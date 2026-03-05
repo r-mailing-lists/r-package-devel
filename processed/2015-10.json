@@ -1,0 +1,1027 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2015-10",
+  "messages": [
+    {
+      "id": "msg-eb470e2e9343",
+      "message_id": "<SN1PR0101MB14394755E0037FDCAC69087BCD4D0@SN1PR0101MB1439.prod.exchangelabs.com>",
+      "from_name": "Dario Strbenac",
+      "from_email_hash": "0d272309e2552a733cf34645f0e220259697f4065c1e3bfc9672933b887da7bc",
+      "date": "2015-10-01T00:00:05Z",
+      "subject": "[R-pkg-devel] Formals of S4 Function",
+      "subject_clean": "[R-pkg-devel] Formals of S4 Function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good day,\n\nIs it still planned that there will be a new method for determining formals implemented for R 3.3 or enhancing the current formals method to work seamlessly on S4 functions ?  http://r.789695.n4.nabble.com/Q-Get-formal-arguments-of-my-implemented-S4-method-td4702420.html I am currently developing a package and one of my design choices would be based on the near-term availability of this feature.\n\n--------------------------------------\nDario Strbenac\nPhD Student\nUniversity of Sydney\nCamperdown NSW 2050\nAustralia",
+      "body_snippet": "Good day,\n\nIs it still planned that there will be a new method for determining formals implemented for R 3.3 or enhancing the current formals method to work seamlessly on S4 functions ?  http://r.7896",
+      "thread_id": "thread-eb470e2e9343",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-2644ae3c7ccc",
+      "message_id": "<56139743.6080203@gmail.com>",
+      "from_name": "Facundo Muñoz",
+      "from_email_hash": "68b46883edd1011ec4c3eabd8311031a2e26eff3b2007513da02aef29064558d",
+      "date": "2015-10-06T11:41:23+02:00",
+      "subject": "[R-pkg-devel] src/install.libs.R",
+      "subject_clean": "[R-pkg-devel] src/install.libs.R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI need to make use of the |src/install.libs.R| file, in order to perform\ncertain tasks at installation time.\nI followed the R-exts doc\n<http://cran.univ-paris1.fr/doc/manuals/r-release/R-exts.html#Package-subdirectories>.\nHowever, R CMD INSTALL seems to never run the script.\n\nHere is a minimal reproducible example.\nIt makes use of |devtools| to simplify the example, but I have tried the\ninstallation manually as well.\n\n|## Create a minimal buildable package library(devtools)\ncreate('testpkg') ## Write src/install.libs.R dir.create('testpkg/src')\ntest.file <- path.expand('~/testfile.txt') diag.lines <- c(\ndeparse(quote(stop('This should break the installation'))),\ndeparse(quote(file.create(test.file))) ) writeLines(diag.lines,\n'testpkg/src/install.libs.R') ## Install package ## also tried manually\nwith R CMD INSTALL install('testpkg') ## The installation did not break\n## nor the file has been created file.exists('~/testfile.txt') # FALSE\n## Cleanup remove.packages('testpkg') unlink('testpkg', recursive = TRUE) |\n\nAm I missing something?\n\nthanks in advance\n?acu.-\n\nPS: by the way?\n\n|> sessionInfo() R version 3.2.2 (2015-08-14) Platform:\nx86_64-pc-linux-gnu (64-bit) Running under: Ubuntu 14.04.2 LTS locale:\n[1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C LC_TIME=en_US.UTF-8\nLC_COLLATE=en_US.UTF-8 [5] LC_MONETARY=fr_FR.UTF-8\nLC_MESSAGES=en_US.UTF-8 LC_PAPER=fr_FR.UTF-8 LC_NAME=C [9] LC_ADDRESS=C\nLC_TELEPHONE=C LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C attached\nbase packages: [1] stats graphics grDevices utils datasets methods base\nother attached packages: [1] devtools_1.8.0.9000 loaded via a namespace\n(and not attached): [1] tools_3.2.2 memoise_0.2.1 digest_0.6.8 |\n\n?\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nI need to make use of the |src/install.libs.R| file, in order to perform\ncertain tasks at installation time.\nI followed the R-exts doc\n<http://cran.univ-paris1.fr/doc/manuals/r-release/R-ex",
+      "thread_id": "thread-2644ae3c7ccc",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-fc756686e74c",
+      "message_id": "<CAFDcVCTdAJn8exdnw-y9D7fJCy7=LEVxAOCmCbr1is14ZTihDA@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "37708a6cb782f5feaf8184aa0c29ee7a2d00c5c1bcf512308a95d10fa8393e79",
+      "date": "2015-10-07T17:37:10-07:00",
+      "subject": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "subject_clean": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI'm looking for a parser of the plain text NEWS format (not the\nNEWS.Rd format) - ideally the same on that is used by R itself.  Does\nanyone know which that one is / of such at tool?\n\nThanks,\n\nHenrik\n\nPS. help(\"news\") mentions tools:::news2Rd(), but that's actually\ndefunct (just reported\nhttps://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16556).",
+      "body_snippet": "Hi,\n\nI'm looking for a parser of the plain text NEWS format (not the\nNEWS.Rd format) - ideally the same on that is used by R itself.  Does\nanyone know which that one is / of such at tool?\n\nThanks,\n\nHe",
+      "thread_id": "thread-fc756686e74c",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-0cdfee37e6a3",
+      "message_id": "<CAJ4QxaMTOK4mNn3KLXWXPrAXvx=44i+n_UxHX3ESUkK-ymEyxg@mail.gmail.com>",
+      "from_name": "boB Rudis",
+      "from_email_hash": "a26d124c455064db4d60c538894063c0f8cb488637af120b1e3326571e017cd6",
+      "date": "2015-10-07T21:40:02-04:00",
+      "subject": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "subject_clean": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "in_reply_to": "<CAFDcVCTdAJn8exdnw-y9D7fJCy7=LEVxAOCmCbr1is14ZTihDA@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCTdAJn8exdnw-y9D7fJCy7=LEVxAOCmCbr1is14ZTihDA@mail.gmail.com>"
+      ],
+      "body_plain": "Try looking at the source for tools:::.news_reader_default and then tools::toRd\n\nOn Wed, Oct 7, 2015 at 8:37 PM, Henrik Bengtsson\n<henrik.bengtsson at ucsf.edu> wrote:\n> Hi,\n>\n> I'm looking for a parser of the plain text NEWS format (not the\n> NEWS.Rd format) - ideally the same on that is used by R itself.  Does\n> anyone know which that one is / of such at tool?\n>\n> Thanks,\n>\n> Henrik\n>\n> PS. help(\"news\") mentions tools:::news2Rd(), but that's actually\n> defunct (just reported\n> https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16556).\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Try looking at the source for tools:::.news_reader_default and then tools::toRd\n\nOn Wed, Oct 7, 2015 at 8:37 PM, Henrik Bengtsson\n<henrik.bengtsson at ucsf.edu> wrote:\n> Hi,\n>\n> I'm looking for a pars",
+      "thread_id": "thread-fc756686e74c",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-5c7a8e5aba58",
+      "message_id": "<CAGg1N9LWAcw_QL51mmZNjMimAi2wGF5e-wV8D8Gg=Ci0cPjNUw@mail.gmail.com>",
+      "from_name": "Ben Bond-Lamberty",
+      "from_email_hash": "74b706b8bf8fe0484eda65fa922b41d1e9be3e23ee14c072299be14f8308de9e",
+      "date": "2015-10-08T08:06:41-04:00",
+      "subject": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "subject_clean": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear list,\n\nMy recent package was accepted and posted by CRAN, but the check\nresults (https://cran.r-project.org/web/checks/check_results_luzlogr.html)\nshow an error for flavor 'r-oldrel-windows-ix86+x86_64'. Everything\nelse passes fine. Unfortunately the error diagnostics are not\nparticularly helpful, only showing that four tests failed; the only\ncommon thread I see, maybe, is that all four tests--and no others--use\nR's file.size() function.\n\nAny suggestions on figuring out what's going on? Is this necessary to\nfix? I'd rather not track down an old Windows machine and install an\nold R release on it just to debug, though will if necessary.\n\nThanks,\n\nBen",
+      "body_snippet": "Dear list,\n\nMy recent package was accepted and posted by CRAN, but the check\nresults (https://cran.r-project.org/web/checks/check_results_luzlogr.html)\nshow an error for flavor 'r-oldrel-windows-ix86+",
+      "thread_id": "thread-5c7a8e5aba58",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-4995b08f65a2",
+      "message_id": "<561664EF.2070002@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-10-08T08:43:27-04:00",
+      "subject": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "subject_clean": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "in_reply_to": "<CAGg1N9LWAcw_QL51mmZNjMimAi2wGF5e-wV8D8Gg=Ci0cPjNUw@mail.gmail.com>",
+      "references": [
+        "<CAGg1N9LWAcw_QL51mmZNjMimAi2wGF5e-wV8D8Gg=Ci0cPjNUw@mail.gmail.com>"
+      ],
+      "body_plain": "On 08/10/2015 8:06 AM, Ben Bond-Lamberty wrote:\n> Dear list,\n> \n> My recent package was accepted and posted by CRAN, but the check\n> results (https://cran.r-project.org/web/checks/check_results_luzlogr.html)\n> show an error for flavor 'r-oldrel-windows-ix86+x86_64'. Everything\n> else passes fine. Unfortunately the error diagnostics are not\n> particularly helpful, only showing that four tests failed; the only\n> common thread I see, maybe, is that all four tests--and no others--use\n> R's file.size() function.\n> \n> Any suggestions on figuring out what's going on? Is this necessary to\n> fix? I'd rather not track down an old Windows machine and install an\n> old R release on it just to debug, though will if necessary.\n\nThose errors came in your own test script, so you should be able to make\nthe messages more informative.  Don't blame CRAN for that.\n\nYou shouldn't need an old Windows machine, just an old release of R.\nThe result script shows that R-oldrel is 3.1.3; a binary for that is\navailable on CRAN.  (Of course, it's possible that the error is specific\nto the version of Windows on the CRAN machine, but it's pretty easy to\nfind out if the problem is reproducible on whatever Windows machine you\ndo have.)\n\nDuncan Murdoch",
+      "body_snippet": "On 08/10/2015 8:06 AM, Ben Bond-Lamberty wrote:\n> Dear list,\n> \n> My recent package was accepted and posted by CRAN, but the check\n> results (https://cran.r-project.org/web/checks/check_results_luzlog",
+      "thread_id": "thread-5c7a8e5aba58",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-172a7c6c3a7b",
+      "message_id": "<CAGg1N9LU9iWxuixopK2pSENU2ue3LPcHoAFWmRFKbvTHuU75VA@mail.gmail.com>",
+      "from_name": "Ben Bond-Lamberty",
+      "from_email_hash": "74b706b8bf8fe0484eda65fa922b41d1e9be3e23ee14c072299be14f8308de9e",
+      "date": "2015-10-08T09:57:10-04:00",
+      "subject": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "subject_clean": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "in_reply_to": "<561664EF.2070002@gmail.com>",
+      "references": [
+        "<CAGg1N9LWAcw_QL51mmZNjMimAi2wGF5e-wV8D8Gg=Ci0cPjNUw@mail.gmail.com>",
+        "<561664EF.2070002@gmail.com>"
+      ],
+      "body_plain": "My intent wasn't particularly to blame CRAN, just puzzlement that a\nnormally-chatty test script is silently dying in this one case.\nAnyway, thanks for the advice.\nBen\n\n\n\nOn Thu, Oct 8, 2015 at 8:43 AM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> On 08/10/2015 8:06 AM, Ben Bond-Lamberty wrote:\n>> Dear list,\n>>\n>> My recent package was accepted and posted by CRAN, but the check\n>> results (https://cran.r-project.org/web/checks/check_results_luzlogr.html)\n>> show an error for flavor 'r-oldrel-windows-ix86+x86_64'. Everything\n>> else passes fine. Unfortunately the error diagnostics are not\n>> particularly helpful, only showing that four tests failed; the only\n>> common thread I see, maybe, is that all four tests--and no others--use\n>> R's file.size() function.\n>>\n>> Any suggestions on figuring out what's going on? Is this necessary to\n>> fix? I'd rather not track down an old Windows machine and install an\n>> old R release on it just to debug, though will if necessary.\n>\n> Those errors came in your own test script, so you should be able to make\n> the messages more informative.  Don't blame CRAN for that.\n>\n> You shouldn't need an old Windows machine, just an old release of R.\n> The result script shows that R-oldrel is 3.1.3; a binary for that is\n> available on CRAN.  (Of course, it's possible that the error is specific\n> to the version of Windows on the CRAN machine, but it's pretty easy to\n> find out if the problem is reproducible on whatever Windows machine you\n> do have.)\n>\n> Duncan Murdoch",
+      "body_snippet": "My intent wasn't particularly to blame CRAN, just puzzlement that a\nnormally-chatty test script is silently dying in this one case.\nAnyway, thanks for the advice.\nBen\n\n\n\nOn Thu, Oct 8, 2015 at 8:43 AM",
+      "thread_id": "thread-5c7a8e5aba58",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-76b524b13949",
+      "message_id": "<CAGg1N9JZV3vy38S7i8HpumLyfkSjNipm1GzPy9nYQz1UaoZGUg@mail.gmail.com>",
+      "from_name": "Ben Bond-Lamberty",
+      "from_email_hash": "74b706b8bf8fe0484eda65fa922b41d1e9be3e23ee14c072299be14f8308de9e",
+      "date": "2015-10-08T10:51:26-04:00",
+      "subject": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "subject_clean": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "in_reply_to": "<CAGg1N9LU9iWxuixopK2pSENU2ue3LPcHoAFWmRFKbvTHuU75VA@mail.gmail.com>",
+      "references": [
+        "<CAGg1N9LWAcw_QL51mmZNjMimAi2wGF5e-wV8D8Gg=Ci0cPjNUw@mail.gmail.com>",
+        "<561664EF.2070002@gmail.com>",
+        "<CAGg1N9LU9iWxuixopK2pSENU2ue3LPcHoAFWmRFKbvTHuU75VA@mail.gmail.com>"
+      ],
+      "body_plain": ">Unfortunately the error diagnostics are not particularly helpful, only showing that four tests failed; the only common thread I see, maybe, is that all four tests--and no others--use R's file.size() function.\n\nBrief follow-up for completeness: it turns out that `file.size()`\ndoesn't exist on Windows R 3.1.1 - instead need to use\n`file.info()$size`. So problem fixed, although I still don't know why\nno error message was appearing.\n\nB",
+      "body_snippet": ">Unfortunately the error diagnostics are not particularly helpful, only showing that four tests failed; the only common thread I see, maybe, is that all four tests--and no others--use R's file.size() ",
+      "thread_id": "thread-5c7a8e5aba58",
+      "thread_depth": 3,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-f162d8270938",
+      "message_id": "<CAOKDuOhbpuvg0faZ6WNUv8k55tMA8WKVAkGNPT_45-a=7NG7zA@mail.gmail.com>",
+      "from_name": "Mark van der Loo",
+      "from_email_hash": "c117c5f9fb080562111efe69787aee73f14b90e5b20d46c1ed502dae0b7f3b9c",
+      "date": "2015-10-08T15:27:09Z",
+      "subject": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "subject_clean": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "in_reply_to": "<CAGg1N9JZV3vy38S7i8HpumLyfkSjNipm1GzPy9nYQz1UaoZGUg@mail.gmail.com>",
+      "references": [
+        "<CAGg1N9LWAcw_QL51mmZNjMimAi2wGF5e-wV8D8Gg=Ci0cPjNUw@mail.gmail.com>",
+        "<561664EF.2070002@gmail.com>",
+        "<CAGg1N9LU9iWxuixopK2pSENU2ue3LPcHoAFWmRFKbvTHuU75VA@mail.gmail.com>",
+        "<CAGg1N9JZV3vy38S7i8HpumLyfkSjNipm1GzPy9nYQz1UaoZGUg@mail.gmail.com>"
+      ],
+      "body_plain": "I had the same problem recently. It was apparently a windows-only\noldrel-only problem (and a specific oldrel, I can't remember which one). I\nopted to adjust the DESCRIPTION to depend on a higher R version. Main\nreason was that I don't have access to the right type of Windows version to\ntest it locally and the winbuilder service only tests on the most recent\nR-versions (current and R-devel).\n\nThese system-dependent problems pop up now and then, causing work on both\nCRAN volunteer and developer side. Especially the work on the volunteer\nside could/should be avoided. So here's a nudge-nudge wink-wink to the R\nconsortium to set up a builder service that fully emulates CRAN. It is\nprobably not trivial but I feel it would be of value. More ambitiously,\nsuch a builder service could include (attempts to) build against other R\nengines apart from the GNU implementation -- but I'm digressing.\n\nBest,\nMark\n\n\n\n\n\n\n\n\n\nOp do 8 okt. 2015 om 16:52 schreef Ben Bond-Lamberty <bpbond at gmail.com>:\n\n> >Unfortunately the error diagnostics are not particularly helpful, only\n> showing that four tests failed; the only common thread I see, maybe, is\n> that all four tests--and no others--use R's file.size() function.\n>\n> Brief follow-up for completeness: it turns out that `file.size()`\n> doesn't exist on Windows R 3.1.1 - instead need to use\n> `file.info()$size`. So problem fixed, although I still don't know why\n> no error message was appearing.\n>\n> B\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I had the same problem recently. It was apparently a windows-only\noldrel-only problem (and a specific oldrel, I can't remember which one). I\nopted to adjust the DESCRIPTION to depend on a higher R ver",
+      "thread_id": "thread-5c7a8e5aba58",
+      "thread_depth": 4,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-c1d0bf207d45",
+      "message_id": "<57AA0143-09F5-4080-A417-727814FD9748@mrc-lmb.cam.ac.uk>",
+      "from_name": "Dr Gregory Jefferis",
+      "from_email_hash": "bda79ebbefcec520ba564cbe5505465aa41e1f3d4fab022745add7730bd8b985",
+      "date": "2015-10-08T21:41:12+01:00",
+      "subject": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "subject_clean": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "in_reply_to": "<55D0B886.3000903@gmail.com>",
+      "references": [
+        "<1B3F92D43EA50646AB74A6C8C69A036064D00C@ait-pex02mbx05.win.dtu.dk>",
+        "<21963.15225.888683.947819@max.nulle.part>",
+        "<55CB4503.9090706@gmail.com>",
+        "<3F0C870A-8D2A-4E49-8434-266F978285E0@mrc-lmb.cam.ac.uk>",
+        "<55D0B886.3000903@gmail.com>"
+      ],
+      "body_plain": "Dear Duncan,\n\nCould I just revive this one more time\n\nOn 16 Aug 2015, at 17:21, Duncan Murdoch wrote:\n\n> It is harder for you to implement this yourself, because CRAN frowns \n> on\n> tests that try to detect whether they're running under CRAN or not.\n>\n> You could put in \"if (interactive())\" checks around your displays.  If\n> you want to check whether the rgl calls are okay, you could do \n> something\n> like this:\n>\n> library(rgl)\n> options(rgl.useNULL = TRUE)\n\nI have a package which imports rgl i.e. rgl is loaded on package \nstartup. A number of examples (not tests) use rgl features and I do not \nwant these to be run on CRAN.\n\nIs there a way to configure rgl.useNULL to handle this situation?\n\nMany thanks,\n\nGreg.\n\n--\nGregory Jefferis, PhD\nDivision of Neurobiology\nMRC Laboratory of Molecular Biology\nFrancis Crick Avenue\nCambridge Biomedical Campus\nCambridge, CB2 OQH, UK\n\nhttp://www2.mrc-lmb.cam.ac.uk/group-leaders/h-to-m/g-jefferis\nhttp://jefferislab.org\nhttp://flybrain.stanford.edu",
+      "body_snippet": "Dear Duncan,\n\nCould I just revive this one more time\n\nOn 16 Aug 2015, at 17:21, Duncan Murdoch wrote:\n\n> It is harder for you to implement this yourself, because CRAN frowns \n> on\n> tests that try to ",
+      "thread_id": "thread-c1d0bf207d45",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-b534f0745452",
+      "message_id": "<5616DBC2.4090005@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-10-08T17:10:26-04:00",
+      "subject": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "subject_clean": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "in_reply_to": "<57AA0143-09F5-4080-A417-727814FD9748@mrc-lmb.cam.ac.uk>",
+      "references": [
+        "<1B3F92D43EA50646AB74A6C8C69A036064D00C@ait-pex02mbx05.win.dtu.dk>",
+        "<21963.15225.888683.947819@max.nulle.part>",
+        "<55CB4503.9090706@gmail.com>",
+        "<3F0C870A-8D2A-4E49-8434-266F978285E0@mrc-lmb.cam.ac.uk>",
+        "<55D0B886.3000903@gmail.com>",
+        "<57AA0143-09F5-4080-A417-727814FD9748@mrc-lmb.cam.ac.uk>"
+      ],
+      "body_plain": "On 08/10/2015 4:41 PM, Dr Gregory Jefferis wrote:\n> Dear Duncan,\n> \n> Could I just revive this one more time\n> \n> On 16 Aug 2015, at 17:21, Duncan Murdoch wrote:\n> \n>> It is harder for you to implement this yourself, because CRAN frowns \n>> on\n>> tests that try to detect whether they're running under CRAN or not.\n>>\n>> You could put in \"if (interactive())\" checks around your displays.  If\n>> you want to check whether the rgl calls are okay, you could do \n>> something\n>> like this:\n>>\n>> library(rgl)\n>> options(rgl.useNULL = TRUE)\n> \n> I have a package which imports rgl i.e. rgl is loaded on package \n> startup. A number of examples (not tests) use rgl features and I do not \n> want these to be run on CRAN.\n> \n> Is there a way to configure rgl.useNULL to handle this situation?\n> \n\nI don't think so, but I don't think you really want that.\n\noptions(rgl.useNULL = TRUE)\n\ndoesn't stop rgl from running, it just stops it from trying to display\nanything.  So you could put code like\n\nif (!interactive())\n  options(rgl.useNULL = TRUE)\n\ninto your .onLoad function for your package, and it wouldn't try to open\na display on CRAN, or anywhere else that wasn't interactive.\n\nDuncan",
+      "body_snippet": "On 08/10/2015 4:41 PM, Dr Gregory Jefferis wrote:\n> Dear Duncan,\n> \n> Could I just revive this one more time\n> \n> On 16 Aug 2015, at 17:21, Duncan Murdoch wrote:\n> \n>> It is harder for you to implemen",
+      "thread_id": "thread-c1d0bf207d45",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-3e87e02478c9",
+      "message_id": "<CAMMJQ0bc1zv7d_N2ASw+dwcuRddhVSuWz+TkNfiew5QgkKZbLQ@mail.gmail.com>",
+      "from_name": "Ott Toomet",
+      "from_email_hash": "84ec365b796d3e57555511368a76040f8538f926b92f4a902c72d0b2900d7f09",
+      "date": "2015-10-08T16:55:50-07:00",
+      "subject": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "subject_clean": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "in_reply_to": "<5616DBC2.4090005@gmail.com>",
+      "references": [
+        "<1B3F92D43EA50646AB74A6C8C69A036064D00C@ait-pex02mbx05.win.dtu.dk>",
+        "<21963.15225.888683.947819@max.nulle.part>",
+        "<55CB4503.9090706@gmail.com>",
+        "<3F0C870A-8D2A-4E49-8434-266F978285E0@mrc-lmb.cam.ac.uk>",
+        "<55D0B886.3000903@gmail.com>",
+        "<57AA0143-09F5-4080-A417-727814FD9748@mrc-lmb.cam.ac.uk>",
+        "<5616DBC2.4090005@gmail.com>"
+      ],
+      "body_plain": "Alternatively, you can exclude selected tests from being included in the\npackage.  Most of the tests I do are not necessary to run on CRAN, these\nare not system dependent while still time consuming.  To run these just on\nmy PC in enough.  So I use .Rbuildignore to exclude those.\n\nCheers,\nOtt\n\nOn Thu, Oct 8, 2015 at 2:10 PM, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 08/10/2015 4:41 PM, Dr Gregory Jefferis wrote:\n> > Dear Duncan,\n> >\n> > Could I just revive this one more time\n> >\n> > On 16 Aug 2015, at 17:21, Duncan Murdoch wrote:\n> >\n> >> It is harder for you to implement this yourself, because CRAN frowns\n> >> on\n> >> tests that try to detect whether they're running under CRAN or not.\n> >>\n> >> You could put in \"if (interactive())\" checks around your displays.  If\n> >> you want to check whether the rgl calls are okay, you could do\n> >> something\n> >> like this:\n> >>\n> >> library(rgl)\n> >> options(rgl.useNULL = TRUE)\n> >\n> > I have a package which imports rgl i.e. rgl is loaded on package\n> > startup. A number of examples (not tests) use rgl features and I do not\n> > want these to be run on CRAN.\n> >\n> > Is there a way to configure rgl.useNULL to handle this situation?\n> >\n>\n> I don't think so, but I don't think you really want that.\n>\n> options(rgl.useNULL = TRUE)\n>\n> doesn't stop rgl from running, it just stops it from trying to display\n> anything.  So you could put code like\n>\n> if (!interactive())\n>   options(rgl.useNULL = TRUE)\n>\n> into your .onLoad function for your package, and it wouldn't try to open\n> a display on CRAN, or anywhere else that wasn't interactive.\n>\n> Duncan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n\n-- \nOtt Toomet\n\nVisiting Researcher\nSchool of Information\nMary Gates Hall, Suite 310\nUniversity of Washington\nSeattle, WA 98195\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Alternatively, you can exclude selected tests from being included in the\npackage.  Most of the tests I do are not necessary to run on CRAN, these\nare not system dependent while still time consuming.  ",
+      "thread_id": "thread-c1d0bf207d45",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-1f072591f501",
+      "message_id": "<56170AC3.60902@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-10-08T20:30:59-04:00",
+      "subject": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "subject_clean": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "in_reply_to": "<CAMMJQ0bc1zv7d_N2ASw+dwcuRddhVSuWz+TkNfiew5QgkKZbLQ@mail.gmail.com>",
+      "references": [
+        "<1B3F92D43EA50646AB74A6C8C69A036064D00C@ait-pex02mbx05.win.dtu.dk>",
+        "<21963.15225.888683.947819@max.nulle.part>",
+        "<55CB4503.9090706@gmail.com>",
+        "<3F0C870A-8D2A-4E49-8434-266F978285E0@mrc-lmb.cam.ac.uk>",
+        "<55D0B886.3000903@gmail.com>",
+        "<57AA0143-09F5-4080-A417-727814FD9748@mrc-lmb.cam.ac.uk>",
+        "<5616DBC2.4090005@gmail.com>",
+        "<CAMMJQ0bc1zv7d_N2ASw+dwcuRddhVSuWz+TkNfiew5QgkKZbLQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 08/10/2015 7:55 PM, Ott Toomet wrote:\n> Alternatively, you can exclude selected tests from being included in the\n> package.  Most of the tests I do are not necessary to run on CRAN, these\n> are not system dependent while still time consuming.  To run these just\n> on my PC in enough.  So I use .Rbuildignore to exclude those.\n\nAnother way to achieve something similar is to put some tests in another\ndirectory besides \"tests\" (e.g. inst/slowtests), and use the --test-dir\nargument to R CMD check to run those.  This way other people can run\nyour tests if they want to.\n\nDuncan Murdoch\n\n> \n> Cheers,\n> Ott\n> \n> On Thu, Oct 8, 2015 at 2:10 PM, Duncan Murdoch <murdoch.duncan at gmail.com\n> <mailto:murdoch.duncan at gmail.com>> wrote:\n> \n>     On 08/10/2015 4:41 PM, Dr Gregory Jefferis wrote:\n>     > Dear Duncan,\n>     >\n>     > Could I just revive this one more time\n>     >\n>     > On 16 Aug 2015, at 17:21, Duncan Murdoch wrote:\n>     >\n>     >> It is harder for you to implement this yourself, because CRAN frowns\n>     >> on\n>     >> tests that try to detect whether they're running under CRAN or not.\n>     >>\n>     >> You could put in \"if (interactive())\" checks around your displays.  If\n>     >> you want to check whether the rgl calls are okay, you could do\n>     >> something\n>     >> like this:\n>     >>\n>     >> library(rgl)\n>     >> options(rgl.useNULL = TRUE)\n>     >\n>     > I have a package which imports rgl i.e. rgl is loaded on package\n>     > startup. A number of examples (not tests) use rgl features and I do not\n>     > want these to be run on CRAN.\n>     >\n>     > Is there a way to configure rgl.useNULL to handle this situation?\n>     >\n> \n>     I don't think so, but I don't think you really want that.\n> \n>     options(rgl.useNULL = TRUE)\n> \n>     doesn't stop rgl from running, it just stops it from trying to display\n>     anything.  So you could put code like\n> \n>     if (!interactive())\n>       options(rgl.useNULL = TRUE)\n> \n>     into your .onLoad function for your package, and it wouldn't try to open\n>     a display on CRAN, or anywhere else that wasn't interactive.\n> \n>     Duncan\n> \n>     ______________________________________________\n>     R-package-devel at r-project.org <mailto:R-package-devel at r-project.org>\n>     mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n> \n> \n> -- \n> Ott Toomet\n> \n> Visiting Researcher\n> School of Information\n> Mary Gates Hall, Suite 310\n> University of Washington\n> Seattle, WA 98195\n>",
+      "body_snippet": "On 08/10/2015 7:55 PM, Ott Toomet wrote:\n> Alternatively, you can exclude selected tests from being included in the\n> package.  Most of the tests I do are not necessary to run on CRAN, these\n> are not",
+      "thread_id": "thread-c1d0bf207d45",
+      "thread_depth": 3,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-3f70fb341f8d",
+      "message_id": "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+      "from_name": "Charles Determan",
+      "from_email_hash": "fcc9a1e7c21371cee92703630056a3d910de1afb77217895dfe5b4bc47c007e1",
+      "date": "2015-10-12T13:13:55-05:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Greetings,\n\nI have a package which provides headers for a C++ library (similar to the\nBH package).  However, the C++ library has some heavily nested components\nwithin its' structure so when I run R CMD check I get the following NOTE:\n\nTarballs are only required to store paths of up to 100 bytes and cannot\nstore those of more than 256 bytes, with restrictions including to 100\nbytes for the final component.\n\nIs this a major problem?  As this is a 'NOTE' I am under the impression\nthat the long paths are not critical but I want to make sure.\n\nThank you,\nRegards,\n\nCharles\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Greetings,\n\nI have a package which provides headers for a C++ library (similar to the\nBH package).  However, the C++ library has some heavily nested components\nwithin its' structure so when I run R CM",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-8b759b50f962",
+      "message_id": "<22044.30603.463681.423932@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-10-12T22:16:27-05:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 12 October 2015 at 13:13, Charles Determan wrote:\n| Greetings,\n| \n| I have a package which provides headers for a C++ library (similar to the\n| BH package).  However, the C++ library has some heavily nested components\n| within its' structure so when I run R CMD check I get the following NOTE:\n| \n| Tarballs are only required to store paths of up to 100 bytes and cannot\n| store those of more than 256 bytes, with restrictions including to 100\n| bytes for the final component.\n| \n| Is this a major problem?\n\nYes.\n\n| As this is a 'NOTE' I am under the impression\n| that the long paths are not critical but I want to make sure.\n\nWrong.\n\n'BH' is called 'BH', believe it or not, to save a few letters, or else I\nwould have a dozen or more files complain for the very same reason (and CRAN\nreject it for non-suitable path/filenames).  Hence not 'BoostHeaders' but\njust 'BH'. And see the ChangeLog of BH and revel in how _each_ release has to\nrename one of the Runge-Kutta integration files to make the 'net' path length\nbe suitable for R packing.\n\nThere is no point in ignoring the output of R CMD check unless you _really_\nknow better.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 12 October 2015 at 13:13, Charles Determan wrote:\n| Greetings,\n| \n| I have a package which provides headers for a C++ library (similar to the\n| BH package).  However, the C++ library has some heavi",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-ea4524033f8b",
+      "message_id": "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>",
+      "from_name": "Barry Rowlingson",
+      "from_email_hash": "94f5c718996fafe3dcf7003ba82c6656414e43b8d3f2b04af298250f493ba5eb",
+      "date": "2015-10-13T08:01:48+01:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<22044.30603.463681.423932@max.nulle.part>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+        "<22044.30603.463681.423932@max.nulle.part>"
+      ],
+      "body_plain": "On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n> On 12 October 2015 at 13:13, Charles Determan wrote:\n> | Greetings,\n> |\n> | I have a package which provides headers for a C++ library (similar to the\n> | BH package).  However, the C++ library has some heavily nested components\n> | within its' structure so when I run R CMD check I get the following NOTE:\n> |\n> | Tarballs are only required to store paths of up to 100 bytes and cannot\n> | store those of more than 256 bytes, with restrictions including to 100\n> | bytes for the final component.\n> |\n> | Is this a major problem?\n>\n> Yes.\n>\n> | As this is a 'NOTE' I am under the impression\n> | that the long paths are not critical but I want to make sure.\n>\n> Wrong.\n>\n> 'BH' is called 'BH', believe it or not, to save a few letters, or else I\n> would have a dozen or more files complain for the very same reason (and CRAN\n> reject it for non-suitable path/filenames).  Hence not 'BoostHeaders' but\n> just 'BH'. And see the ChangeLog of BH and revel in how _each_ release has to\n> rename one of the Runge-Kutta integration files to make the 'net' path length\n> be suitable for R packing.\n>\n> There is no point in ignoring the output of R CMD check unless you _really_\n> know better.\n\n But is it worth asking if the NOTE's restriction could be lifted,\ngiven that from what I read on wikipedia that the \"tar\" file format\nhas been happy with long path names since 2001? Given that R-Core/CRAN\nsometimes refer to R versions from a year ago as \"obsolete\", how can\nthey complain about sticking with a file format restriction from the\nlast century? I've just happily made a tar file with a path that is\n1300 chars long containing a file with a name of 160 chars .\n\n Or are there still old versions of tar around, or other file systems\nwith restrictive naming practices (in which case the error should be\nabout the names/paths of the files themselves, not that old versions\nof tar can't cope with them)?\n\n It now seems to have bothered at least two people and Dirk sounds\nlike he's had to implement a little hack to keep the path names down.\n\nBarry",
+      "body_snippet": "On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n> On 12 October 2015 at 13:13, Charles Determan wrote:\n> | Greetings,\n> |\n> | I have a package which provides headers fo",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-4882b88c65b6",
+      "message_id": "<561CB5FF.4060009@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2015-10-13T09:42:55+02:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+        "<22044.30603.463681.423932@max.nulle.part>",
+        "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>"
+      ],
+      "body_plain": "On 13.10.2015 09:01, Barry Rowlingson wrote:\n> On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>>\n>> On 12 October 2015 at 13:13, Charles Determan wrote:\n>> | Greetings,\n>> |\n>> | I have a package which provides headers for a C++ library (similar to the\n>> | BH package).  However, the C++ library has some heavily nested components\n>> | within its' structure so when I run R CMD check I get the following NOTE:\n>> |\n>> | Tarballs are only required to store paths of up to 100 bytes and cannot\n>> | store those of more than 256 bytes, with restrictions including to 100\n>> | bytes for the final component.\n>> |\n>> | Is this a major problem?\n>>\n>> Yes.\n>>\n>> | As this is a 'NOTE' I am under the impression\n>> | that the long paths are not critical but I want to make sure.\n>>\n>> Wrong.\n>>\n>> 'BH' is called 'BH', believe it or not, to save a few letters, or else I\n>> would have a dozen or more files complain for the very same reason (and CRAN\n>> reject it for non-suitable path/filenames).  Hence not 'BoostHeaders' but\n>> just 'BH'. And see the ChangeLog of BH and revel in how _each_ release has to\n>> rename one of the Runge-Kutta integration files to make the 'net' path length\n>> be suitable for R packing.\n>>\n>> There is no point in ignoring the output of R CMD check unless you _really_\n>> know better.\n>\n>   But is it worth asking if the NOTE's restriction could be lifted,\n> given that from what I read on wikipedia that the \"tar\" file format\n> has been happy with long path names since 2001? Given that R-Core/CRAN\n> sometimes refer to R versions from a year ago as \"obsolete\", how can\n> they complain about sticking with a file format restriction from the\n> last century? I've just happily made a tar file with a path that is\n> 1300 chars long containing a file with a name of 160 chars .\n>\n>   Or are there still old versions of tar around, or other file systems\n> with restrictive naming practices (in which case the error should be\n> about the names/paths of the files themselves, not that old versions\n> of tar can't cope with them)?\n\nYes, some Unixes seem to have old tar versions installed.\n\nBest,\nUwe Ligges\n\n>\n>   It now seems to have bothered at least two people and Dirk sounds\n> like he's had to implement a little hack to keep the path names down.\n>\n> Barry\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 13.10.2015 09:01, Barry Rowlingson wrote:\n> On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>>\n>> On 12 October 2015 at 13:13, Charles Determan wrote:\n>> | Greetings,\n",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 3,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-55caa3c7196a",
+      "message_id": "<A1594A8C-4F0B-4DA2-9246-4157B2ED3D50@gmail.com>",
+      "from_name": "peter dalgaard",
+      "from_email_hash": "d2573f0c0a474184a9d96c815fc6bf37ff7c6392082069d810139c562d5a6f71",
+      "date": "2015-10-13T11:02:37+02:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<561CB5FF.4060009@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+        "<22044.30603.463681.423932@max.nulle.part>",
+        "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>",
+        "<561CB5FF.4060009@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "On 13 Oct 2015, at 09:42 , Uwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> \n> \n> On 13.10.2015 09:01, Barry Rowlingson wrote:\n>> On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>>> \n>>> On 12 October 2015 at 13:13, Charles Determan wrote:\n>>> | Greetings,\n>>> |\n>>> | I have a package which provides headers for a C++ library (similar to the\n>>> | BH package).  However, the C++ library has some heavily nested components\n>>> | within its' structure so when I run R CMD check I get the following NOTE:\n>>> |\n>>> | Tarballs are only required to store paths of up to 100 bytes and cannot\n>>> | store those of more than 256 bytes, with restrictions including to 100\n>>> | bytes for the final component.\n>>> |\n>>> | Is this a major problem?\n>>> \n>>> Yes.\n>>> \n>>> | As this is a 'NOTE' I am under the impression\n>>> | that the long paths are not critical but I want to make sure.\n>>> \n>>> Wrong.\n>>> \n>>> 'BH' is called 'BH', believe it or not, to save a few letters, or else I\n>>> would have a dozen or more files complain for the very same reason (and CRAN\n>>> reject it for non-suitable path/filenames).  Hence not 'BoostHeaders' but\n>>> just 'BH'. And see the ChangeLog of BH and revel in how _each_ release has to\n>>> rename one of the Runge-Kutta integration files to make the 'net' path length\n>>> be suitable for R packing.\n>>> \n>>> There is no point in ignoring the output of R CMD check unless you _really_\n>>> know better.\n>> \n>>  But is it worth asking if the NOTE's restriction could be lifted,\n>> given that from what I read on wikipedia that the \"tar\" file format\n>> has been happy with long path names since 2001? Given that R-Core/CRAN\n>> sometimes refer to R versions from a year ago as \"obsolete\", how can\n>> they complain about sticking with a file format restriction from the\n>> last century? I've just happily made a tar file with a path that is\n>> 1300 chars long containing a file with a name of 160 chars .\n>> \n>>  Or are there still old versions of tar around, or other file systems\n>> with restrictive naming practices (in which case the error should be\n>> about the names/paths of the files themselves, not that old versions\n>> of tar can't cope with them)?\n> \n> Yes, some Unixes seem to have old tar versions installed.\n\nYes, it is somewhat harder to deem entire OSs obsolete... \n\nBut: How old versions and how common is the issue? \n\nMainstream Unix is essentially Linux and OS X these days. OS X seems to be stuck in 2010 (BSD tar 2.8.3), at least up until Yosemite. Linux distros usually keep themselves up to date, except for the enterprise/long upgrade cycle ones that can be like 5 years outdated. Less common, but still in use, are FreeBSD, Solaris and AIX. \n\nIt _is_ a valid question for how long we want out-of-the-box support for OSs that use obsolete tools. At some point we could decide that the more obscure Unices would have to install a recent version (with the R configuration arranging to set TAR=/usr/local/bin/gtar or somesuch).\n\n-pd\n\n> \n> Best,\n> Uwe Ligges\n> \n>> \n>>  It now seems to have bothered at least two people and Dirk sounds\n>> like he's had to implement a little hack to keep the path names down.\n>> \n>> Barry\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "On 13 Oct 2015, at 09:42 , Uwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> \n> \n> On 13.10.2015 09:01, Barry Rowlingson wrote:\n>> On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at de",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 4,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-3d700ef60dea",
+      "message_id": "<CAKxd1KNCSeq8QaG1v+=7h7a-ir36KGRKVxzCk=7=ZGjjirvw6A@mail.gmail.com>",
+      "from_name": "Charles Determan",
+      "from_email_hash": "fcc9a1e7c21371cee92703630056a3d910de1afb77217895dfe5b4bc47c007e1",
+      "date": "2015-10-13T15:04:23-05:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<A1594A8C-4F0B-4DA2-9246-4157B2ED3D50@gmail.com>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+        "<22044.30603.463681.423932@max.nulle.part>",
+        "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>",
+        "<561CB5FF.4060009@statistik.tu-dortmund.de>",
+        "<A1594A8C-4F0B-4DA2-9246-4157B2ED3D50@gmail.com>"
+      ],
+      "body_plain": "I'm glad to see this discussion.  Unfortunately in the short term I cannot\nremove the nested files (as Dirk implies with the BH package) as it would\nrequire restructuring the c++ library and make it far more difficult to\nmaintain.  Unless there are other suggestions I will need to hold off on\nsubmission until such a time that OSs that use obsolete tools are no longer\nsupported out-of-the-box (as Peter says).  I will likely just continue to\nmaintain the package on my gitub until CRAN would accept the longer paths.\n\nCharles\n\nOn Tue, Oct 13, 2015 at 4:02 AM, peter dalgaard <pdalgd at gmail.com> wrote:\n\n>\n> On 13 Oct 2015, at 09:42 , Uwe Ligges <ligges at statistik.tu-dortmund.de>\n> wrote:\n>\n> >\n> >\n> > On 13.10.2015 09:01, Barry Rowlingson wrote:\n> >> On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org>\n> wrote:\n> >>>\n> >>> On 12 October 2015 at 13:13, Charles Determan wrote:\n> >>> | Greetings,\n> >>> |\n> >>> | I have a package which provides headers for a C++ library (similar\n> to the\n> >>> | BH package).  However, the C++ library has some heavily nested\n> components\n> >>> | within its' structure so when I run R CMD check I get the following\n> NOTE:\n> >>> |\n> >>> | Tarballs are only required to store paths of up to 100 bytes and\n> cannot\n> >>> | store those of more than 256 bytes, with restrictions including to\n> 100\n> >>> | bytes for the final component.\n> >>> |\n> >>> | Is this a major problem?\n> >>>\n> >>> Yes.\n> >>>\n> >>> | As this is a 'NOTE' I am under the impression\n> >>> | that the long paths are not critical but I want to make sure.\n> >>>\n> >>> Wrong.\n> >>>\n> >>> 'BH' is called 'BH', believe it or not, to save a few letters, or else\n> I\n> >>> would have a dozen or more files complain for the very same reason\n> (and CRAN\n> >>> reject it for non-suitable path/filenames).  Hence not 'BoostHeaders'\n> but\n> >>> just 'BH'. And see the ChangeLog of BH and revel in how _each_ release\n> has to\n> >>> rename one of the Runge-Kutta integration files to make the 'net' path\n> length\n> >>> be suitable for R packing.\n> >>>\n> >>> There is no point in ignoring the output of R CMD check unless you\n> _really_\n> >>> know better.\n> >>\n> >>  But is it worth asking if the NOTE's restriction could be lifted,\n> >> given that from what I read on wikipedia that the \"tar\" file format\n> >> has been happy with long path names since 2001? Given that R-Core/CRAN\n> >> sometimes refer to R versions from a year ago as \"obsolete\", how can\n> >> they complain about sticking with a file format restriction from the\n> >> last century? I've just happily made a tar file with a path that is\n> >> 1300 chars long containing a file with a name of 160 chars .\n> >>\n> >>  Or are there still old versions of tar around, or other file systems\n> >> with restrictive naming practices (in which case the error should be\n> >> about the names/paths of the files themselves, not that old versions\n> >> of tar can't cope with them)?\n> >\n> > Yes, some Unixes seem to have old tar versions installed.\n>\n> Yes, it is somewhat harder to deem entire OSs obsolete...\n>\n> But: How old versions and how common is the issue?\n>\n> Mainstream Unix is essentially Linux and OS X these days. OS X seems to be\n> stuck in 2010 (BSD tar 2.8.3), at least up until Yosemite. Linux distros\n> usually keep themselves up to date, except for the enterprise/long upgrade\n> cycle ones that can be like 5 years outdated. Less common, but still in\n> use, are FreeBSD, Solaris and AIX.\n>\n> It _is_ a valid question for how long we want out-of-the-box support for\n> OSs that use obsolete tools. At some point we could decide that the more\n> obscure Unices would have to install a recent version (with the R\n> configuration arranging to set TAR=/usr/local/bin/gtar or somesuch).\n>\n> -pd\n>\n> >\n> > Best,\n> > Uwe Ligges\n> >\n> >>\n> >>  It now seems to have bothered at least two people and Dirk sounds\n> >> like he's had to implement a little hack to keep the path names down.\n> >>\n> >> Barry\n> >>\n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> Peter Dalgaard, Professor,\n> Center for Statistics, Copenhagen Business School\n> Solbjerg Plads 3, 2000 Frederiksberg, Denmark\n> Phone: (+45)38153501\n> Office: A 4.23\n> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I'm glad to see this discussion.  Unfortunately in the short term I cannot\nremove the nested files (as Dirk implies with the BH package) as it would\nrequire restructuring the c++ library and make it f",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 5,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-a1a229908e45",
+      "message_id": "<CAFDcVCSD_x1LPxYQWAKuSzZQJDmQmUVXqUzxk9d6X5vnR8n=kg@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "37708a6cb782f5feaf8184aa0c29ee7a2d00c5c1bcf512308a95d10fa8393e79",
+      "date": "2015-10-13T14:21:54-07:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<CAKxd1KNCSeq8QaG1v+=7h7a-ir36KGRKVxzCk=7=ZGjjirvw6A@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+        "<22044.30603.463681.423932@max.nulle.part>",
+        "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>",
+        "<561CB5FF.4060009@statistik.tu-dortmund.de>",
+        "<A1594A8C-4F0B-4DA2-9246-4157B2ED3D50@gmail.com>",
+        "<CAKxd1KNCSeq8QaG1v+=7h7a-ir36KGRKVxzCk=7=ZGjjirvw6A@mail.gmail.com>"
+      ],
+      "body_plain": "Regardless of tar or not, note that there are other limits in R on how\nlong *file* names can be, e.g.\n\n> pathname <- paste(rep(\"a\", times=255), collapse=\"\")\n> nchar(pathname)\n[1] 255\n> cat(\"hello\", file=pathname)\n\n> pathname <- paste(rep(\"a\", times=256), collapse=\"\")\n> nchar(pathname)\n[1] 256\n> cat(\"hello\", file=pathname)\nError in file(file, ifelse(append, \"a\", \"w\")) :\n  cannot open the connection\nIn addition: Warning message:\nIn file(file, ifelse(append, \"a\", \"w\")) :\n  cannot open file\n'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa':\nFile name too long\n\nThe above is the output from R 3.2.2 on x86_64-pc-linux-gnu (64-bit).\nI don't know if/where this is documented.\n\nAlso, and possibly related to the above, the MS Windows operating\nsystem has a limit of 256 characters on the *absolute* *pathname*\n(directory and file names including slashes but not initial drive\nletter specification), cf.\nhttp://aroma-project.org/howtos/UseLongFilenamesOnWindows/.   For\ninstance, if your package is installed in, say, library\n\"C:/Users/JohnDoe/R/win-library/3.2/\", you've already used up 35\ncharacters out of your 256 available ones just there.  Then add the\nlength of your package name.  So, allowing for fairly long usernames\non Windows, in order for your package to build/install on Windows as\nwell, you might still want to aim for something like a maximum of\n200-character *relative* pathnames. (You might get away with a bit\nlonger src/ pathnames if you build a Windows binary package under,\nsay, \"T:/', because src/ is not part of the distributed binary, so the\nuser can still install it, but I don't know how far you want to push\nthat).\n\n/Henrik\n\n\n\nOn Tue, Oct 13, 2015 at 1:04 PM, Charles Determan <cdetermanjr at gmail.com> wrote:\n> I'm glad to see this discussion.  Unfortunately in the short term I cannot\n> remove the nested files (as Dirk implies with the BH package) as it would\n> require restructuring the c++ library and make it far more difficult to\n> maintain.  Unless there are other suggestions I will need to hold off on\n> submission until such a time that OSs that use obsolete tools are no longer\n> supported out-of-the-box (as Peter says).  I will likely just continue to\n> maintain the package on my gitub until CRAN would accept the longer paths.\n>\n> Charles\n>\n> On Tue, Oct 13, 2015 at 4:02 AM, peter dalgaard <pdalgd at gmail.com> wrote:\n>\n>>\n>> On 13 Oct 2015, at 09:42 , Uwe Ligges <ligges at statistik.tu-dortmund.de>\n>> wrote:\n>>\n>> >\n>> >\n>> > On 13.10.2015 09:01, Barry Rowlingson wrote:\n>> >> On Tue, Oct 13, 2015 at 4:16 AM, Dirk Eddelbuettel <edd at debian.org>\n>> wrote:\n>> >>>\n>> >>> On 12 October 2015 at 13:13, Charles Determan wrote:\n>> >>> | Greetings,\n>> >>> |\n>> >>> | I have a package which provides headers for a C++ library (similar\n>> to the\n>> >>> | BH package).  However, the C++ library has some heavily nested\n>> components\n>> >>> | within its' structure so when I run R CMD check I get the following\n>> NOTE:\n>> >>> |\n>> >>> | Tarballs are only required to store paths of up to 100 bytes and\n>> cannot\n>> >>> | store those of more than 256 bytes, with restrictions including to\n>> 100\n>> >>> | bytes for the final component.\n>> >>> |\n>> >>> | Is this a major problem?\n>> >>>\n>> >>> Yes.\n>> >>>\n>> >>> | As this is a 'NOTE' I am under the impression\n>> >>> | that the long paths are not critical but I want to make sure.\n>> >>>\n>> >>> Wrong.\n>> >>>\n>> >>> 'BH' is called 'BH', believe it or not, to save a few letters, or else\n>> I\n>> >>> would have a dozen or more files complain for the very same reason\n>> (and CRAN\n>> >>> reject it for non-suitable path/filenames).  Hence not 'BoostHeaders'\n>> but\n>> >>> just 'BH'. And see the ChangeLog of BH and revel in how _each_ release\n>> has to\n>> >>> rename one of the Runge-Kutta integration files to make the 'net' path\n>> length\n>> >>> be suitable for R packing.\n>> >>>\n>> >>> There is no point in ignoring the output of R CMD check unless you\n>> _really_\n>> >>> know better.\n>> >>\n>> >>  But is it worth asking if the NOTE's restriction could be lifted,\n>> >> given that from what I read on wikipedia that the \"tar\" file format\n>> >> has been happy with long path names since 2001? Given that R-Core/CRAN\n>> >> sometimes refer to R versions from a year ago as \"obsolete\", how can\n>> >> they complain about sticking with a file format restriction from the\n>> >> last century? I've just happily made a tar file with a path that is\n>> >> 1300 chars long containing a file with a name of 160 chars .\n>> >>\n>> >>  Or are there still old versions of tar around, or other file systems\n>> >> with restrictive naming practices (in which case the error should be\n>> >> about the names/paths of the files themselves, not that old versions\n>> >> of tar can't cope with them)?\n>> >\n>> > Yes, some Unixes seem to have old tar versions installed.\n>>\n>> Yes, it is somewhat harder to deem entire OSs obsolete...\n>>\n>> But: How old versions and how common is the issue?\n>>\n>> Mainstream Unix is essentially Linux and OS X these days. OS X seems to be\n>> stuck in 2010 (BSD tar 2.8.3), at least up until Yosemite. Linux distros\n>> usually keep themselves up to date, except for the enterprise/long upgrade\n>> cycle ones that can be like 5 years outdated. Less common, but still in\n>> use, are FreeBSD, Solaris and AIX.\n>>\n>> It _is_ a valid question for how long we want out-of-the-box support for\n>> OSs that use obsolete tools. At some point we could decide that the more\n>> obscure Unices would have to install a recent version (with the R\n>> configuration arranging to set TAR=/usr/local/bin/gtar or somesuch).\n>>\n>> -pd\n>>\n>> >\n>> > Best,\n>> > Uwe Ligges\n>> >\n>> >>\n>> >>  It now seems to have bothered at least two people and Dirk sounds\n>> >> like he's had to implement a little hack to keep the path names down.\n>> >>\n>> >> Barry\n>> >>\n>> >> ______________________________________________\n>> >> R-package-devel at r-project.org mailing list\n>> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> >>\n>> >\n>> > ______________________________________________\n>> > R-package-devel at r-project.org mailing list\n>> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> --\n>> Peter Dalgaard, Professor,\n>> Center for Statistics, Copenhagen Business School\n>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark\n>> Phone: (+45)38153501\n>> Office: A 4.23\n>> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Regardless of tar or not, note that there are other limits in R on how\nlong *file* names can be, e.g.\n\n> pathname <- paste(rep(\"a\", times=255), collapse=\"\")\n> nchar(pathname)\n[1] 255\n> cat(\"hello\", fi",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 6,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-b8bdcc179266",
+      "message_id": "<CAFDcVCSoxZOaK_0QA1tLvZmTcJ_+MJ1gvm7tve3Wbv+6BEem4w@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "37708a6cb782f5feaf8184aa0c29ee7a2d00c5c1bcf512308a95d10fa8393e79",
+      "date": "2015-10-13T15:06:59-07:00",
+      "subject": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "subject_clean": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "in_reply_to": "<CAJ4QxaMTOK4mNn3KLXWXPrAXvx=44i+n_UxHX3ESUkK-ymEyxg@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCTdAJn8exdnw-y9D7fJCy7=LEVxAOCmCbr1is14ZTihDA@mail.gmail.com>",
+        "<CAJ4QxaMTOK4mNn3KLXWXPrAXvx=44i+n_UxHX3ESUkK-ymEyxg@mail.gmail.com>"
+      ],
+      "body_plain": "On Wed, Oct 7, 2015 at 6:40 PM, boB Rudis <bob at rudis.net> wrote:\n> Try looking at the source for tools:::.news_reader_default and then tools::toRd\n\nThank you for this.  That works - for example\n\n> news <- tools:::.news_reader_default(\"NEWS\")\n> str(news)\nClasses 'news_db' and 'data.frame':     21 obs. of  4 variables:\n $ Version : chr  \"0.8.1\" \"0.8.1\" \"0.8.1\" \"0.8.0\" ...\n $ Date    : chr  \"2015-10-05\" \"2015-10-05\" \"2015-10-05\" \"2015-09-06\" ...\n $ Category: chr  NA NA NA NA ...\n $ Text    : chr  \"eager() and multicore() gained argument 'globals', where\\nglo\nbals=TRUE will validate that all global variables\\nidentified can \"| __truncated\n__ \"lazy(sum(x, ...), globals=TRUE) now properly passes `...`\\nfrom the function\n from which the future is setup.  If not\\ncalled wi\"| __truncated__ \"Added vigne\ntte 'Futures in R: Common issues with solutions'.\" \"plan(\\\"default\\\") resets to\nthe default strategy, which is\\nsynchroneous eager evaluation unless option 'fut\nure_plan'\\nor envir\"| __truncated__ ...\n - attr(*, \"bad\")= logi  FALSE FALSE FALSE FALSE FALSE FALSE ...\n> any(attr(news, \"bad\"))\n[1] FALSE\n\nThis would work as way to validate NEWS.\n\n\nAlso, to follow up on my own original post suggesting that\ntools:::news2Rd() calls deprecated functions.  From the feedback I got\non the documentation bug report\n(https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16556) and\nlooking at the code, the following does indeed parse and output to\nNEWS.Rd:\n\n> setwd(\"/path/to/MyPackage/\")\n> tools:::news2Rd(\"NEWS\", out=\"NEWS.Rd\")\n\nwhich assuming NEWS is in the root of the package. If it's under\ninst/, then tools:::news2Rd(\"inst/NEWS\", out=\"NEWS.Rd\").\n\nHowever, it is important that the DESCRIPTION file is also found by\ntools:::news2Rd().  In other words, tools:::news2Rd() assumes you're\nrunning in a package director.  If you do what I tried previously and\nput the NEWS file in a separate \"sandbox\" directory, then you get:\n\n> tools:::news2Rd(\"NEWS\", out=\"NEWS.Rd\")\nError: 'readNEWS' is defunct.\nSee help(\"Defunct\")\n\nWith the a very recent R-devel, you now get:\n\n> tools:::news2Rd(\"NEWS\", \"NEWS.Rd\")\nError in tools:::news2Rd(\"NEWS\", \"NEWS.Rd\") : DESCRIPTION file not found\n\nwhich is more informative.\n\nHenrik\n\n>\n> On Wed, Oct 7, 2015 at 8:37 PM, Henrik Bengtsson\n> <henrik.bengtsson at ucsf.edu> wrote:\n>> Hi,\n>>\n>> I'm looking for a parser of the plain text NEWS format (not the\n>> NEWS.Rd format) - ideally the same on that is used by R itself.  Does\n>> anyone know which that one is / of such at tool?\n>>\n>> Thanks,\n>>\n>> Henrik\n>>\n>> PS. help(\"news\") mentions tools:::news2Rd(), but that's actually\n>> defunct (just reported\n>> https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16556).\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On Wed, Oct 7, 2015 at 6:40 PM, boB Rudis <bob at rudis.net> wrote:\n> Try looking at the source for tools:::.news_reader_default and then tools::toRd\n\nThank you for this.  That works - for example\n\n> ",
+      "thread_id": "thread-fc756686e74c",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-3482a4feed44",
+      "message_id": "<22045.36311.857611.353572@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-10-13T18:03:51-05:00",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "subject_clean": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "in_reply_to": "<CAKxd1KNCSeq8QaG1v+=7h7a-ir36KGRKVxzCk=7=ZGjjirvw6A@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KOkDmN7uX-DApk5zikGZ3TMog2pRKG-GniZUC5XZt4ObQ@mail.gmail.com>",
+        "<22044.30603.463681.423932@max.nulle.part>",
+        "<CANVKczPn+mG1Z+zSQtgmjpghYXGHiohdrNbU5eFWPd2OWJmXtw@mail.gmail.com>",
+        "<561CB5FF.4060009@statistik.tu-dortmund.de>",
+        "<A1594A8C-4F0B-4DA2-9246-4157B2ED3D50@gmail.com>",
+        "<CAKxd1KNCSeq8QaG1v+=7h7a-ir36KGRKVxzCk=7=ZGjjirvw6A@mail.gmail.com>"
+      ],
+      "body_plain": "On 13 October 2015 at 15:04, Charles Determan wrote:\n| I'm glad to see this discussion.  Unfortunately in the short term I cannot\n| remove the nested files (as Dirk implies with the BH package) as it would\n\nRename, not remove. Of course I didn't remove a file.\n\nI changed a filename, and the include statement leading to it.\n\n| require restructuring the c++ library and make it far more difficult to\n| maintain.  Unless there are other suggestions I will need to hold off on\n| submission until such a time that OSs that use obsolete tools are no longer\n| supported out-of-the-box (as Peter says).  I will likely just continue to\n| maintain the package on my gitub until CRAN would accept the longer paths.\n\nWhich still keeps it uninstallable on some systems.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 13 October 2015 at 15:04, Charles Determan wrote:\n| I'm glad to see this discussion.  Unfortunately in the short term I cannot\n| remove the nested files (as Dirk implies with the BH package) as it ",
+      "thread_id": "thread-3f70fb341f8d",
+      "thread_depth": 6,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-1af801151e7b",
+      "message_id": "<CAD6tx97b-oYmOTwH5U1r=ygcM7JjLmf5N3MCP9p-mq0FwMamOQ@mail.gmail.com>",
+      "from_name": "Jim Hester",
+      "from_email_hash": "04a7b20104a1161729ea6b432cba15d55d1714ff77e18f457105f2e4d93bfb22",
+      "date": "2015-10-14T15:53:22-04:00",
+      "subject": "[R-pkg-devel] problem with locale-dependent order()",
+      "subject_clean": "[R-pkg-devel] problem with locale-dependent order()",
+      "in_reply_to": "<CABdHhvGFWKnqUp_7eZiR83UQhW217WA4Zj0OaqbDF--zddsV4w@mail.gmail.com>",
+      "references": [
+        "<1594107507.7395252.1442607921071.JavaMail.zimbra@meteo.be>",
+        "<CABdHhvGFWKnqUp_7eZiR83UQhW217WA4Zj0OaqbDF--zddsV4w@mail.gmail.com>"
+      ],
+      "body_plain": "Alex,\n\n'with_collate' is one of the functions included in the withr package (\nhttps://cran.rstudio.com/web/packages/withr/).\nSo you could simply write\n\n  sort_c <- function(x) withr::with_collate(\"C\", sort(x))\n\nThe usage semantics and implementation are essentially identical to what\nHadley described.\n\nJim\n\nOn Sun, Sep 20, 2015 at 1:22 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n\n> Hi Alex,\n>\n> As far as I know, that's the best solution. In roxygen, I've wrapped\n> it up with a couple of helpers:\n>\n> set_collate <- function(locale) {\n>   cur <- Sys.getlocale(category = \"LC_COLLATE\")\n>   Sys.setlocale(category = \"LC_COLLATE\", locale = locale)\n>   cur\n> }\n>\n> with_collate <- function(locale, code) {\n>   old <- set_collate(locale)\n>   on.exit(set_collate(old))\n>\n>   force(code)\n> }\n>\n> sort_c <- function(x) with_collate(\"C\", sort(x))\n>\n> Hadley\n>\n> On Fri, Sep 18, 2015 at 4:25 PM, Alex Deckmyn <alex.deckmyn at meteo.be>\n> wrote:\n> > Hi,\n> >\n> > For an update of the maps package, I have run into a bug caused by the\n> locale-depent behaviour of order().\n> > In a certain function, the polygon names of the world map are lexically\n> sorted with order() prior to being sent to a C routine. That routine\n> expects them to be sorted according to ASCII rules, but that is not the\n> result I get. The main culprit is the colon used to identify sub-regions.\n> For instance, in my locale (en_GB_UTF-8), I get\n> >\n> > \"uk:northen ireland\" < \"ukrain\" < \"uk:scotland\"\n> >\n> > which is not the order expected by C. I guess some language settings\n> would also cause other unexpected results.\n> >\n> > Apart from the pain of fixing uk/ukrain ambiguities, is there a safe way\n> to fix this order() in a package? An obvious solution seems to be\n> >\n> > lcc <- Sys.getlocale(\"LC_COLLATE\")\n> > Sys.setlocale(\"LC_COLLATE\",\"C\")\n> > ord.nam <- order(nam)\n> > Sys.setlocale(\"LC_COLLATE\",lcc)\n> >\n> > This seems to work fine on my linux PC, but I am not sure about other\n> platforms (Windows, OS-X...), though the \"C\" locale should be standard. Is\n> this safe? Or is there a better way to get the right ordering?\n> >\n> > Alex\n> >\n> > ---\n> > Dr. Alex Deckmyn e-mail: alex.deckmyn at meteo.be\n> > Royal Meteorological Institute http://www.meteo.be\n> > Ringlaan 3, 1180 Ukkel, Belgium tel. (32)(2)3730646\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n> --\n> http://had.co.nz/\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Alex,\n\n'with_collate' is one of the functions included in the withr package (\nhttps://cran.rstudio.com/web/packages/withr/).\nSo you could simply write\n\n  sort_c <- function(x) withr::with_collate(\"C\",",
+      "thread_id": "thread-1af801151e7b",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-971d29465160",
+      "message_id": "<CA+8X3fVybrJW3f4-LLn81qzx=QJvd-MN8J-x6bd-99DbthZxpw@mail.gmail.com>",
+      "from_name": "Jim Lemon",
+      "from_email_hash": "4fd4de8f79714fe62432d41802cdcfa3560d905c372a2f11e0e4da4166fd729b",
+      "date": "2015-10-16T21:46:38+11:00",
+      "subject": "[R-pkg-devel] R-devel installation and libcurl",
+      "subject_clean": "[R-pkg-devel] R-devel installation and libcurl",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\nI have been attempting to install R-devel to check updated packages for\nCRAN. After reading the relevant section in R Installation and\nAdministration, searching and a lot of unsuccessful fiddling with\n\"configure\", I thought I might as well ask.\n\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Fedora 21 (Twenty One)\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n [9] LC_ADDRESS=C               LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\nconfigure hits the wall when checking for libcurl. I installed libcurl\nv7.37.0 and while it is recognized, I have not succeeded in getting it to\nfind curl.h (it's in /usr/include/curl/curl.h). R Installation ahd\nAdministration seems to suggest that the path information should be put in\nMkRules.local. However, that file is nowhere to be found. Neither can I\nfind any variable in \"configure\" that specifies where to look for curl.h.\n\nI'm sure that this is very simple, but if anyone can provide a method to\nstop the:\n\n...\nchecking curl/curl.h usability... no\nchecking curl/curl.h presence... no\nchecking for curl/curl.h... no\nconfigure: error: libcurl >= 7.28.0 library and headers are required with\nsupport for https\n\nerror I would be most grateful.\n\nJim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\nI have been attempting to install R-devel to check updated packages for\nCRAN. After reading the relevant section in R Installation and\nAdministration, searching and a lot of unsuccessful fiddling ",
+      "thread_id": "thread-971d29465160",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-1e02286770bc",
+      "message_id": "<1445013224.6634.12.camel@iarc.fr>",
+      "from_name": "Martyn Plummer",
+      "from_email_hash": "2e099cb1222e34e2ab5938e6ef440a822400d8f04f0d3ca6299b8e1740ceeacb",
+      "date": "2015-10-16T16:33:44Z",
+      "subject": "[R-pkg-devel] R-devel installation and libcurl",
+      "subject_clean": "[R-pkg-devel] R-devel installation and libcurl",
+      "in_reply_to": "<CA+8X3fVybrJW3f4-LLn81qzx=QJvd-MN8J-x6bd-99DbthZxpw@mail.gmail.com>",
+      "references": [
+        "<CA+8X3fVybrJW3f4-LLn81qzx=QJvd-MN8J-x6bd-99DbthZxpw@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, 2015-10-16 at 21:46 +1100, Jim Lemon wrote:\n> Hi,\n> I have been attempting to install R-devel to check updated packages for\n> CRAN. After reading the relevant section in R Installation and\n> Administration, searching and a lot of unsuccessful fiddling with\n> \"configure\", I thought I might as well ask.\n> \n> Platform: x86_64-pc-linux-gnu (64-bit)\n> Running under: Fedora 21 (Twenty One)\n> \n> locale:\n>  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n>  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n>  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n>  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n>  [9] LC_ADDRESS=C               LC_TELEPHONE=C\n> [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n> \n> configure hits the wall when checking for libcurl. I installed libcurl\n> v7.37.0 and while it is recognized, I have not succeeded in getting it to\n> find curl.h (it's in /usr/include/curl/curl.h). R Installation ahd\n> Administration seems to suggest that the path information should be put in\n> MkRules.local. However, that file is nowhere to be found. Neither can I\n> find any variable in \"configure\" that specifies where to look for curl.h.\n> \n> I'm sure that this is very simple, but if anyone can provide a method to\n> stop the:\n> \n> ...\n> checking curl/curl.h usability... no\n> checking curl/curl.h presence... no\n> checking for curl/curl.h... no\n> configure: error: libcurl >= 7.28.0 library and headers are required with\n> support for https\n> \n> error I would be most grateful.\n\nThis may be a little bit off topic for this list, since it is not an\nissue with your package, but I'll try to answer anyway.\n\nThe header file /usr/include/curl/curl.h is provided by both the 32-bit\nand 64-bit versions of libcurl-devel. I can reproduce your error if I\nhave libcurl-devel.i686 installed (which provides the header) but not\nlibcurl-devel.x86_64 (which is needed to compile the 64-bit version of\nR). This gives me the following output:\n\nchecking for curl-config... /usr/bin/curl-config\nchecking libcurl version ... 7.37.0\nPackage libcurl was not found in the pkg-config search path.\nPerhaps you should add the directory containing `libcurl.pc'\nto the PKG_CONFIG_PATH environment variable\nNo package 'libcurl' found\nchecking curl/curl.h usability... no\nchecking curl/curl.h presence... no\nchecking for curl/curl.h... no\nconfigure: error: libcurl >= 7.28.0 library and headers are required\nwith support for https\n\nMartyn\n\n> Jim\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
+      "body_snippet": "On Fri, 2015-10-16 at 21:46 +1100, Jim Lemon wrote:\n> Hi,\n> I have been attempting to install R-devel to check updated packages for\n> CRAN. After reading the relevant section in R Installation and\n> A",
+      "thread_id": "thread-971d29465160",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-f03bed19e3e2",
+      "message_id": "<56213182.4060802@gmail.com>",
+      "from_name": "Facundo Muñoz",
+      "from_email_hash": "68b46883edd1011ec4c3eabd8311031a2e26eff3b2007513da02aef29064558d",
+      "date": "2015-10-16T19:18:58+02:00",
+      "subject": "[R-pkg-devel] Fwd: src/install.libs.R",
+      "subject_clean": "[R-pkg-devel] Fwd: src/install.libs.R",
+      "in_reply_to": "<56139743.6080203@gmail.com>",
+      "references": [
+        "<56139743.6080203@gmail.com>"
+      ],
+      "body_plain": "I relaunch this question for which I had no answers.\nJust in case someone who can give some insight missed it before.\n\nThanks in advance\n        ?acu.-\n\n\n\n-------- Mensaje reenviado --------\nAsunto: \tsrc/install.libs.R\nFecha: \tTue, 6 Oct 2015 11:41:23 +0200\nDe: \tFacundo Mu?oz <famuvie at gmail.com>\nPara: \tr-package-devel at r-project.org\n\n\n\nDear all,\n\nI need to make use of the |src/install.libs.R| file, in order to perform\ncertain tasks at installation time.\nI followed the R-exts doc\n<http://cran.univ-paris1.fr/doc/manuals/r-release/R-exts.html#Package-subdirectories>.\nHowever, R CMD INSTALL seems to never run the script.\n\nHere is a minimal reproducible example.\nIt makes use of |devtools| to simplify the example, but I have tried the\ninstallation manually as well.\n\n|## Create a minimal buildable package library(devtools)\ncreate('testpkg') ## Write src/install.libs.R dir.create('testpkg/src')\ntest.file <- path.expand('~/testfile.txt') diag.lines <- c(\ndeparse(quote(stop('This should break the installation'))),\ndeparse(quote(file.create(test.file))) ) writeLines(diag.lines,\n'testpkg/src/install.libs.R') ## Install package ## also tried manually\nwith R CMD INSTALL install('testpkg') ## The installation did not break\n## nor the file has been created file.exists('~/testfile.txt') # FALSE\n## Cleanup remove.packages('testpkg') unlink('testpkg', recursive = TRUE) |\n\nAm I missing something?\n\nthanks in advance\n?acu.-\n\nPS: by the way?\n\n|> sessionInfo() R version 3.2.2 (2015-08-14) Platform:\nx86_64-pc-linux-gnu (64-bit) Running under: Ubuntu 14.04.2 LTS locale:\n[1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C LC_TIME=en_US.UTF-8\nLC_COLLATE=en_US.UTF-8 [5] LC_MONETARY=fr_FR.UTF-8\nLC_MESSAGES=en_US.UTF-8 LC_PAPER=fr_FR.UTF-8 LC_NAME=C [9] LC_ADDRESS=C\nLC_TELEPHONE=C LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C attached\nbase packages: [1] stats graphics grDevices utils datasets methods base\nother attached packages: [1] devtools_1.8.0.9000 loaded via a namespace\n(and not attached): [1] tools_3.2.2 memoise_0.2.1 digest_0.6.8 |\n\n?\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I relaunch this question for which I had no answers.\nJust in case someone who can give some insight missed it before.\n\nThanks in advance\n        ?acu.-\n\n\n\n-------- Mensaje reenviado --------\nAsunto: \t",
+      "thread_id": "thread-2644ae3c7ccc",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-d7a1f8a37af0",
+      "message_id": "<EA2EC212-8678-40A3-8237-CCC01E1B3638@gmail.com>",
+      "from_name": "peter dalgaard",
+      "from_email_hash": "d2573f0c0a474184a9d96c815fc6bf37ff7c6392082069d810139c562d5a6f71",
+      "date": "2015-10-16T19:37:06+02:00",
+      "subject": "[R-pkg-devel] R-devel installation and libcurl",
+      "subject_clean": "[R-pkg-devel] R-devel installation and libcurl",
+      "in_reply_to": "<1445013224.6634.12.camel@iarc.fr>",
+      "references": [
+        "<CA+8X3fVybrJW3f4-LLn81qzx=QJvd-MN8J-x6bd-99DbthZxpw@mail.gmail.com>",
+        "<1445013224.6634.12.camel@iarc.fr>"
+      ],
+      "body_plain": "> On 16 Oct 2015, at 18:33 , Martyn Plummer <plummerM at iarc.fr> wrote:\n> \n> On Fri, 2015-10-16 at 21:46 +1100, Jim Lemon wrote:\n>> Hi,\n>> I have been attempting to install R-devel to check updated packages for\n>> CRAN. After reading the relevant section in R Installation and\n>> Administration, searching and a lot of unsuccessful fiddling with\n>> \"configure\", I thought I might as well ask.\n>> \n>> Platform: x86_64-pc-linux-gnu (64-bit)\n>> Running under: Fedora 21 (Twenty One)\n>> \n>> locale:\n>> [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n>> [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n>> [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n>> [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n>> [9] LC_ADDRESS=C               LC_TELEPHONE=C\n>> [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n>> \n>> configure hits the wall when checking for libcurl. I installed libcurl\n>> v7.37.0 and while it is recognized, I have not succeeded in getting it to\n>> find curl.h (it's in /usr/include/curl/curl.h). R Installation ahd\n>> Administration seems to suggest that the path information should be put in\n>> MkRules.local. However, that file is nowhere to be found. Neither can I\n>> find any variable in \"configure\" that specifies where to look for curl.h.\n>> \n>> I'm sure that this is very simple, but if anyone can provide a method to\n>> stop the:\n>> \n>> ...\n>> checking curl/curl.h usability... no\n>> checking curl/curl.h presence... no\n>> checking for curl/curl.h... no\n>> configure: error: libcurl >= 7.28.0 library and headers are required with\n>> support for https\n>> \n>> error I would be most grateful.\n> \n> This may be a little bit off topic for this list, since it is not an\n> issue with your package, but I'll try to answer anyway.\n\nAlso, a generic piece of advice: configure doesn't always get its error messages precisely right. Sometimes it is useful to go through the config.log and see exactly what program failed to compile with what error message. It's not that unusual to see an include file test program failing due to wrong compiler flags or libraries. \n\n-pd\n\n> The header file /usr/include/curl/curl.h is provided by both the 32-bit\n> and 64-bit versions of libcurl-devel. I can reproduce your error if I\n> have libcurl-devel.i686 installed (which provides the header) but not\n> libcurl-devel.x86_64 (which is needed to compile the 64-bit version of\n> R). This gives me the following output:\n> \n> checking for curl-config... /usr/bin/curl-config\n> checking libcurl version ... 7.37.0\n> Package libcurl was not found in the pkg-config search path.\n> Perhaps you should add the directory containing `libcurl.pc'\n> to the PKG_CONFIG_PATH environment variable\n> No package 'libcurl' found\n> checking curl/curl.h usability... no\n> checking curl/curl.h presence... no\n> checking for curl/curl.h... no\n> configure: error: libcurl >= 7.28.0 library and headers are required\n> with support for https\n> \n> Martyn\n> \n>> Jim\n>> \n>> \t[[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> -----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "> On 16 Oct 2015, at 18:33 , Martyn Plummer <plummerM at iarc.fr> wrote:\n> \n> On Fri, 2015-10-16 at 21:46 +1100, Jim Lemon wrote:\n>> Hi,\n>> I have been attempting to install R-devel to check updated p",
+      "thread_id": "thread-971d29465160",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-1c8081d03af6",
+      "message_id": "<5621370F.5080907@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-10-16T13:42:39-04:00",
+      "subject": "[R-pkg-devel] Fwd: src/install.libs.R",
+      "subject_clean": "[R-pkg-devel] Fwd: src/install.libs.R",
+      "in_reply_to": "<56213182.4060802@gmail.com>",
+      "references": [
+        "<56139743.6080203@gmail.com>",
+        "<56213182.4060802@gmail.com>"
+      ],
+      "body_plain": "I can't really read your code (HTML?), but there are several CRAN\npackages which make use of this, for example tth, rJava, etc. I just\ntried installing tth and it ran the script.  So you might want to see\nhow your package differs from that one.\n\nDuncan Murdoch\n\nOn 16/10/2015 1:18 PM, Facundo Mu?oz wrote:\n> I relaunch this question for which I had no answers.\n> Just in case someone who can give some insight missed it before.\n> \n> Thanks in advance\n>         ?acu.-\n> \n> \n> \n> -------- Mensaje reenviado --------\n> Asunto: \tsrc/install.libs.R\n> Fecha: \tTue, 6 Oct 2015 11:41:23 +0200\n> De: \tFacundo Mu?oz <famuvie at gmail.com>\n> Para: \tr-package-devel at r-project.org\n> \n> \n> \n> Dear all,\n> \n> I need to make use of the |src/install.libs.R| file, in order to perform\n> certain tasks at installation time.\n> I followed the R-exts doc\n> <http://cran.univ-paris1.fr/doc/manuals/r-release/R-exts.html#Package-subdirectories>.\n> However, R CMD INSTALL seems to never run the script.\n> \n> Here is a minimal reproducible example.\n> It makes use of |devtools| to simplify the example, but I have tried the\n> installation manually as well.\n> \n> |## Create a minimal buildable package library(devtools)\n> create('testpkg') ## Write src/install.libs.R dir.create('testpkg/src')\n> test.file <- path.expand('~/testfile.txt') diag.lines <- c(\n> deparse(quote(stop('This should break the installation'))),\n> deparse(quote(file.create(test.file))) ) writeLines(diag.lines,\n> 'testpkg/src/install.libs.R') ## Install package ## also tried manually\n> with R CMD INSTALL install('testpkg') ## The installation did not break\n> ## nor the file has been created file.exists('~/testfile.txt') # FALSE\n> ## Cleanup remove.packages('testpkg') unlink('testpkg', recursive = TRUE) |\n> \n> Am I missing something?\n> \n> thanks in advance\n> ?acu.-\n> \n> PS: by the way?\n> \n> |> sessionInfo() R version 3.2.2 (2015-08-14) Platform:\n> x86_64-pc-linux-gnu (64-bit) Running under: Ubuntu 14.04.2 LTS locale:\n> [1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C LC_TIME=en_US.UTF-8\n> LC_COLLATE=en_US.UTF-8 [5] LC_MONETARY=fr_FR.UTF-8\n> LC_MESSAGES=en_US.UTF-8 LC_PAPER=fr_FR.UTF-8 LC_NAME=C [9] LC_ADDRESS=C\n> LC_TELEPHONE=C LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C attached\n> base packages: [1] stats graphics grDevices utils datasets methods base\n> other attached packages: [1] devtools_1.8.0.9000 loaded via a namespace\n> (and not attached): [1] tools_3.2.2 memoise_0.2.1 digest_0.6.8 |\n> \n> ?\n> \n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "I can't really read your code (HTML?), but there are several CRAN\npackages which make use of this, for example tth, rJava, etc. I just\ntried installing tth and it ran the script.  So you might want to",
+      "thread_id": "thread-2644ae3c7ccc",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-88409de3736a",
+      "message_id": "<562150B1.2080402@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-10-16T15:32:01-04:00",
+      "subject": "[R-pkg-devel] Fwd: src/install.libs.R",
+      "subject_clean": "[R-pkg-devel] Fwd: src/install.libs.R",
+      "in_reply_to": "<56213182.4060802@gmail.com>",
+      "references": [
+        "<56139743.6080203@gmail.com>",
+        "<56213182.4060802@gmail.com>"
+      ],
+      "body_plain": "On 16/10/2015 1:18 PM, Facundo Mu?oz wrote:\n> I relaunch this question for which I had no answers.\n> Just in case someone who can give some insight missed it before.\n\nWe corresponded offline.  The problem with the sample is that it has no\nfiles in src that trigger processing:  those would be Makefile,\nMakefile.win, Makevars, or source files in supported languages.\n\nIf the real example doesn't have any of these (e.g. because it is just\ncopying a pre-compiled file from somewhere; not something you should do\nin a CRAN package, but maybe reasonable in a local one), then the\neasiest workaround is just to add an empty Makevars file.\n\nDuncan Murdoch\n\n> \n> Thanks in advance\n>         ?acu.-\n> \n> \n> \n> -------- Mensaje reenviado --------\n> Asunto: \tsrc/install.libs.R\n> Fecha: \tTue, 6 Oct 2015 11:41:23 +0200\n> De: \tFacundo Mu?oz <famuvie at gmail.com>\n> Para: \tr-package-devel at r-project.org\n> \n> \n> \n> Dear all,\n> \n> I need to make use of the |src/install.libs.R| file, in order to perform\n> certain tasks at installation time.\n> I followed the R-exts doc\n> <http://cran.univ-paris1.fr/doc/manuals/r-release/R-exts.html#Package-subdirectories>.\n> However, R CMD INSTALL seems to never run the script.\n> \n> Here is a minimal reproducible example.\n> It makes use of |devtools| to simplify the example, but I have tried the\n> installation manually as well.\n> \n> |## Create a minimal buildable package library(devtools)\n> create('testpkg') ## Write src/install.libs.R dir.create('testpkg/src')\n> test.file <- path.expand('~/testfile.txt') diag.lines <- c(\n> deparse(quote(stop('This should break the installation'))),\n> deparse(quote(file.create(test.file))) ) writeLines(diag.lines,\n> 'testpkg/src/install.libs.R') ## Install package ## also tried manually\n> with R CMD INSTALL install('testpkg') ## The installation did not break\n> ## nor the file has been created file.exists('~/testfile.txt') # FALSE\n> ## Cleanup remove.packages('testpkg') unlink('testpkg', recursive = TRUE) |\n> \n> Am I missing something?\n> \n> thanks in advance\n> ?acu.-\n> \n> PS: by the way?\n> \n> |> sessionInfo() R version 3.2.2 (2015-08-14) Platform:\n> x86_64-pc-linux-gnu (64-bit) Running under: Ubuntu 14.04.2 LTS locale:\n> [1] LC_CTYPE=en_US.UTF-8 LC_NUMERIC=C LC_TIME=en_US.UTF-8\n> LC_COLLATE=en_US.UTF-8 [5] LC_MONETARY=fr_FR.UTF-8\n> LC_MESSAGES=en_US.UTF-8 LC_PAPER=fr_FR.UTF-8 LC_NAME=C [9] LC_ADDRESS=C\n> LC_TELEPHONE=C LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C attached\n> base packages: [1] stats graphics grDevices utils datasets methods base\n> other attached packages: [1] devtools_1.8.0.9000 loaded via a namespace\n> (and not attached): [1] tools_3.2.2 memoise_0.2.1 digest_0.6.8 |\n> \n> ?\n> \n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 16/10/2015 1:18 PM, Facundo Mu?oz wrote:\n> I relaunch this question for which I had no answers.\n> Just in case someone who can give some insight missed it before.\n\nWe corresponded offline.  The pro",
+      "thread_id": "thread-2644ae3c7ccc",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-1471e62e72c8",
+      "message_id": "<CA+8X3fU9R_tK-q3fecFiSgbR_No5rMe9x8a9DqXVK4pnWBzu7Q@mail.gmail.com>",
+      "from_name": "Jim Lemon",
+      "from_email_hash": "4fd4de8f79714fe62432d41802cdcfa3560d905c372a2f11e0e4da4166fd729b",
+      "date": "2015-10-18T17:37:33+11:00",
+      "subject": "[R-pkg-devel] R-devel installation and libcurl",
+      "subject_clean": "[R-pkg-devel] R-devel installation and libcurl",
+      "in_reply_to": "<EA2EC212-8678-40A3-8237-CCC01E1B3638@gmail.com>",
+      "references": [
+        "<CA+8X3fVybrJW3f4-LLn81qzx=QJvd-MN8J-x6bd-99DbthZxpw@mail.gmail.com>",
+        "<1445013224.6634.12.camel@iarc.fr>",
+        "<EA2EC212-8678-40A3-8237-CCC01E1B3638@gmail.com>"
+      ],
+      "body_plain": "Hi Martyn,\nThanks for the tip, that was the problem. I had the wrong libcurl-devel\ninstalled.\n\nJim\n\nOn Sat, Oct 17, 2015 at 4:37 AM, peter dalgaard <pdalgd at gmail.com> wrote:\n\n>\n> > On 16 Oct 2015, at 18:33 , Martyn Plummer <plummerM at iarc.fr> wrote:\n> >\n> > On Fri, 2015-10-16 at 21:46 +1100, Jim Lemon wrote:\n> >> Hi,\n> >> I have been attempting to install R-devel to check updated packages for\n> >> CRAN. After reading the relevant section in R Installation and\n> >> Administration, searching and a lot of unsuccessful fiddling with\n> >> \"configure\", I thought I might as well ask.\n> >>\n> >> Platform: x86_64-pc-linux-gnu (64-bit)\n> >> Running under: Fedora 21 (Twenty One)\n> >>\n> >> locale:\n> >> [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C\n> >> [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8\n> >> [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8\n> >> [7] LC_PAPER=en_US.UTF-8       LC_NAME=C\n> >> [9] LC_ADDRESS=C               LC_TELEPHONE=C\n> >> [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n> >>\n> >> configure hits the wall when checking for libcurl. I installed libcurl\n> >> v7.37.0 and while it is recognized, I have not succeeded in getting it\n> to\n> >> find curl.h (it's in /usr/include/curl/curl.h). R Installation ahd\n> >> Administration seems to suggest that the path information should be put\n> in\n> >> MkRules.local. However, that file is nowhere to be found. Neither can I\n> >> find any variable in \"configure\" that specifies where to look for\n> curl.h.\n> >>\n> >> I'm sure that this is very simple, but if anyone can provide a method to\n> >> stop the:\n> >>\n> >> ...\n> >> checking curl/curl.h usability... no\n> >> checking curl/curl.h presence... no\n> >> checking for curl/curl.h... no\n> >> configure: error: libcurl >= 7.28.0 library and headers are required\n> with\n> >> support for https\n> >>\n> >> error I would be most grateful.\n> >\n> > This may be a little bit off topic for this list, since it is not an\n> > issue with your package, but I'll try to answer anyway.\n>\n> Also, a generic piece of advice: configure doesn't always get its error\n> messages precisely right. Sometimes it is useful to go through the\n> config.log and see exactly what program failed to compile with what error\n> message. It's not that unusual to see an include file test program failing\n> due to wrong compiler flags or libraries.\n>\n> -pd\n>\n> > The header file /usr/include/curl/curl.h is provided by both the 32-bit\n> > and 64-bit versions of libcurl-devel. I can reproduce your error if I\n> > have libcurl-devel.i686 installed (which provides the header) but not\n> > libcurl-devel.x86_64 (which is needed to compile the 64-bit version of\n> > R). This gives me the following output:\n> >\n> > checking for curl-config... /usr/bin/curl-config\n> > checking libcurl version ... 7.37.0\n> > Package libcurl was not found in the pkg-config search path.\n> > Perhaps you should add the directory containing `libcurl.pc'\n> > to the PKG_CONFIG_PATH environment variable\n> > No package 'libcurl' found\n> > checking curl/curl.h usability... no\n> > checking curl/curl.h presence... no\n> > checking for curl/curl.h... no\n> > configure: error: libcurl >= 7.28.0 library and headers are required\n> > with support for https\n> >\n> > Martyn\n> >\n> >> Jim\n> >>\n> >>      [[alternative HTML version deleted]]\n> >>\n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n> > -----------------------------------------------------------------------\n> > This message and its attachments are strictly confidenti...{{dropped:8}}\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> Peter Dalgaard, Professor,\n> Center for Statistics, Copenhagen Business School\n> Solbjerg Plads 3, 2000 Frederiksberg, Denmark\n> Phone: (+45)38153501\n> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n>\n>\n>\n>\n>\n>\n>\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Martyn,\nThanks for the tip, that was the problem. I had the wrong libcurl-devel\ninstalled.\n\nJim\n\nOn Sat, Oct 17, 2015 at 4:37 AM, peter dalgaard <pdalgd at gmail.com> wrote:\n\n>\n> > On 16 Oct 2015, ",
+      "thread_id": "thread-971d29465160",
+      "thread_depth": 3,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-4f36c7a77f47",
+      "message_id": "<5C759AAB3680854DA1CFD152DD5CCE5A012D6010DE@NC-MAIL2010.northland.edu>",
+      "from_name": "Derek Ogle",
+      "from_email_hash": "d8ab15f0ac0477824b0baa65b33adead59b0eceb86ebb5176308d5f8cceaa2ec",
+      "date": "2015-10-21T22:15:51Z",
+      "subject": "[R-pkg-devel] CRAN checks question",
+      "subject_clean": "[R-pkg-devel] CRAN checks question",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I was hoping to submit a new version of my FSA package today when I noticed that the current version on CRAN has an error on the CRAN checks page (which I don't believe was there when I first submitted that version of the package).  The error is detailed here (https://cran.r-project.org/web/checks/check_results_FSA.html) and copied below.  The error is only for the \"r-devel-windows-ix86+x86_64\" flavor and appears to be related to missing gdata and testthat packages.  I looked at both the gdata and testthat packages on CRAN and they have clean CRAN checks.  I looked at a handful of other packages that depend on gdata and testthat and they appear to have clean CRAN checks.  I checked the package on win-builder and it did not return any errors.  Any pointers?\n\n---------------------------------\nVersion: 0.8.1 \nCheck: examples \nResult: ERROR \n????Running examples in 'FSA-Ex.R' failed\n????The error most likely occurred in:\n????\n????> ### Name: Subset\n????> ### Title: Subsets/filters a data frame and drops the unused levels.\n????> ### Aliases: Subset filterD\n????> ### Keywords: misc\n????> \n????> ### ** Examples\n????> \n????> ## The problem -- note use of unused level in the final table.\n????> levels(iris$Species)\n????[1] \"setosa\" \"versicolor\" \"virginica\" \n????> iris.set1 <- subset(iris,Species==\"setosa\" | Species==\"versicolor\")\n????> levels(iris.set1$Species)\n????[1] \"setosa\" \"versicolor\" \"virginica\" \n????> xtabs(~Species,data=iris)\n????Species\n???? setosa versicolor virginica \n???? 50 50 50 \n????> \n????> ## A simpler fix using Subset\n????> iris.set2 <- Subset(iris,Species==\"setosa\" | Species==\"versicolor\")\n????Loading required namespace: gdata\n????Failed with error: 'there is no package called 'gdata''\n????Error: 'filterD' requires the 'gdata' package to be installed!\n????Execution halted \nFlavor: r-devel-windows-ix86+x86_64 \nVersion: 0.8.1 \nCheck: tests \nResult: ERROR \n????Running the tests in 'tests/test-all.R' failed.\n????Last 13 lines of output:\n???? Type 'license()' or 'licence()' for distribution details.\n???? \n???? R is a collaborative project with many contributors.\n???? Type 'contributors()' for more information and\n???? 'citation()' on how to cite R or R packages in publications.\n???? \n???? Type 'demo()' for some demos, 'help()' for on-line help, or\n???? 'help.start()' for an HTML browser interface to help.\n???? Type 'q()' to quit R.\n???? \n???? > library(testthat)\n???? Error in library(testthat) : there is no package called 'testthat'\n???? Execution halted \nFlavor: r-devel-windows-ix86+x86_64 \nVersion: 0.8.1\n---------------------------------\n\nDr. Derek H. Ogle\nProfessor of Mathematical Sciences & Natural Resources\nNorthland College\n1411 Ellis Ave\nAshland, WI  54806\n\ne-mail: dogle at northland.edu\nweb: derekogle.com\nfishr: derekogle.com/fishR/\nIntroduction to Fisheries Analysis with R book: derekogle/com/IFAR/",
+      "body_snippet": "I was hoping to submit a new version of my FSA package today when I noticed that the current version on CRAN has an error on the CRAN checks page (which I don't believe was there when I first submitte",
+      "thread_id": "thread-4f36c7a77f47",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-ea8ebff5d911",
+      "message_id": "<CABdHhvHmN-R=ZNaf9acc+8DxTR+z3vyBVbkX5pDFkAyFOwXTpA@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2015-10-22T08:31:22-05:00",
+      "subject": "[R-pkg-devel] CRAN checks question",
+      "subject_clean": "[R-pkg-devel] CRAN checks question",
+      "in_reply_to": "<5C759AAB3680854DA1CFD152DD5CCE5A012D6010DE@NC-MAIL2010.northland.edu>",
+      "references": [
+        "<5C759AAB3680854DA1CFD152DD5CCE5A012D6010DE@NC-MAIL2010.northland.edu>"
+      ],
+      "body_plain": "I've also seen some problems with missing testthat on\nr-devel-windows-ix86+x86_64 - I'd say it's a temporary problem on the\nCRAN end, and if your package is ok on win builder, you should be ok\nto submit.\n\nHadley\n\nOn Wed, Oct 21, 2015 at 5:15 PM, Derek Ogle <DOgle at northland.edu> wrote:\n> I was hoping to submit a new version of my FSA package today when I noticed that the current version on CRAN has an error on the CRAN checks page (which I don't believe was there when I first submitted that version of the package).  The error is detailed here (https://cran.r-project.org/web/checks/check_results_FSA.html) and copied below.  The error is only for the \"r-devel-windows-ix86+x86_64\" flavor and appears to be related to missing gdata and testthat packages.  I looked at both the gdata and testthat packages on CRAN and they have clean CRAN checks.  I looked at a handful of other packages that depend on gdata and testthat and they appear to have clean CRAN checks.  I checked the package on win-builder and it did not return any errors.  Any pointers?\n>\n> ---------------------------------\n> Version: 0.8.1\n> Check: examples\n> Result: ERROR\n>     Running examples in 'FSA-Ex.R' failed\n>     The error most likely occurred in:\n>\n>     > ### Name: Subset\n>     > ### Title: Subsets/filters a data frame and drops the unused levels.\n>     > ### Aliases: Subset filterD\n>     > ### Keywords: misc\n>     >\n>     > ### ** Examples\n>     >\n>     > ## The problem -- note use of unused level in the final table.\n>     > levels(iris$Species)\n>     [1] \"setosa\" \"versicolor\" \"virginica\"\n>     > iris.set1 <- subset(iris,Species==\"setosa\" | Species==\"versicolor\")\n>     > levels(iris.set1$Species)\n>     [1] \"setosa\" \"versicolor\" \"virginica\"\n>     > xtabs(~Species,data=iris)\n>     Species\n>      setosa versicolor virginica\n>      50 50 50\n>     >\n>     > ## A simpler fix using Subset\n>     > iris.set2 <- Subset(iris,Species==\"setosa\" | Species==\"versicolor\")\n>     Loading required namespace: gdata\n>     Failed with error: 'there is no package called 'gdata''\n>     Error: 'filterD' requires the 'gdata' package to be installed!\n>     Execution halted\n> Flavor: r-devel-windows-ix86+x86_64\n> Version: 0.8.1\n> Check: tests\n> Result: ERROR\n>     Running the tests in 'tests/test-all.R' failed.\n>     Last 13 lines of output:\n>      Type 'license()' or 'licence()' for distribution details.\n>\n>      R is a collaborative project with many contributors.\n>      Type 'contributors()' for more information and\n>      'citation()' on how to cite R or R packages in publications.\n>\n>      Type 'demo()' for some demos, 'help()' for on-line help, or\n>      'help.start()' for an HTML browser interface to help.\n>      Type 'q()' to quit R.\n>\n>      > library(testthat)\n>      Error in library(testthat) : there is no package called 'testthat'\n>      Execution halted\n> Flavor: r-devel-windows-ix86+x86_64\n> Version: 0.8.1\n> ---------------------------------\n>\n> Dr. Derek H. Ogle\n> Professor of Mathematical Sciences & Natural Resources\n> Northland College\n> 1411 Ellis Ave\n> Ashland, WI  54806\n>\n> e-mail: dogle at northland.edu\n> web: derekogle.com\n> fishr: derekogle.com/fishR/\n> Introduction to Fisheries Analysis with R book: derekogle/com/IFAR/\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "I've also seen some problems with missing testthat on\nr-devel-windows-ix86+x86_64 - I'd say it's a temporary problem on the\nCRAN end, and if your package is ok on win builder, you should be ok\nto subm",
+      "thread_id": "thread-4f36c7a77f47",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-29ad2fa7a761",
+      "message_id": "<56290133.5030508@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2015-10-22T17:30:59+02:00",
+      "subject": "[R-pkg-devel] CRAN checks question",
+      "subject_clean": "[R-pkg-devel] CRAN checks question",
+      "in_reply_to": "<CABdHhvHmN-R=ZNaf9acc+8DxTR+z3vyBVbkX5pDFkAyFOwXTpA@mail.gmail.com>",
+      "references": [
+        "<5C759AAB3680854DA1CFD152DD5CCE5A012D6010DE@NC-MAIL2010.northland.edu>",
+        "<CABdHhvHmN-R=ZNaf9acc+8DxTR+z3vyBVbkX5pDFkAyFOwXTpA@mail.gmail.com>"
+      ],
+      "body_plain": "We are testing a very strict check setting, this will be reverted shortly.\n\nBest,\nUwe Ligges\n\n\n\nOn 22.10.2015 15:31, Hadley Wickham wrote:\n> I've also seen some problems with missing testthat on\n> r-devel-windows-ix86+x86_64 - I'd say it's a temporary problem on the\n> CRAN end, and if your package is ok on win builder, you should be ok\n> to submit.\n>\n> Hadley\n>\n> On Wed, Oct 21, 2015 at 5:15 PM, Derek Ogle <DOgle at northland.edu> wrote:\n>> I was hoping to submit a new version of my FSA package today when I noticed that the current version on CRAN has an error on the CRAN checks page (which I don't believe was there when I first submitted that version of the package).  The error is detailed here (https://cran.r-project.org/web/checks/check_results_FSA.html) and copied below.  The error is only for the \"r-devel-windows-ix86+x86_64\" flavor and appears to be related to missing gdata and testthat packages.  I looked at both the gdata and testthat packages on CRAN and they have clean CRAN checks.  I looked at a handful of other packages that depend on gdata and testthat and they appear to have clean CRAN checks.  I checked the package on win-builder and it did not return any errors.  Any pointers?\n>>\n>> ---------------------------------\n>> Version: 0.8.1\n>> Check: examples\n>> Result: ERROR\n>>      Running examples in 'FSA-Ex.R' failed\n>>      The error most likely occurred in:\n>>\n>>      > ### Name: Subset\n>>      > ### Title: Subsets/filters a data frame and drops the unused levels.\n>>      > ### Aliases: Subset filterD\n>>      > ### Keywords: misc\n>>      >\n>>      > ### ** Examples\n>>      >\n>>      > ## The problem -- note use of unused level in the final table.\n>>      > levels(iris$Species)\n>>      [1] \"setosa\" \"versicolor\" \"virginica\"\n>>      > iris.set1 <- subset(iris,Species==\"setosa\" | Species==\"versicolor\")\n>>      > levels(iris.set1$Species)\n>>      [1] \"setosa\" \"versicolor\" \"virginica\"\n>>      > xtabs(~Species,data=iris)\n>>      Species\n>>       setosa versicolor virginica\n>>       50 50 50\n>>      >\n>>      > ## A simpler fix using Subset\n>>      > iris.set2 <- Subset(iris,Species==\"setosa\" | Species==\"versicolor\")\n>>      Loading required namespace: gdata\n>>      Failed with error: 'there is no package called 'gdata''\n>>      Error: 'filterD' requires the 'gdata' package to be installed!\n>>      Execution halted\n>> Flavor: r-devel-windows-ix86+x86_64\n>> Version: 0.8.1\n>> Check: tests\n>> Result: ERROR\n>>      Running the tests in 'tests/test-all.R' failed.\n>>      Last 13 lines of output:\n>>       Type 'license()' or 'licence()' for distribution details.\n>>\n>>       R is a collaborative project with many contributors.\n>>       Type 'contributors()' for more information and\n>>       'citation()' on how to cite R or R packages in publications.\n>>\n>>       Type 'demo()' for some demos, 'help()' for on-line help, or\n>>       'help.start()' for an HTML browser interface to help.\n>>       Type 'q()' to quit R.\n>>\n>>       > library(testthat)\n>>       Error in library(testthat) : there is no package called 'testthat'\n>>       Execution halted\n>> Flavor: r-devel-windows-ix86+x86_64\n>> Version: 0.8.1\n>> ---------------------------------\n>>\n>> Dr. Derek H. Ogle\n>> Professor of Mathematical Sciences & Natural Resources\n>> Northland College\n>> 1411 Ellis Ave\n>> Ashland, WI  54806\n>>\n>> e-mail: dogle at northland.edu\n>> web: derekogle.com\n>> fishr: derekogle.com/fishR/\n>> Introduction to Fisheries Analysis with R book: derekogle/com/IFAR/\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>",
+      "body_snippet": "We are testing a very strict check setting, this will be reverted shortly.\n\nBest,\nUwe Ligges\n\n\n\nOn 22.10.2015 15:31, Hadley Wickham wrote:\n> I've also seen some problems with missing testthat on\n> r-d",
+      "thread_id": "thread-4f36c7a77f47",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-e67db163fd76",
+      "message_id": "<5629F040.1030708@uke.de>",
+      "from_name": "Daniel Lüdecke",
+      "from_email_hash": "6f8df6b19ecb9c605277ecfa1677451a38bf3dc3ef7b4c357f841ed131fe14cf",
+      "date": "2015-10-23T10:30:56+02:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\nI don't exactly know how to name my problem, so I try to describe it.\n\nIn my package (sjmisc), I have a function to set label attributes to \nvectors:\n\nset_labels <- function(x, labels, ...) {\n...\n}\n\nUsage would be:\nx <- set_labels(x, c(\"lo\", \"high\"))\n\n\nNo I wanted to also add functionality to directly change a value:\nset_labels(x) <- c(\"lo\", \"high\")\n\n\nSo I added this to my package source:\n\n#' @rdname set_labels\n#' @export\n`set_labels<-` <- function(x, force.labels = FALSE, force.values = TRUE, \nvalue) {\n   UseMethod(\"set_labels<-\")\n}\n\n#' @rdname set_labels\n#' @export\n`set_labels<-.default` <- function(x, force.labels = FALSE, force.values \n= TRUE, value) {\n   x <- set_labels(x, values, force.labels, force.values)\n   x\n}\n\n\nHowever, running the check gives following note and warnings:\n\n* checking R code for possible problems ... NOTE\nset_labels<-.default: no visible binding for global variable 'values'\n* checking Rd files ... OK\n* checking Rd metadata ... OK\n* checking Rd line widths ... OK\n* checking Rd cross-references ... OK\n* checking for missing documentation entries ... OK\n* checking for code/documentation mismatches ... WARNING\nFunctions or methods with usage in documentation object 'set_labels' but \nnot in code:\n   set_labels.default\n\n* checking Rd \\usage sections ... WARNING\nObjects in \\usage without \\alias in documentation object 'set_labels':\n   'set_labels.default'\n\nBad \\usage lines found in documentation object 'set_labels':\n     <- value\n\nFunctions with \\usage entries need to have the appropriate \\alias\nentries, and all their arguments documented.\nThe \\usage entries must correspond to syntactically valid R code.\nSee chapter 'Writing R documentation files' in the 'Writing R\nExtensions' manual.\n\n\nI don't know what to do here. Any help is appreciated!\n\nThanks in advance\nDaniel\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_snippet": "Hello,\nI don't exactly know how to name my problem, so I try to describe it.\n\nIn my package (sjmisc), I have a function to set label attributes to \nvectors:\n\nset_labels <- function(x, labels, ...) {\n.",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-09f7d365ceea",
+      "message_id": "<5629F1B9.2060408@ivt.baug.ethz.ch>",
+      "from_name": "Kirill Müller",
+      "from_email_hash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
+      "date": "2015-10-23T10:37:13+02:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": "<5629F040.1030708@uke.de>",
+      "references": [
+        "<5629F040.1030708@uke.de>"
+      ],
+      "body_plain": "values -> value is a typo in the implementation of .default(). I'm not \nsure you need to document the .default() function (the second @rdname \nset_labels). If this doesn't help, you could try renaming set_labels() \nto avoid collisions.\n\n\nBest regards\n\nKirill\n\n\nOn 23.10.2015 10:30, Daniel L?decke wrote:\n> Hello,\n> I don't exactly know how to name my problem, so I try to describe it.\n>\n> In my package (sjmisc), I have a function to set label attributes to \n> vectors:\n>\n> set_labels <- function(x, labels, ...) {\n> ...\n> }\n>\n> Usage would be:\n> x <- set_labels(x, c(\"lo\", \"high\"))\n>\n>\n> No I wanted to also add functionality to directly change a value:\n> set_labels(x) <- c(\"lo\", \"high\")\n>\n>\n> So I added this to my package source:\n>\n> #' @rdname set_labels\n> #' @export\n> `set_labels<-` <- function(x, force.labels = FALSE, force.values = \n> TRUE, value) {\n>   UseMethod(\"set_labels<-\")\n> }\n>\n> #' @rdname set_labels\n> #' @export\n> `set_labels<-.default` <- function(x, force.labels = FALSE, \n> force.values = TRUE, value) {\n>   x <- set_labels(x, values, force.labels, force.values)\n>   x\n> }\n>\n>\n> However, running the check gives following note and warnings:\n>\n> * checking R code for possible problems ... NOTE\n> set_labels<-.default: no visible binding for global variable 'values'\n> * checking Rd files ... OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... WARNING\n> Functions or methods with usage in documentation object 'set_labels' \n> but not in code:\n>   set_labels.default\n>\n> * checking Rd \\usage sections ... WARNING\n> Objects in \\usage without \\alias in documentation object 'set_labels':\n>   'set_labels.default'\n>\n> Bad \\usage lines found in documentation object 'set_labels':\n>     <- value\n>\n> Functions with \\usage entries need to have the appropriate \\alias\n> entries, and all their arguments documented.\n> The \\usage entries must correspond to syntactically valid R code.\n> See chapter 'Writing R documentation files' in the 'Writing R\n> Extensions' manual.\n>\n>\n> I don't know what to do here. Any help is appreciated!\n>\n> Thanks in advance\n> Daniel\n> -- \n>\n> _____________________________________________________________________\n>\n> Universit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen \n> Rechts; Gerichtsstand: Hamburg | www.uke.de\n> Vorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. \n> Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n> _____________________________________________________________________\n>\n> SAVE PAPER - THINK BEFORE PRINTING\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "values -> value is a typo in the implementation of .default(). I'm not \nsure you need to document the .default() function (the second @rdname \nset_labels). If this doesn't help, you could try renaming",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-1893c5a19b74",
+      "message_id": "<5629F1DD.1070908@uke.de>",
+      "from_name": "Daniel Lüdecke",
+      "from_email_hash": "6f8df6b19ecb9c605277ecfa1677451a38bf3dc3ef7b4c357f841ed131fe14cf",
+      "date": "2015-10-23T10:37:49+02:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": "<5629F040.1030708@uke.de>",
+      "references": [
+        "<5629F040.1030708@uke.de>"
+      ],
+      "body_plain": "Ok, the \"Note\" is due a typo (x <- set_labels(x, values,... \"values\" \nshould be \"value\").\n\nBut still after fixing this, the two warnings remain.\n\nAm 23.10.2015 um 10:30 schrieb Daniel L?decke:\n> Hello,\n> I don't exactly know how to name my problem, so I try to describe it.\n>\n> In my package (sjmisc), I have a function to set label attributes to\n> vectors:\n>\n> set_labels <- function(x, labels, ...) {\n> ...\n> }\n>\n> Usage would be:\n> x <- set_labels(x, c(\"lo\", \"high\"))\n>\n>\n> No I wanted to also add functionality to directly change a value:\n> set_labels(x) <- c(\"lo\", \"high\")\n>\n>\n> So I added this to my package source:\n>\n> #' @rdname set_labels\n> #' @export\n> `set_labels<-` <- function(x, force.labels = FALSE, force.values = TRUE,\n> value) {\n>    UseMethod(\"set_labels<-\")\n> }\n>\n> #' @rdname set_labels\n> #' @export\n> `set_labels<-.default` <- function(x, force.labels = FALSE, force.values\n> = TRUE, value) {\n>    x <- set_labels(x, values, force.labels, force.values)\n>    x\n> }\n>\n>\n> However, running the check gives following note and warnings:\n>\n> * checking R code for possible problems ... NOTE\n> set_labels<-.default: no visible binding for global variable 'values'\n> * checking Rd files ... OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... WARNING\n> Functions or methods with usage in documentation object 'set_labels' but\n> not in code:\n>    set_labels.default\n>\n> * checking Rd \\usage sections ... WARNING\n> Objects in \\usage without \\alias in documentation object 'set_labels':\n>    'set_labels.default'\n>\n> Bad \\usage lines found in documentation object 'set_labels':\n>      <- value\n>\n> Functions with \\usage entries need to have the appropriate \\alias\n> entries, and all their arguments documented.\n> The \\usage entries must correspond to syntactically valid R code.\n> See chapter 'Writing R documentation files' in the 'Writing R\n> Extensions' manual.\n>\n>\n> I don't know what to do here. Any help is appreciated!\n>\n> Thanks in advance\n> Daniel\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_snippet": "Ok, the \"Note\" is due a typo (x <- set_labels(x, values,... \"values\" \nshould be \"value\").\n\nBut still after fixing this, the two warnings remain.\n\nAm 23.10.2015 um 10:30 schrieb Daniel L?decke:\n> Hello",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-ce6234bad2c4",
+      "message_id": "<CABdHhvFbFBSmE7F=_UUpzONGNF6S1LVZLJcD=ovpvBs5_V0GkA@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2015-10-23T06:10:19-05:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": "<5629F040.1030708@uke.de>",
+      "references": [
+        "<5629F040.1030708@uke.de>"
+      ],
+      "body_plain": "Here's a minimal reprex:\n\nout <- roc_proc_text(rd_roclet(), \"\n  #' Foo\n  `foo<-` <- function(x, y, value) {\n    UseMethod('set_labels<-')\n  }\n\n  #' Foo\n  `foo<-.default` <- function(x, y, value) {\n    x\n  }\n  \")[[2]]\n\ncat(format(out))\n\nThat generates\n\n\\usage{\n\\method{foo}{default}(x, y) <- value\n}\n\nwhich I believe is correct, although I don't think I've ever seen such\na construct in the wild.\n\nDuncan: does that look right to you? (i.e. is that what the usage of\nmethod of a replacement function should look like?)\n\nHadley\n\nOn Fri, Oct 23, 2015 at 3:30 AM, Daniel L?decke <d.luedecke at uke.de> wrote:\n> Hello,\n> I don't exactly know how to name my problem, so I try to describe it.\n>\n> In my package (sjmisc), I have a function to set label attributes to\n> vectors:\n>\n> set_labels <- function(x, labels, ...) {\n> ...\n> }\n>\n> Usage would be:\n> x <- set_labels(x, c(\"lo\", \"high\"))\n>\n>\n> No I wanted to also add functionality to directly change a value:\n> set_labels(x) <- c(\"lo\", \"high\")\n>\n>\n> So I added this to my package source:\n>\n> #' @rdname set_labels\n> #' @export\n> `set_labels<-` <- function(x, force.labels = FALSE, force.values = TRUE,\n> value) {\n>   UseMethod(\"set_labels<-\")\n> }\n>\n> #' @rdname set_labels\n> #' @export\n> `set_labels<-.default` <- function(x, force.labels = FALSE, force.values =\n> TRUE, value) {\n>   x <- set_labels(x, values, force.labels, force.values)\n>   x\n> }\n>\n>\n> However, running the check gives following note and warnings:\n>\n> * checking R code for possible problems ... NOTE\n> set_labels<-.default: no visible binding for global variable 'values'\n> * checking Rd files ... OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... WARNING\n> Functions or methods with usage in documentation object 'set_labels' but not\n> in code:\n>   set_labels.default\n>\n> * checking Rd \\usage sections ... WARNING\n> Objects in \\usage without \\alias in documentation object 'set_labels':\n>   'set_labels.default'\n>\n> Bad \\usage lines found in documentation object 'set_labels':\n>     <- value\n>\n> Functions with \\usage entries need to have the appropriate \\alias\n> entries, and all their arguments documented.\n> The \\usage entries must correspond to syntactically valid R code.\n> See chapter 'Writing R documentation files' in the 'Writing R\n> Extensions' manual.\n>\n>\n> I don't know what to do here. Any help is appreciated!\n>\n> Thanks in advance\n> Daniel\n> --\n>\n> _____________________________________________________________________\n>\n> Universit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen\n> Rechts; Gerichtsstand: Hamburg | www.uke.de\n> Vorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr.\n> Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n> _____________________________________________________________________\n>\n> SAVE PAPER - THINK BEFORE PRINTING\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "Here's a minimal reprex:\n\nout <- roc_proc_text(rd_roclet(), \"\n  #' Foo\n  `foo<-` <- function(x, y, value) {\n    UseMethod('set_labels<-')\n  }\n\n  #' Foo\n  `foo<-.default` <- function(x, y, value) {\n   ",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-c06e6904e054",
+      "message_id": "<562A2822.1070408@uke.de>",
+      "from_name": "Daniel Lüdecke",
+      "from_email_hash": "6f8df6b19ecb9c605277ecfa1677451a38bf3dc3ef7b4c357f841ed131fe14cf",
+      "date": "2015-10-23T14:29:22+02:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": "<5629F1B9.2060408@ivt.baug.ethz.ch>",
+      "references": [
+        "<5629F040.1030708@uke.de>",
+        "<5629F1B9.2060408@ivt.baug.ethz.ch>"
+      ],
+      "body_plain": "Ok, this seems to work!\n\nThough I don't know why there's a warning, because in another function I \nuse @rdname as described before, which doesn't give a warning.\n\nBest\nDaniel\n\nAm 23.10.2015 um 10:37 schrieb Kirill M?ller:\n> values -> value is a typo in the implementation of .default(). I'm not\n> sure you need to document the .default() function (the second @rdname\n> set_labels). If this doesn't help, you could try renaming set_labels()\n> to avoid collisions.\n>\n>\n> Best regards\n>\n> Kirill\n>\n>\n> On 23.10.2015 10:30, Daniel L?decke wrote:\n>> Hello,\n>> I don't exactly know how to name my problem, so I try to describe it.\n>>\n>> In my package (sjmisc), I have a function to set label attributes to\n>> vectors:\n>>\n>> set_labels <- function(x, labels, ...) {\n>> ...\n>> }\n>>\n>> Usage would be:\n>> x <- set_labels(x, c(\"lo\", \"high\"))\n>>\n>>\n>> No I wanted to also add functionality to directly change a value:\n>> set_labels(x) <- c(\"lo\", \"high\")\n>>\n>>\n>> So I added this to my package source:\n>>\n>> #' @rdname set_labels\n>> #' @export\n>> `set_labels<-` <- function(x, force.labels = FALSE, force.values =\n>> TRUE, value) {\n>>   UseMethod(\"set_labels<-\")\n>> }\n>>\n>> #' @rdname set_labels\n>> #' @export\n>> `set_labels<-.default` <- function(x, force.labels = FALSE,\n>> force.values = TRUE, value) {\n>>   x <- set_labels(x, values, force.labels, force.values)\n>>   x\n>> }\n>>\n>>\n>> However, running the check gives following note and warnings:\n>>\n>> * checking R code for possible problems ... NOTE\n>> set_labels<-.default: no visible binding for global variable 'values'\n>> * checking Rd files ... OK\n>> * checking Rd metadata ... OK\n>> * checking Rd line widths ... OK\n>> * checking Rd cross-references ... OK\n>> * checking for missing documentation entries ... OK\n>> * checking for code/documentation mismatches ... WARNING\n>> Functions or methods with usage in documentation object 'set_labels'\n>> but not in code:\n>>   set_labels.default\n>>\n>> * checking Rd \\usage sections ... WARNING\n>> Objects in \\usage without \\alias in documentation object 'set_labels':\n>>   'set_labels.default'\n>>\n>> Bad \\usage lines found in documentation object 'set_labels':\n>>     <- value\n>>\n>> Functions with \\usage entries need to have the appropriate \\alias\n>> entries, and all their arguments documented.\n>> The \\usage entries must correspond to syntactically valid R code.\n>> See chapter 'Writing R documentation files' in the 'Writing R\n>> Extensions' manual.\n>>\n>>\n>> I don't know what to do here. Any help is appreciated!\n>>\n>> Thanks in advance\n>> Daniel\n>> --\n>>\n>> _____________________________________________________________________\n>>\n>> Universit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen\n>> Rechts; Gerichtsstand: Hamburg | www.uke.de\n>> Vorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr.\n>> Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n>> _____________________________________________________________________\n>>\n>> SAVE PAPER - THINK BEFORE PRINTING\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\nDaniel L?decke, Dr. phil.\n\nUniversit?tsklinikum Hamburg-Eppendorf\nZentrum f?r Psychosoziale Medizin\nInstitut f?r Medizinische Soziologie\nW37, 8. Stock\nMartinistr. 52\nD-20246 Hamburg\n\nTel: +49 (0)1515 2494757\nTel: +49 (0)40 7410 52878\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_snippet": "Ok, this seems to work!\n\nThough I don't know why there's a warning, because in another function I \nuse @rdname as described before, which doesn't give a warning.\n\nBest\nDaniel\n\nAm 23.10.2015 um 10:37 s",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-5bc093b892d8",
+      "message_id": "<562A28E8.1070709@uke.de>",
+      "from_name": "Daniel Lüdecke",
+      "from_email_hash": "6f8df6b19ecb9c605277ecfa1677451a38bf3dc3ef7b4c357f841ed131fe14cf",
+      "date": "2015-10-23T14:32:40+02:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": "<CABdHhvFbFBSmE7F=_UUpzONGNF6S1LVZLJcD=ovpvBs5_V0GkA@mail.gmail.com>",
+      "references": [
+        "<5629F040.1030708@uke.de>",
+        "<CABdHhvFbFBSmE7F=_UUpzONGNF6S1LVZLJcD=ovpvBs5_V0GkA@mail.gmail.com>"
+      ],
+      "body_plain": "> which I believe is correct, although I don't think I've ever seen such\n > a construct in the wild.\n\nWhat would be the proper way to define such methods?\n\nEg, I want `set_label` to work like this:\nx <- set_label(x, \"my label\")\n\nand additionally, like this:\nset_label(x) <- \"my label\"\n\n\nHow would I define the latter function?\n\n(this is how it is currently done by me)\n\n#' @export\nset_label <- function(x, lab, attr.string = NULL) {\n...\n}\n\n#' @rdname set_label\n#' @export\n`set_label<-` <- function(x, attr.string = NULL, value) {\n   UseMethod(\"set_label<-\")\n}\n\n#' @rdname set_label\n#' @export\n`set_label<-.default` <- function(x, attr.string = NULL, value) {\n   x <- set_label(x, value, attr.string)\n   x\n}\n\n\n\n\nAm 23.10.2015 um 13:10 schrieb Hadley Wickham:\n> Here's a minimal reprex:\n>\n> out <- roc_proc_text(rd_roclet(), \"\n>    #' Foo\n>    `foo<-` <- function(x, y, value) {\n>      UseMethod('set_labels<-')\n>    }\n>\n>    #' Foo\n>    `foo<-.default` <- function(x, y, value) {\n>      x\n>    }\n>    \")[[2]]\n>\n> cat(format(out))\n>\n> That generates\n>\n> \\usage{\n> \\method{foo}{default}(x, y) <- value\n> }\n>\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_snippet": "> which I believe is correct, although I don't think I've ever seen such\n > a construct in the wild.\n\nWhat would be the proper way to define such methods?\n\nEg, I want `set_label` to work like this:\nx ",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-cca2aa8f18be",
+      "message_id": "<562A2B0D.4020805@uke.de>",
+      "from_name": "Daniel Lüdecke",
+      "from_email_hash": "6f8df6b19ecb9c605277ecfa1677451a38bf3dc3ef7b4c357f841ed131fe14cf",
+      "date": "2015-10-23T14:41:49+02:00",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "subject_clean": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "in_reply_to": "<CABdHhvFbFBSmE7F=_UUpzONGNF6S1LVZLJcD=ovpvBs5_V0GkA@mail.gmail.com>",
+      "references": [
+        "<5629F040.1030708@uke.de>",
+        "<CABdHhvFbFBSmE7F=_UUpzONGNF6S1LVZLJcD=ovpvBs5_V0GkA@mail.gmail.com>"
+      ],
+      "body_plain": "Ok, this might be a Roxygene issue, so I would close this discussion \nhere and file an issue at GitHub for further investigation. What I found \nout so far:\n\n#' @rdname set_label\n#' @export\n`set_label<-` <- function(x, attr.string = NULL, value) {\n   UseMethod(\"set_label<-\")\n}\n\n#' @rdname set_label\n#' @export\n`set_label<-.default` <- function(x, attr.string = NULL, value) {\n   x <- set_label(x, value, attr.string)\n   x\n}\n\n\ncreates following rd-file:\n\n% Generated by roxygen2 (4.1.1): do not edit by hand\n% Please edit documentation in R/set_label.R\n\\name{set_label}\n\\alias{set_label}\n\\alias{set_label<-}\n\\alias{set_label<-.default}\n\\alias{set_var_labels}\n\\title{Add variable label(s) to variables}\n\\usage{\nset_label(x, lab, attr.string = NULL)\n\nset_var_labels(x, lab, attr.string = NULL)\n\nset_label(x, attr.string = NULL) <- value\n\n\\method{set_label}{default}(x, attr.string = NULL) <- value\n}\n\n\nwhile\n\n#' @rdname set_labels\n#' @export\n`set_labels<-` <- function(x, force.labels = FALSE, force.values = TRUE, \nvalue) {\n   UseMethod(\"set_labels<-\")\n}\n\n#' @rdname set_labels\n#' @export\n`set_labels<-.default` <- function(x, force.labels = FALSE, force.values \n= TRUE, value) {\n   x <- set_labels(x, value, force.labels, force.values)\n   x\n}\n\n\nresults in\n\n% Generated by roxygen2 (4.1.1): do not edit by hand\n% Please edit documentation in R/set_labels.R\n\\name{set_labels}\n\\alias{set_labels}\n\\alias{set_labels<-}\n\\alias{set_labels<-.default}\n\\alias{set_val_labels}\n\\title{Add value labels to variables}\n\\usage{\nset_labels(x, labels, force.labels = FALSE, force.values = TRUE)\n\nset_val_labels(x, labels, force.labels = FALSE, force.values = TRUE)\n\nset_labels(x, force.labels = FALSE, force.values = TRUE) <- value\n\n\\method{set_labels}{default}(x, force.labels = FALSE, force.values = TRUE)\n   <- value\n}\n\n\nThere's a carriage return (or similar) in the generated rd-file which \nthrows the warning message in the check procedure. I cam up with \nremoving \"#' @rdname set_labels\", because 1) it works fine then and 2) \nmy index-page of the package help does not list redundant function names \nmultiple times.\n\nBest\nDaniel\n\n\n\nAm 23.10.2015 um 13:10 schrieb Hadley Wickham:\n> Here's a minimal reprex:\n>\n> out <- roc_proc_text(rd_roclet(), \"\n>    #' Foo\n>    `foo<-` <- function(x, y, value) {\n>      UseMethod('set_labels<-')\n>    }\n>\n>    #' Foo\n>    `foo<-.default` <- function(x, y, value) {\n>      x\n>    }\n>    \")[[2]]\n>\n> cat(format(out))\n>\n> That generates\n>\n> \\usage{\n> \\method{foo}{default}(x, y) <- value\n> }\n>\n> which I believe is correct, although I don't think I've ever seen such\n> a construct in the wild.\n>\n> Duncan: does that look right to you? (i.e. is that what the usage of\n> method of a replacement function should look like?)\n>\n> Hadley\n>\n> On Fri, Oct 23, 2015 at 3:30 AM, Daniel L?decke <d.luedecke at uke.de> wrote:\n>> Hello,\n>> I don't exactly know how to name my problem, so I try to describe it.\n>>\n>> In my package (sjmisc), I have a function to set label attributes to\n>> vectors:\n>>\n>> set_labels <- function(x, labels, ...) {\n>> ...\n>> }\n>>\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_snippet": "Ok, this might be a Roxygene issue, so I would close this discussion \nhere and file an issue at GitHub for further investigation. What I found \nout so far:\n\n#' @rdname set_label\n#' @export\n`set_label<",
+      "thread_id": "thread-e67db163fd76",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-6015f4024162",
+      "message_id": "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>",
+      "from_name": "Jason E. Aten",
+      "from_email_hash": "7fc5d7d5283226d916b9e67fcbfc0b0512f3db36d6ce1403380de837c03ae812",
+      "date": "2015-10-24T09:31:21-07:00",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "subject_clean": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello r-package-devel,\n\nI've made a package for R that uses Go (golang), the compiled language\ncreated by Rob Pike, Ken Thomson, Robert Griesemer, a team of Google\nemployees, and thousands of open source volunteer contributors. See\nhttp://golang.org\n\nMy package, called RMQ for \"R messaging and queuing\" provides msgpack\n(supporting version 2 of msgpack) serialization and robust web-socket based\nRPC.  The existing package for msgpackR in CRAN is for the outdated msgpack\n1 standard, and can be very slow for some inputs, crashing on others. RMQ\ninstead uses a highly optimized and compiled msgpack parsing library. RMQ\nalso incorporates a hardened and well-tested websocket webserver framework\nfrom the Go world. The details of RMQ can be viewed at\nhttps://github.com/glycerine/rmq\n\nI view this as cutting edge work. It demonstrates for the first time how to\nintegrate libraries written in Go with R.\n\nComplimenting the great library support in R, there are a quite some number\nof high quality libraries in Go; especially the networking, crypto, and\nbig-integer libraries. Realistic integration between Go and R only became\nviable last month, with the release of Go1.5.1 that supports compiling Go\ncode into shared libraries and simplified package vendoring.\n\nI don't know how viable it is to contribute RMQ (or any Go based package to\nCRAN). If it is not too difficult, I would be willing to try.  Go1.5.1\nwould need to be installed on all build hosts. I would be willing to help\nsetup an appropriate build environments if need be.\n\nIn summary, my question is: is it viable to add RMQ to CRAN?\n\nThank you for your thoughts!\n\nJason\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello r-package-devel,\n\nI've made a package for R that uses Go (golang), the compiled language\ncreated by Rob Pike, Ken Thomson, Robert Griesemer, a team of Google\nemployees, and thousands of open sou",
+      "thread_id": "thread-6015f4024162",
+      "thread_depth": 0,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-b23f77841750",
+      "message_id": "<22062.12755.608268.416137@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-10-26T08:59:47-05:00",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work\t(RMQ)",
+      "subject_clean": "[R-pkg-devel] golang based package for R msgpack and websocket work\t(RMQ)",
+      "in_reply_to": "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>",
+      "references": [
+        "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Jason,\n\nOn 24 October 2015 at 09:31, Jason E. Aten wrote:\n| Hello r-package-devel,\n| \n| I've made a package for R that uses Go (golang), the compiled language\n| created by Rob Pike, Ken Thomson, Robert Griesemer, a team of Google\n| employees, and thousands of open source volunteer contributors. See\n| http://golang.org\n\nNice. I like go and looked at it a few times over these last few years. Did\nyou know that Google has worked on Go/R integration?  Christoph Best talked\nabout it at useR! 2015. No code release yet, and it depends on RPC and new\nProtoBuf.\n\n| My package, called RMQ for \"R messaging and queuing\" provides msgpack\n| (supporting version 2 of msgpack) serialization and robust web-socket based\n| RPC.  The existing package for msgpackR in CRAN is for the outdated msgpack\n| 1 standard, and can be very slow for some inputs, crashing on others. RMQ\n| instead uses a highly optimized and compiled msgpack parsing library. RMQ\n| also incorporates a hardened and well-tested websocket webserver framework\n| from the Go world. The details of RMQ can be viewed at\n| https://github.com/glycerine/rmq\n| \n| I view this as cutting edge work. It demonstrates for the first time how to\n| integrate libraries written in Go with R.\n\nLet's the view of package author's of their own package an invariant :)  Most\nare pretty impressed.\n \n| Complimenting the great library support in R, there are a quite some number\n| of high quality libraries in Go; especially the networking, crypto, and\n| big-integer libraries. Realistic integration between Go and R only became\n| viable last month, with the release of Go1.5.1 that supports compiling Go\n| code into shared libraries and simplified package vendoring.\n| \n| I don't know how viable it is to contribute RMQ (or any Go based package to\n| CRAN). If it is not too difficult, I would be willing to try.  Go1.5.1\n| would need to be installed on all build hosts. I would be willing to help\n| setup an appropriate build environments if need be.\n\nYou \"just\" make that\n  a) a SystemRequirements: entry and possibly add a line to say which\n     Debian/Ubuntu and/or Fedora/Yum packages need to be installed\n  b) possibly test for it in configure\n \n| In summary, my question is: is it viable to add RMQ to CRAN?\n\nYes. Many other packages on CRAN depend on / work with external packages,\nlibraries or tools.\n\nWe'll help.  Let's work on this.\n\nDirk\n \n| Thank you for your thoughts!\n| \n| Jason\n| \n| \t[[alternative HTML version deleted]]\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Hi Jason,\n\nOn 24 October 2015 at 09:31, Jason E. Aten wrote:\n| Hello r-package-devel,\n| \n| I've made a package for R that uses Go (golang), the compiled language\n| created by Rob Pike, Ken Thomson, Ro",
+      "thread_id": "thread-6015f4024162",
+      "thread_depth": 1,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-748ec4fddc72",
+      "message_id": "<CAPNEFAYFnSrmhi2KUU7TtY9FC5=zzkvdrAKvrXarJ_y2W+A6mA@mail.gmail.com>",
+      "from_name": "Jason E. Aten",
+      "from_email_hash": "7fc5d7d5283226d916b9e67fcbfc0b0512f3db36d6ce1403380de837c03ae812",
+      "date": "2015-10-26T09:46:42-07:00",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "subject_clean": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "in_reply_to": "<22062.12755.608268.416137@max.nulle.part>",
+      "references": [
+        "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>",
+        "<22062.12755.608268.416137@max.nulle.part>"
+      ],
+      "body_plain": "On Mon, Oct 26, 2015 at 6:59 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>  Did you know that Google has worked on Go/R integration?  Christoph Best\n> talked\n> about it at useR! 2015. No code release yet, and it depends on RPC and new\n> ProtoBuf.\n\n\nCool. Thanks for mentioning that. I'll send him a note.\n\n\n> Let's the view of package author's of their own package an invariant :)\n> Most\n> are pretty impressed.\n\n\nHA! :-)\n\n\n> You \"just\" make that\n>   a) a SystemRequirements: entry and possibly add a line to say which\n>      Debian/Ubuntu and/or Fedora/Yum packages need to be installed\n>   b) possibly test for it in configure\n>\n\nI'll try to dig into the autotools docs and figure out how to add a\nconfigure test. It's really just running \"go version\" and checking that the\n\"go\" executalbe exists and the output of \"go version\" is 1.5.1 or later.\n\nI added a human readable note to the SystemRequirements in the\nDESCRIPTION.  It's \"apt-get install golang\" on ubuntu, and \"yum install\ngolang\" on fedora. Should the SystemRequirements field be in some kind of\nmachine parseable/CRAN build-testable syntax?\n\nBest,\nJason\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "On Mon, Oct 26, 2015 at 6:59 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>  Did you know that Google has worked on Go/R integration?  Christoph Best\n> talked\n> about it at useR! 2015. No code re",
+      "thread_id": "thread-6015f4024162",
+      "thread_depth": 2,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-50710b4af8e1",
+      "message_id": "<22062.23437.33588.503831@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-10-26T11:57:49-05:00",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "subject_clean": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "in_reply_to": "<CAPNEFAYFnSrmhi2KUU7TtY9FC5=zzkvdrAKvrXarJ_y2W+A6mA@mail.gmail.com>",
+      "references": [
+        "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>",
+        "<22062.12755.608268.416137@max.nulle.part>",
+        "<CAPNEFAYFnSrmhi2KUU7TtY9FC5=zzkvdrAKvrXarJ_y2W+A6mA@mail.gmail.com>"
+      ],
+      "body_plain": "On 26 October 2015 at 09:46, Jason E. Aten wrote:\n| Cool. Thanks for mentioning that. I'll send him a note.\n\n+1 -- I would have CC'ed him had I had his email handy. I'll try to reach out too.\n\n|     You \"just\" make that\n|     ? a) a SystemRequirements: entry and possibly add a line to say which\n|     ? ? ?Debian/Ubuntu and/or Fedora/Yum packages need to be installed\n|     ? b) possibly test for it in configure\n| \n| \n| I'll try to dig into the autotools docs and figure out how to add a configure\n\nIf it is \"all greek\" to you let me know. I helped a few other packages over\nthe years with simple configure tasks.\n\n| test. It's really just running \"go version\" and checking that the \"go\"\n| executalbe exists and the output of \"go version\" is 1.5.1 or later.\n\nPretty much. Here is what I do in RQuantLib:\n\n    pkg_version=`quantlib-config --version`\n\n    # also test for quantlib version using result from quantlib-config --version\n    case ${pkg_version} in\n    0.1.*|0.2.*|0.3.*|0.4.*|0.8.*|0.9.*|1.0.*|1.1.*|1.2.*|1.3.*)\n\tAC_MSG_WARN([RQuantLib requires QuantLib (>= 1.4.0).])\n\tAC_MSG_ERROR([Please upgrade to a current version.])\n\t;;\n    esac\n\nautoconf looks complicated, but is mostly just shell scripting ...\n \n| I added a human readable note to the SystemRequirements in the DESCRIPTION.?\n| It's \"apt-get install golang\" on ubuntu, and \"yum install golang\" on fedora.\n| Should the SystemRequirements field be in some kind of machine parseable/CRAN\n| build-testable syntax?\n\nBut I checked with eg\n\n   http://metadata.ftp-master.debian.org/changelogs//main/g/golang/golang_1.5.1-1_changelog\n\nand few systems will have 1.5.1 yet.  Ie it probably won't Ubuntu before\n16.04 next year.  Are there PPAs?\n\nDirk\n\nPS Oh, and I forgot to mention that I like msgPack a lot too :)   and have\nplayed a little bit with C++ bindings via Rcpp.\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 26 October 2015 at 09:46, Jason E. Aten wrote:\n| Cool. Thanks for mentioning that. I'll send him a note.\n\n+1 -- I would have CC'ed him had I had his email handy. I'll try to reach out too.\n\n|     Y",
+      "thread_id": "thread-6015f4024162",
+      "thread_depth": 3,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-27d031481313",
+      "message_id": "<CAPNEFAZKLdaoSgpOhj5e4-hLh4MMtrZdpm-0HW0BsRqiDJMRjg@mail.gmail.com>",
+      "from_name": "Jason E. Aten",
+      "from_email_hash": "7fc5d7d5283226d916b9e67fcbfc0b0512f3db36d6ce1403380de837c03ae812",
+      "date": "2015-10-27T12:51:20-07:00",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "subject_clean": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "in_reply_to": "<22062.23437.33588.503831@max.nulle.part>",
+      "references": [
+        "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>",
+        "<22062.12755.608268.416137@max.nulle.part>",
+        "<CAPNEFAYFnSrmhi2KUU7TtY9FC5=zzkvdrAKvrXarJ_y2W+A6mA@mail.gmail.com>",
+        "<22062.23437.33588.503831@max.nulle.part>"
+      ],
+      "body_plain": "Re PPAs: good question.\n\nI did some digging. The ubuntu 14 PPA that I found (\nhttps://launchpad.net/~eugenesan/+ppa-packages) was already out of date\n(having go1.5 not go1.5.1) when I tried it on a test cloud box running\nubuntu 14.\n\nI think the best way to get Go on a CRAN build box is to do a simple binary\ninstall with the following two lines. This has the big advantage that it\nwill work on any flavor of linux on amd64, since the go binaries are\nstatically linked. i.e. any version of ubuntu, fedora, centos, redhat, etc.\n (Full details: https://golang.org/doc/install  lists the exact\narchitectures that the binary tarballs support, encompassing FreeBSD,\nLinux, Windows, and OSX and which architectures for each.)\n\n*sudo curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz\n<https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz> | su**do\ntar xz -C /usr/local/*\n\n*sudo echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile*\nNB This will install the \"go\" binary to /usr/local/go/bin/go. The install\nlocation /usr/local/go is baked into the go1.5.1.linux-amd64.tar.gz binary\nas the default GOROOT location, so it can't be moved without setting the\nGOROOT env variable as well.\n\n\nSo that's what I would recommend.  Any questions, let me know if know.\n\nJason\n\n\nOn Mon, Oct 26, 2015 at 9:57 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 26 October 2015 at 09:46, Jason E. Aten wrote:\n> | Cool. Thanks for mentioning that. I'll send him a note.\n>\n> +1 -- I would have CC'ed him had I had his email handy. I'll try to reach\n> out too.\n>\n> |     You \"just\" make that\n> |       a) a SystemRequirements: entry and possibly add a line to say which\n> |          Debian/Ubuntu and/or Fedora/Yum packages need to be installed\n> |       b) possibly test for it in configure\n> |\n> |\n> | I'll try to dig into the autotools docs and figure out how to add a\n> configure\n>\n> If it is \"all greek\" to you let me know. I helped a few other packages over\n> the years with simple configure tasks.\n>\n> | test. It's really just running \"go version\" and checking that the \"go\"\n> | executalbe exists and the output of \"go version\" is 1.5.1 or later.\n>\n> Pretty much. Here is what I do in RQuantLib:\n>\n>     pkg_version=`quantlib-config --version`\n>\n>     # also test for quantlib version using result from quantlib-config\n> --version\n>     case ${pkg_version} in\n>     0.1.*|0.2.*|0.3.*|0.4.*|0.8.*|0.9.*|1.0.*|1.1.*|1.2.*|1.3.*)\n>         AC_MSG_WARN([RQuantLib requires QuantLib (>= 1.4.0).])\n>         AC_MSG_ERROR([Please upgrade to a current version.])\n>         ;;\n>     esac\n>\n> autoconf looks complicated, but is mostly just shell scripting ...\n>\n> | I added a human readable note to the SystemRequirements in the\n> DESCRIPTION.\n> | It's \"apt-get install golang\" on ubuntu, and \"yum install golang\" on\n> fedora.\n> | Should the SystemRequirements field be in some kind of machine\n> parseable/CRAN\n> | build-testable syntax?\n>\n> But I checked with eg\n>\n>\n> http://metadata.ftp-master.debian.org/changelogs//main/g/golang/golang_1.5.1-1_changelog\n>\n> and few systems will have 1.5.1 yet.  Ie it probably won't Ubuntu before\n> 16.04 next year.  Are there PPAs?\n>\n> Dirk\n>\n> PS Oh, and I forgot to mention that I like msgPack a lot too :)   and have\n> played a little bit with C++ bindings via Rcpp.\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Re PPAs: good question.\n\nI did some digging. The ubuntu 14 PPA that I found (\nhttps://launchpad.net/~eugenesan/+ppa-packages) was already out of date\n(having go1.5 not go1.5.1) when I tried it on a te",
+      "thread_id": "thread-6015f4024162",
+      "thread_depth": 4,
+      "month": "2015-10"
+    },
+    {
+      "id": "msg-22b6f5d7dc49",
+      "message_id": "<22063.56006.642.644525@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-10-27T15:12:53-05:00",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "subject_clean": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "in_reply_to": "<CAPNEFAZKLdaoSgpOhj5e4-hLh4MMtrZdpm-0HW0BsRqiDJMRjg@mail.gmail.com>",
+      "references": [
+        "<CAPNEFAY7XaOGhLvm_FTSXSf7H3a9oT6FHZp6MwZ1gSgwajC+fg@mail.gmail.com>",
+        "<22062.12755.608268.416137@max.nulle.part>",
+        "<CAPNEFAYFnSrmhi2KUU7TtY9FC5=zzkvdrAKvrXarJ_y2W+A6mA@mail.gmail.com>",
+        "<22062.23437.33588.503831@max.nulle.part>",
+        "<CAPNEFAZKLdaoSgpOhj5e4-hLh4MMtrZdpm-0HW0BsRqiDJMRjg@mail.gmail.com>"
+      ],
+      "body_plain": "On 27 October 2015 at 12:51, Jason E. Aten wrote:\n| Re PPAs: good question.\n| \n| I did some digging. The ubuntu 14 PPA that I found (https://launchpad.net/\n| ~eugenesan/+ppa-packages) was already out of date (having go1.5 not go1.5.1)\n| when I tried it on a test cloud box running ubuntu 14.\n\nI found this one which is current for go 1.5.1:\n    https://launchpad.net/~ubuntu-lxc/+archive/ubuntu/lxd-stable\n\nDebian unstable is fine; testing may be soon\n \n| I think the best way to get Go on a CRAN build box is to do a simple binary\n| install with the following two lines. This has the big advantage that it will\n| work on any flavor of linux on amd64, since the go binaries are statically\n| linked. i.e. any version of ubuntu, fedora, centos, redhat, etc. ?(Full\n| details: https://golang.org/doc/install ?lists the exact architectures that the\n| binary tarballs support, encompassing FreeBSD, Linux, Windows, and OSX and\n| which architectures for each.)\n| \n| \n| sudo curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz | su\n| do tar xz -C /usr/local/\n| \n| sudo echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile\n| \n| NB This will install the \"go\" binary to /usr/local/go/bin/go. The install\n| location /usr/local/go is baked into the go1.5.1.linux-amd64.tar.gz binary as\n| the default GOROOT location, so it can't be moved without setting the GOROOT\n| env variable as well.\n| \n| \n| So that's what I would recommend.? Any questions, let me know if know.\n\nI cannot speak for CRAN but based on my experience this may be a bit of long\nshot.  Maybe you can offer them a Docker image or something less intrusive at\nthe system level.\n\nBut I could also be too pessimistic. You should probably just ask CRAN.  But\nright now, with the somewhat advanced system requirements, you may just get\nasked to wait.  Dunno.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 27 October 2015 at 12:51, Jason E. Aten wrote:\n| Re PPAs: good question.\n| \n| I did some digging. The ubuntu 14 PPA that I found (https://launchpad.net/\n| ~eugenesan/+ppa-packages) was already out ",
+      "thread_id": "thread-6015f4024162",
+      "thread_depth": 5,
+      "month": "2015-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-eb470e2e9343",
+      "subject": "[R-pkg-devel] Formals of S4 Function",
+      "message_count": 1,
+      "participants": [
+        "Dario Strbenac"
+      ],
+      "started": "2015-10-01T00:00:05+00:00",
+      "last_reply": "2015-10-01T00:00:05+00:00",
+      "root_message_id": "msg-eb470e2e9343"
+    },
+    {
+      "id": "thread-2644ae3c7ccc",
+      "subject": "[R-pkg-devel] src/install.libs.R",
+      "message_count": 4,
+      "participants": [
+        "Duncan Murdoch",
+        "Facundo Muñoz"
+      ],
+      "started": "2015-10-06T11:41:23+02:00",
+      "last_reply": "2015-10-16T15:32:01-04:00",
+      "root_message_id": "msg-2644ae3c7ccc"
+    },
+    {
+      "id": "thread-fc756686e74c",
+      "subject": "[R-pkg-devel] Format/parser for NEWS (not NEWS.Rd)?",
+      "message_count": 3,
+      "participants": [
+        "Henrik Bengtsson",
+        "boB Rudis"
+      ],
+      "started": "2015-10-07T17:37:10-07:00",
+      "last_reply": "2015-10-13T15:06:59-07:00",
+      "root_message_id": "msg-fc756686e74c"
+    },
+    {
+      "id": "thread-5c7a8e5aba58",
+      "subject": "[R-pkg-devel] Diagnosing error on CRAN's old R, old Windows",
+      "message_count": 5,
+      "participants": [
+        "Ben Bond-Lamberty",
+        "Duncan Murdoch",
+        "Mark van der Loo"
+      ],
+      "started": "2015-10-08T08:06:41-04:00",
+      "last_reply": "2015-10-08T15:27:09+00:00",
+      "root_message_id": "msg-5c7a8e5aba58"
+    },
+    {
+      "id": "thread-c1d0bf207d45",
+      "subject": "[R-pkg-devel] how to make \"r-release-osx-x86_64-mavericks\" machine support rgl 3D plots",
+      "message_count": 4,
+      "participants": [
+        "Dr Gregory Jefferis",
+        "Duncan Murdoch",
+        "Ott Toomet"
+      ],
+      "started": "2015-10-08T21:41:12+01:00",
+      "last_reply": "2015-10-08T20:30:59-04:00",
+      "root_message_id": "msg-c1d0bf207d45"
+    },
+    {
+      "id": "thread-3f70fb341f8d",
+      "subject": "[R-pkg-devel] R CMD check NOTE - Long paths in package",
+      "message_count": 8,
+      "participants": [
+        "Barry Rowlingson",
+        "Charles Determan",
+        "Dirk Eddelbuettel",
+        "Henrik Bengtsson",
+        "Uwe Ligges",
+        "peter dalgaard"
+      ],
+      "started": "2015-10-12T13:13:55-05:00",
+      "last_reply": "2015-10-13T18:03:51-05:00",
+      "root_message_id": "msg-3f70fb341f8d"
+    },
+    {
+      "id": "thread-1af801151e7b",
+      "subject": "[R-pkg-devel] problem with locale-dependent order()",
+      "message_count": 1,
+      "participants": [
+        "Jim Hester"
+      ],
+      "started": "2015-10-14T15:53:22-04:00",
+      "last_reply": "2015-10-14T15:53:22-04:00",
+      "root_message_id": "msg-1af801151e7b"
+    },
+    {
+      "id": "thread-971d29465160",
+      "subject": "[R-pkg-devel] R-devel installation and libcurl",
+      "message_count": 4,
+      "participants": [
+        "Jim Lemon",
+        "Martyn Plummer",
+        "peter dalgaard"
+      ],
+      "started": "2015-10-16T21:46:38+11:00",
+      "last_reply": "2015-10-18T17:37:33+11:00",
+      "root_message_id": "msg-971d29465160"
+    },
+    {
+      "id": "thread-4f36c7a77f47",
+      "subject": "[R-pkg-devel] CRAN checks question",
+      "message_count": 3,
+      "participants": [
+        "Derek Ogle",
+        "Hadley Wickham",
+        "Uwe Ligges"
+      ],
+      "started": "2015-10-21T22:15:51+00:00",
+      "last_reply": "2015-10-22T17:30:59+02:00",
+      "root_message_id": "msg-4f36c7a77f47"
+    },
+    {
+      "id": "thread-e67db163fd76",
+      "subject": "[R-pkg-devel] S3 method, useMethod and <-, using Roxygen",
+      "message_count": 7,
+      "participants": [
+        "Daniel Lüdecke",
+        "Hadley Wickham",
+        "Kirill Müller"
+      ],
+      "started": "2015-10-23T10:30:56+02:00",
+      "last_reply": "2015-10-23T14:41:49+02:00",
+      "root_message_id": "msg-e67db163fd76"
+    },
+    {
+      "id": "thread-6015f4024162",
+      "subject": "[R-pkg-devel] golang based package for R msgpack and websocket work (RMQ)",
+      "message_count": 6,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Jason E. Aten"
+      ],
+      "started": "2015-10-24T09:31:21-07:00",
+      "last_reply": "2015-10-27T15:12:53-05:00",
+      "root_message_id": "msg-6015f4024162"
+    }
+  ]
+}

@@ -1,0 +1,1432 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2025-04",
+  "messages": [
+    {
+      "id": "msg-b59c5e2ed1fe",
+      "message_id": "<405d9027-1b87-4b80-a0ec-60cb501e9e97@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-04-01T10:26:35+02:00",
+      "subject": "[R-pkg-devel]  [CRAN-pretest-archived] CRAN Submission OPCreg 0.2.0",
+      "subject_clean": "[R-pkg-devel]  [CRAN-pretest-archived] CRAN Submission OPCreg 0.2.0",
+      "in_reply_to": "<513f1a07.73cc.195f03a36e2.Coremail.ggb11111111@163.com>",
+      "references": [
+        "<20250401013307.D9595A01D4@xmpalantir.wu.ac.at>",
+        "<01dba2ac$Blat.v3.2.24$40b54e1c$2604851e1@mail.statistik.tu-dortmund.de>",
+        "<513f1a07.73cc.195f03a36e2.Coremail.ggb11111111@163.com>"
+      ],
+      "body_plain": "But we see\n\nAuthor field differs from that derived from Authors at R\n   Author:    'Guangbao Guo [aut, cre] \nhttps://orcid.org/0000-0002-4115-6218>), Chunjie Wei [aut]'\n   Authors at R: 'Guangbao Guo [aut, cre] (ORCID: \n<https://orcid.org/0000-0002-4115-6218>), Chunjie Wei [aut]'\n\n\nYou have to build the package with R-devel or R-prerelease, then the \nfield will be auto generated in the new form.\n\nBest,\nUwe Ligges\n\n\nOn 01.04.2025 09:21, ??? wrote:\n> Dear Uwe Ligges,\n> \n>          The name \"Guo\" is correctly spelled. Guo is my family name.\n> \n> \n> \n> \n> If you are fairly certain the rejection is a false positive.\n> \n>   \n> \n> \n> \n> \n> --\n> \n> Sincerely yours,\n> Guangbao Guo\n> \n> \n> Wechat Number: ggb11111111\n> \n> \n> \n> \n> \n> At 2025-04-01 10:17:44, ligges at statistik.tu-dortmund.de wrote:\n>> Dear maintainer,\n>>\n>> package OPCreg_0.2.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\n>> Windows: <https://win-builder.r-project.org/incoming_pretest/OPCreg_0.2.0_20250401_033307/Windows/00check.log>\n>> Status: 2 NOTEs\n>> Debian: <https://win-builder.r-project.org/incoming_pretest/OPCreg_0.2.0_20250401_033307/Debian/00check.log>\n>> Status: 2 NOTEs\n>>\n>>\n>>\n>> Please fix all problems and resubmit a fixed version via the webform.\n>> If you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n>> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>> If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n>>\n>> More details are given in the directory:\n>> <https://win-builder.r-project.org/incoming_pretest/OPCreg_0.2.0_20250401_033307/>\n>> The files will be removed after roughly 7 days.\n>>\n>> No strong reverse dependencies to be checked.\n>>\n>> Best regards,\n>> CRAN teams' auto-check service\n> \n> \t[[alternative HTML version deleted]]\n>",
+      "body_snippet": "But we see\n\nAuthor field differs from that derived from Authors at R\n   Author:    'Guangbao Guo [aut, cre] \nhttps://orcid.org/0000-0002-4115-6218>), Chunjie Wei [aut]'\n   Authors at R: 'Guangbao Guo ",
+      "thread_id": "thread-b59c5e2ed1fe",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-800233d2762b",
+      "message_id": "<fa95ce55-a249-45a8-be6e-167a808e0398@gmail.com>",
+      "from_name": "Serguei Sokol",
+      "from_email_hash": "80fbfa5a2fb090124371607c0b9b0616dc1e4e6ae0e3aa8a3ca78397eadc432a",
+      "date": "2025-04-01T10:26:44+02:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": "<CAMUU=-+C8bMCUFOOD_FEGJLvSnVk+Ubjd+JEwHL86Th+8Mn7pw@mail.gmail.com>",
+      "references": [
+        "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+        "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>",
+        "<CAMUU=-LsEvLGvTbub0nKz2R-sG4HFgms2cxP_6bO5E9PxJHOJg@mail.gmail.com>",
+        "<dcd2bc2b-c486-4532-962f-c04793ecb091@gmail.com>",
+        "<CAMUU=-+C8bMCUFOOD_FEGJLvSnVk+Ubjd+JEwHL86Th+8Mn7pw@mail.gmail.com>"
+      ],
+      "body_plain": "Le 31/03/2025 ? 18:00, Jerome Braun a ?crit?:\n> Hi Duncan!\n> \n>>   Since the compiler will supply stdbool.h, it's safer to use that than to\n> try to emulate it.\n> \n> Understood. It seems like the definitions are exactly the same between the\n> two.\nYes and no. Yes, true and false are the same. No, because there is also \n__bool_true_false_are_defined which is set to 1 and this can make the \ncompiler react differently in various situations.\n\n> \n> Currently there is no use of \"bool\" in any of the code (after having\n> changed bool to int everywhere in the code).\n> \n> So I think I can replace the two lines in the original code with a call to\n> include the <stdbool.h> header --- does that seem reasonable?   Can I use\n> an include statement there in place of those two lines?\nI think it would be good and safe idea.\n\nBest,\nSerguei.\n\n> \n> Thank you!",
+      "body_snippet": "Le 31/03/2025 ? 18:00, Jerome Braun a ?crit?:\n> Hi Duncan!\n> \n>>   Since the compiler will supply stdbool.h, it's safer to use that than to\n> try to emulate it.\n> \n> Understood. It seems like the defi",
+      "thread_id": "thread-800233d2762b",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-d27f4417b984",
+      "message_id": "<CAJuCY5xfn7uykxM2JHPOWgkzUPrjXz8tpJ-3E_=GFw7XucuYfA@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "1183e720326bc91ec429d1a20d015e292579537392780a0fcfc24d392942c637",
+      "date": "2025-04-01T14:28:04+02:00",
+      "subject": "[R-pkg-devel] Connection time-out when checking a package",
+      "subject_clean": "[R-pkg-devel] Connection time-out when checking a package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nWhen checking a package via a GitHub action I often (but not always) get a\nconnection-time out for the GNU license page. The github actions runs the\ncode below\n\n   Sys.setenv(\"R_DEFAULT_INTERNET_TIMEOUT\" = 360)\n   options(timeout = max(360, getOption(\"timeout\")))\n    rcmdcheck::rcmdcheck(\n      path = x$get_path, args = c(\"--timings\", \"--as-cran\", \"--no-manual\"),\n      error_on = \"never\", timeout = Inf\n    )\n\nThe resulting NOTE\n\nFound the following (possibly) invalid URLs:\n  URL: https://www.gnu.org/licenses/gpl-3.0.html\n    From: README.md\n    Status: Error\n    Message: libcurl error code 28:\n      Failed to connect to www.gnu.org port 443 after 136189 ms: Couldn't\nconnect to server\n\nI'm guessing that https://www.gnu.org is blocking the request from the\nGitHub Action. Any suggestions how to fix this note without removing the\nURL for the README?\n\nBest regards,\n\nThierry\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse Overheid / Government of Flanders\nINSTITUUT VOOR NATUUR- EN BOSONDERZOEK / RESEARCH INSTITUTE FOR NATURE AND\nFOREST\nTeam Biometrie & Kwaliteitszorg / Team Biometrics & Quality Assurance\nthierry.onkelinx at inbo.be\nHavenlaan 88 bus 73, 1000 Brussel\n*Postadres:* Koning Albert II-laan 15 bus 186, 1210 Brussel\n*Poststukken die naar dit adres worden gestuurd, worden ingescand en\ndigitaal aan de geadresseerde bezorgd. Zo kan de Vlaamse overheid haar\ndossiers volledig digitaal behandelen. Poststukken met de vermelding\n?vertrouwelijk? worden niet ingescand, maar ongeopend aan de geadresseerde\nbezorgd.*\nwww.inbo.be\n\n///////////////////////////////////////////////////////////////////////////////////////////\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n///////////////////////////////////////////////////////////////////////////////////////////\n\n<https://www.inbo.be>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nWhen checking a package via a GitHub action I often (but not always) get a\nconnection-time out for the GNU license page. The github actions runs the\ncode below\n\n   Sys.setenv(\"R_DEFAULT_INT",
+      "thread_id": "thread-d27f4417b984",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-0f40a37c1d22",
+      "message_id": "<20250402124554.023fa302@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-02T12:45:54+03:00",
+      "subject": "[R-pkg-devel] Connection time-out when checking a package",
+      "subject_clean": "[R-pkg-devel] Connection time-out when checking a package",
+      "in_reply_to": "<CAJuCY5xfn7uykxM2JHPOWgkzUPrjXz8tpJ-3E_=GFw7XucuYfA@mail.gmail.com>",
+      "references": [
+        "<CAJuCY5xfn7uykxM2JHPOWgkzUPrjXz8tpJ-3E_=GFw7XucuYfA@mail.gmail.com>"
+      ],
+      "body_plain": "? Tue, 1 Apr 2025 14:28:04 +0200\nThierry Onkelinx <thierry.onkelinx at inbo.be> ?????:\n\n> Any suggestions how to fix this note without removing the\n> URL for the README?\n\nI think it should be possible to set the environment variable\n_R_CHECK_CRAN_INCOMING_REMOTE_=FALSE to disable the \"remote\" checks [*]\n(including checks for repository content) or\n_R_CHECK_CRAN_INCOMING_SKIP_URL_CHECKS_IF_REMOTE_=TRUE to only skip the\nURL checks.\n\n-- \nBest regards,\nIvan\n\n[*]\nhttps://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005fREMOTE_005f",
+      "body_snippet": "? Tue, 1 Apr 2025 14:28:04 +0200\nThierry Onkelinx <thierry.onkelinx at inbo.be> ?????:\n\n> Any suggestions how to fix this note without removing the\n> URL for the README?\n\nI think it should be possible",
+      "thread_id": "thread-d27f4417b984",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-6e8d335ce63f",
+      "message_id": "<CAJuCY5wdRwwmu_b1NZHPjTvBoDa+YFrBe8SsuawoXnxL0CYvLg@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "1183e720326bc91ec429d1a20d015e292579537392780a0fcfc24d392942c637",
+      "date": "2025-04-02T13:01:12+02:00",
+      "subject": "[R-pkg-devel] Connection time-out when checking a package",
+      "subject_clean": "[R-pkg-devel] Connection time-out when checking a package",
+      "in_reply_to": "<20250402124554.023fa302@arachnoid>",
+      "references": [
+        "<CAJuCY5xfn7uykxM2JHPOWgkzUPrjXz8tpJ-3E_=GFw7XucuYfA@mail.gmail.com>",
+        "<20250402124554.023fa302@arachnoid>"
+      ],
+      "body_plain": "Dear Ivan,\n\nThanks for the feedback. Skipping all URL checks is not an ideal solution.\nGetting a NOTE for a broken link is valuable. Given that the problem occurs\nover several repositories but always with the gnu.org domain, I was hoping\nfor a more tailored solution.\n\nRemoving the problematic URL is probably the best solution for now.\n\nBest regards,\n\nThierry\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse Overheid / Government of Flanders\nINSTITUUT VOOR NATUUR- EN BOSONDERZOEK / RESEARCH INSTITUTE FOR NATURE AND\nFOREST\nTeam Biometrie & Kwaliteitszorg / Team Biometrics & Quality Assurance\nthierry.onkelinx at inbo.be\nHavenlaan 88 bus 73, 1000 Brussel\n*Postadres:* Koning Albert II-laan 15 bus 186, 1210 Brussel\n*Poststukken die naar dit adres worden gestuurd, worden ingescand en\ndigitaal aan de geadresseerde bezorgd. Zo kan de Vlaamse overheid haar\ndossiers volledig digitaal behandelen. Poststukken met de vermelding\n?vertrouwelijk? worden niet ingescand, maar ongeopend aan de geadresseerde\nbezorgd.*\nwww.inbo.be\n\n///////////////////////////////////////////////////////////////////////////////////////////\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n///////////////////////////////////////////////////////////////////////////////////////////\n\n<https://www.inbo.be>\n\n\nOp wo 2 apr 2025 om 11:45 schreef Ivan Krylov <ikrylov at disroot.org>:\n\n> ? Tue, 1 Apr 2025 14:28:04 +0200\n> Thierry Onkelinx <thierry.onkelinx at inbo.be> ?????:\n>\n> > Any suggestions how to fix this note without removing the\n> > URL for the README?\n>\n> I think it should be possible to set the environment variable\n> _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE to disable the \"remote\" checks [*]\n> (including checks for repository content) or\n> _R_CHECK_CRAN_INCOMING_SKIP_URL_CHECKS_IF_REMOTE_=TRUE to only skip the\n> URL checks.\n>\n> --\n> Best regards,\n> Ivan\n>\n> [*]\n>\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005fREMOTE_005f\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Ivan,\n\nThanks for the feedback. Skipping all URL checks is not an ideal solution.\nGetting a NOTE for a broken link is valuable. Given that the problem occurs\nover several repositories but always ",
+      "thread_id": "thread-d27f4417b984",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-b25ba036499b",
+      "message_id": "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>",
+      "from_name": "Jason Cory Brunson",
+      "from_email_hash": "78b15b51d4b2f78b9f5aaca4e4a9842d54fc6e8c5f04fdc92aae327952f27729",
+      "date": "2025-04-02T13:28:32-04:00",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "subject_clean": "[R-pkg-devel] proper way to cite an invalid URL",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI'm trying to submit a new version of a package to CRAN. Among the \nadditions is an RMarkdown vignette that uses data from a website that is \nno longer active. For completeness, i'd still like to cite the invalid \nURL, but without formatting it as a hyperlink. What is the preferred way \nto do this?\n\nOne StackExchange answer is to surround the URL with <span></span>, but \nthis did not remove the hyperlink when i rendered the vignette locally. \nInstead, i surrounded it with back-ticks, which works locally, but i've \nbeen unable to run Win-Builder checks to see whether this prevents the \n\"invalid URLs\" NOTE. And, even if the NOTE is prevented, i'm not sure \nthis is preferred.\n\nThank you,\n\nCory Brunson",
+      "body_snippet": "Hello,\n\nI'm trying to submit a new version of a package to CRAN. Among the \nadditions is an RMarkdown vignette that uses data from a website that is \nno longer active. For completeness, i'd still like",
+      "thread_id": "thread-b25ba036499b",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-720fc9ac854f",
+      "message_id": "<f08930c4-6928-469c-ab27-1773004934ae@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-04-02T17:42:35-04:00",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "subject_clean": "[R-pkg-devel] proper way to cite an invalid URL",
+      "in_reply_to": "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>",
+      "references": [
+        "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>"
+      ],
+      "body_plain": "On 2025-04-02 1:28 p.m., Jason Cory Brunson wrote:\n> Hello,\n> \n> I'm trying to submit a new version of a package to CRAN. Among the\n> additions is an RMarkdown vignette that uses data from a website that is\n> no longer active. For completeness, i'd still like to cite the invalid\n> URL, but without formatting it as a hyperlink. What is the preferred way\n> to do this?\n> \n> One StackExchange answer is to surround the URL with <span></span>, but\n> this did not remove the hyperlink when i rendered the vignette locally.\n> Instead, i surrounded it with back-ticks, which works locally, but i've\n> been unable to run Win-Builder checks to see whether this prevents the\n> \"invalid URLs\" NOTE. And, even if the NOTE is prevented, i'm not sure\n> this is preferred.\n\nWhy not leave off the scheme, e.g. \"www.r-project.org\" instead of \n\"https://www.r-project.org\".\n\nDuncan Murdoch",
+      "body_snippet": "On 2025-04-02 1:28 p.m., Jason Cory Brunson wrote:\n> Hello,\n> \n> I'm trying to submit a new version of a package to CRAN. Among the\n> additions is an RMarkdown vignette that uses data from a website t",
+      "thread_id": "thread-b25ba036499b",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-69a6a99eb912",
+      "message_id": "<C14FACC0-4361-4BFA-8EAA-DAE30D225C0D@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-04-03T11:01:03+13:00",
+      "subject": "[R-pkg-devel] Connection time-out when checking a package",
+      "subject_clean": "[R-pkg-devel] Connection time-out when checking a package",
+      "in_reply_to": "<CAJuCY5wdRwwmu_b1NZHPjTvBoDa+YFrBe8SsuawoXnxL0CYvLg@mail.gmail.com>",
+      "references": [
+        "<CAJuCY5xfn7uykxM2JHPOWgkzUPrjXz8tpJ-3E_=GFw7XucuYfA@mail.gmail.com>",
+        "<20250402124554.023fa302@arachnoid>",
+        "<CAJuCY5wdRwwmu_b1NZHPjTvBoDa+YFrBe8SsuawoXnxL0CYvLg@mail.gmail.com>"
+      ],
+      "body_plain": "FWIW: connectivity from GH runners is notoriously patchy*, so I wouldn?t rely on those for URL checks, so I?d recommend using the solution by Ivan in actions and simply running a separate check without the option once in a while locally (e.g., before submission) to detect such issues. After all, the point of GHAs is to detect things you cannot detect locally (because of OS etc.) which this not the case here.\n\n* - the failure rate is so high that pretty much all actions involving remote files include provisions for several retries, otherwise your actions will fail on a regular basis. That said, GNU servers are notoriously unreliable themselves, compounding the problem. Even in our macOS recipes I had to create a provision for automatic rewriting of gnu.org URLs to more reliable GNU mirrors as the master site is either slow or unresponsive very often, so this is not an unusual problem.\n\nCheers,\nSimon\n\n\n> On 3 Apr 2025, at 00:01, Thierry Onkelinx <thierry.onkelinx at inbo.be> wrote:\n> \n> Dear Ivan,\n> \n> Thanks for the feedback. Skipping all URL checks is not an ideal solution.\n> Getting a NOTE for a broken link is valuable. Given that the problem occurs\n> over several repositories but always with the gnu.org domain, I was hoping\n> for a more tailored solution.\n> \n> Removing the problematic URL is probably the best solution for now.\n> \n> Best regards,\n> \n> Thierry\n> \n> ir. Thierry Onkelinx\n> Statisticus / Statistician\n> \n> Vlaamse Overheid / Government of Flanders\n> INSTITUUT VOOR NATUUR- EN BOSONDERZOEK / RESEARCH INSTITUTE FOR NATURE AND\n> FOREST\n> Team Biometrie & Kwaliteitszorg / Team Biometrics & Quality Assurance\n> thierry.onkelinx at inbo.be\n> Havenlaan 88 bus 73, 1000 Brussel\n> *Postadres:* Koning Albert II-laan 15 bus 186, 1210 Brussel\n> *Poststukken die naar dit adres worden gestuurd, worden ingescand en\n> digitaal aan de geadresseerde bezorgd. Zo kan de Vlaamse overheid haar\n> dossiers volledig digitaal behandelen. Poststukken met de vermelding\n> ?vertrouwelijk? worden niet ingescand, maar ongeopend aan de geadresseerde\n> bezorgd.*\n> www.inbo.be\n> \n> ///////////////////////////////////////////////////////////////////////////////////////////\n> To call in the statistician after the experiment is done may be no more\n> than asking him to perform a post-mortem examination: he may be able to say\n> what the experiment died of. ~ Sir Ronald Aylmer Fisher\n> The plural of anecdote is not data. ~ Roger Brinner\n> The combination of some data and an aching desire for an answer does not\n> ensure that a reasonable answer can be extracted from a given body of data.\n> ~ John Tukey\n> ///////////////////////////////////////////////////////////////////////////////////////////\n> \n> <https://www.inbo.be>\n> \n> \n> Op wo 2 apr 2025 om 11:45 schreef Ivan Krylov <ikrylov at disroot.org>:\n> \n>> ? Tue, 1 Apr 2025 14:28:04 +0200\n>> Thierry Onkelinx <thierry.onkelinx at inbo.be> ?????:\n>> \n>>> Any suggestions how to fix this note without removing the\n>>> URL for the README?\n>> \n>> I think it should be possible to set the environment variable\n>> _R_CHECK_CRAN_INCOMING_REMOTE_=FALSE to disable the \"remote\" checks [*]\n>> (including checks for repository content) or\n>> _R_CHECK_CRAN_INCOMING_SKIP_URL_CHECKS_IF_REMOTE_=TRUE to only skip the\n>> URL checks.\n>> \n>> --\n>> Best regards,\n>> Ivan\n>> \n>> [*]\n>> \n>> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005fREMOTE_005f\n>> \n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "FWIW: connectivity from GH runners is notoriously patchy*, so I wouldn?t rely on those for URL checks, so I?d recommend using the solution by Ivan in actions and simply running a separate check withou",
+      "thread_id": "thread-d27f4417b984",
+      "thread_depth": 3,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-a10ed199eee5",
+      "message_id": "<CACrL82XTjtTHZRvz4YL2rPRfWvKvFE3rgAsDJSVUKbo2zY4QuA@mail.gmail.com>",
+      "from_name": "Nicholas Tierney",
+      "from_email_hash": "15ee301a0dc60167c9147bb3b0d9d877aa76d9c01e3e30623d3848b5b834f8d5",
+      "date": "2025-04-03T11:28:32+11:00",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "subject_clean": "[R-pkg-devel] proper way to cite an invalid URL",
+      "in_reply_to": "<f08930c4-6928-469c-ab27-1773004934ae@gmail.com>",
+      "references": [
+        "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>",
+        "<f08930c4-6928-469c-ab27-1773004934ae@gmail.com>"
+      ],
+      "body_plain": "Could you potentially look for the original website in the internet archive\n/ wayback machine: https://web.archive.org/ and cite that instead?\n\nOn Thu, 3 Apr 2025 at 08:42, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 2025-04-02 1:28 p.m., Jason Cory Brunson wrote:\n> > Hello,\n> >\n> > I'm trying to submit a new version of a package to CRAN. Among the\n> > additions is an RMarkdown vignette that uses data from a website that is\n> > no longer active. For completeness, i'd still like to cite the invalid\n> > URL, but without formatting it as a hyperlink. What is the preferred way\n> > to do this?\n> >\n> > One StackExchange answer is to surround the URL with <span></span>, but\n> > this did not remove the hyperlink when i rendered the vignette locally.\n> > Instead, i surrounded it with back-ticks, which works locally, but i've\n> > been unable to run Win-Builder checks to see whether this prevents the\n> > \"invalid URLs\" NOTE. And, even if the NOTE is prevented, i'm not sure\n> > this is preferred.\n>\n> Why not leave off the scheme, e.g. \"www.r-project.org\" instead of\n> \"https://www.r-project.org\".\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Could you potentially look for the original website in the internet archive\n/ wayback machine: https://web.archive.org/ and cite that instead?\n\nOn Thu, 3 Apr 2025 at 08:42, Duncan Murdoch <murdoch.dun",
+      "thread_id": "thread-b25ba036499b",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-16a6c2d6b5af",
+      "message_id": "<93131639-5472-4fdb-b5af-0091ead580aa@gmail.com>",
+      "from_name": "Jason Cory Brunson",
+      "from_email_hash": "78b15b51d4b2f78b9f5aaca4e4a9842d54fc6e8c5f04fdc92aae327952f27729",
+      "date": "2025-04-02T21:20:19-04:00",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "subject_clean": "[R-pkg-devel] proper way to cite an invalid URL",
+      "in_reply_to": "<CACrL82XTjtTHZRvz4YL2rPRfWvKvFE3rgAsDJSVUKbo2zY4QuA@mail.gmail.com>",
+      "references": [
+        "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>",
+        "<f08930c4-6928-469c-ab27-1773004934ae@gmail.com>",
+        "<CACrL82XTjtTHZRvz4YL2rPRfWvKvFE3rgAsDJSVUKbo2zY4QuA@mail.gmail.com>"
+      ],
+      "body_plain": "Thank you both!\n\nNicholas, i did check the Wayback Machine; the URL was never archived, \nnor was the domain itself (in case you're curious, www.ibge.Goi?sv.br/).\n\nDuncan, that worked at preventing the hyperlink locally; thank you. But \ni got a new error from Win-Builder (the development version via \ndevtools::check_win_devel() but not the release version via \ndevtools::check_win_release()). It seems to apply to all URLs and DOIs, \nthough i did not get it on any previous check:\n\nChecking URLs failed with message:\n ? there is no package called 'curl'\n\nChecking DOIs failed with message:\n ? there is no package called 'curl'\n\nCory\n\nOn 4/2/25 20:28, Nicholas Tierney wrote:\n> Could you potentially look for the original website in the internet \n> archive / wayback machine: https://web.archive.org/ and cite that instead?\n>\n> On Thu, 3 Apr 2025 at 08:42, Duncan Murdoch <murdoch.duncan at gmail.com> \n> wrote:\n>\n>     On 2025-04-02 1:28 p.m., Jason Cory Brunson wrote:\n>     > Hello,\n>     >\n>     > I'm trying to submit a new version of a package to CRAN. Among the\n>     > additions is an RMarkdown vignette that uses data from a website\n>     that is\n>     > no longer active. For completeness, i'd still like to cite the\n>     invalid\n>     > URL, but without formatting it as a hyperlink. What is the\n>     preferred way\n>     > to do this?\n>     >\n>     > One StackExchange answer is to surround the URL with\n>     <span></span>, but\n>     > this did not remove the hyperlink when i rendered the vignette\n>     locally.\n>     > Instead, i surrounded it with back-ticks, which works locally,\n>     but i've\n>     > been unable to run Win-Builder checks to see whether this\n>     prevents the\n>     > \"invalid URLs\" NOTE. And, even if the NOTE is prevented, i'm not\n>     sure\n>     > this is preferred.\n>\n>     Why not leave off the scheme, e.g. \"www.r-project.org\n>     <http://www.r-project.org>\" instead of\n>     \"https://www.r-project.org\".\n>\n>     Duncan Murdoch\n>\n>     ______________________________________________\n>     R-package-devel at r-project.org mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you both!\n\nNicholas, i did check the Wayback Machine; the URL was never archived, \nnor was the domain itself (in case you're curious, www.ibge.Goi?sv.br/).\n\nDuncan, that worked at preventing the",
+      "thread_id": "thread-b25ba036499b",
+      "thread_depth": 3,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-25a2e6925d41",
+      "message_id": "<20250403085433.52c99c01@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-03T08:54:33+03:00",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "subject_clean": "[R-pkg-devel] proper way to cite an invalid URL",
+      "in_reply_to": "<93131639-5472-4fdb-b5af-0091ead580aa@gmail.com>",
+      "references": [
+        "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>",
+        "<f08930c4-6928-469c-ab27-1773004934ae@gmail.com>",
+        "<CACrL82XTjtTHZRvz4YL2rPRfWvKvFE3rgAsDJSVUKbo2zY4QuA@mail.gmail.com>",
+        "<93131639-5472-4fdb-b5af-0091ead580aa@gmail.com>"
+      ],
+      "body_plain": "? Wed, 2 Apr 2025 21:20:19 -0400\nJason Cory Brunson <cornelioid at gmail.com> ?????:\n\n> in case you're curious, www.ibge.Goi?sv.br/\n\nI went looking for links to this domain on the Web, found the link in\nthe documentation for the 'ripserr' package, and then found what looks\nlike a domain where the desired page could be found. Could it be\n\nhttps://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areas-dos-municipios.html?edicao=30133&t=acesso-ao-produto\n\ninstead of the original link?\n\nhttps://www.ibge.Goiasv.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areas-dos-municipios.html?edicao=30133&t=acesso-ao-produto?\n\n> But i got a new error from Win-Builder (the development version via \n> devtools::check_win_devel() but not the release version via \n> devtools::check_win_release()). It seems to apply to all URLs and\n> DOIs, though i did not get it on any previous check:\n> \n> Checking URLs failed with message:\n>  ? there is no package called 'curl'\n> \n> Checking DOIs failed with message:\n>  ? there is no package called 'curl'\n\nLooks like Win-Builder for R-devel is having transient problems:\nhttps://www.r-project.org/nosvn/R.check/r-devel-windows-x86_64/curl-00install.html\n\n(\"ERROR: cannot remove earlier installation, is it in use?\", and then\nit fails to overwrite libs\\x64\\curl.dll with \"Permission denied\".)\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Wed, 2 Apr 2025 21:20:19 -0400\nJason Cory Brunson <cornelioid at gmail.com> ?????:\n\n> in case you're curious, www.ibge.Goi?sv.br/\n\nI went looking for links to this domain on the Web, found the link ",
+      "thread_id": "thread-b25ba036499b",
+      "thread_depth": 4,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-077e84f0c05a",
+      "message_id": "<038242e6-9bdb-4dac-9088-f6bd2d67ecea@gmail.com>",
+      "from_name": "Jason Cory Brunson",
+      "from_email_hash": "78b15b51d4b2f78b9f5aaca4e4a9842d54fc6e8c5f04fdc92aae327952f27729",
+      "date": "2025-04-03T08:34:30-04:00",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "subject_clean": "[R-pkg-devel] proper way to cite an invalid URL",
+      "in_reply_to": "<20250403085433.52c99c01@Tarkus>",
+      "references": [
+        "<cc4856a9-3a87-4f9b-a0f1-6ce40b1d5e45@gmail.com>",
+        "<f08930c4-6928-469c-ab27-1773004934ae@gmail.com>",
+        "<CACrL82XTjtTHZRvz4YL2rPRfWvKvFE3rgAsDJSVUKbo2zY4QuA@mail.gmail.com>",
+        "<93131639-5472-4fdb-b5af-0091ead580aa@gmail.com>",
+        "<20250403085433.52c99c01@Tarkus>"
+      ],
+      "body_plain": "Ivan, thank you! That seems to be correct. I'll replace the link.\n\nFor future reference in answer to the original question, it seems that \nDuncan's suggestion works best, assuming that the 'curl' problem was \nunrelated.\n\nCory\n\nOn 4/3/25 01:54, Ivan Krylov wrote:\n> ? Wed, 2 Apr 2025 21:20:19 -0400\n> Jason Cory Brunson <cornelioid at gmail.com> ?????:\n>\n>> in case you're curious, www.ibge.Goi?sv.br/\n> I went looking for links to this domain on the Web, found the link in\n> the documentation for the 'ripserr' package, and then found what looks\n> like a domain where the desired page could be found. Could it be\n>\n> https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areas-dos-municipios.html?edicao=30133&t=acesso-ao-produto\n>\n> instead of the original link?\n>\n> https://www.ibge.Goiasv.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areas-dos-municipios.html?edicao=30133&t=acesso-ao-produto?\n>\n>> But i got a new error from Win-Builder (the development version via\n>> devtools::check_win_devel() but not the release version via\n>> devtools::check_win_release()). It seems to apply to all URLs and\n>> DOIs, though i did not get it on any previous check:\n>>\n>> Checking URLs failed with message:\n>>   ? there is no package called 'curl'\n>>\n>> Checking DOIs failed with message:\n>>   ? there is no package called 'curl'\n> Looks like Win-Builder for R-devel is having transient problems:\n> https://www.r-project.org/nosvn/R.check/r-devel-windows-x86_64/curl-00install.html\n>\n> (\"ERROR: cannot remove earlier installation, is it in use?\", and then\n> it fails to overwrite libs\\x64\\curl.dll with \"Permission denied\".)\n>",
+      "body_snippet": "Ivan, thank you! That seems to be correct. I'll replace the link.\n\nFor future reference in answer to the original question, it seems that \nDuncan's suggestion works best, assuming that the 'curl' prob",
+      "thread_id": "thread-b25ba036499b",
+      "thread_depth": 5,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-b08fccbfe744",
+      "message_id": "<3f84af97-544e-42d2-932b-35cca7bd6128@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "23eddf46e0ea9b02c3ac4701d820ec1c7cb1ea6f9f9d602508498f7026c2f5f3",
+      "date": "2025-04-03T14:49:46+01:00",
+      "subject": "[R-pkg-devel]  [My solution] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel]  [My solution] How and where do I document sysdata.rda",
+      "in_reply_to": "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "I promised I would update on this.\n\nI now realise that what I was tryig to do was logically impossible. I \nwas trying to hide the data set (achieved) but also hide the \ndocumentation. That makes no sense as anyone wanting to change the \ndataset would not know where to find the documentation. The probabiliy \nanyone would want to edit it is almost indsitinguishable from zero but \nit is as Charles suggests a good principle.\n\nSo the answer is to document it in the usual way and use the keyword \ninternal. The main difference from a standard Rd file for data is the \nusage statement. As georgi pointed out this just consists of the dataset \nname not data(datasetname).\n\nThanks for all your help on this and sorry it took so long to respond.\n\nMichael\n\nOn 20/03/2025 14:39, Lists wrote:\n> I want to put a look-up table into sysdata.rda to avoid having to \n> compute it everytime. At the moment I create it and save the resulting \n> file and then manually copy it to sysdata.rda. This works but the \n> package now contains no documentation about the look-up table.\n> \n> Most of the information which I turned up online involves doing it all \n> indirectly using various packages. I do not want to do that, I am quite \n> happy editing files by hand and moving them to where I want them by \n> hand. So what I need is to know where I should put the documentation and \n> what format it should be assuming it is not an Rd file.\n> \n> Of course what I want may be impossible and I just need to document it \n> in the script which creates it but that seems messy.\n> \n> Michael Dewey\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nMichael Dewey",
+      "body_snippet": "I promised I would update on this.\n\nI now realise that what I was tryig to do was logically impossible. I \nwas trying to hide the data set (achieved) but also hide the \ndocumentation. That makes no se",
+      "thread_id": "thread-b08fccbfe744",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-b123b444b38e",
+      "message_id": "<DM6PR01MB38971146EB7242086206CBDBA2A92@DM6PR01MB3897.prod.exchangelabs.com>",
+      "from_name": "Halder,Aritra",
+      "from_email_hash": "20126db81bdf2ce9388f201ae30a64732c36c89510df44d4bf4056f298ac8052",
+      "date": "2025-04-04T22:29:40Z",
+      "subject": "[R-pkg-devel] Warnings and notes while building package with nimble",
+      "subject_clean": "[R-pkg-devel] Warnings and notes while building package with nimble",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am trying to submit a package to CRAN built using nimble. It generates warnings like so:\n\n: no visible global function definition for  'nimDim'\n\nand fails automatic checks by CRAN. Any help is appreciated.\n\nThanks and regards,\n\nAritra\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am trying to submit a package to CRAN built using nimble. It generates warnings like so:\n\n: no visible global function definition for  'nimDim'\n\nand fails automatic checks by CRAN. Any help is ",
+      "thread_id": "thread-b123b444b38e",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-bddb681c9b85",
+      "message_id": "<CALOkxuxkANWVyYeC1JFzVSjRwWG9ae=5CYN1Ze9SBL8jMBTz2g@mail.gmail.com>",
+      "from_name": "Reed A. Cartwright",
+      "from_email_hash": "4475455339c7696f1d6904c31e35c396ab68c14f977c46ff243363f96a70c7b5",
+      "date": "2025-04-04T17:58:25-07:00",
+      "subject": "[R-pkg-devel] libc++ and abort function usage",
+      "subject_clean": "[R-pkg-devel] libc++ and abort function usage",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have updated my package, rbedrock [1-2], to remove a bundled\nlibrary's calls to abort() and stderr when compiled with -DNDEBUG\n(which is the default). This has mostly worked; however, I have\nuncovered that libc++ contains inline functions that call abort() if\nexceptions are disabled.\n\nMy bundled library is a C++ library and is compiled with exceptions\nturned off. I use its C-level interface in my package, so its C++ code\nis mostly hidden from my package. When compiled on a platform with\nlibc++, libc++ introduces abort calls into the compiled package. This\nis causing `R CMD check` to warn about abort() usage on those\nplatforms.\n\nI am wondering what people on this list think I should do?\n\nShould I enable exceptions in the bundled library and keep using the\nC-level interface? (It doesn't throw any exceptions itself, but std\nlibrary calls might.)\n\nIf there is any other strategy that I should try, please let me know.\n\nThanks,\nReed\n\n[1] https://github.com/reedacartwright/rbedrock\n[2] https://cran.r-project.org/package=rbedrock\n[3] https://github.com/llvm/llvm-project/blob/release/12.x/libcxx/include/any#L107-L116\n\n--\nReed A. Cartwright, PhD\nAssociate Professor of Life Sciences\nTEACh Representative - Evolution and Computational Courses\nSchool of Life Sciences and The Biodesign Institute\nArizona State University\n==================\nAddress: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA\nPackages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n85287-6401 USA\nOffice: Biodesign B-220C, 1-480-965-9949\nWebsite: http://cartwrig.ht/",
+      "body_snippet": "I have updated my package, rbedrock [1-2], to remove a bundled\nlibrary's calls to abort() and stderr when compiled with -DNDEBUG\n(which is the default). This has mostly worked; however, I have\nuncover",
+      "thread_id": "thread-bddb681c9b85",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-9faab3c4cc90",
+      "message_id": "<CAB3e68C8KRW4TtHRDhd9-AfVeZisZAaajR3OcmajuciFStebpQ@mail.gmail.com>",
+      "from_name": "Paul Angelo Manlapaz",
+      "from_email_hash": "57d3706699af31c1407c3492efe53062832d3f6572f8b031436095ab11c550ec",
+      "date": "2025-04-05T14:40:56+08:00",
+      "subject": "[R-pkg-devel] R Package Submission",
+      "subject_clean": "[R-pkg-devel] R Package Submission",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear Sir / Ma'am,\n\nGreetings.\n\nI am but a newbie in R Package development and currently, I am trying to\nsubmit my second package to CRAN and every time after submission, the\nresults for the pre-tests come back 'does not pass the incoming checks\nautomatically'.\n\nThe NOTE says;\n\n  Possibly misspelled words in DESCRIPTION:\n    ProteinPCA (9:45, 12:19)\n    ggplot (12:5)\n\nThe name of the package is ProteinPCA and I have already checked multiple\ntimes the Description files for any possible misspellings but I have not\nfound any. Same goes with ggplot2.\n\nAt this moment, I am really at loss on how to resolve this issue. Could you\nperhaps enlighten me on this?\n\nThank you very much.\n\nSincerely,\n*P. A. C. Manlapaz, RCh*\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Sir / Ma'am,\n\nGreetings.\n\nI am but a newbie in R Package development and currently, I am trying to\nsubmit my second package to CRAN and every time after submission, the\nresults for the pre-tests ",
+      "thread_id": "thread-9faab3c4cc90",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-d3924cb626f3",
+      "message_id": "<7918ce96-307d-484c-8896-c7738931fcc6@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-04-05T18:30:16+02:00",
+      "subject": "[R-pkg-devel] R Package Submission",
+      "subject_clean": "[R-pkg-devel] R Package Submission",
+      "in_reply_to": "<CAB3e68C8KRW4TtHRDhd9-AfVeZisZAaajR3OcmajuciFStebpQ@mail.gmail.com>",
+      "references": [
+        "<CAB3e68C8KRW4TtHRDhd9-AfVeZisZAaajR3OcmajuciFStebpQ@mail.gmail.com>"
+      ],
+      "body_plain": "See my response in the communication among you and CRAN.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 05.04.2025 08:40, Paul Angelo Manlapaz wrote:\n> Dear Sir / Ma'am,\n> \n> Greetings.\n> \n> I am but a newbie in R Package development and currently, I am trying to\n> submit my second package to CRAN and every time after submission, the\n> results for the pre-tests come back 'does not pass the incoming checks\n> automatically'.\n> \n> The NOTE says;\n> \n>    Possibly misspelled words in DESCRIPTION:\n>      ProteinPCA (9:45, 12:19)\n>      ggplot (12:5)\n> \n> The name of the package is ProteinPCA and I have already checked multiple\n> times the Description files for any possible misspellings but I have not\n> found any. Same goes with ggplot2.\n> \n> At this moment, I am really at loss on how to resolve this issue. Could you\n> perhaps enlighten me on this?\n> \n> Thank you very much.\n> \n> Sincerely,\n> *P. A. C. Manlapaz, RCh*\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "See my response in the communication among you and CRAN.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 05.04.2025 08:40, Paul Angelo Manlapaz wrote:\n> Dear Sir / Ma'am,\n> \n> Greetings.\n> \n> I am but a newbie in R Package ",
+      "thread_id": "thread-9faab3c4cc90",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-a09fe9017c68",
+      "message_id": "<294AB8A2-A6AE-4C15-8789-0F9CE15B5870@comcast.net>",
+      "from_name": "David Winsemius",
+      "from_email_hash": "960cf691f34cc2709527dabb6de874fb0a4c64edacd6eb5108b4fb7e2aa36670",
+      "date": "2025-04-05T15:31:38-06:00",
+      "subject": "[R-pkg-devel] R Package Submission",
+      "subject_clean": "[R-pkg-devel] R Package Submission",
+      "in_reply_to": "<CAB3e68C8KRW4TtHRDhd9-AfVeZisZAaajR3OcmajuciFStebpQ@mail.gmail.com>",
+      "references": [
+        "<CAB3e68C8KRW4TtHRDhd9-AfVeZisZAaajR3OcmajuciFStebpQ@mail.gmail.com>"
+      ],
+      "body_plain": "It would be unusual these days to have pkg:ggplot as a dependency. \n\n? \nDavid. \nSent from my iPhone\n\n> On Apr 5, 2025, at 10:28?AM, Paul Angelo Manlapaz <pacmanlapaz at gmail.com> wrote:\n> \n> ?Dear Sir / Ma'am,\n> \n> Greetings.\n> \n> I am but a newbie in R Package development and currently, I am trying to\n> submit my second package to CRAN and every time after submission, the\n> results for the pre-tests come back 'does not pass the incoming checks\n> automatically'.\n> \n> The NOTE says;\n> \n>  Possibly misspelled words in DESCRIPTION:\n>    ProteinPCA (9:45, 12:19)\n>    ggplot (12:5)\n> \n> The name of the package is ProteinPCA and I have already checked multiple\n> times the Description files for any possible misspellings but I have not\n> found any. Same goes with ggplot2.\n> \n> At this moment, I am really at loss on how to resolve this issue. Could you\n> perhaps enlighten me on this?\n> \n> Thank you very much.\n> \n> Sincerely,\n> *P. A. C. Manlapaz, RCh*\n> \n>    [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "It would be unusual these days to have pkg:ggplot as a dependency. \n\n? \nDavid. \nSent from my iPhone\n\n> On Apr 5, 2025, at 10:28?AM, Paul Angelo Manlapaz <pacmanlapaz at gmail.com> wrote:\n> \n> ?Dear Si",
+      "thread_id": "thread-9faab3c4cc90",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-3fd823f0f29a",
+      "message_id": "<CAN+W6_uVKhYy=Vz8oboRfGsHUMm8rLPcaN27tfYQ9F75Lx3-AA@mail.gmail.com>",
+      "from_name": "Lluís Revilla",
+      "from_email_hash": "76a9726a6e0e47bbb7afccdf71a32cc468fa12b74f368ad4203569f7d7fbc065",
+      "date": "2025-04-06T01:25:09+02:00",
+      "subject": "[R-pkg-devel]  Warnings and notes while building package with nimble",
+      "subject_clean": "[R-pkg-devel]  Warnings and notes while building package with nimble",
+      "in_reply_to": "<DM6PR01MB38971146EB7242086206CBDBA2A92@DM6PR01MB3897.prod.exchangelabs.com>",
+      "references": [
+        "<DM6PR01MB38971146EB7242086206CBDBA2A92@DM6PR01MB3897.prod.exchangelabs.com>"
+      ],
+      "body_plain": "Hi Aritra,\n\nIt would be helpful if we can explore the package source code. It helps to\nprovide a more accurate answer.\n\nBut you will find some other cases on the archive of the mailing list with\nsimilar messages.\nThe message indicates that the static code analyzer hasn't detected the\ndefinition of the object but detected it is used.\nThis is often the case if you use subset, within or dplyr, ggplot2,\ndata.table or other packages that use delayed evaluation.\nTo solve it, it might be as simple as writing nimDim <- NULL inside your\npackage or there might be a real issue there.\n\nBest,\n\nLlu?s\n\nOn Sat, 5 Apr 2025 at 18:25, Halder,Aritra <ah3758 at drexel.edu> wrote:\n\n> Hi,\n>\n> I am trying to submit a package to CRAN built using nimble. It generates\n> warnings like so:\n>\n> : no visible global function definition for  'nimDim'\n>\n> and fails automatic checks by CRAN. Any help is appreciated.\n>\n> Thanks and regards,\n>\n> Aritra\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Aritra,\n\nIt would be helpful if we can explore the package source code. It helps to\nprovide a more accurate answer.\n\nBut you will find some other cases on the archive of the mailing list with\nsimil",
+      "thread_id": "thread-b123b444b38e",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-c914918bc03e",
+      "message_id": "<26609.48490.450936.846033@rob.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-04-05T18:31:54-05:00",
+      "subject": "[R-pkg-devel]  Warnings and notes while building package with nimble",
+      "subject_clean": "[R-pkg-devel]  Warnings and notes while building package with nimble",
+      "in_reply_to": "<CAN+W6_uVKhYy=Vz8oboRfGsHUMm8rLPcaN27tfYQ9F75Lx3-AA@mail.gmail.com>",
+      "references": [
+        "<DM6PR01MB38971146EB7242086206CBDBA2A92@DM6PR01MB3897.prod.exchangelabs.com>",
+        "<CAN+W6_uVKhYy=Vz8oboRfGsHUMm8rLPcaN27tfYQ9F75Lx3-AA@mail.gmail.com>"
+      ],
+      "body_plain": "On 6 April 2025 at 01:25, Llu?s Revilla wrote:\n| To solve it, it might be as simple as writing nimDim <- NULL inside your\n| package or there might be a real issue there.\n\nOr call utils::globalVariables(c(\"nimDim\")) where, if needed, you could add\nto that argument vector any other variables listed as global. \n\nCheers, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 6 April 2025 at 01:25, Llu?s Revilla wrote:\n| To solve it, it might be as simple as writing nimDim <- NULL inside your\n| package or there might be a real issue there.\n\nOr call utils::globalVariable",
+      "thread_id": "thread-b123b444b38e",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-5bfc82426bca",
+      "message_id": "<ME4P282MB1287D439FBAC309EC438D30EA0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>",
+      "from_name": "Chris Brien",
+      "from_email_hash": "207bf0fe3dfe6e4785a3d31d49108ddaa16be47294c259b18eaf73b6254e4473",
+      "date": "2025-04-06T08:08:15Z",
+      "subject": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "subject_clean": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI submitted my package asremlPlus 4.4.47 to CRAN on Thurs 3/04/2025 and it generated an Error (and a NOTE) on Winbuilder using R version 4.5.0 RC (2025-04-04 r88102 ucrt):\n\npackage asremlPlus_4.4.47.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\nWindows: <https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log<https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log>>\nStatus: 1 ERROR, 1 NOTE\n\nI ran R CMD check on the package using r-devel r88102 and was unable to generate the ERROR.\n\nSo, I submitted the package to Winbuilder r-devel and the package does not generate an error using R version 4.5.0 RC (2025-04-04 r88112 ucrt) - see https://win-builder.r-project.org/Ht2zyDE9N1Xx/00check.log.\n\nCan I assume that the error was transitory and resubmit my package to CRAN?\n\nCheers,\n\n Chris\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI submitted my package asremlPlus 4.4.47 to CRAN on Thurs 3/04/2025 and it generated an Error (and a NOTE) on Winbuilder using R version 4.5.0 RC (2025-04-04 r88102 ucrt):\n\npackage asremlPlus",
+      "thread_id": "thread-5bfc82426bca",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-2688dd87f7b0",
+      "message_id": "<421d4aaa-571d-40a6-a4cf-3fe773d5d0b0@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-04-06T13:08:10+02:00",
+      "subject": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "subject_clean": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "in_reply_to": "<ME4P282MB1287D439FBAC309EC438D30EA0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>",
+      "references": [
+        "<ME4P282MB1287D439FBAC309EC438D30EA0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "This is on so far strange as the winbuilder service and the CRAN \nincoming check happen actually on the same machine, same library and \nsame version of R.\n\nIf this is not related to some randomness in generating your data, \nplease simply resubmit.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 06.04.2025 10:08, Chris Brien wrote:\n> Hi all,\n> \n> I submitted my package asremlPlus 4.4.47 to CRAN on Thurs 3/04/2025 and it generated an Error (and a NOTE) on Winbuilder using R version 4.5.0 RC (2025-04-04 r88102 ucrt):\n> \n> package asremlPlus_4.4.47.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\n> Windows: <https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log<https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log>>\n> Status: 1 ERROR, 1 NOTE\n> \n> I ran R CMD check on the package using r-devel r88102 and was unable to generate the ERROR.\n> \n> So, I submitted the package to Winbuilder r-devel and the package does not generate an error using R version 4.5.0 RC (2025-04-04 r88112 ucrt) - see https://win-builder.r-project.org/Ht2zyDE9N1Xx/00check.log.\n> \n> Can I assume that the error was transitory and resubmit my package to CRAN?\n> \n> Cheers,\n> \n>   Chris\n> \n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "This is on so far strange as the winbuilder service and the CRAN \nincoming check happen actually on the same machine, same library and \nsame version of R.\n\nIf this is not related to some randomness in",
+      "thread_id": "thread-5bfc82426bca",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-a88c222e530b",
+      "message_id": "<b29b0479-9569-440c-80f3-1558354aa7b9@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-04-06T09:33:19-04:00",
+      "subject": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "subject_clean": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "in_reply_to": "<ME4P282MB1287D439FBAC309EC438D30EA0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>",
+      "references": [
+        "<ME4P282MB1287D439FBAC309EC438D30EA0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "On 2025-04-06 4:08 a.m., Chris Brien wrote:\n> Hi all,\n> \n> I submitted my package asremlPlus 4.4.47 to CRAN on Thurs 3/04/2025 and it generated an Error (and a NOTE) on Winbuilder using R version 4.5.0 RC (2025-04-04 r88102 ucrt):\n> \n> package asremlPlus_4.4.47.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\n> Windows: <https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log<https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log>>\n> Status: 1 ERROR, 1 NOTE\n> \n> I ran R CMD check on the package using r-devel r88102 and was unable to generate the ERROR.\n> \n> So, I submitted the package to Winbuilder r-devel and the package does not generate an error using R version 4.5.0 RC (2025-04-04 r88112 ucrt) - see https://win-builder.r-project.org/Ht2zyDE9N1Xx/00check.log.\n> \n> Can I assume that the error was transitory and resubmit my package to CRAN?\n> \n> Cheers,\n\nThe error was\n\n\"Error in pf(q = Fvalue, df1 = ndf, df2 = ddf, lower.tail = FALSE) :\n   Non-numeric argument to mathematical function\"\n\nThat doesn't look like something that would be transitory.  If you are \nworking with random data it might be hard to reproduce, but still worth \nworrying about.  Or it could be transitory because some package you're \nusing was updated between the two runs, or some weird timing issue \ncaused some value to be wrong.\n\nDuncan Murdoch",
+      "body_snippet": "On 2025-04-06 4:08 a.m., Chris Brien wrote:\n> Hi all,\n> \n> I submitted my package asremlPlus 4.4.47 to CRAN on Thurs 3/04/2025 and it generated an Error (and a NOTE) on Winbuilder using R version 4.5.",
+      "thread_id": "thread-5bfc82426bca",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-159eab8f8bc9",
+      "message_id": "<ME4P282MB12875D91379E8866C17C7AD7A0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>",
+      "from_name": "Chris Brien",
+      "from_email_hash": "207bf0fe3dfe6e4785a3d31d49108ddaa16be47294c259b18eaf73b6254e4473",
+      "date": "2025-04-06T23:51:45Z",
+      "subject": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "subject_clean": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "in_reply_to": "<b29b0479-9569-440c-80f3-1558354aa7b9@gmail.com>",
+      "references": [
+        "<ME4P282MB1287D439FBAC309EC438D30EA0AB2@ME4P282MB1287.AUSP282.PROD.OUTLOOK.COM>",
+        "<b29b0479-9569-440c-80f3-1558354aa7b9@gmail.com>"
+      ],
+      "body_plain": "Hi Duncan,\n\nThanks for your comments.\n\n\"Error in pf(q = Fvalue, df1 = ndf, df2 = ddf, lower.tail = FALSE) :\nNon-numeric argument to mathematical function\"\nIndeed, and the problem arises from a call to the anova function of lmerTest whose latest versions is 2020-10-23.\n\n\nThat doesn't look like something that would be transitory. If you are\nworking with random data it might be hard to reproduce, but still worth\nworrying about. Or it could be transitory because some package you're\nusing was updated between the two runs, or some weird timing issue\ncaused some value to be wrong.\n\nThe data is a data set from asremlplus called Oat.dat, so not random at all.\n\nIt seems that the most likely explanation is that it is some weird transitory issue on the CRAN incoming check that caused some value to be wrong.\n\nAnyway, asremlPlus has now been resubmitted and is on its way to CRAN.\n\nCheers,\n\n Chris\n\n\n\nFrom: Duncan Murdoch <murdoch.duncan at gmail.com>\nSent: Sunday, 6 April 2025 11:03 PM\nTo: Chris Brien <chris.brien at adelaide.edu.au>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel\n\nOn 2025-04-06 4:08 a.m., Chris Brien wrote:\n> Hi all,\n>\n> I submitted my package asremlPlus 4.4.47 to CRAN on Thurs 3/04/2025 and it generated an Error (and a NOTE) on Winbuilder using R version 4.5.0 RC (2025-04-04 r88102 ucrt):\n>\n> package asremlPlus_4.4.47.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\n> Windows: <https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log<https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log><https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log<https://win-builder.r-project.org/incoming_pretest/asremlPlus_4.4.47_20250403_120518/Windows/00check.log>>>\n> Status: 1 ERROR, 1 NOTE\n>\n> I ran R CMD check on the package using r-devel r88102 and was unable to generate the ERROR.\n>\n> So, I submitted the package to Winbuilder r-devel and the package does not generate an error using R version 4.5.0 RC (2025-04-04 r88112 ucrt) - see https://win-builder.r-project.org/Ht2zyDE9N1Xx/00check.log<https://win-builder.r-project.org/Ht2zyDE9N1Xx/00check.log>.\n>\n> Can I assume that the error was transitory and resubmit my package to CRAN?\n>\n> Cheers,\n\nThe error was\n\n\"Error in pf(q = Fvalue, df1 = ndf, df2 = ddf, lower.tail = FALSE) :\nNon-numeric argument to mathematical function\"\n\nThat doesn't look like something that would be transitory. If you are\nworking with random data it might be hard to reproduce, but still worth\nworrying about. Or it could be transitory because some package you're\nusing was updated between the two runs, or some weird timing issue\ncaused some value to be wrong.\n\nDuncan Murdoch\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Duncan,\n\nThanks for your comments.\n\n\"Error in pf(q = Fvalue, df1 = ndf, df2 = ddf, lower.tail = FALSE) :\nNon-numeric argument to mathematical function\"\nIndeed, and the problem arises from a call to",
+      "thread_id": "thread-5bfc82426bca",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-c22b8b8e3502",
+      "message_id": "<d0bf0977-d98b-4ba4-b161-8b6d7d730ff0@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-04-07T10:24:13+02:00",
+      "subject": "[R-pkg-devel]  Warnings and notes while building package with nimble",
+      "subject_clean": "[R-pkg-devel]  Warnings and notes while building package with nimble",
+      "in_reply_to": "<DM6PR01MB38971146EB7242086206CBDBA2A92@DM6PR01MB3897.prod.exchangelabs.com>",
+      "references": [
+        "<DM6PR01MB38971146EB7242086206CBDBA2A92@DM6PR01MB3897.prod.exchangelabs.com>"
+      ],
+      "body_plain": "On 05.04.2025 00:29, Halder,Aritra wrote:\n> Hi,\n> \n> I am trying to submit a package to CRAN built using nimble. It generates warnings like so:\n\nWhich package?\n\n\n> : no visible global function definition for  'nimDim'\n\nand you have not forgot to import nlmDim()?\n\nBest,\nUwe Ligges\n\n\n\n\n\n\n> and fails automatic checks by CRAN. Any help is appreciated.\n> \n> Thanks and regards,\n> \n> Aritra\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 05.04.2025 00:29, Halder,Aritra wrote:\n> Hi,\n> \n> I am trying to submit a package to CRAN built using nimble. It generates warnings like so:\n\nWhich package?\n\n\n> : no visible global function definit",
+      "thread_id": "thread-b123b444b38e",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-66f3526d3108",
+      "message_id": "<412dd1c9-85e9-4786-b20d-109af5c96fc8@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2025-04-07T11:10:21-04:00",
+      "subject": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "subject_clean": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am systematically going through the packages that I maintain on CRAN \nto clean up some administrative details. Specifically, I am (1) changing \nall DESCRIPTION files to use Authirs at R, (2) updating the links in man \nfiles to include package anchors, and (3) making sure that the output of \ncalls to summary in test scripts don't break (i.e., mismatch the saved \ntest output) in the 4.5.0 release candidate.\n\nNot surprisingly, this process also finds other issues. Right now,I am \nlooking at the package BimodalIndex. The version currently on CRAN (v. \n1.1.9) includes the following URL:\n ??? https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2730180/\nOn first checking the package, I get informed that this URL has \n\"permanently moved\" to:\n ??? https://pmc.ncbi.nlm.nih.gov/articles/PMC2730180/\n\nThe fix seems simple, so I edited the DESCRIPTION file to use the new \nURL instead of the old one. Then I submitted the newly built version \n(1.1.11) to both the current release and the development release at \nwinbuilder before submitting the update to CRAN.? R version 4.4.3 comes \nback with a 00check.log that is absolutely \"OK\". No errors, warnings, or \nnotes. But version R 4.5.0 RC comes back with;\n ??? (possibly) invalid URL. Status: 403? Message: Forbidden\nI copied the URL as reported in the error message, pasted it into my \nbrowser, and it worked just fine.\n\nCan I assume that this is just something weird about the corresponding \nwinbuilder server at the moment, and go ahead and submit the package? Or \nis there some mysterious change in R 4.5 lurking somewhere that I need \nto deal with?\n\nThanks,\n ?? Kevin",
+      "body_snippet": "Hi,\n\nI am systematically going through the packages that I maintain on CRAN \nto clean up some administrative details. Specifically, I am (1) changing \nall DESCRIPTION files to use Authirs at R, (2) up",
+      "thread_id": "thread-66f3526d3108",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-16f06cb39eec",
+      "message_id": "<20250407183535.2f11ab7f@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-07T18:35:35+03:00",
+      "subject": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "subject_clean": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "in_reply_to": "<412dd1c9-85e9-4786-b20d-109af5c96fc8@gmail.com>",
+      "references": [
+        "<412dd1c9-85e9-4786-b20d-109af5c96fc8@gmail.com>"
+      ],
+      "body_plain": "? Mon, 7 Apr 2025 11:10:21 -0400\n\"Kevin R. Coombes\" <kevin.r.coombes at gmail.com> ?????:\n\n> But version R 4.5.0 RC comes back with;\n>  ??? (possibly) invalid URL. Status: 403? Message: Forbidden\n> I copied the URL as reported in the error message, pasted it into my \n> browser, and it worked just fine.\n> \n> Can I assume that this is just something weird about the\n> corresponding winbuilder server at the moment, and go ahead and\n> submit the package?\n\nThis is a false positive. R CMD check sends automated requests to all\nURLs it finds in the package. PubMed \"protects\" itself from automated\nrequests and returns an error code:\n\n$ curl -I https://pmc.ncbi.nlm.nih.gov/articles/PMC2730180/\nHTTP/2 403\ncontent-length: 134\ncontent-type: text/html; charset=UTF-8\ndate: Mon, 07 Apr 2025 15:14:59 GMT\nalt-svc: clear\n\nUsing a browser instead results in subtly different behaviour visible\nto the server, so the page loads successfully when clicking a link.\n\nI see you're already linking to the article's DOI, 10.4137/cin.s2846,\nand the article is not paywalled. Is it an option to remove the PubMed\nlink? There is code that is intended to recommend to only use the DOI,\nbut currently doesn't include a pattern for the new PubMed URLs:\n\nif(length(y) &&\n         any(ind <-\n           (grepl(re_or(c(\"^https://pubmed.ncbi.nlm.nih.gov/[0-9]+\",\n              \"^https://www.ncbi.nlm.nih.gov/pmc/articles/PMC[0-9]+/$\",\n              \"^https://academic.oup.com/.*(/[0-9]*){4}$\",\n              \"^https://www.sciencedirect.com/science/article\")),\n            y$URL)))) {\n    ## <FIXME>\n    ## Ideally we would complain about such URLs in general\n    ## and not only when the URL checks were not OK.\n    paste(c(\"Please use DOIs for the following publisher URLs:\",\n            paste0(\"  \", y$URL[ind])),\n          collapse = \"\\n\")\n    ## </FIXME>\n}\n\nIf you don't want to remove the PubMed link, you can explain the\n\"possibly invalid URL\" as a false positive in the submission comment.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 7 Apr 2025 11:10:21 -0400\n\"Kevin R. Coombes\" <kevin.r.coombes at gmail.com> ?????:\n\n> But version R 4.5.0 RC comes back with;\n>  ??? (possibly) invalid URL. Status: 403? Message: Forbidden\n> I ",
+      "thread_id": "thread-66f3526d3108",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-c13b33550e7d",
+      "message_id": "<7a26a6a4-8501-44bf-baad-13885ed1a305@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2025-04-07T11:52:30-04:00",
+      "subject": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "subject_clean": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "in_reply_to": "<20250407183535.2f11ab7f@arachnoid>",
+      "references": [
+        "<412dd1c9-85e9-4786-b20d-109af5c96fc8@gmail.com>",
+        "<20250407183535.2f11ab7f@arachnoid>"
+      ],
+      "body_plain": "Thanks. That's what I thought (though I was somewhat confused by the \ndifferent behaviors of winbuilder on the current and development \nversions). I think the original DESCRIPTION file (from 2017?) just had \nthe URL. Some time after that, CRAN asked for the inclusion of the DOI, \nbut they didn't say to get rid of the URL. The code itself hasn't been \ntouched since at least 2019 (since it still works exactly the way it is \nsupposed to.)\n\nAnd, becauseI have been both finding and losing things on the Internet \nfor several decades, I am not particularly confident that the DOI is \ngoing to have a significantly longer stable lifetime than the NCBI URL. \nSo, for now at least, I think I will leave them both.\n\nBest,\n ?? Kevin\n\nOn 4/7/2025 11:35 AM, Ivan Krylov wrote:\n> ? Mon, 7 Apr 2025 11:10:21 -0400\n> \"Kevin R. Coombes\" <kevin.r.coombes at gmail.com> ?????:\n>\n>> But version R 4.5.0 RC comes back with;\n>>   ??? (possibly) invalid URL. Status: 403? Message: Forbidden\n>> I copied the URL as reported in the error message, pasted it into my\n>> browser, and it worked just fine.\n>>\n>> Can I assume that this is just something weird about the\n>> corresponding winbuilder server at the moment, and go ahead and\n>> submit the package?\n> This is a false positive. R CMD check sends automated requests to all\n> URLs it finds in the package. PubMed \"protects\" itself from automated\n> requests and returns an error code:\n>\n> $ curl -I https://pmc.ncbi.nlm.nih.gov/articles/PMC2730180/\n> HTTP/2 403\n> content-length: 134\n> content-type: text/html; charset=UTF-8\n> date: Mon, 07 Apr 2025 15:14:59 GMT\n> alt-svc: clear\n>\n> Using a browser instead results in subtly different behaviour visible\n> to the server, so the page loads successfully when clicking a link.\n>\n> I see you're already linking to the article's DOI, 10.4137/cin.s2846,\n> and the article is not paywalled. Is it an option to remove the PubMed\n> link? There is code that is intended to recommend to only use the DOI,\n> but currently doesn't include a pattern for the new PubMed URLs:\n>\n> if(length(y) &&\n>           any(ind <-\n>             (grepl(re_or(c(\"^https://pubmed.ncbi.nlm.nih.gov/[0-9]+\",\n>                \"^https://www.ncbi.nlm.nih.gov/pmc/articles/PMC[0-9]+/$\",\n>                \"^https://academic.oup.com/.*(/[0-9]*){4}$\",\n>                \"^https://www.sciencedirect.com/science/article\")),\n>              y$URL)))) {\n>      ## <FIXME>\n>      ## Ideally we would complain about such URLs in general\n>      ## and not only when the URL checks were not OK.\n>      paste(c(\"Please use DOIs for the following publisher URLs:\",\n>              paste0(\"  \", y$URL[ind])),\n>            collapse = \"\\n\")\n>      ## </FIXME>\n> }\n>\n> If you don't want to remove the PubMed link, you can explain the\n> \"possibly invalid URL\" as a false positive in the submission comment.\n>",
+      "body_snippet": "Thanks. That's what I thought (though I was somewhat confused by the \ndifferent behaviors of winbuilder on the current and development \nversions). I think the original DESCRIPTION file (from 2017?) ju",
+      "thread_id": "thread-66f3526d3108",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-e7c6c14b7a34",
+      "message_id": "<CAJXgQP1N6qEKHBxRFnRZN593ycGq-WoZ=cu_eGkUiaRn2KMiCg@mail.gmail.com>",
+      "from_name": "Kevin Ushey",
+      "from_email_hash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
+      "date": "2025-04-07T09:18:29-07:00",
+      "subject": "[R-pkg-devel] libc++ and abort function usage",
+      "subject_clean": "[R-pkg-devel] libc++ and abort function usage",
+      "in_reply_to": "<CALOkxuxkANWVyYeC1JFzVSjRwWG9ae=5CYN1Ze9SBL8jMBTz2g@mail.gmail.com>",
+      "references": [
+        "<CALOkxuxkANWVyYeC1JFzVSjRwWG9ae=5CYN1Ze9SBL8jMBTz2g@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Reed,\n\nUnfortunately I don't think there is any other strategy here -- I\nwould agree that your best bet is to just enable exceptions in the\nbundled library.\n\nBest,\nKevin\n\nOn Fri, Apr 4, 2025 at 5:59?PM Reed A. Cartwright\n<racartwright at gmail.com> wrote:\n>\n> I have updated my package, rbedrock [1-2], to remove a bundled\n> library's calls to abort() and stderr when compiled with -DNDEBUG\n> (which is the default). This has mostly worked; however, I have\n> uncovered that libc++ contains inline functions that call abort() if\n> exceptions are disabled.\n>\n> My bundled library is a C++ library and is compiled with exceptions\n> turned off. I use its C-level interface in my package, so its C++ code\n> is mostly hidden from my package. When compiled on a platform with\n> libc++, libc++ introduces abort calls into the compiled package. This\n> is causing `R CMD check` to warn about abort() usage on those\n> platforms.\n>\n> I am wondering what people on this list think I should do?\n>\n> Should I enable exceptions in the bundled library and keep using the\n> C-level interface? (It doesn't throw any exceptions itself, but std\n> library calls might.)\n>\n> If there is any other strategy that I should try, please let me know.\n>\n> Thanks,\n> Reed\n>\n> [1] https://github.com/reedacartwright/rbedrock\n> [2] https://cran.r-project.org/package=rbedrock\n> [3] https://github.com/llvm/llvm-project/blob/release/12.x/libcxx/include/any#L107-L116\n>\n> --\n> Reed A. Cartwright, PhD\n> Associate Professor of Life Sciences\n> TEACh Representative - Evolution and Computational Courses\n> School of Life Sciences and The Biodesign Institute\n> Arizona State University\n> ==================\n> Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA\n> Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n> 85287-6401 USA\n> Office: Biodesign B-220C, 1-480-965-9949\n> Website: http://cartwrig.ht/\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi Reed,\n\nUnfortunately I don't think there is any other strategy here -- I\nwould agree that your best bet is to just enable exceptions in the\nbundled library.\n\nBest,\nKevin\n\nOn Fri, Apr 4, 2025 at 5:5",
+      "thread_id": "thread-bddb681c9b85",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-81c58d92d35b",
+      "message_id": "<Z_Sq2XEUnVi20Z6x@kumo.plessy.net>",
+      "from_name": "Charles Plessy",
+      "from_email_hash": "639d9df579b8f02bfe0af859d14b28901e30a5828dd79c9afb97aab5cd3068c6",
+      "date": "2025-04-08T13:49:29+09:00",
+      "subject": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "subject_clean": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "in_reply_to": "<20250407183535.2f11ab7f@arachnoid>",
+      "references": [
+        "<412dd1c9-85e9-4786-b20d-109af5c96fc8@gmail.com>",
+        "<20250407183535.2f11ab7f@arachnoid>"
+      ],
+      "body_plain": "Le Mon, Apr 07, 2025 at 06:35:35PM +0300, Ivan Krylov via R-package-devel a ?crit :\n> \n> PubMed \"protects\" itself from automated requests and returns an error code:\n> \n> $ curl -I https://pmc.ncbi.nlm.nih.gov/articles/PMC2730180/\n> HTTP/2 403\n\nQuick minor correction: this is PubMed Central, not PubMed.\n\nA PubMed URL to the same article would work:\n\ncurl -I https://pubmed.ncbi.nlm.nih.gov/19718451/\nHTTP/2 200 \n\nHave a nice day,\n\nCharles Plessy",
+      "body_snippet": "Le Mon, Apr 07, 2025 at 06:35:35PM +0300, Ivan Krylov via R-package-devel a ?crit :\n> \n> PubMed \"protects\" itself from automated requests and returns an error code:\n> \n> $ curl -I https://pmc.ncbi.nlm",
+      "thread_id": "thread-66f3526d3108",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-f0775da58e1d",
+      "message_id": "<f9d824ef-2e0c-4d50-b754-e2b24849a5b7@gmail.com>",
+      "from_name": "J C Nash",
+      "from_email_hash": "3c186aece47b9fdb3cc7c9c4b2429fcf77a95534a068b908c57a0b272b212c98",
+      "date": "2025-04-09T19:52:05-04:00",
+      "subject": "[R-pkg-devel] Procedure for dealing with reverse dependency that has gone bad on CRAN version of my package",
+      "subject_clean": "[R-pkg-devel] Procedure for dealing with reverse dependency that has gone bad on CRAN version of my package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "In correcting a minor bug in the optimx package, I submitted a new version today.\nThe existing CRAN version (2024-12.2) has all CRAN checks OK, and to my knowledge\nno notifications of bugs. The new version has hit a FAIL with package phenofit revdep.\nWanting to have output from a \"working\" system, I (re-)installed the CRAN version\nof optimx and ran R CMD check on phenofit, and also get the FAIL on one of its tests.\n\nThe failure is a solve error (singularity) in the called minimizer nlminb, so could be\na result of some alteration in something like the matrix routines. I've also seen\nchanges in tests due to use of M1 and similar processors, relaxed IEEE arithmetic\nbeing the cause. Such differences in outcome are not really a surprise, but can\nbe a nuisance.\n\nMy query is how to proceed to resolve this situation. Since my existing package --\nwhich was supposedly OK back in December -- also throws the test failure in phenofit,\nI've no path to reverse changes in my code. It's also possible there's no error\nin phenofit, just a test case that now trips up when it did not prior to some\nexternal change.\n\nStill, some resolution is needed, and it would be good to avoid too much fuss.\n\nJohn Nash",
+      "body_snippet": "In correcting a minor bug in the optimx package, I submitted a new version today.\nThe existing CRAN version (2024-12.2) has all CRAN checks OK, and to my knowledge\nno notifications of bugs. The new ve",
+      "thread_id": "thread-f0775da58e1d",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-e0f64ad73307",
+      "message_id": "<CAMVrHdB1MD09exeXi1OLC7-fE7y2VEH0GW2wbEsR6gTw_efvBg@mail.gmail.com>",
+      "from_name": "Jarrett Phillips",
+      "from_email_hash": "9de639c796ddbbb6cad4b1fa42d2a3b128a824ed6eed451e623fe0760502cf98",
+      "date": "2025-04-09T19:57:36-04:00",
+      "subject": "[R-pkg-devel] Lost Braces in R Markdown File",
+      "subject_clean": "[R-pkg-devel] Lost Braces in R Markdown File",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello!\n\nI recently ran R CMD CHECK via devtools::check_built() on my CRAN package\n'VLF'. See: https://cran.r-project.org/web/checks/check_results_VLF.html.\n\nThe notes I received pertain to the below, but I am unsure exactly how to\nresolve the issue after googling a bit. Any ideas?\n\nThanks.\n\nCheers,\n\nJarrett\n\n-----\n\nVersion: 1.1\nCheck: Rd files\nResult: NOTE\n  checkRd: (-1) aminoAcidFun.Rd:37: Lost braces\n      37 | \\item{ownVLFreduced}{ownVLFMatrix}{A matrix containing only\nthose specimen that have VLFs as well as the amino     acids at the\npositions that contain VLFs and NAs in all other positions of the\nsequence.  Only appears if own is not NULL.}\n         |                                   ^\n  checkRd: (-1) vlfFun.Rd:36: Lost braces\n      36 | \\item{ownVLFreduced}{ownVLFMatrix}{A matrix containing only\nthose specimen that have VLFs as well as the     nucleotides at the\npositions that contain VLFs and NAs in all other positions of the\nsequence.  Only appears if own is not NULL.}\n         |\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello!\n\nI recently ran R CMD CHECK via devtools::check_built() on my CRAN package\n'VLF'. See: https://cran.r-project.org/web/checks/check_results_VLF.html.\n\nThe notes I received pertain to the below, ",
+      "thread_id": "thread-e0f64ad73307",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-b65820bf9807",
+      "message_id": "<455645f1-3bc7-4da2-a9a8-47e49aa72906@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-04-09T22:41:07-04:00",
+      "subject": "[R-pkg-devel] Lost Braces in R Markdown File",
+      "subject_clean": "[R-pkg-devel] Lost Braces in R Markdown File",
+      "in_reply_to": "<CAMVrHdB1MD09exeXi1OLC7-fE7y2VEH0GW2wbEsR6gTw_efvBg@mail.gmail.com>",
+      "references": [
+        "<CAMVrHdB1MD09exeXi1OLC7-fE7y2VEH0GW2wbEsR6gTw_efvBg@mail.gmail.com>"
+      ],
+      "body_plain": "[I sent this only to Jarrett on my first attempt, this was meant to go \nto the list.]\n\nThe syntax for the \\item macro has two arguments, so the text \"A matrix\ncontaining only those specimen that have ...\" is in braces that are\nunnecessary.  That's why you got the note, because check thinks that was\nunintentional and wanted to point it out to you.  It's legal, so it's\nnot an error, just a note.\n\nIf I look at the display of the help page ?aminoAcidFun, I think it's\nright that something is wrong.  The formatting near the end of the Value\nsection looks messed up.\n\nDuncan Murdoch\n\n\n\nOn 2025-04-09 7:57 p.m., Jarrett Phillips wrote:\n> Hello!\n> \n> I recently ran R CMD CHECK via devtools::check_built() on my CRAN package\n> 'VLF'. See: https://cran.r-project.org/web/checks/check_results_VLF.html.\n> \n> The notes I received pertain to the below, but I am unsure exactly how to\n> resolve the issue after googling a bit. Any ideas?\n> \n> Thanks.\n> \n> Cheers,\n> \n> Jarrett\n> \n> -----\n> \n> Version: 1.1\n> Check: Rd files\n> Result: NOTE\n>    checkRd: (-1) aminoAcidFun.Rd:37: Lost braces\n>        37 | \\item{ownVLFreduced}{ownVLFMatrix}{A matrix containing only\n> those specimen that have VLFs as well as the amino     acids at the\n> positions that contain VLFs and NAs in all other positions of the\n> sequence.  Only appears if own is not NULL.}\n>           |                                   ^\n>    checkRd: (-1) vlfFun.Rd:36: Lost braces\n>        36 | \\item{ownVLFreduced}{ownVLFMatrix}{A matrix containing only\n> those specimen that have VLFs as well as the     nucleotides at the\n> positions that contain VLFs and NAs in all other positions of the\n> sequence.  Only appears if own is not NULL.}\n>           |\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "[I sent this only to Jarrett on my first attempt, this was meant to go \nto the list.]\n\nThe syntax for the \\item macro has two arguments, so the text \"A matrix\ncontaining only those specimen that have ",
+      "thread_id": "thread-e0f64ad73307",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-0f34cb2311a3",
+      "message_id": "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>",
+      "from_name": "Emanuele Cordano",
+      "from_email_hash": "2bac11e89f6a69fa442e61b7f246fe910df70a82dfc0f9baf4088ac15a548e7f",
+      "date": "2025-04-10T11:24:31+02:00",
+      "subject": "[R-pkg-devel] broken or outdaeted URLs",
+      "subject_clean": "[R-pkg-devel] broken or outdaeted URLs",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI'm submitting a new version of a package created and published on CRAN\nsince 2011. I'm the maintainer. CRAN checks highlight the presence of some\nURLs link in the documentation that can be broken or outdated and CRAN\nasked me to fix them. I'm fixing them following the list set by CRAN and\nwin-builder services.  Is there an option in R CMD check that I can use on\nmy server to directly verify all URLs and fix them on my server / RStudio\nserver?\n\nThank you\nBest\nEmanuele Cordano\n\n-- \nEmanuele Cordano, PhD\nEnvironmental Engineer / Ingegnere per l' Ambiente e il territorio nr.\n3587 (Albo A - Provincia di Trento)\ncell: +39 3282818564\nemail: emanuele.cordano at gmail.com,emanuele.cordano at rendena100.eu,\nemanuele.cordano at eurac.edu\nPEC: emanuele.cordano at ingpec.eu\nURL: www.rendena100.eu\nLinkedIn: https://www.linkedin.com/in/emanuele-cordano-31995333\nGitHub: https://github.com/ecor\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nI'm submitting a new version of a package created and published on CRAN\nsince 2011. I'm the maintainer. CRAN checks highlight the presence of some\nURLs link in the documentation that can be",
+      "thread_id": "thread-0f34cb2311a3",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-bb345b73b3b0",
+      "message_id": "<ONUH3zQ--J-9@tuta.com>",
+      "from_name": "@d@mhsp@rks m@iii@g oii tut@@com",
+      "from_email_hash": "3b01fa53a97e8c8d1d5c200ae61c9a34c01f91f8dce769607255a5a66f7368a0",
+      "date": "2025-04-10T12:40:15+02:00",
+      "subject": "[R-pkg-devel] broken or outdaeted URLs",
+      "subject_clean": "[R-pkg-devel] broken or outdaeted URLs",
+      "in_reply_to": "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>",
+      "references": [
+        "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Emanuele,\nI usually use `urlchecker::url_check()` to start with. There is a `urlchecker::url_update()` option in the package as well. The check catches the errors, the update can fix some but not all errors.\n\n--\nbest,\nAdam\n10 Apr 2025 at 17:25 by emanuele.cordano at gmail.com:\n\n> Dear all,\n>\n> I'm submitting a new version of a package created and published on CRAN\n> since 2011. I'm the maintainer. CRAN checks highlight the presence of some\n> URLs link in the documentation that can be broken or outdated and CRAN\n> asked me to fix them. I'm fixing them following the list set by CRAN and\n> win-builder services.  Is there an option in R CMD check that I can use on\n> my server to directly verify all URLs and fix them on my server / RStudio\n> server?\n>\n> Thank you\n> Best\n> Emanuele Cordano\n>\n> --\n> Emanuele Cordano, PhD\n> Environmental Engineer / Ingegnere per l' Ambiente e il territorio nr.\n> 3587 (Albo A - Provincia di Trento)\n> cell: +39 3282818564\n> email: emanuele.cordano at gmail.com,emanuele.cordano at rendena100.eu,\n> emanuele.cordano at eurac.edu\n> PEC: emanuele.cordano at ingpec.eu\n> URL: www.rendena100.eu\n> LinkedIn: https://www.linkedin.com/in/emanuele-cordano-31995333\n> GitHub: https://github.com/ecor\n>\n> [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Emanuele,\nI usually use `urlchecker::url_check()` to start with. There is a `urlchecker::url_update()` option in the package as well. The check catches the errors, the update can fix some but not a",
+      "thread_id": "thread-0f34cb2311a3",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-59c11ffdac39",
+      "message_id": "<20250410135208.157697c6@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-10T13:52:08+03:00",
+      "subject": "[R-pkg-devel] broken or outdaeted URLs",
+      "subject_clean": "[R-pkg-devel] broken or outdaeted URLs",
+      "in_reply_to": "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>",
+      "references": [
+        "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>"
+      ],
+      "body_plain": "? Thu, 10 Apr 2025 11:24:31 +0200\nEmanuele Cordano <emanuele.cordano at gmail.com> ?????:\n\n> Is there an option in R CMD check that I can use on\n> my server to directly verify all URLs\n\nDoes R CMD check --as-cran help?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Thu, 10 Apr 2025 11:24:31 +0200\nEmanuele Cordano <emanuele.cordano at gmail.com> ?????:\n\n> Is there an option in R CMD check that I can use on\n> my server to directly verify all URLs\n\nDoes R CMD che",
+      "thread_id": "thread-0f34cb2311a3",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-5b7d3dbdf8b9",
+      "message_id": "<7f2cda3e-cb44-41c9-b412-5d41201ad16f@gmail.com>",
+      "from_name": "J C Nash",
+      "from_email_hash": "3c186aece47b9fdb3cc7c9c4b2429fcf77a95534a068b908c57a0b272b212c98",
+      "date": "2025-04-10T07:47:51-04:00",
+      "subject": "[R-pkg-devel]  Procedure for dealing with reverse dependency that has gone bad on CRAN version of my package",
+      "subject_clean": "[R-pkg-devel]  Procedure for dealing with reverse dependency that has gone bad on CRAN version of my package",
+      "in_reply_to": "<f9d824ef-2e0c-4d50-b754-e2b24849a5b7@gmail.com>",
+      "references": [
+        "<f9d824ef-2e0c-4d50-b754-e2b24849a5b7@gmail.com>"
+      ],
+      "body_plain": "I've had an email from CRAN team that the revdep failure with phenofit is a known issue and\nupdated optimx package (fixing glitch in computing approximate Hessian when objective uses dot args)\nis on its way to CRAN.\n\nJohn Nash",
+      "body_snippet": "I've had an email from CRAN team that the revdep failure with phenofit is a known issue and\nupdated optimx package (fixing glitch in computing approximate Hessian when objective uses dot args)\nis on i",
+      "thread_id": "thread-f0775da58e1d",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-f091d696b24b",
+      "message_id": "<LNXP265MB15649B9DFEE0CB8839F6DFA9A8B62@LNXP265MB1564.GBRP265.PROD.OUTLOOK.COM>",
+      "from_name": "Killick, Rebecca",
+      "from_email_hash": "cc56097ff1feb1619466f4de24b5680254c2614b3fa3932c1ea433a7b493a100",
+      "date": "2025-04-11T16:00:16Z",
+      "subject": "[R-pkg-devel] \\linkS4class anchoring",
+      "subject_clean": "[R-pkg-devel] \\linkS4class anchoring",
+      "in_reply_to": "<LNXP265MB1564D9993DE64BAFF2F4B957A8B72@LNXP265MB1564.GBRP265.PROD.OUTLOOK.COM>",
+      "references": [
+        "<LNXP265MB1564D9993DE64BAFF2F4B957A8B72@LNXP265MB1564.GBRP265.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Hi Fellow Package Maintainers,\n\nI received the following helpful message from the CRAN maintainers about a new check that my EnvCpt package is failing:\n\n\"CRAN would like to move its package web pages to providing (static) HTML refmans instead of PDF refmans, which needs Rd cross-references to Rd \\link{} targets not in the package itself nor in the base packages to use package anchors, i.e., use \\link[PKG]{FOO} (see section \"Cross-references\" in \"Writing R Extensions\").\"\n\nThe CRAN package checks here:\nhttps://cran.r-project.org/web/checks/check_results_EnvCpt.html\nnote that:\n\"Found the following Rd file(s) with Rd \\link{} targets missing package anchors: envcpt.Rd: cpt-class\"\n\nAll of the \\link uses within my package are anchored except for the \\linkS4class{cpt} call so I think this is what it is referring to.? I've checked the writing R extensions \"Cross-references\" section and it just says to use \\linkS4class{<class>} but does so in reference to a class within the current package - which is what has been working up until now.\n\nThe class is within the changepoint package so, I tried the obvious inference, \\linkS4class[changepoint]{cpt} but this creates the following warning on check:\n\"prepare_Rd: ./man/envcpt.Rd:63: unexpected TEXT '[changepoint]', expecting '{'\ncheckRd: (7) envcpt.Rd:63: Tag LIST is invalid in a \\code block\"\n\nHas anyone else come across this (needing to reference a class in another package) and knows how to anchor it?\n\nI could be lazy and just delete the reference to solve the problem but, as the class is given as outputs, I think it is helpful to users who haven't come across the class before to have a direct link to the structure of it.\n\nThanks,\nRebecca\n\nPronouns: They/Them/Theirs\nPlease note:? Whilst I may choose to correspond by email during evenings and weekends as it fits best with my preferred working pattern, I do not expect responses outside your usual working pattern.",
+      "body_snippet": "Hi Fellow Package Maintainers,\n\nI received the following helpful message from the CRAN maintainers about a new check that my EnvCpt package is failing:\n\n\"CRAN would like to move its package web pages ",
+      "thread_id": "thread-f091d696b24b",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-bfe035059a48",
+      "message_id": "<20250411224503.4c763fcb@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-11T22:45:03+03:00",
+      "subject": "[R-pkg-devel] \\linkS4class anchoring",
+      "subject_clean": "[R-pkg-devel] \\linkS4class anchoring",
+      "in_reply_to": "<LNXP265MB15649B9DFEE0CB8839F6DFA9A8B62@LNXP265MB1564.GBRP265.PROD.OUTLOOK.COM>",
+      "references": [
+        "<LNXP265MB1564D9993DE64BAFF2F4B957A8B72@LNXP265MB1564.GBRP265.PROD.OUTLOOK.COM>",
+        "<LNXP265MB15649B9DFEE0CB8839F6DFA9A8B62@LNXP265MB1564.GBRP265.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "? Fri, 11 Apr 2025 16:00:16 +0000\n\"Killick, Rebecca\" <r.killick at lancaster.ac.uk> ?????:\n\n> All of the \\link uses within my package are anchored except for the\n> \\linkS4class{cpt} call so I think this is what it is referring to.\n> I've checked the writing R extensions \"Cross-references\" section and\n> it just says to use \\linkS4class{<class>} but does so in reference to\n> a class within the current package - which is what has been working\n> up until now.\n> \n> The class is within the changepoint package so, I tried the obvious\n> inference, \\linkS4class[changepoint]{cpt} but this creates the\n> following warning on check:\n> \"prepare_Rd: ./man/envcpt.Rd:63: unexpected TEXT '[changepoint]',\n> expecting '{' checkRd: (7)\n> envcpt.Rd:63: Tag LIST is invalid in a \\code block\"\n\n\\linkS4class is a \"primitive\" Rd markup operation, included in the\ngrammar and implemented directly by the individual Rd converters.\nCurrently, the grammar says that \\linkS4class{} takes no optional\narguments. The workaround used by ?stats::xtabs is:\n\n>> \\code{\\link[Matrix:sparseMatrix-class]{sparseMatrix}}\n\n(With \\linkS4class{sparseMatrix} helpfully left commented out on the\nsame line.)\n\nIn your case, that would be \\link[changepoint:cpt-class]{cpt}.\n\nFor the future packages depending on future R versions, the grammar and\none of the converters can be changed:\n\n-----------------------------------8<-----------------------------------\nIndex: src/library/tools/R/Rd2HTML.R\n===================================================================\n--- src/library/tools/R/Rd2HTML.R\t(revision 88138)\n+++ src/library/tools/R/Rd2HTML.R\t(working copy)\n@@ -35,6 +35,8 @@\n     option <- attr(arg, \"Rd_option\")\n \n     topic <- dest <- paste(unlist(arg), collapse = \"\")\n+    if (tag == \"\\\\linkS4class\") dest <- paste0(dest, \"-class\")\n+\n     targetfile <- NULL\n     pkg <- NULL\n     if (!is.null(option)) {\n@@ -55,7 +57,6 @@\n     } else if (!isTEXT)\n         stopRd(arg, Rdfile, \"Bad \\\\link topic -- must be text\")\n \n-    if (tag == \"\\\\linkS4class\") dest <- paste0(dest, \"-class\")\n     list(topic = topic, dest = dest, pkg = pkg, targetfile = targetfile)\n }\n \nIndex: src/library/tools/src/gramRd.y\n===================================================================\n--- src/library/tools/src/gramRd.y\t(revision 88138)\n+++ src/library/tools/src/gramRd.y\t(working copy)\n@@ -1168,7 +1168,6 @@\n     \n     { \"\\\\emph\",    LATEXMACRO },    \n     { \"\\\\file\",    LATEXMACRO },\n-    { \"\\\\linkS4class\", LATEXMACRO },\n     { \"\\\\pkg\",\t   LATEXMACRO },\n     { \"\\\\sQuote\",  LATEXMACRO },\n     \n@@ -1209,6 +1208,7 @@\n        one LaTeX-like argument */\n        \n     { \"\\\\link\",    OPTMACRO },\n+    { \"\\\\linkS4class\", OPTMACRO },\n        \n     /* These markup macros require an R-like text argument */\n     \n-----------------------------------8<-----------------------------------\n\nWith the patch applied, the output for \\linkS4class[changepoint]{cpt}\nand \\link[changepoint:cpt-class]{cpt} will be the same:\n\nlibrary(tools)\nr\"{ \\linkS4class[changepoint]{cpt} \\link[changepoint:cpt-class]{cpt} }\" |>\n textConnection() |> parse_Rd(fragment = TRUE) |>\n Rd2HTML(no_links = FALSE, fragment = TRUE)'\n# <p><a href=\"../../changepoint/help/cpt-class.html\">cpt</a>\n# <a href=\"../../changepoint/help/cpt-class.html\">cpt</a>\n\nRd2ex skips \\linkS4class as before; Rd2txt prints the name on the link;\nRd2latex doesn't support the cross-package anchor; and Rd2HTML needs to\nprocess the ...-class destination first, before the if (option) { ... }\nbranch sets targetfile based on it.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Fri, 11 Apr 2025 16:00:16 +0000\n\"Killick, Rebecca\" <r.killick at lancaster.ac.uk> ?????:\n\n> All of the \\link uses within my package are anchored except for the\n> \\linkS4class{cpt} call so I think th",
+      "thread_id": "thread-f091d696b24b",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-208a9e761128",
+      "message_id": "<CAL3ufULDRrB74hQwxmw9bWKy4aDk1o4mvfzf1DLcJzRmwVuBFA@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2025-04-12T08:03:11-07:00",
+      "subject": "[R-pkg-devel] extendr packages on CRAN",
+      "subject_clean": "[R-pkg-devel] extendr packages on CRAN",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hey folks,\n\nextendr v0.8.0 was released which provides backports from R 4.2 and onwards\nto address the solidifying C api.\n\nA number of packages are slated for archival on 2025-04-14. We believe\nwe've provided a PR to each package to get it back in good standing. If you\nhave not received a PR, please let Mossa (on the TO line) and myself know\nand we will assist with a PR.\n\nRelease notes with migration guide at:\nhttps://github.com/extendr/extendr/releases/tag/extendr-api-v0.8.0\n\nThanks,\n\nJosiah Parry\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hey folks,\n\nextendr v0.8.0 was released which provides backports from R 4.2 and onwards\nto address the solidifying C api.\n\nA number of packages are slated for archival on 2025-04-14. We believe\nwe've ",
+      "thread_id": "thread-208a9e761128",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-5050198e1559",
+      "message_id": "<alpine.DEB.2.22.394.2504132150390.3328074@anzu.alexisdinno.com>",
+      "from_name": "@di@@o m@iii@g oii pdx@edu",
+      "from_email_hash": "f36c91383a02fa5e87ab96fffad1baf5d6272dfe21c1b77444e4c570cbeee52c",
+      "date": "2025-04-13T21:54:03-07:00",
+      "subject": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "subject_clean": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Devs,\n\n\nI am unsure how to resolve this NOTE in my package build (I am \ncomfortable with the possibly misspelled words part):\n\n Package has help file(s) containing install/render-stage \\Sexpr{} \n expressions but no prebuilt PDF manual.\n\n\nI've dozens of files and no idea which one(s) offend, or if I am missing \nsome other detail. (Aside: I am using mathjaxr... not sure if that is \nthe issue.)\n\n\nLinks for winbuilder logs are here for the time being:\n\n https://win-builder.r-project.org/qG7LHs2Yf18p\n https://win-builder.r-project.org/BBXdLV7kDOuI\n https://win-builder.r-project.org/63RmX21pnrAw ?This check passes\n\n\nThank you very much,\n\nAlexis Dinno\n\n\nPS Am including the log from the R-release winbuilder check in case my \nlinks expire:\n\n\n* using log directory \n'd:/RCompile/CRANguest/R-oldrelease/tost.suite.Rcheck'\n* using R version 4.4.3 (2025-02-28 ucrt)\n* using platform: x86_64-w64-mingw32\n* R was compiled by\n    gcc.exe (GCC) 13.3.0\n    GNU Fortran (GCC) 13.3.0\n* running under: Windows Server 2022 x64 (build 20348)\n* using session charset: UTF-8\n* checking for file 'tost.suite/DESCRIPTION' ... OK\n* this is package 'tost.suite' version '3.15'\n* package encoding: UTF-8\n* checking CRAN incoming feasibility ... [8s] NOTE\nMaintainer: 'Alexis Dinno <alexis.dinno at pdx.edu>'\n\nNew submission\n\nPossibly misspelled words in DESCRIPTION:\n  Kolmogorov (9:402)\n  McNemar's (9:198)\n  OLS (9:289)\n  Smirnov (9:413)\n  Stata (9:47)\n  Wilcoxon (9:312, 9:340)\n  nonparametric (9:546)\n  rrp (9:842)\n  rrpi (9:855)\n  tost (9:18, 9:65, 9:837, 9:850)\n\nPackage has help file(s) containing install/render-stage \\Sexpr{} \nexpressions but no prebuilt PDF manual.\n* checking package namespace information ... OK\n* checking package dependencies ... OK\n* checking if this is a source package ... OK\n* checking if there is a namespace ... OK\n* checking for hidden files and directories ... OK\n* checking for portable file names ... OK\n* checking whether package 'tost.suite' can be installed ... OK\n* checking installed package size ... OK\n* checking package directory ... OK\n* checking for future file timestamps ... OK\n* checking DESCRIPTION meta-information ... OK\n* checking top-level files ... OK\n* checking for left-over files ... OK\n* checking index information ... OK\n* checking package subdirectories ... OK\n* checking code files for non-ASCII characters ... OK\n* checking R files for syntax errors ... OK\n* checking whether the package can be loaded ... [1s] OK\n* checking whether the package can be loaded with stated dependencies \n... [1s] OK\n* checking whether the package can be unloaded cleanly ... [1s] OK\n* checking whether the namespace can be loaded with stated dependencies \n... [1s] OK\n* checking whether the namespace can be unloaded cleanly ... [1s] OK\n* checking loading without being on the library search path ... [1s] OK\n* checking use of S3 registration ... OK\n* checking dependencies in R code ... OK\n* checking S3 generic/method consistency ... OK\n* checking replacement functions ... OK\n* checking foreign function calls ... OK\n* checking R code for possible problems ... [16s] OK\n* checking Rd files ... [1s] OK\n* checking Rd metadata ... OK\n* checking Rd line widths ... OK\n* checking Rd cross-references ... OK\n* checking for missing documentation entries ... OK\n* checking for code/documentation mismatches ... OK\n* checking Rd \\usage sections ... OK\n* checking Rd contents ... OK\n* checking for unstated dependencies in examples ... OK\n* checking contents of 'data' directory ... OK\n* checking data for non-ASCII characters ... [0s] OK\n* checking data for ASCII and uncompressed saves ... OK\n* checking examples ... [7s] OK\n* checking PDF version of manual ... [12s] OK\n* checking HTML version of manual ... [5s] OK\n* checking for detritus in the temp directory ... OK\n* DONE\nStatus: 1 NOTE",
+      "body_snippet": "Dear R Devs,\n\n\nI am unsure how to resolve this NOTE in my package build (I am \ncomfortable with the possibly misspelled words part):\n\n Package has help file(s) containing install/render-stage \\Sexpr{}",
+      "thread_id": "thread-5050198e1559",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-94657c81bd6a",
+      "message_id": "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>",
+      "from_name": "Emanuele Cordano",
+      "from_email_hash": "2bac11e89f6a69fa442e61b7f246fe910df70a82dfc0f9baf4088ac15a548e7f",
+      "date": "2025-04-14T08:53:38+02:00",
+      "subject": "[R-pkg-devel] cran check about examples time",
+      "subject_clean": "[R-pkg-devel] cran check about examples time",
+      "in_reply_to": "<01dbac8d$Blat.v3.2.24$1fe6c315$2606c31f4@mail.statistik.tu-dortmund.de>",
+      "references": [
+        "<20250413154815.D51ECA019C@xmpalantir.wu.ac.at>",
+        "<01dbac8d$Blat.v3.2.24$1fe6c315$2606c31f4@mail.statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Dear list,\n\nI'm submitting the following package. CRAN check were OK (frorr Windows)\nwhereas in Debian a function example elapses   5.326 seconds.  I need to\nfix this. Most lines in the examples are within \\donttest{} brackets, so\nthey should not be executed by CRAN checks. The examples are useful to\nunderstand the functions, as they are, should I include all examples lines\nin \\donttest{} or \\dontrun{} ?\nDo you have any suggestion or reference on this? CRAN message attached\nbelow.\n\nThank you\nBest\nEmanuele Cordano\n\nCRAN message:\n\nDear maintainer,\n\npackage geotopbricks_1.5.9.1.tar.gz does not pass the incoming checks\nautomatically, please see the following pre-tests (additional issue checks):\nWindows: <\nhttps://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/Windows/00check.log\n>\nStatus: OK\nDebian: <\nhttps://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/Debian/00check.log\n>\nStatus: 1 NOTE\n\nLast released version's CRAN status: OK: 9, NOTE: 5\nSee: <https://CRAN.R-project.org/web/checks/check_results_geotopbricks.html>\n\nCRAN Web: <https://cran.r-project.org/package=geotopbricks>\n\nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help on\nthe R-package-devel mailing list:\n<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\nIf you are fairly certain the rejection is a false positive, please\nreply-all to this message and explain.\n\nMore details are given in the directory:\n<\nhttps://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/\n>\nThe files will be removed after roughly 7 days.\n\nNo strong reverse dependencies to be checked.\n\nBest regards,\nCRAN teams' auto-check service\nFlavor: r-devel-windows-x86_64\nCheck: *, Result: OK\n\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: examples, Result: NOTE\n  Examples with CPU (user + system) or elapsed time > 5s\n                                  user system elapsed\n  get.geotop.inpts.keyword.value 1.406  0.027   5.326\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear list,\n\nI'm submitting the following package. CRAN check were OK (frorr Windows)\nwhereas in Debian a function example elapses   5.326 seconds.  I need to\nfix this. Most lines in the examples are w",
+      "thread_id": "thread-94657c81bd6a",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-4ac0d8d7f9c0",
+      "message_id": "<CAKw81f_uwOMtfqbbWq5DpYSoerxXbsAkb3A=DRQpjVRb5_Sa=Q@mail.gmail.com>",
+      "from_name": "Emanuele Cordano",
+      "from_email_hash": "2bac11e89f6a69fa442e61b7f246fe910df70a82dfc0f9baf4088ac15a548e7f",
+      "date": "2025-04-14T08:57:49+02:00",
+      "subject": "[R-pkg-devel] broken or outdaeted URLs",
+      "subject_clean": "[R-pkg-devel] broken or outdaeted URLs",
+      "in_reply_to": "<20250410135208.157697c6@arachnoid>",
+      "references": [
+        "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>",
+        "<20250410135208.157697c6@arachnoid>"
+      ],
+      "body_plain": "No,  R CMD check --as-cran on my machine did not help.\n\n  `urlchecker::url_check()`  was very useful. It found most of broken URLs\nand they were fixed.\n\nThank you for your feedback.\n\nBest\nEmanuele Cordano\n\nIl giorno gio 10 apr 2025 alle ore 12:52 Ivan Krylov <ikrylov at disroot.org>\nha scritto:\n\n> ? Thu, 10 Apr 2025 11:24:31 +0200\n> Emanuele Cordano <emanuele.cordano at gmail.com> ?????:\n>\n> > Is there an option in R CMD check that I can use on\n> > my server to directly verify all URLs\n>\n> Does R CMD check --as-cran help?\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\n-- \nEmanuele Cordano, PhD\nEnvironmental Engineer / Ingegnere per l' Ambiente e il territorio nr.\n3587 (Albo A - Provincia di Trento)\ncell: +39 3282818564\nemail: emanuele.cordano at gmail.com,emanuele.cordano at rendena100.eu,\nemanuele.cordano at eurac.edu\nPEC: emanuele.cordano at ingpec.eu\nURL: www.rendena100.eu\nLinkedIn: https://www.linkedin.com/in/emanuele-cordano-31995333\nGitHub: https://github.com/ecor\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "No,  R CMD check --as-cran on my machine did not help.\n\n  `urlchecker::url_check()`  was very useful. It found most of broken URLs\nand they were fixed.\n\nThank you for your feedback.\n\nBest\nEmanuele Cor",
+      "thread_id": "thread-0f34cb2311a3",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-db49635db890",
+      "message_id": "<20250414143416.6df84324@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-14T14:34:16+03:00",
+      "subject": "[R-pkg-devel] broken or outdaeted URLs",
+      "subject_clean": "[R-pkg-devel] broken or outdaeted URLs",
+      "in_reply_to": "<CAKw81f_uwOMtfqbbWq5DpYSoerxXbsAkb3A=DRQpjVRb5_Sa=Q@mail.gmail.com>",
+      "references": [
+        "<CAKw81f_UYBRk8tvyF7B3UysvrXU3jY86PLwiHEWWsePeAZuStg@mail.gmail.com>",
+        "<20250410135208.157697c6@arachnoid>",
+        "<CAKw81f_uwOMtfqbbWq5DpYSoerxXbsAkb3A=DRQpjVRb5_Sa=Q@mail.gmail.com>"
+      ],
+      "body_plain": "? Mon, 14 Apr 2025 08:57:49 +0200\nEmanuele Cordano <emanuele.cordano at gmail.com> ?????:\n\n> R CMD check --as-cran on my machine did not help.\n\nStrange, it should be doing the same thing as 'urlchecker'. I've tried\nit with an old version of 'RMAWGEN' and saw the messages:\n\n>> * checking CRAN incoming feasibility ... [6s/526s] WARNING\n>> <...>\n>> Found the following (possibly) invalid URLs:\n\nSome of the URL checks in R CMD check do not work if 'xml2' is not\ninstalled, but 'urlchecker' depends on it as well. Still, glad that\n'urlchecker' helped you locate and fix the problematic URLs.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 14 Apr 2025 08:57:49 +0200\nEmanuele Cordano <emanuele.cordano at gmail.com> ?????:\n\n> R CMD check --as-cran on my machine did not help.\n\nStrange, it should be doing the same thing as 'urlchecke",
+      "thread_id": "thread-0f34cb2311a3",
+      "thread_depth": 3,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-ff7fb44f7a50",
+      "message_id": "<20250414143422.45918aac@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-14T14:34:22+03:00",
+      "subject": "[R-pkg-devel] cran check about examples time",
+      "subject_clean": "[R-pkg-devel] cran check about examples time",
+      "in_reply_to": "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>",
+      "references": [
+        "<20250413154815.D51ECA019C@xmpalantir.wu.ac.at>",
+        "<01dbac8d$Blat.v3.2.24$1fe6c315$2606c31f4@mail.statistik.tu-dortmund.de>",
+        "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>"
+      ],
+      "body_plain": "? Mon, 14 Apr 2025 08:53:38 +0200\nEmanuele Cordano <emanuele.cordano at gmail.com> ?????:\n\n> CRAN check were OK (frorr Windows) whereas in Debian a function\n> example elapses   5.326 seconds.  I need to fix this. Most lines in\n> the examples are within \\donttest{} brackets, so they should not be\n> executed by CRAN checks.\n\nNowadays, R CMD check --as-cran does run \\donttest{} examples. (But not\nwithout --as-cran or --run-donttest, and no automatic checks enable\n--run-dontrun.)\n\n>   Examples with CPU (user + system) or elapsed time > 5s\n>                                   user system elapsed\n>   get.geotop.inpts.keyword.value 1.406  0.027   5.326\n\nIt looks like most of the time was spent waiting to establish a new\nconnection (closer to 8 seconds on my computer). What does\nsystem.time(example(get.geotop.inpts.keyword.value)) return for you? Is\nit an option to download less files in the example?\n\nHaving examples that download data from the internet is somewhat\nprecarious for a CRAN package. One way to prevent intermittent\nconnectivity problems from failing your package checks is to make sure\nthat any time your package fails to download something from the Web, it\ncalls stop() with a classed error object (e.g. simpleError(...) with an\nadditional class \"geotop_internet_error\" attached). This makes it\npossible to wrap your examples in tryCatch(..., geotop_internet_error =\nfunction(e) { ... }), so that any connection errors do not cause your\nexamples to fail, but other errors are not swallowed.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 14 Apr 2025 08:53:38 +0200\nEmanuele Cordano <emanuele.cordano at gmail.com> ?????:\n\n> CRAN check were OK (frorr Windows) whereas in Debian a function\n> example elapses   5.326 seconds.  I need ",
+      "thread_id": "thread-94657c81bd6a",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-2d14bc3ee3a7",
+      "message_id": "<CADNULg_spZZyKmHmYAbO0MW0xHuBTWZsb735E23X4a8=NZKrbA@mail.gmail.com>",
+      "from_name": "Iris Simmons",
+      "from_email_hash": "40b01f168beec35ef27cb62ca97f7a4b288ecbda9c188bcf84504fdbe44290e9",
+      "date": "2025-04-14T09:46:22-04:00",
+      "subject": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "subject_clean": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "in_reply_to": "<alpine.DEB.2.22.394.2504132150390.3328074@anzu.alexisdinno.com>",
+      "references": [
+        "<alpine.DEB.2.22.394.2504132150390.3328074@anzu.alexisdinno.com>"
+      ],
+      "body_plain": "I believe R CMD build changed the default from --manual to --no-manual, I'm\nnot sure why. You could add --manual when you build the tarball or you\ncould add\n\nBuildManual: TRUE\n\nto your DESCRIPTION.\n\nOn Mon, Apr 14, 2025, 09:41 <adinno at pdx.edu> wrote:\n\n>\n>\n> Dear R Devs,\n>\n>\n> I am unsure how to resolve this NOTE in my package build (I am\n> comfortable with the possibly misspelled words part):\n>\n>  Package has help file(s) containing install/render-stage \\Sexpr{}\n>  expressions but no prebuilt PDF manual.\n>\n>\n> I've dozens of files and no idea which one(s) offend, or if I am missing\n> some other detail. (Aside: I am using mathjaxr... not sure if that is\n> the issue.)\n>\n>\n> Links for winbuilder logs are here for the time being:\n>\n>  https://win-builder.r-project.org/qG7LHs2Yf18p\n>  https://win-builder.r-project.org/BBXdLV7kDOuI\n>  https://win-builder.r-project.org/63RmX21pnrAw ?This check passes\n>\n>\n> Thank you very much,\n>\n> Alexis Dinno\n>\n>\n> PS Am including the log from the R-release winbuilder check in case my\n> links expire:\n>\n>\n> * using log directory\n> 'd:/RCompile/CRANguest/R-oldrelease/tost.suite.Rcheck'\n> * using R version 4.4.3 (2025-02-28 ucrt)\n> * using platform: x86_64-w64-mingw32\n> * R was compiled by\n>     gcc.exe (GCC) 13.3.0\n>     GNU Fortran (GCC) 13.3.0\n> * running under: Windows Server 2022 x64 (build 20348)\n> * using session charset: UTF-8\n> * checking for file 'tost.suite/DESCRIPTION' ... OK\n> * this is package 'tost.suite' version '3.15'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... [8s] NOTE\n> Maintainer: 'Alexis Dinno <alexis.dinno at pdx.edu>'\n>\n> New submission\n>\n> Possibly misspelled words in DESCRIPTION:\n>   Kolmogorov (9:402)\n>   McNemar's (9:198)\n>   OLS (9:289)\n>   Smirnov (9:413)\n>   Stata (9:47)\n>   Wilcoxon (9:312, 9:340)\n>   nonparametric (9:546)\n>   rrp (9:842)\n>   rrpi (9:855)\n>   tost (9:18, 9:65, 9:837, 9:850)\n>\n> Package has help file(s) containing install/render-stage \\Sexpr{}\n> expressions but no prebuilt PDF manual.\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking whether package 'tost.suite' can be installed ... OK\n> * checking installed package size ... OK\n> * checking package directory ... OK\n> * checking for future file timestamps ... OK\n> * checking DESCRIPTION meta-information ... OK\n> * checking top-level files ... OK\n> * checking for left-over files ... OK\n> * checking index information ... OK\n> * checking package subdirectories ... OK\n> * checking code files for non-ASCII characters ... OK\n> * checking R files for syntax errors ... OK\n> * checking whether the package can be loaded ... [1s] OK\n> * checking whether the package can be loaded with stated dependencies\n> ... [1s] OK\n> * checking whether the package can be unloaded cleanly ... [1s] OK\n> * checking whether the namespace can be loaded with stated dependencies\n> ... [1s] OK\n> * checking whether the namespace can be unloaded cleanly ... [1s] OK\n> * checking loading without being on the library search path ... [1s] OK\n> * checking use of S3 registration ... OK\n> * checking dependencies in R code ... OK\n> * checking S3 generic/method consistency ... OK\n> * checking replacement functions ... OK\n> * checking foreign function calls ... OK\n> * checking R code for possible problems ... [16s] OK\n> * checking Rd files ... [1s] OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... OK\n> * checking Rd \\usage sections ... OK\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking contents of 'data' directory ... OK\n> * checking data for non-ASCII characters ... [0s] OK\n> * checking data for ASCII and uncompressed saves ... OK\n> * checking examples ... [7s] OK\n> * checking PDF version of manual ... [12s] OK\n> * checking HTML version of manual ... [5s] OK\n> * checking for detritus in the temp directory ... OK\n> * DONE\n> Status: 1 NOTE\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I believe R CMD build changed the default from --manual to --no-manual, I'm\nnot sure why. You could add --manual when you build the tarball or you\ncould add\n\nBuildManual: TRUE\n\nto your DESCRIPTION.\n\nO",
+      "thread_id": "thread-5050198e1559",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-a02edd1ef95b",
+      "message_id": "<20250414165845.35899aa8@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-14T16:58:45+03:00",
+      "subject": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "subject_clean": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "in_reply_to": "<alpine.DEB.2.22.394.2504132150390.3328074@anzu.alexisdinno.com>",
+      "references": [
+        "<alpine.DEB.2.22.394.2504132150390.3328074@anzu.alexisdinno.com>"
+      ],
+      "body_plain": "? Sun, 13 Apr 2025 21:54:03 -0700 (PDT)\nadinno at pdx.edu ?????:\n\n> Package has help file(s) containing install/render-stage \\Sexpr{} \n> expressions but no prebuilt PDF manual.\n\nThis is a relatively recent change (r85348, October 2023). Previously,\nR CMD build detected non-build-time dynamic content in the package\ndocumentation and built the manual automatically. Nowadays I think you\nhave to set BuildManual: yes in your DESCRIPTION before building the\npackage. (There's R CMD build --no-manual, but I'm not seeing a command\nline option to override it from \"no\" to \"yes\".)\n\n> (Aside: I am using mathjaxr... not sure if that is the issue.)\n\nCorrect, that must be what's producing the render-stage dynamic content:\n\nhttps://github.com/wviechtb/mathjaxr/blob/8900cbbb2eda4dc45b776cc203c2942b6289fac3/man/macros/mathjax.Rd#L4\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Sun, 13 Apr 2025 21:54:03 -0700 (PDT)\nadinno at pdx.edu ?????:\n\n> Package has help file(s) containing install/render-stage \\Sexpr{} \n> expressions but no prebuilt PDF manual.\n\nThis is a relatively r",
+      "thread_id": "thread-5050198e1559",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-48493fb41a8d",
+      "message_id": "<alpine.DEB.2.22.394.2504140901090.3338421@anzu.alexisdinno.com>",
+      "from_name": "@di@@o m@iii@g oii pdx@edu",
+      "from_email_hash": "f36c91383a02fa5e87ab96fffad1baf5d6272dfe21c1b77444e4c570cbeee52c",
+      "date": "2025-04-14T09:37:20-07:00",
+      "subject": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "subject_clean": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "in_reply_to": "<20250414165845.35899aa8@arachnoid>",
+      "references": [
+        "<alpine.DEB.2.22.394.2504132150390.3328074@anzu.alexisdinno.com>",
+        "<20250414165845.35899aa8@arachnoid>"
+      ],
+      "body_plain": "Dear Iris and Ivan, \n\n\nTogether both your comments were very helpful, and both pointed me at a \nsolution to resolve my issue and to explain why this change in behavior \nemerged, and how my package was triggering the behavior.\n\nSolution that worked:\n\n Editing the DESCRIPTION file to add the line BuildManual: TRUE\n\nSolution that did *not* work (along with variations):\n \n R CMD build --manual  ?Resulted in: Warning: unknown option ?--manual?\n R CMD --manual build\n R --manual CMD build\n R CMD check --manual\n\nNote: I am using R version 4.4.3 (2025-02-28) -- \"Trophy Case\" on Ubuntu \n24.04\n\n\nThank you both very much for this help!\n\nAlexis Dinno",
+      "body_snippet": "Dear Iris and Ivan, \n\n\nTogether both your comments were very helpful, and both pointed me at a \nsolution to resolve my issue and to explain why this change in behavior \nemerged, and how my package was",
+      "thread_id": "thread-5050198e1559",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-a339648dcbf9",
+      "message_id": "<CAKw81f_O3D2Dim=Tr-f37vx4DR=PZofRNWpyd5g5V1YRY59XQg@mail.gmail.com>",
+      "from_name": "Emanuele Cordano",
+      "from_email_hash": "2bac11e89f6a69fa442e61b7f246fe910df70a82dfc0f9baf4088ac15a548e7f",
+      "date": "2025-04-16T09:39:13+02:00",
+      "subject": "[R-pkg-devel] cran check about examples time",
+      "subject_clean": "[R-pkg-devel] cran check about examples time",
+      "in_reply_to": "<20250414143422.45918aac@arachnoid>",
+      "references": [
+        "<20250413154815.D51ECA019C@xmpalantir.wu.ac.at>",
+        "<01dbac8d$Blat.v3.2.24$1fe6c315$2606c31f4@mail.statistik.tu-dortmund.de>",
+        "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>",
+        "<20250414143422.45918aac@arachnoid>"
+      ],
+      "body_plain": "Thanks\nI  checked  system.time(example(get.geotop.inpts.keyword.value)) .  Elapsed\ntime varies on my machines between 6 and 3 seconds (see below) , mostly\nlesser than 5 seconds. It extracts information from a set-up directory of\nthe GEOtop model. I cannot put an  GEOtop simulation folder within\n\"geotopbricks\" package for obvious reasons and function example refers to\nexample GEOtop simulation folder available on an external ad hoc Github\nrepository.   I'm looking for a solution. Thanks for suggestions.\n\nBest\nEmanuele\n\n user  system elapsed\n  2.991   0.024   5.532 > > >\nsystem.time(example(get.geotop.inpts.keyword.value))\n\n user  system elapsed\n  2.846   0.001   3.796\n\n>\n\nIl giorno lun 14 apr 2025 alle ore 13:34 Ivan Krylov <ikrylov at disroot.org>\nha scritto:\n\n> ? Mon, 14 Apr 2025 08:53:38 +0200\n> Emanuele Cordano <emanuele.cordano at gmail.com> ?????:\n>\n> > CRAN check were OK (frorr Windows) whereas in Debian a function\n> > example elapses   5.326 seconds.  I need to fix this. Most lines in\n> > the examples are within \\donttest{} brackets, so they should not be\n> > executed by CRAN checks.\n>\n> Nowadays, R CMD check --as-cran does run \\donttest{} examples. (But not\n> without --as-cran or --run-donttest, and no automatic checks enable\n> --run-dontrun.)\n>\n> >   Examples with CPU (user + system) or elapsed time > 5s\n> >                                   user system elapsed\n> >   get.geotop.inpts.keyword.value 1.406  0.027   5.326\n>\n> It looks like most of the time was spent waiting to establish a new\n> connection (closer to 8 seconds on my computer). What does\n> system.time(example(get.geotop.inpts.keyword.value)) return for you? Is\n> it an option to download less files in the example?\n>\n> Having examples that download data from the internet is somewhat\n> precarious for a CRAN package. One way to prevent intermittent\n> connectivity problems from failing your package checks is to make sure\n> that any time your package fails to download something from the Web, it\n> calls stop() with a classed error object (e.g. simpleError(...) with an\n> additional class \"geotop_internet_error\" attached). This makes it\n> possible to wrap your examples in tryCatch(..., geotop_internet_error =\n> function(e) { ... }), so that any connection errors do not cause your\n> examples to fail, but other errors are not swallowed.\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\n-- \nEmanuele Cordano, PhD\nEnvironmental Engineer / Ingegnere per l' Ambiente e il territorio nr.\n3587 (Albo A - Provincia di Trento)\ncell: +39 3282818564\nemail: emanuele.cordano at gmail.com,emanuele.cordano at rendena100.eu,\nemanuele.cordano at eurac.edu\nPEC: emanuele.cordano at ingpec.eu\nURL: www.rendena100.eu\nLinkedIn: https://www.linkedin.com/in/emanuele-cordano-31995333\nGitHub: https://github.com/ecor\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks\nI  checked  system.time(example(get.geotop.inpts.keyword.value)) .  Elapsed\ntime varies on my machines between 6 and 3 seconds (see below) , mostly\nlesser than 5 seconds. It extracts informatio",
+      "thread_id": "thread-94657c81bd6a",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-3115e79a4c57",
+      "message_id": "<VE1PR01MB56807EB8340E276B05CF2C6889BC2@VE1PR01MB5680.eurprd01.prod.exchangelabs.com>",
+      "from_name": "Fellinger Tobias",
+      "from_email_hash": "cdf10ee1462d14c4f3c928758ba27709be4a08047ff89d4b939a7edda4734702",
+      "date": "2025-04-17T07:27:49Z",
+      "subject": "[R-pkg-devel] [EXTERN]  cran check about examples time",
+      "subject_clean": "[R-pkg-devel] [EXTERN]  cran check about examples time",
+      "in_reply_to": "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>",
+      "references": [
+        "<20250413154815.D51ECA019C@xmpalantir.wu.ac.at>",
+        "<01dbac8d$Blat.v3.2.24$1fe6c315$2606c31f4@mail.statistik.tu-dortmund.de>",
+        "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Emanuele,\n\nI checked one of the Notes. One of the examples of get.geotop.inpts.keyword.value that throws a NOTE has parts outside of donttest that seem to load data from an url which can lead to varying execution times depending on the server. Moreover the url seems not to work. (https://raw.githubusercontent.com/ecor/geotopbricks_doc/master/simulations/panola13_run2xC_test3)\n\nIf you want to load the data from the web, I'd also put this in a donttest section.\n\nAn alternative would be (if this makes sense for the example) to include the file in the package and load it with system.file in the examples. This should run faster and more reliable and be independent of changes to URLs outside of the repository. Beware of maximum package sizes though.\n\n(I checked this with the current default branch on github.)\n\nHope this helps, best regards, Tobias\n\n-----Urspr?ngliche Nachricht-----\nVon: R-package-devel <r-package-devel-bounces at r-project.org> Im Auftrag von Emanuele Cordano\nGesendet: Montag, 14. April 2025 08:54\nAn: r-package-devel at r-project.org\nBetreff: [EXTERN] [R-pkg-devel] cran check about examples time\n\n[You don't often get email from emanuele.cordano at gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]\n\nDear list,\n\nI'm submitting the following package. CRAN check were OK (frorr Windows)\nwhereas in Debian a function example elapses   5.326 seconds.  I need to\nfix this. Most lines in the examples are within \\donttest{} brackets, so they should not be executed by CRAN checks. The examples are useful to understand the functions, as they are, should I include all examples lines in \\donttest{} or \\dontrun{} ?\nDo you have any suggestion or reference on this? CRAN message attached below.\n\nThank you\nBest\nEmanuele Cordano\n\nCRAN message:\n\nDear maintainer,\n\npackage geotopbricks_1.5.9.1.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\nWindows: <\nhttps://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/Windows/00check.log\n>\nStatus: OK\nDebian: <\nhttps://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/Debian/00check.log\n>\nStatus: 1 NOTE\n\nLast released version's CRAN status: OK: 9, NOTE: 5\nSee: <https://cran.r-project.org/web/checks/check_results_geotopbricks.html>\n\nCRAN Web: <https://cran.r-project.org/package=geotopbricks>\n\nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\nIf you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n\nMore details are given in the directory:\n<\nhttps://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/\n>\nThe files will be removed after roughly 7 days.\n\nNo strong reverse dependencies to be checked.\n\nBest regards,\nCRAN teams' auto-check service\nFlavor: r-devel-windows-x86_64\nCheck: *, Result: OK\n\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: examples, Result: NOTE\n  Examples with CPU (user + system) or elapsed time > 5s\n                                  user system elapsed\n  get.geotop.inpts.keyword.value 1.406  0.027   5.326\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n[https://www.ages.at/fileadmin/Signatur/03_AGES_Mailsignatur2025_Zeichenflaeche_1-04.png]<https://www.ages.at/ages/one-health/one-health>\n\n________________________________\n\n\n\nFirma & Rechtsform: ?sterreichische Agentur f?r Gesundheit und Ern?hrungssicherheit GmbH\n\nSitz: Spargelfeldstra?e 191, 1220 Wien\n\nFirmenbuchnummer: FN 223056z\n\nFirmenbuchgericht: Handelsgericht Wien\n\nDiese Nachricht und allf?llige angeh?ngte Dokumente sind vertraulich und nur f?r den/die Adressaten bestimmt. Sollten Sie nicht der beabsichtigte Adressat sein, ist jede Offenlegung, Weiterleitung oder sonstige Verwendung dieser Information nicht gestattet. In diesem Fall bitten wir, den Absender zu verst?ndigen und die Information zu vernichten. F?r ?bermittlungsfehler oder sonstige Irrt?mer bei ?bermittlung besteht keine Haftung.\n\nUnsere Datenschutzerkl?rung finden Sie unter: Datenschutzerkl?rung<https://www.ages.at/datenschutzerklaerung>\n\nThis message and any attached files are confidential and intended solely for the addressee(s). Any publication, transmission or other use of the information by a person or entity other than the intended addressee is prohibited. If you receive this in error please contact the sender and delete the material. The sender does not accept liability for any errors or omissions as a result of the transmission.\n\nYou can find our privacy policy at: privacy policy<https://www.ages.at/en/privacy>",
+      "body_snippet": "Dear Emanuele,\n\nI checked one of the Notes. One of the examples of get.geotop.inpts.keyword.value that throws a NOTE has parts outside of donttest that seem to load data from an url which can lead to ",
+      "thread_id": "thread-94657c81bd6a",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-0af61e758bc9",
+      "message_id": "<dcdbf1c4-f4ad-41e7-92dc-d47f0ab09f96@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-04-17T09:44:51+02:00",
+      "subject": "[R-pkg-devel] [EXTERN] cran check about examples time",
+      "subject_clean": "[R-pkg-devel] [EXTERN] cran check about examples time",
+      "in_reply_to": "<VE1PR01MB56807EB8340E276B05CF2C6889BC2@VE1PR01MB5680.eurprd01.prod.exchangelabs.com>",
+      "references": [
+        "<20250413154815.D51ECA019C@xmpalantir.wu.ac.at>",
+        "<01dbac8d$Blat.v3.2.24$1fe6c315$2606c31f4@mail.statistik.tu-dortmund.de>",
+        "<CAKw81f-M=RyFY5iaUh_r7nTkMRe7b4pRFByxqo43jP7xLe7VTw@mail.gmail.com>",
+        "<VE1PR01MB56807EB8340E276B05CF2C6889BC2@VE1PR01MB5680.eurprd01.prod.exchangelabs.com>"
+      ],
+      "body_plain": "Or set a web timeout and if not downloaded succesfully not run the code \n(i.e. condiationalize).\n\nBest,\nUwe Ligges\n\n\nOn 17.04.2025 09:27, Fellinger Tobias wrote:\n> Dear Emanuele,\n> \n> I checked one of the Notes. One of the examples of get.geotop.inpts.keyword.value that throws a NOTE has parts outside of donttest that seem to load data from an url which can lead to varying execution times depending on the server. Moreover the url seems not to work. (https://raw.githubusercontent.com/ecor/geotopbricks_doc/master/simulations/panola13_run2xC_test3)\n> \n> If you want to load the data from the web, I'd also put this in a donttest section.\n> \n> An alternative would be (if this makes sense for the example) to include the file in the package and load it with system.file in the examples. This should run faster and more reliable and be independent of changes to URLs outside of the repository. Beware of maximum package sizes though.\n> \n> (I checked this with the current default branch on github.)\n> \n> Hope this helps, best regards, Tobias\n> \n> -----Urspr?ngliche Nachricht-----\n> Von: R-package-devel <r-package-devel-bounces at r-project.org> Im Auftrag von Emanuele Cordano\n> Gesendet: Montag, 14. April 2025 08:54\n> An: r-package-devel at r-project.org\n> Betreff: [EXTERN] [R-pkg-devel] cran check about examples time\n> \n> [You don't often get email from emanuele.cordano at gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]\n> \n> Dear list,\n> \n> I'm submitting the following package. CRAN check were OK (frorr Windows)\n> whereas in Debian a function example elapses   5.326 seconds.  I need to\n> fix this. Most lines in the examples are within \\donttest{} brackets, so they should not be executed by CRAN checks. The examples are useful to understand the functions, as they are, should I include all examples lines in \\donttest{} or \\dontrun{} ?\n> Do you have any suggestion or reference on this? CRAN message attached below.\n> \n> Thank you\n> Best\n> Emanuele Cordano\n> \n> CRAN message:\n> \n> Dear maintainer,\n> \n> package geotopbricks_1.5.9.1.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\n> Windows: <\n> https://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/Windows/00check.log\n>>\n> Status: OK\n> Debian: <\n> https://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/Debian/00check.log\n>>\n> Status: 1 NOTE\n> \n> Last released version's CRAN status: OK: 9, NOTE: 5\n> See: <https://cran.r-project.org/web/checks/check_results_geotopbricks.html>\n> \n> CRAN Web: <https://cran.r-project.org/package=geotopbricks>\n> \n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n> \n> More details are given in the directory:\n> <\n> https://win-builder.r-project.org/incoming_pretest/geotopbricks_1.5.9.1_20250413_174815/\n>>\n> The files will be removed after roughly 7 days.\n> \n> No strong reverse dependencies to be checked.\n> \n> Best regards,\n> CRAN teams' auto-check service\n> Flavor: r-devel-windows-x86_64\n> Check: *, Result: OK\n> \n> \n> Flavor: r-devel-linux-x86_64-debian-gcc\n> Check: examples, Result: NOTE\n>    Examples with CPU (user + system) or elapsed time > 5s\n>                                    user system elapsed\n>    get.geotop.inpts.keyword.value 1.406  0.027   5.326\n> \n>          [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> [https://www.ages.at/fileadmin/Signatur/03_AGES_Mailsignatur2025_Zeichenflaeche_1-04.png]<https://www.ages.at/ages/one-health/one-health>\n> \n> ________________________________\n> \n> \n> \n> Firma & Rechtsform: ?sterreichische Agentur f?r Gesundheit und Ern?hrungssicherheit GmbH\n> \n> Sitz: Spargelfeldstra?e 191, 1220 Wien\n> \n> Firmenbuchnummer: FN 223056z\n> \n> Firmenbuchgericht: Handelsgericht Wien\n> \n> Diese Nachricht und allf?llige angeh?ngte Dokumente sind vertraulich und nur f?r den/die Adressaten bestimmt. Sollten Sie nicht der beabsichtigte Adressat sein, ist jede Offenlegung, Weiterleitung oder sonstige Verwendung dieser Information nicht gestattet. In diesem Fall bitten wir, den Absender zu verst?ndigen und die Information zu vernichten. F?r ?bermittlungsfehler oder sonstige Irrt?mer bei ?bermittlung besteht keine Haftung.\n> \n> Unsere Datenschutzerkl?rung finden Sie unter: Datenschutzerkl?rung<https://www.ages.at/datenschutzerklaerung>\n> \n> This message and any attached files are confidential and intended solely for the addressee(s). Any publication, transmission or other use of the information by a person or entity other than the intended addressee is prohibited. If you receive this in error please contact the sender and delete the material. The sender does not accept liability for any errors or omissions as a result of the transmission.\n> \n> You can find our privacy policy at: privacy policy<https://www.ages.at/en/privacy>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Or set a web timeout and if not downloaded succesfully not run the code \n(i.e. condiationalize).\n\nBest,\nUwe Ligges\n\n\nOn 17.04.2025 09:27, Fellinger Tobias wrote:\n> Dear Emanuele,\n> \n> I checked one of",
+      "thread_id": "thread-94657c81bd6a",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-f13993dcb013",
+      "message_id": "<AS4P195MB1430136E16DEA56418F69FCEBE852@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+      "from_name": "Tony Wilkes",
+      "from_email_hash": "6136bb32e737ef21100ebbcea9efbb7efdaa4349bc12a55dea6e0aec4798b535",
+      "date": "2025-04-24T12:36:57Z",
+      "subject": "[R-pkg-devel] Check if any object pointing to a given address is locked",
+      "subject_clean": "[R-pkg-devel] Check if any object pointing to a given address is locked",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi everyone,\n\nI have a question.\n\nGiven the address of an object (\"address\" in the sense given by, for example, \"data.table::address()\"), is it possible to check if any binding in any environment pointing to that address is locked?\nSo a function similar to \"bindingIsLocked()\", except the function checks all bindings sharing the same address, instead of checking a binding by name in a specific environment.\n\nOne use-case for this is to check if it's save to modify an object by reference.\nFor example, when saying x <- base::letters, x is not save to modify by reference:\nAlthough the binding of x itself is not locked, the binding of base::letters is locked, and we obviously don't want to modify base::letters.\n\nIt should be possible, I think. R has a few pass-by-reference classes (like environments), so R should be able to check something like this. I just have no idea how exactly R checks this.\n\nThanks in advance for any response!\n\nKind regards,\n\nTony\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi everyone,\n\nI have a question.\n\nGiven the address of an object (\"address\" in the sense given by, for example, \"data.table::address()\"), is it possible to check if any binding in any environment poin",
+      "thread_id": "thread-f13993dcb013",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-64e880c3269b",
+      "message_id": "<20250424162816.43ce256c@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-24T16:28:16+03:00",
+      "subject": "[R-pkg-devel]  Check if any object pointing to a given address is locked",
+      "subject_clean": "[R-pkg-devel]  Check if any object pointing to a given address is locked",
+      "in_reply_to": "<AS4P195MB1430136E16DEA56418F69FCEBE852@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AS4P195MB1430136E16DEA56418F69FCEBE852@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "? Thu, 24 Apr 2025 12:36:57 +0000\nTony Wilkes <tony_a_wilkes at outlook.com> ?????:\n\n> One use-case for this is to check if it's save to modify an object by\n> reference.\n\nI think you might need NOT_SHARED() for that, except it's far from\nbeing simple, especially once you pass arbitrary expressions (not just\nvariable names) as arguments to your function:\nhttps://developer.r-project.org/Refcnt.html\n\n> For example, when saying x <- base::letters, x is not save\n> to modify by reference: Although the binding of x itself is not\n> locked, the binding of base::letters is locked, and we obviously\n> don't want to modify base::letters.\n\nThe situation is more dangerous than that. When 'x' references the same\nobject as base::letters (which is a locked binding), you can still\nmodify this object from C code, given its SEXP address, and see the\nchanges from either binding; R won't be able to stop you. (That's the\ndanger of by-reference operations like those implemented in data.table.)\n\nOn the other hand, if you assign a new value to the 'x' binding inside\na given environment, base::letters and any other objects referencing it\nwill retain their original values; there is no need to worry about\nother bindings being locked.\n\n> R has a few pass-by-reference classes (like environments)\n\nThese are different. You can lock a _binding_ to an environment and\nstill change the _value_ of that environment precisely because it's a\nmutable, pass-by-reference object:\n\nx <- new.env()\ny <- x\nlockBinding('x', environment())\n# x$foo <- 'bar' # would signal an error, but:\nassign('foo', 'bar', envir = x) # works\nx$foo # [1] \"bar\"\nidentical(x, y) # [1] TRUE\n\nR switched to reference counting by default in version 4.0. One\ndownside of the reference counts as currently implemented is that when\nan object containing references to other objects is garbage-collected,\nthe reference counts of the child objects are not decremented:\n\nx <- 1\ninvisible(replicate(999, list(x)))\ngc(full = TRUE)\n.Internal(inspect(x))\n# @5618cd515488 14 REALSXP g1c1 [MARK,REF(2000)] (len=1, tl=0) 1\n\n'x' retains a reference count of 2000 despite the 999 lists that\npreviously referenced it no longer exist. This is possible to change,\nbut at the cost of slowing down the garbage collector.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Thu, 24 Apr 2025 12:36:57 +0000\nTony Wilkes <tony_a_wilkes at outlook.com> ?????:\n\n> One use-case for this is to check if it's save to modify an object by\n> reference.\n\nI think you might need NOT_SH",
+      "thread_id": "thread-f13993dcb013",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-371b385e3883",
+      "message_id": "<df6fe1ad-b835-48e2-8d76-af3bdeca8c09@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-04-24T16:38:13+02:00",
+      "subject": "[R-pkg-devel]  Check if any object pointing to a given address is locked",
+      "subject_clean": "[R-pkg-devel]  Check if any object pointing to a given address is locked",
+      "in_reply_to": "<AS4P195MB1430136E16DEA56418F69FCEBE852@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AS4P195MB1430136E16DEA56418F69FCEBE852@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "On 4/24/25 14:36, Tony Wilkes wrote:\n> Hi everyone,\n>\n> I have a question.\n>\n> Given the address of an object (\"address\" in the sense given by, for example, \"data.table::address()\"), is it possible to check if any binding in any environment pointing to that address is locked?\n> So a function similar to \"bindingIsLocked()\", except the function checks all bindings sharing the same address, instead of checking a binding by name in a specific environment.\n>\n> One use-case for this is to check if it's save to modify an object by reference.\n> For example, when saying x <- base::letters, x is not save to modify by reference:\n> Although the binding of x itself is not locked, the binding of base::letters is locked, and we obviously don't want to modify base::letters.\n\nThe question seems to be mixing R-level abstractions with the underlying \nC-level abstractions. To answer whether one can modify a C-level R \nobjects (an SEXP) in place or not, one should think in C-level R API \nabstractions. One can modify an R object (SEXP x) in place when \nNO_REFERENCES(x) is true.\n\nIf this doesn't answer your question, please try to clarify it, explain \nwhat is the problem you are trying to solve.\n\nBest\nTomas\n\n> It should be possible, I think. R has a few pass-by-reference classes (like environments), so R should be able to check something like this. I just have no idea how exactly R checks this.\n>\n> Thanks in advance for any response!\n>\n> Kind regards,\n>\n> Tony\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 4/24/25 14:36, Tony Wilkes wrote:\n> Hi everyone,\n>\n> I have a question.\n>\n> Given the address of an object (\"address\" in the sense given by, for example, \"data.table::address()\"), is it possible to",
+      "thread_id": "thread-f13993dcb013",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-b3d3152a2086",
+      "message_id": "<ed3ae707af8e1af36f51e73581ee14af@uni-duesseldorf.de>",
+      "from_name": "Nils Lüschow",
+      "from_email_hash": "f92f88353a96fc728b114bc92ecfd6b7cf85935df5b8cdd7727f9d8a23e8c7bb",
+      "date": "2025-04-29T14:43:40+02:00",
+      "subject": "[R-pkg-devel] Problem building package depending on third party c++ source library.",
+      "subject_clean": "[R-pkg-devel] Problem building package depending on third party c++ source library.",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello everybody,\n\nas a new feature for the anticlust package \n(https://cran.r-project.org/web/packages/anticlust/index.html) we are \ntrying to include a constraint programming model, written in C++ \nutilizing the Gecode solver. While we generally got this feature to work \nwhen Gecode is pre-installed on the system, we would like to spare the \nusers this step and include it with the package (or inside a \nsupplementary package) to install through the regular R tooling. \nHowever, we run into a problem when it comes to compiling Gecode during \nthe packages build-process, which I describe in this SO post:\n\nhttps://stackoverflow.com/questions/79596214/configure-script-does-not-generate-makefile-properly-for-3rd-party-library-used\n\nI strongly suspect the Makevars file to be incorrect, if you want to \ntake a look or try to compile it yourself, I have uploaded the code of \nthe new feature as well as the source files of the Gecode library to \nGitHub:\n\nhttps://github.com/nilslueschow/Anticlust-Dispersion-Constraint-Model/tree/main/RcppTestPackage/src\n\nThanks for your help!\n\nBest,\nNils L?schow",
+      "body_snippet": "Hello everybody,\n\nas a new feature for the anticlust package \n(https://cran.r-project.org/web/packages/anticlust/index.html) we are \ntrying to include a constraint programming model, written in C++ \nu",
+      "thread_id": "thread-b3d3152a2086",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-0159624120e6",
+      "message_id": "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+      "from_name": "Tim Taylor",
+      "from_email_hash": "e3071ae8257bda4085d8999a9801b324cc930f4864ac0aec1c44601958781446",
+      "date": "2025-04-30T09:25:51+01:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n\nAs background this was motivated by a query raised in the matrixStats package:\nhttps://github.com/HenrikBengtsson/matrixStats/issues/278",
+      "body_snippet": "Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 0,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-1c3a916eb817",
+      "message_id": "<e61ec7a1-4a15-475a-a0c0-624c0512fa1d@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-04-30T10:33:42+02:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+      "references": [
+        "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>"
+      ],
+      "body_plain": "On 30.04.2025 10:25, Tim Taylor wrote:\n> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n\na double is 64 bit and stored that way on all platforms, the concept of \nlong doubles is CPU specific. x86 chips have 80bit in the floating point \nunits for calculations before rounding (and normalizing) to a regular \ndouble.\n\nSome chips, e.g. those ARM chips used in current M[123]Macs (hence very \nrelevant topic), do not support long doubles. And compilers offer to \ncompile without support for long doubles which e.g. CRAN uses to check \nin an additional (issues) check.\n\nBest,\nUwe Ligges\n\n> \n> As background this was motivated by a query raised in the matrixStats package:\n> https://github.com/HenrikBengtsson/matrixStats/issues/278\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 30.04.2025 10:25, Tim Taylor wrote:\n> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, ",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-fb99841b30c7",
+      "message_id": "<B1E9136F-25A7-404B-9EE4-8FE2317DCC48@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-04-30T20:40:17+12:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+      "references": [
+        "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>"
+      ],
+      "body_plain": "Tim,\n\nno, and as far as I can tell some of the claims in that thread are incorrect. Whether long double is identical to double is irrelevant and has nothing to do with it.\n\nR has a configuration option --enable-long-double which governs whether R should use algorithms which can benefit from extended precision where applicable. However, that is entirely internal to R and has nothing to do with packages, it just changes algorithms used in R itself.\n\nIt is definitely a bug in matrixStats to assume that HAVE_LONG_DOUBLE  of LDOUBLE are somehow defined as they are not unless matrixStats does so.\n\nCheers,\nSimon\n\n\n\n> On Apr 30, 2025, at 8:25 PM, Tim Taylor <tim.taylor at hiddenelephants.co.uk> wrote:\n> \n> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n> \n> As background this was motivated by a query raised in the matrixStats package:\n> https://github.com/HenrikBengtsson/matrixStats/issues/278\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Tim,\n\nno, and as far as I can tell some of the claims in that thread are incorrect. Whether long double is identical to double is irrelevant and has nothing to do with it.\n\nR has a configuration optio",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-50fb122f9bb7",
+      "message_id": "<4e0f4a5a-b2a6-4cdf-9918-067f52dc225f@app.fastmail.com>",
+      "from_name": "Tim Taylor",
+      "from_email_hash": "e3071ae8257bda4085d8999a9801b324cc930f4864ac0aec1c44601958781446",
+      "date": "2025-04-30T09:43:24+01:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": "<e61ec7a1-4a15-475a-a0c0-624c0512fa1d@statistik.tu-dortmund.de>",
+      "references": [
+        "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+        "<e61ec7a1-4a15-475a-a0c0-624c0512fa1d@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Cheers for the quick response.\n\nTo clarify my question: Is it correct to say that as long as packages do not assume the greater precision provided by 'double' there is no reason they cannot use 'long double' to get *possible* advantages (e.g. in summations). AFAICT 'long double' is (and has always been) part of the C standard so it's use as a type should be unproblematic (this is the query relevant to matrixStats).\n\nApologies if this does not make much sense.\n\nTim\n\n\n\nOn Wed, 30 Apr 2025, at 9:33 AM, Uwe Ligges wrote:\n> On 30.04.2025 10:25, Tim Taylor wrote:\n>> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n>\n> a double is 64 bit and stored that way on all platforms, the concept of \n> long doubles is CPU specific. x86 chips have 80bit in the floating point \n> units for calculations before rounding (and normalizing) to a regular \n> double.\n>\n> Some chips, e.g. those ARM chips used in current M[123]Macs (hence very \n> relevant topic), do not support long doubles. And compilers offer to \n> compile without support for long doubles which e.g. CRAN uses to check \n> in an additional (issues) check.\n>\n> Best,\n> Uwe Ligges\n>\n>> \n>> As background this was motivated by a query raised in the matrixStats package:\n>> https://github.com/HenrikBengtsson/matrixStats/issues/278\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n> Attachments:\n> * smime.p7s",
+      "body_snippet": "Cheers for the quick response.\n\nTo clarify my question: Is it correct to say that as long as packages do not assume the greater precision provided by 'double' there is no reason they cannot use 'long ",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 2,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-e222b3a0e083",
+      "message_id": "<14a5bf54-f860-460b-a6c6-8be9d1905984@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-04-30T11:07:17+02:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": "<4e0f4a5a-b2a6-4cdf-9918-067f52dc225f@app.fastmail.com>",
+      "references": [
+        "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+        "<e61ec7a1-4a15-475a-a0c0-624c0512fa1d@statistik.tu-dortmund.de>",
+        "<4e0f4a5a-b2a6-4cdf-9918-067f52dc225f@app.fastmail.com>"
+      ],
+      "body_plain": "On 4/30/25 10:43, Tim Taylor wrote:\n> Cheers for the quick response.\n>\n> To clarify my question: Is it correct to say that as long as packages do not assume the greater precision provided by 'double' there is no reason they cannot use 'long double' to get *possible* advantages (e.g. in summations). AFAICT 'long double' is (and has always been) part of the C standard so it's use as a type should be unproblematic (this is the query relevant to matrixStats).\n\nProbably already clear from previous answers, but yes, packages can use \nlong double type.\n\nWhenever using a long double type, one needs to be careful about making \nsure the algorithms work, and the tests pass (so have reasonable \ntolerances), even when the long double type happens to be just the same \nas double. This is the case on aarch64, and macOS/aarch64 is one of the \nplatforms where packages have to work, anyway, so this shouldn't be too \nlimiting anymore - but really one needs to test on such platform.\n\nR itself has an option to disable use of long double to make such \ntesting in R itself possible also on other platforms. In principle one \ncould do something similar in a package, have some ifdefs to disable \nlong doubles, but this is not required. And I probably wouldn't do that, \nI'd just test on aarch64 regularly.\n\nSee Writing R Extensions for more details.\n\nBest\nTomas\n\n> Apologies if this does not make much sense.\n>\n> Tim\n>\n>\n>\n> On Wed, 30 Apr 2025, at 9:33 AM, Uwe Ligges wrote:\n>> On 30.04.2025 10:25, Tim Taylor wrote:\n>>> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n>> a double is 64 bit and stored that way on all platforms, the concept of\n>> long doubles is CPU specific. x86 chips have 80bit in the floating point\n>> units for calculations before rounding (and normalizing) to a regular\n>> double.\n>>\n>> Some chips, e.g. those ARM chips used in current M[123]Macs (hence very\n>> relevant topic), do not support long doubles. And compilers offer to\n>> compile without support for long doubles which e.g. CRAN uses to check\n>> in an additional (issues) check.\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>>> As background this was motivated by a query raised in the matrixStats package:\n>>> https://github.com/HenrikBengtsson/matrixStats/issues/278\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> Attachments:\n>> * smime.p7s\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 4/30/25 10:43, Tim Taylor wrote:\n> Cheers for the quick response.\n>\n> To clarify my question: Is it correct to say that as long as packages do not assume the greater precision provided by 'double' ",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 3,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-8ccc70878ccf",
+      "message_id": "<d3c4ea69-d835-45b3-ba39-1b5a950fcc29@app.fastmail.com>",
+      "from_name": "Tim Taylor",
+      "from_email_hash": "e3071ae8257bda4085d8999a9801b324cc930f4864ac0aec1c44601958781446",
+      "date": "2025-04-30T10:08:54+01:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": "<14a5bf54-f860-460b-a6c6-8be9d1905984@gmail.com>",
+      "references": [
+        "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+        "<e61ec7a1-4a15-475a-a0c0-624c0512fa1d@statistik.tu-dortmund.de>",
+        "<4e0f4a5a-b2a6-4cdf-9918-067f52dc225f@app.fastmail.com>",
+        "<14a5bf54-f860-460b-a6c6-8be9d1905984@gmail.com>"
+      ],
+      "body_plain": "Thank you all!\n\nEverything is clear.\n\nTim\n\nOn Wed, 30 Apr 2025, at 10:07 AM, Tomas Kalibera wrote:\n> On 4/30/25 10:43, Tim Taylor wrote:\n>> Cheers for the quick response.\n>>\n>> To clarify my question: Is it correct to say that as long as packages do not assume the greater precision provided by 'double' there is no reason they cannot use 'long double' to get *possible* advantages (e.g. in summations). AFAICT 'long double' is (and has always been) part of the C standard so it's use as a type should be unproblematic (this is the query relevant to matrixStats).\n>\n> Probably already clear from previous answers, but yes, packages can use \n> long double type.\n>\n> Whenever using a long double type, one needs to be careful about making \n> sure the algorithms work, and the tests pass (so have reasonable \n> tolerances), even when the long double type happens to be just the same \n> as double. This is the case on aarch64, and macOS/aarch64 is one of the \n> platforms where packages have to work, anyway, so this shouldn't be too \n> limiting anymore - but really one needs to test on such platform.\n>\n> R itself has an option to disable use of long double to make such \n> testing in R itself possible also on other platforms. In principle one \n> could do something similar in a package, have some ifdefs to disable \n> long doubles, but this is not required. And I probably wouldn't do that, \n> I'd just test on aarch64 regularly.\n>\n> See Writing R Extensions for more details.\n>\n> Best\n> Tomas\n>\n>> Apologies if this does not make much sense.\n>>\n>> Tim\n>>\n>>\n>>\n>> On Wed, 30 Apr 2025, at 9:33 AM, Uwe Ligges wrote:\n>>> On 30.04.2025 10:25, Tim Taylor wrote:\n>>>> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n>>> a double is 64 bit and stored that way on all platforms, the concept of\n>>> long doubles is CPU specific. x86 chips have 80bit in the floating point\n>>> units for calculations before rounding (and normalizing) to a regular\n>>> double.\n>>>\n>>> Some chips, e.g. those ARM chips used in current M[123]Macs (hence very\n>>> relevant topic), do not support long doubles. And compilers offer to\n>>> compile without support for long doubles which e.g. CRAN uses to check\n>>> in an additional (issues) check.\n>>>\n>>> Best,\n>>> Uwe Ligges\n>>>\n>>>> As background this was motivated by a query raised in the matrixStats package:\n>>>> https://github.com/HenrikBengtsson/matrixStats/issues/278\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>> Attachments:\n>>> * smime.p7s\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Thank you all!\n\nEverything is clear.\n\nTim\n\nOn Wed, 30 Apr 2025, at 10:07 AM, Tomas Kalibera wrote:\n> On 4/30/25 10:43, Tim Taylor wrote:\n>> Cheers for the quick response.\n>>\n>> To clarify my question:",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 4,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-7192b623dc29",
+      "message_id": "<8799192b-315b-423c-8e83-9d9412b48aa6@gmail.com>",
+      "from_name": "J C Nash",
+      "from_email_hash": "3c186aece47b9fdb3cc7c9c4b2429fcf77a95534a068b908c57a0b272b212c98",
+      "date": "2025-04-30T06:29:43-04:00",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "subject_clean": "[R-pkg-devel] Use of long double in configuration",
+      "in_reply_to": "<d3c4ea69-d835-45b3-ba39-1b5a950fcc29@app.fastmail.com>",
+      "references": [
+        "<bc2d2752-547e-4b4d-ba53-86a66816d64c@app.fastmail.com>",
+        "<e61ec7a1-4a15-475a-a0c0-624c0512fa1d@statistik.tu-dortmund.de>",
+        "<4e0f4a5a-b2a6-4cdf-9918-067f52dc225f@app.fastmail.com>",
+        "<14a5bf54-f860-460b-a6c6-8be9d1905984@gmail.com>",
+        "<d3c4ea69-d835-45b3-ba39-1b5a950fcc29@app.fastmail.com>"
+      ],
+      "body_plain": "As one of original 30-some members of 1985 IEEE 754, I find it discouraging that\nwe are treating long-double as the exception, when it is the introduction of\n\"short double\" in M1 etc chips that have forced the issue. There are strong\ncommercial reasons, but they aren't computational ones.\n\nJN\n\n\nOn 2025-04-30 05:08, Tim Taylor wrote:\n> Thank you all!\n> \n> Everything is clear.\n> \n> Tim\n> \n> On Wed, 30 Apr 2025, at 10:07 AM, Tomas Kalibera wrote:\n>> On 4/30/25 10:43, Tim Taylor wrote:\n>>> Cheers for the quick response.\n>>>\n>>> To clarify my question: Is it correct to say that as long as packages do not assume the greater precision provided by 'double' there is no reason they cannot use 'long double' to get *possible* advantages (e.g. in summations). AFAICT 'long double' is (and has always been) part of the C standard so it's use as a type should be unproblematic (this is the query relevant to matrixStats).\n>>\n>> Probably already clear from previous answers, but yes, packages can use\n>> long double type.\n>>\n>> Whenever using a long double type, one needs to be careful about making\n>> sure the algorithms work, and the tests pass (so have reasonable\n>> tolerances), even when the long double type happens to be just the same\n>> as double. This is the case on aarch64, and macOS/aarch64 is one of the\n>> platforms where packages have to work, anyway, so this shouldn't be too\n>> limiting anymore - but really one needs to test on such platform.\n>>\n>> R itself has an option to disable use of long double to make such\n>> testing in R itself possible also on other platforms. In principle one\n>> could do something similar in a package, have some ifdefs to disable\n>> long doubles, but this is not required. And I probably wouldn't do that,\n>> I'd just test on aarch64 regularly.\n>>\n>> See Writing R Extensions for more details.\n>>\n>> Best\n>> Tomas\n>>\n>>> Apologies if this does not make much sense.\n>>>\n>>> Tim\n>>>\n>>>\n>>>\n>>> On Wed, 30 Apr 2025, at 9:33 AM, Uwe Ligges wrote:\n>>>> On 30.04.2025 10:25, Tim Taylor wrote:\n>>>>> Is it correct to say that R's conditional use of long double is around ensuring things work on platforms which have 'long double' identical to 'double' types, as opposed to there being an odd compiler targeted that does not even have any concept of 'long double' type?\n>>>> a double is 64 bit and stored that way on all platforms, the concept of\n>>>> long doubles is CPU specific. x86 chips have 80bit in the floating point\n>>>> units for calculations before rounding (and normalizing) to a regular\n>>>> double.\n>>>>\n>>>> Some chips, e.g. those ARM chips used in current M[123]Macs (hence very\n>>>> relevant topic), do not support long doubles. And compilers offer to\n>>>> compile without support for long doubles which e.g. CRAN uses to check\n>>>> in an additional (issues) check.\n>>>>\n>>>> Best,\n>>>> Uwe Ligges\n>>>>\n>>>>> As background this was motivated by a query raised in the matrixStats package:\n>>>>> https://github.com/HenrikBengtsson/matrixStats/issues/278\n>>>>>\n>>>>> ______________________________________________\n>>>>> R-package-devel at r-project.org mailing list\n>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>> Attachments:\n>>>> * smime.p7s\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "As one of original 30-some members of 1985 IEEE 754, I find it discouraging that\nwe are treating long-double as the exception, when it is the introduction of\n\"short double\" in M1 etc chips that have f",
+      "thread_id": "thread-0159624120e6",
+      "thread_depth": 5,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-6f3bad75dac3",
+      "message_id": "<d0ec2d12-2dfb-4b13-9ff4-cae945ad4726@gmail.com>",
+      "from_name": "Serguei Sokol",
+      "from_email_hash": "80fbfa5a2fb090124371607c0b9b0616dc1e4e6ae0e3aa8a3ca78397eadc432a",
+      "date": "2025-04-30T15:31:37+02:00",
+      "subject": "[R-pkg-devel]  Problem building package depending on third party c++ source library.",
+      "subject_clean": "[R-pkg-devel]  Problem building package depending on third party c++ source library.",
+      "in_reply_to": "<ed3ae707af8e1af36f51e73581ee14af@uni-duesseldorf.de>",
+      "references": [
+        "<ed3ae707af8e1af36f51e73581ee14af@uni-duesseldorf.de>"
+      ],
+      "body_plain": "Le 29/04/2025 ? 14:43, Nils L?schow a ?crit?:\n> Hello everybody,\n> \n> as a new feature for the anticlust package (https://cran.r-project.org/ \n> web/packages/anticlust/index.html) we are trying to include a constraint \n> programming model, written in C++ utilizing the Gecode solver. While we \n> generally got this feature to work when Gecode is pre-installed on the \n> system, we would like to spare the users this step and include it with \n> the package (or inside a supplementary package) to install through the \n> regular R tooling. However, we run into a problem when it comes to \n> compiling Gecode during the packages build-process, which I describe in \n> this SO post:\n> \n> https://stackoverflow.com/questions/79596214/configure-script-does-not- \n> generate-makefile-properly-for-3rd-party-library-used\n> \n> I strongly suspect the Makevars file to be incorrect, if you want to \n> take a look or try to compile it yourself, I have uploaded the code of \n> the new feature as well as the source files of the Gecode library to \n> GitHub:\n> \n> https://github.com/nilslueschow/Anticlust-Dispersion-Constraint-Model/ \n> tree/main/RcppTestPackage/src\nI don't know if it is the source of your problem but it's safer to use \nCC and CXX variables provided by R building process (they are already \npredefined when you are in Makevars) which minimize the risks of \nincompatibility between R and your library. So instead of\n\ncd $(GECODE_DIR) && $(MAKE)\n\nI'd use something like\n\n$(MAKE) -C $(GECODE_DIR) CC=\"$(CC)\" CXX=\"$(CXX)\" CXXFLAGS=\"$(CXXFLAGS)\"\n\nBest,\nSerguei.\n\n> \n> Thanks for your help!\n> \n> Best,\n> Nils L?schow\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Le 29/04/2025 ? 14:43, Nils L?schow a ?crit?:\n> Hello everybody,\n> \n> as a new feature for the anticlust package (https://cran.r-project.org/ \n> web/packages/anticlust/index.html) we are trying to inc",
+      "thread_id": "thread-b3d3152a2086",
+      "thread_depth": 1,
+      "month": "2025-04"
+    },
+    {
+      "id": "msg-fb224ec6eff9",
+      "message_id": "<20250430215741.445338cd@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-04-30T21:57:41+03:00",
+      "subject": "[R-pkg-devel]  Problem building package depending on third party c++ source library.",
+      "subject_clean": "[R-pkg-devel]  Problem building package depending on third party c++ source library.",
+      "in_reply_to": "<ed3ae707af8e1af36f51e73581ee14af@uni-duesseldorf.de>",
+      "references": [
+        "<ed3ae707af8e1af36f51e73581ee14af@uni-duesseldorf.de>"
+      ],
+      "body_plain": "? Tue, 29 Apr 2025 14:43:40 +0200\nNils L?schow <Nils.Lueschow at uni-duesseldorf.de> ?????:\n\n> While we generally got this feature to work when Gecode is\n> pre-installed on the system, we would like to spare the users this\n> step and include it with the package\n\nIt's probably a good idea to try to achieve both. If a system copy of\nthe package is available, link with it; otherwise build the bundled\ncopy. Unfortunately, this kind of user convenience involves a lot of\ntesting to make sure that both configurations work as intended.\nBundling dependencies also creates headaches for distro packagers.\n\n> However, we run into a problem when it comes to compiling Gecode\n> during the packages build-process, which I describe in this SO post\n\nOne problem is that when using $(MAKE) to compile gecode, various\nvariables used by gecode's Makefile are overridden through the\nMAKEFLAGS variable. For example, $(CXX) ends up being defined as\n$(CXX20) $(CXX20STD) without the variables CXX20 and CXX20STD being\navailable to the downstream Make process. What's worse is CXXFLAGS are\nalso overridden, losing the include paths in the process.\n\nIn order to build gecode from Makevars, you'll have to disable these\noverrides by emptying MAKEFLAGS:\n\nbuild_gecode:\n        cd $(GECODE_DIR) && \\\n\t./configure CC=\"$(CC)\" CXX=\"$(CXX20) $(CXX20STD)\" \\\n\t\t--disable-examples --enable-static --disable-shared\n\t$(MAKE) -C $(GECODE_DIR) MAKEFLAGS=\n\n(Alternatively, you can ./configure and build the library from the\n./configure script of your package.)\n\nOther changes are also needed to make the package build in a portable\nmanner:\n\n - Recipe lines in Makefiles must start with tabs, not groups of\n   four spaces.\n - Don't use GNU Make append syntax (+=) without declaring\n   SystemRequirements: GNU Make.\n - Don't set compiler-specific flags such as -mtune=native without at\n   least testing that the compiler understands them.\n - With the current directory structure, GECODE_DIR must be just\n   gecode, not $(CURDIR)/gecode-release-6.3.0.\n - Since the C++ source code already uses #include <gecode/...>, the\n   include path must be -I$(GECODE_DIR), not -I$(GECODE_DIR)/gecode.\n - Don't hard-code compiler names. Instead of ./configure CC=gcc ...,\n   use ./configure CC=\"$(CC)\" CXX=\"$(CXX20) $(CXX20STD)\".\n - Build gecode as a static library and link it into the package\n   shared library. Otherwise you'll need to arrange for the gecode\n   shared libraries to be installed together with the R package and\n   properly loaded before your package shared library.\n - Provide a 'clean' target so that R CMD build doesn't include the\n   binaries from the gecode subdirectory into the source package.\n\nWith that, we get the following Makevars:\n\nall: $(SHLIB)\n\nGECODE_DIR = gecode\nPKG_CPPFLAGS = -I$(GECODE_DIR)\nPKG_LIBS = -L$(GECODE_DIR) -lgecodesearch -lgecodeminimodel \\\n           -lgecodeint -lgecodekernel -lgecodesupport\nCXX_STD = CXX20\n\n$(SHLIB): gecode_built\n# package code relies on header files only available after gecode is\n# configured and probably built\n$(OBJECTS): gecode_built\n\ngecode_built:\n\tcd $(GECODE_DIR) && \\\n\t\t./configure CC=\"$(CC)\" CXX=\"$(CXX20) $(CXX20STD)\" \\\n\t\t--disable-examples --enable-static --disable-shared \\\n\t\t--disable-flatzinc --disable-qt\n\t$(MAKE) -C $(GECODE_DIR) MAKEFLAGS=\n\ttouch $@\n\nclean:\n\t-cd $(GECODE_DIR) && make clean\n\t-rm -f gecode_built\n\nHopefully, the Makevars.win with same contents but\n--with-host-os=windows added to the configure flags will work on\nWindows. (It needs to be .win, not .ucrt, because your package declares\nsupport for R > 3.6, which predates use of UCRT in R. To think of it,\nR-3.6.0 also predates C++20...) You can probably give some more\n--disable-... arguments to ./configure to remove some more components\nthat the R package doesn't use.\n\nHowever, this is only the beginning of the troubles.\n\nR packages are not allowed file path lengths above 100 bytes, and your\npackage has seven that are longer, e.g.,\n\n>> RcppTestPackage/src/gecode/gecode/third-party/boost/numeric/interval/detail/x86gcc_rounding_control.hpp\n\nMaybe you can unbundle the bits of Boost and rely on the 'BH' package\ninstead. Maybe there's a way to rename the files and patch the includes\nin the source code.\n\nThe gecode library produces a lot of warnings, and R CMD check\nconsiders some of them serious:\n\n>> Found the following significant warnings:\n>> ./gecode/kernel/core.hpp:4102:24: warning: array subscript -1 is\n>> below array bounds of ?unsigned int [1]? [-Warray-bounds]\n>> ./gecode/kernel/core.hpp:4109:17: warning: array subscript -1 is\n>> below array bounds of ?unsigned int [1]? [-Warray-bounds]\n>> ./gecode/support/allocator.hpp:88:11: warning: ?void free(void*)?\n>> called on pointer returned from a mismatched allocation function\n>> [-Wmismatched-new-delete]                 \n\nThe -Warray-bounds warnings might be false positives (could pc_max ever\nbe 0?), but -Wmismatched-new-delete is probably real; the compiler\nshows a place where an object allocated using new(...) can be\ndeallocated using free(...).\n\nSome parts of the gecode library contain references to std::cerr, and\nthe R package code calls rand(). These are not recommended in R\npackages, because the standard error stream isn't necessarily connected\nto the terminal and because rand() is disconnected from R's random\nnumber generator.\n\nOnce you build the whole gecode yourself, be ready for it being tested\nwith AddressSanitizer and UndefinedBehaviorSanitizer. Things like\nfree(new(...)) that were previously invisible to them (due to the\nthird-party library being compiled without sanitizers) will now be\nrevealed (and become yours to fix instead of just something happening\nupstream).\n\nThere are other problems noted by R CMD check, but they should be\neasier to fix.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 29 Apr 2025 14:43:40 +0200\nNils L?schow <Nils.Lueschow at uni-duesseldorf.de> ?????:\n\n> While we generally got this feature to work when Gecode is\n> pre-installed on the system, we would like t",
+      "thread_id": "thread-b3d3152a2086",
+      "thread_depth": 1,
+      "month": "2025-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-b59c5e2ed1fe",
+      "subject": "[R-pkg-devel]  [CRAN-pretest-archived] CRAN Submission OPCreg 0.2.0",
+      "message_count": 1,
+      "participants": [
+        "Uwe Ligges"
+      ],
+      "started": "2025-04-01T10:26:35+02:00",
+      "last_reply": "2025-04-01T10:26:35+02:00",
+      "root_message_id": "msg-b59c5e2ed1fe"
+    },
+    {
+      "id": "thread-800233d2762b",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "message_count": 1,
+      "participants": [
+        "Serguei Sokol"
+      ],
+      "started": "2025-04-01T10:26:44+02:00",
+      "last_reply": "2025-04-01T10:26:44+02:00",
+      "root_message_id": "msg-800233d2762b"
+    },
+    {
+      "id": "thread-d27f4417b984",
+      "subject": "[R-pkg-devel] Connection time-out when checking a package",
+      "message_count": 4,
+      "participants": [
+        "Ivan Krylov",
+        "Simon Urbanek",
+        "Thierry Onkelinx"
+      ],
+      "started": "2025-04-01T14:28:04+02:00",
+      "last_reply": "2025-04-03T11:01:03+13:00",
+      "root_message_id": "msg-d27f4417b984"
+    },
+    {
+      "id": "thread-b25ba036499b",
+      "subject": "[R-pkg-devel] proper way to cite an invalid URL",
+      "message_count": 6,
+      "participants": [
+        "Duncan Murdoch",
+        "Ivan Krylov",
+        "Jason Cory Brunson",
+        "Nicholas Tierney"
+      ],
+      "started": "2025-04-02T13:28:32-04:00",
+      "last_reply": "2025-04-03T08:34:30-04:00",
+      "root_message_id": "msg-b25ba036499b"
+    },
+    {
+      "id": "thread-b08fccbfe744",
+      "subject": "[R-pkg-devel]  [My solution] How and where do I document sysdata.rda",
+      "message_count": 1,
+      "participants": [
+        "Michael Dewey"
+      ],
+      "started": "2025-04-03T14:49:46+01:00",
+      "last_reply": "2025-04-03T14:49:46+01:00",
+      "root_message_id": "msg-b08fccbfe744"
+    },
+    {
+      "id": "thread-bddb681c9b85",
+      "subject": "[R-pkg-devel] libc++ and abort function usage",
+      "message_count": 2,
+      "participants": [
+        "Kevin Ushey",
+        "Reed A. Cartwright"
+      ],
+      "started": "2025-04-04T17:58:25-07:00",
+      "last_reply": "2025-04-07T09:18:29-07:00",
+      "root_message_id": "msg-bddb681c9b85"
+    },
+    {
+      "id": "thread-b123b444b38e",
+      "subject": "[R-pkg-devel] Warnings and notes while building package with nimble",
+      "message_count": 4,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Halder,Aritra",
+        "Lluís Revilla",
+        "Uwe Ligges"
+      ],
+      "started": "2025-04-04T22:29:40+00:00",
+      "last_reply": "2025-04-07T10:24:13+02:00",
+      "root_message_id": "msg-b123b444b38e"
+    },
+    {
+      "id": "thread-9faab3c4cc90",
+      "subject": "[R-pkg-devel] R Package Submission",
+      "message_count": 3,
+      "participants": [
+        "David Winsemius",
+        "Paul Angelo Manlapaz",
+        "Uwe Ligges"
+      ],
+      "started": "2025-04-05T14:40:56+08:00",
+      "last_reply": "2025-04-05T15:31:38-06:00",
+      "root_message_id": "msg-9faab3c4cc90"
+    },
+    {
+      "id": "thread-5bfc82426bca",
+      "subject": "[R-pkg-devel] Unreproducible error for CRAN submission on winbuilder using r-devel",
+      "message_count": 4,
+      "participants": [
+        "Chris Brien",
+        "Duncan Murdoch",
+        "Uwe Ligges"
+      ],
+      "started": "2025-04-06T08:08:15+00:00",
+      "last_reply": "2025-04-06T23:51:45+00:00",
+      "root_message_id": "msg-5bfc82426bca"
+    },
+    {
+      "id": "thread-66f3526d3108",
+      "subject": "[R-pkg-devel] URLs in DESCRIPTION file",
+      "message_count": 4,
+      "participants": [
+        "Charles Plessy",
+        "Ivan Krylov",
+        "Kevin R. Coombes"
+      ],
+      "started": "2025-04-07T11:10:21-04:00",
+      "last_reply": "2025-04-08T13:49:29+09:00",
+      "root_message_id": "msg-66f3526d3108"
+    },
+    {
+      "id": "thread-f0775da58e1d",
+      "subject": "[R-pkg-devel] Procedure for dealing with reverse dependency that has gone bad on CRAN version of my package",
+      "message_count": 2,
+      "participants": [
+        "J C Nash"
+      ],
+      "started": "2025-04-09T19:52:05-04:00",
+      "last_reply": "2025-04-10T07:47:51-04:00",
+      "root_message_id": "msg-f0775da58e1d"
+    },
+    {
+      "id": "thread-e0f64ad73307",
+      "subject": "[R-pkg-devel] Lost Braces in R Markdown File",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Jarrett Phillips"
+      ],
+      "started": "2025-04-09T19:57:36-04:00",
+      "last_reply": "2025-04-09T22:41:07-04:00",
+      "root_message_id": "msg-e0f64ad73307"
+    },
+    {
+      "id": "thread-0f34cb2311a3",
+      "subject": "[R-pkg-devel] broken or outdaeted URLs",
+      "message_count": 5,
+      "participants": [
+        "@d@mhsp@rks m@iii@g oii tut@@com",
+        "Emanuele Cordano",
+        "Ivan Krylov"
+      ],
+      "started": "2025-04-10T11:24:31+02:00",
+      "last_reply": "2025-04-14T14:34:16+03:00",
+      "root_message_id": "msg-0f34cb2311a3"
+    },
+    {
+      "id": "thread-f091d696b24b",
+      "subject": "[R-pkg-devel] \\linkS4class anchoring",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "Killick, Rebecca"
+      ],
+      "started": "2025-04-11T16:00:16+00:00",
+      "last_reply": "2025-04-11T22:45:03+03:00",
+      "root_message_id": "msg-f091d696b24b"
+    },
+    {
+      "id": "thread-208a9e761128",
+      "subject": "[R-pkg-devel] extendr packages on CRAN",
+      "message_count": 1,
+      "participants": [
+        "Josiah Parry"
+      ],
+      "started": "2025-04-12T08:03:11-07:00",
+      "last_reply": "2025-04-12T08:03:11-07:00",
+      "root_message_id": "msg-208a9e761128"
+    },
+    {
+      "id": "thread-5050198e1559",
+      "subject": "[R-pkg-devel] How to resolve help files with \\Sexpr{} warning?",
+      "message_count": 4,
+      "participants": [
+        "@di@@o m@iii@g oii pdx@edu",
+        "Iris Simmons",
+        "Ivan Krylov"
+      ],
+      "started": "2025-04-13T21:54:03-07:00",
+      "last_reply": "2025-04-14T09:37:20-07:00",
+      "root_message_id": "msg-5050198e1559"
+    },
+    {
+      "id": "thread-94657c81bd6a",
+      "subject": "[R-pkg-devel] cran check about examples time",
+      "message_count": 5,
+      "participants": [
+        "Emanuele Cordano",
+        "Fellinger Tobias",
+        "Ivan Krylov",
+        "Uwe Ligges"
+      ],
+      "started": "2025-04-14T08:53:38+02:00",
+      "last_reply": "2025-04-17T09:44:51+02:00",
+      "root_message_id": "msg-94657c81bd6a"
+    },
+    {
+      "id": "thread-f13993dcb013",
+      "subject": "[R-pkg-devel] Check if any object pointing to a given address is locked",
+      "message_count": 3,
+      "participants": [
+        "Ivan Krylov",
+        "Tomas Kalibera",
+        "Tony Wilkes"
+      ],
+      "started": "2025-04-24T12:36:57+00:00",
+      "last_reply": "2025-04-24T16:38:13+02:00",
+      "root_message_id": "msg-f13993dcb013"
+    },
+    {
+      "id": "thread-b3d3152a2086",
+      "subject": "[R-pkg-devel] Problem building package depending on third party c++ source library.",
+      "message_count": 3,
+      "participants": [
+        "Ivan Krylov",
+        "Nils Lüschow",
+        "Serguei Sokol"
+      ],
+      "started": "2025-04-29T14:43:40+02:00",
+      "last_reply": "2025-04-30T21:57:41+03:00",
+      "root_message_id": "msg-b3d3152a2086"
+    },
+    {
+      "id": "thread-0159624120e6",
+      "subject": "[R-pkg-devel] Use of long double in configuration",
+      "message_count": 7,
+      "participants": [
+        "J C Nash",
+        "Simon Urbanek",
+        "Tim Taylor",
+        "Tomas Kalibera",
+        "Uwe Ligges"
+      ],
+      "started": "2025-04-30T09:25:51+01:00",
+      "last_reply": "2025-04-30T06:29:43-04:00",
+      "root_message_id": "msg-0159624120e6"
+    }
+  ]
+}

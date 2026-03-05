@@ -1,0 +1,1322 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2016-03",
+  "messages": [
+    {
+      "id": "msg-175219f14ba0",
+      "message_id": "<2049273.fyg8YAvWIl@tux>",
+      "from_name": "Johannes Ranke",
+      "from_email_hash": "8d7dc9cf8d248719dcd9a94c124dab5545d72861321d11f36ce7fddb3c609524",
+      "date": "2016-03-01T08:16:09+01:00",
+      "subject": "[R-pkg-devel] Linking an R package to the Python library",
+      "subject_clean": "[R-pkg-devel] Linking an R package to the Python library",
+      "in_reply_to": "<CAAeMkWsncRAxX1X3rc-R+XVYcP9F_06f-ndkxycJr5an_8z1VQ@mail.gmail.com>",
+      "references": [
+        "<CAAeMkWsncRAxX1X3rc-R+XVYcP9F_06f-ndkxycJr5an_8z1VQ@mail.gmail.com>"
+      ],
+      "body_plain": "Bruce,\n\nmaybe you want to also have a look at PythonInR, which solves a similar, if \nnot the same, problem\n\nhttps://bitbucket.org/Floooo/pythoninr/\n\nJohannes\n\nAm Montag, 29. Februar 2016, 13:01:06 schrieb Bruce Hoff:\n> I am trying to create a self-contained R package wrapping Python that works\n> cross platform and have not been able to do this on Windows.  There is\n> already an R package which calls Python, requiring Python to be installed\n> on the target machine: https://github.com/cjgb/rPython-win.  When the R\n> package is built it successfully links to the resident Python dll.\n> \n> I retrieved the Python source code plus associated Visual Studio projects\n> as described here: https://docs.python.org/devguide/setup.html  I ran the\n> Python 3.6 build and verified that rPython-win can link to the generated\n> dll, as expected.  In order to make a portable, self-contained R package, I\n> changed the build to create a _static_ Python library as described in the\n> file PCbuild\\readme.txt.  This creates a 31MB file \"python36.lib\" but when\n> I try to build the rPython-win package under R i386 (and using the latest\n> RTools) I get:\n> \n> gcc -m32 -shared -s -static-libgcc -o rPython.dll tmp.def pycall.o\n> -LC:/cpython/PCbuild/win32 -lpython3stub -lpython36\n> -Ld:/RCompile/r-compiling/local/local323/lib/i386\n> -Ld:/RCompile/r-compiling/local/local323/lib\n> -LC:/PROGRA~1/R/R-32~1.3/bin/i386 -lR\n> C:/cpython/PCbuild/win32/python36.lib: *error adding symbols: File format\n> not recognized*\n> collect2.exe: error: ld returned 1 exit status\n> no DLL was created\n> ERROR: compilation failed for package 'rPython'\n> \n> I see some mention of the link error here:\n> https://sourceware.org/bugzilla/show_bug.cgi?id=17910\n> It looks like a related bug was in binutils 2.25 on 2/27/2015.  It seems\n> like the fix would have made it into Rtools 3.3 since:\n> 1) this page suggests that the aforementioned was resolved before the\n> latest release of binutils, 2.25.1, 9/15/2015:\n> https://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/\n> 2) Installing Rtools 3.3, one can see that the binaries which are part of\n> binutils (like ld.exe) are dated 9/22/2015.\n> \n> I don't know if MinGW is 'buggy', if I'm doing something wrong, and/or what\n> to do to fix the link error.\n> \n> Is there anyone on this list with experience linking an R package to a\n> static library built on Windows using Visual Studio?\n> \n> Any suggestions are appreciated!\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n-- \nPD Dr. Johannes Ranke\nKronacher Str. 8\n79639 Grenzach-Wyhlen",
+      "body_snippet": "Bruce,\n\nmaybe you want to also have a look at PythonInR, which solves a similar, if \nnot the same, problem\n\nhttps://bitbucket.org/Floooo/pythoninr/\n\nJohannes\n\nAm Montag, 29. Februar 2016, 13:01:06 sch",
+      "thread_id": "thread-175219f14ba0",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-31d0c60a85d4",
+      "message_id": "<CAAeMkWtN4FVrhbW+6wMyfKvWqtttCyFEBqbbbg67FPXUTvv-KA@mail.gmail.com>",
+      "from_name": "Bruce Hoff",
+      "from_email_hash": "d06ebaa60976c742e2fa4e9f3ac1a394fff97e5fe8127dbfe9fdd334677e177d",
+      "date": "2016-03-01T08:40:36-08:00",
+      "subject": "[R-pkg-devel] Linking an R package to the Python library",
+      "subject_clean": "[R-pkg-devel] Linking an R package to the Python library",
+      "in_reply_to": "<2049273.fyg8YAvWIl@tux>",
+      "references": [
+        "<CAAeMkWsncRAxX1X3rc-R+XVYcP9F_06f-ndkxycJr5an_8z1VQ@mail.gmail.com>",
+        "<2049273.fyg8YAvWIl@tux>"
+      ],
+      "body_plain": "Dear Johannes:\nThank you for sending the link to \"pythoninr\".  Looking at the page, under\n\"Windows\" there is the statement  \"One obviously needs to have R and Python\ninstalled.\"  Our goal is to create a package which does not require that\nthe user install Python prior to installing the R package.  The use of\nPython should be seamless/invisible to the user.  So pythoninr may be an\ninteresting alternative to rPython/rPython-win but (based on my read of the\ndocumentation) it doesn't get me closer to the solution of embedding Python\nwithin the R package.\nAgain, thanks for the reference, which I had not seen previously.\nBest,\nBruce Hoff\nSage Bionetworks\n\nOn Mon, Feb 29, 2016 at 11:16 PM, Johannes Ranke <jranke at uni-bremen.de>\nwrote:\n\n> Bruce,\n>\n> maybe you want to also have a look at PythonInR, which solves a similar, if\n> not the same, problem\n>\n> https://bitbucket.org/Floooo/pythoninr/\n>\n> Johannes\n>\n> Am Montag, 29. Februar 2016, 13:01:06 schrieb Bruce Hoff:\n> > I am trying to create a self-contained R package wrapping Python that\n> works\n> > cross platform and have not been able to do this on Windows.  There is\n> > already an R package which calls Python, requiring Python to be installed\n> > on the target machine: https://github.com/cjgb/rPython-win.  When the R\n> > package is built it successfully links to the resident Python dll.\n> >\n> > I retrieved the Python source code plus associated Visual Studio projects\n> > as described here: https://docs.python.org/devguide/setup.html  I ran\n> the\n> > Python 3.6 build and verified that rPython-win can link to the generated\n> > dll, as expected.  In order to make a portable, self-contained R\n> package, I\n> > changed the build to create a _static_ Python library as described in the\n> > file PCbuild\\readme.txt.  This creates a 31MB file \"python36.lib\" but\n> when\n> > I try to build the rPython-win package under R i386 (and using the latest\n> > RTools) I get:\n> >\n> > gcc -m32 -shared -s -static-libgcc -o rPython.dll tmp.def pycall.o\n> > -LC:/cpython/PCbuild/win32 -lpython3stub -lpython36\n> > -Ld:/RCompile/r-compiling/local/local323/lib/i386\n> > -Ld:/RCompile/r-compiling/local/local323/lib\n> > -LC:/PROGRA~1/R/R-32~1.3/bin/i386 -lR\n> > C:/cpython/PCbuild/win32/python36.lib: *error adding symbols: File format\n> > not recognized*\n> > collect2.exe: error: ld returned 1 exit status\n> > no DLL was created\n> > ERROR: compilation failed for package 'rPython'\n> >\n> > I see some mention of the link error here:\n> > https://sourceware.org/bugzilla/show_bug.cgi?id=17910\n> > It looks like a related bug was in binutils 2.25 on 2/27/2015.  It seems\n> > like the fix would have made it into Rtools 3.3 since:\n> > 1) this page suggests that the aforementioned was resolved before the\n> > latest release of binutils, 2.25.1, 9/15/2015:\n> > https://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/\n> > 2) Installing Rtools 3.3, one can see that the binaries which are part of\n> > binutils (like ld.exe) are dated 9/22/2015.\n> >\n> > I don't know if MinGW is 'buggy', if I'm doing something wrong, and/or\n> what\n> > to do to fix the link error.\n> >\n> > Is there anyone on this list with experience linking an R package to a\n> > static library built on Windows using Visual Studio?\n> >\n> > Any suggestions are appreciated!\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> --\n> PD Dr. Johannes Ranke\n> Kronacher Str. 8\n> 79639 Grenzach-Wyhlen\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Johannes:\nThank you for sending the link to \"pythoninr\".  Looking at the page, under\n\"Windows\" there is the statement  \"One obviously needs to have R and Python\ninstalled.\"  Our goal is to create",
+      "thread_id": "thread-175219f14ba0",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-bb6d334d046f",
+      "message_id": "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "dae04c4953348ab1a35e8427343ae0b4fd8830bc053feb0d2b09ee16a3c19a2d",
+      "date": "2016-03-01T16:47:52Z",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "The spell checker is correct they are not correctly spelled English \nwords but names. I searched the Writing R Extensions manual but did not \nfind any solution. I know it is only a NOTE not more serious.\n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "The spell checker is correct they are not correctly spelled English \nwords but names. I searched the Writing R Extensions manual but did not \nfind any solution. I know it is only a NOTE not more serio",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-a549581c15a7",
+      "message_id": "<56D5D15C.9070807@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-03-01T12:29:00-05:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "On 01/03/2016 11:47 AM, Michael Dewey wrote:\n> The spell checker is correct they are not correctly spelled English\n> words but names. I searched the Writing R Extensions manual but did not\n> find any solution. I know it is only a NOTE not more serious.\n>\nI think so.  See the discussion of the .aspell directory in ?\"aspell-utils\".\n\nDuncan Murdoch",
+      "body_snippet": "On 01/03/2016 11:47 AM, Michael Dewey wrote:\n> The spell checker is correct they are not correctly spelled English\n> words but names. I searched the Writing R Extensions manual but did not\n> find any ",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d5b9723142f4",
+      "message_id": "<56D5F15E.2030609@uw.edu>",
+      "from_name": "Hana Sevcikova",
+      "from_email_hash": "fb682fb5a0b5dfea1eeacf5a8cbb2579e779cfa608f18329f1e361d748ccfe14",
+      "date": "2016-03-01T11:45:34-08:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "If it's in the DESCRIPTION file put the word into quotes.\nHana\n\nOn 01/03/2016 08:47, Michael Dewey wrote:\n> The spell checker is correct they are not correctly spelled English\n> words but names. I searched the Writing R Extensions manual but did not\n> find any solution. I know it is only a NOTE not more serious.\n>",
+      "body_snippet": "If it's in the DESCRIPTION file put the word into quotes.\nHana\n\nOn 01/03/2016 08:47, Michael Dewey wrote:\n> The spell checker is correct they are not correctly spelled English\n> words but names. I sea",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-5de54acd93ed",
+      "message_id": "<22230.43541.192789.891424@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "2016-03-02T09:53:41+01:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<56D5F15E.2030609@uw.edu>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+        "<56D5F15E.2030609@uw.edu>"
+      ],
+      "body_plain": ">>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>     on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n\n    > If it's in the DESCRIPTION file put the word into quotes.\n    > Hana\n\nIndeed, thank you Hana!\n\nTo add - embarrassingly I've only learned this about a week ago -\nthey need to be *single* quotes (as used 'here', they are also\ncalled 'apostroph') and *not* double quotes.\n\nMartin\n\n    > On 01/03/2016 08:47, Michael Dewey wrote:\n    >> The spell checker is correct they are not correctly spelled English\n    >> words but names. I searched the Writing R Extensions manual but did not\n    >> find any solution. I know it is only a NOTE not more serious.",
+      "body_snippet": ">>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>     on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n\n    > If it's in the DESCRIPTION file put the word into quotes.\n    > Hana\n\nIndeed, thank you Hana!\n\nTo add ",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-8bec66fdf729",
+      "message_id": "<56D6D11E.9090707@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-03-02T12:40:14+01:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<22230.43541.192789.891424@stat.math.ethz.ch>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+        "<56D5F15E.2030609@uw.edu>",
+        "<22230.43541.192789.891424@stat.math.ethz.ch>"
+      ],
+      "body_plain": "Indeed, from Writing R Extensions:\n\n\"double quotes should be used for quotations (including titles of books \nand articles), and single quotes for non-English usage, including names \nof other packages and external software.\"\n\nBest,\nUwe\n\n\n\n\nOn 02.03.2016 09:53, Martin Maechler wrote:\n>>>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>>      on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n>\n>      > If it's in the DESCRIPTION file put the word into quotes.\n>      > Hana\n>\n> Indeed, thank you Hana!\n>\n> To add - embarrassingly I've only learned this about a week ago -\n> they need to be *single* quotes (as used 'here', they are also\n> called 'apostroph') and *not* double quotes.\n>\n> Martin\n>\n>      > On 01/03/2016 08:47, Michael Dewey wrote:\n>      >> The spell checker is correct they are not correctly spelled English\n>      >> words but names. I searched the Writing R Extensions manual but did not\n>      >> find any solution. I know it is only a NOTE not more serious.\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Indeed, from Writing R Extensions:\n\n\"double quotes should be used for quotations (including titles of books \nand articles), and single quotes for non-English usage, including names \nof other packages ",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d48b58224f0d",
+      "message_id": "<56D849B3.8040909@unil.ch>",
+      "from_name": "Sebastien Moretti",
+      "from_email_hash": "5707133f380b10ef666606b9d36cb2d273110219ea60e31e2cfd584c30bb2fd8",
+      "date": "2016-03-03T15:26:59+01:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi\n\nI have issues with an R package developed in 2004.\nIt works perfectly in R < 3.\nIt can be installed in R > 3 but functions are not available.\n\nDocumentation I found is not really helpful for me who are not an R master.\nI have already fixed some problems with R CMD check but remaining ones \nare less trivial.\n\n\nFor what I understand - with R < 3 - everything is loaded with this \ncommand in an R file in the R/ directory:\n.First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib); \nrequire(\"cluster\")\n\nNow I replaced that with\n.onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib); \nrequire(\"cluster\")}\nbut functions are not found when called.\n\nNAMESPACE exists but is empty.\n\n\nAny idea how to solve that?\n\n\nRegards\n\n--\nS?bastien Moretti",
+      "body_snippet": "Hi\n\nI have issues with an R package developed in 2004.\nIt works perfectly in R < 3.\nIt can be installed in R > 3 but functions are not available.\n\nDocumentation I found is not really helpful for me wh",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-8487f875ef52",
+      "message_id": "<56D84E11.5090406@unil.ch>",
+      "from_name": "Sebastien Moretti",
+      "from_email_hash": "5707133f380b10ef666606b9d36cb2d273110219ea60e31e2cfd584c30bb2fd8",
+      "date": "2016-03-03T15:45:37+01:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<56D849B3.8040909@unil.ch>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>"
+      ],
+      "body_plain": "I have just found that R 2 filled by itself the NAMESPACE file with\n# Export all names\nexportPattern(\".\")\n\n# Import all packages listed as Imports or Depends\nimport(\n   cluster\n)\n\n\nSo I filled the NAMESPACE file with that and gave it to R 3\nNow functions are found!\n\n\nIs it enough to do that?\nIs it good practice to do that?\nis .onLoad ... still required?\n\nRegards\n\n> Hi\n>\n> I have issues with an R package developed in 2004.\n> It works perfectly in R < 3.\n> It can be installed in R > 3 but functions are not available.\n>\n> Documentation I found is not really helpful for me who are not an R master.\n> I have already fixed some problems with R CMD check but remaining ones\n> are less trivial.\n>\n>\n> For what I understand - with R < 3 - everything is loaded with this\n> command in an R file in the R/ directory:\n> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n> require(\"cluster\")\n>\n> Now I replaced that with\n> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n> require(\"cluster\")}\n> but functions are not found when called.\n>\n> NAMESPACE exists but is empty.\n>\n>\n> Any idea how to solve that?\n>\n>\n> Regards\n>\n> --\n> S?bastien Moretti",
+      "body_snippet": "I have just found that R 2 filled by itself the NAMESPACE file with\n# Export all names\nexportPattern(\".\")\n\n# Import all packages listed as Imports or Depends\nimport(\n   cluster\n)\n\n\nSo I filled the NAM",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-296f6d000087",
+      "message_id": "<1457017690.3141.18.camel@iarc.fr>",
+      "from_name": "Martyn Plummer",
+      "from_email_hash": "2e099cb1222e34e2ab5938e6ef440a822400d8f04f0d3ca6299b8e1740ceeacb",
+      "date": "2016-03-03T15:08:10Z",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<56D84E11.5090406@unil.ch>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>"
+      ],
+      "body_plain": "On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> I have just found that R 2 filled by itself the NAMESPACE file with\n> # Export all names\n> exportPattern(\".\")\n> \n> # Import all packages listed as Imports or Depends\n> import(\n> ???cluster\n> )\n> \n> \n> So I filled the NAMESPACE file with that and gave it to R 3\n> Now functions are found!\n> \n> \n> Is it enough to do that?\n\nYes. Even in the latest version of R, \"R CMD build\" will create a\ndefault NAMESPACE file like that for you if one does not exist.\n?\n> Is it good practice to do that?\n\nNo. The Writing R Extensions manual says \"such broad patterns are not\nrecommended for production code: it is better to list all exports or\nuse narrowly-defined groups\"\n\n> is .onLoad ... still required?\n\nYes, if your package has compiled code (e.g. C, C++, Fortran) then the\n.onLoad function is required to load it into R.\n\nMartyn\n?\n> Regards\n> \n> > Hi\n> > \n> > I have issues with an R package developed in 2004.\n> > It works perfectly in R < 3.\n> > It can be installed in R > 3 but functions are not available.\n> > \n> > Documentation I found is not really helpful for me who are not an R\n> > master.\n> > I have already fixed some problems with R CMD check but remaining\n> > ones\n> > are less trivial.\n> > \n> > \n> > For what I understand - with R < 3 - everything is loaded with this\n> > command in an R file in the R/ directory:\n> > .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n> > require(\"cluster\")\n> > \n> > Now I replaced that with\n> > .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n> > require(\"cluster\")}\n> > but functions are not found when called.\n> > \n> > NAMESPACE exists but is empty.\n> > \n> > \n> > Any idea how to solve that?\n> > \n> > \n> > Regards\n> > \n> > --\n> > S?bastien Moretti\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
+      "body_snippet": "On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> I have just found that R 2 filled by itself the NAMESPACE file with\n> # Export all names\n> exportPattern(\".\")\n> \n> # Import all packages l",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d46012640bab",
+      "message_id": "<alpine.DEB.2.10.1603030940140.2759@luke-Latitude>",
+      "from_name": "luke-tierney at uiowa.edu",
+      "from_email_hash": "fd87c994f74e0db3eb4746b5041d9c21c4b45ec2e8a16acbcb99f7a3f6e651dc",
+      "date": "2016-03-03T09:42:17-06:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<1457017690.3141.18.camel@iarc.fr>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>"
+      ],
+      "body_plain": "On Thu, 3 Mar 2016, Martyn Plummer wrote:\n\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>> ???cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n> ?\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n>\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n\nActually you do not need .onLoad if you use the useDynLib directive in the \nNAMESPACE file; details are in teh extensions manual at\n\nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#useDynLib\n\nBest,\n\nluke\n\n\n>\n> Martyn\n> ?\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n>>>\n>>> --\n>>> S?bastien Moretti\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
+      "body_snippet": "On Thu, 3 Mar 2016, Martyn Plummer wrote:\n\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>>",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-c65ef2fa1406",
+      "message_id": "<56D85B68.6020504@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-03-03T16:42:32+01:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<1457017690.3141.18.camel@iarc.fr>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>"
+      ],
+      "body_plain": "On 03.03.2016 16:08, Martyn Plummer wrote:\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n>\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n>\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n\nWell, I do not use .onLoad but just the\n\nuseDynLib(packagename)\n\ndirective in the NAESPACE file.\n\n\n\nBest,\nUwe Ligges\n\n\n\n\n\n>\n> Martyn\n>\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n>>>\n>>> --\n>>> S?bastien Moretti\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 03.03.2016 16:08, Martyn Plummer wrote:\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>>",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-72ef22c90d9f",
+      "message_id": "<1457020708.3141.20.camel@iarc.fr>",
+      "from_name": "Martyn Plummer",
+      "from_email_hash": "2e099cb1222e34e2ab5938e6ef440a822400d8f04f0d3ca6299b8e1740ceeacb",
+      "date": "2016-03-03T15:58:28Z",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<56D85B68.6020504@statistik.tu-dortmund.de>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>",
+        "<56D85B68.6020504@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "On Thu, 2016-03-03 at 16:42 +0100, Uwe Ligges wrote:\n> \n> On 03.03.2016 16:08, Martyn Plummer wrote:\n> > On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> > > I have just found that R 2 filled by itself the NAMESPACE file\n> > > with\n> > > # Export all names\n> > > exportPattern(\".\")\n> > > \n> > > # Import all packages listed as Imports or Depends\n> > > import(\n> > > ????cluster\n> > > )\n> > > \n> > > \n> > > So I filled the NAMESPACE file with that and gave it to R 3\n> > > Now functions are found!\n> > > \n> > > \n> > > Is it enough to do that?\n> > \n> > Yes. Even in the latest version of R, \"R CMD build\" will create a\n> > default NAMESPACE file like that for you if one does not exist.\n> > \n> > > Is it good practice to do that?\n> > \n> > No. The Writing R Extensions manual says \"such broad patterns are\n> > not\n> > recommended for production code: it is better to list all exports\n> > or\n> > use narrowly-defined groups\"\n> > \n> > > is .onLoad ... still required?\n> > \n> > Yes, if your package has compiled code (e.g. C, C++, Fortran) then\n> > the\n> > .onLoad function is required to load it into R.\n> \n> Well, I do not use .onLoad but just the\n> \n> useDynLib(packagename)\n> \n> directive in the NAESPACE file.\n\nI stand corrected. Twice.\n\nMartyn\n\n> Best,\n> Uwe Ligges\n> \n> \n> \n> \n> \n> > \n> > Martyn\n> > \n> > > Regards\n> > > \n> > > > Hi\n> > > > \n> > > > I have issues with an R package developed in 2004.\n> > > > It works perfectly in R < 3.\n> > > > It can be installed in R > 3 but functions are not available.\n> > > > \n> > > > Documentation I found is not really helpful for me who are not\n> > > > an R\n> > > > master.\n> > > > I have already fixed some problems with R CMD check but\n> > > > remaining\n> > > > ones\n> > > > are less trivial.\n> > > > \n> > > > \n> > > > For what I understand - with R < 3 - everything is loaded with\n> > > > this\n> > > > command in an R file in the R/ directory:\n> > > > .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg,\n> > > > lib);\n> > > > require(\"cluster\")\n> > > > \n> > > > Now I replaced that with\n> > > > .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg,\n> > > > lib);\n> > > > require(\"cluster\")}\n> > > > but functions are not found when called.\n> > > > \n> > > > NAMESPACE exists but is empty.\n> > > > \n> > > > \n> > > > Any idea how to solve that?\n> > > > \n> > > > \n> > > > Regards\n> > > > \n> > > > --\n> > > > S?bastien Moretti\n> > > \n> > > ______________________________________________\n> > > R-package-devel at r-project.org mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-package-devel------------\n> > > -----------------------------------------------------------\n> > This message and its attachments are strictly\n> > confidenti...{{dropped:8}}\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > -----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
+      "body_snippet": "On Thu, 2016-03-03 at 16:42 +0100, Uwe Ligges wrote:\n> \n> On 03.03.2016 16:08, Martyn Plummer wrote:\n> > On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> > > I have just found that R 2 fi",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 4,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-c3cdfa98c990",
+      "message_id": "<56D93DDF.60103@unil.ch>",
+      "from_name": "Sebastien Moretti",
+      "from_email_hash": "5707133f380b10ef666606b9d36cb2d273110219ea60e31e2cfd584c30bb2fd8",
+      "date": "2016-03-04T08:48:47+01:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<1457017690.3141.18.camel@iarc.fr>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>"
+      ],
+      "body_plain": ">> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n\nThe package contained an empty NAMESPACE file.\nThat's maybe why it failed.\n\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n\nWill export only required functions once identified.\n\n\nFunctions are available now!\nThanks\n\nWill compare results with R 2 and 3 to see if I did not break something.\n\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n>\n> Martyn\n>\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n\n--\nS?bastien Moretti",
+      "body_snippet": ">> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>>",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-815c3af18724",
+      "message_id": "<56D93E89.1010901@unil.ch>",
+      "from_name": "Sebastien Moretti",
+      "from_email_hash": "5707133f380b10ef666606b9d36cb2d273110219ea60e31e2cfd584c30bb2fd8",
+      "date": "2016-03-04T08:51:37+01:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<56D85B68.6020504@statistik.tu-dortmund.de>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>",
+        "<56D85B68.6020504@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": ">>> I have just found that R 2 filled by itself the NAMESPACE file with\n>>> # Export all names\n>>> exportPattern(\".\")\n>>>\n>>> # Import all packages listed as Imports or Depends\n>>> import(\n>>>     cluster\n>>> )\n>>>\n>>>\n>>> So I filled the NAMESPACE file with that and gave it to R 3\n>>> Now functions are found!\n>>>\n>>>\n>>> Is it enough to do that?\n>>\n>> Yes. Even in the latest version of R, \"R CMD build\" will create a\n>> default NAMESPACE file like that for you if one does not exist.\n>>\n>>> Is it good practice to do that?\n>>\n>> No. The Writing R Extensions manual says \"such broad patterns are not\n>> recommended for production code: it is better to list all exports or\n>> use narrowly-defined groups\"\n>>\n>>> is .onLoad ... still required?\n>>\n>> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n>> .onLoad function is required to load it into R.\n>\n> Well, I do not use .onLoad but just the\n>\n> useDynLib(packagename)\n>\n> directive in the NAESPACE file.\n\nMuch simpler like that and I can remove the zzz.R file with .onLoad ...\n\nThanks again\n\n\nIs useDynLib enough for package with compiled code?\n\n> Best,\n> Uwe Ligges\n>\n>\n>\n>\n>\n>>\n>> Martyn\n>>\n>>> Regards\n>>>\n>>>> Hi\n>>>>\n>>>> I have issues with an R package developed in 2004.\n>>>> It works perfectly in R < 3.\n>>>> It can be installed in R > 3 but functions are not available.\n>>>>\n>>>> Documentation I found is not really helpful for me who are not an R\n>>>> master.\n>>>> I have already fixed some problems with R CMD check but remaining\n>>>> ones\n>>>> are less trivial.\n>>>>\n>>>>\n>>>> For what I understand - with R < 3 - everything is loaded with this\n>>>> command in an R file in the R/ directory:\n>>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>>> require(\"cluster\")\n>>>>\n>>>> Now I replaced that with\n>>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>>> require(\"cluster\")}\n>>>> but functions are not found when called.\n>>>>\n>>>> NAMESPACE exists but is empty.\n>>>>\n>>>>\n>>>> Any idea how to solve that?\n>>>>\n>>>>\n>>>> Regards\n\n--\nS?bastien Moretti",
+      "body_snippet": ">>> I have just found that R 2 filled by itself the NAMESPACE file with\n>>> # Export all names\n>>> exportPattern(\".\")\n>>>\n>>> # Import all packages listed as Imports or Depends\n>>> import(\n>>>     clu",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 4,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-fbefd720f269",
+      "message_id": "<22233.48637.272900.256603@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-03-04T10:55:25-06:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<56D93E89.1010901@unil.ch>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>",
+        "<56D85B68.6020504@statistik.tu-dortmund.de>",
+        "<56D93E89.1010901@unil.ch>"
+      ],
+      "body_plain": "On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n| Is useDynLib enough for package with compiled code?\n\nFor the loading of the shared library, yes.\n\nYour other importing and exporting of R functions is orthogonal to this.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n| Is useDynLib enough for package with compiled code?\n\nFor the loading of the shared library, yes.\n\nYour other importing and exporting of R functions",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 5,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-b0982cbafc80",
+      "message_id": "<56D9D1B9.6050602@unil.ch>",
+      "from_name": "Sébastien Moretti",
+      "from_email_hash": "5707133f380b10ef666606b9d36cb2d273110219ea60e31e2cfd584c30bb2fd8",
+      "date": "2016-03-04T19:19:37+01:00",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "in_reply_to": "<22233.48637.272900.256603@max.nulle.part>",
+      "references": [
+        "<56D849B3.8040909@unil.ch>",
+        "<56D84E11.5090406@unil.ch>",
+        "<1457017690.3141.18.camel@iarc.fr>",
+        "<56D85B68.6020504@statistik.tu-dortmund.de>",
+        "<56D93E89.1010901@unil.ch>",
+        "<22233.48637.272900.256603@max.nulle.part>"
+      ],
+      "body_plain": "Great!\n\nThanks for your explanation\n\nLe 04/03/2016 17:55, Dirk Eddelbuettel a ?crit :\n>\n> On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n> | Is useDynLib enough for package with compiled code?\n>\n> For the loading of the shared library, yes.\n>\n> Your other importing and exporting of R functions is orthogonal to this.\n>\n> Dirk\n\n--\nS?bastien Moretti",
+      "body_snippet": "Great!\n\nThanks for your explanation\n\nLe 04/03/2016 17:55, Dirk Eddelbuettel a ?crit :\n>\n> On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n> | Is useDynLib enough for package with compiled code?\n>\n>",
+      "thread_id": "thread-d48b58224f0d",
+      "thread_depth": 6,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d1099d1147b6",
+      "message_id": "<56DC5611.7060402@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "dae04c4953348ab1a35e8427343ae0b4fd8830bc053feb0d2b09ee16a3c19a2d",
+      "date": "2016-03-06T16:08:49Z",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<56D6D11E.9090707@statistik.tu-dortmund.de>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+        "<56D5F15E.2030609@uw.edu>",
+        "<22230.43541.192789.891424@stat.math.ethz.ch>",
+        "<56D6D11E.9090707@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Thanks to all. I find it quite reassuring that even someone so steeped \nin R is still finding new things to learn, it gives me hope.\n\nOn 02/03/2016 11:40, Uwe Ligges wrote:\n> Indeed, from Writing R Extensions:\n>\n> \"double quotes should be used for quotations (including titles of books\n> and articles), and single quotes for non-English usage, including names\n> of other packages and external software.\"\n>\n> Best,\n> Uwe\n>\n>\n>\n>\n> On 02.03.2016 09:53, Martin Maechler wrote:\n>>>>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>>>      on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n>>\n>>      > If it's in the DESCRIPTION file put the word into quotes.\n>>      > Hana\n>>\n>> Indeed, thank you Hana!\n>>\n>> To add - embarrassingly I've only learned this about a week ago -\n>> they need to be *single* quotes (as used 'here', they are also\n>> called 'apostroph') and *not* double quotes.\n>>\n>> Martin\n>>\n>>      > On 01/03/2016 08:47, Michael Dewey wrote:\n>>      >> The spell checker is correct they are not correctly spelled\n>> English\n>>      >> words but names. I searched the Writing R Extensions manual\n>> but did not\n>>      >> find any solution. I know it is only a NOTE not more serious.\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "Thanks to all. I find it quite reassuring that even someone so steeped \nin R is still finding new things to learn, it gives me hope.\n\nOn 02/03/2016 11:40, Uwe Ligges wrote:\n> Indeed, from Writing R Ex",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 4,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-a69f87cc0bf9",
+      "message_id": "<CAJ4QxaPCNhY+nB6XZeoVmqoFwaGkbuAcdyOV48FZOY_VNy2aeg@mail.gmail.com>",
+      "from_name": "boB Rudis",
+      "from_email_hash": "a26d124c455064db4d60c538894063c0f8cb488637af120b1e3326571e017cd6",
+      "date": "2016-03-06T21:14:13-05:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<56DC5611.7060402@dewey.myzen.co.uk>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+        "<56D5F15E.2030609@uw.edu>",
+        "<22230.43541.192789.891424@stat.math.ethz.ch>",
+        "<56D6D11E.9090707@statistik.tu-dortmund.de>",
+        "<56DC5611.7060402@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "Is there a minimum length req for the single quote spell checker\nfirewall? I've been putting 'API' in proper single quotes and it\nalways gets flagged.\n\nOn Sun, Mar 6, 2016 at 11:08 AM, Michael Dewey <lists at dewey.myzen.co.uk> wrote:\n> Thanks to all. I find it quite reassuring that even someone so steeped in R\n> is still finding new things to learn, it gives me hope.\n>\n>\n> On 02/03/2016 11:40, Uwe Ligges wrote:\n>>\n>> Indeed, from Writing R Extensions:\n>>\n>> \"double quotes should be used for quotations (including titles of books\n>> and articles), and single quotes for non-English usage, including names\n>> of other packages and external software.\"\n>>\n>> Best,\n>> Uwe\n>>\n>>\n>>\n>>\n>> On 02.03.2016 09:53, Martin Maechler wrote:\n>>>>>>>>\n>>>>>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>>>>      on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n>>>\n>>>\n>>>      > If it's in the DESCRIPTION file put the word into quotes.\n>>>      > Hana\n>>>\n>>> Indeed, thank you Hana!\n>>>\n>>> To add - embarrassingly I've only learned this about a week ago -\n>>> they need to be *single* quotes (as used 'here', they are also\n>>> called 'apostroph') and *not* double quotes.\n>>>\n>>> Martin\n>>>\n>>>      > On 01/03/2016 08:47, Michael Dewey wrote:\n>>>      >> The spell checker is correct they are not correctly spelled\n>>> English\n>>>      >> words but names. I searched the Writing R Extensions manual\n>>> but did not\n>>>      >> find any solution. I know it is only a NOTE not more serious.\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Is there a minimum length req for the single quote spell checker\nfirewall? I've been putting 'API' in proper single quotes and it\nalways gets flagged.\n\nOn Sun, Mar 6, 2016 at 11:08 AM, Michael Dewey <",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 5,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-ff050009c0de",
+      "message_id": "<56DD2054.6030000@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-03-07T07:31:48+01:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<CAJ4QxaPCNhY+nB6XZeoVmqoFwaGkbuAcdyOV48FZOY_VNy2aeg@mail.gmail.com>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+        "<56D5F15E.2030609@uw.edu>",
+        "<22230.43541.192789.891424@stat.math.ethz.ch>",
+        "<56D6D11E.9090707@statistik.tu-dortmund.de>",
+        "<56DC5611.7060402@dewey.myzen.co.uk>",
+        "<CAJ4QxaPCNhY+nB6XZeoVmqoFwaGkbuAcdyOV48FZOY_VNy2aeg@mail.gmail.com>"
+      ],
+      "body_plain": "On 07.03.2016 03:14, boB Rudis wrote:\n> Is there a minimum length req for the single quote spell checker\n> firewall? I've been putting 'API' in proper single quotes and it\n> always gets flagged.\n\nYou do not need toout everything within qtuotes.\nThere are humans looking at the check result who know that the spell \nchecker does not know some words. If a function foo() or a package 'pkg' \nare not typeset correctly (i.e. without parantheses or quotes, \nrespectively), we see this quickly using the spellchecker. But the \nspellchecker is actually intended for spell checking. ;-)\n\nBest,\nUwe Ligges\n\n>\n> On Sun, Mar 6, 2016 at 11:08 AM, Michael Dewey <lists at dewey.myzen.co.uk> wrote:\n>> Thanks to all. I find it quite reassuring that even someone so steeped in R\n>> is still finding new things to learn, it gives me hope.\n>>\n>>\n>> On 02/03/2016 11:40, Uwe Ligges wrote:\n>>>\n>>> Indeed, from Writing R Extensions:\n>>>\n>>> \"double quotes should be used for quotations (including titles of books\n>>> and articles), and single quotes for non-English usage, including names\n>>> of other packages and external software.\"\n>>>\n>>> Best,\n>>> Uwe\n>>>\n>>>\n>>>\n>>>\n>>> On 02.03.2016 09:53, Martin Maechler wrote:\n>>>>>>>>>\n>>>>>>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>>>>>       on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n>>>>\n>>>>\n>>>>       > If it's in the DESCRIPTION file put the word into quotes.\n>>>>       > Hana\n>>>>\n>>>> Indeed, thank you Hana!\n>>>>\n>>>> To add - embarrassingly I've only learned this about a week ago -\n>>>> they need to be *single* quotes (as used 'here', they are also\n>>>> called 'apostroph') and *not* double quotes.\n>>>>\n>>>> Martin\n>>>>\n>>>>       > On 01/03/2016 08:47, Michael Dewey wrote:\n>>>>       >> The spell checker is correct they are not correctly spelled\n>>>> English\n>>>>       >> words but names. I searched the Writing R Extensions manual\n>>>> but did not\n>>>>       >> find any solution. I know it is only a NOTE not more serious.\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>> --\n>> Michael\n>> http://www.dewey.myzen.co.uk/home.html\n>>\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 07.03.2016 03:14, boB Rudis wrote:\n> Is there a minimum length req for the single quote spell checker\n> firewall? I've been putting 'API' in proper single quotes and it\n> always gets flagged.\n\nYou ",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 6,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-a423f32cc915",
+      "message_id": "<CA+zP7HH6y8-fHpxzcNSuiBmpKJnkBdR+F4e=eFWaG+94NU7zPA@mail.gmail.com>",
+      "from_name": "Jack Wasey",
+      "from_email_hash": "7d2f0b8d1ea7b010c54f9af90a9adc619e9597f35408f75c7bd1722f2f428db2",
+      "date": "2016-03-07T08:12:02-05:00",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "subject_clean": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "in_reply_to": "<56D5D15C.9070807@gmail.com>",
+      "references": [
+        "<56D5C7B8.5080909@dewey.myzen.co.uk>",
+        "<56D5D15C.9070807@gmail.com>"
+      ],
+      "body_plain": "I have a fair number of medical words and acronyms in my icd9 package\nand found aspell to be very useful. For an example, look in the icd10\nbranch in github at https://github.com/jackwasey/icd9/tree/icd10 .\nLook in .aspell/ and R/generate_spelling.R.\n\nOn Tue, Mar 1, 2016 at 12:29 PM, Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n> On 01/03/2016 11:47 AM, Michael Dewey wrote:\n>>\n>> The spell checker is correct they are not correctly spelled English\n>> words but names. I searched the Writing R Extensions manual but did not\n>> find any solution. I know it is only a NOTE not more serious.\n>>\n> I think so.  See the discussion of the .aspell directory in ?\"aspell-utils\".\n>\n> Duncan Murdoch\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I have a fair number of medical words and acronyms in my icd9 package\nand found aspell to be very useful. For an example, look in the icd10\nbranch in github at https://github.com/jackwasey/icd9/tree/i",
+      "thread_id": "thread-bb6d334d046f",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d6b16a3dad88",
+      "message_id": "<D5A1EEBA3EB597469E03B74F43274534CC4136ED@UKCH-PRD-EXMB01.illumina.com>",
+      "from_name": "Berri, Stefano",
+      "from_email_hash": "47ce696993a1c2815d4cc744e043f12b8acdcc64e831a5c049e0a1b88d037659",
+      "date": "2016-03-09T12:10:15Z",
+      "subject": "[R-pkg-devel] documentation of generic '['",
+      "subject_clean": "[R-pkg-devel] documentation of generic '['",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi. \n\nI am having problems with R CMD check around documentation of method \"[\". I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have tried many things, but I am not sure how to fix it.\n\n\n$  R CMD check encore\n...\n* using R version 3.2.3 (2015-12-10)\n...\n* checking for missing documentation entries ... WARNING\nUndocumented S4 methods:\n  generic '[' and siglist 'encore,ANY,ANY'\nAll user-level objects in a package (including S4 classes and methods)\nshould have documentation entries.\nSee chapter 'Writing R documentation files' in the 'Writing R\nExtensions' manual.\n...\n\nEverything else is OK, there is an unrelated NOTE we are addressing\n\n##### R CODE ######\n\nsetMethod(\"[\", \"encore\", function(x,i,j,drop){\n\t... code here ...\n})\n\n##### DOCUMENTATION #####\n\n\\name{encore-class}\n\\Rdversion{0.1}\n\\docType{class}\n\\alias{encore}\n\\alias{subtraction-class}\n\\alias{encore-class}\n\\alias{dConn-class}\n\n\\alias{[,encore-method}\n\n... description of the class, no explicit description of method \"[\" though \n\n##########################\n\nI have tried various things searching around, but I seem to introduce new WARNINGS without removing the one I have.\n\nI have read the \"Writing R documentation files\", but there is no special description of method \"[\", and I am struggling to understand what's wrong.\n\nThank you very much in advance\n\nStefano",
+      "body_snippet": "Hi. \n\nI am having problems with R CMD check around documentation of method \"[\". I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have tried many things, but I am not sure how to fix ",
+      "thread_id": "thread-d6b16a3dad88",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d706ca1e66e3",
+      "message_id": "<56E0210A.7020900@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-03-09T08:11:38-05:00",
+      "subject": "[R-pkg-devel] documentation of generic '['",
+      "subject_clean": "[R-pkg-devel] documentation of generic '['",
+      "in_reply_to": "<D5A1EEBA3EB597469E03B74F43274534CC4136ED@UKCH-PRD-EXMB01.illumina.com>",
+      "references": [
+        "<D5A1EEBA3EB597469E03B74F43274534CC4136ED@UKCH-PRD-EXMB01.illumina.com>"
+      ],
+      "body_plain": "On 09/03/2016 7:10 AM, Berri, Stefano wrote:\n> Hi.\n>\n> I am having problems with R CMD check around documentation of method \"[\". I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have tried many things, but I am not sure how to fix it.\n>\n>\n> $  R CMD check encore\n> ...\n> * using R version 3.2.3 (2015-12-10)\n> ...\n> * checking for missing documentation entries ... WARNING\n> Undocumented S4 methods:\n>    generic '[' and siglist 'encore,ANY,ANY'\n> All user-level objects in a package (including S4 classes and methods)\n> should have documentation entries.\n> See chapter 'Writing R documentation files' in the 'Writing R\n> Extensions' manual.\n> ...\n>\n> Everything else is OK, there is an unrelated NOTE we are addressing\n>\n> ##### R CODE ######\n>\n> setMethod(\"[\", \"encore\", function(x,i,j,drop){\n> \t... code here ...\n> })\n>\n> ##### DOCUMENTATION #####\n>\n> \\name{encore-class}\n> \\Rdversion{0.1}\n> \\docType{class}\n> \\alias{encore}\n> \\alias{subtraction-class}\n> \\alias{encore-class}\n> \\alias{dConn-class}\n>\n> \\alias{[,encore-method}\n>\n> ... description of the class, no explicit description of method \"[\" though\n>\n> ##########################\n>\n> I have tried various things searching around, but I seem to introduce new WARNINGS without removing the one I have.\n>\n> I have read the \"Writing R documentation files\", but there is no special description of method \"[\", and I am struggling to understand what's wrong.\n>\n> Thank you very much in advance\n\n From the error message, it looks as though you need\n\n\\alias{[,encore,ANY,ANY-method}\n\nand perhaps a corresponding \\S4method{} entry.  I don't see why that \nwould arise from the setMethod call you give; I would have guessed 3 \n\"ANY\"s, but I don't use S4 much.\n\nDuncan Murdoch",
+      "body_snippet": "On 09/03/2016 7:10 AM, Berri, Stefano wrote:\n> Hi.\n>\n> I am having problems with R CMD check around documentation of method \"[\". I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have",
+      "thread_id": "thread-d6b16a3dad88",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-b62412a8eda4",
+      "message_id": "<CAO1zAVYXnJ6fek6BAZqjyZ9VFNLL7YJZsSh0a_GU3KO7RbZY+w@mail.gmail.com>",
+      "from_name": "Joris Meys",
+      "from_email_hash": "cf2c291e295c3b43546ed267473d7380d75115c7ba81261f99169f6b377d363d",
+      "date": "2016-03-09T14:14:56+01:00",
+      "subject": "[R-pkg-devel] documentation of generic '['",
+      "subject_clean": "[R-pkg-devel] documentation of generic '['",
+      "in_reply_to": "<D5A1EEBA3EB597469E03B74F43274534CC4136ED@UKCH-PRD-EXMB01.illumina.com>",
+      "references": [
+        "<D5A1EEBA3EB597469E03B74F43274534CC4136ED@UKCH-PRD-EXMB01.illumina.com>"
+      ],
+      "body_plain": "Hi Stefano,\n\ndid you try moving the method to a separate file already? I've noticed that\ndocumentation of classes and methods in the same .Rd file isn't very\nstraightforward. You need a \\usage{} section to document the method, and\nthat's likely to cause trouble when used in a class document.\n\nIn any case, afaik you need a :\n\n\\S4method{generic}{signature_list}(argument_list)\n\nin the usage section, and you have to refer to the method as\n\n\\alias{[, encore,ANY,ANY-method}\n\nSee\nhttps://cran.r-project.org/doc/manuals/R-exts.html#Documenting-S4-classes-and-methods\n\nCheers\nJoris\n\nOn Wed, Mar 9, 2016 at 1:10 PM, Berri, Stefano <sberri at illumina.com> wrote:\n\n> Hi.\n>\n> I am having problems with R CMD check around documentation of method \"[\".\n> I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have\n> tried many things, but I am not sure how to fix it.\n>\n>\n> $  R CMD check encore\n> ...\n> * using R version 3.2.3 (2015-12-10)\n> ...\n> * checking for missing documentation entries ... WARNING\n> Undocumented S4 methods:\n>   generic '[' and siglist 'encore,ANY,ANY'\n> All user-level objects in a package (including S4 classes and methods)\n> should have documentation entries.\n> See chapter 'Writing R documentation files' in the 'Writing R\n> Extensions' manual.\n> ...\n>\n> Everything else is OK, there is an unrelated NOTE we are addressing\n>\n> ##### R CODE ######\n>\n> setMethod(\"[\", \"encore\", function(x,i,j,drop){\n>         ... code here ...\n> })\n>\n> ##### DOCUMENTATION #####\n>\n> \\name{encore-class}\n> \\Rdversion{0.1}\n> \\docType{class}\n> \\alias{encore}\n> \\alias{subtraction-class}\n> \\alias{encore-class}\n> \\alias{dConn-class}\n>\n> \\alias{[,encore-method}\n>\n> ... description of the class, no explicit description of method \"[\" though\n>\n> ##########################\n>\n> I have tried various things searching around, but I seem to introduce new\n> WARNINGS without removing the one I have.\n>\n> I have read the \"Writing R documentation files\", but there is no special\n> description of method \"[\", and I am struggling to understand what's wrong.\n>\n> Thank you very much in advance\n>\n> Stefano\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n\n-- \nJoris Meys\nStatistical consultant\n\nGhent University\nFaculty of Bioscience Engineering\nDepartment of Mathematical Modelling, Statistics and Bio-Informatics\n\ntel : +32 9 264 59 87\nJoris.Meys at Ugent.be\n-------------------------------\nDisclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Stefano,\n\ndid you try moving the method to a separate file already? I've noticed that\ndocumentation of classes and methods in the same .Rd file isn't very\nstraightforward. You need a \\usage{} secti",
+      "thread_id": "thread-d6b16a3dad88",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-522ac70a573c",
+      "message_id": "<D5A1EEBA3EB597469E03B74F43274534CC413720@UKCH-PRD-EXMB01.illumina.com>",
+      "from_name": "Berri, Stefano",
+      "from_email_hash": "47ce696993a1c2815d4cc744e043f12b8acdcc64e831a5c049e0a1b88d037659",
+      "date": "2016-03-09T13:32:30Z",
+      "subject": "[R-pkg-devel] documentation of generic '['",
+      "subject_clean": "[R-pkg-devel] documentation of generic '['",
+      "in_reply_to": "<CAO1zAVYXnJ6fek6BAZqjyZ9VFNLL7YJZsSh0a_GU3KO7RbZY+w@mail.gmail.com>",
+      "references": [
+        "<D5A1EEBA3EB597469E03B74F43274534CC4136ED@UKCH-PRD-EXMB01.illumina.com>",
+        "<CAO1zAVYXnJ6fek6BAZqjyZ9VFNLL7YJZsSh0a_GU3KO7RbZY+w@mail.gmail.com>"
+      ],
+      "body_plain": "Thank you Joris and Duncan!\n\n\\alias{[, encore,ANY,ANY-method}\n\nis all it is needed to fix the WARNING.\n\nNow that it is fixed, I will try to follow your other suggestions and move the documentation outside the class documentation (probably with other accessors would make more sense) and add \n\nS4method{generic}{signature_list}(argument_list)\n\ncheers\n\nStefano\n\nFrom: jorismeys at gmail.com [mailto:jorismeys at gmail.com] On Behalf Of Joris Meys\nSent: 09 March 2016 13:15\nTo: Berri, Stefano\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] documentation of generic '['\n\nHi Stefano,\ndid you try moving the method to a separate file already? I've noticed that documentation of classes and methods in the same .Rd file isn't very straightforward. You need a \\usage{} section to document the method, and that's likely to cause trouble when used in a class document. \n\nIn any case, afaik you need a :\n\\S4method{generic}{signature_list}(argument_list)\nin the usage section, and you have to refer to the method as \n\n\\alias{[, encore,ANY,ANY-method}\nSee https://cran.r-project.org/doc/manuals/R-exts.html#Documenting-S4-classes-and-methods\nCheers\nJoris",
+      "body_snippet": "Thank you Joris and Duncan!\n\n\\alias{[, encore,ANY,ANY-method}\n\nis all it is needed to fix the WARNING.\n\nNow that it is fixed, I will try to follow your other suggestions and move the documentation out",
+      "thread_id": "thread-d6b16a3dad88",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-44bfa13e41b9",
+      "message_id": "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-03-10T08:05:02-06:00",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "subject_clean": "[R-pkg-devel] Creating Accessor Methods",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "All,\n\nI have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple signatures.  Is this possible?  I have checked my books, help, BioConductor tutorials and it appears that this is not possible.  Has anyone ever run into this situation?\n\nBest Glenn",
+      "body_snippet": "All,\n\nI have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple sign",
+      "thread_id": "thread-44bfa13e41b9",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-8640fbc71f10",
+      "message_id": "<CAO1zAVaN=ttiAxA8yA9hxwxraF22MKJUJ75ze1FUZJWkbSkcpg@mail.gmail.com>",
+      "from_name": "Joris Meys",
+      "from_email_hash": "cf2c291e295c3b43546ed267473d7380d75115c7ba81261f99169f6b377d363d",
+      "date": "2016-03-10T15:13:56+01:00",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "subject_clean": "[R-pkg-devel] Creating Accessor Methods",
+      "in_reply_to": "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
+      "references": [
+        "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>"
+      ],
+      "body_plain": "Hi Glenn,\n\nthat is actually as easy as defining a generic and defining a method for\neach class to extract the slot. I do this literally in every package I\nwrite.\n\nsetGeneric('duration', function(x, ...) standardGeneric('duration')\n\nsetMethod('duration', signature = 'MBSCashFlow', function(x) { x at Duration})\nsetMethod('duration', signature = 'REMICCashFlow', function(x) {x at Duration})\netc...\n\nI suggest you take a close look at Hadley Wickham's books 'Advanced R'  and\n'R packages', both freely available online.\n\nThis is the relevant section of the first book :\nhttp://adv-r.had.co.nz/OO-essentials.html\nThis is the other book : http://r-pkgs.had.co.nz/\n\nCheers\nJoris\n\nOn Thu, Mar 10, 2016 at 3:05 PM, Glenn Schultz <glennmschultz at me.com> wrote:\n\n> All,\n>\n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n> BondCashFlow) all of which contain the slot Duration.  I would like have an\n> accessor Duration that would work on multiple signatures.  Is this\n> possible?  I have checked my books, help, BioConductor tutorials and it\n> appears that this is not possible.  Has anyone ever run into this situation?\n>\n> Best Glenn\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n\n-- \nJoris Meys\nStatistical consultant\n\nGhent University\nFaculty of Bioscience Engineering\nDepartment of Mathematical Modelling, Statistics and Bio-Informatics\n\ntel : +32 9 264 59 87\nJoris.Meys at Ugent.be\n-------------------------------\nDisclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Glenn,\n\nthat is actually as easy as defining a generic and defining a method for\neach class to extract the slot. I do this literally in every package I\nwrite.\n\nsetGeneric('duration', function(x, ..",
+      "thread_id": "thread-44bfa13e41b9",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-1ac5277a926c",
+      "message_id": "<56E19734.7080605@uni-muenster.de>",
+      "from_name": "Daniel Nüst",
+      "from_email_hash": "0cfcace2f2f3018a4f5dfdc5c3024177bfb3c0c1c101e9ad7148bfbac2a854a7",
+      "date": "2016-03-10T16:48:04+01:00",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "subject_clean": "[R-pkg-devel] Creating Accessor Methods",
+      "in_reply_to": "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
+      "references": [
+        "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>"
+      ],
+      "body_plain": "Hi Glenn!\n\nOn 10/03/16 15:05, Glenn Schultz wrote:\n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple signatures.  Is this possible?  I have checked my books, help, BioConductor tutorials and it appears that this is not possible.  Has anyone ever run into this situation?\n\nI actually use a similar mechanism to extract values from different S4 \nclasses in my package, and it works quite well. So if I understand you \nright, the following code might help you to get closer to want you want:\n\nhttps://github.com/52North/sos4R/blob/master/R/SOS-methods-accessor.R\n\nI created methods for different signatures, see for example \n\"sosObservedProperties\".\n\n\nHope this helps,\nDaniel\n\n-- \nDaniel N?st\nInstitute for Geoinformatics (ifgi),   University of M?nster\nHeisenbergstra?e 2, 48149 M?nster, Germany; +49 251 83 31962\nhttp://ifgi.uni-muenster.de/~d_nues01        http://o2r.info",
+      "body_snippet": "Hi Glenn!\n\nOn 10/03/16 15:05, Glenn Schultz wrote:\n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an acc",
+      "thread_id": "thread-44bfa13e41b9",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-bc89d4261af2",
+      "message_id": "<56E1A1CC.4090000@tu-dresden.de>",
+      "from_name": "Thomas Petzoldt",
+      "from_email_hash": "293b878c929b08957b39d343bd395f26896f90270369e5ed65be3d670401efdc",
+      "date": "2016-03-10T17:33:16+01:00",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "subject_clean": "[R-pkg-devel] Creating Accessor Methods",
+      "in_reply_to": "<56E19734.7080605@uni-muenster.de>",
+      "references": [
+        "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
+        "<56E19734.7080605@uni-muenster.de>"
+      ],
+      "body_plain": "On 10.03.2016 16:48, Daniel N?st wrote:\n> Hi Glenn!\n>\n> On 10/03/16 15:05, Glenn Schultz wrote:\n>> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n>> BondCashFlow) all of which contain the slot Duration.  I would like\n>> have an accessor Duration that would work on multiple signatures.  Is\n>> this possible?  I have checked my books, help, BioConductor tutorials\n>> and it appears that this is not possible.  Has anyone ever run into\n>> this situation?\n>\n> I actually use a similar mechanism to extract values from different S4\n> classes in my package, and it works quite well. So if I understand you\n> right, the following code might help you to get closer to want you want:\n>\n> https://github.com/52North/sos4R/blob/master/R/SOS-methods-accessor.R\n>\n> I created methods for different signatures, see for example\n> \"sosObservedProperties\".\n\nYes, that's straightforward. But I still wonder if it is at all possible \nto use not only different *signatures*, but also different argument \n*names* in S4, e.g.:\n\nfoo(formula, data, ...)\n\nfoo(data, grouping, ...)\n\n\nNow I'm using a combination of S3 and S4 in my package for this purpose, \nand for some other quirks.\n\nThomas\n\n\n-- \nDr. Thomas Petzoldt\nTechnische Universitaet Dresden\nFaculty of Environmental Sciences\nInstitute of Hydrobiology\n01062 Dresden, Germany\n\nE-Mail: thomas.petzoldt at tu-dresden.de\nhttp://tu-dresden.de/Members/thomas.petzoldt",
+      "body_snippet": "On 10.03.2016 16:48, Daniel N?st wrote:\n> Hi Glenn!\n>\n> On 10/03/16 15:05, Glenn Schultz wrote:\n>> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n>> BondCashFlow) all of which con",
+      "thread_id": "thread-44bfa13e41b9",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-b802dfcc34f8",
+      "message_id": "<BD54320D-DB45-484B-83F4-E625B70A0ACE@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-03-10T15:04:25-06:00",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "subject_clean": "[R-pkg-devel] Creating Accessor Methods",
+      "in_reply_to": "<CAO1zAVaN=ttiAxA8yA9hxwxraF22MKJUJ75ze1FUZJWkbSkcpg@mail.gmail.com>",
+      "references": [
+        "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
+        "<CAO1zAVaN=ttiAxA8yA9hxwxraF22MKJUJ75ze1FUZJWkbSkcpg@mail.gmail.com>"
+      ],
+      "body_plain": "Hello Joris,\n\nThank worked perfectly.  My main concern was that I was creating multiple methods which may have the same name but different signature. Just over thinking things I guess but I appreciate your time answering my question.\n\nGlenn\n\n> On Mar 10, 2016, at 8:13 AM, Joris Meys <Joris.Meys at Ugent.be> wrote:\n> \n> Hi Glenn,\n> \n> that is actually as easy as defining a generic and defining a method for each class to extract the slot. I do this literally in every package I write.\n> \n> setGeneric('duration', function(x, ...) standardGeneric('duration')\n> \n> setMethod('duration', signature = 'MBSCashFlow', function(x) { x at Duration})\n> setMethod('duration', signature = 'REMICCashFlow', function(x) {x at Duration})\n> etc...\n> \n> I suggest you take a close look at Hadley Wickham's books 'Advanced R'  and 'R packages', both freely available online.\n> \n> This is the relevant section of the first book : http://adv-r.had.co.nz/OO-essentials.html <http://adv-r.had.co.nz/OO-essentials.html>\n> This is the other book : http://r-pkgs.had.co.nz/ <http://r-pkgs.had.co.nz/>\n> \n> Cheers\n> Joris\n> \n> On Thu, Mar 10, 2016 at 3:05 PM, Glenn Schultz <glennmschultz at me.com <mailto:glennmschultz at me.com>> wrote:\n> All,\n> \n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple signatures.  Is this possible?  I have checked my books, help, BioConductor tutorials and it appears that this is not possible.  Has anyone ever run into this situation?\n> \n> Best Glenn\n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> \n> \n> \n> -- \n> Joris Meys\n> Statistical consultant\n> \n> Ghent University\n> Faculty of Bioscience Engineering\n> Department of Mathematical Modelling, Statistics and Bio-Informatics\n> \n> tel : +32 9 264 59 87\n> Joris.Meys at Ugent.be\n> -------------------------------\n> Disclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php <http://helpdesk.ugent.be/e-maildisclaimer.php>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello Joris,\n\nThank worked perfectly.  My main concern was that I was creating multiple methods which may have the same name but different signature. Just over thinking things I guess but I appreciate",
+      "thread_id": "thread-44bfa13e41b9",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-bf1f1e86fd7f",
+      "message_id": "<CAC2h7uudOt6rTHqGoiJRz17MrMqA5e_Gu9Jf26492OFkAbgG=w@mail.gmail.com>",
+      "from_name": "Kasper Daniel Hansen",
+      "from_email_hash": "b2b45a5f3ad330d8561a4711d1f95ff6a445243a303a83a7a709685fab3e068c",
+      "date": "2016-03-10T21:01:43-05:00",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "subject_clean": "[R-pkg-devel] Creating Accessor Methods",
+      "in_reply_to": "<BD54320D-DB45-484B-83F4-E625B70A0ACE@me.com>",
+      "references": [
+        "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
+        "<CAO1zAVaN=ttiAxA8yA9hxwxraF22MKJUJ75ze1FUZJWkbSkcpg@mail.gmail.com>",
+        "<BD54320D-DB45-484B-83F4-E625B70A0ACE@me.com>"
+      ],
+      "body_plain": "Creating functions that looks like they have the same name, but have\ndifferent internals is exactly (one of) the purposes of having methods.\n\nBest,\nKasper\n\nOn Thu, Mar 10, 2016 at 4:04 PM, Glenn Schultz <glennmschultz at me.com> wrote:\n\n> Hello Joris,\n>\n> Thank worked perfectly.  My main concern was that I was creating multiple\n> methods which may have the same name but different signature. Just over\n> thinking things I guess but I appreciate your time answering my question.\n>\n> Glenn\n>\n> > On Mar 10, 2016, at 8:13 AM, Joris Meys <Joris.Meys at Ugent.be> wrote:\n> >\n> > Hi Glenn,\n> >\n> > that is actually as easy as defining a generic and defining a method for\n> each class to extract the slot. I do this literally in every package I\n> write.\n> >\n> > setGeneric('duration', function(x, ...) standardGeneric('duration')\n> >\n> > setMethod('duration', signature = 'MBSCashFlow', function(x) { x at Duration\n> })\n> > setMethod('duration', signature = 'REMICCashFlow', function(x)\n> {x at Duration})\n> > etc...\n> >\n> > I suggest you take a close look at Hadley Wickham's books 'Advanced R'\n> and 'R packages', both freely available online.\n> >\n> > This is the relevant section of the first book :\n> http://adv-r.had.co.nz/OO-essentials.html <\n> http://adv-r.had.co.nz/OO-essentials.html>\n> > This is the other book : http://r-pkgs.had.co.nz/ <\n> http://r-pkgs.had.co.nz/>\n> >\n> > Cheers\n> > Joris\n> >\n> > On Thu, Mar 10, 2016 at 3:05 PM, Glenn Schultz <glennmschultz at me.com\n> <mailto:glennmschultz at me.com>> wrote:\n> > All,\n> >\n> > I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n> BondCashFlow) all of which contain the slot Duration.  I would like have an\n> accessor Duration that would work on multiple signatures.  Is this\n> possible?  I have checked my books, help, BioConductor tutorials and it\n> appears that this is not possible.  Has anyone ever run into this situation?\n> >\n> > Best Glenn\n> > ______________________________________________\n> > R-package-devel at r-project.org <mailto:R-package-devel at r-project.org>\n> mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel <\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> >\n> >\n> >\n> > --\n> > Joris Meys\n> > Statistical consultant\n> >\n> > Ghent University\n> > Faculty of Bioscience Engineering\n> > Department of Mathematical Modelling, Statistics and Bio-Informatics\n> >\n> > tel : +32 9 264 59 87\n> > Joris.Meys at Ugent.be\n> > -------------------------------\n> > Disclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php <\n> http://helpdesk.ugent.be/e-maildisclaimer.php>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Creating functions that looks like they have the same name, but have\ndifferent internals is exactly (one of) the purposes of having methods.\n\nBest,\nKasper\n\nOn Thu, Mar 10, 2016 at 4:04 PM, Glenn Schul",
+      "thread_id": "thread-44bfa13e41b9",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-09a68996934d",
+      "message_id": "<56E992C8.5020604@gmail.com>",
+      "from_name": "Henric Winell",
+      "from_email_hash": "5d45c7f70a3e8c62298b50baacd1a3b9bb0f7bc73d07cc011cfe21129fac53b5",
+      "date": "2016-03-16T18:07:20+01:00",
+      "subject": "[R-pkg-devel] No reference output from knitr vignettes",
+      "subject_clean": "[R-pkg-devel] No reference output from knitr vignettes",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nAfter having converted a couple of package vignettes from Sweave to \nknitr, I discovered that the reference output generated by R CMD check, \ni.e., <vignette>.Rnw.log in the check directory, is now empty except for \nthe timings.\n\nWhen doing the conversion I added knitr to DESCRIPTION's Suggests and \nVignetteBuilder fields.  I also added %\\VignetteEngine(knitr::knitr) to \nthe LaTeX preamble in <vignette>.Rnw.  The vignettes are built OK.\n\nAm I doing something wrong here?\n\n\nHenric Winell",
+      "body_snippet": "Hi,\n\nAfter having converted a couple of package vignettes from Sweave to \nknitr, I discovered that the reference output generated by R CMD check, \ni.e., <vignette>.Rnw.log in the check directory, is n",
+      "thread_id": "thread-09a68996934d",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-40554154f18e",
+      "message_id": "<CANHtDkSjCqP86+NyzQ+f1U+_99vwrbYqJb-908usPcWaA7umCw@mail.gmail.com>",
+      "from_name": "Manny Calavera",
+      "from_email_hash": "ae9a7a247f748a238e55062a6dc5bdaca0d40728b0bbb27085bad21cc909e871",
+      "date": "2016-03-18T13:20:56+01:00",
+      "subject": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "subject_clean": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good day to everyone,\nI have an issue when documenting an S4 generic. I have the following in my\nfile generics.R:\n\n#' @rdname myfunction-methods#' @name myfunction <- without this,\nroxygen2 complaints about missing name#' @export\nmethods::setGeneric(\"myfunction\",\n  function( arg1, arg2 ),\n      arg3, arg4 {\n        methods::standardGeneric(\"myfunction\")});\n\nand then in my file mymethods.R:\n\n#' Something#'#' A brief description#'#' @param all params... #'\n@return Something#' @name myfunction <- without this, roxygen2\ncomplaints on missing name#' @include generics.R#' @rdname\nmyfunction-methods#' @export\nmethods::setMethod( \"myfunction\",\n  methods::signature( arg1 = \"formula\", arg2 = \"data.frame\" ),\n  function( arg1, arg2, arg3, arg4 ) {\n\n   ...whatever\n    })\n\nWith this, everything is fine except that the usage section is not showing\nup. Could you please correct what is wrong in my documentation? More\nprecisely:\n\n   1.\n\n   Is it correct to write the documentation before setMethod or is it\n   preferably before setGeneric ?\n   2.\n\n   Why do I need the @namein both files? Should it be different? Does it\n   matter?\n   3.\n\n   Do I need @export in both files?\n   4.\n\n   Would @alias help at all?\n\nI tried reading Hadley Wickham's section on how to document S4 functions\nbut did not help (probably I didn't understand something correctly).\n\nThank you very much in advance.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Good day to everyone,\nI have an issue when documenting an S4 generic. I have the following in my\nfile generics.R:\n\n#' @rdname myfunction-methods#' @name myfunction <- without this,\nroxygen2 complaints",
+      "thread_id": "thread-40554154f18e",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-2185ff6a27e5",
+      "message_id": "<CABdHhvHJ6Ynw0Dj_eTVrfsSo2R1eNi1kmXWfmwE3pS5Nn7VwqA@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2016-03-18T09:11:18-05:00",
+      "subject": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "subject_clean": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "in_reply_to": "<CANHtDkSjCqP86+NyzQ+f1U+_99vwrbYqJb-908usPcWaA7umCw@mail.gmail.com>",
+      "references": [
+        "<CANHtDkSjCqP86+NyzQ+f1U+_99vwrbYqJb-908usPcWaA7umCw@mail.gmail.com>"
+      ],
+      "body_plain": "The problem seems to be your use of methods::setMethod instead of\nsetMethod (etc). Roxygen2 doesn't seem to be quite smart enough to\nrealise that these aren't equivalent. You might want to file an issue\non github so I look into this the next time I'm working on roxygen2.\n\nHadley\n\nOn Fri, Mar 18, 2016 at 7:20 AM, Manny Calavera <olbapjose at gmail.com> wrote:\n> Good day to everyone,\n> I have an issue when documenting an S4 generic. I have the following in my\n> file generics.R:\n>\n> #' @rdname myfunction-methods#' @name myfunction <- without this,\n> roxygen2 complaints about missing name#' @export\n> methods::setGeneric(\"myfunction\",\n>   function( arg1, arg2 ),\n>       arg3, arg4 {\n>         methods::standardGeneric(\"myfunction\")});\n>\n> and then in my file mymethods.R:\n>\n> #' Something#'#' A brief description#'#' @param all params... #'\n> @return Something#' @name myfunction <- without this, roxygen2\n> complaints on missing name#' @include generics.R#' @rdname\n> myfunction-methods#' @export\n> methods::setMethod( \"myfunction\",\n>   methods::signature( arg1 = \"formula\", arg2 = \"data.frame\" ),\n>   function( arg1, arg2, arg3, arg4 ) {\n>\n>    ...whatever\n>     })\n>\n> With this, everything is fine except that the usage section is not showing\n> up. Could you please correct what is wrong in my documentation? More\n> precisely:\n>\n>    1.\n>\n>    Is it correct to write the documentation before setMethod or is it\n>    preferably before setGeneric ?\n>    2.\n>\n>    Why do I need the @namein both files? Should it be different? Does it\n>    matter?\n>    3.\n>\n>    Do I need @export in both files?\n>    4.\n>\n>    Would @alias help at all?\n>\n> I tried reading Hadley Wickham's section on how to document S4 functions\n> but did not help (probably I didn't understand something correctly).\n>\n> Thank you very much in advance.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "The problem seems to be your use of methods::setMethod instead of\nsetMethod (etc). Roxygen2 doesn't seem to be quite smart enough to\nrealise that these aren't equivalent. You might want to file an iss",
+      "thread_id": "thread-40554154f18e",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-6ac867332148",
+      "message_id": "<CANHtDkTai_Jws+mUgfEQp8TQ8r_82zm2vf=N98owhLEc7r+PSg@mail.gmail.com>",
+      "from_name": "Manny Calavera",
+      "from_email_hash": "ae9a7a247f748a238e55062a6dc5bdaca0d40728b0bbb27085bad21cc909e871",
+      "date": "2016-03-21T17:06:36+01:00",
+      "subject": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "subject_clean": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Thank you so much, it works like a charm :-)\n\nI would appreciate if you could please answer (very briefly) questions 1 to\n3, so I can learn how to correctly document S4 generics properly in the\nfuture.\n\nThanks again.\n\n2016-03-18 15:11 GMT+01:00 Hadley Wickham <h.wickham at gmail.com>:\n\n> The problem seems to be your use of methods::setMethod instead of\n> setMethod (etc). Roxygen2 doesn't seem to be quite smart enough to\n> realise that these aren't equivalent. You might want to file an issue\n> on github so I look into this the next time I'm working on roxygen2.\n>\n> Hadley\n>\n> On Fri, Mar 18, 2016 at 7:20 AM, Manny Calavera <olbapjose at gmail.com>\n> wrote:\n> > Good day to everyone,\n> > I have an issue when documenting an S4 generic. I have the following in\n> my\n> > file generics.R:\n> >\n> > #' @rdname myfunction-methods#' @name myfunction <- without this,\n> > roxygen2 complaints about missing name#' @export\n> > methods::setGeneric(\"myfunction\",\n> >   function( arg1, arg2 ),\n> >       arg3, arg4 {\n> >         methods::standardGeneric(\"myfunction\")});\n> >\n> > and then in my file mymethods.R:\n> >\n> > #' Something#'#' A brief description#'#' @param all params... #'\n> > @return Something#' @name myfunction <- without this, roxygen2\n> > complaints on missing name#' @include generics.R#' @rdname\n> > myfunction-methods#' @export\n> > methods::setMethod( \"myfunction\",\n> >   methods::signature( arg1 = \"formula\", arg2 = \"data.frame\" ),\n> >   function( arg1, arg2, arg3, arg4 ) {\n> >\n> >    ...whatever\n> >     })\n> >\n> > With this, everything is fine except that the usage section is not\n> showing\n> > up. Could you please correct what is wrong in my documentation? More\n> > precisely:\n> >\n> >    1.\n> >\n> >    Is it correct to write the documentation before setMethod or is it\n> >    preferably before setGeneric ?\n> >    2.\n> >\n> >    Why do I need the @name in both files? Should it be different? Does it\n> >    matter?\n> >    3.\n> >\n> >    Do I need @export in both files?\n> >    4.\n> >\n> >    Would @alias help at all?\n> >\n> > I tried reading Hadley Wickham's section on how to document S4 functions\n> > but did not help (probably I didn't understand something correctly).\n> >\n> > Thank you very much in advance.\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n> --\n> http://hadley.nz\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you so much, it works like a charm :-)\n\nI would appreciate if you could please answer (very briefly) questions 1 to\n3, so I can learn how to correctly document S4 generics properly in the\nfuture",
+      "thread_id": "thread-6ac867332148",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-2c2b245e9e96",
+      "message_id": "<CABdHhvGeux3BehAynz8OLqpsLNtQh7F78thM=2kHHqSHT6KcrQ@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2016-03-21T11:10:01-05:00",
+      "subject": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "subject_clean": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "in_reply_to": "<CANHtDkTai_Jws+mUgfEQp8TQ8r_82zm2vf=N98owhLEc7r+PSg@mail.gmail.com>",
+      "references": [
+        "<CANHtDkTai_Jws+mUgfEQp8TQ8r_82zm2vf=N98owhLEc7r+PSg@mail.gmail.com>"
+      ],
+      "body_plain": "1. Depends on whether you're documenting the method or the generic.\n2. You don't\n3. I can never remember. I think if it's your generic, you only need\nit in one place.\n\nHadley\n\nOn Mon, Mar 21, 2016 at 11:06 AM, Manny Calavera <olbapjose at gmail.com> wrote:\n> Thank you so much, it works like a charm :-)\n>\n> I would appreciate if you could please answer (very briefly) questions 1 to\n> 3, so I can learn how to correctly document S4 generics properly in the\n> future.\n>\n> Thanks again.\n>\n> 2016-03-18 15:11 GMT+01:00 Hadley Wickham <h.wickham at gmail.com>:\n>>\n>> The problem seems to be your use of methods::setMethod instead of\n>> setMethod (etc). Roxygen2 doesn't seem to be quite smart enough to\n>> realise that these aren't equivalent. You might want to file an issue\n>> on github so I look into this the next time I'm working on roxygen2.\n>>\n>> Hadley\n>>\n>> On Fri, Mar 18, 2016 at 7:20 AM, Manny Calavera <olbapjose at gmail.com>\n>> wrote:\n>> > Good day to everyone,\n>> > I have an issue when documenting an S4 generic. I have the following in\n>> > my\n>> > file generics.R:\n>> >\n>> > #' @rdname myfunction-methods#' @name myfunction <- without this,\n>> > roxygen2 complaints about missing name#' @export\n>> > methods::setGeneric(\"myfunction\",\n>> >   function( arg1, arg2 ),\n>> >       arg3, arg4 {\n>> >         methods::standardGeneric(\"myfunction\")});\n>> >\n>> > and then in my file mymethods.R:\n>> >\n>> > #' Something#'#' A brief description#'#' @param all params... #'\n>> > @return Something#' @name myfunction <- without this, roxygen2\n>> > complaints on missing name#' @include generics.R#' @rdname\n>> > myfunction-methods#' @export\n>> > methods::setMethod( \"myfunction\",\n>> >   methods::signature( arg1 = \"formula\", arg2 = \"data.frame\" ),\n>> >   function( arg1, arg2, arg3, arg4 ) {\n>> >\n>> >    ...whatever\n>> >     })\n>> >\n>> > With this, everything is fine except that the usage section is not\n>> > showing\n>> > up. Could you please correct what is wrong in my documentation? More\n>> > precisely:\n>> >\n>> >    1.\n>> >\n>> >    Is it correct to write the documentation before setMethod or is it\n>> >    preferably before setGeneric ?\n>> >    2.\n>> >\n>> >    Why do I need the @name in both files? Should it be different? Does\n>> > it\n>> >    matter?\n>> >    3.\n>> >\n>> >    Do I need @export in both files?\n>> >    4.\n>> >\n>> >    Would @alias help at all?\n>> >\n>> > I tried reading Hadley Wickham's section on how to document S4 functions\n>> > but did not help (probably I didn't understand something correctly).\n>> >\n>> > Thank you very much in advance.\n>> >\n>> >         [[alternative HTML version deleted]]\n>> >\n>> > ______________________________________________\n>> > R-package-devel at r-project.org mailing list\n>> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n>>\n>> --\n>> http://hadley.nz\n>\n>\n\n\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "1. Depends on whether you're documenting the method or the generic.\n2. You don't\n3. I can never remember. I think if it's your generic, you only need\nit in one place.\n\nHadley\n\nOn Mon, Mar 21, 2016 at ",
+      "thread_id": "thread-6ac867332148",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-b97bb315c642",
+      "message_id": "<56F13FF3.1030006@gmail.com>",
+      "from_name": "Kevin Coombes",
+      "from_email_hash": "bdff314fd84967c658ffe321f940a656c4f86380f9a5be07424efaeac531b6d7",
+      "date": "2016-03-22T08:52:03-04:00",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] Data-generating scripts in R packages",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI'm currently developing an R package that includes a small data set \nalong with the functions that I want to export. I have an R script that \ngenerates the data set; the computation time is long (well, relative to \nthe size of the data set). So, my plan is to run the script and save() \nthe data set as an *.rda file that I can put in the data directory.  (It \nis possible that some users of the package will _only_ be interested in \nthe data set.)\n\nBut, I'd like to keep the script with the package, both because it shows \nhow to use some of the functions and because I might want to modify how \nthe data set is generated in the future.  My question: What is the \"best \npractice\" for where in the package directory structure to store such a \nscript?\n\nBest,\n   Kevin\n\n---\nThis email has been checked for viruses by Avast antivirus software.\nhttps://www.avast.com/antivirus",
+      "body_snippet": "Hi,\n\nI'm currently developing an R package that includes a small data set \nalong with the functions that I want to export. I have an R script that \ngenerates the data set; the computation time is long",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-0c04b206ca4c",
+      "message_id": "<1458652509.29692.28.camel@brian-rcg>",
+      "from_name": "Brian G. Peterson",
+      "from_email_hash": "2d44e89a02cb2a9eb2f2113de72098dcb74d077b13b61958f1336c3292aa0254",
+      "date": "2016-03-22T08:15:09-05:00",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] Data-generating scripts in R packages",
+      "in_reply_to": "<56F13FF3.1030006@gmail.com>",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>"
+      ],
+      "body_plain": "On Tue, 2016-03-22 at 08:52 -0400, Kevin Coombes wrote:\n> I'm currently developing an R package that includes a small data set \n> along with the functions that I want to export. I have an R script that \n> generates the data set; the computation time is long (well, relative to \n> the size of the data set). So, my plan is to run the script and save() \n> the data set as an *.rda file that I can put in the data directory.  (It \n> is possible that some users of the package will _only_ be interested in \n> the data set.)\n> \n> But, I'd like to keep the script with the package, both because it shows \n> how to use some of the functions and because I might want to modify how \n> the data set is generated in the future.  My question: What is the \"best \n> practice\" for where in the package directory structure to store such a \n> script?\n\nI'd probably put the script in the 'demo' directory so that it would be\neasy for a user to run it.  \n\nMy team has taken to documenting things like that as RStudio notebooks\n(.R files with rmarkdown comments that may be compiled as an annotated\ndocument), but that's just a suggestion and certainly not necessary.\n\nThe other place things like this could go would be in the inst/\ndirectory.  We have a package that includes several 'parser' scripts for\ndifferent data providers, and we chose to include these in a directory\nunder inst/\n\nRegards,\n\nBrian",
+      "body_snippet": "On Tue, 2016-03-22 at 08:52 -0400, Kevin Coombes wrote:\n> I'm currently developing an R package that includes a small data set \n> along with the functions that I want to export. I have an R script tha",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-b7a000441740",
+      "message_id": "<CA+zP7HG3sRAhM6aQstanbdT1PT8MN9CAwEZ1LsW2BDyTB_u1bg@mail.gmail.com>",
+      "from_name": "Jack Wasey",
+      "from_email_hash": "7d2f0b8d1ea7b010c54f9af90a9adc619e9597f35408f75c7bd1722f2f428db2",
+      "date": "2016-03-22T16:03:48-04:00",
+      "subject": "[R-pkg-devel]  Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel]  Data-generating scripts in R packages",
+      "in_reply_to": "<1458652509.29692.28.camel@brian-rcg>",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>",
+        "<1458652509.29692.28.camel@brian-rcg>"
+      ],
+      "body_plain": "You can leave them in R/ (and write them as functions) but use\n.Rbuildignore to exclude them from the distributed package. People can use\nthe source, eg github, to regenerate the package and all its data if they\nwish. This way, R CMD check and tests can cover them easily while\ndeveloping.\n\nHowever, if the source data is small, I would think including it in the\ndistributed source package may be a good idea for reproducibility, without\nactually invoking the reconstruction of the data on install (or CRAN\ncheck). Or you can pull the data from the Internet as needed, and leave the\nsource data out of the package, and just include the pre-processing\nfunction, which you need not export in the namespace.\n\nOn Tue, Mar 22, 2016 at 9:15 AM, Brian G. Peterson <brian at braverock.com\n<javascript:;>> wrote:\n> On Tue, 2016-03-22 at 08:52 -0400, Kevin Coombes wrote:\n>> I'm currently developing an R package that includes a small data set\n>> along with the functions that I want to export. I have an R script that\n>> generates the data set; the computation time is long (well, relative to\n>> the size of the data set). So, my plan is to run the script and save()\n>> the data set as an *.rda file that I can put in the data directory.  (It\n>> is possible that some users of the package will _only_ be interested in\n>> the data set.)\n>>\n>> But, I'd like to keep the script with the package, both because it shows\n>> how to use some of the functions and because I might want to modify how\n>> the data set is generated in the future.  My question: What is the \"best\n>> practice\" for where in the package directory structure to store such a\n>> script?\n>\n> I'd probably put the script in the 'demo' directory so that it would be\n> easy for a user to run it.\n>\n> My team has taken to documenting things like that as RStudio notebooks\n> (.R files with rmarkdown comments that may be compiled as an annotated\n> document), but that's just a suggestion and certainly not necessary.\n>\n> The other place things like this could go would be in the inst/\n> directory.  We have a package that includes several 'parser' scripts for\n> different data providers, and we chose to include these in a directory\n> under inst/\n>\n> Regards,\n>\n> Brian\n>\n> ______________________________________________\n> R-package-devel at r-project.org <javascript:;> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "You can leave them in R/ (and write them as functions) but use\n.Rbuildignore to exclude them from the distributed package. People can use\nthe source, eg github, to regenerate the package and all its d",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-689875b28d1e",
+      "message_id": "<22257.46150.676711.260299@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-03-22T16:08:22-05:00",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] Data-generating scripts in R packages",
+      "in_reply_to": "<56F13FF3.1030006@gmail.com>",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>"
+      ],
+      "body_plain": "Kevin,\n\nThe inst/ directory gives a good handle to pass arbitrary directory layouts\nof your choosing through.  You just need to avoid inst/data as it would clash\nwith an existing data/ directory.\n\nI think I have seen\n\n    inst/rawData\n    inst/extData                # as in 'external data'\n\nand of course\n\n    inst/scripts\n\nor\n\n    inst/tools\n\nNote that there is a reasonable discussion in Writing R Extensions, but as\nalways, you have to find it first.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Kevin,\n\nThe inst/ directory gives a good handle to pass arbitrary directory layouts\nof your choosing through.  You just need to avoid inst/data as it would clash\nwith an existing data/ directory.\n\nI t",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-967e6d748fb8",
+      "message_id": "<56F1D790.9040007@auckland.ac.nz>",
+      "from_name": "Rolf Turner",
+      "from_email_hash": "904c134d5ad39093183253270ee481b35c208cc4297e137e579e32e8115e7dff",
+      "date": "2016-03-23T12:38:56+13:00",
+      "subject": "[R-pkg-devel] [FORGED] Re: Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] [FORGED] Re: Data-generating scripts in R packages",
+      "in_reply_to": "<22257.46150.676711.260299@max.nulle.part>",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>",
+        "<22257.46150.676711.260299@max.nulle.part>"
+      ],
+      "body_plain": "On 23/03/16 10:08, Dirk Eddelbuettel wrote:\n\n<SNIP>\n\n> Note that there is a reasonable discussion in Writing R Extensions, but as\n> always, you have to find it first.\n\nFortune nomination!\n\ncheers,\n\nRolf Turner\n\n-- \nTechnical Editor ANZJS\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276",
+      "body_snippet": "On 23/03/16 10:08, Dirk Eddelbuettel wrote:\n\n<SNIP>\n\n> Note that there is a reasonable discussion in Writing R Extensions, but as\n> always, you have to find it first.\n\nFortune nomination!\n\ncheers,\n\nRo",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-5f37044b4b9a",
+      "message_id": "<87y499tqsl.fsf@enricoschumann.net>",
+      "from_name": "Enrico Schumann",
+      "from_email_hash": "6e2b07dfece9903edd38ae5f89516e6019180d40f61f8bc93b0510f5f6c6ba17",
+      "date": "2016-03-23T11:46:50+01:00",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] Data-generating scripts in R packages",
+      "in_reply_to": "<56F13FF3.1030006@gmail.com> (Kevin Coombes's message of \"Tue, 22 Mar 2016 08:52:03 -0400\")",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>"
+      ],
+      "body_plain": "On Tue, 22 Mar 2016, Kevin Coombes <kevin.r.coombes at gmail.com> writes:\n\n> Hi,\n>\n> I'm currently developing an R package that includes a small data set\n> along with the functions that I want to export. I have an R script\n> that generates the data set; the computation time is long (well,\n> relative to the size of the data set). So, my plan is to run the\n> script and save() the data set as an *.rda file that I can put in the\n> data directory.  (It is possible that some users of the package will\n> _only_ be interested in the data set.)\n>\n> But, I'd like to keep the script with the package, both because it\n> shows how to use some of the functions and because I might want to\n> modify how the data set is generated in the future.  My question: What\n> is the \"best practice\" for where in the package directory structure to\n> store such a script?\n>\n> Best,\n>   Kevin\n\nIf the script is short, you could wrap it in \\dontrun{...}\nand put it into the Examples section of the Rd file that\ndescribes the data. In this way people can quickly find the\ncode when they look up the data's documentation.\n\n\nKind regards\n    Enrico\n\n\n-- \nEnrico Schumann\nLucerne, Switzerland\nhttp://enricoschumann.net",
+      "body_snippet": "On Tue, 22 Mar 2016, Kevin Coombes <kevin.r.coombes at gmail.com> writes:\n\n> Hi,\n>\n> I'm currently developing an R package that includes a small data set\n> along with the functions that I want to expo",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-aaeb6b3a9120",
+      "message_id": "<CAJuCY5ySOiCDD6Kn9J16R_jirf3wkbbQuxE-pvW7ZPhRdjEwpA@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "939ccb0e8bbc2d0c7bbe22a43b9bdc551e1b9ce62c1e0af38d79ce042e5bddbe",
+      "date": "2016-03-23T12:25:08+01:00",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] Data-generating scripts in R packages",
+      "in_reply_to": "<87y499tqsl.fsf@enricoschumann.net>",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>",
+        "<87y499tqsl.fsf@enricoschumann.net>"
+      ],
+      "body_plain": "Dear Kevin,\n\nI would convert the script into a function and add it to the R folder. This\nmakes it easy to document the script using the standard R help files. Then\nadd the function to the examples in the helpfile of the data in a\n\\dontrun{}. Then it is clear to to user how the data was generated.\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature and\nForest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n\n2016-03-23 11:46 GMT+01:00 Enrico Schumann <es at enricoschumann.net>:\n\n> On Tue, 22 Mar 2016, Kevin Coombes <kevin.r.coombes at gmail.com> writes:\n>\n> > Hi,\n> >\n> > I'm currently developing an R package that includes a small data set\n> > along with the functions that I want to export. I have an R script\n> > that generates the data set; the computation time is long (well,\n> > relative to the size of the data set). So, my plan is to run the\n> > script and save() the data set as an *.rda file that I can put in the\n> > data directory.  (It is possible that some users of the package will\n> > _only_ be interested in the data set.)\n> >\n> > But, I'd like to keep the script with the package, both because it\n> > shows how to use some of the functions and because I might want to\n> > modify how the data set is generated in the future.  My question: What\n> > is the \"best practice\" for where in the package directory structure to\n> > store such a script?\n> >\n> > Best,\n> >   Kevin\n>\n> If the script is short, you could wrap it in \\dontrun{...}\n> and put it into the Examples section of the Rd file that\n> describes the data. In this way people can quickly find the\n> code when they look up the data's documentation.\n>\n>\n> Kind regards\n>     Enrico\n>\n>\n> --\n> Enrico Schumann\n> Lucerne, Switzerland\n> http://enricoschumann.net\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Kevin,\n\nI would convert the script into a function and add it to the R folder. This\nmakes it easy to document the script using the standard R help files. Then\nadd the function to the examples in ",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-3a9955758cb0",
+      "message_id": "<56F2ADCC.7080302@gmail.com>",
+      "from_name": "Kevin Coombes",
+      "from_email_hash": "bdff314fd84967c658ffe321f940a656c4f86380f9a5be07424efaeac531b6d7",
+      "date": "2016-03-23T10:53:00-04:00",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "subject_clean": "[R-pkg-devel] Data-generating scripts in R packages",
+      "in_reply_to": "<22257.46150.676711.260299@max.nulle.part>",
+      "references": [
+        "<56F13FF3.1030006@gmail.com>",
+        "<22257.46150.676711.260299@max.nulle.part>"
+      ],
+      "body_plain": "Hi,\n\nI'm going to start by summarizing the suggestions (for where to put the \nscript) that have been presented so far:\n\n[1] in the /demo directory\n[2] in /inst/SOMETHING, where Dirk lists four possible values for SOMETHING\n[3] in /R , but hidden using .Rbuildignore\n[4] in the Example section of a man page, protected by \\dontrun{...}\n[5] the same as [4], but after encapsulating the script in a function \nthat could be exported.\n\nOf these, I think I like [5] the best (and so will probably do things \nthat way), followed by [1].\n\nAnd I can't resist following up on to Dirk's (fortune-eligible?) comment \nthat \"there is a reasonable discussion in Writing R Extensions, but as \nalways, you have to find it first\".  Before posting, I read section \n1.1.6 (Data in packages) of the \"fine manual\", and couldn't find a clear \nrecommendation for my situation. Given the range of responses, it seems \nthat I wasn't alone....\n\nThanks to all,\n   Kevin\n\nOn 3/22/2016 5:08 PM, Dirk Eddelbuettel wrote:\n> Kevin,\n>\n> The inst/ directory gives a good handle to pass arbitrary directory layouts\n> of your choosing through.  You just need to avoid inst/data as it would clash\n> with an existing data/ directory.\n>\n> I think I have seen\n>\n>      inst/rawData\n>      inst/extData                # as in 'external data'\n>\n> and of course\n>\n>      inst/scripts\n>\n> or\n>\n>      inst/tools\n>\n> Note that there is a reasonable discussion in Writing R Extensions, but as\n> always, you have to find it first.\n>\n> Dirk\n>\n\n\n---\nThis email has been checked for viruses by Avast antivirus software.\nhttps://www.avast.com/antivirus",
+      "body_snippet": "Hi,\n\nI'm going to start by summarizing the suggestions (for where to put the \nscript) that have been presented so far:\n\n[1] in the /demo directory\n[2] in /inst/SOMETHING, where Dirk lists four possibl",
+      "thread_id": "thread-b97bb315c642",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-8c2497f4ce19",
+      "message_id": "<CAJCz-yKvkjeehvkZ9k3_hkjGr_jEHSVmVm1Vwx5XAhym5O5puA@mail.gmail.com>",
+      "from_name": "Paul Hurley",
+      "from_email_hash": "6afd583f452447d5a62aaf5e1ae271ae6b4c2ed08898356f22c39d64c2495ee4",
+      "date": "2016-03-23T20:43:36Z",
+      "subject": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "subject_clean": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Several years ago I assembled some of my own most used code into a package,\nand had that installed on my machine.  Since then I have lost the source\nfiles, but still have the package installed in an old v2.x R installation.\n\nI now need to use the package in my current R install, which is v3.1, and\nwon't let me just copy the directory across, as it complains it was build\npre v3.  Is it possible to reverse engineer a package back to R source\nfiles so I can then rebuild it in a new package ?\n\nThanks\n\nPaul.\n\n--http://www.paulhurley.co.uk\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Several years ago I assembled some of my own most used code into a package,\nand had that installed on my machine.  Since then I have lost the source\nfiles, but still have the package installed in an o",
+      "thread_id": "thread-8c2497f4ce19",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-236e5fa89ebd",
+      "message_id": "<56F35035.90504@gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "18f6c2b0b79bec76f7afe0fad5e36fffd27297982eaee9a3a21101b9461258e5",
+      "date": "2016-03-23T22:25:57-04:00",
+      "subject": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "subject_clean": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "in_reply_to": "<CAJCz-yKvkjeehvkZ9k3_hkjGr_jEHSVmVm1Vwx5XAhym5O5puA@mail.gmail.com>",
+      "references": [
+        "<CAJCz-yKvkjeehvkZ9k3_hkjGr_jEHSVmVm1Vwx5XAhym5O5puA@mail.gmail.com>"
+      ],
+      "body_plain": "You could take your old install and do this:\n\n   library(\"your_package\")\n   funs <- ls(pos=\"package:your_package\")\n   dump(funs,\"your_package.R\")\n\n   that wouldn't recreate documentation, NAMESPACE files, etc., but it \nwould be a start.\n\nOn 16-03-23 04:43 PM, Paul Hurley wrote:\n> Several years ago I assembled some of my own most used code into a package,\n> and had that installed on my machine.  Since then I have lost the source\n> files, but still have the package installed in an old v2.x R installation.\n>\n> I now need to use the package in my current R install, which is v3.1, and\n> won't let me just copy the directory across, as it complains it was build\n> pre v3.  Is it possible to reverse engineer a package back to R source\n> files so I can then rebuild it in a new package ?\n>\n> Thanks\n>\n> Paul.\n>\n> --http://www.paulhurley.co.uk\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "You could take your old install and do this:\n\n   library(\"your_package\")\n   funs <- ls(pos=\"package:your_package\")\n   dump(funs,\"your_package.R\")\n\n   that wouldn't recreate documentation, NAMESPACE fi",
+      "thread_id": "thread-8c2497f4ce19",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-ca7cf87035e8",
+      "message_id": "<CAPPM_gRuTdvmY9RBb0RQ9_rLbcA2eMWLw_FCuBXqsk24BL=ccQ@mail.gmail.com>",
+      "from_name": "Joshua Ulrich",
+      "from_email_hash": "1c142a8ab2a2cd292396c50d658d894b0e8efcc0774aa9558978b89b50ac3080",
+      "date": "2016-03-24T00:53:25-05:00",
+      "subject": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "subject_clean": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "in_reply_to": "<56F35035.90504@gmail.com>",
+      "references": [
+        "<CAJCz-yKvkjeehvkZ9k3_hkjGr_jEHSVmVm1Vwx5XAhym5O5puA@mail.gmail.com>",
+        "<56F35035.90504@gmail.com>"
+      ],
+      "body_plain": "On Wed, Mar 23, 2016 at 9:25 PM, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>  You could take your old install and do this:\n>\n>   library(\"your_package\")\n>   funs <- ls(pos=\"package:your_package\")\n>   dump(funs,\"your_package.R\")\n>\n>   that wouldn't recreate documentation, NAMESPACE files, etc., but it would\n> be a start.\n>\nYou might be able to recreate the Rd files using the answers to this\nStackOverflow question: http://stackoverflow.com/q/7493843/271616\n\nUsing the example in my answer as a starting point:\nsink(file=\"survey.Rd\")\nutils:::.getHelpFile(as.character(help(survey,package=\"MASS\")))\nsink()\n\nIt might still need some formatting clean-up, but hopefully that gets\nyou 80-90% of the solution.\n\n>\n> On 16-03-23 04:43 PM, Paul Hurley wrote:\n>>\n>> Several years ago I assembled some of my own most used code into a\n>> package,\n>> and had that installed on my machine.  Since then I have lost the source\n>> files, but still have the package installed in an old v2.x R installation.\n>>\n>> I now need to use the package in my current R install, which is v3.1, and\n>> won't let me just copy the directory across, as it complains it was build\n>> pre v3.  Is it possible to reverse engineer a package back to R source\n>> files so I can then rebuild it in a new package ?\n>>\n>> Thanks\n>>\n>> Paul.\n>>\n>> --http://www.paulhurley.co.uk\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com\nR/Finance 2016 | www.rinfinance.com",
+      "body_snippet": "On Wed, Mar 23, 2016 at 9:25 PM, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>  You could take your old install and do this:\n>\n>   library(\"your_package\")\n>   funs <- ls(pos=\"package:your_package\")\n>  ",
+      "thread_id": "thread-8c2497f4ce19",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-48b496b1b5d4",
+      "message_id": "<438D2EC9EAFE5946B2D5864670EA468E0179C6FDA5@MBXP01.ds.man.ac.uk>",
+      "from_name": "Georgi Boshnakov",
+      "from_email_hash": "7f9cf1d101e5f283d6c513194b7b3651e266057959d272dd3fc10966ecfad60f",
+      "date": "2016-03-24T07:43:46Z",
+      "subject": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "subject_clean": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "in_reply_to": "<CAPPM_gRuTdvmY9RBb0RQ9_rLbcA2eMWLw_FCuBXqsk24BL=ccQ@mail.gmail.com>",
+      "references": [
+        "<CAJCz-yKvkjeehvkZ9k3_hkjGr_jEHSVmVm1Vwx5XAhym5O5puA@mail.gmail.com>",
+        "<56F35035.90504@gmail.com>",
+        "<CAPPM_gRuTdvmY9RBb0RQ9_rLbcA2eMWLw_FCuBXqsk24BL=ccQ@mail.gmail.com>"
+      ],
+      "body_plain": "Further to Joshua's comment, \npackage \"Rdpack\" has a function reprompt(), which when called with one argument \ncreates an Rd documentation file. It can do this for methods (S3/S4), classes and package-package if required,\ne.g.\n\nlibrary(Rdpack)\nreprompt(lm)\n\ncreates a lm.Rd in the current working directory.\n\nreprompt() actually checks if the current documentation is up to date and updates the usage statement or adds the  items for additional arguments as needed. I use it during development.\n\nGeorgi\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Joshua Ulrich\nSent: 24 March 2016 05:53\nTo: Ben Bolker\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?\n\nOn Wed, Mar 23, 2016 at 9:25 PM, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>  You could take your old install and do this:\n>\n>   library(\"your_package\")\n>   funs <- ls(pos=\"package:your_package\")\n>   dump(funs,\"your_package.R\")\n>\n>   that wouldn't recreate documentation, NAMESPACE files, etc., but it \n> would be a start.\n>\nYou might be able to recreate the Rd files using the answers to this StackOverflow question: http://stackoverflow.com/q/7493843/271616\n\nUsing the example in my answer as a starting point:\nsink(file=\"survey.Rd\")\nutils:::.getHelpFile(as.character(help(survey,package=\"MASS\")))\nsink()\n\nIt might still need some formatting clean-up, but hopefully that gets you 80-90% of the solution.\n\n>\n> On 16-03-23 04:43 PM, Paul Hurley wrote:\n>>\n>> Several years ago I assembled some of my own most used code into a \n>> package, and had that installed on my machine.  Since then I have \n>> lost the source files, but still have the package installed in an old \n>> v2.x R installation.\n>>\n>> I now need to use the package in my current R install, which is v3.1, \n>> and won't let me just copy the directory across, as it complains it \n>> was build pre v3.  Is it possible to reverse engineer a package back \n>> to R source files so I can then rebuild it in a new package ?\n>>\n>> Thanks\n>>\n>> Paul.\n>>\n>> --http://www.paulhurley.co.uk\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list \n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n--\nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com\nR/Finance 2016 | www.rinfinance.com\n\n______________________________________________\nR-package-devel at r-project.org mailing list https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Further to Joshua's comment, \npackage \"Rdpack\" has a function reprompt(), which when called with one argument \ncreates an Rd documentation file. It can do this for methods (S3/S4), classes and package",
+      "thread_id": "thread-8c2497f4ce19",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-1425c7b6a310",
+      "message_id": "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>",
+      "from_name": "arilamstein at gmail.com",
+      "from_email_hash": "22f3367d2c8c62a56b5aec2585b7855e83dd8723aebc13c0fbd1fb8b34b7081d",
+      "date": "2016-03-25T13:55:42-07:00",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "subject_clean": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Recently the functionality in the choroplethr\n<https://cran.r-project.org/web/packages/choroplethr/index.html> package\nthat depends on the acs\n<https://cran.r-project.org/web/packages/acs/index.html> package has\nstopped working. I've been able to narrow down the cause, but cannot figure\nout how to fix it. Any help would be appreciated. To reproduce the error\nyou can type:\n\ninstall.packages(\"choroplethr\")\n\nlibrary(choroplethr)\n\n?get_state_demographics\n\nget_state_demographics()\n\nError in (function (classes, fdef, mtable)  :\n\nunable to find an inherited method for function ?geography? for signature\n\"matrix\"?\n\n(Note: you will need to set a census API key for this example to \"work\".\nSee here\n<https://cran.r-project.org/web/packages/choroplethr/vignettes/e-mapping-us-census-data.html>\nfor instructions).\n\nI believe that this error was introduced by version 2.0 of the acs package,\nwhich was just released. I suspect that choroplethr is either not importing\nsomething that it should be importing, or acs is not exporting something\nthat it should be exporting. For example, the problem can be fixed by\nsimply loading the acs package first:\n\nlibrary(acs)\n\nget_state_demographics()\n\n<valid result>\n\nThe acs package uses both S3 and S4, which I do not have much experience\nwith. I have been reading Hadley's excellent chapter on Namespaces\n<http://r-pkgs.had.co.nz/namespace.html>, and tweaked various import\ndirectives in the choroplethr package (the actual code that crashes is here\n<https://github.com/arilamstein/choroplethr/blob/master/R/get_state_demograhpics.R#L42>).\nBut I am still not sure how to fix this problem.. Any help would be\nappreciated.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Recently the functionality in the choroplethr\n<https://cran.r-project.org/web/packages/choroplethr/index.html> package\nthat depends on the acs\n<https://cran.r-project.org/web/packages/acs/index.html> ",
+      "thread_id": "thread-1425c7b6a310",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-7a84afea3871",
+      "message_id": "<56F82BD5.9080809@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-03-27T20:52:05+02:00",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "subject_clean": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "in_reply_to": "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>",
+      "references": [
+        "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>"
+      ],
+      "body_plain": "Has this been resolved now?\n\nI cannot reproduce the problem as I get:\n\n > library(choroplethr)\n >\n > ?get_state_demographics\nstarting httpd help server ... done\n >\n > get_state_demographics()\nError in (function (classes, fdef, mtable)  :\n   unable to find an inherited method for function ?geography? for \nsignature ?\"logical\"?\nIn addition: Warning message:\nIn acs::acs.fetch(geography = state_geo, table.number = \"B03002\",  :\n   'key' required to access Census API site for download;\n   See http://www.census.gov/developers/ to request a key\n   and/or use 'key=' (or run 'api.key.install()') to avoid this error.\n\n\nBest,\nUwe Ligges\n\n\n\nOn 25.03.2016 21:55, arilamstein at gmail.com wrote:\n> Recently the functionality in the choroplethr\n> <https://cran.r-project.org/web/packages/choroplethr/index.html> package\n> that depends on the acs\n> <https://cran.r-project.org/web/packages/acs/index.html> package has\n> stopped working. I've been able to narrow down the cause, but cannot figure\n> out how to fix it. Any help would be appreciated. To reproduce the error\n> you can type:\n>\n> install.packages(\"choroplethr\")\n>\n> library(choroplethr)\n>\n> ?get_state_demographics\n>\n> get_state_demographics()\n>\n> Error in (function (classes, fdef, mtable)  :\n>\n> unable to find an inherited method for function ?geography? for signature\n> \"matrix\"?\n>\n> (Note: you will need to set a census API key for this example to \"work\".\n> See here\n> <https://cran.r-project.org/web/packages/choroplethr/vignettes/e-mapping-us-census-data.html>\n> for instructions).\n>\n> I believe that this error was introduced by version 2.0 of the acs package,\n> which was just released. I suspect that choroplethr is either not importing\n> something that it should be importing, or acs is not exporting something\n> that it should be exporting. For example, the problem can be fixed by\n> simply loading the acs package first:\n>\n> library(acs)\n>\n> get_state_demographics()\n>\n> <valid result>\n>\n> The acs package uses both S3 and S4, which I do not have much experience\n> with. I have been reading Hadley's excellent chapter on Namespaces\n> <http://r-pkgs.had.co.nz/namespace.html>, and tweaked various import\n> directives in the choroplethr package (the actual code that crashes is here\n> <https://github.com/arilamstein/choroplethr/blob/master/R/get_state_demograhpics.R#L42>).\n> But I am still not sure how to fix this problem.. Any help would be\n> appreciated.\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Has this been resolved now?\n\nI cannot reproduce the problem as I get:\n\n > library(choroplethr)\n >\n > ?get_state_demographics\nstarting httpd help server ... done\n >\n > get_state_demographics()\nError in",
+      "thread_id": "thread-1425c7b6a310",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-8c48b56cbea5",
+      "message_id": "<BD18BE68-1F4B-4ABA-9D66-7432AEE5CD95@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-03-28T13:09:19-05:00",
+      "subject": "[R-pkg-devel] set generic and methods when slot is a function",
+      "subject_clean": "[R-pkg-devel] set generic and methods when slot is a function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "All,\nI am creating a mortgage prepayment model package.  The idea is to create a class FRMModelFunction and each slot in the class is a function that may be use in the prepayment. So I would like to create a generic and method that will allow me to call the slot by name.  However, I think that I am missing something in my setup\n\nIf I run the below code I can do the following\n\nOmega(Model) which returns the function\n\nOmega <- Omega(Model) which then assigns the function and allows me to pass values and get a result from Omega(x = 1)\n\nHowever I can also get a result by directly accessing the slot\n\nModel at Omega(x=1)\n\nWhat I want to do is set a generic and method so that I can do the following\n\nOmega(x=1)\n\nThe below is close but still not what I would like to have.  Is what  I have described possible and if so what have I missed?\n\nGlenn \n\n\nsetGeneric(\"Omega\", function(object,...) {standardGeneric(\"Omega\")})\n\n setMethod(\"Omega\", signature = \"FRMModelFunction\", \n           definition = function(object){object at Omega})\n\n setClass(\"FRMModelFunction\",\n          representation(\n            Omega = \"function\"))\n\n Model <- new(\"FRMModelFunction\",\n           Omega = function(x = numeric()) {return(max(0, min(1, x)))}\n           )",
+      "body_snippet": "All,\nI am creating a mortgage prepayment model package.  The idea is to create a class FRMModelFunction and each slot in the class is a function that may be use in the prepayment. So I would like to c",
+      "thread_id": "thread-8c48b56cbea5",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-ece79f222e80",
+      "message_id": "<CAC2h7uudTRB+9L4aU2eF8s-NG=hWu0TnOgv9ddnQfVuhtorXeQ@mail.gmail.com>",
+      "from_name": "Kasper Daniel Hansen",
+      "from_email_hash": "b2b45a5f3ad330d8561a4711d1f95ff6a445243a303a83a7a709685fab3e068c",
+      "date": "2016-03-28T15:14:52-04:00",
+      "subject": "[R-pkg-devel] set generic and methods when slot is a function",
+      "subject_clean": "[R-pkg-devel] set generic and methods when slot is a function",
+      "in_reply_to": "<BD18BE68-1F4B-4ABA-9D66-7432AEE5CD95@me.com>",
+      "references": [
+        "<BD18BE68-1F4B-4ABA-9D66-7432AEE5CD95@me.com>"
+      ],
+      "body_plain": "This syntax\n  Omega(x = 1)\nseems weird.  How do you know that this call should refer back to the Model\nobject and not some other hypothetical Model2 object?  The code you're\ndefining should make something like this work\n  Omega(Model)(x=1)\nwhere you can see the direct dependence on the Model object.\n\n(unrelated: One experience from Bioconductor, is that it is good to have\nexplicit constructors for S4 objects instead of using new(\"...\").)\n\nBest,\nKasper\n\nOn Mon, Mar 28, 2016 at 2:09 PM, Glenn Schultz <glennmschultz at me.com> wrote:\n\n> All,\n> I am creating a mortgage prepayment model package.  The idea is to create\n> a class FRMModelFunction and each slot in the class is a function that may\n> be use in the prepayment. So I would like to create a generic and method\n> that will allow me to call the slot by name.  However, I think that I am\n> missing something in my setup\n>\n> If I run the below code I can do the following\n>\n> Omega(Model) which returns the function\n>\n> Omega <- Omega(Model) which then assigns the function and allows me to\n> pass values and get a result from Omega(x = 1)\n>\n> However I can also get a result by directly accessing the slot\n>\n> Model at Omega(x=1)\n>\n> What I want to do is set a generic and method so that I can do the\n> following\n>\n> Omega(x=1)\n>\n> The below is close but still not what I would like to have.  Is what  I\n> have described possible and if so what have I missed?\n>\n> Glenn\n>\n>\n> setGeneric(\"Omega\", function(object,...) {standardGeneric(\"Omega\")})\n>\n>  setMethod(\"Omega\", signature = \"FRMModelFunction\",\n>            definition = function(object){object at Omega})\n>\n>  setClass(\"FRMModelFunction\",\n>           representation(\n>             Omega = \"function\"))\n>\n>  Model <- new(\"FRMModelFunction\",\n>            Omega = function(x = numeric()) {return(max(0, min(1, x)))}\n>            )\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This syntax\n  Omega(x = 1)\nseems weird.  How do you know that this call should refer back to the Model\nobject and not some other hypothetical Model2 object?  The code you're\ndefining should make somet",
+      "thread_id": "thread-8c48b56cbea5",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-d78a71dc6c53",
+      "message_id": "<CAEO2ku+1O74UVEfb9JuCdeXNqLAWzD6JGwhVGzt2y7qQ6Em1CA@mail.gmail.com>",
+      "from_name": "arilamstein at gmail.com",
+      "from_email_hash": "22f3367d2c8c62a56b5aec2585b7855e83dd8723aebc13c0fbd1fb8b34b7081d",
+      "date": "2016-03-28T13:49:23-07:00",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "subject_clean": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "in_reply_to": "<56F82BD5.9080809@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>",
+        "<56F82BD5.9080809@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Unfortunately I am still getting the same error:\n\ninstall.packages(c(\"choroplethr\", \"acs\"))\nlibrary(acs)\napi.key.install(\"f8b2a6df01479981aef39577b3c4466f5a4c8274\")\ndetach(\"package:acs\", unload=TRUE)\n\nlibrary(choroplethr)\nget_state_demographics()\nError in (function (classes, fdef, mtable)  :\n            unable to find an inherited method for function ?geography? for\nsignature ?\"matrix\"?\n\nSomeone suggested that I import the acs class in my NAMESPACE. But even\nafter adding:\n\nimportClassesFrom(acs,acs)\n\nI get the same error.\n\n\nOn Sun, Mar 27, 2016 at 11:52 AM, Uwe Ligges <\nligges at statistik.tu-dortmund.de> wrote:\n\n> Has this been resolved now?\n>\n> I cannot reproduce the problem as I get:\n>\n> > library(choroplethr)\n> >\n> > ?get_state_demographics\n> starting httpd help server ... done\n> >\n> > get_state_demographics()\n> Error in (function (classes, fdef, mtable)  :\n>   unable to find an inherited method for function ?geography? for\n> signature ?\"logical\"?\n> In addition: Warning message:\n> In acs::acs.fetch(geography = state_geo, table.number = \"B03002\",  :\n>   'key' required to access Census API site for download;\n>   See http://www.census.gov/developers/ to request a key\n>   and/or use 'key=' (or run 'api.key.install()') to avoid this error.\n>\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n> On 25.03.2016 21:55, arilamstein at gmail.com wrote:\n>\n>> Recently the functionality in the choroplethr\n>> <https://cran.r-project.org/web/packages/choroplethr/index.html> package\n>> that depends on the acs\n>> <https://cran.r-project.org/web/packages/acs/index.html> package has\n>> stopped working. I've been able to narrow down the cause, but cannot\n>> figure\n>> out how to fix it. Any help would be appreciated. To reproduce the error\n>> you can type:\n>>\n>> install.packages(\"choroplethr\")\n>>\n>> library(choroplethr)\n>>\n>> ?get_state_demographics\n>>\n>> get_state_demographics()\n>>\n>> Error in (function (classes, fdef, mtable)  :\n>>\n>> unable to find an inherited method for function ?geography? for signature\n>> \"matrix\"?\n>>\n>> (Note: you will need to set a census API key for this example to \"work\".\n>> See here\n>> <\n>> https://cran.r-project.org/web/packages/choroplethr/vignettes/e-mapping-us-census-data.html\n>> >\n>> for instructions).\n>>\n>> I believe that this error was introduced by version 2.0 of the acs\n>> package,\n>> which was just released. I suspect that choroplethr is either not\n>> importing\n>> something that it should be importing, or acs is not exporting something\n>> that it should be exporting. For example, the problem can be fixed by\n>> simply loading the acs package first:\n>>\n>> library(acs)\n>>\n>> get_state_demographics()\n>>\n>> <valid result>\n>>\n>> The acs package uses both S3 and S4, which I do not have much experience\n>> with. I have been reading Hadley's excellent chapter on Namespaces\n>> <http://r-pkgs.had.co.nz/namespace.html>, and tweaked various import\n>> directives in the choroplethr package (the actual code that crashes is\n>> here\n>> <\n>> https://github.com/arilamstein/choroplethr/blob/master/R/get_state_demograhpics.R#L42\n>> >).\n>> But I am still not sure how to fix this problem.. Any help would be\n>> appreciated.\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Unfortunately I am still getting the same error:\n\ninstall.packages(c(\"choroplethr\", \"acs\"))\nlibrary(acs)\napi.key.install(\"f8b2a6df01479981aef39577b3c4466f5a4c8274\")\ndetach(\"package:acs\", unload=TRUE)\n",
+      "thread_id": "thread-1425c7b6a310",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-644555972c87",
+      "message_id": "<56F99BB5.2080809@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-03-28T23:01:41+02:00",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "subject_clean": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "in_reply_to": "<CAEO2ku+1O74UVEfb9JuCdeXNqLAWzD6JGwhVGzt2y7qQ6Em1CA@mail.gmail.com>",
+      "references": [
+        "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>",
+        "<56F82BD5.9080809@statistik.tu-dortmund.de>",
+        "<CAEO2ku+1O74UVEfb9JuCdeXNqLAWzD6JGwhVGzt2y7qQ6Em1CA@mail.gmail.com>"
+      ],
+      "body_plain": "I just tried your code with acs 2.0 and choroplethr 3.5.1 under R-3.3.0 \nalpha and got a result rather than an error...\n\nAre you using a different version of anything?\n\nBest,\nUwe Ligges\n\n\n\nOn 28.03.2016 22:49, arilamstein at gmail.com wrote:\n> Unfortunately I am still getting the same error:\n>\n> install.packages(c(\"choroplethr\", \"acs\"))\n> library(acs)\n> api.key.install(\"f8b2a6df01479981aef39577b3c4466f5a4c8274\")\n> detach(\"package:acs\", unload=TRUE)\n>\n> library(choroplethr)\n> get_state_demographics()\n> Error in (function (classes, fdef, mtable)  :\n>              unable to find an inherited method for function ?geography?\n> for signature ?\"matrix\"?\n>\n> Someone suggested that I import the acs class in my NAMESPACE. But even\n> after adding:\n>\n> importClassesFrom(acs,acs)\n>\n> I get the same error.\n>\n>\n> On Sun, Mar 27, 2016 at 11:52 AM, Uwe Ligges\n> <ligges at statistik.tu-dortmund.de\n> <mailto:ligges at statistik.tu-dortmund.de>> wrote:\n>\n>     Has this been resolved now?\n>\n>     I cannot reproduce the problem as I get:\n>\n>      > library(choroplethr)\n>      >\n>      > ?get_state_demographics\n>     starting httpd help server ... done\n>     >\n>     > get_state_demographics()\n>     Error in (function (classes, fdef, mtable)  :\n>        unable to find an inherited method for function ?geography? for\n>     signature ?\"logical\"?\n>     In addition: Warning message:\n>     In acs::acs.fetch(geography = state_geo, table.number = \"B03002\",  :\n>        'key' required to access Census API site for download;\n>        See http://www.census.gov/developers/ to request a key\n>        and/or use 'key=' (or run 'api.key.install()') to avoid this error.\n>\n>\n>     Best,\n>     Uwe Ligges\n>\n>\n>\n>     On 25.03.2016 21 <tel:25.03.2016%2021>:55, arilamstein at gmail.com\n>     <mailto:arilamstein at gmail.com> wrote:\n>\n>         Recently the functionality in the choroplethr\n>         <https://cran.r-project.org/web/packages/choroplethr/index.html>\n>         package\n>         that depends on the acs\n>         <https://cran.r-project.org/web/packages/acs/index.html> package has\n>         stopped working. I've been able to narrow down the cause, but\n>         cannot figure\n>         out how to fix it. Any help would be appreciated. To reproduce\n>         the error\n>         you can type:\n>\n>         install.packages(\"choroplethr\")\n>\n>         library(choroplethr)\n>\n>         ?get_state_demographics\n>\n>         get_state_demographics()\n>\n>         Error in (function (classes, fdef, mtable)  :\n>\n>         unable to find an inherited method for function ?geography? for\n>         signature\n>         \"matrix\"?\n>\n>         (Note: you will need to set a census API key for this example to\n>         \"work\".\n>         See here\n>         <https://cran.r-project.org/web/packages/choroplethr/vignettes/e-mapping-us-census-data.html>\n>         for instructions).\n>\n>         I believe that this error was introduced by version 2.0 of the\n>         acs package,\n>         which was just released. I suspect that choroplethr is either\n>         not importing\n>         something that it should be importing, or acs is not exporting\n>         something\n>         that it should be exporting. For example, the problem can be\n>         fixed by\n>         simply loading the acs package first:\n>\n>         library(acs)\n>\n>         get_state_demographics()\n>\n>         <valid result>\n>\n>         The acs package uses both S3 and S4, which I do not have much\n>         experience\n>         with. I have been reading Hadley's excellent chapter on Namespaces\n>         <http://r-pkgs.had.co.nz/namespace.html>, and tweaked various import\n>         directives in the choroplethr package (the actual code that\n>         crashes is here\n>         <https://github.com/arilamstein/choroplethr/blob/master/R/get_state_demograhpics.R#L42>).\n>         But I am still not sure how to fix this problem.. Any help would be\n>         appreciated.\n>\n>                  [[alternative HTML version deleted]]\n>\n>         ______________________________________________\n>         R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org> mailing list\n>         https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>",
+      "body_snippet": "I just tried your code with acs 2.0 and choroplethr 3.5.1 under R-3.3.0 \nalpha and got a result rather than an error...\n\nAre you using a different version of anything?\n\nBest,\nUwe Ligges\n\n\n\nOn 28.03.20",
+      "thread_id": "thread-1425c7b6a310",
+      "thread_depth": 3,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-13dd5b0c4cab",
+      "message_id": "<CAEO2kuLz4=2Yw8pLKX5Ba_1AiMN70A05sdv50kSpnjVm8rDUrA@mail.gmail.com>",
+      "from_name": "arilamstein at gmail.com",
+      "from_email_hash": "22f3367d2c8c62a56b5aec2585b7855e83dd8723aebc13c0fbd1fb8b34b7081d",
+      "date": "2016-03-28T14:07:15-07:00",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "subject_clean": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "in_reply_to": "<56F99BB5.2080809@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>",
+        "<56F82BD5.9080809@statistik.tu-dortmund.de>",
+        "<CAEO2ku+1O74UVEfb9JuCdeXNqLAWzD6JGwhVGzt2y7qQ6Em1CA@mail.gmail.com>",
+        "<56F99BB5.2080809@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "I am using R 3.2.4 for mac. Here is my sessionInfo():\n\n> sessionInfo()\nR version 3.2.4 (2016-03-10)\nPlatform: x86_64-apple-darwin13.4.0 (64-bit)\nRunning under: OS X 10.10.5 (Yosemite)\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base\n\nother attached packages:\n[1] choroplethr_3.5.1 XML_3.98-1.4      plyr_1.8.3        stringr_1.0.0\n\nloaded via a namespace (and not attached):\n [1] Rcpp_0.12.4         RColorBrewer_1.1-2  bitops_1.0-6\n tools_3.2.4\n [5] rpart_4.1-10        gtable_0.2.0        lattice_0.20-33     png_0.1-7\n\n [9] WDI_2.4             DBI_0.3.1           mapproj_1.2-4\nparallel_3.2.4\n[13] proto_0.3-10        gridExtra_2.2.1     dplyr_0.4.3\ncluster_2.0.3\n[17] maps_3.1.0          RgoogleMaps_1.2.0.7 grid_3.2.4\n nnet_7.3-12\n[21] R6_2.1.2            jpeg_0.1-8          survival_2.38-3\nforeign_0.8-66\n[25] RJSONIO_1.3-0       sp_1.1-1            ggmap_2.6.1\nlatticeExtra_0.6-28\n[29] Formula_1.2-1       reshape2_1.4.1      ggplot2_2.1.0\nmagrittr_1.5\n[33] Hmisc_3.17-2        scales_0.4.0        acs_2.0\nsplines_3.2.4\n[37] assertthat_0.1      colorspace_1.2-6    geosphere_1.5-1\nstringi_1.0-1\n[41] acepack_1.3-3.3     RCurl_1.95-4.8      munsell_0.4.3\nrjson_0.2.15\n>\n\nOn Mon, Mar 28, 2016 at 2:01 PM, Uwe Ligges <ligges at statistik.tu-dortmund.de\n> wrote:\n\n> I just tried your code with acs 2.0 and choroplethr 3.5.1 under R-3.3.0\n> alpha and got a result rather than an error...\n>\n> Are you using a different version of anything?\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n> On 28.03.2016 22:49, arilamstein at gmail.com wrote:\n>\n>> Unfortunately I am still getting the same error:\n>>\n>> install.packages(c(\"choroplethr\", \"acs\"))\n>> library(acs)\n>> api.key.install(\"f8b2a6df01479981aef39577b3c4466f5a4c8274\")\n>> detach(\"package:acs\", unload=TRUE)\n>>\n>> library(choroplethr)\n>> get_state_demographics()\n>> Error in (function (classes, fdef, mtable)  :\n>>              unable to find an inherited method for function ?geography?\n>> for signature ?\"matrix\"?\n>>\n>> Someone suggested that I import the acs class in my NAMESPACE. But even\n>> after adding:\n>>\n>> importClassesFrom(acs,acs)\n>>\n>> I get the same error.\n>>\n>>\n>> On Sun, Mar 27, 2016 at 11:52 AM, Uwe Ligges\n>> <ligges at statistik.tu-dortmund.de\n>> <mailto:ligges at statistik.tu-dortmund.de>> wrote:\n>>\n>>     Has this been resolved now?\n>>\n>>     I cannot reproduce the problem as I get:\n>>\n>>      > library(choroplethr)\n>>      >\n>>      > ?get_state_demographics\n>>     starting httpd help server ... done\n>>     >\n>>     > get_state_demographics()\n>>     Error in (function (classes, fdef, mtable)  :\n>>        unable to find an inherited method for function ?geography? for\n>>     signature ?\"logical\"?\n>>     In addition: Warning message:\n>>     In acs::acs.fetch(geography = state_geo, table.number = \"B03002\",  :\n>>        'key' required to access Census API site for download;\n>>        See http://www.census.gov/developers/ to request a key\n>>        and/or use 'key=' (or run 'api.key.install()') to avoid this error.\n>>\n>>\n>>     Best,\n>>     Uwe Ligges\n>>\n>>\n>>\n>>     On 25.03.2016 21 <tel:25.03.2016%2021>:55, arilamstein at gmail.com\n>>\n>>     <mailto:arilamstein at gmail.com> wrote:\n>>\n>>         Recently the functionality in the choroplethr\n>>         <https://cran.r-project.org/web/packages/choroplethr/index.html>\n>>         package\n>>         that depends on the acs\n>>         <https://cran.r-project.org/web/packages/acs/index.html> package\n>> has\n>>         stopped working. I've been able to narrow down the cause, but\n>>         cannot figure\n>>         out how to fix it. Any help would be appreciated. To reproduce\n>>         the error\n>>         you can type:\n>>\n>>         install.packages(\"choroplethr\")\n>>\n>>         library(choroplethr)\n>>\n>>         ?get_state_demographics\n>>\n>>         get_state_demographics()\n>>\n>>         Error in (function (classes, fdef, mtable)  :\n>>\n>>         unable to find an inherited method for function ?geography? for\n>>         signature\n>>         \"matrix\"?\n>>\n>>         (Note: you will need to set a census API key for this example to\n>>         \"work\".\n>>         See here\n>>         <\n>> https://cran.r-project.org/web/packages/choroplethr/vignettes/e-mapping-us-census-data.html\n>> >\n>>         for instructions).\n>>\n>>         I believe that this error was introduced by version 2.0 of the\n>>         acs package,\n>>         which was just released. I suspect that choroplethr is either\n>>         not importing\n>>         something that it should be importing, or acs is not exporting\n>>         something\n>>         that it should be exporting. For example, the problem can be\n>>         fixed by\n>>         simply loading the acs package first:\n>>\n>>         library(acs)\n>>\n>>         get_state_demographics()\n>>\n>>         <valid result>\n>>\n>>         The acs package uses both S3 and S4, which I do not have much\n>>         experience\n>>         with. I have been reading Hadley's excellent chapter on Namespaces\n>>         <http://r-pkgs.had.co.nz/namespace.html>, and tweaked various\n>> import\n>>         directives in the choroplethr package (the actual code that\n>>         crashes is here\n>>         <\n>> https://github.com/arilamstein/choroplethr/blob/master/R/get_state_demograhpics.R#L42\n>> >).\n>>         But I am still not sure how to fix this problem.. Any help would\n>> be\n>>         appreciated.\n>>\n>>                  [[alternative HTML version deleted]]\n>>\n>>         ______________________________________________\n>>         R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org> mailing list\n>>         https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n>>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am using R 3.2.4 for mac. Here is my sessionInfo():\n\n> sessionInfo()\nR version 3.2.4 (2016-03-10)\nPlatform: x86_64-apple-darwin13.4.0 (64-bit)\nRunning under: OS X 10.10.5 (Yosemite)\n\nlocale:\n[1] en_",
+      "thread_id": "thread-1425c7b6a310",
+      "thread_depth": 4,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-7248dd9ae3fa",
+      "message_id": "<EED74E89-AE66-49C8-84DD-59C538ABBE91@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-03-28T18:27:13-05:00",
+      "subject": "[R-pkg-devel] set generic and methods when slot is a function",
+      "subject_clean": "[R-pkg-devel] set generic and methods when slot is a function",
+      "in_reply_to": "<CAC2h7uudTRB+9L4aU2eF8s-NG=hWu0TnOgv9ddnQfVuhtorXeQ@mail.gmail.com>",
+      "references": [
+        "<BD18BE68-1F4B-4ABA-9D66-7432AEE5CD95@me.com>",
+        "<CAC2h7uudTRB+9L4aU2eF8s-NG=hWu0TnOgv9ddnQfVuhtorXeQ@mail.gmail.com>"
+      ],
+      "body_plain": "Kasper,\n\nThanks! I that was the clue I was looking for.  Simple change to the code makes it work perfectly as you describe.  I also have constructor function for Model beyond the minimal example.  I also like you reference to Bioconductor as that is the model I am trying to follow.\n\nGlenn\n\n setGeneric(\"Omega\", function(object) {standardGeneric(\"Omega\")})\n  \n  setMethod(\"Omega\", signature = \"FRMModelFunction\", \n            definition = function(object){object at Omega})\n  \n  setClass(\"FRMModelFunction\",\n           representation(\n             Omega = \"function\"))\n\n  Model <- new(\"FRMModelFunction\",\n            Omega = function(x = numeric()) {return(max(0, min(1, x)))}\n            )\n  \n\n\n> On Mar 28, 2016, at 2:14 PM, Kasper Daniel Hansen <kasperdanielhansen at gmail.com> wrote:\n> \n> This syntax \n>   Omega(x = 1)\n> seems weird.  How do you know that this call should refer back to the Model object and not some other hypothetical Model2 object?  The code you're defining should make something like this work\n>   Omega(Model)(x=1)\n> where you can see the direct dependence on the Model object.\n> \n> (unrelated: One experience from Bioconductor, is that it is good to have explicit constructors for S4 objects instead of using new(\"...\").)\n> \n> Best,\n> Kasper\n> \n> On Mon, Mar 28, 2016 at 2:09 PM, Glenn Schultz <glennmschultz at me.com <mailto:glennmschultz at me.com>> wrote:\n> All,\n> I am creating a mortgage prepayment model package.  The idea is to create a class FRMModelFunction and each slot in the class is a function that may be use in the prepayment. So I would like to create a generic and method that will allow me to call the slot by name.  However, I think that I am missing something in my setup\n> \n> If I run the below code I can do the following\n> \n> Omega(Model) which returns the function\n> \n> Omega <- Omega(Model) which then assigns the function and allows me to pass values and get a result from Omega(x = 1)\n> \n> However I can also get a result by directly accessing the slot\n> \n> Model at Omega(x=1)\n> \n> What I want to do is set a generic and method so that I can do the following\n> \n> Omega(x=1)\n> \n> The below is close but still not what I would like to have.  Is what  I have described possible and if so what have I missed?\n> \n> Glenn\n> \n> \n> setGeneric(\"Omega\", function(object,...) {standardGeneric(\"Omega\")})\n> \n>  setMethod(\"Omega\", signature = \"FRMModelFunction\",\n>            definition = function(object){object at Omega})\n> \n>  setClass(\"FRMModelFunction\",\n>           representation(\n>             Omega = \"function\"))\n> \n>  Model <- new(\"FRMModelFunction\",\n>            Omega = function(x = numeric()) {return(max(0, min(1, x)))}\n>            )\n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Kasper,\n\nThanks! I that was the clue I was looking for.  Simple change to the code makes it work perfectly as you describe.  I also have constructor function for Model beyond the minimal example.  I a",
+      "thread_id": "thread-8c48b56cbea5",
+      "thread_depth": 2,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-66344e2c7d58",
+      "message_id": "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>",
+      "from_name": "Iago Mosqueira",
+      "from_email_hash": "a0cd6c5a16e8886c107ca21a5a5f223486c2eff63fd18b5b88e0c2d41c22cd27",
+      "date": "2016-03-30T14:03:33+02:00",
+      "subject": "[R-pkg-devel] Scripts to generate data objects",
+      "subject_clean": "[R-pkg-devel] Scripts to generate data objects",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nWhat is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the user, but I would like to keep them in the package itself. Right now I am storing them inside data/, for example PKG/data/datasetone.R to create PKG/data/dataseton.RData, and then adding those R files to .Rbuildignore.\n\nAre there any other sensible ways of doing this?\n\nThanks,\n\n\nIago\n\n\n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nWhat is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the user, but I would like to keep them in the pa",
+      "thread_id": "thread-66344e2c7d58",
+      "thread_depth": 0,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-69aeb9519c9c",
+      "message_id": "<22267.50487.877949.695045@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-03-30T07:23:19-05:00",
+      "subject": "[R-pkg-devel] Scripts to generate data objects",
+      "subject_clean": "[R-pkg-devel] Scripts to generate data objects",
+      "in_reply_to": "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>",
+      "references": [
+        "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>"
+      ],
+      "body_plain": "On 30 March 2016 at 14:03, Iago Mosqueira wrote:\n| What is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the user, but I would like to keep them in the package itself. Right now I am storing them inside data/, for example PKG/data/datasetone.R to create PKG/data/dataseton.RData, and then adding those R files to .Rbuildignore.\n| \n| Are there any other sensible ways of doing this?\n\nFor gunsales we keep it simple:\n    https://github.com/NYTimes/gunsales/blob/master/R/data.R\n\nIt is both a convenience for us (when more data gets released) and\ndocumentation for the user.  \n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 30 March 2016 at 14:03, Iago Mosqueira wrote:\n| What is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the us",
+      "thread_id": "thread-66344e2c7d58",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-aa08360f685f",
+      "message_id": "<CAEO2kuJSBRK2E=UnqSRLbGwVVFNk3_Z=3XrbdNiZGnxhVEJdCA@mail.gmail.com>",
+      "from_name": "arilamstein at gmail.com",
+      "from_email_hash": "22f3367d2c8c62a56b5aec2585b7855e83dd8723aebc13c0fbd1fb8b34b7081d",
+      "date": "2016-03-30T09:55:28-07:00",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "subject_clean": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "in_reply_to": "<CAEO2kuLz4=2Yw8pLKX5Ba_1AiMN70A05sdv50kSpnjVm8rDUrA@mail.gmail.com>",
+      "references": [
+        "<CAEO2kuJKyP+H-xT_Y9H_oa6fLF242wDiouCSLvxtXMzABKX9TQ@mail.gmail.com>",
+        "<56F82BD5.9080809@statistik.tu-dortmund.de>",
+        "<CAEO2ku+1O74UVEfb9JuCdeXNqLAWzD6JGwhVGzt2y7qQ6Em1CA@mail.gmail.com>",
+        "<56F99BB5.2080809@statistik.tu-dortmund.de>",
+        "<CAEO2kuLz4=2Yw8pLKX5Ba_1AiMN70A05sdv50kSpnjVm8rDUrA@mail.gmail.com>"
+      ],
+      "body_plain": "Uwe,\n\nBased on what you report, it seems at least possible that the bug is\nrelated to some changes in R between versions.\n\nI just submitted an updated version of the package to CRAN that moves the\nacs package from \"import\" to \"depends'. This solves the problem because it\nforces users to load the acs package whenever they use the choroplethr\npackage. This is the solution that I was hoping to avoid (it seems like\noverkill to me), but it will at least allow me to distribute a version of\nmy package where all the functions work.\n\nAri\n\nOn Mon, Mar 28, 2016 at 2:07 PM, <arilamstein at gmail.com> wrote:\n\n> I am using R 3.2.4 for mac. Here is my sessionInfo():\n>\n> > sessionInfo()\n> R version 3.2.4 (2016-03-10)\n> Platform: x86_64-apple-darwin13.4.0 (64-bit)\n> Running under: OS X 10.10.5 (Yosemite)\n>\n> locale:\n> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n>\n> attached base packages:\n> [1] stats     graphics  grDevices utils     datasets  methods   base\n>\n> other attached packages:\n> [1] choroplethr_3.5.1 XML_3.98-1.4      plyr_1.8.3        stringr_1.0.0\n>\n> loaded via a namespace (and not attached):\n>  [1] Rcpp_0.12.4         RColorBrewer_1.1-2  bitops_1.0-6\n>  tools_3.2.4\n>  [5] rpart_4.1-10        gtable_0.2.0        lattice_0.20-33     png_0.1-7\n>\n>  [9] WDI_2.4             DBI_0.3.1           mapproj_1.2-4\n> parallel_3.2.4\n> [13] proto_0.3-10        gridExtra_2.2.1     dplyr_0.4.3\n> cluster_2.0.3\n> [17] maps_3.1.0          RgoogleMaps_1.2.0.7 grid_3.2.4\n>  nnet_7.3-12\n> [21] R6_2.1.2            jpeg_0.1-8          survival_2.38-3\n> foreign_0.8-66\n> [25] RJSONIO_1.3-0       sp_1.1-1            ggmap_2.6.1\n> latticeExtra_0.6-28\n> [29] Formula_1.2-1       reshape2_1.4.1      ggplot2_2.1.0\n> magrittr_1.5\n> [33] Hmisc_3.17-2        scales_0.4.0        acs_2.0\n> splines_3.2.4\n> [37] assertthat_0.1      colorspace_1.2-6    geosphere_1.5-1\n> stringi_1.0-1\n> [41] acepack_1.3-3.3     RCurl_1.95-4.8      munsell_0.4.3\n> rjson_0.2.15\n> >\n>\n> On Mon, Mar 28, 2016 at 2:01 PM, Uwe Ligges <\n> ligges at statistik.tu-dortmund.de> wrote:\n>\n>> I just tried your code with acs 2.0 and choroplethr 3.5.1 under R-3.3.0\n>> alpha and got a result rather than an error...\n>>\n>> Are you using a different version of anything?\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>>\n>>\n>> On 28.03.2016 22:49, arilamstein at gmail.com wrote:\n>>\n>>> Unfortunately I am still getting the same error:\n>>>\n>>> install.packages(c(\"choroplethr\", \"acs\"))\n>>> library(acs)\n>>> api.key.install(\"f8b2a6df01479981aef39577b3c4466f5a4c8274\")\n>>> detach(\"package:acs\", unload=TRUE)\n>>>\n>>> library(choroplethr)\n>>> get_state_demographics()\n>>> Error in (function (classes, fdef, mtable)  :\n>>>              unable to find an inherited method for function ?geography?\n>>> for signature ?\"matrix\"?\n>>>\n>>> Someone suggested that I import the acs class in my NAMESPACE. But even\n>>> after adding:\n>>>\n>>> importClassesFrom(acs,acs)\n>>>\n>>> I get the same error.\n>>>\n>>>\n>>> On Sun, Mar 27, 2016 at 11:52 AM, Uwe Ligges\n>>> <ligges at statistik.tu-dortmund.de\n>>> <mailto:ligges at statistik.tu-dortmund.de>> wrote:\n>>>\n>>>     Has this been resolved now?\n>>>\n>>>     I cannot reproduce the problem as I get:\n>>>\n>>>      > library(choroplethr)\n>>>      >\n>>>      > ?get_state_demographics\n>>>     starting httpd help server ... done\n>>>     >\n>>>     > get_state_demographics()\n>>>     Error in (function (classes, fdef, mtable)  :\n>>>        unable to find an inherited method for function ?geography? for\n>>>     signature ?\"logical\"?\n>>>     In addition: Warning message:\n>>>     In acs::acs.fetch(geography = state_geo, table.number = \"B03002\",  :\n>>>        'key' required to access Census API site for download;\n>>>        See http://www.census.gov/developers/ to request a key\n>>>        and/or use 'key=' (or run 'api.key.install()') to avoid this\n>>> error.\n>>>\n>>>\n>>>     Best,\n>>>     Uwe Ligges\n>>>\n>>>\n>>>\n>>>     On 25.03.2016 21 <tel:25.03.2016%2021>:55, arilamstein at gmail.com\n>>>\n>>>     <mailto:arilamstein at gmail.com> wrote:\n>>>\n>>>         Recently the functionality in the choroplethr\n>>>         <https://cran.r-project.org/web/packages/choroplethr/index.html>\n>>>         package\n>>>         that depends on the acs\n>>>         <https://cran.r-project.org/web/packages/acs/index.html>\n>>> package has\n>>>         stopped working. I've been able to narrow down the cause, but\n>>>         cannot figure\n>>>         out how to fix it. Any help would be appreciated. To reproduce\n>>>         the error\n>>>         you can type:\n>>>\n>>>         install.packages(\"choroplethr\")\n>>>\n>>>         library(choroplethr)\n>>>\n>>>         ?get_state_demographics\n>>>\n>>>         get_state_demographics()\n>>>\n>>>         Error in (function (classes, fdef, mtable)  :\n>>>\n>>>         unable to find an inherited method for function ?geography? for\n>>>         signature\n>>>         \"matrix\"?\n>>>\n>>>         (Note: you will need to set a census API key for this example to\n>>>         \"work\".\n>>>         See here\n>>>         <\n>>> https://cran.r-project.org/web/packages/choroplethr/vignettes/e-mapping-us-census-data.html\n>>> >\n>>>         for instructions).\n>>>\n>>>         I believe that this error was introduced by version 2.0 of the\n>>>         acs package,\n>>>         which was just released. I suspect that choroplethr is either\n>>>         not importing\n>>>         something that it should be importing, or acs is not exporting\n>>>         something\n>>>         that it should be exporting. For example, the problem can be\n>>>         fixed by\n>>>         simply loading the acs package first:\n>>>\n>>>         library(acs)\n>>>\n>>>         get_state_demographics()\n>>>\n>>>         <valid result>\n>>>\n>>>         The acs package uses both S3 and S4, which I do not have much\n>>>         experience\n>>>         with. I have been reading Hadley's excellent chapter on\n>>> Namespaces\n>>>         <http://r-pkgs.had.co.nz/namespace.html>, and tweaked various\n>>> import\n>>>         directives in the choroplethr package (the actual code that\n>>>         crashes is here\n>>>         <\n>>> https://github.com/arilamstein/choroplethr/blob/master/R/get_state_demograhpics.R#L42\n>>> >).\n>>>         But I am still not sure how to fix this problem.. Any help would\n>>> be\n>>>         appreciated.\n>>>\n>>>                  [[alternative HTML version deleted]]\n>>>\n>>>         ______________________________________________\n>>>         R-package-devel at r-project.org\n>>>         <mailto:R-package-devel at r-project.org> mailing list\n>>>         https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>>\n>>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Uwe,\n\nBased on what you report, it seems at least possible that the bug is\nrelated to some changes in R between versions.\n\nI just submitted an updated version of the package to CRAN that moves the\nacs",
+      "thread_id": "thread-1425c7b6a310",
+      "thread_depth": 5,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-2022348ea3bc",
+      "message_id": "<56FD149B.7080106@ivt.baug.ethz.ch>",
+      "from_name": "Kirill Müller",
+      "from_email_hash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
+      "date": "2016-03-31T14:14:19+02:00",
+      "subject": "[R-pkg-devel] Scripts to generate data objects",
+      "subject_clean": "[R-pkg-devel] Scripts to generate data objects",
+      "in_reply_to": "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>",
+      "references": [
+        "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>"
+      ],
+      "body_plain": "The devtools::use_data_raw() function creates a \"data-raw\" directory for \nthis purpose, and adds it to .Rbuildignore so that it's not included in \nthe built package. Your scripts can then write the data to the proper \nplace using devtools::use_data().\n\n\n-Kirill\n\n\nOn 30.03.2016 14:03, Iago Mosqueira wrote:\n> Hello,\n>\n> What is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the user, but I would like to keep them in the package itself. Right now I am storing them inside data/, for example PKG/data/datasetone.R to create PKG/data/dataseton.RData, and then adding those R files to .Rbuildignore.\n>\n> Are there any other sensible ways of doing this?\n>\n> Thanks,\n>\n>\n> Iago\n>\n>\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "The devtools::use_data_raw() function creates a \"data-raw\" directory for \nthis purpose, and adds it to .Rbuildignore so that it's not included in \nthe built package. Your scripts can then write the da",
+      "thread_id": "thread-66344e2c7d58",
+      "thread_depth": 1,
+      "month": "2016-03"
+    },
+    {
+      "id": "msg-f005863b7e74",
+      "message_id": "<22269.6265.540598.734326@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-03-31T07:30:49-05:00",
+      "subject": "[R-pkg-devel] Scripts to generate data objects",
+      "subject_clean": "[R-pkg-devel] Scripts to generate data objects",
+      "in_reply_to": "<56FD149B.7080106@ivt.baug.ethz.ch>",
+      "references": [
+        "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>",
+        "<56FD149B.7080106@ivt.baug.ethz.ch>"
+      ],
+      "body_plain": "On 31 March 2016 at 14:14, Kirill M?ller wrote:\n| The devtools::use_data_raw() function\n\nBut the question was about the best way ;-)   <ducks>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 31 March 2016 at 14:14, Kirill M?ller wrote:\n| The devtools::use_data_raw() function\n\nBut the question was about the best way ;-)   <ducks>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel |",
+      "thread_id": "thread-66344e2c7d58",
+      "thread_depth": 2,
+      "month": "2016-03"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-175219f14ba0",
+      "subject": "[R-pkg-devel] Linking an R package to the Python library",
+      "message_count": 2,
+      "participants": [
+        "Bruce Hoff",
+        "Johannes Ranke"
+      ],
+      "started": "2016-03-01T08:16:09+01:00",
+      "last_reply": "2016-03-01T08:40:36-08:00",
+      "root_message_id": "msg-175219f14ba0"
+    },
+    {
+      "id": "thread-bb6d334d046f",
+      "subject": "[R-pkg-devel] Is it possible to protect a word from the spell checker?",
+      "message_count": 9,
+      "participants": [
+        "Duncan Murdoch",
+        "Hana Sevcikova",
+        "Jack Wasey",
+        "Martin Maechler",
+        "Michael Dewey",
+        "Uwe Ligges",
+        "boB Rudis"
+      ],
+      "started": "2016-03-01T16:47:52+00:00",
+      "last_reply": "2016-03-07T08:12:02-05:00",
+      "root_message_id": "msg-bb6d334d046f"
+    },
+    {
+      "id": "thread-d48b58224f0d",
+      "subject": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
+      "message_count": 10,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Martyn Plummer",
+        "Sebastien Moretti",
+        "Sébastien Moretti",
+        "Uwe Ligges",
+        "luke-tierney at uiowa.edu"
+      ],
+      "started": "2016-03-03T15:26:59+01:00",
+      "last_reply": "2016-03-04T19:19:37+01:00",
+      "root_message_id": "msg-d48b58224f0d"
+    },
+    {
+      "id": "thread-d6b16a3dad88",
+      "subject": "[R-pkg-devel] documentation of generic '['",
+      "message_count": 4,
+      "participants": [
+        "Berri, Stefano",
+        "Duncan Murdoch",
+        "Joris Meys"
+      ],
+      "started": "2016-03-09T12:10:15+00:00",
+      "last_reply": "2016-03-09T13:32:30+00:00",
+      "root_message_id": "msg-d6b16a3dad88"
+    },
+    {
+      "id": "thread-44bfa13e41b9",
+      "subject": "[R-pkg-devel] Creating Accessor Methods",
+      "message_count": 6,
+      "participants": [
+        "Daniel Nüst",
+        "Glenn Schultz",
+        "Joris Meys",
+        "Kasper Daniel Hansen",
+        "Thomas Petzoldt"
+      ],
+      "started": "2016-03-10T08:05:02-06:00",
+      "last_reply": "2016-03-10T21:01:43-05:00",
+      "root_message_id": "msg-44bfa13e41b9"
+    },
+    {
+      "id": "thread-09a68996934d",
+      "subject": "[R-pkg-devel] No reference output from knitr vignettes",
+      "message_count": 1,
+      "participants": [
+        "Henric Winell"
+      ],
+      "started": "2016-03-16T18:07:20+01:00",
+      "last_reply": "2016-03-16T18:07:20+01:00",
+      "root_message_id": "msg-09a68996934d"
+    },
+    {
+      "id": "thread-40554154f18e",
+      "subject": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "message_count": 2,
+      "participants": [
+        "Hadley Wickham",
+        "Manny Calavera"
+      ],
+      "started": "2016-03-18T13:20:56+01:00",
+      "last_reply": "2016-03-18T09:11:18-05:00",
+      "root_message_id": "msg-40554154f18e"
+    },
+    {
+      "id": "thread-6ac867332148",
+      "subject": "[R-pkg-devel] Documenting S4 generic does not show usage",
+      "message_count": 2,
+      "participants": [
+        "Hadley Wickham",
+        "Manny Calavera"
+      ],
+      "started": "2016-03-21T17:06:36+01:00",
+      "last_reply": "2016-03-21T11:10:01-05:00",
+      "root_message_id": "msg-6ac867332148"
+    },
+    {
+      "id": "thread-b97bb315c642",
+      "subject": "[R-pkg-devel] Data-generating scripts in R packages",
+      "message_count": 8,
+      "participants": [
+        "Brian G. Peterson",
+        "Dirk Eddelbuettel",
+        "Enrico Schumann",
+        "Jack Wasey",
+        "Kevin Coombes",
+        "Rolf Turner",
+        "Thierry Onkelinx"
+      ],
+      "started": "2016-03-22T08:52:03-04:00",
+      "last_reply": "2016-03-23T10:53:00-04:00",
+      "root_message_id": "msg-b97bb315c642"
+    },
+    {
+      "id": "thread-8c2497f4ce19",
+      "subject": "[R-pkg-devel] Is it possible to reverse engineer a package from the installed library directory ?",
+      "message_count": 4,
+      "participants": [
+        "Ben Bolker",
+        "Georgi Boshnakov",
+        "Joshua Ulrich",
+        "Paul Hurley"
+      ],
+      "started": "2016-03-23T20:43:36+00:00",
+      "last_reply": "2016-03-24T07:43:46+00:00",
+      "root_message_id": "msg-8c2497f4ce19"
+    },
+    {
+      "id": "thread-1425c7b6a310",
+      "subject": "[R-pkg-devel] “unable to find an inherited method” error in choroplethr package",
+      "message_count": 6,
+      "participants": [
+        "Uwe Ligges",
+        "arilamstein at gmail.com"
+      ],
+      "started": "2016-03-25T13:55:42-07:00",
+      "last_reply": "2016-03-30T09:55:28-07:00",
+      "root_message_id": "msg-1425c7b6a310"
+    },
+    {
+      "id": "thread-8c48b56cbea5",
+      "subject": "[R-pkg-devel] set generic and methods when slot is a function",
+      "message_count": 3,
+      "participants": [
+        "Glenn Schultz",
+        "Kasper Daniel Hansen"
+      ],
+      "started": "2016-03-28T13:09:19-05:00",
+      "last_reply": "2016-03-28T18:27:13-05:00",
+      "root_message_id": "msg-8c48b56cbea5"
+    },
+    {
+      "id": "thread-66344e2c7d58",
+      "subject": "[R-pkg-devel] Scripts to generate data objects",
+      "message_count": 4,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Iago Mosqueira",
+        "Kirill Müller"
+      ],
+      "started": "2016-03-30T14:03:33+02:00",
+      "last_reply": "2016-03-31T07:30:49-05:00",
+      "root_message_id": "msg-66344e2c7d58"
+    }
+  ]
+}

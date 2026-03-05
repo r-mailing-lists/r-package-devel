@@ -1,0 +1,369 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-03",
+  "messages": [
+    {
+      "id": "msg-82c7d2ec8f08",
+      "message_id": "<CAPRVBcxEuJrFKjoBJhdo5v87SFtWAOzFvZKAc6eGxfMdBOt8iw@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-03-01T10:55:18+08:00",
+      "subject": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "subject_clean": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "in_reply_to": "<YTBPR01MB37427BE8B9ABF83A8E529D698070A@YTBPR01MB3742.CANPRD01.PROD.OUTLOOK.COM>",
+      "references": [
+        "<YTBPR01MB37427BE8B9ABF83A8E529D698070A@YTBPR01MB3742.CANPRD01.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Hi Azadeh,\n\nThe first thing to do when you see an issue traceable to another package is\nto check their results page to see if they have the same issue; they do:\n\nhttps://cran.r-project.org/web/checks/check_results_systemfonts.html\n\nThe almost certain outcome is that the authors are aware and preparing a\nfix in time for their deadline and you'll be unaffected.\n\nYou can also mention this to the CRAN maintainers on submission; it will be\nat their discretion whether this is a blocking issue but it seems unlikely\nthis will lead to a package rejection. You could also wait until system\nfonts is updated to avoid any friction.\n\nMike C\n\nOn Sun, Mar 1, 2026, 7:05?AM Azadeh Bayani <azadeh.bayani at umontreal.ca>\nwrote:\n\n> Dear R-package-devel,\n> I am encountering a CRAN pretest installation WARNING under Debian clang\n> (R-devel), and I would appreciate guidance.\n> My package (LABTNSCPSS) contains no compiled code.\n> Local R CMD check --as-cran on macOS results in 0 errors and 0 warnings.\n> However, CRAN pretest reports:\n> * checking whether package ?LABTNSCPSS? can be installed ... WARNING\n> Found the following significant warnings:\n>   font_matching.cpp:230:37: warning: comparison of floating-point type\n> 'double' with enumeration type 'FontWidth' is deprecated\n> [-Wdeprecated-enum-float-conversion]\n>   ...\n>   agg/src/agg_vcgen_stroke.cpp:202:42: warning: bitwise operation between\n> different enumeration types ...\n> These warnings appear to originate from systemfonts (and its bundled agg\n> code), which is being compiled during installation.\n> My DESCRIPTION Imports are:\n> Imports:\n> dplyr, magrittr, tibble, checkmate, tidyselect,\n> data.table, stringi, lubridate, purrr, tidyr, glue\n> There is no direct dependency on ggplot2, systemfonts, ragg, or svglite.\n> Questions:\n>\n>   1.\n> Why would systemfonts be compiled during CRAN checks for this package?\n>   2.\n> Is this considered an upstream issue with systemfonts under clang 21?\n>   3.\n> Is there a recommended way to prevent this installation WARNING when the\n> package itself contains no compiled code?\n>\n> Thank you very much for your time and assistance.\n> The source tarball is available here:\n>\n> https://github.com/bayaniazadeh/LabTNSCPSSPackage/blob/main/LABTNSCPSS_1.0.2.tar.gz\n> Best regards,\n> Azadeh Bayani\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Azadeh,\n\nThe first thing to do when you see an issue traceable to another package is\nto check their results page to see if they have the same issue; they do:\n\nhttps://cran.r-project.org/web/checks/",
+      "thread_id": "thread-82c7d2ec8f08",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-df743fcfcfdb",
+      "message_id": "<C0F07110-0E2C-45E8-8D2D-CBC2FE2E6910@xs4all.nl>",
+      "from_name": "Berend Hasselman",
+      "from_email_hash": "17a9f9a08e46a88b44ead0b1767633a861c70fd505a5c038522133ba3f4cbdd2",
+      "date": "2026-03-02T16:35:33+01:00",
+      "subject": "[R-pkg-devel] Package nleqslv",
+      "subject_clean": "[R-pkg-devel] Package nleqslv",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear members\n\nI am currently in a hospice due to a severe illness.\nI can nol longer maintain package nleqslv.\n\nI would like to handover maintenance and further extension to someone else.\n\nyours gratefully\nBerend Hasselman",
+      "body_snippet": "Dear members\n\nI am currently in a hospice due to a severe illness.\nI can nol longer maintain package nleqslv.\n\nI would like to handover maintenance and further extension to someone else.\n\nyours gratef",
+      "thread_id": "thread-df743fcfcfdb",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-9a94f057f833",
+      "message_id": "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+      "from_name": "Louise McMillan",
+      "from_email_hash": "a37f92fef39b2e5edf48bae2a451bf0840637cc48c9e5022a17ba5c94788090a",
+      "date": "2026-03-02T22:36:15Z",
+      "subject": "[R-pkg-devel] Different unit test results on MacOS",
+      "subject_clean": "[R-pkg-devel] Different unit test results on MacOS",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nMy package is called clustord (Github latest version at github.com/vuw-clustering/clustord, and version 2.0.0 pushed to CRAN yesterday 2nd March 2026.)\n\nI have an odd problem: I added a function to my package and an extensive set of unit tests for it, and the unit tests run correctly on Windows and Linux, but half of one single file out of the three test files runs differently on MacOS than it does on Windows and Linux, and fails the tests.\n\nThe package is a clustering package, and the new function is designed to be able to reorder the output clusters in order of their cluster effect sizes. The unit tests run the clustering algorithm and then the reorder function on a simulated dataset and then check the output orderings against what I've manually worked out the ordering should be.\n\nThe dataset simulation process uses randomness, and the clustering algorithm uses randomness, but the reordering does not. The start of each section of the test script is set.seed(), in order to ensure the dataset is always the same, and then that seed should also fix the output of the clustering algorithm that runs just after the dataset simulation. So therefore the results should always be the same on all operating systems. This is why I'm so puzzled that almost all of the different versions of this test work on MacOS as on Windows and Linux, but this particular version of the test runs differently on MacOS, even though I set the seed at the start of simulating the dataset for this specific test run.\n\nSince I do not have a Mac, it is difficult for me to debug it, though I can see the error when the push to Github triggers the Github Actions check, which runs on multiple OSs.\n\nThe start of the section of the test script that's failing is:\n\n------------------------------\n    library(clustord)\n    ## Dataset simulation\n    set.seed(30)\n    n <- 30\n    p <- 5\n    long_df_sim <- data.frame(Y=factor(sample(1:3,n*p,replace=TRUE)),\n                              ROW=rep(1:n,times=p),COL=rep(1:p,each=n))\n\n    xr1 <- runif(n, min=0, max=2)\n    xr2 <- sample(c(\"A\",\"B\"),size=n, replace=TRUE, prob=c(0.3,0.7))\n    xr3 <- factor(sample(1:4, size=n, replace=TRUE))\n\n    xc1 <- runif(p, min=-1, max=1)\n\n    long_df_sim$xr1 <- rep(xr1, times=5)\n    long_df_sim$xr2 <- rep(xr2, times=5)\n    long_df_sim$xr3 <- rep(xr3, times=5)\n    long_df_sim$xc1 <- rep(xc1, each=30)\n\n    ## Clustering algorithm\n    # OSM results --------------------------------------------------------------\n    ## Model 1 ----\n    orig <- clustord(Y~ROWCLUST*xr1+xr2*xr3+COL, model=\"OSM\", RG=4,\n                     long_df=long_df_sim, nstarts=1, constraint_sum_zero = FALSE,\n                     control_EM=list(maxiter=3,maxiter_start=2,keep_all_params=TRUE))\n------------------------------\n\nThis section is just the dataset simulation and the clustering algorithm. The reordering checks afterwards are failing, but I think it's more likely it's because the clustering algorithm is somehow producing a different result on the Mac than because the reordering (which is deterministic) is somehow producing a different result on the Mac.\n\nIff you display orig$out_parlist after running the above code, I expect the $rowc values to be\n\n$rowc\n     rowc_1      rowc_2      rowc_3      rowc_4\n 0.00000000  0.08713465 -0.26123294  0.05820879\n\nI will keep investigating this myself, but if anyone has any suggestions why the randomness might be working slightly differently on the Mac, or any other possible causes for occasional mismatches between MacOS and other OSs, I would really appreciate reading them.\n\nThanks very much\nLouise\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nMy package is called clustord (Github latest version at github.com/vuw-clustering/clustord, and version 2.0.0 pushed to CRAN yesterday 2nd March 2026.)\n\nI have an odd problem: I added a function ",
+      "thread_id": "thread-9a94f057f833",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-1b649e3392d6",
+      "message_id": "<SYZPR01MB77076478B8C2C8763FCD9CD5BA7FA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+      "from_name": "Louise McMillan",
+      "from_email_hash": "a37f92fef39b2e5edf48bae2a451bf0840637cc48c9e5022a17ba5c94788090a",
+      "date": "2026-03-03T04:06:34Z",
+      "subject": "[R-pkg-devel] Different unit test results on MacOS",
+      "subject_clean": "[R-pkg-devel] Different unit test results on MacOS",
+      "in_reply_to": "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+      "references": [
+        "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>"
+      ],
+      "body_plain": "Hi,\n\nQuick follow-up: after editing the tests on a branch of the repository so that they spit out various values for debug purposes, I have observed that the simulated datasets generated in the tests are the same on all OSs, but the values that the algorithm has at the point where it starts the EM algorithm stage are not. As I am short on time for  now, I am going to convert the unit tests of the reordering step so that they are applying reordering to a pre-run saved set of clustering output objects. In the long run, I need to diagnose where the differences are between the starting points generated by the three OSs.\n\nSo I have no need for further assistance right now, but thanks for reading.\n\nLouise\n________________________________\nFrom: Louise McMillan <louise.mcmillan at vuw.ac.nz>\nSent: Tuesday, 3 March 2026 11:36 am\nTo: r-package-devel at r-project.org <r-package-devel at r-project.org>\nSubject: Different unit test results on MacOS\n\nHi,\n\nMy package is called clustord (Github latest version at github.com/vuw-clustering/clustord, and version 2.0.0 pushed to CRAN yesterday 2nd March 2026.)\n\nI have an odd problem: I added a function to my package and an extensive set of unit tests for it, and the unit tests run correctly on Windows and Linux, but half of one single file out of the three test files runs differently on MacOS than it does on Windows and Linux, and fails the tests.\n\nThe package is a clustering package, and the new function is designed to be able to reorder the output clusters in order of their cluster effect sizes. The unit tests run the clustering algorithm and then the reorder function on a simulated dataset and then check the output orderings against what I've manually worked out the ordering should be.\n\nThe dataset simulation process uses randomness, and the clustering algorithm uses randomness, but the reordering does not. The start of each section of the test script is set.seed(), in order to ensure the dataset is always the same, and then that seed should also fix the output of the clustering algorithm that runs just after the dataset simulation. So therefore the results should always be the same on all operating systems. This is why I'm so puzzled that almost all of the different versions of this test work on MacOS as on Windows and Linux, but this particular version of the test runs differently on MacOS, even though I set the seed at the start of simulating the dataset for this specific test run.\n\nSince I do not have a Mac, it is difficult for me to debug it, though I can see the error when the push to Github triggers the Github Actions check, which runs on multiple OSs.\n\nThe start of the section of the test script that's failing is:\n\n------------------------------\n    library(clustord)\n    ## Dataset simulation\n    set.seed(30)\n    n <- 30\n    p <- 5\n    long_df_sim <- data.frame(Y=factor(sample(1:3,n*p,replace=TRUE)),\n                              ROW=rep(1:n,times=p),COL=rep(1:p,each=n))\n\n    xr1 <- runif(n, min=0, max=2)\n    xr2 <- sample(c(\"A\",\"B\"),size=n, replace=TRUE, prob=c(0.3,0.7))\n    xr3 <- factor(sample(1:4, size=n, replace=TRUE))\n\n    xc1 <- runif(p, min=-1, max=1)\n\n    long_df_sim$xr1 <- rep(xr1, times=5)\n    long_df_sim$xr2 <- rep(xr2, times=5)\n    long_df_sim$xr3 <- rep(xr3, times=5)\n    long_df_sim$xc1 <- rep(xc1, each=30)\n\n    ## Clustering algorithm\n    # OSM results --------------------------------------------------------------\n    ## Model 1 ----\n    orig <- clustord(Y~ROWCLUST*xr1+xr2*xr3+COL, model=\"OSM\", RG=4,\n                     long_df=long_df_sim, nstarts=1, constraint_sum_zero = FALSE,\n                     control_EM=list(maxiter=3,maxiter_start=2,keep_all_params=TRUE))\n------------------------------\n\nThis section is just the dataset simulation and the clustering algorithm. The reordering checks afterwards are failing, but I think it's more likely it's because the clustering algorithm is somehow producing a different result on the Mac than because the reordering (which is deterministic) is somehow producing a different result on the Mac.\n\nIff you display orig$out_parlist after running the above code, I expect the $rowc values to be\n\n$rowc\n     rowc_1      rowc_2      rowc_3      rowc_4\n 0.00000000  0.08713465 -0.26123294  0.05820879\n\nI will keep investigating this myself, but if anyone has any suggestions why the randomness might be working slightly differently on the Mac, or any other possible causes for occasional mismatches between MacOS and other OSs, I would really appreciate reading them.\n\nThanks very much\nLouise\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nQuick follow-up: after editing the tests on a branch of the repository so that they spit out various values for debug purposes, I have observed that the simulated datasets generated in the tests ",
+      "thread_id": "thread-9a94f057f833",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-ef6175be67af",
+      "message_id": "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "4861a2b833132ccee758def2caa0ac4dc6bbdf1b2c4e2f28a1b1b8a43ceeb278",
+      "date": "2026-03-02T21:08:05-08:00",
+      "subject": "[R-pkg-devel] Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "subject_clean": "[R-pkg-devel] Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've started to get:\n\n* checking CRAN incoming feasibility ... NOTE\n  Found the following (possibly) invalid URLs:\n    URL: https://www.winehq.org/\n      From: inst/doc/parallelly-22-wine-workers.html\n      Status: 403\n      Message: Forbidden\n\nwhen R CMD check:ing 'parallelly'. The page <https://www.winehq.org/>\nworks fine in the web browser, but it blocked (by Cloudflare)\nelsewhere, e.g.\n\n$ curl --silent --head https://www.winehq.org/ | head -1\nHTTP/2 403\n\nand\n\n$ wget https://www.winehq.org/\n--2026-03-02 21:01:12--  https://www.winehq.org/\nResolving www.winehq.org (www.winehq.org)... 104.26.8.100,\n172.67.69.38, 104.26.9.100, ...\nConnecting to www.winehq.org (www.winehq.org)|104.26.8.100|:443... connected.\nHTTP request sent, awaiting response... 403 Forbidden\n2026-03-02 21:01:12 ERROR 403: Forbidden.\n\nI can only guess, but I suspect that <https://www.winehq.org/> started\nto do this to protect against AI-scraping bots, or similar. I can\nimagine more websites to do the same.\n\nTo avoid having to deal with this check NOTE everywhere (e.g. locally,\nCI, and on CRAN submission), my current strategy is to switch from\n\\url{https://www.winehq.org/} to \\code{https://www.winehq.org/} in the\ndocs. Does anyone else have a better idea?\n\n/Henrik",
+      "body_snippet": "I've started to get:\n\n* checking CRAN incoming feasibility ... NOTE\n  Found the following (possibly) invalid URLs:\n    URL: https://www.winehq.org/\n      From: inst/doc/parallelly-22-wine-workers.html",
+      "thread_id": "thread-ef6175be67af",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-b20ceb7673b5",
+      "message_id": "<B787DA43-C597-4BDD-B4E7-D0C53473F784@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-03-03T20:01:13+13:00",
+      "subject": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "subject_clean": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "in_reply_to": "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>"
+      ],
+      "body_plain": "Henrik,\n\nyes, that's quite annoying - they respond with a 403 which *does* have html content which the browsers display and that page contains JavaScript code which calls a CGI script on their server which bounces to CF's server which after 7(!) more requests finally sets the challenge cookie and re-directs back to winehq.org. However, what is truly annoying, the response is the same whether the resource exists or not, so there is no way to verify the URL. I'm somewhat shocked that they rely on the browsers showing the error page and hijack it to quickly re-direct from it so the user isn't even aware they the server responded with an error.\n\nMore practically, I don't see that we can do anything about it. Those are URLs are truly responding with an error, so short of emulating a full browser with JavaScript (they also do fingerprinting etc. so it's distinctly non-trivial - by design) there is no way to verify them. Given the amount of shenanigans that page does with the user's browser I'd say your approach is probably good since the user won't accidentally click on the link then :). But more seriously, this is a problem since the idea behind checking URLs is a good one - they do disappear or change quite often, so not checking them is not an answer, either.\n\nOne special-case approach for cases like you mentioned (i.e. where you want to check a top-domain as opposed to a specific resource) is to use a resource that is guaranteed (by design) to be accessible by direct requests, so for example robots.txt. So for top-level URLs, we could fall back to checking https://winehq.org/robots.txt which does work (since most sites do want those to be directly accessible). However, it doesn't help with URLs containing specific paths as those will be still blocked.\n\nCheers,\nSimon\n\n\n\n> On 3/03/2026, at 18:08, Henrik Bengtsson <henrik.bengtsson at gmail.com> wrote:\n> \n> I've started to get:\n> \n> * checking CRAN incoming feasibility ... NOTE\n>  Found the following (possibly) invalid URLs:\n>    URL: https://www.winehq.org/\n>      From: inst/doc/parallelly-22-wine-workers.html\n>      Status: 403\n>      Message: Forbidden\n> \n> when R CMD check:ing 'parallelly'. The page <https://www.winehq.org/>\n> works fine in the web browser, but it blocked (by Cloudflare)\n> elsewhere, e.g.\n> \n> $ curl --silent --head https://www.winehq.org/ | head -1\n> HTTP/2 403\n> \n> and\n> \n> $ wget https://www.winehq.org/\n> --2026-03-02 21:01:12--  https://www.winehq.org/\n> Resolving www.winehq.org (www.winehq.org)... 104.26.8.100,\n> 172.67.69.38, 104.26.9.100, ...\n> Connecting to www.winehq.org (www.winehq.org)|104.26.8.100|:443... connected.\n> HTTP request sent, awaiting response... 403 Forbidden\n> 2026-03-02 21:01:12 ERROR 403: Forbidden.\n> \n> I can only guess, but I suspect that <https://www.winehq.org/> started\n> to do this to protect against AI-scraping bots, or similar. I can\n> imagine more websites to do the same.\n> \n> To avoid having to deal with this check NOTE everywhere (e.g. locally,\n> CI, and on CRAN submission), my current strategy is to switch from\n> \\url{https://www.winehq.org/} to \\code{https://www.winehq.org/} in the\n> docs. Does anyone else have a better idea?\n> \n> /Henrik\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Henrik,\n\nyes, that's quite annoying - they respond with a 403 which *does* have html content which the browsers display and that page contains JavaScript code which calls a CGI script on their server ",
+      "thread_id": "thread-ef6175be67af",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-3bd2e22030ac",
+      "message_id": "<27046.41726.702188.663853@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "a92f4a07d4e3cad5fba985e30db2b0fff598d5ddfbadbb2e91ffe91636400c62",
+      "date": "2026-03-03T09:59:42+01:00",
+      "subject": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "subject_clean": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "in_reply_to": "<fake-VM-id.5b81630d93aa39c4d069671047dadfac@talos.iv>",
+      "references": [
+        "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>",
+        "<B787DA43-C597-4BDD-B4E7-D0C53473F784@R-project.org>"
+      ],
+      "body_plain": ">>>>> Simon Urbanek \n>>>>>     on Tue, 3 Mar 2026 20:01:13 +1300 writes:\n\n    > Henrik, yes, that's quite annoying \n\nindeed, and similar for all those of us who do want to have\nresourceful help pages (and other R package documentation).\n\n\n    >  - they respond with a\n    > 403 which *does* have html content which the browsers\n    > display and that page contains JavaScript code which calls\n    > a CGI script on their server which bounces to CF's server\n    > which after 7(!) more requests finally sets the challenge\n    > cookie and re-directs back to winehq.org. However, what is\n    > truly annoying, the response is the same whether the\n    > resource exists or not, so there is no way to verify the\n    > URL. I'm somewhat shocked that they rely on the browsers\n    > showing the error page and hijack it to quickly re-direct\n    > from it so the user isn't even aware they the server\n    > responded with an error.\n\n    > More practically, I don't see that we can do anything\n    > about it. Those are URLs are truly responding with an\n    > error, so short of emulating a full browser with\n    > JavaScript (they also do fingerprinting etc. so it's\n    > distinctly non-trivial - by design) there is no way to\n    > verify them. Given the amount of shenanigans that page\n    > does with the user's browser I'd say your approach is\n    > probably good since the user won't accidentally click on\n    > the link then :). But more seriously, this is a problem\n    > since the idea behind checking URLs is a good one - they\n    > do disappear or change quite often, so not checking them\n    > is not an answer, either.\n\n    > One special-case approach for cases like you mentioned\n    > (i.e. where you want to check a top-domain as opposed to a\n    > specific resource) is to use a resource that is guaranteed\n    > (by design) to be accessible by direct requests, so for\n    > example robots.txt. So for top-level URLs, we could fall\n    > back to checking https://winehq.org/robots.txt which does\n    > work (since most sites do want those to be directly\n    > accessible). However, it doesn't help with URLs containing\n    > specific paths as those will be still blocked.\n\n    > Cheers, Simon\n\nThank you, Simon. Nice idea with `robots.txt`, but as you\nmention this will only apply to a relative tiny fraction of our\nurl's in R (package) documentation. ... or the 'R CMD check' R\nfunctions could always try  https://<toplevel>/robots.txt  if\nthe  https://<toplevel>/<morestuff> URL gives a 403 ... ? ...\n\nOTOH, isn't this rather a \"world-wide\" challenge/problem: \n\"\n I want to check if an https URL is \"valid\" (i.e., not invalid),\n but I don't need to get any other data from its http server.\n\"\nfor which e.g. the W3C (World Wide Web Consortium) or others\nshould have provided recommendations or even protocols and tools?\n\nMartin\n\n    >> On 3/03/2026, at 18:08, Henrik Bengtsson\n    >> <henrik.bengtsson at gmail.com> wrote:\n    >> \n    >> I've started to get:\n    >> \n    >> * checking CRAN incoming feasibility ... NOTE Found the\n    >> following (possibly) invalid URLs: URL:\n    >> https://www.winehq.org/ From:\n    >> inst/doc/parallelly-22-wine-workers.html Status: 403\n    >> Message: Forbidden\n    >> \n    >> when R CMD check:ing 'parallelly'. The page\n    >> <https://www.winehq.org/> works fine in the web browser,\n    >> but it blocked (by Cloudflare) elsewhere, e.g.\n    >> \n    >> $ curl --silent --head https://www.winehq.org/ | head -1\n    >> HTTP/2 403\n    >> \n    >> and\n    >> \n    >> $ wget https://www.winehq.org/ --2026-03-02 21:01:12--\n    >> https://www.winehq.org/ Resolving www.winehq.org\n    >> (www.winehq.org)... 104.26.8.100, 172.67.69.38,\n    >> 104.26.9.100, ...  Connecting to www.winehq.org\n    >> (www.winehq.org)|104.26.8.100|:443... connected.  HTTP\n    >> request sent, awaiting response... 403 Forbidden\n    >> 2026-03-02 21:01:12 ERROR 403: Forbidden.\n    >> \n    >> I can only guess, but I suspect that\n    >> <https://www.winehq.org/> started to do this to protect\n    >> against AI-scraping bots, or similar. I can imagine more\n    >> websites to do the same.\n    >> \n    >> To avoid having to deal with this check NOTE everywhere\n    >> (e.g. locally, CI, and on CRAN submission), my current\n    >> strategy is to switch from \\url{https://www.winehq.org/}\n    >> to \\code{https://www.winehq.org/} in the docs. Does\n    >> anyone else have a better idea?\n    >> \n    >> /Henrik",
+      "body_snippet": ">>>>> Simon Urbanek \n>>>>>     on Tue, 3 Mar 2026 20:01:13 +1300 writes:\n\n    > Henrik, yes, that's quite annoying \n\nindeed, and similar for all those of us who do want to have\nresourceful help pages ",
+      "thread_id": "thread-ef6175be67af",
+      "thread_depth": 2,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-c0d181f30d27",
+      "message_id": "<CAAS8PALefpenrk4BJghCFdJqLk8JVo4QWxZhYkBydy+XtAE8-A@mail.gmail.com>",
+      "from_name": "Greg Hunt",
+      "from_email_hash": "6680a1473ccc317fcdbb73d87f2fd510c00f5c689458225a71f5fb4768f07f7b",
+      "date": "2026-03-03T20:35:15+11:00",
+      "subject": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "subject_clean": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "in_reply_to": "<27046.41726.702188.663853@stat.math.ethz.ch>",
+      "references": [
+        "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>",
+        "<B787DA43-C597-4BDD-B4E7-D0C53473F784@R-project.org>",
+        "<fake-VM-id.5b81630d93aa39c4d069671047dadfac@talos.iv>",
+        "<27046.41726.702188.663853@stat.math.ethz.ch>"
+      ],
+      "body_plain": "Martin,\nW3C did.  The HTTP HEAD verb does something like what you want, but the\npoint of something like CloudFlare is to keep problematic (not a person\nclicking a link) workload off the target server entirely.  Detail like\nindividual resources is only resolved when you get to the server after\ninteracting with Cloudflare.\n\nGreg\n\nOn Tue, 3 Mar 2026 at 19:59, Martin Maechler <maechler at stat.math.ethz.ch>\nwrote:\n\n> >>>>> Simon Urbanek\n> >>>>>     on Tue, 3 Mar 2026 20:01:13 +1300 writes:\n>\n>     > Henrik, yes, that's quite annoying\n>\n> indeed, and similar for all those of us who do want to have\n> resourceful help pages (and other R package documentation).\n>\n>\n>     >  - they respond with a\n>     > 403 which *does* have html content which the browsers\n>     > display and that page contains JavaScript code which calls\n>     > a CGI script on their server which bounces to CF's server\n>     > which after 7(!) more requests finally sets the challenge\n>     > cookie and re-directs back to winehq.org. However, what is\n>     > truly annoying, the response is the same whether the\n>     > resource exists or not, so there is no way to verify the\n>     > URL. I'm somewhat shocked that they rely on the browsers\n>     > showing the error page and hijack it to quickly re-direct\n>     > from it so the user isn't even aware they the server\n>     > responded with an error.\n>\n>     > More practically, I don't see that we can do anything\n>     > about it. Those are URLs are truly responding with an\n>     > error, so short of emulating a full browser with\n>     > JavaScript (they also do fingerprinting etc. so it's\n>     > distinctly non-trivial - by design) there is no way to\n>     > verify them. Given the amount of shenanigans that page\n>     > does with the user's browser I'd say your approach is\n>     > probably good since the user won't accidentally click on\n>     > the link then :). But more seriously, this is a problem\n>     > since the idea behind checking URLs is a good one - they\n>     > do disappear or change quite often, so not checking them\n>     > is not an answer, either.\n>\n>     > One special-case approach for cases like you mentioned\n>     > (i.e. where you want to check a top-domain as opposed to a\n>     > specific resource) is to use a resource that is guaranteed\n>     > (by design) to be accessible by direct requests, so for\n>     > example robots.txt. So for top-level URLs, we could fall\n>     > back to checking https://winehq.org/robots.txt which does\n>     > work (since most sites do want those to be directly\n>     > accessible). However, it doesn't help with URLs containing\n>     > specific paths as those will be still blocked.\n>\n>     > Cheers, Simon\n>\n> Thank you, Simon. Nice idea with `robots.txt`, but as you\n> mention this will only apply to a relative tiny fraction of our\n> url's in R (package) documentation. ... or the 'R CMD check' R\n> functions could always try  https://<toplevel>/robots.txt  if\n> the  https://<toplevel>/<morestuff> URL gives a 403 ... ? ...\n>\n> OTOH, isn't this rather a \"world-wide\" challenge/problem:\n> \"\n>  I want to check if an https URL is \"valid\" (i.e., not invalid),\n>  but I don't need to get any other data from its http server.\n> \"\n> for which e.g. the W3C (World Wide Web Consortium) or others\n> should have provided recommendations or even protocols and tools?\n>\n> Martin\n>\n>     >> On 3/03/2026, at 18:08, Henrik Bengtsson\n>     >> <henrik.bengtsson at gmail.com> wrote:\n>     >>\n>     >> I've started to get:\n>     >>\n>     >> * checking CRAN incoming feasibility ... NOTE Found the\n>     >> following (possibly) invalid URLs: URL:\n>     >> https://www.winehq.org/ From:\n>     >> inst/doc/parallelly-22-wine-workers.html Status: 403\n>     >> Message: Forbidden\n>     >>\n>     >> when R CMD check:ing 'parallelly'. The page\n>     >> <https://www.winehq.org/> works fine in the web browser,\n>     >> but it blocked (by Cloudflare) elsewhere, e.g.\n>     >>\n>     >> $ curl --silent --head https://www.winehq.org/ | head -1\n>     >> HTTP/2 403\n>     >>\n>     >> and\n>     >>\n>     >> $ wget https://www.winehq.org/ --2026-03-02 21:01:12--\n>     >> https://www.winehq.org/ Resolving www.winehq.org\n>     >> (www.winehq.org)... 104.26.8.100, 172.67.69.38,\n>     >> 104.26.9.100, ...  Connecting to www.winehq.org\n>     >> (www.winehq.org)|104.26.8.100|:443... connected.  HTTP\n>     >> request sent, awaiting response... 403 Forbidden\n>     >> 2026-03-02 21:01:12 ERROR 403: Forbidden.\n>     >>\n>     >> I can only guess, but I suspect that\n>     >> <https://www.winehq.org/> started to do this to protect\n>     >> against AI-scraping bots, or similar. I can imagine more\n>     >> websites to do the same.\n>     >>\n>     >> To avoid having to deal with this check NOTE everywhere\n>     >> (e.g. locally, CI, and on CRAN submission), my current\n>     >> strategy is to switch from \\url{https://www.winehq.org/}\n>     >> to \\code{https://www.winehq.org/} in the docs. Does\n>     >> anyone else have a better idea?\n>     >>\n>     >> /Henrik\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Martin,\nW3C did.  The HTTP HEAD verb does something like what you want, but the\npoint of something like CloudFlare is to keep problematic (not a person\nclicking a link) workload off the target server ",
+      "thread_id": "thread-ef6175be67af",
+      "thread_depth": 3,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-3db18f06a862",
+      "message_id": "<CAJmOi+Og-R7BZuGGvnCFfZaESDDgSmEt64rtQN9e2dXsFjqyzw@mail.gmail.com>",
+      "from_name": "Hugh Parsonage",
+      "from_email_hash": "a89c372a54c568c3603f3612df869407f3ff241d82a5bcd03ca989dc9a036f3b",
+      "date": "2026-03-03T21:07:09+11:00",
+      "subject": "[R-pkg-devel] Different unit test results on MacOS",
+      "subject_clean": "[R-pkg-devel] Different unit test results on MacOS",
+      "in_reply_to": "<SYZPR01MB77076478B8C2C8763FCD9CD5BA7FA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+      "references": [
+        "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+        "<SYZPR01MB77076478B8C2C8763FCD9CD5BA7FA@SYZPR01MB7707.ausprd01.prod.outlook.com>"
+      ],
+      "body_plain": "Smells like a arm64 ? `parallel_starts` precision issue: Try\n\nSys.setenv(\n  OMP_NUM_THREADS=\"1\",\n  OPENBLAS_NUM_THREADS=\"1\",\n  MKL_NUM_THREADS=\"1\",\n  VECLIB_MAXIMUM_THREADS=\"1\"  # important on macOS\n)\n\n# and (for diagnostics, on a Mac machine)\n\noptions(digits = 21)\n#or\nsprintf(\"%.<whatever produces the most precision>f\", \"Your info when tests\nfail %g\")\n\naround the numbers you expect to be ordered identically. Though I can't see\nparallel_starts invoked TRUE in your test suite, though I only looked\ncursorily.\n\nOn Tue, 3 Mar 2026 at 20:26, Louise McMillan <louise.mcmillan at vuw.ac.nz>\nwrote:\n\n> Hi,\n>\n> Quick follow-up: after editing the tests on a branch of the repository so\n> that they spit out various values for debug purposes, I have observed that\n> the simulated datasets generated in the tests are the same on all OSs, but\n> the values that the algorithm has at the point where it starts the EM\n> algorithm stage are not. As I am short on time for  now, I am going to\n> convert the unit tests of the reordering step so that they are applying\n> reordering to a pre-run saved set of clustering output objects. In the long\n> run, I need to diagnose where the differences are between the starting\n> points generated by the three OSs.\n>\n> So I have no need for further assistance right now, but thanks for reading.\n>\n> Louise\n> ________________________________\n> From: Louise McMillan <louise.mcmillan at vuw.ac.nz>\n> Sent: Tuesday, 3 March 2026 11:36 am\n> To: r-package-devel at r-project.org <r-package-devel at r-project.org>\n> Subject: Different unit test results on MacOS\n>\n> Hi,\n>\n> My package is called clustord (Github latest version at\n> github.com/vuw-clustering/clustord, and version 2.0.0 pushed to CRAN\n> yesterday 2nd March 2026.)\n>\n> I have an odd problem: I added a function to my package and an extensive\n> set of unit tests for it, and the unit tests run correctly on Windows and\n> Linux, but half of one single file out of the three test files runs\n> differently on MacOS than it does on Windows and Linux, and fails the tests.\n>\n> The package is a clustering package, and the new function is designed to\n> be able to reorder the output clusters in order of their cluster effect\n> sizes. The unit tests run the clustering algorithm and then the reorder\n> function on a simulated dataset and then check the output orderings against\n> what I've manually worked out the ordering should be.\n>\n> The dataset simulation process uses randomness, and the clustering\n> algorithm uses randomness, but the reordering does not. The start of each\n> section of the test script is set.seed(), in order to ensure the dataset is\n> always the same, and then that seed should also fix the output of the\n> clustering algorithm that runs just after the dataset simulation. So\n> therefore the results should always be the same on all operating systems.\n> This is why I'm so puzzled that almost all of the different versions of\n> this test work on MacOS as on Windows and Linux, but this particular\n> version of the test runs differently on MacOS, even though I set the seed\n> at the start of simulating the dataset for this specific test run.\n>\n> Since I do not have a Mac, it is difficult for me to debug it, though I\n> can see the error when the push to Github triggers the Github Actions\n> check, which runs on multiple OSs.\n>\n> The start of the section of the test script that's failing is:\n>\n> ------------------------------\n>     library(clustord)\n>     ## Dataset simulation\n>     set.seed(30)\n>     n <- 30\n>     p <- 5\n>     long_df_sim <- data.frame(Y=factor(sample(1:3,n*p,replace=TRUE)),\n>                               ROW=rep(1:n,times=p),COL=rep(1:p,each=n))\n>\n>     xr1 <- runif(n, min=0, max=2)\n>     xr2 <- sample(c(\"A\",\"B\"),size=n, replace=TRUE, prob=c(0.3,0.7))\n>     xr3 <- factor(sample(1:4, size=n, replace=TRUE))\n>\n>     xc1 <- runif(p, min=-1, max=1)\n>\n>     long_df_sim$xr1 <- rep(xr1, times=5)\n>     long_df_sim$xr2 <- rep(xr2, times=5)\n>     long_df_sim$xr3 <- rep(xr3, times=5)\n>     long_df_sim$xc1 <- rep(xc1, each=30)\n>\n>     ## Clustering algorithm\n>     # OSM results\n> --------------------------------------------------------------\n>     ## Model 1 ----\n>     orig <- clustord(Y~ROWCLUST*xr1+xr2*xr3+COL, model=\"OSM\", RG=4,\n>                      long_df=long_df_sim, nstarts=1, constraint_sum_zero =\n> FALSE,\n>\n>  control_EM=list(maxiter=3,maxiter_start=2,keep_all_params=TRUE))\n> ------------------------------\n>\n> This section is just the dataset simulation and the clustering algorithm.\n> The reordering checks afterwards are failing, but I think it's more likely\n> it's because the clustering algorithm is somehow producing a different\n> result on the Mac than because the reordering (which is deterministic) is\n> somehow producing a different result on the Mac.\n>\n> Iff you display orig$out_parlist after running the above code, I expect\n> the $rowc values to be\n>\n> $rowc\n>      rowc_1      rowc_2      rowc_3      rowc_4\n>  0.00000000  0.08713465 -0.26123294  0.05820879\n>\n> I will keep investigating this myself, but if anyone has any suggestions\n> why the randomness might be working slightly differently on the Mac, or any\n> other possible causes for occasional mismatches between MacOS and other\n> OSs, I would really appreciate reading them.\n>\n> Thanks very much\n> Louise\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Smells like a arm64 ? `parallel_starts` precision issue: Try\n\nSys.setenv(\n  OMP_NUM_THREADS=\"1\",\n  OPENBLAS_NUM_THREADS=\"1\",\n  MKL_NUM_THREADS=\"1\",\n  VECLIB_MAXIMUM_THREADS=\"1\"  # important on macOS\n)",
+      "thread_id": "thread-9a94f057f833",
+      "thread_depth": 2,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-c0f494ae1a89",
+      "message_id": "<20260303142429.2b2e65e0@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-03-03T14:24:29+03:00",
+      "subject": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "subject_clean": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "in_reply_to": "<YTBPR01MB37427BE8B9ABF83A8E529D698070A@YTBPR01MB3742.CANPRD01.PROD.OUTLOOK.COM>",
+      "references": [
+        "<YTBPR01MB37427BE8B9ABF83A8E529D698070A@YTBPR01MB3742.CANPRD01.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Dear Azadeh Bayani,\n\nWelcome to R-package-devel and thank you for providing enough\ninformation to diagnose the problem!\n\n? Sat, 28 Feb 2026 15:01:40 +0000\nAzadeh Bayani <azadeh.bayani at umontreal.ca> ?????:\n\n> These warnings appear to originate from systemfonts (and its bundled\n> agg code), which is being compiled during installation.\n\nThe source code of the LABTNSCPSS package contains the following in the\nfile R/setup_package.R:\n\n> # Install packages if not installed\n> install_if_missing <- function(packages) {\n>   new_packages <- packages[\n>     !(packages %in% installed.packages()[,\"Package\"])\n>   ]\n>   if (length(new_packages)) install.packages(new_packages)\n> }\n> \n> # List of required packages\n> required_packages <- c(\"usethis\", \"devtools\", \"tidyr\", \"data.table\",\n> \"glue\", \"plyr\", \"reshape2\", \"dplyr\", \"tidyr\", \"openxlsx\", \"lubridate\")\n> \n> # Install missing packages\n> install_if_missing(required_packages)\n> \n> # Load required packages\n> lapply(required_packages, library, character.only = TRUE)\n\nIf your package needs functions from these packages, it should declare\nthem in the Imports: field of the DESCRIPTION file and then either use\nthe fully qualified names of their exported functions (e.g.\ndata.table::IDateTime) or refer to them by name but then also list them\nin the NAMESPACE file (e.g. importFrom(data.table, IDateTime)). If you\nreally need the packages attached to the global environment (why?), you\ncan list these packages in Depends:\nhttps://cran.r-project.org/doc/manuals/R-exts.html#Package-Dependencies\n\nInstalling and loading packages by hand in your source code will break\nwhen a binary package is built from your source package (among other\nthings). A binary package contains the contents of the environment in\nwhich your source code was evaluated; it will not contain the calls to\ninstall.packages() and library() themselves. Therefore, the\ndependencies will not be installed and the side effects from library()\nloading and attaching the packages will also not happen. \n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Dear Azadeh Bayani,\n\nWelcome to R-package-devel and thank you for providing enough\ninformation to diagnose the problem!\n\n? Sat, 28 Feb 2026 15:01:40 +0000\nAzadeh Bayani <azadeh.bayani at umontreal.ca>",
+      "thread_id": "thread-c0f494ae1a89",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-0fa1b90a1da2",
+      "message_id": "<27046.52961.810149.784024@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-03-03T06:06:57-06:00",
+      "subject": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "subject_clean": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "in_reply_to": "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>"
+      ],
+      "body_plain": "On 2 March 2026 at 21:08, Henrik Bengtsson wrote:\n| To avoid having to deal with this check NOTE everywhere (e.g. locally,\n| CI, and on CRAN submission), my current strategy is to switch from\n| \\url{https://www.winehq.org/} to \\code{https://www.winehq.org/} in the\n| docs. Does anyone else have a better idea?\n\nNope, that is what I have done too per the standard '\"Dr Dr it hurts when I\ndo this\" \"So don't do this\"' approach.\n\nAlso use of archive.org for documentation links that have vanished with their\nservers. It may help to think of (most) web pages as temporary resources we\ncannot really rely not.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 2 March 2026 at 21:08, Henrik Bengtsson wrote:\n| To avoid having to deal with this check NOTE everywhere (e.g. locally,\n| CI, and on CRAN submission), my current strategy is to switch from\n| \\url{h",
+      "thread_id": "thread-ef6175be67af",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-2ab26320a0fe",
+      "message_id": "<aa745d46-5673-477f-a82c-ac1e2b447fa6@fau.de>",
+      "from_name": "Sebastian Meyer",
+      "from_email_hash": "b32c09dd3a31073d640ca6b0e4a9622b24387f298b03dc425beea12447839a33",
+      "date": "2026-03-03T13:39:29+01:00",
+      "subject": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "subject_clean": "[R-pkg-devel]  Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "in_reply_to": "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCSdvqzt5_=zwyoD2nvbHpPF+iwVQTgXtw=s-xBb0JJX3w@mail.gmail.com>"
+      ],
+      "body_plain": "Am 03.03.26 um 06:08 schrieb Henrik Bengtsson:\n> To avoid having to deal with this check NOTE everywhere (e.g. locally,\n> CI, and on CRAN submission), my current strategy is to switch from\n> \\url{https://www.winehq.org/} to \\code{https://www.winehq.org/} in the\n> docs. Does anyone else have a better idea?\n\\code{} is formally reserved for R code fragments, where, e.g., \\link is \ninterpreted, and it is by default rendered within single quotes in \nplain-text help.\n\nTo disable the hyperlink, you could use \\verb{} instead, or \\samp{} if \nyou want it single quotes. Both of these take verbatim input like \\url{}.\n\n\tSebastian Meyer",
+      "body_snippet": "Am 03.03.26 um 06:08 schrieb Henrik Bengtsson:\n> To avoid having to deal with this check NOTE everywhere (e.g. locally,\n> CI, and on CRAN submission), my current strategy is to switch from\n> \\url{http",
+      "thread_id": "thread-ef6175be67af",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-9c233b831238",
+      "message_id": "<4A0D3D91-29FE-498B-8885-DB4D689773EF@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-03-04T11:01:19+13:00",
+      "subject": "[R-pkg-devel] Different unit test results on MacOS",
+      "subject_clean": "[R-pkg-devel] Different unit test results on MacOS",
+      "in_reply_to": "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+      "references": [
+        "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>"
+      ],
+      "body_plain": "Louise,\n\nTL;DR this is not macOS specific - your test example is chaotic and thus will be influenced even by small changes in the precision beyond what is guaranteed, i.e. your assumptions are not generally valid and thus the tests don?t work. \n\nThe full story: floating point operation are deterministic, but may not yield the same results if varying precision is used. In most cases, the default precision is double-precision (53-bit significand) which is guaranteed to work on all CPUs, but R has the option to use extended precision (long double) for some operations (like accumulators in sums/means) if available which can be anywhere from 53 to 113-bits. Common CPUs derived from the Intel FPU use 64-bit significand which is only slightly more than double precision, but enough to make a difference in some cases. The arm CPUs used by Macs only support double precision, so any operations that are otherwise preformed with extended precision will be different. The differences will be very small, but your algorithm seems to be extremely sensitive to those - I think you're just testing the wrong thing (the output even says that it doesn't converge) since the result is chaotic (i.e. small changes have huge impact), not something you want to test.\n\nTo check what precision your R has, have a look at .Machine$longdouble.digits which will give you the precision of long doubles or NULL if there is no long double support in that build of R (given your results I bet you are using Intel-based CPU with 64-bit precision). You can check if your code is overly sensitive on your machine if you compile R with --disable-long-double which will make R only use double precision and then run your code - it does produce very different results on your example.\n\nCheers,\nSimon\n\n\n> On 3/03/2026, at 11:36, Louise McMillan <louise.mcmillan at vuw.ac.nz> wrote:\n> \n> Hi,\n> \n> My package is called clustord (Github latest version at github.com/vuw-clustering/clustord, and version 2.0.0 pushed to CRAN yesterday 2nd March 2026.)\n> \n> I have an odd problem: I added a function to my package and an extensive set of unit tests for it, and the unit tests run correctly on Windows and Linux, but half of one single file out of the three test files runs differently on MacOS than it does on Windows and Linux, and fails the tests.\n> \n> The package is a clustering package, and the new function is designed to be able to reorder the output clusters in order of their cluster effect sizes. The unit tests run the clustering algorithm and then the reorder function on a simulated dataset and then check the output orderings against what I've manually worked out the ordering should be.\n> \n> The dataset simulation process uses randomness, and the clustering algorithm uses randomness, but the reordering does not. The start of each section of the test script is set.seed(), in order to ensure the dataset is always the same, and then that seed should also fix the output of the clustering algorithm that runs just after the dataset simulation. So therefore the results should always be the same on all operating systems. This is why I'm so puzzled that almost all of the different versions of this test work on MacOS as on Windows and Linux, but this particular version of the test runs differently on MacOS, even though I set the seed at the start of simulating the dataset for this specific test run.\n> \n> Since I do not have a Mac, it is difficult for me to debug it, though I can see the error when the push to Github triggers the Github Actions check, which runs on multiple OSs.\n> \n> The start of the section of the test script that's failing is:\n> \n> ------------------------------\n>    library(clustord)\n>    ## Dataset simulation\n>    set.seed(30)\n>    n <- 30\n>    p <- 5\n>    long_df_sim <- data.frame(Y=factor(sample(1:3,n*p,replace=TRUE)),\n>                              ROW=rep(1:n,times=p),COL=rep(1:p,each=n))\n> \n>    xr1 <- runif(n, min=0, max=2)\n>    xr2 <- sample(c(\"A\",\"B\"),size=n, replace=TRUE, prob=c(0.3,0.7))\n>    xr3 <- factor(sample(1:4, size=n, replace=TRUE))\n> \n>    xc1 <- runif(p, min=-1, max=1)\n> \n>    long_df_sim$xr1 <- rep(xr1, times=5)\n>    long_df_sim$xr2 <- rep(xr2, times=5)\n>    long_df_sim$xr3 <- rep(xr3, times=5)\n>    long_df_sim$xc1 <- rep(xc1, each=30)\n> \n>    ## Clustering algorithm\n>    # OSM results --------------------------------------------------------------\n>    ## Model 1 ----\n>    orig <- clustord(Y~ROWCLUST*xr1+xr2*xr3+COL, model=\"OSM\", RG=4,\n>                     long_df=long_df_sim, nstarts=1, constraint_sum_zero = FALSE,\n>                     control_EM=list(maxiter=3,maxiter_start=2,keep_all_params=TRUE))\n> ------------------------------\n> \n> This section is just the dataset simulation and the clustering algorithm. The reordering checks afterwards are failing, but I think it's more likely it's because the clustering algorithm is somehow producing a different result on the Mac than because the reordering (which is deterministic) is somehow producing a different result on the Mac.\n> \n> Iff you display orig$out_parlist after running the above code, I expect the $rowc values to be\n> \n> $rowc\n>     rowc_1      rowc_2      rowc_3      rowc_4\n> 0.00000000  0.08713465 -0.26123294  0.05820879\n> \n> I will keep investigating this myself, but if anyone has any suggestions why the randomness might be working slightly differently on the Mac, or any other possible causes for occasional mismatches between MacOS and other OSs, I would really appreciate reading them.\n> \n> Thanks very much\n> Louise\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Louise,\n\nTL;DR this is not macOS specific - your test example is chaotic and thus will be influenced even by small changes in the precision beyond what is guaranteed, i.e. your assumptions are not gen",
+      "thread_id": "thread-9a94f057f833",
+      "thread_depth": 1,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-eb5c91159230",
+      "message_id": "<SYZPR01MB77073D1395AE4AABB7E62A4DBA7FA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+      "from_name": "Louise McMillan",
+      "from_email_hash": "a37f92fef39b2e5edf48bae2a451bf0840637cc48c9e5022a17ba5c94788090a",
+      "date": "2026-03-03T23:25:43Z",
+      "subject": "[R-pkg-devel] Different unit test results on MacOS",
+      "subject_clean": "[R-pkg-devel] Different unit test results on MacOS",
+      "in_reply_to": "<4A0D3D91-29FE-498B-8885-DB4D689773EF@R-project.org>",
+      "references": [
+        "<SYZPR01MB7707F8B35E6378A6CC9AE633BA7EA@SYZPR01MB7707.ausprd01.prod.outlook.com>",
+        "<4A0D3D91-29FE-498B-8885-DB4D689773EF@R-project.org>"
+      ],
+      "body_plain": "Hi Simon and Hugh,\n\nThat's extremely helpful, thank you for all the info. I have found a better solution for those tests in the meantime ? they are to test the reordering of the clustering output, so the output doesn't need to have converged, thus all the warnings because the clustering is just running briefly to produce any output. Your info will be very helpful for my further investigation into the variation between runs and between OSs.\n\nI agree that the algorithm is likely to be sensitive to small differences at the start, but when it's running in the proper mode to get good output, rather than just running briefly for test output, it chooses the best of many different starting points before working towards a good solution, so the variation at the start then has less of an impact.\n\nThanks\nLouise\n________________________________\nFrom: Simon Urbanek <simon.urbanek at R-project.org>\nSent: Wednesday, 4 March 2026 11:01 am\nTo: Louise McMillan <louise.mcmillan at vuw.ac.nz>\nCc: r-package-devel at r-project.org <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Different unit test results on MacOS\n\nLouise,\n\nTL;DR this is not macOS specific - your test example is chaotic and thus will be influenced even by small changes in the precision beyond what is guaranteed, i.e. your assumptions are not generally valid and thus the tests don?t work.\n\nThe full story: floating point operation are deterministic, but may not yield the same results if varying precision is used. In most cases, the default precision is double-precision (53-bit significand) which is guaranteed to work on all CPUs, but R has the option to use extended precision (long double) for some operations (like accumulators in sums/means) if available which can be anywhere from 53 to 113-bits. Common CPUs derived from the Intel FPU use 64-bit significand which is only slightly more than double precision, but enough to make a difference in some cases. The arm CPUs used by Macs only support double precision, so any operations that are otherwise preformed with extended precision will be different. The differences will be very small, but your algorithm seems to be extremely sensitive to those - I think you're just testing the wrong thing (the output even says that it doesn't converge) since the result is chaotic (i.e. small changes have huge impact), not something you want to test.\n\nTo check what precision your R has, have a look at .Machine$longdouble.digits which will give you the precision of long doubles or NULL if there is no long double support in that build of R (given your results I bet you are using Intel-based CPU with 64-bit precision). You can check if your code is overly sensitive on your machine if you compile R with --disable-long-double which will make R only use double precision and then run your code - it does produce very different results on your example.\n\nCheers,\nSimon\n\n\n> On 3/03/2026, at 11:36, Louise McMillan <louise.mcmillan at vuw.ac.nz> wrote:\n>\n> Hi,\n>\n> My package is called clustord (Github latest version at github.com/vuw-clustering/clustord, and version 2.0.0 pushed to CRAN yesterday 2nd March 2026.)\n>\n> I have an odd problem: I added a function to my package and an extensive set of unit tests for it, and the unit tests run correctly on Windows and Linux, but half of one single file out of the three test files runs differently on MacOS than it does on Windows and Linux, and fails the tests.\n>\n> The package is a clustering package, and the new function is designed to be able to reorder the output clusters in order of their cluster effect sizes. The unit tests run the clustering algorithm and then the reorder function on a simulated dataset and then check the output orderings against what I've manually worked out the ordering should be.\n>\n> The dataset simulation process uses randomness, and the clustering algorithm uses randomness, but the reordering does not. The start of each section of the test script is set.seed(), in order to ensure the dataset is always the same, and then that seed should also fix the output of the clustering algorithm that runs just after the dataset simulation. So therefore the results should always be the same on all operating systems. This is why I'm so puzzled that almost all of the different versions of this test work on MacOS as on Windows and Linux, but this particular version of the test runs differently on MacOS, even though I set the seed at the start of simulating the dataset for this specific test run.\n>\n> Since I do not have a Mac, it is difficult for me to debug it, though I can see the error when the push to Github triggers the Github Actions check, which runs on multiple OSs.\n>\n> The start of the section of the test script that's failing is:\n>\n> ------------------------------\n>    library(clustord)\n>    ## Dataset simulation\n>    set.seed(30)\n>    n <- 30\n>    p <- 5\n>    long_df_sim <- data.frame(Y=factor(sample(1:3,n*p,replace=TRUE)),\n>                              ROW=rep(1:n,times=p),COL=rep(1:p,each=n))\n>\n>    xr1 <- runif(n, min=0, max=2)\n>    xr2 <- sample(c(\"A\",\"B\"),size=n, replace=TRUE, prob=c(0.3,0.7))\n>    xr3 <- factor(sample(1:4, size=n, replace=TRUE))\n>\n>    xc1 <- runif(p, min=-1, max=1)\n>\n>    long_df_sim$xr1 <- rep(xr1, times=5)\n>    long_df_sim$xr2 <- rep(xr2, times=5)\n>    long_df_sim$xr3 <- rep(xr3, times=5)\n>    long_df_sim$xc1 <- rep(xc1, each=30)\n>\n>    ## Clustering algorithm\n>    # OSM results --------------------------------------------------------------\n>    ## Model 1 ----\n>    orig <- clustord(Y~ROWCLUST*xr1+xr2*xr3+COL, model=\"OSM\", RG=4,\n>                     long_df=long_df_sim, nstarts=1, constraint_sum_zero = FALSE,\n>                     control_EM=list(maxiter=3,maxiter_start=2,keep_all_params=TRUE))\n> ------------------------------\n>\n> This section is just the dataset simulation and the clustering algorithm. The reordering checks afterwards are failing, but I think it's more likely it's because the clustering algorithm is somehow producing a different result on the Mac than because the reordering (which is deterministic) is somehow producing a different result on the Mac.\n>\n> Iff you display orig$out_parlist after running the above code, I expect the $rowc values to be\n>\n> $rowc\n>     rowc_1      rowc_2      rowc_3      rowc_4\n> 0.00000000  0.08713465 -0.26123294  0.05820879\n>\n> I will keep investigating this myself, but if anyone has any suggestions why the randomness might be working slightly differently on the Mac, or any other possible causes for occasional mismatches between MacOS and other OSs, I would really appreciate reading them.\n>\n> Thanks very much\n> Louise\n>\n> [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Simon and Hugh,\n\nThat's extremely helpful, thank you for all the info. I have found a better solution for those tests in the meantime ? they are to test the reordering of the clustering output, so ",
+      "thread_id": "thread-9a94f057f833",
+      "thread_depth": 2,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-2cad6662c3b5",
+      "message_id": "<SY7P282MB6231A8D4209B50DF627229C8CD7CA@SY7P282MB6231.AUSP282.PROD.OUTLOOK.COM>",
+      "from_name": "Dario Strbenac",
+      "from_email_hash": "fbdab2274401eb52c26745455bbcbbecfe7b132d172d6b296c723c20f18d6dbf",
+      "date": "2026-03-04T09:00:04Z",
+      "subject": "[R-pkg-devel] Example Check Time Leeway for a Workflow-style Package",
+      "subject_clean": "[R-pkg-devel] Example Check Time Leeway for a Workflow-style Package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good day,\n\nI submitted a package which has the design of having nine private functions and one user-facing function that operates on a data set and corresponding YAML file describing each column, and picks which subset of private functions are relevant to the data set to execute. It does not pass automated package submission check because the lone example is 1 second too long on Linux (6.4 s) and Windows (11.9 s). The example data set has only 18 columns and 120 rows. Is there special consideration available for such a driver function package design?\n\n--------------------------------------\nDr. Dario Strbenac\nBioinformatics Research Fellow\nSchool of Mathematics and Statistics, University of Sydney\nCamperdown N.S.W. 2050, Australia",
+      "body_snippet": "Good day,\n\nI submitted a package which has the design of having nine private functions and one user-facing function that operates on a data set and corresponding YAML file describing each column, and ",
+      "thread_id": "thread-2cad6662c3b5",
+      "thread_depth": 0,
+      "month": "2026-03"
+    },
+    {
+      "id": "msg-d23658e6a40f",
+      "message_id": "<20260304174759.2db6005e@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-03-04T17:47:59+03:00",
+      "subject": "[R-pkg-devel] Example Check Time Leeway for a Workflow-style Package",
+      "subject_clean": "[R-pkg-devel] Example Check Time Leeway for a Workflow-style Package",
+      "in_reply_to": "<SY7P282MB6231A8D4209B50DF627229C8CD7CA@SY7P282MB6231.AUSP282.PROD.OUTLOOK.COM>",
+      "references": [
+        "<SY7P282MB6231A8D4209B50DF627229C8CD7CA@SY7P282MB6231.AUSP282.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Dear Dr. Dario Strbenac,\n\n? Wed, 4 Mar 2026 09:00:04 +0000\nDario Strbenac <dstr7320 at uni.sydney.edu.au> ?????:\n\n> It does not pass automated package submission check because the lone\n> example is 1 second too long on Linux (6.4 s) and Windows (11.9 s).\n> The example data set has only 18 columns and 120 rows. Is there\n> special consideration available for such a driver function package\n> design?\n\nUnfortunately, I don't think there's any special consideration for\npackages whose examples take too long for algorithmic reasons instead\nof datasets being too large.\n\nI found your package (integrity_0.9.tar.gz) in the archive subdirectory\non CRAN. When I set my locale to C.UTF-8 (otherwise examples and\nvignettes fail when the code tries to read English week day names from\na 'table' object containing translated week day names) and profiled\nyour example, I saw that the code spent a significant part of its time\ndownstream from the call to gtsummary::tbl_summary() in the\n.external_consistency() function. Maybe there's a way to speed up that\ncall? Or, since the example code doesn't seem to do anything with the\nresult of the check except return it to the user, maybe that call could\nbe postponed until its result is needed, and the more extensive\ncoverage could be moved to tests?\n\nAnother chunk of time is taken by the call to dplyr::bind_rows(), later\nused to construct a ggplot object that the example doesn't process\nfurther. Maybe there's a way to postpone that until needed as well?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Dear Dr. Dario Strbenac,\n\n? Wed, 4 Mar 2026 09:00:04 +0000\nDario Strbenac <dstr7320 at uni.sydney.edu.au> ?????:\n\n> It does not pass automated package submission check because the lone\n> example is 1 ",
+      "thread_id": "thread-2cad6662c3b5",
+      "thread_depth": 1,
+      "month": "2026-03"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-82c7d2ec8f08",
+      "subject": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "message_count": 1,
+      "participants": [
+        "Michael Chirico"
+      ],
+      "started": "2026-03-01T10:55:18+08:00",
+      "last_reply": "2026-03-01T10:55:18+08:00",
+      "root_message_id": "msg-82c7d2ec8f08"
+    },
+    {
+      "id": "thread-df743fcfcfdb",
+      "subject": "[R-pkg-devel] Package nleqslv",
+      "message_count": 1,
+      "participants": [
+        "Berend Hasselman"
+      ],
+      "started": "2026-03-02T16:35:33+01:00",
+      "last_reply": "2026-03-02T16:35:33+01:00",
+      "root_message_id": "msg-df743fcfcfdb"
+    },
+    {
+      "id": "thread-ef6175be67af",
+      "subject": "[R-pkg-devel] Strategy for dealing with websites serving HTTP 403 only when validated by 'R CMD check'",
+      "message_count": 6,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Greg Hunt",
+        "Henrik Bengtsson",
+        "Martin Maechler",
+        "Sebastian Meyer",
+        "Simon Urbanek"
+      ],
+      "started": "2026-03-02T21:08:05-08:00",
+      "last_reply": "2026-03-03T13:39:29+01:00",
+      "root_message_id": "msg-ef6175be67af"
+    },
+    {
+      "id": "thread-9a94f057f833",
+      "subject": "[R-pkg-devel] Different unit test results on MacOS",
+      "message_count": 5,
+      "participants": [
+        "Hugh Parsonage",
+        "Louise McMillan",
+        "Simon Urbanek"
+      ],
+      "started": "2026-03-02T22:36:15+00:00",
+      "last_reply": "2026-03-03T23:25:43+00:00",
+      "root_message_id": "msg-9a94f057f833"
+    },
+    {
+      "id": "thread-c0f494ae1a89",
+      "subject": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "message_count": 1,
+      "participants": [
+        "Ivan Krylov"
+      ],
+      "started": "2026-03-03T14:24:29+03:00",
+      "last_reply": "2026-03-03T14:24:29+03:00",
+      "root_message_id": "msg-c0f494ae1a89"
+    },
+    {
+      "id": "thread-2cad6662c3b5",
+      "subject": "[R-pkg-devel] Example Check Time Leeway for a Workflow-style Package",
+      "message_count": 2,
+      "participants": [
+        "Dario Strbenac",
+        "Ivan Krylov"
+      ],
+      "started": "2026-03-04T09:00:04+00:00",
+      "last_reply": "2026-03-04T17:47:59+03:00",
+      "root_message_id": "msg-2cad6662c3b5"
+    }
+  ]
+}

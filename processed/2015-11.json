@@ -1,0 +1,798 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2015-11",
+  "messages": [
+    {
+      "id": "msg-309ad10855d7",
+      "message_id": "<F1F13E14A610474196571953929C02090BD788BA@ex08.net.ucsf.edu>",
+      "from_name": "Boylan, Ross",
+      "from_email_hash": "875b9e09014d7a3fd3148e1f1d7e145d20923974368f97a75dd3ab7f81db4b62",
+      "date": "2015-11-05T23:52:45Z",
+      "subject": "[R-pkg-devel] NAMESPACE and S4 classes",
+      "subject_clean": "[R-pkg-devel] NAMESPACE and S4 classes",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to update a package from 2010 to the new standards, including adding a NAMESPACE file.   The package has S4 classes, and I'm having some trouble interpreting the manual.\n\nSuppose I have\nsetClass(\"MyClass\", .....)\nMyClass <- function(a, b, c) {...}  # constructor\nand various methods for the class\n\nAssuming I want to make the class and everything associated user-visible, I must\nexportClass(MyClass)\n\nDo I need to \nexport(MyClass)\nso the constructor is visible?\n\nDo I need to \nexportMethods()\nfor the methods of that class?\n\nI take it that if the class uses a name from elsewhere in the system, e.g., it has a \"print\" method, I must import that too.  Or is it that I only need to import generics that are not in the base package?",
+      "body_snippet": "I am trying to update a package from 2010 to the new standards, including adding a NAMESPACE file.   The package has S4 classes, and I'm having some trouble interpreting the manual.\n\nSuppose I have\nse",
+      "thread_id": "thread-309ad10855d7",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-47a645cf0d38",
+      "message_id": "<563C8989.1040100@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2015-11-06T12:05:45+01:00",
+      "subject": "[R-pkg-devel] NAMESPACE and S4 classes",
+      "subject_clean": "[R-pkg-devel] NAMESPACE and S4 classes",
+      "in_reply_to": "<F1F13E14A610474196571953929C02090BD788BA@ex08.net.ucsf.edu>",
+      "references": [
+        "<F1F13E14A610474196571953929C02090BD788BA@ex08.net.ucsf.edu>"
+      ],
+      "body_plain": "On 06.11.2015 00:52, Boylan, Ross wrote:\n> I am trying to update a package from 2010 to the new standards, including adding a NAMESPACE file.   The package has S4 classes, and I'm having some trouble interpreting the manual.\n>\n> Suppose I have\n> setClass(\"MyClass\", .....)\n> MyClass <- function(a, b, c) {...}  # constructor\n> and various methods for the class\n>\n> Assuming I want to make the class and everything associated user-visible, I must\n> exportClass(MyClass)\n>\n> Do I need to\n> export(MyClass)\n> so the constructor is visible?\n\nYes, if a user shoudl have access to the constructor.\n\n> Do I need to\n> exportMethods()\n> for the methods of that class?\n\nYes, if not only used internally by your own functions.\n\n\n\n>\n> I take it that if the class uses a name from elsewhere in the system, e.g., it has a \"print\" method, I must import that too.  Or is it that I only need to import generics that are not in the base package?\n\nRight, you need to import the generics you want to use.\n\nBest,\nUwe Ligges\n\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 06.11.2015 00:52, Boylan, Ross wrote:\n> I am trying to update a package from 2010 to the new standards, including adding a NAMESPACE file.   The package has S4 classes, and I'm having some trouble ",
+      "thread_id": "thread-309ad10855d7",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-cbabaad18c1d",
+      "message_id": "<CAJ9GNakVqMersd7A1_BLTa3OTEnHM1BpRKCEzH_wCwzcGy=Lsg@mail.gmail.com>",
+      "from_name": "Jan Wijffels",
+      "from_email_hash": "c67854060f9d1faa0785ceb6d8fc98369d857f79d54a92b874f39998787b7fc2",
+      "date": "2015-11-10T16:32:27+01:00",
+      "subject": "[R-pkg-devel] extra license (ODbL) on https://svn.r-project.org/R/trunk/share/licenses/license.db",
+      "subject_clean": "[R-pkg-devel] extra license (ODbL) on https://svn.r-project.org/R/trunk/share/licenses/license.db",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI would like to add an R package to CRAN which is now available at github:\nhttps://github.com/jwijffels/BelgiumMaps.Admin\n\nThe package contains data from OpenStreetMap which should be released under\nthe Open Database license (ODbL 1.0) which can be found at\nhttp://opendatacommons.org/licenses/odbl/1-0/\n\nUnfortunately ODbL is not part of\nhttps://svn.r-project.org/R/trunk/share/licenses/license.db\nSo I presume it will be rejected by the CRAN policy which states that other\nlicenses than in that license.db file will generally be rejected.\n\nHence my question. What can I do to make ODbL part of\nhttps://svn.r-project.org/R/trunk/share/licenses/license.db\n\nthanks,\nJan\n\nJan Wijffels\nStatistician\nwww.bnosac.be  | +32 486 611708\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI would like to add an R package to CRAN which is now available at github:\nhttps://github.com/jwijffels/BelgiumMaps.Admin\n\nThe package contains data from OpenStreetMap which should be released un",
+      "thread_id": "thread-cbabaad18c1d",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-bb7ce8fa721d",
+      "message_id": "<CAJ9GNak66SQstVC-4YvnGDPwpPLxHRbR1rynmnyA6i+fqua8xw@mail.gmail.com>",
+      "from_name": "Jan Wijffels",
+      "from_email_hash": "c67854060f9d1faa0785ceb6d8fc98369d857f79d54a92b874f39998787b7fc2",
+      "date": "2015-11-10T16:57:41+01:00",
+      "subject": "[R-pkg-devel] found ... marked UTF-8 strings",
+      "subject_clean": "[R-pkg-devel] found ... marked UTF-8 strings",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "?Dear,\n\nI trying to fix all notes from R ?CMD check on a package.\nThe package contains a data.frame inside the data folder where character\nvectors in the dataset are set with an UTF-8 encoding.\n?R CMD check gives me.?\n\n\n* checking data for non-ASCII characters ... NOTE  Note: found 1163\nmarked UTF-8 strings\n\nI would like to keep the strings as correctly encoded as UTF-8 instead of\nhaving to convert them to ASCII. Hence my questions:\n\nQuestion 1: What can I do to make this NOTE disappear?\n?\nNow that http://win-builder.r-project.org/ with R-devel? doesn't give me\nthe NOTE, while with R-release, I'm still getting the NOTE.\nQuestion 2: Will the note disappear in the next release of R allowing to\nhave encoded character strings in a data.frame in the data folder?\n\n?thanks,\n?Jan?\n\nJan Wijffels\nStatistician\nwww.bnosac.be  | +32 486 611708\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "?Dear,\n\nI trying to fix all notes from R ?CMD check on a package.\nThe package contains a data.frame inside the data folder where character\nvectors in the dataset are set with an UTF-8 encoding.\n?R CMD",
+      "thread_id": "thread-bb7ce8fa721d",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-9b4501ae6dfc",
+      "message_id": "<CAKxd1KNNqekaVfhMMV-OHZdnYk7_BzP+21MRzJriz2KM_F92dA@mail.gmail.com>",
+      "from_name": "Charles Determan",
+      "from_email_hash": "fcc9a1e7c21371cee92703630056a3d910de1afb77217895dfe5b4bc47c007e1",
+      "date": "2015-11-12T07:17:16-06:00",
+      "subject": "[R-pkg-devel] configure.win for multiple architectures",
+      "subject_clean": "[R-pkg-devel] configure.win for multiple architectures",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to compile a package (using Rcpp) where the libraries needed\nfor linking (assigned with PKG_LIBS) are in different locations depending\nupon the architecture (32 or 64 bit).\n\nIn the R-admin documents 6.3.1 Windows (\nhttp://www.hep.by/gnu/r-patched/r-admin/R-admin_36.html) it is stated that\nif 'configure.win' does something appropriate for both architectures use\noption `--force-biarch`'.\n\nAre there any packages that demonstrate this?\n\nThanks,\nCharles\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to compile a package (using Rcpp) where the libraries needed\nfor linking (assigned with PKG_LIBS) are in different locations depending\nupon the architecture (32 or 64 bit).\n\nIn the R-admin",
+      "thread_id": "thread-9b4501ae6dfc",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-6d6dd593b4cd",
+      "message_id": "<22084.38239.579497.284375@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-12T07:34:23-06:00",
+      "subject": "[R-pkg-devel] configure.win for multiple architectures",
+      "subject_clean": "[R-pkg-devel] configure.win for multiple architectures",
+      "in_reply_to": "<CAKxd1KNNqekaVfhMMV-OHZdnYk7_BzP+21MRzJriz2KM_F92dA@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KNNqekaVfhMMV-OHZdnYk7_BzP+21MRzJriz2KM_F92dA@mail.gmail.com>"
+      ],
+      "body_plain": "On 12 November 2015 at 07:17, Charles Determan wrote:\n| I am trying to compile a package (using Rcpp) where the libraries needed\n| for linking (assigned with PKG_LIBS) are in different locations depending\n| upon the architecture (32 or 64 bit).\n[...]\n\nMaybe you can borrow this short piece from Rblpapi which picks a win32 or a\nwin64 library path:\n\n\n  ## Distinguish between 32 and 64 bit windows\n  ifeq \"$(WIN)\" \"64\"\n      FLV = x64\n  else\n      FLV = i386\n  endif\n\n  ## Standard compiler / linker flags including windows flavor\n  CXX_STD = CXX11\n  PKG_CPPFLAGS = -I../inst/include -I.\n  PKG_LIBS = -lblpapi3_${WIN} -L${FLV}\n\n\nThere is more in Makevars.win as this file also downloads a vendor library\n(which it puts into that very directory). This is per an agreement with CRAN\nas it keeps the (not-FOSS) library outside the package, but permits simple\nbuilding.  Our package itself is FOSS, but it depends on this vendor library.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 12 November 2015 at 07:17, Charles Determan wrote:\n| I am trying to compile a package (using Rcpp) where the libraries needed\n| for linking (assigned with PKG_LIBS) are in different locations depen",
+      "thread_id": "thread-9b4501ae6dfc",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-dbb7f8b22808",
+      "message_id": "<CAKxd1KOFs0PxcuN2W8pAx93OUXodDFpuO+dObbtOCi_0ucp6JA@mail.gmail.com>",
+      "from_name": "Charles Determan",
+      "from_email_hash": "fcc9a1e7c21371cee92703630056a3d910de1afb77217895dfe5b4bc47c007e1",
+      "date": "2015-11-12T08:45:12-06:00",
+      "subject": "[R-pkg-devel] configure.win for multiple architectures",
+      "subject_clean": "[R-pkg-devel] configure.win for multiple architectures",
+      "in_reply_to": "<22084.38239.579497.284375@max.nulle.part>",
+      "references": [
+        "<CAKxd1KNNqekaVfhMMV-OHZdnYk7_BzP+21MRzJriz2KM_F92dA@mail.gmail.com>",
+        "<22084.38239.579497.284375@max.nulle.part>"
+      ],
+      "body_plain": "Thanks Dirk,\n\nThis appears to work for my purposes.\n\nCharles\n\nOn Thu, Nov 12, 2015 at 7:34 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 12 November 2015 at 07:17, Charles Determan wrote:\n> | I am trying to compile a package (using Rcpp) where the libraries needed\n> | for linking (assigned with PKG_LIBS) are in different locations depending\n> | upon the architecture (32 or 64 bit).\n> [...]\n>\n> Maybe you can borrow this short piece from Rblpapi which picks a win32 or a\n> win64 library path:\n>\n>\n>   ## Distinguish between 32 and 64 bit windows\n>   ifeq \"$(WIN)\" \"64\"\n>       FLV = x64\n>   else\n>       FLV = i386\n>   endif\n>\n>   ## Standard compiler / linker flags including windows flavor\n>   CXX_STD = CXX11\n>   PKG_CPPFLAGS = -I../inst/include -I.\n>   PKG_LIBS = -lblpapi3_${WIN} -L${FLV}\n>\n>\n> There is more in Makevars.win as this file also downloads a vendor library\n> (which it puts into that very directory). This is per an agreement with\n> CRAN\n> as it keeps the (not-FOSS) library outside the package, but permits simple\n> building.  Our package itself is FOSS, but it depends on this vendor\n> library.\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Dirk,\n\nThis appears to work for my purposes.\n\nCharles\n\nOn Thu, Nov 12, 2015 at 7:34 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 12 November 2015 at 07:17, Charles Determan wrote:\n>",
+      "thread_id": "thread-9b4501ae6dfc",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-9caa06539ec1",
+      "message_id": "<56460EC9.1020303@dms.umontreal.ca>",
+      "from_name": "Pierre Lafaye de Micheaux",
+      "from_email_hash": "6de1e5d34aaead452a6520cc984c45a5c6ebaf424b04e43afdc1bc6cda692fe3",
+      "date": "2015-11-13T17:24:41+01:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI created a new version of the package IndependenceTests where I call \nsome C and Fortran functions (using the .C() or .Fortran() interface).\nIt works perfectly under Linux, with gcc. No problem with R CMD check. I \nwould like to upload this package on the CRAN.\n\nBut when I first tried to use winbuilder, I got an error with the \nfollowing message:\n\n* installing *source* package 'IndependenceTests' ...\n** libs\n\n*** arch - i386\ng++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG \n-I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall \n-mtune=core2 -c Cnhat.cpp -o Cnhat.o\nCnhat.cpp:9:89: error: 'complex' has not been declared\nCnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n....\n.....\netc.\n\n\nI think I understand that there is a problem (only under Windows though) \nwith the complex type.\nThe beginning of my file Cnhat.cpp is as follows:\n\n1. #include <R.h>\n2. #include \"Rmath.h\"\n3. #include <complex.h>\n4. #include <iostream>\n5. using namespace std;\n6.\n7. extern\"C\" {\n8.\n9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int *q, \nint *p, int *vecd, complex double *res) {\n10.\n11.    void phinhatReturn(double *vect1, double *vect2, double *vect3, \ndouble *X, int *q, int *n, double _Complex *res1, double _Complex *res2, \ndouble _Complex *res3);\n12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 + \n0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n13.    int indbeginblocl, l, i, *vecdl, k, j;\n14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n15.    double _Complex *res1, *res2, *res3;\n16.    vecdl = new int[1];\n17.    res1 =  new _Complex double[1];\n....\n.....\netc.\n\nAs you can see, there seem to be some problem (on line 9.) with: complex \ndouble *res\n\nCould you please point me to something (e.g., another package) that \nmight help me solve the problem? If possible, I would like to avoid \ninvest too much time using the new .Call() interface because I am quite \nfamiliar\nwith the old .C(). And also I am not even sure if it would help solving \nthe problem.\n\nBest regards,\n\nPierre L.\n\n-- \nPierre Lafaye de Micheaux\n\nAdresse courrier:\nUniversit? de Montr?al\nPavillon Andr?-Aisenstadt\nD?partement de Math?matiques et Statistique\nCP 6128 Succursale Centre-ville\nMontr?al Qc H3C 3J7\nCANADA\n\nAdresse physique:\nD?partement de Math?matiques et Statistique\nBureau 4249, Pavillon Andr?-Aisenstadt\n2920, chemin de la Tour\nMontr?al, Qu?bec H3T 1J4\nCANADA\n\nT?l.: (00-1) 514-343-6607 / Fax: (00-1) 514-343-5700\nlafaye at dms.umontreal.ca\nhttp://www.biostatisticien.eu\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nI created a new version of the package IndependenceTests where I call \nsome C and Fortran functions (using the .C() or .Fortran() interface).\nIt works perfectly under Linux, with gcc. No pr",
+      "thread_id": "thread-9caa06539ec1",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-9e39de19d547",
+      "message_id": "<22086.17440.833043.722735@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-13T14:12:16-06:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<56460EC9.1020303@dms.umontreal.ca>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>"
+      ],
+      "body_plain": "On 13 November 2015 at 17:24, Pierre Lafaye de Micheaux wrote:\n| might help me solve the problem? If possible, I would like to avoid \n| invest too much time using the new .Call() interface because I am quite \n| familiar with the old .C().\n\nIf you pay attention to posts in recent years of the R-devel list (or here)\nyou will see that .C is now actively discouraged -- eg in a few posts by R\nCore member Simon Urbanek.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 13 November 2015 at 17:24, Pierre Lafaye de Micheaux wrote:\n| might help me solve the problem? If possible, I would like to avoid \n| invest too much time using the new .Call() interface because I a",
+      "thread_id": "thread-9caa06539ec1",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-e8147f9b972c",
+      "message_id": "<F9D8FADAB1DB8447B03EE30D076C1AC2132D53FB@D1PWPEXMBX06.mdanderson.edu>",
+      "from_name": "Roebuck,Paul L",
+      "from_email_hash": "ef0e57f0bb056c7f3f42f0e63a2d5a56aad5435f894d1b6af3943f2a4f40021d",
+      "date": "2015-11-13T20:24:25Z",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<56460EC9.1020303@dms.umontreal.ca>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>"
+      ],
+      "body_plain": "Too bad you couldn't just use C++ std::complex, but that's a no-go if your function needs C linkage.\n\n<http://stackoverflow.com/questions/1063406/c99-complex-support-with-visual-studio>\nsuggests MS-specific topic, but answers explain more.\n\nHave you looked at RCpp package?\n\n________________________________________\nFrom: R-package-devel [r-package-devel-bounces at r-project.org] on behalf of Pierre Lafaye de Micheaux [lafaye at dms.umontreal.ca]\nSent: Friday, November 13, 2015 10:24 AM\nTo: r-package-devel at r-project.org\nSubject: [R-pkg-devel] Problem (with complex.h?) under Microsoft Windows\n\nI created a new version of the package IndependenceTests where I call\nsome C and Fortran functions (using the .C() or .Fortran() interface).\nIt works perfectly under Linux, with gcc. No problem with R CMD check. I\nwould like to upload this package on the CRAN.\n\nBut when I first tried to use winbuilder, I got an error with the\nfollowing message:\n\n* installing *source* package 'IndependenceTests' ...\n** libs\n\n*** arch - i386\ng++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG\n-I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall\n-mtune=core2 -c Cnhat.cpp -o Cnhat.o\nCnhat.cpp:9:89: error: 'complex' has not been declared\nCnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n....\n.....\netc.\n\n\nI think I understand that there is a problem (only under Windows though)\nwith the complex type.\nThe beginning of my file Cnhat.cpp is as follows:\n\n1. #include <R.h>\n2. #include \"Rmath.h\"\n3. #include <complex.h>\n4. #include <iostream>\n5. using namespace std;\n6.\n7. extern\"C\" {\n8.\n9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int *q,\nint *p, int *vecd, complex double *res) {\n10.\n11.    void phinhatReturn(double *vect1, double *vect2, double *vect3,\ndouble *X, int *q, int *n, double _Complex *res1, double _Complex *res2,\ndouble _Complex *res3);\n12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 +\n0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n13.    int indbeginblocl, l, i, *vecdl, k, j;\n14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n15.    double _Complex *res1, *res2, *res3;\n16.    vecdl = new int[1];\n17.    res1 =  new _Complex double[1];\n....\n.....\netc.\n\nAs you can see, there seem to be some problem (on line 9.) with: complex\ndouble *res\n\nCould you please point me to something (e.g., another package) that\nmight help me solve the problem? If possible, I would like to avoid\ninvest too much time using the new .Call() interface because I am quite\nfamiliar\nwith the old .C(). And also I am not even sure if it would help solving\nthe problem.\n\nBest regards,\n\nPierre L.\n\n--\nPierre Lafaye de Micheaux\n\nAdresse courrier:\nUniversit? de Montr?al\nPavillon Andr?-Aisenstadt\nD?partement de Math?matiques et Statistique\nCP 6128 Succursale Centre-ville\nMontr?al Qc H3C 3J7\nCANADA\n\nAdresse physique:\nD?partement de Math?matiques et Statistique\nBureau 4249, Pavillon Andr?-Aisenstadt\n2920, chemin de la Tour\nMontr?al, Qu?bec H3T 1J4\nCANADA\n\nT?l.: (00-1) 514-343-6607 / Fax: (00-1) 514-343-5700\nlafaye at dms.umontreal.ca\nhttp://www.biostatisticien.eu\n\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\nThe information contained in this e-mail message may be privileged, confidential, and/or protected from disclosure. This e-mail message may contain protected health information (PHI); dissemination of PHI should comply with applicable federal and state laws. If you are not the intended recipient, or an authorized representative of the intended recipient, any further review, disclosure, use, dissemination, distribution, or copying of this message or any attachment (or the information contained therein) is strictly prohibited. If you think that you have received this e-mail message in error, please notify the sender by return e-mail and delete all references to it and its contents from your systems.",
+      "body_snippet": "Too bad you couldn't just use C++ std::complex, but that's a no-go if your function needs C linkage.\n\n<http://stackoverflow.com/questions/1063406/c99-complex-support-with-visual-studio>\nsuggests MS-sp",
+      "thread_id": "thread-9caa06539ec1",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-76a20ebcf726",
+      "message_id": "<564649B0.8000701@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-11-13T15:36:00-05:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<56460EC9.1020303@dms.umontreal.ca>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>"
+      ],
+      "body_plain": "On 13/11/2015 11:24 AM, Pierre Lafaye de Micheaux wrote:\n> Dear all,\n>\n> I created a new version of the package IndependenceTests where I call\n> some C and Fortran functions (using the .C() or .Fortran() interface).\n> It works perfectly under Linux, with gcc. No problem with R CMD check. I\n> would like to upload this package on the CRAN.\n>\n> But when I first tried to use winbuilder, I got an error with the\n> following message:\n>\n> * installing *source* package 'IndependenceTests' ...\n> ** libs\n>\n> *** arch - i386\n> g++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG\n> -I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall\n> -mtune=core2 -c Cnhat.cpp -o Cnhat.o\n> Cnhat.cpp:9:89: error: 'complex' has not been declared\n> Cnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n> ....\n> .....\n> etc.\n>\n>\n> I think I understand that there is a problem (only under Windows though)\n> with the complex type.\n> The beginning of my file Cnhat.cpp is as follows:\n>\n> 1. #include <R.h>\n> 2. #include \"Rmath.h\"\n> 3. #include <complex.h>\n> 4. #include <iostream>\n> 5. using namespace std;\n> 6.\n> 7. extern\"C\" {\n> 8.\n> 9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int *q,\n> int *p, int *vecd, complex double *res) {\n> 10.\n> 11.    void phinhatReturn(double *vect1, double *vect2, double *vect3,\n> double *X, int *q, int *n, double _Complex *res1, double _Complex *res2,\n> double _Complex *res3);\n> 12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 +\n> 0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n> 13.    int indbeginblocl, l, i, *vecdl, k, j;\n> 14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n> 15.    double _Complex *res1, *res2, *res3;\n> 16.    vecdl = new int[1];\n> 17.    res1 =  new _Complex double[1];\n> ....\n> .....\n> etc.\n>\n> As you can see, there seem to be some problem (on line 9.) with: complex\n> double *res\n>\n> Could you please point me to something (e.g., another package) that\n> might help me solve the problem? If possible, I would like to avoid\n> invest too much time using the new .Call() interface because I am quite\n> familiar\n> with the old .C(). And also I am not even sure if it would help solving\n> the problem.\n\nYou should be using Rcomplex in the type declaration. (See Writing R \nExtensions for a discussion of this.)  It is defined as\n\ntypedef struct {\n\tdouble r;\n\tdouble i;\n} Rcomplex;\n\nwhich is likely compatible with your \"complex double\" on those other \nsystems (which are using newer gcc versions), but it's not guaranteed to \nbe, even there.\n\nDuncan Murdoch",
+      "body_snippet": "On 13/11/2015 11:24 AM, Pierre Lafaye de Micheaux wrote:\n> Dear all,\n>\n> I created a new version of the package IndependenceTests where I call\n> some C and Fortran functions (using the .C() or .Fortra",
+      "thread_id": "thread-9caa06539ec1",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-7fcdc879e4a3",
+      "message_id": "<22086.45625.933834.882100@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-13T22:02:01-06:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<F9D8FADAB1DB8447B03EE30D076C1AC2132D53FB@D1PWPEXMBX06.mdanderson.edu>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>",
+        "<F9D8FADAB1DB8447B03EE30D076C1AC2132D53FB@D1PWPEXMBX06.mdanderson.edu>"
+      ],
+      "body_plain": "On 13 November 2015 at 20:24, Roebuck,Paul L wrote:\n| Too bad you couldn't just use C++ std::complex, but that's a no-go if your function needs C linkage.\n| \n| <http://stackoverflow.com/questions/1063406/c99-complex-support-with-visual-studio>\n| suggests MS-specific topic, but answers explain more.\n| \n| Have you looked at RCpp package?\n\nRcpp can help quite a bit with all of the mechanics: header files, linking,\nloading, conversion, ...  We don't use it all that much for complex data\ntypes but some things certainly work, and Baptiste has a few packages (using\nRcppArmadillo) which use complex numbers.\n\nHere is a quick example:\n\nR> library(Rcpp)             # load Rcpp, them define a one-liner in the R shell\nR> cppFunction(\"ComplexVector timesTwo(ComplexVector x) { ComplexVector y = x+x; return y; }\")\nR> timesTwo(7i)              # use it\n[1] 0+14i\nR> timesTwo(c(4+2i, 7i))     # vectors or scalars are the same to R\n[1] 8+ 4i 0+14i\nR> \n\nThis should very much work the same way in Windows.  And note that we didn't\nhave to specify a single header (though you can of course should you need\nextra ones -- see many examples at http://gallery.rcpp.org)\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 13 November 2015 at 20:24, Roebuck,Paul L wrote:\n| Too bad you couldn't just use C++ std::complex, but that's a no-go if your function needs C linkage.\n| \n| <http://stackoverflow.com/questions/1063",
+      "thread_id": "thread-9caa06539ec1",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-93b833c83267",
+      "message_id": "<D26E30E5.1BCEE%gordon.brown@cruk.cam.ac.uk>",
+      "from_name": "Gordon Brown",
+      "from_email_hash": "9369279f1f2044378c4e76aad7236f5080f4453aa5aa8b6e2184b3e371d81e65",
+      "date": "2015-11-15T13:02:04Z",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<F9D8FADAB1DB8447B03EE30D076C1AC2132D53FB@D1PWPEXMBX06.mdanderson.edu>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>",
+        "<F9D8FADAB1DB8447B03EE30D076C1AC2132D53FB@D1PWPEXMBX06.mdanderson.edu>"
+      ],
+      "body_plain": "Hi, folks,\n\nI just want to throw in another vote for Rcpp.  I recently rewrote some old code that used the legacy interface to use Rcpp, and life with Rcpp is *much* better.  The code is clean and easy to read (and write), and memory protection is taken care of.  I don't know if it will fix Pierre's specific problem, but if you try it, I suspect you'll like it.\n\nMany thanks to Dirk, Romain, and all.\n\nCheers,\n\n - Gord\n\n\nFrom: R-package-devel <r-package-devel-bounces at r-project.org<mailto:r-package-devel-bounces at r-project.org>> on behalf of \"Roebuck,Paul L\" <proebuck at mdanderson.org<mailto:proebuck at mdanderson.org>>\nDate: Friday, 13 November 2015 20:24\nTo: \"r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>\" <r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>>\nSubject: Re: [R-pkg-devel] Problem (with complex.h?) under Microsoft Windows\n\nToo bad you couldn't just use C++ std::complex, but that's a no-go if your function needs C linkage.\n\n<http://stackoverflow.com/questions/1063406/c99-complex-support-with-visual-studio>\nsuggests MS-specific topic, but answers explain more.\n\nHave you looked at RCpp package?\n\n________________________________________\nFrom: R-package-devel [r-package-devel-bounces at r-project.org<mailto:r-package-devel-bounces at r-project.org>] on behalf of Pierre Lafaye de Micheaux [lafaye at dms.umontreal.ca<mailto:lafaye at dms.umontreal.ca>]\nSent: Friday, November 13, 2015 10:24 AM\nTo: r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>\nSubject: [R-pkg-devel] Problem (with complex.h?) under Microsoft Windows\n\nI created a new version of the package IndependenceTests where I call\nsome C and Fortran functions (using the .C() or .Fortran() interface).\nIt works perfectly under Linux, with gcc. No problem with R CMD check. I\nwould like to upload this package on the CRAN.\n\nBut when I first tried to use winbuilder, I got an error with the\nfollowing message:\n\n* installing *source* package 'IndependenceTests' ...\n** libs\n\n*** arch - i386\ng++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG\n-I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall\n-mtune=core2 -c Cnhat.cpp -o Cnhat.o\nCnhat.cpp:9:89: error: 'complex' has not been declared\nCnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n....\n.....\netc.\n\n\nI think I understand that there is a problem (only under Windows though)\nwith the complex type.\nThe beginning of my file Cnhat.cpp is as follows:\n\n1. #include <R.h>\n2. #include \"Rmath.h\"\n3. #include <complex.h>\n4. #include <iostream>\n5. using namespace std;\n6.\n7. extern\"C\" {\n8.\n9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int *q,\nint *p, int *vecd, complex double *res) {\n10.\n11.    void phinhatReturn(double *vect1, double *vect2, double *vect3,\ndouble *X, int *q, int *n, double _Complex *res1, double _Complex *res2,\ndouble _Complex *res3);\n12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 +\n0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n13.    int indbeginblocl, l, i, *vecdl, k, j;\n14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n15.    double _Complex *res1, *res2, *res3;\n16.    vecdl = new int[1];\n17.    res1 =  new _Complex double[1];\n....\n.....\netc.\n\nAs you can see, there seem to be some problem (on line 9.) with: complex\ndouble *res\n\nCould you please point me to something (e.g., another package) that\nmight help me solve the problem? If possible, I would like to avoid\ninvest too much time using the new .Call() interface because I am quite\nfamiliar\nwith the old .C(). And also I am not even sure if it would help solving\nthe problem.\n\nBest regards,\n\nPierre L.\n\n--\nPierre Lafaye de Micheaux\n\nAdresse courrier:\nUniversit? de Montr?al\nPavillon Andr?-Aisenstadt\nD?partement de Math?matiques et Statistique\nCP 6128 Succursale Centre-ville\nMontr?al Qc H3C 3J7\nCANADA\n\nAdresse physique:\nD?partement de Math?matiques et Statistique\nBureau 4249, Pavillon Andr?-Aisenstadt\n2920, chemin de la Tour\nMontr?al, Qu?bec H3T 1J4\nCANADA\n\nT?l.: (00-1) 514-343-6607 / Fax: (00-1) 514-343-5700\nlafaye at dms.umontreal.ca<mailto:lafaye at dms.umontreal.ca>\nhttp://www.biostatisticien.eu\n\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\nThe information contained in this e-mail message may be privileged, confidential, and/or protected from disclosure. This e-mail message may contain protected health information (PHI); dissemination of PHI should comply with applicable federal and state laws. If you are not the intended recipient, or an authorized representative of the intended recipient, any further review, disclosure, use, dissemination, distribution, or copying of this message or any attachment (or the information contained therein) is strictly prohibited. If you think that you have received this e-mail message in error, please notify the sender by return e-mail and delete all references to it and its contents from your systems.\n\n______________________________________________\nR-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, folks,\n\nI just want to throw in another vote for Rcpp.  I recently rewrote some old code that used the legacy interface to use Rcpp, and life with Rcpp is *much* better.  The code is clean and eas",
+      "thread_id": "thread-9caa06539ec1",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-06f3b604322a",
+      "message_id": "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>",
+      "from_name": "Marvin Wright",
+      "from_email_hash": "12ca0e2f89fa1e30603a826652ba20092ef76cb1df60aa48e048e40c45fe0551",
+      "date": "2015-11-16T13:07:21+01:00",
+      "subject": "[R-pkg-devel] Checking for C++11",
+      "subject_clean": "[R-pkg-devel] Checking for C++11",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all, \n\nI would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Makevars.win. I tried two approaches in Makevars so far, but both give warnings in CRAN checks. \n\nApproach 1: \n## Check for gcc >= 4.7\nifeq ($(shell basename $(CC)),gcc)\nGCC_VER := $(shell gcc -dumpversion)\nGCC_MAJOR := $(shell gcc -dumpversion | cut -f1-2 -d.)\n\nGCC_OK := $(shell echo $(GCC_MAJOR) \\>= 4.7 | bc )\nifneq ($(GCC_OK),1)\n  $(error Error: gcc >= 4.7 required, version $(GCC_VER) installed. Please update gcc.)\nendif\nendif\n\nWorks quite well but a warning in check ?as-cran: \n> Found the following file(s) containing GNU extensions:\n> src/Makevars\n> Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),\n> $(wildcard), ifeq ... endif. See section ?Writing portable packages? in\n> the ?Writing R Extensions? manual.\n\n\nApproach 2: \nUse std=c++11 flag instead of CXX_STD = CXX11, which should work on gcc >=4.7 and throw an error on earlier versions. \n\nThis time in check ?as-cran: \n> Non-portable flags in variable 'PKG_CPPFLAGS':\n> -std=c++11\n\nAny other ideas how to check? Or is one of the versions above OK on CRAN? \n\nThanks, \n\nMarvin",
+      "body_snippet": "Dear all, \n\nI would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Makevars.win. I tried two approaches in Makevars so",
+      "thread_id": "thread-06f3b604322a",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-4a528651383a",
+      "message_id": "<5649CF9A.905@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-11-16T07:44:10-05:00",
+      "subject": "[R-pkg-devel] Checking for C++11",
+      "subject_clean": "[R-pkg-devel] Checking for C++11",
+      "in_reply_to": "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>",
+      "references": [
+        "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>"
+      ],
+      "body_plain": "On 16/11/2015 7:07 AM, Marvin Wright wrote:\n> Dear all,\n>\n> I would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Makevars.win. I tried two approaches in Makevars so far, but both give warnings in CRAN checks.\n>\n> Approach 1:\n> ## Check for gcc >= 4.7\n> ifeq ($(shell basename $(CC)),gcc)\n> GCC_VER := $(shell gcc -dumpversion)\n> GCC_MAJOR := $(shell gcc -dumpversion | cut -f1-2 -d.)\n>\n> GCC_OK := $(shell echo $(GCC_MAJOR) \\>= 4.7 | bc )\n> ifneq ($(GCC_OK),1)\n>    $(error Error: gcc >= 4.7 required, version $(GCC_VER) installed. Please update gcc.)\n> endif\n> endif\n>\n> Works quite well but a warning in check ?as-cran:\n>> Found the following file(s) containing GNU extensions:\n>> src/Makevars\n>> Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),\n>> $(wildcard), ifeq ... endif. See section ?Writing portable packages? in\n>> the ?Writing R Extensions? manual.\n>\n>\n> Approach 2:\n> Use std=c++11 flag instead of CXX_STD = CXX11, which should work on gcc >=4.7 and throw an error on earlier versions.\n>\n> This time in check ?as-cran:\n>> Non-portable flags in variable 'PKG_CPPFLAGS':\n>> -std=c++11\n>\n> Any other ideas how to check? Or is one of the versions above OK on CRAN?\n\nA better approach may be to check for features rather than versions by \njust using them.  Put in tests that fail if the features you need are \nnot there, and put something like \"C++11\" into your DESCRIPTION file \nSystemRequirements field to tell people why they're failing (as well as \ncomments in the source).\n\nDuncan Murdoch",
+      "body_snippet": "On 16/11/2015 7:07 AM, Marvin Wright wrote:\n> Dear all,\n>\n> I would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Mak",
+      "thread_id": "thread-06f3b604322a",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-9f230d221a3f",
+      "message_id": "<22089.53883.263336.72759@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-16T06:56:27-06:00",
+      "subject": "[R-pkg-devel] Checking for C++11",
+      "subject_clean": "[R-pkg-devel] Checking for C++11",
+      "in_reply_to": "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>",
+      "references": [
+        "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>"
+      ],
+      "body_plain": "On 16 November 2015 at 13:07, Marvin Wright wrote:\n| I would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Makevars.win. I tried two approaches in Makevars so far, but both give warnings in CRAN checks. \n| \n| Approach 1: \n| ## Check for gcc >= 4.7\n| ifeq ($(shell basename $(CC)),gcc)\n| GCC_VER := $(shell gcc -dumpversion)\n| GCC_MAJOR := $(shell gcc -dumpversion | cut -f1-2 -d.)\n| \n| GCC_OK := $(shell echo $(GCC_MAJOR) \\>= 4.7 | bc )\n| ifneq ($(GCC_OK),1)\n|   $(error Error: gcc >= 4.7 required, version $(GCC_VER) installed. Please update gcc.)\n| endif\n| endif\n| \n| Works quite well but a warning in check ?as-cran: \n| > Found the following file(s) containing GNU extensions:\n| > src/Makevars\n| > Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),\n| > $(wildcard), ifeq ... endif. See section ?Writing portable packages? in\n| > the ?Writing R Extensions? manual.\n\nYup. One of the things I dislike the about current CRAN checks. GNU Make *is*\na standard, but we are not allowed to use it unless we use the GNUMakefile\nname (which is ugly), or declare a 'SystemRequirements: GNU make'.\n\nSo I would not use this.\n \n| Approach 2: \n| Use std=c++11 flag instead of CXX_STD = CXX11, which should work on gcc >=4.7 and throw an error on earlier versions. \n| \n| This time in check ?as-cran: \n| > Non-portable flags in variable 'PKG_CPPFLAGS':\n| > -std=c++11\n\nObviously not good as it throws an error.\n \n| Any other ideas how to check? Or is one of the versions above OK on CRAN? \n\nLook eg at RcppTOML which includes/provides the cpptoml.h header which is\nreal C++11.  There I just do (in DESCRIPTION)\n\n   SystemRequirements: A C++11 compiler. Version 4.6.* of g++ (as currently in\n    Rtools) is insufficient; versions 4.8.*, 4.9.* or later will be fine.\n\nand (in src/Makevars)\n\n   ## This is a C++11 package\n   CXX_STD = CXX11\n\nThen CRAN takes care of things -- see the status at\n\n   https://cran.rstudio.com/web/checks/check_results_RcppTOML.html\n\nwhich generally builds fine (and where I just noticed the Mavericks error --\nick. Anybody with a Mavericks box who can help by poking around ?)\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 16 November 2015 at 13:07, Marvin Wright wrote:\n| I would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Makevars.w",
+      "thread_id": "thread-06f3b604322a",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-30202084c940",
+      "message_id": "<4DC4659A-D2D6-4119-8567-88F547FBD991@imbs.uni-luebeck.de>",
+      "from_name": "Marvin Wright",
+      "from_email_hash": "12ca0e2f89fa1e30603a826652ba20092ef76cb1df60aa48e048e40c45fe0551",
+      "date": "2015-11-16T16:45:10+01:00",
+      "subject": "[R-pkg-devel] Checking for C++11",
+      "subject_clean": "[R-pkg-devel] Checking for C++11",
+      "in_reply_to": "<22089.53883.263336.72759@max.nulle.part>",
+      "references": [
+        "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>",
+        "<22089.53883.263336.72759@max.nulle.part>"
+      ],
+      "body_plain": "Thanks, that helped. However, a user with gcc < 4.7 will still get cryptic errors. \n\nI had another idea: I created a file src/AAA_check_cpp11.cpp, checking the preprocessor directive ?__cplusplus?, see https://github.com/mnwright/ranger/blob/master/ranger-r-package/ranger/src/AAA_check_cpp11.cpp <https://github.com/mnwright/ranger/blob/master/ranger-r-package/ranger/src/AAA_check_cpp11.cpp>. This isn?t beautiful, but the error message is better and it?s fine on CRAN. \n\n\n> On 16 Nov 2015, at 13:56, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 16 November 2015 at 13:07, Marvin Wright wrote:\n> | I would like to check for C++11 support in a package. The package requires gcc >= 4.7 or clang >= 3.0. Windows is handled differently in Makevars.win. I tried two approaches in Makevars so far, but both give warnings in CRAN checks. \n> | \n> | Approach 1: \n> | ## Check for gcc >= 4.7\n> | ifeq ($(shell basename $(CC)),gcc)\n> | GCC_VER := $(shell gcc -dumpversion)\n> | GCC_MAJOR := $(shell gcc -dumpversion | cut -f1-2 -d.)\n> | \n> | GCC_OK := $(shell echo $(GCC_MAJOR) \\>= 4.7 | bc )\n> | ifneq ($(GCC_OK),1)\n> |   $(error Error: gcc >= 4.7 required, version $(GCC_VER) installed. Please update gcc.)\n> | endif\n> | endif\n> | \n> | Works quite well but a warning in check ?as-cran: \n> | > Found the following file(s) containing GNU extensions:\n> | > src/Makevars\n> | > Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),\n> | > $(wildcard), ifeq ... endif. See section ?Writing portable packages? in\n> | > the ?Writing R Extensions? manual.\n> \n> Yup. One of the things I dislike the about current CRAN checks. GNU Make *is*\n> a standard, but we are not allowed to use it unless we use the GNUMakefile\n> name (which is ugly), or declare a 'SystemRequirements: GNU make'.\n> \n> So I would not use this.\n> \n> | Approach 2: \n> | Use std=c++11 flag instead of CXX_STD = CXX11, which should work on gcc >=4.7 and throw an error on earlier versions. \n> | \n> | This time in check ?as-cran: \n> | > Non-portable flags in variable 'PKG_CPPFLAGS':\n> | > -std=c++11\n> \n> Obviously not good as it throws an error.\n> \n> | Any other ideas how to check? Or is one of the versions above OK on CRAN? \n> \n> Look eg at RcppTOML which includes/provides the cpptoml.h header which is\n> real C++11.  There I just do (in DESCRIPTION)\n> \n>   SystemRequirements: A C++11 compiler. Version 4.6.* of g++ (as currently in\n>    Rtools) is insufficient; versions 4.8.*, 4.9.* or later will be fine.\n> \n> and (in src/Makevars)\n> \n>   ## This is a C++11 package\n>   CXX_STD = CXX11\n> \n> Then CRAN takes care of things -- see the status at\n> \n>   https://cran.rstudio.com/web/checks/check_results_RcppTOML.html\n> \n> which generally builds fine (and where I just noticed the Mavericks error --\n> ick. Anybody with a Mavericks box who can help by poking around ?)\n> \n> Dirk\n> \n> -- \n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks, that helped. However, a user with gcc < 4.7 will still get cryptic errors. \n\nI had another idea: I created a file src/AAA_check_cpp11.cpp, checking the preprocessor directive ?__cplusplus?, se",
+      "thread_id": "thread-06f3b604322a",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-482d96aad710",
+      "message_id": "<22089.64528.201110.155101@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-16T09:53:52-06:00",
+      "subject": "[R-pkg-devel] Checking for C++11",
+      "subject_clean": "[R-pkg-devel] Checking for C++11",
+      "in_reply_to": "<4DC4659A-D2D6-4119-8567-88F547FBD991@imbs.uni-luebeck.de>",
+      "references": [
+        "<6B292690-BA3A-4770-9E1D-D83C858CE758@imbs.uni-luebeck.de>",
+        "<22089.53883.263336.72759@max.nulle.part>",
+        "<4DC4659A-D2D6-4119-8567-88F547FBD991@imbs.uni-luebeck.de>"
+      ],
+      "body_plain": "On 16 November 2015 at 16:45, Marvin Wright wrote:\n| Thanks, that helped. However, a user with gcc < 4.7 will still get cryptic\n| errors. \n| \n| I had another idea: I created a file src/AAA_check_cpp11.cpp, checking the\n| preprocessor directive ?__cplusplus?, see https://github.com/mnwright/ranger/\n| blob/master/ranger-r-package/ranger/src/AAA_check_cpp11.cpp. This isn?t\n| beautiful, but the error message is better and it?s fine on CRAN. \n\nThat is basically what autoconf is for. You can embed small programs in the\nconfigure.ac -- that _is_ how header presence and linkability is tested.\n\nI don't have a link handly but I can probably help (off-list) if needed.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 16 November 2015 at 16:45, Marvin Wright wrote:\n| Thanks, that helped. However, a user with gcc < 4.7 will still get cryptic\n| errors. \n| \n| I had another idea: I created a file src/AAA_check_cpp11",
+      "thread_id": "thread-06f3b604322a",
+      "thread_depth": 3,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-2f05ce53f938",
+      "message_id": "<2995f598-5caf-4265-9d40-e050416355cf@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2015-11-19T01:35:15Z",
+      "subject": "[R-pkg-devel] Class with functions as slots",
+      "subject_clean": "[R-pkg-devel] Class with functions as slots",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "All,\n\nI have the following class with slots as functions. For the analysis of MBS this is good set-up as it allows for a very clean and modular way of handling things. ?My question is really geared to understanding what is happening in R.\n\nBelow is the function without sato = NULL R CMD throws a warning global variable not defined. ?With SATO = NULL I do not get the warning. ?Why only sato and not two and ten which are also inputs?\n\nGlenn\n\n# Bond Lab is a software application for the analysis of \n# fixed income securities it provides a suite of applications\n# in addition to standard fixed income analysis bond lab provides \n# for the specific analysis of structured products residential mortgage backed securities, \n# asset backed securities, and commerical mortgage backed securities\n# License GPL3 + File License\n# Copyright (C) 2014 Glenn M Schultz, CFA\n\n#' An S4 class whose slots are functions used to propogate\n#' the mortgage rate used to motivate the prepayment model\n#' @slot yr30 A function defining the 30-year mortgage rate as a function\n#' of the 2- and 10-year swap rate\n#' @slot yr15 A function defining the 15-year mortgage rate as a function\n#' of the 2- and 10-year swap rate \n#' @export MortgageRate\n\nsetClass(\"MortgageRate\",\nrepresentation(\nyr30 = \"function\",\nyr15 = \"function\"))\n\n#' A constructor function for the class Mortgage Rate\nMortgageRate <- function(){\nsato = NULL\nnew(\"MortgageRate\",\nyr30 = function(two = numeric(), ten = numeric(), sato = numeric()) {\n2.25 + (.06 * two) + (.75 * ten) + sato},\n\nyr15 = function(two = numeric(), ten = numeric()){\n1.75 + (.06 * two) + (.75 * ten) + sato}\n)}",
+      "body_snippet": "All,\n\nI have the following class with slots as functions. For the analysis of MBS this is good set-up as it allows for a very clean and modular way of handling things. ?My question is really geared to",
+      "thread_id": "thread-2f05ce53f938",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-b71fea78228d",
+      "message_id": "<CAPPM_gTst1Cv1hbCF6OYiiLkYV5sjC74L2DWKykYspRo+i20zw@mail.gmail.com>",
+      "from_name": "Joshua Ulrich",
+      "from_email_hash": "1c142a8ab2a2cd292396c50d658d894b0e8efcc0774aa9558978b89b50ac3080",
+      "date": "2015-11-18T19:51:31-06:00",
+      "subject": "[R-pkg-devel] Class with functions as slots",
+      "subject_clean": "[R-pkg-devel] Class with functions as slots",
+      "in_reply_to": "<2995f598-5caf-4265-9d40-e050416355cf@me.com>",
+      "references": [
+        "<2995f598-5caf-4265-9d40-e050416355cf@me.com>"
+      ],
+      "body_plain": "On Wed, Nov 18, 2015 at 7:35 PM, Glenn Schultz <glennmschultz at me.com> wrote:\n> All,\n>\n> I have the following class with slots as functions. For the analysis of MBS\n> this is good set-up as it allows for a very clean and modular way of\n> handling things.  My question is really geared to understanding what is\n> happening in R.\n>\n> Below is the function without sato = NULL R CMD throws a warning global\n> variable not defined.  With SATO = NULL I do not get the warning.  Why only\n> sato and not two and ten which are also inputs?\n>\nYou use sato in the yr15 function even though it is not an argument to\nthe function.  Did you forget to add it as an argument to the yr15\nfunction?\n\n> Glenn\n>\n> # Bond Lab is a software application for the analysis of # fixed income\n> securities it provides a suite of applications\n> # in addition to standard fixed income analysis bond lab provides # for the\n> specific analysis of structured products residential mortgage backed\n> securities, # asset backed securities, and commerical mortgage backed\n> securities\n> # License GPL3 + File License\n> # Copyright (C) 2014 Glenn M Schultz, CFA\n>\n> #' An S4 class whose slots are functions used to propogate\n> #' the mortgage rate used to motivate the prepayment model\n> #' @slot yr30 A function defining the 30-year mortgage rate as a function\n> #' of the 2- and 10-year swap rate\n> #' @slot yr15 A function defining the 15-year mortgage rate as a function\n> #' of the 2- and 10-year swap rate #' @export MortgageRate\n>\n> setClass(\"MortgageRate\",\n> representation(\n> yr30 = \"function\",\n> yr15 = \"function\"))\n>\n> #' A constructor function for the class Mortgage Rate\n> MortgageRate <- function(){\n> sato = NULL\n> new(\"MortgageRate\",\n> yr30 = function(two = numeric(), ten = numeric(), sato = numeric()) {\n> 2.25 + (.06 * two) + (.75 * ten) + sato},\n>\n> yr15 = function(two = numeric(), ten = numeric()){\n> 1.75 + (.06 * two) + (.75 * ten) + sato}\n> )}\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com",
+      "body_snippet": "On Wed, Nov 18, 2015 at 7:35 PM, Glenn Schultz <glennmschultz at me.com> wrote:\n> All,\n>\n> I have the following class with slots as functions. For the analysis of MBS\n> this is good set-up as it allow",
+      "thread_id": "thread-2f05ce53f938",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-12ab0c0f4cd3",
+      "message_id": "<SNT146-W34AB9B97B28DB4E0B02053BB1B0@phx.gbl>",
+      "from_name": "Daniel Marcelino",
+      "from_email_hash": "18b067cb4fd1969aee9f7d276f4810f7fa4fcb6204f12041892371339be3f888",
+      "date": "2015-11-19T11:05:00-03:00",
+      "subject": "[R-pkg-devel] Build fails on Mavericks",
+      "subject_clean": "[R-pkg-devel] Build fails on Mavericks",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, I'm having this error when building C functions from a package:\n\n?clang: error: no such file or directory: '/usr/local/lib/libreadline.a'?\n\nApparently, it's a path issue caused by xcode/gfortran, but I couldn't figure out how to solve it.?\n\"which gcc\" points to \"/usr/bin/gcc\"\nDoes someone have any idea on how on this?\n\nThanks,\nDaniel",
+      "body_snippet": "Hi, I'm having this error when building C functions from a package:\n\n?clang: error: no such file or directory: '/usr/local/lib/libreadline.a'?\n\nApparently, it's a path issue caused by xcode/gfortran, ",
+      "thread_id": "thread-12ab0c0f4cd3",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-60f996eea96f",
+      "message_id": "<564DDF72.301@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-11-19T09:40:50-05:00",
+      "subject": "[R-pkg-devel] Build fails on Mavericks",
+      "subject_clean": "[R-pkg-devel] Build fails on Mavericks",
+      "in_reply_to": "<SNT146-W34AB9B97B28DB4E0B02053BB1B0@phx.gbl>",
+      "references": [
+        "<SNT146-W34AB9B97B28DB4E0B02053BB1B0@phx.gbl>"
+      ],
+      "body_plain": "On 19/11/2015 9:05 AM, Daniel Marcelino wrote:\n> Hi, I'm having this error when building C functions from a package:\n>\n>   clang: error: no such file or directory: '/usr/local/lib/libreadline.a'\n>\n> Apparently, it's a path issue caused by xcode/gfortran, but I couldn't figure out how to solve it.\n> \"which gcc\" points to \"/usr/bin/gcc\"\n> Does someone have any idea on how on this?\n\nYou didn't say what system you're on, but the message is coming from \nclang, not gcc, so it looks like OSX, and \"which gcc\" is irrelevant.  If \nso, you probably want to ask on the R-sig-mac group.  If not, give more \ndetails.\n\nDuncan Murdoch",
+      "body_snippet": "On 19/11/2015 9:05 AM, Daniel Marcelino wrote:\n> Hi, I'm having this error when building C functions from a package:\n>\n>   clang: error: no such file or directory: '/usr/local/lib/libreadline.a'\n>\n> A",
+      "thread_id": "thread-12ab0c0f4cd3",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-64914697f3aa",
+      "message_id": "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>",
+      "from_name": "Tushar Sadhu",
+      "from_email_hash": "4f51d64adbaca12a8018b1c32d2eb6386eb766375459f724318460313f9c30b8",
+      "date": "2015-11-19T22:03:15+05:30",
+      "subject": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "subject_clean": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello and greetings\n\nI have been doing Twitter Data Analysis following a few blogs which\nrequires me to register as a developer and enter a PIN everytime I want to\nstart reading tweets. But now I have made a basic package which does all\nthe hectic authentication, but the PIN from an authorized app is still\nrequired.\n(specifically after twitCred is correctly defined and this step :\ntwitCred$handshake(cainfo = system.file(\"CurlSSL\", \"cacert.pem\", package =\n\"RCurl\"))     )\nThough it works and reduces the steps, it still has to go to the URL and\nenter the PIN manually\n\nSo my questions are two :\n\n1. If I go ahead with the current method of reading tweets by logging from\nmy account, how do I automate the process of entering the PIN when the code\nruns inside the package?\n2. What is the standard method of gathering tweets without any\nauthentication at all. How is it done professionally without using anyone's\naccount and PIN.\n\nThis is my first question here and I am not sure if I am following the\nright protocols or am asking silly questions. In either case I am sorry.\n\nPlease help!\nAlso Thankyou in advance :)\n\nRegards\nTushar Sadhu\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello and greetings\n\nI have been doing Twitter Data Analysis following a few blogs which\nrequires me to register as a developer and enter a PIN everytime I want to\nstart reading tweets. But now I have",
+      "thread_id": "thread-64914697f3aa",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-36233905e6dc",
+      "message_id": "<m27flekks5.fsf@krugs.de>",
+      "from_name": "Rainer M Krug",
+      "from_email_hash": "157e56ae6c387b32c26749d4c5a2fa1f3d30fe259f3a41322190852de6c6c637",
+      "date": "2015-11-19T17:37:30+01:00",
+      "subject": "[R-pkg-devel] Build fails on Mavericks",
+      "subject_clean": "[R-pkg-devel] Build fails on Mavericks",
+      "in_reply_to": "<564DDF72.301@gmail.com> (Duncan Murdoch's message of \"Thu, 19 Nov 2015 09:40:50 -0500\")",
+      "references": [
+        "<SNT146-W34AB9B97B28DB4E0B02053BB1B0@phx.gbl>",
+        "<564DDF72.301@gmail.com>"
+      ],
+      "body_plain": "Duncan Murdoch <murdoch.duncan at gmail.com> writes:\n\n> On 19/11/2015 9:05 AM, Daniel Marcelino wrote:\n>> Hi, I'm having this error when building C functions from a package:\n>>\n>>   clang: error: no such file or directory: '/usr/local/lib/libreadline.a'\n>>\n>> Apparently, it's a path issue caused by xcode/gfortran, but I couldn't figure out how to solve it.\n>> \"which gcc\" points to \"/usr/bin/gcc\"\n>> Does someone have any idea on how on this?\n>\n> You didn't say what system you're on, but the message is coming from\n> clang, not gcc, so it looks like OSX, and \"which gcc\" is irrelevant.\n> If so, you probably want to ask on the R-sig-mac group.  If not, give\n> more details.\n\nAlso: did you use the official R installer or installed it using homebrew?\n\nThe path looks very much like homebrew. If yes, try installing readline",
+      "body_snippet": "Duncan Murdoch <murdoch.duncan at gmail.com> writes:\n\n> On 19/11/2015 9:05 AM, Daniel Marcelino wrote:\n>> Hi, I'm having this error when building C functions from a package:\n>>\n>>   clang: error: no s",
+      "thread_id": "thread-12ab0c0f4cd3",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-b94c6c11f2fd",
+      "message_id": "<CAAjbdi+Oj9HxgtCspnyczar9KxtmZSRWmfK3pJAXO=Awpjsfow@mail.gmail.com>",
+      "from_name": "Daniel Marcelino",
+      "from_email_hash": "18b067cb4fd1969aee9f7d276f4810f7fa4fcb6204f12041892371339be3f888",
+      "date": "2015-11-19T15:28:18-02:00",
+      "subject": "[R-pkg-devel] Build fails on Mavericks",
+      "subject_clean": "[R-pkg-devel] Build fails on Mavericks",
+      "in_reply_to": "<m27flekks5.fsf@krugs.de>",
+      "references": [
+        "<SNT146-W34AB9B97B28DB4E0B02053BB1B0@phx.gbl>",
+        "<564DDF72.301@gmail.com>",
+        "<m27flekks5.fsf@krugs.de>"
+      ],
+      "body_plain": "Yes, I do use homebrew for installing almost everything.\n\nI ended up solving the issue with $ brew link readline --forc\ne\n\nDaniel\n\nOn Thu, Nov 19, 2015 at 2:37 PM, Rainer M Krug <Rainer at krugs.de> wrote:\n> Duncan Murdoch <murdoch.duncan at gmail.com> writes:\n>\n>> On 19/11/2015 9:05 AM, Daniel Marcelino wrote:\n>>> Hi, I'm having this error when building C functions from a package:\n>>>\n>>>   clang: error: no such file or directory: '/usr/local/lib/libreadline.a'\n>>>\n>>> Apparently, it's a path issue caused by xcode/gfortran, but I couldn't figure out how to solve it.\n>>> \"which gcc\" points to \"/usr/bin/gcc\"\n>>> Does someone have any idea on how on this?\n>>\n>> You didn't say what system you're on, but the message is coming from\n>> clang, not gcc, so it looks like OSX, and \"which gcc\" is irrelevant.\n>> If so, you probably want to ask on the R-sig-mac group.  If not, give\n>> more details.\n>\n> Also: did you use the official R installer or installed it using homebrew?\n>\n> The path looks very much like homebrew. If yes, try installing readline\n> From homebrew.\n>\n> Cheers,\n>\n> Rainer\n>\n>>\n>> Duncan Murdoch\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> Rainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation Biology, UCT), Dipl. Phys. (Germany)\n>\n> Centre of Excellence for Invasion Biology\n> Stellenbosch University\n> South Africa\n>\n> Tel :       +33 - (0)9 53 10 27 44\n> Cell:       +33 - (0)6 85 62 59 98\n> Fax :       +33 - (0)9 58 10 27 44\n>\n> Fax (D):    +49 - (0)3 21 21 25 22 44\n>\n> email:      Rainer at krugs.de\n>\n> Skype:      RMkrug\n>\n> PGP: 0x0F52F982",
+      "body_snippet": "Yes, I do use homebrew for installing almost everything.\n\nI ended up solving the issue with $ brew link readline --forc\ne\n\nDaniel\n\nOn Thu, Nov 19, 2015 at 2:37 PM, Rainer M Krug <Rainer at krugs.de> w",
+      "thread_id": "thread-12ab0c0f4cd3",
+      "thread_depth": 3,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-230994e19a0a",
+      "message_id": "<92F94572-AF23-4F61-B2DB-127A74BDE1DE@science.oregonstate.edu>",
+      "from_name": "Zhian Kamvar",
+      "from_email_hash": "22d49dbeb0ae0b237f0469049b2a7bdfde827513b85adcc2c71ca951614f6bcc",
+      "date": "2015-11-19T11:18:01-08:00",
+      "subject": "[R-pkg-devel] Build fails on Mavericks",
+      "subject_clean": "[R-pkg-devel] Build fails on Mavericks",
+      "in_reply_to": "<CAAjbdi+Oj9HxgtCspnyczar9KxtmZSRWmfK3pJAXO=Awpjsfow@mail.gmail.com>",
+      "references": [
+        "<SNT146-W34AB9B97B28DB4E0B02053BB1B0@phx.gbl>",
+        "<564DDF72.301@gmail.com>",
+        "<m27flekks5.fsf@krugs.de>",
+        "<CAAjbdi+Oj9HxgtCspnyczar9KxtmZSRWmfK3pJAXO=Awpjsfow@mail.gmail.com>"
+      ],
+      "body_plain": "Might it be an issue with your Makevars file?\n\nAs far as I can tell, by default, OS X sets clang as the C compiler. If you installed gcc separately, then you have to tell R to use it in ~/.R/Makevars\n\nHere's an example of my Makevars file so that I can run C code with openmp: https://gist.github.com/zkamvar/9a7c4b8251a0a662f214\n\nZhian\n\n> On Nov 19, 2015, at 09:28 , Daniel Marcelino <dmarcelino at live.com> wrote:\n> \n> Yes, I do use homebrew for installing almost everything.\n> \n> I ended up solving the issue with $ brew link readline --forc\n> e\n> \n> Daniel\n> \n> On Thu, Nov 19, 2015 at 2:37 PM, Rainer M Krug <Rainer at krugs.de> wrote:\n>> Duncan Murdoch <murdoch.duncan at gmail.com> writes:\n>> \n>>> On 19/11/2015 9:05 AM, Daniel Marcelino wrote:\n>>>> Hi, I'm having this error when building C functions from a package:\n>>>> \n>>>>  clang: error: no such file or directory: '/usr/local/lib/libreadline.a'\n>>>> \n>>>> Apparently, it's a path issue caused by xcode/gfortran, but I couldn't figure out how to solve it.\n>>>> \"which gcc\" points to \"/usr/bin/gcc\"\n>>>> Does someone have any idea on how on this?\n>>> \n>>> You didn't say what system you're on, but the message is coming from\n>>> clang, not gcc, so it looks like OSX, and \"which gcc\" is irrelevant.\n>>> If so, you probably want to ask on the R-sig-mac group.  If not, give\n>>> more details.\n>> \n>> Also: did you use the official R installer or installed it using homebrew?\n>> \n>> The path looks very much like homebrew. If yes, try installing readline\n>> From homebrew.\n>> \n>> Cheers,\n>> \n>> Rainer\n>> \n>>> \n>>> Duncan Murdoch\n>>> \n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n>> --\n>> Rainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation Biology, UCT), Dipl. Phys. (Germany)\n>> \n>> Centre of Excellence for Invasion Biology\n>> Stellenbosch University\n>> South Africa\n>> \n>> Tel :       +33 - (0)9 53 10 27 44\n>> Cell:       +33 - (0)6 85 62 59 98\n>> Fax :       +33 - (0)9 58 10 27 44\n>> \n>> Fax (D):    +49 - (0)3 21 21 25 22 44\n>> \n>> email:      Rainer at krugs.de\n>> \n>> Skype:      RMkrug\n>> \n>> PGP: 0x0F52F982\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Might it be an issue with your Makevars file?\n\nAs far as I can tell, by default, OS X sets clang as the C compiler. If you installed gcc separately, then you have to tell R to use it in ~/.R/Makevars\n",
+      "thread_id": "thread-12ab0c0f4cd3",
+      "thread_depth": 4,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-61eb553e25d8",
+      "message_id": "<CAJLyBTUwt8K5RPwjWjC0VO63MgPw0QGVgADe6j4P-48bO2r1pQ@mail.gmail.com>",
+      "from_name": "Robert M. Flight",
+      "from_email_hash": "9e63154c82c6afea6d20fb120a56e436e60c424567c84c7e5d78bfa50d6421a2",
+      "date": "2015-11-20T17:11:41Z",
+      "subject": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "subject_clean": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "in_reply_to": "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>",
+      "references": [
+        "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>"
+      ],
+      "body_plain": "Tushar,\n\nI've created a Twitter App, and then saved the credentials for that app as\nan object that is part of an R package, using the four pieces of *api key,\napi secret, token key, token secret* that you get when you create a new\napp. I've posted a tutorial here:\nhttp://rmflight.github.io/posts/2014/06/r_job_notifications_twitter.html\n\nThe only thing I've found is that with new versions of some packages I may\nhave to regenerate the object and save it with the package.\n\nNote that this method *should only be used with personal packages*, and the\ncredential object should never go into version control!\n\nAlternatively, I think there may be a way to read in the four pieces from a\ntext file to generate the Oauth token object that can then be used for the\nsession. This might be a better method for a distributable package, and I'm\nactually thinking of switching to this method myself, but have not tried it\nyet.\n\nI hope this helps.\n\n-Robert\n\nOn Fri, Nov 20, 2015 at 11:55 AM Tushar Sadhu <tushar.sadhu08 at gmail.com>\nwrote:\n\n> Hello and greetings\n>\n> I have been doing Twitter Data Analysis following a few blogs which\n> requires me to register as a developer and enter a PIN everytime I want to\n> start reading tweets. But now I have made a basic package which does all\n> the hectic authentication, but the PIN from an authorized app is still\n> required.\n> (specifically after twitCred is correctly defined and this step :\n> twitCred$handshake(cainfo = system.file(\"CurlSSL\", \"cacert.pem\", package =\n> \"RCurl\"))     )\n> Though it works and reduces the steps, it still has to go to the URL and\n> enter the PIN manually\n>\n> So my questions are two :\n>\n> 1. If I go ahead with the current method of reading tweets by logging from\n> my account, how do I automate the process of entering the PIN when the code\n> runs inside the package?\n> 2. What is the standard method of gathering tweets without any\n> authentication at all. How is it done professionally without using anyone's\n> account and PIN.\n>\n> This is my first question here and I am not sure if I am following the\n> right protocols or am asking silly questions. In either case I am sorry.\n>\n> Please help!\n> Also Thankyou in advance :)\n>\n> Regards\n> Tushar Sadhu\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Tushar,\n\nI've created a Twitter App, and then saved the credentials for that app as\nan object that is part of an R package, using the four pieces of *api key,\napi secret, token key, token secret* that",
+      "thread_id": "thread-64914697f3aa",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-3b85e9ff58c2",
+      "message_id": "<1448161620.5509.0@smtp.gmail.com>",
+      "from_name": "Peter Meissner",
+      "from_email_hash": "995e8c129d80a55c502ea3d786d41d905fdce75d0ab78df186e4c9c940b90a77",
+      "date": "2015-11-22T03:08:00+00:01",
+      "subject": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "subject_clean": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "in_reply_to": "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>",
+      "references": [
+        "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hey,\n\nI am not sure, that this is the right list for questions that are 'only \nmildly' related to package developement. Your question is more about \nAPI/webscraping etc. . \n\nMaybe someone can point to a better place to post questions like this?. \n\n... that beeing said ... \n\nIf I understand your problem right, I would suggest to try out the \ntwitteR package [1] which already has authentication and data retrieval \nbuild in. \n\nIf you do want to do it on your own I would suggest building on top of \nhttr [2] for  authentication and HTTP-communication to access \ninformation from the official Twitter API [3]. Make sure to have a look \nat the demo provided on httr's Github repo [4]. Also the httr vignette \non how to write API wrapper packages might be useful and last and very \nleast I build a kind of minimal package for reading tweets and tweeting \not be found on my Github [5] which might also be of use because it only \nimplements reading tweets of specific user.\n\nGood luck, Peter\n\n\n[1] https://cran.r-project.org/web/packages/twitteR/index.html\n[2] https://cran.r-project.org/web/packages/httr/index.html\n[3] https://dev.twitter.com/rest/public\n[4] https://github.com/hadley/httr/blob/master/demo/oauth1-twitter.r\n[5] https://github.com/petermeissner/twitterlight\n\n\n\nAm Do, 19. Nov, 2015 um 5:33 schrieb Tushar Sadhu \n<tushar.sadhu08 at gmail.com>:\n> Hello and greetings\n> \n> I have been doing Twitter Data Analysis following a few blogs which\n> requires me to register as a developer and enter a PIN everytime I \n> want to\n> start reading tweets. But now I have made a basic package which does \n> all\n> the hectic authentication, but the PIN from an authorized app is still\n> required.\n> (specifically after twitCred is correctly defined and this step :\n> twitCred$handshake(cainfo = system.file(\"CurlSSL\", \"cacert.pem\", \n> package =\n> \"RCurl\"))     )\n> Though it works and reduces the steps, it still has to go to the URL \n> and\n> enter the PIN manually\n> \n> So my questions are two :\n> \n> 1. If I go ahead with the current method of reading tweets by logging \n> from\n> my account, how do I automate the process of entering the PIN when \n> the code\n> runs inside the package?\n> 2. What is the standard method of gathering tweets without any\n> authentication at all. How is it done professionally without using \n> anyone's\n> account and PIN.\n> \n> This is my first question here and I am not sure if I am following the\n> right protocols or am asking silly questions. In either case I am \n> sorry.\n> \n> Please help!\n> Also Thankyou in advance :)\n> \n> Regards\n> Tushar Sadhu\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hey,\n\nI am not sure, that this is the right list for questions that are 'only \nmildly' related to package developement. Your question is more about \nAPI/webscraping etc. . \n\nMaybe someone can point to",
+      "thread_id": "thread-64914697f3aa",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-efdf5bb06bbf",
+      "message_id": "<991A130D-827D-4BF9-AE1E-87A4A29EB53E@stat.ubc.ca>",
+      "from_name": "Jenny Bryan",
+      "from_email_hash": "988dbf0ede3bb651c591455ed750e23d2de29563949c022d8bf38d67cf91e836",
+      "date": "2015-11-24T15:15:56-08:00",
+      "subject": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "subject_clean": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "in_reply_to": "<CAJLyBTUwt8K5RPwjWjC0VO63MgPw0QGVgADe6j4P-48bO2r1pQ@mail.gmail.com>",
+      "references": [
+        "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>",
+        "<CAJLyBTUwt8K5RPwjWjC0VO63MgPw0QGVgADe6j4P-48bO2r1pQ@mail.gmail.com>"
+      ],
+      "body_plain": "> On Nov 21, 2015, at 7:07 PM, Peter Meissner <retep.meissner at gmail.com> wrote:\n> \n> Hey,\n> \n> I am not sure, that this is the right list for questions that are 'only \n> mildly' related to package developement. Your question is more about \n> API/webscraping etc. . \n> \n> Maybe someone can point to a better place to post questions like this?. \n\nA good place to ask API wrapping questions is:\n\nhttps://discuss.ropensci.org\n\n> On Nov 20, 2015, at 9:11 AM, Robert M. Flight <rflight79 at gmail.com> wrote:\n> \n> Tushar,\n> \n> I've created a Twitter App, and then saved the credentials for that app as\n> an object that is part of an R package, using the four pieces of *api key,\n> api secret, token key, token secret* that you get when you create a new\n> app. I've posted a tutorial here:\n> http://rmflight.github.io/posts/2014/06/r_job_notifications_twitter.html\n> \n> The only thing I've found is that with new versions of some packages I may\n> have to regenerate the object and save it with the package.\n> \n> Note that this method *should only be used with personal packages*, and the\n> credential object should never go into version control!\n\nWhile this may not be true for Twitter, there are many APIs where the app key\nand ?secret? don?t necessarily need to be kept super secret.\n\nYes, you would not want to put, e.g., actual access tokens in a package or\non GitHub. I?m NOT contradicting what Robert says above for his approach.\n\nBut it feels like package authors are overly conservative about building in\ndefault apps that can facilitate first-time or casual use of an API from R.\n\n? Jenny",
+      "body_snippet": "> On Nov 21, 2015, at 7:07 PM, Peter Meissner <retep.meissner at gmail.com> wrote:\n> \n> Hey,\n> \n> I am not sure, that this is the right list for questions that are 'only \n> mildly' related to package ",
+      "thread_id": "thread-64914697f3aa",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-aa0cde5f165d",
+      "message_id": "<22101.9398.257771.402644@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-24T21:02:14-06:00",
+      "subject": "[R-pkg-devel] Help with making a package for Twitter\tAuthentication",
+      "subject_clean": "[R-pkg-devel] Help with making a package for Twitter\tAuthentication",
+      "in_reply_to": "<CAJLyBTUwt8K5RPwjWjC0VO63MgPw0QGVgADe6j4P-48bO2r1pQ@mail.gmail.com>",
+      "references": [
+        "<CAE_K4vvv7+KLMWDSAPQZWcAAQJQVKF0GMLB_n7gOdgePKF=MwQ@mail.gmail.com>",
+        "<CAJLyBTUwt8K5RPwjWjC0VO63MgPw0QGVgADe6j4P-48bO2r1pQ@mail.gmail.com>"
+      ],
+      "body_plain": "I just use and external program: bti [1] and let it handle authentication\n(there is a set up step).  That works beautifully for two cronjobs:\nCRANberries [2] (which has tweeted thousands of times) and the CRAN Repo\nPolicy changes watcher [3] which tweets whenever the policy document is\nupdated.  I use bti because the R twitter clients were at the times shutout\nfrom twitter, and I also had a devil of a time making them work. I never\nlooked back.\n\nThat said, I have not attempted to read in bulk.\n\nHth,  Dirk\n\n\n[1] By Linux kernel maintainer Greg Kroah-Hartman, see\n    https://github.com/gregkh/bti\n[2] http://dirk.eddelbuettel.com/cranberries/\n[3] https://github.com/eddelbuettel/crp\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "I just use and external program: bti [1] and let it handle authentication\n(there is a set up step).  That works beautifully for two cronjobs:\nCRANberries [2] (which has tweeted thousands of times) and",
+      "thread_id": "thread-64914697f3aa",
+      "thread_depth": 2,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-b9dc841b1076",
+      "message_id": "<BBE589F7-F00B-4A44-A355-CEEF5EE257C0@gmail.com>",
+      "from_name": "Guillaume Chapron",
+      "from_email_hash": "02f0693d3cf4841364a66299e93b6e320512d36e2bc8437af934be976baf96cc",
+      "date": "2015-11-27T19:48:04+01:00",
+      "subject": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "subject_clean": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nHas anyone written a package with a C code that uses R's RNG but in a multi-threaded way (e.g. to parallelize Monte Carlo simulations)? I do not have the knowledge to figure out myself how to solved this and would need to see an example.\n\nThanks!\n\nGuillaume\n\n--\nGuillaume Chapron, PhD\n\nAssociate Professor\n\nGrims? Wildlife Research Station\nSwedish University of Agricultural Sciences\nSE - 73091 Riddarhyttan, Sweden\n\nhttp://www.carnivore.science/\nTwitter @CarnivoreSci",
+      "body_snippet": "Hello,\n\nHas anyone written a package with a C code that uses R's RNG but in a multi-threaded way (e.g. to parallelize Monte Carlo simulations)? I do not have the knowledge to figure out myself how to ",
+      "thread_id": "thread-b9dc841b1076",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-72a42ee956c4",
+      "message_id": "<22104.44257.327624.746646@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-27T13:20:01-06:00",
+      "subject": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "subject_clean": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "in_reply_to": "<BBE589F7-F00B-4A44-A355-CEEF5EE257C0@gmail.com>",
+      "references": [
+        "<BBE589F7-F00B-4A44-A355-CEEF5EE257C0@gmail.com>"
+      ],
+      "body_plain": "On 27 November 2015 at 19:48, Guillaume Chapron wrote:\n| Has anyone written a package with a C code that uses R's RNG but in a multi-threaded way (e.g. to parallelize Monte Carlo simulations)? I do not have the knowledge to figure out myself how to solved this and would need to see an example.\n\nTo the best of my knowledge you cannot do thatas the RNG writes state back,\nso you would have interaction between multiple threads and R itself --- which\nis almost surely going to end in tears.\n\nMultithreading is fine with proper mutexes, and/or via OpenMP, but keep your\ndata in non-R data structures and stau away from R while you multithread.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 27 November 2015 at 19:48, Guillaume Chapron wrote:\n| Has anyone written a package with a C code that uses R's RNG but in a multi-threaded way (e.g. to parallelize Monte Carlo simulations)? I do no",
+      "thread_id": "thread-b9dc841b1076",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-d3e18e4538ed",
+      "message_id": "<3085e3be-9d78-4fdd-b7df-822450fedff6@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2015-11-27T22:33:17Z",
+      "subject": "[R-pkg-devel] Strange warnings from build",
+      "subject_clean": "[R-pkg-devel] Strange warnings from build",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello All,?\n\nWhen I build my package. ?I get the following warnings. ?I think these are related to LaTex and ElCapitan but are flowing through to my R build. All the tests pass and the help files work. ?These are just warnings but are frustrating nonetheless.\n\nNote: I just up graded to El Capitan OS - This blew out my Tex Maker / Knitr to the point that I was ready to give up. ?I had to uninstall mactex and texmaker twice but everything seems to be ?working okay as far a knitr and Tex Maker is concerned - basically I can knit my document and get the same results as before.\n\nI am not sure where to start to correct the R build warnings and I have been researching for about 2-3 weeks. ?I am a little more fearful of the R build warnings than the Tex Maker / Knitr as that issue was basically one of path. \n\nIn R build case I just don't know, so I am a little more fearful. ?If someone could give me a nudge in the right direction I would appreciate the help.\n\nGlenn\n\nThe new warnings are:\n===============================================================\nThis is the first one\n================================================================\nUndocumented arguments in documentation object 'Mortgage.OAS'\n?bond.id? ?trade.date? ?settlement.date? ?original.bal? ?price?\n?sigma? ?paths?\n\n\nThe code for the constructor function is documented.\n\n#' Mortgage OAS the OAS engine for pass through OAS\n#' \n#' Pass through OAS engine\n#' @param bond.id A character string the bond id or cusip number\n#' @param trade.date A character string the trade date\n#' @param settlement.date A character string the settlement date\n#' @param original.bal A numeric value the pool original balance\n#' @param price A numeric value the price of the pass through\n#' @param sigma A numeric value the volatility assumption (not annualized)\n#' @param paths A numeric value the number of paths\n#' @importFrom lubridate %m+%\n#' @export Mortgage.OAS\nMortgage.OAS <- function(bond.id = \"character\", \ntrade.date = \"character\", \nsettlement.date = \"character\", \noriginal.bal = numeric(),\nprice = numeric(), \nsigma = numeric(), \npaths = numeric()\n){ some stuff to do OAS}\n\n============================================================\nThe other is\n============================================================\n\nFunctions with \\usage entries need to have the appropriate \\alias\nentries, and all their arguments documented.\nThe \\usage entries must correspond to syntactically valid R code.\nSee chapter ?Writing R documentation files? in the ?Writing R\nExtensions? manual.\n* checking Rd contents ... OK\n* checking for unstated dependencies in examples ... OK\n* checking examples ... OK\nExamples with CPU or elapsed time > 5s\nuser system elapsed\nREMIC.OAS 22.746 0.351 23.100\nPassThroughOAS 11.449 0.067 11.518\n* checking PDF version of manual ... WARNING\nLaTeX errors when creating PDF version.\nThis typically indicates Rd problems.\nLaTeX errors found:\n! You can't use `macro parameter character #' in horizontal mode.\nl.1175 #\n# Not run: need example\nSorry, but I'm not programmed to handle this case;\nI'll just pretend that you didn't ask for it.\n! You can't use `macro parameter character #' in horizontal mode.\nl.1175 ##",
+      "body_snippet": "Hello All,?\n\nWhen I build my package. ?I get the following warnings. ?I think these are related to LaTex and ElCapitan but are flowing through to my R build. All the tests pass and the help files work",
+      "thread_id": "thread-d3e18e4538ed",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-2c12a63d5cb7",
+      "message_id": "<CABdHhvGFJ_VvmqEy3aDQTaMbV5jSyMbjrqAHFxx-eKS6=F1atA@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2015-11-28T11:49:36+13:00",
+      "subject": "[R-pkg-devel] Strange warnings from build",
+      "subject_clean": "[R-pkg-devel] Strange warnings from build",
+      "in_reply_to": "<3085e3be-9d78-4fdd-b7df-822450fedff6@me.com>",
+      "references": [
+        "<3085e3be-9d78-4fdd-b7df-822450fedff6@me.com>"
+      ],
+      "body_plain": "Take a look at this line:\n\n#' #' Pass through OAS engine\n\nHadley\n\nOn Sat, Nov 28, 2015 at 11:33 AM, Glenn Schultz <glennmschultz at me.com> wrote:\n> Hello All,\n>\n> When I build my package.  I get the following warnings.  I think these are\n> related to LaTex and ElCapitan but are flowing through to my R build. All\n> the tests pass and the help files work.  These are just warnings but are\n> frustrating nonetheless.\n>\n> Note: I just up graded to El Capitan OS - This blew out my Tex Maker / Knitr\n> to the point that I was ready to give up.  I had to uninstall mactex and\n> texmaker twice but everything seems to be  working okay as far a knitr and\n> Tex Maker is concerned - basically I can knit my document and get the same\n> results as before.\n>\n> I am not sure where to start to correct the R build warnings and I have been\n> researching for about 2-3 weeks.  I am a little more fearful of the R build\n> warnings than the Tex Maker / Knitr as that issue was basically one of path.\n> In R build case I just don't know, so I am a little more fearful.  If\n> someone could give me a nudge in the right direction I would appreciate the\n> help.\n>\n> Glenn\n>\n> The new warnings are:\n> ===============================================================\n> This is the first one\n> ================================================================\n> Undocumented arguments in documentation object 'Mortgage.OAS'\n> ?bond.id? ?trade.date? ?settlement.date? ?original.bal? ?price?\n> ?sigma? ?paths?\n>\n>\n> The code for the constructor function is documented.\n>\n> #' Mortgage OAS the OAS engine for pass through OAS\n> #' #' Pass through OAS engine\n> #' @param bond.id A character string the bond id or cusip number\n> #' @param trade.date A character string the trade date\n> #' @param settlement.date A character string the settlement date\n> #' @param original.bal A numeric value the pool original balance\n> #' @param price A numeric value the price of the pass through\n> #' @param sigma A numeric value the volatility assumption (not annualized)\n> #' @param paths A numeric value the number of paths\n> #' @importFrom lubridate %m+%\n> #' @export Mortgage.OAS\n> Mortgage.OAS <- function(bond.id = \"character\", trade.date = \"character\",\n> settlement.date = \"character\", original.bal = numeric(),\n> price = numeric(), sigma = numeric(), paths = numeric()\n> ){ some stuff to do OAS}\n>\n> ============================================================\n> The other is\n> ============================================================\n>\n> Functions with \\usage entries need to have the appropriate \\alias\n> entries, and all their arguments documented.\n> The \\usage entries must correspond to syntactically valid R code.\n> See chapter ?Writing R documentation files? in the ?Writing R\n> Extensions? manual.\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking examples ... OK\n> Examples with CPU or elapsed time > 5s\n> user system elapsed\n> REMIC.OAS 22.746 0.351 23.100\n> PassThroughOAS 11.449 0.067 11.518\n> * checking PDF version of manual ... WARNING\n> LaTeX errors when creating PDF version.\n> This typically indicates Rd problems.\n> LaTeX errors found:\n> ! You can't use `macro parameter character #' in horizontal mode.\n> l.1175 #\n> # Not run: need example\n> Sorry, but I'm not programmed to handle this case;\n> I'll just pretend that you didn't ask for it.\n> ! You can't use `macro parameter character #' in horizontal mode.\n> l.1175 ##\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "Take a look at this line:\n\n#' #' Pass through OAS engine\n\nHadley\n\nOn Sat, Nov 28, 2015 at 11:33 AM, Glenn Schultz <glennmschultz at me.com> wrote:\n> Hello All,\n>\n> When I build my package.  I get the ",
+      "thread_id": "thread-d3e18e4538ed",
+      "thread_depth": 1,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-62a3a10866ba",
+      "message_id": "<38F6D40F55648441B2070D889450ADCBB9A66B0E@NUFF-ROCKALL.nuff.ox.ac.uk>",
+      "from_name": "Tom Snijders",
+      "from_email_hash": "0fa1ba875dffac0092b2b583856accdf28167fac5eefca688ec44d5647b0a797",
+      "date": "2015-11-28T13:40:47Z",
+      "subject": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "subject_clean": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "On Fri, 27 Nov 2015 19:48:04 +0100, Guillaume Chapron carnivorescience at gmail.com<mailto:carnivorescience at gmail.com> wrote:\n\n\n\n| Has anyone written a package with a C code that uses R's RNG but in a multi-threaded way (e.g. to parallelize Monte Carlo simulations)? I do not have the knowledge to figure out myself how to solved this and would need to see an example.\n\n\n\nThis is done in RSiena, using the package parallel. The programming was done by Ruth Ripley. There is some documentation in the package RSienaTest in \\doc\\RSIENAspec.tex and \\doc\\RSienaDeveloper.tex (search in these files for 'processes'); RSienaTest is not at CRAN but can be obtained from http://r-forge.r-project.org/R/?group_id=461; with respect to this use of random number streams, RSiena and RSienaTest are identical.\n\n\n\nBest wishes,\n\nTom\n================================================================\nTom A.B. Snijders\nProfessor of Statistics and Methodology\nDept. of Sociology, University of Groningen\nEmeritus Fellow, Nuffield College, University of Oxford\nAssociate Member, Dept. of Statistics, University of Oxford\nhttp://www.stats.ox.ac.uk/~snijders/\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "On Fri, 27 Nov 2015 19:48:04 +0100, Guillaume Chapron carnivorescience at gmail.com<mailto:carnivorescience at gmail.com> wrote:\n\n\n\n| Has anyone written a package with a C code that uses R's RNG but i",
+      "thread_id": "thread-62a3a10866ba",
+      "thread_depth": 0,
+      "month": "2015-11"
+    },
+    {
+      "id": "msg-666f1a22f46d",
+      "message_id": "<22105.58163.684418.782407@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-11-28T11:24:03-06:00",
+      "subject": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "subject_clean": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "in_reply_to": "<38F6D40F55648441B2070D889450ADCBB9A66B0E@NUFF-ROCKALL.nuff.ox.ac.uk>",
+      "references": [
+        "<38F6D40F55648441B2070D889450ADCBB9A66B0E@NUFF-ROCKALL.nuff.ox.ac.uk>"
+      ],
+      "body_plain": "On 28 November 2015 at 13:40, Tom Snijders wrote:\n| On Fri, 27 Nov 2015 19:48:04 +0100, Guillaume Chapron carnivorescience at gmail.com<mailto:carnivorescience at gmail.com> wrote:\n| \n| \n| \n| | Has anyone written a package with a C code that uses R's RNG but in a multi-threaded way (e.g. to parallelize Monte Carlo simulations)? I do not have the knowledge to figure out myself how to solved this and would need to see an example.\n| \n| \n| \n| This is done in RSiena, using the package parallel. The programming was done by Ruth Ripley. There is some documentation in the package RSienaTest in \\doc\\RSIENAspec.tex and \\doc\\RSienaDeveloper.tex (search in these files for 'processes'); RSienaTest is not at CRAN but can be obtained from http://r-forge.r-project.org/R/?group_id=461; with respect to this use of random number streams, RSiena and RSienaTest are identical.\n\nI just glanced at its Random.h and Random.cpp.  One could split hairs and say\nthat its use of unif_rand() and subsequent _modifications within RSiena_\nitself keep the calculation away from R's core.\n\nSee Writing R Extensions and the difference between using the RNG via\nunif_rand (as also discussed in using the optional external math library that\nbuildable from R sources) and using the full-blown d/p/q/r functions.\nPresumably when people ask for 'R random numbers in streams' they want the\nfull richness of the various distributions available for random draws.\n\nBut your point is well taken: the basic uniform sample can be accessed, and\nhence be seeded from R before calling.   More complicated (parallel) setup\nmay still require extrade code.\n\nThere are a few CRAN packages doing that.  Too bad we don't have a nice\nsurvey paper.  I could do with one now...\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 28 November 2015 at 13:40, Tom Snijders wrote:\n| On Fri, 27 Nov 2015 19:48:04 +0100, Guillaume Chapron carnivorescience at gmail.com<mailto:carnivorescience at gmail.com> wrote:\n| \n| \n| \n| | Has an",
+      "thread_id": "thread-62a3a10866ba",
+      "thread_depth": 1,
+      "month": "2015-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-309ad10855d7",
+      "subject": "[R-pkg-devel] NAMESPACE and S4 classes",
+      "message_count": 2,
+      "participants": [
+        "Boylan, Ross",
+        "Uwe Ligges"
+      ],
+      "started": "2015-11-05T23:52:45+00:00",
+      "last_reply": "2015-11-06T12:05:45+01:00",
+      "root_message_id": "msg-309ad10855d7"
+    },
+    {
+      "id": "thread-cbabaad18c1d",
+      "subject": "[R-pkg-devel] extra license (ODbL) on https://svn.r-project.org/R/trunk/share/licenses/license.db",
+      "message_count": 1,
+      "participants": [
+        "Jan Wijffels"
+      ],
+      "started": "2015-11-10T16:32:27+01:00",
+      "last_reply": "2015-11-10T16:32:27+01:00",
+      "root_message_id": "msg-cbabaad18c1d"
+    },
+    {
+      "id": "thread-bb7ce8fa721d",
+      "subject": "[R-pkg-devel] found ... marked UTF-8 strings",
+      "message_count": 1,
+      "participants": [
+        "Jan Wijffels"
+      ],
+      "started": "2015-11-10T16:57:41+01:00",
+      "last_reply": "2015-11-10T16:57:41+01:00",
+      "root_message_id": "msg-bb7ce8fa721d"
+    },
+    {
+      "id": "thread-9b4501ae6dfc",
+      "subject": "[R-pkg-devel] configure.win for multiple architectures",
+      "message_count": 3,
+      "participants": [
+        "Charles Determan",
+        "Dirk Eddelbuettel"
+      ],
+      "started": "2015-11-12T07:17:16-06:00",
+      "last_reply": "2015-11-12T08:45:12-06:00",
+      "root_message_id": "msg-9b4501ae6dfc"
+    },
+    {
+      "id": "thread-9caa06539ec1",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "message_count": 6,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Gordon Brown",
+        "Pierre Lafaye de Micheaux",
+        "Roebuck,Paul L"
+      ],
+      "started": "2015-11-13T17:24:41+01:00",
+      "last_reply": "2015-11-15T13:02:04+00:00",
+      "root_message_id": "msg-9caa06539ec1"
+    },
+    {
+      "id": "thread-06f3b604322a",
+      "subject": "[R-pkg-devel] Checking for C++11",
+      "message_count": 5,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Marvin Wright"
+      ],
+      "started": "2015-11-16T13:07:21+01:00",
+      "last_reply": "2015-11-16T09:53:52-06:00",
+      "root_message_id": "msg-06f3b604322a"
+    },
+    {
+      "id": "thread-2f05ce53f938",
+      "subject": "[R-pkg-devel] Class with functions as slots",
+      "message_count": 2,
+      "participants": [
+        "Glenn Schultz",
+        "Joshua Ulrich"
+      ],
+      "started": "2015-11-19T01:35:15+00:00",
+      "last_reply": "2015-11-18T19:51:31-06:00",
+      "root_message_id": "msg-2f05ce53f938"
+    },
+    {
+      "id": "thread-12ab0c0f4cd3",
+      "subject": "[R-pkg-devel] Build fails on Mavericks",
+      "message_count": 5,
+      "participants": [
+        "Daniel Marcelino",
+        "Duncan Murdoch",
+        "Rainer M Krug",
+        "Zhian Kamvar"
+      ],
+      "started": "2015-11-19T11:05:00-03:00",
+      "last_reply": "2015-11-19T11:18:01-08:00",
+      "root_message_id": "msg-12ab0c0f4cd3"
+    },
+    {
+      "id": "thread-64914697f3aa",
+      "subject": "[R-pkg-devel] Help with making a package for Twitter Authentication",
+      "message_count": 5,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Jenny Bryan",
+        "Peter Meissner",
+        "Robert M. Flight",
+        "Tushar Sadhu"
+      ],
+      "started": "2015-11-19T22:03:15+05:30",
+      "last_reply": "2015-11-24T21:02:14-06:00",
+      "root_message_id": "msg-64914697f3aa"
+    },
+    {
+      "id": "thread-b9dc841b1076",
+      "subject": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Guillaume Chapron"
+      ],
+      "started": "2015-11-27T19:48:04+01:00",
+      "last_reply": "2015-11-27T13:20:01-06:00",
+      "root_message_id": "msg-b9dc841b1076"
+    },
+    {
+      "id": "thread-d3e18e4538ed",
+      "subject": "[R-pkg-devel] Strange warnings from build",
+      "message_count": 2,
+      "participants": [
+        "Glenn Schultz",
+        "Hadley Wickham"
+      ],
+      "started": "2015-11-27T22:33:17+00:00",
+      "last_reply": "2015-11-28T11:49:36+13:00",
+      "root_message_id": "msg-d3e18e4538ed"
+    },
+    {
+      "id": "thread-62a3a10866ba",
+      "subject": "[R-pkg-devel] Multi-threaded C with R's RNG",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Tom Snijders"
+      ],
+      "started": "2015-11-28T13:40:47+00:00",
+      "last_reply": "2015-11-28T11:24:03-06:00",
+      "root_message_id": "msg-62a3a10866ba"
+    }
+  ]
+}

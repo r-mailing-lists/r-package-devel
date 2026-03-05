@@ -1,0 +1,1241 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2016-01",
+  "messages": [
+    {
+      "id": "msg-849ea9b5e052",
+      "message_id": "<5688278E.1020804@dms.umontreal.ca>",
+      "from_name": "Pierre Lafaye de Micheaux",
+      "from_email_hash": "6de1e5d34aaead452a6520cc984c45a5c6ebaf424b04e43afdc1bc6cda692fe3",
+      "date": "2016-01-02T20:39:58+01:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<564649B0.8000701@gmail.com>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>",
+        "<564649B0.8000701@gmail.com>"
+      ],
+      "body_plain": "Dear all,\n\nThank you very much for your answers. And sorry for the last reply.\nHere is how I solved my problem.\n\nI incorporated some files from the src/ directory of the R package \nFaddeeva to\nthe subdirectory /libraries of the src/ directory of my own package.\n\nThis is because I needed to use some functions (in C)  from this package.\nThen I used something as:\n#include <R.h>\n#include \"Rmath.h\"\n#include \"libraries/callFaddeeva.cpp\"\n#include \"libraries/Faddeeva.cpp\"\n#include \"libraries/RcppExports.cpp\"\n\nIt is then possible, to initialise and manipulate complex numbers in C \nin my own code. For example:\n\ncmplx I = C(0.0, 1.0); # For a + ib where a = 0 and b = 1.\ncmplx res;\nres = Faddeeva::erfi(I, 0.0);\n\nAnd this compiles well under Windows now.\n\nNote that I first tried to add the Faddeeva package in the Depends field \nof my own package thinking that this might prevent me from having to put \nthe Faddeeva source files in my own package but it did not work ...\n\nBest regards,\n\nPierre L.\n\n\n\n\nLe 13/11/2015 21:36, Duncan Murdoch a ?crit :\n> On 13/11/2015 11:24 AM, Pierre Lafaye de Micheaux wrote:\n>> Dear all,\n>>\n>> I created a new version of the package IndependenceTests where I call\n>> some C and Fortran functions (using the .C() or .Fortran() interface).\n>> It works perfectly under Linux, with gcc. No problem with R CMD check. I\n>> would like to upload this package on the CRAN.\n>>\n>> But when I first tried to use winbuilder, I got an error with the\n>> following message:\n>>\n>> * installing *source* package 'IndependenceTests' ...\n>> ** libs\n>>\n>> *** arch - i386\n>> g++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG\n>> -I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall\n>> -mtune=core2 -c Cnhat.cpp -o Cnhat.o\n>> Cnhat.cpp:9:89: error: 'complex' has not been declared\n>> Cnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n>> ....\n>> .....\n>> etc.\n>>\n>>\n>> I think I understand that there is a problem (only under Windows though)\n>> with the complex type.\n>> The beginning of my file Cnhat.cpp is as follows:\n>>\n>> 1. #include <R.h>\n>> 2. #include \"Rmath.h\"\n>> 3. #include <complex.h>\n>> 4. #include <iostream>\n>> 5. using namespace std;\n>> 6.\n>> 7. extern\"C\" {\n>> 8.\n>> 9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int *q,\n>> int *p, int *vecd, complex double *res) {\n>> 10.\n>> 11.    void phinhatReturn(double *vect1, double *vect2, double *vect3,\n>> double *X, int *q, int *n, double _Complex *res1, double _Complex *res2,\n>> double _Complex *res3);\n>> 12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 +\n>> 0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n>> 13.    int indbeginblocl, l, i, *vecdl, k, j;\n>> 14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n>> 15.    double _Complex *res1, *res2, *res3;\n>> 16.    vecdl = new int[1];\n>> 17.    res1 =  new _Complex double[1];\n>> ....\n>> .....\n>> etc.\n>>\n>> As you can see, there seem to be some problem (on line 9.) with: complex\n>> double *res\n>>\n>> Could you please point me to something (e.g., another package) that\n>> might help me solve the problem? If possible, I would like to avoid\n>> invest too much time using the new .Call() interface because I am quite\n>> familiar\n>> with the old .C(). And also I am not even sure if it would help solving\n>> the problem.\n>\n> You should be using Rcomplex in the type declaration. (See Writing R \n> Extensions for a discussion of this.)  It is defined as\n>\n> typedef struct {\n>     double r;\n>     double i;\n> } Rcomplex;\n>\n> which is likely compatible with your \"complex double\" on those other \n> systems (which are using newer gcc versions), but it's not guaranteed \n> to be, even there.\n>\n> Duncan Murdoch\n\n-- \nPierre Lafaye de Micheaux\n\nAdresse courrier:\nUniversit? de Montr?al\nPavillon Andr?-Aisenstadt\nD?partement de Math?matiques et Statistique\nCP 6128 Succursale Centre-ville\nMontr?al Qc H3C 3J7\nCANADA\n\nAdresse physique:\nD?partement de Math?matiques et Statistique\nBureau 4249, Pavillon Andr?-Aisenstadt\n2920, chemin de la Tour\nMontr?al, Qu?bec H3T 1J4\nCANADA\n\nT?l.: (00-1) 514-343-6607 / Fax: (00-1) 514-343-5700\nlafaye at dms.umontreal.ca\nhttp://www.biostatisticien.eu",
+      "body_snippet": "Dear all,\n\nThank you very much for your answers. And sorry for the last reply.\nHere is how I solved my problem.\n\nI incorporated some files from the src/ directory of the R package \nFaddeeva to\nthe sub",
+      "thread_id": "thread-849ea9b5e052",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-c4b4e3035050",
+      "message_id": "<56882E5E.2020009@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-02T15:09:02-05:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<5688278E.1020804@dms.umontreal.ca>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>",
+        "<564649B0.8000701@gmail.com>",
+        "<5688278E.1020804@dms.umontreal.ca>"
+      ],
+      "body_plain": "On 02/01/2016 2:39 PM, Pierre Lafaye de Micheaux wrote:\n> Dear all,\n>\n> Thank you very much for your answers. And sorry for the last reply.\n> Here is how I solved my problem.\n>\n> I incorporated some files from the src/ directory of the R package\n> Faddeeva to\n> the subdirectory /libraries of the src/ directory of my own package.\n\nI don't know of an R package called Faddeeva.  There's an \tRcppFaddeeva \npackage.\n\n>\n> This is because I needed to use some functions (in C)  from this package.\n> Then I used something as:\n> #include <R.h>\n> #include \"Rmath.h\"\n> #include \"libraries/callFaddeeva.cpp\"\n> #include \"libraries/Faddeeva.cpp\"\n> #include \"libraries/RcppExports.cpp\"\n>\n> It is then possible, to initialise and manipulate complex numbers in C\n> in my own code. For example:\n>\n> cmplx I = C(0.0, 1.0); # For a + ib where a = 0 and b = 1.\n> cmplx res;\n> res = Faddeeva::erfi(I, 0.0);\n>\n> And this compiles well under Windows now.\n\nYou shouldn't need to copy the code if you're using RcppFaddeeva, but I \ncan't tell you exactly what you need to do:  the Rcpp mailing list would \nbe a better place to ask.\n\n>\n> Note that I first tried to add the Faddeeva package in the Depends field\n> of my own package thinking that this might prevent me from having to put\n> the Faddeeva source files in my own package but it did not work ...\n\nDepends is not the way to link at the C++ level.  If this is possible, \nyou'll need to use LinkingTo as well as Imports.  I'm not sure if it's \npossible, but people on the Rcpp list would know...\n\nDuncan Murdoch\n\n>\n> Best regards,\n>\n> Pierre L.\n>\n>\n>\n>\n> Le 13/11/2015 21:36, Duncan Murdoch a ?crit :\n>> On 13/11/2015 11:24 AM, Pierre Lafaye de Micheaux wrote:\n>>> Dear all,\n>>>\n>>> I created a new version of the package IndependenceTests where I call\n>>> some C and Fortran functions (using the .C() or .Fortran() interface).\n>>> It works perfectly under Linux, with gcc. No problem with R CMD check. I\n>>> would like to upload this package on the CRAN.\n>>>\n>>> But when I first tried to use winbuilder, I got an error with the\n>>> following message:\n>>>\n>>> * installing *source* package 'IndependenceTests' ...\n>>> ** libs\n>>>\n>>> *** arch - i386\n>>> g++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG\n>>> -I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall\n>>> -mtune=core2 -c Cnhat.cpp -o Cnhat.o\n>>> Cnhat.cpp:9:89: error: 'complex' has not been declared\n>>> Cnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n>>> ....\n>>> .....\n>>> etc.\n>>>\n>>>\n>>> I think I understand that there is a problem (only under Windows though)\n>>> with the complex type.\n>>> The beginning of my file Cnhat.cpp is as follows:\n>>>\n>>> 1. #include <R.h>\n>>> 2. #include \"Rmath.h\"\n>>> 3. #include <complex.h>\n>>> 4. #include <iostream>\n>>> 5. using namespace std;\n>>> 6.\n>>> 7. extern\"C\" {\n>>> 8.\n>>> 9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int *q,\n>>> int *p, int *vecd, complex double *res) {\n>>> 10.\n>>> 11.    void phinhatReturn(double *vect1, double *vect2, double *vect3,\n>>> double *X, int *q, int *n, double _Complex *res1, double _Complex *res2,\n>>> double _Complex *res3);\n>>> 12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = 1.0 +\n>>> 0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n>>> 13.    int indbeginblocl, l, i, *vecdl, k, j;\n>>> 14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n>>> 15.    double _Complex *res1, *res2, *res3;\n>>> 16.    vecdl = new int[1];\n>>> 17.    res1 =  new _Complex double[1];\n>>> ....\n>>> .....\n>>> etc.\n>>>\n>>> As you can see, there seem to be some problem (on line 9.) with: complex\n>>> double *res\n>>>\n>>> Could you please point me to something (e.g., another package) that\n>>> might help me solve the problem? If possible, I would like to avoid\n>>> invest too much time using the new .Call() interface because I am quite\n>>> familiar\n>>> with the old .C(). And also I am not even sure if it would help solving\n>>> the problem.\n>>\n>> You should be using Rcomplex in the type declaration. (See Writing R\n>> Extensions for a discussion of this.)  It is defined as\n>>\n>> typedef struct {\n>>      double r;\n>>      double i;\n>> } Rcomplex;\n>>\n>> which is likely compatible with your \"complex double\" on those other\n>> systems (which are using newer gcc versions), but it's not guaranteed\n>> to be, even there.\n>>\n>> Duncan Murdoch\n>",
+      "body_snippet": "On 02/01/2016 2:39 PM, Pierre Lafaye de Micheaux wrote:\n> Dear all,\n>\n> Thank you very much for your answers. And sorry for the last reply.\n> Here is how I solved my problem.\n>\n> I incorporated some f",
+      "thread_id": "thread-849ea9b5e052",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-bbffb1e6ce11",
+      "message_id": "<5688E043.8010801@dms.umontreal.ca>",
+      "from_name": "Pierre Lafaye de Micheaux",
+      "from_email_hash": "6de1e5d34aaead452a6520cc984c45a5c6ebaf424b04e43afdc1bc6cda692fe3",
+      "date": "2016-01-03T09:48:03+01:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<56882E5E.2020009@gmail.com>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>",
+        "<564649B0.8000701@gmail.com>",
+        "<5688278E.1020804@dms.umontreal.ca>",
+        "<56882E5E.2020009@gmail.com>"
+      ],
+      "body_plain": "Thank you for your comments.\n\nIt is indeed the RcppFaddeeva package. I had also tried to put \nRcppFaddeeva on the LinkingTo line with no success.\nBut I will try to ask on the Rcpp mailing list.\n\nBest regards,\nPierre L.\n\nLe 02/01/2016 21:09, Duncan Murdoch a ?crit :\n> On 02/01/2016 2:39 PM, Pierre Lafaye de Micheaux wrote:\n>> Dear all,\n>>\n>> Thank you very much for your answers. And sorry for the last reply.\n>> Here is how I solved my problem.\n>>\n>> I incorporated some files from the src/ directory of the R package\n>> Faddeeva to\n>> the subdirectory /libraries of the src/ directory of my own package.\n>\n> I don't know of an R package called Faddeeva.  There's an RcppFaddeeva \n> package.\n>\n>>\n>> This is because I needed to use some functions (in C)  from this \n>> package.\n>> Then I used something as:\n>> #include <R.h>\n>> #include \"Rmath.h\"\n>> #include \"libraries/callFaddeeva.cpp\"\n>> #include \"libraries/Faddeeva.cpp\"\n>> #include \"libraries/RcppExports.cpp\"\n>>\n>> It is then possible, to initialise and manipulate complex numbers in C\n>> in my own code. For example:\n>>\n>> cmplx I = C(0.0, 1.0); # For a + ib where a = 0 and b = 1.\n>> cmplx res;\n>> res = Faddeeva::erfi(I, 0.0);\n>>\n>> And this compiles well under Windows now.\n>\n> You shouldn't need to copy the code if you're using RcppFaddeeva, but \n> I can't tell you exactly what you need to do:  the Rcpp mailing list \n> would be a better place to ask.\n>\n>>\n>> Note that I first tried to add the Faddeeva package in the Depends field\n>> of my own package thinking that this might prevent me from having to put\n>> the Faddeeva source files in my own package but it did not work ...\n>\n> Depends is not the way to link at the C++ level.  If this is possible, \n> you'll need to use LinkingTo as well as Imports.  I'm not sure if it's \n> possible, but people on the Rcpp list would know...\n>\n> Duncan Murdoch\n>\n>>\n>> Best regards,\n>>\n>> Pierre L.\n>>\n>>\n>>\n>>\n>> Le 13/11/2015 21:36, Duncan Murdoch a ?crit :\n>>> On 13/11/2015 11:24 AM, Pierre Lafaye de Micheaux wrote:\n>>>> Dear all,\n>>>>\n>>>> I created a new version of the package IndependenceTests where I call\n>>>> some C and Fortran functions (using the .C() or .Fortran() interface).\n>>>> It works perfectly under Linux, with gcc. No problem with R CMD \n>>>> check. I\n>>>> would like to upload this package on the CRAN.\n>>>>\n>>>> But when I first tried to use winbuilder, I got an error with the\n>>>> following message:\n>>>>\n>>>> * installing *source* package 'IndependenceTests' ...\n>>>> ** libs\n>>>>\n>>>> *** arch - i386\n>>>> g++  -I\"D:/RCompile/recent/R/include\" -DNDEBUG\n>>>> -I\"d:/RCompile/r-compiling/local/local320/include\"     -O2 -Wall\n>>>> -mtune=core2 -c Cnhat.cpp -o Cnhat.o\n>>>> Cnhat.cpp:9:89: error: 'complex' has not been declared\n>>>> Cnhat.cpp:9:105: error: two or more data types in declaration of 'res'\n>>>> ....\n>>>> .....\n>>>> etc.\n>>>>\n>>>>\n>>>> I think I understand that there is a problem (only under Windows \n>>>> though)\n>>>> with the complex type.\n>>>> The beginning of my file Cnhat.cpp is as follows:\n>>>>\n>>>> 1. #include <R.h>\n>>>> 2. #include \"Rmath.h\"\n>>>> 3. #include <complex.h>\n>>>> 4. #include <iostream>\n>>>> 5. using namespace std;\n>>>> 6.\n>>>> 7. extern\"C\" {\n>>>> 8.\n>>>> 9.   void CnhatC(double *vecs, double *vect, double *X, int *n, int \n>>>> *q,\n>>>> int *p, int *vecd, complex double *res) {\n>>>> 10.\n>>>> 11.    void phinhatReturn(double *vect1, double *vect2, double *vect3,\n>>>> double *X, int *q, int *n, double _Complex *res1, double _Complex \n>>>> *res2,\n>>>> double _Complex *res3);\n>>>> 12.    double _Complex tmp2, prod1 = 1.0 + 0.0*_Complex_I, prod2 = \n>>>> 1.0 +\n>>>> 0.0*_Complex_I, somme = 0.0 + 0.0*_Complex_I;\n>>>> 13.    int indbeginblocl, l, i, *vecdl, k, j;\n>>>> 14.    double *vecsl, *mvectl, *diffvecsvectl, *Xl;\n>>>> 15.    double _Complex *res1, *res2, *res3;\n>>>> 16.    vecdl = new int[1];\n>>>> 17.    res1 =  new _Complex double[1];\n>>>> ....\n>>>> .....\n>>>> etc.\n>>>>\n>>>> As you can see, there seem to be some problem (on line 9.) with: \n>>>> complex\n>>>> double *res\n>>>>\n>>>> Could you please point me to something (e.g., another package) that\n>>>> might help me solve the problem? If possible, I would like to avoid\n>>>> invest too much time using the new .Call() interface because I am \n>>>> quite\n>>>> familiar\n>>>> with the old .C(). And also I am not even sure if it would help \n>>>> solving\n>>>> the problem.\n>>>\n>>> You should be using Rcomplex in the type declaration. (See Writing R\n>>> Extensions for a discussion of this.)  It is defined as\n>>>\n>>> typedef struct {\n>>>      double r;\n>>>      double i;\n>>> } Rcomplex;\n>>>\n>>> which is likely compatible with your \"complex double\" on those other\n>>> systems (which are using newer gcc versions), but it's not guaranteed\n>>> to be, even there.\n>>>\n>>> Duncan Murdoch\n>>\n>\n\n-- \nPierre Lafaye de Micheaux\n\nAdresse courrier:\nUniversit? de Montr?al\nPavillon Andr?-Aisenstadt\nD?partement de Math?matiques et Statistique\nCP 6128 Succursale Centre-ville\nMontr?al Qc H3C 3J7\nCANADA\n\nAdresse physique:\nD?partement de Math?matiques et Statistique\nBureau 4249, Pavillon Andr?-Aisenstadt\n2920, chemin de la Tour\nMontr?al, Qu?bec H3T 1J4\nCANADA\n\nT?l.: (00-1) 514-343-6607 / Fax: (00-1) 514-343-5700\nlafaye at dms.umontreal.ca\nhttp://www.biostatisticien.eu",
+      "body_snippet": "Thank you for your comments.\n\nIt is indeed the RcppFaddeeva package. I had also tried to put \nRcppFaddeeva on the LinkingTo line with no success.\nBut I will try to ask on the Rcpp mailing list.\n\nBest ",
+      "thread_id": "thread-849ea9b5e052",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-949bb95eec95",
+      "message_id": "<22153.4494.107707.691269@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-03T06:18:22-06:00",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "subject_clean": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "in_reply_to": "<5688E043.8010801@dms.umontreal.ca>",
+      "references": [
+        "<56460EC9.1020303@dms.umontreal.ca>",
+        "<564649B0.8000701@gmail.com>",
+        "<5688278E.1020804@dms.umontreal.ca>",
+        "<56882E5E.2020009@gmail.com>",
+        "<5688E043.8010801@dms.umontreal.ca>"
+      ],
+      "body_plain": "On 3 January 2016 at 09:48, Pierre Lafaye de Micheaux wrote:\n| Thank you for your comments.\n| \n| It is indeed the RcppFaddeeva package. I had also tried to put \n| RcppFaddeeva on the LinkingTo line with no success.\n| But I will try to ask on the Rcpp mailing list.\n\nThe RcppFaddeeva package does _not_ export any headers so there is little use\nin adding a 'LinkingTo: RcppFadeeva'.\n\nCompare the directory structure of the installed (or even source) RcppFadeeva\nwith, say, RcppArmadillo to see the difference.\n\nIn short, you can't just reuse / link / deploy another random package. It\nneeds to be exported.\n\nBut if you write to rcpp-devel (after subscribing first !!) we will try to\nhelp you there.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 3 January 2016 at 09:48, Pierre Lafaye de Micheaux wrote:\n| Thank you for your comments.\n| \n| It is indeed the RcppFaddeeva package. I had also tried to put \n| RcppFaddeeva on the LinkingTo line wi",
+      "thread_id": "thread-849ea9b5e052",
+      "thread_depth": 3,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-6d7c6c3b79ce",
+      "message_id": "<9B90E77F-EF00-4959-AAAD-737C11EB63A2@me.com>",
+      "from_name": "Imanuel Costigan",
+      "from_email_hash": "753b565898d368f05006c2d0e0c7bc9584e3202aa61c8c71536bba0c5738d1ee",
+      "date": "2016-01-09T12:20:40+11:00",
+      "subject": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr backend",
+      "subject_clean": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr backend",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi \n\nI am looking to release an updated version of RSQLServer and noticed that when checking the package, I was getting a large number of errors of the style:\n\n* checking R code for possible problems ... NOTE\nauto_copy: no visible global function definition for ?same_src?\nb\n\nI have dplyr in Description > Imports and call dplyr functions such as `same_src` without them being imported into my package?s NAMESPACE (or making qualified calls using `::`, the latter being my usual preference). My thinking is that my package?s (dplyr) backend functionality should fail if dplyr itself is not attached on the search path (by for e.g. calling `library(dplyr)`). I think the latter is the behaviour that Hadley has advocated elsewhere (I can?t find reference in places I would expect).\n\nI am looking for guidance on what to do in this circumstance. I see at least two possibilities:\n\n* I import all these dplyr functions into my package (or call with ::) and make CRAN errors go away\n* I stick with behaviour described above and risk wasting CRAN maintainers' time and have package rejected.\n\nMany thanks",
+      "body_snippet": "Hi \n\nI am looking to release an updated version of RSQLServer and noticed that when checking the package, I was getting a large number of errors of the style:\n\n* checking R code for possible problems ",
+      "thread_id": "thread-6d7c6c3b79ce",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-b9b287fb47a7",
+      "message_id": "<22160.26040.562485.178046@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-08T19:43:20-06:00",
+      "subject": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr\tbackend",
+      "subject_clean": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr\tbackend",
+      "in_reply_to": "<9B90E77F-EF00-4959-AAAD-737C11EB63A2@me.com>",
+      "references": [
+        "<9B90E77F-EF00-4959-AAAD-737C11EB63A2@me.com>"
+      ],
+      "body_plain": "On 9 January 2016 at 12:20, Imanuel Costigan wrote:\n| * I import all these dplyr functions into my package (or call with ::) and make CRAN errors go away\n\nThis is emerging as a recommended idiom for packages.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 9 January 2016 at 12:20, Imanuel Costigan wrote:\n| * I import all these dplyr functions into my package (or call with ::) and make CRAN errors go away\n\nThis is emerging as a recommended idiom for p",
+      "thread_id": "thread-6d7c6c3b79ce",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-5afa7082bba4",
+      "message_id": "<5690D723.7000302@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-09T04:47:15-05:00",
+      "subject": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr backend",
+      "subject_clean": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr backend",
+      "in_reply_to": "<9B90E77F-EF00-4959-AAAD-737C11EB63A2@me.com>",
+      "references": [
+        "<9B90E77F-EF00-4959-AAAD-737C11EB63A2@me.com>"
+      ],
+      "body_plain": "On 08/01/2016 8:20 PM, Imanuel Costigan wrote:\n> Hi\n>\n> I am looking to release an updated version of RSQLServer and noticed that when checking the package, I was getting a large number of errors of the style:\n>\n> * checking R code for possible problems ... NOTE\n> auto_copy: no visible global function definition for ?same_src?\n> b\n\n> I have dplyr in Description > Imports and call dplyr functions such as `same_src` without them being imported into my package?s NAMESPACE (or making qualified calls using `::`, the latter being my usual preference). My thinking is that my package?s (dplyr) backend functionality should fail if dplyr itself is not attached on the search path (by for e.g. calling `library(dplyr)`). I think the latter is the behaviour that Hadley has advocated elsewhere (I can?t find reference in places I would expect).\n\nIf it makes no sense to use your package without dplyr on the search \npath, you should have\n\nDepends:  dplyr\n\nin your DESCRIPTION file rather than Imports:  dplyr.  You should \nexplain this choice when you submit to CRAN, because using this means \nthat calling library(RSQLServer) will add dplyr to the search path if \nit's not there.  That could mess up something else that a user is doing, \nso should normally be avoided.  It can also cause your functions to \nfail, if a user has already got dplyr on the search path, as well as \nanother package that masks some of its functions.  Your package will use \nthe first copies it sees (unless you use :: even in this case).\n\nIf your package has functions that users might want to use on their own, \nthen you should import the dplyr functions that you need, or call them \nwith ::.\n\nIt doesn't sound like this applies to you, but another possibility is \nthat most of your package doesn't need dplyr.  Then you might use\n\nSuggests:  dplyr\n\nand check for it (using \"if (requireNamespace('dplyr'))\" ) before each \nuse with ::.\n\nDuncan Murdoch\n\n> I am looking for guidance on what to do in this circumstance. I see at least two possibilities:\n\n> * I import all these dplyr functions into my package (or call with ::) and make CRAN errors go away\n> * I stick with behaviour described above and risk wasting CRAN maintainers' time and have package rejected.",
+      "body_snippet": "On 08/01/2016 8:20 PM, Imanuel Costigan wrote:\n> Hi\n>\n> I am looking to release an updated version of RSQLServer and noticed that when checking the package, I was getting a large number of errors of t",
+      "thread_id": "thread-6d7c6c3b79ce",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-b3f4a80eb186",
+      "message_id": "<CAH6zZCH7V2NSMh+gepPhKDjbYYAe2-oxYgsF1vRTj_3pnOszVw@mail.gmail.com>",
+      "from_name": "Chelsey Xiao",
+      "from_email_hash": "d73ac8afbb63acb2e19de2562f1f273f519ef542eb94722c4ba44febeae6650f",
+      "date": "2016-01-14T00:18:45-05:00",
+      "subject": "[R-pkg-devel] Self built R package would not be installed from local zip file in plain R",
+      "subject_clean": "[R-pkg-devel] Self built R package would not be installed from local zip file in plain R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi Everyone,\n\nRecently I built an R package and it passed R CMD check, install and\ngenerated package manual.\n\nBut my problem is that although the package works well on my laptop, it\nwould not work well in other computers. When I tried on R-studio in other\nlaptops with no r packages that were needed to be imported to make my\npackage run, it wouldn't automatically installing packages that I listed in\nthe \"Imports\" in Description file. And when I tried to install this Package\nin plain R by installing from local zip file, the plain R had warnings:\n\n\"Warning in install.packages(choose.files(\"\", filters = Filters[c(\"zip\",  :\n\nError in read.dcf(file.path(pkgname, \"DESCRIPTION\"), c(\"Package\", \"Type\"))\n:\n  cannot open the connection\nIn addition: Warning messages:\n1: In unzip(zipname, exdir = dest) : error 1 in extracting from zip file\n2: In read.dcf(file.path(pkgname, \"DESCRIPTION\"), c(\"Package\", \"Type\")) :\n  cannot open compressed file 'R-3.2.3-win.exe/DESCRIPTION', probable\nreason 'No such file or directory'\n> utils:::menuInstallPkgs()\n\nI do not know how to handle these problems. How would I test my package\nbefore I put it on CRAN if the package would not run in other devices?\n\nCould anyone tell me what should I do? I will appreciate any helps.\n\nSincerely,\nChelsey\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Everyone,\n\nRecently I built an R package and it passed R CMD check, install and\ngenerated package manual.\n\nBut my problem is that although the package works well on my laptop, it\nwould not work wel",
+      "thread_id": "thread-b3f4a80eb186",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-4f716f6026d3",
+      "message_id": "<5697BEBF.6070903@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-01-14T16:29:03+01:00",
+      "subject": "[R-pkg-devel] Self built R package would not be installed from local zip file in plain R",
+      "subject_clean": "[R-pkg-devel] Self built R package would not be installed from local zip file in plain R",
+      "in_reply_to": "<CAH6zZCH7V2NSMh+gepPhKDjbYYAe2-oxYgsF1vRTj_3pnOszVw@mail.gmail.com>",
+      "references": [
+        "<CAH6zZCH7V2NSMh+gepPhKDjbYYAe2-oxYgsF1vRTj_3pnOszVw@mail.gmail.com>"
+      ],
+      "body_plain": "On 14.01.2016 06:18, Chelsey Xiao wrote:\n> Hi Everyone,\n>\n> Recently I built an R package and it passed R CMD check, install and\n> generated package manual.\n>\n> But my problem is that although the package works well on my laptop, it\n> would not work well in other computers. When I tried on R-studio in other\n> laptops with no r packages that were needed to be imported to make my\n> package run, it wouldn't automatically installing packages that I listed in\n> the \"Imports\" in Description file. And when I tried to install this Package\n> in plain R by installing from local zip file, the plain R had warnings:\n>\n> \"Warning in install.packages(choose.files(\"\", filters = Filters[c(\"zip\",  :\n>\n> Error in read.dcf(file.path(pkgname, \"DESCRIPTION\"), c(\"Package\", \"Type\"))\n> :\n>    cannot open the connection\n> In addition: Warning messages:\n> 1: In unzip(zipname, exdir = dest) : error 1 in extracting from zip file\n> 2: In read.dcf(file.path(pkgname, \"DESCRIPTION\"), c(\"Package\", \"Type\")) :\n>    cannot open compressed file 'R-3.2.3-win.exe\n\nErrr, your packasge is not called \"R-3.2.3-win.exe\", is it?\n\nBest,\nUwe Ligges\n\n\n\n\n\n/DESCRIPTION', probable\n> reason 'No such file or directory'\n>> utils:::menuInstallPkgs()\n>\n> I do not know how to handle these problems. How would I test my package\n> before I put it on CRAN if the package would not run in other devices?\n>\n> Could anyone tell me what should I do? I will appreciate any helps.\n>\n> Sincerely,\n> Chelsey\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 14.01.2016 06:18, Chelsey Xiao wrote:\n> Hi Everyone,\n>\n> Recently I built an R package and it passed R CMD check, install and\n> generated package manual.\n>\n> But my problem is that although the pac",
+      "thread_id": "thread-b3f4a80eb186",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-59b445c7b838",
+      "message_id": "<B9B52584-1C27-4172-ADD3-E5C0B4C35490@icloud.com>",
+      "from_name": "Sven E. Templer",
+      "from_email_hash": "39110eb3ad5c123cd52b66aa7e06d92d7bb4d3e6be600860da5cc505b870da83",
+      "date": "2016-01-20T08:42:22+01:00",
+      "subject": "[R-pkg-devel] winbuilder - missing global definitions / error in example latex code stdout",
+      "subject_clean": "[R-pkg-devel] winbuilder - missing global definitions / error in example latex code stdout",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello everybody,\n\ni uploaded a package to the win-builder.r-project.org (R-devel) and received a 00check.log that NOTifiEs about missing visible global functions. Please see \nhttp://win-builder.r-project.org/WZnnzaSqBse4/00check.log \nat the lines following: \n* checking R code for possible problems ... NOTE\n\nThis is not happening on local Darwin and Linux (64bit) (R 3.2.3) checks, nor on the win-builder R-release, e.g. see\nhttp://win-builder.r-project.org/a83iezxtXSg4/00check.log\n\nDespite, on both win-builder checks, I recognized errors (not on local Darwin and Linux) running examples that print latex code (see the logs from above).\n\nTwo questions:\n\na) Is the 'missing global functions' issue in win-builder R-devel a planned change in the R future release, so one will need to import base functions in future, or is it an unsolved issue in the developmental stage?\n\nb) Is it (also for Linux and Darwin) suggested to '\\dontrun{}' examples with standard output (esp. in latex code)?\n\nMany thanks for enlightening me,\nSven",
+      "body_snippet": "Hello everybody,\n\ni uploaded a package to the win-builder.r-project.org (R-devel) and received a 00check.log that NOTifiEs about missing visible global functions. Please see \nhttp://win-builder.r-proj",
+      "thread_id": "thread-59b445c7b838",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-9256edb8e0e9",
+      "message_id": "<569F4C31.3070405@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-01-20T09:58:25+01:00",
+      "subject": "[R-pkg-devel] winbuilder - missing global definitions / error in example latex code stdout",
+      "subject_clean": "[R-pkg-devel] winbuilder - missing global definitions / error in example latex code stdout",
+      "in_reply_to": "<B9B52584-1C27-4172-ADD3-E5C0B4C35490@icloud.com>",
+      "references": [
+        "<B9B52584-1C27-4172-ADD3-E5C0B4C35490@icloud.com>"
+      ],
+      "body_plain": "On 20.01.2016 08:42, Sven E. Templer wrote:\n> Hello everybody,\n>\n> i uploaded a package to the win-builder.r-project.org (R-devel) and received a 00check.log that NOTifiEs about missing visible global functions. Please see\n> http://win-builder.r-project.org/WZnnzaSqBse4/00check.log\n> at the lines following:\n> * checking R code for possible problems ... NOTE\n>\n> This is not happening on local Darwin and Linux (64bit) (R 3.2.3) checks, nor on the win-builder R-release, e.g. see\n> http://win-builder.r-project.org/a83iezxtXSg4/00check.log\n>\n> Despite, on both win-builder checks, I recognized errors (not on local Darwin and Linux) running examples that print latex code (see the logs from above).\n>\n> Two questions:\n>\n> a) Is the 'missing global functions' issue in win-builder R-devel a planned change in the R future release, so one will need to import base functions in future, or is it an unsolved issue in the developmental stage?\n\n\nNo, this is a new and important check that we forgot in previous \nreleases of R. Hence R-release is wrong not to warn about it.\n\n\n> b) Is it (also for Linux and Darwin) suggested to '\\dontrun{}' examples with standard output (esp. in latex code)?\n\nNo, it is suggested not to hardcode paths such as \"/tmp\" that are not \navailable under, e.g., Windows. You can write to tempdir().\n\nBest,\nUwe Ligges\n\n\n>\n> Many thanks for enlightening me,\n> Sven\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 20.01.2016 08:42, Sven E. Templer wrote:\n> Hello everybody,\n>\n> i uploaded a package to the win-builder.r-project.org (R-devel) and received a 00check.log that NOTifiEs about missing visible global",
+      "thread_id": "thread-59b445c7b838",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-d9081cb6f960",
+      "message_id": "<CAKL30wXPvfGcm=1HtooVH6m1ORJVpQM90pNpd8c3jrofS+vNhA@mail.gmail.com>",
+      "from_name": "François Michonneau",
+      "from_email_hash": "14a03cfa37356bac871fd6063b63c24fb187cf1141c680344d64ccb7bceed691",
+      "date": "2016-01-20T11:50:04-05:00",
+      "subject": "[R-pkg-devel] Issue with vignette on win-builder",
+      "subject_clean": "[R-pkg-devel] Issue with vignette on win-builder",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello all,\n\n  On win-builder (both with R 3.2.3 and R-devel), I see this error at the\nend of the check.log. Would anyone have any hint on what might be wrong and\npossible ways of debugging? I obviously can't reproduce this on my Linux\nsystems.\n\n  The vignette is built to HTML with knitr as the engine and contains calls\nto an API. Previous versions of it were passing the R CMD check on\nwin-builder without this issue.\n\n Thanks,\n  -- Fran?ois\n\n* checking re-building of vignette outputs ... ERROR\nCheck process probably crashed or hung up for 20 minutes ... killed\nMost likely this happened in the example checks (?),\nif not, ignore the following last lines of example output:\n\n======== End of example output (where/before crash/hang up occured ?) ========\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello all,\n\n  On win-builder (both with R 3.2.3 and R-devel), I see this error at the\nend of the check.log. Would anyone have any hint on what might be wrong and\npossible ways of debugging? I obviousl",
+      "thread_id": "thread-d9081cb6f960",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-06495feb34fd",
+      "message_id": "<SNT146-W41CCB69C3A1E80AB0D4541BBC20@phx.gbl>",
+      "from_name": "Daniel Marcelino",
+      "from_email_hash": "18b067cb4fd1969aee9f7d276f4810f7fa4fcb6204f12041892371339be3f888",
+      "date": "2016-01-20T14:10:23-03:00",
+      "subject": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "subject_clean": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, I used to have some pictures in ?inst/doc? for decoration of the README.MD text, most for the Github repository.\nI was able to build the package without any NOTE on this, but since I updated to R 3.2.3 and created a vignette folder I'm receiving the following message. Am I missing something from the last R release?\n\n* checking sizes of PDF files under ?inst/doc? ... OK\n* checking installed files from ?inst/doc? ... NOTE\nThe following files should probably not be installed:\n?Rlogo.png?, ?SciencesPo_logo.png?, ?butterfly.png?\n\nDaniel",
+      "body_snippet": "Hi, I used to have some pictures in ?inst/doc? for decoration of the README.MD text, most for the Github repository.\nI was able to build the package without any NOTE on this, but since I updated to R ",
+      "thread_id": "thread-06495feb34fd",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-fd58a2a73bb4",
+      "message_id": "<22175.51747.513815.205143@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-20T11:55:47-06:00",
+      "subject": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "subject_clean": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "in_reply_to": "<SNT146-W41CCB69C3A1E80AB0D4541BBC20@phx.gbl>",
+      "references": [
+        "<SNT146-W41CCB69C3A1E80AB0D4541BBC20@phx.gbl>"
+      ],
+      "body_plain": "On 20 January 2016 at 14:10, Daniel Marcelino wrote:\n| Hi, I used to have some pictures in ?inst/doc? for decoration of the README.MD text, most for the Github repository.\n| I was able to build the package without any NOTE on this, but since I updated to R 3.2.3 and created a vignette folder I'm receiving the following message. Am I missing something from the last R release?\n| \n| * checking sizes of PDF files under ?inst/doc? ... OK\n| * checking installed files from ?inst/doc? ... NOTE\n| The following files should probably not be installed:\n| ?Rlogo.png?, ?SciencesPo_logo.png?, ?butterfly.png?\n\nJust list them in .Rbuildignore --- they will still be in the GH repo but not\nbe part of the resulting .tar.gz. Hemce R CMD check will be no longer complain.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 20 January 2016 at 14:10, Daniel Marcelino wrote:\n| Hi, I used to have some pictures in ?inst/doc? for decoration of the README.MD text, most for the Github repository.\n| I was able to build the pa",
+      "thread_id": "thread-06495feb34fd",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-6d508d9a6b34",
+      "message_id": "<569FCD01.5030708@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-20T13:08:01-05:00",
+      "subject": "[R-pkg-devel] Issue with vignette on win-builder",
+      "subject_clean": "[R-pkg-devel] Issue with vignette on win-builder",
+      "in_reply_to": "<CAKL30wXPvfGcm=1HtooVH6m1ORJVpQM90pNpd8c3jrofS+vNhA@mail.gmail.com>",
+      "references": [
+        "<CAKL30wXPvfGcm=1HtooVH6m1ORJVpQM90pNpd8c3jrofS+vNhA@mail.gmail.com>"
+      ],
+      "body_plain": "On 20/01/2016 11:50 AM, Fran?ois Michonneau wrote:\n> Hello all,\n>\n>    On win-builder (both with R 3.2.3 and R-devel), I see this error at the\n> end of the check.log. Would anyone have any hint on what might be wrong and\n> possible ways of debugging? I obviously can't reproduce this on my Linux\n> systems.\n>\n>    The vignette is built to HTML with knitr as the engine and contains calls\n> to an API. Previous versions of it were passing the R CMD check on\n> win-builder without this issue.\n>\n>   Thanks,\n>    -- Fran?ois\n>\n> * checking re-building of vignette outputs ... ERROR\n> Check process probably crashed or hung up for 20 minutes ... killed\n> Most likely this happened in the example checks (?),\n> if not, ignore the following last lines of example output:\n>\n\nIt says that it started building your vignette, but the process was \nkilled when it hadn't finished in 20 minutes.\n\nI'd suggest to debug it that you leave the vignette out of the package \ntemporarily, but extract all of its R code (using the purl() function), \nand include that script as a test script.  I believe you'll get more \ninformative error messages from a test failure than a vignette failure.\n\nDuncan Murdoch",
+      "body_snippet": "On 20/01/2016 11:50 AM, Fran?ois Michonneau wrote:\n> Hello all,\n>\n>    On win-builder (both with R 3.2.3 and R-devel), I see this error at the\n> end of the check.log. Would anyone have any hint on wha",
+      "thread_id": "thread-d9081cb6f960",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-1d191620d97c",
+      "message_id": "<SNT404-EAS20666C64B53BE3FDAA4CD75BBC20@phx.gbl>",
+      "from_name": "Daniel Marcelino",
+      "from_email_hash": "18b067cb4fd1969aee9f7d276f4810f7fa4fcb6204f12041892371339be3f888",
+      "date": "2016-01-20T16:20:43-02:00",
+      "subject": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "subject_clean": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "in_reply_to": "<22175.51747.513815.205143@max.nulle.part>",
+      "references": [
+        "<SNT146-W41CCB69C3A1E80AB0D4541BBC20@phx.gbl>",
+        "<22175.51747.513815.205143@max.nulle.part>"
+      ],
+      "body_plain": "Thanks for this Dirk.\nDaniel\n\nSent from my iPhone\n\n> On Jan 20, 2016, at 3:55 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 20 January 2016 at 14:10, Daniel Marcelino wrote:\n> | Hi, I used to have some pictures in ?inst/doc? for decoration of the README.MD text, most for the Github repository.\n> | I was able to build the package without any NOTE on this, but since I updated to R 3.2.3 and created a vignette folder I'm receiving the following message. Am I missing something from the last R release?\n> | \n> | * checking sizes of PDF files under ?inst/doc? ... OK\n> | * checking installed files from ?inst/doc? ... NOTE\n> | The following files should probably not be installed:\n> | ?Rlogo.png?, ?SciencesPo_logo.png?, ?butterfly.png?\n> \n> Just list them in .Rbuildignore --- they will still be in the GH repo but not\n> be part of the resulting .tar.gz. Hemce R CMD check will be no longer complain.\n> \n> Dirk\n> \n> -- \n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Thanks for this Dirk.\nDaniel\n\nSent from my iPhone\n\n> On Jan 20, 2016, at 3:55 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 20 January 2016 at 14:10, Daniel Marcelino wrote:\n> | Hi, I us",
+      "thread_id": "thread-06495feb34fd",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-c0685e79d25b",
+      "message_id": "<m27fj3s0z4.fsf@krugs.de>",
+      "from_name": "Rainer M Krug",
+      "from_email_hash": "157e56ae6c387b32c26749d4c5a2fa1f3d30fe259f3a41322190852de6c6c637",
+      "date": "2016-01-21T11:03:59+01:00",
+      "subject": "[R-pkg-devel] Adding non-exported functions in an extra environment in new S4 object",
+      "subject_clean": "[R-pkg-devel] Adding non-exported functions in an extra environment in new S4 object",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi\n\nI have a package named asm which contains many non-exported functions\nwhich are all starting with \"for.eq.\".\n\nI also have an S4 class ASM which, when a new object asm of class ASM is\ncreated by using the function newASM() (in the package asm) contains\namong other slots one sot with an environment called \"equations\"\n(including the definition of the function\"equations\" and \"equations<-\").\n\nNow in this function newASM() I want to copy all functions starting with\n\"for.eq.\" into this environment.\n\nI have the following code:\n\n--8<---------------cut here---------------start------------->8---\n    ASM at equations <- new.env()\n    funs <- apropos(\"^for\\\\.eq\\\\.\", mode=\"function\")\n    for (fun in funs) {\n        assign(\n            gsub(\"for.eq.\", \"\", fun),\n            get(fun),\n            ASM at equations\n        )\n    }\n--8<---------------cut here---------------end--------------->8---\n\noutside the package I call it as follow:\n\n--8<---------------cut here---------------start------------->8---\nasm <- newASM()\n--8<---------------cut here---------------end--------------->8---\n\nThis worked fine when the functions \"for.eq.*\" were exported, but does\nnot work anymore now that I don't export them anymore.\n\nThis is a bit surprising to me, as the function newASM() is in the\npackage and I assumed that inside of a package, all exported and\nnon-exported functions are seen.\n\nMy question:\n\nhow can I add all functions starting with \"for.eq.\" into the\nenvironment, irrespective if they are exported or not?\n\nWhy I want to do this: I want to be able to have the functions\nencapsulated in the environment of the object asm as they are used in a\nsimulation executed by the sim() function, which attaches the equations\nenvironment at the beginning and detaches it at the end.\n\nThis enables me to have different simulation objects with different\nfunctions.\n\nThanks,\n\nRainer\n\n-- \nRainer M. Krug, PhD (Conservation Ecology, SUN), MSc (Conservation Biology, UCT), Dipl. Phys. (Germany)\n\nCentre of Excellence for Invasion Biology\nStellenbosch University\nSouth Africa\n\nTel :       +33 - (0)9 53 10 27 44\nCell:       +33 - (0)6 85 62 59 98\nFax :       +33 - (0)9 58 10 27 44\n\nFax (D):    +49 - (0)3 21 21 25 22 44\n\nemail:      Rainer at krugs.de\n\nSkype:      RMkrug\n\nPGP: 0x0F52F982\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: not available\nType: application/pgp-signature\nSize: 454 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20160121/c4f43e8e/attachment.bin>",
+      "body_snippet": "Hi\n\nI have a package named asm which contains many non-exported functions\nwhich are all starting with \"for.eq.\".\n\nI also have an S4 class ASM which, when a new object asm of class ASM is\ncreated by us",
+      "thread_id": "thread-c0685e79d25b",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-0e91bbe8dd2c",
+      "message_id": "<m237trryt8.fsf@krugs.de>",
+      "from_name": "Rainer M Krug",
+      "from_email_hash": "157e56ae6c387b32c26749d4c5a2fa1f3d30fe259f3a41322190852de6c6c637",
+      "date": "2016-01-21T11:50:43+01:00",
+      "subject": "[R-pkg-devel] Adding non-exported functions in an extra environment in new S4 object",
+      "subject_clean": "[R-pkg-devel] Adding non-exported functions in an extra environment in new S4 object",
+      "in_reply_to": "<m27fj3s0z4.fsf@krugs.de> (Rainer M. Krug's message of \"Thu, 21 Jan 2016 11:03:59 +0100\")",
+      "references": [
+        "<m27fj3s0z4.fsf@krugs.de>"
+      ],
+      "body_plain": "Rainer M Krug <Rainer at krugs.de> writes:\n\n> Hi\n>\n> I have a package named asm which contains many non-exported functions\n> which are all starting with \"for.eq.\".\n>\n> I also have an S4 class ASM which, when a new object asm of class ASM is\n> created by using the function newASM() (in the package asm) contains\n> among other slots one sot with an environment called \"equations\"\n> (including the definition of the function\"equations\" and \"equations<-\").\n>\n> Now in this function newASM() I want to copy all functions starting with\n> \"for.eq.\" into this environment.\n>\n> I have the following code:\n>\n>     ASM at equations <- new.env()\n>     funs <- apropos(\"^for\\\\.eq\\\\.\", mode=\"function\")\n>     for (fun in funs) {\n>         assign(\n>             gsub(\"for.eq.\", \"\", fun),\n>             get(fun),\n>             ASM at equations\n>         )\n>     }\n>\n> outside the package I call it as follow:\n>\n> asm <- newASM()\n>\n> This worked fine when the functions \"for.eq.*\" were exported, but does\n> not work anymore now that I don't export them anymore.\n>\n> This is a bit surprising to me, as the function newASM() is in the\n> package and I assumed that inside of a package, all exported and\n> non-exported functions are seen.\n>\n> My question:\n>\n> how can I add all functions starting with \"for.eq.\" into the\n> environment, irrespective if they are exported or not?\n\nI found a solution:\n\n--8<---------------cut here---------------start------------->8---\n    funs <- grep(\n        pattern = \"for.eq.*\",\n        x = ls(\n            getNamespace(\"asm\"),\n            all.names=TRUE\n        ),\n        value = TRUE\n    )\n    for (fun in funs) {\n        assign(\n            gsub(\"for.eq.\", \"\", fun),\n            get(fun, getNamespace(\"asm\")),\n            ASM at equations\n        )\n    }\n--8<---------------cut here---------------end--------------->8---\n\nIt adds all objects starting with \"for.eq.\" but this is fine with me.\n\nThanks,\n\nRainer\n\n>\n> Why I want to do this: I want to be able to have the functions\n> encapsulated in the environment of the object asm as they are used in a\n> simulation executed by the sim() function, which attaches the equations\n> environment at the beginning and detaches it at the end.\n>\n> This enables me to have different simulation objects with different\n> functions.\n>\n> Thanks,\n>\n> Rainer\n\n-- \nRainer M. Krug\nemail: Rainer<at>krugs<dot>de\nPGP: 0x0F52F982\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: not available\nType: application/pgp-signature\nSize: 454 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20160121/ab1aa8ad/attachment.bin>",
+      "body_snippet": "Rainer M Krug <Rainer at krugs.de> writes:\n\n> Hi\n>\n> I have a package named asm which contains many non-exported functions\n> which are all starting with \"for.eq.\".\n>\n> I also have an S4 class ASM whic",
+      "thread_id": "thread-c0685e79d25b",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-686fff7e996b",
+      "message_id": "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+      "from_name": "Tom Quarendon",
+      "from_email_hash": "e2ab4549ad25746aad71bbcf70ea568824a0acc179412297726ccf6db39fd436",
+      "date": "2016-01-21T16:39:59Z",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I would like to implement a package that contains a C function that writes to a connection.\nSo the R_ext/Connections.h defines what a connection IS, but not how to get one.\n\nWhat seems to work is to manually declare\nRconnection getConnection(int n);\nIn my C file, and while this works, and I can then use the connection object, it fails package validation with:\n\n?Found non-API call to R: ?getConnection?\nCompiled code should not call non-API entry points in R.?\n\nSo how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n\nThanks.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I would like to implement a package that contains a C function that writes to a connection.\nSo the R_ext/Connections.h defines what a connection IS, but not how to get one.\n\nWhat seems to work is to m",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-fb7c95cb7c8d",
+      "message_id": "<56A1189F.3080307@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-21T12:42:55-05:00",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+      "references": [
+        "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>"
+      ],
+      "body_plain": "On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n> I would like to implement a package that contains a C function that writes to a connection.\n> So the R_ext/Connections.h defines what a connection IS, but not how to get one.\n>\n> What seems to work is to manually declare\n> Rconnection getConnection(int n);\n> In my C file, and while this works, and I can then use the connection object, it fails package validation with:\n>\n> ?Found non-API call to R: ?getConnection?\n> Compiled code should not call non-API entry points in R.?\n>\n> So how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n\nThe usual way to do that would be to create the connection in R code, \nand pass it in with your call.\n\nIf you don't know what connection you need at the time you call your C \ncode, you can evaluate an R expression from C to do the same, but this \nis relatively tricky, so I'd advise the other method.\n\nDuncan Murdoch",
+      "body_snippet": "On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n> I would like to implement a package that contains a C function that writes to a connection.\n> So the R_ext/Connections.h defines what a connection IS, bu",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-a8f955d13fa5",
+      "message_id": "<4DC2EEB5-EFF2-471A-BF7F-B2799DB2D5F5@teamwpc.co.uk>",
+      "from_name": "Tom Quarendon",
+      "from_email_hash": "e2ab4549ad25746aad71bbcf70ea568824a0acc179412297726ccf6db39fd436",
+      "date": "2016-01-21T17:49:45Z",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": "<56A1189F.3080307@gmail.com>",
+      "references": [
+        "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+        "<56A1189F.3080307@gmail.com>"
+      ],
+      "body_plain": "But that's what I want to do, create the connection in R code and pass it on to the C function.\nMy question is, how do I do that?\nYou appear to need the C getConnection entry point, but it's not part of the API. \nSo I'm wondering how I'm supposed to do what you describe.\n\nSorry if I was unclear.\n\nSent from my iPhone\n\n> On 21 Jan 2016, at 5:44 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n>> On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n>> I would like to implement a package that contains a C function that writes to a connection.\n>> So the R_ext/Connections.h defines what a connection IS, but not how to get one.\n>> \n>> What seems to work is to manually declare\n>> Rconnection getConnection(int n);\n>> In my C file, and while this works, and I can then use the connection object, it fails package validation with:\n>> \n>> ?Found non-API call to R: ?getConnection?\n>> Compiled code should not call non-API entry points in R.?\n>> \n>> So how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n> \n> The usual way to do that would be to create the connection in R code, and pass it in with your call.\n> \n> If you don't know what connection you need at the time you call your C code, you can evaluate an R expression from C to do the same, but this is relatively tricky, so I'd advise the other method.\n> \n> Duncan Murdoch",
+      "body_snippet": "But that's what I want to do, create the connection in R code and pass it on to the C function.\nMy question is, how do I do that?\nYou appear to need the C getConnection entry point, but it's not part ",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-bc83f942d47e",
+      "message_id": "<30AC5829-2DAF-45D6-B249-DA2508541748@teamwpc.co.uk>",
+      "from_name": "Tom Quarendon",
+      "from_email_hash": "e2ab4549ad25746aad71bbcf70ea568824a0acc179412297726ccf6db39fd436",
+      "date": "2016-01-21T17:50:25Z",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": "<56A1189F.3080307@gmail.com>",
+      "references": [
+        "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+        "<56A1189F.3080307@gmail.com>"
+      ],
+      "body_plain": "But that's what I want to do, create the connection in R code and pass it on to the C function.\nMy question is, how do I do that?\nYou appear to need the C getConnection entry point, but it's not part of the API. \nSo I'm wondering how I'm supposed to do what you describe.\n\nSorry if I was unclear.\n\nSent from my iPhone\n\n>> On 21 Jan 2016, at 5:44 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>> \n>> On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n>> I would like to implement a package that contains a C function that writes to a connection.\n>> So the R_ext/Connections.h defines what a connection IS, but not how to get one.\n>> \n>> What seems to work is to manually declare\n>> Rconnection getConnection(int n);\n>> In my C file, and while this works, and I can then use the connection object, it fails package validation with:\n>> \n>> ?Found non-API call to R: ?getConnection?\n>> Compiled code should not call non-API entry points in R.?\n>> \n>> So how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n> \n> The usual way to do that would be to create the connection in R code, and pass it in with your call.\n> \n> If you don't know what connection you need at the time you call your C code, you can evaluate an R expression from C to do the same, but this is relatively tricky, so I'd advise the other method.\n> \n> Duncan Murdoch",
+      "body_snippet": "But that's what I want to do, create the connection in R code and pass it on to the C function.\nMy question is, how do I do that?\nYou appear to need the C getConnection entry point, but it's not part ",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-6eb8deefd3bc",
+      "message_id": "<56A11D62.9090209@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-21T13:03:14-05:00",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": "<30AC5829-2DAF-45D6-B249-DA2508541748@teamwpc.co.uk>",
+      "references": [
+        "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+        "<56A1189F.3080307@gmail.com>",
+        "<30AC5829-2DAF-45D6-B249-DA2508541748@teamwpc.co.uk>"
+      ],
+      "body_plain": "On 21/01/2016 12:50 PM, Tom Quarendon wrote:\n> But that's what I want to do, create the connection in R code and pass it on to the C function.\n> My question is, how do I do that?\n> You appear to need the C getConnection entry point, but it's not part of the API.\n> So I'm wondering how I'm supposed to do what you describe.\n\nSorry, my advice was wrong.  I remembered that we exposed code to create \nnew connections, and assumed it had some code to work with them, but it \ndoesn't.\n\nDuncan Murdoch\n>\n> Sorry if I was unclear.\n>\n> Sent from my iPhone\n>\n> >> On 21 Jan 2016, at 5:44 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> >>\n> >> On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n> >> I would like to implement a package that contains a C function that writes to a connection.\n> >> So the R_ext/Connections.h defines what a connection IS, but not how to get one.\n> >>\n> >> What seems to work is to manually declare\n> >> Rconnection getConnection(int n);\n> >> In my C file, and while this works, and I can then use the connection object, it fails package validation with:\n> >>\n> >> ?Found non-API call to R: ?getConnection?\n> >> Compiled code should not call non-API entry points in R.?\n> >>\n> >> So how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n> >\n> > The usual way to do that would be to create the connection in R code, and pass it in with your call.\n> >\n> > If you don't know what connection you need at the time you call your C code, you can evaluate an R expression from C to do the same, but this is relatively tricky, so I'd advise the other method.\n> >\n> > Duncan Murdoch",
+      "body_snippet": "On 21/01/2016 12:50 PM, Tom Quarendon wrote:\n> But that's what I want to do, create the connection in R code and pass it on to the C function.\n> My question is, how do I do that?\n> You appear to need ",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 3,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-fcd049671abc",
+      "message_id": "<7086C8A6-AEE1-47E9-98E2-A23D9918532A@teamwpc.co.uk>",
+      "from_name": "Tom Quarendon",
+      "from_email_hash": "e2ab4549ad25746aad71bbcf70ea568824a0acc179412297726ccf6db39fd436",
+      "date": "2016-01-21T18:07:46Z",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": "<56A11D62.9090209@gmail.com>",
+      "references": [
+        "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+        "<56A1189F.3080307@gmail.com>",
+        "<30AC5829-2DAF-45D6-B249-DA2508541748@teamwpc.co.uk>",
+        "<56A11D62.9090209@gmail.com>"
+      ],
+      "body_plain": "So upshot is that I can only do why I want by using the function that's not part of the api, or just not using connections at all and just using normal C file io, opened from C, and simply pass the file name in instead, rather than a proper connection object?\n\n> On 21 Jan 2016, at 6:04 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n>> On 21/01/2016 12:50 PM, Tom Quarendon wrote:\n>> But that's what I want to do, create the connection in R code and pass it on to the C function.\n>> My question is, how do I do that?\n>> You appear to need the C getConnection entry point, but it's not part of the API.\n>> So I'm wondering how I'm supposed to do what you describe.\n> \n> Sorry, my advice was wrong.  I remembered that we exposed code to create new connections, and assumed it had some code to work with them, but it doesn't.\n> \n> Duncan Murdoch\n>> \n>> Sorry if I was unclear.\n>> \n>> Sent from my iPhone\n>> \n>> >> On 21 Jan 2016, at 5:44 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>> >>\n>> >> On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n>> >> I would like to implement a package that contains a C function that writes to a connection.\n>> >> So the R_ext/Connections.h defines what a connection IS, but not how to get one.\n>> >>\n>> >> What seems to work is to manually declare\n>> >> Rconnection getConnection(int n);\n>> >> In my C file, and while this works, and I can then use the connection object, it fails package validation with:\n>> >>\n>> >> ?Found non-API call to R: ?getConnection?\n>> >> Compiled code should not call non-API entry points in R.?\n>> >>\n>> >> So how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n>> >\n>> > The usual way to do that would be to create the connection in R code, and pass it in with your call.\n>> >\n>> > If you don't know what connection you need at the time you call your C code, you can evaluate an R expression from C to do the same, but this is relatively tricky, so I'd advise the other method.\n>> >\n>> > Duncan Murdoch\n>",
+      "body_snippet": "So upshot is that I can only do why I want by using the function that's not part of the api, or just not using connections at all and just using normal C file io, opened from C, and simply pass the fi",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 4,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-f34c76729380",
+      "message_id": "<56A1381A.6080600@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-21T14:57:14-05:00",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "subject_clean": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "in_reply_to": "<7086C8A6-AEE1-47E9-98E2-A23D9918532A@teamwpc.co.uk>",
+      "references": [
+        "<AM2PR05MB0771D366F6E514BCE535C68DB0C30@AM2PR05MB0771.eurprd05.prod.outlook.com>",
+        "<56A1189F.3080307@gmail.com>",
+        "<30AC5829-2DAF-45D6-B249-DA2508541748@teamwpc.co.uk>",
+        "<56A11D62.9090209@gmail.com>",
+        "<7086C8A6-AEE1-47E9-98E2-A23D9918532A@teamwpc.co.uk>"
+      ],
+      "body_plain": "On 21/01/2016 1:07 PM, Tom Quarendon wrote:\n> So upshot is that I can only do why I want by using the function that's not part of the api, or just not using connections at all and just using normal C file io, opened from C, and simply pass the file name in instead, rather than a proper connection object?\n\nYou could also call R from C to do the I/O for you.\n\nDuncan Murdoch\n\n>> On 21 Jan 2016, at 6:04 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>>> On 21/01/2016 12:50 PM, Tom Quarendon wrote:\n>>> But that's what I want to do, create the connection in R code and pass it on to the C function.\n>>> My question is, how do I do that?\n>>> You appear to need the C getConnection entry point, but it's not part of the API.\n>>> So I'm wondering how I'm supposed to do what you describe.\n>>\n>> Sorry, my advice was wrong.  I remembered that we exposed code to create new connections, and assumed it had some code to work with them, but it doesn't.\n>>\n>> Duncan Murdoch\n>>>\n>>> Sorry if I was unclear.\n>>>\n>>> Sent from my iPhone\n>>>\n>>>>> On 21 Jan 2016, at 5:44 pm, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>>>>\n>>>>> On 21/01/2016 11:39 AM, Tom Quarendon wrote:\n>>>>> I would like to implement a package that contains a C function that writes to a connection.\n>>>>> So the R_ext/Connections.h defines what a connection IS, but not how to get one.\n>>>>>\n>>>>> What seems to work is to manually declare\n>>>>> Rconnection getConnection(int n);\n>>>>> In my C file, and while this works, and I can then use the connection object, it fails package validation with:\n>>>>>\n>>>>> ?Found non-API call to R: ?getConnection?\n>>>>> Compiled code should not call non-API entry points in R.?\n>>>>>\n>>>>> So how am I supposed to do this? Is there a way? Or do I just live with the check warning (ideally not)?\n>>>>\n>>>> The usual way to do that would be to create the connection in R code, and pass it in with your call.\n>>>>\n>>>> If you don't know what connection you need at the time you call your C code, you can evaluate an R expression from C to do the same, but this is relatively tricky, so I'd advise the other method.\n>>>>\n>>>> Duncan Murdoch\n>>",
+      "body_snippet": "On 21/01/2016 1:07 PM, Tom Quarendon wrote:\n> So upshot is that I can only do why I want by using the function that's not part of the api, or just not using connections at all and just using normal C ",
+      "thread_id": "thread-686fff7e996b",
+      "thread_depth": 5,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-a1bbc645983c",
+      "message_id": "<87wpqzx54u.fsf@posteo.de>",
+      "from_name": "Titus von der Malsburg",
+      "from_email_hash": "73d3069343c916d076359619f76ae72ce4da074b8f842d3de929669b9ba6b09e",
+      "date": "2016-01-23T15:12:01-08:00",
+      "subject": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "subject_clean": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI have a package that might be useful for a lot of my colleagues.  It\nprovides functions for reading a binary file format generated by\nmeasurement instruments by a specific manufacturer.  Eventually, I would\nlike to make this package available on CRAN.\n\nOne problem is that this package uses a binary blob provided by said\nmanufacturer.  I understand that it is not allowed to include binaries\nin R packages.  The question is, what else can I do?  Are there any\nrecommendations or best practices that one should follow in this\nsituation?  Any example of existing CRAN packages that deal with this\nproblem?\n\nI suppose one solution would be that the R code installs without the\nbinary but warns when the user tries to use it without having installed\nthe binary.  In this scenario, it would be the user?s responsibility to\nmake sure that the binary is correctly installed.  If the user fails to\ndo that, the package is completely useless.  Of course this also has\nimplications for the sample code in the man pages which is not\nguaranteed to work and will certainly not work on CRAN build servers.\n\n  Titus\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: not available\nType: application/pgp-signature\nSize: 472 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20160123/434211c7/attachment.bin>",
+      "body_snippet": "Hi all,\n\nI have a package that might be useful for a lot of my colleagues.  It\nprovides functions for reading a binary file format generated by\nmeasurement instruments by a specific manufacturer.  Eve",
+      "thread_id": "thread-a1bbc645983c",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-eea4a41dfb58",
+      "message_id": "<56A40C4B.9010904@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-23T18:27:07-05:00",
+      "subject": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "subject_clean": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "in_reply_to": "<87wpqzx54u.fsf@posteo.de>",
+      "references": [
+        "<87wpqzx54u.fsf@posteo.de>"
+      ],
+      "body_plain": "On 23/01/2016 6:12 PM, Titus von der Malsburg wrote:\n>\n> Hi all,\n>\n> I have a package that might be useful for a lot of my colleagues.  It\n> provides functions for reading a binary file format generated by\n> measurement instruments by a specific manufacturer.  Eventually, I would\n> like to make this package available on CRAN.\n>\n> One problem is that this package uses a binary blob provided by said\n> manufacturer.  I understand that it is not allowed to include binaries\n> in R packages.  The question is, what else can I do?  Are there any\n> recommendations or best practices that one should follow in this\n> situation?  Any example of existing CRAN packages that deal with this\n> problem?\n>\n> I suppose one solution would be that the R code installs without the\n> binary but warns when the user tries to use it without having installed\n> the binary.  In this scenario, it would be the user?s responsibility to\n> make sure that the binary is correctly installed.  If the user fails to\n> do that, the package is completely useless.  Of course this also has\n> implications for the sample code in the man pages which is not\n> guaranteed to work and will certainly not work on CRAN build servers.\n\nExamples of packages like that are RGtk2 and rjags (for either or both \nof which I might have the capitalization wrong).\n\nYou need to be sure your examples don't fail whether or not the \nexternals are available.\n\nI think both of those packages list the external dependencies in \nDESCRIPTION, and refuse to load if the dependencies aren't present.  So \nthen the examples should all work.\n\nAnother approach is to include a function that tests for the presence of \nthe externals, and only runs the examples when they will work.\n\nYou shouldn't include examples that fail.\n\nI don't know if CRAN will accept your package if it is hard to obtain \nthe external software because of license issues.  So you might think \nabout distributing such a package to your colleagues and others by a \nless careful channel, e.g. Github.  I tell my students *never* to use \npackages unless they are on CRAN, but you may have no choice.\n\nDuncan Murdoch",
+      "body_snippet": "On 23/01/2016 6:12 PM, Titus von der Malsburg wrote:\n>\n> Hi all,\n>\n> I have a package that might be useful for a lot of my colleagues.  It\n> provides functions for reading a binary file format generat",
+      "thread_id": "thread-a1bbc645983c",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-1c6dbc1d9436",
+      "message_id": "<22180.4826.534879.85098@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-23T17:55:06-06:00",
+      "subject": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "subject_clean": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "in_reply_to": "<87wpqzx54u.fsf@posteo.de>",
+      "references": [
+        "<87wpqzx54u.fsf@posteo.de>"
+      ],
+      "body_plain": "Titus,\n\nOn 23 January 2016 at 15:12, Titus von der Malsburg wrote:\n| I have a package that might be useful for a lot of my colleagues.  It\n| provides functions for reading a binary file format generated by\n| measurement instruments by a specific manufacturer.  Eventually, I would\n| like to make this package available on CRAN.\n| \n| One problem is that this package uses a binary blob provided by said\n| manufacturer.  I understand that it is not allowed to include binaries\n| in R packages.  The question is, what else can I do?  Are there any\n| recommendations or best practices that one should follow in this\n| situation?  Any example of existing CRAN packages that deal with this\n| problem?\n\nWe just released the 'x13binary' package to CRAN for this.\n\nIt provides the X-13ARIMA-SEATS seasonal adjustment program provided by the\nUS Census for use by other programs -- notably Christoph Sax's (excellent)\n'seasonal' CRAN package (see also the very pretty http://www.seasonal.website ).\n\nThe 'x13binary' package downloads suitable binaries we fetch at build time\nfrom the corresponding 'x13prebuilt' repo.  Both the source for 'x13binary'\nand these 'x13prebuilt' binaries are inside the http://github.com/x13org repo\nChristoph and I set up.\n\nNow X-13ARIMA-SEATS is a special case. US Government works cannot be\ncopyright in the US, so distribution here is fine -- but for other countries\nit is murky because it is a bit of a non-standard license.  CRAN and I went\nback and forth for a few days on this.  But that package is now out there.\nWe are currently awaiting the processing of 'seasonal' from incoming at CRAN\nwhich should hopefilly get through 'soon'.  Once it is, I plan to release a\n(small) package using 'seasonal' (and hence 'x13binary' / X-13ARIMA-SEATS) to\nredo something (in a package) the NY Times recently did with (and for which\nthey released non-package code).\n\nNow, for your 'binary blob from said manufacturer' the license may well\nprevent upload to CRAN.  You can, however, have CRAN use a Suggests: to a\nthird-party repo -- for which you could use small repo (maybe even created\nand managed with my 'drat' package -- there are precedents) and then have the\noff-CRAN package deal with the blob.\n \n| I suppose one solution would be that the R code installs without the\n| binary but warns when the user tries to use it without having installed\n| the binary.  In this scenario, it would be the user?s responsibility to\n| make sure that the binary is correctly installed.  If the user fails to\n\nThat is exactly what 'seasonal' versions up to 1.1 (currently on CRAN) did.\n\nNow we are trying to do one better to automate this because here we can (or\nso we think -- given the license).  We think it would be a boost for\n'X-13ARIMA-SEATS' use which is why the did this work in the first place.\n\n| do that, the package is completely useless.  Of course this also has\n| implications for the sample code in the man pages which is not\n| guaranteed to work and will certainly not work on CRAN build servers.\n\nHope this helps, regards, Dirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Titus,\n\nOn 23 January 2016 at 15:12, Titus von der Malsburg wrote:\n| I have a package that might be useful for a lot of my colleagues.  It\n| provides functions for reading a binary file format generat",
+      "thread_id": "thread-a1bbc645983c",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-d7f36e5f3697",
+      "message_id": "<87vb6jx1bo.fsf@posteo.de>",
+      "from_name": "Titus von der Malsburg",
+      "from_email_hash": "73d3069343c916d076359619f76ae72ce4da074b8f842d3de929669b9ba6b09e",
+      "date": "2016-01-23T16:34:28-08:00",
+      "subject": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "subject_clean": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "in_reply_to": "<22180.4826.534879.85098@max.nulle.part>",
+      "references": [
+        "<87wpqzx54u.fsf@posteo.de>",
+        "<22180.4826.534879.85098@max.nulle.part>"
+      ],
+      "body_plain": "Thank you, Dirk and Duncan.  I think I will go the same route as the\ncurrent seasonal package then.  In my case, I can expect users to be\nable to install the binary by themselves.  The license of the binary may\nalso prevent us from doing anything more than that.\n\nDuncan, according to ?Writing R Extensions?, the field\nSystemRequirements can be used to list external dependencies but I\ngather that the content of this field is purely descriptive and that the\ndependencies listed in it are not enforced by R.\n\nThanks again.\n\n  Titus\n\nOn 2016-01-23 Sat 15:55, Dirk Eddelbuettel wrote:\n> Titus,\n>\n> On 23 January 2016 at 15:12, Titus von der Malsburg wrote:\n> | I have a package that might be useful for a lot of my colleagues.  It\n> | provides functions for reading a binary file format generated by\n> | measurement instruments by a specific manufacturer.  Eventually, I would\n> | like to make this package available on CRAN.\n> | \n> | One problem is that this package uses a binary blob provided by said\n> | manufacturer.  I understand that it is not allowed to include binaries\n> | in R packages.  The question is, what else can I do?  Are there any\n> | recommendations or best practices that one should follow in this\n> | situation?  Any example of existing CRAN packages that deal with this\n> | problem?\n>\n> We just released the 'x13binary' package to CRAN for this.\n>\n> It provides the X-13ARIMA-SEATS seasonal adjustment program provided by the\n> US Census for use by other programs -- notably Christoph Sax's (excellent)\n> 'seasonal' CRAN package (see also the very pretty http://www.seasonal.website ).\n>\n> The 'x13binary' package downloads suitable binaries we fetch at build time\n> from the corresponding 'x13prebuilt' repo.  Both the source for 'x13binary'\n> and these 'x13prebuilt' binaries are inside the http://github.com/x13org repo\n> Christoph and I set up.\n>\n> Now X-13ARIMA-SEATS is a special case. US Government works cannot be\n> copyright in the US, so distribution here is fine -- but for other countries\n> it is murky because it is a bit of a non-standard license.  CRAN and I went\n> back and forth for a few days on this.  But that package is now out there.\n> We are currently awaiting the processing of 'seasonal' from incoming at CRAN\n> which should hopefilly get through 'soon'.  Once it is, I plan to release a\n> (small) package using 'seasonal' (and hence 'x13binary' / X-13ARIMA-SEATS) to\n> redo something (in a package) the NY Times recently did with (and for which\n> they released non-package code).\n>\n> Now, for your 'binary blob from said manufacturer' the license may well\n> prevent upload to CRAN.  You can, however, have CRAN use a Suggests: to a\n> third-party repo -- for which you could use small repo (maybe even created\n> and managed with my 'drat' package -- there are precedents) and then have the\n> off-CRAN package deal with the blob.\n>  \n> | I suppose one solution would be that the R code installs without the\n> | binary but warns when the user tries to use it without having installed\n> | the binary.  In this scenario, it would be the user?s responsibility to\n> | make sure that the binary is correctly installed.  If the user fails to\n>\n> That is exactly what 'seasonal' versions up to 1.1 (currently on CRAN) did.\n>\n> Now we are trying to do one better to automate this because here we can (or\n> so we think -- given the license).  We think it would be a boost for\n> 'X-13ARIMA-SEATS' use which is why the did this work in the first place.\n>\n> | do that, the package is completely useless.  Of course this also has\n> | implications for the sample code in the man pages which is not\n> | guaranteed to work and will certainly not work on CRAN build servers.\n>\n> Hope this helps, regards, Dirk",
+      "body_snippet": "Thank you, Dirk and Duncan.  I think I will go the same route as the\ncurrent seasonal package then.  In my case, I can expect users to be\nable to install the binary by themselves.  The license of the ",
+      "thread_id": "thread-a1bbc645983c",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-491572e208a0",
+      "message_id": "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+      "from_name": "Adah Zhang",
+      "from_email_hash": "910edd87dfb034f84a2597ee2cd070b09c5a803b05cda8281eb065fe90661dc5",
+      "date": "2016-01-26T14:03:01-05:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI am running R CMD check (and also with the --as-cran flag), which results\nin all OK's in my 00check.log. However, after submitting the package, the\nCRAN reviewer tells me of a warning/error regarding one of my examples\n(which is easily fix-able if I got the warning myself).\n\nHow do I ensure that all warnings, errors, and notes are addressed if I do\nnot receive these when running the standard checks or when testing the\nexamples myself? Is there a standard order of commands that a CRAN reviewer\ngoes through aside from 'R CMD check'?\n\nThanks,\nAdah\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nI am running R CMD check (and also with the --as-cran flag), which results\nin all OK's in my 00check.log. However, after submitting the package, the\nCRAN reviewer tells me of a warning/error r",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-ed33031d7924",
+      "message_id": "<CABghstT3UekAVR5t=PeEKrQbcVURBb+yQQpWWsPtrkpdpv_rEg@mail.gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "18f6c2b0b79bec76f7afe0fad5e36fffd27297982eaee9a3a21101b9461258e5",
+      "date": "2016-01-26T14:53:46-05:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "in_reply_to": "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+      "references": [
+        "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>"
+      ],
+      "body_plain": "The most common scenario is that you're using R-release and the\nwarnings are coming from the R-devel version, which often has a bunch\nof new, additional tests.\n\nThe other frequent answer to this question (is there a FAQ list for\nthis mailing list yet?) is that using CRAN's win-builder service is a\nvery easy way to get access to the R-release and R-devel tests without\nchanging anything in your local setup.\n\n\nOn Tue, Jan 26, 2016 at 2:03 PM, Adah Zhang <asz25 at case.edu> wrote:\n> Hello,\n>\n> I am running R CMD check (and also with the --as-cran flag), which results\n> in all OK's in my 00check.log. However, after submitting the package, the\n> CRAN reviewer tells me of a warning/error regarding one of my examples\n> (which is easily fix-able if I got the warning myself).\n>\n> How do I ensure that all warnings, errors, and notes are addressed if I do\n> not receive these when running the standard checks or when testing the\n> examples myself? Is there a standard order of commands that a CRAN reviewer\n> goes through aside from 'R CMD check'?\n>\n> Thanks,\n> Adah\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "The most common scenario is that you're using R-release and the\nwarnings are coming from the R-devel version, which often has a bunch\nof new, additional tests.\n\nThe other frequent answer to this quest",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-b0ed734f1cfc",
+      "message_id": "<22183.52974.754694.397246@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-26T13:54:22-06:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than\tCRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me than\tCRAN reviewer",
+      "in_reply_to": "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+      "references": [
+        "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 26 January 2016 at 14:03, Adah Zhang wrote:\n| I am running R CMD check (and also with the --as-cran flag), which results\n| in all OK's in my 00check.log. However, after submitting the package, the\n| CRAN reviewer tells me of a warning/error regarding one of my examples\n| (which is easily fix-able if I got the warning myself).\n| \n| How do I ensure that all warnings, errors, and notes are addressed if I do\n| not receive these when running the standard checks or when testing the\n| examples myself? Is there a standard order of commands that a CRAN reviewer\n| goes through aside from 'R CMD check'?\n\n\"Use a different computer.\"\n\nThat is not as flippant as it sounds because\n\n -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n    submission away\n\n -- thanks to Carl and yours truly you can also try a variety of Docker\n    containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n    flavours\n\n -- the remainer of campus should offer some choices too though that relies\n    on your local contacts.\n\nSometimes these things are of course also due to something else but as you\nsupplied nothing concrete or reproducible I cannot be more specific either.\n\nHope this helps.  It's the right list for the question.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 26 January 2016 at 14:03, Adah Zhang wrote:\n| I am running R CMD check (and also with the --as-cran flag), which results\n| in all OK's in my 00check.log. However, after submitting the package, the\n",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-ee49c0a27523",
+      "message_id": "<56A7CEFE.5070501@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-01-26T20:54:38+01:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "in_reply_to": "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+      "references": [
+        "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 26.01.2016 20:03, Adah Zhang wrote:\n> Hello,\n>\n> I am running R CMD check (and also with the --as-cran flag), which results\n> in all OK's in my 00check.log. However, after submitting the package, the\n> CRAN reviewer tells me of a warning/error regarding one of my examples\n> (which is easily fix-able if I got the warning myself).\n>\n> How do I ensure that all warnings, errors, and notes are addressed if I do\n> not receive these when running the standard checks or when testing the\n> examples myself? Is there a standard order of commands that a CRAN reviewer\n> goes through aside from 'R CMD check'?\n\nThe reviewer uses a recent version of R-devel (i.e. a daily built), a \nrecent set of packages (i.e. run update.packages() first) and then\n\nR CMD check --as-cran (well, at least similar, but you will get the \nwarnings you talk about if you do that, as I already told you when you \nasked CRAN).\n\nBest,\nUwe Ligges\n\n\n\n> Thanks,\n> Adah\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 26.01.2016 20:03, Adah Zhang wrote:\n> Hello,\n>\n> I am running R CMD check (and also with the --as-cran flag), which results\n> in all OK's in my 00check.log. However, after submitting the package, t",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-b1492e5e6d22",
+      "message_id": "<A2B7448B-3344-4EA5-833A-79CC44661871@icloud.com>",
+      "from_name": "Sven E. Templer",
+      "from_email_hash": "39110eb3ad5c123cd52b66aa7e06d92d7bb4d3e6be600860da5cc505b870da83",
+      "date": "2016-01-26T21:53:51+01:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me\tthan CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me\tthan CRAN reviewer",
+      "in_reply_to": "<22183.52974.754694.397246@max.nulle.part>",
+      "references": [
+        "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+        "<22183.52974.754694.397246@max.nulle.part>"
+      ],
+      "body_plain": "Dear Adah,\n\nwin-builder is fairly easy, but once you've setup a github repository using\n\nhttps://github.com/metacran/r-builder\n\nyou might save even that few amount of work.\n\nBest,\nSven\n\n> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 26 January 2016 at 14:03, Adah Zhang wrote:\n> | I am running R CMD check (and also with the --as-cran flag), which results\n> | in all OK's in my 00check.log. However, after submitting the package, the\n> | CRAN reviewer tells me of a warning/error regarding one of my examples\n> | (which is easily fix-able if I got the warning myself).\n> | \n> | How do I ensure that all warnings, errors, and notes are addressed if I do\n> | not receive these when running the standard checks or when testing the\n> | examples myself? Is there a standard order of commands that a CRAN reviewer\n> | goes through aside from 'R CMD check'?\n> \n> \"Use a different computer.\"\n> \n> That is not as flippant as it sounds because\n> \n> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n>    submission away\n> \n> -- thanks to Carl and yours truly you can also try a variety of Docker\n>    containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n>    flavours\n> \n> -- the remainer of campus should offer some choices too though that relies\n>    on your local contacts.\n> \n> Sometimes these things are of course also due to something else but as you\n> supplied nothing concrete or reproducible I cannot be more specific either.\n> \n> Hope this helps.  It's the right list for the question.\n> \n> Dirk\n> \n> -- \n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Dear Adah,\n\nwin-builder is fairly easy, but once you've setup a github repository using\n\nhttps://github.com/metacran/r-builder\n\nyou might save even that few amount of work.\n\nBest,\nSven\n\n> On 26 Jan 20",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-d4c8831f3730",
+      "message_id": "<DDEF22D7-FD31-4367-AF43-2D33D399E3C8@case.edu>",
+      "from_name": "Adah Zhang",
+      "from_email_hash": "910edd87dfb034f84a2597ee2cd070b09c5a803b05cda8281eb065fe90661dc5",
+      "date": "2016-01-26T16:13:20-05:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me\tthan CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me\tthan CRAN reviewer",
+      "in_reply_to": "<A2B7448B-3344-4EA5-833A-79CC44661871@icloud.com>",
+      "references": [
+        "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+        "<22183.52974.754694.397246@max.nulle.part>",
+        "<A2B7448B-3344-4EA5-833A-79CC44661871@icloud.com>"
+      ],
+      "body_plain": "Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n\n\n> On Jan 26, 2016, at 3:53 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n> \n> Dear Adah,\n> \n> win-builder is fairly easy, but once you've setup a github repository using\n> \n> https://github.com/metacran/r-builder\n> \n> you might save even that few amount of work.\n> \n> Best,\n> Sven\n> \n>> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n>> \n>> \n>> On 26 January 2016 at 14:03, Adah Zhang wrote:\n>> | I am running R CMD check (and also with the --as-cran flag), which results\n>> | in all OK's in my 00check.log. However, after submitting the package, the\n>> | CRAN reviewer tells me of a warning/error regarding one of my examples\n>> | (which is easily fix-able if I got the warning myself).\n>> | \n>> | How do I ensure that all warnings, errors, and notes are addressed if I do\n>> | not receive these when running the standard checks or when testing the\n>> | examples myself? Is there a standard order of commands that a CRAN reviewer\n>> | goes through aside from 'R CMD check'?\n>> \n>> \"Use a different computer.\"\n>> \n>> That is not as flippant as it sounds because\n>> \n>> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n>>   submission away\n>> \n>> -- thanks to Carl and yours truly you can also try a variety of Docker\n>>   containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n>>   flavours\n>> \n>> -- the remainer of campus should offer some choices too though that relies\n>>   on your local contacts.\n>> \n>> Sometimes these things are of course also due to something else but as you\n>> supplied nothing concrete or reproducible I cannot be more specific either.\n>> \n>> Hope this helps.  It's the right list for the question.\n>> \n>> Dirk\n>> \n>> -- \n>> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n\n\n> On Jan 26, 2016, at 3:53 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n> \n> ",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 3,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-3494e0704d32",
+      "message_id": "<22183.59054.312112.535814@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-26T15:35:42-06:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for\tme\tthan CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for\tme\tthan CRAN reviewer",
+      "in_reply_to": "<DDEF22D7-FD31-4367-AF43-2D33D399E3C8@case.edu>",
+      "references": [
+        "<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ@mail.gmail.com>",
+        "<22183.52974.754694.397246@max.nulle.part>",
+        "<A2B7448B-3344-4EA5-833A-79CC44661871@icloud.com>",
+        "<DDEF22D7-FD31-4367-AF43-2D33D399E3C8@case.edu>"
+      ],
+      "body_plain": "On 26 January 2016 at 16:13, Adah Zhang wrote:\n| Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n\nWrong. Read http://win-builder.r-project.org.  It is a _service_ that you\nsubmit _source_ tarballs to.  Which is why I called it just one ftp away:\n\n| >> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n| >> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n| >>   submission away\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 26 January 2016 at 16:13, Adah Zhang wrote:\n| Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n\nWrong. Read http://win-builder.r-projec",
+      "thread_id": "thread-491572e208a0",
+      "thread_depth": 4,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-9b6c7be73d76",
+      "message_id": "<SNT148-W33427EAD7171E518EB86CAA7D90@phx.gbl>",
+      "from_name": "Carlos Cinelli",
+      "from_email_hash": "08a422e7b92cc18b12860b56965bef4ad9e5962ca6f997c7aa4dd3381390aa6a",
+      "date": "2016-01-27T13:00:52Z",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "in_reply_to": "<mailman.7.1453892402.3298.r-package-devel@r-project.org>",
+      "references": [
+        "<mailman.7.1453892402.3298.r-package-devel@r-project.org>"
+      ],
+      "body_plain": "I have been using win-builder and Gabor's R-Builder .\nYou can use win-builder either from the webpage (http://win-builder.r-project.org/) or using the function build_win() from  Hadley's devtools package. Win-builder will test both r-devel and r-release in Windows.\nAs for r-builder, you will can use it with Travis or Semaphore (see https://github.com/metacran/r-builder). It will test with r-oldrel, r-release and r-devel in Linux. \n\n> From: r-package-devel-request at r-project.org\n> Subject: R-package-devel Digest, Vol 9, Issue 10\n> To: r-package-devel at r-project.org\n> Date: Wed, 27 Jan 2016 12:00:02 +0100\n> \n> Send R-package-devel mailing list submissions to\n> \tr-package-devel at r-project.org\n> \n> To subscribe or unsubscribe via the World Wide Web, visit\n> \thttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n> or, via email, send a message with subject or body 'help' to\n> \tr-package-devel-request at r-project.org\n> \n> You can reach the person managing the list at\n> \tr-package-devel-owner at r-project.org\n> \n> When replying, please edit your Subject line so it is more specific\n> than \"Re: Contents of R-package-devel digest...\"\n> \n> \n> Today's Topics:\n> \n>    1. R CMD check yielding different results for me than\tCRAN\n>       reviewer (Adah Zhang)\n>    2. Re: R CMD check yielding different results for me than CRAN\n>       reviewer (Ben Bolker)\n>    3. Re: R CMD check yielding different results for me\tthan\tCRAN\n>       reviewer (Dirk Eddelbuettel)\n>    4. Re: R CMD check yielding different results for me than CRAN\n>       reviewer (Uwe Ligges)\n>    5. Re: R CMD check yielding different results for\tme\tthan CRAN\n>       reviewer (Sven E. Templer)\n>    6. Re: R CMD check yielding different results for\tme\tthan CRAN\n>       reviewer (Adah Zhang)\n>    7. Re: R CMD check yielding different results\tfor\tme\tthan CRAN\n>       reviewer (Dirk Eddelbuettel)\n> \n> \n> ----------------------------------------------------------------------\n> \n> Message: 1\n> Date: Tue, 26 Jan 2016 14:03:01 -0500\n> From: Adah Zhang <asz25 at case.edu>\n> To: r-package-devel at r-project.org\n> Subject: [R-pkg-devel] R CMD check yielding different results for me\n> \tthan\tCRAN reviewer\n> Message-ID:\n> \t<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ at mail.gmail.com>\n> Content-Type: text/plain; charset=\"UTF-8\"\n> \n> Hello,\n> \n> I am running R CMD check (and also with the --as-cran flag), which results\n> in all OK's in my 00check.log. However, after submitting the package, the\n> CRAN reviewer tells me of a warning/error regarding one of my examples\n> (which is easily fix-able if I got the warning myself).\n> \n> How do I ensure that all warnings, errors, and notes are addressed if I do\n> not receive these when running the standard checks or when testing the\n> examples myself? Is there a standard order of commands that a CRAN reviewer\n> goes through aside from 'R CMD check'?\n> \n> Thanks,\n> Adah\n> \n> \t[[alternative HTML version deleted]]\n> \n> \n> \n> ------------------------------\n> \n> Message: 2\n> Date: Tue, 26 Jan 2016 14:53:46 -0500\n> From: Ben Bolker <bbolker at gmail.com>\n> To: Adah Zhang <asz25 at case.edu>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n> \tme than CRAN reviewer\n> Message-ID:\n> \t<CABghstT3UekAVR5t=PeEKrQbcVURBb+yQQpWWsPtrkpdpv_rEg at mail.gmail.com>\n> Content-Type: text/plain; charset=UTF-8\n> \n> The most common scenario is that you're using R-release and the\n> warnings are coming from the R-devel version, which often has a bunch\n> of new, additional tests.\n> \n> The other frequent answer to this question (is there a FAQ list for\n> this mailing list yet?) is that using CRAN's win-builder service is a\n> very easy way to get access to the R-release and R-devel tests without\n> changing anything in your local setup.\n> \n> \n> On Tue, Jan 26, 2016 at 2:03 PM, Adah Zhang <asz25 at case.edu> wrote:\n> > Hello,\n> >\n> > I am running R CMD check (and also with the --as-cran flag), which results\n> > in all OK's in my 00check.log. However, after submitting the package, the\n> > CRAN reviewer tells me of a warning/error regarding one of my examples\n> > (which is easily fix-able if I got the warning myself).\n> >\n> > How do I ensure that all warnings, errors, and notes are addressed if I do\n> > not receive these when running the standard checks or when testing the\n> > examples myself? Is there a standard order of commands that a CRAN reviewer\n> > goes through aside from 'R CMD check'?\n> >\n> > Thanks,\n> > Adah\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n> \n> ------------------------------\n> \n> Message: 3\n> Date: Tue, 26 Jan 2016 13:54:22 -0600\n> From: Dirk Eddelbuettel <edd at debian.org>\n> To: Adah Zhang <asz25 at case.edu>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n> \tme\tthan\tCRAN reviewer\n> Message-ID: <22183.52974.754694.397246 at max.nulle.part>\n> Content-Type: text/plain; charset=us-ascii\n> \n> \n> On 26 January 2016 at 14:03, Adah Zhang wrote:\n> | I am running R CMD check (and also with the --as-cran flag), which results\n> | in all OK's in my 00check.log. However, after submitting the package, the\n> | CRAN reviewer tells me of a warning/error regarding one of my examples\n> | (which is easily fix-able if I got the warning myself).\n> | \n> | How do I ensure that all warnings, errors, and notes are addressed if I do\n> | not receive these when running the standard checks or when testing the\n> | examples myself? Is there a standard order of commands that a CRAN reviewer\n> | goes through aside from 'R CMD check'?\n> \n> \"Use a different computer.\"\n> \n> That is not as flippant as it sounds because\n> \n>  -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n>     submission away\n> \n>  -- thanks to Carl and yours truly you can also try a variety of Docker\n>     containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n>     flavours\n> \n>  -- the remainer of campus should offer some choices too though that relies\n>     on your local contacts.\n> \n> Sometimes these things are of course also due to something else but as you\n> supplied nothing concrete or reproducible I cannot be more specific either.\n> \n> Hope this helps.  It's the right list for the question.\n> \n> Dirk\n> \n> -- \n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> \n> \n> \n> ------------------------------\n> \n> Message: 4\n> Date: Tue, 26 Jan 2016 20:54:38 +0100\n> From: Uwe Ligges <ligges at statistik.tu-dortmund.de>\n> To: Adah Zhang <asz25 at case.edu>, r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n> \tme than CRAN reviewer\n> Message-ID: <56A7CEFE.5070501 at statistik.tu-dortmund.de>\n> Content-Type: text/plain; charset=utf-8; format=flowed\n> \n> \n> \n> On 26.01.2016 20:03, Adah Zhang wrote:\n> > Hello,\n> >\n> > I am running R CMD check (and also with the --as-cran flag), which results\n> > in all OK's in my 00check.log. However, after submitting the package, the\n> > CRAN reviewer tells me of a warning/error regarding one of my examples\n> > (which is easily fix-able if I got the warning myself).\n> >\n> > How do I ensure that all warnings, errors, and notes are addressed if I do\n> > not receive these when running the standard checks or when testing the\n> > examples myself? Is there a standard order of commands that a CRAN reviewer\n> > goes through aside from 'R CMD check'?\n> \n> The reviewer uses a recent version of R-devel (i.e. a daily built), a \n> recent set of packages (i.e. run update.packages() first) and then\n> \n> R CMD check --as-cran (well, at least similar, but you will get the \n> warnings you talk about if you do that, as I already told you when you \n> asked CRAN).\n> \n> Best,\n> Uwe Ligges\n> \n> \n> \n> > Thanks,\n> > Adah\n> >\n> > \t[[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n> \n> \n> \n> ------------------------------\n> \n> Message: 5\n> Date: Tue, 26 Jan 2016 21:53:51 +0100\n> From: \"Sven E. Templer\" <sven.templer at gmail.com>\n> To: Adah Zhang <asz25 at case.edu>\n> Cc: List r-package-devel <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n> \tme\tthan CRAN reviewer\n> Message-ID: <A2B7448B-3344-4EA5-833A-79CC44661871 at icloud.com>\n> Content-Type: text/plain; charset=us-ascii\n> \n> Dear Adah,\n> \n> win-builder is fairly easy, but once you've setup a github repository using\n> \n> https://github.com/metacran/r-builder\n> \n> you might save even that few amount of work.\n> \n> Best,\n> Sven\n> \n> > On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n> > \n> > \n> > On 26 January 2016 at 14:03, Adah Zhang wrote:\n> > | I am running R CMD check (and also with the --as-cran flag), which results\n> > | in all OK's in my 00check.log. However, after submitting the package, the\n> > | CRAN reviewer tells me of a warning/error regarding one of my examples\n> > | (which is easily fix-able if I got the warning myself).\n> > | \n> > | How do I ensure that all warnings, errors, and notes are addressed if I do\n> > | not receive these when running the standard checks or when testing the\n> > | examples myself? Is there a standard order of commands that a CRAN reviewer\n> > | goes through aside from 'R CMD check'?\n> > \n> > \"Use a different computer.\"\n> > \n> > That is not as flippant as it sounds because\n> > \n> > -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n> >    submission away\n> > \n> > -- thanks to Carl and yours truly you can also try a variety of Docker\n> >    containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n> >    flavours\n> > \n> > -- the remainer of campus should offer some choices too though that relies\n> >    on your local contacts.\n> > \n> > Sometimes these things are of course also due to something else but as you\n> > supplied nothing concrete or reproducible I cannot be more specific either.\n> > \n> > Hope this helps.  It's the right list for the question.\n> > \n> > Dirk\n> > \n> > -- \n> > http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n> \n> ------------------------------\n> \n> Message: 6\n> Date: Tue, 26 Jan 2016 16:13:20 -0500\n> From: Adah Zhang <asz25 at case.edu>\n> To: \"Sven E. Templer\" <sven.templer at gmail.com>\n> Cc: List r-package-devel <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n> \tme\tthan CRAN reviewer\n> Message-ID: <DDEF22D7-FD31-4367-AF43-2D33D399E3C8 at case.edu>\n> Content-Type: text/plain;\tcharset=us-ascii\n> \n> Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n> \n> \n> > On Jan 26, 2016, at 3:53 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n> > \n> > Dear Adah,\n> > \n> > win-builder is fairly easy, but once you've setup a github repository using\n> > \n> > https://github.com/metacran/r-builder\n> > \n> > you might save even that few amount of work.\n> > \n> > Best,\n> > Sven\n> > \n> >> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n> >> \n> >> \n> >> On 26 January 2016 at 14:03, Adah Zhang wrote:\n> >> | I am running R CMD check (and also with the --as-cran flag), which results\n> >> | in all OK's in my 00check.log. However, after submitting the package, the\n> >> | CRAN reviewer tells me of a warning/error regarding one of my examples\n> >> | (which is easily fix-able if I got the warning myself).\n> >> | \n> >> | How do I ensure that all warnings, errors, and notes are addressed if I do\n> >> | not receive these when running the standard checks or when testing the\n> >> | examples myself? Is there a standard order of commands that a CRAN reviewer\n> >> | goes through aside from 'R CMD check'?\n> >> \n> >> \"Use a different computer.\"\n> >> \n> >> That is not as flippant as it sounds because\n> >> \n> >> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n> >>   submission away\n> >> \n> >> -- thanks to Carl and yours truly you can also try a variety of Docker\n> >>   containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n> >>   flavours\n> >> \n> >> -- the remainer of campus should offer some choices too though that relies\n> >>   on your local contacts.\n> >> \n> >> Sometimes these things are of course also due to something else but as you\n> >> supplied nothing concrete or reproducible I cannot be more specific either.\n> >> \n> >> Hope this helps.  It's the right list for the question.\n> >> \n> >> Dirk\n> >> \n> >> -- \n> >> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> >> \n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > \n> \n> \n> \n> ------------------------------\n> \n> Message: 7\n> Date: Tue, 26 Jan 2016 15:35:42 -0600\n> From: Dirk Eddelbuettel <edd at debian.org>\n> To: Adah Zhang <asz25 at case.edu>\n> Cc: List r-package-devel <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] R CMD check yielding different results\tfor\n> \tme\tthan CRAN reviewer\n> Message-ID: <22183.59054.312112.535814 at max.nulle.part>\n> Content-Type: text/plain; charset=us-ascii\n> \n> \n> On 26 January 2016 at 16:13, Adah Zhang wrote:\n> | Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n> \n> Wrong. Read http://win-builder.r-project.org.  It is a _service_ that you\n> submit _source_ tarballs to.  Which is why I called it just one ftp away:\n> \n> | >> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n> | >> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n> | >>   submission away\n> \n> Dirk\n> \n> -- \n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> \n> \n> \n> ------------------------------\n> \n> Subject: Digest Footer\n> \n> _______________________________________________\n> R-package-devel mailing list\n> R-package-devel at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ------------------------------\n> \n> End of R-package-devel Digest, Vol 9, Issue 10\n> **********************************************\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have been using win-builder and Gabor's R-Builder .\nYou can use win-builder either from the webpage (http://win-builder.r-project.org/) or using the function build_win() from  Hadley's devtools pack",
+      "thread_id": "thread-9b6c7be73d76",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-0fe2d578f883",
+      "message_id": "<22184.50200.615950.3237@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-01-27T07:20:24-06:00",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "subject_clean": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "in_reply_to": "<SNT148-W33427EAD7171E518EB86CAA7D90@phx.gbl>",
+      "references": [
+        "<mailman.7.1453892402.3298.r-package-devel@r-project.org>",
+        "<SNT148-W33427EAD7171E518EB86CAA7D90@phx.gbl>"
+      ],
+      "body_plain": "On 27 January 2016 at 13:00, Carlos Cinelli wrote:\n| I have been using win-builder and Gabor's R-Builder .\n| You can use win-builder either from the webpage (http://win-builder.r-project.org/) or using the function build_win() from  Hadley's devtools package. Win-builder will test both r-devel and r-release in Windows.\n\nYou misses an obvious one which which devtools hides from you: ftp.\n\nYou can parameterize your ftp client -- in my case ncftp which keeps a\nbookmark associating the shorthand 'win-builder' with a host as well as\ndefault directory and more:\n\n  edd at max:~$ grep win-builder .ncftp/bookmarks \n  win-builder,win-builder.r-project.org,,,,R-release,I,21,1252258158,1,1,1,1,129.217.207.166,,,,,,S,0,\n  edd at max:~$ \n\nThen a trivial helper scripts facilitates this:\n\n  edd at max:~$ cat bin/wbput.sh \n  #!/bin/bash\n  \n  function errorexit () {\n      echo \"Error: $1\"\n      exit 1\n  }\n  \n  if [ \"$#\" -lt 1 ]; then\n      errorexit \"Need to specify argument file\"\n  fi\n  \n  if [ ! -f ${1} ]; then\n      errorexit \"File ${1} not found, aborting.\"\n  fi\n  \n  ncftpput win-builder.r-project.org /R-release ${1}\n  ncftpput win-builder.r-project.org /R-devel ${1}\n  edd at max:~$\n\nSo I just say, eg, 'R CMD build foo; wbput.sh foo_1.2-3.tar.gz' and then\nsimply await the email replies.\n\nNo packages involving excessive amounts of underscores were used in\nassembling this message.\n\nDirk\n\n\n| As for r-builder, you will can use it with Travis or Semaphore (see https://github.com/metacran/r-builder). It will test with r-oldrel, r-release and r-devel in Linux. \n| \n| > From: r-package-devel-request at r-project.org\n| > Subject: R-package-devel Digest, Vol 9, Issue 10\n| > To: r-package-devel at r-project.org\n| > Date: Wed, 27 Jan 2016 12:00:02 +0100\n| > \n| > Send R-package-devel mailing list submissions to\n| > \tr-package-devel at r-project.org\n| > \n| > To subscribe or unsubscribe via the World Wide Web, visit\n| > \thttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n| > or, via email, send a message with subject or body 'help' to\n| > \tr-package-devel-request at r-project.org\n| > \n| > You can reach the person managing the list at\n| > \tr-package-devel-owner at r-project.org\n| > \n| > When replying, please edit your Subject line so it is more specific\n| > than \"Re: Contents of R-package-devel digest...\"\n| > \n| > \n| > Today's Topics:\n| > \n| >    1. R CMD check yielding different results for me than\tCRAN\n| >       reviewer (Adah Zhang)\n| >    2. Re: R CMD check yielding different results for me than CRAN\n| >       reviewer (Ben Bolker)\n| >    3. Re: R CMD check yielding different results for me\tthan\tCRAN\n| >       reviewer (Dirk Eddelbuettel)\n| >    4. Re: R CMD check yielding different results for me than CRAN\n| >       reviewer (Uwe Ligges)\n| >    5. Re: R CMD check yielding different results for\tme\tthan CRAN\n| >       reviewer (Sven E. Templer)\n| >    6. Re: R CMD check yielding different results for\tme\tthan CRAN\n| >       reviewer (Adah Zhang)\n| >    7. Re: R CMD check yielding different results\tfor\tme\tthan CRAN\n| >       reviewer (Dirk Eddelbuettel)\n| > \n| > \n| > ----------------------------------------------------------------------\n| > \n| > Message: 1\n| > Date: Tue, 26 Jan 2016 14:03:01 -0500\n| > From: Adah Zhang <asz25 at case.edu>\n| > To: r-package-devel at r-project.org\n| > Subject: [R-pkg-devel] R CMD check yielding different results for me\n| > \tthan\tCRAN reviewer\n| > Message-ID:\n| > \t<CAHHtEr-oJKLEcC_=O9gPAHEka_PKUATURryiyzV_HdE+SPY4XQ at mail.gmail.com>\n| > Content-Type: text/plain; charset=\"UTF-8\"\n| > \n| > Hello,\n| > \n| > I am running R CMD check (and also with the --as-cran flag), which results\n| > in all OK's in my 00check.log. However, after submitting the package, the\n| > CRAN reviewer tells me of a warning/error regarding one of my examples\n| > (which is easily fix-able if I got the warning myself).\n| > \n| > How do I ensure that all warnings, errors, and notes are addressed if I do\n| > not receive these when running the standard checks or when testing the\n| > examples myself? Is there a standard order of commands that a CRAN reviewer\n| > goes through aside from 'R CMD check'?\n| > \n| > Thanks,\n| > Adah\n| > \n| > \t[[alternative HTML version deleted]]\n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Message: 2\n| > Date: Tue, 26 Jan 2016 14:53:46 -0500\n| > From: Ben Bolker <bbolker at gmail.com>\n| > To: Adah Zhang <asz25 at case.edu>\n| > Cc: r-package-devel at r-project.org\n| > Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n| > \tme than CRAN reviewer\n| > Message-ID:\n| > \t<CABghstT3UekAVR5t=PeEKrQbcVURBb+yQQpWWsPtrkpdpv_rEg at mail.gmail.com>\n| > Content-Type: text/plain; charset=UTF-8\n| > \n| > The most common scenario is that you're using R-release and the\n| > warnings are coming from the R-devel version, which often has a bunch\n| > of new, additional tests.\n| > \n| > The other frequent answer to this question (is there a FAQ list for\n| > this mailing list yet?) is that using CRAN's win-builder service is a\n| > very easy way to get access to the R-release and R-devel tests without\n| > changing anything in your local setup.\n| > \n| > \n| > On Tue, Jan 26, 2016 at 2:03 PM, Adah Zhang <asz25 at case.edu> wrote:\n| > > Hello,\n| > >\n| > > I am running R CMD check (and also with the --as-cran flag), which results\n| > > in all OK's in my 00check.log. However, after submitting the package, the\n| > > CRAN reviewer tells me of a warning/error regarding one of my examples\n| > > (which is easily fix-able if I got the warning myself).\n| > >\n| > > How do I ensure that all warnings, errors, and notes are addressed if I do\n| > > not receive these when running the standard checks or when testing the\n| > > examples myself? Is there a standard order of commands that a CRAN reviewer\n| > > goes through aside from 'R CMD check'?\n| > >\n| > > Thanks,\n| > > Adah\n| > >\n| > >         [[alternative HTML version deleted]]\n| > >\n| > > ______________________________________________\n| > > R-package-devel at r-project.org mailing list\n| > > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Message: 3\n| > Date: Tue, 26 Jan 2016 13:54:22 -0600\n| > From: Dirk Eddelbuettel <edd at debian.org>\n| > To: Adah Zhang <asz25 at case.edu>\n| > Cc: r-package-devel at r-project.org\n| > Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n| > \tme\tthan\tCRAN reviewer\n| > Message-ID: <22183.52974.754694.397246 at max.nulle.part>\n| > Content-Type: text/plain; charset=us-ascii\n| > \n| > \n| > On 26 January 2016 at 14:03, Adah Zhang wrote:\n| > | I am running R CMD check (and also with the --as-cran flag), which results\n| > | in all OK's in my 00check.log. However, after submitting the package, the\n| > | CRAN reviewer tells me of a warning/error regarding one of my examples\n| > | (which is easily fix-able if I got the warning myself).\n| > | \n| > | How do I ensure that all warnings, errors, and notes are addressed if I do\n| > | not receive these when running the standard checks or when testing the\n| > | examples myself? Is there a standard order of commands that a CRAN reviewer\n| > | goes through aside from 'R CMD check'?\n| > \n| > \"Use a different computer.\"\n| > \n| > That is not as flippant as it sounds because\n| > \n| >  -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n| >     submission away\n| > \n| >  -- thanks to Carl and yours truly you can also try a variety of Docker\n| >     containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n| >     flavours\n| > \n| >  -- the remainer of campus should offer some choices too though that relies\n| >     on your local contacts.\n| > \n| > Sometimes these things are of course also due to something else but as you\n| > supplied nothing concrete or reproducible I cannot be more specific either.\n| > \n| > Hope this helps.  It's the right list for the question.\n| > \n| > Dirk\n| > \n| > -- \n| > http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Message: 4\n| > Date: Tue, 26 Jan 2016 20:54:38 +0100\n| > From: Uwe Ligges <ligges at statistik.tu-dortmund.de>\n| > To: Adah Zhang <asz25 at case.edu>, r-package-devel at r-project.org\n| > Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n| > \tme than CRAN reviewer\n| > Message-ID: <56A7CEFE.5070501 at statistik.tu-dortmund.de>\n| > Content-Type: text/plain; charset=utf-8; format=flowed\n| > \n| > \n| > \n| > On 26.01.2016 20:03, Adah Zhang wrote:\n| > > Hello,\n| > >\n| > > I am running R CMD check (and also with the --as-cran flag), which results\n| > > in all OK's in my 00check.log. However, after submitting the package, the\n| > > CRAN reviewer tells me of a warning/error regarding one of my examples\n| > > (which is easily fix-able if I got the warning myself).\n| > >\n| > > How do I ensure that all warnings, errors, and notes are addressed if I do\n| > > not receive these when running the standard checks or when testing the\n| > > examples myself? Is there a standard order of commands that a CRAN reviewer\n| > > goes through aside from 'R CMD check'?\n| > \n| > The reviewer uses a recent version of R-devel (i.e. a daily built), a \n| > recent set of packages (i.e. run update.packages() first) and then\n| > \n| > R CMD check --as-cran (well, at least similar, but you will get the \n| > warnings you talk about if you do that, as I already told you when you \n| > asked CRAN).\n| > \n| > Best,\n| > Uwe Ligges\n| > \n| > \n| > \n| > > Thanks,\n| > > Adah\n| > >\n| > > \t[[alternative HTML version deleted]]\n| > >\n| > > ______________________________________________\n| > > R-package-devel at r-project.org mailing list\n| > > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| > >\n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Message: 5\n| > Date: Tue, 26 Jan 2016 21:53:51 +0100\n| > From: \"Sven E. Templer\" <sven.templer at gmail.com>\n| > To: Adah Zhang <asz25 at case.edu>\n| > Cc: List r-package-devel <r-package-devel at r-project.org>\n| > Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n| > \tme\tthan CRAN reviewer\n| > Message-ID: <A2B7448B-3344-4EA5-833A-79CC44661871 at icloud.com>\n| > Content-Type: text/plain; charset=us-ascii\n| > \n| > Dear Adah,\n| > \n| > win-builder is fairly easy, but once you've setup a github repository using\n| > \n| > https://github.com/metacran/r-builder\n| > \n| > you might save even that few amount of work.\n| > \n| > Best,\n| > Sven\n| > \n| > > On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n| > > \n| > > \n| > > On 26 January 2016 at 14:03, Adah Zhang wrote:\n| > > | I am running R CMD check (and also with the --as-cran flag), which results\n| > > | in all OK's in my 00check.log. However, after submitting the package, the\n| > > | CRAN reviewer tells me of a warning/error regarding one of my examples\n| > > | (which is easily fix-able if I got the warning myself).\n| > > | \n| > > | How do I ensure that all warnings, errors, and notes are addressed if I do\n| > > | not receive these when running the standard checks or when testing the\n| > > | examples myself? Is there a standard order of commands that a CRAN reviewer\n| > > | goes through aside from 'R CMD check'?\n| > > \n| > > \"Use a different computer.\"\n| > > \n| > > That is not as flippant as it sounds because\n| > > \n| > > -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n| > >    submission away\n| > > \n| > > -- thanks to Carl and yours truly you can also try a variety of Docker\n| > >    containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n| > >    flavours\n| > > \n| > > -- the remainer of campus should offer some choices too though that relies\n| > >    on your local contacts.\n| > > \n| > > Sometimes these things are of course also due to something else but as you\n| > > supplied nothing concrete or reproducible I cannot be more specific either.\n| > > \n| > > Hope this helps.  It's the right list for the question.\n| > > \n| > > Dirk\n| > > \n| > > -- \n| > > http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n| > > \n| > > ______________________________________________\n| > > R-package-devel at r-project.org mailing list\n| > > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Message: 6\n| > Date: Tue, 26 Jan 2016 16:13:20 -0500\n| > From: Adah Zhang <asz25 at case.edu>\n| > To: \"Sven E. Templer\" <sven.templer at gmail.com>\n| > Cc: List r-package-devel <r-package-devel at r-project.org>\n| > Subject: Re: [R-pkg-devel] R CMD check yielding different results for\n| > \tme\tthan CRAN reviewer\n| > Message-ID: <DDEF22D7-FD31-4367-AF43-2D33D399E3C8 at case.edu>\n| > Content-Type: text/plain;\tcharset=us-ascii\n| > \n| > Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n| > \n| > \n| > > On Jan 26, 2016, at 3:53 PM, Sven E. Templer <sven.templer at gmail.com> wrote:\n| > > \n| > > Dear Adah,\n| > > \n| > > win-builder is fairly easy, but once you've setup a github repository using\n| > > \n| > > https://github.com/metacran/r-builder\n| > > \n| > > you might save even that few amount of work.\n| > > \n| > > Best,\n| > > Sven\n| > > \n| > >> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n| > >> \n| > >> \n| > >> On 26 January 2016 at 14:03, Adah Zhang wrote:\n| > >> | I am running R CMD check (and also with the --as-cran flag), which results\n| > >> | in all OK's in my 00check.log. However, after submitting the package, the\n| > >> | CRAN reviewer tells me of a warning/error regarding one of my examples\n| > >> | (which is easily fix-able if I got the warning myself).\n| > >> | \n| > >> | How do I ensure that all warnings, errors, and notes are addressed if I do\n| > >> | not receive these when running the standard checks or when testing the\n| > >> | examples myself? Is there a standard order of commands that a CRAN reviewer\n| > >> | goes through aside from 'R CMD check'?\n| > >> \n| > >> \"Use a different computer.\"\n| > >> \n| > >> That is not as flippant as it sounds because\n| > >> \n| > >> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n| > >>   submission away\n| > >> \n| > >> -- thanks to Carl and yours truly you can also try a variety of Docker\n| > >>   containers for R including r-devel prebuilt and even SAN/ASAN/UBSAN\n| > >>   flavours\n| > >> \n| > >> -- the remainer of campus should offer some choices too though that relies\n| > >>   on your local contacts.\n| > >> \n| > >> Sometimes these things are of course also due to something else but as you\n| > >> supplied nothing concrete or reproducible I cannot be more specific either.\n| > >> \n| > >> Hope this helps.  It's the right list for the question.\n| > >> \n| > >> Dirk\n| > >> \n| > >> -- \n| > >> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n| > >> \n| > >> ______________________________________________\n| > >> R-package-devel at r-project.org mailing list\n| > >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| > > \n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Message: 7\n| > Date: Tue, 26 Jan 2016 15:35:42 -0600\n| > From: Dirk Eddelbuettel <edd at debian.org>\n| > To: Adah Zhang <asz25 at case.edu>\n| > Cc: List r-package-devel <r-package-devel at r-project.org>\n| > Subject: Re: [R-pkg-devel] R CMD check yielding different results\tfor\n| > \tme\tthan CRAN reviewer\n| > Message-ID: <22183.59054.312112.535814 at max.nulle.part>\n| > Content-Type: text/plain; charset=us-ascii\n| > \n| > \n| > On 26 January 2016 at 16:13, Adah Zhang wrote:\n| > | Thanks for all the suggestions! I'm working off of a Mac, so I don't think win-builder would work for my case.\n| > \n| > Wrong. Read http://win-builder.r-project.org.  It is a _service_ that you\n| > submit _source_ tarballs to.  Which is why I called it just one ftp away:\n| > \n| > | >> On 26 Jan 2016, at 20:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n| > | >> -- thanks to Uwe you have r-release and r-devel on Windows just one ftp\n| > | >>   submission away\n| > \n| > Dirk\n| > \n| > -- \n| > http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n| > \n| > \n| > \n| > ------------------------------\n| > \n| > Subject: Digest Footer\n| > \n| > _______________________________________________\n| > R-package-devel mailing list\n| > R-package-devel at r-project.org\n| > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| > \n| > ------------------------------\n| > \n| > End of R-package-devel Digest, Vol 9, Issue 10\n| > **********************************************\n|  \t\t \t   \t\t  \n| \t[[alternative HTML version deleted]]\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 27 January 2016 at 13:00, Carlos Cinelli wrote:\n| I have been using win-builder and Gabor's R-Builder .\n| You can use win-builder either from the webpage (http://win-builder.r-project.org/) or usin",
+      "thread_id": "thread-9b6c7be73d76",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-2d68e0b71ea2",
+      "message_id": "<56AA0DF9.8020205@auckland.ac.nz>",
+      "from_name": "David Scott",
+      "from_email_hash": "2c9d506f932f52e297603989c7487f952af79f0b8c5b08cc411a7b40db8096d8",
+      "date": "2016-01-29T01:47:53+13:00",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "subject_clean": "[R-pkg-devel] Problems with :::",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to incorporate a print method for flat tables into the \npackage xtable which I maintain.\n\nTo format the flat table before printing, I wish to use format.ftable \nfrom the base package stats.\nThis is unfortunately not exported, so R CMD check --as-cran produces a \nwarning because I access that function using stats:::format.ftable.\n\nSo, having read the thread about this problem, I think I should copy the \nfunction into my package. I do that, and declare format.ftable as an S3 \nformat method. Now I get a different warning:\n\nRegistered S3 method from a standard package overwritten by 'xtable':\n  method        from\n  format.ftable stats\n\nI am at a loss. Any suggestions?\n\nDavid Scott\n\n-- \n_________________________________________________________________\nDavid Scott\tDepartment of Statistics\n\t\tThe University of Auckland, PB 92019\n\t\tAuckland 1142,    NEW ZEALAND\nPhone: +64 9 923 5055, or +64 9 373 7599 ext 85055\nEmail:\td.scott at auckland.ac.nz,  Fax: +64 9 373 7018",
+      "body_snippet": "I am trying to incorporate a print method for flat tables into the \npackage xtable which I maintain.\n\nTo format the flat table before printing, I wish to use format.ftable \nfrom the base package stats",
+      "thread_id": "thread-2d68e0b71ea2",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-994778a830a8",
+      "message_id": "<56AA15B0.7070000@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-28T08:20:48-05:00",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "subject_clean": "[R-pkg-devel] Problems with :::",
+      "in_reply_to": "<56AA0DF9.8020205@auckland.ac.nz>",
+      "references": [
+        "<56AA0DF9.8020205@auckland.ac.nz>"
+      ],
+      "body_plain": "On 28/01/2016 7:47 AM, David Scott wrote:\n> I am trying to incorporate a print method for flat tables into the\n> package xtable which I maintain.\n>\n> To format the flat table before printing, I wish to use format.ftable\n> from the base package stats.\n> This is unfortunately not exported, so R CMD check --as-cran produces a\n> warning because I access that function using stats:::format.ftable.\n>\n> So, having read the thread about this problem, I think I should copy the\n> function into my package. I do that, and declare format.ftable as an S3\n> format method. Now I get a different warning:\n>\n> Registered S3 method from a standard package overwritten by 'xtable':\n>    method        from\n>    format.ftable stats\n>\n> I am at a loss. Any suggestions?\n\nstats::format() is exported, and it will delegate to format.ftable if \nthe class of the object is \"ftable\".  So the normal solution is just to \ncall stats::format() on your object.\n\nIf your object has a different class (e.g. \"mytable\"), it might be that \nyou need to do this from your own format.mytable method.  Then \nNextMethod() is supposed to work, assuming the class is really \nc(\"mytable\", \"ftable\").\n\nIf the class is just \"mytable\", then you'll have to change it to \n\"ftable\" before calling stats::format().\n\nDuncan Murdoch",
+      "body_snippet": "On 28/01/2016 7:47 AM, David Scott wrote:\n> I am trying to incorporate a print method for flat tables into the\n> package xtable which I maintain.\n>\n> To format the flat table before printing, I wish t",
+      "thread_id": "thread-2d68e0b71ea2",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-69d09cf5327e",
+      "message_id": "<CABtg=Kn8w=mE02rJUbSFJzrtyFB4OysJtcM5FRozcUD52PRsCA@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2016-01-28T13:21:52Z",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "subject_clean": "[R-pkg-devel] Problems with :::",
+      "in_reply_to": "<56AA0DF9.8020205@auckland.ac.nz>",
+      "references": [
+        "<56AA0DF9.8020205@auckland.ac.nz>"
+      ],
+      "body_plain": "Ho David, just rename the copied function to sg else. It does not even has\nto be s3, probably.\n\nGabor\nOn 28 Jan 2016 13:16, \"David Scott\" <d.scott at auckland.ac.nz> wrote:\n\n> I am trying to incorporate a print method for flat tables into the package\n> xtable which I maintain.\n>\n> To format the flat table before printing, I wish to use format.ftable from\n> the base package stats.\n> This is unfortunately not exported, so R CMD check --as-cran produces a\n> warning because I access that function using stats:::format.ftable.\n>\n> So, having read the thread about this problem, I think I should copy the\n> function into my package. I do that, and declare format.ftable as an S3\n> format method. Now I get a different warning:\n>\n> Registered S3 method from a standard package overwritten by 'xtable':\n>  method        from\n>  format.ftable stats\n>\n> I am at a loss. Any suggestions?\n>\n> David Scott\n>\n> --\n> _________________________________________________________________\n> David Scott     Department of Statistics\n>                 The University of Auckland, PB 92019\n>                 Auckland 1142,    NEW ZEALAND\n> Phone: +64 9 923 5055, or +64 9 373 7599 ext 85055\n> Email:  d.scott at auckland.ac.nz,  Fax: +64 9 373 7018\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Ho David, just rename the copied function to sg else. It does not even has\nto be s3, probably.\n\nGabor\nOn 28 Jan 2016 13:16, \"David Scott\" <d.scott at auckland.ac.nz> wrote:\n\n> I am trying to incorpora",
+      "thread_id": "thread-2d68e0b71ea2",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-bbe3e7bcca8f",
+      "message_id": "<56AA44E4.3060205@ivt.baug.ethz.ch>",
+      "from_name": "Kirill Müller",
+      "from_email_hash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
+      "date": "2016-01-28T17:42:12+01:00",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "subject_clean": "[R-pkg-devel] Problems with :::",
+      "in_reply_to": "<56AA15B0.7070000@gmail.com>",
+      "references": [
+        "<56AA0DF9.8020205@auckland.ac.nz>",
+        "<56AA15B0.7070000@gmail.com>"
+      ],
+      "body_plain": "On 28.01.2016 14:20, Duncan Murdoch wrote:\n> If the class is just \"mytable\", then you'll have to change it to \n> \"ftable\" before calling stats::format(). \nSide note: The following will fail, because format.ftable double-checks \nthe class of its argument:\n\nformat_ftable <- utils::getS3method(\"format\", \"ftable\")\nformat_ftable(mytable)\n\n\n-Kirill",
+      "body_snippet": "On 28.01.2016 14:20, Duncan Murdoch wrote:\n> If the class is just \"mytable\", then you'll have to change it to \n> \"ftable\" before calling stats::format(). \nSide note: The following will fail, because f",
+      "thread_id": "thread-2d68e0b71ea2",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-d273e0ad71a6",
+      "message_id": "<DUB127-W103F48A679D41783DF4427D5DB0@phx.gbl>",
+      "from_name": "Berry Boessenkool",
+      "from_email_hash": "88183f5b02da143fd3450afd20b54db89006fcb0cebb65d9a124109bb7f2d3f0",
+      "date": "2016-01-29T15:21:42+01:00",
+      "subject": "[R-pkg-devel] double colon",
+      "subject_clean": "[R-pkg-devel] double colon",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\nin our Berlin R User Group meeting yesterday we talked about dependencies in package development.\nOne thing that came up is that it's a good practice to explicitly write   package::function   in the code.\n\nIs it worth to go through all of my package and enhance the code in all instances? \nOr do you think that NAMESPACE sufficiently prevents using a function with the same name from another package than intended and people reading source code should be aware of that anyways?\nIf Answer1==YES:\nShould I also refer to other functions within my own package through   myPackage::otherFunction?\nShould I do that for base packages like graphics, stats, utils, grDevices? (we have to declare them in the NAMESPACE imports, after all)\nWhat's a fast and easy way to find all the instances of 'external' function usage?\n\nI guess there must be discussions and guidelines about this, so some pointers instead of answers would be fine as well.\nThanks ahead,\nBerry\n\n\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\nin our Berlin R User Group meeting yesterday we talked about dependencies in package development.\nOne thing that came up is that it's a good practice to explicitly write   package::function   in t",
+      "thread_id": "thread-d273e0ad71a6",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-c73228c9b0a4",
+      "message_id": "<56AB8BAC.2050208@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-01-29T16:56:28+01:00",
+      "subject": "[R-pkg-devel] double colon",
+      "subject_clean": "[R-pkg-devel] double colon",
+      "in_reply_to": "<DUB127-W103F48A679D41783DF4427D5DB0@phx.gbl>",
+      "references": [
+        "<DUB127-W103F48A679D41783DF4427D5DB0@phx.gbl>"
+      ],
+      "body_plain": "On 29.01.2016 15:21, Berry Boessenkool wrote:\n>\n> Hi,\n> in our Berlin R User Group meeting yesterday we talked about dependencies in package development.\n> One thing that came up is that it's a good practice to explicitly write   package::function   in the code.\n>\n> Is it worth to go through all of my package and enhance the code in all instances?\n\nNo, *if* you import anyway (see below).\n\n\n> Or do you think that NAMESPACE sufficiently prevents using a function with the same name from another package than intended and people reading source code should be aware of that anyways?\n\nYes.\n\n\n> If Answer1==YES:\n> Should I also refer to other functions within my own package through   myPackage::otherFunction?\n\nYes, *if* you only suggest the package and do not import from the \nnamespace unconditionally, you should do that.\n\n\nBest,\nUwe Ligges\n\n\n> Should I do that for base packages like graphics, stats, utils, grDevices? (we have to declare them in the NAMESPACE imports, after all)\n> What's a fast and easy way to find all the instances of 'external' function usage?\n>\n> I guess there must be discussions and guidelines about this, so some pointers instead of answers would be fine as well.\n> Thanks ahead,\n> Berry\n>\n>\n>   \t\t \t   \t\t\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 29.01.2016 15:21, Berry Boessenkool wrote:\n>\n> Hi,\n> in our Berlin R User Group meeting yesterday we talked about dependencies in package development.\n> One thing that came up is that it's a good p",
+      "thread_id": "thread-d273e0ad71a6",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-996545b7d4b4",
+      "message_id": "<56AB93AD.8060503@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-01-29T11:30:37-05:00",
+      "subject": "[R-pkg-devel] double colon",
+      "subject_clean": "[R-pkg-devel] double colon",
+      "in_reply_to": "<56AB8BAC.2050208@statistik.tu-dortmund.de>",
+      "references": [
+        "<DUB127-W103F48A679D41783DF4427D5DB0@phx.gbl>",
+        "<56AB8BAC.2050208@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "On 29/01/2016 10:56 AM, Uwe Ligges wrote:\n>\n> On 29.01.2016 15:21, Berry Boessenkool wrote:\n> >\n> > Hi,\n> > in our Berlin R User Group meeting yesterday we talked about dependencies in package development.\n> > One thing that came up is that it's a good practice to explicitly write   package::function   in the code.\n> >\n> > Is it worth to go through all of my package and enhance the code in all instances?\n>\n> No, *if* you import anyway (see below).\n>\n>\n> > Or do you think that NAMESPACE sufficiently prevents using a function with the same name from another package than intended and people reading source code should be aware of that anyways?\n>\n> Yes.\n\nI'd add one caveat here:  if you explicitly import things by name, this \nis definitely true.\n\nIf you import everything from another package, then conceivably you \ncould end up with problems:  e.g. you import all of package A and all of \npackage B.  You want Fn from B, and since A doesn't have a function like \nthat, you're fine.  But later if package A adds a function called Fn,  \nyou might get in trouble and end up using the wrong one.\n\nSo use\n\nimportFrom(A, something)\nimportFrom(B, Fn)\n\nrather than\n\nimport(A, B)\n\nDuncan Murdoch\n\n>\n>\n> > If Answer1==YES:\n> > Should I also refer to other functions within my own package through   myPackage::otherFunction?\n>\n> Yes, *if* you only suggest the package and do not import from the\n> namespace unconditionally, you should do that.\n\nI think Berry was referring to the case where package Foo has function \nFn, and was asking whether he should use Foo::Fn within the code of \npackage Foo.  The answer to that is no.  Your own locally defined \nfunctions generally have precedence over ones from other packages \n(unless you mess around with environments; don't do that).",
+      "body_snippet": "On 29/01/2016 10:56 AM, Uwe Ligges wrote:\n>\n> On 29.01.2016 15:21, Berry Boessenkool wrote:\n> >\n> > Hi,\n> > in our Berlin R User Group meeting yesterday we talked about dependencies in package develop",
+      "thread_id": "thread-d273e0ad71a6",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-5806d63e4222",
+      "message_id": "<DUB127-W321D010CC12F3B0892D673D5DB0@phx.gbl>",
+      "from_name": "Berry Boessenkool",
+      "from_email_hash": "88183f5b02da143fd3450afd20b54db89006fcb0cebb65d9a124109bb7f2d3f0",
+      "date": "2016-01-29T17:41:40+01:00",
+      "subject": "[R-pkg-devel] double colon",
+      "subject_clean": "[R-pkg-devel] double colon",
+      "in_reply_to": "<56AB8BAC.2050208@statistik.tu-dortmund.de>",
+      "references": [
+        "<DUB127-W103F48A679D41783DF4427D5DB0@phx.gbl>",
+        "<56AB8BAC.2050208@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Thanks for your reply, Uwe.\nThe guy yesterday very strongly suggested it for user readability, but I wanted to get more opinions before doing so much work. (No offense, Steven).\n\nI'm not sure whether we talk about the same thing considering functions *within* the package.\nSay I have 'MyPackage' with 'fun_a' and also 'fun_b', which inside calls 'fun_a'. (Both exported)\nThat wouldn't be in imports or suggests, right?\n\nNow image by unfortunate history there is 'AnotherPackage' that also has (its own and different) 'fun_a'.\nIs far as I remember, 'fun_b' will still call 'fun_a' from 'MyPackage'.\nI can't find back where I read that, though.\nFor user readability and to be on the safe side, in the future I'll write 'MyPackage::fun_a'.\n(Of course, if I'm aware, I'll avoid same-name functions altogether).\n\nkind regards,\nBerry\n\n\n> Subject: Re: [R-pkg-devel] double colon\n> To: berryboessenkool at hotmail.com; r-package-devel at r-project.org\n> From: ligges at statistik.tu-dortmund.de\n> Date: Fri, 29 Jan 2016 16:56:28 +0100\n> \n> \n> \n> On 29.01.2016 15:21, Berry Boessenkool wrote:\n> >\n> > Hi,\n> > in our Berlin R User Group meeting yesterday we talked about dependencies in package development.\n> > One thing that came up is that it's a good practice to explicitly write   package::function   in the code.\n> >\n> > Is it worth to go through all of my package and enhance the code in all instances?\n> \n> No, *if* you import anyway (see below).\n> \n> \n> > Or do you think that NAMESPACE sufficiently prevents using a function with the same name from another package than intended and people reading source code should be aware of that anyways?\n> \n> Yes.\n> \n> \n> > If Answer1==YES:\n> > Should I also refer to other functions within my own package through   myPackage::otherFunction?\n> \n> Yes, *if* you only suggest the package and do not import from the \n> namespace unconditionally, you should do that.\n> \n> \n> Best,\n> Uwe Ligges\n> \n> \n> > Should I do that for base packages like graphics, stats, utils, grDevices? (we have to declare them in the NAMESPACE imports, after all)\n> > What's a fast and easy way to find all the instances of 'external' function usage?\n> >\n> > I guess there must be discussions and guidelines about this, so some pointers instead of answers would be fine as well.\n> > Thanks ahead,\n> > Berry\n> >\n> >\n> >   \t\t \t   \t\t\n> > \t[[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks for your reply, Uwe.\nThe guy yesterday very strongly suggested it for user readability, but I wanted to get more opinions before doing so much work. (No offense, Steven).\n\nI'm not sure whether ",
+      "thread_id": "thread-d273e0ad71a6",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-fc50e852e01d",
+      "message_id": "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+      "from_name": "Nathan Wendt",
+      "from_email_hash": "1e0dcb722c3f59ed32f860fa4d88c51c25a14de686b92bab9105ed5d69d3ad61",
+      "date": "2016-01-30T13:25:03-06:00",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI have run into an issue while developing an R package. Specifically, my\nissue relates to what happens when I define an S3 length method for my\nclass. Here is my basic setup:\n\n# Here is the structure of myClass\n# uses an externalptr to operate on file using some C functions\nlist(file = \"my/file/location\", handle = <externalptr>)\n\n# this function gets an S3Method() in NAMESPACE\nlength.myClass <- function(x) {\n  .Call(\"get_class_length\",myPkg)\n}\n\nAs you can see, myClass is just a list of two pieces of information about\nthe particular object. Without a defined length method, length(myClass)\nwould be 2. However, I defined a length method to give me the information\nabout the amount of binary messages contained in the file the object points\nto. In one of my test files there are 82 messages and length(myObject)\ncorrectly returns 82. What I ran into is that I was crashing RStudio when\nrebuilding my package with an object of myClass in my environment. Only\nremoving my S3 length method caused the crash to not occur. After looking\nfor memory leaks and other errors I finally noticed that the str() on the\nobject of myClass looked odd. It returned something like this:\n\nList of 82\n $ file  : chr \"my/file/location\"\n $ handle:<externalptr>\n $ NA:\nError in object[[i]] : subscript out of bounds\n\nIt seems that when I define an S3 method for length that somehow the object\nof myClass then gets restructured to have the length returned by the\nfunction. There are 82 messages in the file, but myClass objects should\nonly have two elements. My best guess here is that the RStudio crash was\nhappening because the object was misrepresented internally. Of course, I\ncannot be sure. None of my tests pointed to anything useful.\n\nMy questions are, then, whether this behavior makes sense and what to do\nabout it. If I define my own str() method, will that fix it? I think I am\njust misunderstanding what is going on with the methods I have defined.\nHopefully, someone can offer some clarity.\n\nThanks,\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nI have run into an issue while developing an R package. Specifically, my\nissue relates to what happens when I define an S3 length method for my\nclass. Here is my basic setup:\n\n# Here is the st",
+      "thread_id": "thread-fc50e852e01d",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-effebed14161",
+      "message_id": "<56ADE3E2.5040203@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T11:37:22+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>"
+      ],
+      "body_plain": "I am trying to check a package using R 3.2.3 on Windows\n\nR cmd check --as-cran pgirmess\n\nbut surprisingly, the check get suspended on \"checking PDF version of \nmanual ...\"\n\n* checking data for non-ASCII characters ... OK\n* checking data for ASCII and uncompressed saves ... OK\n* checking examples ... OK\n* checking PDF version of manual ...\n\nthen nothing happens, and the prompt stays on that...\n\nAny idea about what is happening ?\n\nPatrick Giraudoux",
+      "body_snippet": "I am trying to check a package using R 3.2.3 on Windows\n\nR cmd check --as-cran pgirmess\n\nbut surprisingly, the check get suspended on \"checking PDF version of \nmanual ...\"\n\n* checking data for non-ASC",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-4d7605c5ba80",
+      "message_id": "<56ADEC51.1090101@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T12:13:21+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56ADE3E2.5040203@univ-fcomte.fr>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+        "<56ADE3E2.5040203@univ-fcomte.fr>"
+      ],
+      "body_plain": "Le 31/01/2016 11:37, Patrick Giraudoux a ?crit :\n> I am trying to check a package using R 3.2.3 on Windows\n>\n> R cmd check --as-cran pgirmess\n>\n> but surprisingly, the check get suspended on \"checking PDF version of \n> manual ...\"\n>\n> * checking data for non-ASCII characters ... OK\n> * checking data for ASCII and uncompressed saves ... OK\n> * checking examples ... OK\n> * checking PDF version of manual ...\n>\n> then nothing happens, and the prompt stays on that...\n>\n> Any idea about what is happening ?\n>\n> Patrick Giraudoux\n>\n>\n\nI am trying to \"debug\", now exploring  Rd2pdf, and get this:\n\nU:\\Users\\pgiraudo2\\Documents\\R\\pgir_arch\\pgirmess_arch\\151104v1.6.3>rcmd \nRd2pdf\npgirmess\nHmm ... looks like a package\nConverting Rd files to LaTeX .....\nCreating pdf output from LaTeX ...\nWarning: running command \n'\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n\"Rd2.tex\" --max-iterations=20 -I \n\"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n-I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\nError : running 'texi2dvi' on 'Rd2.tex' failed\n\nLaTeX errors:\n!pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata \nat 540 n\not found\n  ==> Fatal error occurred, no output PDF file produced!\n\nWarning: running command \n'\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n\"Rd2.tex\" --max-iterations=20 -I \n\"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n-I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\nError : running 'texi2dvi' on 'Rd2.tex' failed\n\nLaTeX errors:\n!pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata \nat 540 n\not found\n  ==> Fatal error occurred, no output PDF file produced!\n\nError in running tools::texi2pdf()\n\nLooks like there is someting wrong with the call to MIKTEX and a font \nmissing. However I did not change anything to the MIKTEX configuration \n(MIKTEK 2.9) which was working OK last time I packaged pgirmess...\n\nAlso I can not find out how to download an \"ec-inconsolata\" fond through \nthe MIKTEX package manager\n\nAny advise appreciated.\n\nCheers,\n\nPatrick",
+      "body_snippet": "Le 31/01/2016 11:37, Patrick Giraudoux a ?crit :\n> I am trying to check a package using R 3.2.3 on Windows\n>\n> R cmd check --as-cran pgirmess\n>\n> but surprisingly, the check get suspended on \"checking",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 1,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-68b7c5a175d6",
+      "message_id": "<56ADF385.3040109@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T12:44:05+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56ADEC51.1090101@univ-fcomte.fr>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+        "<56ADE3E2.5040203@univ-fcomte.fr>",
+        "<56ADEC51.1090101@univ-fcomte.fr>"
+      ],
+      "body_plain": "Le 31/01/2016 12:13, Patrick Giraudoux a ?crit :\n> Le 31/01/2016 11:37, Patrick Giraudoux a ?crit :\n>> I am trying to check a package using R 3.2.3 on Windows\n>>\n>> R cmd check --as-cran pgirmess\n>>\n>> but surprisingly, the check get suspended on \"checking PDF version of \n>> manual ...\"\n>>\n>> * checking data for non-ASCII characters ... OK\n>> * checking data for ASCII and uncompressed saves ... OK\n>> * checking examples ... OK\n>> * checking PDF version of manual ...\n>>\n>> then nothing happens, and the prompt stays on that...\n>>\n>> Any idea about what is happening ?\n>>\n>> Patrick Giraudoux\n>>\n>>\n>\n> I am trying to \"debug\", now exploring  Rd2pdf, and get this:\n>\n> U:\\Users\\pgiraudo2\\Documents\\R\\pgir_arch\\pgirmess_arch\\151104v1.6.3>rcmd \n> Rd2pdf\n> pgirmess\n> Hmm ... looks like a package\n> Converting Rd files to LaTeX .....\n> Creating pdf output from LaTeX ...\n> Warning: running command \n> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n> \"Rd2.tex\" --max-iterations=20 -I \n> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>\n> LaTeX errors:\n> !pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata \n> at 540 n\n> ot found\n>  ==> Fatal error occurred, no output PDF file produced!\n>\n> Warning: running command \n> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n> \"Rd2.tex\" --max-iterations=20 -I \n> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>\n> LaTeX errors:\n> !pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata \n> at 540 n\n> ot found\n>  ==> Fatal error occurred, no output PDF file produced!\n>\n> Error in running tools::texi2pdf()\n>\n> Looks like there is someting wrong with the call to MIKTEX and a font \n> missing. However I did not change anything to the MIKTEX configuration \n> (MIKTEK 2.9) which was working OK last time I packaged pgirmess...\n>\n> Also I can not find out how to download an \"ec-inconsolata\" fond \n> through the MIKTEX package manager\n>\n> Any advise appreciated.\n>\n> Cheers,\n>\n> Patrick\n>\n>\n>\n>\n\n\nI have updated all packages of MIKTEX, but with no improvement. I ge the \nsame error.\n\nQuestion: does it comes from the MIKTEX installation (do I re-install \nit) or from rcmd Rd2pdf ?\n\nAny other user having experienced the same problem ?\n\nPatrick",
+      "body_snippet": "Le 31/01/2016 12:13, Patrick Giraudoux a ?crit :\n> Le 31/01/2016 11:37, Patrick Giraudoux a ?crit :\n>> I am trying to check a package using R 3.2.3 on Windows\n>>\n>> R cmd check --as-cran pgirmess\n>>\n>",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-5d60a402af89",
+      "message_id": "<56ADF851.2040504@braverock.com>",
+      "from_name": "Brian G. Peterson",
+      "from_email_hash": "2d44e89a02cb2a9eb2f2113de72098dcb74d077b13b61958f1336c3292aa0254",
+      "date": "2016-01-31T06:04:33-06:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56ADF385.3040109@univ-fcomte.fr>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+        "<56ADE3E2.5040203@univ-fcomte.fr>",
+        "<56ADEC51.1090101@univ-fcomte.fr>",
+        "<56ADF385.3040109@univ-fcomte.fr>"
+      ],
+      "body_plain": "The error says:\n\" Font ec-inconsolata at 540 not found\"\n\nSo it looks like you need to install extra fonts.  I'm on linux, and \nhaven't tried to do that on Windows in years, so I think that's about \nall I can do to help you out.\n\nRegards,\n\nBrian\n\n\nOn 01/31/2016 05:44 AM, Patrick Giraudoux wrote:\n> Le 31/01/2016 12:13, Patrick Giraudoux a ?crit :\n>> Le 31/01/2016 11:37, Patrick Giraudoux a ?crit :\n>>> I am trying to check a package using R 3.2.3 on Windows\n>>>\n>>> R cmd check --as-cran pgirmess\n>>>\n>>> but surprisingly, the check get suspended on \"checking PDF version of\n>>> manual ...\"\n>>>\n>>> * checking data for non-ASCII characters ... OK\n>>> * checking data for ASCII and uncompressed saves ... OK\n>>> * checking examples ... OK\n>>> * checking PDF version of manual ...\n>>>\n>>> then nothing happens, and the prompt stays on that...\n>>>\n>>> Any idea about what is happening ?\n>>>\n>>> Patrick Giraudoux\n>>>\n>>>\n>>\n>> I am trying to \"debug\", now exploring  Rd2pdf, and get this:\n>>\n>> U:\\Users\\pgiraudo2\\Documents\\R\\pgir_arch\\pgirmess_arch\\151104v1.6.3>rcmd\n>> Rd2pdf\n>> pgirmess\n>> Hmm ... looks like a package\n>> Converting Rd files to LaTeX .....\n>> Creating pdf output from LaTeX ...\n>> Warning: running command\n>> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n>> \"Rd2.tex\" --max-iterations=20 -I\n>> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n>> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n>> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>>\n>> LaTeX errors:\n>> !pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata\n>> at 540 n\n>> ot found\n>>  ==> Fatal error occurred, no output PDF file produced!\n>>\n>> Warning: running command\n>> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n>> \"Rd2.tex\" --max-iterations=20 -I\n>> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n>> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n>> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>>\n>> LaTeX errors:\n>> !pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata\n>> at 540 n\n>> ot found\n>>  ==> Fatal error occurred, no output PDF file produced!\n>>\n>> Error in running tools::texi2pdf()\n>>\n>> Looks like there is someting wrong with the call to MIKTEX and a font\n>> missing. However I did not change anything to the MIKTEX configuration\n>> (MIKTEK 2.9) which was working OK last time I packaged pgirmess...\n>>\n>> Also I can not find out how to download an \"ec-inconsolata\" fond\n>> through the MIKTEX package manager\n>>\n>> Any advise appreciated.\n>>\n>> Cheers,\n>>\n>> Patrick\n>>\n>>\n>>\n>>\n>\n>\n> I have updated all packages of MIKTEX, but with no improvement. I ge the\n> same error.\n>\n> Question: does it comes from the MIKTEX installation (do I re-install\n> it) or from rcmd Rd2pdf ?\n>\n> Any other user having experienced the same problem ?\n>\n> Patrick\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nBrian G. Peterson\nhttp://braverock.com/brian/\nPh: 773-459-4973\nIM: bgpbraverock",
+      "body_snippet": "The error says:\n\" Font ec-inconsolata at 540 not found\"\n\nSo it looks like you need to install extra fonts.  I'm on linux, and \nhaven't tried to do that on Windows in years, so I think that's about \nal",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 3,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-9f6af5412e99",
+      "message_id": "<56AE0DD0.1060308@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-01-31T14:36:16+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56ADEC51.1090101@univ-fcomte.fr>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+        "<56ADE3E2.5040203@univ-fcomte.fr>",
+        "<56ADEC51.1090101@univ-fcomte.fr>"
+      ],
+      "body_plain": "Eitehr the file is no longer there or corrupted, or the database that \nknow about the file got corrupted.\n\nFor the former, re-instal the package, fr the latter, just go to MikTeX \nsettings and run \"refresh FNDB\" and \"Update Formats\".\n\nYou can also upload the package to the winbuilder service to verify - it \nalso uses MikTeX 2.9 ...\n\n\nBest,\nUwe Ligges\n\n\n\nOn 31.01.2016 12:13, Patrick Giraudoux wrote:\n> Le 31/01/2016 11:37, Patrick Giraudoux a ?crit :\n>> I am trying to check a package using R 3.2.3 on Windows\n>>\n>> R cmd check --as-cran pgirmess\n>>\n>> but surprisingly, the check get suspended on \"checking PDF version of\n>> manual ...\"\n>>\n>> * checking data for non-ASCII characters ... OK\n>> * checking data for ASCII and uncompressed saves ... OK\n>> * checking examples ... OK\n>> * checking PDF version of manual ...\n>>\n>> then nothing happens, and the prompt stays on that...\n>>\n>> Any idea about what is happening ?\n>>\n>> Patrick Giraudoux\n>>\n>>\n>\n> I am trying to \"debug\", now exploring  Rd2pdf, and get this:\n>\n> U:\\Users\\pgiraudo2\\Documents\\R\\pgir_arch\\pgirmess_arch\\151104v1.6.3>rcmd\n> Rd2pdf\n> pgirmess\n> Hmm ... looks like a package\n> Converting Rd files to LaTeX .....\n> Creating pdf output from LaTeX ...\n> Warning: running command\n> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n> \"Rd2.tex\" --max-iterations=20 -I\n> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>\n> LaTeX errors:\n> !pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata\n> at 540 n\n> ot found\n>   ==> Fatal error occurred, no output PDF file produced!\n>\n> Warning: running command\n> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n> \"Rd2.tex\" --max-iterations=20 -I\n> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>\n> LaTeX errors:\n> !pdfTeX error: pdflatex.EXE (file ec-inconsolata): Font ec-inconsolata\n> at 540 n\n> ot found\n>   ==> Fatal error occurred, no output PDF file produced!\n>\n> Error in running tools::texi2pdf()\n>\n> Looks like there is someting wrong with the call to MIKTEX and a font\n> missing. However I did not change anything to the MIKTEX configuration\n> (MIKTEK 2.9) which was working OK last time I packaged pgirmess...\n>\n> Also I can not find out how to download an \"ec-inconsolata\" fond through\n> the MIKTEX package manager\n>\n> Any advise appreciated.\n>\n> Cheers,\n>\n> Patrick\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Eitehr the file is no longer there or corrupted, or the database that \nknow about the file got corrupted.\n\nFor the former, re-instal the package, fr the latter, just go to MikTeX \nsettings and run \"re",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 2,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-c2153aa4b741",
+      "message_id": "<56AE18BC.4090905@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T15:22:52+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56AE0DD0.1060308@statistik.tu-dortmund.de>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+        "<56ADE3E2.5040203@univ-fcomte.fr>",
+        "<56ADEC51.1090101@univ-fcomte.fr>",
+        "<56AE0DD0.1060308@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Le 31/01/2016 14:36, Uwe Ligges a ?crit :\n> Eitehr the file is no longer there or corrupted, or the database that \n> know about the file got corrupted.\n>\n> For the former, re-instal the package, fr the latter, just go to \n> MikTeX settings and run \"refresh FNDB\" and \"Update Formats\".\n>\n> You can also upload the package to the winbuilder service to verify - \n> it also uses MikTeX 2.9 ...\n>\n>\n> Best,\n> Uwe Ligges\n>\n\nThanks. Meanwhile I have already reinstalled MikTEX 2.9,  run \"refresh \nFNDB\" and \"Update Formats\", and still get a similar error.... There \nshould be something with MikTEX since the package was submitted to CRAN \nand went through successfully (Kurt Hornik).\n\nA bit beyond my understanding...\n\n\nU:\\Users\\pgiraudo2\\Documents\\R\\pgir_arch\\pgirmess_arch\\On work>rcmd \nRd2pdf pgirmess\nHmm ... looks like a package\nConverting Rd files to LaTeX .....\nCreating pdf output from LaTeX ...\nWarning: running command \n'\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n\"Rd2.tex\" --max-iterations=20 -I \n\"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n-I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\nError : running 'texi2dvi' on 'Rd2.tex' failed\n\nLaTeX errors:\n!pdfTeX error: pdflatex.EXE (file ts1-zi4r): Font ts1-zi4r at 540 not found\n  ==> Fatal error occurred, no output PDF file produced!\n\nWarning: running command \n'\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n\"Rd2.tex\" --max-iterations=20 -I \n\"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n-I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\nError : running 'texi2dvi' on 'Rd2.tex' failed\n\nLaTeX errors:\n!pdfTeX error: pdflatex.EXE (file ts1-zi4r): Font ts1-zi4r at 540 not found\n  ==> Fatal error occurred, no output PDF file produced!\n\nError in running tools::texi2pdf()",
+      "body_snippet": "Le 31/01/2016 14:36, Uwe Ligges a ?crit :\n> Eitehr the file is no longer there or corrupted, or the database that \n> know about the file got corrupted.\n>\n> For the former, re-instal the package, fr th",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 3,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-210e91b0acf5",
+      "message_id": "<56AE2125.6010708@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T15:58:45+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56AE18BC.4090905@univ-fcomte.fr>",
+      "references": [
+        "<mailman.9.1454065202.22890.r-package-devel@r-project.org>",
+        "<56ADE3E2.5040203@univ-fcomte.fr>",
+        "<56ADEC51.1090101@univ-fcomte.fr>",
+        "<56AE0DD0.1060308@statistik.tu-dortmund.de>",
+        "<56AE18BC.4090905@univ-fcomte.fr>"
+      ],
+      "body_plain": "Le 31/01/2016 15:22, Patrick Giraudoux a ?crit :\n> Le 31/01/2016 14:36, Uwe Ligges a ?crit :\n>> Eitehr the file is no longer there or corrupted, or the database that \n>> know about the file got corrupted.\n>>\n>> For the former, re-instal the package, fr the latter, just go to \n>> MikTeX settings and run \"refresh FNDB\" and \"Update Formats\".\n>>\n>> You can also upload the package to the winbuilder service to verify - \n>> it also uses MikTeX 2.9 ...\n>>\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>\n> Thanks. Meanwhile I have already reinstalled MikTEX 2.9,  run \"refresh \n> FNDB\" and \"Update Formats\", and still get a similar error.... There \n> should be something with MikTEX since the package was submitted to \n> CRAN and went through successfully (Kurt Hornik).\n>\n> A bit beyond my understanding...\n>\n>\n> U:\\Users\\pgiraudo2\\Documents\\R\\pgir_arch\\pgirmess_arch\\On work>rcmd \n> Rd2pdf pgirmess\n> Hmm ... looks like a package\n> Converting Rd files to LaTeX .....\n> Creating pdf output from LaTeX ...\n> Warning: running command \n> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n> \"Rd2.tex\" --max-iterations=20 -I \n> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>\n> LaTeX errors:\n> !pdfTeX error: pdflatex.EXE (file ts1-zi4r): Font ts1-zi4r at 540 not \n> found\n>  ==> Fatal error occurred, no output PDF file produced!\n>\n> Warning: running command \n> '\"C:\\PROGRA~2\\MIKTEX~1.9\\miktex\\bin\\texify.exe\"  --pdf\n> \"Rd2.tex\" --max-iterations=20 -I \n> \"C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\"\n> -I \"C:/PROGRA~1/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n> Error : running 'texi2dvi' on 'Rd2.tex' failed\n>\n> LaTeX errors:\n> !pdfTeX error: pdflatex.EXE (file ts1-zi4r): Font ts1-zi4r at 540 not \n> found\n>  ==> Fatal error occurred, no output PDF file produced!\n>\n> Error in running tools::texi2pdf()\n>\n\nI am closer to the solution. Rd2pdf (and MikTeX) works fine when I am \nrunning it as administrator. Does not work (with subsequent errors) when \nI run it on my usual user account (with limited rights). Now I remember \nthat 2 weeks ago our computer manager has created a new user account on \nmy labtop... Suspect some access rights may have been modified by him... \nWill see him tomorow...\n\nBest,\n\nPatrick",
+      "body_snippet": "Le 31/01/2016 15:22, Patrick Giraudoux a ?crit :\n> Le 31/01/2016 14:36, Uwe Ligges a ?crit :\n>> Eitehr the file is no longer there or corrupted, or the database that \n>> know about the file got corrup",
+      "thread_id": "thread-effebed14161",
+      "thread_depth": 4,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-64ba1dd4c8ce",
+      "message_id": "<56AE2822.5090006@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T16:28:34+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<OF45DACFA8.2F155253-ON85257F4B.00523DA8-1454252298166@american.edu>",
+      "references": [
+        "<OF45DACFA8.2F155253-ON85257F4B.00523DA8-1454252298166@american.edu>"
+      ],
+      "body_plain": "Le 31/01/2016 15:58, John Nolan a ?crit :\n>\n> Years ago I had a similar problem.   I had to manually install some \n> font using the MikTex Settings program.  I think I also had to run the \n> administrator version of this, not the regular user version, or the \n> font didn't go in the right folder.   I don't remember details, but \n> perhaps this will help.\n>\n> John Nolan\n> American University\n>\n\nYes thanks; this is true for installing; the standard account does not \ngive appropriate warnings and subsequent proposals for MikTeX package \ninstallation if missing, but does it as administrator. However,  that is \npart of the truth only (;-), now works fine as administrator, but still \nnot under usual account (even after having resfreshed FNDB and updated \nformats... following Uwe's instructions, see earlier mails). Suppose \nmatter of access rights. Will see that with our computer professionnals \nin the lab tomorow Monday morning...\n\nWill inform the list thenafter in case it may help other users\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Le 31/01/2016 15:58, John Nolan a ?crit :\n>\n> Years ago I had a similar problem.   I had to manually install some \n> font using the MikTex Settings program.  I think I also had to run the \n> administr",
+      "thread_id": "thread-64ba1dd4c8ce",
+      "thread_depth": 0,
+      "month": "2016-01"
+    },
+    {
+      "id": "msg-bb1fefb24062",
+      "message_id": "<56AE5E88.9080100@univ-fcomte.fr>",
+      "from_name": "Patrick Giraudoux",
+      "from_email_hash": "ada52e5125646269290cc634dcd24a69afb4b93fb66ae59f0d267942cfdd21ff",
+      "date": "2016-01-31T20:20:40+01:00",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "subject_clean": "[R-pkg-devel] checking PDF version of manual",
+      "in_reply_to": "<56AE2822.5090006@univ-fcomte.fr>",
+      "references": [
+        "<OF45DACFA8.2F155253-ON85257F4B.00523DA8-1454252298166@american.edu>",
+        "<56AE2822.5090006@univ-fcomte.fr>"
+      ],
+      "body_plain": "Le 31/01/2016 16:28, Patrick Giraudoux a ?crit :\n> Le 31/01/2016 15:58, John Nolan a ?crit :\n>>\n>> Years ago I had a similar problem.   I had to manually install some \n>> font using the MikTex Settings program.  I think I also had to run \n>> the administrator version of this, not the regular user version, or \n>> the font didn't go in the right folder.   I don't remember details, \n>> but perhaps this will help.\n>>\n>> John Nolan\n>> American University\n>>\n>\n> Yes thanks; this is true for installing; the standard account does not \n> give appropriate warnings and subsequent proposals for MikTeX package \n> installation if missing, but does it as administrator. However,  that \n> is part of the truth only (;-), now works fine as administrator, but \n> still not under usual account (even after having resfreshed FNDB and \n> updated formats... following Uwe's instructions, see earlier mails). \n> Suppose matter of access rights. Will see that with our computer \n> professionnals in the lab tomorow Monday morning...\n>\n> Will inform the list thenafter in case it may help other users\n\n\nAt last found a way round... Actually gave administrator rights to the \nstandard account. Then updated using MikTeX update (admin); new files to \nupdate appeared and these files were then visibly copied somewhere in \nthe 'AppData' folder of the standard account; then rcmd Rd2pdf worked... \nWent back to the adminstrator account to give back standard rights to \nthe standard account.\n\nWorks now !\n\nLooks like there is sometting either weird in the way MiKTeX manages \ninstallation or weird in the way I manage with MiKTeX.\n\n\n\n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Le 31/01/2016 16:28, Patrick Giraudoux a ?crit :\n> Le 31/01/2016 15:58, John Nolan a ?crit :\n>>\n>> Years ago I had a similar problem.   I had to manually install some \n>> font using the MikTex Setting",
+      "thread_id": "thread-64ba1dd4c8ce",
+      "thread_depth": 1,
+      "month": "2016-01"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-849ea9b5e052",
+      "subject": "[R-pkg-devel] Problem (with complex.h?) under Microsoft Windows",
+      "message_count": 4,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Pierre Lafaye de Micheaux"
+      ],
+      "started": "2016-01-02T20:39:58+01:00",
+      "last_reply": "2016-01-03T06:18:22-06:00",
+      "root_message_id": "msg-849ea9b5e052"
+    },
+    {
+      "id": "thread-6d7c6c3b79ce",
+      "subject": "[R-pkg-devel] Calls to exported dplyr functions from DBI/dplyr backend",
+      "message_count": 3,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Imanuel Costigan"
+      ],
+      "started": "2016-01-09T12:20:40+11:00",
+      "last_reply": "2016-01-09T04:47:15-05:00",
+      "root_message_id": "msg-6d7c6c3b79ce"
+    },
+    {
+      "id": "thread-b3f4a80eb186",
+      "subject": "[R-pkg-devel] Self built R package would not be installed from local zip file in plain R",
+      "message_count": 2,
+      "participants": [
+        "Chelsey Xiao",
+        "Uwe Ligges"
+      ],
+      "started": "2016-01-14T00:18:45-05:00",
+      "last_reply": "2016-01-14T16:29:03+01:00",
+      "root_message_id": "msg-b3f4a80eb186"
+    },
+    {
+      "id": "thread-59b445c7b838",
+      "subject": "[R-pkg-devel] winbuilder - missing global definitions / error in example latex code stdout",
+      "message_count": 2,
+      "participants": [
+        "Sven E. Templer",
+        "Uwe Ligges"
+      ],
+      "started": "2016-01-20T08:42:22+01:00",
+      "last_reply": "2016-01-20T09:58:25+01:00",
+      "root_message_id": "msg-59b445c7b838"
+    },
+    {
+      "id": "thread-d9081cb6f960",
+      "subject": "[R-pkg-devel] Issue with vignette on win-builder",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "François Michonneau"
+      ],
+      "started": "2016-01-20T11:50:04-05:00",
+      "last_reply": "2016-01-20T13:08:01-05:00",
+      "root_message_id": "msg-d9081cb6f960"
+    },
+    {
+      "id": "thread-06495feb34fd",
+      "subject": "[R-pkg-devel] Previous messageNext messageBack to messages The following files should probably not be installed‏",
+      "message_count": 3,
+      "participants": [
+        "Daniel Marcelino",
+        "Dirk Eddelbuettel"
+      ],
+      "started": "2016-01-20T14:10:23-03:00",
+      "last_reply": "2016-01-20T16:20:43-02:00",
+      "root_message_id": "msg-06495feb34fd"
+    },
+    {
+      "id": "thread-c0685e79d25b",
+      "subject": "[R-pkg-devel] Adding non-exported functions in an extra environment in new S4 object",
+      "message_count": 2,
+      "participants": [
+        "Rainer M Krug"
+      ],
+      "started": "2016-01-21T11:03:59+01:00",
+      "last_reply": "2016-01-21T11:50:43+01:00",
+      "root_message_id": "msg-c0685e79d25b"
+    },
+    {
+      "id": "thread-686fff7e996b",
+      "subject": "[R-pkg-devel] How to pass a connection into a C function (R 3.2)",
+      "message_count": 7,
+      "participants": [
+        "Duncan Murdoch",
+        "Tom Quarendon"
+      ],
+      "started": "2016-01-21T16:39:59+00:00",
+      "last_reply": "2016-01-21T14:57:14-05:00",
+      "root_message_id": "msg-686fff7e996b"
+    },
+    {
+      "id": "thread-a1bbc645983c",
+      "subject": "[R-pkg-devel] Packages that depend on third-party binaries",
+      "message_count": 4,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Titus von der Malsburg"
+      ],
+      "started": "2016-01-23T15:12:01-08:00",
+      "last_reply": "2016-01-23T16:34:28-08:00",
+      "root_message_id": "msg-a1bbc645983c"
+    },
+    {
+      "id": "thread-491572e208a0",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "message_count": 7,
+      "participants": [
+        "Adah Zhang",
+        "Ben Bolker",
+        "Dirk Eddelbuettel",
+        "Sven E. Templer",
+        "Uwe Ligges"
+      ],
+      "started": "2016-01-26T14:03:01-05:00",
+      "last_reply": "2016-01-26T15:35:42-06:00",
+      "root_message_id": "msg-491572e208a0"
+    },
+    {
+      "id": "thread-9b6c7be73d76",
+      "subject": "[R-pkg-devel] R CMD check yielding different results for me than CRAN reviewer",
+      "message_count": 2,
+      "participants": [
+        "Carlos Cinelli",
+        "Dirk Eddelbuettel"
+      ],
+      "started": "2016-01-27T13:00:52+00:00",
+      "last_reply": "2016-01-27T07:20:24-06:00",
+      "root_message_id": "msg-9b6c7be73d76"
+    },
+    {
+      "id": "thread-2d68e0b71ea2",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "message_count": 4,
+      "participants": [
+        "David Scott",
+        "Duncan Murdoch",
+        "Gábor Csárdi",
+        "Kirill Müller"
+      ],
+      "started": "2016-01-29T01:47:53+13:00",
+      "last_reply": "2016-01-28T17:42:12+01:00",
+      "root_message_id": "msg-2d68e0b71ea2"
+    },
+    {
+      "id": "thread-d273e0ad71a6",
+      "subject": "[R-pkg-devel] double colon",
+      "message_count": 4,
+      "participants": [
+        "Berry Boessenkool",
+        "Duncan Murdoch",
+        "Uwe Ligges"
+      ],
+      "started": "2016-01-29T15:21:42+01:00",
+      "last_reply": "2016-01-29T17:41:40+01:00",
+      "root_message_id": "msg-d273e0ad71a6"
+    },
+    {
+      "id": "thread-fc50e852e01d",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "message_count": 1,
+      "participants": [
+        "Nathan Wendt"
+      ],
+      "started": "2016-01-30T13:25:03-06:00",
+      "last_reply": "2016-01-30T13:25:03-06:00",
+      "root_message_id": "msg-fc50e852e01d"
+    },
+    {
+      "id": "thread-effebed14161",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "message_count": 7,
+      "participants": [
+        "Brian G. Peterson",
+        "Patrick Giraudoux",
+        "Uwe Ligges"
+      ],
+      "started": "2016-01-31T11:37:22+01:00",
+      "last_reply": "2016-01-31T15:58:45+01:00",
+      "root_message_id": "msg-effebed14161"
+    },
+    {
+      "id": "thread-64ba1dd4c8ce",
+      "subject": "[R-pkg-devel] checking PDF version of manual",
+      "message_count": 2,
+      "participants": [
+        "Patrick Giraudoux"
+      ],
+      "started": "2016-01-31T16:28:34+01:00",
+      "last_reply": "2016-01-31T20:20:40+01:00",
+      "root_message_id": "msg-64ba1dd4c8ce"
+    }
+  ]
+}

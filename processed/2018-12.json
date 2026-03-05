@@ -1,0 +1,1218 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2018-12",
+  "messages": [
+    {
+      "id": "msg-c6de9267de18",
+      "message_id": "<CAL6gwnLe1pW2NyiOnXWOOK1OqyZ5HV4c74Ho=cGfKBDx+oyqTg@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "bc31d95136a42dda70906a1be7a3202337f5c9b8728bd4b530319c59fc1de16e",
+      "date": "2018-12-04T00:34:27-05:00",
+      "subject": "[R-pkg-devel] Best practices for R package requiring Fortran 2003",
+      "subject_clean": "[R-pkg-devel] Best practices for R package requiring Fortran 2003",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Following the news, I've been trying to clean up my package which uses\nFortran in preparation for the changes that appear to be coming in\nR-devel. The package has implicitly been relying on Fortran 2003,\nsince it uses iso_c_binding. In practice, is it proper that\n\"-std=f2003\" be explicitly added to PKG_FCFLAGS (or possibPKG_FFLAGS\nin 3.6.0)? Should \"Fortran 2003\" be listed in SystemRequirements? It\ncurrently passes CRAN checks, but that's because all the Fortran\ncompilers in use have the iso_c_bindings implemented (GCC 4.5 already\nhad it, and it's clearly in Oracle Developer Studio 12.5).\n\nThank you,\n\nAvi",
+      "body_snippet": "Following the news, I've been trying to clean up my package which uses\nFortran in preparation for the changes that appear to be coming in\nR-devel. The package has implicitly been relying on Fortran 20",
+      "thread_id": "thread-c6de9267de18",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-177b9d8e8074",
+      "message_id": "<b71f2e1c-bb0e-c806-111a-f07e69fc9aec@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "246da43ddf08fd9000ed72e0d4f61157a9c4964bae5f0af6f47d4d61aa4882b1",
+      "date": "2018-12-05T15:19:26Z",
+      "subject": "[R-pkg-devel] Can I put my small data-sets into one .rda file in my CRAN package?",
+      "subject_clean": "[R-pkg-devel] Can I put my small data-sets into one .rda file in my CRAN package?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "At the moment my package (metap) has a number of small data-sets each as\na separate .rda file. It works fine. I thought it would be neater to put\nthem all into one file which I called data.rda (original choice of name\nthere).\n\nNow when I do R CMD build metap\nit fails when trying to build the vignette when that executes\ndata(validity)\nwhere validity is contained in data.rda.\n\nI cannot find anything in writing R extensions which explicitly forbids\nthis but equally nothing which explicitly permits it. Am I missing\nsomething? Obviously this is not an important problem and as the title\nsays the solution should work on CRAN too.\n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "At the moment my package (metap) has a number of small data-sets each as\na separate .rda file. It works fine. I thought it would be neater to put\nthem all into one file which I called data.rda (origin",
+      "thread_id": "thread-177b9d8e8074",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-9cc8172c24ee",
+      "message_id": "<CAO1zAVbqxqD4=wxh7-FqHGoZbFMLQssA+yuq7-L0Nqh-hNGqYQ@mail.gmail.com>",
+      "from_name": "Joris Meys",
+      "from_email_hash": "4b52777cd2dd216aac9cf12bafed2294d7058f309d87c0952e581642f2caca02",
+      "date": "2018-12-05T17:22:29+01:00",
+      "subject": "[R-pkg-devel]  Can I put my small data-sets into one .rda file in my CRAN package?",
+      "subject_clean": "[R-pkg-devel]  Can I put my small data-sets into one .rda file in my CRAN package?",
+      "in_reply_to": "<b71f2e1c-bb0e-c806-111a-f07e69fc9aec@dewey.myzen.co.uk>",
+      "references": [
+        "<b71f2e1c-bb0e-c806-111a-f07e69fc9aec@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "Hi Michael,\n\nin the data() function you have to use the name of the rda file, not the\nname of the dataset you need.\nSo say you have the datasets validity and data2 in a file called\nalldata.rda, you need to do:\n\ndata(alldata)\n\nand that will make both validity and data2 available to the user.\n\nimho it only makes sense to combine data in one .rda file when they're also\nrelated (for example an dataset with species and the similarity matrix for\nthose species).\n\nHope this helps\nCheers\nJoris\n\nOn Wed, Dec 5, 2018 at 4:19 PM Michael Dewey <lists at dewey.myzen.co.uk>\nwrote:\n\n> At the moment my package (metap) has a number of small data-sets each as\n> a separate .rda file. It works fine. I thought it would be neater to put\n> them all into one file which I called data.rda (original choice of name\n> there).\n>\n> Now when I do R CMD build metap\n> it fails when trying to build the vignette when that executes\n> data(validity)\n> where validity is contained in data.rda.\n>\n> I cannot find anything in writing R extensions which explicitly forbids\n> this but equally nothing which explicitly permits it. Am I missing\n> something? Obviously this is not an important problem and as the title\n> says the solution should work on CRAN too.\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nJoris Meys\nStatistical consultant\n\nDepartment of Data Analysis and Mathematical Modelling\nGhent University\nCoupure Links 653, B-9000 Gent (Belgium)\n<https://maps.google.com/?q=Coupure+links+653,%C2%A0B-9000+Gent,%C2%A0Belgium&entry=gmail&source=g>\n\ntel: +32 (0)9 264 61 79\n-----------\nBiowiskundedagen 2017-2018\nhttp://www.biowiskundedagen.ugent.be/\n\n-------------------------------\nDisclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Michael,\n\nin the data() function you have to use the name of the rda file, not the\nname of the dataset you need.\nSo say you have the datasets validity and data2 in a file called\nalldata.rda, you ne",
+      "thread_id": "thread-177b9d8e8074",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-b42b93ad8ed0",
+      "message_id": "<438D2EC9EAFE5946B2D5864670EA468E018F6CB019@MBXP02.ds.man.ac.uk>",
+      "from_name": "Georgi Boshnakov",
+      "from_email_hash": "afff2d87e670f7cb63c3a72f641980f7eeb866a458d473442a70517edb862adc",
+      "date": "2018-12-05T16:44:38Z",
+      "subject": "[R-pkg-devel]  Can I put my small data-sets into one .rda file in my CRAN package?",
+      "subject_clean": "[R-pkg-devel]  Can I put my small data-sets into one .rda file in my CRAN package?",
+      "in_reply_to": "<CAO1zAVbqxqD4=wxh7-FqHGoZbFMLQssA+yuq7-L0Nqh-hNGqYQ@mail.gmail.com>",
+      "references": [
+        "<b71f2e1c-bb0e-c806-111a-f07e69fc9aec@dewey.myzen.co.uk>",
+        "<CAO1zAVbqxqD4=wxh7-FqHGoZbFMLQssA+yuq7-L0Nqh-hNGqYQ@mail.gmail.com>"
+      ],
+      "body_plain": "Further to Joris' email, the help page of data() is very informative. \nIf the reason for wishing to combine the datasets together is so that they can be made available in a single command,\nan option might be to create an R source file which loads all datasets, thus giving this option without withdrawing the possibility for  loading the individual datasets.\n\nGeorgi Boshnakov\n\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Joris Meys\nSent: 05 December 2018 16:22\nTo: lists at dewey.myzen.co.uk\nCc: R Package Development\nSubject: Re: [R-pkg-devel] Can I put my small data-sets into one .rda file in my CRAN package?\n\nHi Michael,\n\nin the data() function you have to use the name of the rda file, not the\nname of the dataset you need.\nSo say you have the datasets validity and data2 in a file called\nalldata.rda, you need to do:\n\ndata(alldata)\n\nand that will make both validity and data2 available to the user.\n\nimho it only makes sense to combine data in one .rda file when they're also\nrelated (for example an dataset with species and the similarity matrix for\nthose species).\n\nHope this helps\nCheers\nJoris\n\nOn Wed, Dec 5, 2018 at 4:19 PM Michael Dewey <lists at dewey.myzen.co.uk>\nwrote:\n\n> At the moment my package (metap) has a number of small data-sets each as\n> a separate .rda file. It works fine. I thought it would be neater to put\n> them all into one file which I called data.rda (original choice of name\n> there).\n>\n> Now when I do R CMD build metap\n> it fails when trying to build the vignette when that executes\n> data(validity)\n> where validity is contained in data.rda.\n>\n> I cannot find anything in writing R extensions which explicitly forbids\n> this but equally nothing which explicitly permits it. Am I missing\n> something? Obviously this is not an important problem and as the title\n> says the solution should work on CRAN too.\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nJoris Meys\nStatistical consultant\n\nDepartment of Data Analysis and Mathematical Modelling\nGhent University\nCoupure Links 653, B-9000 Gent (Belgium)\n<https://maps.google.com/?q=Coupure+links+653,%C2%A0B-9000+Gent,%C2%A0Belgium&entry=gmail&source=g>\n\ntel: +32 (0)9 264 61 79\n-----------\nBiowiskundedagen 2017-2018\nhttp://www.biowiskundedagen.ugent.be/\n\n-------------------------------\nDisclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Further to Joris' email, the help page of data() is very informative. \nIf the reason for wishing to combine the datasets together is so that they can be made available in a single command,\nan option m",
+      "thread_id": "thread-177b9d8e8074",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-5828d9eb53b8",
+      "message_id": "<CAJeYpE_1q=fQgfFx2cQXBH9_m+vx8YETt_pveEJt6Ou+wr51aw@mail.gmail.com>",
+      "from_name": "Dalthorp, Daniel",
+      "from_email_hash": "1dd92aa0d8137cb8d345a1e2f23835f609293a18c0090db48c9131bf82a3eb37",
+      "date": "2018-12-05T22:28:01-08:00",
+      "subject": "package 'corpus' not available?",
+      "subject_clean": "package 'corpus' not available?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All,\nI am trying to submit a minor update of new package (GenEst) to CRAN, but\ngot an error that has not appeared in releases earlier this year (the\nlatest was two weeks ago):\n\n* checking package dependencies ... ERROR\nPackage required but not available: ?corpus?\n\nI see the package on CRAN, and it installs and runs fine on my machine.\nSince its last release, my package has not had any changes that involve\n'corpus' functions, the 'corpus' package at CRAN has not changed, and R is\nstill 3.5.1. Any ideas about what might be going on?\n\nAny help would be greatly appreciated!\n\n-Dan\n\n-- \nDan Dalthorp, PhD\nUSGS Forest and Rangeland Ecosystem Science Center\nForest Sciences Lab, Rm 311\n3200 SW Jefferson Way\nCorvallis, OR 97331\nph: 541-750-0953\nddalthorp at usgs.gov\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear All,\nI am trying to submit a minor update of new package (GenEst) to CRAN, but\ngot an error that has not appeared in releases earlier this year (the\nlatest was two weeks ago):\n\n* checking package",
+      "thread_id": "thread-5828d9eb53b8",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-e9e8d319cd28",
+      "message_id": "<7e36b565-4cfb-9084-6d61-b3b176df1486@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "104c87483880acf2172abe27b608842b6455f9ef1ad2ceef608cdf4d12ad2557",
+      "date": "2018-12-06T09:16:13+01:00",
+      "subject": "[R-pkg-devel] package 'corpus' not available?",
+      "subject_clean": "[R-pkg-devel] package 'corpus' not available?",
+      "in_reply_to": "<mailman.3265.9212.1544077711.1179.r-package-devel@r-project.org>",
+      "references": [
+        "<mailman.3265.9212.1544077711.1179.r-package-devel@r-project.org>"
+      ],
+      "body_plain": "Please submit again, perhaps a race cndition on one of the incoming \ncheck machines that instaled corpus when your package was checked?\n\nIf this persists, pls write to  <cran-submissions at r-project.org> in \nresponse to the auto-rejection.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 06.12.2018 07:28, Dalthorp, Daniel via R-package-devel wrote:\n> \n> Subject:\n> package 'corpus' not available?\n> From:\n> \"Dalthorp, Daniel\" <ddalthorp at usgs.gov>\n> Date:\n> 06.12.2018 07:28\n> To:\n> <r-package-devel at r-project.org>\n> \n> To:\n> <r-package-devel at r-project.org>\n> \n> \n> Dear All,\n> I am trying to submit a minor update of new package (GenEst) to CRAN, but\n> got an error that has not appeared in releases earlier this year (the\n> latest was two weeks ago):\n> \n> * checking package dependencies ... ERROR\n> Package required but not available: ?corpus?\n> \n> I see the package on CRAN, and it installs and runs fine on my machine.\n> Since its last release, my package has not had any changes that involve\n> 'corpus' functions, the 'corpus' package at CRAN has not changed, and R is\n> still 3.5.1. Any ideas about what might be going on?\n> \n> Any help would be greatly appreciated!\n> \n> -Dan\n> \n> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Please submit again, perhaps a race cndition on one of the incoming \ncheck machines that instaled corpus when your package was checked?\n\nIf this persists, pls write to  <cran-submissions at r-project.",
+      "thread_id": "thread-e9e8d319cd28",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-c873a757571a",
+      "message_id": "<CAHJ+2VLmGPsVzCJfMj4ttvcmSNdRap8SxWCFpFv7zBSD4-dEGQ@mail.gmail.com>",
+      "from_name": "Kevin Coombes",
+      "from_email_hash": "b518b59f54e201fbc08d097fe8505129268f2f82942600e15149b8969c3604e6",
+      "date": "2018-12-06T10:59:12-05:00",
+      "subject": "[R-pkg-devel] testing coercion",
+      "subject_clean": "[R-pkg-devel] testing coercion",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nA package I recently submitted to CRAN includes an S4 class that defines a\nmethod to coerce from that class to a numeric vector, basically through\n\n>  setAs(\"myClass\", \"numeric\", function(from) from at psi)\n\nBeing perhaps overly compulsive about trying to test everything while\ndocumenting behavior, my accompanying test script includes these lines:\n\n> try( as.numeric(wv) )            # should fail\n> canCoerce(wv, \"numeric\")   # returns TRUE\n> canCoerce(wv, \"double\")     # gets a complaint from CRAN incoming pretest\n\nThe complaint on the last line arises because\n+ in the current version of R, the answer is FALSE\n+ in the development version of R, the answer is TRUE\nThe change is (probably) documented on the R-devel daily news from 04 Sept\n2018, which lists\n\nBug Fix:  as(1L, \"double\") now does coerce (PR#17457)\n\nSo, here's my question. Do I remove this test (and thus lose my\ndocumentation of how the method behaves) in order to get the incoming\nprecheck to stop whinging? Or do I tell the CRAN maintainers to not worry\nabout the test changing, since it's due to a core bug fix, and promise to\nchange my saved test results when the devel version becomes current? (Even\nthough the fixed results will then show up as wrong in the \"oldrel\" tests.)\n\nBest,\n  Kevin\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nA package I recently submitted to CRAN includes an S4 class that defines a\nmethod to coerce from that class to a numeric vector, basically through\n\n>  setAs(\"myClass\", \"numeric\", function(from) f",
+      "thread_id": "thread-c873a757571a",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-4c0328a52020",
+      "message_id": "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "32916ed354eafa1dedfcc7ab83aea781d79e68664b0fa536c3f7d6a85eea45d9",
+      "date": "2018-12-06T10:22:47-06:00",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "subject_clean": "[R-pkg-devel] New CRAN internet policy",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI'd love to get some clarification on what the new internet policy\nmeans for packages like httr:\n\n> Packages which use Internet resources should fail gracefully with an informative\n> message if the resource is not available (and not give a check warning nor error).\n\nIt's not clear what \"internet resource\" means here? If it means\ndataset, then I think the httr tests and examples are ok. If it means\nany use of the internet, I'm not sure what do - httr critically\ndepends on internet access, so I can't see any way to make it fail\ngracefully.\n\nHadley\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "Hi all,\n\nI'd love to get some clarification on what the new internet policy\nmeans for packages like httr:\n\n> Packages which use Internet resources should fail gracefully with an informative\n> message ",
+      "thread_id": "thread-4c0328a52020",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-773e3c1a23af",
+      "message_id": "<6c9e0ea3-f36b-aeba-2255-11d407de50ed@fau.de>",
+      "from_name": "Sebastian Meyer",
+      "from_email_hash": "8988b59b824ff6ac3c628ecf77f3b5f94511e8e145ec1a644b6aaf616c31104e",
+      "date": "2018-12-06T17:41:39+01:00",
+      "subject": "[R-pkg-devel] testing coercion",
+      "subject_clean": "[R-pkg-devel] testing coercion",
+      "in_reply_to": "<CAHJ+2VLmGPsVzCJfMj4ttvcmSNdRap8SxWCFpFv7zBSD4-dEGQ@mail.gmail.com>",
+      "references": [
+        "<CAHJ+2VLmGPsVzCJfMj4ttvcmSNdRap8SxWCFpFv7zBSD4-dEGQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Kevin,\n\nI think using\n\n> canCoerce(wv, \"double\") || getRversion() < \"3.6.0\"\n\ncould solve the issue of an inconsistent test result and is descriptive.\n\nBest regards,\n\n\tSebastian\n\n\nAm 06.12.18 um 16:59 schrieb Kevin Coombes:\n>  Hi,\n> \n> A package I recently submitted to CRAN includes an S4 class that defines a\n> method to coerce from that class to a numeric vector, basically through\n> \n>>  setAs(\"myClass\", \"numeric\", function(from) from at psi)\n> \n> Being perhaps overly compulsive about trying to test everything while\n> documenting behavior, my accompanying test script includes these lines:\n> \n>> try( as.numeric(wv) )            # should fail\n>> canCoerce(wv, \"numeric\")   # returns TRUE\n>> canCoerce(wv, \"double\")     # gets a complaint from CRAN incoming pretest\n> \n> The complaint on the last line arises because\n> + in the current version of R, the answer is FALSE\n> + in the development version of R, the answer is TRUE\n> The change is (probably) documented on the R-devel daily news from 04 Sept\n> 2018, which lists\n> \n> Bug Fix:  as(1L, \"double\") now does coerce (PR#17457)\n> \n> So, here's my question. Do I remove this test (and thus lose my\n> documentation of how the method behaves) in order to get the incoming\n> precheck to stop whinging? Or do I tell the CRAN maintainers to not worry\n> about the test changing, since it's due to a core bug fix, and promise to\n> change my saved test results when the devel version becomes current? (Even\n> though the fixed results will then show up as wrong in the \"oldrel\" tests.)\n> \n> Best,\n>   Kevin\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Hi Kevin,\n\nI think using\n\n> canCoerce(wv, \"double\") || getRversion() < \"3.6.0\"\n\ncould solve the issue of an inconsistent test result and is descriptive.\n\nBest regards,\n\n\tSebastian\n\n\nAm 06.12.18 um 16:",
+      "thread_id": "thread-c873a757571a",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-861bab1ec206",
+      "message_id": "<088FAC1C-9ED8-4239-A03E-92AED4A96C68@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "573daa30dda21e85c8a664e21ee8ef983a3bf06fc669cc2eaeae1f65c241e69f",
+      "date": "2018-12-06T08:41:57-08:00",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "subject_clean": "[R-pkg-devel] New CRAN internet policy",
+      "in_reply_to": "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>",
+      "references": [
+        "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>"
+      ],
+      "body_plain": "Hi All:\n\nCan someone point me to where all the policies such as this one are posted.  This may affect a package I have,  and one problem I have is different people have differing ideas of what defines a \"graceful\" exit.\n\nThanks,\n\nRoy\n\n\n> On Dec 6, 2018, at 8:22 AM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> \n> Hi all,\n> \n> I'd love to get some clarification on what the new internet policy\n> means for packages like httr:\n> \n>> Packages which use Internet resources should fail gracefully with an informative\n>> message if the resource is not available (and not give a check warning nor error).\n> \n> It's not clear what \"internet resource\" means here? If it means\n> dataset, then I think the httr tests and examples are ok. If it means\n> any use of the internet, I'm not sure what do - httr critically\n> depends on internet access, so I can't see any way to make it fail\n> gracefully.\n> \n> Hadley\n> \n> -- \n> http://hadley.nz\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\" \n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.",
+      "body_snippet": "Hi All:\n\nCan someone point me to where all the policies such as this one are posted.  This may affect a package I have,  and one problem I have is different people have differing ideas of what defines",
+      "thread_id": "thread-4c0328a52020",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-600e3469f90d",
+      "message_id": "<CABdHhvEtm0R1soCndfNJ_6iF_1ztzOQxBNxDix4MKqpExjKHLw@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "32916ed354eafa1dedfcc7ab83aea781d79e68664b0fa536c3f7d6a85eea45d9",
+      "date": "2018-12-06T10:50:16-06:00",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "subject_clean": "[R-pkg-devel] New CRAN internet policy",
+      "in_reply_to": "<088FAC1C-9ED8-4239-A03E-92AED4A96C68@noaa.gov>",
+      "references": [
+        "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>",
+        "<088FAC1C-9ED8-4239-A03E-92AED4A96C68@noaa.gov>"
+      ],
+      "body_plain": "Policies at https://cran.r-project.org/web/packages/policies.html\n\nDirk Eddelbuettel has a CRAN policy watch where you can see the\nchanges: https://github.com/eddelbuettel/crp\n\nHadley\n\nOn Thu, Dec 6, 2018 at 10:42 AM Roy Mendelssohn - NOAA Federal\n<roy.mendelssohn at noaa.gov> wrote:\n>\n> Hi All:\n>\n> Can someone point me to where all the policies such as this one are posted.  This may affect a package I have,  and one problem I have is different people have differing ideas of what defines a \"graceful\" exit.\n>\n> Thanks,\n>\n> Roy\n>\n>\n> > On Dec 6, 2018, at 8:22 AM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> >\n> > Hi all,\n> >\n> > I'd love to get some clarification on what the new internet policy\n> > means for packages like httr:\n> >\n> >> Packages which use Internet resources should fail gracefully with an informative\n> >> message if the resource is not available (and not give a check warning nor error).\n> >\n> > It's not clear what \"internet resource\" means here? If it means\n> > dataset, then I think the httr tests and examples are ok. If it means\n> > any use of the internet, I'm not sure what do - httr critically\n> > depends on internet access, so I can't see any way to make it fail\n> > gracefully.\n> >\n> > Hadley\n> >\n> > --\n> > http://hadley.nz\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> **********************\n> \"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n> **********************\n> Roy Mendelssohn\n> Supervisory Operations Research Analyst\n> NOAA/NMFS\n> Environmental Research Division\n> Southwest Fisheries Science Center\n> ***Note new street address***\n> 110 McAllister Way\n> Santa Cruz, CA 95060\n> Phone: (831)-420-3666\n> Fax: (831) 420-3980\n> e-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n>\n> \"Old age and treachery will overcome youth and skill.\"\n> \"From those who have been given much, much will be expected\"\n> \"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.\n>\n\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "Policies at https://cran.r-project.org/web/packages/policies.html\n\nDirk Eddelbuettel has a CRAN policy watch where you can see the\nchanges: https://github.com/eddelbuettel/crp\n\nHadley\n\nOn Thu, Dec 6, ",
+      "thread_id": "thread-4c0328a52020",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-762e34616dfe",
+      "message_id": "<AA55A481-1E31-41EF-B8F1-EFEE9C4062F2@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "573daa30dda21e85c8a664e21ee8ef983a3bf06fc669cc2eaeae1f65c241e69f",
+      "date": "2018-12-06T08:54:58-08:00",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "subject_clean": "[R-pkg-devel] New CRAN internet policy",
+      "in_reply_to": "<CABdHhvEtm0R1soCndfNJ_6iF_1ztzOQxBNxDix4MKqpExjKHLw@mail.gmail.com>",
+      "references": [
+        "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>",
+        "<088FAC1C-9ED8-4239-A03E-92AED4A96C68@noaa.gov>",
+        "<CABdHhvEtm0R1soCndfNJ_6iF_1ztzOQxBNxDix4MKqpExjKHLw@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks muchly.\n\n-Roy\n\n\n> On Dec 6, 2018, at 8:50 AM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> \n> Policies at https://cran.r-project.org/web/packages/policies.html\n> \n> Dirk Eddelbuettel has a CRAN policy watch where you can see the\n> changes: https://github.com/eddelbuettel/crp\n> \n> Hadley\n> \n> On Thu, Dec 6, 2018 at 10:42 AM Roy Mendelssohn - NOAA Federal\n> <roy.mendelssohn at noaa.gov> wrote:\n>> \n>> Hi All:\n>> \n>> Can someone point me to where all the policies such as this one are posted.  This may affect a package I have,  and one problem I have is different people have differing ideas of what defines a \"graceful\" exit.\n>> \n>> Thanks,\n>> \n>> Roy\n>> \n>> \n>>> On Dec 6, 2018, at 8:22 AM, Hadley Wickham <h.wickham at gmail.com> wrote:\n>>> \n>>> Hi all,\n>>> \n>>> I'd love to get some clarification on what the new internet policy\n>>> means for packages like httr:\n>>> \n>>>> Packages which use Internet resources should fail gracefully with an informative\n>>>> message if the resource is not available (and not give a check warning nor error).\n>>> \n>>> It's not clear what \"internet resource\" means here? If it means\n>>> dataset, then I think the httr tests and examples are ok. If it means\n>>> any use of the internet, I'm not sure what do - httr critically\n>>> depends on internet access, so I can't see any way to make it fail\n>>> gracefully.\n>>> \n>>> Hadley\n>>> \n>>> --\n>>> http://hadley.nz\n>>> \n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n>> **********************\n>> \"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n>> **********************\n>> Roy Mendelssohn\n>> Supervisory Operations Research Analyst\n>> NOAA/NMFS\n>> Environmental Research Division\n>> Southwest Fisheries Science Center\n>> ***Note new street address***\n>> 110 McAllister Way\n>> Santa Cruz, CA 95060\n>> Phone: (831)-420-3666\n>> Fax: (831) 420-3980\n>> e-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n>> \n>> \"Old age and treachery will overcome youth and skill.\"\n>> \"From those who have been given much, much will be expected\"\n>> \"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.\n>> \n> \n> \n> -- \n> http://hadley.nz\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\" \n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.",
+      "body_snippet": "Thanks muchly.\n\n-Roy\n\n\n> On Dec 6, 2018, at 8:50 AM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> \n> Policies at https://cran.r-project.org/web/packages/policies.html\n> \n> Dirk Eddelbuettel has a ",
+      "thread_id": "thread-4c0328a52020",
+      "thread_depth": 3,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-4b9e297d167b",
+      "message_id": "<CAHJ+2VLfcepypUgqe6KeG1rPAvU1gByUg4VGbVS8C0OVvZyXFw@mail.gmail.com>",
+      "from_name": "Kevin Coombes",
+      "from_email_hash": "b518b59f54e201fbc08d097fe8505129268f2f82942600e15149b8969c3604e6",
+      "date": "2018-12-06T12:52:00-05:00",
+      "subject": "[R-pkg-devel] testing coercion",
+      "subject_clean": "[R-pkg-devel] testing coercion",
+      "in_reply_to": "<6c9e0ea3-f36b-aeba-2255-11d407de50ed@fau.de>",
+      "references": [
+        "<CAHJ+2VLmGPsVzCJfMj4ttvcmSNdRap8SxWCFpFv7zBSD4-dEGQ@mail.gmail.com>",
+        "<6c9e0ea3-f36b-aeba-2255-11d407de50ed@fau.de>"
+      ],
+      "body_plain": "Thanks for the suggestion. But it may not be quite expressive enough; I\nthink I will instead use\n\n > ifelse(getRversion() < \"3.6.0\",\n >           ! canCoerce(wv, \"double\"),   # fails in older versions\n >              canCoerce(wv, \"double\"))  # works in newer versions\n\nThat way, when I update the package six months from now, I might have a\nchance of remembering what was going on.\n\nBest,\n   Kevin\n\nOn 12/6/2018 11:41 AM, Sebastian Meyer wrote:\n> Hi Kevin,\n>\n> I think using\n>\n>> canCoerce(wv, \"double\") || getRversion() < \"3.6.0\"\n> could solve the issue of an inconsistent test result and is descriptive.\n>\n> Best regards,\n>\n>       Sebastian\n>\n>\n> Am 06.12.18 um 16:59 schrieb Kevin Coombes:\n>>   Hi,\n>>\n>> A package I recently submitted to CRAN includes an S4 class that defines a\n>> method to coerce from that class to a numeric vector, basically through\n>>\n>>>   setAs(\"myClass\", \"numeric\", function(from) from at psi)\n>> Being perhaps overly compulsive about trying to test everything while\n>> documenting behavior, my accompanying test script includes these lines:\n>>\n>>> try( as.numeric(wv) )            # should fail\n>>> canCoerce(wv, \"numeric\")   # returns TRUE\n>>> canCoerce(wv, \"double\")     # gets a complaint from CRAN incoming pretest\n>> The complaint on the last line arises because\n>> + in the current version of R, the answer is FALSE\n>> + in the development version of R, the answer is TRUE\n>> The change is (probably) documented on the R-devel daily news from 04 Sept\n>> 2018, which lists\n>>\n>> Bug Fix:  as(1L, \"double\") now does coerce (PR#17457)\n>>\n>> So, here's my question. Do I remove this test (and thus lose my\n>> documentation of how the method behaves) in order to get the incoming\n>> precheck to stop whinging? Or do I tell the CRAN maintainers to not worry\n>> about the test changing, since it's due to a core bug fix, and promise to\n>> change my saved test results when the devel version becomes current? (Even\n>> though the fixed results will then show up as wrong in the \"oldrel\" tests.)\n>>\n>> Best,\n>>    Kevin\n>>\n>>      [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Thanks for the suggestion. But it may not be quite expressive enough; I\nthink I will instead use\n\n > ifelse(getRversion() < \"3.6.0\",\n >           ! canCoerce(wv, \"double\"),   # fails in older versions",
+      "thread_id": "thread-c873a757571a",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-dbfb2d41612f",
+      "message_id": "<CADj50wF=ja3fXYMuyWzLPsnH-ks127jJJv4t4uoH+fGw6OkNFQ@mail.gmail.com>",
+      "from_name": "Michael Kellermann",
+      "from_email_hash": "df53bed8812b0e2935ae728151a4a6172ec3e52454ac8c76288bb8e02f1f3287",
+      "date": "2018-12-06T13:29:07-05:00",
+      "subject": "[R-pkg-devel] R package submission - C code does not compile",
+      "subject_clean": "[R-pkg-devel] R package submission - C code does not compile",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI'm attempting to submit an update of our eiPack package to CRAN.  When I\nsubmitted it, it passed the Windows check with no problem (other than a\nnote for a change in maintainer), but it failed almost immediately on the\nDebian check.  The 00install.out file shows that it failed due to an\ninability to compile the C code included in the package.  The error message\nwas as follows:\n\n** libs\ngcc-8  -I\"/home/hornik/tmp/R/include\" -DNDEBUG   -I/usr/local/include\n=  -fpic  -g -O2 -Wall -pedantic -mtune=native -c eiutil.c -o eiutil.o\ngcc-8: error: =: No such file or directory\nmake: *** [/home/hornik/tmp/R/etc/Makeconf:166: eiutil.o] Error 1\nERROR: compilation failed for package ?eiPack?\n\n\nI updated the package on a Windows machine, but tested it on several\nlinux systems using the rhub package and never encountered this issue.\nI think it has something to do with the equal sign in the following\ncode snippet\n\n-I/usr/local/include =  -fpic\n\nbut I could be wrong, as I don't have much experience with linux.  I'm\nsure that I made a mistake somewhere, but I'm at a bit of a loss as to\nwhat to try next.  Any advice would be most appreciated.\n\n\nBest regards,\n\nMike Kellermann\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI'm attempting to submit an update of our eiPack package to CRAN.  When I\nsubmitted it, it passed the Windows check with no problem (other than a\nnote for a change in maintainer), but it fail",
+      "thread_id": "thread-dbfb2d41612f",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-995982958591",
+      "message_id": "<4fcfbdd6-298c-7526-6d81-8dc581c2ce9f@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "104c87483880acf2172abe27b608842b6455f9ef1ad2ceef608cdf4d12ad2557",
+      "date": "2018-12-07T08:23:42+01:00",
+      "subject": "[R-pkg-devel] R package submission - C code does not compile",
+      "subject_clean": "[R-pkg-devel] R package submission - C code does not compile",
+      "in_reply_to": "<CADj50wF=ja3fXYMuyWzLPsnH-ks127jJJv4t4uoH+fGw6OkNFQ@mail.gmail.com>",
+      "references": [
+        "<CADj50wF=ja3fXYMuyWzLPsnH-ks127jJJv4t4uoH+fGw6OkNFQ@mail.gmail.com>"
+      ],
+      "body_plain": "Please resubmit, a hicc up on the check machine.\n\nBest,\nUwe Ligges\n\nOn 06.12.2018 19:29, Michael Kellermann wrote:\n> Hi all,\n> \n> I'm attempting to submit an update of our eiPack package to CRAN.  When I\n> submitted it, it passed the Windows check with no problem (other than a\n> note for a change in maintainer), but it failed almost immediately on the\n> Debian check.  The 00install.out file shows that it failed due to an\n> inability to compile the C code included in the package.  The error message\n> was as follows:\n> \n> ** libs\n> gcc-8  -I\"/home/hornik/tmp/R/include\" -DNDEBUG   -I/usr/local/include\n> =  -fpic  -g -O2 -Wall -pedantic -mtune=native -c eiutil.c -o eiutil.o\n> gcc-8: error: =: No such file or directory\n> make: *** [/home/hornik/tmp/R/etc/Makeconf:166: eiutil.o] Error 1\n> ERROR: compilation failed for package ?eiPack?\n> \n> \n> I updated the package on a Windows machine, but tested it on several\n> linux systems using the rhub package and never encountered this issue.\n> I think it has something to do with the equal sign in the following\n> code snippet\n> \n> -I/usr/local/include =  -fpic\n> \n> but I could be wrong, as I don't have much experience with linux.  I'm\n> sure that I made a mistake somewhere, but I'm at a bit of a loss as to\n> what to try next.  Any advice would be most appreciated.\n> \n> \n> Best regards,\n> \n> Mike Kellermann\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Please resubmit, a hicc up on the check machine.\n\nBest,\nUwe Ligges\n\nOn 06.12.2018 19:29, Michael Kellermann wrote:\n> Hi all,\n> \n> I'm attempting to submit an update of our eiPack package to CRAN.  Whe",
+      "thread_id": "thread-dbfb2d41612f",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-64ca0386a585",
+      "message_id": "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+      "from_name": "Wolfgang Lenhard",
+      "from_email_hash": "018776cc5e46a8d2436b30dfa0fb550318bf2319956bd7be9b984a36b682ab4a",
+      "date": "2018-12-07T08:54:30+01:00",
+      "subject": "[R-pkg-devel] Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel] Package update submission to CRAN fails on pretest",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear list,\nI am getting problems when trying to submit an update of the package \ncNORM to CRAN. I am developing the package with RStudio and devtools and \nI am using Travis for automatic testing. The package is tested locally \non Win10 and Mac OS X and on Travis with Ubuntu and Mac both for \ndevelopment and release versions of R. All local tests and tests on \nTravis work flawlessly - no errors, warning or notes. When submitting to \nCRAN, a note and an error show up on some of the Linux OS (Fedora & \nSolaris) and Mac OS X, while others display an 'OK' (Win, Debian). The \nresults: https://cran.r-project.org/web/checks/check_results_cNORM.html\n\n- error: This seems to be related to the vignette with the following \nmessage:\n> * checking examples ... ERROR\n> Running examples in ?cNORM-Ex.R? failed\nI can however not identify the location of the error\n\n- Note: Check: data for non-ASCII characters\n\nThe strange thing is: I checked all data files multiple times. They \nmainly consist of data.frames with numerics and all colnames? are ASCII. \nI am not able to replicate the issue. The same is true for the error, \nwhich does not show up on Travis and as well locally. And finally, the \nresults state, that the version of the package is 1.0.1, which had been \nthe first submission to CRAN a month ago. The current version of the \npackage is 1.1.1. Could this be the reason for the problem?\n\nDo you have an idea how to progress with the testing or how to locate \nthe errors? Any help is welcome.\n\nBest regards,\n ??? Wolfgang Lenhard\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear list,\nI am getting problems when trying to submit an update of the package \ncNORM to CRAN. I am developing the package with RStudio and devtools and \nI am using Travis for automatic testing. The ",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-c45fbd4bcc59",
+      "message_id": "<23562.13285.820319.446050@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c1e0575ce023711414056e46c72c590f45ca0fadf72e92845bd17d4f37dc3a13",
+      "date": "2018-12-07T09:48:37+01:00",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "subject_clean": "[R-pkg-devel] New CRAN internet policy",
+      "in_reply_to": "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>",
+      "references": [
+        "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> Hadley Wickham \n>>>>>     on Thu, 6 Dec 2018 10:22:47 -0600 writes:\n\n    > Hi all,\n    > I'd love to get some clarification on what the new internet policy\n    > means for packages like httr:\n\n    >> Packages which use Internet resources should fail gracefully with an informative\n    >> message if the resource is not available (and not give a check warning nor error).\n\n    > It's not clear what \"internet resource\" means here? If it means\n    > dataset, then I think the httr tests and examples are ok. If it means\n    > any use of the internet, I'm not sure what do - httr critically\n    > depends on internet access, so I can't see any way to make it fail\n    > gracefully.\n\n    > Hadley\n\nI cannot answer your question, notably as I'm not part of the CRAN\nteam, but as R Core developer, I've encountered the problem\nmany times which this policy tries to mitigate\n(but I also think we should consider to go further than the\n above \"policy\") :\n\nAs R developer, I'd like to see the effect of a change to the\nsources of base R, and so eventually, I may want to run the\nequivalent of 'R CMD check' on all existing CRAN and\nBioconductor packages. If I have access to a server with many\ncores and very fast hard disks, I can hope to finish running the\ntests with 1--2 days.\nBut then I have to deal with the result.  The few times I've\ndone this, the result has been \"a mess\" because many many\npackages  nowadays assume in their examples and their regression/unit\ntests that internet access to some resources works, ... which it\n\"often\" does not, and so  download.file(),\nread.table(\"http://.....\") etc result in errors sooner or later.\n\nBecause of that some packages fail their checks \"randomly\" (in\nthe sense that internet resources are not available \"randomly\").\nIdeally we'd find a very good way that these failures are\ncommunicated back to the person / process running (a version of)\n'R CMD check', because in the above scenario, I'd like to weed\nout the 300 packages that just failed because of internet\nresource access failures,  and only look at the other packages\nthat got a change in their 'R CMD check' results.\n\nThe recent introduction in R-devel of classed error conditions\n(in some cases), e.g., https://developer.r-project.org/blosxom.cgi/R-devel/NEWS/2018/10/04#n2018-10-04,  and the similar and somewhat earlier\neffort of Lionel Henry to use classed error conditions (in\nrlang only, unfortunately, rather than as a patch proposal to R ..)\nmaybe one step towards a nice solution here.\n\nIdeally we'd not just get  'ERROR'  in the check 'Status:' line,\nbut qualified errors, and if for a package the only errors are caused by\ninternet resource access failures, I could easily filter them out.\n\nMartin",
+      "body_snippet": ">>>>> Hadley Wickham \n>>>>>     on Thu, 6 Dec 2018 10:22:47 -0600 writes:\n\n    > Hi all,\n    > I'd love to get some clarification on what the new internet policy\n    > means for packages like httr:\n\n ",
+      "thread_id": "thread-4c0328a52020",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-a5adcccc0ffe",
+      "message_id": "<438D2EC9EAFE5946B2D5864670EA468E018F6CB2E7@MBXP02.ds.man.ac.uk>",
+      "from_name": "Georgi Boshnakov",
+      "from_email_hash": "afff2d87e670f7cb63c3a72f641980f7eeb866a458d473442a70517edb862adc",
+      "date": "2018-12-07T12:46:04Z",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>"
+      ],
+      "body_plain": "The link you gave, https://cran.r-project.org/web/checks/check_results_cNORM.html,\nis to the check results for the package currently on CRAN and it is indeed v. 1.0.1\n(it is linked from https://CRAN.R-project.org/package=cNORM).\n\nWas this really the link you got from CRAN's pretest? Sometimes they ask if care has been taken about NOTEs/WARNINGs for the current CRAN version, since some tests are not done during submission, but this doesn't seem the case here.\n\nGeorgi Boshnakov\n\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Wolfgang Lenhard\nSent: 07 December 2018 07:55\nTo: r-package-devel at r-project.org\nSubject: [R-pkg-devel] Package update submission to CRAN fails on pretest\n\nDear list,\nI am getting problems when trying to submit an update of the package \ncNORM to CRAN. I am developing the package with RStudio and devtools and \nI am using Travis for automatic testing. The package is tested locally \non Win10 and Mac OS X and on Travis with Ubuntu and Mac both for \ndevelopment and release versions of R. All local tests and tests on \nTravis work flawlessly - no errors, warning or notes. When submitting to \nCRAN, a note and an error show up on some of the Linux OS (Fedora & \nSolaris) and Mac OS X, while others display an 'OK' (Win, Debian). The \nresults: https://cran.r-project.org/web/checks/check_results_cNORM.html\n\n- error: This seems to be related to the vignette with the following \nmessage:\n> * checking examples ... ERROR\n> Running examples in ?cNORM-Ex.R? failed\nI can however not identify the location of the error\n\n- Note: Check: data for non-ASCII characters\n\nThe strange thing is: I checked all data files multiple times. They \nmainly consist of data.frames with numerics and all colnames? are ASCII. \nI am not able to replicate the issue. The same is true for the error, \nwhich does not show up on Travis and as well locally. And finally, the \nresults state, that the version of the package is 1.0.1, which had been \nthe first submission to CRAN a month ago. The current version of the \npackage is 1.1.1. Could this be the reason for the problem?\n\nDo you have an idea how to progress with the testing or how to locate \nthe errors? Any help is welcome.\n\nBest regards,\n ??? Wolfgang Lenhard\n\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "The link you gave, https://cran.r-project.org/web/checks/check_results_cNORM.html,\nis to the check results for the package currently on CRAN and it is indeed v. 1.0.1\n(it is linked from https://CRAN.R",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-1da08ebd9b5e",
+      "message_id": "<BEEC124C-5489-4CBE-8030-D0F604F536CE@gmail.com>",
+      "from_name": "peter dalgaard",
+      "from_email_hash": "1fc04d4a77fecb20fdc58c1c3055a221c8b5bb5afdaf796ec0c7a054370691ec",
+      "date": "2018-12-07T13:58:03+01:00",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>"
+      ],
+      "body_plain": "Hmm, no ERRORs in the CRAN checks at this moment? \n\nRe. utf-8, on Mac OS, the CRAN checks have a note about 90 strings marked as utf8.\n\nI see 57 of them in\n\n\n> life$Country[Encoding(life$Country)!=\"unknown\"]\n [1] \"Korea, Dem. People?s Rep.\" \"Korea, Dem. People?s Rep.\"\n [3] \"Korea, Dem. People?s Rep.\" \"Korea, Dem. People?s Rep.\"\n [5] \"Korea, Dem. People?s Rep.\" \"Korea, Dem. People?s Rep.\"\n...\n\nand 32 more in \"mortality\". You go find the remaining 1...\n\nThis seems to be an issue with the quote symbol:\n\n\n> u <- life$Country[Encoding(life$Country)!=\"unknown\"][1]\n> Encoding(u)\n[1] \"UTF-8\"\n> Encoding(u) <- \"bytes\"\n> u\n[1] \"Korea, Dem. People\\\\xe2\\\\x80\\\\x99s Rep.\"\n\n\nI have no clue why this is not an issue on only some platforms.\n\n-pd\n\n\n> On 7 Dec 2018, at 08:54 , Wolfgang Lenhard <wolfgang.lenhard at uni-wuerzburg.de> wrote:\n> \n> Dear list,\n> I am getting problems when trying to submit an update of the package \n> cNORM to CRAN. I am developing the package with RStudio and devtools and \n> I am using Travis for automatic testing. The package is tested locally \n> on Win10 and Mac OS X and on Travis with Ubuntu and Mac both for \n> development and release versions of R. All local tests and tests on \n> Travis work flawlessly - no errors, warning or notes. When submitting to \n> CRAN, a note and an error show up on some of the Linux OS (Fedora & \n> Solaris) and Mac OS X, while others display an 'OK' (Win, Debian). The \n> results: https://cran.r-project.org/web/checks/check_results_cNORM.html\n> \n> - error: This seems to be related to the vignette with the following \n> message:\n>> * checking examples ... ERROR\n>> Running examples in ?cNORM-Ex.R? failed\n> I can however not identify the location of the error\n> \n> - Note: Check: data for non-ASCII characters\n> \n> The strange thing is: I checked all data files multiple times. They \n> mainly consist of data.frames with numerics and all colnames  are ASCII. \n> I am not able to replicate the issue. The same is true for the error, \n> which does not show up on Travis and as well locally. And finally, the \n> results state, that the version of the package is 1.0.1, which had been \n> the first submission to CRAN a month ago. The current version of the \n> package is 1.1.1. Could this be the reason for the problem?\n> \n> Do you have an idea how to progress with the testing or how to locate \n> the errors? Any help is welcome.\n> \n> Best regards,\n>     Wolfgang Lenhard\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "Hmm, no ERRORs in the CRAN checks at this moment? \n\nRe. utf-8, on Mac OS, the CRAN checks have a note about 90 strings marked as utf8.\n\nI see 57 of them in\n\n\n> life$Country[Encoding(life$Country)!=\"un",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-feb849b13dac",
+      "message_id": "<7705b8da-a988-1709-6afb-7b5f01f737be@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "246da43ddf08fd9000ed72e0d4f61157a9c4964bae5f0af6f47d4d61aa4882b1",
+      "date": "2018-12-07T15:20:40Z",
+      "subject": "[R-pkg-devel]  Can I put my small data-sets into one .rda file in my CRAN package?",
+      "subject_clean": "[R-pkg-devel]  Can I put my small data-sets into one .rda file in my CRAN package?",
+      "in_reply_to": "<438D2EC9EAFE5946B2D5864670EA468E018F6CB019@MBXP02.ds.man.ac.uk>",
+      "references": [
+        "<b71f2e1c-bb0e-c806-111a-f07e69fc9aec@dewey.myzen.co.uk>",
+        "<CAO1zAVbqxqD4=wxh7-FqHGoZbFMLQssA+yuq7-L0Nqh-hNGqYQ@mail.gmail.com>",
+        "<438D2EC9EAFE5946B2D5864670EA468E018F6CB019@MBXP02.ds.man.ac.uk>"
+      ],
+      "body_plain": "Thanks to both Joris and Georgi for some helpful information. I was \ntaken by Joris' aside that combining the data-sets makes more sense if \nthey are conceptually related so I have decided to stick with separate \nfiles.\n\nMichael\n\nOn 05/12/2018 16:44, Georgi Boshnakov wrote:\n> Further to Joris' email, the help page of data() is very informative.\n> If the reason for wishing to combine the datasets together is so that they can be made available in a single command,\n> an option might be to create an R source file which loads all datasets, thus giving this option without withdrawing the possibility for  loading the individual datasets.\n> \n> Georgi Boshnakov\n> \n> \n> -----Original Message-----\n> From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Joris Meys\n> Sent: 05 December 2018 16:22\n> To: lists at dewey.myzen.co.uk\n> Cc: R Package Development\n> Subject: Re: [R-pkg-devel] Can I put my small data-sets into one .rda file in my CRAN package?\n> \n> Hi Michael,\n> \n> in the data() function you have to use the name of the rda file, not the\n> name of the dataset you need.\n> So say you have the datasets validity and data2 in a file called\n> alldata.rda, you need to do:\n> \n> data(alldata)\n> \n> and that will make both validity and data2 available to the user.\n> \n> imho it only makes sense to combine data in one .rda file when they're also\n> related (for example an dataset with species and the similarity matrix for\n> those species).\n> \n> Hope this helps\n> Cheers\n> Joris\n> \n> On Wed, Dec 5, 2018 at 4:19 PM Michael Dewey <lists at dewey.myzen.co.uk>\n> wrote:\n> \n>> At the moment my package (metap) has a number of small data-sets each as\n>> a separate .rda file. It works fine. I thought it would be neater to put\n>> them all into one file which I called data.rda (original choice of name\n>> there).\n>>\n>> Now when I do R CMD build metap\n>> it fails when trying to build the vignette when that executes\n>> data(validity)\n>> where validity is contained in data.rda.\n>>\n>> I cannot find anything in writing R extensions which explicitly forbids\n>> this but equally nothing which explicitly permits it. Am I missing\n>> something? Obviously this is not an important problem and as the title\n>> says the solution should work on CRAN too.\n>>\n>> --\n>> Michael\n>> http://www.dewey.myzen.co.uk/home.html\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "Thanks to both Joris and Georgi for some helpful information. I was \ntaken by Joris' aside that combining the data-sets makes more sense if \nthey are conceptually related so I have decided to stick wi",
+      "thread_id": "thread-177b9d8e8074",
+      "thread_depth": 3,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-f886c8d92123",
+      "message_id": "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>",
+      "from_name": "David Hugh-Jones",
+      "from_email_hash": "b861a0e46a03ea754054f771a3a6d4397e2e40ca0c58eb56fa5478b1247a758d",
+      "date": "2018-12-07T16:10:18Z",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "subject_clean": "[R-pkg-devel] Suggested package relies on recent R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nMy package Suggests a package that relies on R >= 3.5.0. My package works\nfine with earlier R, though. When travis runs R CMD check on R-oldrel,\ntherefore, it fails because it can't install the suggested package.\n\nIs this going to stop me submitting to CRAN? I don't really want to require\nR 3.5.0 just to satisfy an optional dependency.\n\nCheers,\nDavid\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nMy package Suggests a package that relies on R >= 3.5.0. My package works\nfine with earlier R, though. When travis runs R CMD check on R-oldrel,\ntherefore, it fails because it can't install the s",
+      "thread_id": "thread-f886c8d92123",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-352dd7a91b7c",
+      "message_id": "<db8fb11a-faa6-5af8-9bb4-de86ea2a5b87@uni-wuerzburg.de>",
+      "from_name": "Wolfgang Lenhard",
+      "from_email_hash": "018776cc5e46a8d2436b30dfa0fb550318bf2319956bd7be9b984a36b682ab4a",
+      "date": "2018-12-07T18:45:43+01:00",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<438D2EC9EAFE5946B2D5864670EA468E018F6CB2E7@MBXP02.ds.man.ac.uk>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+        "<438D2EC9EAFE5946B2D5864670EA468E018F6CB2E7@MBXP02.ds.man.ac.uk>"
+      ],
+      "body_plain": "Many thanks for the remark. It seems, it has something to do with \nsubmitting via the devtools (maybe I did something wrong with tagging \nthe prior release). Submitting it manually at least does not result in \npretest rejection. I guess there is something out of sync which resulted \nin rechecking and old version.\n\nAm 07.12.2018 um 13:46 schrieb Georgi Boshnakov:\n> The link you gave, https://cran.r-project.org/web/checks/check_results_cNORM.html,\n> is to the check results for the package currently on CRAN and it is indeed v. 1.0.1\n> (it is linked from https://CRAN.R-project.org/package=cNORM).\n>\n> Was this really the link you got from CRAN's pretest? Sometimes they ask if care has been taken about NOTEs/WARNINGs for the current CRAN version, since some tests are not done during submission, but this doesn't seem the case here.\n>\n> Georgi Boshnakov\n>\n>\n> -----Original Message-----\n> From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Wolfgang Lenhard\n> Sent: 07 December 2018 07:55\n> To: r-package-devel at r-project.org\n> Subject: [R-pkg-devel] Package update submission to CRAN fails on pretest\n>\n> Dear list,\n> I am getting problems when trying to submit an update of the package\n> cNORM to CRAN. I am developing the package with RStudio and devtools and\n> I am using Travis for automatic testing. The package is tested locally\n> on Win10 and Mac OS X and on Travis with Ubuntu and Mac both for\n> development and release versions of R. All local tests and tests on\n> Travis work flawlessly - no errors, warning or notes. When submitting to\n> CRAN, a note and an error show up on some of the Linux OS (Fedora &\n> Solaris) and Mac OS X, while others display an 'OK' (Win, Debian). The\n> results: https://cran.r-project.org/web/checks/check_results_cNORM.html\n>\n> - error: This seems to be related to the vignette with the following\n> message:\n>> * checking examples ... ERROR\n>> Running examples in ?cNORM-Ex.R? failed\n> I can however not identify the location of the error\n>\n> - Note: Check: data for non-ASCII characters\n>\n> The strange thing is: I checked all data files multiple times. They\n> mainly consist of data.frames with numerics and all colnames? are ASCII.\n> I am not able to replicate the issue. The same is true for the error,\n> which does not show up on Travis and as well locally. And finally, the\n> results state, that the version of the package is 1.0.1, which had been\n> the first submission to CRAN a month ago. The current version of the\n> package is 1.1.1. Could this be the reason for the problem?\n>\n> Do you have an idea how to progress with the testing or how to locate\n> the errors? Any help is welcome.\n>\n> Best regards,\n>   ??? Wolfgang Lenhard\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nProf. Dr. Wolfgang Lenhard\nLehrstuhl Psychologie IV\nRaum 02.130\nWittelsbacherplatz 1\nD-97070 W?rzburg\n\nTel.: 0931 3189791\nFAX:  0931 3184891\nURL:  https://go.uniwue.de/lenhard\nMap:  https://go.uni-wuerzburg.de/3b",
+      "body_snippet": "Many thanks for the remark. It seems, it has something to do with \nsubmitting via the devtools (maybe I did something wrong with tagging \nthe prior release). Submitting it manually at least does not r",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-2aa30133fc44",
+      "message_id": "<442cea25-9782-64e4-1d37-8b9c145b5786@uni-wuerzburg.de>",
+      "from_name": "Wolfgang Lenhard",
+      "from_email_hash": "018776cc5e46a8d2436b30dfa0fb550318bf2319956bd7be9b984a36b682ab4a",
+      "date": "2018-12-07T18:47:56+01:00",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<BEEC124C-5489-4CBE-8030-D0F604F536CE@gmail.com>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+        "<BEEC124C-5489-4CBE-8030-D0F604F536CE@gmail.com>"
+      ],
+      "body_plain": "Thanks for pointing that out. I rebuilt everything from scratch. Indeed \nI thought, there were no UTF-8 encodings in the data and neither Travis, \nchecking it locally and R-Hub (all kinds of OS) resulted in errors.\n\nAm 07.12.2018 um 13:58 schrieb peter dalgaard:\n> Hmm, no ERRORs in the CRAN checks at this moment?\n>\n> Re. utf-8, on Mac OS, the CRAN checks have a note about 90 strings marked as utf8.\n>\n> I see 57 of them in\n>\n>\n>> life$Country[Encoding(life$Country)!=\"unknown\"]\n>   [1] \"Korea, Dem. People?s Rep.\" \"Korea, Dem. People?s Rep.\"\n>   [3] \"Korea, Dem. People?s Rep.\" \"Korea, Dem. People?s Rep.\"\n>   [5] \"Korea, Dem. People?s Rep.\" \"Korea, Dem. People?s Rep.\"\n> ...\n>\n> and 32 more in \"mortality\". You go find the remaining 1...\n>\n> This seems to be an issue with the quote symbol:\n>\n>\n>> u <- life$Country[Encoding(life$Country)!=\"unknown\"][1]\n>> Encoding(u)\n> [1] \"UTF-8\"\n>> Encoding(u) <- \"bytes\"\n>> u\n> [1] \"Korea, Dem. People\\\\xe2\\\\x80\\\\x99s Rep.\"\n>\n>\n> I have no clue why this is not an issue on only some platforms.\n>\n> -pd\n>\n>\n>> On 7 Dec 2018, at 08:54 , Wolfgang Lenhard <wolfgang.lenhard at uni-wuerzburg.de> wrote:\n>>\n>> Dear list,\n>> I am getting problems when trying to submit an update of the package\n>> cNORM to CRAN. I am developing the package with RStudio and devtools and\n>> I am using Travis for automatic testing. The package is tested locally\n>> on Win10 and Mac OS X and on Travis with Ubuntu and Mac both for\n>> development and release versions of R. All local tests and tests on\n>> Travis work flawlessly - no errors, warning or notes. When submitting to\n>> CRAN, a note and an error show up on some of the Linux OS (Fedora &\n>> Solaris) and Mac OS X, while others display an 'OK' (Win, Debian). The\n>> results: https://cran.r-project.org/web/checks/check_results_cNORM.html\n>>\n>> - error: This seems to be related to the vignette with the following\n>> message:\n>>> * checking examples ... ERROR\n>>> Running examples in ?cNORM-Ex.R? failed\n>> I can however not identify the location of the error\n>>\n>> - Note: Check: data for non-ASCII characters\n>>\n>> The strange thing is: I checked all data files multiple times. They\n>> mainly consist of data.frames with numerics and all colnames  are ASCII.\n>> I am not able to replicate the issue. The same is true for the error,\n>> which does not show up on Travis and as well locally. And finally, the\n>> results state, that the version of the package is 1.0.1, which had been\n>> the first submission to CRAN a month ago. The current version of the\n>> package is 1.1.1. Could this be the reason for the problem?\n>>\n>> Do you have an idea how to progress with the testing or how to locate\n>> the errors? Any help is welcome.\n>>\n>> Best regards,\n>>      Wolfgang Lenhard\n>>\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nProf. Dr. Wolfgang Lenhard\nLehrstuhl Psychologie IV\nRaum 02.130\nWittelsbacherplatz 1\nD-97070 W?rzburg\n\nTel.: 0931 3189791\nFAX:  0931 3184891\nURL:  https://go.uniwue.de/lenhard\nMap:  https://go.uni-wuerzburg.de/3b",
+      "body_snippet": "Thanks for pointing that out. I rebuilt everything from scratch. Indeed \nI thought, there were no UTF-8 encodings in the data and neither Travis, \nchecking it locally and R-Hub (all kinds of OS) resul",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-5c14f2e99717",
+      "message_id": "<CY4PR19MB01511BF3B5CCF9429A6E14E1BBAA0@CY4PR19MB0151.namprd19.prod.outlook.com>",
+      "from_name": "Daniel Marcelino",
+      "from_email_hash": "b83dbde5af0b3b52d4d1051c474cd10a460c90589fe91575b7c4704a22df0409",
+      "date": "2018-12-07T19:27:21Z",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<db8fb11a-faa6-5af8-9bb4-de86ea2a5b87@uni-wuerzburg.de>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+        "<438D2EC9EAFE5946B2D5864670EA468E018F6CB2E7@MBXP02.ds.man.ac.uk>",
+        "<db8fb11a-faa6-5af8-9bb4-de86ea2a5b87@uni-wuerzburg.de>"
+      ],
+      "body_plain": "Daniel Marcelino\n\n\"Small steps toward a much better world\"\n________________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Wolfgang Lenhard <wolfgang.lenhard at uni-wuerzburg.de>\nSent: December 7, 2018 2:15 PM\nTo: Georgi Boshnakov; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel]  Package update submission to CRAN fails on pretest\n\nMany thanks for the remark. It seems, it has something to do with\nsubmitting via the devtools (maybe I did something wrong with tagging\nthe prior release). Submitting it manually at least does not result in\npretest rejection. I guess there is something out of sync which resulted\nin rechecking and old version.\n\nAm 07.12.2018 um 13:46 schrieb Georgi Boshnakov:\n&gt; The link you gave, https://cran.r-project.org/web/checks/check_results_cNORM.html,\n&gt; is to the check results for the package currently on CRAN and it is indeed v. 1.0.1\n&gt; (it is linked from https://CRAN.R-project.org/package=cNORM).\n&gt;\n&gt; Was this really the link you got from CRAN's pretest? Sometimes they ask if care has been taken about NOTEs/WARNINGs for the current CRAN version, since some tests are not done during submission, but this doesn't seem the case here.\n&gt;\n&gt; Georgi Boshnakov\n&gt;\n&gt;\n&gt; -----Original Message-----\n&gt; From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Wolfgang Lenhard\n&gt; Sent: 07 December 2018 07:55\n&gt; To: r-package-devel at r-project.org\n&gt; Subject: [R-pkg-devel] Package update submission to CRAN fails on pretest\n&gt;\n&gt; Dear list,\n&gt; I am getting problems when trying to submit an update of the package\n&gt; cNORM to CRAN. I am developing the package with RStudio and devtools and\n&gt; I am using Travis for automatic testing. The package is tested locally\n&gt; on Win10 and Mac OS X and on Travis with Ubuntu and Mac both for\n&gt; development and release versions of R. All local tests and tests on\n&gt; Travis work flawlessly - no errors, warning or notes. When submitting to\n&gt; CRAN, a note and an error show up on some of the Linux OS (Fedora &amp;\n&gt; Solaris) and Mac OS X, while others display an 'OK' (Win, Debian). The\n&gt; results: https://cran.r-project.org/web/checks/check_results_cNORM.html\n&gt;\n&gt; - error: This seems to be related to the vignette with the following\n&gt; message:\n&gt;&gt; * checking examples ... ERROR\n&gt;&gt; Running examples in ?cNORM-Ex.R? failed\n&gt; I can however not identify the location of the error\n&gt;\n&gt; - Note: Check: data for non-ASCII characters\n&gt;\n&gt; The strange thing is: I checked all data files multiple times. They\n&gt; mainly consist of data.frames with numerics and all colnames  are ASCII.\n&gt; I am not able to replicate the issue. The same is true for the error,\n&gt; which does not show up on Travis and as well locally. And finally, the\n&gt; results state, that the version of the package is 1.0.1, which had been\n&gt; the first submission to CRAN a month ago. The current version of the\n&gt; package is 1.1.1. Could this be the reason for the problem?\n&gt;\n&gt; Do you have an idea how to progress with the testing or how to locate\n&gt; the errors? Any help is welcome.\n&gt;\n&gt; Best regards,\n&gt;       Wolfgang Lenhard\n&gt;\n&gt;\n&gt;       [[alternative HTML version deleted]]\n&gt;\n&gt; ______________________________________________\n&gt; R-package-devel at r-project.org mailing list\n&gt; https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n--\nProf. Dr. Wolfgang Lenhard\nLehrstuhl Psychologie IV\nRaum 02.130\nWittelsbacherplatz 1\nD-97070 W?rzburg\n\nTel.: 0931 3189791\nFAX:  0931 3184891\nURL:  https://go.uniwue.de/lenhard\nMap:  https://go.uni-wuerzburg.de/3b\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n</wolfgang.lenhard at uni-wuerzburg.de></r-package-devel-bounces at r-project.org>",
+      "body_snippet": "Daniel Marcelino\n\n\"Small steps toward a much better world\"\n________________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Wolfgang Lenhard <wolf",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 3,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-d5b3038c6fdd",
+      "message_id": "<CABdHhvG0dJOvgyUK7e_oO5pL1Y88_XFyRVfiNpeOM61qeGniPA@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "32916ed354eafa1dedfcc7ab83aea781d79e68664b0fa536c3f7d6a85eea45d9",
+      "date": "2018-12-08T07:28:01-07:00",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "subject_clean": "[R-pkg-devel] Suggested package relies on recent R",
+      "in_reply_to": "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>",
+      "references": [
+        "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>"
+      ],
+      "body_plain": "Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n\nenv:\n  global:\n  # don't treat missing suggested packages as error\n  - _R_CHECK_FORCE_SUGGESTS_=false\n\nI am reasonably certain that is what CRAN uses.\n\nHadley\n\nOn Fri, Dec 7, 2018 at 9:11 AM David Hugh-Jones\n<davidhughjones at gmail.com> wrote:\n>\n> Hi,\n>\n> My package Suggests a package that relies on R >= 3.5.0. My package works\n> fine with earlier R, though. When travis runs R CMD check on R-oldrel,\n> therefore, it fails because it can't install the suggested package.\n>\n> Is this going to stop me submitting to CRAN? I don't really want to require\n> R 3.5.0 just to satisfy an optional dependency.\n>\n> Cheers,\n> David\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n\nenv:\n  global:\n  # don't treat missing suggested packages as error\n  - _R_CHECK_FORCE_SUGGESTS_=false\n\nI am reasonably certain that is what CRAN uses.",
+      "thread_id": "thread-f886c8d92123",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-f36981388bed",
+      "message_id": "<CABdHhvGQU8ddqCTSN6wLEjc1irVAo5R8k=3-CJ7uwmS6-3q8jw@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "32916ed354eafa1dedfcc7ab83aea781d79e68664b0fa536c3f7d6a85eea45d9",
+      "date": "2018-12-08T07:31:20-07:00",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<db8fb11a-faa6-5af8-9bb4-de86ea2a5b87@uni-wuerzburg.de>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+        "<438D2EC9EAFE5946B2D5864670EA468E018F6CB2E7@MBXP02.ds.man.ac.uk>",
+        "<db8fb11a-faa6-5af8-9bb4-de86ea2a5b87@uni-wuerzburg.de>"
+      ],
+      "body_plain": "You might try reinstalling devtools and dependencies - there was\nunfortunately a brief combination of versions that lead to build()\nfailing to overwrite existing files.\n\nHadley\nOn Fri, Dec 7, 2018 at 10:46 AM Wolfgang Lenhard\n<wolfgang.lenhard at uni-wuerzburg.de> wrote:\n>\n> Many thanks for the remark. It seems, it has something to do with\n> submitting via the devtools (maybe I did something wrong with tagging\n> the prior release). Submitting it manually at least does not result in\n> pretest rejection. I guess there is something out of sync which resulted\n> in rechecking and old version.\n>\n> Am 07.12.2018 um 13:46 schrieb Georgi Boshnakov:\n> > The link you gave, https://cran.r-project.org/web/checks/check_results_cNORM.html,\n> > is to the check results for the package currently on CRAN and it is indeed v. 1.0.1\n> > (it is linked from https://CRAN.R-project.org/package=cNORM).\n> >\n> > Was this really the link you got from CRAN's pretest? Sometimes they ask if care has been taken about NOTEs/WARNINGs for the current CRAN version, since some tests are not done during submission, but this doesn't seem the case here.\n> >\n> > Georgi Boshnakov\n> >\n> >\n> > -----Original Message-----\n> > From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Wolfgang Lenhard\n> > Sent: 07 December 2018 07:55\n> > To: r-package-devel at r-project.org\n> > Subject: [R-pkg-devel] Package update submission to CRAN fails on pretest\n> >\n> > Dear list,\n> > I am getting problems when trying to submit an update of the package\n> > cNORM to CRAN. I am developing the package with RStudio and devtools and\n> > I am using Travis for automatic testing. The package is tested locally\n> > on Win10 and Mac OS X and on Travis with Ubuntu and Mac both for\n> > development and release versions of R. All local tests and tests on\n> > Travis work flawlessly - no errors, warning or notes. When submitting to\n> > CRAN, a note and an error show up on some of the Linux OS (Fedora &\n> > Solaris) and Mac OS X, while others display an 'OK' (Win, Debian). The\n> > results: https://cran.r-project.org/web/checks/check_results_cNORM.html\n> >\n> > - error: This seems to be related to the vignette with the following\n> > message:\n> >> * checking examples ... ERROR\n> >> Running examples in ?cNORM-Ex.R? failed\n> > I can however not identify the location of the error\n> >\n> > - Note: Check: data for non-ASCII characters\n> >\n> > The strange thing is: I checked all data files multiple times. They\n> > mainly consist of data.frames with numerics and all colnames  are ASCII.\n> > I am not able to replicate the issue. The same is true for the error,\n> > which does not show up on Travis and as well locally. And finally, the\n> > results state, that the version of the package is 1.0.1, which had been\n> > the first submission to CRAN a month ago. The current version of the\n> > package is 1.1.1. Could this be the reason for the problem?\n> >\n> > Do you have an idea how to progress with the testing or how to locate\n> > the errors? Any help is welcome.\n> >\n> > Best regards,\n> >       Wolfgang Lenhard\n> >\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> Prof. Dr. Wolfgang Lenhard\n> Lehrstuhl Psychologie IV\n> Raum 02.130\n> Wittelsbacherplatz 1\n> D-97070 W?rzburg\n>\n> Tel.: 0931 3189791\n> FAX:  0931 3184891\n> URL:  https://go.uniwue.de/lenhard\n> Map:  https://go.uni-wuerzburg.de/3b\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "You might try reinstalling devtools and dependencies - there was\nunfortunately a brief combination of versions that lead to build()\nfailing to overwrite existing files.\n\nHadley\nOn Fri, Dec 7, 2018 at ",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 3,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-36a7ede31e8d",
+      "message_id": "<5e85c8ee-6be6-c64e-96c7-4359ed9f6bfe@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "2c29654901c6af19d511ed0419332d94c100586e3e427467f118bc891bc76e5f",
+      "date": "2018-12-08T09:36:22-05:00",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "subject_clean": "[R-pkg-devel] Suggested package relies on recent R",
+      "in_reply_to": "<CABdHhvG0dJOvgyUK7e_oO5pL1Y88_XFyRVfiNpeOM61qeGniPA@mail.gmail.com>",
+      "references": [
+        "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>",
+        "<CABdHhvG0dJOvgyUK7e_oO5pL1Y88_XFyRVfiNpeOM61qeGniPA@mail.gmail.com>"
+      ],
+      "body_plain": "On 08/12/2018 9:28 AM, Hadley Wickham wrote:\n> Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n> \n> env:\n>    global:\n>    # don't treat missing suggested packages as error\n>    - _R_CHECK_FORCE_SUGGESTS_=false\n> \n> I am reasonably certain that is what CRAN uses.\n\nAlso make sure that examples fail gracefully if the suggested package is \nnot present, i.e. wrap uses of the suggested package in\n\nif (requireNamespace(...)) { ... }\n\nDuncan Murdoch\n\n\n> \n> Hadley\n> \n> On Fri, Dec 7, 2018 at 9:11 AM David Hugh-Jones\n> <davidhughjones at gmail.com> wrote:\n>>\n>> Hi,\n>>\n>> My package Suggests a package that relies on R >= 3.5.0. My package works\n>> fine with earlier R, though. When travis runs R CMD check on R-oldrel,\n>> therefore, it fails because it can't install the suggested package.\n>>\n>> Is this going to stop me submitting to CRAN? I don't really want to require\n>> R 3.5.0 just to satisfy an optional dependency.",
+      "body_snippet": "On 08/12/2018 9:28 AM, Hadley Wickham wrote:\n> Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n> \n> env:\n>    global:\n>    # don't treat missing suggested packages as error\n>    - _R_CHECK_FORCE_SUGG",
+      "thread_id": "thread-f886c8d92123",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-cccd99ca2053",
+      "message_id": "<CAARY7ki+oZDnXTenHnT6ZW=E5ceS3K2f29uzeFy6=Ga4wyDf_w@mail.gmail.com>",
+      "from_name": "David Hugh-Jones",
+      "from_email_hash": "b861a0e46a03ea754054f771a3a6d4397e2e40ca0c58eb56fa5478b1247a758d",
+      "date": "2018-12-08T14:41:03Z",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "subject_clean": "[R-pkg-devel] Suggested package relies on recent R",
+      "in_reply_to": "<5e85c8ee-6be6-c64e-96c7-4359ed9f6bfe@gmail.com>",
+      "references": [
+        "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>",
+        "<CABdHhvG0dJOvgyUK7e_oO5pL1Y88_XFyRVfiNpeOM61qeGniPA@mail.gmail.com>",
+        "<5e85c8ee-6be6-c64e-96c7-4359ed9f6bfe@gmail.com>"
+      ],
+      "body_plain": "Thanks guys. If CRAN already sets FORCE_SUGGESTS = false, then I think I\ndon't have a problem.\nDavid\n\n\nOn Sat, 8 Dec 2018 at 14:36, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 08/12/2018 9:28 AM, Hadley Wickham wrote:\n> > Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n> >\n> > env:\n> >    global:\n> >    # don't treat missing suggested packages as error\n> >    - _R_CHECK_FORCE_SUGGESTS_=false\n> >\n> > I am reasonably certain that is what CRAN uses.\n>\n> Also make sure that examples fail gracefully if the suggested package is\n> not present, i.e. wrap uses of the suggested package in\n>\n> if (requireNamespace(...)) { ... }\n>\n> Duncan Murdoch\n>\n>\n> >\n> > Hadley\n> >\n> > On Fri, Dec 7, 2018 at 9:11 AM David Hugh-Jones\n> > <davidhughjones at gmail.com> wrote:\n> >>\n> >> Hi,\n> >>\n> >> My package Suggests a package that relies on R >= 3.5.0. My package\n> works\n> >> fine with earlier R, though. When travis runs R CMD check on R-oldrel,\n> >> therefore, it fails because it can't install the suggested package.\n> >>\n> >> Is this going to stop me submitting to CRAN? I don't really want to\n> require\n> >> R 3.5.0 just to satisfy an optional dependency.\n>\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks guys. If CRAN already sets FORCE_SUGGESTS = false, then I think I\ndon't have a problem.\nDavid\n\n\nOn Sat, 8 Dec 2018 at 14:36, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 08/12/2018",
+      "thread_id": "thread-f886c8d92123",
+      "thread_depth": 3,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-cf97b9ad86f2",
+      "message_id": "<23563.57454.231471.88527@rob.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "41afaefcb8db6ed02b73dc17f00c860596be87f14445fbbc0a5f7ccb3093af22",
+      "date": "2018-12-08T09:17:02-06:00",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "subject_clean": "[R-pkg-devel] Suggested package relies on recent R",
+      "in_reply_to": "<CAARY7ki+oZDnXTenHnT6ZW=E5ceS3K2f29uzeFy6=Ga4wyDf_w@mail.gmail.com>",
+      "references": [
+        "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>",
+        "<CABdHhvG0dJOvgyUK7e_oO5pL1Y88_XFyRVfiNpeOM61qeGniPA@mail.gmail.com>",
+        "<5e85c8ee-6be6-c64e-96c7-4359ed9f6bfe@gmail.com>",
+        "<CAARY7ki+oZDnXTenHnT6ZW=E5ceS3K2f29uzeFy6=Ga4wyDf_w@mail.gmail.com>"
+      ],
+      "body_plain": "On 8 December 2018 at 14:41, David Hugh-Jones wrote:\n| Thanks guys. If CRAN already sets FORCE_SUGGESTS = false, then I think I\n| don't have a problem.\n\nI think you still do as long as you ignore Duncan's advice.  It's not \"just\"\nabout skirting CRAN tests and rules, it is about doing packaging right.\n\nFor that, Suggests != Depends and you should test presence of optional\nppackage just like Duncan showed you.\n\nDirk\n\n\n| David\n| \n| \n| On Sat, 8 Dec 2018 at 14:36, Duncan Murdoch <murdoch.duncan at gmail.com>\n| wrote:\n| \n| > On 08/12/2018 9:28 AM, Hadley Wickham wrote:\n| > > Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n| > >\n| > > env:\n| > >    global:\n| > >    # don't treat missing suggested packages as error\n| > >    - _R_CHECK_FORCE_SUGGESTS_=false\n| > >\n| > > I am reasonably certain that is what CRAN uses.\n| >\n| > Also make sure that examples fail gracefully if the suggested package is\n| > not present, i.e. wrap uses of the suggested package in\n| >\n| > if (requireNamespace(...)) { ... }\n\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 8 December 2018 at 14:41, David Hugh-Jones wrote:\n| Thanks guys. If CRAN already sets FORCE_SUGGESTS = false, then I think I\n| don't have a problem.\n\nI think you still do as long as you ignore Dunc",
+      "thread_id": "thread-f886c8d92123",
+      "thread_depth": 4,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-a071f46b6809",
+      "message_id": "<CAARY7kiKo4C1J+VqK4ZHHcyy-KTmvCSQYVPKgFSd2pLNnDA-2A@mail.gmail.com>",
+      "from_name": "David Hugh-Jones",
+      "from_email_hash": "b861a0e46a03ea754054f771a3a6d4397e2e40ca0c58eb56fa5478b1247a758d",
+      "date": "2018-12-08T15:56:16Z",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "subject_clean": "[R-pkg-devel] Suggested package relies on recent R",
+      "in_reply_to": "<23563.57454.231471.88527@rob.eddelbuettel.com>",
+      "references": [
+        "<CAARY7khQcGUkAP5OOLt4RBSJanVc2A2OOyuef2ffG4RSqthdeg@mail.gmail.com>",
+        "<CABdHhvG0dJOvgyUK7e_oO5pL1Y88_XFyRVfiNpeOM61qeGniPA@mail.gmail.com>",
+        "<5e85c8ee-6be6-c64e-96c7-4359ed9f6bfe@gmail.com>",
+        "<CAARY7ki+oZDnXTenHnT6ZW=E5ceS3K2f29uzeFy6=Ga4wyDf_w@mail.gmail.com>",
+        "<23563.57454.231471.88527@rob.eddelbuettel.com>"
+      ],
+      "body_plain": "Yes, I certainly will do that. I've checked on win-builder and the package\nseems to pass, so my examples seem to be in good order.\nDavid\n\n\nOn Sat, 8 Dec 2018 at 15:17, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 8 December 2018 at 14:41, David Hugh-Jones wrote:\n> | Thanks guys. If CRAN already sets FORCE_SUGGESTS = false, then I think I\n> | don't have a problem.\n>\n> I think you still do as long as you ignore Duncan's advice.  It's not\n> \"just\"\n> about skirting CRAN tests and rules, it is about doing packaging right.\n>\n> For that, Suggests != Depends and you should test presence of optional\n> ppackage just like Duncan showed you.\n>\n> Dirk\n>\n>\n> | David\n> |\n> |\n> | On Sat, 8 Dec 2018 at 14:36, Duncan Murdoch <murdoch.duncan at gmail.com>\n> | wrote:\n> |\n> | > On 08/12/2018 9:28 AM, Hadley Wickham wrote:\n> | > > Can you just set _R_CHECK_FORCE_SUGGESTS_=false?\n> | > >\n> | > > env:\n> | > >    global:\n> | > >    # don't treat missing suggested packages as error\n> | > >    - _R_CHECK_FORCE_SUGGESTS_=false\n> | > >\n> | > > I am reasonably certain that is what CRAN uses.\n> | >\n> | > Also make sure that examples fail gracefully if the suggested package\n> is\n> | > not present, i.e. wrap uses of the suggested package in\n> | >\n> | > if (requireNamespace(...)) { ... }\n>\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Yes, I certainly will do that. I've checked on win-builder and the package\nseems to pass, so my examples seem to be in good order.\nDavid\n\n\nOn Sat, 8 Dec 2018 at 15:17, Dirk Eddelbuettel <edd at debian",
+      "thread_id": "thread-f886c8d92123",
+      "thread_depth": 5,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-b5a2d1a2fce2",
+      "message_id": "<dda9fc4a-a51c-c040-9280-be66a61f0a74@uni-wuerzburg.de>",
+      "from_name": "Wolfgang Lenhard",
+      "from_email_hash": "018776cc5e46a8d2436b30dfa0fb550318bf2319956bd7be9b984a36b682ab4a",
+      "date": "2018-12-08T20:20:53+01:00",
+      "subject": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "subject_clean": "[R-pkg-devel]  Package update submission to CRAN fails on pretest",
+      "in_reply_to": "<CABdHhvGQU8ddqCTSN6wLEjc1irVAo5R8k=3-CJ7uwmS6-3q8jw@mail.gmail.com>",
+      "references": [
+        "<81d78b1e-afa5-177b-fac5-055025ec96d8@uni-wuerzburg.de>",
+        "<438D2EC9EAFE5946B2D5864670EA468E018F6CB2E7@MBXP02.ds.man.ac.uk>",
+        "<db8fb11a-faa6-5af8-9bb4-de86ea2a5b87@uni-wuerzburg.de>",
+        "<CABdHhvGQU8ddqCTSN6wLEjc1irVAo5R8k=3-CJ7uwmS6-3q8jw@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Hadley,\nmany thanks for your comment and much more for your fantastic tutorial \nand packages! I essentially learned (and still learn) package \ndevelopment by your tutorial. In the concrete case, changing some \nsettings finally did it and devtools worked like charm. I want to thank \nyou for your really great work.\n\nThere was a strange thing, though, that I do not yet understand. The \nsubmission failed on some systems (fedora and Mac OS X; not on Win and \nUbuntu) because of errors building the vignette. Adding rmarkdown to \nimports in the description file solved the pretest rejection and the new \nversion of cNORM is on CRAN, but now, I have the following note:\n> checking dependencies in R code ... NOTE\n> Namespace in Imports field not imported from: ?rmarkdown?\n> ??All declared Imports should be used.\n\nApart from the note, it works now. Maybe, I remove the code from the \nvignette in future releases and.\n\nBest regards,\nWolfgang\n\nAm 08.12.2018 um 15:31 schrieb Hadley Wickham:\n> You might try reinstalling devtools and dependencies - there was\n> unfortunately a brief combination of versions that lead to build()\n> failing to overwrite existing files.\n>\n> Hadley\n> On Fri, Dec 7, 2018 at 10:46 AM Wolfgang Lenhard\n> <wolfgang.lenhard at uni-wuerzburg.de> wrote:\n>> Many thanks for the remark. It seems, it has something to do with\n>> submitting via the devtools (maybe I did something wrong with tagging\n>> the prior release). Submitting it manually at least does not result in\n>> pretest rejection. I guess there is something out of sync which resulted\n>> in rechecking and old version.\n>>\n>> Am 07.12.2018 um 13:46 schrieb Georgi Boshnakov:\n>>> The link you gave, https://cran.r-project.org/web/checks/check_results_cNORM.html,\n>>> is to the check results for the package currently on CRAN and it is indeed v. 1.0.1\n>>> (it is linked from https://CRAN.R-project.org/package=cNORM).\n>>>\n>>> Was this really the link you got from CRAN's pretest? Sometimes they ask if care has been taken about NOTEs/WARNINGs for the current CRAN version, since some tests are not done during submission, but this doesn't seem the case here.\n>>>\n>>> Georgi Boshnakov\n>>>\n>>>\n>>> -----Original Message-----\n>>> From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Wolfgang Lenhard\n>>> Sent: 07 December 2018 07:55\n>>> To: r-package-devel at r-project.org\n>>> Subject: [R-pkg-devel] Package update submission to CRAN fails on pretest\n>>>\n>>> Dear list,\n>>> I am getting problems when trying to submit an update of the package\n>>> cNORM to CRAN. I am developing the package with RStudio and devtools and\n>>> I am using Travis for automatic testing. The package is tested locally\n>>> on Win10 and Mac OS X and on Travis with Ubuntu and Mac both for\n>>> development and release versions of R. All local tests and tests on\n>>> Travis work flawlessly - no errors, warning or notes. When submitting to\n>>> CRAN, a note and an error show up on some of the Linux OS (Fedora &\n>>> Solaris) and Mac OS X, while others display an 'OK' (Win, Debian). The\n>>> results: https://cran.r-project.org/web/checks/check_results_cNORM.html\n>>>\n>>> - error: This seems to be related to the vignette with the following\n>>> message:\n>>>> * checking examples ... ERROR\n>>>> Running examples in ?cNORM-Ex.R? failed\n>>> I can however not identify the location of the error\n>>>\n>>> - Note: Check: data for non-ASCII characters\n>>>\n>>> The strange thing is: I checked all data files multiple times. They\n>>> mainly consist of data.frames with numerics and all colnames  are ASCII.\n>>> I am not able to replicate the issue. The same is true for the error,\n>>> which does not show up on Travis and as well locally. And finally, the\n>>> results state, that the version of the package is 1.0.1, which had been\n>>> the first submission to CRAN a month ago. The current version of the\n>>> package is 1.1.1. Could this be the reason for the problem?\n>>>\n>>> Do you have an idea how to progress with the testing or how to locate\n>>> the errors? Any help is welcome.\n>>>\n>>> Best regards,\n>>>        Wolfgang Lenhard\n>>>\n>>>\n>>>        [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> --\n>> Prof. Dr. Wolfgang Lenhard\n>> Lehrstuhl Psychologie IV\n>> Raum 02.130\n>> Wittelsbacherplatz 1\n>> D-97070 W?rzburg\n>>\n>> Tel.: 0931 3189791\n>> FAX:  0931 3184891\n>> URL:  https://go.uniwue.de/lenhard\n>> Map:  https://go.uni-wuerzburg.de/3b\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>",
+      "body_snippet": "Dear Hadley,\nmany thanks for your comment and much more for your fantastic tutorial \nand packages! I essentially learned (and still learn) package \ndevelopment by your tutorial. In the concrete case, ",
+      "thread_id": "thread-64ca0386a585",
+      "thread_depth": 4,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-5fcdbc1c766f",
+      "message_id": "<9dcccee1-1145-7cce-3523-3804216b3a34@oracle.com>",
+      "from_name": "Rajendra Pingte",
+      "from_email_hash": "8edb214cb2adc766b0630c30c5b81a29f8a32a62abd40996171524a2b1363b47",
+      "date": "2018-12-11T11:48:37-08:00",
+      "subject": "[R-pkg-devel]  [CRAN-pretest-archived] CRAN submission ROracle 1.3-2",
+      "subject_clean": "[R-pkg-devel]  [CRAN-pretest-archived] CRAN submission ROracle 1.3-2",
+      "in_reply_to": "<010b2f34-0a90-1544-915b-2ccb03da881b@oracle.com>",
+      "references": [
+        "<20181204204547.3D683160B2C@xmpalantir.wu.ac.at>",
+        "<01d48c5b$Blat.v3.2.16$53a31c30$3182064e5@mail.statistik.tu-dortmund.de>",
+        "<701f23f1-c8bf-2259-456e-6453485c9a77@oracle.com>",
+        "<7cc7f519-1e89-fe13-d52b-325c50ab01b7@oracle.com>",
+        "<010b2f34-0a90-1544-915b-2ccb03da881b@oracle.com>"
+      ],
+      "body_plain": "Hi,\n\nI like to know how to resolve this? Oracle client libraries have to be \ndownloaded in order to install ROracle package.\n\nThanks\nRajendra\n\nOn 12/10/2018 7:48 AM, Rajendra Pingte wrote:\n>\n> Hi,\n>\n> Any update on this?\n>\n> Thanks\n> Rajendra\n> On 12/6/2018 10:15 AM, Rajendra Pingte wrote:\n>>\n>> Hi,\n>>\n>> Also, wanted to pint out that configure script seems to look for \n>> '^M., as shown below:\n>>\n>> # Set up the scripts for CONFIG_FILES section.\n>> # No need to generate them if there are no CONFIG_FILES.\n>> # This happens for instance with `./config.status config.h'.\n>> if test -n \"$CONFIG_FILES\"; then\n>>\n>>\n>> ac_cr='^M'\n>> ac_cs_awk_cr=`$AWK 'BEGIN { print \"a\\rb\" }' </dev/null 2>/dev/null`\n>> if test \"$ac_cs_awk_cr\" = \"a${ac_cr}b\"; then\n>> ? ac_cs_awk_cr='\\\\r'\n>> else\n>> ? ac_cs_awk_cr=$ac_cr\n>> fi\n>>\n>> Please let me know?\n>>\n>> Thanks\n>> Rajendra\n>> On 12/5/2018 7:34 AM, Rajendra Pingte wrote:\n>>>\n>>> Hi,\n>>>\n>>> We will not be able to verify installation on Windows with ROracle \n>>> package as it requires Oracle Database Client. One also needs to \n>>> setup the location of the library OCI_LIB64, which is call \n>>> documented in INSTALL. There is no easy way to download the Oracle \n>>> Database Client other than getting it from OTN: \n>>> https://www.oracle.com/technetwork/topics/winx64soft-089540.html\n>>>\n>>> It has various versions. How can we by pass this check on CRAN? We \n>>> are working on no-click download of Oracle DB client.\n>>>\n>>> Thanks\n>>> Rajendra\n>>> On 12/4/2018 9:28 PM, ligges at statistik.tu-dortmund.de wrote:\n>>>> Dear maintainer,\n>>>>   \n>>>> package ROracle_1.3-2.tar.gz does not pass the incoming checks automatically, please see the following pre-tests:\n>>>> Windows:<https://urldefense.proofpoint.com/v2/url?u=https-3A__win-2Dbuilder.r-2Dproject.org_incoming-5Fpretest_ROracle-5F1.3-2D2-5F20181204-5F214547_Windows_00check.log&d=DwICAw&c=RoP1YumCXCgaWHvlZYR8PZh8Bv7qIrMUB65eapI_JnE&r=NlZZlfpgVvHUlbdDm824ek-8oDW5SzsVQZWw3jApv-8&m=1XnAYHVX7BGvPf2Sb48bvBqxvwD9hq5UYS5brDBKqzU&s=ANo6DpMhwm62weOctj7W07-lm3O-CDRex1H93n04TkI&e=>\n>>>> Status: 1 ERROR, 1 NOTE\n>>>> Debian:<https://urldefense.proofpoint.com/v2/url?u=https-3A__win-2Dbuilder.r-2Dproject.org_incoming-5Fpretest_ROracle-5F1.3-2D2-5F20181204-5F214547_Debian_00check.log&d=DwICAw&c=RoP1YumCXCgaWHvlZYR8PZh8Bv7qIrMUB65eapI_JnE&r=NlZZlfpgVvHUlbdDm824ek-8oDW5SzsVQZWw3jApv-8&m=1XnAYHVX7BGvPf2Sb48bvBqxvwD9hq5UYS5brDBKqzU&s=L7TdvkmyIDRD4iJNeZMlQIOW2q0iC2Uun62aSkhSo-Y&e=>\n>>>> Status: 1 WARNING, 1 NOTE\n>>>>   \n>>>> Last released version's CRAN status: ERROR: 3, OK: 4\n>>>> See:<https://urldefense.proofpoint.com/v2/url?u=https-3A__CRAN.R-2Dproject.org_web_checks_check-5Fresults-5FROracle.html&d=DwICAw&c=RoP1YumCXCgaWHvlZYR8PZh8Bv7qIrMUB65eapI_JnE&r=NlZZlfpgVvHUlbdDm824ek-8oDW5SzsVQZWw3jApv-8&m=1XnAYHVX7BGvPf2Sb48bvBqxvwD9hq5UYS5brDBKqzU&s=tGY-wzUoUAuRuKguUxbCZxD-2ZWQPE_ZL0CkLNQN3oI&e=>\n>>>>   \n>>>> CRAN Web:<https://urldefense.proofpoint.com/v2/url?u=https-3A__cran.r-2Dproject.org_package-3DROracle&d=DwICAw&c=RoP1YumCXCgaWHvlZYR8PZh8Bv7qIrMUB65eapI_JnE&r=NlZZlfpgVvHUlbdDm824ek-8oDW5SzsVQZWw3jApv-8&m=1XnAYHVX7BGvPf2Sb48bvBqxvwD9hq5UYS5brDBKqzU&s=1h7-Un3ySBYCuY3lJg_Po2k-LCbdrOlLWJ6AGozJjpQ&e=>\n>>>>   \n>>>> Please fix all problems and resubmit a fixed version via the webform.\n>>>> If you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n>>>> <https://urldefense.proofpoint.com/v2/url?u=https-3A__stat.ethz.ch_mailman_listinfo_r-2Dpackage-2Ddevel&d=DwICAw&c=RoP1YumCXCgaWHvlZYR8PZh8Bv7qIrMUB65eapI_JnE&r=NlZZlfpgVvHUlbdDm824ek-8oDW5SzsVQZWw3jApv-8&m=1XnAYHVX7BGvPf2Sb48bvBqxvwD9hq5UYS5brDBKqzU&s=egI7FRKuOPNjS8e1-Dg4T8RuEIrOkbgaWAMw5bS40ME&e=>\n>>>> If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n>>>>   \n>>>> More details are given in the directory:\n>>>> <https://urldefense.proofpoint.com/v2/url?u=https-3A__win-2Dbuilder.r-2Dproject.org_incoming-5Fpretest_ROracle-5F1.3-2D2-5F20181204-5F214547_&d=DwICAw&c=RoP1YumCXCgaWHvlZYR8PZh8Bv7qIrMUB65eapI_JnE&r=NlZZlfpgVvHUlbdDm824ek-8oDW5SzsVQZWw3jApv-8&m=1XnAYHVX7BGvPf2Sb48bvBqxvwD9hq5UYS5brDBKqzU&s=OTv_08965QsmhVjsk7UfsN3x3XUXezTgQ48zi38tq88&e=>\n>>>> The files will be removed after roughly 7 days.\n>>>>   \n>>>> *** Strong rev. depends ***: ora\n>>>>   \n>>>> Best regards,\n>>>> CRAN teams' auto-check service\n>>>>\n>>>> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n>>>> Check: CRAN incoming feasibility, Result: NOTE\n>>>>    Maintainer: 'Rajendra S. Pingte<rajendra.pingte at oracle.com>'\n>>>>    \n>>>>    The Date field is over a month old.\n>>>>\n>>>> Flavor: r-devel-windows-ix86+x86_64\n>>>> Check: whether package can be installed, Result: ERROR\n>>>>    Installation failed.\n>>>>    See 'd:/RCompile/CRANincoming/R-devel/ROracle.Rcheck/00install.out' for details.\n>>>>\n>>>> Flavor: r-devel-linux-x86_64-debian-gcc\n>>>> Check: line endings in shell scripts, Result: WARNING\n>>>>    Found the following shell script(s) with CR or CRLF line endings:\n>>>>      configure\n>>>>    Non-Windows OSes require LF line endings.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI like to know how to resolve this? Oracle client libraries have to be \ndownloaded in order to install ROracle package.\n\nThanks\nRajendra\n\nOn 12/10/2018 7:48 AM, Rajendra Pingte wrote:\n>\n> Hi,\n>\n>",
+      "thread_id": "thread-5fcdbc1c766f",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-18d582d0f74c",
+      "message_id": "<a94ce9db-d827-4352-2835-cc6923e636cb@gmail.com>",
+      "from_name": "J C Nash",
+      "from_email_hash": "cb1e1ad5faa281e458b671afe0fe007fe9411a1936256eea41a78d09be213609",
+      "date": "2018-12-12T09:06:33-05:00",
+      "subject": "[R-pkg-devel] Collaboration request to build R wrapper for C program(s)",
+      "subject_clean": "[R-pkg-devel] Collaboration request to build R wrapper for C program(s)",
+      "in_reply_to": "<CALivmgaPPFidqtKMy_EGCsVVzXCSLjT-frL4dMMLLba+2A6T0g@mail.gmail.com>",
+      "references": [
+        "<CALivmgaPPFidqtKMy_EGCsVVzXCSLjT-frL4dMMLLba+2A6T0g@mail.gmail.com>"
+      ],
+      "body_plain": "There is a quite well-developed but not terribly large C program\nfor conjugate gradients and similar approaches to optimization I would\nlike to wrap in a package for use in R. I would then build this into the\noptimx package I maintain. I suspect that the approach may turn out to be\none of the most efficient for large-n problems.\n\nHowever, my skills with C and C++ are essentially knowing how to mimic\nexisting code, and I would welcome collaboration or help to build the\npackage, likely using Rcpp. Possibly this would be a suitable term\nproject in a stat. computing course. I'm more than happy to share my\nexpertise on the optimization side, or with other computing languages,\nparticularly Fortran.\n\nTo reduce noise on the list, I'll suggest off-line contact to the\naddress above (profjcnash _at_ gmail.com).\n\nBest, JN",
+      "body_snippet": "There is a quite well-developed but not terribly large C program\nfor conjugate gradients and similar approaches to optimization I would\nlike to wrap in a package for use in R. I would then build this ",
+      "thread_id": "thread-18d582d0f74c",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-3da3b6d255ab",
+      "message_id": "<a6f42f14-d139-9e3b-dd9e-e2dd867c21ff@gmail.com>",
+      "from_name": "Emmanuel Blondel (GMAIL)",
+      "from_email_hash": "66b7385d3e48d90ea898d0573de7656273ef4e10936f04e968ea8f3d5cc16a1a",
+      "date": "2018-12-16T22:35:51+01:00",
+      "subject": "[R-pkg-devel] Issue with package check on Debian, XML issue?",
+      "subject_clean": "[R-pkg-devel] Issue with package check on Debian, XML issue?",
+      "in_reply_to": "<01d4955b$Blat.v3.2.16$e1bec255$feb45776@mail.statistik.tu-dortmund.de>",
+      "references": [
+        "<01d4955b$Blat.v3.2.16$e1bec255$feb45776@mail.statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Dear all, I've received some notice from CRAN to fix issues in geometa \npkg i'm maintaining. I've fixed some issue, and tried to upload a \npackage package. I've tested the package on x86_64-pc-linux-gnu (64-bit) \n/ Ubuntu 14.04.5 LTS, and Windows OS. For both, R CMD check goes well. \nHere results for Win.\n\nhttps://win-builder.r-project.org/7ZXV14p14Spe\nhttps://win-builder.r-project.org/RwX93ZPJuMr8\nhttps://win-builder.r-project.org/9O8W7dYJLlOW\n\nI've received pre-archived message here below stating that they are \nstill issues on Debian.\n\nI receive? 2 messages that let me suspect this is due to an issue with \nXML package:\n\nError: package or namespace load failed for ?XML?:\n\n ?.onLoad failed in loadNamespace() for ?XML?, details:\n\n ??call: dyn.load(file, DLLpath = DLLpath, ...)\n\n ??error: unable to load shared object \n?/home/hornik/tmp/R.check/r-devel-clang/Work/build/Packages/XML/libs/XML.so?:\n\n ??/home/hornik/tmp/R.check/r-devel-clang/Work/build/Packages/XML/libs/XML.so: failed to map segment from shared object\n\n(this message also appears in this moment for XML package checks \nhttps://cran.r-project.org/web/checks/check_results_XML.html)\n\nand\n\nUnknown IO errorfailed to load external entity\n\n\nWould someone have any idea what could be wrong? I'm stuck on that.\n\nThanks in advance for your help,\n\nBest,\nEmmanuel\n\n\n-------- Message transf?r? --------\nSujet?: \t[CRAN-pretest-archived] CRAN submission geometa 0.4-0\nDate?: \tSun, 16 Dec 2018 17:24:56 +0100\nDe?: \tligges at statistik.tu-dortmund.de\nR?pondre ??: \tCRAN-submissions at R-project.org\nPour?: \temmanuel.blondel1 at gmail.com\nCopie ??: \tCRAN-submissions at R-project.org\n\n\n\nDear maintainer,\npackage geometa_0.4-0.tar.gz does not pass the incoming checks \nautomatically, please see the following pre-tests:\nWindows: \n<https://win-builder.r-project.org/incoming_pretest/geometa_0.4-0_20181216_165029/Windows/00check.log>\nStatus: OK\nDebian: \n<https://win-builder.r-project.org/incoming_pretest/geometa_0.4-0_20181216_165029/Debian/00check.log>\nStatus: 2 ERRORs\nLast released version's CRAN status: ERROR: 10, NOTE: 1, OK: 1\nSee: <https://CRAN.R-project.org/web/checks/check_results_geometa.html>\nCRAN Web: <https://cran.r-project.org/package=geometa>\nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help \non the R-package-devel mailing list:\n<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\nIf you are fairly certain the rejection is a false positive, please \nreply-all to this message and explain.\nMore details are given in the directory:\n<https://win-builder.r-project.org/incoming_pretest/geometa_0.4-0_20181216_165029/>\nThe files will be removed after roughly 7 days.\n*** Strong rev. depends ***: geonapi ows4R\nBest regards,\nCRAN teams' auto-check service\n\n\n-------------- next part --------------\nAn embedded and charset-unspecified text was scrubbed...\nName: Portion de message joint\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20181216/d2ea3c72/attachment.ksh>",
+      "body_snippet": "Dear all, I've received some notice from CRAN to fix issues in geometa \npkg i'm maintaining. I've fixed some issue, and tried to upload a \npackage package. I've tested the package on x86_64-pc-linux-g",
+      "thread_id": "thread-3da3b6d255ab",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-42789d6ee7fc",
+      "message_id": "<15ba3bbe-73aa-558d-c2f7-86f5870800f3@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "104c87483880acf2172abe27b608842b6455f9ef1ad2ceef608cdf4d12ad2557",
+      "date": "2018-12-17T16:20:17+01:00",
+      "subject": "[R-pkg-devel] CRAN incoming queue closed from Dec 21 to Jan 02",
+      "subject_clean": "[R-pkg-devel] CRAN incoming queue closed from Dec 21 to Jan 02",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear package developers,\n\nthe CRAN incoming queue will be closed from Dec 21, 2018 to Jan 02, \n2019. Hence package submissions are only possible before and after that \nperiod.\n\nBest,\nUwe Ligges\n(for the CRAN team)",
+      "body_snippet": "Dear package developers,\n\nthe CRAN incoming queue will be closed from Dec 21, 2018 to Jan 02, \n2019. Hence package submissions are only possible before and after that \nperiod.\n\nBest,\nUwe Ligges\n(for t",
+      "thread_id": "thread-42789d6ee7fc",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-2aa79a974810",
+      "message_id": "<CADVZz_pFr4be3ERS0MipZSTrkxzXx5prWXM5ciPWf0H0H1Kuew@mail.gmail.com>",
+      "from_name": "Marta Karaś",
+      "from_email_hash": "95998e47a6677b08e94461b5d55a7d96387199b3d540e36570a99c4322988def",
+      "date": "2018-12-17T12:54:11-05:00",
+      "subject": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "subject_clean": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "For my R package, I want to demonstrate some benchmark results that take a\nwhile to generate. I want to present the results in both README and\nvignette.\n\nI thought a way to go is to have a README.Rmd code chunk with generates the\nresults with `eval = FALSE`, which I run in R console and save the table in\nsome place within a package, and then read the saved table and display it\nin both README.Rmd (in a next chunk) and in the vignette Rmd file.\n\nQuestions:\n\n   - What is the proper subdirectory (naming, location) I should save\n   the results into?\n   - Should I out this subdirectory into .gitignore, or rather keep them\n   (i.e., they would be available to anybody who downloads package's source\n   files from CRAN?)\n\nThank you,\nMarta\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "For my R package, I want to demonstrate some benchmark results that take a\nwhile to generate. I want to present the results in both README and\nvignette.\n\nI thought a way to go is to have a README.Rmd ",
+      "thread_id": "thread-2aa79a974810",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-e000dcccb1d3",
+      "message_id": "<fdb89bae-dab1-d50a-7cbc-6b23d24738c4@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "2c29654901c6af19d511ed0419332d94c100586e3e427467f118bc891bc76e5f",
+      "date": "2018-12-17T15:58:37-05:00",
+      "subject": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "subject_clean": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "in_reply_to": "<CADVZz_pFr4be3ERS0MipZSTrkxzXx5prWXM5ciPWf0H0H1Kuew@mail.gmail.com>",
+      "references": [
+        "<CADVZz_pFr4be3ERS0MipZSTrkxzXx5prWXM5ciPWf0H0H1Kuew@mail.gmail.com>"
+      ],
+      "body_plain": "On 17/12/2018 12:54 PM, Marta Kara? wrote:\n> For my R package, I want to demonstrate some benchmark results that take a\n> while to generate. I want to present the results in both README and\n> vignette.\n> \n> I thought a way to go is to have a README.Rmd code chunk with generates the\n> results with `eval = FALSE`, which I run in R console and save the table in\n> some place within a package, and then read the saved table and display it\n> in both README.Rmd (in a next chunk) and in the vignette Rmd file.\n> \n> Questions:\n> \n>     - What is the proper subdirectory (naming, location) I should save\n>     the results into?\n\neither data/ or inst/<your choice>/ would be fine.  Use data if you want \nthese to be easily available to package users, some private name if you \ndon't.\n\n>     - Should I out this subdirectory into .gitignore, or rather keep them\n>     (i.e., they would be available to anybody who downloads package's source\n>     files from CRAN?)\n\nWhat you put in .gitignore is up to you.  Do you want version control on \nthese files?  Usually derived objects like your benchmark results aren't \nput in version control, you just put in the code to generate them.  But \nin this case, you might find it interesting to compare current results \nwith historical ones, and version control would let you do that.\n\nDuncan Murdoch\n\n> \n> Thank you,\n> Marta\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 17/12/2018 12:54 PM, Marta Kara? wrote:\n> For my R package, I want to demonstrate some benchmark results that take a\n> while to generate. I want to present the results in both README and\n> vignette",
+      "thread_id": "thread-2aa79a974810",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-08a3565f6be7",
+      "message_id": "<CADVZz_qYWofy+9fvffve1SVTBYRvZjPTWAyki41y9yqcuDepCA@mail.gmail.com>",
+      "from_name": "Marta Karaś",
+      "from_email_hash": "95998e47a6677b08e94461b5d55a7d96387199b3d540e36570a99c4322988def",
+      "date": "2018-12-17T17:07:01-05:00",
+      "subject": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "subject_clean": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "in_reply_to": "<fdb89bae-dab1-d50a-7cbc-6b23d24738c4@gmail.com>",
+      "references": [
+        "<CADVZz_pFr4be3ERS0MipZSTrkxzXx5prWXM5ciPWf0H0H1Kuew@mail.gmail.com>",
+        "<fdb89bae-dab1-d50a-7cbc-6b23d24738c4@gmail.com>"
+      ],
+      "body_plain": "Cool, thanks! 100% clear and very helpful, I appreciate your answer a lot!\n\nBests / Pozdrawiam,\nMarta Karas\n\n\n\n\n\nOn Mon, Dec 17, 2018 at 3:58 PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 17/12/2018 12:54 PM, Marta Kara? wrote:\n> > For my R package, I want to demonstrate some benchmark results that take\n> a\n> > while to generate. I want to present the results in both README and\n> > vignette.\n> >\n> > I thought a way to go is to have a README.Rmd code chunk with generates\n> the\n> > results with `eval = FALSE`, which I run in R console and save the table\n> in\n> > some place within a package, and then read the saved table and display it\n> > in both README.Rmd (in a next chunk) and in the vignette Rmd file.\n> >\n> > Questions:\n> >\n> >     - What is the proper subdirectory (naming, location) I should save\n> >     the results into?\n>\n> either data/ or inst/<your choice>/ would be fine.  Use data if you want\n> these to be easily available to package users, some private name if you\n> don't.\n>\n> >     - Should I out this subdirectory into .gitignore, or rather keep them\n> >     (i.e., they would be available to anybody who downloads package's\n> source\n> >     files from CRAN?)\n>\n> What you put in .gitignore is up to you.  Do you want version control on\n> these files?  Usually derived objects like your benchmark results aren't\n> put in version control, you just put in the code to generate them.  But\n> in this case, you might find it interesting to compare current results\n> with historical ones, and version control would let you do that.\n>\n> Duncan Murdoch\n>\n> >\n> > Thank you,\n> > Marta\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Cool, thanks! 100% clear and very helpful, I appreciate your answer a lot!\n\nBests / Pozdrawiam,\nMarta Karas\n\n\n\n\n\nOn Mon, Dec 17, 2018 at 3:58 PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> ",
+      "thread_id": "thread-2aa79a974810",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-402b290083f6",
+      "message_id": "<3190425.fZs42kuUFN@alex-laptop>",
+      "from_name": "Alexandre Génin",
+      "from_email_hash": "5b44098c692bc1bd33343eed23a6b3266881aaa6e19fd2435027b4abc15df220",
+      "date": "2018-12-18T22:08:12+01:00",
+      "subject": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "subject_clean": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all, \n\nI am preparing an update to my CRAN package 'spatialwarnings' and fixing the \nlast issues before submitting it. \n\nI keep running into this type of message arising during checking: \n\n* checking top-level files ... NOTE\nNon-standard files/directories found at top level:\n  'file35451f8cc152' 'file35451f9d8e7a' 'file3545214f4cdf'\n  'file354524b354c4' 'file35452559ca7' 'file354525cb8eb1'\n  'file35452a4e4bdd' 'file35452ac564a0' 'file35452ae421b2'\n  'file35452d03ad' 'file35452dc8e4d4' 'file354530b2d171'\n[snip]\n\n(the complete log is available there: https://pastebin.com/JgyG9SwJ )\n\nThis happens for a variety of architectures, R versions and building service \n(I tried rhub and win-builder). I am a bit puzzled because the files are \nabsent from the archive built through R CMD build and from my git tree. I also \nadded the following pattern to my .Rbuildignore to try to fix the issue: \n^file.*$, without success. \n\nI have no idea of what generates these files (the problem does not arise on my \ncomputers). Any hints on how to fix this ? \n\nThanks in advance and sorry if the question has already been asked (a quick \nsearch returned nothing)\n\nAlexandre\n\n-- \nLisez, causez ! http://saulecauseur.org",
+      "body_snippet": "Dear all, \n\nI am preparing an update to my CRAN package 'spatialwarnings' and fixing the \nlast issues before submitting it. \n\nI keep running into this type of message arising during checking: \n\n* chec",
+      "thread_id": "thread-402b290083f6",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-121a5e18fec8",
+      "message_id": "<2a9769bf-b640-0c6d-2470-ea8deca4e913@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "2c29654901c6af19d511ed0419332d94c100586e3e427467f118bc891bc76e5f",
+      "date": "2018-12-18T16:19:52-05:00",
+      "subject": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "subject_clean": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "in_reply_to": "<3190425.fZs42kuUFN@alex-laptop>",
+      "references": [
+        "<3190425.fZs42kuUFN@alex-laptop>"
+      ],
+      "body_plain": "On 18/12/2018 4:08 PM, Alexandre G?nin wrote:\n> Dear all,\n> \n> I am preparing an update to my CRAN package 'spatialwarnings' and fixing the\n> last issues before submitting it.\n> \n> I keep running into this type of message arising during checking:\n> \n> * checking top-level files ... NOTE\n> Non-standard files/directories found at top level:\n>    'file35451f8cc152' 'file35451f9d8e7a' 'file3545214f4cdf'\n>    'file354524b354c4' 'file35452559ca7' 'file354525cb8eb1'\n>    'file35452a4e4bdd' 'file35452ac564a0' 'file35452ae421b2'\n>    'file35452d03ad' 'file35452dc8e4d4' 'file354530b2d171'\n> [snip]\n> \n> (the complete log is available there: https://pastebin.com/JgyG9SwJ )\n> \n> This happens for a variety of architectures, R versions and building service\n> (I tried rhub and win-builder). I am a bit puzzled because the files are\n> absent from the archive built through R CMD build and from my git tree. I also\n> added the following pattern to my .Rbuildignore to try to fix the issue:\n> ^file.*$, without success.\n> \n> I have no idea of what generates these files (the problem does not arise on my\n> computers). Any hints on how to fix this ?\n> \n> Thanks in advance and sorry if the question has already been asked (a quick\n> search returned nothing)\n\nThose look like filenames generated by the tempfile() function.  Those \nwould normally be in the tempdir() directory.  If you have some \nenvironment variable (TMPDIR, TMP, TEMP) set to \".\", they could be \ncreated in the top level of your package.  Alternatively, if you are \nusing basename() on tempfile() you'll get the same sort of thing.\n\nDuncan Murdoch",
+      "body_snippet": "On 18/12/2018 4:08 PM, Alexandre G?nin wrote:\n> Dear all,\n> \n> I am preparing an update to my CRAN package 'spatialwarnings' and fixing the\n> last issues before submitting it.\n> \n> I keep running into",
+      "thread_id": "thread-402b290083f6",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-a7d450517011",
+      "message_id": "<5643992.AgjVLdAzdO@alex-laptop>",
+      "from_name": "Alexandre Génin",
+      "from_email_hash": "5b44098c692bc1bd33343eed23a6b3266881aaa6e19fd2435027b4abc15df220",
+      "date": "2018-12-19T12:00:33+01:00",
+      "subject": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "subject_clean": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "in_reply_to": "<2a9769bf-b640-0c6d-2470-ea8deca4e913@gmail.com>",
+      "references": [
+        "<3190425.fZs42kuUFN@alex-laptop>",
+        "<2a9769bf-b640-0c6d-2470-ea8deca4e913@gmail.com>"
+      ],
+      "body_plain": "On mardi 18 d?cembre 2018 22:19:52 CET Duncan Murdoch wrote:\n> On 18/12/2018 4:08 PM, Alexandre G?nin wrote:\n> > Dear all,\n> > \n> > I am preparing an update to my CRAN package 'spatialwarnings' and fixing\n> > the last issues before submitting it.\n> > \n> > I keep running into this type of message arising during checking:\n> > \n> > * checking top-level files ... NOTE\n> > \n> > Non-standard files/directories found at top level:\n> >    'file35451f8cc152' 'file35451f9d8e7a' 'file3545214f4cdf'\n> >    'file354524b354c4' 'file35452559ca7' 'file354525cb8eb1'\n> >    'file35452a4e4bdd' 'file35452ac564a0' 'file35452ae421b2'\n> >    'file35452d03ad' 'file35452dc8e4d4' 'file354530b2d171'\n> > \n> > [snip]\n> > \n> > (the complete log is available there: https://pastebin.com/JgyG9SwJ )\n> > \n> > This happens for a variety of architectures, R versions and building\n> > service (I tried rhub and win-builder). I am a bit puzzled because the\n> > files are absent from the archive built through R CMD build and from my\n> > git tree. I also added the following pattern to my .Rbuildignore to try\n> > to fix the issue: ^file.*$, without success.\n> > \n> > I have no idea of what generates these files (the problem does not arise\n> > on my computers). Any hints on how to fix this ?\n> > \n> > Thanks in advance and sorry if the question has already been asked (a\n> > quick\n> > search returned nothing)\n> \n> Those look like filenames generated by the tempfile() function.  Those\n> would normally be in the tempdir() directory.  If you have some\n> environment variable (TMPDIR, TMP, TEMP) set to \".\", they could be\n> created in the top level of your package.  Alternatively, if you are\n> using basename() on tempfile() you'll get the same sort of thing.\n> \n> Duncan Murdoch\n\nAh, this was exactly it ! My checking script was using a temporary directory \n(using tempdir()) and those files were created in the package root for some \nreason. \n\nThanks very much for the quick answer, \n\nAlexandre",
+      "body_snippet": "On mardi 18 d?cembre 2018 22:19:52 CET Duncan Murdoch wrote:\n> On 18/12/2018 4:08 PM, Alexandre G?nin wrote:\n> > Dear all,\n> > \n> > I am preparing an update to my CRAN package 'spatialwarnings' and fi",
+      "thread_id": "thread-402b290083f6",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-8e6e0a51afb3",
+      "message_id": "<1545270808.local-8bb473c0-9bed-v1.5.3-420ce003@getmailspring.com>",
+      "from_name": "Aditya Saligrama",
+      "from_email_hash": "6a24a5ba1e54f50cd38e6a7799479b390ded0a5c07aca7993ea41bc87031627d",
+      "date": "2018-12-19T20:54:27-05:00",
+      "subject": "[R-pkg-devel] Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "subject_clean": "[R-pkg-devel] Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am trying to submit an R interface for CORELS (Certifiably Optimal Rule Lists). However, I've had a lot of difficulty getting this to compile and run on Windows. In its current state, it compiles on Windows but crashes when I try to run it. Am I able to submit this without Windows support, or could somebody help us with supporting Windows?\nThe code is at https://github.com/saligrama/rcorels, and the main project is available at https://corels.eecs.harvard.edu.\nThanks!\n-Aditya Saligrama\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am trying to submit an R interface for CORELS (Certifiably Optimal Rule Lists). However, I've had a lot of difficulty getting this to compile and run on Windows. In its current state, it compil",
+      "thread_id": "thread-8e6e0a51afb3",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-0f48f5325b14",
+      "message_id": "<8bf9d9bf-5376-2282-1920-2a22ca654548@daqana.com>",
+      "from_name": "Ralf Stubner",
+      "from_email_hash": "47f4782239adabbcf14960e1886f42c1089d8e66e1de7ae8ecb7f088016c550c",
+      "date": "2018-12-20T09:00:10+01:00",
+      "subject": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "subject_clean": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "in_reply_to": "<1545270808.local-8bb473c0-9bed-v1.5.3-420ce003@getmailspring.com>",
+      "references": [
+        "<1545270808.local-8bb473c0-9bed-v1.5.3-420ce003@getmailspring.com>"
+      ],
+      "body_plain": "On 20.12.18 02:54, Aditya Saligrama wrote:\n> I am trying to submit an R interface for CORELS (Certifiably Optimal Rule Lists). However, I've had a lot of difficulty getting this to compile and run on Windows. In its current state, it compiles on Windows but crashes when I try to run it. Am I able to submit this without Windows support, or could somebody help us with supporting Windows?\n> The code is at https://github.com/saligrama/rcorels, and the main project is available at https://corels.eecs.harvard.edu.\n\nWhat errors doe you get? Your package seems to require GMP and GSL\nlibraries, which can impose problems on Windows if not handled\ncorrectly. Have a look at CRAN for how other packages using these\nlibraries handle it.\n\nGreetinga\nRalf\n\n-- \nRalf Stubner\nSenior Software Engineer / Trainer\n\ndaqana GmbH\nDortustra?e 48\n14467 Potsdam\n\nT: +49 331 23 61 93 11\nF: +49 331 23 61 93 90\nM: +49 162 20 91 196\nMail: ralf.stubner at daqana.com\n\nSitz: Potsdam\nRegister: AG Potsdam HRB 27966\nUst.-IdNr.: DE300072622\nGesch?ftsf?hrer: Dr.-Ing. Stefan Knirsch, Prof. Dr. Dr. Karl-Kuno Kunze\n\n\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: signature.asc\nType: application/pgp-signature\nSize: 833 bytes\nDesc: OpenPGP digital signature\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20181220/9c5cc1d5/attachment.sig>",
+      "body_snippet": "On 20.12.18 02:54, Aditya Saligrama wrote:\n> I am trying to submit an R interface for CORELS (Certifiably Optimal Rule Lists). However, I've had a lot of difficulty getting this to compile and run on ",
+      "thread_id": "thread-8e6e0a51afb3",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-9ada2fa6acb2",
+      "message_id": "<1545310217.local-1f2481e9-0201-v1.4.2-f587b7b7@getmailspring.com>",
+      "from_name": "Aditya Saligrama",
+      "from_email_hash": "6a24a5ba1e54f50cd38e6a7799479b390ded0a5c07aca7993ea41bc87031627d",
+      "date": "2018-12-20T07:52:24-05:00",
+      "subject": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "subject_clean": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "in_reply_to": "<8bf9d9bf-5376-2282-1920-2a22ca654548@daqana.com>",
+      "references": [
+        "<8bf9d9bf-5376-2282-1920-2a22ca654548@daqana.com>"
+      ],
+      "body_plain": "I was able to get the package to compile on Windows by emulating the way the sbrl package builds in Windows support. However, when I try to run the package on Windows, R completely crashes and exits to the desktop.\n\nWould you have any suggestions on how to debug or fix this?\nThanks,\n-Aditya Saligrama\n\nOn Dec 20 2018, at 3:00 am, Ralf Stubner <ralf.stubner at daqana.com> wrote:\n>\n> On 20.12.18 02:54, Aditya Saligrama wrote:\n> > I am trying to submit an R interface for CORELS (Certifiably Optimal Rule Lists). However, I've had a lot of difficulty getting this to compile and run on Windows. In its current state, it compiles on Windows but crashes when I try to run it. Am I able to submit this without Windows support, or could somebody help us with supporting Windows?\n> > The code is at https://github.com/saligrama/rcorels, and the main project is available at https://corels.eecs.harvard.edu.\n>\n>\n> What errors doe you get? Your package seems to require GMP and GSL\n> libraries, which can impose problems on Windows if not handled\n> correctly. Have a look at CRAN for how other packages using these\n> libraries handle it.\n>\n> Greetinga\n> Ralf\n>\n> --\n> Ralf Stubner\n> Senior Software Engineer / Trainer\n>\n> daqana GmbH\n> Dortustra?e 48\n> 14467 Potsdam\n>\n> T: +49 331 23 61 93 11\n> F: +49 331 23 61 93 90\n> M: +49 162 20 91 196\n> Mail: ralf.stubner at daqana.com\n>\n> Sitz: Potsdam\n> Register: AG Potsdam HRB 27966\n> Ust.-IdNr.: DE300072622\n> Gesch?ftsf?hrer: Dr.-Ing. Stefan Knirsch, Prof. Dr. Dr. Karl-Kuno Kunze\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I was able to get the package to compile on Windows by emulating the way the sbrl package builds in Windows support. However, when I try to run the package on Windows, R completely crashes and exits t",
+      "thread_id": "thread-8e6e0a51afb3",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-bb31be492d3c",
+      "message_id": "<f47eb7d3-c964-bb51-3dbe-245feda45775@daqana.com>",
+      "from_name": "Ralf Stubner",
+      "from_email_hash": "47f4782239adabbcf14960e1886f42c1089d8e66e1de7ae8ecb7f088016c550c",
+      "date": "2018-12-20T14:07:09+01:00",
+      "subject": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "subject_clean": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "in_reply_to": "<1545310217.local-1f2481e9-0201-v1.4.2-f587b7b7@getmailspring.com>",
+      "references": [
+        "<8bf9d9bf-5376-2282-1920-2a22ca654548@daqana.com>",
+        "<1545310217.local-1f2481e9-0201-v1.4.2-f587b7b7@getmailspring.com>"
+      ],
+      "body_plain": "On 20.12.18 13:52, Aditya Saligrama wrote:\n> I was able to get the package to compile on Windows by emulating the way\n> the sbrl package builds in Windows support. However, when I try to run\n> the package on Windows, R completely crashes and exits to the desktop.\n> \n> Would you have any suggestions on how to debug or fix this?\n\nStart R from a command prompt. This way you might catch the error\nmessage when R exits. Alternatively you could run R (or Rgui) in the gdb\ndebugger:\n\ncmd> gdb.exe Rgui.exe\ngdb> run\nR> ...\n\nSee http://sourceware.org/gdb/current/onlinedocs/gdb/ for more info on gdb.\n\nGreetings\nRalf\n\n\n-- \nRalf Stubner\nSenior Software Engineer / Trainer\n\ndaqana GmbH\nDortustra?e 48\n14467 Potsdam\n\nT: +49 331 23 61 93 11\nF: +49 331 23 61 93 90\nM: +49 162 20 91 196\nMail: ralf.stubner at daqana.com\n\nSitz: Potsdam\nRegister: AG Potsdam HRB 27966\nUst.-IdNr.: DE300072622\nGesch?ftsf?hrer: Dr.-Ing. Stefan Knirsch, Prof. Dr. Dr. Karl-Kuno Kunze\n\n\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: signature.asc\nType: application/pgp-signature\nSize: 833 bytes\nDesc: OpenPGP digital signature\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20181220/e18e7262/attachment.sig>",
+      "body_snippet": "On 20.12.18 13:52, Aditya Saligrama wrote:\n> I was able to get the package to compile on Windows by emulating the way\n> the sbrl package builds in Windows support. However, when I try to run\n> the pac",
+      "thread_id": "thread-8e6e0a51afb3",
+      "thread_depth": 3,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-4c6e80f056aa",
+      "message_id": "<CAOKDuOhpz5k+=m0GuuhmnFkZH7Yri1W3+nZ6iE=fm+xvc=fUnw@mail.gmail.com>",
+      "from_name": "Mark van der Loo",
+      "from_email_hash": "66dbabc481febaaf3d9680d7953e6f702655593d631082a758af9eeae317f1eb",
+      "date": "2018-12-20T15:36:10+01:00",
+      "subject": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "subject_clean": "[R-pkg-devel]  Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "in_reply_to": "<f47eb7d3-c964-bb51-3dbe-245feda45775@daqana.com>",
+      "references": [
+        "<8bf9d9bf-5376-2282-1920-2a22ca654548@daqana.com>",
+        "<1545310217.local-1f2481e9-0201-v1.4.2-f587b7b7@getmailspring.com>",
+        "<f47eb7d3-c964-bb51-3dbe-245feda45775@daqana.com>"
+      ],
+      "body_plain": "Dear Aditya,\n\nYou ask:\n\n|  Am I able to submit this without Windows support, or could somebody help\nus with supporting Windows?\n\nThe CRAN policy[1] is pretty clear about this:\n\n\"Package authors should make all reasonable efforts to provide\ncross-platform portable code. Packages will not normally be accepted that\ndo not run on at least two of the major R platforms.\"\n\nand also\n\n\"It should be normal for those without Windows machines of their own to use\nthe winbuilder service to check a package before submission. \"\n\n\nBest wishes,\nMark\n[1] https://cran.r-project.org/web/packages/policies.html\n\nOn Thu, Dec 20, 2018 at 2:07 PM Ralf Stubner <ralf.stubner at daqana.com>\nwrote:\n\n> On 20.12.18 13:52, Aditya Saligrama wrote:\n> > I was able to get the package to compile on Windows by emulating the way\n> > the sbrl package builds in Windows support. However, when I try to run\n> > the package on Windows, R completely crashes and exits to the desktop.\n> >\n> > Would you have any suggestions on how to debug or fix this?\n>\n> Start R from a command prompt. This way you might catch the error\n> message when R exits. Alternatively you could run R (or Rgui) in the gdb\n> debugger:\n>\n> cmd> gdb.exe Rgui.exe\n> gdb> run\n> R> ...\n>\n> See http://sourceware.org/gdb/current/onlinedocs/gdb/ for more info on\n> gdb.\n>\n> Greetings\n> Ralf\n>\n>\n> --\n> Ralf Stubner\n> Senior Software Engineer / Trainer\n>\n> daqana GmbH\n> Dortustra?e 48\n> 14467 Potsdam\n>\n> T: +49 331 23 61 93 11\n> F: +49 331 23 61 93 90\n> M: +49 162 20 91 196\n> Mail: ralf.stubner at daqana.com\n>\n> Sitz: Potsdam\n> Register: AG Potsdam HRB 27966\n> Ust.-IdNr.: DE300072622\n> Gesch?ftsf?hrer: Dr.-Ing. Stefan Knirsch, Prof. Dr. Dr. Karl-Kuno Kunze\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Aditya,\n\nYou ask:\n\n|  Am I able to submit this without Windows support, or could somebody help\nus with supporting Windows?\n\nThe CRAN policy[1] is pretty clear about this:\n\n\"Package authors should",
+      "thread_id": "thread-8e6e0a51afb3",
+      "thread_depth": 4,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-b13678eae5eb",
+      "message_id": "<CAO49RG5E-o4S_mBgr=7+iQ1rGuUrZoCOk8h_HhUs6cusKtNpyQ@mail.gmail.com>",
+      "from_name": "Adam Price",
+      "from_email_hash": "8f915f8d57478bac268a0da925995eecf0a7b3d6c8ee055d43bbaf0f3eb089e4",
+      "date": "2018-12-20T11:33:45-05:00",
+      "subject": "[R-pkg-devel] '! LaTeX Error: Option clash for package xcolor' on linux-based builds",
+      "subject_clean": "[R-pkg-devel] '! LaTeX Error: Option clash for package xcolor' on linux-based builds",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am currently having an issue getting past a warning that's occurring on\nlinux based builds for my vignette.  The warning is: \"! LaTeX Error: Option\nclash for package xcolor.\"\n\nThe check results are here:\nhttps://cran.r-project.org/web/checks/check_results_DEVis.html\n\nI currently cannot reproduce this issue on my side, and travis-ci checks do\nnot seem to produce this warning.  I can only see it currently when\nsubmitting an update to my package and failing the CRAN auto-checks.\n\nI have recently changed from PDF vignette to html-based, and am not sure\nwhy LaTeX packages would even be loading in this case.  I have attempted to\ncorrect for it based on this post (\nhttps://github.com/haozhu233/kableExtra/issues/274) which claims the issue\nis a conflict between kableExtra and xcolor.\n\nSome relevant sections of code from the vignette might include:\n\"\nvignette: |\n  %\\VignetteIndexEntry{DEVis}\n  %\\usepackage[utf8]{inputenc}\n  %\\usepackage[table]{xcolor}\n  %\\VignetteEngine{knitr::knitr}\n---\n\n```{r loadData, echo = F, eval = TRUE}\n#load(\"../data/exampleData.Rda\")\nknitr::opts_knit$set(root.dir = '../vignettes/')\nknitr::opts_chunk$set(fig.path='figure/graphics-',\n                 cache.path='cache/graphics-',\n                 fig.align='center',\n                 external=TRUE,\n                 echo=TRUE,\n                 warning=FALSE,\n                 fig.pos='H'\n                )\n  a4width<- 8.3\n  a4height<- 11.7\nlibrary(kableExtra)\nlibrary(rmarkdown)\nlibrary(knitr)\noptions(knitr.table.format = \"html\")\noptions(kableExtra.latex.load_packages = FALSE)\n\"\n\n\nThe full package code can be found here: https://github.com/price0416/DEvis\n\nI would appreciate any insight anyone can offer into this issue, as I\ncannot update my package until I get to the bottom of this!  Thanks very\nmuch in advance!\n\nBest,\n-Adam\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am currently having an issue getting past a warning that's occurring on\nlinux based builds for my vignette.  The warning is: \"! LaTeX Error: Option\nclash for package xcolor.\"\n\nThe check results",
+      "thread_id": "thread-b13678eae5eb",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-60b00ca733c9",
+      "message_id": "<CABdHhvFQBPvddqPm0ZYx-p4FPhYc=j1fGRv7Fag0fP8LJWrGQw@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "32916ed354eafa1dedfcc7ab83aea781d79e68664b0fa536c3f7d6a85eea45d9",
+      "date": "2018-12-21T10:35:17-06:00",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "subject_clean": "[R-pkg-devel] New CRAN internet policy",
+      "in_reply_to": "<23562.13285.820319.446050@stat.math.ethz.ch>",
+      "references": [
+        "<CABdHhvFWTfTHcVvWLqrRne_T76W_+jhwuOYWzbxahPwnip_N1A@mail.gmail.com>",
+        "<23562.13285.820319.446050@stat.math.ethz.ch>"
+      ],
+      "body_plain": "On Fri, Dec 7, 2018 at 2:48 AM Martin Maechler\n<maechler at stat.math.ethz.ch> wrote:\n>\n> >>>>> Hadley Wickham\n> >>>>>     on Thu, 6 Dec 2018 10:22:47 -0600 writes:\n>\n>     > Hi all,\n>     > I'd love to get some clarification on what the new internet policy\n>     > means for packages like httr:\n>\n>     >> Packages which use Internet resources should fail gracefully with an informative\n>     >> message if the resource is not available (and not give a check warning nor error).\n>\n>     > It's not clear what \"internet resource\" means here? If it means\n>     > dataset, then I think the httr tests and examples are ok. If it means\n>     > any use of the internet, I'm not sure what do - httr critically\n>     > depends on internet access, so I can't see any way to make it fail\n>     > gracefully.\n>\n>     > Hadley\n>\n> I cannot answer your question, notably as I'm not part of the CRAN\n> team, but as R Core developer, I've encountered the problem\n> many times which this policy tries to mitigate\n> (but I also think we should consider to go further than the\n>  above \"policy\") :\n>\n> As R developer, I'd like to see the effect of a change to the\n> sources of base R, and so eventually, I may want to run the\n> equivalent of 'R CMD check' on all existing CRAN and\n> Bioconductor packages. If I have access to a server with many\n> cores and very fast hard disks, I can hope to finish running the\n> tests with 1--2 days.\n> But then I have to deal with the result.  The few times I've\n> done this, the result has been \"a mess\" because many many\n> packages  nowadays assume in their examples and their regression/unit\n> tests that internet access to some resources works, ... which it\n> \"often\" does not, and so  download.file(),\n> read.table(\"http://.....\") etc result in errors sooner or later.\n>\n> Because of that some packages fail their checks \"randomly\" (in\n> the sense that internet resources are not available \"randomly\").\n> Ideally we'd find a very good way that these failures are\n> communicated back to the person / process running (a version of)\n> 'R CMD check', because in the above scenario, I'd like to weed\n> out the 300 packages that just failed because of internet\n> resource access failures,  and only look at the other packages\n> that got a change in their 'R CMD check' results.\n\nWe have now decent tooling for this in revdepcheck\n(https://www.github.com/r-lib/revdepcheck, planning for CRAN\nsubmission next year). After performing all the revdepchecks, you can\nrun revdep_add_broken() to recheck packages that failed in the\nprevious round - in my experience testing httr (whose revdeps\nobviously use the internet a lot) this resolves most of the randomness\n(since it's fairly unlikely to get two random failures in a row).\n\nMy main concern about making the checking in examples and tests\nstricter is that I think the primary result is that people will simply\ndo less testing and write fewer realistic examples, which is a net\nnegative for the community. When you want people to do the right\nthing, I think you have to provide a carrot along with the stick.\n\n> The recent introduction in R-devel of classed error conditions\n> (in some cases), e.g., https://developer.r-project.org/blosxom.cgi/R-devel/NEWS/2018/10/04#n2018-10-04,  and the similar and somewhat earlier\n> effort of Lionel Henry to use classed error conditions (in\n> rlang only, unfortunately, rather than as a patch proposal to R ..)\n> maybe one step towards a nice solution here.\n\nWe'd be happy to propose a patch to base R, but it's not yet clear to\nus exactly how things should work so I think it makes the most sense\nto first prototype in a package.\n\nHadley\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "On Fri, Dec 7, 2018 at 2:48 AM Martin Maechler\n<maechler at stat.math.ethz.ch> wrote:\n>\n> >>>>> Hadley Wickham\n> >>>>>     on Thu, 6 Dec 2018 10:22:47 -0600 writes:\n>\n>     > Hi all,\n>     > I'd love ",
+      "thread_id": "thread-4c0328a52020",
+      "thread_depth": 2,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-e5f8e317759b",
+      "message_id": "<9C2A9373-95E8-464A-9317-FB6ABDCDB3A7@dal.ca>",
+      "from_name": "Daniel Kelley",
+      "from_email_hash": "0c6d0dc44596ec49dfc2b237a2f933d2b060ca5f8cff2c2d24fc0c7c69658f6a",
+      "date": "2018-12-22T12:22:20Z",
+      "subject": "[R-pkg-devel] R-package-devel Digest, Vol 44, Issue 14",
+      "subject_clean": "[R-pkg-devel] R-package-devel Digest, Vol 44, Issue 14",
+      "in_reply_to": "<mailman.3308.9.1545476402.12456.r-package-devel@r-project.org>",
+      "references": [
+        "<mailman.3308.9.1545476402.12456.r-package-devel@r-project.org>"
+      ],
+      "body_plain": "> On Dec 22, 2018, at 7:00 AM, r-package-devel-request at r-project.org wrote:\n>\n> (since it's fairly unlikely to get two random failures in a row).\n\nFlakey links are also a problem for packages, per se, as opposed to revdeps.  For example, I have a package (oce) that has quite a lot of \\url{} items in its docs, and I get failures quite often. Sometimes the failures will persist (perhaps intermittently) for days, as work is done on servers, etc.  My policy is to just change \\url to \\code (usually with a note to tell the user that the link is actually likely to work), and that's not a good thing, because it leads to less testing. I do not know what the best policy is ... maybe a new macro like \\checkedurl{} that will make a link if the resource is found, and add a note about the link failing to work, otherwise. That way, the package could still build, and the user would not be stuck with a lot of non-linked URLs in the docs.",
+      "body_snippet": "> On Dec 22, 2018, at 7:00 AM, r-package-devel-request at r-project.org wrote:\n>\n> (since it's fairly unlikely to get two random failures in a row).\n\nFlakey links are also a problem for packages, per ",
+      "thread_id": "thread-e5f8e317759b",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-2e9c46f02320",
+      "message_id": "<CAOXa6G0QY-=p16ufOHQAnAYsVNh5jQk4V3uxzRmcQ=g0X+m19Q@mail.gmail.com>",
+      "from_name": "Tom Kelly",
+      "from_email_hash": "a2fb2d169549b47526cc29fa4a976e926f9e31779ef7d6e089c1a6c8245bb18b",
+      "date": "2018-12-26T17:00:38+09:00",
+      "subject": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "subject_clean": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "in_reply_to": "<CAOXa6G28SDXkT0rzHZQn9jpk0QZqec+n4Hh8s2Rxi5bEXa=KHQ@mail.gmail.com>",
+      "references": [
+        "<20180224153007.49B241641AA@xmpalantir.wu.ac.at>",
+        "<01d3ad84$Blat.v2.2.2$f8fcba75@mail.statistik.tu-dortmund.de>",
+        "<CAOXa6G28SDXkT0rzHZQn9jpk0QZqec+n4Hh8s2Rxi5bEXa=KHQ@mail.gmail.com>"
+      ],
+      "body_plain": "Dear CRAN maintainers and R package developers,\n\nI am still interested in submitting this update to the \"vioplot\" package. I\nwould like to revisit the idea to update this package on CRAN. I think the\nchanges that I've made here would be useful to a significant number of R\nusers.\n\nI am submitting to take over as maintainer as this package has been\norphaned for years. I will of course take measures to attribute the\noriginal author and preserve the original LICENSE.\n\nThis is a major update with many additional features. This includes fine\ncontrol over plotting parameters and formula inputs with documentation on\nthese parameters. I've added tests and vignettes showing that these work.\nHowever, it does not pass automated checks such as the LICENSE since some\naspects of the original package are very outdated (the additional NOTEs\nfrom the CRAN checks were due to the outdated LICENSE and not being the\ncurrent maintainer). Thus a manual review would be required. Otherwise, I\nhave taken every measure I think is possible to reduce the number of errors\nfrom automated checks and ensure backwards compatibility. These additional\nfeatures can be pushed to the repo without disrupting the behaviour of any\nexisting scripts or packages calling this function.\n\nI realise that the files may since been removed and I would need to\nresubmit if it is possible. These can be found at the following GitHub repo:\n\nhttps://github.com/TomKellyGenetics/vioplot\n\nKind regards,\n\nTom Kelly\n\n---------- Forwarded message ---------\nFrom: Tom Kelly <tomkellygenetics at gmail.com>\nDate: Sun, Feb 25, 2018 at 10:33 AM\nSubject: Re: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0\nTo: <CRAN-submissions at r-project.org>\nCc: Tom Kelly <tom.kelly at postgrad.otago.ac.nz>\n\n\nDear CRAN team,\n\nI have documented the NOTE issues in a cran-comments.md file. I think some\nof these are unavoidable as stated in this file. In particular, some issues\nwith automated checks may arise due to legacy code and meta-data for\ncompatibility with vioplot 0.2 (last updated in 2005). Please notice that\nmany of the checks failed by the original package vioplot 0.2 have been\nresolved with this release. In addition, this supports range of added\nfeatures and input methods consistent with similar plotting functions while\npreserving backwards-compatibility.\n\nDue to the proposal to take over as maintainer of an orphaned package, I\nrequest that this submission be reviewed manually. Sorry for the\ninconvenience, I will do my best to resolve any further issues that should\narise.\n\nKind Regards,\n\nTom Kelly\n\n\nOn Sun, Feb 25, 2018 at 12:34 AM, <Uwe.Ligges at r-project.org> wrote:\n\n> Dear maintainer,\n>\n> package vioplot_0.3.0.tar.gz does not pass the incoming checks\n> automatically, please see the pre-test at:\n> <\n> https://win-builder.r-project.org/incoming_pretest/180224_163015_vioplot_030/00check.log\n> >\n> Status: 5 NOTEs\n>\n> Current CRAN status: NOTE: 12\n> See: <https://CRAN.R-project.org/web/checks/check_results_vioplot.html>\n>\n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help on\n> the R-package-devel mailing list:\n> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> If you are fairly certain the rejection is a false positive, please\n> reply-all to this message and explain.\n>\n> More details are given in the directory:\n> <\n> https://win-builder.r-project.org/incoming_pretest/180224_163015_vioplot_030\n> >\n> The files will be removed after roughly 7 days.\n>\n> Strong rev. depends: parviol regplot\n>\n> Best regards,\n> CRAN teams' auto-check service\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear CRAN maintainers and R package developers,\n\nI am still interested in submitting this update to the \"vioplot\" package. I\nwould like to revisit the idea to update this package on CRAN. I think the\n",
+      "thread_id": "thread-2e9c46f02320",
+      "thread_depth": 0,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-54325db45a77",
+      "message_id": "<e024f264-153f-5793-0fca-a5e1b188b391@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "2c29654901c6af19d511ed0419332d94c100586e3e427467f118bc891bc76e5f",
+      "date": "2018-12-26T09:27:42-05:00",
+      "subject": "[R-pkg-devel]  Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "subject_clean": "[R-pkg-devel]  Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "in_reply_to": "<CAOXa6G0QY-=p16ufOHQAnAYsVNh5jQk4V3uxzRmcQ=g0X+m19Q@mail.gmail.com>",
+      "references": [
+        "<20180224153007.49B241641AA@xmpalantir.wu.ac.at>",
+        "<01d3ad84$Blat.v2.2.2$f8fcba75@mail.statistik.tu-dortmund.de>",
+        "<CAOXa6G28SDXkT0rzHZQn9jpk0QZqec+n4Hh8s2Rxi5bEXa=KHQ@mail.gmail.com>",
+        "<CAOXa6G0QY-=p16ufOHQAnAYsVNh5jQk4V3uxzRmcQ=g0X+m19Q@mail.gmail.com>"
+      ],
+      "body_plain": "On 26/12/2018 3:00 a.m., Tom Kelly wrote:\n> Dear CRAN maintainers and R package developers,\n> \n> I am still interested in submitting this update to the \"vioplot\" package. I\n> would like to revisit the idea to update this package on CRAN. I think the\n> changes that I've made here would be useful to a significant number of R\n> users.\n> \n> I am submitting to take over as maintainer as this package has been\n> orphaned for years. I will of course take measures to attribute the\n> original author and preserve the original LICENSE.\n> \n> This is a major update with many additional features. This includes fine\n> control over plotting parameters and formula inputs with documentation on\n> these parameters. I've added tests and vignettes showing that these work.\n> However, it does not pass automated checks such as the LICENSE since some\n> aspects of the original package are very outdated (the additional NOTEs\n> from the CRAN checks were due to the outdated LICENSE and not being the\n> current maintainer). Thus a manual review would be required. Otherwise, I\n> have taken every measure I think is possible to reduce the number of errors\n> from automated checks and ensure backwards compatibility. These additional\n> features can be pushed to the repo without disrupting the behaviour of any\n> existing scripts or packages calling this function.\n> \n> I realise that the files may since been removed and I would need to\n> resubmit if it is possible. These can be found at the following GitHub repo:\n> \n> https://github.com/TomKellyGenetics/vioplot\n\nCRAN has announced they are taking a (well-deserved) holiday, and not \nprocessing incoming packages until after Jan 2.  The check log from your \nFebruary submission is long since removed, so I can't give specific \ncomments, but here are some general ones:\n\n1.  Check your package using the \"as-cran\" option on R-devel before \nsubmitting again.  Make sure that the only remaining problems are \nunavoidable:  e.g. including your name as maintainer.  You should be \nable to fix the License issue following the instructions in Writing R \nExtensions, if the license really is compatible with CRAN.  If it is not \ncompatible with CRAN, then don't waste everyone's time by submitting it \nthere:  let interested people install it from Github.\n\n2.  Submit it again after Jan 2, following the instructions in \nhttps://cran.r-project.org/web/packages/policies.html.\n\nDuncan Murdoch\n\n> \n> Kind regards,\n> \n> Tom Kelly\n> \n> ---------- Forwarded message ---------\n> From: Tom Kelly <tomkellygenetics at gmail.com>\n> Date: Sun, Feb 25, 2018 at 10:33 AM\n> Subject: Re: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0\n> To: <CRAN-submissions at r-project.org>\n> Cc: Tom Kelly <tom.kelly at postgrad.otago.ac.nz>\n> \n> \n> Dear CRAN team,\n> \n> I have documented the NOTE issues in a cran-comments.md file. I think some\n> of these are unavoidable as stated in this file. In particular, some issues\n> with automated checks may arise due to legacy code and meta-data for\n> compatibility with vioplot 0.2 (last updated in 2005). Please notice that\n> many of the checks failed by the original package vioplot 0.2 have been\n> resolved with this release. In addition, this supports range of added\n> features and input methods consistent with similar plotting functions while\n> preserving backwards-compatibility.\n> \n> Due to the proposal to take over as maintainer of an orphaned package, I\n> request that this submission be reviewed manually. Sorry for the\n> inconvenience, I will do my best to resolve any further issues that should\n> arise.\n> \n> Kind Regards,\n> \n> Tom Kelly\n> \n> \n> On Sun, Feb 25, 2018 at 12:34 AM, <Uwe.Ligges at r-project.org> wrote:\n> \n>> Dear maintainer,\n>>\n>> package vioplot_0.3.0.tar.gz does not pass the incoming checks\n>> automatically, please see the pre-test at:\n>> <\n>> https://win-builder.r-project.org/incoming_pretest/180224_163015_vioplot_030/00check.log\n>>>\n>> Status: 5 NOTEs\n>>\n>> Current CRAN status: NOTE: 12\n>> See: <https://CRAN.R-project.org/web/checks/check_results_vioplot.html>\n>>\n>> Please fix all problems and resubmit a fixed version via the webform.\n>> If you are not sure how to fix the problems shown, please ask for help on\n>> the R-package-devel mailing list:\n>> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>> If you are fairly certain the rejection is a false positive, please\n>> reply-all to this message and explain.\n>>\n>> More details are given in the directory:\n>> <\n>> https://win-builder.r-project.org/incoming_pretest/180224_163015_vioplot_030\n>>>\n>> The files will be removed after roughly 7 days.\n>>\n>> Strong rev. depends: parviol regplot\n>>\n>> Best regards,\n>> CRAN teams' auto-check service\n>>\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 26/12/2018 3:00 a.m., Tom Kelly wrote:\n> Dear CRAN maintainers and R package developers,\n> \n> I am still interested in submitting this update to the \"vioplot\" package. I\n> would like to revisit the",
+      "thread_id": "thread-2e9c46f02320",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-40850acad802",
+      "message_id": "<KL1P15301MB0023F1E82CCDF348C9822705A6B50@KL1P15301MB0023.APCP153.PROD.OUTLOOK.COM>",
+      "from_name": "Hong Ooi",
+      "from_email_hash": "63abe8167535bf3948844e0dc7605c570bec26abf129f62166d40c53e7fa95f6",
+      "date": "2018-12-26T14:38:53Z",
+      "subject": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "subject_clean": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "in_reply_to": "<CAOXa6G0QY-=p16ufOHQAnAYsVNh5jQk4V3uxzRmcQ=g0X+m19Q@mail.gmail.com>",
+      "references": [
+        "<20180224153007.49B241641AA@xmpalantir.wu.ac.at>",
+        "<01d3ad84$Blat.v2.2.2$f8fcba75@mail.statistik.tu-dortmund.de>",
+        "<CAOXa6G28SDXkT0rzHZQn9jpk0QZqec+n4Hh8s2Rxi5bEXa=KHQ@mail.gmail.com>",
+        "<CAOXa6G0QY-=p16ufOHQAnAYsVNh5jQk4V3uxzRmcQ=g0X+m19Q@mail.gmail.com>"
+      ],
+      "body_plain": "Just a few comments:\n\n- Given vioplot 0.2 is 12 years old, I wouldn't be TOO concerned with backward compatibility. I wouldn't ignore it either, but if I had to choose, I'd go for modern idioms over ensuring that everything works exactly the same.\n\n- You don't need to keep HTML versions of the vignettes in the repo. They'll be built automatically from the Rmd files when you run install.packages(\"vioplot\"). Also, if size is an issue, you can set output: rmarkdown::html_vignette instead of rmarkdown::html_document which reduces the output size considerably.\n\n- Using attach() to evaluate a formula in the context of a data frame should never be necessary; use model.frame(*, data=df) or eval(*, envir=df). That said, I didn't see any uses of attach in the repo, so presumably you've already fixed this.\n\n- BSD is a very permissive license. While I'm not a lawyer, I don't think there would be any conflicts if you changed it to, say, the MIT license which is also very permissive.\n\n-----Original Message-----\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Tom Kelly\nSent: Wednesday, 26 December, 2018 7:01 PM\nTo: CRAN-submissions at r-project.org; r-package-devel at r-project.org\nSubject: [R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0\n\nDear CRAN maintainers and R package developers,\n\nI am still interested in submitting this update to the \"vioplot\" package. I would like to revisit the idea to update this package on CRAN. I think the changes that I've made here would be useful to a significant number of R users.\n\nI am submitting to take over as maintainer as this package has been orphaned for years. I will of course take measures to attribute the original author and preserve the original LICENSE.\n\nThis is a major update with many additional features. This includes fine control over plotting parameters and formula inputs with documentation on these parameters. I've added tests and vignettes showing that these work.\nHowever, it does not pass automated checks such as the LICENSE since some aspects of the original package are very outdated (the additional NOTEs from the CRAN checks were due to the outdated LICENSE and not being the current maintainer). Thus a manual review would be required. Otherwise, I have taken every measure I think is possible to reduce the number of errors from automated checks and ensure backwards compatibility. These additional features can be pushed to the repo without disrupting the behaviour of any existing scripts or packages calling this function.\n\nI realise that the files may since been removed and I would need to resubmit if it is possible. These can be found at the following GitHub repo:\n\nhttps://github.com/TomKellyGenetics/vioplot\n\nKind regards,\n\nTom Kelly\n\n---------- Forwarded message ---------\nFrom: Tom Kelly <tomkellygenetics at gmail.com>\nDate: Sun, Feb 25, 2018 at 10:33 AM\nSubject: Re: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0\nTo: <CRAN-submissions at r-project.org>\nCc: Tom Kelly <tom.kelly at postgrad.otago.ac.nz>\n\n\nDear CRAN team,\n\nI have documented the NOTE issues in a cran-comments.md file. I think some of these are unavoidable as stated in this file. In particular, some issues with automated checks may arise due to legacy code and meta-data for compatibility with vioplot 0.2 (last updated in 2005). Please notice that many of the checks failed by the original package vioplot 0.2 have been resolved with this release. In addition, this supports range of added features and input methods consistent with similar plotting functions while preserving backwards-compatibility.\n\nDue to the proposal to take over as maintainer of an orphaned package, I request that this submission be reviewed manually. Sorry for the inconvenience, I will do my best to resolve any further issues that should arise.\n\nKind Regards,\n\nTom Kelly\n\n\nOn Sun, Feb 25, 2018 at 12:34 AM, <Uwe.Ligges at r-project.org> wrote:\n\n> Dear maintainer,\n>\n> package vioplot_0.3.0.tar.gz does not pass the incoming checks \n> automatically, please see the pre-test at:\n> <\n> https://win-builder.r-project.org/incoming_pretest/180224_163015_viopl\n> ot_030/00check.log\n> >\n> Status: 5 NOTEs\n>\n> Current CRAN status: NOTE: 12\n> See: \n> <https://CRAN.R-project.org/web/checks/check_results_vioplot.html>\n>\n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help \n> on the R-package-devel mailing list:\n> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> If you are fairly certain the rejection is a false positive, please \n> reply-all to this message and explain.\n>\n> More details are given in the directory:\n> <\n> https://win-builder.r-project.org/incoming_pretest/180224_163015_viopl\n> ot_030\n> >\n> The files will be removed after roughly 7 days.\n>\n> Strong rev. depends: parviol regplot\n>\n> Best regards,\n> CRAN teams' auto-check service\n>\n>\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Just a few comments:\n\n- Given vioplot 0.2 is 12 years old, I wouldn't be TOO concerned with backward compatibility. I wouldn't ignore it either, but if I had to choose, I'd go for modern idioms over e",
+      "thread_id": "thread-2e9c46f02320",
+      "thread_depth": 1,
+      "month": "2018-12"
+    },
+    {
+      "id": "msg-b83e120229a3",
+      "message_id": "<495889EA-8260-4B89-ADE0-21CC802E5E6A@me.com>",
+      "from_name": "Imanuel Costigan",
+      "from_email_hash": "fc48da01c9caf212a5aab4e96ac8a862b33633f57cad8a992717214d0bc7d931",
+      "date": "2018-12-28T11:41:13+11:00",
+      "subject": "[R-pkg-devel] Odd R CMD build behaviour on Windows",
+      "subject_clean": "[R-pkg-devel] Odd R CMD build behaviour on Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all\n\n[Originally posted on R-help which is probably not the right place - hence no response?]\n\nI am finding that on Windows 10:\n\n* the archive file produced by R (i386) CMD build command saves the resulting archive file in the present working directory \n* ...BUT the archive produced by the R (x64) CMD build command is **not** saved in the present working directory. Instead it is saved in the file path produced by `paste0(Sys.getenv(\"HOMEDRIVE\"), Sys.getenv(\"HOMEPATH\"))` or `Sys.getenv(\"HOMESHARE\")` (the former resolves to H:\\ which is an alias for the latter). This path is not represented in any other environment variables returned by Sys.getenv()\n\nThis behaviour persists for R-3.5.1 (formally release) and R-3.4.4. It also persists after I uninstall R and Rtools and then clean reinstall R-3.4.4 and R-3.5.1.\n\nHas anyone else had this issue? Or tips on what might be causing this? Alternatively a pointer to the part of the R source code that determines the output directory for R CMD build would be much appreciated. \n\nI am running these commands in Powershell using the following commands:\n\nThanks.\n\n```\n& 'C:\\R\\R-3.5.1\\bin\\x64\\R.exe' --no-site-file --no-environ --no-save --no-restore --quiet CMD build \"C:\\users\\XXXX\\Coding\\testpackage\\\" --no-resave-data --no-manual\n\n# Archive is **not** saved in present working directory, but saved to H:\\\n\n& 'C:\\R\\R-3.5.1\\bin\\i386\\R.exe' --no-site-file --no-environ --no-save --no-restore --quiet CMD build \"C:\\users\\XXXX\\Coding\\testpackage\\\" --no-resave-data --no-manual\n\n# Archive is saved in present working directory.\n```",
+      "body_snippet": "Hi all\n\n[Originally posted on R-help which is probably not the right place - hence no response?]\n\nI am finding that on Windows 10:\n\n* the archive file produced by R (i386) CMD build command saves the ",
+      "thread_id": "thread-b83e120229a3",
+      "thread_depth": 0,
+      "month": "2018-12"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-c6de9267de18",
+      "subject": "[R-pkg-devel] Best practices for R package requiring Fortran 2003",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2018-12-04T00:34:27-05:00",
+      "last_reply": "2018-12-04T00:34:27-05:00",
+      "root_message_id": "msg-c6de9267de18"
+    },
+    {
+      "id": "thread-177b9d8e8074",
+      "subject": "[R-pkg-devel] Can I put my small data-sets into one .rda file in my CRAN package?",
+      "message_count": 4,
+      "participants": [
+        "Georgi Boshnakov",
+        "Joris Meys",
+        "Michael Dewey"
+      ],
+      "started": "2018-12-05T15:19:26+00:00",
+      "last_reply": "2018-12-07T15:20:40+00:00",
+      "root_message_id": "msg-177b9d8e8074"
+    },
+    {
+      "id": "thread-5828d9eb53b8",
+      "subject": "package 'corpus' not available?",
+      "message_count": 1,
+      "participants": [
+        "Dalthorp, Daniel"
+      ],
+      "started": "2018-12-05T22:28:01-08:00",
+      "last_reply": "2018-12-05T22:28:01-08:00",
+      "root_message_id": "msg-5828d9eb53b8"
+    },
+    {
+      "id": "thread-e9e8d319cd28",
+      "subject": "[R-pkg-devel] package 'corpus' not available?",
+      "message_count": 1,
+      "participants": [
+        "Uwe Ligges"
+      ],
+      "started": "2018-12-06T09:16:13+01:00",
+      "last_reply": "2018-12-06T09:16:13+01:00",
+      "root_message_id": "msg-e9e8d319cd28"
+    },
+    {
+      "id": "thread-4c0328a52020",
+      "subject": "[R-pkg-devel] New CRAN internet policy",
+      "message_count": 6,
+      "participants": [
+        "Hadley Wickham",
+        "Martin Maechler",
+        "Roy Mendelssohn - NOAA Federal"
+      ],
+      "started": "2018-12-06T10:22:47-06:00",
+      "last_reply": "2018-12-21T10:35:17-06:00",
+      "root_message_id": "msg-4c0328a52020"
+    },
+    {
+      "id": "thread-c873a757571a",
+      "subject": "[R-pkg-devel] testing coercion",
+      "message_count": 3,
+      "participants": [
+        "Kevin Coombes",
+        "Sebastian Meyer"
+      ],
+      "started": "2018-12-06T10:59:12-05:00",
+      "last_reply": "2018-12-06T12:52:00-05:00",
+      "root_message_id": "msg-c873a757571a"
+    },
+    {
+      "id": "thread-dbfb2d41612f",
+      "subject": "[R-pkg-devel] R package submission - C code does not compile",
+      "message_count": 2,
+      "participants": [
+        "Michael Kellermann",
+        "Uwe Ligges"
+      ],
+      "started": "2018-12-06T13:29:07-05:00",
+      "last_reply": "2018-12-07T08:23:42+01:00",
+      "root_message_id": "msg-dbfb2d41612f"
+    },
+    {
+      "id": "thread-64ca0386a585",
+      "subject": "[R-pkg-devel] Package update submission to CRAN fails on pretest",
+      "message_count": 8,
+      "participants": [
+        "Daniel Marcelino",
+        "Georgi Boshnakov",
+        "Hadley Wickham",
+        "Wolfgang Lenhard",
+        "peter dalgaard"
+      ],
+      "started": "2018-12-07T08:54:30+01:00",
+      "last_reply": "2018-12-08T20:20:53+01:00",
+      "root_message_id": "msg-64ca0386a585"
+    },
+    {
+      "id": "thread-f886c8d92123",
+      "subject": "[R-pkg-devel] Suggested package relies on recent R",
+      "message_count": 6,
+      "participants": [
+        "David Hugh-Jones",
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Hadley Wickham"
+      ],
+      "started": "2018-12-07T16:10:18+00:00",
+      "last_reply": "2018-12-08T15:56:16+00:00",
+      "root_message_id": "msg-f886c8d92123"
+    },
+    {
+      "id": "thread-5fcdbc1c766f",
+      "subject": "[R-pkg-devel]  [CRAN-pretest-archived] CRAN submission ROracle 1.3-2",
+      "message_count": 1,
+      "participants": [
+        "Rajendra Pingte"
+      ],
+      "started": "2018-12-11T11:48:37-08:00",
+      "last_reply": "2018-12-11T11:48:37-08:00",
+      "root_message_id": "msg-5fcdbc1c766f"
+    },
+    {
+      "id": "thread-18d582d0f74c",
+      "subject": "[R-pkg-devel] Collaboration request to build R wrapper for C program(s)",
+      "message_count": 1,
+      "participants": [
+        "J C Nash"
+      ],
+      "started": "2018-12-12T09:06:33-05:00",
+      "last_reply": "2018-12-12T09:06:33-05:00",
+      "root_message_id": "msg-18d582d0f74c"
+    },
+    {
+      "id": "thread-3da3b6d255ab",
+      "subject": "[R-pkg-devel] Issue with package check on Debian, XML issue?",
+      "message_count": 1,
+      "participants": [
+        "Emmanuel Blondel (GMAIL)"
+      ],
+      "started": "2018-12-16T22:35:51+01:00",
+      "last_reply": "2018-12-16T22:35:51+01:00",
+      "root_message_id": "msg-3da3b6d255ab"
+    },
+    {
+      "id": "thread-2aa79a974810",
+      "subject": "[R-pkg-devel] In R package directory, where to put results for some long-taking simulations I want to use in README / vignette?",
+      "message_count": 3,
+      "participants": [
+        "Duncan Murdoch",
+        "Marta Karaś"
+      ],
+      "started": "2018-12-17T12:54:11-05:00",
+      "last_reply": "2018-12-17T17:07:01-05:00",
+      "root_message_id": "msg-2aa79a974810"
+    },
+    {
+      "id": "thread-42789d6ee7fc",
+      "subject": "[R-pkg-devel] CRAN incoming queue closed from Dec 21 to Jan 02",
+      "message_count": 1,
+      "participants": [
+        "Uwe Ligges"
+      ],
+      "started": "2018-12-17T16:20:17+01:00",
+      "last_reply": "2018-12-17T16:20:17+01:00",
+      "root_message_id": "msg-42789d6ee7fc"
+    },
+    {
+      "id": "thread-402b290083f6",
+      "subject": "[R-pkg-devel] file35451f8cc152 found a top level",
+      "message_count": 3,
+      "participants": [
+        "Alexandre Génin",
+        "Duncan Murdoch"
+      ],
+      "started": "2018-12-18T22:08:12+01:00",
+      "last_reply": "2018-12-19T12:00:33+01:00",
+      "root_message_id": "msg-402b290083f6"
+    },
+    {
+      "id": "thread-8e6e0a51afb3",
+      "subject": "[R-pkg-devel] Submitting CORELS (Certifiably Optimal Rule Lists) package with/without Windows support",
+      "message_count": 5,
+      "participants": [
+        "Aditya Saligrama",
+        "Mark van der Loo",
+        "Ralf Stubner"
+      ],
+      "started": "2018-12-19T20:54:27-05:00",
+      "last_reply": "2018-12-20T15:36:10+01:00",
+      "root_message_id": "msg-8e6e0a51afb3"
+    },
+    {
+      "id": "thread-b13678eae5eb",
+      "subject": "[R-pkg-devel] '! LaTeX Error: Option clash for package xcolor' on linux-based builds",
+      "message_count": 1,
+      "participants": [
+        "Adam Price"
+      ],
+      "started": "2018-12-20T11:33:45-05:00",
+      "last_reply": "2018-12-20T11:33:45-05:00",
+      "root_message_id": "msg-b13678eae5eb"
+    },
+    {
+      "id": "thread-e5f8e317759b",
+      "subject": "[R-pkg-devel] R-package-devel Digest, Vol 44, Issue 14",
+      "message_count": 1,
+      "participants": [
+        "Daniel Kelley"
+      ],
+      "started": "2018-12-22T12:22:20+00:00",
+      "last_reply": "2018-12-22T12:22:20+00:00",
+      "root_message_id": "msg-e5f8e317759b"
+    },
+    {
+      "id": "thread-2e9c46f02320",
+      "subject": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN submission vioplot 0.3.0",
+      "message_count": 3,
+      "participants": [
+        "Duncan Murdoch",
+        "Hong Ooi",
+        "Tom Kelly"
+      ],
+      "started": "2018-12-26T17:00:38+09:00",
+      "last_reply": "2018-12-26T14:38:53+00:00",
+      "root_message_id": "msg-2e9c46f02320"
+    },
+    {
+      "id": "thread-b83e120229a3",
+      "subject": "[R-pkg-devel] Odd R CMD build behaviour on Windows",
+      "message_count": 1,
+      "participants": [
+        "Imanuel Costigan"
+      ],
+      "started": "2018-12-28T11:41:13+11:00",
+      "last_reply": "2018-12-28T11:41:13+11:00",
+      "root_message_id": "msg-b83e120229a3"
+    }
+  ]
+}

@@ -1,0 +1,923 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2015-09",
+  "messages": [
+    {
+      "id": "msg-bc96607abc45",
+      "message_id": "<CAJuCY5zmk9W54uaRt+Z3ov8y7LXEo59mShua70+B_BbnmfaMbQ@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "939ccb0e8bbc2d0c7bbe22a43b9bdc551e1b9ce62c1e0af38d79ce042e5bddbe",
+      "date": "2015-09-01T10:53:09+02:00",
+      "subject": "[R-pkg-devel] Define S4 method for generic in other package",
+      "subject_clean": "[R-pkg-devel] Define S4 method for generic in other package",
+      "in_reply_to": "<CABdHhvHzvBd9SyiknM_hEGA5WENOhTLFhcwRjPozznSALZTK0Q@mail.gmail.com>",
+      "references": [
+        "<CAJuCY5y__v0RPzHceJbnQPMpcfM2JXjcW7hLjiKvxhkYgwvExA@mail.gmail.com>",
+        "<CABdHhvHzvBd9SyiknM_hEGA5WENOhTLFhcwRjPozznSALZTK0Q@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Hadley,\n\nI've put a reproducible example at https://github.com/ThierryO/testS4\n\nBest regards,\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature\nand Forest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no\nmore than asking him to perform a post-mortem examination: he may be\nable to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does\nnot ensure that a reasonable answer can be extracted from a given body\nof data. ~ John Tukey\n\n\n2015-09-01 0:32 GMT+02:00 Hadley Wickham <h.wickham at gmail.com>:\n> I'd recommend creating a minimal package that illustrates the problem\n> using an existing S4 generic in a base package (e.g. stats4::AIC).\n> That makes it easier to figure out what's gone wrong.\n>\n> It's unlikely to be a roxygen2 problem since the translation from\n> @importFrom foo bar (etc) to importFrom(foo, bar) is quite\n> straightforward.\n>\n> Hadley\n>\n> On Fri, Aug 28, 2015 at 3:23 AM, Thierry Onkelinx\n> <thierry.onkelinx at inbo.be> wrote:\n>> Dear all,\n>>\n>> I'm trying to define a new S4 method for a generics defined in an\n>> other package. Here is my attempt, but that isn't working.\n>>\n>> bar <- function(a, b) is defined as generic and S4 method in the package foo\n>>\n>> #' @importFrom foo bar\n>> #' @importMethodsFrom foo bar\n>> setMethod(\n>>   f = \"bar\",\n>>   signature = signature(A = \"myClass\"),\n>>   definition = function(\n>>     a,\n>>     b\n>>   ){\n>>     bar(\n>>       a = myClass at A,\n>>       b = myClass at B\n>>     )\n>>   }\n>> )\n>>\n>> When I build my package I get the error \"no existing definition for\n>> function 'bar'\".\n>>\n>> Any suggestions?\n>>\n>> Best regards,\n>>\n>> ir. Thierry Onkelinx\n>> Instituut voor natuur- en bosonderzoek / Research Institute for Nature\n>> and Forest\n>> team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n>> Kliniekstraat 25\n>> 1070 Anderlecht\n>> Belgium\n>>\n>> To call in the statistician after the experiment is done may be no\n>> more than asking him to perform a post-mortem examination: he may be\n>> able to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\n>> The plural of anecdote is not data. ~ Roger Brinner\n>> The combination of some data and an aching desire for an answer does\n>> not ensure that a reasonable answer can be extracted from a given body\n>> of data. ~ John Tukey\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n> --\n> http://had.co.nz/",
+      "body_snippet": "Dear Hadley,\n\nI've put a reproducible example at https://github.com/ThierryO/testS4\n\nBest regards,\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature\nand Fores",
+      "thread_id": "thread-bc96607abc45",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-9be76161dec6",
+      "message_id": "<F97D76B1-DA23-442C-BFBF-9C36240CE866@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2015-09-01T07:17:59-05:00",
+      "subject": "[R-pkg-devel] Problem with Description File",
+      "subject_clean": "[R-pkg-devel] Problem with Description File",
+      "in_reply_to": "<55E2A8FD.5020405@statistik.tu-dortmund.de>",
+      "references": [
+        "<2a25f3c5-11ae-4967-b864-5437168cce9c@me.com>",
+        "<55E2A8FD.5020405@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "I solved the problem. By copying the description file from the R library into the project directory.  Then everything started working\nGlenn\n\nSent from my iPhone\n\n> On Aug 30, 2015, at 1:55 AM, Uwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n> \n> \n> \n>> On 30.08.2015 00:37, Glenn Schultz wrote:\n>> Hi All,\n>> \n>> I am getting an error that the build directory does not contain a\n>> description file.  But there is one in the directory.  Everything was\n>> working fine until this error.  Any ideas how to fix it?\n>> \n>> ERROR: The build directory does not contain a DESCRIPTION\n>> file so cannot be built as a package.\n> \n> Is it spelled all upper case? Do you have read permission?\n> If on Windows: Is there some hidden filname extension?\n> \n> Best,\n> Uwe Ligges\n>> \n>> Glenn\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I solved the problem. By copying the description file from the R library into the project directory.  Then everything started working\nGlenn\n\nSent from my iPhone\n\n> On Aug 30, 2015, at 1:55 AM, Uwe Lig",
+      "thread_id": "thread-9be76161dec6",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-cf8396da3edb",
+      "message_id": "<55E5A352.5040008@fau.de>",
+      "from_name": "Benjamin Hofner",
+      "from_email_hash": "53bbacd419f91e18c0804266fda338e61993f117e87c02a9bb28179f46f643c5",
+      "date": "2015-09-01T15:08:34+02:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Gavin,\n\nunfortunately, I cannot overwrite plot.data.frame only. If I do this I\nget the following warning from R CMD check:\n\n* checking use of S3 registration ... WARNING\nRegistered S3 method from a standard package overwritten by 'papeR':\nmethod from\nplot.data.frame graphics\n\nThe reason for this is given in the following statement by Prof. Ripley:\n\n > Do not replace registered S3 methods from base/recommended packages,\n > something which is not allowed by the CRAN policies and will mean\n > that everyone gets your method even if your namespace is unloaded.\n\nThe route I am taking is one of the advised routes to go (see \nhttps://github.com/hofnerb/papeR/issues/5). So I am still looking for a \nfix of this issue.\n\nYour warning regarding the changed user experience is well noted. \nHowever, I think (and am aware that this is my personal opinion) that a \nlot of users will not miss the standard plot.data.frame method which is \nonly well defined for numerics anyway and not very informative in many \nsituations. After your comment I am thinking of adding an option to my \nplot.data.frame function which allows to fall back to the original user \nexperience.\n\nThanks,\nBenjamin\n\nAm 01.09.2015 um 04:37 schrieb Gavin Simpson:\n> Why do you even need to take over `plot`, `plot.default`? You can just\n> register/export the plot.data.frame method from our package without\n> touching the generic or default method. The part of WRE that you refer\n> to is about making functions that are *not* S3 methods in one of base R\n> or it's packages into S3 generics. You are just providing a method for\n> an existing generic so you don't need to follow that code.\n>\n> That said, it wouldn't be good form to fundamentally alter the way\n> plot.data.frame worked as users might expect certain functionality.\n>\n> HTH\n>\n> G\n>\n> On 31 August 2015 at 04:03, Benjamin Hofner <benjamin.hofner at fau.de\n> <mailto:benjamin.hofner at fau.de>> wrote:\n>\n>     Dear all,\n>\n>     CRAN policies do not allow that single methods (for generic\n>     functions) which are defined in base or recommended packages are\n>     replaced. They advice package authors to replace the standard\n>     generic and use a xxx.default method which then calls the original\n>     standard generic.\n>\n>     Using the following code\n>\n>\n>     ## overwrite standard generic\n>     plot <- function(x, y, ...)\n>          UseMethod(\"plot\")\n>\n>     ## per default fall back to standard generic\n>     plot.default <- function(x, y, ...)\n>          graphics::plot(x, y, ...)\n>\n>     ## now specify modified plot function for data frames\n>     plot.data.frame <- function(x, variables = names(x), ...)\n>\n>\n>     essentially works for all tested plot.xxx functions. Yet, it breaks\n>     plot.formula. How can I proceed to overwrite plot.data.frame without\n>     breaking plot.formula. Any help is greatly appreciated.\n>\n>     For a detailed description of the problem with syntax highlighting\n>     and code to reproduce the problem please see:\n>\n>     http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n>\n>     Best,\n>     Benjamin\n>     --\n>     ******************************************************************************\n>     Dr. rer. nat. Benjamin Hofner\n>\n>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>     Waldstr. 6 - 91054 Erlangen - Germany\n>\n>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>\n>     B?ro:\n>        Raum 3.036\n>        Universit?tsstra?e 22\n>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>\n>     benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>\n>     http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>     http://www.benjaminhofner.de\n>\n>     ______________________________________________\n>     R-package-devel at r-project.org <mailto:R-package-devel at r-project.org>\n>     mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n>\n> --\n> Gavin Simpson, PhD",
+      "body_snippet": "Dear Gavin,\n\nunfortunately, I cannot overwrite plot.data.frame only. If I do this I\nget the following warning from R CMD check:\n\n* checking use of S3 registration ... WARNING\nRegistered S3 method from",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-bfe7dc47c554",
+      "message_id": "<CABdHhvHn3THhrNNDZmiwSGcS3t2Lycf68ReY35nJthwx2c--Ug@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2015-09-01T08:10:59-05:00",
+      "subject": "[R-pkg-devel] Define S4 method for generic in other package",
+      "subject_clean": "[R-pkg-devel] Define S4 method for generic in other package",
+      "in_reply_to": "<CAJuCY5zmk9W54uaRt+Z3ov8y7LXEo59mShua70+B_BbnmfaMbQ@mail.gmail.com>",
+      "references": [
+        "<CAJuCY5y__v0RPzHceJbnQPMpcfM2JXjcW7hLjiKvxhkYgwvExA@mail.gmail.com>",
+        "<CABdHhvHzvBd9SyiknM_hEGA5WENOhTLFhcwRjPozznSALZTK0Q@mail.gmail.com>",
+        "<CAJuCY5zmk9W54uaRt+Z3ov8y7LXEo59mShua70+B_BbnmfaMbQ@mail.gmail.com>"
+      ],
+      "body_plain": "Ah, the problem is because of roxyen2 because:\n\n* To document your code, roxygen2 needs to load it first\n* But it can't load it without the definition of git2r::pull\n\nSo you're stuck in a bit of a vicious circle. I usually break out of\nthis circle by temporarily patching the NAMESPACE by hand (in this\ncase with importFrom(git2r,pull) and then re-generating once I can get\nthe package loading.\n\nIt would be nice to have a more general solution, but I'm not sure how\nto do it, because (e.g.) @export needs the loaded object so it can\ngenerate the correct directives. Maybe I need a separate roclet that\nonly does import namespaces and can run by only inspecting the\ncomments, not by running the code. I filed an issue at\nhttps://github.com/klutometis/roxygen/issues/372\n\nHadley\n\nOn Tue, Sep 1, 2015 at 3:53 AM, Thierry Onkelinx\n<thierry.onkelinx at inbo.be> wrote:\n> Dear Hadley,\n>\n> I've put a reproducible example at https://github.com/ThierryO/testS4\n>\n> Best regards,\n> ir. Thierry Onkelinx\n> Instituut voor natuur- en bosonderzoek / Research Institute for Nature\n> and Forest\n> team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n> Kliniekstraat 25\n> 1070 Anderlecht\n> Belgium\n>\n> To call in the statistician after the experiment is done may be no\n> more than asking him to perform a post-mortem examination: he may be\n> able to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\n> The plural of anecdote is not data. ~ Roger Brinner\n> The combination of some data and an aching desire for an answer does\n> not ensure that a reasonable answer can be extracted from a given body\n> of data. ~ John Tukey\n>\n>\n> 2015-09-01 0:32 GMT+02:00 Hadley Wickham <h.wickham at gmail.com>:\n>> I'd recommend creating a minimal package that illustrates the problem\n>> using an existing S4 generic in a base package (e.g. stats4::AIC).\n>> That makes it easier to figure out what's gone wrong.\n>>\n>> It's unlikely to be a roxygen2 problem since the translation from\n>> @importFrom foo bar (etc) to importFrom(foo, bar) is quite\n>> straightforward.\n>>\n>> Hadley\n>>\n>> On Fri, Aug 28, 2015 at 3:23 AM, Thierry Onkelinx\n>> <thierry.onkelinx at inbo.be> wrote:\n>>> Dear all,\n>>>\n>>> I'm trying to define a new S4 method for a generics defined in an\n>>> other package. Here is my attempt, but that isn't working.\n>>>\n>>> bar <- function(a, b) is defined as generic and S4 method in the package foo\n>>>\n>>> #' @importFrom foo bar\n>>> #' @importMethodsFrom foo bar\n>>> setMethod(\n>>>   f = \"bar\",\n>>>   signature = signature(A = \"myClass\"),\n>>>   definition = function(\n>>>     a,\n>>>     b\n>>>   ){\n>>>     bar(\n>>>       a = myClass at A,\n>>>       b = myClass at B\n>>>     )\n>>>   }\n>>> )\n>>>\n>>> When I build my package I get the error \"no existing definition for\n>>> function 'bar'\".\n>>>\n>>> Any suggestions?\n>>>\n>>> Best regards,\n>>>\n>>> ir. Thierry Onkelinx\n>>> Instituut voor natuur- en bosonderzoek / Research Institute for Nature\n>>> and Forest\n>>> team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n>>> Kliniekstraat 25\n>>> 1070 Anderlecht\n>>> Belgium\n>>>\n>>> To call in the statistician after the experiment is done may be no\n>>> more than asking him to perform a post-mortem examination: he may be\n>>> able to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\n>>> The plural of anecdote is not data. ~ Roger Brinner\n>>> The combination of some data and an aching desire for an answer does\n>>> not ensure that a reasonable answer can be extracted from a given body\n>>> of data. ~ John Tukey\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n>>\n>> --\n>> http://had.co.nz/\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "Ah, the problem is because of roxyen2 because:\n\n* To document your code, roxygen2 needs to load it first\n* But it can't load it without the definition of git2r::pull\n\nSo you're stuck in a bit of a vic",
+      "thread_id": "thread-bc96607abc45",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-5d538dc43480",
+      "message_id": "<CAJuCY5wYZFCU09Lz+tU2rg6MgAMg5hOjibkJQrvL2ONngLUkaw@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "939ccb0e8bbc2d0c7bbe22a43b9bdc551e1b9ce62c1e0af38d79ce042e5bddbe",
+      "date": "2015-09-01T15:14:41+02:00",
+      "subject": "[R-pkg-devel] Define S4 method for generic in other package",
+      "subject_clean": "[R-pkg-devel] Define S4 method for generic in other package",
+      "in_reply_to": "<CABdHhvHn3THhrNNDZmiwSGcS3t2Lycf68ReY35nJthwx2c--Ug@mail.gmail.com>",
+      "references": [
+        "<CAJuCY5y__v0RPzHceJbnQPMpcfM2JXjcW7hLjiKvxhkYgwvExA@mail.gmail.com>",
+        "<CABdHhvHzvBd9SyiknM_hEGA5WENOhTLFhcwRjPozznSALZTK0Q@mail.gmail.com>",
+        "<CAJuCY5zmk9W54uaRt+Z3ov8y7LXEo59mShua70+B_BbnmfaMbQ@mail.gmail.com>",
+        "<CABdHhvHn3THhrNNDZmiwSGcS3t2Lycf68ReY35nJthwx2c--Ug@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Hadley,\n\nThanks for the workaround.\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature\nand Forest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no\nmore than asking him to perform a post-mortem examination: he may be\nable to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does\nnot ensure that a reasonable answer can be extracted from a given body\nof data. ~ John Tukey\n\n\n2015-09-01 15:10 GMT+02:00 Hadley Wickham <h.wickham at gmail.com>:\n> Ah, the problem is because of roxyen2 because:\n>\n> * To document your code, roxygen2 needs to load it first\n> * But it can't load it without the definition of git2r::pull\n>\n> So you're stuck in a bit of a vicious circle. I usually break out of\n> this circle by temporarily patching the NAMESPACE by hand (in this\n> case with importFrom(git2r,pull) and then re-generating once I can get\n> the package loading.\n>\n> It would be nice to have a more general solution, but I'm not sure how\n> to do it, because (e.g.) @export needs the loaded object so it can\n> generate the correct directives. Maybe I need a separate roclet that\n> only does import namespaces and can run by only inspecting the\n> comments, not by running the code. I filed an issue at\n> https://github.com/klutometis/roxygen/issues/372\n>\n> Hadley\n>\n> On Tue, Sep 1, 2015 at 3:53 AM, Thierry Onkelinx\n> <thierry.onkelinx at inbo.be> wrote:\n>> Dear Hadley,\n>>\n>> I've put a reproducible example at https://github.com/ThierryO/testS4\n>>\n>> Best regards,\n>> ir. Thierry Onkelinx\n>> Instituut voor natuur- en bosonderzoek / Research Institute for Nature\n>> and Forest\n>> team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n>> Kliniekstraat 25\n>> 1070 Anderlecht\n>> Belgium\n>>\n>> To call in the statistician after the experiment is done may be no\n>> more than asking him to perform a post-mortem examination: he may be\n>> able to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\n>> The plural of anecdote is not data. ~ Roger Brinner\n>> The combination of some data and an aching desire for an answer does\n>> not ensure that a reasonable answer can be extracted from a given body\n>> of data. ~ John Tukey\n>>\n>>\n>> 2015-09-01 0:32 GMT+02:00 Hadley Wickham <h.wickham at gmail.com>:\n>>> I'd recommend creating a minimal package that illustrates the problem\n>>> using an existing S4 generic in a base package (e.g. stats4::AIC).\n>>> That makes it easier to figure out what's gone wrong.\n>>>\n>>> It's unlikely to be a roxygen2 problem since the translation from\n>>> @importFrom foo bar (etc) to importFrom(foo, bar) is quite\n>>> straightforward.\n>>>\n>>> Hadley\n>>>\n>>> On Fri, Aug 28, 2015 at 3:23 AM, Thierry Onkelinx\n>>> <thierry.onkelinx at inbo.be> wrote:\n>>>> Dear all,\n>>>>\n>>>> I'm trying to define a new S4 method for a generics defined in an\n>>>> other package. Here is my attempt, but that isn't working.\n>>>>\n>>>> bar <- function(a, b) is defined as generic and S4 method in the package foo\n>>>>\n>>>> #' @importFrom foo bar\n>>>> #' @importMethodsFrom foo bar\n>>>> setMethod(\n>>>>   f = \"bar\",\n>>>>   signature = signature(A = \"myClass\"),\n>>>>   definition = function(\n>>>>     a,\n>>>>     b\n>>>>   ){\n>>>>     bar(\n>>>>       a = myClass at A,\n>>>>       b = myClass at B\n>>>>     )\n>>>>   }\n>>>> )\n>>>>\n>>>> When I build my package I get the error \"no existing definition for\n>>>> function 'bar'\".\n>>>>\n>>>> Any suggestions?\n>>>>\n>>>> Best regards,\n>>>>\n>>>> ir. Thierry Onkelinx\n>>>> Instituut voor natuur- en bosonderzoek / Research Institute for Nature\n>>>> and Forest\n>>>> team Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\n>>>> Kliniekstraat 25\n>>>> 1070 Anderlecht\n>>>> Belgium\n>>>>\n>>>> To call in the statistician after the experiment is done may be no\n>>>> more than asking him to perform a post-mortem examination: he may be\n>>>> able to say what the experiment died of. ~ Sir Ronald Aylmer Fisher\n>>>> The plural of anecdote is not data. ~ Roger Brinner\n>>>> The combination of some data and an aching desire for an answer does\n>>>> not ensure that a reasonable answer can be extracted from a given body\n>>>> of data. ~ John Tukey\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>>\n>>>\n>>> --\n>>> http://had.co.nz/\n>\n>\n>\n> --\n> http://had.co.nz/",
+      "body_snippet": "Hi Hadley,\n\nThanks for the workaround.\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature\nand Forest\nteam Biometrie & Kwaliteitszorg / team Bio",
+      "thread_id": "thread-bc96607abc45",
+      "thread_depth": 2,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-dc9326bec6ba",
+      "message_id": "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2015-09-01T08:14:51-05:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<55E5A352.5040008@fau.de>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+        "<55E5A352.5040008@fau.de>"
+      ],
+      "body_plain": "Why don't you just create your own function?\n\nHadley\n\nOn Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner <benjamin.hofner at fau.de> wrote:\n> Dear Gavin,\n>\n> unfortunately, I cannot overwrite plot.data.frame only. If I do this I\n> get the following warning from R CMD check:\n>\n> * checking use of S3 registration ... WARNING\n> Registered S3 method from a standard package overwritten by 'papeR':\n> method from\n> plot.data.frame graphics\n>\n> The reason for this is given in the following statement by Prof. Ripley:\n>\n>> Do not replace registered S3 methods from base/recommended packages,\n>> something which is not allowed by the CRAN policies and will mean\n>> that everyone gets your method even if your namespace is unloaded.\n>\n> The route I am taking is one of the advised routes to go (see\n> https://github.com/hofnerb/papeR/issues/5). So I am still looking for a fix\n> of this issue.\n>\n> Your warning regarding the changed user experience is well noted. However, I\n> think (and am aware that this is my personal opinion) that a lot of users\n> will not miss the standard plot.data.frame method which is only well defined\n> for numerics anyway and not very informative in many situations. After your\n> comment I am thinking of adding an option to my plot.data.frame function\n> which allows to fall back to the original user experience.\n>\n> Thanks,\n> Benjamin\n>\n> Am 01.09.2015 um 04:37 schrieb Gavin Simpson:\n>>\n>> Why do you even need to take over `plot`, `plot.default`? You can just\n>> register/export the plot.data.frame method from our package without\n>> touching the generic or default method. The part of WRE that you refer\n>> to is about making functions that are *not* S3 methods in one of base R\n>> or it's packages into S3 generics. You are just providing a method for\n>> an existing generic so you don't need to follow that code.\n>>\n>> That said, it wouldn't be good form to fundamentally alter the way\n>> plot.data.frame worked as users might expect certain functionality.\n>>\n>> HTH\n>>\n>> G\n>>\n>> On 31 August 2015 at 04:03, Benjamin Hofner <benjamin.hofner at fau.de\n>> <mailto:benjamin.hofner at fau.de>> wrote:\n>>\n>>     Dear all,\n>>\n>>     CRAN policies do not allow that single methods (for generic\n>>     functions) which are defined in base or recommended packages are\n>>     replaced. They advice package authors to replace the standard\n>>     generic and use a xxx.default method which then calls the original\n>>     standard generic.\n>>\n>>     Using the following code\n>>\n>>\n>>     ## overwrite standard generic\n>>     plot <- function(x, y, ...)\n>>          UseMethod(\"plot\")\n>>\n>>     ## per default fall back to standard generic\n>>     plot.default <- function(x, y, ...)\n>>          graphics::plot(x, y, ...)\n>>\n>>     ## now specify modified plot function for data frames\n>>     plot.data.frame <- function(x, variables = names(x), ...)\n>>\n>>\n>>     essentially works for all tested plot.xxx functions. Yet, it breaks\n>>     plot.formula. How can I proceed to overwrite plot.data.frame without\n>>     breaking plot.formula. Any help is greatly appreciated.\n>>\n>>     For a detailed description of the problem with syntax highlighting\n>>     and code to reproduce the problem please see:\n>>\n>>\n>> http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n>>\n>>     Best,\n>>     Benjamin\n>>     --\n>>\n>> ******************************************************************************\n>>     Dr. rer. nat. Benjamin Hofner\n>>\n>>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n>>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>>     Waldstr. 6 - 91054 Erlangen - Germany\n>>\n>>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>>\n>>     B?ro:\n>>        Raum 3.036\n>>        Universit?tsstra?e 22\n>>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>>\n>>     benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>\n>>     http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>>     http://www.benjaminhofner.de\n>>\n>>     ______________________________________________\n>>     R-package-devel at r-project.org <mailto:R-package-devel at r-project.org>\n>>     mailing list\n>>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n>>\n>>\n>> --\n>> Gavin Simpson, PhD\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "Why don't you just create your own function?\n\nHadley\n\nOn Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner <benjamin.hofner at fau.de> wrote:\n> Dear Gavin,\n>\n> unfortunately, I cannot overwrite plot.data.f",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-248862dfe741",
+      "message_id": "<CAAHES9xoKg1MN6G=v9ctTP6EwLr28nHchPw03AHFhJJx5KMy8A@mail.gmail.com>",
+      "from_name": "Gavin Simpson",
+      "from_email_hash": "58add0b466097570af4fc2db149715e659937a31492dc23dbcbc4da7c2628f70",
+      "date": "2015-09-01T07:44:15-06:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+        "<55E5A352.5040008@fau.de>",
+        "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>"
+      ],
+      "body_plain": "...or have an object that is a data.frame but to which you add an\nadditional class\n\nclass(obj) <- c(\"my_df\", \"data.frame\")\n\nThen you can include plot.my_df() in your package, plus a function to\ncreate a my_df object from a data frame, and you don't have to worry about\nall this and your objects will still work like data frames\n\nG\nOn Sep 1, 2015 07:15, \"Hadley Wickham\" <h.wickham at gmail.com> wrote:\n\n> Why don't you just create your own function?\n>\n> Hadley\n>\n> On Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner <benjamin.hofner at fau.de>\n> wrote:\n> > Dear Gavin,\n> >\n> > unfortunately, I cannot overwrite plot.data.frame only. If I do this I\n> > get the following warning from R CMD check:\n> >\n> > * checking use of S3 registration ... WARNING\n> > Registered S3 method from a standard package overwritten by 'papeR':\n> > method from\n> > plot.data.frame graphics\n> >\n> > The reason for this is given in the following statement by Prof. Ripley:\n> >\n> >> Do not replace registered S3 methods from base/recommended packages,\n> >> something which is not allowed by the CRAN policies and will mean\n> >> that everyone gets your method even if your namespace is unloaded.\n> >\n> > The route I am taking is one of the advised routes to go (see\n> > https://github.com/hofnerb/papeR/issues/5). So I am still looking for a\n> fix\n> > of this issue.\n> >\n> > Your warning regarding the changed user experience is well noted.\n> However, I\n> > think (and am aware that this is my personal opinion) that a lot of users\n> > will not miss the standard plot.data.frame method which is only well\n> defined\n> > for numerics anyway and not very informative in many situations. After\n> your\n> > comment I am thinking of adding an option to my plot.data.frame function\n> > which allows to fall back to the original user experience.\n> >\n> > Thanks,\n> > Benjamin\n> >\n> > Am 01.09.2015 um 04:37 schrieb Gavin Simpson:\n> >>\n> >> Why do you even need to take over `plot`, `plot.default`? You can just\n> >> register/export the plot.data.frame method from our package without\n> >> touching the generic or default method. The part of WRE that you refer\n> >> to is about making functions that are *not* S3 methods in one of base R\n> >> or it's packages into S3 generics. You are just providing a method for\n> >> an existing generic so you don't need to follow that code.\n> >>\n> >> That said, it wouldn't be good form to fundamentally alter the way\n> >> plot.data.frame worked as users might expect certain functionality.\n> >>\n> >> HTH\n> >>\n> >> G\n> >>\n> >> On 31 August 2015 at 04:03, Benjamin Hofner <benjamin.hofner at fau.de\n> >> <mailto:benjamin.hofner at fau.de>> wrote:\n> >>\n> >>     Dear all,\n> >>\n> >>     CRAN policies do not allow that single methods (for generic\n> >>     functions) which are defined in base or recommended packages are\n> >>     replaced. They advice package authors to replace the standard\n> >>     generic and use a xxx.default method which then calls the original\n> >>     standard generic.\n> >>\n> >>     Using the following code\n> >>\n> >>\n> >>     ## overwrite standard generic\n> >>     plot <- function(x, y, ...)\n> >>          UseMethod(\"plot\")\n> >>\n> >>     ## per default fall back to standard generic\n> >>     plot.default <- function(x, y, ...)\n> >>          graphics::plot(x, y, ...)\n> >>\n> >>     ## now specify modified plot function for data frames\n> >>     plot.data.frame <- function(x, variables = names(x), ...)\n> >>\n> >>\n> >>     essentially works for all tested plot.xxx functions. Yet, it breaks\n> >>     plot.formula. How can I proceed to overwrite plot.data.frame without\n> >>     breaking plot.formula. Any help is greatly appreciated.\n> >>\n> >>     For a detailed description of the problem with syntax highlighting\n> >>     and code to reproduce the problem please see:\n> >>\n> >>\n> >>\n> http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n> >>\n> >>     Best,\n> >>     Benjamin\n> >>     --\n> >>\n> >>\n> ******************************************************************************\n> >>     Dr. rer. nat. Benjamin Hofner\n> >>\n> >>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n> >>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n> >>     Waldstr. 6 - 91054 Erlangen - Germany\n> >>\n> >>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n> >>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n> >>\n> >>     B?ro:\n> >>        Raum 3.036\n> >>        Universit?tsstra?e 22\n> >>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n> >>\n> >>     benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n> >>\n> >>     http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n> >>     http://www.benjaminhofner.de\n> >>\n> >>     ______________________________________________\n> >>     R-package-devel at r-project.org <mailto:R-package-devel at r-project.org\n> >\n> >>     mailing list\n> >>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >>\n> >>\n> >>\n> >> --\n> >> Gavin Simpson, PhD\n> >\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n> --\n> http://had.co.nz/\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "...or have an object that is a data.frame but to which you add an\nadditional class\n\nclass(obj) <- c(\"my_df\", \"data.frame\")\n\nThen you can include plot.my_df() in your package, plus a function to\ncreate",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 2,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-751652bab7be",
+      "message_id": "<55E5ADEC.5080608@fau.de>",
+      "from_name": "Benjamin Hofner",
+      "from_email_hash": "53bbacd419f91e18c0804266fda338e61993f117e87c02a9bb28179f46f643c5",
+      "date": "2015-09-01T15:53:48+02:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<CAAHES9xoKg1MN6G=v9ctTP6EwLr28nHchPw03AHFhJJx5KMy8A@mail.gmail.com>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+        "<55E5A352.5040008@fau.de>",
+        "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>",
+        "<CAAHES9xoKg1MN6G=v9ctTP6EwLr28nHchPw03AHFhJJx5KMy8A@mail.gmail.com>"
+      ],
+      "body_plain": "I am using it this way as I want to be able to plot data.frames but have \na better display and more options. Thus, using plot.data.frame seems \nrather natural. A different function or new classes are just a work \naround. I do not want to use a new class as these functions should work \non ANY data frame without coercion.\n\nAdditionally, I had the function plot.data.frame [*] in an old versions \nof the package and would like to keep it for backward compatibility.\n\n[*] admittedly the function was plot.labeled.data.frame but I dropped \nthe class labeled.data.frame as all my functions now work on regular \ndata frames as well. If labels are present, these are used. If not, not.\n\nBenjamin\n\nAm 01.09.2015 um 15:44 schrieb Gavin Simpson:\n> ...or have an object that is a data.frame but to which you add an\n> additional class\n>\n> class(obj) <- c(\"my_df\", \"data.frame\")\n>\n> Then you can include plot.my_df() in your package, plus a function to\n> create a my_df object from a data frame, and you don't have to worry\n> about all this and your objects will still work like data frames\n>\n> G\n>\n> On Sep 1, 2015 07:15, \"Hadley Wickham\" <h.wickham at gmail.com\n> <mailto:h.wickham at gmail.com>> wrote:\n>\n>     Why don't you just create your own function?\n>\n>     Hadley\n>\n>     On Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner\n>     <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>> wrote:\n>      > Dear Gavin,\n>      >\n>      > unfortunately, I cannot overwrite plot.data.frame only. If I do\n>     this I\n>      > get the following warning from R CMD check:\n>      >\n>      > * checking use of S3 registration ... WARNING\n>      > Registered S3 method from a standard package overwritten by 'papeR':\n>      > method from\n>      > plot.data.frame graphics\n>      >\n>      > The reason for this is given in the following statement by Prof.\n>     Ripley:\n>      >\n>      >> Do not replace registered S3 methods from base/recommended packages,\n>      >> something which is not allowed by the CRAN policies and will mean\n>      >> that everyone gets your method even if your namespace is unloaded.\n>      >\n>      > The route I am taking is one of the advised routes to go (see\n>      > https://github.com/hofnerb/papeR/issues/5). So I am still looking\n>     for a fix\n>      > of this issue.\n>      >\n>      > Your warning regarding the changed user experience is well noted.\n>     However, I\n>      > think (and am aware that this is my personal opinion) that a lot\n>     of users\n>      > will not miss the standard plot.data.frame method which is only\n>     well defined\n>      > for numerics anyway and not very informative in many situations.\n>     After your\n>      > comment I am thinking of adding an option to my plot.data.frame\n>     function\n>      > which allows to fall back to the original user experience.\n>      >\n>      > Thanks,\n>      > Benjamin\n>      >\n>      > Am 01.09.2015 um 04:37 schrieb Gavin Simpson:\n>      >>\n>      >> Why do you even need to take over `plot`, `plot.default`? You\n>     can just\n>      >> register/export the plot.data.frame method from our package without\n>      >> touching the generic or default method. The part of WRE that you\n>     refer\n>      >> to is about making functions that are *not* S3 methods in one of\n>     base R\n>      >> or it's packages into S3 generics. You are just providing a\n>     method for\n>      >> an existing generic so you don't need to follow that code.\n>      >>\n>      >> That said, it wouldn't be good form to fundamentally alter the way\n>      >> plot.data.frame worked as users might expect certain functionality.\n>      >>\n>      >> HTH\n>      >>\n>      >> G\n>      >>\n>      >> On 31 August 2015 at 04:03, Benjamin Hofner\n>     <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>      >> <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>>\n>     wrote:\n>      >>\n>      >>     Dear all,\n>      >>\n>      >>     CRAN policies do not allow that single methods (for generic\n>      >>     functions) which are defined in base or recommended packages are\n>      >>     replaced. They advice package authors to replace the standard\n>      >>     generic and use a xxx.default method which then calls the\n>     original\n>      >>     standard generic.\n>      >>\n>      >>     Using the following code\n>      >>\n>      >>\n>      >>     ## overwrite standard generic\n>      >>     plot <- function(x, y, ...)\n>      >>          UseMethod(\"plot\")\n>      >>\n>      >>     ## per default fall back to standard generic\n>      >>     plot.default <- function(x, y, ...)\n>      >>          graphics::plot(x, y, ...)\n>      >>\n>      >>     ## now specify modified plot function for data frames\n>      >>     plot.data.frame <- function(x, variables = names(x), ...)\n>      >>\n>      >>\n>      >>     essentially works for all tested plot.xxx functions. Yet, it\n>     breaks\n>      >>     plot.formula. How can I proceed to overwrite plot.data.frame\n>     without\n>      >>     breaking plot.formula. Any help is greatly appreciated.\n>      >>\n>      >>     For a detailed description of the problem with syntax\n>     highlighting\n>      >>     and code to reproduce the problem please see:\n>      >>\n>      >>\n>      >>\n>     http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n>      >>\n>      >>     Best,\n>      >>     Benjamin\n>      >>     --\n>      >>\n>      >>\n>     ******************************************************************************\n>      >>     Dr. rer. nat. Benjamin Hofner\n>      >>\n>      >>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n>      >>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>      >>     Waldstr. 6 - 91054 Erlangen - Germany\n>      >>\n>      >>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>     <tel:%2B49-9131-85-22707>\n>      >>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>     <tel:%2B49-9131-85-25740>\n>      >>\n>      >>     B?ro:\n>      >>        Raum 3.036\n>      >>        Universit?tsstra?e 22\n>      >>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>      >>\n>      >> benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>     <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>\n>      >>\n>      >> http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>      >> http://www.benjaminhofner.de\n>      >>\n>      >>     ______________________________________________\n>      >> R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org>\n>     <mailto:R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org>>\n>      >>     mailing list\n>      >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>      >>\n>      >>\n>      >>\n>      >>\n>      >> --\n>      >> Gavin Simpson, PhD\n>      >\n>      >\n>      > ______________________________________________\n>      > R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org> mailing list\n>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n>     --\n>     http://had.co.nz/\n>\n\n-- \n******************************************************************************\nDr. rer. nat. Benjamin Hofner\n\nInstitut f?r Medizininformatik, Biometrie und Epidemiologie\nFriedrich-Alexander-Universit?t Erlangen-N?rnberg\nWaldstr. 6 - 91054 Erlangen - Germany\n\nTel: +49-9131-85-22707\nFax: +49-9131-85-25740\n\nB?ro:\n   Raum 3.036\n   Universit?tsstra?e 22\n   (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n\nbenjamin.hofner at fau.de\n\nhttp://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\nhttp://www.benjaminhofner.de",
+      "body_snippet": "I am using it this way as I want to be able to plot data.frames but have \na better display and more options. Thus, using plot.data.frame seems \nrather natural. A different function or new classes are ",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 3,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-bdb4c3958376",
+      "message_id": "<CAF8bMcboyQz8HNWhzF170qNDdNkZz9oZvuLqQ9cm5onudC7o4A@mail.gmail.com>",
+      "from_name": "William Dunlap",
+      "from_email_hash": "f2d7c86f8973847ec833317a92c6bf21dfd137e5fc779a0e1153dd49b8b69516",
+      "date": "2015-09-01T08:39:22-07:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>"
+      ],
+      "body_plain": "Try giving y a default value, NULL, in your plot.default:\n   plot.default <- function(x, y=NULL, ...)\n       graphics::plot(x, y, ...)\n\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Mon, Aug 31, 2015 at 7:37 PM, Gavin Simpson <ucfagls at gmail.com> wrote:\n\n> Why do you even need to take over `plot`, `plot.default`? You can just\n> register/export the plot.data.frame method from our package without\n> touching the generic or default method. The part of WRE that you refer to\n> is about making functions that are *not* S3 methods in one of base R or\n> it's packages into S3 generics. You are just providing a method for an\n> existing generic so you don't need to follow that code.\n>\n> That said, it wouldn't be good form to fundamentally alter the way\n> plot.data.frame worked as users might expect certain functionality.\n>\n> HTH\n>\n> G\n>\n> On 31 August 2015 at 04:03, Benjamin Hofner <benjamin.hofner at fau.de>\n> wrote:\n>\n> > Dear all,\n> >\n> > CRAN policies do not allow that single methods (for generic functions)\n> > which are defined in base or recommended packages are replaced. They\n> advice\n> > package authors to replace the standard generic and use a xxx.default\n> > method which then calls the original standard generic.\n> >\n> > Using the following code\n> >\n> >\n> > ## overwrite standard generic\n> > plot <- function(x, y, ...)\n> >     UseMethod(\"plot\")\n> >\n> > ## per default fall back to standard generic\n> > plot.default <- function(x, y, ...)\n> >     graphics::plot(x, y, ...)\n> >\n> > ## now specify modified plot function for data frames\n> > plot.data.frame <- function(x, variables = names(x), ...)\n> >\n> >\n> > essentially works for all tested plot.xxx functions. Yet, it breaks\n> > plot.formula. How can I proceed to overwrite plot.data.frame without\n> > breaking plot.formula. Any help is greatly appreciated.\n> >\n> > For a detailed description of the problem with syntax highlighting and\n> > code to reproduce the problem please see:\n> >\n> >\n> >\n> http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n> >\n> > Best,\n> > Benjamin\n> > --\n> >\n> >\n> ******************************************************************************\n> > Dr. rer. nat. Benjamin Hofner\n> >\n> > Institut f?r Medizininformatik, Biometrie und Epidemiologie\n> > Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n> > Waldstr. 6 - 91054 Erlangen - Germany\n> >\n> > Tel: +49-9131-85-22707\n> > Fax: +49-9131-85-25740\n> >\n> > B?ro:\n> >   Raum 3.036\n> >   Universit?tsstra?e 22\n> >   (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n> >\n> > benjamin.hofner at fau.de\n> >\n> > http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n> > http://www.benjaminhofner.de\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n>\n> --\n> Gavin Simpson, PhD\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Try giving y a default value, NULL, in your plot.default:\n   plot.default <- function(x, y=NULL, ...)\n       graphics::plot(x, y, ...)\n\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Mon, Aug 31, 2",
+      "thread_id": "thread-bdb4c3958376",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-e6ba26678fd3",
+      "message_id": "<CAAHES9wk9aGp2Z0qjabohqEoNZZ3VZPYTvrV76qJKbkj2R7fkQ@mail.gmail.com>",
+      "from_name": "Gavin Simpson",
+      "from_email_hash": "58add0b466097570af4fc2db149715e659937a31492dc23dbcbc4da7c2628f70",
+      "date": "2015-09-01T09:54:51-06:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<55E5ADEC.5080608@fau.de>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+        "<55E5A352.5040008@fau.de>",
+        "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>",
+        "<CAAHES9xoKg1MN6G=v9ctTP6EwLr28nHchPw03AHFhJJx5KMy8A@mail.gmail.com>",
+        "<55E5ADEC.5080608@fau.de>"
+      ],
+      "body_plain": "It's not just plot.formula that is broken; plot.lm is dead too for example.\nIt's seems that just unexported methods fail to be called. This works\nplot(ts(1:100)), correctly calling the plot.ts method.\n\nWhat you must be doing overwriting the plot generic seems to be clobbering\nS3 dispatch or killing the registration of those methods such that they\nnever get called.\n\nI think you might need to take this to R Devel to ask what is happening to\nS3 dispatch when you modify the generic (by providing your own), unless\nsomeone else here knows what is going on?\n\nIf this isn't a problem in R, it looks like it would be easier all round to\nfollow Prof. Ripley's other advice/option and add a new class to data.frame\nobjects and provide a method for that new class...\n\nHTH\n\nG\n\nOn 1 September 2015 at 07:53, Benjamin Hofner <benjamin.hofner at fau.de>\nwrote:\n\n> I am using it this way as I want to be able to plot data.frames but have a\n> better display and more options. Thus, using plot.data.frame seems rather\n> natural. A different function or new classes are just a work around. I do\n> not want to use a new class as these functions should work on ANY data\n> frame without coercion.\n>\n> Additionally, I had the function plot.data.frame [*] in an old versions of\n> the package and would like to keep it for backward compatibility.\n>\n> [*] admittedly the function was plot.labeled.data.frame but I dropped the\n> class labeled.data.frame as all my functions now work on regular data\n> frames as well. If labels are present, these are used. If not, not.\n>\n> Benjamin\n>\n> Am 01.09.2015 um 15:44 schrieb Gavin Simpson:\n>\n>> ...or have an object that is a data.frame but to which you add an\n>> additional class\n>>\n>> class(obj) <- c(\"my_df\", \"data.frame\")\n>>\n>> Then you can include plot.my_df() in your package, plus a function to\n>> create a my_df object from a data frame, and you don't have to worry\n>> about all this and your objects will still work like data frames\n>>\n>> G\n>>\n>> On Sep 1, 2015 07:15, \"Hadley Wickham\" <h.wickham at gmail.com\n>> <mailto:h.wickham at gmail.com>> wrote:\n>>\n>>     Why don't you just create your own function?\n>>\n>>     Hadley\n>>\n>>     On Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner\n>>     <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>> wrote:\n>>      > Dear Gavin,\n>>      >\n>>      > unfortunately, I cannot overwrite plot.data.frame only. If I do\n>>     this I\n>>      > get the following warning from R CMD check:\n>>      >\n>>      > * checking use of S3 registration ... WARNING\n>>      > Registered S3 method from a standard package overwritten by\n>> 'papeR':\n>>      > method from\n>>      > plot.data.frame graphics\n>>      >\n>>      > The reason for this is given in the following statement by Prof.\n>>     Ripley:\n>>      >\n>>      >> Do not replace registered S3 methods from base/recommended\n>> packages,\n>>      >> something which is not allowed by the CRAN policies and will mean\n>>      >> that everyone gets your method even if your namespace is unloaded.\n>>      >\n>>      > The route I am taking is one of the advised routes to go (see\n>>      > https://github.com/hofnerb/papeR/issues/5). So I am still looking\n>>     for a fix\n>>      > of this issue.\n>>      >\n>>      > Your warning regarding the changed user experience is well noted.\n>>     However, I\n>>      > think (and am aware that this is my personal opinion) that a lot\n>>     of users\n>>      > will not miss the standard plot.data.frame method which is only\n>>     well defined\n>>      > for numerics anyway and not very informative in many situations.\n>>     After your\n>>      > comment I am thinking of adding an option to my plot.data.frame\n>>     function\n>>      > which allows to fall back to the original user experience.\n>>      >\n>>      > Thanks,\n>>      > Benjamin\n>>      >\n>>      > Am 01.09.2015 um 04:37 schrieb Gavin Simpson:\n>>      >>\n>>      >> Why do you even need to take over `plot`, `plot.default`? You\n>>     can just\n>>      >> register/export the plot.data.frame method from our package\n>> without\n>>      >> touching the generic or default method. The part of WRE that you\n>>     refer\n>>      >> to is about making functions that are *not* S3 methods in one of\n>>     base R\n>>      >> or it's packages into S3 generics. You are just providing a\n>>     method for\n>>      >> an existing generic so you don't need to follow that code.\n>>      >>\n>>      >> That said, it wouldn't be good form to fundamentally alter the way\n>>      >> plot.data.frame worked as users might expect certain\n>> functionality.\n>>      >>\n>>      >> HTH\n>>      >>\n>>      >> G\n>>      >>\n>>      >> On 31 August 2015 at 04:03, Benjamin Hofner\n>>     <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>      >> <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>>\n>>\n>>     wrote:\n>>      >>\n>>      >>     Dear all,\n>>      >>\n>>      >>     CRAN policies do not allow that single methods (for generic\n>>      >>     functions) which are defined in base or recommended packages\n>> are\n>>      >>     replaced. They advice package authors to replace the standard\n>>      >>     generic and use a xxx.default method which then calls the\n>>     original\n>>      >>     standard generic.\n>>      >>\n>>      >>     Using the following code\n>>      >>\n>>      >>\n>>      >>     ## overwrite standard generic\n>>      >>     plot <- function(x, y, ...)\n>>      >>          UseMethod(\"plot\")\n>>      >>\n>>      >>     ## per default fall back to standard generic\n>>      >>     plot.default <- function(x, y, ...)\n>>      >>          graphics::plot(x, y, ...)\n>>      >>\n>>      >>     ## now specify modified plot function for data frames\n>>      >>     plot.data.frame <- function(x, variables = names(x), ...)\n>>      >>\n>>      >>\n>>      >>     essentially works for all tested plot.xxx functions. Yet, it\n>>     breaks\n>>      >>     plot.formula. How can I proceed to overwrite plot.data.frame\n>>     without\n>>      >>     breaking plot.formula. Any help is greatly appreciated.\n>>      >>\n>>      >>     For a detailed description of the problem with syntax\n>>     highlighting\n>>      >>     and code to reproduce the problem please see:\n>>      >>\n>>      >>\n>>      >>\n>>\n>> http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n>>      >>\n>>      >>     Best,\n>>      >>     Benjamin\n>>      >>     --\n>>      >>\n>>      >>\n>>\n>> ******************************************************************************\n>>      >>     Dr. rer. nat. Benjamin Hofner\n>>      >>\n>>      >>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n>>      >>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>>      >>     Waldstr. 6 - 91054 Erlangen - Germany\n>>      >>\n>>      >>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>>     <tel:%2B49-9131-85-22707>\n>>      >>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>>     <tel:%2B49-9131-85-25740>\n>>      >>\n>>      >>     B?ro:\n>>      >>        Raum 3.036\n>>      >>        Universit?tsstra?e 22\n>>      >>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>>      >>\n>>      >> benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>     <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>\n>>      >>\n>>      >> http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>>      >> http://www.benjaminhofner.de\n>>      >>\n>>      >>     ______________________________________________\n>>      >> R-package-devel at r-project.org\n>>     <mailto:R-package-devel at r-project.org>\n>>     <mailto:R-package-devel at r-project.org\n>>     <mailto:R-package-devel at r-project.org>>\n>>      >>     mailing list\n>>      >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>      >>\n>>      >>\n>>      >>\n>>      >>\n>>      >> --\n>>      >> Gavin Simpson, PhD\n>>      >\n>>      >\n>>      > ______________________________________________\n>>      > R-package-devel at r-project.org\n>>     <mailto:R-package-devel at r-project.org> mailing list\n>>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n>>\n>>     --\n>>     http://had.co.nz/\n>>\n>>\n> --\n>\n> ******************************************************************************\n> Dr. rer. nat. Benjamin Hofner\n>\n> Institut f?r Medizininformatik, Biometrie und Epidemiologie\n> Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n> Waldstr. 6 - 91054 Erlangen - Germany\n>\n> Tel: +49-9131-85-22707\n> Fax: +49-9131-85-25740\n>\n> B?ro:\n>   Raum 3.036\n>   Universit?tsstra?e 22\n>   (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>\n> benjamin.hofner at fau.de\n>\n> http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n> http://www.benjaminhofner.de\n>\n> ******************************************************************************\n>\n\n\n\n-- \nGavin Simpson, PhD\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "It's not just plot.formula that is broken; plot.lm is dead too for example.\nIt's seems that just unexported methods fail to be called. This works\nplot(ts(1:100)), correctly calling the plot.ts method.",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 4,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-5e3550017820",
+      "message_id": "<55E5CBE9.5080507@fau.de>",
+      "from_name": "Benjamin Hofner",
+      "from_email_hash": "53bbacd419f91e18c0804266fda338e61993f117e87c02a9bb28179f46f643c5",
+      "date": "2015-09-01T18:01:45+02:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<CAAHES9wk9aGp2Z0qjabohqEoNZZ3VZPYTvrV76qJKbkj2R7fkQ@mail.gmail.com>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+        "<55E5A352.5040008@fau.de>",
+        "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>",
+        "<CAAHES9xoKg1MN6G=v9ctTP6EwLr28nHchPw03AHFhJJx5KMy8A@mail.gmail.com>",
+        "<55E5ADEC.5080608@fau.de>",
+        "<CAAHES9wk9aGp2Z0qjabohqEoNZZ3VZPYTvrV76qJKbkj2R7fkQ@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Gavin,\n\nyou and Hadley seem to be right. It looks like a problem which is buried \ndeeper within R and the method dispatch. It seems like I have to \nreintroduce the class labeled.data.frame and plot.labeled.data.frame.\n\nHowever, I will post on R-devel to try to understand this issue.\n\nThanks a lot!\nBenjamin\n\nAm 01.09.2015 um 17:54 schrieb Gavin Simpson:\n> It's not just plot.formula that is broken; plot.lm is dead too for\n> example. It's seems that just unexported methods fail to be called. This\n> works plot(ts(1:100)), correctly calling the plot.ts method.\n>\n> What you must be doing overwriting the plot generic seems to be\n> clobbering S3 dispatch or killing the registration of those methods such\n> that they never get called.\n>\n> I think you might need to take this to R Devel to ask what is happening\n> to S3 dispatch when you modify the generic (by providing your own),\n> unless someone else here knows what is going on?\n>\n> If this isn't a problem in R, it looks like it would be easier all round\n> to follow Prof. Ripley's other advice/option and add a new class to\n> data.frame objects and provide a method for that new class...\n>\n> HTH\n>\n> G\n>\n> On 1 September 2015 at 07:53, Benjamin Hofner <benjamin.hofner at fau.de\n> <mailto:benjamin.hofner at fau.de>> wrote:\n>\n>     I am using it this way as I want to be able to plot data.frames but\n>     have a better display and more options. Thus, using plot.data.frame\n>     seems rather natural. A different function or new classes are just a\n>     work around. I do not want to use a new class as these functions\n>     should work on ANY data frame without coercion.\n>\n>     Additionally, I had the function plot.data.frame [*] in an old\n>     versions of the package and would like to keep it for backward\n>     compatibility.\n>\n>     [*] admittedly the function was plot.labeled.data.frame but I\n>     dropped the class labeled.data.frame as all my functions now work on\n>     regular data frames as well. If labels are present, these are used.\n>     If not, not.\n>\n>     Benjamin\n>\n>     Am 01.09.2015 um 15:44 schrieb Gavin Simpson:\n>\n>         ...or have an object that is a data.frame but to which you add an\n>         additional class\n>\n>         class(obj) <- c(\"my_df\", \"data.frame\")\n>\n>         Then you can include plot.my_df() in your package, plus a\n>         function to\n>         create a my_df object from a data frame, and you don't have to worry\n>         about all this and your objects will still work like data frames\n>\n>         G\n>\n>         On Sep 1, 2015 07:15, \"Hadley Wickham\" <h.wickham at gmail.com\n>         <mailto:h.wickham at gmail.com>\n>         <mailto:h.wickham at gmail.com <mailto:h.wickham at gmail.com>>> wrote:\n>\n>              Why don't you just create your own function?\n>\n>              Hadley\n>\n>              On Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner\n>              <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>         <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>>\n>         wrote:\n>               > Dear Gavin,\n>               >\n>               > unfortunately, I cannot overwrite plot.data.frame only.\n>         If I do\n>              this I\n>               > get the following warning from R CMD check:\n>               >\n>               > * checking use of S3 registration ... WARNING\n>               > Registered S3 method from a standard package overwritten\n>         by 'papeR':\n>               > method from\n>               > plot.data.frame graphics\n>               >\n>               > The reason for this is given in the following statement\n>         by Prof.\n>              Ripley:\n>               >\n>               >> Do not replace registered S3 methods from\n>         base/recommended packages,\n>               >> something which is not allowed by the CRAN policies and\n>         will mean\n>               >> that everyone gets your method even if your namespace\n>         is unloaded.\n>               >\n>               > The route I am taking is one of the advised routes to go\n>         (see\n>               > https://github.com/hofnerb/papeR/issues/5). So I am\n>         still looking\n>              for a fix\n>               > of this issue.\n>               >\n>               > Your warning regarding the changed user experience is\n>         well noted.\n>              However, I\n>               > think (and am aware that this is my personal opinion)\n>         that a lot\n>              of users\n>               > will not miss the standard plot.data.frame method which\n>         is only\n>              well defined\n>               > for numerics anyway and not very informative in many\n>         situations.\n>              After your\n>               > comment I am thinking of adding an option to my\n>         plot.data.frame\n>              function\n>               > which allows to fall back to the original user experience.\n>               >\n>               > Thanks,\n>               > Benjamin\n>               >\n>               > Am 01.09.2015 um 04:37 schrieb Gavin Simpson:\n>               >>\n>               >> Why do you even need to take over `plot`,\n>         `plot.default`? You\n>              can just\n>               >> register/export the plot.data.frame method from our\n>         package without\n>               >> touching the generic or default method. The part of WRE\n>         that you\n>              refer\n>               >> to is about making functions that are *not* S3 methods\n>         in one of\n>              base R\n>               >> or it's packages into S3 generics. You are just providing a\n>              method for\n>               >> an existing generic so you don't need to follow that code.\n>               >>\n>               >> That said, it wouldn't be good form to fundamentally\n>         alter the way\n>               >> plot.data.frame worked as users might expect certain\n>         functionality.\n>               >>\n>               >> HTH\n>               >>\n>               >> G\n>               >>\n>               >> On 31 August 2015 at 04:03, Benjamin Hofner\n>              <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>         <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>\n>               >> <mailto:benjamin.hofner at fau.de\n>         <mailto:benjamin.hofner at fau.de> <mailto:benjamin.hofner at fau.de\n>         <mailto:benjamin.hofner at fau.de>>>>\n>\n>              wrote:\n>               >>\n>               >>     Dear all,\n>               >>\n>               >>     CRAN policies do not allow that single methods (for\n>         generic\n>               >>     functions) which are defined in base or recommended\n>         packages are\n>               >>     replaced. They advice package authors to replace\n>         the standard\n>               >>     generic and use a xxx.default method which then\n>         calls the\n>              original\n>               >>     standard generic.\n>               >>\n>               >>     Using the following code\n>               >>\n>               >>\n>               >>     ## overwrite standard generic\n>               >>     plot <- function(x, y, ...)\n>               >>          UseMethod(\"plot\")\n>               >>\n>               >>     ## per default fall back to standard generic\n>               >>     plot.default <- function(x, y, ...)\n>               >>          graphics::plot(x, y, ...)\n>               >>\n>               >>     ## now specify modified plot function for data frames\n>               >>     plot.data.frame <- function(x, variables =\n>         names(x), ...)\n>               >>\n>               >>\n>               >>     essentially works for all tested plot.xxx\n>         functions. Yet, it\n>              breaks\n>               >>     plot.formula. How can I proceed to overwrite\n>         plot.data.frame\n>              without\n>               >>     breaking plot.formula. Any help is greatly appreciated.\n>               >>\n>               >>     For a detailed description of the problem with syntax\n>              highlighting\n>               >>     and code to reproduce the problem please see:\n>               >>\n>               >>\n>               >>\n>         http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n>               >>\n>               >>     Best,\n>               >>     Benjamin\n>               >>     --\n>               >>\n>               >>\n>\n>         ******************************************************************************\n>               >>     Dr. rer. nat. Benjamin Hofner\n>               >>\n>               >>     Institut f?r Medizininformatik, Biometrie und\n>         Epidemiologie\n>               >>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>               >>     Waldstr. 6 - 91054 Erlangen - Germany\n>               >>\n>               >>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>         <tel:%2B49-9131-85-22707>\n>              <tel:%2B49-9131-85-22707>\n>               >>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>         <tel:%2B49-9131-85-25740>\n>              <tel:%2B49-9131-85-25740>\n>               >>\n>               >>     B?ro:\n>               >>        Raum 3.036\n>               >>        Universit?tsstra?e 22\n>               >>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>               >>\n>               >> benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>         <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>\n>              <mailto:benjamin.hofner at fau.de\n>         <mailto:benjamin.hofner at fau.de> <mailto:benjamin.hofner at fau.de\n>         <mailto:benjamin.hofner at fau.de>>>\n>               >>\n>               >>\n>         http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>               >> http://www.benjaminhofner.de\n>               >>\n>               >>     ______________________________________________\n>               >> R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org>\n>              <mailto:R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org>>\n>              <mailto:R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org>\n>              <mailto:R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org>>>\n>               >>     mailing list\n>               >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>               >>\n>               >>\n>               >>\n>               >>\n>               >> --\n>               >> Gavin Simpson, PhD\n>               >\n>               >\n>               > ______________________________________________\n>               > R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org>\n>              <mailto:R-package-devel at r-project.org\n>         <mailto:R-package-devel at r-project.org>> mailing list\n>               > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n>              --\n>         http://had.co.nz/\n>\n>\n>     --\n>     ******************************************************************************\n>     Dr. rer. nat. Benjamin Hofner\n>\n>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>     Waldstr. 6 - 91054 Erlangen - Germany\n>\n>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>\n>     B?ro:\n>        Raum 3.036\n>        Universit?tsstra?e 22\n>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>\n>     benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>\n>     http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>     http://www.benjaminhofner.de\n>     ******************************************************************************\n>\n>\n>\n>\n> --\n> Gavin Simpson, PhD\n\n-- \n******************************************************************************\nDr. rer. nat. Benjamin Hofner\n\nInstitut f?r Medizininformatik, Biometrie und Epidemiologie\nFriedrich-Alexander-Universit?t Erlangen-N?rnberg\nWaldstr. 6 - 91054 Erlangen - Germany\n\nTel: +49-9131-85-22707\nFax: +49-9131-85-25740\n\nB?ro:\n   Raum 3.036\n   Universit?tsstra?e 22\n   (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n\nbenjamin.hofner at fau.de\n\nhttp://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\nhttp://www.benjaminhofner.de",
+      "body_snippet": "Dear Gavin,\n\nyou and Hadley seem to be right. It looks like a problem which is buried \ndeeper within R and the method dispatch. It seems like I have to \nreintroduce the class labeled.data.frame and pl",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 5,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-1c9fb3f5831e",
+      "message_id": "<CAJXgQP3oRXYfW3OXx-dcu_WCX-Y9tYw=BG-neyETbFavdwyyuw@mail.gmail.com>",
+      "from_name": "Kevin Ushey",
+      "from_email_hash": "fd1e8dc06c8e4652d61a44d70d6e99b3b7fb556bac7ad471ff6447d5a6e491ec",
+      "date": "2015-09-01T10:18:25-07:00",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "subject_clean": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "in_reply_to": "<55E5CBE9.5080507@fau.de>",
+      "references": [
+        "<55E42654.20309@fau.de>",
+        "<CAAHES9xx7f=PV0uCKCAYuFr_A5OUUSL+yR8yPjGWmmrDe4_POg@mail.gmail.com>",
+        "<55E5A352.5040008@fau.de>",
+        "<CABdHhvFontSByS65WxooChsQWMWy+W+8W5-TchP-3apjg5kYKQ@mail.gmail.com>",
+        "<CAAHES9xoKg1MN6G=v9ctTP6EwLr28nHchPw03AHFhJJx5KMy8A@mail.gmail.com>",
+        "<55E5ADEC.5080608@fau.de>",
+        "<CAAHES9wk9aGp2Z0qjabohqEoNZZ3VZPYTvrV76qJKbkj2R7fkQ@mail.gmail.com>",
+        "<55E5CBE9.5080507@fau.de>"
+      ],
+      "body_plain": "FWIW, it's a very _very_ bad idea to add methods to S3 generics for\nclasses you don't 'own'. Some code might be written with the\nexpectation that `plot(df)` actually does dispatch to `plot.default`.\nThis implies that simply loading your package would break code in\nsurprising ways.\n\nI would strongly suggest creating your own class and using\npre-existing generics whenever possible.\n\n\nOn Tue, Sep 1, 2015 at 9:01 AM, Benjamin Hofner <benjamin.hofner at fau.de> wrote:\n> Dear Gavin,\n>\n> you and Hadley seem to be right. It looks like a problem which is buried\n> deeper within R and the method dispatch. It seems like I have to reintroduce\n> the class labeled.data.frame and plot.labeled.data.frame.\n>\n> However, I will post on R-devel to try to understand this issue.\n>\n> Thanks a lot!\n> Benjamin\n>\n> Am 01.09.2015 um 17:54 schrieb Gavin Simpson:\n>>\n>> It's not just plot.formula that is broken; plot.lm is dead too for\n>> example. It's seems that just unexported methods fail to be called. This\n>> works plot(ts(1:100)), correctly calling the plot.ts method.\n>>\n>> What you must be doing overwriting the plot generic seems to be\n>> clobbering S3 dispatch or killing the registration of those methods such\n>> that they never get called.\n>>\n>> I think you might need to take this to R Devel to ask what is happening\n>> to S3 dispatch when you modify the generic (by providing your own),\n>> unless someone else here knows what is going on?\n>>\n>> If this isn't a problem in R, it looks like it would be easier all round\n>> to follow Prof. Ripley's other advice/option and add a new class to\n>> data.frame objects and provide a method for that new class...\n>>\n>> HTH\n>>\n>> G\n>>\n>> On 1 September 2015 at 07:53, Benjamin Hofner <benjamin.hofner at fau.de\n>> <mailto:benjamin.hofner at fau.de>> wrote:\n>>\n>>     I am using it this way as I want to be able to plot data.frames but\n>>     have a better display and more options. Thus, using plot.data.frame\n>>     seems rather natural. A different function or new classes are just a\n>>     work around. I do not want to use a new class as these functions\n>>     should work on ANY data frame without coercion.\n>>\n>>     Additionally, I had the function plot.data.frame [*] in an old\n>>     versions of the package and would like to keep it for backward\n>>     compatibility.\n>>\n>>     [*] admittedly the function was plot.labeled.data.frame but I\n>>     dropped the class labeled.data.frame as all my functions now work on\n>>     regular data frames as well. If labels are present, these are used.\n>>     If not, not.\n>>\n>>     Benjamin\n>>\n>>     Am 01.09.2015 um 15:44 schrieb Gavin Simpson:\n>>\n>>         ...or have an object that is a data.frame but to which you add an\n>>         additional class\n>>\n>>         class(obj) <- c(\"my_df\", \"data.frame\")\n>>\n>>         Then you can include plot.my_df() in your package, plus a\n>>         function to\n>>         create a my_df object from a data frame, and you don't have to\n>> worry\n>>         about all this and your objects will still work like data frames\n>>\n>>         G\n>>\n>>         On Sep 1, 2015 07:15, \"Hadley Wickham\" <h.wickham at gmail.com\n>>         <mailto:h.wickham at gmail.com>\n>>         <mailto:h.wickham at gmail.com <mailto:h.wickham at gmail.com>>> wrote:\n>>\n>>              Why don't you just create your own function?\n>>\n>>              Hadley\n>>\n>>              On Tue, Sep 1, 2015 at 8:08 AM, Benjamin Hofner\n>>              <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>         <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>>\n>>         wrote:\n>>               > Dear Gavin,\n>>               >\n>>               > unfortunately, I cannot overwrite plot.data.frame only.\n>>         If I do\n>>              this I\n>>               > get the following warning from R CMD check:\n>>               >\n>>               > * checking use of S3 registration ... WARNING\n>>               > Registered S3 method from a standard package overwritten\n>>         by 'papeR':\n>>               > method from\n>>               > plot.data.frame graphics\n>>               >\n>>               > The reason for this is given in the following statement\n>>         by Prof.\n>>              Ripley:\n>>               >\n>>               >> Do not replace registered S3 methods from\n>>         base/recommended packages,\n>>               >> something which is not allowed by the CRAN policies and\n>>         will mean\n>>               >> that everyone gets your method even if your namespace\n>>         is unloaded.\n>>               >\n>>               > The route I am taking is one of the advised routes to go\n>>         (see\n>>               > https://github.com/hofnerb/papeR/issues/5). So I am\n>>         still looking\n>>              for a fix\n>>               > of this issue.\n>>               >\n>>               > Your warning regarding the changed user experience is\n>>         well noted.\n>>              However, I\n>>               > think (and am aware that this is my personal opinion)\n>>         that a lot\n>>              of users\n>>               > will not miss the standard plot.data.frame method which\n>>         is only\n>>              well defined\n>>               > for numerics anyway and not very informative in many\n>>         situations.\n>>              After your\n>>               > comment I am thinking of adding an option to my\n>>         plot.data.frame\n>>              function\n>>               > which allows to fall back to the original user experience.\n>>               >\n>>               > Thanks,\n>>               > Benjamin\n>>               >\n>>               > Am 01.09.2015 um 04:37 schrieb Gavin Simpson:\n>>               >>\n>>               >> Why do you even need to take over `plot`,\n>>         `plot.default`? You\n>>              can just\n>>               >> register/export the plot.data.frame method from our\n>>         package without\n>>               >> touching the generic or default method. The part of WRE\n>>         that you\n>>              refer\n>>               >> to is about making functions that are *not* S3 methods\n>>         in one of\n>>              base R\n>>               >> or it's packages into S3 generics. You are just providing\n>> a\n>>              method for\n>>               >> an existing generic so you don't need to follow that\n>> code.\n>>               >>\n>>               >> That said, it wouldn't be good form to fundamentally\n>>         alter the way\n>>               >> plot.data.frame worked as users might expect certain\n>>         functionality.\n>>               >>\n>>               >> HTH\n>>               >>\n>>               >> G\n>>               >>\n>>               >> On 31 August 2015 at 04:03, Benjamin Hofner\n>>              <benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>         <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>\n>>               >> <mailto:benjamin.hofner at fau.de\n>>         <mailto:benjamin.hofner at fau.de> <mailto:benjamin.hofner at fau.de\n>>         <mailto:benjamin.hofner at fau.de>>>>\n>>\n>>              wrote:\n>>               >>\n>>               >>     Dear all,\n>>               >>\n>>               >>     CRAN policies do not allow that single methods (for\n>>         generic\n>>               >>     functions) which are defined in base or recommended\n>>         packages are\n>>               >>     replaced. They advice package authors to replace\n>>         the standard\n>>               >>     generic and use a xxx.default method which then\n>>         calls the\n>>              original\n>>               >>     standard generic.\n>>               >>\n>>               >>     Using the following code\n>>               >>\n>>               >>\n>>               >>     ## overwrite standard generic\n>>               >>     plot <- function(x, y, ...)\n>>               >>          UseMethod(\"plot\")\n>>               >>\n>>               >>     ## per default fall back to standard generic\n>>               >>     plot.default <- function(x, y, ...)\n>>               >>          graphics::plot(x, y, ...)\n>>               >>\n>>               >>     ## now specify modified plot function for data frames\n>>               >>     plot.data.frame <- function(x, variables =\n>>         names(x), ...)\n>>               >>\n>>               >>\n>>               >>     essentially works for all tested plot.xxx\n>>         functions. Yet, it\n>>              breaks\n>>               >>     plot.formula. How can I proceed to overwrite\n>>         plot.data.frame\n>>              without\n>>               >>     breaking plot.formula. Any help is greatly\n>> appreciated.\n>>               >>\n>>               >>     For a detailed description of the problem with syntax\n>>              highlighting\n>>               >>     and code to reproduce the problem please see:\n>>               >>\n>>               >>\n>>               >>\n>>\n>> http://stackoverflow.com/questions/32246361/redefinition-of-generic-for-plot-function-breaks-plot-formula\n>>               >>\n>>               >>     Best,\n>>               >>     Benjamin\n>>               >>     --\n>>               >>\n>>               >>\n>>\n>>\n>> ******************************************************************************\n>>               >>     Dr. rer. nat. Benjamin Hofner\n>>               >>\n>>               >>     Institut f?r Medizininformatik, Biometrie und\n>>         Epidemiologie\n>>               >>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>>               >>     Waldstr. 6 - 91054 Erlangen - Germany\n>>               >>\n>>               >>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>>         <tel:%2B49-9131-85-22707>\n>>              <tel:%2B49-9131-85-22707>\n>>               >>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>>         <tel:%2B49-9131-85-25740>\n>>              <tel:%2B49-9131-85-25740>\n>>               >>\n>>               >>     B?ro:\n>>               >>        Raum 3.036\n>>               >>        Universit?tsstra?e 22\n>>               >>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>>               >>\n>>               >> benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>         <mailto:benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>>\n>>              <mailto:benjamin.hofner at fau.de\n>>         <mailto:benjamin.hofner at fau.de> <mailto:benjamin.hofner at fau.de\n>>         <mailto:benjamin.hofner at fau.de>>>\n>>               >>\n>>               >>\n>>         http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>>               >> http://www.benjaminhofner.de\n>>               >>\n>>               >>     ______________________________________________\n>>               >> R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org>\n>>              <mailto:R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org>>\n>>              <mailto:R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org>\n>>              <mailto:R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org>>>\n>>               >>     mailing list\n>>               >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>               >>\n>>               >>\n>>               >>\n>>               >>\n>>               >> --\n>>               >> Gavin Simpson, PhD\n>>               >\n>>               >\n>>               > ______________________________________________\n>>               > R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org>\n>>              <mailto:R-package-devel at r-project.org\n>>         <mailto:R-package-devel at r-project.org>> mailing list\n>>               > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n>>\n>>              --\n>>         http://had.co.nz/\n>>\n>>\n>>     --\n>>\n>> ******************************************************************************\n>>     Dr. rer. nat. Benjamin Hofner\n>>\n>>     Institut f?r Medizininformatik, Biometrie und Epidemiologie\n>>     Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n>>     Waldstr. 6 - 91054 Erlangen - Germany\n>>\n>>     Tel: +49-9131-85-22707 <tel:%2B49-9131-85-22707>\n>>     Fax: +49-9131-85-25740 <tel:%2B49-9131-85-25740>\n>>\n>>     B?ro:\n>>        Raum 3.036\n>>        Universit?tsstra?e 22\n>>        (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>>\n>>     benjamin.hofner at fau.de <mailto:benjamin.hofner at fau.de>\n>>\n>>     http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n>>     http://www.benjaminhofner.de\n>>\n>> ******************************************************************************\n>>\n>>\n>>\n>>\n>> --\n>> Gavin Simpson, PhD\n>\n>\n> --\n> ******************************************************************************\n> Dr. rer. nat. Benjamin Hofner\n>\n> Institut f?r Medizininformatik, Biometrie und Epidemiologie\n> Friedrich-Alexander-Universit?t Erlangen-N?rnberg\n> Waldstr. 6 - 91054 Erlangen - Germany\n>\n> Tel: +49-9131-85-22707\n> Fax: +49-9131-85-25740\n>\n> B?ro:\n>   Raum 3.036\n>   Universit?tsstra?e 22\n>   (Eingang linke Seite des Geb?udes; Wegweiser IMBE)\n>\n> benjamin.hofner at fau.de\n>\n> http://www.imbe.med.uni-erlangen.de/cms/benjamin_hofner.html\n> http://www.benjaminhofner.de\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "FWIW, it's a very _very_ bad idea to add methods to S3 generics for\nclasses you don't 'own'. Some code might be written with the\nexpectation that `plot(df)` actually does dispatch to `plot.default`.\nT",
+      "thread_id": "thread-cf8396da3edb",
+      "thread_depth": 6,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-3c9fb61e7dc1",
+      "message_id": "<CAF+B1fQnGMj=6vYZneYWfcf1WAzghM0YtUE_g6=4MiZqexHWhg@mail.gmail.com>",
+      "from_name": "Chay Ngee Lim",
+      "from_email_hash": "78023ac14dd3bcb13ec6f9f39c9f0c3975d2d7fe76f28d86c0aff3fd1b838517",
+      "date": "2015-09-03T17:07:05-05:00",
+      "subject": "[R-pkg-devel] devtools::revdep_check error message",
+      "subject_clean": "[R-pkg-devel] devtools::revdep_check error message",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI am a first time package developer, having issues with the downstream\ndependency check function -- devtools::revdep_check.\n\n>From the manual, it seems that by default the current directory will\nbe set as the package path so I was working within the package path\nand had completed the checks before going to the downstream dependency\ncheck but I am getting the following error message:\n\n\nReverse dependency checks for phxnlme\n===================================================================Installing\nphxnlmeError in normalizePath(path.expand(path), winslash, mustWork) :\n  path[1]=\"C:\\Users\\Chay\\AppData\\Local\\Temp\\Rtmp001SM6/R-lib\": The\nsystem cannot find the path specified\n\n\nThanks.\n\nChay\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am a first time package developer, having issues with the downstream\ndependency check function -- devtools::revdep_check.\n\n>From the manual, it seems that by default the current directory will\n",
+      "thread_id": "thread-3c9fb61e7dc1",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-f3b919131920",
+      "message_id": "<55E8CBCC.4000108@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-09-03T18:38:04-04:00",
+      "subject": "[R-pkg-devel] devtools::revdep_check error message",
+      "subject_clean": "[R-pkg-devel] devtools::revdep_check error message",
+      "in_reply_to": "<CAF+B1fQnGMj=6vYZneYWfcf1WAzghM0YtUE_g6=4MiZqexHWhg@mail.gmail.com>",
+      "references": [
+        "<CAF+B1fQnGMj=6vYZneYWfcf1WAzghM0YtUE_g6=4MiZqexHWhg@mail.gmail.com>"
+      ],
+      "body_plain": "On 03/09/2015 6:07 PM, Chay Ngee Lim wrote:\n> Hi,\n> \n> I am a first time package developer, having issues with the downstream\n> dependency check function -- devtools::revdep_check.\n> \n>>From the manual, it seems that by default the current directory will\n> be set as the package path so I was working within the package path\n> and had completed the checks before going to the downstream dependency\n> check but I am getting the following error message:\n> \n> \n> Reverse dependency checks for phxnlme\n> ===================================================================Installing\n> phxnlmeError in normalizePath(path.expand(path), winslash, mustWork) :\n>   path[1]=\"C:\\Users\\Chay\\AppData\\Local\\Temp\\Rtmp001SM6/R-lib\": The\n> system cannot find the path specified\n> \n\nThis sounds like a devtools misuse or bug --- you probably need to ask\nabout it on the devtools page.  (devtools is not part of R, it is a\ncontributed package.)\n\nThe devtools page is http://github.com/hadley/devtools.\n\nDuncan Murdoch",
+      "body_snippet": "On 03/09/2015 6:07 PM, Chay Ngee Lim wrote:\n> Hi,\n> \n> I am a first time package developer, having issues with the downstream\n> dependency check function -- devtools::revdep_check.\n> \n>>From the manua",
+      "thread_id": "thread-3c9fb61e7dc1",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-e90c4b057f1a",
+      "message_id": "<55E957A1.8080804@uni-wuerzburg.de>",
+      "from_name": "Benjamin Leutner",
+      "from_email_hash": "410eea9999416bdeff895c4ef66b6f6cc927e369044f4093728ecbf04bb4adec",
+      "date": "2015-09-04T10:34:41+02:00",
+      "subject": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "subject_clean": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear List,\n\nI'm about to submit my first package to CRAN but am stuck with an error \non winbuilder:\nMy package builds and checks fine on TravisCI (oldrel, release and \nr-devel) as well as locally (Ubuntu 15.04 and Windows, R3.2.2).\n\nWhen I submit it to winbuilder it builds without problems on R-devel.\n\nhttp://win-builder.r-project.org/feFmHdOo851R\n\n\nHowever on R-release it fails to pass the R-release build:\n\nhttp://win-builder.r-project.org/N9v1fqwY4e13\n\nPermanent link to failing log (00install.out):\n\nhttps://gist.github.com/bleutner/69c78460894a53b1a8d9\n\n\nThe 00install.out says:\n\n** R\n** data\n*** moving datasets to lazyload DB\n** inst\n** preparing package for lazy loading\nError : objects 'findbars', 'nobars' are not exported by 'namespace:lme4'\nERROR: lazy loading failed for package 'RStoolbox'\n* removing 'd:/RCompile/CRANguest/R-release/lib/RStoolbox'\n\n\nThis is the package repo:\n\nhttps://github.com/bleutner/RStoolbox\n\n\nI don't get what is happening here. Is it my fault or is there something \nwrong on winbuilder?\nI can't reproduce this on any other Windows machine all on R3.2.2\n\n\nBest regards,\nBenjamin\n\n\n-- \nBenjamin Leutner M.Sc.\n\nDepartment of Remote Sensing\nUniversity of Wuerzburg\nCampus Hubland Nord 86\n97074 Wuerzburg, Germany\n\nTel: +49-(0)931-31 89594\nFax: +49-(0)931-31 89594-0\nEmail: benjamin.leutner at uni-wuerzburg.de\nWeb: http://www.fernerkundung.uni-wuerzburg.de",
+      "body_snippet": "Dear List,\n\nI'm about to submit my first package to CRAN but am stuck with an error \non winbuilder:\nMy package builds and checks fine on TravisCI (oldrel, release and \nr-devel) as well as locally (Ubu",
+      "thread_id": "thread-e90c4b057f1a",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-8629223e4b66",
+      "message_id": "<55E9EA29.3090108@uni-wuerzburg.de>",
+      "from_name": "Benjamin Leutner",
+      "from_email_hash": "410eea9999416bdeff895c4ef66b6f6cc927e369044f4093728ecbf04bb4adec",
+      "date": "2015-09-04T20:59:53+02:00",
+      "subject": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "subject_clean": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "in_reply_to": "<55E957A1.8080804@uni-wuerzburg.de>",
+      "references": [
+        "<55E957A1.8080804@uni-wuerzburg.de>"
+      ],
+      "body_plain": "To supplement my previous email:\nhere is a link to the source bundle if that helps\nhttps://raw.githubusercontent.com/bleutner/RStoolbox/gh-pages/RStoolbox_0.1.0.tar.gz\n\nOn 04.09.2015 10:34, Benjamin Leutner wrote:\n> Dear List,\n>\n> I'm about to submit my first package to CRAN but am stuck with an \n> error on winbuilder:\n> My package builds and checks fine on TravisCI (oldrel, release and \n> r-devel) as well as locally (Ubuntu 15.04 and Windows, R3.2.2).\n>\n> When I submit it to winbuilder it builds without problems on R-devel.\n>\n> http://win-builder.r-project.org/feFmHdOo851R\n>\n>\n> However on R-release it fails to pass the R-release build:\n>\n> http://win-builder.r-project.org/N9v1fqwY4e13\n>\n> Permanent link to failing log (00install.out):\n>\n> https://gist.github.com/bleutner/69c78460894a53b1a8d9\n>\n>\n> The 00install.out says:\n>\n> ** R\n> ** data\n> *** moving datasets to lazyload DB\n> ** inst\n> ** preparing package for lazy loading\n> Error : objects 'findbars', 'nobars' are not exported by 'namespace:lme4'\n> ERROR: lazy loading failed for package 'RStoolbox'\n> * removing 'd:/RCompile/CRANguest/R-release/lib/RStoolbox'\n>\n>\n> This is the package repo:\n>\n> https://github.com/bleutner/RStoolbox\n>\n>\n> I don't get what is happening here. Is it my fault or is there \n> something wrong on winbuilder?\n> I can't reproduce this on any other Windows machine all on R3.2.2\n>\n>\n> Best regards,\n> Benjamin\n>\n>\n\n-- \nBenjamin Leutner M.Sc.\n\nDepartment of Remote Sensing\nUniversity of Wuerzburg\nCampus Hubland Nord 86\n97074 Wuerzburg, Germany\n\nTel: +49-(0)931-31 89594\nFax: +49-(0)931-31 89594-0\nEmail: benjamin.leutner at uni-wuerzburg.de\nWeb: http://www.fernerkundung.uni-wuerzburg.de",
+      "body_snippet": "To supplement my previous email:\nhere is a link to the source bundle if that helps\nhttps://raw.githubusercontent.com/bleutner/RStoolbox/gh-pages/RStoolbox_0.1.0.tar.gz\n\nOn 04.09.2015 10:34, Benjamin L",
+      "thread_id": "thread-e90c4b057f1a",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-a1a19dfce5e3",
+      "message_id": "<55E9F747.5070703@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2015-09-04T21:55:51+02:00",
+      "subject": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "subject_clean": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "in_reply_to": "<55E9EA29.3090108@uni-wuerzburg.de>",
+      "references": [
+        "<55E957A1.8080804@uni-wuerzburg.de>",
+        "<55E9EA29.3090108@uni-wuerzburg.de>"
+      ],
+      "body_plain": "Please try again now.\n\n\nBest,\nUwe Ligges\n\n\nOn 04.09.2015 20:59, Benjamin Leutner wrote:\n>\n> To supplement my previous email:\n> here is a link to the source bundle if that helps\n> https://raw.githubusercontent.com/bleutner/RStoolbox/gh-pages/RStoolbox_0.1.0.tar.gz\n>\n>\n> On 04.09.2015 10:34, Benjamin Leutner wrote:\n>> Dear List,\n>>\n>> I'm about to submit my first package to CRAN but am stuck with an\n>> error on winbuilder:\n>> My package builds and checks fine on TravisCI (oldrel, release and\n>> r-devel) as well as locally (Ubuntu 15.04 and Windows, R3.2.2).\n>>\n>> When I submit it to winbuilder it builds without problems on R-devel.\n>>\n>> http://win-builder.r-project.org/feFmHdOo851R\n>>\n>>\n>> However on R-release it fails to pass the R-release build:\n>>\n>> http://win-builder.r-project.org/N9v1fqwY4e13\n>>\n>> Permanent link to failing log (00install.out):\n>>\n>> https://gist.github.com/bleutner/69c78460894a53b1a8d9\n>>\n>>\n>> The 00install.out says:\n>>\n>> ** R\n>> ** data\n>> *** moving datasets to lazyload DB\n>> ** inst\n>> ** preparing package for lazy loading\n>> Error : objects 'findbars', 'nobars' are not exported by 'namespace:lme4'\n>> ERROR: lazy loading failed for package 'RStoolbox'\n>> * removing 'd:/RCompile/CRANguest/R-release/lib/RStoolbox'\n>>\n>>\n>> This is the package repo:\n>>\n>> https://github.com/bleutner/RStoolbox\n>>\n>>\n>> I don't get what is happening here. Is it my fault or is there\n>> something wrong on winbuilder?\n>> I can't reproduce this on any other Windows machine all on R3.2.2\n>>\n>>\n>> Best regards,\n>> Benjamin\n>>\n>>\n>",
+      "body_snippet": "Please try again now.\n\n\nBest,\nUwe Ligges\n\n\nOn 04.09.2015 20:59, Benjamin Leutner wrote:\n>\n> To supplement my previous email:\n> here is a link to the source bundle if that helps\n> https://raw.githubuse",
+      "thread_id": "thread-e90c4b057f1a",
+      "thread_depth": 2,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-718e2a5595c2",
+      "message_id": "<55E9FDFA.1070803@uni-wuerzburg.de>",
+      "from_name": "Benjamin Leutner",
+      "from_email_hash": "410eea9999416bdeff895c4ef66b6f6cc927e369044f4093728ecbf04bb4adec",
+      "date": "2015-09-04T22:24:26+02:00",
+      "subject": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "subject_clean": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "in_reply_to": "<55E9F747.5070703@statistik.tu-dortmund.de>",
+      "references": [
+        "<55E957A1.8080804@uni-wuerzburg.de>",
+        "<55E9EA29.3090108@uni-wuerzburg.de>",
+        "<55E9F747.5070703@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Fantastic. Now it builds just fine. Out of curiosity: what was the issue?\n\nThanks\nBenjamin\n\n\nOn 04.09.2015 21:55, Uwe Ligges wrote:\n> Please try again now.\n>\n>\n> Best,\n> Uwe Ligges\n>\n>\n> On 04.09.2015 20:59, Benjamin Leutner wrote:\n>>\n>> To supplement my previous email:\n>> here is a link to the source bundle if that helps\n>> https://raw.githubusercontent.com/bleutner/RStoolbox/gh-pages/RStoolbox_0.1.0.tar.gz \n>>\n>>\n>>\n>> On 04.09.2015 10:34, Benjamin Leutner wrote:\n>>> Dear List,\n>>>\n>>> I'm about to submit my first package to CRAN but am stuck with an\n>>> error on winbuilder:\n>>> My package builds and checks fine on TravisCI (oldrel, release and\n>>> r-devel) as well as locally (Ubuntu 15.04 and Windows, R3.2.2).\n>>>\n>>> When I submit it to winbuilder it builds without problems on R-devel.\n>>>\n>>> http://win-builder.r-project.org/feFmHdOo851R\n>>>\n>>>\n>>> However on R-release it fails to pass the R-release build:\n>>>\n>>> http://win-builder.r-project.org/N9v1fqwY4e13\n>>>\n>>> Permanent link to failing log (00install.out):\n>>>\n>>> https://gist.github.com/bleutner/69c78460894a53b1a8d9\n>>>\n>>>\n>>> The 00install.out says:\n>>>\n>>> ** R\n>>> ** data\n>>> *** moving datasets to lazyload DB\n>>> ** inst\n>>> ** preparing package for lazy loading\n>>> Error : objects 'findbars', 'nobars' are not exported by \n>>> 'namespace:lme4'\n>>> ERROR: lazy loading failed for package 'RStoolbox'\n>>> * removing 'd:/RCompile/CRANguest/R-release/lib/RStoolbox'\n>>>\n>>>\n>>> This is the package repo:\n>>>\n>>> https://github.com/bleutner/RStoolbox\n>>>\n>>>\n>>> I don't get what is happening here. Is it my fault or is there\n>>> something wrong on winbuilder?\n>>> I can't reproduce this on any other Windows machine all on R3.2.2\n>>>\n>>>\n>>> Best regards,\n>>> Benjamin\n>>>\n>>>\n>>\n>\n\n-- \nBenjamin Leutner M.Sc.\n\nDepartment of Remote Sensing\nUniversity of Wuerzburg\nCampus Hubland Nord 86\n97074 Wuerzburg, Germany\n\nTel: +49-(0)931-31 89594\nFax: +49-(0)931-31 89594-0\nEmail: benjamin.leutner at uni-wuerzburg.de\nWeb: http://www.fernerkundung.uni-wuerzburg.de",
+      "body_snippet": "Fantastic. Now it builds just fine. Out of curiosity: what was the issue?\n\nThanks\nBenjamin\n\n\nOn 04.09.2015 21:55, Uwe Ligges wrote:\n> Please try again now.\n>\n>\n> Best,\n> Uwe Ligges\n>\n>\n> On 04.09.2015",
+      "thread_id": "thread-e90c4b057f1a",
+      "thread_depth": 3,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-2049f937e5f3",
+      "message_id": "<F38E7170-5C8F-4815-818E-5D6601D4EA51@neuwirth.priv.at>",
+      "from_name": "Erich Subscriptions",
+      "from_email_hash": "55845a66b690f66a6404cf10e5b1570a33e87cb188276cb84facbd3d7c0b8cb8",
+      "date": "2015-09-14T17:24:14+02:00",
+      "subject": "[R-pkg-devel] html from Rd",
+      "subject_clean": "[R-pkg-devel] html from Rd",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am converting an Rd file to html.\nI am furthermore using the html file produced as input for producing a ch, file.\nAnd the user experience could be improved it there were a way to embed names like\n<a name=?first name?> \ninto the html file produced.\nIs there a way of accomplishing this?\n\nErich Neuwirth",
+      "body_snippet": "I am converting an Rd file to html.\nI am furthermore using the html file produced as input for producing a ch, file.\nAnd the user experience could be improved it there were a way to embed names like\n<",
+      "thread_id": "thread-2049f937e5f3",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-3ae4511a1f4a",
+      "message_id": "<55F6F7C3.1030003@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-09-14T12:37:23-04:00",
+      "subject": "[R-pkg-devel] html from Rd",
+      "subject_clean": "[R-pkg-devel] html from Rd",
+      "in_reply_to": "<F38E7170-5C8F-4815-818E-5D6601D4EA51@neuwirth.priv.at>",
+      "references": [
+        "<F38E7170-5C8F-4815-818E-5D6601D4EA51@neuwirth.priv.at>"
+      ],
+      "body_plain": "On 14/09/2015 11:24 AM, Erich Subscriptions wrote:\n> I am converting an Rd file to html.\n> I am furthermore using the html file produced as input for producing a ch, file.\n> And the user experience could be improved it there were a way to embed names like\n> <a name=?first name?>\n> into the html file produced.\n> Is there a way of accomplishing this?\n\nI think this is more of an R-devel topic, but the answer is \"yes, \nseveral ways, none very simple\".\n\nThe way I'd do it is to split up the parse_Rd() step from the Rd2HTML() \nstep, and add the extra bit to the parsed version.\n\nAnother way to do it would be to edit the input file before conversion, \nor the output file after conversion.  The latter is probably easier \nbecause the output is a little more predictable.\n\nDuncan Murdoch",
+      "body_snippet": "On 14/09/2015 11:24 AM, Erich Subscriptions wrote:\n> I am converting an Rd file to html.\n> I am furthermore using the html file produced as input for producing a ch, file.\n> And the user experience co",
+      "thread_id": "thread-2049f937e5f3",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-5f105af1a039",
+      "message_id": "<SN1PR0101MB1439A0B7AAADF3724A2F165DCD5C0@SN1PR0101MB1439.prod.exchangelabs.com>",
+      "from_name": "Dario Strbenac",
+      "from_email_hash": "0d272309e2552a733cf34645f0e220259697f4065c1e3bfc9672933b887da7bc",
+      "date": "2015-09-15T05:00:05Z",
+      "subject": "[R-pkg-devel] Return Value of By Function",
+      "subject_clean": "[R-pkg-devel] Return Value of By Function",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good day,\n\nI am curious why the by function result has dimensions attached, even when it returns a list.\n\nresult <- by(warpbreaks[, 1],   warpbreaks[, -1], summary)\nstr(result)\n\nList of 6\n...\n- attr(*, \"dim\")= int [1:2] 2 3\n - attr(*, \"dimnames\")=List of 2\n  ..$ wool   : chr [1:2] \"A\" \"B\"\n  ..$ tension: chr [1:3] \"L\" \"M\" \"H\"\n\nAlso, why does looking at the top of the list remove the names ?\n\n> head(result, 3)\n[[1]]\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  25.00   26.00   51.00   44.56   54.00   70.00 \n\n[[2]]\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  14.00   20.00   29.00   28.22   31.00   44.00 \n\n[[3]]\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n     12      18      21      24      30      36\n\nCompared to :\n\n> result\nwool: A\ntension: L\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  25.00   26.00   51.00   44.56   54.00   70.00 \n...\n\nI can't tell which list entry is for which combination of factors, after it is accessed. It would be great if it was easier to get the factor levels used for each list element, perhaps as a data.frame.\n\n--------------------------------------\nDario Strbenac\nPhD Student\nUniversity of Sydney\nCamperdown NSW 2050\nAustralia",
+      "body_snippet": "Good day,\n\nI am curious why the by function result has dimensions attached, even when it returns a list.\n\nresult <- by(warpbreaks[, 1],   warpbreaks[, -1], summary)\nstr(result)\n\nList of 6\n...\n- attr(*",
+      "thread_id": "thread-5f105af1a039",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-414bd1ff71fb",
+      "message_id": "<22007.52633.450451.206739@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "2015-09-15T09:49:45+02:00",
+      "subject": "[R-pkg-devel] Return Value of By Function",
+      "subject_clean": "[R-pkg-devel] Return Value of By Function",
+      "in_reply_to": "<SN1PR0101MB1439A0B7AAADF3724A2F165DCD5C0@SN1PR0101MB1439.prod.exchangelabs.com>",
+      "references": [
+        "<SN1PR0101MB1439A0B7AAADF3724A2F165DCD5C0@SN1PR0101MB1439.prod.exchangelabs.com>"
+      ],
+      "body_plain": ">>>>> Dario Strbenac <dstr7320 at uni.sydney.edu.au>\n>>>>>     on Tue, 15 Sep 2015 05:00:05 +0000 writes:\n\n    > Good day, I am curious why the by function result has\n    > dimensions attached, even when it returns a list.\n\nSorry, but this is *NOT* the mailing list for such questions !\n\nPlease ask on different list (or forum), e.g., on R-help.\n\nMartin Maechler",
+      "body_snippet": ">>>>> Dario Strbenac <dstr7320 at uni.sydney.edu.au>\n>>>>>     on Tue, 15 Sep 2015 05:00:05 +0000 writes:\n\n    > Good day, I am curious why the by function result has\n    > dimensions attached, even w",
+      "thread_id": "thread-5f105af1a039",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-d9310dcde8fe",
+      "message_id": "<1594107507.7395252.1442607921071.JavaMail.zimbra@meteo.be>",
+      "from_name": "Alex Deckmyn",
+      "from_email_hash": "b3d1e6f006faa315c69ed0744f4118e0020743d7620b8a4dd1c1cf53e5c21bce",
+      "date": "2015-09-18T22:25:21+02:00",
+      "subject": "[R-pkg-devel] problem with locale-dependent order()",
+      "subject_clean": "[R-pkg-devel] problem with locale-dependent order()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, \n\nFor an update of the maps package, I have run into a bug caused by the locale-depent behaviour of order(). \nIn a certain function, the polygon names of the world map are lexically sorted with order() prior to being sent to a C routine. That routine expects them to be sorted according to ASCII rules, but that is not the result I get. The main culprit is the colon used to identify sub-regions. For instance, in my locale (en_GB_UTF-8), I get \n\n\"uk:northen ireland\" < \"ukrain\" < \"uk:scotland\" \n\nwhich is not the order expected by C. I guess some language settings would also cause other unexpected results. \n\nApart from the pain of fixing uk/ukrain ambiguities, is there a safe way to fix this order() in a package? An obvious solution seems to be \n\nlcc <- Sys.getlocale(\"LC_COLLATE\") \nSys.setlocale(\"LC_COLLATE\",\"C\") \nord.nam <- order(nam) \nSys.setlocale(\"LC_COLLATE\",lcc) \n\nThis seems to work fine on my linux PC, but I am not sure about other platforms (Windows, OS-X...), though the \"C\" locale should be standard. Is this safe? Or is there a better way to get the right ordering? \n\nAlex \n\n--- \nDr. Alex Deckmyn e-mail: alex.deckmyn at meteo.be \nRoyal Meteorological Institute http://www.meteo.be \nRinglaan 3, 1180 Ukkel, Belgium tel. (32)(2)3730646 \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, \n\nFor an update of the maps package, I have run into a bug caused by the locale-depent behaviour of order(). \nIn a certain function, the polygon names of the world map are lexically sorted with or",
+      "thread_id": "thread-d9310dcde8fe",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-e84e0f520b49",
+      "message_id": "<CAPp_+=ddQ8taA+xCusq=Vvz=GX8=fY=ieMVYCMHtUBy0_-w2kA@mail.gmail.com>",
+      "from_name": "Richard Cotton",
+      "from_email_hash": "dbe2d04d514d779764a525afa98052b362a23b6d664fa4a04e212cc21978898b",
+      "date": "2015-09-19T13:07:06+03:00",
+      "subject": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "subject_clean": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have a package that uses win.version from the utils package.\n\nI've made my R code safe to use across platforms, I check that the OS is\nWindows before calling win.version.\n\nThe NAMESPACE file contains the line\n\nimportFrom(utils,win.version)\n\nwhich causes an install failure under other OSes since that function\ndoesn't exist.\n\nCan I use this platform-dependent function and still have a cross-platform\npackage?\n\nAlso, it seems like it would be nicer if the utils package always included\nthis function and returned NA with a warning on platforms other than\nWindows.  Does that sound like a reasonable change?\n\n-- \nRegards,\nRichie\n\nLearning R <http://shop.oreilly.com/product/0636920028352.do>\n4dpiecharts.com\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I have a package that uses win.version from the utils package.\n\nI've made my R code safe to use across platforms, I check that the OS is\nWindows before calling win.version.\n\nThe NAMESPACE file contain",
+      "thread_id": "thread-e84e0f520b49",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-3876bf062144",
+      "message_id": "<CAJuCY5w+LFBnh71VhWy+xf8oZmpf3a5jrQvXxFr9ee-Sr7R_cA@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "939ccb0e8bbc2d0c7bbe22a43b9bdc551e1b9ce62c1e0af38d79ce042e5bddbe",
+      "date": "2015-09-19T13:05:39+02:00",
+      "subject": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "subject_clean": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "in_reply_to": "<CAPp_+=ddQ8taA+xCusq=Vvz=GX8=fY=ieMVYCMHtUBy0_-w2kA@mail.gmail.com>",
+      "references": [
+        "<CAPp_+=ddQ8taA+xCusq=Vvz=GX8=fY=ieMVYCMHtUBy0_-w2kA@mail.gmail.com>"
+      ],
+      "body_plain": "Have a look at the RODBC package. odbcConnectAcces() is only available on\nWindows.\nOp 19-sep.-2015 12:08 schreef \"Richard Cotton\" <richierocks at gmail.com>:\n\n> I have a package that uses win.version from the utils package.\n>\n> I've made my R code safe to use across platforms, I check that the OS is\n> Windows before calling win.version.\n>\n> The NAMESPACE file contains the line\n>\n> importFrom(utils,win.version)\n>\n> which causes an install failure under other OSes since that function\n> doesn't exist.\n>\n> Can I use this platform-dependent function and still have a cross-platform\n> package?\n>\n> Also, it seems like it would be nicer if the utils package always included\n> this function and returned NA with a warning on platforms other than\n> Windows.  Does that sound like a reasonable change?\n>\n> --\n> Regards,\n> Richie\n>\n> Learning R <http://shop.oreilly.com/product/0636920028352.do>\n> 4dpiecharts.com\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Have a look at the RODBC package. odbcConnectAcces() is only available on\nWindows.\nOp 19-sep.-2015 12:08 schreef \"Richard Cotton\" <richierocks at gmail.com>:\n\n> I have a package that uses win.version ",
+      "thread_id": "thread-e84e0f520b49",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-0172ea02fbb4",
+      "message_id": "<55FD44E3.6030801@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2015-09-19T07:20:03-04:00",
+      "subject": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "subject_clean": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "in_reply_to": "<CAPp_+=ddQ8taA+xCusq=Vvz=GX8=fY=ieMVYCMHtUBy0_-w2kA@mail.gmail.com>",
+      "references": [
+        "<CAPp_+=ddQ8taA+xCusq=Vvz=GX8=fY=ieMVYCMHtUBy0_-w2kA@mail.gmail.com>"
+      ],
+      "body_plain": "On 19/09/2015 6:07 AM, Richard Cotton wrote:\n> I have a package that uses win.version from the utils package.\n> \n> I've made my R code safe to use across platforms, I check that the OS is\n> Windows before calling win.version.\n> \n> The NAMESPACE file contains the line\n> \n> importFrom(utils,win.version)\n> \n> which causes an install failure under other OSes since that function\n> doesn't exist.\n> \n> Can I use this platform-dependent function and still have a cross-platform\n> package?\n\nI think there are two ways to do this.\n\nYou can use conditionals in the NAMESPACE file. For example, rgl has\n\nif(tools:::.OStype() == \"windows\") {\nimportFrom(utils, getWindowsHandle)\n}\n\nThis is really old code, and I'm surprised I don't get warnings about\nthe :::. I believe a better test would be\n\n.Platform$OS.type == \"windows\"\n\nbut I just sent a new version of rgl to CRAN before noticing this, so\nthe fix will have to wait.\n\nAlternatively, I believe if you use utils::win.version in the code\ninstead of importing it in the NAMESPACE file you won't get a warning.\n(You need to condition the call on being on Windows, of course.)\n\n> \n> Also, it seems like it would be nicer if the utils package always included\n> this function and returned NA with a warning on platforms other than\n> Windows.  Does that sound like a reasonable change?\n> \n\nPlatform-specific functions cause a number of problems; this is just one\nof them.  It might be a good idea to do away with them completely, but\nthat would be pretty boring work, for little gain.\n\nDuncan Murdoch",
+      "body_snippet": "On 19/09/2015 6:07 AM, Richard Cotton wrote:\n> I have a package that uses win.version from the utils package.\n> \n> I've made my R code safe to use across platforms, I check that the OS is\n> Windows be",
+      "thread_id": "thread-e84e0f520b49",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-563f344abd62",
+      "message_id": "<747185242.252420.1442691759815.JavaMail.yahoo@mail.yahoo.com>",
+      "from_name": "Mohammad Tanvir Ahamed",
+      "from_email_hash": "a32fcc71f474c54d305c895d5b6734a8b59ffd5deaab4391cce13653af6b830f",
+      "date": "2015-09-19T19:42:39Z",
+      "subject": "Help with Package creation",
+      "subject_clean": "Help with Package creation",
+      "in_reply_to": "<1889360163.58293.1442630664341.JavaMail.yahoo@mail.yahoo.com>",
+      "references": [
+        "<1889360163.58293.1442630664341.JavaMail.yahoo@mail.yahoo.com>"
+      ],
+      "body_plain": "Hello ,\n\nI am new in R package built. \n\nI want to install one package (randomForest) that will install automatically while my package(myPack) will install. \nI am using R studio to built. \n\nMy Description file is : \n\nPackage: myPack\nType: Package\nTitle: What the Package Does (Title Case)\nVersion: 0.1\nDate: 2015-09-19\nAuthor: Who wrote it\nMaintainer: Who to complain to <yourfault at somewhere.net>\nDescription: More about what it does (maybe more than one line)\nLicense: What license is it under?\nDepends: R\nImports: randomForest\n\nLazyData: TRUE \n\n------------------------------------------------------------------------------------\n\nBut it shows me a error ...\n\n\n\nUpdating myPack documentation\nLoading myPack\nError in (function (dep_name, dep_ver = NA, dep_compare = NA)  : \n  Dependency package randomForest not available.\nCalls: suppressPackageStartupMessages ... <Anonymous> -> load_all -> load_imports -> mapply -> <Anonymous>\nExecution halted\n\n\nExited with status 1.\n\n\n------------------------------------------------------------------------------------\n\nAny help regarding this problem will appreciated . \nThank you . \n\n\nTanvir Ahamed \nG?teborg, Sweden  |",
+      "body_snippet": "Hello ,\n\nI am new in R package built. \n\nI want to install one package (randomForest) that will install automatically while my package(myPack) will install. \nI am using R studio to built. \n\nMy Descript",
+      "thread_id": "thread-563f344abd62",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-1b80007a60b8",
+      "message_id": "<CABdHhvGFWKnqUp_7eZiR83UQhW217WA4Zj0OaqbDF--zddsV4w@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2015-09-20T13:22:54-04:00",
+      "subject": "[R-pkg-devel] problem with locale-dependent order()",
+      "subject_clean": "[R-pkg-devel] problem with locale-dependent order()",
+      "in_reply_to": "<1594107507.7395252.1442607921071.JavaMail.zimbra@meteo.be>",
+      "references": [
+        "<1594107507.7395252.1442607921071.JavaMail.zimbra@meteo.be>"
+      ],
+      "body_plain": "Hi Alex,\n\nAs far as I know, that's the best solution. In roxygen, I've wrapped\nit up with a couple of helpers:\n\nset_collate <- function(locale) {\n  cur <- Sys.getlocale(category = \"LC_COLLATE\")\n  Sys.setlocale(category = \"LC_COLLATE\", locale = locale)\n  cur\n}\n\nwith_collate <- function(locale, code) {\n  old <- set_collate(locale)\n  on.exit(set_collate(old))\n\n  force(code)\n}\n\nsort_c <- function(x) with_collate(\"C\", sort(x))\n\nHadley\n\nOn Fri, Sep 18, 2015 at 4:25 PM, Alex Deckmyn <alex.deckmyn at meteo.be> wrote:\n> Hi,\n>\n> For an update of the maps package, I have run into a bug caused by the locale-depent behaviour of order().\n> In a certain function, the polygon names of the world map are lexically sorted with order() prior to being sent to a C routine. That routine expects them to be sorted according to ASCII rules, but that is not the result I get. The main culprit is the colon used to identify sub-regions. For instance, in my locale (en_GB_UTF-8), I get\n>\n> \"uk:northen ireland\" < \"ukrain\" < \"uk:scotland\"\n>\n> which is not the order expected by C. I guess some language settings would also cause other unexpected results.\n>\n> Apart from the pain of fixing uk/ukrain ambiguities, is there a safe way to fix this order() in a package? An obvious solution seems to be\n>\n> lcc <- Sys.getlocale(\"LC_COLLATE\")\n> Sys.setlocale(\"LC_COLLATE\",\"C\")\n> ord.nam <- order(nam)\n> Sys.setlocale(\"LC_COLLATE\",lcc)\n>\n> This seems to work fine on my linux PC, but I am not sure about other platforms (Windows, OS-X...), though the \"C\" locale should be standard. Is this safe? Or is there a better way to get the right ordering?\n>\n> Alex\n>\n> ---\n> Dr. Alex Deckmyn e-mail: alex.deckmyn at meteo.be\n> Royal Meteorological Institute http://www.meteo.be\n> Ringlaan 3, 1180 Ukkel, Belgium tel. (32)(2)3730646\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "Hi Alex,\n\nAs far as I know, that's the best solution. In roxygen, I've wrapped\nit up with a couple of helpers:\n\nset_collate <- function(locale) {\n  cur <- Sys.getlocale(category = \"LC_COLLATE\")\n  Sys.",
+      "thread_id": "thread-d9310dcde8fe",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-88868515ef25",
+      "message_id": "<F781F0C3-94EC-4EBA-9EBD-A5F34678FE58@stat.ubc.ca>",
+      "from_name": "Jennifer Bryan",
+      "from_email_hash": "988dbf0ede3bb651c591455ed750e23d2de29563949c022d8bf38d67cf91e836",
+      "date": "2015-09-20T15:17:45-07:00",
+      "subject": "[R-pkg-devel] Help with Package creation",
+      "subject_clean": "[R-pkg-devel] Help with Package creation",
+      "in_reply_to": "<mailman.4169.1442759864.3797.r-package-devel@r-project.org>",
+      "references": [
+        "<1889360163.58293.1442630664341.JavaMail.yahoo@mail.yahoo.com>",
+        "<mailman.4169.1442759864.3797.r-package-devel@r-project.org>"
+      ],
+      "body_plain": "Hi Mohammad,\n\nYou don?t really say but I?m guessing your error is when checking the package?\n\nI think you should take the message at face value. It appears the randomForest package is not\navailable from the libraries R knows about at the time of whatever it is your doing. R CMD check\nwill not go out and install a dependency for you. install.packages() will do this, so maybe that\nis what you?re thinking of.\n\n? Jenny\n\n> On Sep 20, 2015, at 7:37 AM, Mohammad Tanvir Ahamed via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> \n> From: Mohammad Tanvir Ahamed <mashranga at yahoo.com>\n> Subject: Help with Package creation\n> Date: September 19, 2015 at 12:42:39 PM PDT\n> To: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\n> Reply-To: Mohammad Tanvir Ahamed <mashranga at yahoo.com>\n> \n> \n> Hello ,\n> \n> I am new in R package built. \n> \n> I want to install one package (randomForest) that will install automatically while my package(myPack) will install. \n> I am using R studio to built. \n> \n> My Description file is : \n> \n> Package: myPack\n> Type: Package\n> Title: What the Package Does (Title Case)\n> Version: 0.1\n> Date: 2015-09-19\n> Author: Who wrote it\n> Maintainer: Who to complain to <yourfault at somewhere.net>\n> Description: More about what it does (maybe more than one line)\n> License: What license is it under?\n> Depends: R\n> Imports: randomForest\n> \n> LazyData: TRUE \n> \n> ------------------------------------------------------------------------------------\n> \n> But it shows me a error ...\n> \n> \n> \n> Updating myPack documentation\n> Loading myPack\n> Error in (function (dep_name, dep_ver = NA, dep_compare = NA)  : \n>  Dependency package randomForest not available.\n> Calls: suppressPackageStartupMessages ... <Anonymous> -> load_all -> load_imports -> mapply -> <Anonymous>\n> Execution halted\n> \n> \n> Exited with status 1.\n> \n> \n> ------------------------------------------------------------------------------------\n> \n> Any help regarding this problem will appreciated . \n> Thank you . \n> \n> \n> Tanvir Ahamed \n> G?teborg, Sweden  |\n> \n> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi Mohammad,\n\nYou don?t really say but I?m guessing your error is when checking the package?\n\nI think you should take the message at face value. It appears the randomForest package is not\navailable fr",
+      "thread_id": "thread-88868515ef25",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-966370fa6eb0",
+      "message_id": "<EEAAA68994E0C7448D25DE01CF98AB0003413A65EE@MER2-EXCH07A7.echostar.com>",
+      "from_name": "Shaub, David",
+      "from_email_hash": "55bdd2a64ff19d42df1d7f42cc517975c6b9bb90056f59cc3f39d99217ae4da4",
+      "date": "2015-09-23T11:37:47-06:00",
+      "subject": "[R-pkg-devel] Unit test functions as standalone block of code but not in test_that()",
+      "subject_clean": "[R-pkg-devel] Unit test functions as standalone block of code but not in test_that()",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I'm creating unit tests on the forecast package, specifically for the forecast.ar() function. I have a block of code that works just fine when run on its own.\n\nrequire(testthat)\nrequire(forecast)\nset.seed(55)\nsimseries <- stats::arima.sim(model = list(ar = c(-0.42, 0.832, 0.1, -0.34)), n = 400)\narfit <- stats::ar(simseries)\nfc1 <- forecast(arfit)$mean\nfc2 <- forecast(arfit, bootstrap = TRUE, npaths = 100, fan = TRUE)$mean\nexpect_true(all(fc1 == fc2))\n\nHowever, when I embed this in a test_that() function (after starting a new clean R session), I get an error that the ts is empty. I've determined that the error occurs on the two lines generating fc1 and fc2; simseries is assigned correctly.\n\nrequire(testthat)\nrequire(forecast)\ntest_that(\"tests for forecast.ar\", {\nset.seed(55)\nsimseries <- stats::arima.sim(model = list(ar = c(-0.42, 0.832, 0.1, -0.34)), n = 400)\narfit <- stats::ar(simseries)\nfc1 <- forecast(arfit)$mean\nfc2 <- forecast(arfit, bootstrap = TRUE, npaths = 100, fan = TRUE)$mean\nexpect_true(all(fc1 == fc2))\n})\n\nWhy is this happening? I thought it might be a namespace issue with using the ar and arima.sim functions from the stats package, so I included the stats namespace in the function call, but that does not fix the problem.\n\nR 3.1.1 forecast 6.1 testthat 0.10.0\n\nDavid Shaub\nBusiness Operations Analyst II\nIn-Home Services |Dish Network L.L.C\nIHS Command Center | Forecasting Team\nDavid.Shaub at dish.com<mailto:gavin.redelman at dish.com>\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I'm creating unit tests on the forecast package, specifically for the forecast.ar() function. I have a block of code that works just fine when run on its own.\n\nrequire(testthat)\nrequire(forecast)\nset.",
+      "thread_id": "thread-966370fa6eb0",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-94c9ae0cc0b7",
+      "message_id": "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+      "from_name": "Jack Wasey",
+      "from_email_hash": "7d2f0b8d1ea7b010c54f9af90a9adc619e9597f35408f75c7bd1722f2f428db2",
+      "date": "2015-09-26T10:27:32-04:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nHaving just read section 1.2 in Writing R extensions, a fragment of a\nconfigure script is offered in order to determine the correct compiler\noptions. It starts by setting R_HOME with:\n\n: ${R_HOME=`R RHOME`}\n\n\n`R` is called, even if, as in my case, `Rdevel` is the command used to\ninvoke package compilation. This can be overridden by setting R_HOME\nin the call to `Rdevel`, but this seems to be undesirable, since the\nwhole point of a configure script is that it sets up the package given\nthe constraints of the compiling environment.\n\nMy particular problem is that I have docker images with plain R in\n/usr/bin/R, and R-devel with sanitizers in /usr/local/bin/Rdevel.\nThese have different compiler flags, and if I `Rdevel CMD INSTALL\nmypackage` then it configures itself for the plain `R` environment.\n\nThings are unfolding at:\nhttps://github.com/jackwasey/rocker-ubsan\nand\nhttps://github.com/jackwasey/icd9/tree/issue75/tools\n\nAm I doing something wrong?\n\nThanks for your advice,\n\nJack",
+      "body_snippet": "Hello,\n\nHaving just read section 1.2 in Writing R extensions, a fragment of a\nconfigure script is offered in order to determine the correct compiler\noptions. It starts by setting R_HOME with:\n\n: ${R_H",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 0,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-58400c52feb3",
+      "message_id": "<22022.48439.245838.660163@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-09-26T10:43:51-05:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>"
+      ],
+      "body_plain": "On 26 September 2015 at 10:27, Jack Wasey wrote:\n| Having just read section 1.2 in Writing R extensions, a fragment of a\n| configure script is offered in order to determine the correct compiler\n| options. It starts by setting R_HOME with:\n| \n| : ${R_HOME=`R RHOME`}\n| \n| \n| `R` is called, even if, as in my case, `Rdevel` is the command used to\n| invoke package compilation. This can be overridden by setting R_HOME\n| in the call to `Rdevel`, but this seems to be undesirable, since the\n| whole point of a configure script is that it sets up the package given\n| the constraints of the compiling environment.\n\n[...] \n| \n| Am I doing something wrong?\n\nR_HOME is set to the result of the command R RHOME if and only it is unset.\n\nAnd it usually is unset.  This scheme generally works, I use it in a few\npackages on CRAN which had it for years -- and it was initially suggested to\nmy by Kurt to make precisely _this_ work:  you set a different $PATH, or call\na different R engine.  And the right thing happens:\n\n  edd at max:~$ R RHOME            # default installation\n  /usr/lib/R\n  edd at max:~$ RD RHOME           # alternate R-devel with a short-hand wrapper\n  /usr/local/lib/R-devel/lib/R\n  edd at max:~$ which RD\n  /home/edd/bin/RD\n  edd at max:~$ \n\nThe (nice) idea of calling R-devel just 'RD' appears due to Winston.  It\nworks the same way if I just call R-devel-sh as I had for years:\n\n  edd at max:~$ R-devel.sh RHOME\n  /usr/local/lib/R-devel/lib/R\n  edd at max:~$ \n\nSo if you still think it fails for you, compare to e.g. the packages\n\n  nloptr\n  RProtoBuf\n  RQuantLib\n  RVowpalWabbit\n\nall of which use this scheme.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 26 September 2015 at 10:27, Jack Wasey wrote:\n| Having just read section 1.2 in Writing R extensions, a fragment of a\n| configure script is offered in order to determine the correct compiler\n| opti",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 1,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-2d6e106ed0ba",
+      "message_id": "<CA+zP7HFAc0_JpgEBCdgSK9Bjuo+0PMgg8Hq77KXhHcgt6jCQYg@mail.gmail.com>",
+      "from_name": "Jack Wasey",
+      "from_email_hash": "7d2f0b8d1ea7b010c54f9af90a9adc619e9597f35408f75c7bd1722f2f428db2",
+      "date": "2015-09-26T12:32:41-04:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<22022.48439.245838.660163@max.nulle.part>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+        "<22022.48439.245838.660163@max.nulle.part>"
+      ],
+      "body_plain": "Dirk, thanks for detailed reply. I may not have explained myself well\nenough. I think the problem is that the recommended configure command\nassumes 'R', not the actually running RD, Rdevel etc, when inferring\nR_HOME. I can indeed set R_HOME, but I want my configure script to be able\nto figure out which R is running, and thus which R_HOME to use when it is\nnot set.\n\nYour RQuantLib seems to use the same bare 'R RHOME', yet if a package is R\nCMD installed with RD, the configure script will in fact not run RD, but R,\nto find R_HOME. I think it is usually not apparent because the compile\nflags derived from R_HOME/bin/R CMD config are usually the same or similar,\nbut when, in my case, I have R compiled with OpenMP, and RD with\nsanitizers, but without OpenMP, this fails because of the discrepancy.\n\nAgain, I feel like I'm missing something obvious, but I hope my explanation\nof what I think is happening may help you guide me.\n\nBest wishes,\n\nJack\n\nOn Saturday, September 26, 2015, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 26 September 2015 at 10:27, Jack Wasey wrote:\n> | Having just read section 1.2 in Writing R extensions, a fragment of a\n> | configure script is offered in order to determine the correct compiler\n> | options. It starts by setting R_HOME with:\n> |\n> | : ${R_HOME=`R RHOME`}\n> |\n> |\n> | `R` is called, even if, as in my case, `Rdevel` is the command used to\n> | invoke package compilation. This can be overridden by setting R_HOME\n> | in the call to `Rdevel`, but this seems to be undesirable, since the\n> | whole point of a configure script is that it sets up the package given\n> | the constraints of the compiling environment.\n>\n> [...]\n> |\n> | Am I doing something wrong?\n>\n> R_HOME is set to the result of the command R RHOME if and only it is unset.\n>\n> And it usually is unset.  This scheme generally works, I use it in a few\n> packages on CRAN which had it for years -- and it was initially suggested\n> to\n> my by Kurt to make precisely _this_ work:  you set a different $PATH, or\n> call\n> a different R engine.  And the right thing happens:\n>\n>   edd at max:~$ R RHOME            # default installation\n>   /usr/lib/R\n>   edd at max:~$ RD RHOME           # alternate R-devel with a short-hand\n> wrapper\n>   /usr/local/lib/R-devel/lib/R\n>   edd at max:~$ which RD\n>   /home/edd/bin/RD\n>   edd at max:~$\n>\n> The (nice) idea of calling R-devel just 'RD' appears due to Winston.  It\n> works the same way if I just call R-devel-sh as I had for years:\n>\n>   edd at max:~$ R-devel.sh RHOME\n>   /usr/local/lib/R-devel/lib/R\n>   edd at max:~$\n>\n> So if you still think it fails for you, compare to e.g. the packages\n>\n>   nloptr\n>   RProtoBuf\n>   RQuantLib\n>   RVowpalWabbit\n>\n> all of which use this scheme.\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> <javascript:;>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dirk, thanks for detailed reply. I may not have explained myself well\nenough. I think the problem is that the recommended configure command\nassumes 'R', not the actually running RD, Rdevel etc, when i",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 2,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-976cb7b66fd0",
+      "message_id": "<22022.54422.587881.263969@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-09-26T12:23:34-05:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<CA+zP7HFAc0_JpgEBCdgSK9Bjuo+0PMgg8Hq77KXhHcgt6jCQYg@mail.gmail.com>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+        "<22022.48439.245838.660163@max.nulle.part>",
+        "<CA+zP7HFAc0_JpgEBCdgSK9Bjuo+0PMgg8Hq77KXhHcgt6jCQYg@mail.gmail.com>"
+      ],
+      "body_plain": "On 26 September 2015 at 12:32, Jack Wasey wrote:\n| Dirk, thanks for detailed reply. I may not have explained myself well enough. I\n| think the problem is that the recommended configure command assumes 'R',?not\n\nIf and only if R_HOME is unset. But witness:\n\n  edd at max:~$ R --slave -e 'Sys.getenv(\"R_HOME\")'\n  [1] \"/usr/lib/R\"\n  edd at max:~$ RD --slave -e 'Sys.getenv(\"R_HOME\")'\n  [1] \"/usr/local/lib/R-devel/lib/R\"\n  edd at max:~$\n\nYou don't have to take my work for it, but maybe you trust Writing R Extensions.\nAnd with RHOME set to this, the rest of confiure.{ac,in} uses it.  From\nnloptr where I helped Jelmer to generalize his setup:\n\n   ## Set R_HOME, respecting an environment variable if set \n   : ${R_HOME=$(R RHOME)}\n   if test -z \"${R_HOME}\"; then\n       AC_MSG_ERROR([Could not determine R_HOME.])   \n   fi\n\n   ## Get R compilers and flags\n   NLOPT_CC=$(\"${R_HOME}/bin/R\" CMD config CC)\n   NLOPT_CFLAGS=$(\"${R_HOME}/bin/R\" CMD config CFLAGS)\n   NLOPT_CPP=$(\"${R_HOME}/bin/R\" CMD config CPP)\n   NLOPT_CPPFLAGS=$(\"${R_HOME}/bin/R\" CMD config CPPFLAGS)\n   NLOPT_CXX=$(\"${R_HOME}/bin/R\" CMD config CXX)\n   NLOPT_CXXFLAGS=$(\"${R_HOME}/bin/R\" CMD config CXXFLAGS)\n   NLOPT_CXXCPP=$(\"${R_HOME}/bin/R\" CMD config CXXCPP)\n\nSee the source:\n\n   https://github.com/jyypma/nloptr/blob/master/configure.ac#L106-L119\n\n| the actually running RD, Rdevel etc, when inferring R_HOME. I can indeed set\n| R_HOME, but I want my configure script to be able to figure out which R is\n| running, and thus which R_HOME to use when it is not set.\n| \n| Your RQuantLib seems to use the same bare 'R RHOME', yet if a package is R\n| CMD?installed with RD, the configure script will in fact not run RD, but R, to\n| find R_HOME. I think it?is usually not apparent because the compile flags\n| derived from R_HOME/bin/R?CMD config are usually the same or similar, but when,\n| in my case, I have R compiled with OpenMP, and RD with sanitizers, but without\n| OpenMP, this fails because of the discrepancy.\n| \n| Again, I feel like I'm missing something obvious, but I hope my explanation of\n| what I think is happening may help you guide me.\n\nNo I think it beats me, so I'll retire from this thread.  Maybe you can\n'diassemble' a few of the existing configure.{ac,in} on CRAN.  There are\nhundreds to choose from.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 26 September 2015 at 12:32, Jack Wasey wrote:\n| Dirk, thanks for detailed reply. I may not have explained myself well enough. I\n| think the problem is that the recommended configure command assumes",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 3,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-d8534fdaba12",
+      "message_id": "<CAFDcVCQ0RyMvdcsROBi-5jL+nDRQO89Ms4ygBRBzE9XCFt_UwA@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "37708a6cb782f5feaf8184aa0c29ee7a2d00c5c1bcf512308a95d10fa8393e79",
+      "date": "2015-09-26T10:45:49-07:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<CA+zP7HFAc0_JpgEBCdgSK9Bjuo+0PMgg8Hq77KXhHcgt6jCQYg@mail.gmail.com>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+        "<22022.48439.245838.660163@max.nulle.part>",
+        "<CA+zP7HFAc0_JpgEBCdgSK9Bjuo+0PMgg8Hq77KXhHcgt6jCQYg@mail.gmail.com>"
+      ],
+      "body_plain": "Not sure I understand what you're doing and in what context, but if\nyou're trying to query R for where it lives, the following may help.\nNote that executables or where they live do *not* follow solely from\nR.home() - there's more to it.\n\n## Windows\n$ Rscript -e \"R.home()\"\n[1] \"C:/PROGRA~1/R/R-devel\"\n\n$ Rscript -e \"R.home('bin')\"\n[1] \"C:/PROGRA~1/R/R-devel/bin/x64\"\n\n$ Rscript -e \"commandArgs()[1L]\"\n[1] \"C:\\\\PROGRA~1\\\\R\\\\R-devel\\\\bin\\\\x64\\\\Rterm.exe\"\n\n(there is typically another 32-bit binary under ..bin\\i386\\ on Windows)\n\n\n# Linux\n$ Rscript -e \"R.home()\"\n[1] \"/path-to-software/R/R-3.2.2-20150814/lib64/R\"\n\n$ Rscript -e \"R.home('bin')\"\n[1] \"/path-to-software/R/R-3.2.2-20150814/lib64/R/bin\"\n\n$ Rscript -e \"commandArgs()[1L]\"\n[1] \"/path-to/software/R/R-3.2.2-20150814/lib64/R/bin/exec/R\"\n\n# Linux R 2.11.1\ncclc01{henrik}: /path-to/software/R-2.11.1/bin/Rscript -e \"R.home()\"\n[1] \"/path-to/software/R/R-2.11.1-20150918/lib64/R\"\n\n\n# OS X\n$ Rscript -e \"R.home()\"\n[1] \"/Library/Frameworks/R.framework/Resources\"\n$ Rscript -e \"R.home('bin')\"\n[1] \"/Library/Frameworks/R.framework/Resources/bin\"\n$ Rscript -e \"commandArgs()[1L]\"\n[1] \"/Library/Frameworks/R.framework/Resources/bin/exec/R\"\n\nMy $.02\n\nHenrik\n\nOn Sat, Sep 26, 2015 at 9:32 AM, Jack Wasey <jack at jackwasey.com> wrote:\n> Dirk, thanks for detailed reply. I may not have explained myself well\n> enough. I think the problem is that the recommended configure command\n> assumes 'R', not the actually running RD, Rdevel etc, when inferring\n> R_HOME. I can indeed set R_HOME, but I want my configure script to be able\n> to figure out which R is running, and thus which R_HOME to use when it is\n> not set.\n>\n> Your RQuantLib seems to use the same bare 'R RHOME', yet if a package is R\n> CMD installed with RD, the configure script will in fact not run RD, but R,\n> to find R_HOME. I think it is usually not apparent because the compile\n> flags derived from R_HOME/bin/R CMD config are usually the same or similar,\n> but when, in my case, I have R compiled with OpenMP, and RD with\n> sanitizers, but without OpenMP, this fails because of the discrepancy.\n>\n> Again, I feel like I'm missing something obvious, but I hope my explanation\n> of what I think is happening may help you guide me.\n>\n> Best wishes,\n>\n> Jack\n>\n> On Saturday, September 26, 2015, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>>\n>> On 26 September 2015 at 10:27, Jack Wasey wrote:\n>> | Having just read section 1.2 in Writing R extensions, a fragment of a\n>> | configure script is offered in order to determine the correct compiler\n>> | options. It starts by setting R_HOME with:\n>> |\n>> | : ${R_HOME=`R RHOME`}\n>> |\n>> |\n>> | `R` is called, even if, as in my case, `Rdevel` is the command used to\n>> | invoke package compilation. This can be overridden by setting R_HOME\n>> | in the call to `Rdevel`, but this seems to be undesirable, since the\n>> | whole point of a configure script is that it sets up the package given\n>> | the constraints of the compiling environment.\n>>\n>> [...]\n>> |\n>> | Am I doing something wrong?\n>>\n>> R_HOME is set to the result of the command R RHOME if and only it is unset.\n>>\n>> And it usually is unset.  This scheme generally works, I use it in a few\n>> packages on CRAN which had it for years -- and it was initially suggested\n>> to\n>> my by Kurt to make precisely _this_ work:  you set a different $PATH, or\n>> call\n>> a different R engine.  And the right thing happens:\n>>\n>>   edd at max:~$ R RHOME            # default installation\n>>   /usr/lib/R\n>>   edd at max:~$ RD RHOME           # alternate R-devel with a short-hand\n>> wrapper\n>>   /usr/local/lib/R-devel/lib/R\n>>   edd at max:~$ which RD\n>>   /home/edd/bin/RD\n>>   edd at max:~$\n>>\n>> The (nice) idea of calling R-devel just 'RD' appears due to Winston.  It\n>> works the same way if I just call R-devel-sh as I had for years:\n>>\n>>   edd at max:~$ R-devel.sh RHOME\n>>   /usr/local/lib/R-devel/lib/R\n>>   edd at max:~$\n>>\n>> So if you still think it fails for you, compare to e.g. the packages\n>>\n>>   nloptr\n>>   RProtoBuf\n>>   RQuantLib\n>>   RVowpalWabbit\n>>\n>> all of which use this scheme.\n>>\n>> Dirk\n>>\n>> --\n>> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>> <javascript:;>\n>>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Not sure I understand what you're doing and in what context, but if\nyou're trying to query R for where it lives, the following may help.\nNote that executables or where they live do *not* follow solely",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 3,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-9051889aaedf",
+      "message_id": "<39F86C27-3E55-4ADC-8256-B6E1FD1574DA@gmail.com>",
+      "from_name": "peter dalgaard",
+      "from_email_hash": "d2573f0c0a474184a9d96c815fc6bf37ff7c6392082069d810139c562d5a6f71",
+      "date": "2015-09-26T22:29:57+02:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<22022.48439.245838.660163@max.nulle.part>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+        "<22022.48439.245838.660163@max.nulle.part>"
+      ],
+      "body_plain": "> On 26 Sep 2015, at 17:43 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> R_HOME is set to the result of the command R RHOME if and only it is unset.\n> \n> And it usually is unset. \n\nDid you actually mean that, Dirk? I would expect that R_HOME would be set by \"myR CMD whatever\" before it got to the configure script, so that the default R would only be used as a last resort. And R rather actively defends itself against R_HOME being set in its environment.\n\nE.g.\n\n$ R_HOME=/tmp R CMD env | grep R_HOME\nWARNING: ignoring environment value of R_HOME\nR_HOME=/Library/Frameworks/R.framework/Resources\n\n(I'm not sure that it is actually supposed to work, but apparently R CMD foo executes 'foo' in the same environment as R CMD check et al.)\n\n-pd\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "> On 26 Sep 2015, at 17:43 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> R_HOME is set to the result of the command R RHOME if and only it is unset.\n> \n> And it usually is unset. \n\nDid you actua",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 2,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-42a6a92081fe",
+      "message_id": "<22023.1538.22408.314705@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2015-09-26T15:54:26-05:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<39F86C27-3E55-4ADC-8256-B6E1FD1574DA@gmail.com>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+        "<22022.48439.245838.660163@max.nulle.part>",
+        "<39F86C27-3E55-4ADC-8256-B6E1FD1574DA@gmail.com>"
+      ],
+      "body_plain": "On 26 September 2015 at 22:29, peter dalgaard wrote:\n| \n| > On 26 Sep 2015, at 17:43 , Dirk Eddelbuettel <edd at debian.org> wrote:\n| > \n| > R_HOME is set to the result of the command R RHOME if and only it is unset.\n| > \n| > And it usually is unset. \n| \n| Did you actually mean that, Dirk?\n\nYes. But I didn't make myself very clear, as you noted.\n\nWhat I meant to say, but did not, sadly, was that via PATH and called the\ncorresponding R front-end script from the particular (via PATH or explicit\nabsolute dir/path/to/R we get R_HOME set by the particular R invoked.\n\nWhich then calls configure for us, and that is how configure sees it as set\nwithout the need for explicit settings.\n\n| I would expect that R_HOME would be set by \"myR CMD whatever\" before it got\n| to the configure script, so that the default R would only be used as a last\n| resort. And R rather actively defends itself against R_HOME being set in\n| its environment. \n\nQuite right.\n\n| E.g.\n| \n| $ R_HOME=/tmp R CMD env | grep R_HOME\n| WARNING: ignoring environment value of R_HOME\n| R_HOME=/Library/Frameworks/R.framework/Resources\n| \n| (I'm not sure that it is actually supposed to work, but apparently R CMD foo executes 'foo' in the same environment as R CMD check et al.)\n\nSome backends take advantage of that. Rserve comes to mind IIRC.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 26 September 2015 at 22:29, peter dalgaard wrote:\n| \n| > On 26 Sep 2015, at 17:43 , Dirk Eddelbuettel <edd at debian.org> wrote:\n| > \n| > R_HOME is set to the result of the command R RHOME if and o",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 3,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-efb4034f7114",
+      "message_id": "<CA+zP7HEgwHWNPxfxvR7b1YCN0gfHHY12DaoDUE=oU9ERB6iFaw@mail.gmail.com>",
+      "from_name": "Jack Wasey",
+      "from_email_hash": "7d2f0b8d1ea7b010c54f9af90a9adc619e9597f35408f75c7bd1722f2f428db2",
+      "date": "2015-09-27T07:11:40-04:00",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "subject_clean": "[R-pkg-devel] Using the correct R binary in configure script",
+      "in_reply_to": "<22023.1538.22408.314705@max.nulle.part>",
+      "references": [
+        "<CA+zP7HF2A3RNsM_AXejXKSn0-OLb7+16k9iFmzBy9BYn4CisRg@mail.gmail.com>",
+        "<22022.48439.245838.660163@max.nulle.part>",
+        "<39F86C27-3E55-4ADC-8256-B6E1FD1574DA@gmail.com>",
+        "<22023.1538.22408.314705@max.nulle.part>"
+      ],
+      "body_plain": "Thanks for all your input. I am now aware that the R environment\nrunning configure will have set R_HOME. I had sometimes been running\n./configure without R_HOME set, leading to my problem (since in this\ncase, the configure snippet does assume 'R'). I'll stick to the\nofficial build routine from now on.\n\nIt may be helpful to other package developers that I threw a tiny\npackage up on github to demonstrate this behavior: this could be\nuseful as a simple test base for people working on configure scripts\nin R packages.\n\nhttps://github.com/jackwasey/configrdev\nThe script therein tests the package in DIrk's\nrocker/r-devel-san-clang which has both R and RD.\n\nJack\n\nOn Sat, Sep 26, 2015 at 4:54 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n> On 26 September 2015 at 22:29, peter dalgaard wrote:\n> |\n> | > On 26 Sep 2015, at 17:43 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> | >\n> | > R_HOME is set to the result of the command R RHOME if and only it is unset.\n> | >\n> | > And it usually is unset.\n> |\n> | Did you actually mean that, Dirk?\n>\n> Yes. But I didn't make myself very clear, as you noted.\n>\n> What I meant to say, but did not, sadly, was that via PATH and called the\n> corresponding R front-end script from the particular (via PATH or explicit\n> absolute dir/path/to/R we get R_HOME set by the particular R invoked.\n>\n> Which then calls configure for us, and that is how configure sees it as set\n> without the need for explicit settings.\n>\n> | I would expect that R_HOME would be set by \"myR CMD whatever\" before it got\n> | to the configure script, so that the default R would only be used as a last\n> | resort. And R rather actively defends itself against R_HOME being set in\n> | its environment.\n>\n> Quite right.\n>\n> | E.g.\n> |\n> | $ R_HOME=/tmp R CMD env | grep R_HOME\n> | WARNING: ignoring environment value of R_HOME\n> | R_HOME=/Library/Frameworks/R.framework/Resources\n> |\n> | (I'm not sure that it is actually supposed to work, but apparently R CMD foo executes 'foo' in the same environment as R CMD check et al.)\n>\n> Some backends take advantage of that. Rserve comes to mind IIRC.\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Thanks for all your input. I am now aware that the R environment\nrunning configure will have set R_HOME. I had sometimes been running\n./configure without R_HOME set, leading to my problem (since in th",
+      "thread_id": "thread-94c9ae0cc0b7",
+      "thread_depth": 4,
+      "month": "2015-09"
+    },
+    {
+      "id": "msg-08d072ac184b",
+      "message_id": "<077E31A57DA26E46AB0D493C9966AC730F1E1333B3@UM-MAIL4112.unimaas.nl>",
+      "from_name": "Viechtbauer Wolfgang (STAT)",
+      "from_email_hash": "fe20b3a5fb546662c9e482cc51bdbcbf36f93cf33ff40a37be639675351fb4ee",
+      "date": "2015-09-29T17:47:34+02:00",
+      "subject": "[R-pkg-devel] CRAN Version r-release-osx-x86_64-mavericks",
+      "subject_clean": "[R-pkg-devel] CRAN Version r-release-osx-x86_64-mavericks",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All,\n\nI just submitted a new version (1.9-8) of the metafor package to CRAN. The checks show an error for r-release-osx-x86_64-mavericks:\n\nhttps://cran.r-project.org/web/checks/check_results_metafor.html\n\nDigging down shows:\n\nERROR: this R is version 3.2.0, package 'metafor' requires R >= 3.2.2\n\nBut isn't 3.2.2 available for Mac OS X 10.9 (Mavericks)? https://cran.r-project.org/bin/macosx/ seems to suggest it is.\n\nIs there any reason why this isn't being used here?\n\nBest,\nWolfgang\n\n-- \nWolfgang Viechtbauer, Ph.D., Statistician | Department of Psychiatry and    \nNeuropsychology | Maastricht University | P.O. Box 616 (VIJV1) | 6200 MD    \nMaastricht, The Netherlands | +31 (43) 388-4170 | http://www.wvbauer.com",
+      "body_snippet": "Dear All,\n\nI just submitted a new version (1.9-8) of the metafor package to CRAN. The checks show an error for r-release-osx-x86_64-mavericks:\n\nhttps://cran.r-project.org/web/checks/check_results_meta",
+      "thread_id": "thread-08d072ac184b",
+      "thread_depth": 0,
+      "month": "2015-09"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-9be76161dec6",
+      "subject": "[R-pkg-devel] Problem with Description File",
+      "message_count": 1,
+      "participants": [
+        "Glenn Schultz"
+      ],
+      "started": "2015-09-01T07:17:59-05:00",
+      "last_reply": "2015-09-01T07:17:59-05:00",
+      "root_message_id": "msg-9be76161dec6"
+    },
+    {
+      "id": "thread-bdb4c3958376",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "message_count": 1,
+      "participants": [
+        "William Dunlap"
+      ],
+      "started": "2015-09-01T08:39:22-07:00",
+      "last_reply": "2015-09-01T08:39:22-07:00",
+      "root_message_id": "msg-bdb4c3958376"
+    },
+    {
+      "id": "thread-bc96607abc45",
+      "subject": "[R-pkg-devel] Define S4 method for generic in other package",
+      "message_count": 3,
+      "participants": [
+        "Hadley Wickham",
+        "Thierry Onkelinx"
+      ],
+      "started": "2015-09-01T10:53:09+02:00",
+      "last_reply": "2015-09-01T15:14:41+02:00",
+      "root_message_id": "msg-bc96607abc45"
+    },
+    {
+      "id": "thread-cf8396da3edb",
+      "subject": "[R-pkg-devel] Redefinition of generic for plot function breaks plot.formula",
+      "message_count": 7,
+      "participants": [
+        "Benjamin Hofner",
+        "Gavin Simpson",
+        "Hadley Wickham",
+        "Kevin Ushey"
+      ],
+      "started": "2015-09-01T15:08:34+02:00",
+      "last_reply": "2015-09-01T10:18:25-07:00",
+      "root_message_id": "msg-cf8396da3edb"
+    },
+    {
+      "id": "thread-3c9fb61e7dc1",
+      "subject": "[R-pkg-devel] devtools::revdep_check error message",
+      "message_count": 2,
+      "participants": [
+        "Chay Ngee Lim",
+        "Duncan Murdoch"
+      ],
+      "started": "2015-09-03T17:07:05-05:00",
+      "last_reply": "2015-09-03T18:38:04-04:00",
+      "root_message_id": "msg-3c9fb61e7dc1"
+    },
+    {
+      "id": "thread-e90c4b057f1a",
+      "subject": "[R-pkg-devel] Winbuilder build error on r-release due to lazy loading",
+      "message_count": 4,
+      "participants": [
+        "Benjamin Leutner",
+        "Uwe Ligges"
+      ],
+      "started": "2015-09-04T10:34:41+02:00",
+      "last_reply": "2015-09-04T22:24:26+02:00",
+      "root_message_id": "msg-e90c4b057f1a"
+    },
+    {
+      "id": "thread-2049f937e5f3",
+      "subject": "[R-pkg-devel] html from Rd",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Erich Subscriptions"
+      ],
+      "started": "2015-09-14T17:24:14+02:00",
+      "last_reply": "2015-09-14T12:37:23-04:00",
+      "root_message_id": "msg-2049f937e5f3"
+    },
+    {
+      "id": "thread-5f105af1a039",
+      "subject": "[R-pkg-devel] Return Value of By Function",
+      "message_count": 2,
+      "participants": [
+        "Dario Strbenac",
+        "Martin Maechler"
+      ],
+      "started": "2015-09-15T05:00:05+00:00",
+      "last_reply": "2015-09-15T09:49:45+02:00",
+      "root_message_id": "msg-5f105af1a039"
+    },
+    {
+      "id": "thread-d9310dcde8fe",
+      "subject": "[R-pkg-devel] problem with locale-dependent order()",
+      "message_count": 2,
+      "participants": [
+        "Alex Deckmyn",
+        "Hadley Wickham"
+      ],
+      "started": "2015-09-18T22:25:21+02:00",
+      "last_reply": "2015-09-20T13:22:54-04:00",
+      "root_message_id": "msg-d9310dcde8fe"
+    },
+    {
+      "id": "thread-e84e0f520b49",
+      "subject": "[R-pkg-devel] Writing a portable package that imports functions only available on Windows",
+      "message_count": 3,
+      "participants": [
+        "Duncan Murdoch",
+        "Richard Cotton",
+        "Thierry Onkelinx"
+      ],
+      "started": "2015-09-19T13:07:06+03:00",
+      "last_reply": "2015-09-19T07:20:03-04:00",
+      "root_message_id": "msg-e84e0f520b49"
+    },
+    {
+      "id": "thread-563f344abd62",
+      "subject": "Help with Package creation",
+      "message_count": 1,
+      "participants": [
+        "Mohammad Tanvir Ahamed"
+      ],
+      "started": "2015-09-19T19:42:39+00:00",
+      "last_reply": "2015-09-19T19:42:39+00:00",
+      "root_message_id": "msg-563f344abd62"
+    },
+    {
+      "id": "thread-88868515ef25",
+      "subject": "[R-pkg-devel] Help with Package creation",
+      "message_count": 1,
+      "participants": [
+        "Jennifer Bryan"
+      ],
+      "started": "2015-09-20T15:17:45-07:00",
+      "last_reply": "2015-09-20T15:17:45-07:00",
+      "root_message_id": "msg-88868515ef25"
+    },
+    {
+      "id": "thread-966370fa6eb0",
+      "subject": "[R-pkg-devel] Unit test functions as standalone block of code but not in test_that()",
+      "message_count": 1,
+      "participants": [
+        "Shaub, David"
+      ],
+      "started": "2015-09-23T11:37:47-06:00",
+      "last_reply": "2015-09-23T11:37:47-06:00",
+      "root_message_id": "msg-966370fa6eb0"
+    },
+    {
+      "id": "thread-94c9ae0cc0b7",
+      "subject": "[R-pkg-devel] Using the correct R binary in configure script",
+      "message_count": 8,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Henrik Bengtsson",
+        "Jack Wasey",
+        "peter dalgaard"
+      ],
+      "started": "2015-09-26T10:27:32-04:00",
+      "last_reply": "2015-09-27T07:11:40-04:00",
+      "root_message_id": "msg-94c9ae0cc0b7"
+    },
+    {
+      "id": "thread-08d072ac184b",
+      "subject": "[R-pkg-devel] CRAN Version r-release-osx-x86_64-mavericks",
+      "message_count": 1,
+      "participants": [
+        "Viechtbauer Wolfgang (STAT)"
+      ],
+      "started": "2015-09-29T17:47:34+02:00",
+      "last_reply": "2015-09-29T17:47:34+02:00",
+      "root_message_id": "msg-08d072ac184b"
+    }
+  ]
+}

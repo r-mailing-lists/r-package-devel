@@ -1,0 +1,1103 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2025-03",
+  "messages": [
+    {
+      "id": "msg-b2efd7a0a6ef",
+      "message_id": "<CO6PR09MB78942AC6C421FECD5502824F96D52@CO6PR09MB7894.namprd09.prod.outlook.com>",
+      "from_name": "McCrowey, Clinton",
+      "from_email_hash": "1b9981fb18fc4a960090377113e670cbf5fca77050311f6bab34955deb783830",
+      "date": "2025-03-07T13:21:19Z",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "subject_clean": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "in_reply_to": "<20250226144956.21c5e1c4@arachnoid>",
+      "references": [
+        "<AS8PR02MB101481E0D5A2A3073DE0B9486ACC22@AS8PR02MB10148.eurprd02.prod.outlook.com>",
+        "<20250226144956.21c5e1c4@arachnoid>"
+      ],
+      "body_plain": "I wrapped my examples in \\dontrun{} and the CRAN maintainers never complained to me.\n\n\n\nClinton Mccrowey |  Physical Scientist | U.S. Environmental Protection Agency - Region III | Air and Radiation Division | Office Number: 14-202 | Air Quality Analysis Branch | Philadelphia, PA | Mail Code: 3AD40 | Email: mccrowey.clinton at epa.gov | Phone: 215-814-2157 | Fax: 215-814-2124\n\n-----Original Message-----\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Ivan Krylov via R-package-devel\nSent: Wednesday, February 26, 2025 6:50 AM\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] How do you make it possible to run the example that requires a Conda environment?\n\nCaution: This email originated from outside EPA, please exercise additional caution when deciding whether to open attachments or click on provided links.\n\n\n? Wed, 26 Feb 2025 08:57:10 +0000\nKABILAN S <kabilan151414 at gmail.com> ?????:\n\n> if I submit the package to CRAN, the example is not running and\n> returning an error message. Even if I mention \\donttest{} to avoid the\n> automatic checking of example, the CRAN team members are not allowing.\n\nDoes it help to use if (reticulate::py_module_available(...)) { ... } instead of \\donttest{...} in your examples?\n\nhttps://cran.r-project.org/web/packages/reticulate/vignettes/package.html#checking-and-testing-on-cran\n\n--\nBest regards,\nIvan\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I wrapped my examples in \\dontrun{} and the CRAN maintainers never complained to me.\n\n\n\nClinton Mccrowey |  Physical Scientist | U.S. Environmental Protection Agency - Region III | Air and Radiation D",
+      "thread_id": "thread-b2efd7a0a6ef",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-08d611634abd",
+      "message_id": "<CAL3ufU+-rbENGJ+MKXwpbbpjB5XPEoxJZLvc0gbAX+QUFdXPsQ@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2025-03-07T07:36:42-08:00",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "subject_clean": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "in_reply_to": "<CO6PR09MB78942AC6C421FECD5502824F96D52@CO6PR09MB7894.namprd09.prod.outlook.com>",
+      "references": [
+        "<AS8PR02MB101481E0D5A2A3073DE0B9486ACC22@AS8PR02MB10148.eurprd02.prod.outlook.com>",
+        "<20250226144956.21c5e1c4@arachnoid>",
+        "<CO6PR09MB78942AC6C421FECD5502824F96D52@CO6PR09MB7894.namprd09.prod.outlook.com>"
+      ],
+      "body_plain": "Whereas, I just had a CRAN submission fail for using \\dontrun{} just once!\n?\n\nOn Fri, Mar 7, 2025 at 06:47 McCrowey, Clinton via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> I wrapped my examples in \\dontrun{} and the CRAN maintainers never\n> complained to me.\n>\n>\n>\n> Clinton Mccrowey |  Physical Scientist | U.S. Environmental Protection\n> Agency - Region III | Air and Radiation Division | Office Number: 14-202 |\n> Air Quality Analysis Branch | Philadelphia, PA | Mail Code: 3AD40 | Email:\n> mccrowey.clinton at epa.gov | Phone: 215-814-2157 | Fax: 215-814-2124\n>\n> -----Original Message-----\n> From: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf\n> Of Ivan Krylov via R-package-devel\n> Sent: Wednesday, February 26, 2025 6:50 AM\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] How do you make it possible to run the example\n> that requires a Conda environment?\n>\n> Caution: This email originated from outside EPA, please exercise\n> additional caution when deciding whether to open attachments or click on\n> provided links.\n>\n>\n> ? Wed, 26 Feb 2025 08:57:10 +0000\n> KABILAN S <kabilan151414 at gmail.com> ?????:\n>\n> > if I submit the package to CRAN, the example is not running and\n> > returning an error message. Even if I mention \\donttest{} to avoid the\n> > automatic checking of example, the CRAN team members are not allowing.\n>\n> Does it help to use if (reticulate::py_module_available(...)) { ... }\n> instead of \\donttest{...} in your examples?\n>\n>\n> https://cran.r-project.org/web/packages/reticulate/vignettes/package.html#checking-and-testing-on-cran\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Whereas, I just had a CRAN submission fail for using \\dontrun{} just once!\n?\n\nOn Fri, Mar 7, 2025 at 06:47 McCrowey, Clinton via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> I wrapped",
+      "thread_id": "thread-b2efd7a0a6ef",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-0728700a5bea",
+      "message_id": "<49fb48e535907215d75d1348743aaee03933a035.camel@braverock.com>",
+      "from_name": "Brian G. Peterson",
+      "from_email_hash": "8f7d7863b98c36f594dc0b3ee1ea66fe80f3c655487f1e98dd55606a26ed6070",
+      "date": "2025-03-07T09:57:41-06:00",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "subject_clean": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "in_reply_to": "<CAL3ufU+-rbENGJ+MKXwpbbpjB5XPEoxJZLvc0gbAX+QUFdXPsQ@mail.gmail.com>",
+      "references": [
+        "<AS8PR02MB101481E0D5A2A3073DE0B9486ACC22@AS8PR02MB10148.eurprd02.prod.outlook.com>",
+        "<20250226144956.21c5e1c4@arachnoid>",
+        "<CO6PR09MB78942AC6C421FECD5502824F96D52@CO6PR09MB7894.namprd09.prod.outlook.com>",
+        "<CAL3ufU+-rbENGJ+MKXwpbbpjB5XPEoxJZLvc0gbAX+QUFdXPsQ@mail.gmail.com>"
+      ],
+      "body_plain": "\\dontrun{} is allowed by CRAN. ?If your package got rejected for using\n\\dontrun{} I would guess that maybe your example needs a package that\nisn't in \"Suggests\" in your DESCRIPTION file. ?Even in \\dontrun{} you\nshould still tell the user that certain packages may be needed to\naccess specific optional functionality.\n\n-- \nBrian G. Peterson\nph: +1.773.459.4973\nim: bgpbraverock\n\nOn Fri, 2025-03-07 at 07:36 -0800, Josiah Parry wrote:\n> Whereas, I just had a CRAN submission fail for using \\dontrun{} just\n> once!\n> ?\n> \n> On Fri, Mar 7, 2025 at 06:47 McCrowey, Clinton via R-package-devel <\n> r-package-devel at r-project.org> wrote:\n> \n> > I wrapped my examples in \\dontrun{} and the CRAN maintainers never\n> > complained to me.\n> > \n> > \n> > \n> > Clinton Mccrowey |? Physical Scientist | U.S. Environmental\n> > Protection\n> > Agency - Region III | Air and Radiation Division | Office Number:\n> > 14-202 |\n> > Air Quality Analysis Branch | Philadelphia, PA | Mail Code: 3AD40 |\n> > Email:\n> > mccrowey.clinton at epa.gov?| Phone: 215-814-2157 | Fax: 215-814-2124\n> > \n> > -----Original Message-----\n> > From: R-package-devel <r-package-devel-bounces at r-project.org> On\n> > Behalf\n> > Of Ivan Krylov via R-package-devel\n> > Sent: Wednesday, February 26, 2025 6:50 AM\n> > Cc: r-package-devel at r-project.org\n> > Subject: Re: [R-pkg-devel] How do you make it possible to run the\n> > example\n> > that requires a Conda environment?\n> > \n> > Caution: This email originated from outside EPA, please exercise\n> > additional caution when deciding whether to open attachments or\n> > click on\n> > provided links.\n> > \n> > \n> > ? Wed, 26 Feb 2025 08:57:10 +0000\n> > KABILAN S <kabilan151414 at gmail.com> ?????:\n> > \n> > > if I submit the package to CRAN, the example is not running and\n> > > returning an error message. Even if I mention \\donttest{} to\n> > > avoid the\n> > > automatic checking of example, the CRAN team members are not\n> > > allowing.\n> > \n> > Does it help to use if (reticulate::py_module_available(...)) { ...\n> > }\n> > instead of \\donttest{...} in your examples?\n> > \n> > \n> > https://cran.r-project.org/web/packages/reticulate/vignettes/package.html#checking-and-testing-on-cran\n> > \n> > --\n> > Best regards,\n> > Ivan\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org?mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org?mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > \n> \n> ????????[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org?mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "\\dontrun{} is allowed by CRAN. ?If your package got rejected for using\n\\dontrun{} I would guess that maybe your example needs a package that\nisn't in \"Suggests\" in your DESCRIPTION file. ?Even in \\don",
+      "thread_id": "thread-b2efd7a0a6ef",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-84abb2b4f512",
+      "message_id": "<CAE_v-D6HrMoBMm1nu_a_JSbErad0ZkhP6FN_AF-y0APHuzLYDg@mail.gmail.com>",
+      "from_name": "Stephen Abrams",
+      "from_email_hash": "76f49b98ff5acdb583648e2e4853de94b0acd2a779326193f423586e0a0761e9",
+      "date": "2025-03-09T15:03:00-04:00",
+      "subject": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "subject_clean": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi again - I'm working through the final details of a submission. My\ncurrent problem is that I make use of a dependency of the caret package\n(kernlab) in one of my vignettes. If I don't include kernlab in my\nDESCRIPTION file, I get the following ERROR:\n\n* checking re-building of vignette outputs ... [16s] ERROR\nError(s) in re-building vignettes:\n--- re-building 'create_synthetic_data.Rmd' using rmarkdown\n--- finished re-building 'create_synthetic_data.Rmd'\n\n--- re-building 'modeling_with_binary_classifiers.Rmd' using rmarkdown\n\nQuitting from lines 56-63 [unnamed-chunk-4]\n(modeling_with_binary_classifiers.Rmd)\nError: processing vignette 'modeling_with_binary_classifiers.Rmd' failed\nwith diagnostics:\nRequired packages are missing: kernlab\n--- failed re-building 'modeling_with_binary_classifiers.Rmd'\n\nIf I do include kernlab as a dependency in my DESCRIPTION file, I get the\nfollowing NOTE:\n\n* checking dependencies in R code ... NOTE\nPackages in Depends field not imported from:\n  'kernlab' 'randomForest'\n  These packages need to be imported from (in the NAMESPACE file)\n  for when this namespace is loaded but not attached.\n\nMy NAMESPACE file is auto-generated by roxygen and actually says not to\nedit it. I think the problem is the implicit dependency inside caret, but\nI'm not sure how to solve it so the automated checks work. When I run this\non my own machine, it passes the --as-cran check. Any advice would be\ngreatly appreciated.\n\nThanks!\n\n\n-- \nStephen Abrams\nDivergent Blue <http://www.divergentblue.com/>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi again - I'm working through the final details of a submission. My\ncurrent problem is that I make use of a dependency of the caret package\n(kernlab) in one of my vignettes. If I don't include kernla",
+      "thread_id": "thread-84abb2b4f512",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-b55c4554660c",
+      "message_id": "<26573.59438.228939.875461@rob.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-03-09T14:12:46-05:00",
+      "subject": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "subject_clean": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "in_reply_to": "<CAE_v-D6HrMoBMm1nu_a_JSbErad0ZkhP6FN_AF-y0APHuzLYDg@mail.gmail.com>",
+      "references": [
+        "<CAE_v-D6HrMoBMm1nu_a_JSbErad0ZkhP6FN_AF-y0APHuzLYDg@mail.gmail.com>"
+      ],
+      "body_plain": "On 9 March 2025 at 15:03, Stephen Abrams wrote:\n| Hi again - I'm working through the final details of a submission. My\n| current problem is that I make use of a dependency of the caret package\n| (kernlab) in one of my vignettes. If I don't include kernlab in my\n| DESCRIPTION file, I get the following ERROR:\n[...]\n| My NAMESPACE file is auto-generated by roxygen and actually says not to\n\nYou need to edit DESCRIPTION (by hand). That is all that there is, and\n_Writing R Extensions_ is fairly clear about this. Here is a quote from\nSection 1.1.3\n\n     The ?Suggests? field uses the same syntax as ?Depends? and lists\n  packages that are not necessarily needed.  This includes packages used\n  only in examples, tests or vignettes (*note Writing package\n  vignettes::), and packages loaded in the body of functions.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 9 March 2025 at 15:03, Stephen Abrams wrote:\n| Hi again - I'm working through the final details of a submission. My\n| current problem is that I make use of a dependency of the caret package\n| (kern",
+      "thread_id": "thread-84abb2b4f512",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-4c9fedc612bd",
+      "message_id": "<CAE_v-D5VA4R5o8df+gE3QKG7fDEKVAhp2Ppxc1M0ufMdMJGR3g@mail.gmail.com>",
+      "from_name": "Stephen Abrams",
+      "from_email_hash": "76f49b98ff5acdb583648e2e4853de94b0acd2a779326193f423586e0a0761e9",
+      "date": "2025-03-09T18:41:21-04:00",
+      "subject": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "subject_clean": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "in_reply_to": "<26573.59438.228939.875461@rob.eddelbuettel.com>",
+      "references": [
+        "<CAE_v-D6HrMoBMm1nu_a_JSbErad0ZkhP6FN_AF-y0APHuzLYDg@mail.gmail.com>",
+        "<26573.59438.228939.875461@rob.eddelbuettel.com>"
+      ],
+      "body_plain": "Awesome - much appreciated. I think I'm missing the forest for the trees at\nthis point - thanks!\n\nOn Sun, Mar 9, 2025 at 3:12?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 9 March 2025 at 15:03, Stephen Abrams wrote:\n> | Hi again - I'm working through the final details of a submission. My\n> | current problem is that I make use of a dependency of the caret package\n> | (kernlab) in one of my vignettes. If I don't include kernlab in my\n> | DESCRIPTION file, I get the following ERROR:\n> [...]\n> | My NAMESPACE file is auto-generated by roxygen and actually says not to\n>\n> You need to edit DESCRIPTION (by hand). That is all that there is, and\n> _Writing R Extensions_ is fairly clear about this. Here is a quote from\n> Section 1.1.3\n>\n>      The ?Suggests? field uses the same syntax as ?Depends? and lists\n>   packages that are not necessarily needed.  This includes packages used\n>   only in examples, tests or vignettes (*note Writing package\n>   vignettes::), and packages loaded in the body of functions.\n>\n> Dirk\n>\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\n-- \nStephen Abrams\nDivergent Blue <http://www.divergentblue.com/>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Awesome - much appreciated. I think I'm missing the forest for the trees at\nthis point - thanks!\n\nOn Sun, Mar 9, 2025 at 3:12?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 9 March 2025 at 15",
+      "thread_id": "thread-84abb2b4f512",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-ee77a94a8ea8",
+      "message_id": "<00f2c98a-69f7-40a9-ab2d-95add9061736@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-03-10T12:29:53+01:00",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "subject_clean": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "in_reply_to": "<49fb48e535907215d75d1348743aaee03933a035.camel@braverock.com>",
+      "references": [
+        "<AS8PR02MB101481E0D5A2A3073DE0B9486ACC22@AS8PR02MB10148.eurprd02.prod.outlook.com>",
+        "<20250226144956.21c5e1c4@arachnoid>",
+        "<CO6PR09MB78942AC6C421FECD5502824F96D52@CO6PR09MB7894.namprd09.prod.outlook.com>",
+        "<CAL3ufU+-rbENGJ+MKXwpbbpjB5XPEoxJZLvc0gbAX+QUFdXPsQ@mail.gmail.com>",
+        "<49fb48e535907215d75d1348743aaee03933a035.camel@braverock.com>"
+      ],
+      "body_plain": "On 07.03.2025 16:57, Brian G. Peterson wrote:\n> \\dontrun{} is allowed by CRAN. ?If your package got rejected for using\n> \\dontrun{} I would guess that maybe your example needs a package that\n> isn't in \"Suggests\" in your DESCRIPTION file. ?Even in \\dontrun{} you\n> should still tell the user that certain packages may be needed to\n> access specific optional functionality.\n> \n\nA package will rejected if \\dontrun is not needed and there are better \nways to structure the examples. Frequently code such as Ivan's proposal\n\n    (reticulate::py_module_available(...)) { ... }\n\nis perferrable, so that the code runs if the requirements are fullfilled \n/ suggested packages are available.\n\nBest,\nUwe Ligges",
+      "body_snippet": "On 07.03.2025 16:57, Brian G. Peterson wrote:\n> \\dontrun{} is allowed by CRAN. ?If your package got rejected for using\n> \\dontrun{} I would guess that maybe your example needs a package that\n> isn't i",
+      "thread_id": "thread-b2efd7a0a6ef",
+      "thread_depth": 3,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-5c8ddb2da280",
+      "message_id": "<CAC+++OxBY21wm3ciJT61T5qywR=n=Gi0C3RfwvMvaywigyZbmw@mail.gmail.com>",
+      "from_name": "KABILAN S",
+      "from_email_hash": "f590e26da882409b067653e4e6e1dab2f430fde8265d0ff6463be8d129dc9add",
+      "date": "2025-03-11T16:54:47+05:30",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "subject_clean": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Thank you Ivan and Uwe Ligges for your suggestions. I have used the\n`reticulate::py_module_available(...)) { ... } and it is working fine now.\nAlso, my package was accepted by the CRAN.\n\n-- \n*Kabilan S*,\nPh.D., Bioinformatics,\nICAR - Indian Agricultural Statistics Research Institute (IASRI),\nNew Delhi - 110012.\nIndia\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you Ivan and Uwe Ligges for your suggestions. I have used the\n`reticulate::py_module_available(...)) { ... } and it is working fine now.\nAlso, my package was accepted by the CRAN.\n\n-- \n*Kabilan ",
+      "thread_id": "thread-5c8ddb2da280",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-e7007840a422",
+      "message_id": "<CAM9CR=2X26iSionVpxjB8dac9xr_S5r75c+d-zgFx8b_aRxfLQ@mail.gmail.com>",
+      "from_name": "Jon Clayden",
+      "from_email_hash": "de10dbb1c5c94d086da54b37bb348916f07770655e7b33274844b6e0ee49245c",
+      "date": "2025-03-13T09:48:03Z",
+      "subject": "[R-pkg-devel] Status of R_ext/Connections.h",
+      "subject_clean": "[R-pkg-devel] Status of R_ext/Connections.h",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI know this has been discussed before, but I'm still confused about\nhow to interpret various signals regarding the R_ext/Connections.h\nheader and the functions it exposes.\n\nThe header itself says that it's non-API but if you use it you must\ncheck the version number. That's slightly unclear but suggests it can\nbe used with care.\n\nThe current \"Writing R Extensions\" says \"Facilities for defining\ncustom connection implementations are provided in R_ext/Connections.h,\nbut make sure you consult the file before use\". Again that sounds like\nweak support for use with care.\n\nI have recently received a note regarding my {ore} regular expression\npackage, saying \"This includes the non-API header\n<R_ext/Connections.h> but does not test its version as required in its\ncomments.  It seems unused.\" In fact, my code does test the version,\nbut the header was included in one extra source file where it wasn't\nneeded, so I assume that's what the issue is. I have corrected that.\nAgain, there is no implication here that use is prohibited.\n\nAnd yet, R CMD check still produces a NOTE, which is grounds for\nauto-rejection upon submission to CRAN.\n\nSince builds of my package using these functions have historically\nsometimes been let onto CRAN, sometimes not, I maintain a\nCRAN-specific branch that disables this functionality via a\ncompile-time constant, and I can continue with that if I must, but the\nconnections interface is I think useful so I'd like to make it\navailable to all users if I can. Is this practicable, or should I give\nup and continue disabling the feature for CRAN?\n\nThanks for your time.\n\nAll the best,\nJon",
+      "body_snippet": "Dear all,\n\nI know this has been discussed before, but I'm still confused about\nhow to interpret various signals regarding the R_ext/Connections.h\nheader and the functions it exposes.\n\nThe header itsel",
+      "thread_id": "thread-e7007840a422",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-6074c97d3a71",
+      "message_id": "<481962756.7725874.1742162776289@mail.yahoo.com>",
+      "from_name": "Mark Webster",
+      "from_email_hash": "e9cba4832c7d6aecfd3a7bc51b018bba757bb41fa0d583ec45c2cfa0c9839a43",
+      "date": "2025-03-16T22:06:16Z",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": null,
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>"
+      ],
+      "body_plain": "Hello,\nI'm getting a NOTE on winbuilder, which doesn't come with much information:\nBuild log:> * using log directory 'd:/RCompile/CRANguest/R-devel/autodb.Rcheck'\n> * using R version 4.5.0 alpha (2025-03-15 r87978 ucrt)\n> * using platform: x86_64-w64-mingw32\n> * R was compiled by\n>     gcc.exe (GCC) 14.2.0\n>     GNU Fortran (GCC) 14.2.0\n> * running under: Windows Server 2022 x64 (build 20348)\n> * using session charset: UTF-8\n> * checking for file 'autodb/DESCRIPTION' ... OK\n> * this is package 'autodb' version '2.3.0'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'Mark Webster <markwebster204 at yahoo.co.uk>'\n>\n> New submission [etc., no other problems]\nAuthor text in original DESCRIPTION:> Authors at R:?> ? ? person(> ? ? ? \"Mark\",> ? ? ? \"Webster\",?> ? ? ? email = \"markwebster204 at yahoo.co.uk\",> ? ? ? role = c(\"aut\", \"cre\"),> ? ? ? comment = c(ORCID = \"0000-0002-3351-0686\")> ? ? )\n\n\nIf I build locally, the release (4.3.2) and development (2025-03-15 r87978 ucrt) versions do differ by the resulting Author DESCRIPTION field: the development version puts ORCID: in front of the Orcid URL.However, they both get the NOTE on Winbuilder.What is the error here?\nBest Regards,Mark Webster\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\nI'm getting a NOTE on winbuilder, which doesn't come with much information:\nBuild log:> * using log directory 'd:/RCompile/CRANguest/R-devel/autodb.Rcheck'\n> * using R version 4.5.0 alpha (2025",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-06194d0032e2",
+      "message_id": "<12d048d4-0d80-4255-b8aa-098104e39154@dewey.myzen.co.uk>",
+      "from_name": "Lists",
+      "from_email_hash": "23eddf46e0ea9b02c3ac4701d820ec1c7cb1ea6f9f9d602508498f7026c2f5f3",
+      "date": "2025-03-17T13:18:18Z",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<481962756.7725874.1742162776289@mail.yahoo.com>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>"
+      ],
+      "body_plain": "Dear Mark\n\nThat note is entirely expected. I believe it is just to help the CRAN \nmaintainers.\n\nMichael\n\nOn 16/03/2025 22:06, Mark Webster via R-package-devel wrote:\n> Hello,\n> I'm getting a NOTE on winbuilder, which doesn't come with much information:\n> Build log:> * using log directory 'd:/RCompile/CRANguest/R-devel/autodb.Rcheck'\n>> * using R version 4.5.0 alpha (2025-03-15 r87978 ucrt)\n>> * using platform: x86_64-w64-mingw32\n>> * R was compiled by\n>>      gcc.exe (GCC) 14.2.0\n>>      GNU Fortran (GCC) 14.2.0\n>> * running under: Windows Server 2022 x64 (build 20348)\n>> * using session charset: UTF-8\n>> * checking for file 'autodb/DESCRIPTION' ... OK\n>> * this is package 'autodb' version '2.3.0'\n>> * package encoding: UTF-8\n>> * checking CRAN incoming feasibility ... NOTE\n>> Maintainer: 'Mark Webster <markwebster204 at yahoo.co.uk>'\n>>\n>> New submission [etc., no other problems]\n> Author text in original DESCRIPTION:> Authors at R:?> ? ? person(> ? ? ? \"Mark\",> ? ? ? \"Webster\",?> ? ? ? email = \"markwebster204 at yahoo.co.uk\",> ? ? ? role = c(\"aut\", \"cre\"),> ? ? ? comment = c(ORCID = \"0000-0002-3351-0686\")> ? ? )\n> \n> \n> If I build locally, the release (4.3.2) and development (2025-03-15 r87978 ucrt) versions do differ by the resulting Author DESCRIPTION field: the development version puts ORCID: in front of the Orcid URL.However, they both get the NOTE on Winbuilder.What is the error here?\n> Best Regards,Mark Webster\n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n-- \nThis email has been checked for viruses by AVG antivirus software.\nwww.avg.com",
+      "body_snippet": "Dear Mark\n\nThat note is entirely expected. I believe it is just to help the CRAN \nmaintainers.\n\nMichael\n\nOn 16/03/2025 22:06, Mark Webster via R-package-devel wrote:\n> Hello,\n> I'm getting a NOTE on w",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-b057b836efe2",
+      "message_id": "<20250317162437.57199dfb@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-03-17T16:24:37+03:00",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<481962756.7725874.1742162776289@mail.yahoo.com>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>"
+      ],
+      "body_plain": "? Sun, 16 Mar 2025 22:06:16 +0000 (UTC)\nMark Webster via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> I'm getting a NOTE on winbuilder, which doesn't come with much\n> information:\n> Build log:\n> * using log directory\n> 'd:/RCompile/CRANguest/R-devel/autodb.Rcheck'\n> > * using R version 4.5.0 alpha (2025-03-15 r87978 ucrt)\n> > * using platform: x86_64-w64-mingw32\n> > * R was compiled by\n> >     gcc.exe (GCC) 14.2.0\n> >     GNU Fortran (GCC) 14.2.0\n> > * running under: Windows Server 2022 x64 (build 20348)\n> > * using session charset: UTF-8\n> > * checking for file 'autodb/DESCRIPTION' ... OK\n> > * this is package 'autodb' version '2.3.0'\n> > * package encoding: UTF-8\n> > * checking CRAN incoming feasibility ... NOTE\n> > Maintainer: 'Mark Webster <markwebster204 at yahoo.co.uk>'\n> >\n> > New submission [etc., no other problems]  \n> Author text in original DESCRIPTION:> Authors at R:?> ? ? person(>\n> \"Mark\",> ? ? ? \"Webster\",?> ? ? ? email =\n> \"markwebster204 at yahoo.co.uk\",> ? ? ? role = c(\"aut\", \"cre\"),>\n> comment = c(ORCID = \"0000-0002-3351-0686\")> ? ? )\n\nCould you please share a link to the check results? If it's\n<https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/>,\nit seems to have passed the R CMD check. As Michael says, the NOTE\nabout the package being a new submission is expected.\n\nI wasn't able to find the message you are being concerned with (\"Author\ntext in original DESCRIPTION\" and its substrings) anywhere in the R\nsource code or in the R-dev-web Subversion repository. Are you sure the\nproblem is not elsewhere?\n\n> \t[[alternative HTML version deleted]]\n\nYour message did not arrive intact:\nhttps://stat.ethz.ch/pipermail/r-package-devel/2025q1/011533.html\n\nOn the R mailing lists, it's best to compose messages in plain text.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Sun, 16 Mar 2025 22:06:16 +0000 (UTC)\nMark Webster via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> I'm getting a NOTE on winbuilder, which doesn't come with much\n> information:\n> Bu",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-190fbc93d888",
+      "message_id": "<41662215.1929359.1742218730400@mail.yahoo.com>",
+      "from_name": "Mark Webster",
+      "from_email_hash": "e9cba4832c7d6aecfd3a7bc51b018bba757bb41fa0d583ec45c2cfa0c9839a43",
+      "date": "2025-03-17T13:38:50Z",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<20250317162437.57199dfb@arachnoid>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>",
+        "<20250317162437.57199dfb@arachnoid>"
+      ],
+      "body_plain": "Hi Michael and Ivan,\n\n   > Could you please share a link to the check results? If it's> <https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/>,\n> it seems to have passed the R CMD check. As Michael says, the NOTE\n> about the package being a new submission is expected.\n\nYes, that's the one.\n\n\n> I wasn't able to find the message you are being concerned with (\"Author\n> text in original DESCRIPTION\" and its substrings) anywhere in the R\n> source code or in the R-dev-web Subversion repository. Are you sure the\n> problem is not elsewhere?\nThe relevant part of the two check logs is\n> * checking CRAN incoming feasibility ... [4s/6s] NOTE\n> Maintainer: ?Mark Webster <markwebster204 at yahoo.co.uk>?The NOTE is the only thing mentioned WRT the pre-checks failing.I've copied the original email below.Looking at the email, the Windows build does look to have overrun the 10minchecktime limit, but when I've had that reported back before it's been after thepre-check, so I assume that's not the issue here.\n> That note is entirely expected. I believe it is just to help the CRAN> maintainers.\nGiven the above, would it be reasonable to reply to this as a false positive?\nBest Regards,Mark\n\nOriginal email:\n> Dear maintainer,>> package autodb_2.3.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):>> Windows: <>?https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/00check.log>\n> Status: 1 NOTE\n> Debian: <https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Debian/00check.log>\n> Status: 1 NOTE\n>\n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n>\n> More details are given in the directory:\n> <https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/>\n> The files will be removed after roughly 7 days.\n>\n> No strong reverse dependencies to be checked.\n>\n> Best regards,\n> CRAN teams' auto-check service>\n> Flavor: r-devel-windows-x86_64\n> Check: CRAN incoming feasibility, Result: NA\n>? ?Maintainer: 'Mark Webster <markwebster204 at yahoo.co.uk>'\n>\n>? ?New submission\n>\n> Flavor: r-devel-windows-x86_64\n> Check: Overall checktime, Result: NOTE\n>? ?Overall checktime 12 min > 10 min\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc\n> Check: CRAN incoming feasibility, Result: NOTE\n>? ?Maintainer: 'Mark Webster <markwebster204 at yahoo.co.uk>'\n>?\n>? ?New submission\n\n  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Michael and Ivan,\n\n   > Could you please share a link to the check results? If it's> <https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/>,\n> it seems to have passed th",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-a4d2f9d673b5",
+      "message_id": "<20250317164830.3b711a4b@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-03-17T16:48:30+03:00",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<41662215.1929359.1742218730400@mail.yahoo.com>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>",
+        "<20250317162437.57199dfb@arachnoid>",
+        "<41662215.1929359.1742218730400@mail.yahoo.com>"
+      ],
+      "body_plain": "? Mon, 17 Mar 2025 13:38:50 +0000 (UTC)\nMark Webster <markwebster204 at yahoo.co.uk> ?????:\n\n> > Flavor: r-devel-windows-x86_64\n> > Check: Overall checktime, Result: NOTE\n> >? ?Overall checktime 12 min > 10 min\n\nI think you'll have to reduce the test datasets further:\nhttps://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/examples_and_tests/tests/testthat.Rout\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 17 Mar 2025 13:38:50 +0000 (UTC)\nMark Webster <markwebster204 at yahoo.co.uk> ?????:\n\n> > Flavor: r-devel-windows-x86_64\n> > Check: Overall checktime, Result: NOTE\n> >? ?Overall checktime 12 mi",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 3,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-de6adca5cbac",
+      "message_id": "<721506386.8188353.1742220293066@mail.yahoo.com>",
+      "from_name": "Mark Webster",
+      "from_email_hash": "e9cba4832c7d6aecfd3a7bc51b018bba757bb41fa0d583ec45c2cfa0c9839a43",
+      "date": "2025-03-17T14:04:53Z",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<20250317164830.3b711a4b@arachnoid>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>",
+        "<20250317162437.57199dfb@arachnoid>",
+        "<41662215.1929359.1742218730400@mail.yahoo.com>",
+        "<20250317164830.3b711a4b@arachnoid>"
+      ],
+      "body_plain": "> I think you'll have to reduce the test datasets further:>?https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/examples_and_tests/tests/testthat.Rout\n\nOh, definitely.I'll reduce them further and re-submit, thanks.Best Regards,Mark  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "> I think you'll have to reduce the test datasets further:>?https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/examples_and_tests/tests/testthat.Rout\n\nOh, definite",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 4,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-a3f20f8aac6f",
+      "message_id": "<3cf3afce-e677-4e09-bc7b-105df77c20d4@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-03-17T15:05:42+01:00",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<12d048d4-0d80-4255-b8aa-098104e39154@dewey.myzen.co.uk>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>",
+        "<12d048d4-0d80-4255-b8aa-098104e39154@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "On 17.03.2025 14:18, Lists wrote:\n> Dear Mark\n> \n> That note is entirely expected. I believe it is just to help the CRAN \n> maintainers.\n> \n> Michael\n> \n> On 16/03/2025 22:06, Mark Webster via R-package-devel wrote:\n>> Hello,\n>> I'm getting a NOTE on winbuilder, which doesn't come with much \n>> information:\n>> Build log:> * using log directory 'd:/RCompile/CRANguest/R-devel/ \n>> autodb.Rcheck'\n>>> * using R version 4.5.0 alpha (2025-03-15 r87978 ucrt)\n>>> * using platform: x86_64-w64-mingw32\n>>> * R was compiled by\n>>> ???? gcc.exe (GCC) 14.2.0\n>>> ???? GNU Fortran (GCC) 14.2.0\n>>> * running under: Windows Server 2022 x64 (build 20348)\n>>> * using session charset: UTF-8\n>>> * checking for file 'autodb/DESCRIPTION' ... OK\n>>> * this is package 'autodb' version '2.3.0'\n>>> * package encoding: UTF-8\n>>> * checking CRAN incoming feasibility ... NOTE\n>>> Maintainer: 'Mark Webster <markwebster204 at yahoo.co.uk>'\n>>>\n>>> New submission [etc., no other problems]\n>> Author text in original DESCRIPTION:> Authors at R:?> ? ? person(>       \n>> \"Mark\",> ? ? ? \"Webster\",?> ? ? ? email = \n>> \"markwebster204 at yahoo.co.uk\",> ? ? ? role = c(\"aut\", \"cre\"),>       \n>> comment = c(ORCID = \"0000-0002-3351-0686\")> ? ? )\n\n\nYou should build with a recent version of R-dvel whic his also used for \nincoming checks on CRAN.\n\nBest,\nUwe Ligges\n\n>>\n>> If I build locally, the release (4.3.2) and development (2025-03-15 \n>> r87978 ucrt) versions do differ by the resulting Author DESCRIPTION \n>> field: the development version puts ORCID: in front of the Orcid \n>> URL.However, they both get the NOTE on Winbuilder.What is the error here?\n>> Best Regards,Mark Webster\n>> ????[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n>",
+      "body_snippet": "On 17.03.2025 14:18, Lists wrote:\n> Dear Mark\n> \n> That note is entirely expected. I believe it is just to help the CRAN \n> maintainers.\n> \n> Michael\n> \n> On 16/03/2025 22:06, Mark Webster via R-packa",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-c4bd00b17ad4",
+      "message_id": "<3a7a0915-e4ef-4942-975b-db0253df9bce@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-03-17T15:06:06+01:00",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<20250317164830.3b711a4b@arachnoid>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>",
+        "<20250317162437.57199dfb@arachnoid>",
+        "<41662215.1929359.1742218730400@mail.yahoo.com>",
+        "<20250317164830.3b711a4b@arachnoid>"
+      ],
+      "body_plain": "On 17.03.2025 14:48, Ivan Krylov via R-package-devel wrote:\n> ? Mon, 17 Mar 2025 13:38:50 +0000 (UTC)\n> Mark Webster <markwebster204 at yahoo.co.uk> ?????:\n> \n>>> Flavor: r-devel-windows-x86_64\n>>> Check: Overall checktime, Result: NOTE\n>>>  ? ?Overall checktime 12 min > 10 min\n> \n> I think you'll have to reduce the test datasets further:\n> https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/examples_and_tests/tests/testthat.Rout\n> \n\nRight, manly from\n\n\n* checking tests ... [10m] OK\n   Running 'testthat.R' [10m]\n\nPlease reduce the test timings by using\n  - small toy data only\n  - few iterations\n  - or by running less important tests only conditionally if some \nenvironment variable is set that you only define on your machine?\n\nBest,\nUwe Ligges",
+      "body_snippet": "On 17.03.2025 14:48, Ivan Krylov via R-package-devel wrote:\n> ? Mon, 17 Mar 2025 13:38:50 +0000 (UTC)\n> Mark Webster <markwebster204 at yahoo.co.uk> ?????:\n> \n>>> Flavor: r-devel-windows-x86_64\n>>> Ch",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 4,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-c7195b070020",
+      "message_id": "<561741269.8216038.1742220561754@mail.yahoo.com>",
+      "from_name": "Mark Webster",
+      "from_email_hash": "e9cba4832c7d6aecfd3a7bc51b018bba757bb41fa0d583ec45c2cfa0c9839a43",
+      "date": "2025-03-17T14:09:21Z",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "subject_clean": "[R-pkg-devel] NOTE about authors, no explanation",
+      "in_reply_to": "<3a7a0915-e4ef-4942-975b-db0253df9bce@statistik.tu-dortmund.de>",
+      "references": [
+        "<481962756.7725874.1742162776289.ref@mail.yahoo.com>",
+        "<481962756.7725874.1742162776289@mail.yahoo.com>",
+        "<20250317162437.57199dfb@arachnoid>",
+        "<41662215.1929359.1742218730400@mail.yahoo.com>",
+        "<20250317164830.3b711a4b@arachnoid>",
+        "<3a7a0915-e4ef-4942-975b-db0253df9bce@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": ">> I think you'll have to reduce the test datasets further:>> https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/examples_and_tests/tests/testthat.Rout\n>> \n>\n> Right, manly from\n>\n>\n> * checking tests ... [10m] OK\n>? ? Running 'testthat.R' [10m]\n>\n> Please reduce the test timings by using\n>? ?- small toy data only\n>? ?- few iterations\n>? ?- or by running less important tests only conditionally if some \n> environment variable is set that you only define on your machine?>\n>\n> Best,>\n> Uwe Ligges\nThanks Uwe, I'll reduce further -- looks like there's a test runtime variance of a few minutes I need to account for.Best Regards,Mark\n  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": ">> I think you'll have to reduce the test datasets further:>> https://win-builder.r-project.org/incoming_pretest/autodb_2.3.0_20250316_203825/Windows/examples_and_tests/tests/testthat.Rout\n>> \n>\n> Rig",
+      "thread_id": "thread-6074c97d3a71",
+      "thread_depth": 5,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-08f89a36add8",
+      "message_id": "<CAL3ufUKhG5SALDSH0t0pWvacYb1Mc8J_Nj8dvu3R5CQq51g5fw@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2025-03-19T08:08:45-07:00",
+      "subject": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "subject_clean": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I'm trying to work through some new WARNINGs that I am experiencing *only* in\nR-devel.\n\n Found non-API calls to R: ?BODY?, ?CLOENV?, ?ENCLOS?, ?FORMALS?\n\nTake FORMALS, for example. IIUC, we should now be using R_ClosureFormals\ninstead. However, my understanding is that this is available only in R 4.5\nmain trunk.\n\nIf migrating to the R_ClosureFormals, should the minimum version of R for\nthe package be recorded in the DESCRIPTION as R >= 4.5?\n\nAdditionally, I'm somewhat at a loss for how to pass CRAN checks for\nR-release and R-devel while using only R_ClosureFormals to adhere to\nR-devel WARNING.\n\nShould old versions have an upper bound on the supported R version as well\nas a lower one e.g. Depends may have R >=4.1.0 <4.5.0?\n\nThanks in advance for your advice / insight!\n\n- Josiah\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I'm trying to work through some new WARNINGs that I am experiencing *only* in\nR-devel.\n\n Found non-API calls to R: ?BODY?, ?CLOENV?, ?ENCLOS?, ?FORMALS?\n\nTake FORMALS, for example. IIUC, we should now",
+      "thread_id": "thread-08f89a36add8",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-57fea5745949",
+      "message_id": "<6269f256-e669-4250-a4c5-f7189e085d52@gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "058f22460bce77c55c3340fec40d01e374409ed76ec5a897b62075a27eb9734c",
+      "date": "2025-03-19T11:16:41-04:00",
+      "subject": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "subject_clean": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "in_reply_to": "<CAL3ufUKhG5SALDSH0t0pWvacYb1Mc8J_Nj8dvu3R5CQq51g5fw@mail.gmail.com>",
+      "references": [
+        "<CAL3ufUKhG5SALDSH0t0pWvacYb1Mc8J_Nj8dvu3R5CQq51g5fw@mail.gmail.com>"
+      ],
+      "body_plain": "FWIW  Rcpp handles this (for CLOENV) with an ifdef:\n\n             #if (defined(R_VERSION) && R_VERSION >= R_Version(4,5,0))\n             return R_ClosureEnv(fun);\n             #else\n             return CLOENV(fun);\n             #endif\n\nhttps://github.com/RcppCore/Rcpp/blob/257e1977cd6e251d0a3d691050ad43fa29cf9666/inst/include/Rcpp/Function.h#L102-L106\n\nOn 3/19/25 11:08, Josiah Parry wrote:\n> I'm trying to work through some new WARNINGs that I am experiencing *only* in\n> R-devel.\n> \n>   Found non-API calls to R: ?BODY?, ?CLOENV?, ?ENCLOS?, ?FORMALS?\n> \n> Take FORMALS, for example. IIUC, we should now be using R_ClosureFormals\n> instead. However, my understanding is that this is available only in R 4.5\n> main trunk.\n> \n> If migrating to the R_ClosureFormals, should the minimum version of R for\n> the package be recorded in the DESCRIPTION as R >= 4.5?\n> \n> Additionally, I'm somewhat at a loss for how to pass CRAN checks for\n> R-release and R-devel while using only R_ClosureFormals to adhere to\n> R-devel WARNING.\n> \n> Should old versions have an upper bound on the supported R version as well\n> as a lower one e.g. Depends may have R >=4.1.0 <4.5.0?\n> \n> Thanks in advance for your advice / insight!\n> \n> - Josiah\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nDr. Benjamin Bolker\nProfessor, Mathematics & Statistics and Biology, McMaster University\nDirector, School of Computational Science and Engineering\n* E-mail is sent at my convenience; I don't expect replies outside of \nworking hours.",
+      "body_snippet": "FWIW  Rcpp handles this (for CLOENV) with an ifdef:\n\n             #if (defined(R_VERSION) && R_VERSION >= R_Version(4,5,0))\n             return R_ClosureEnv(fun);\n             #else\n             retur",
+      "thread_id": "thread-08f89a36add8",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-a82e55aeb41d",
+      "message_id": "<CAPRVBcwkqa5T9bdJepFKyqiPgQqPY4J5dJCM67NbPJOd7XAR7Q@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2025-03-19T09:29:46-07:00",
+      "subject": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "subject_clean": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "in_reply_to": "<6269f256-e669-4250-a4c5-f7189e085d52@gmail.com>",
+      "references": [
+        "<CAL3ufUKhG5SALDSH0t0pWvacYb1Mc8J_Nj8dvu3R5CQq51g5fw@mail.gmail.com>",
+        "<6269f256-e669-4250-a4c5-f7189e085d52@gmail.com>"
+      ],
+      "body_plain": "data.table is doing the same in a number of places, Ivan even went so far\nas to pin down a specific SVN commit for those as well:\n\n#if R_VERSION < R_Version(4, 5, 0) || R_SVN_REVISION < 86702\n#  define isDataFrame(x) isFrame(x) // #6180\n#endif\n\nhttps://github.com/Rdatatable/data.table/blob/0909048017d35f8b8a910c74549650f5de5a74a9/src/data.table.h#L21-L23\n\nSneaking onto my soapbox to complain that it really seems incorrect that R\nCMD check started complaining about these issues before the API-compliant\nfunctions were included in an R release. I was really surprised to see\nthese functions were not included in the most recent past release, for\nexample.\n\nAnyway, 4.5.0 is due for release in a few weeks so this will become moot\nmomentarily.\n\nOn Wed, Mar 19, 2025 at 8:19?AM Ben Bolker <bbolker at gmail.com> wrote:\n\n>    FWIW  Rcpp handles this (for CLOENV) with an ifdef:\n>\n>              #if (defined(R_VERSION) && R_VERSION >= R_Version(4,5,0))\n>              return R_ClosureEnv(fun);\n>              #else\n>              return CLOENV(fun);\n>              #endif\n>\n>\n> https://github.com/RcppCore/Rcpp/blob/257e1977cd6e251d0a3d691050ad43fa29cf9666/inst/include/Rcpp/Function.h#L102-L106\n>\n> On 3/19/25 11:08, Josiah Parry wrote:\n> > I'm trying to work through some new WARNINGs that I am experiencing\n> *only* in\n> > R-devel.\n> >\n> >   Found non-API calls to R: ?BODY?, ?CLOENV?, ?ENCLOS?, ?FORMALS?\n> >\n> > Take FORMALS, for example. IIUC, we should now be using R_ClosureFormals\n> > instead. However, my understanding is that this is available only in R\n> 4.5\n> > main trunk.\n> >\n> > If migrating to the R_ClosureFormals, should the minimum version of R for\n> > the package be recorded in the DESCRIPTION as R >= 4.5?\n> >\n> > Additionally, I'm somewhat at a loss for how to pass CRAN checks for\n> > R-release and R-devel while using only R_ClosureFormals to adhere to\n> > R-devel WARNING.\n> >\n> > Should old versions have an upper bound on the supported R version as\n> well\n> > as a lower one e.g. Depends may have R >=4.1.0 <4.5.0?\n> >\n> > Thanks in advance for your advice / insight!\n> >\n> > - Josiah\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> Dr. Benjamin Bolker\n> Professor, Mathematics & Statistics and Biology, McMaster University\n> Director, School of Computational Science and Engineering\n> * E-mail is sent at my convenience; I don't expect replies outside of\n> working hours.\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "data.table is doing the same in a number of places, Ivan even went so far\nas to pin down a specific SVN commit for those as well:\n\n#if R_VERSION < R_Version(4, 5, 0) || R_SVN_REVISION < 86702\n#  defin",
+      "thread_id": "thread-08f89a36add8",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-ae152818cadd",
+      "message_id": "<26586.61731.296279.266476@rob.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-03-19T11:30:27-05:00",
+      "subject": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "subject_clean": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "in_reply_to": "<6269f256-e669-4250-a4c5-f7189e085d52@gmail.com>",
+      "references": [
+        "<CAL3ufUKhG5SALDSH0t0pWvacYb1Mc8J_Nj8dvu3R5CQq51g5fw@mail.gmail.com>",
+        "<6269f256-e669-4250-a4c5-f7189e085d52@gmail.com>"
+      ],
+      "body_plain": "On 19 March 2025 at 11:16, Ben Bolker wrote:\n|    FWIW  Rcpp handles this (for CLOENV) with an ifdef:\n| \n|              #if (defined(R_VERSION) && R_VERSION >= R_Version(4,5,0))\n|              return R_ClosureEnv(fun);\n|              #else\n|              return CLOENV(fun);\n|              #endif\n| \n| https://github.com/RcppCore/Rcpp/blob/257e1977cd6e251d0a3d691050ad43fa29cf9666/inst/include/Rcpp/Function.h#L102-L106\n\nBeat me to it while I was away from my desk :-) We added that last week after\nwe good the nag from CRAN.\n\nWe are to follow the r-devel version R which is accessible e.g. 'as a\nservice' at winbuilder and macbuilder, at rhub (v2), and of course by\ncompiling locally (as I still do). Or by using one the available containers:\nrocker/r-devel and rocker/drd are two I look after and they get updated\nweekly.\n\nAlso note that when I made the update above I spotted a nice section in WRE\n(where one 'of course' needs the r-devel version) which has what I quote\nbelow. You could make use of that too.\n\nDirk\n\n\nQuote from WRE follows\n\n6.21.8 Some backports ?\n\nThis section lists backports of recently added definitions that can be used\nin packages that need to be compiled under older versions of R that do not\nyet contain these entry points.\n\n    #if R_VERSION < R_Version(4, 4, 1)\n    #define allocLang Rf_allocLang\n    \n    SEXP Rf_allocLang(int n)\n    {\n        if (n > 0)\n              return LCONS(R_NilValue, Rf_allocList(n - 1));\n        else\n              return R_NilValue;\n    }\n    #endif\n    \n    #if R_VERSION < R_Version(4, 5, 0)\n    # define isDataFrame(x) Rf_isFrame(x)\n    # define R_ClosureFormals(x) FORMALS(x)\n    # define R_ClosureEnv(x) CLOENV(x)\n    # define R_ParentEnv(x) ENCLOS(x)\n    \n    SEXP R_mkClosure(SEXP formals, SEXP body, SEXP env)\n    {\n        SEXP fun = Rf_allocSExp(CLOSXP);\n        SET_FORMALS(fun, formals);\n        SET_BODY(fun, body);\n        SET_CLOENV(fun, env);\n        return fun;\n    }\n    \n    void CLEAR_ATTRIB(SEXP x)\n    {\n        SET_ATTRIB(x, R_NilValue);\n        SET_OBJECT(x, 0);\n        UNSET_S4_OBJECT(x);\n    }\n    #endif\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 19 March 2025 at 11:16, Ben Bolker wrote:\n|    FWIW  Rcpp handles this (for CLOENV) with an ifdef:\n| \n|              #if (defined(R_VERSION) && R_VERSION >= R_Version(4,5,0))\n|              return ",
+      "thread_id": "thread-08f89a36add8",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-c4cc9df2ca70",
+      "message_id": "<26586.62943.274198.692155@rob.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-03-19T11:50:39-05:00",
+      "subject": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "subject_clean": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "in_reply_to": "<CAPRVBcwkqa5T9bdJepFKyqiPgQqPY4J5dJCM67NbPJOd7XAR7Q@mail.gmail.com>",
+      "references": [
+        "<CAL3ufUKhG5SALDSH0t0pWvacYb1Mc8J_Nj8dvu3R5CQq51g5fw@mail.gmail.com>",
+        "<6269f256-e669-4250-a4c5-f7189e085d52@gmail.com>",
+        "<CAPRVBcwkqa5T9bdJepFKyqiPgQqPY4J5dJCM67NbPJOd7XAR7Q@mail.gmail.com>"
+      ],
+      "body_plain": "On 19 March 2025 at 09:29, Michael Chirico wrote:\n| data.table is doing the same in a number of places, Ivan even went so far\n| as to pin down a specific SVN commit for those as well:\n| \n| #if R_VERSION < R_Version(4, 5, 0) || R_SVN_REVISION < 86702\n| #  define isDataFrame(x) isFrame(x) // #6180\n| #endif\n| \n| https://github.com/Rdatatable/data.table/blob/0909048017d35f8b8a910c74549650f5de5a74a9/src/data.table.h#L21-L23\n| \n| Sneaking onto my soapbox to complain that it really seems incorrect that R\n| CMD check started complaining about these issues before the API-compliant\n| functions were included in an R release. I was really surprised to see\n| these functions were not included in the most recent past release, for\n| example.\n\nSeconded.  \n\n(Also I was wrong in them previous email: we learned from Ben as lme4 got the nag.)\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 19 March 2025 at 09:29, Michael Chirico wrote:\n| data.table is doing the same in a number of places, Ivan even went so far\n| as to pin down a specific SVN commit for those as well:\n| \n| #if R_VERSI",
+      "thread_id": "thread-08f89a36add8",
+      "thread_depth": 3,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-e66b3900fc99",
+      "message_id": "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+      "from_name": "Lists",
+      "from_email_hash": "23eddf46e0ea9b02c3ac4701d820ec1c7cb1ea6f9f9d602508498f7026c2f5f3",
+      "date": "2025-03-20T14:39:39Z",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I want to put a look-up table into sysdata.rda to avoid having to \ncompute it everytime. At the moment I create it and save the resulting \nfile and then manually copy it to sysdata.rda. This works but the \npackage now contains no documentation about the look-up table.\n\nMost of the information which I turned up online involves doing it all \nindirectly using various packages. I do not want to do that, I am quite \nhappy editing files by hand and moving them to where I want them by \nhand. So what I need is to know where I should put the documentation and \nwhat format it should be assuming it is not an Rd file.\n\nOf course what I want may be impossible and I just need to document it \nin the script which creates it but that seems messy.\n\nMichael Dewey",
+      "body_snippet": "I want to put a look-up table into sysdata.rda to avoid having to \ncompute it everytime. At the moment I create it and save the resulting \nfile and then manually copy it to sysdata.rda. This works but",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-ecc90532cd93",
+      "message_id": "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2025-03-20T08:15:59-07:00",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "Did you seriously look for instructions and not find [1]? And why do you think the answer should not involve Rd files? Documentation in R packages is what Rd files are for.\n\nIf you don't want to mess with Rd files then you have no choice but to use something like the Roxygen package to mess with them for you... but that just kicks the can down the road .. Rd files are always involved.\n\n[1] https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Documenting-data-sets\n\nOn March 20, 2025 7:39:39 AM PDT, Lists <lists at dewey.myzen.co.uk> wrote:\n>I want to put a look-up table into sysdata.rda to avoid having to compute it everytime. At the moment I create it and save the resulting file and then manually copy it to sysdata.rda. This works but the package now contains no documentation about the look-up table.\n>\n>Most of the information which I turned up online involves doing it all indirectly using various packages. I do not want to do that, I am quite happy editing files by hand and moving them to where I want them by hand. So what I need is to know where I should put the documentation and what format it should be assuming it is not an Rd file.\n>\n>Of course what I want may be impossible and I just need to document it in the script which creates it but that seems messy.\n>\n>Michael Dewey\n>\n>______________________________________________\n>R-package-devel at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nSent from my phone. Please excuse my brevity.",
+      "body_snippet": "Did you seriously look for instructions and not find [1]? And why do you think the answer should not involve Rd files? Documentation in R packages is what Rd files are for.\n\nIf you don't want to mess ",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-e9320b95555d",
+      "message_id": "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+      "from_name": "Lists",
+      "from_email_hash": "23eddf46e0ea9b02c3ac4701d820ec1c7cb1ea6f9f9d602508498f7026c2f5f3",
+      "date": "2025-03-20T16:47:22Z",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>"
+      ],
+      "body_plain": "Dear Jeff\n\nI am afraid that does not work if the data file is in sysdata.rda. I had \nto remove my existing Rd file to get the package to pass checks.\n\nMichael\n\nOn 20/03/2025 15:15, Jeff Newmiller wrote:\n> Did you seriously look for instructions and not find [1]? And why do you think the answer should not involve Rd files? Documentation in R packages is what Rd files are for.\n> \n> If you don't want to mess with Rd files then you have no choice but to use something like the Roxygen package to mess with them for you... but that just kicks the can down the road .. Rd files are always involved.\n> \n> [1] https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Documenting-data-sets\n> \n> On March 20, 2025 7:39:39 AM PDT, Lists <lists at dewey.myzen.co.uk> wrote:\n>> I want to put a look-up table into sysdata.rda to avoid having to compute it everytime. At the moment I create it and save the resulting file and then manually copy it to sysdata.rda. This works but the package now contains no documentation about the look-up table.\n>>\n>> Most of the information which I turned up online involves doing it all indirectly using various packages. I do not want to do that, I am quite happy editing files by hand and moving them to where I want them by hand. So what I need is to know where I should put the documentation and what format it should be assuming it is not an Rd file.\n>>\n>> Of course what I want may be impossible and I just need to document it in the script which creates it but that seems messy.\n>>\n>> Michael Dewey\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Dear Jeff\n\nI am afraid that does not work if the data file is in sysdata.rda. I had \nto remove my existing Rd file to get the package to pass checks.\n\nMichael\n\nOn 20/03/2025 15:15, Jeff Newmiller wrot",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-b2bedaf36b1d",
+      "message_id": "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2025-03-20T12:56:49-04:00",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+        "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "If it is *only *in sysdata.Rda, then it is accessible to your package \ncode but is not available to users. (They can't, for example, use the \n\"data\" function to load it themselves.) So, there is no reason to \ndocument it. Just like there is no reason to document functions in your \nR scripts that were not exported into user space. Of course, you can \ndocument those functions by using the keyword \"internal\" in an Rd file. \nI suspect that this would work to document your internal data set as well.\n\nOn 3/20/2025 12:47 PM, Lists wrote:\n> Dear Jeff\n>\n> I am afraid that does not work if the data file is in sysdata.rda. I \n> had to remove my existing Rd file to get the package to pass checks.\n>\n> Michael\n>\n> On 20/03/2025 15:15, Jeff Newmiller wrote:\n>> Did you seriously look for instructions and not find [1]? And why do \n>> you think the answer should not involve Rd files? Documentation in R \n>> packages is what Rd files are for.\n>>\n>> If you don't want to mess with Rd files then you have no choice but \n>> to use something like the Roxygen package to mess with them for \n>> you... but that just kicks the can down the road .. Rd files are \n>> always involved.\n>>\n>> [1] \n>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Documenting-data-sets\n>>\n>> On March 20, 2025 7:39:39 AM PDT, Lists <lists at dewey.myzen.co.uk> wrote:\n>>> I want to put a look-up table into sysdata.rda to avoid having to \n>>> compute it everytime. At the moment I create it and save the \n>>> resulting file and then manually copy it to sysdata.rda. This works \n>>> but the package now contains no documentation about the look-up table.\n>>>\n>>> Most of the information which I turned up online involves doing it \n>>> all indirectly using various packages. I do not want to do that, I \n>>> am quite happy editing files by hand and moving them to where I want \n>>> them by hand. So what I need is to know where I should put the \n>>> documentation and what format it should be assuming it is not an Rd \n>>> file.\n>>>\n>>> Of course what I want may be impossible and I just need to document \n>>> it in the script which creates it but that seems messy.\n>>>\n>>> Michael Dewey\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If it is *only *in sysdata.Rda, then it is accessible to your package \ncode but is not available to users. (They can't, for example, use the \n\"data\" function to load it themselves.) So, there is no re",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 3,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-031f138846a8",
+      "message_id": "<CAPRVBcz7j9iXknL0DncUZxE8vP0XcxsU1Xy4umzx_3Nv3X5w9A@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2025-03-20T10:05:04-07:00",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+        "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+        "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>"
+      ],
+      "body_plain": "Here are about 60 CRAN packages discussing sysdata in their Rd files:\n\nhttps://github.com/search?q=org%3Acran+path%3A.Rd+%2F%28%5B%5E%7B+%5D%7C%5B%5Ed%5D%5C%7B%29%5Cs*sysdata%2F&type=code\n\nYou might take a cue from them. Indeed \\keyword{internal} is common there.\n\nOn Thu, Mar 20, 2025 at 9:57?AM Kevin R. Coombes <kevin.r.coombes at gmail.com>\nwrote:\n\n> If it is *only *in sysdata.Rda, then it is accessible to your package\n> code but is not available to users. (They can't, for example, use the\n> \"data\" function to load it themselves.) So, there is no reason to\n> document it. Just like there is no reason to document functions in your\n> R scripts that were not exported into user space. Of course, you can\n> document those functions by using the keyword \"internal\" in an Rd file.\n> I suspect that this would work to document your internal data set as well.\n>\n> On 3/20/2025 12:47 PM, Lists wrote:\n> > Dear Jeff\n> >\n> > I am afraid that does not work if the data file is in sysdata.rda. I\n> > had to remove my existing Rd file to get the package to pass checks.\n> >\n> > Michael\n> >\n> > On 20/03/2025 15:15, Jeff Newmiller wrote:\n> >> Did you seriously look for instructions and not find [1]? And why do\n> >> you think the answer should not involve Rd files? Documentation in R\n> >> packages is what Rd files are for.\n> >>\n> >> If you don't want to mess with Rd files then you have no choice but\n> >> to use something like the Roxygen package to mess with them for\n> >> you... but that just kicks the can down the road .. Rd files are\n> >> always involved.\n> >>\n> >> [1]\n> >>\n> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Documenting-data-sets\n> >>\n> >> On March 20, 2025 7:39:39 AM PDT, Lists <lists at dewey.myzen.co.uk>\n> wrote:\n> >>> I want to put a look-up table into sysdata.rda to avoid having to\n> >>> compute it everytime. At the moment I create it and save the\n> >>> resulting file and then manually copy it to sysdata.rda. This works\n> >>> but the package now contains no documentation about the look-up table.\n> >>>\n> >>> Most of the information which I turned up online involves doing it\n> >>> all indirectly using various packages. I do not want to do that, I\n> >>> am quite happy editing files by hand and moving them to where I want\n> >>> them by hand. So what I need is to know where I should put the\n> >>> documentation and what format it should be assuming it is not an Rd\n> >>> file.\n> >>>\n> >>> Of course what I want may be impossible and I just need to document\n> >>> it in the script which creates it but that seems messy.\n> >>>\n> >>> Michael Dewey\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Here are about 60 CRAN packages discussing sysdata in their Rd files:\n\nhttps://github.com/search?q=org%3Acran+path%3A.Rd+%2F%28%5B%5E%7B+%5D%7C%5B%5Ed%5D%5C%7B%29%5Cs*sysdata%2F&type=code\n\nYou might t",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 4,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-eb2572820042",
+      "message_id": "<LO0P265MB632552A1A5129C49F807EC73AED82@LO0P265MB6325.GBRP265.PROD.OUTLOOK.COM>",
+      "from_name": "Georgi Boshnakov",
+      "from_email_hash": "6637d0c921f2a36f6e99fccdf4bf80229b389f57df94a4871de534ef317950f4",
+      "date": "2025-03-20T17:34:36Z",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<CAPRVBcz7j9iXknL0DncUZxE8vP0XcxsU1Xy4umzx_3Nv3X5w9A@mail.gmail.com>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+        "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+        "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>",
+        "<CAPRVBcz7j9iXknL0DncUZxE8vP0XcxsU1Xy4umzx_3Nv3X5w9A@mail.gmail.com>"
+      ],
+      "body_plain": "> > I am afraid that does not work if the data file is in sysdata.rda. I\n> > had to remove my existing Rd file to get the package to pass checks....\n\nMaybe give more details? Did you use `data(xxx)` in the usage statement? If so, replace it with just the name of the dataset. \n\nGeorgi Boshnakov\n\n________________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Michael Chirico <michaelchirico4 at gmail.com>\nSent: 20 March 2025 17:05\nTo: Kevin R. Coombes\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] How and where do I document sysdata.rda\n\nHere are about 60 CRAN packages discussing sysdata in their Rd files:\n\nhttps://urldefense.com/v3/__https://github.com/search?q=org*3Acran*path*3A.Rd**A2F*28*5B*5E*7B**A5D*7C*5B*5Ed*5D*5C*7B*29*5Cs*sysdata*2F&type=code__;JSslKyUlJSUlKyUlJSUlJSUlJSol!!PDiH4ENfjr2_Jw!DixK39DPLqlWQMJxs1qWMUez_lKjlOQbfLYCjerS7aGjLJaS9kOaI59OJo3zqXYFXxuJrLWUQBJupQTB0mkWwOxORtv-aE8jEmKfdkE$ [github[.]com]\n\nYou might take a cue from them. Indeed \\keyword{internal} is common there.\n\nOn Thu, Mar 20, 2025 at 9:57?AM Kevin R. Coombes <kevin.r.coombes at gmail.com>\nwrote:\n\n> If it is *only *in sysdata.Rda, then it is accessible to your package\n> code but is not available to users. (They can't, for example, use the\n> \"data\" function to load it themselves.) So, there is no reason to\n> document it. Just like there is no reason to document functions in your\n> R scripts that were not exported into user space. Of course, you can\n> document those functions by using the keyword \"internal\" in an Rd file.\n> I suspect that this would work to document your internal data set as well.\n>\n> On 3/20/2025 12:47 PM, Lists wrote:\n> > Dear Jeff\n> >\n> > I am afraid that does not work if the data file is in sysdata.rda. I\n> > had to remove my existing Rd file to get the package to pass checks.\n> >\n> > Michael\n> >\n> > On 20/03/2025 15:15, Jeff Newmiller wrote:\n> >> Did you seriously look for instructions and not find [1]? And why do\n> >> you think the answer should not involve Rd files? Documentation in R\n> >> packages is what Rd files are for.\n> >>\n> >> If you don't want to mess with Rd files then you have no choice but\n> >> to use something like the Roxygen package to mess with them for\n> >> you... but that just kicks the can down the road .. Rd files are\n> >> always involved.\n> >>\n> >> [1]\n> >>\n> https://urldefense.com/v3/__https://cran.r-project.org/doc/manuals/r-devel/R-exts.html*Documenting-data-sets__;Iw!!PDiH4ENfjr2_Jw!DixK39DPLqlWQMJxs1qWMUez_lKjlOQbfLYCjerS7aGjLJaS9kOaI59OJo3zqXYFXxuJrLWUQBJupQTB0mkWwOxORtv-aE8jRJdTNWY$ [cran[.]r-project[.]org]\n> >>\n> >> On March 20, 2025 7:39:39 AM PDT, Lists <lists at dewey.myzen.co.uk>\n> wrote:\n> >>> I want to put a look-up table into sysdata.rda to avoid having to\n> >>> compute it everytime. At the moment I create it and save the\n> >>> resulting file and then manually copy it to sysdata.rda. This works\n> >>> but the package now contains no documentation about the look-up table.\n> >>>\n> >>> Most of the information which I turned up online involves doing it\n> >>> all indirectly using various packages. I do not want to do that, I\n> >>> am quite happy editing files by hand and moving them to where I want\n> >>> them by hand. So what I need is to know where I should put the\n> >>> documentation and what format it should be assuming it is not an Rd\n> >>> file.\n> >>>\n> >>> Of course what I want may be impossible and I just need to document\n> >>> it in the script which creates it but that seems messy.\n> >>>\n> >>> Michael Dewey\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!DixK39DPLqlWQMJxs1qWMUez_lKjlOQbfLYCjerS7aGjLJaS9kOaI59OJo3zqXYFXxuJrLWUQBJupQTB0mkWwOxORtv-aE8jlzZPbMU$ [stat[.]ethz[.]ch]\n> >>\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!DixK39DPLqlWQMJxs1qWMUez_lKjlOQbfLYCjerS7aGjLJaS9kOaI59OJo3zqXYFXxuJrLWUQBJupQTB0mkWwOxORtv-aE8jlzZPbMU$ [stat[.]ethz[.]ch]\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!DixK39DPLqlWQMJxs1qWMUez_lKjlOQbfLYCjerS7aGjLJaS9kOaI59OJo3zqXYFXxuJrLWUQBJupQTB0mkWwOxORtv-aE8jlzZPbMU$ [stat[.]ethz[.]ch]\n>\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!DixK39DPLqlWQMJxs1qWMUez_lKjlOQbfLYCjerS7aGjLJaS9kOaI59OJo3zqXYFXxuJrLWUQBJupQTB0mkWwOxORtv-aE8jlzZPbMU$ [stat[.]ethz[.]ch]",
+      "body_snippet": "> > I am afraid that does not work if the data file is in sysdata.rda. I\n> > had to remove my existing Rd file to get the package to pass checks....\n\nMaybe give more details? Did you use `data(xxx)` i",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 5,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-e1e3cc2a8c80",
+      "message_id": "<Z9ypzgKy6shnjMr2@kumo.plessy.net>",
+      "from_name": "Charles Plessy",
+      "from_email_hash": "639d9df579b8f02bfe0af859d14b28901e30a5828dd79c9afb97aab5cd3068c6",
+      "date": "2025-03-21T08:50:38+09:00",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+        "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+        "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>"
+      ],
+      "body_plain": "Le Thu, Mar 20, 2025 at 12:56:49PM -0400, Kevin R. Coombes a ??crit :\n> If it is *only *in sysdata.Rda, then it is accessible to your package \n> code but is not available to users. (They can't, for example, use the \n> \"data\" function to load it themselves.) So, there is no reason to \n> document it.\n\nHello Kevin and Michael,\n\nUsers who care about software provenance, security and software freedom would\nlove to see it documented, because binary objects are hard to audit when there\nis no description of what they are expected to contain.\n\nRedistributors who give guarantees to their users about software freedom, like\nDebian, also want to see that these objects are easy to modify in case of need\n(that is: the developer does not keep some secret receipes about how the object\nis made to keep an advantage against forks and other forms of competition), and\nto be able to check by themselves that they were not built from data that is\nnot placed under too restrictive terms.\n\nWhen I write R packages and when I reeistribute CRAN/Bioconductor pakcages in\nDebian, I find that the way documented in the R Packages book (./data-raw/,\nusethis::use_data(), etc.) fits my needs very well.\n\nHave a nice day,\n\nCharles\n\n--\nCharles Plessy                         Nagahama, Yomitan, Okinawa, Japan\nDebian Med packaging team         http://www.debian.org/devel/debian-med\nTooting from home                  https://framapiaf.org/@charles_plessy\n- You  do not have  my permission  to use  this email  to train  an AI -",
+      "body_snippet": "Le Thu, Mar 20, 2025 at 12:56:49PM -0400, Kevin R. Coombes a ??crit :\n> If it is *only *in sysdata.Rda, then it is accessible to your package \n> code but is not available to users. (They can't, for ex",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 4,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-4c8a5c717aa9",
+      "message_id": "<001101db9b07$bad81000$30883000$@gmx.de>",
+      "from_name": "m@tthi@s-go@d@@ m@iii@g oii gmx@de",
+      "from_email_hash": "57190ccd5a917b2866daf4bf830b05836b59efcabacd9f07d64f27305ad42e6e",
+      "date": "2025-03-22T09:52:23+01:00",
+      "subject": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "subject_clean": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear CRAN people, and R package developers,\n\n\n\nsince the last update, the CRAN tests of my package for r-*-macos-arm64\ncomplain about the use of a function called cmake_path, which according to\ndocs has been introduced in cmake 3.20 in 2021 (?). Is it an option to\nupdate cmake on the respective test machines? I understand if it's\nnot-sometimes it makes sense to keep compatibility. I will search for an\nalternative then.\n\n\n\nhttps://cran.r-project.org/web/checks/check_results_rswipl.html\n\n\n\nBest wishes,\n\n\n\nMatthias\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear CRAN people, and R package developers,\n\n\n\nsince the last update, the CRAN tests of my package for r-*-macos-arm64\ncomplain about the use of a function called cmake_path, which according to\ndocs h",
+      "thread_id": "thread-4c8a5c717aa9",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-93d8cf7df498",
+      "message_id": "<9cec6b3e-b8b1-40cb-aa26-3a11a86568f6@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2025-03-22T11:37:06+01:00",
+      "subject": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "subject_clean": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "in_reply_to": "<001101db9b07$bad81000$30883000$@gmx.de>",
+      "references": [
+        "<001101db9b07$bad81000$30883000$@gmx.de>"
+      ],
+      "body_plain": "On 22.03.2025 09:52, matthias-gondan at gmx.de wrote:\n> Dear CRAN people, and R package developers,\n> \n> \n> \n> since the last update, the CRAN tests of my package for r-*-macos-arm64\n> complain about the use of a function called cmake_path, which according to\n> docs has been introduced in cmake 3.20 in 2021 (?). Is it an option to\n> update cmake on the respective test machines? I understand if it's\n> not-sometimes it makes sense to keep compatibility. I will search for an\n> alternative then.\n\nPlease ask the Mac maintainer, Simon Urbanek.\n\nBest,\nUwe Ligges\n\n> \n> \n> \n> https://cran.r-project.org/web/checks/check_results_rswipl.html\n> \n> \n> \n> Best wishes,\n> \n> \n> \n> Matthias\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 22.03.2025 09:52, matthias-gondan at gmx.de wrote:\n> Dear CRAN people, and R package developers,\n> \n> \n> \n> since the last update, the CRAN tests of my package for r-*-macos-arm64\n> complain about ",
+      "thread_id": "thread-4c8a5c717aa9",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-401c0905150e",
+      "message_id": "<7a0d17c3-f12f-4ab0-8322-d0f067b4fdac@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "23eddf46e0ea9b02c3ac4701d820ec1c7cb1ea6f9f9d602508498f7026c2f5f3",
+      "date": "2025-03-22T12:04:54Z",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<Z9ypzgKy6shnjMr2@kumo.plessy.net>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+        "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+        "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>",
+        "<Z9ypzgKy6shnjMr2@kumo.plessy.net>"
+      ],
+      "body_plain": "Dear Charles\n\nI agree and in fact that was in the back of my mind when I started this. \nI felt I should document it even though the chances of anyone wanting to \naccess it still less edit it were almost indistinguishable from zero. I \nam reluctant to use a suggestion like yours as then I will have \ndocumentation created in diferent ways and that raises the possibility \nthat they may interact\n\nI have had a number of useful hints in the answers to my original \nquestion and I think I see a way forward. I will report back when I have \ndigested them.\n\nMichael\n\nOn 20/03/2025 23:50, Charles Plessy wrote:\n> Le Thu, Mar 20, 2025 at 12:56:49PM -0400, Kevin R. Coombes a ?crit :\n>> If it is *only *in sysdata.Rda, then it is accessible to your package\n>> code but is not available to users. (They can't, for example, use the\n>> \"data\" function to load it themselves.) So, there is no reason to\n>> document it.\n> \n> Hello Kevin and Michael,\n> \n> Users who care about software provenance, security and software freedom would\n> love to see it documented, because binary objects are hard to audit when there\n> is no description of what they are expected to contain.\n> \n> Redistributors who give guarantees to their users about software freedom, like\n> Debian, also want to see that these objects are easy to modify in case of need\n> (that is: the developer does not keep some secret receipes about how the object\n> is made to keep an advantage against forks and other forms of competition), and\n> to be able to check by themselves that they were not built from data that is\n> not placed under too restrictive terms.\n> \n> When I write R packages and when I reeistribute CRAN/Bioconductor pakcages in\n> Debian, I find that the way documented in the R Packages book (./data-raw/,\n> usethis::use_data(), etc.) fits my needs very well.\n> \n> Have a nice day,\n> \n> Charles\n> \n> --\n> Charles Plessy                         Nagahama, Yomitan, Okinawa, Japan\n> Debian Med packaging team         http://www.debian.org/devel/debian-med\n> Tooting from home                  https://framapiaf.org/@charles_plessy\n> - You  do not have  my permission  to use  this email  to train  an AI -\n> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nMichael Dewey",
+      "body_snippet": "Dear Charles\n\nI agree and in fact that was in the back of my mind when I started this. \nI felt I should document it even though the chances of anyone wanting to \naccess it still less edit it were almo",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 5,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-513cc2373fdf",
+      "message_id": "<6A590BF9-94E4-4D67-A384-AC8B68412FEE@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-03-24T11:05:52+13:00",
+      "subject": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "subject_clean": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "in_reply_to": "<001101db9b07$bad81000$30883000$@gmx.de>",
+      "references": [
+        "<001101db9b07$bad81000$30883000$@gmx.de>"
+      ],
+      "body_plain": "? but you have \n\nSystemRequirements: GNU make, CMake (>= 3.10), \n\nso clearly something it wrong in your package?\n\nCheers,\nSimon\n\n\n> On 22 Mar 2025, at 21:52, matthias-gondan at gmx.de wrote:\n> \n> Dear CRAN people, and R package developers,\n> \n> \n> \n> since the last update, the CRAN tests of my package for r-*-macos-arm64\n> complain about the use of a function called cmake_path, which according to\n> docs has been introduced in cmake 3.20 in 2021 (?). Is it an option to\n> update cmake on the respective test machines? I understand if it's\n> not-sometimes it makes sense to keep compatibility. I will search for an\n> alternative then.\n> \n> \n> \n> https://cran.r-project.org/web/checks/check_results_rswipl.html\n> \n> \n> \n> Best wishes,\n> \n> \n> \n> Matthias\n> \n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "? but you have \n\nSystemRequirements: GNU make, CMake (>= 3.10), \n\nso clearly something it wrong in your package?\n\nCheers,\nSimon\n\n\n> On 22 Mar 2025, at 21:52, matthias-gondan at gmx.de wrote:\n> \n> Dear",
+      "thread_id": "thread-4c8a5c717aa9",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-18e1ca1a3667",
+      "message_id": "<CAL3ufU+ZQj07n_tfd1qYowTca6TkJhjU0Yq3uBSSnr9Lj0-sVQ@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2025-03-24T09:10:02-07:00",
+      "subject": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "subject_clean": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "In trying to address new WARNINGs on R-devel I'm trying to rebuild my\npackage environment on R 4.6 (r88038) so I can try and remediate. However,\nI'm encountering a segfault when doing so which doesn't occur for R 4.5.0\nalpha (2025-03-18 r87991).\n\nIs there a known change to building using R CMD build that we have to\naddress?\n\nrextendr ? R CMD build .\n* checking for file ?./DESCRIPTION? ... OK\n* preparing ?rextendr?:\n* checking DESCRIPTION meta-information ... OK\n* installing the package to build vignettes\n      -----------------------------------\n* installing *source* package ?rextendr? ...\n** this is package ?rextendr? version ?0.3.1.9001?\n** using staged installation\n** R\n** inst\n** byte-compile and prepare package for lazy loading\nsh: line 1: 20659 Segmentation fault: 11  R_TESTS=\n'/Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/bin/R'\n--no-save --no-restore --no-echo 2>&1 <\n'/var/folders/wd/xq999jjj3bx2w8cpg7lkfxlm0000gn/T//RtmpkyfWsl/file50adcb72e68'\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "In trying to address new WARNINGs on R-devel I'm trying to rebuild my\npackage environment on R 4.6 (r88038) so I can try and remediate. However,\nI'm encountering a segfault when doing so which doesn't",
+      "thread_id": "thread-18e1ca1a3667",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-b65c75288a64",
+      "message_id": "<26593.36045.602357.325585@rob.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-03-24T11:48:13-05:00",
+      "subject": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "subject_clean": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "in_reply_to": "<CAL3ufU+ZQj07n_tfd1qYowTca6TkJhjU0Yq3uBSSnr9Lj0-sVQ@mail.gmail.com>",
+      "references": [
+        "<CAL3ufU+ZQj07n_tfd1qYowTca6TkJhjU0Yq3uBSSnr9Lj0-sVQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 24 March 2025 at 09:10, Josiah Parry wrote:\n| In trying to address new WARNINGs on R-devel I'm trying to rebuild my\n| package environment on R 4.6 (r88038) so I can try and remediate. However,\n| I'm encountering a segfault when doing so which doesn't occur for R 4.5.0\n| alpha (2025-03-18 r87991).\n| \n| Is there a known change to building using R CMD build that we have to\n| address?\n| \n| rextendr ? R CMD build .\n| * checking for file ?./DESCRIPTION? ... OK\n| * preparing ?rextendr?:\n| * checking DESCRIPTION meta-information ... OK\n| * installing the package to build vignettes\n|       -----------------------------------\n| * installing *source* package ?rextendr? ...\n| ** this is package ?rextendr? version ?0.3.1.9001?\n| ** using staged installation\n| ** R\n| ** inst\n| ** byte-compile and prepare package for lazy loading\n| sh: line 1: 20659 Segmentation fault: 11  R_TESTS=\n| '/Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/bin/R'\n| --no-save --no-restore --no-echo 2>&1 <\n| '/var/folders/wd/xq999jjj3bx2w8cpg7lkfxlm0000gn/T//RtmpkyfWsl/file50adcb72e68'\n\nIt's been a while since I have seen such a segfault, but I have encountered\nplenty in both the earlier days of Rcpp, or when working with for example the\ngeospatial satck. And it almost always traced back to different (binary,\ni.e. 'native' code containing) packages requiring a rebuild.  While I haven't\nseen it lately, my suggestion would still be to see if it persists if you\nrebuild everything touched by that package / if it happens for subsets of\nthese packages. Subsetting to the other native packages may suffice. From a\nquick check (see below) that is still 16 packages.\n\nDirk\n\n> db <- data.table(tools::CRAN_package_db())\n> pkgs <- data.table(Package=tools::package_dependencies(\"rextendr\", db=db, recursive=TRUE)[[1]])\n> pkgs[,Package]\n [1] \"brio\"       \"callr\"      \"cli\"        \"desc\"       \"dplyr\"     \n [6] \"glue\"       \"jsonlite\"   \"pkgbuild\"   \"processx\"   \"purrr\"     \n[11] \"rlang\"      \"rprojroot\"  \"stringi\"    \"tibble\"     \"vctrs\"     \n[16] \"withr\"      \"R6\"         \"utils\"      \"generics\"   \"lifecycle\" \n[21] \"magrittr\"   \"methods\"    \"pillar\"     \"tidyselect\" \"ps\"        \n[26] \"tools\"      \"stats\"      \"fansi\"      \"pkgconfig\"  \"graphics\"  \n[31] \"grDevices\"  \"utf8\"      \n> db[pkgs, on=\"Package\"][NeedsCompilation==\"yes\", Package]\n [1] \"brio\"       \"cli\"        \"dplyr\"      \"glue\"       \"jsonlite\"  \n [6] \"processx\"   \"purrr\"      \"rlang\"      \"stringi\"    \"tibble\"    \n[11] \"vctrs\"      \"magrittr\"   \"tidyselect\" \"ps\"         \"fansi\"     \n[16] \"utf8\"      \n> \n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 24 March 2025 at 09:10, Josiah Parry wrote:\n| In trying to address new WARNINGs on R-devel I'm trying to rebuild my\n| package environment on R 4.6 (r88038) so I can try and remediate. However,\n| I'",
+      "thread_id": "thread-18e1ca1a3667",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-3b33322ea6ad",
+      "message_id": "<CAL3ufUJHTu+wHpvLQ8Y7SHQ7iqfn42AQ8y7aXZBV5A-edE1yUg@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2025-03-24T10:10:30-07:00",
+      "subject": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "subject_clean": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "in_reply_to": "<26593.36045.602357.325585@rob.eddelbuettel.com>",
+      "references": [
+        "<CAL3ufU+ZQj07n_tfd1qYowTca6TkJhjU0Yq3uBSSnr9Lj0-sVQ@mail.gmail.com>",
+        "<26593.36045.602357.325585@rob.eddelbuettel.com>"
+      ],
+      "body_plain": "?\n\nJosiah Parry reacted via Gmail\n<https://www.google.com/gmail/about/?utm_source=gmail-in-product&utm_medium=et&utm_campaign=emojireactionemail#app>\n\nOn Mon, Mar 24, 2025 at 9:48?AM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 24 March 2025 at 09:10, Josiah Parry wrote:\n> | In trying to address new WARNINGs on R-devel I'm trying to rebuild my\n> | package environment on R 4.6 (r88038) so I can try and remediate.\n> However,\n> | I'm encountering a segfault when doing so which doesn't occur for R 4.5.0\n> | alpha (2025-03-18 r87991).\n> |\n> | Is there a known change to building using R CMD build that we have to\n> | address?\n> |\n> | rextendr ? R CMD build .\n> | * checking for file ?./DESCRIPTION? ... OK\n> | * preparing ?rextendr?:\n> | * checking DESCRIPTION meta-information ... OK\n> | * installing the package to build vignettes\n> |       -----------------------------------\n> | * installing *source* package ?rextendr? ...\n> | ** this is package ?rextendr? version ?0.3.1.9001?\n> | ** using staged installation\n> | ** R\n> | ** inst\n> | ** byte-compile and prepare package for lazy loading\n> | sh: line 1: 20659 Segmentation fault: 11  R_TESTS=\n> | '/Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/bin/R'\n> | --no-save --no-restore --no-echo 2>&1 <\n> |\n> '/var/folders/wd/xq999jjj3bx2w8cpg7lkfxlm0000gn/T//RtmpkyfWsl/file50adcb72e68'\n>\n> It's been a while since I have seen such a segfault, but I have encountered\n> plenty in both the earlier days of Rcpp, or when working with for example\n> the\n> geospatial satck. And it almost always traced back to different (binary,\n> i.e. 'native' code containing) packages requiring a rebuild.  While I\n> haven't\n> seen it lately, my suggestion would still be to see if it persists if you\n> rebuild everything touched by that package / if it happens for subsets of\n> these packages. Subsetting to the other native packages may suffice. From a\n> quick check (see below) that is still 16 packages.\n>\n> Dirk\n>\n> > db <- data.table(tools::CRAN_package_db())\n> > pkgs <- data.table(Package=tools::package_dependencies(\"rextendr\",\n> db=db, recursive=TRUE)[[1]])\n> > pkgs[,Package]\n>  [1] \"brio\"       \"callr\"      \"cli\"        \"desc\"       \"dplyr\"\n>  [6] \"glue\"       \"jsonlite\"   \"pkgbuild\"   \"processx\"   \"purrr\"\n> [11] \"rlang\"      \"rprojroot\"  \"stringi\"    \"tibble\"     \"vctrs\"\n> [16] \"withr\"      \"R6\"         \"utils\"      \"generics\"   \"lifecycle\"\n> [21] \"magrittr\"   \"methods\"    \"pillar\"     \"tidyselect\" \"ps\"\n> [26] \"tools\"      \"stats\"      \"fansi\"      \"pkgconfig\"  \"graphics\"\n> [31] \"grDevices\"  \"utf8\"\n> > db[pkgs, on=\"Package\"][NeedsCompilation==\"yes\", Package]\n>  [1] \"brio\"       \"cli\"        \"dplyr\"      \"glue\"       \"jsonlite\"\n>  [6] \"processx\"   \"purrr\"      \"rlang\"      \"stringi\"    \"tibble\"\n> [11] \"vctrs\"      \"magrittr\"   \"tidyselect\" \"ps\"         \"fansi\"\n> [16] \"utf8\"\n> >\n>\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>",
+      "body_snippet": "?\n\nJosiah Parry reacted via Gmail\n<https://www.google.com/gmail/about/?utm_source=gmail-in-product&utm_medium=et&utm_campaign=emojireactionemail#app>\n\nOn Mon, Mar 24, 2025 at 9:48?AM Dirk Eddelbuettel",
+      "thread_id": "thread-18e1ca1a3667",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-83fa5acd34cd",
+      "message_id": "<CAL3ufULNDdJ8nvH6hNJ0hEY_saPsvG2FfnCu_z8ZCDMTNT3s5Q@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2025-03-24T10:19:46-07:00",
+      "subject": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "subject_clean": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "in_reply_to": "<26593.36045.602357.325585@rob.eddelbuettel.com>",
+      "references": [
+        "<CAL3ufU+ZQj07n_tfd1qYowTca6TkJhjU0Yq3uBSSnr9Lj0-sVQ@mail.gmail.com>",
+        "<26593.36045.602357.325585@rob.eddelbuettel.com>"
+      ],
+      "body_plain": "Thank you! I suspect it is because I installed stringi from a binary\ncreated on r-universe and it may not have been compatible with my machine\nor version of R-devel.\n\nOn Mon, Mar 24, 2025 at 9:48?AM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 24 March 2025 at 09:10, Josiah Parry wrote:\n> | In trying to address new WARNINGs on R-devel I'm trying to rebuild my\n> | package environment on R 4.6 (r88038) so I can try and remediate.\n> However,\n> | I'm encountering a segfault when doing so which doesn't occur for R 4.5.0\n> | alpha (2025-03-18 r87991).\n> |\n> | Is there a known change to building using R CMD build that we have to\n> | address?\n> |\n> | rextendr ? R CMD build .\n> | * checking for file ?./DESCRIPTION? ... OK\n> | * preparing ?rextendr?:\n> | * checking DESCRIPTION meta-information ... OK\n> | * installing the package to build vignettes\n> |       -----------------------------------\n> | * installing *source* package ?rextendr? ...\n> | ** this is package ?rextendr? version ?0.3.1.9001?\n> | ** using staged installation\n> | ** R\n> | ** inst\n> | ** byte-compile and prepare package for lazy loading\n> | sh: line 1: 20659 Segmentation fault: 11  R_TESTS=\n> | '/Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/bin/R'\n> | --no-save --no-restore --no-echo 2>&1 <\n> |\n> '/var/folders/wd/xq999jjj3bx2w8cpg7lkfxlm0000gn/T//RtmpkyfWsl/file50adcb72e68'\n>\n> It's been a while since I have seen such a segfault, but I have encountered\n> plenty in both the earlier days of Rcpp, or when working with for example\n> the\n> geospatial satck. And it almost always traced back to different (binary,\n> i.e. 'native' code containing) packages requiring a rebuild.  While I\n> haven't\n> seen it lately, my suggestion would still be to see if it persists if you\n> rebuild everything touched by that package / if it happens for subsets of\n> these packages. Subsetting to the other native packages may suffice. From a\n> quick check (see below) that is still 16 packages.\n>\n> Dirk\n>\n> > db <- data.table(tools::CRAN_package_db())\n> > pkgs <- data.table(Package=tools::package_dependencies(\"rextendr\",\n> db=db, recursive=TRUE)[[1]])\n> > pkgs[,Package]\n>  [1] \"brio\"       \"callr\"      \"cli\"        \"desc\"       \"dplyr\"\n>  [6] \"glue\"       \"jsonlite\"   \"pkgbuild\"   \"processx\"   \"purrr\"\n> [11] \"rlang\"      \"rprojroot\"  \"stringi\"    \"tibble\"     \"vctrs\"\n> [16] \"withr\"      \"R6\"         \"utils\"      \"generics\"   \"lifecycle\"\n> [21] \"magrittr\"   \"methods\"    \"pillar\"     \"tidyselect\" \"ps\"\n> [26] \"tools\"      \"stats\"      \"fansi\"      \"pkgconfig\"  \"graphics\"\n> [31] \"grDevices\"  \"utf8\"\n> > db[pkgs, on=\"Package\"][NeedsCompilation==\"yes\", Package]\n>  [1] \"brio\"       \"cli\"        \"dplyr\"      \"glue\"       \"jsonlite\"\n>  [6] \"processx\"   \"purrr\"      \"rlang\"      \"stringi\"    \"tibble\"\n> [11] \"vctrs\"      \"magrittr\"   \"tidyselect\" \"ps\"         \"fansi\"\n> [16] \"utf8\"\n> >\n>\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you! I suspect it is because I installed stringi from a binary\ncreated on r-universe and it may not have been compatible with my machine\nor version of R-devel.\n\nOn Mon, Mar 24, 2025 at 9:48?AM D",
+      "thread_id": "thread-18e1ca1a3667",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-03ca76819a2b",
+      "message_id": "<CANz9Z_JwFpG-LuuwwzHENFFbOVc0dhh6W=15+uzo0rnnLFp8Cw@mail.gmail.com>",
+      "from_name": "Joshua Wiley",
+      "from_email_hash": "ac3e9d77a36f83421d5a54e92ec707af9fc8674c06bd61632d60bba2c9d9df67",
+      "date": "2025-03-27T12:02:06+11:00",
+      "subject": "[R-pkg-devel] error on r-release-macos-arm64",
+      "subject_clean": "[R-pkg-devel] error on r-release-macos-arm64",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi All,\n\nI just submitted an update to one of my packages to CRAN. It went live, but\nwhen I am looking at checks, I can see that the new version, 1.4.2 works on\nmost platforms but has an error on r-release-macos-arm64. Here is the link\nto CRAN check results\n\nhttps://cran.r-project.org/web/checks/check_results_JWileymisc.html\n\nlooking at the error and the logs, I am at a bit of a loss what is wrong.\n\nLocal build tests and checks are all going fine.\nMy GitHub actions from the most recent version look fine:\n\nhttps://github.com/JWiley/JWileymisc/actions/runs/14074277302\n\nAny ideas / input on what I can do?\n\nThanks,\n\nJosh\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi All,\n\nI just submitted an update to one of my packages to CRAN. It went live, but\nwhen I am looking at checks, I can see that the new version, 1.4.2 works on\nmost platforms but has an error on r-re",
+      "thread_id": "thread-03ca76819a2b",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-fbee6b6569bd",
+      "message_id": "<37400FC3-E42B-4463-8CFC-1481AD3EBC0B@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-03-27T14:48:50+13:00",
+      "subject": "[R-pkg-devel] error on r-release-macos-arm64",
+      "subject_clean": "[R-pkg-devel] error on r-release-macos-arm64",
+      "in_reply_to": "<CANz9Z_JwFpG-LuuwwzHENFFbOVc0dhh6W=15+uzo0rnnLFp8Cw@mail.gmail.com>",
+      "references": [
+        "<CANz9Z_JwFpG-LuuwwzHENFFbOVc0dhh6W=15+uzo0rnnLFp8Cw@mail.gmail.com>"
+      ],
+      "body_plain": "Josh,\n\nyour package got caught up in a chain-reaction: the pan package failed to install *after* its binary package was built due to disk space issues, so although the pan package binary is on CRAN, the package itself was not available in the build machine?s R library. JWileymisc doesn?t depend directly on pan, but one of its dependencies apparently does. I have re-installed pan from the binary into the library so the next run should pick it up. (We have added a new SSD to the build machine so disk space issues should be history).\n\nCheers,\nSimon\n\n\n> On 27 Mar 2025, at 14:02, Joshua Wiley <jwiley.psych at gmail.com> wrote:\n> \n> Hi All,\n> \n> I just submitted an update to one of my packages to CRAN. It went live, but\n> when I am looking at checks, I can see that the new version, 1.4.2 works on\n> most platforms but has an error on r-release-macos-arm64. Here is the link\n> to CRAN check results\n> \n> https://cran.r-project.org/web/checks/check_results_JWileymisc.html\n> \n> looking at the error and the logs, I am at a bit of a loss what is wrong.\n> \n> Local build tests and checks are all going fine.\n> My GitHub actions from the most recent version look fine:\n> \n> https://github.com/JWiley/JWileymisc/actions/runs/14074277302\n> \n> Any ideas / input on what I can do?\n> \n> Thanks,\n> \n> Josh\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Josh,\n\nyour package got caught up in a chain-reaction: the pan package failed to install *after* its binary package was built due to disk space issues, so although the pan package binary is on CRAN, t",
+      "thread_id": "thread-03ca76819a2b",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-e5580201c850",
+      "message_id": "<CANz9Z_+Yhb0FuPkP4UhWB1nxxO4uwXQsen=-QnNXwqUiDE6V=g@mail.gmail.com>",
+      "from_name": "Joshua Wiley",
+      "from_email_hash": "ac3e9d77a36f83421d5a54e92ec707af9fc8674c06bd61632d60bba2c9d9df67",
+      "date": "2025-03-27T15:23:20+11:00",
+      "subject": "[R-pkg-devel] error on r-release-macos-arm64",
+      "subject_clean": "[R-pkg-devel] error on r-release-macos-arm64",
+      "in_reply_to": "<37400FC3-E42B-4463-8CFC-1481AD3EBC0B@R-project.org>",
+      "references": [
+        "<CANz9Z_JwFpG-LuuwwzHENFFbOVc0dhh6W=15+uzo0rnnLFp8Cw@mail.gmail.com>",
+        "<37400FC3-E42B-4463-8CFC-1481AD3EBC0B@R-project.org>"
+      ],
+      "body_plain": "Hi Simon,\n\nWow thank you so much for the detailed exploration and reply.\nI really appreciate it and all you do for the community!\n\nJosh\n\nOn Thu, 27 Mar 2025 at 12:49, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> Josh,\n>\n> your package got caught up in a chain-reaction: the pan package failed to\n> install *after* its binary package was built due to disk space issues, so\n> although the pan package binary is on CRAN, the package itself was not\n> available in the build machine?s R library. JWileymisc doesn?t depend\n> directly on pan, but one of its dependencies apparently does. I have\n> re-installed pan from the binary into the library so the next run should\n> pick it up. (We have added a new SSD to the build machine so disk space\n> issues should be history).\n>\n> Cheers,\n> Simon\n>\n>\n> > On 27 Mar 2025, at 14:02, Joshua Wiley <jwiley.psych at gmail.com> wrote:\n> >\n> > Hi All,\n> >\n> > I just submitted an update to one of my packages to CRAN. It went live,\n> but\n> > when I am looking at checks, I can see that the new version, 1.4.2 works\n> on\n> > most platforms but has an error on r-release-macos-arm64. Here is the\n> link\n> > to CRAN check results\n> >\n> > https://cran.r-project.org/web/checks/check_results_JWileymisc.html\n> >\n> > looking at the error and the logs, I am at a bit of a loss what is wrong.\n> >\n> > Local build tests and checks are all going fine.\n> > My GitHub actions from the most recent version look fine:\n> >\n> > https://github.com/JWiley/JWileymisc/actions/runs/14074277302\n> >\n> > Any ideas / input on what I can do?\n> >\n> > Thanks,\n> >\n> > Josh\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Simon,\n\nWow thank you so much for the detailed exploration and reply.\nI really appreciate it and all you do for the community!\n\nJosh\n\nOn Thu, 27 Mar 2025 at 12:49, Simon Urbanek <simon.urbanek at r",
+      "thread_id": "thread-03ca76819a2b",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-718c4db838f4",
+      "message_id": "<CAJmOi+MC0A_3O9mO2Vcn7ajXMThrsRZd38+3Mi37N_7ELF1GFQ@mail.gmail.com>",
+      "from_name": "Hugh Parsonage",
+      "from_email_hash": "a89c372a54c568c3603f3612df869407f3ff241d82a5bcd03ca989dc9a036f3b",
+      "date": "2025-03-28T07:56:04+11:00",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "subject_clean": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "in_reply_to": "<7a0d17c3-f12f-4ab0-8322-d0f067b4fdac@dewey.myzen.co.uk>",
+      "references": [
+        "<6e48e8fa-2e36-4dbc-8fb9-8039e487ab55@dewey.myzen.co.uk>",
+        "<3D2EF8E5-CBB4-4E1B-8CF0-ED7156AA3E50@dcn.davis.ca.us>",
+        "<9990bd17-b270-4dc1-b32b-9085cc15d2ca@dewey.myzen.co.uk>",
+        "<726ae033-e80f-4af5-b96c-3783538bde76@gmail.com>",
+        "<Z9ypzgKy6shnjMr2@kumo.plessy.net>",
+        "<7a0d17c3-f12f-4ab0-8322-d0f067b4fdac@dewey.myzen.co.uk>"
+      ],
+      "body_plain": "One relatively simple mechanism would be to export a function that\nsimply returns the internal lookup data, and to then document that\nfunction.\n\nOn Sat, 22 Mar 2025 at 23:05, Michael Dewey <lists at dewey.myzen.co.uk> wrote:\n>\n> Dear Charles\n>\n> I agree and in fact that was in the back of my mind when I started this.\n> I felt I should document it even though the chances of anyone wanting to\n> access it still less edit it were almost indistinguishable from zero. I\n> am reluctant to use a suggestion like yours as then I will have\n> documentation created in diferent ways and that raises the possibility\n> that they may interact\n>\n> I have had a number of useful hints in the answers to my original\n> question and I think I see a way forward. I will report back when I have\n> digested them.\n>\n> Michael\n>\n> On 20/03/2025 23:50, Charles Plessy wrote:\n> > Le Thu, Mar 20, 2025 at 12:56:49PM -0400, Kevin R. Coombes a ?crit :\n> >> If it is *only *in sysdata.Rda, then it is accessible to your package\n> >> code but is not available to users. (They can't, for example, use the\n> >> \"data\" function to load it themselves.) So, there is no reason to\n> >> document it.\n> >\n> > Hello Kevin and Michael,\n> >\n> > Users who care about software provenance, security and software freedom would\n> > love to see it documented, because binary objects are hard to audit when there\n> > is no description of what they are expected to contain.\n> >\n> > Redistributors who give guarantees to their users about software freedom, like\n> > Debian, also want to see that these objects are easy to modify in case of need\n> > (that is: the developer does not keep some secret receipes about how the object\n> > is made to keep an advantage against forks and other forms of competition), and\n> > to be able to check by themselves that they were not built from data that is\n> > not placed under too restrictive terms.\n> >\n> > When I write R packages and when I reeistribute CRAN/Bioconductor pakcages in\n> > Debian, I find that the way documented in the R Packages book (./data-raw/,\n> > usethis::use_data(), etc.) fits my needs very well.\n> >\n> > Have a nice day,\n> >\n> > Charles\n> >\n> > --\n> > Charles Plessy                         Nagahama, Yomitan, Okinawa, Japan\n> > Debian Med packaging team         http://www.debian.org/devel/debian-med\n> > Tooting from home                  https://framapiaf.org/@charles_plessy\n> > - You  do not have  my permission  to use  this email  to train  an AI -\n> >\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> Michael Dewey\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "One relatively simple mechanism would be to export a function that\nsimply returns the internal lookup data, and to then document that\nfunction.\n\nOn Sat, 22 Mar 2025 at 23:05, Michael Dewey <lists at d",
+      "thread_id": "thread-e66b3900fc99",
+      "thread_depth": 6,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-c7baabe76631",
+      "message_id": "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+      "from_name": "Jerome Braun",
+      "from_email_hash": "33c73b6a6d7b4d9953aa2612ab54d6facad0cd700582601ddca0d51aee6fbc00",
+      "date": "2025-03-30T23:43:57-04:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi!\n\nI'm currently the maintainer of AlgDesign, though my C skill is clearly a\nlittle too low for the task.\n\nIt has become necessary for me to fix some issues with the code that had\ndefined true, false, and bool in the header file (wheeler.h).\n\nLines 23 and 24 currently have:\n\n#define true 1\n#define false 0\n\nThere used to be a line 25 that had:\n\n#define bool int\n\nI removed line 25 and changed all occurrences in the C code of \"bool\" to\n\"int\".   But this doesn't seem to have fully resolved the issue.\n\nThe current checks on AlgDesign generate a warning based on header lines 23\nand 24:\n\nDebian: <\nhttps://win-builder.r-project.org/incoming_pretest/AlgDesign_1.2.1.2_20250331_023833/Debian/00check.log\n>\nStatus: 1 WARNING, 1 NOTE\n\nI'm not sure what this means yet, nor how to resolve it properly.  I would\nlove some help in working forward, if possible.\n\nThank you very much!\n-- \nJerome\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi!\n\nI'm currently the maintainer of AlgDesign, though my C skill is clearly a\nlittle too low for the task.\n\nIt has become necessary for me to fix some issues with the code that had\ndefined true, fals",
+      "thread_id": "thread-c7baabe76631",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-e7c15a916376",
+      "message_id": "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2025-03-31T00:46:23-07:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+      "references": [
+        "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>"
+      ],
+      "body_plain": "Do you want to use <stdbool.h> instead of your macros?\n\nhttps://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdbool.h.html\n\nOn Mon, Mar 31, 2025, 12:37?AM Jerome Braun <jvbraun.statistics at gmail.com>\nwrote:\n\n>   Hi!\n>\n> I'm currently the maintainer of AlgDesign, though my C skill is clearly a\n> little too low for the task.\n>\n> It has become necessary for me to fix some issues with the code that had\n> defined true, false, and bool in the header file (wheeler.h).\n>\n> Lines 23 and 24 currently have:\n>\n> #define true 1\n> #define false 0\n>\n> There used to be a line 25 that had:\n>\n> #define bool int\n>\n> I removed line 25 and changed all occurrences in the C code of \"bool\" to\n> \"int\".   But this doesn't seem to have fully resolved the issue.\n>\n> The current checks on AlgDesign generate a warning based on header lines 23\n> and 24:\n>\n> Debian: <\n>\n> https://win-builder.r-project.org/incoming_pretest/AlgDesign_1.2.1.2_20250331_023833/Debian/00check.log\n> >\n> Status: 1 WARNING, 1 NOTE\n>\n> I'm not sure what this means yet, nor how to resolve it properly.  I would\n> love some help in working forward, if possible.\n>\n> Thank you very much!\n> --\n> Jerome\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Do you want to use <stdbool.h> instead of your macros?\n\nhttps://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdbool.h.html\n\nOn Mon, Mar 31, 2025, 12:37?AM Jerome Braun <jvbraun.statistics at gmai",
+      "thread_id": "thread-c7baabe76631",
+      "thread_depth": 1,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-c80d01aee6b9",
+      "message_id": "<MN2PR10MB32303DD295B68D848B58DF7AF9AD2@MN2PR10MB3230.namprd10.prod.outlook.com>",
+      "from_name": "Sean Davis",
+      "from_email_hash": "109b9a34086cf76701f2b8d9829b34ab79f50658b0fbd49b00fae8e1665544ec",
+      "date": "2025-03-31T11:24:27Z",
+      "subject": "[R-pkg-devel] Retrieving versioned csv datasets for use in an R package",
+      "subject_clean": "[R-pkg-devel] Retrieving versioned csv datasets for use in an R package",
+      "in_reply_to": "<26544.45744.991423.778990@rob.eddelbuettel.com>",
+      "references": [
+        "<CAF0e1n-ZzgkqT-zcVUJjaWXpART7QmPe-94b6xiqQMA2pjpv1w@mail.gmail.com>",
+        "<CAJuCY5wpJc=5Np0+igkJ=EBZr_QH1QUnnTN-4UdtTR7wz6FGJQ@mail.gmail.com>",
+        "<C45E0F9A-F6B4-4E24-9BA4-D9D5E6E0A343@R-project.org>",
+        "<26544.45744.991423.778990@rob.eddelbuettel.com>"
+      ],
+      "body_plain": "Hi, all.\n\nZenodo does offer storage (I believe limited to 50GB per submission) and is backed by CERN with a guarantee of storage for at least 20 years (the life of CERN, could be extended).\n\nI agree that Github is a viable alternative to Zenodo and one can use the two together easily. On github, one can use three different approaches: 1) check files into version control, 2) use git lfs, and 3) as release artifacts. Each has pros and cons.\n\nIf data are of a biomedical nature, one can ofter deposit in a biomedical repository, including one of dozens at NIH and EBI. NIH even recommends some open ?generalist repositories? that include zenodo and OSF: https://www.nlm.nih.gov/NIHbmic/generalist_repositories.html\n\nIf one is looking to cater to the machine learning/AI community, hosting on huggingface is another option. Doing so is quite similar to hosting on github from a purely practical perspective.\n\nCloud storage systems such as AWS, GCP, and Azure are possibilities, but egress charges can be challenging to predict. Cloudflare R2 is s3-compatible and has no egress charges, making it a good choice for sharing particularly large files.\n\nOn the client side, Bioconductor has BiocFileCache which is a client-side package for caching files that have been downloaded. Other file download/cache packages are available, though I?m less familiar with them.\n\nJust wanted to expand the list a bit.\n\nSean\n\n\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Dirk Eddelbuettel <edd at debian.org>\nDate: Saturday, February 15, 2025 at 10:29?AM\nTo: Simon Urbanek <simon.urbanek at R-project.org>\nCc: R-package-devel at r-project.org <R-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Retrieving versioned csv datasets for use in an R package\n\nOn 15 February 2025 at 19:50, Simon Urbanek wrote:\n| Github is not reliable enough for reproducible research (your files can\n| disappear at any point - or can change without notice),\n\nI'm curious: Do you have a concrete example of a no-longer-reproducible study\nwhose data or other support files changed and thereby caused this breakage?\n\n| that's why Zenodo was created.\n\nBut AFAIK Zenodo offers DOI issuance only, not storage (as, say, OSF would).\nSo this does not address the problem faced by the OP.\n\nDirk\n\n--\ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, all.\n\nZenodo does offer storage (I believe limited to 50GB per submission) and is backed by CERN with a guarantee of storage for at least 20 years (the life of CERN, could be extended).\n\nI agree t",
+      "thread_id": "thread-c80d01aee6b9",
+      "thread_depth": 0,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-3dcb4c1eda92",
+      "message_id": "<CAMUU=-LsEvLGvTbub0nKz2R-sG4HFgms2cxP_6bO5E9PxJHOJg@mail.gmail.com>",
+      "from_name": "Jerome Braun",
+      "from_email_hash": "33c73b6a6d7b4d9953aa2612ab54d6facad0cd700582601ddca0d51aee6fbc00",
+      "date": "2025-03-31T09:28:01-04:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>",
+      "references": [
+        "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+        "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Michael!\n\nI'd like to make the smallest change possible to Bob Wheeler's original\ncode so I'm not sure if using <stdbool.h> is the best route forward.\n\nI do see that the definitions are the same there.  Is there a low-cost way\nto use that header file or just those definitions?\n\nThank  you!\n-- \nJerome\n\n\n\nOn Mon, Mar 31, 2025 at 3:46?AM Michael Chirico <michaelchirico4 at gmail.com>\nwrote:\n\n> Do you want to use <stdbool.h> instead of your macros?\n>\n> https://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdbool.h.html\n>\n> On Mon, Mar 31, 2025, 12:37?AM Jerome Braun <jvbraun.statistics at gmail.com>\n> wrote:\n>\n>>   Hi!\n>>\n>> I'm currently the maintainer of AlgDesign, though my C skill is clearly a\n>> little too low for the task.\n>>\n>> It has become necessary for me to fix some issues with the code that had\n>> defined true, false, and bool in the header file (wheeler.h).\n>>\n>> Lines 23 and 24 currently have:\n>>\n>> #define true 1\n>> #define false 0\n>>\n>> There used to be a line 25 that had:\n>>\n>> #define bool int\n>>\n>> I removed line 25 and changed all occurrences in the C code of \"bool\" to\n>> \"int\".   But this doesn't seem to have fully resolved the issue.\n>>\n>> The current checks on AlgDesign generate a warning based on header lines\n>> 23\n>> and 24:\n>>\n>> Debian: <\n>>\n>> https://win-builder.r-project.org/incoming_pretest/AlgDesign_1.2.1.2_20250331_023833/Debian/00check.log\n>> >\n>> Status: 1 WARNING, 1 NOTE\n>>\n>> I'm not sure what this means yet, nor how to resolve it properly.  I would\n>> love some help in working forward, if possible.\n>>\n>> Thank you very much!\n>> --\n>> Jerome\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Michael!\n\nI'd like to make the smallest change possible to Bob Wheeler's original\ncode so I'm not sure if using <stdbool.h> is the best route forward.\n\nI do see that the definitions are the same th",
+      "thread_id": "thread-c7baabe76631",
+      "thread_depth": 2,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-802c255bde9b",
+      "message_id": "<dcd2bc2b-c486-4532-962f-c04793ecb091@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-03-31T11:28:49-04:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": "<CAMUU=-LsEvLGvTbub0nKz2R-sG4HFgms2cxP_6bO5E9PxJHOJg@mail.gmail.com>",
+      "references": [
+        "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+        "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>",
+        "<CAMUU=-LsEvLGvTbub0nKz2R-sG4HFgms2cxP_6bO5E9PxJHOJg@mail.gmail.com>"
+      ],
+      "body_plain": "On 2025-03-31 9:28 a.m., Jerome Braun wrote:\n> Hi Michael!\n> \n> I'd like to make the smallest change possible to Bob Wheeler's original\n> code so I'm not sure if using <stdbool.h> is the best route forward.\n> \n> I do see that the definitions are the same there.  Is there a low-cost way\n> to use that header file or just those definitions?\n\nThe problem is that the definitions may vary from compiler to compiler, \nand the error message you're getting only shows up some of them.  Since \nthe compiler will supply stdbool.h, it's safer to use that than to try \nto emulate it.\n\nDuncan Murdoch",
+      "body_snippet": "On 2025-03-31 9:28 a.m., Jerome Braun wrote:\n> Hi Michael!\n> \n> I'd like to make the smallest change possible to Bob Wheeler's original\n> code so I'm not sure if using <stdbool.h> is the best route fo",
+      "thread_id": "thread-c7baabe76631",
+      "thread_depth": 3,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-a7f446ccfb39",
+      "message_id": "<CAMUU=-+C8bMCUFOOD_FEGJLvSnVk+Ubjd+JEwHL86Th+8Mn7pw@mail.gmail.com>",
+      "from_name": "Jerome Braun",
+      "from_email_hash": "33c73b6a6d7b4d9953aa2612ab54d6facad0cd700582601ddca0d51aee6fbc00",
+      "date": "2025-03-31T12:00:31-04:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": "<dcd2bc2b-c486-4532-962f-c04793ecb091@gmail.com>",
+      "references": [
+        "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+        "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>",
+        "<CAMUU=-LsEvLGvTbub0nKz2R-sG4HFgms2cxP_6bO5E9PxJHOJg@mail.gmail.com>",
+        "<dcd2bc2b-c486-4532-962f-c04793ecb091@gmail.com>"
+      ],
+      "body_plain": "Hi Duncan!\n\n>  Since the compiler will supply stdbool.h, it's safer to use that than to\ntry to emulate it.\n\nUnderstood. It seems like the definitions are exactly the same between the\ntwo.\n\nCurrently there is no use of \"bool\" in any of the code (after having\nchanged bool to int everywhere in the code).\n\nSo I think I can replace the two lines in the original code with a call to\ninclude the <stdbool.h> header --- does that seem reasonable?   Can I use\nan include statement there in place of those two lines?\n\nThank you!\n-- \nJerome\n\nOn Mon, Mar 31, 2025 at 11:28?AM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 2025-03-31 9:28 a.m., Jerome Braun wrote:\n> > Hi Michael!\n> >\n> > I'd like to make the smallest change possible to Bob Wheeler's original\n> > code so I'm not sure if using <stdbool.h> is the best route forward.\n> >\n> > I do see that the definitions are the same there.  Is there a low-cost\n> way\n> > to use that header file or just those definitions?\n>\n> The problem is that the definitions may vary from compiler to compiler,\n> and the error message you're getting only shows up some of them.  Since\n> the compiler will supply stdbool.h, it's safer to use that than to try\n> to emulate it.\n>\n> Duncan Murdoch\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Duncan!\n\n>  Since the compiler will supply stdbool.h, it's safer to use that than to\ntry to emulate it.\n\nUnderstood. It seems like the definitions are exactly the same between the\ntwo.\n\nCurrently t",
+      "thread_id": "thread-c7baabe76631",
+      "thread_depth": 4,
+      "month": "2025-03"
+    },
+    {
+      "id": "msg-2f01f38125eb",
+      "message_id": "<b2ebfce3-a436-48d1-a233-a6ed23dcf239@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-03-31T12:38:01-04:00",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "subject_clean": "[R-pkg-devel] AlgDesign C Issue",
+      "in_reply_to": "<CAMUU=-+C8bMCUFOOD_FEGJLvSnVk+Ubjd+JEwHL86Th+8Mn7pw@mail.gmail.com>",
+      "references": [
+        "<CAMUU=-Km46C8gMdnBQQ2VoHXLxKoi-=B-7i5u90PvRx9psXndQ@mail.gmail.com>",
+        "<CAPRVBcy+LpPHQ9DAAOMFicZ7m-P7+fgc7oqD0jT0bK_XFrjQew@mail.gmail.com>",
+        "<CAMUU=-LsEvLGvTbub0nKz2R-sG4HFgms2cxP_6bO5E9PxJHOJg@mail.gmail.com>",
+        "<dcd2bc2b-c486-4532-962f-c04793ecb091@gmail.com>",
+        "<CAMUU=-+C8bMCUFOOD_FEGJLvSnVk+Ubjd+JEwHL86Th+8Mn7pw@mail.gmail.com>"
+      ],
+      "body_plain": "On 2025-03-31 12:00 p.m., Jerome Braun wrote:\n> Hi Duncan!\n> \n>  >? Since the compiler will supply stdbool.h, it's safer to use that \n> than to try to emulate it.\n> \n> Understood.?It seems like the definitions are exactly the same between \n> the two.\n> \n> Currently there is no use of \"bool\" in any of the code (after having \n> changed bool to int everywhere in the code).\n> \n> So I think I can replace the two lines in the original code with a call \n> to include the <stdbool.h> header --- does that seem reasonable?? ?Can I \n> use an include statement there in place of those two lines?\n\nI think replacing those two defines with\n\n#include <stdbool.h>\n\nshould be safe.  There's not much a huge difference between bool and \nint, but they aren't the same, so you might still run into some issues. \nFor example, in a modern C compiler a bool value can never be \nNA_LOGICAL, but an int value could be.  And if you do arithmetic on bool \nvalues, you might be surprised by the answer.  For example\n\n   bool x = true + true;\n\nresults in x storing true, which is equivalent to 1 when used as an integer.\n\nDuncan Murdoch\n\n\n> \n> Thank you!\n> -- \n> Jerome\n> \n> On Mon, Mar 31, 2025 at 11:28?AM Duncan Murdoch \n> <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n> \n>     On 2025-03-31 9:28 a.m., Jerome Braun wrote:\n>      > Hi Michael!\n>      >\n>      > I'd like to make the smallest change possible to Bob Wheeler's\n>     original\n>      > code so I'm not sure if using <stdbool.h> is the best route forward.\n>      >\n>      > I do see that the definitions are the same there.? Is there a\n>     low-cost way\n>      > to use that header file or just those definitions?\n> \n>     The problem is that the definitions may vary from compiler to compiler,\n>     and the error message you're getting only shows up some of them.? Since\n>     the compiler will supply stdbool.h, it's safer to use that than to try\n>     to emulate it.\n> \n>     Duncan Murdoch\n>",
+      "body_snippet": "On 2025-03-31 12:00 p.m., Jerome Braun wrote:\n> Hi Duncan!\n> \n>  >? Since the compiler will supply stdbool.h, it's safer to use that \n> than to try to emulate it.\n> \n> Understood.?It seems like the de",
+      "thread_id": "thread-c7baabe76631",
+      "thread_depth": 5,
+      "month": "2025-03"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-b2efd7a0a6ef",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "message_count": 4,
+      "participants": [
+        "Brian G. Peterson",
+        "Josiah Parry",
+        "McCrowey, Clinton",
+        "Uwe Ligges"
+      ],
+      "started": "2025-03-07T13:21:19+00:00",
+      "last_reply": "2025-03-10T12:29:53+01:00",
+      "root_message_id": "msg-b2efd7a0a6ef"
+    },
+    {
+      "id": "thread-84abb2b4f512",
+      "subject": "[R-pkg-devel] How to resolve missing packages without Notes",
+      "message_count": 3,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Stephen Abrams"
+      ],
+      "started": "2025-03-09T15:03:00-04:00",
+      "last_reply": "2025-03-09T18:41:21-04:00",
+      "root_message_id": "msg-84abb2b4f512"
+    },
+    {
+      "id": "thread-5c8ddb2da280",
+      "subject": "[R-pkg-devel]  How do you make it possible to run the example that requires a Conda environment?",
+      "message_count": 1,
+      "participants": [
+        "KABILAN S"
+      ],
+      "started": "2025-03-11T16:54:47+05:30",
+      "last_reply": "2025-03-11T16:54:47+05:30",
+      "root_message_id": "msg-5c8ddb2da280"
+    },
+    {
+      "id": "thread-e7007840a422",
+      "subject": "[R-pkg-devel] Status of R_ext/Connections.h",
+      "message_count": 1,
+      "participants": [
+        "Jon Clayden"
+      ],
+      "started": "2025-03-13T09:48:03+00:00",
+      "last_reply": "2025-03-13T09:48:03+00:00",
+      "root_message_id": "msg-e7007840a422"
+    },
+    {
+      "id": "thread-6074c97d3a71",
+      "subject": "[R-pkg-devel] NOTE about authors, no explanation",
+      "message_count": 9,
+      "participants": [
+        "Ivan Krylov",
+        "Lists",
+        "Mark Webster",
+        "Uwe Ligges"
+      ],
+      "started": "2025-03-16T22:06:16+00:00",
+      "last_reply": "2025-03-17T14:09:21+00:00",
+      "root_message_id": "msg-6074c97d3a71"
+    },
+    {
+      "id": "thread-08f89a36add8",
+      "subject": "[R-pkg-devel] New API in R-devel & minimum version of R",
+      "message_count": 5,
+      "participants": [
+        "Ben Bolker",
+        "Dirk Eddelbuettel",
+        "Josiah Parry",
+        "Michael Chirico"
+      ],
+      "started": "2025-03-19T08:08:45-07:00",
+      "last_reply": "2025-03-19T11:50:39-05:00",
+      "root_message_id": "msg-08f89a36add8"
+    },
+    {
+      "id": "thread-e66b3900fc99",
+      "subject": "[R-pkg-devel] How and where do I document sysdata.rda",
+      "message_count": 9,
+      "participants": [
+        "Charles Plessy",
+        "Georgi Boshnakov",
+        "Hugh Parsonage",
+        "Jeff Newmiller",
+        "Kevin R. Coombes",
+        "Lists",
+        "Michael Chirico",
+        "Michael Dewey"
+      ],
+      "started": "2025-03-20T14:39:39+00:00",
+      "last_reply": "2025-03-28T07:56:04+11:00",
+      "root_message_id": "msg-e66b3900fc99"
+    },
+    {
+      "id": "thread-4c8a5c717aa9",
+      "subject": "[R-pkg-devel] cmake_path on r-*-macos-arm64",
+      "message_count": 3,
+      "participants": [
+        "Simon Urbanek",
+        "Uwe Ligges",
+        "m@tthi@s-go@d@@ m@iii@g oii gmx@de"
+      ],
+      "started": "2025-03-22T09:52:23+01:00",
+      "last_reply": "2025-03-24T11:05:52+13:00",
+      "root_message_id": "msg-4c8a5c717aa9"
+    },
+    {
+      "id": "thread-18e1ca1a3667",
+      "subject": "[R-pkg-devel] R CMD build segfault (r88038)",
+      "message_count": 4,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Josiah Parry"
+      ],
+      "started": "2025-03-24T09:10:02-07:00",
+      "last_reply": "2025-03-24T10:19:46-07:00",
+      "root_message_id": "msg-18e1ca1a3667"
+    },
+    {
+      "id": "thread-03ca76819a2b",
+      "subject": "[R-pkg-devel] error on r-release-macos-arm64",
+      "message_count": 3,
+      "participants": [
+        "Joshua Wiley",
+        "Simon Urbanek"
+      ],
+      "started": "2025-03-27T12:02:06+11:00",
+      "last_reply": "2025-03-27T15:23:20+11:00",
+      "root_message_id": "msg-03ca76819a2b"
+    },
+    {
+      "id": "thread-c7baabe76631",
+      "subject": "[R-pkg-devel] AlgDesign C Issue",
+      "message_count": 6,
+      "participants": [
+        "Duncan Murdoch",
+        "Jerome Braun",
+        "Michael Chirico"
+      ],
+      "started": "2025-03-30T23:43:57-04:00",
+      "last_reply": "2025-03-31T12:38:01-04:00",
+      "root_message_id": "msg-c7baabe76631"
+    },
+    {
+      "id": "thread-c80d01aee6b9",
+      "subject": "[R-pkg-devel] Retrieving versioned csv datasets for use in an R package",
+      "message_count": 1,
+      "participants": [
+        "Sean Davis"
+      ],
+      "started": "2025-03-31T11:24:27+00:00",
+      "last_reply": "2025-03-31T11:24:27+00:00",
+      "root_message_id": "msg-c80d01aee6b9"
+    }
+  ]
+}

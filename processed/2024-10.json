@@ -1,0 +1,929 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2024-10",
+  "messages": [
+    {
+      "id": "msg-794deac68953",
+      "message_id": "<ea61f7fb-b212-46ff-870e-4e82b3ba4e70@eoos.dds.nl>",
+      "from_name": "Jan van der Laan",
+      "from_email_hash": "e88c347497c91b8e26adcf70a2e44486234f485bf8554354a0871edeafb3b2a7",
+      "date": "2024-10-01T09:32:59+02:00",
+      "subject": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "subject_clean": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "in_reply_to": "<SY4PR01MB56580A1C36102B5DB3462AE4AC6A2@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+      "references": [
+        "<SY4PR01MB56581D25A3BD15AC4CB3F882AC692@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+        "<20240926234842.286fed70@Tarkus>",
+        "<SY4PR01MB56580A1C36102B5DB3462AE4AC6A2@SY4PR01MB5658.ausprd01.prod.outlook.com>"
+      ],
+      "body_plain": "On 9/26/24 23:48, Murray Efford via R-package-devel wrote:\n\n> I am tossing up between (i) appealing to CRAN to allow the submission through with NOTEs until it feels safe to remove the functions with misleading names altogether, and (ii) removing them now and warning users about the new names in an  onLoad message.\n\n\nA third solution would be to create a `esa.plot` method that redirects \nthe user to `esaPlot` etc. So you create a function `esa.plot`. Its \narguments should match those of the `esa` generic. If the `esaPlot` \nfunction has completely different arguments, you could have this \n`esa.plot` function give an error, redirecting the user to `esaPlot`.\n\nYou will still need to document the `esa.plot` function as a method to \nprevent warnings/notes:\n\n\\usage{\n\\method{esa}{plot}(..)\n}\n\nAnd you should export it:\n\nexport(esa.plot)\n\nSo that it can be called directly. To prevent that the `esa.plot` is \ncalled when a user passes a `plot` object to the `esa` generic, you \ncould use the solution mentioned below:\n\n\n\n> ________________________________\n> From: Ivan Krylov <ikrylov at disroot.org>\n> \n> Theoretically speaking, if there was a place in your package where you\n> called the esa() generic with a user-supplied object, esa.plot() would\n> be a reachable S3 method, because the user would be able to construct\n> structure(list(), class = 'plot') and give it to your package code to\n> call esa(plot_object) and have it dispatched to esa.plot(). (Which\n> wouldn't be useful to the user, but that's how S3 works.)\n>\n\nIn NAMESPACE you can do:\n\nS3method(esa, plot, esaplotmethod)\n\nTo register `esaplotmethod` as the method that is called when using \n`esa` with an object of type `plot`. This would prevent this issue. \nHowever, this probably (can't test as the note doesn't happen on my \nsystem) doesn't resolve the issue with the NOTE.\n\n\nBest,\nJan",
+      "body_snippet": "On 9/26/24 23:48, Murray Efford via R-package-devel wrote:\n\n> I am tossing up between (i) appealing to CRAN to allow the submission through with NOTEs until it feels safe to remove the functions with ",
+      "thread_id": "thread-794deac68953",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-980e176a5025",
+      "message_id": "<20241001133921.3296a176@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-01T13:39:21+03:00",
+      "subject": "[R-pkg-devel] Question about Debian installation error",
+      "subject_clean": "[R-pkg-devel] Question about Debian installation error",
+      "in_reply_to": "<617BD822-1EE1-4928-AA9F-42CDFB069B84@gmail.com>",
+      "references": [
+        "<617BD822-1EE1-4928-AA9F-42CDFB069B84@gmail.com>"
+      ],
+      "body_plain": "Hi Yu and welcome to R-package-devel! You're now part of the team as\nwell.\n\n? Mon, 30 Sep 2024 21:30:44 -0400\nYu Yang <yuyang.stat at gmail.com> ?????:\n\n>   I recently updated my package ?glmtlp? to meet the ?_PACKAGE?\n> requirement and to deal with the ?noRemap\" requirement. I only\n> modified the DESCRIPTION and glmtlp-package.R file and fixed a few\n> typos. R CMD check showed no errors in my local machine (MacOS), but\n> when I submitted to CRAN, it said installation error on Debian. \n> \n>   The log file is at:\n> https://win-builder.r-project.org/incoming_pretest/glmtlp_2.0.2_20240930_002619/Debian/00install.out. \n\nThank you for providing the link to the failing example. The\nscreenshot(?) didn't come through [1]; this mailing list only accepts\nplain text messages and a restricted set of attachment types, so it's\nbest to compose in plain text as well.\n\nThe reason your package is failing is because your C++ code calls R API\nfunctions by their short (\"remapped\") names, and this will no longer\nwork in the next version of R. This has been mentioned in the news for\nR-devel [2,3]. The remapping is described in \"Writing R Extensions\",\nchapter 6 [4] (and a bit more at the end, shortly before chapter 7).\n\nIn short, to reproduce the error outside of R-devel, you need to\n#define R_NO_REMAP before #including R API (or provide the -DR_NO_REMAP\ncommand-line switch to the compiler), and then fix it by finding every\nremapped name in your code and replacing it by the full name (typically\nby prepending Rf_ to it).\n\nYou're not the first package author to have problems with C++ code due\nto R_NO_REMAP [5]. There's now an incomplete, unofficial set of\nmanpage-style API documentation (made possible by Luke Tierney's effort\nto export a list of API functions programmatically via tools:::funAPI)\nwhere you can find both full and remapped names for most of \"ordinary\"\nR API and slightly less than a half of experimental R API [6]. Thanks\nto Erez Shomron, there's also information about when a lot of the\nfunctions had been introduced.\n\nThe reason we have remapping in the first place is that for historical\nreasons, R API contained a lot of functions with \"ordinary\" names, such\nas \"length\", which conflicted with other C functions named \"length\" in\nthe same namespace. This problem has been solved at the cost of\nintroducing a more manageable problem by remapping: the \"real\" names of\nthe conflicting functions now start with Rf_ (e.g. \"Rf_length\"), and to\navoid breaking all existing code (including R itself), R uses the C\npreprocessor to replace the short names with the full names on the fly:\n\"#define length Rf_length\" and so on.\n\nUnfortunately, that still leads to conflicts when you need to use\nsomething named \"length\" (e.g. [7]) in a source file that #includes the\nR API. You type s.length(), and the preprocessor patches that to\ns.Rf_length(), and everything breaks. Since C++ code is the most\naffected by this, the R developers are now disabling it for all C++\ncode.\n\nHope this helps!\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://stat.ethz.ch/pipermail/r-package-devel/2024q4/011121.html\n\n[2]\nhttps://developer.r-project.org/blosxom.cgi/R-devel/NEWS/2024/04/14#n2024-04-14\n\n[3]\nhttps://stat.ethz.ch/R-manual/R-devel/doc/html/NEWS.html\n\n[4]\nhttps://cran.r-project.org/doc/manuals/R-exts.html#The-R-API\n\n[5]\nhttps://stat.ethz.ch/pipermail/r-package-devel/2024q2/010913.html\n\n[6]\nhttps://aitap.codeberg.page/R-api/#nrows\nhttps://aitap.codeberg.page/R-api/#XLENGTH\nhttps://aitap.codeberg.page/R-api/#allocVector\n\n[7]\nhttps://en.cppreference.com/w/cpp/string/basic_string/size",
+      "body_snippet": "Hi Yu and welcome to R-package-devel! You're now part of the team as\nwell.\n\n? Mon, 30 Sep 2024 21:30:44 -0400\nYu Yang <yuyang.stat at gmail.com> ?????:\n\n>   I recently updated my package ?glmtlp? to m",
+      "thread_id": "thread-980e176a5025",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-18fe02c0cf9d",
+      "message_id": "<20241001144537.2bec7355@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-01T14:45:37+03:00",
+      "subject": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "subject_clean": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "in_reply_to": "<38d9bf9a-6ab4-4e3a-9790-511159aab23c@dds.nl>",
+      "references": [
+        "<SY4PR01MB56581D25A3BD15AC4CB3F882AC692@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+        "<20240926234842.286fed70@Tarkus>",
+        "<SY4PR01MB56580A1C36102B5DB3462AE4AC6A2@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+        "<38d9bf9a-6ab4-4e3a-9790-511159aab23c@dds.nl>"
+      ],
+      "body_plain": "? Tue, 1 Oct 2024 09:00:24 +0200\nJan van der Laan <eoos at dds.nl> ?????:\n\n> S3method(esa, plot, esaplotmethod)\n> \n> To register `esaplotmethod` as the method that is called when using \n> `esa` with an object of type `plot`. This would prevent this issue. \n> However, this probably (can't test as the note doesn't happen on my \n> system) doesn't resolve the issue with the NOTE.\n\nExcellent idea, thank you! It does work for R CMD check as well:\n\nSys.setenv(\"_R_CHECK_S3_METHODS_SHOW_POSSIBLE_ISSUES_\" = 'TRUE')\ntools::checkS3methods(dir = '.') # used to show esa.plot as well\n# Apparent methods for exported generics not registered:\n#   fxi.contour fxi.mode\n\nNo need for extra bits or attributes on the esa.plot function, just\nregister a method for \"esa\" generic, \"plot\" class to prevent S3\ndispatch from reaching the function in question.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 1 Oct 2024 09:00:24 +0200\nJan van der Laan <eoos at dds.nl> ?????:\n\n> S3method(esa, plot, esaplotmethod)\n> \n> To register `esaplotmethod` as the method that is called when using \n> `esa` with a",
+      "thread_id": "thread-18fe02c0cf9d",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-1bfff183e4be",
+      "message_id": "<SY4PR01MB56586DA4A75D7199ED7D6DCDAC702@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+      "from_name": "Murray Efford",
+      "from_email_hash": "82bfe0c72bb61f0f38c9ced4d7d6ebe1e213c779150a721c41da24aa8495d9a0",
+      "date": "2024-10-02T01:04:29Z",
+      "subject": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "subject_clean": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "in_reply_to": "<20241001144537.2bec7355@arachnoid>",
+      "references": [
+        "<SY4PR01MB56581D25A3BD15AC4CB3F882AC692@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+        "<20240926234842.286fed70@Tarkus>",
+        "<SY4PR01MB56580A1C36102B5DB3462AE4AC6A2@SY4PR01MB5658.ausprd01.prod.outlook.com>",
+        "<38d9bf9a-6ab4-4e3a-9790-511159aab23c@dds.nl>",
+        "<20241001144537.2bec7355@arachnoid>"
+      ],
+      "body_plain": "Almost too good to be true: with this in my NAMESPACE\n\nexport (esa.plot)\nS3method(esa,plot)\n\nit seems I can deprecate esa.plot by the usual route (calling .Deprecated and passing call through to the new function esaPlot).\n\nThanks!\nMurray\n________________________________\nFrom: Ivan Krylov <ikrylov at disroot.org>\nSent: Wednesday, 2 October 2024 00:45\nTo: Jan van der Laan <eoos at dds.nl>\nCc: Murray Efford <murray.efford at otago.ac.nz>; Murray Efford via R-package-devel <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Deprecating apparent S3 method, changing name\n\n? Tue, 1 Oct 2024 09:00:24 +0200\nJan van der Laan <eoos at dds.nl> ?????:\n\n> S3method(esa, plot, esaplotmethod)\n>\n> To register `esaplotmethod` as the method that is called when using\n> `esa` with an object of type `plot`. This would prevent this issue.\n> However, this probably (can't test as the note doesn't happen on my\n> system) doesn't resolve the issue with the NOTE.\n\nExcellent idea, thank you! It does work for R CMD check as well:\n\nSys.setenv(\"_R_CHECK_S3_METHODS_SHOW_POSSIBLE_ISSUES_\" = 'TRUE')\ntools::checkS3methods(dir = '.') # used to show esa.plot as well\n# Apparent methods for exported generics not registered:\n#   fxi.contour fxi.mode\n\nNo need for extra bits or attributes on the esa.plot function, just\nregister a method for \"esa\" generic, \"plot\" class to prevent S3\ndispatch from reaching the function in question.\n\n--\nBest regards,\nIvan\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Almost too good to be true: with this in my NAMESPACE\n\nexport (esa.plot)\nS3method(esa,plot)\n\nit seems I can deprecate esa.plot by the usual route (calling .Deprecated and passing call through to the n",
+      "thread_id": "thread-18fe02c0cf9d",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-8fbf6c03bd8b",
+      "message_id": "<9389AB20-E775-41AF-A4B6-ABA18B32B652@gmail.com>",
+      "from_name": "Yu Yang",
+      "from_email_hash": "dd0b611f7d7f4b36e4edd1793c1ee2db30d2e106e47977c2190c197825b55580",
+      "date": "2024-10-01T21:05:03-04:00",
+      "subject": "[R-pkg-devel] Question about Debian installation error",
+      "subject_clean": "[R-pkg-devel] Question about Debian installation error",
+      "in_reply_to": "<20241001133921.3296a176@arachnoid>",
+      "references": [
+        "<617BD822-1EE1-4928-AA9F-42CDFB069B84@gmail.com>",
+        "<20241001133921.3296a176@arachnoid>"
+      ],
+      "body_plain": "Hi Ivan, \n\n  Thank you so much for your help! I have fixed the issue following your advice!\n\n  May you have a great day!\n\nBest,\nYu\n\n\n> On Oct 1, 2024, at 6:39?AM, Ivan Krylov <ikrylov at disroot.org> wrote:\n> \n> Hi Yu and welcome to R-package-devel! You're now part of the team as\n> well.\n> \n> ? Mon, 30 Sep 2024 21:30:44 -0400\n> Yu Yang <yuyang.stat at gmail.com> ?????:\n> \n>>  I recently updated my package ?glmtlp? to meet the ?_PACKAGE?\n>> requirement and to deal with the ?noRemap\" requirement. I only\n>> modified the DESCRIPTION and glmtlp-package.R file and fixed a few\n>> typos. R CMD check showed no errors in my local machine (MacOS), but\n>> when I submitted to CRAN, it said installation error on Debian. \n>> \n>>  The log file is at:\n>> https://win-builder.r-project.org/incoming_pretest/glmtlp_2.0.2_20240930_002619/Debian/00install.out.\n> \n> Thank you for providing the link to the failing example. The\n> screenshot(?) didn't come through [1]; this mailing list only accepts\n> plain text messages and a restricted set of attachment types, so it's\n> best to compose in plain text as well.\n> \n> The reason your package is failing is because your C++ code calls R API\n> functions by their short (\"remapped\") names, and this will no longer\n> work in the next version of R. This has been mentioned in the news for\n> R-devel [2,3]. The remapping is described in \"Writing R Extensions\",\n> chapter 6 [4] (and a bit more at the end, shortly before chapter 7).\n> \n> In short, to reproduce the error outside of R-devel, you need to\n> #define R_NO_REMAP before #including R API (or provide the -DR_NO_REMAP\n> command-line switch to the compiler), and then fix it by finding every\n> remapped name in your code and replacing it by the full name (typically\n> by prepending Rf_ to it).\n> \n> You're not the first package author to have problems with C++ code due\n> to R_NO_REMAP [5]. There's now an incomplete, unofficial set of\n> manpage-style API documentation (made possible by Luke Tierney's effort\n> to export a list of API functions programmatically via tools:::funAPI)\n> where you can find both full and remapped names for most of \"ordinary\"\n> R API and slightly less than a half of experimental R API [6]. Thanks\n> to Erez Shomron, there's also information about when a lot of the\n> functions had been introduced.\n> \n> The reason we have remapping in the first place is that for historical\n> reasons, R API contained a lot of functions with \"ordinary\" names, such\n> as \"length\", which conflicted with other C functions named \"length\" in\n> the same namespace. This problem has been solved at the cost of\n> introducing a more manageable problem by remapping: the \"real\" names of\n> the conflicting functions now start with Rf_ (e.g. \"Rf_length\"), and to\n> avoid breaking all existing code (including R itself), R uses the C\n> preprocessor to replace the short names with the full names on the fly:\n> \"#define length Rf_length\" and so on.\n> \n> Unfortunately, that still leads to conflicts when you need to use\n> something named \"length\" (e.g. [7]) in a source file that #includes the\n> R API. You type s.length(), and the preprocessor patches that to\n> s.Rf_length(), and everything breaks. Since C++ code is the most\n> affected by this, the R developers are now disabling it for all C++\n> code.\n> \n> Hope this helps!\n> \n> -- \n> Best regards,\n> Ivan\n> \n> [1]\n> https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011121.html\n> \n> [2]\n> https://developer.r-project.org/blosxom.cgi/R-devel/NEWS/2024/04/14#n2024-04-14\n> \n> [3]\n> https://stat.ethz.ch/R-manual/R-devel/doc/html/NEWS.html\n> \n> [4]\n> https://cran.r-project.org/doc/manuals/R-exts.html#The-R-API\n> \n> [5]\n> https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010913.html\n> \n> [6]\n> https://aitap.codeberg.page/R-api/#nrows\n> https://aitap.codeberg.page/R-api/#XLENGTH\n> https://aitap.codeberg.page/R-api/#allocVector\n> \n> [7]\n> https://en.cppreference.com/w/cpp/string/basic_string/size",
+      "body_snippet": "Hi Ivan, \n\n  Thank you so much for your help! I have fixed the issue following your advice!\n\n  May you have a great day!\n\nBest,\nYu\n\n\n> On Oct 1, 2024, at 6:39?AM, Ivan Krylov <ikrylov at disroot.org> ",
+      "thread_id": "thread-980e176a5025",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-9960cf4951ef",
+      "message_id": "<78E66F51-2437-43C6-B4CD-C6A43A8984E6@stat.ubc.ca>",
+      "from_name": "Mallory Flynn",
+      "from_email_hash": "90ea89723f5f09b63d8789ba8bafcab347cd78ccd3bc4aa028b75adee0081b7a",
+      "date": "2024-10-09T13:26:24-07:00",
+      "subject": "[R-pkg-devel] Question about examples/tests run-time",
+      "subject_clean": "[R-pkg-devel] Question about examples/tests run-time",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI am hoping this is the correct way to pose a question about my submission, which I can?t seem to fix 2 NOTES for.  They are related to run time:\nFlavor: r-devel-windows-x86_64\nCheck: examples, Result: NOTE\nExamples with CPU (user + system) or elapsed time > 10s\n           user system elapsed\ncountTree 17.66   0.13   17.78\nestTree   17.52   0.02   17.54\nwmmTree   15.70   0.02   15.72\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: examples, Result: NOTE\nExamples with CPU (user + system) or elapsed time > 5s\n            user system elapsed\ncountTree 14.218  0.077  14.401\nwmmTree   14.049  0.028  14.086\nestTree   14.046  0.012  14.066\n\nThe package enables easy implementation of a sampling method for population size estimation on a highly correlated tree - since it?s sequentially sampled, it?s expected to run long compared to other functionality, even on smaller examples. \nI have added many layers to try to shorten examples and tests, including ?donttest?, ?dontrun?, ?if (interactive())?, and reducing toy examples to what I believe is the smallest they can be to still demonstrate utility.  I also included the ?skip_on_cran()? function in tests which run longer.\n\nDoes anyone else have any ideas on how I can eliminate these notes?\n\nAny help is very much appreciated!!\nThank you!",
+      "body_snippet": "Hello,\n\nI am hoping this is the correct way to pose a question about my submission, which I can?t seem to fix 2 NOTES for.  They are related to run time:\nFlavor: r-devel-windows-x86_64\nCheck: examples",
+      "thread_id": "thread-9960cf4951ef",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-c096028b7ada",
+      "message_id": "<em79af66bf-7e90-400c-88a2-733409da284a@d22f2075.com>",
+      "from_name": "Jaime Salvador",
+      "from_email_hash": "bfa9e79beb0cd03cabd057369a1a93d0671abfdb9666baf1d8dec0730b9646a8",
+      "date": "2024-10-09T20:42:24Z",
+      "subject": "[R-pkg-devel] Help with 2 NOTES",
+      "subject_clean": "[R-pkg-devel] Help with 2 NOTES",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "How I can solve this NOTES:\n\n\n* checking CRAN incoming feasibility ... [3s/5s] NOTE\nMaintainer: ?Jaime Salvador <\njaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>>?\n\nNew submission\n\nPossibly misspelled words in DESCRIPTION:\n  DICX (12:67)\n  RXDB (12:59)\n  Redatam (2:34, 12:40)\n\n\n\n* checking for detritus in the temp directory ... NOTE\n\nFound the following files/directories:\n  ?redatam?\n\n\n\nThanks\n\n-------------------------------------\nJaime Salvador\n| Ideas&Bits\n| mobile: +593 0987285748\n| email: jaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>\n| site: www.ideasybits.com<https://urldefense.com/v3/__http:/www.ideasybits.com__;!!C3eXzRIY6Mw!YcjWo_ljX1Mppy0kki8QDmz6mHQIrU1XSABeGK31GmB50zdsNenbNNyRCZvpmI0lgbWo$>\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "How I can solve this NOTES:\n\n\n* checking CRAN incoming feasibility ... [3s/5s] NOTE\nMaintainer: ?Jaime Salvador <\njaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>>?\n\nNew submi",
+      "thread_id": "thread-c096028b7ada",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-53c07211779b",
+      "message_id": "<CAN+W6_vmbnEX4BgcYoHoQJ4h-T9WnCyyYbcw38nuX3w_fMVQrQ@mail.gmail.com>",
+      "from_name": "Lluís Revilla",
+      "from_email_hash": "76a9726a6e0e47bbb7afccdf71a32cc468fa12b74f368ad4203569f7d7fbc065",
+      "date": "2024-10-10T00:00:48+02:00",
+      "subject": "[R-pkg-devel] Question about examples/tests run-time",
+      "subject_clean": "[R-pkg-devel] Question about examples/tests run-time",
+      "in_reply_to": "<78E66F51-2437-43C6-B4CD-C6A43A8984E6@stat.ubc.ca>",
+      "references": [
+        "<78E66F51-2437-43C6-B4CD-C6A43A8984E6@stat.ubc.ca>"
+      ],
+      "body_plain": "Dear Mallory,\n\nIt would help a little bit if we know the package and we can check the\nexamples and code.\nPerhaps it can help this little explanation of when to use donttest,\ndontrun and other options:\nhttps://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples\nIf it is still too long I would leave the representative example for a\nvignette or demo (or an article if you use pkgdown) and show how to use the\ndifferent parameters of your functions in the examples.\n\nBest,\n\nOn Wed, 9 Oct 2024 at 23:04, Mallory Flynn <mallory.flynn at stat.ubc.ca>\nwrote:\n\n> Hello,\n>\n> I am hoping this is the correct way to pose a question about my\n> submission, which I can?t seem to fix 2 NOTES for.  They are related to run\n> time:\n> Flavor: r-devel-windows-x86_64\n> Check: examples, Result: NOTE\n> Examples with CPU (user + system) or elapsed time > 10s\n>            user system elapsed\n> countTree 17.66   0.13   17.78\n> estTree   17.52   0.02   17.54\n> wmmTree   15.70   0.02   15.72\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc\n> Check: examples, Result: NOTE\n> Examples with CPU (user + system) or elapsed time > 5s\n>             user system elapsed\n> countTree 14.218  0.077  14.401\n> wmmTree   14.049  0.028  14.086\n> estTree   14.046  0.012  14.066\n>\n> The package enables easy implementation of a sampling method for\n> population size estimation on a highly correlated tree - since it?s\n> sequentially sampled, it?s expected to run long compared to other\n> functionality, even on smaller examples.\n> I have added many layers to try to shorten examples and tests, including\n> ?donttest?, ?dontrun?, ?if (interactive())?, and reducing toy examples to\n> what I believe is the smallest they can be to still demonstrate utility.  I\n> also included the ?skip_on_cran()? function in tests which run longer.\n>\n> Does anyone else have any ideas on how I can eliminate these notes?\n>\n> Any help is very much appreciated!!\n> Thank you!\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Mallory,\n\nIt would help a little bit if we know the package and we can check the\nexamples and code.\nPerhaps it can help this little explanation of when to use donttest,\ndontrun and other options:",
+      "thread_id": "thread-9960cf4951ef",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-ae7a2f491857",
+      "message_id": "<20241010113018.079bb0c9@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-10T11:30:18+03:00",
+      "subject": "[R-pkg-devel] Help with 2 NOTES",
+      "subject_clean": "[R-pkg-devel] Help with 2 NOTES",
+      "in_reply_to": "<em79af66bf-7e90-400c-88a2-733409da284a@d22f2075.com>",
+      "references": [
+        "<em79af66bf-7e90-400c-88a2-733409da284a@d22f2075.com>"
+      ],
+      "body_plain": "Dear Jaime Salvador,\n\nWelcome to R-package-devel!\n\n? Wed, 9 Oct 2024 20:42:24 +0000\nJaime Salvador <jaime.salvador at ideasybits.com> ?????:\n\n> New submission\n\nThis one is expected for new packages.\n\n> Possibly misspelled words in DESCRIPTION:\n>   DICX (12:67)\n>   RXDB (12:59)\n>   Redatam (2:34, 12:40)\n\nWrap the abbreviations and software names into 'single quotes':\nhttps://contributor.r-project.org/cran-cookbook/description_issues.html#formatting-software-names.\nSome of the acronyms may need to be explained in the submission\ncomments in the CRAN web form.\n\nI see you've tried to put the acronyms into the WORDLIST, but I think\nthe interface for spell-checking the package is different (see\n?'aspell-utils') and involves saving vectors of words into .rds files\nin .aspell and describing them in .aspell/defaults.R.\n\n(If anything reads WORDLIST, why doesn't grep -r WORDLIST src on the R\nsource code show anything?)\n\n> * checking for detritus in the temp directory ... NOTE\n> \n> Found the following files/directories:\n>   ?redatam?\n\nSome code from your package that ran during R CMD check (it's usually\nexamples or tests) created the file named \"redatam\" in the temporary\ndirectory and didn't remove it afterwards. I'm not seeing any R code do\nthis, so it must be something in the libredengine DLL. Can you make it\nremove its temporary files during _redatam_redatam_destroy()?\n\nThere are more serious problems not flagged by R CMD check.\n\nYour code downloads a binary DLL during the configuration stage. What\nis the license under which it is shipped? Will it work on macOS? CRAN\npolicy recommends including sources or downloading (and compiling on\nthe fly) a fixed version rather than the latest one, although I know\nof exceptions for some open-source libraries.\n\nAlmost all your examples are wrapped in \\dontrun{}. Generally, this is\nonly allowed for code that absolutely has no chance of running as\nwritten, for example, due to a missing API key:\nhttps://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples\n\nYour NAMESPACE contains a lot of extraneous stuff. You intend for the\nuser to call functions redatam.open(), redatam.query(), and so on, but\nroxygen2 misinterpreted those as S3 methods and registered them for the\nS3 generic redatam, which doesn't do anything and isn't properly\ndocumented. It's best to get rid of the S3 generic and only export the\nfunctions by name (e.g. export(redatam.open, redatam.query)) instead of\nresorting to exportPattern(\"^[[:alpha:]]+\"). Maybe it's best to just\navoid dots in the function names altogether, lest something else\nmisinterprets them as S3 methods.\n\nYour \"Description:\" field says \"you need R (>=4.0)\", which is better\nexpressed as a separate field, \"Depends: R (>= 4.0)\".\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Dear Jaime Salvador,\n\nWelcome to R-package-devel!\n\n? Wed, 9 Oct 2024 20:42:24 +0000\nJaime Salvador <jaime.salvador at ideasybits.com> ?????:\n\n> New submission\n\nThis one is expected for new packages.\n\n",
+      "thread_id": "thread-c096028b7ada",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-c15094b431d6",
+      "message_id": "<em629f01a5-d4de-4ffd-9986-b3808e6cec1f@7660d48a.com>",
+      "from_name": "Jaime Salvador",
+      "from_email_hash": "bfa9e79beb0cd03cabd057369a1a93d0671abfdb9666baf1d8dec0730b9646a8",
+      "date": "2024-10-10T13:10:39Z",
+      "subject": "[R-pkg-devel] Help with 2 NOTES",
+      "subject_clean": "[R-pkg-devel] Help with 2 NOTES",
+      "in_reply_to": "<20241010113018.079bb0c9@Tarkus>",
+      "references": [
+        "<em79af66bf-7e90-400c-88a2-733409da284a@d22f2075.com>",
+        "<20241010113018.079bb0c9@Tarkus>"
+      ],
+      "body_plain": "Hi Ivan,\n\nThanks for you reply, I appreciate your help.\n\nActually, with your help, I fixex the issues :\n\n\n  *   I enclose between single quotes Redata, RXDB and DICX\n  *   I fixed the version of binaries downloaded, for example redatamx-core-linux-20241010.zip\n  *   The binary DLL/so library generate a LOG file in temp/redatam directory, so I remove the directory in .onUnload\n  *   The \\dontrun in examples. To run the examples, we need a database, the package doesn't include a sample database, so the code can't be run. I remove \\dontrun in functions that can run without a database (for example redatam_version)\n  *   All the exported functions, now have the name redatam_XXX (where XXX is open, close, etc.)\n\nRegarding to the DLL downloading during the configurarion, REDATAM is not an open source software (the source code is controlled by CELADE-CEPAL), but the binary is freely  distributed, you can get a copy from https://redatam.org/es/aplicaciones (Redatam X version)\n\nThanks\n\n\n-------------------------------------\nJaime Salvador\n| Ideas&Bits\n| mobile: +593 0987285748\n| email: jaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>\n| site: www.ideasybits.com<https://urldefense.com/v3/__http:/www.ideasybits.com__;!!C3eXzRIY6Mw!YcjWo_ljX1Mppy0kki8QDmz6mHQIrU1XSABeGK31GmB50zdsNenbNNyRCZvpmI0lgbWo$>\n\n\n\n------ Mensaje original ------\nDe \"Ivan Krylov\" <ikrylov at disroot.org<mailto:ikrylov at disroot.org>>\nPara \"Jaime Salvador\" <jaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>>\nCc \"r-package-devel at r-project.org\" <r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>>\nFecha 10/10/2024 3:30:18\nAsunto Re: [R-pkg-devel] Help with 2 NOTES\n\nDear Jaime Salvador,\n\nWelcome to R-package-devel!\n\n? Wed, 9 Oct 2024 20:42:24 +0000\nJaime Salvador <jaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>> ?????:\n\nNew submission\n\nThis one is expected for new packages.\n\nPossibly misspelled words in DESCRIPTION:\nDICX (12:67)\nRXDB (12:59)\nRedatam (2:34, 12:40)\n\nWrap the abbreviations and software names into 'single quotes':\nhttps://contributor.r-project.org/cran-cookbook/description_issues.html#formatting-software-names.\nSome of the acronyms may need to be explained in the submission\ncomments in the CRAN web form.\n\nI see you've tried to put the acronyms into the WORDLIST, but I think\nthe interface for spell-checking the package is different (see\n?'aspell-utils') and involves saving vectors of words into .rds files\nin .aspell and describing them in .aspell/defaults.R.\n\n(If anything reads WORDLIST, why doesn't grep -r WORDLIST src on the R\nsource code show anything?)\n\n* checking for detritus in the temp directory ... NOTE\n\nFound the following files/directories:\n?redatam?\n\nSome code from your package that ran during R CMD check (it's usually\nexamples or tests) created the file named \"redatam\" in the temporary\ndirectory and didn't remove it afterwards. I'm not seeing any R code do\nthis, so it must be something in the libredengine DLL. Can you make it\nremove its temporary files during _redatam_redatam_destroy()?\n\nThere are more serious problems not flagged by R CMD check.\n\nYour code downloads a binary DLL during the configuration stage. What\nis the license under which it is shipped? Will it work on macOS? CRAN\npolicy recommends including sources or downloading (and compiling on\nthe fly) a fixed version rather than the latest one, although I know\nof exceptions for some open-source libraries.\n\nAlmost all your examples are wrapped in \\dontrun{}. Generally, this is\nonly allowed for code that absolutely has no chance of running as\nwritten, for example, due to a missing API key:\nhttps://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples\n\nYour NAMESPACE contains a lot of extraneous stuff. You intend for the\nuser to call functions redatam.open(), redatam.query(), and so on, but\nroxygen2 misinterpreted those as S3 methods and registered them for the\nS3 generic redatam, which doesn't do anything and isn't properly\ndocumented. It's best to get rid of the S3 generic and only export the\nfunctions by name (e.g. export(redatam.open, redatam.query)) instead of\nresorting to exportPattern(\"^[[:alpha:]]+\"). Maybe it's best to just\navoid dots in the function names altogether, lest something else\nmisinterprets them as S3 methods.\n\nYour \"Description:\" field says \"you need R (>=4.0)\", which is better\nexpressed as a separate field, \"Depends: R (>= 4.0)\".\n\n--\nBest regards,\nIvan\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Ivan,\n\nThanks for you reply, I appreciate your help.\n\nActually, with your help, I fixex the issues :\n\n\n  *   I enclose between single quotes Redata, RXDB and DICX\n  *   I fixed the version of binar",
+      "thread_id": "thread-c096028b7ada",
+      "thread_depth": 2,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-0ab20c7dd9a1",
+      "message_id": "<20241010162917.214ee9af@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-10T16:29:17+03:00",
+      "subject": "[R-pkg-devel] Help with 2 NOTES",
+      "subject_clean": "[R-pkg-devel] Help with 2 NOTES",
+      "in_reply_to": "<em629f01a5-d4de-4ffd-9986-b3808e6cec1f@7660d48a.com>",
+      "references": [
+        "<em79af66bf-7e90-400c-88a2-733409da284a@d22f2075.com>",
+        "<20241010113018.079bb0c9@Tarkus>",
+        "<em629f01a5-d4de-4ffd-9986-b3808e6cec1f@7660d48a.com>"
+      ],
+      "body_plain": "? Thu, 10 Oct 2024 13:10:39 +0000\nJaime Salvador <jaime.salvador at ideasybits.com> ?????:\n\n>   *   The \\dontrun in examples. To run the examples, we need a\n> database, the package doesn't include a sample database, so the code\n> can't be run. I remove \\dontrun in functions that can run without a\n> database (for example redatam_version)\n\nThat makes perfect sense. Can you provide a small example database as\npart of the package? It's best to exercise as much of the code of\npackage as reasonably possible in tests and examples. If not, leaving\n\\dontrun{} in is indeed the right choice.\n\n> Regarding to the DLL downloading during the configurarion, REDATAM is\n> not an open source software (the source code is controlled by\n> CELADE-CEPAL), but the binary is freely  distributed, you can get a\n> copy from https://redatam.org/es/aplicaciones (Redatam X version)\n\nThank you for clarifying that. It may help to follow the example of the\n'Rblpapi' package <https://CRAN.R-project.org/package=Rblpapi> in\nspecifying the license covering the package as a whole. In particular,\nyou need to ensure that CRAN has the right to redistribute Redatam DLLs\nas part of the binary packages they compile. I'm not seeing a license\ncovering the downloads at https://redatam.org/es/aplicaciones or\nhttps://redatam.org/en/software.\n\nGood luck! For best results next time you have a question, please\nprovide a link to the latest version of the package source code.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Thu, 10 Oct 2024 13:10:39 +0000\nJaime Salvador <jaime.salvador at ideasybits.com> ?????:\n\n>   *   The \\dontrun in examples. To run the examples, we need a\n> database, the package doesn't include a s",
+      "thread_id": "thread-c096028b7ada",
+      "thread_depth": 3,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-1cb45de464b1",
+      "message_id": "<PAVPR03MB101039EE8E46028FAFFD96737D3452@PAVPR03MB10103.eurprd03.prod.outlook.com>",
+      "from_name": "D Z",
+      "from_email_hash": "d39e067331cb40c6972848ed03bfda8459567f1ce1c7445baced3f29c7f87256",
+      "date": "2024-10-16T17:38:27Z",
+      "subject": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "subject_clean": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\nI have a new package that I submitted to CRAN, that uses rust (for reference, it's called rtiktoken and can be found here: https://github.com/DavZim/rtiktoken).\nThe submission failed as 1-2 NOTEs were found, most importantly: Installation took CPU time 7.2 times elapsed time.\n\nIn both my Makevars and Makevars.win files, I specify to use 2 cores for cargo build on CRAN machines (see below or here https://github.com/DavZim/rtiktoken/blob/master/src/Makevars#L21C2-L25C4) but I still get the NOTE. Furthermore, I only get this on Debian but not on Windows.\n\nif [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n? export BUILDFLAGS=\"-j 2 --offline\"; \\\nelse \\\n?export BUILDFLAGS=\"--offline\"; \\\nfi\n...\ncargo build ${BUILDFLAGS} --lib --release --manifest-path=./rust/Cargo.toml --target-dir $(TARGET_DIR)\n\nThe check results are here\n\n  *\nWindows: https://win-builder.r-project.org/incoming_pretest/rtiktoken_0.0.3_20241016_135446/Windows/00check.log (1 NOTE about misspelled words and a URL not being available)\n  *\nDebian:https://win-builder.r-project.org/incoming_pretest/rtiktoken_0.0.3_20241016_135446/Debian/00check.log (2 NOTEs: installation time and misspelled words)\n\nNow I am wondering if there is anything that I can do about this NOTE or if I should ignore it.\nI did not find any reference to this in the \"Using Rust in CRAN Packages\" nor in other CRAN packages that use rust (eg gifski, string2path, arcpbf), but I might have missed something.\n\nI found also the CARGO_BUILD_JOBS flag for rust (https://doc.rust-lang.org/cargo/reference/environment-variables.html) but as I can't reproduce the error locally (or on other GitHub Actions runners), I don't want to trial-and-test-it on CRAN servers.\n\nThanks, any help is appreciated!\nDavid\n\n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\nI have a new package that I submitted to CRAN, that uses rust (for reference, it's called rtiktoken and can be found here: https://github.com/DavZim/rtiktoken).\nThe submission failed as 1-2 NO",
+      "thread_id": "thread-1cb45de464b1",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-cdc720bccfb6",
+      "message_id": "<20241016215029.3694e8d0@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-16T21:50:29+03:00",
+      "subject": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "subject_clean": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "in_reply_to": "<PAVPR03MB101039EE8E46028FAFFD96737D3452@PAVPR03MB10103.eurprd03.prod.outlook.com>",
+      "references": [
+        "<PAVPR03MB101039EE8E46028FAFFD96737D3452@PAVPR03MB10103.eurprd03.prod.outlook.com>"
+      ],
+      "body_plain": "? Wed, 16 Oct 2024 17:38:27 +0000\nD Z <david_j_zimmermann at hotmail.com> ?????:\n\n> if [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n> ? export BUILDFLAGS=\"-j 2 --offline\"; \\\n\nThis environment variable is spelled with an extra underscore:\nhttps://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fLIMIT_005fCORES_005f\n\nAt least one of Josiah's packages instead relies on the user setting\nthe NOT_CRAN environment variable:\nhttps://github.com/extendr/b64/blob/67ff753f71676870e3b04657909050ae10ec2145/src/Makevars#L10-L28\n\n> Now I am wondering if there is anything that I can do about this NOTE\n> or if I should ignore it.\n> I did not find any reference to this in the \"Using Rust in CRAN\n> Packages\"\n\n\"Not taking more than two parallel processes or threads during the CRAN\ncheck\" is a more general requirement for all packages, regardless of\nwhether they use Rust. A package that uses cmake -GNinja without\nlimiting the number of compiler processes or gives the -j$(nproc)\nargument to a Make subprocess would have received this NOTE as well.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Wed, 16 Oct 2024 17:38:27 +0000\nD Z <david_j_zimmermann at hotmail.com> ?????:\n\n> if [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n> ? export BUILDFLAGS=\"-j 2 --offline\"; \\\n\nThis environment variable is sp",
+      "thread_id": "thread-1cb45de464b1",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-8fa82091b71a",
+      "message_id": "<CAL3ufUK9VLDvZVHGzHFzwzPfXzdDnqnSmniqrv9DtmXtO4KBWA@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2024-10-16T12:30:54-07:00",
+      "subject": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "subject_clean": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "in_reply_to": "<20241016215029.3694e8d0@Tarkus>",
+      "references": [
+        "<PAVPR03MB101039EE8E46028FAFFD96737D3452@PAVPR03MB10103.eurprd03.prod.outlook.com>",
+        "<20241016215029.3694e8d0@Tarkus>"
+      ],
+      "body_plain": "Thanks, Ivan! Yes, I would use the NOT_CRAN flag. But in the case of that\npackage, the CRAN_FLAGS are not set dynamically.\nIt would be a welcome PR to rextendr if anyone more comfortable with Make\nwould like to. The current\ntemplate Makevars is at\nhttps://github.com/extendr/rextendr/blob/main/inst/templates/cran/Makevars.\n\nDavid, it looks like you went about crafting your CRAN-compliance by\nhand?hats off! If you want to be a little more\nhands off in the future, you can check out the development version of\n{rextendr} https://extendr.github.io/rextendr/dev/reference/cran.html\nwhich provides Makevars and configure scripts that are CRAN compatible.\n\nThe general workflow for a new package would be something like:\n\nusethis::create_package()\nrextendr::use_extendr()\nrextendr::use_cran_defaults()\nrextendr::use_msrv(\"1.69\") # or whatever MSRV you have\nrextendr::vendor_pkgs()\n\nIf you, or anyone else for that matter, have additional questions, I\nrecommend joining the\nextendr discord at https://discord.gg/Mt4Kauus.\n\nFor more \"formal\" questions a GitHub discussion or issue is also welcome\nhttps://github.com/extendr/extendr/discussions\n\n\nOn Wed, Oct 16, 2024 at 11:50?AM Ivan Krylov via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> ? Wed, 16 Oct 2024 17:38:27 +0000\n> D Z <david_j_zimmermann at hotmail.com> ?????:\n>\n> > if [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n> >  export BUILDFLAGS=\"-j 2 --offline\"; \\\n>\n> This environment variable is spelled with an extra underscore:\n>\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fLIMIT_005fCORES_005f\n>\n> At least one of Josiah's packages instead relies on the user setting\n> the NOT_CRAN environment variable:\n>\n> https://github.com/extendr/b64/blob/67ff753f71676870e3b04657909050ae10ec2145/src/Makevars#L10-L28\n>\n> > Now I am wondering if there is anything that I can do about this NOTE\n> > or if I should ignore it.\n> > I did not find any reference to this in the \"Using Rust in CRAN\n> > Packages\"\n>\n> \"Not taking more than two parallel processes or threads during the CRAN\n> check\" is a more general requirement for all packages, regardless of\n> whether they use Rust. A package that uses cmake -GNinja without\n> limiting the number of compiler processes or gives the -j$(nproc)\n> argument to a Make subprocess would have received this NOTE as well.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks, Ivan! Yes, I would use the NOT_CRAN flag. But in the case of that\npackage, the CRAN_FLAGS are not set dynamically.\nIt would be a welcome PR to rextendr if anyone more comfortable with Make\nwou",
+      "thread_id": "thread-1cb45de464b1",
+      "thread_depth": 2,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-8cf2da36eb81",
+      "message_id": "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>",
+      "from_name": "Michael Mahony",
+      "from_email_hash": "40baaae4dd3399dd17b0cf43df0c2d1dcb4ce1cbe22698f1853ee2ffa7140812",
+      "date": "2024-10-16T20:04:54Z",
+      "subject": "[R-pkg-devel] Installation error when submitting package to CRAN",
+      "subject_clean": "[R-pkg-devel] Installation error when submitting package to CRAN",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Apologies in advance for not providing a reproducible example, but I am \nunsure how to reproduce the below error, as it did not occur on my \nmachine.\n\nI recently submitted a package to CRAN, after which I received an \nautomated email from ligges at statistik.tu-dortmund.de, saying my package \nhad failed the automated checks. I was advised to ask for help on this \nmailing list if I did not know how to resolve the error.\n\nDetails of the automated checks are provided here: \nhttps://win-builder.r-project.org/incoming_pretest/hhmR_0.0.1_20241015_235116/\n\nEssentially, when trying to install the package for Windows, the \nfollowing error was produced.\n\n```\n* installing *source* package 'hhmR' ...\n** using staged installation\n** R\n** data\n*** moving datasets to lazyload DB\n** inst\n** byte-compile and prepare package for lazy loading\nError in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), \nversionCheck = vI[[j]]) :\n   there is no package called 'farver'\nCalls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart \n-> doWithOneRestart\nExecution halted\nERROR: lazy loading failed for package 'hhmR'\n* removing 'd:/RCompile/CRANincoming/R-devel/lib/hhmR'\n```\n\nThis error has never occurred before when testing the package using \n`devtools` or `rhub`. I imagine I probably need to add `library(farver)` \nsomewhere in my package, but am unsure where.\n\nIf anyone has any advice about how to resolve this issue I would be very \ngreatful.\n\nThank you in advance,\n\nMichael\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Apologies in advance for not providing a reproducible example, but I am \nunsure how to reproduce the below error, as it did not occur on my \nmachine.\n\nI recently submitted a package to CRAN, after whi",
+      "thread_id": "thread-8cf2da36eb81",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-60c28971cd03",
+      "message_id": "<D894D9F4-EF5F-4465-82A8-B55D96898232@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2024-10-17T13:00:43+13:00",
+      "subject": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "subject_clean": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "in_reply_to": "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>",
+      "references": [
+        "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>"
+      ],
+      "body_plain": "See the error - that looks like a temporary issue. I'd contact CRAN or resubmit.\n\nCheers,\nSimon\n\n\n\n> On Oct 17, 2024, at 09:04, Michael Mahony <michael.mahony at cantab.net> wrote:\n> \n> \n> \n> Apologies in advance for not providing a reproducible example, but I am \n> unsure how to reproduce the below error, as it did not occur on my \n> machine.\n> \n> I recently submitted a package to CRAN, after which I received an \n> automated email from ligges at statistik.tu-dortmund.de, saying my package \n> had failed the automated checks. I was advised to ask for help on this \n> mailing list if I did not know how to resolve the error.\n> \n> Details of the automated checks are provided here: \n> https://win-builder.r-project.org/incoming_pretest/hhmR_0.0.1_20241015_235116/\n> \n> Essentially, when trying to install the package for Windows, the \n> following error was produced.\n> \n> ```\n> * installing *source* package 'hhmR' ...\n> ** using staged installation\n> ** R\n> ** data\n> *** moving datasets to lazyload DB\n> ** inst\n> ** byte-compile and prepare package for lazy loading\n> Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), \n> versionCheck = vI[[j]]) :\n>   there is no package called 'farver'\n> Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart \n> -> doWithOneRestart\n> Execution halted\n> ERROR: lazy loading failed for package 'hhmR'\n> * removing 'd:/RCompile/CRANincoming/R-devel/lib/hhmR'\n> ```\n> \n> This error has never occurred before when testing the package using \n> `devtools` or `rhub`. I imagine I probably need to add `library(farver)` \n> somewhere in my package, but am unsure where.\n> \n> If anyone has any advice about how to resolve this issue I would be very \n> greatful.\n> \n> Thank you in advance,\n> \n> Michael\n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "See the error - that looks like a temporary issue. I'd contact CRAN or resubmit.\n\nCheers,\nSimon\n\n\n\n> On Oct 17, 2024, at 09:04, Michael Mahony <michael.mahony at cantab.net> wrote:\n> \n> \n> \n> Apologie",
+      "thread_id": "thread-8cf2da36eb81",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-c508705e0965",
+      "message_id": "<A2D47FF5-6AFA-4A1C-8C36-57B44EDA31F5@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2024-10-16T17:46:52-07:00",
+      "subject": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "subject_clean": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "in_reply_to": "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>",
+      "references": [
+        "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>"
+      ],
+      "body_plain": "You should not use \"library(anything)\" in a package. You should rely on the Imports: field in the DESCRIPTION file along with importFrom() in your NAMESPACE file, or the Suggests: field in the DESCRIPTION file and if (requireNamespace(\"anypackage\"))  {anypackage::somefun} else {# avoid using anypackage}. See WRE 1.1.3.1.\n\nBut in this particular case this might be a temporary glitch on the CRAN server.\n\nOn October 16, 2024 1:04:54 PM PDT, Michael Mahony <michael.mahony at cantab.net> wrote:\n>\n>\n>Apologies in advance for not providing a reproducible example, but I am \n>unsure how to reproduce the below error, as it did not occur on my \n>machine.\n>\n>I recently submitted a package to CRAN, after which I received an \n>automated email from ligges at statistik.tu-dortmund.de, saying my package \n>had failed the automated checks. I was advised to ask for help on this \n>mailing list if I did not know how to resolve the error.\n>\n>Details of the automated checks are provided here: \n>https://win-builder.r-project.org/incoming_pretest/hhmR_0.0.1_20241015_235116/\n>\n>Essentially, when trying to install the package for Windows, the \n>following error was produced.\n>\n>```\n>* installing *source* package 'hhmR' ...\n>** using staged installation\n>** R\n>** data\n>*** moving datasets to lazyload DB\n>** inst\n>** byte-compile and prepare package for lazy loading\n>Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), \n>versionCheck = vI[[j]]) :\n>   there is no package called 'farver'\n>Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart \n>-> doWithOneRestart\n>Execution halted\n>ERROR: lazy loading failed for package 'hhmR'\n>* removing 'd:/RCompile/CRANincoming/R-devel/lib/hhmR'\n>```\n>\n>This error has never occurred before when testing the package using \n>`devtools` or `rhub`. I imagine I probably need to add `library(farver)` \n>somewhere in my package, but am unsure where.\n>\n>If anyone has any advice about how to resolve this issue I would be very \n>greatful.\n>\n>Thank you in advance,\n>\n>Michael\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-package-devel at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nSent from my phone. Please excuse my brevity.",
+      "body_snippet": "You should not use \"library(anything)\" in a package. You should rely on the Imports: field in the DESCRIPTION file along with importFrom() in your NAMESPACE file, or the Suggests: field in the DESCRIP",
+      "thread_id": "thread-8cf2da36eb81",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-4e78354846ef",
+      "message_id": "<e9240ba7-4447-41a3-bc97-7350bcdd78ca@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2024-10-17T10:33:33+02:00",
+      "subject": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "subject_clean": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "in_reply_to": "<A2D47FF5-6AFA-4A1C-8C36-57B44EDA31F5@dcn.davis.ca.us>",
+      "references": [
+        "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>",
+        "<A2D47FF5-6AFA-4A1C-8C36-57B44EDA31F5@dcn.davis.ca.us>"
+      ],
+      "body_plain": "1. I looked, and farver is not declared in your DESCRIPTION file as any \ndependency. Is it used by another package you depend on?\n\n\n2. We also see:\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: DESCRIPTION meta-information, Result: NOTE\n   License stub is invalid DCF.\n\nand\n\n   License components with restrictions and base license permitting such:\n     MIT + file LICENSE\n   File 'LICENSE':\n     MIT License\n\n     Copyright (c) 2024 sgmmahon\n\n     Permission is ....\n\nPlease only ship the CRAN template for the MIT license.\n\n3. In the Description field you have\n\"... (e.g. `dendextend`) ...\"\nPlease use straight rather than directed quotes.\n\nPlease fix and resubmit.\n\nBest,\nUwe Ligges\n\n\n\n\n\n\nOn 17.10.2024 02:46, Jeff Newmiller via R-package-devel wrote:\n> You should not use \"library(anything)\" in a package. You should rely on the Imports: field in the DESCRIPTION file along with importFrom() in your NAMESPACE file, or the Suggests: field in the DESCRIPTION file and if (requireNamespace(\"anypackage\"))  {anypackage::somefun} else {# avoid using anypackage}. See WRE 1.1.3.1.\n> \n> But in this particular case this might be a temporary glitch on the CRAN server.\n> \n> On October 16, 2024 1:04:54 PM PDT, Michael Mahony <michael.mahony at cantab.net> wrote:\n>>\n>>\n>> Apologies in advance for not providing a reproducible example, but I am\n>> unsure how to reproduce the below error, as it did not occur on my\n>> machine.\n>>\n>> I recently submitted a package to CRAN, after which I received an\n>> automated email from ligges at statistik.tu-dortmund.de, saying my package\n>> had failed the automated checks. I was advised to ask for help on this\n>> mailing list if I did not know how to resolve the error.\n>>\n>> Details of the automated checks are provided here:\n>> https://win-builder.r-project.org/incoming_pretest/hhmR_0.0.1_20241015_235116/\n>>\n>> Essentially, when trying to install the package for Windows, the\n>> following error was produced.\n>>\n>> ```\n>> * installing *source* package 'hhmR' ...\n>> ** using staged installation\n>> ** R\n>> ** data\n>> *** moving datasets to lazyload DB\n>> ** inst\n>> ** byte-compile and prepare package for lazy loading\n>> Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()),\n>> versionCheck = vI[[j]]) :\n>>    there is no package called 'farver'\n>> Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart\n>> -> doWithOneRestart\n>> Execution halted\n>> ERROR: lazy loading failed for package 'hhmR'\n>> * removing 'd:/RCompile/CRANincoming/R-devel/lib/hhmR'\n>> ```\n>>\n>> This error has never occurred before when testing the package using\n>> `devtools` or `rhub`. I imagine I probably need to add `library(farver)`\n>> somewhere in my package, but am unsure where.\n>>\n>> If anyone has any advice about how to resolve this issue I would be very\n>> greatful.\n>>\n>> Thank you in advance,\n>>\n>> Michael\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "1. I looked, and farver is not declared in your DESCRIPTION file as any \ndependency. Is it used by another package you depend on?\n\n\n2. We also see:\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: DESC",
+      "thread_id": "thread-8cf2da36eb81",
+      "thread_depth": 2,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-d4b788212dc6",
+      "message_id": "<20241017115246.210db267@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-17T11:52:46+03:00",
+      "subject": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "subject_clean": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "in_reply_to": "<e9240ba7-4447-41a3-bc97-7350bcdd78ca@statistik.tu-dortmund.de>",
+      "references": [
+        "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>",
+        "<A2D47FF5-6AFA-4A1C-8C36-57B44EDA31F5@dcn.davis.ca.us>",
+        "<e9240ba7-4447-41a3-bc97-7350bcdd78ca@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "On Thu, 17 Oct 2024 10:33:33 +0200\nUwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> I looked, and farver is not declared in your DESCRIPTION file as any \n> dependency. Is it used by another package you depend on?\n\nIt's a transitive dependency via hhmR's Imports: patchwork, which in\nturn Imports: farver.\n\n> Please only ship the CRAN template for the MIT license.\n\nMichael: for more information, see RShowDoc(\"MIT\") and\n<https://contributor.r-project.org/cran-cookbook/description_issues.html#license-files>.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "On Thu, 17 Oct 2024 10:33:33 +0200\nUwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> I looked, and farver is not declared in your DESCRIPTION file as any \n> dependency. Is it used by another p",
+      "thread_id": "thread-8cf2da36eb81",
+      "thread_depth": 3,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-cbbcb444da19",
+      "message_id": "<f34fe95d-6898-45b2-af89-e0055fae7215@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2024-10-17T10:55:25+02:00",
+      "subject": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "subject_clean": "[R-pkg-devel]  Installation error when submitting package to CRAN",
+      "in_reply_to": "<20241017115246.210db267@Tarkus>",
+      "references": [
+        "<da2d74d2d92ee1231f083ff304f25d97@cantab.net>",
+        "<A2D47FF5-6AFA-4A1C-8C36-57B44EDA31F5@dcn.davis.ca.us>",
+        "<e9240ba7-4447-41a3-bc97-7350bcdd78ca@statistik.tu-dortmund.de>",
+        "<20241017115246.210db267@Tarkus>"
+      ],
+      "body_plain": "Indeed, thank you, Ivan.\nThen it was a temporary hicc up on the build server and should work for \nthe resubmission of the fixed package.\n\nBest,\nUwe\n\nOn 17.10.2024 10:52, Ivan Krylov wrote:\n> On Thu, 17 Oct 2024 10:33:33 +0200\n> Uwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n> \n>> I looked, and farver is not declared in your DESCRIPTION file as any\n>> dependency. Is it used by another package you depend on?\n> \n> It's a transitive dependency via hhmR's Imports: patchwork, which in\n> turn Imports: farver.\n> \n>> Please only ship the CRAN template for the MIT license.\n> \n> Michael: for more information, see RShowDoc(\"MIT\") and\n> <https://contributor.r-project.org/cran-cookbook/description_issues.html#license-files>.\n>",
+      "body_snippet": "Indeed, thank you, Ivan.\nThen it was a temporary hicc up on the build server and should work for \nthe resubmission of the fixed package.\n\nBest,\nUwe\n\nOn 17.10.2024 10:52, Ivan Krylov wrote:\n> On Thu, 1",
+      "thread_id": "thread-8cf2da36eb81",
+      "thread_depth": 4,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-3b46dc5a5151",
+      "message_id": "<CAPhhD8mY0FNaQJmdag+TFz4uQ+yYOdNZMjgy5B9GXkRvp5+2ng@mail.gmail.com>",
+      "from_name": "Noah Greifer",
+      "from_email_hash": "ac0ec4e9b8ad477c334a3eeadd84a928d5e7a41797c8269ce757e87d4111f481",
+      "date": "2024-10-24T12:55:32-04:00",
+      "subject": "[R-pkg-devel] check_equal() test fails on ATLAS",
+      "subject_clean": "[R-pkg-devel] check_equal() test fails on ATLAS",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello all,\n\nMy package *WeightIt* is failing\n<https://cran.r-project.org/web/checks/check_results_WeightIt.html> the\nCRAN test on ATLAS. The failure is due\n<https://www.stats.ox.ac.uk/pub/bdr/Rblas/ATLAS/WeightIt.out> to a failed\n*testthat* test comparing two covariance matrices using check_equal(). A\nfew things are confusing to me, so I'm not sure how to solve it.\n\nFirst, the covariance matrices should be identical; there is no random\ncomponent in their computation and the the only difference in the calls\nused to generate them are whether an argument is omitted or whether it is\nexplicitly set to its default (i.e., the purpose of the test is to ensure\nthe default argument corresponds to the supplied argument). I am willing to\naccept that there is some non-deterministic process in ATLAS, e.g., where\nconvergence is measured based on time rather than number of iterations,\nthough I don't know if this is actually the case.\n\nSecond, the package tests have passed on previous CRAN checks (this is\nweeks after this version was accepted to CRAN), on all other versions of R,\nand in the rhub test\n<https://github.com/ngreifer/WeightIt/actions/runs/11489721542/job/31979056981#step:6:124>\nwith ATLAS.\n\nDoes anyone have any advice on how to solve this? I know I can change the\ntolerance argument to check_equal() but this is a case where the output\nshould be identical. I cannot reproduce the problem with rhub, so I can't\nsee where the problem is. Could this be a false alarm due to caching?\nThanks for any insights.\n\nNoah\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello all,\n\nMy package *WeightIt* is failing\n<https://cran.r-project.org/web/checks/check_results_WeightIt.html> the\nCRAN test on ATLAS. The failure is due\n<https://www.stats.ox.ac.uk/pub/bdr/Rblas/AT",
+      "thread_id": "thread-3b46dc5a5151",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-75e7d1019ec8",
+      "message_id": "<CACSk52-bmXQzSBXwp+Q2jvK0ucw=_-XAt1iw3HVV=+-9PwGPRQ@mail.gmail.com>",
+      "from_name": "jérémy Gelb",
+      "from_email_hash": "fbe72477bb39b6033cad3c871755cd7a4d4234e3da981cf1905c121f090aade6",
+      "date": "2024-10-26T12:18:07-04:00",
+      "subject": "[R-pkg-devel]  *** caught segfault *** address (nil), cause 'unknown'",
+      "subject_clean": "[R-pkg-devel]  *** caught segfault *** address (nil), cause 'unknown'",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R packages developers,\n\nI am the maintainer of the package spNetwork. It has been removed from CRAN\nrecently because of an issue with the new compiler clang19. The error came\nfrom one of the dependencies: the package BH giving access to the boost c++\nlibrary (https://github.com/eddelbuettel/bh/issues/101).\n\nThe boost code has been updated since and I had no choice to include it\ndirectly in my own package and remove the dependency to BH because its\nmaintainer does not plan a new release before december 2024.\n\nHowever, there is a new error when I submit the package to CRAN (ubuntu\nwith clang19). The full report is here :\nhttps://win-builder.r-project.org/incoming_pretest/spNetwork_0.4.4.4_20241026_034629/specialChecks/clang19/package/00install.out\n\nThe error occurred during the installation of the package, and the message\nis not very helpful :\n\n *** caught segfault ***\naddress (nil), cause 'unknown'\n\nIt seems that the error is happening when loading a c++ module of my\npackage\n\nTraceback:\n 1: Module(module, mustStart = TRUE, where = env)\n 2: doTryCatch(return(expr), name, parentenv, handler)\n 3: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n 4: tryCatchList(expr, classes, parentenv, handlers)\n 5: tryCatch(Module(module, mustStart = TRUE, where = env), error =\nfunction(e) e)\n 6: loadModule(module = \"spatial_index_cpp\", what = TRUE, env = ns,\n loadNow = TRUE)\n\n\nIt is rather strange because I have not edited this module since the last\nversion and the package is installing correctly on other platforms. I also\ntried to validate it with rhub and it worked well even with ubuntu and\nclang19 :\nhttps://github.com/JeremyGelb/spNetwork/actions/runs/11527593888/job/32093568292\n\nDoes someone have an idea about what could be causing this error during the\ninstallation ? Any help would be highly appreciated.\n\nI have a specific branch in gihtub for this issue :\nhttps://github.com/JeremyGelb/spNetwork/tree/refs/heads/CRAN-v4.\n\nAll the best\n-- \n\n*J?r?my GELB*\nConseiller en gestion et analyse de donn?es ? l'ARTM\nDocteur en ?tudes Urbaines\n\n438 389 6398\ngelbjeremy22 at gmail.com\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R packages developers,\n\nI am the maintainer of the package spNetwork. It has been removed from CRAN\nrecently because of an issue with the new compiler clang19. The error came\nfrom one of the depe",
+      "thread_id": "thread-75e7d1019ec8",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-4b614ade067e",
+      "message_id": "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+      "from_name": "Gianmarco Alberti",
+      "from_email_hash": "6d4c43338b5a1663c3a0ecdfcb6791d0b2578ceaff5f7c0294c16ad87535f2c7",
+      "date": "2024-10-27T11:03:41+01:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Package Developers,\nI am seeking guidance regarding a situation with my package 'chisquare'\n(version 1.1) on CRAN.\n\nCurrent situation:\n\n1. The package was submitted and (automatically) accepted to CRAN (version\n1.1) after thorough local testing and complete devtools checks\n(check_win_oldrelease(), check_win_release(), check_win_devel())\n\n2. After acceptance, I received a request to make formatting changes to the\nDESCRIPTION file by November 2, 2024:\n-Remove version specifications for graphics and stats in Imports\n-Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n\n3. Upon attempting to submit these formatting changes, I received a warning\nabout \"Insufficient package version (submitted: 1.1, existing: 1.1)\". I am\nwell aware that this warning typically indicates the need to increment the\nversion number for new submissions of existing packages, as per CRAN\npolicies.\n\nThis creates a procedural challenge:\n-I need to make the requested DESCRIPTION file changes to retain the package\n-The changes are purely formatting-related, not functional (all checks pass)\n-I cannot submit without changing the version number\n-However, incrementing the version number seems disproportionate for\nformatting changes.\n\nI would greatly appreciate guidance on the proper way to handle this\nsituation.\nWhat is the recommended approach for submitting DESCRIPTION file formatting\ncorrections for an already-accepted package, given that incrementing the\nversion number might seem a bit disproportionate?\n\nThank you for your time and assistance.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R Package Developers,\nI am seeking guidance regarding a situation with my package 'chisquare'\n(version 1.1) on CRAN.\n\nCurrent situation:\n\n1. The package was submitted and (automatically) accepted",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-6e55756ea513",
+      "message_id": "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2024-10-27T06:49:05-04:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>"
+      ],
+      "body_plain": "On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (version 1.1) on CRAN.\n> \n> Current situation:\n> \n> 1. The package was submitted and (automatically) accepted to CRAN (version\n> 1.1) after thorough local testing and complete devtools checks\n> (check_win_oldrelease(), check_win_release(), check_win_devel())\n> \n> 2. After acceptance, I received a request to make formatting changes to the\n> DESCRIPTION file by November 2, 2024:\n> -Remove version specifications for graphics and stats in Imports\n> -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> \n> 3. Upon attempting to submit these formatting changes, I received a warning\n> about \"Insufficient package version (submitted: 1.1, existing: 1.1)\". I am\n> well aware that this warning typically indicates the need to increment the\n> version number for new submissions of existing packages, as per CRAN\n> policies.\n> \n> This creates a procedural challenge:\n> -I need to make the requested DESCRIPTION file changes to retain the package\n> -The changes are purely formatting-related, not functional (all checks pass)\n> -I cannot submit without changing the version number\n> -However, incrementing the version number seems disproportionate for\n> formatting changes.\n> \n> I would greatly appreciate guidance on the proper way to handle this\n> situation.\n> What is the recommended approach for submitting DESCRIPTION file formatting\n> corrections for an already-accepted package, given that incrementing the\n> version number might seem a bit disproportionate?\n> \n> Thank you for your time and assistance.\n\nThe simplest thing is to just update the version.  Use 1.1.1 if you \ndon't want to go to 1.2.\n\nDuncan Murdoch",
+      "body_snippet": "On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (version 1.1) on CRAN.\n> \n> Current situation",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-5bfad4990b2c",
+      "message_id": "<CAMQoV_qqOx8AGcosji0QrvV2Vc-nnXE0cC5xZjkrssCLC+K6pA@mail.gmail.com>",
+      "from_name": "Gianmarco Alberti",
+      "from_email_hash": "6d4c43338b5a1663c3a0ecdfcb6791d0b2578ceaff5f7c0294c16ad87535f2c7",
+      "date": "2024-10-27T12:48:28+01:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+        "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>"
+      ],
+      "body_plain": "Dear Duncan,\n\nThank you for the straightforward guidance.\n\nMy initial query stemmed from a concern about versioning consistency - I\nthought that once using three digits (1.1.1), I would need to maintain that\nformat (e.g., 1.2.0) in future updates. Your suggestion clarified that I\ncan use 1.1.1 for these formatting changes and still use 1.2 for future\nsubstantial updates.\n\nBest regards,\n\nGm\n\nIl giorno dom 27 ott 2024 alle ore 11:49 Duncan Murdoch <\nmurdoch.duncan at gmail.com> ha scritto:\n\n> On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n> > Dear R Package Developers,\n> > I am seeking guidance regarding a situation with my package 'chisquare'\n> > (version 1.1) on CRAN.\n> >\n> > Current situation:\n> >\n> > 1. The package was submitted and (automatically) accepted to CRAN\n> (version\n> > 1.1) after thorough local testing and complete devtools checks\n> > (check_win_oldrelease(), check_win_release(), check_win_devel())\n> >\n> > 2. After acceptance, I received a request to make formatting changes to\n> the\n> > DESCRIPTION file by November 2, 2024:\n> > -Remove version specifications for graphics and stats in Imports\n> > -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> >\n> > 3. Upon attempting to submit these formatting changes, I received a\n> warning\n> > about \"Insufficient package version (submitted: 1.1, existing: 1.1)\". I\n> am\n> > well aware that this warning typically indicates the need to increment\n> the\n> > version number for new submissions of existing packages, as per CRAN\n> > policies.\n> >\n> > This creates a procedural challenge:\n> > -I need to make the requested DESCRIPTION file changes to retain the\n> package\n> > -The changes are purely formatting-related, not functional (all checks\n> pass)\n> > -I cannot submit without changing the version number\n> > -However, incrementing the version number seems disproportionate for\n> > formatting changes.\n> >\n> > I would greatly appreciate guidance on the proper way to handle this\n> > situation.\n> > What is the recommended approach for submitting DESCRIPTION file\n> formatting\n> > corrections for an already-accepted package, given that incrementing the\n> > version number might seem a bit disproportionate?\n> >\n> > Thank you for your time and assistance.\n>\n> The simplest thing is to just update the version.  Use 1.1.1 if you\n> don't want to go to 1.2.\n>\n> Duncan Murdoch\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Duncan,\n\nThank you for the straightforward guidance.\n\nMy initial query stemmed from a concern about versioning consistency - I\nthought that once using three digits (1.1.1), I would need to mainta",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 2,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-44789cc07497",
+      "message_id": "<49f94200-e26a-4d4d-9934-988b5ec82269@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2024-10-27T09:16:36-04:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<CAMQoV_qqOx8AGcosji0QrvV2Vc-nnXE0cC5xZjkrssCLC+K6pA@mail.gmail.com>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+        "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>",
+        "<CAMQoV_qqOx8AGcosji0QrvV2Vc-nnXE0cC5xZjkrssCLC+K6pA@mail.gmail.com>"
+      ],
+      "body_plain": "I don't think R will enforce a 3 part version just because you used it \nonce.  You might have other reasons to try to maintain versioning \nconsistency.\n\nDuncan Murdoch\n\nOn 2024-10-27 7:48 a.m., Gianmarco Alberti wrote:\n> Dear Duncan,\n> \n> Thank you for the straightforward guidance.\n> \n> My initial query stemmed from a concern about versioning consistency - I \n> thought that once using three digits (1.1.1), I would need to maintain \n> that format (e.g., 1.2.0) in future updates. Your suggestion clarified \n> that I can use 1.1.1 for these formatting changes and still use 1.2 for \n> future substantial updates.\n> \n> Best regards,\n> \n> Gm\n> \n> \n> Il giorno dom 27 ott 2024 alle ore 11:49 Duncan Murdoch \n> <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> ha scritto:\n> \n>     On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n>      > Dear R Package Developers,\n>      > I am seeking guidance regarding a situation with my package\n>     'chisquare'\n>      > (version 1.1) on CRAN.\n>      >\n>      > Current situation:\n>      >\n>      > 1. The package was submitted and (automatically) accepted to CRAN\n>     (version\n>      > 1.1) after thorough local testing and complete devtools checks\n>      > (check_win_oldrelease(), check_win_release(), check_win_devel())\n>      >\n>      > 2. After acceptance, I received a request to make formatting\n>     changes to the\n>      > DESCRIPTION file by November 2, 2024:\n>      > -Remove version specifications for graphics and stats in Imports\n>      > -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n>      >\n>      > 3. Upon attempting to submit these formatting changes, I received\n>     a warning\n>      > about \"Insufficient package version (submitted: 1.1, existing:\n>     1.1)\". I am\n>      > well aware that this warning typically indicates the need to\n>     increment the\n>      > version number for new submissions of existing packages, as per CRAN\n>      > policies.\n>      >\n>      > This creates a procedural challenge:\n>      > -I need to make the requested DESCRIPTION file changes to retain\n>     the package\n>      > -The changes are purely formatting-related, not functional (all\n>     checks pass)\n>      > -I cannot submit without changing the version number\n>      > -However, incrementing the version number seems disproportionate for\n>      > formatting changes.\n>      >\n>      > I would greatly appreciate guidance on the proper way to handle this\n>      > situation.\n>      > What is the recommended approach for submitting DESCRIPTION file\n>     formatting\n>      > corrections for an already-accepted package, given that\n>     incrementing the\n>      > version number might seem a bit disproportionate?\n>      >\n>      > Thank you for your time and assistance.\n> \n>     The simplest thing is to just update the version.? Use 1.1.1 if you\n>     don't want to go to 1.2.\n> \n>     Duncan Murdoch\n>",
+      "body_snippet": "I don't think R will enforce a 3 part version just because you used it \nonce.  You might have other reasons to try to maintain versioning \nconsistency.\n\nDuncan Murdoch\n\nOn 2024-10-27 7:48 a.m., Gianma",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 3,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-05262b79e888",
+      "message_id": "<20241028144253.6e3c3988@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-28T14:42:53+03:00",
+      "subject": "[R-pkg-devel]  *** caught segfault *** address (nil), cause 'unknown'",
+      "subject_clean": "[R-pkg-devel]  *** caught segfault *** address (nil), cause 'unknown'",
+      "in_reply_to": "<CACSk52-bmXQzSBXwp+Q2jvK0ucw=_-XAt1iw3HVV=+-9PwGPRQ@mail.gmail.com>",
+      "references": [
+        "<CACSk52-bmXQzSBXwp+Q2jvK0ucw=_-XAt1iw3HVV=+-9PwGPRQ@mail.gmail.com>"
+      ],
+      "body_plain": "? Sat, 26 Oct 2024 12:18:07 -0400\nj?r?my Gelb <gelbjeremy22 at gmail.com> ?????:\n\n>  *** caught segfault ***\n> address (nil), cause 'unknown'\n> \n> It seems that the error is happening when loading a c++ module of my\n> package\n> \n> Traceback:\n>  1: Module(module, mustStart = TRUE, where = env)\n>  2: doTryCatch(return(expr), name, parentenv, handler)\n>  3: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>  4: tryCatchList(expr, classes, parentenv, handlers)\n>  5: tryCatch(Module(module, mustStart = TRUE, where = env), error =\n> function(e) e)\n>  6: loadModule(module = \"spatial_index_cpp\", what = TRUE, env = ns,\n>  loadNow = TRUE)\n> \n> \n> It is rather strange because I have not edited this module since the\n> last version and the package is installing correctly on other\n> platforms\n\nPerplexing. The method that usually works - starting a fresh Debian\ntrixie/sid virtual machine, installing clang-19 and R\nbuild-dependencies, compiling R from source (with OR without\nCXXFLAGS=-stdlib=libc++), installing fresh dependencies from CRAN\nsource packages and running R CMD check --as-cran - did not reproduce\nthe null pointer dereference and the crash.\n\nThe compiler versions did not exactly match (current Debian testing has\nnewer clang-19 than 19.1.0 that had compiled R or 19.1.1 that compiled\nyour package), but that looks very minor.\n\nAlthough there was no crash on Windows, the Windows compilation log is\nfull of warnings about potential null pointer dereference:\n\nhttps://win-builder.r-project.org/incoming_pretest/spNetwork_0.4.4.4_20241026_034629/Windows/00install.out\n\n../inst/i/b/concept/detail/general.hpp:50:47: warning: 'this' pointer is null [-Wnonnull]\n   50 |     static void failed() { ((Model*)0)->~Model(); }\n      |                            ~~~~~~~~~~~~~~~~~~~^~\n../inst/i/b/concept/usage.hpp:20:5: note: in a call to non-static member function 'boost::concepts::usage_requirements<Model>::~usage_requirements() [with Model = boost::geometry::concepts::Box<boost::geometry::model::box<boost::geometry::model::point<double, 2, boost::geometry::cs::cartesian> > >]'\n   20 |     ~usage_requirements() { ((Model*)0)->~Model(); }\n      |     ^\n\nI see that, for example,\nboost::geometry::concepts::Box<boost::geometry::model::box>::dimension_checker::apply()\ncreates a null pointer boost::geometry::model::box * b = 0 and then\ncalls geometry::set<...>(*b, geometry::get<...>(*b)). This _could_ be a\nred herring, but class boost::geometry::model::box has member\nvariables. Could a previous version of the clang-19 compiler have\nfailed to elide member variable access in this call for some reason?\n(According to the standard, having a null `this` pointer is always\nundefined behaviour, so the compiler would not be exactly wrong to make\nthe application crash if this code is ever reached.)\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Sat, 26 Oct 2024 12:18:07 -0400\nj?r?my Gelb <gelbjeremy22 at gmail.com> ?????:\n\n>  *** caught segfault ***\n> address (nil), cause 'unknown'\n> \n> It seems that the error is happening when loading a c",
+      "thread_id": "thread-75e7d1019ec8",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-d3eeb637b193",
+      "message_id": "<CAPPM_gS21xVZ7Fyh+xwQ3nGjUx4KdQyp7MF9hQR1t8ea0hhkwA@mail.gmail.com>",
+      "from_name": "Joshua Ulrich",
+      "from_email_hash": "23f6c30ff3bdcca471f7faac8696c097be744a921830fdf6ee417f06337a1b60",
+      "date": "2024-10-28T10:41:07-05:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<49f94200-e26a-4d4d-9934-988b5ec82269@gmail.com>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+        "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>",
+        "<CAMQoV_qqOx8AGcosji0QrvV2Vc-nnXE0cC5xZjkrssCLC+K6pA@mail.gmail.com>",
+        "<49f94200-e26a-4d4d-9934-988b5ec82269@gmail.com>"
+      ],
+      "body_plain": "`R CMD check` uses the `package_version()` function to check that the\nsubmitted package version is > the version on CRAN. You can use it to\ncheck Duncan's hypothesis:\n\nR$ # current update with 3-part version\nR$ package_version(\"1.1.1\") > package_version(\"1.1\")\n[1] TRUE\nR$ # next update with only a 2-part version\nR$ package_version(\"1.2\") > package_version(\"1.1.1\")\n[1] TRUE\n\n\nOn Sun, Oct 27, 2024 at 8:16?AM Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> I don't think R will enforce a 3 part version just because you used it\n> once.  You might have other reasons to try to maintain versioning\n> consistency.\n>\n> Duncan Murdoch\n>\n> On 2024-10-27 7:48 a.m., Gianmarco Alberti wrote:\n> > Dear Duncan,\n> >\n> > Thank you for the straightforward guidance.\n> >\n> > My initial query stemmed from a concern about versioning consistency - I\n> > thought that once using three digits (1.1.1), I would need to maintain\n> > that format (e.g., 1.2.0) in future updates. Your suggestion clarified\n> > that I can use 1.1.1 for these formatting changes and still use 1.2 for\n> > future substantial updates.\n> >\n> > Best regards,\n> >\n> > Gm\n> >\n> >\n> > Il giorno dom 27 ott 2024 alle ore 11:49 Duncan Murdoch\n> > <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> ha scritto:\n> >\n> >     On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n> >      > Dear R Package Developers,\n> >      > I am seeking guidance regarding a situation with my package\n> >     'chisquare'\n> >      > (version 1.1) on CRAN.\n> >      >\n> >      > Current situation:\n> >      >\n> >      > 1. The package was submitted and (automatically) accepted to CRAN\n> >     (version\n> >      > 1.1) after thorough local testing and complete devtools checks\n> >      > (check_win_oldrelease(), check_win_release(), check_win_devel())\n> >      >\n> >      > 2. After acceptance, I received a request to make formatting\n> >     changes to the\n> >      > DESCRIPTION file by November 2, 2024:\n> >      > -Remove version specifications for graphics and stats in Imports\n> >      > -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> >      >\n> >      > 3. Upon attempting to submit these formatting changes, I received\n> >     a warning\n> >      > about \"Insufficient package version (submitted: 1.1, existing:\n> >     1.1)\". I am\n> >      > well aware that this warning typically indicates the need to\n> >     increment the\n> >      > version number for new submissions of existing packages, as per CRAN\n> >      > policies.\n> >      >\n> >      > This creates a procedural challenge:\n> >      > -I need to make the requested DESCRIPTION file changes to retain\n> >     the package\n> >      > -The changes are purely formatting-related, not functional (all\n> >     checks pass)\n> >      > -I cannot submit without changing the version number\n> >      > -However, incrementing the version number seems disproportionate for\n> >      > formatting changes.\n> >      >\n> >      > I would greatly appreciate guidance on the proper way to handle this\n> >      > situation.\n> >      > What is the recommended approach for submitting DESCRIPTION file\n> >     formatting\n> >      > corrections for an already-accepted package, given that\n> >     incrementing the\n> >      > version number might seem a bit disproportionate?\n> >      >\n> >      > Thank you for your time and assistance.\n> >\n> >     The simplest thing is to just update the version.  Use 1.1.1 if you\n> >     don't want to go to 1.2.\n> >\n> >     Duncan Murdoch\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com",
+      "body_snippet": "`R CMD check` uses the `package_version()` function to check that the\nsubmitted package version is > the version on CRAN. You can use it to\ncheck Duncan's hypothesis:\n\nR$ # current update with 3-part ",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 4,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-5a043c48085b",
+      "message_id": "<LO0P265MB6325B421A9C4EE0D7E3999ADAE4A2@LO0P265MB6325.GBRP265.PROD.OUTLOOK.COM>",
+      "from_name": "Georgi Boshnakov",
+      "from_email_hash": "6637d0c921f2a36f6e99fccdf4bf80229b389f57df94a4871de534ef317950f4",
+      "date": "2024-10-28T16:56:17Z",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<CAPPM_gS21xVZ7Fyh+xwQ3nGjUx4KdQyp7MF9hQR1t8ea0hhkwA@mail.gmail.com>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+        "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>",
+        "<CAMQoV_qqOx8AGcosji0QrvV2Vc-nnXE0cC5xZjkrssCLC+K6pA@mail.gmail.com>",
+        "<49f94200-e26a-4d4d-9934-988b5ec82269@gmail.com>",
+        "<CAPPM_gS21xVZ7Fyh+xwQ3nGjUx4KdQyp7MF9hQR1t8ea0hhkwA@mail.gmail.com>"
+      ],
+      "body_plain": "Also, v1.1 = v1.1.0:\n\n>  package_version(\"1.1.0\") > package_version(\"1.1\")\n[1] FALSE\n>  package_version(\"1.1.0\") == package_version(\"1.1\")\n[1] TRUE\n\nIf you adopt the 2-digit versions but decide to keep the possibility for 3-letter ones for minor fixes (bugs; fixing CRAN NOTES, minor bugs etc.), always use the four-digit development versions, e.g. 1.1.0.9000 after release of 1.1, to keep the possibility for 1.2 or 1.1.1 for the following release.\n\nGeorgi Boshnakov\n\n________________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Joshua Ulrich <josh.m.ulrich at gmail.com>\nSent: 28 October 2024 15:41\nTo: Duncan Murdoch\nCc: R Package Development\nSubject: Re: [R-pkg-devel] DESCRIPTION file corrections for accepted package\n\n`R CMD check` uses the `package_version()` function to check that the submitted package version is > the version on CRAN. You can use it to check Duncan's hypothesis: R$ # current update with 3-part version R$ package_version(\"1.?1.?1\") >\nZjQcmQRYFpfptBannerStart\nThis Message Is From a New External Sender\nYou have not previously corresponded with this sender. Please exercise caution when opening links or attachments included in this message.\n\nZjQcmQRYFpfptBannerEnd\n\n`R CMD check` uses the `package_version()` function to check that the\nsubmitted package version is > the version on CRAN. You can use it to\ncheck Duncan's hypothesis:\n\nR$ # current update with 3-part version\nR$ package_version(\"1.1.1\") > package_version(\"1.1\")\n[1] TRUE\nR$ # next update with only a 2-part version\nR$ package_version(\"1.2\") > package_version(\"1.1.1\")\n[1] TRUE\n\n\nOn Sun, Oct 27, 2024 at 8:16?AM Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> I don't think R will enforce a 3 part version just because you used it\n> once.  You might have other reasons to try to maintain versioning\n> consistency.\n>\n> Duncan Murdoch\n>\n> On 2024-10-27 7:48 a.m., Gianmarco Alberti wrote:\n> > Dear Duncan,\n> >\n> > Thank you for the straightforward guidance.\n> >\n> > My initial query stemmed from a concern about versioning consistency - I\n> > thought that once using three digits (1.1.1), I would need to maintain\n> > that format (e.g., 1.2.0) in future updates. Your suggestion clarified\n> > that I can use 1.1.1 for these formatting changes and still use 1.2 for\n> > future substantial updates.\n> >\n> > Best regards,\n> >\n> > Gm\n> >\n> >\n> > Il giorno dom 27 ott 2024 alle ore 11:49 Duncan Murdoch\n> > <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> ha scritto:\n> >\n> >     On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n> >      > Dear R Package Developers,\n> >      > I am seeking guidance regarding a situation with my package\n> >     'chisquare'\n> >      > (version 1.1) on CRAN.\n> >      >\n> >      > Current situation:\n> >      >\n> >      > 1. The package was submitted and (automatically) accepted to CRAN\n> >     (version\n> >      > 1.1) after thorough local testing and complete devtools checks\n> >      > (check_win_oldrelease(), check_win_release(), check_win_devel())\n> >      >\n> >      > 2. After acceptance, I received a request to make formatting\n> >     changes to the\n> >      > DESCRIPTION file by November 2, 2024:\n> >      > -Remove version specifications for graphics and stats in Imports\n> >      > -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> >      >\n> >      > 3. Upon attempting to submit these formatting changes, I received\n> >     a warning\n> >      > about \"Insufficient package version (submitted: 1.1, existing:\n> >     1.1)\". I am\n> >      > well aware that this warning typically indicates the need to\n> >     increment the\n> >      > version number for new submissions of existing packages, as per CRAN\n> >      > policies.\n> >      >\n> >      > This creates a procedural challenge:\n> >      > -I need to make the requested DESCRIPTION file changes to retain\n> >     the package\n> >      > -The changes are purely formatting-related, not functional (all\n> >     checks pass)\n> >      > -I cannot submit without changing the version number\n> >      > -However, incrementing the version number seems disproportionate for\n> >      > formatting changes.\n> >      >\n> >      > I would greatly appreciate guidance on the proper way to handle this\n> >      > situation.\n> >      > What is the recommended approach for submitting DESCRIPTION file\n> >     formatting\n> >      > corrections for an already-accepted package, given that\n> >     incrementing the\n> >      > version number might seem a bit disproportionate?\n> >      >\n> >      > Thank you for your time and assistance.\n> >\n> >     The simplest thing is to just update the version.  Use 1.1.1 if you\n> >     don't want to go to 1.2.\n> >\n> >     Duncan Murdoch\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!DCS7NzQVm5Q1FFruS86zOyiLNBS9_EZ46Qpjb7Ks8TvH80ChDrXf8l5x94KXWZtPgoOExpq8805sRyJ_Zz_aNn7qkCwbNu8XZ0yf$[stat[.]ethz[.]ch]\n\n\n\n--\nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  https://urldefense.com/v3/__http://www.fosstrading.com__;!!PDiH4ENfjr2_Jw!DCS7NzQVm5Q1FFruS86zOyiLNBS9_EZ46Qpjb7Ks8TvH80ChDrXf8l5x94KXWZtPgoOExpq8805sRyJ_Zz_aNn7qkCwbNgL0eU2t$[fosstrading[.]com]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!DCS7NzQVm5Q1FFruS86zOyiLNBS9_EZ46Qpjb7Ks8TvH80ChDrXf8l5x94KXWZtPgoOExpq8805sRyJ_Zz_aNn7qkCwbNu8XZ0yf$[stat[.]ethz[.]ch]",
+      "body_snippet": "Also, v1.1 = v1.1.0:\n\n>  package_version(\"1.1.0\") > package_version(\"1.1\")\n[1] FALSE\n>  package_version(\"1.1.0\") == package_version(\"1.1\")\n[1] TRUE\n\nIf you adopt the 2-digit versions but decide to kee",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 5,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-21872f15c026",
+      "message_id": "<aa5fa16b-194a-44af-81bb-8f7a173ad5f2@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2024-10-28T13:03:31-04:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<LO0P265MB6325B421A9C4EE0D7E3999ADAE4A2@LO0P265MB6325.GBRP265.PROD.OUTLOOK.COM>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+        "<142292b0-f4e2-4a96-b77e-a337d287606a@gmail.com>",
+        "<CAMQoV_qqOx8AGcosji0QrvV2Vc-nnXE0cC5xZjkrssCLC+K6pA@mail.gmail.com>",
+        "<49f94200-e26a-4d4d-9934-988b5ec82269@gmail.com>",
+        "<CAPPM_gS21xVZ7Fyh+xwQ3nGjUx4KdQyp7MF9hQR1t8ea0hhkwA@mail.gmail.com>",
+        "<LO0P265MB6325B421A9C4EE0D7E3999ADAE4A2@LO0P265MB6325.GBRP265.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "On 2024-10-28 12:56 p.m., Georgi Boshnakov wrote:\n> Also, v1.1 = v1.1.0:\n> \n>>   package_version(\"1.1.0\") > package_version(\"1.1\")\n> [1] FALSE\n>>   package_version(\"1.1.0\") == package_version(\"1.1\")\n> [1] TRUE\n> \n> If you adopt the 2-digit versions but decide to keep the possibility for 3-letter ones for minor fixes (bugs; fixing CRAN NOTES, minor bugs etc.), always use the four-digit development versions, e.g. 1.1.0.9000 after release of 1.1, to keep the possibility for 1.2 or 1.1.1 for the following release.\n\nThat's one strategy, but it's not the one I use.  I generally increment \nthe 3rd digit whenever I make a bug fix or minor change to the source. \nI won't necessarily release every one of those, but they'll be available \non Github, and if I get a bug report that has been dealt with, I can say \nthings like \"that was fixed in version 1.2.12.  You can get 1.2.14 from \nGithub using this code: ...., or wait a couple of months until a later \nversion is released on CRAN\".  I dislike Hadley's x.y.z.9000 scheme.\n\nDuncan Murdoch",
+      "body_snippet": "On 2024-10-28 12:56 p.m., Georgi Boshnakov wrote:\n> Also, v1.1 = v1.1.0:\n> \n>>   package_version(\"1.1.0\") > package_version(\"1.1\")\n> [1] FALSE\n>>   package_version(\"1.1.0\") == package_version(\"1.1\")\n>",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 6,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-33dc128d2f28",
+      "message_id": "<780B18B5-3792-4532-B9E3-7374B2AEADE0@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2024-10-30T11:04:14+13:00",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "in_reply_to": "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>",
+      "references": [
+        "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>"
+      ],
+      "body_plain": "> On 27 Oct 2024, at 23:03, Gianmarco Alberti <gianmarcoalberti at gmail.com> wrote:\n> \n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (version 1.1) on CRAN.\n> \n> Current situation:\n> \n> 1. The package was submitted and (automatically) accepted to CRAN (version\n> 1.1) after thorough local testing and complete devtools checks\n> (check_win_oldrelease(), check_win_release(), check_win_devel())\n> \n> 2. After acceptance, I received a request to make formatting changes to the\n> DESCRIPTION file by November 2, 2024:\n> -Remove version specifications for graphics and stats in Imports\n> -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> \n> 3. Upon attempting to submit these formatting changes, I received a warning\n> about \"Insufficient package version (submitted: 1.1, existing: 1.1)\". I am\n> well aware that this warning typically indicates the need to increment the\n> version number for new submissions of existing packages, as per CRAN\n> policies.\n> \n> This creates a procedural challenge:\n> -I need to make the requested DESCRIPTION file changes to retain the package\n> -The changes are purely formatting-related, not functional (all checks pass)\n> -I cannot submit without changing the version number\n> -However, incrementing the version number seems disproportionate for\n> formatting changes.\n> \n\n\nBut it is not. ANY change requires a version bump. You cannot have two files with different content yet the same version - the whole point of version is to uniquely identify content. Whether the change is just cosmetic or not is irrelevant (in your case it is actually functional so not even a question). As Rob Gentleman is fond of saying, version numbers are cheap ;). In your case I?d just use 1.1-1 (see semantic versioning which is highly recommended to follow)\n\nCheers,\nSimon\n\n\n\n> I would greatly appreciate guidance on the proper way to handle this\n> situation.\n> What is the recommended approach for submitting DESCRIPTION file formatting\n> corrections for an already-accepted package, given that incrementing the\n> version number might seem a bit disproportionate?\n> \n> Thank you for your time and assistance.\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "> On 27 Oct 2024, at 23:03, Gianmarco Alberti <gianmarcoalberti at gmail.com> wrote:\n> \n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (versio",
+      "thread_id": "thread-4b614ade067e",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-c16b4621f76c",
+      "message_id": "<CAAsVnmJ_j-Pf=b7Cq4q7UAMa9V1CLVuPsnnHUFORSoP66f5e4g@mail.gmail.com>",
+      "from_name": "Kaifeng Lu",
+      "from_email_hash": "17c92f9e64b6cdbbfd89f2c056558e287a7349939b641a7d0875418c8360a44c",
+      "date": "2024-10-29T22:21:16-04:00",
+      "subject": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "subject_clean": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear friends,\n\nI received clang-san error messages for all vignettes that include ggplot2\nfigures when submitting an R package to CRAN. Please see below for an\nexample.\n\nHow can I resolve this problem without replacing the ggplot2 figures with\nbase R plots?\n\nThank you in advance for your help.\n\nRegards,\nKaifeng\n\n--- re-building ?tsegest.Rmd? using rmarkdown\n  ** Processing:\n/home/hornik/tmp/CRAN_special_clang-san/trtswitch.Rcheck/vign_test/trtswitch/vignettes/tsegest_files/figure-html/km-1.png\n  288x288 pixels, 8 bits/pixel, 256 colors in palette\n  Reducing image to 8 bits/pixel, grayscale\n  Input IDAT size = 4659 bytes\n  Input file size = 5517 bytes\n\n  Trying:\n    zc = 9  zm = 8  zs = 0  f = 0\t\tIDAT size = 4256\n    zc = 9  zm = 8  zs = 1  f = 0\t\tIDAT size = 4226\n    zc = 1  zm = 8  zs = 2  f = 0\n    zc = 9  zm = 8  zs = 3  f = 0\n    zc = 9  zm = 8  zs = 0  f = 5\n    zc = 9  zm = 8  zs = 1  f = 5\n    zc = 1  zm = 8  zs = 2  f = 5\n    zc = 9  zm = 8  zs = 3  f = 5\n\n  Selecting parameters:\n    zc = 9  zm = 8  zs = 1  f = 0\t\tIDAT size = 4226\n\n  Output IDAT size = 4226 bytes (433 bytes decrease)\n  Output file size = 4304 bytes (1213 bytes = 21.99% decrease)\n\n  ** Processing:\n/home/hornik/tmp/CRAN_special_clang-san/trtswitch.Rcheck/vign_test/trtswitch/vignettes/tsegest_files/figure-html/Z(psi)-1.png\n  288x288 pixels, 8 bits/pixel, 256 colors in palette\n  Reducing image to 8 bits/pixel, grayscale\n  Input IDAT size = 5933 bytes\n  Input file size = 6791 bytes\n\n  Trying:\n    zc = 9  zm = 8  zs = 0  f = 0\t\tIDAT size = 5349\n    zc = 9  zm = 8  zs = 1  f = 0\n    zc = 1  zm = 8  zs = 2  f = 0\n    zc = 9  zm = 8  zs = 3  f = 0\n    zc = 9  zm = 8  zs = 0  f = 5\n    zc = 9  zm = 8  zs = 1  f = 5\n    zc = 1  zm = 8  zs = 2  f = 5\n    zc = 9  zm = 8  zs = 3  f = 5\n\n  Selecting parameters:\n    zc = 9  zm = 8  zs = 0  f = 0\t\tIDAT size = 5349\n\n  Output IDAT size = 5349 bytes (584 bytes decrease)\n  Output file size = 5427 bytes (1364 bytes = 20.09% decrease)\n\n  --- finished re-building ?tsegest.Rmd?\n\n  +-+tsegest.html\n\n  =================================================================\n  ==1429888==ERROR: LeakSanitizer: detected memory leaks\n\n  Direct leak of 7680 byte(s) in 12 object(s) allocated from:\n      #0 0x55b3e7ff95d0 in realloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc65d0) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd7d28\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24d28) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Direct leak of 6656 byte(s) in 26 object(s) allocated from:\n      #0 0x55b3e7ff91b3 in malloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc61b3) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd7c81\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24c81) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 25920 byte(s) in 810 object(s) allocated from:\n      #0 0x55b3e7ff91b3 in malloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc61b3) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbc198f\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0xe98f) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 11982 byte(s) in 994 object(s) allocated from:\n      #0 0x55b3e7fe0ebe in strdup\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xadebe) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd74d7 in FcValueSave\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x244d7) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 8768 byte(s) in 274 object(s) allocated from:\n      #0 0x55b3e7ff939d in calloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd8450\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x25450) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 5376 byte(s) in 168 object(s) allocated from:\n      #0 0x55b3e7ff939d in calloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd7862\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24862) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 1152 byte(s) in 36 object(s) allocated from:\n      #0 0x55b3e7ff939d in calloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd770f\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x2470f) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 384 byte(s) in 12 object(s) allocated from:\n      #0 0x55b3e7ff939d in calloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd777f\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x2477f) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n  Indirect leak of 288 byte(s) in 6 object(s) allocated from:\n      #0 0x55b3e7ff91b3 in malloc\n(/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc61b3) (BuildId:\n71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n      #1 0x7f61fcbd0d2f in FcLangSetCopy\n(/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x1dd2f) (BuildId:\n4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear friends,\n\nI received clang-san error messages for all vignettes that include ggplot2\nfigures when submitting an R package to CRAN. Please see below for an\nexample.\n\nHow can I resolve this problem",
+      "thread_id": "thread-c16b4621f76c",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-01478773e787",
+      "message_id": "<CABghstSTk=-pmb9NX4Crnn+1p27vAizSS1k6zK3-CaZMs8003A@mail.gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "058f22460bce77c55c3340fec40d01e374409ed76ec5a897b62075a27eb9734c",
+      "date": "2024-10-29T22:36:54-04:00",
+      "subject": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "subject_clean": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "in_reply_to": "<CAAsVnmJ_j-Pf=b7Cq4q7UAMa9V1CLVuPsnnHUFORSoP66f5e4g@mail.gmail.com>",
+      "references": [
+        "<CAAsVnmJ_j-Pf=b7Cq4q7UAMa9V1CLVuPsnnHUFORSoP66f5e4g@mail.gmail.com>"
+      ],
+      "body_plain": "Can you tell us more about/point us to the code for the plots that are\ntriggering these errors? (eg, are you using unusual fonts or other\nsettings?)\n\nOn Tue, Oct 29, 2024, 10:22 PM Kaifeng Lu <kaifenglu at gmail.com> wrote:\n\n> Dear friends,\n>\n> I received clang-san error messages for all vignettes that include ggplot2\n> figures when submitting an R package to CRAN. Please see below for an\n> example.\n>\n> How can I resolve this problem without replacing the ggplot2 figures with\n> base R plots?\n>\n> Thank you in advance for your help.\n>\n> Regards,\n> Kaifeng\n>\n> --- re-building ?tsegest.Rmd? using rmarkdown\n>   ** Processing:\n>\n> /home/hornik/tmp/CRAN_special_clang-san/trtswitch.Rcheck/vign_test/trtswitch/vignettes/tsegest_files/figure-html/km-1.png\n>   288x288 pixels, 8 bits/pixel, 256 colors in palette\n>   Reducing image to 8 bits/pixel, grayscale\n>   Input IDAT size = 4659 bytes\n>   Input file size = 5517 bytes\n>\n>   Trying:\n>     zc = 9  zm = 8  zs = 0  f = 0               IDAT size = 4256\n>     zc = 9  zm = 8  zs = 1  f = 0               IDAT size = 4226\n>     zc = 1  zm = 8  zs = 2  f = 0\n>     zc = 9  zm = 8  zs = 3  f = 0\n>     zc = 9  zm = 8  zs = 0  f = 5\n>     zc = 9  zm = 8  zs = 1  f = 5\n>     zc = 1  zm = 8  zs = 2  f = 5\n>     zc = 9  zm = 8  zs = 3  f = 5\n>\n>   Selecting parameters:\n>     zc = 9  zm = 8  zs = 1  f = 0               IDAT size = 4226\n>\n>   Output IDAT size = 4226 bytes (433 bytes decrease)\n>   Output file size = 4304 bytes (1213 bytes = 21.99% decrease)\n>\n>   ** Processing:\n>\n> /home/hornik/tmp/CRAN_special_clang-san/trtswitch.Rcheck/vign_test/trtswitch/vignettes/tsegest_files/figure-html/Z(psi)-1.png\n>   288x288 pixels, 8 bits/pixel, 256 colors in palette\n>   Reducing image to 8 bits/pixel, grayscale\n>   Input IDAT size = 5933 bytes\n>   Input file size = 6791 bytes\n>\n>   Trying:\n>     zc = 9  zm = 8  zs = 0  f = 0               IDAT size = 5349\n>     zc = 9  zm = 8  zs = 1  f = 0\n>     zc = 1  zm = 8  zs = 2  f = 0\n>     zc = 9  zm = 8  zs = 3  f = 0\n>     zc = 9  zm = 8  zs = 0  f = 5\n>     zc = 9  zm = 8  zs = 1  f = 5\n>     zc = 1  zm = 8  zs = 2  f = 5\n>     zc = 9  zm = 8  zs = 3  f = 5\n>\n>   Selecting parameters:\n>     zc = 9  zm = 8  zs = 0  f = 0               IDAT size = 5349\n>\n>   Output IDAT size = 5349 bytes (584 bytes decrease)\n>   Output file size = 5427 bytes (1364 bytes = 20.09% decrease)\n>\n>   --- finished re-building ?tsegest.Rmd?\n>\n>   +-+tsegest.html\n>\n>   =================================================================\n>   ==1429888==ERROR: LeakSanitizer: detected memory leaks\n>\n>   Direct leak of 7680 byte(s) in 12 object(s) allocated from:\n>       #0 0x55b3e7ff95d0 in realloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc65d0) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd7d28\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24d28) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Direct leak of 6656 byte(s) in 26 object(s) allocated from:\n>       #0 0x55b3e7ff91b3 in malloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc61b3) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd7c81\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24c81) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 25920 byte(s) in 810 object(s) allocated from:\n>       #0 0x55b3e7ff91b3 in malloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc61b3) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbc198f\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0xe98f) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 11982 byte(s) in 994 object(s) allocated from:\n>       #0 0x55b3e7fe0ebe in strdup\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xadebe) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd74d7 in FcValueSave\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x244d7) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 8768 byte(s) in 274 object(s) allocated from:\n>       #0 0x55b3e7ff939d in calloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd8450\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x25450) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 5376 byte(s) in 168 object(s) allocated from:\n>       #0 0x55b3e7ff939d in calloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd7862\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24862) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 1152 byte(s) in 36 object(s) allocated from:\n>       #0 0x55b3e7ff939d in calloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd770f\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x2470f) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 384 byte(s) in 12 object(s) allocated from:\n>       #0 0x55b3e7ff939d in calloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc639d) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd777f\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x2477f) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>   Indirect leak of 288 byte(s) in 6 object(s) allocated from:\n>       #0 0x55b3e7ff91b3 in malloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc61b3) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd0d2f in FcLangSetCopy\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x1dd2f) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Can you tell us more about/point us to the code for the plots that are\ntriggering these errors? (eg, are you using unusual fonts or other\nsettings?)\n\nOn Tue, Oct 29, 2024, 10:22 PM Kaifeng Lu <kaifeng",
+      "thread_id": "thread-c16b4621f76c",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-4e23bc2b0021",
+      "message_id": "<20241030095729.79f4e0dd@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-30T09:57:29+03:00",
+      "subject": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "subject_clean": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "in_reply_to": "<CAAsVnmJ_j-Pf=b7Cq4q7UAMa9V1CLVuPsnnHUFORSoP66f5e4g@mail.gmail.com>",
+      "references": [
+        "<CAAsVnmJ_j-Pf=b7Cq4q7UAMa9V1CLVuPsnnHUFORSoP66f5e4g@mail.gmail.com>"
+      ],
+      "body_plain": "? Tue, 29 Oct 2024 22:21:16 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n>   ==1429888==ERROR: LeakSanitizer: detected memory leaks\n> \n>   Direct leak of 7680 byte(s) in 12 object(s) allocated from:\n>       #0 0x55b3e7ff95d0 in realloc\n> (/home/hornik/tmp/R-d-clang-xtra/bin/exec/R+0xc65d0) (BuildId:\n> 71b7cc9351bcc02083f9df16c056d5fba06ed51c)\n>       #1 0x7f61fcbd7d28\n> (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x24d28) (BuildId:\n> 4b26d8a18d92f6f97cf8eccd56f114fb89e44039)\n\nI found the link to the full test output at\n<https://win-builder.r-project.org/incoming_pretest/trtswitch_0.1.1_20241030_031632/>\n(it's best to link to the check logs and source code when seeking help\nhere) and I don't think these are caused by your code. fontconfig leaks\nsmall amounts of memory by itself, without your package:\n\n$ build-san/bin/R -q -s -e 'png(\"/dev/null\"); plot(1,1); dev.off()'\nnull device\n 1\n\n=================================================================                                                    \n==22925==ERROR: LeakSanitizer: detected memory leaks            \n\nDirect leak of 6912 byte(s) in 27 object(s) allocated from:                  \n    #0 0x7f1154cb89cf in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69\n    #1 0x7f1149857431  (/usr/lib/x86_64-linux-gnu/libfontconfig.so.1+0x23431)\n<...>\nSUMMARY: AddressSanitizer: 45733 byte(s) leaked in 1474 allocation(s).\n\nI think that this check may need suppressions at least for fontconfig:\n<https://github.com/google/sanitizers/wiki/AddressSanitizerLeakSanitizer#suppressions>.\nAlternatively, Prof. Kurt Hornik may set the environment variable\nASAN_OPTIONS=\"detect_leaks=0\" like done by Prof. Brian D. Ripley:\nhttps://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 29 Oct 2024 22:21:16 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n>   ==1429888==ERROR: LeakSanitizer: detected memory leaks\n> \n>   Direct leak of 7680 byte(s) in 12 object(s) allocated fr",
+      "thread_id": "thread-c16b4621f76c",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-9c812ddd198d",
+      "message_id": "<CAAsVnmJ=EurBKD6ber9umE68bH5ZO6HhmHuhX4ryHbWgXJ+cqQ@mail.gmail.com>",
+      "from_name": "Kaifeng Lu",
+      "from_email_hash": "17c92f9e64b6cdbbfd89f2c056558e287a7349939b641a7d0875418c8360a44c",
+      "date": "2024-10-31T12:06:25-04:00",
+      "subject": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "subject_clean": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear friends,\n\nI received the following warning messages related to functions from the\nsurvival package. I didn't directly use the functions mentioned below:\ncoxph_wtest, agsurv5, survdiff2, and coxmart. I believe they are used by\nhigher-level functions from the survival package, such as survdiff and\ncoxph, which I used in my unit tests. Does anyone know how to get rid of\nsuchwarning to pass the CRAN checks?\n\nThank you very much in advance for your help.\n\nRegards,\nKaifeng\n\n\npackage trtswitch_0.1.1.tar.gz does not pass the incoming checks\nautomatically, please see the following pre-tests (additional issue checks):\nWindows: <\nhttps://win-builder.r-project.org/incoming_pretest/trtswitch_0.1.1_20241031_134058/Windows/00check.log\n>\nStatus: OK\nDebian: <\nhttps://win-builder.r-project.org/incoming_pretest/trtswitch_0.1.1_20241031_134058/Debian/00check.log\n>\nStatus: OK\n\nAdditional issues checked: <\nhttps://win-builder.r-project.org/incoming_pretest/trtswitch_0.1.1_20241031_134058/specialChecks/\n>\nclang-san: Status: WARNING\n\nMore details are given in the directory:\n<\nhttps://win-builder.r-project.org/incoming_pretest/trtswitch_0.1.1_20241031_134058/\n>\nThe files will be removed after roughly 7 days.\n\n\nFlavor: r-devel-linux-x86_64-debian-special-clang-san\nCheck: *, Result: NA\n\n\nFlavor: r-devel-linux-x86_64-debian-special-clang-san\nCheck: Post-processing issues found for clang-san, Result: WARNING\n  File: tests/testthat.Rout\n  /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime error: call to\nfunction coxph_wtest through pointer to incorrect function type 'void\n(*)(void *, void *, void *, void *, void *, void *)'\n  /home/hornik/src/R/src/main/dotcode.c:1994:2: runtime error: call to\nfunction agsurv5 through pointer to incorrect function type 'void (*)(void\n*, void *, void *, void *, void *, void *, void *, void *, void *, void *)'\n  /home/hornik/src/R/src/main/dotcode.c:2008:2: runtime error: call to\nfunction survdiff2 through pointer to incorrect function type 'void\n(*)(void *, void *, void *, void *, void *, void *, void *, void *, void *,\nvoid *, void *, void *, void *)'\n  /home/hornik/src/R/src/main/dotcode.c:1986:2: runtime error: call to\nfunction coxmart through pointer to incorrect function type 'void (*)(void\n*, void *, void *, void *, void *, void *, void *, void *)'\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear friends,\n\nI received the following warning messages related to functions from the\nsurvival package. I didn't directly use the functions mentioned below:\ncoxph_wtest, agsurv5, survdiff2, and coxma",
+      "thread_id": "thread-9c812ddd198d",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-a8d6984c572a",
+      "message_id": "<20241031193914.54310b7e@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-31T19:39:14+03:00",
+      "subject": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "subject_clean": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "in_reply_to": "<CAAsVnmJ=EurBKD6ber9umE68bH5ZO6HhmHuhX4ryHbWgXJ+cqQ@mail.gmail.com>",
+      "references": [
+        "<CAAsVnmJ=EurBKD6ber9umE68bH5ZO6HhmHuhX4ryHbWgXJ+cqQ@mail.gmail.com>"
+      ],
+      "body_plain": "? Thu, 31 Oct 2024 12:06:25 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n>   /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime error: call to\n> function coxph_wtest through pointer to incorrect function type 'void\n> (*)(void *, void *, void *, void *, void *, void *)'\n>   /home/hornik/src/R/src/main/dotcode.c:1994:2: runtime error: call to\n> function agsurv5 through pointer to incorrect function type 'void\n> (*)(void *, void *, void *, void *, void *, void *, void *, void *,\n> void *, void *)' /home/hornik/src/R/src/main/dotcode.c:2008:2:\n> runtime error: call to function survdiff2 through pointer to\n> incorrect function type 'void (*)(void *, void *, void *, void *,\n> void *, void *, void *, void *, void *, void *, void *, void *, void\n> *)' /home/hornik/src/R/src/main/dotcode.c:1986:2: runtime error: call\n> to function coxmart through pointer to incorrect function type 'void\n> (*)(void *, void *, void *, void *, void *, void *, void *, void *)'\n\nThis is something R does to call all .C() / .Fortran() functions. For\nexample, coxph_wtest actually takes int*, int*, double*, double*,\ndouble*, double *, but R assumes that the calling convention is the\nsame as if it took 6 times void* and calls it through a pointer of a\ndifferent type [1]. In practice it works well, but formally, calling a\nfunction through a pointer of a different type is undefined behaviour.\nUnfortunately, there is no easy way to call arbitrary functions, like\n.C() and .Fortran() do, without either breaking some rules (which\nhappens here) or generating function calls at runtime (like some\nforeign function interfaces do, which is less portable).\n\nThis check may need suppressions for src/main/dotcode.c or special\nattributes [2] on R's do_dotCode.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://github.com/r-devel/r-svn/blob/91a84c048a26b2b776603482545e4678625a54c3/src/main/dotcode.c#L1977-L1979\n\n[2]\nhttps://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html#issue-suppression",
+      "body_snippet": "? Thu, 31 Oct 2024 12:06:25 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n>   /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime error: call to\n> function coxph_wtest through pointer to incorre",
+      "thread_id": "thread-9c812ddd198d",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-00780e87d8e2",
+      "message_id": "<f78c3ec9-30ba-4edb-afe2-0244dff37715@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2024-10-31T17:59:01+01:00",
+      "subject": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "subject_clean": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "in_reply_to": "<20241031193914.54310b7e@arachnoid>",
+      "references": [
+        "<CAAsVnmJ=EurBKD6ber9umE68bH5ZO6HhmHuhX4ryHbWgXJ+cqQ@mail.gmail.com>",
+        "<20241031193914.54310b7e@arachnoid>"
+      ],
+      "body_plain": "On 10/31/24 17:39, Ivan Krylov via R-package-devel wrote:\n> ? Thu, 31 Oct 2024 12:06:25 -0400\n> Kaifeng Lu <kaifenglu at gmail.com> ?????:\n>\n>>    /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime error: call to\n>> function coxph_wtest through pointer to incorrect function type 'void\n>> (*)(void *, void *, void *, void *, void *, void *)'\n>>    /home/hornik/src/R/src/main/dotcode.c:1994:2: runtime error: call to\n>> function agsurv5 through pointer to incorrect function type 'void\n>> (*)(void *, void *, void *, void *, void *, void *, void *, void *,\n>> void *, void *)' /home/hornik/src/R/src/main/dotcode.c:2008:2:\n>> runtime error: call to function survdiff2 through pointer to\n>> incorrect function type 'void (*)(void *, void *, void *, void *,\n>> void *, void *, void *, void *, void *, void *, void *, void *, void\n>> *)' /home/hornik/src/R/src/main/dotcode.c:1986:2: runtime error: call\n>> to function coxmart through pointer to incorrect function type 'void\n>> (*)(void *, void *, void *, void *, void *, void *, void *, void *)'\n> This is something R does to call all .C() / .Fortran() functions. For\n> example, coxph_wtest actually takes int*, int*, double*, double*,\n> double*, double *, but R assumes that the calling convention is the\n> same as if it took 6 times void* and calls it through a pointer of a\n> different type [1]. In practice it works well, but formally, calling a\n> function through a pointer of a different type is undefined behaviour.\n> Unfortunately, there is no easy way to call arbitrary functions, like\n> .C() and .Fortran() do, without either breaking some rules (which\n> happens here) or generating function calls at runtime (like some\n> foreign function interfaces do, which is less portable).\n>\n> This check may need suppressions for src/main/dotcode.c or special\n> attributes [2] on R's do_dotCode.\n\nYes, yes. This is in base R and can be ignored by package authors.\n\nWe might consider outsourcing this e.g. to libffi at some point, but for \nnow, if you know an elegant, minimal way how to suppress this, and have \nthe time and energy, a patch would be welcome. We've known about this \nsince the start of this year, but it hasn't gotten high enough on \nanyone's priority list, and then popped up here.\n\nBest\nTomas\n\n>",
+      "body_snippet": "On 10/31/24 17:39, Ivan Krylov via R-package-devel wrote:\n> ? Thu, 31 Oct 2024 12:06:25 -0400\n> Kaifeng Lu <kaifenglu at gmail.com> ?????:\n>\n>>    /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime",
+      "thread_id": "thread-9c812ddd198d",
+      "thread_depth": 2,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-e01e92d301f4",
+      "message_id": "<084d69e2-dc9e-41ba-aab9-21c0a5ef054f@Spark>",
+      "from_name": "Nikos Bosse",
+      "from_email_hash": "e89c8563c1a60a46186de5103b68997b40ea14abfa8adbd46295a2ac0fb21241",
+      "date": "2024-10-31T18:04:47+01:00",
+      "subject": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "subject_clean": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear list,\n\nI'm trying to submit an updated version of R package scoringutils to CRAN (https://github.com/epiforecasts/scoringutils). I built the package using `R CMD build` with Roxygen2 7.3.2 both on Mac and on Ubuntu.\n\nI'm seeing a NOTE related to several HTML validation problems (see below).\n\nThese are some of the offending Rd files and corresponding source files:\n\n? https://github.com/epiforecasts/scoringutils/blob/main/man/ae_median_quantile.Rd, https://github.com/epiforecasts/scoringutils/blob/efb41afd9925ffc4b62963abc0642cc1f7447c22/R/metrics-quantile.R#L559\n? https://github.com/epiforecasts/scoringutils/blob/main/man/dss_sample.Rd, https://github.com/epiforecasts/scoringutils/blob/efb41afd9925ffc4b62963abc0642cc1f7447c22/R/metrics-sample.R#L224\n? https://github.com/epiforecasts/scoringutils/blob/main/man/interpolate_median.Rd, https://github.com/epiforecasts/scoringutils/blob/efb41afd9925ffc4b62963abc0642cc1f7447c22/R/metrics-quantile.R#L530\n\n\nI suspect the issue might be related to images that get added using the following code (https://github.com/epiforecasts/scoringutils/blob/efb41afd9925ffc4b62963abc0642cc1f7447c22/R/documentation-templates.R#L106):\n\n```\n#' Illustration of required inputs for sample-based forecasts\n#' @details # Input format\n#' \\if{html}{\n#'? ?\\out{<div style=\"text-align: left\">}\n#'? ?\\figure{metrics-sample.png}{options: style=\"width:750px;max-width:100\\%;\"}\n#'? ?\\out{</div>}\n#' }\n#' \\if{latex}{\n#'? ?\\figure{metrics-sample.png}\n#' }\n#' @name illustration-input-metric-sample\n#' @keywords internal\nNULL\n```\n\nI've tried changing @details to @section, tried adding linebreaks, but that didn't help, unfortunately.\nAny help would be much appreciated, thank you!\n\nBest wishes,\nNikos\n\n\nCRAN Note:\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: HTML version of manual, Result: NOTE\n?Found the following HTML validation problems:\n?ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning: inserting implicit <p>\n?ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning: trimming empty <p>\n?ae_median_sample.html:71:1 (ae_median_sample.Rd:35): Warning: inserting implicit <p>\n?ae_median_sample.html:71:1 (ae_median_sample.Rd:35): Warning: trimming empty <p>\n?bias_quantile.html:133:1 (bias_quantile.Rd:85): Warning: inserting implicit <p>\n?bias_quantile.html:133:1 (bias_quantile.Rd:85): Warning: trimming empty <p>\n?bias_sample.html:94:1 (bias_sample.Rd:56): Warning: inserting implicit <p>\n?bias_sample.html:94:1 (bias_sample.Rd:56): Warning: trimming empty <p>\n?crps_sample.html:107:1 (crps_sample.Rd:73): Warning: inserting implicit <p>\n?crps_sample.html:107:1 (crps_sample.Rd:73): Warning: trimming empty <p>\n?dss_sample.html:70:1 (dss_sample.Rd:35): Warning: inserting implicit <p>\n?dss_sample.html:70:1 (dss_sample.Rd:35): Warning: trimming empty <p>\n?get_metrics.forecast_binary.html:82:1 (get_metrics.forecast_binary.Rd:39): Warning: inserting implicit <p>\n?get_metrics.forecast_binary.html:82:1 (get_metrics.forecast_binary.Rd:39): Warning: trimming empty <p>\n?get_metrics.forecast_point.html:92:1 (get_metrics.forecast_point.Rd:50): Warning: inserting implicit <p>\n?get_metrics.forecast_point.html:92:1 (get_metrics.forecast_point.Rd:50): Warning: trimming empty <p>\n?get_metrics.forecast_quantile.html:104:1 (get_metrics.forecast_quantile.Rd:52): Warning: inserting implicit <p>\n?get_metrics.forecast_quantile.html:104:1 (get_metrics.forecast_quantile.Rd:52): Warning: trimming empty <p>\n?get_metrics.forecast_sample.html:100:1 (get_metrics.forecast_sample.Rd:44): Warning: inserting implicit <p>\n?get_metrics.forecast_sample.html:100:1 (get_metrics.forecast_sample.Rd:44): Warning: trimming empty <p>\n?get_pairwise_comparisons.html:43:1 (get_pairwise_comparisons.Rd:74): Warning: inserting implicit <p>\n?get_pairwise_comparisons.html:43:1 (get_pairwise_comparisons.Rd:74): Warning: trimming empty <p>\n?illustration-input-metric-binary-point.html:35:1 (illustration-input-metric-binary-point.Rd:17): Warning: inserting implicit <p>\n?illustration-input-metric-binary-point.html:35:1 (illustration-input-metric-binary-point.Rd:17): Warning: trimming empty <p>\n?illustration-input-metric-nominal.html:35:1 (illustration-input-metric-nominal.Rd:17): Warning: inserting implicit <p>\n?illustration-input-metric-nominal.html:35:1 (illustration-input-metric-nominal.Rd:17): Warning: trimming empty <p>\n?illustration-input-metric-quantile.html:35:1 (illustration-input-metric-quantile.Rd:17): Warning: inserting implicit <p>\n?illustration-input-metric-quantile.html:35:1 (illustration-input-metric-quantile.Rd:17): Warning: trimming empty <p>\n?illustration-input-metric-sample.html:35:1 (illustration-input-metric-sample.Rd:17): Warning: inserting implicit <p>\n?illustration-input-metric-sample.html:35:1 (illustration-input-metric-sample.Rd:17): Warning: trimming empty <p>\n?interpolate_median.html:67:1 (interpolate_median.Rd:34): Warning: inserting implicit <p>\n?interpolate_median.html:67:1 (interpolate_median.Rd:34): Warning: trimming empty <p>\n?interval_coverage.html:83:1 (interval_coverage.Rd:46): Warning: inserting implicit <p>\n?interval_coverage.html:83:1 (interval_coverage.Rd:46): Warning: trimming empty <p>\n?logs_sample.html:81:1 (logs_sample.Rd:46): Warning: inserting implicit <p>\n?logs_sample.html:81:1 (logs_sample.Rd:46): Warning: trimming empty <p>\n?mad_sample.html:77:1 (mad_sample.Rd:42): Warning: inserting implicit <p>\n?mad_sample.html:77:1 (mad_sample.Rd:42): Warning: trimming empty <p>\n?pit_histogram_sample.html:120:32 (pit_histogram_sample.Rd:84): Warning: trimming empty <code>\n?pit_histogram_sample.html:127:32 (pit_histogram_sample.Rd:90): Warning: trimming empty <code>\n?quantile_score.html:119:1 (quantile_score.Rd:76): Warning: inserting implicit <p>\n?quantile_score.html:119:1 (quantile_score.Rd:76): Warning: trimming empty <p>\n?scoring-functions-binary.html:112:1 (scoring-functions-binary.Rd:78): Warning: inserting implicit <p>\n?scoring-functions-binary.html:112:1 (scoring-functions-binary.Rd:78): Warning: trimming empty <p>\n?scoring-functions-nominal.html:73:1 (scoring-functions-nominal.Rd:38): Warning: inserting implicit <p>\n?scoring-functions-nominal.html:73:1 (scoring-functions-nominal.Rd:38): Warning: trimming empty <p>\n?se_mean_sample.html:64:1 (se_mean_sample.Rd:34): Warning: inserting implicit <p>\n?se_mean_sample.html:64:1 (se_mean_sample.Rd:34): Warning: trimming empty <p>\n?wis.html:210:1 (wis.Rd:169): Warning: inserting implicit <p>\n?wis.html:210:1 (wis.Rd:169): Warning: trimming empty <p>\n\n\n\n\n\n\n\n\nR version 4.3.1 (2023-06-16)\nPlatform: x86_64-pc-linux-gnu (64-bit)\nRunning under: Ubuntu 22.04.2 LTS\n\nMatrix products: default\nBLAS:? ?/usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3\nLAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;??LAPACK version 3.10.0\n\nlocale:\n?[1] LC_CTYPE=en_US.UTF-8? ? ? ?LC_NUMERIC=C\n?[3] LC_TIME=en_US.UTF-8?? ? ? ?LC_COLLATE=en_US.UTF-8\n?[5] LC_MONETARY=en_US.UTF-8?? ?LC_MESSAGES=en_US.UTF-8\n?[7] LC_PAPER=en_US.UTF-8? ? ? ?LC_NAME=C\n?[9] LC_ADDRESS=C? ? ? ? ? ? ? ?LC_TELEPHONE=C\n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C\n\ntime zone: Etc/UTC\ntzcode source: system (glibc)\n\nattached base packages:\n[1] stats? ? ?graphics??grDevices utils? ? ?datasets??methods? ?base\n\nloaded via a namespace (and not attached):\n[1] compiler_4.3.1 tools_4.3.1\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear list,\n\nI'm trying to submit an updated version of R package scoringutils to CRAN (https://github.com/epiforecasts/scoringutils). I built the package using `R CMD build` with Roxygen2 7.3.2 both o",
+      "thread_id": "thread-e01e92d301f4",
+      "thread_depth": 0,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-463a22f483e5",
+      "message_id": "<20241031210608.3c959584@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-31T21:06:08+03:00",
+      "subject": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "subject_clean": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "in_reply_to": "<084d69e2-dc9e-41ba-aab9-21c0a5ef054f@Spark>",
+      "references": [
+        "<084d69e2-dc9e-41ba-aab9-21c0a5ef054f@Spark>"
+      ],
+      "body_plain": "? Thu, 31 Oct 2024 18:04:47 +0100\nNikos Bosse <nikosbosse at gmail.com> ?????:\n\n> ?Found the following HTML validation problems:\n> ?ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning:\n> inserting implicit <p>\n> ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning:\n> trimming empty <p>\n\nThank you for providing the links to the source code!\n\nThis can be diagnosed using R CMD Rdconv:\n\nR CMD Rdconv -o ae_median_quantile.html -t html ae_median_quantile.Rd\ntidy ae_median_quantile.html >/dev/null\n\nHere are the lines around the problematic part of the HTML document:\n\n-----------------------------------8<-----------------------------------\n<h3>Input format</h3>\n\n\n<div style=\"text-align: left\">\n<p><img src=\"../help/figures/metrics-quantile.png\"\nstyle=\"width:750px;max-width:100%;\" alt=\"metrics-quantile.png\" /> </div>\n\n\n</p> <!-- here: inserting implicit <p>, trimming empty <p> -->\n-----------------------------------8<-----------------------------------\n\nThis </p> is inserted here by Rd2HTML to terminate the paragraph\nstarted above (I think by \\figure if not by \\section). Rd2HTML doesn't\nknow that you started and ended a <div> before this line, which\nimplicitly ended the previous <p>, which makes the present </p> an\nerror.\n\nThe only way I was able to silence the warning while preserving the\nexisting tag structure was to make it \\out{</div><p>} to start the new\nparagraph and provide some text for the auto-inserted </p> to finish\nit. Maybe you'll come up with a better fix that doesn't rely on Rd2HTML\nauto-inserting the terminating </p>. I'm not sure, but could it help to\nset style=\"text-align: left;...\" on \\figure itself, without the <div>?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Thu, 31 Oct 2024 18:04:47 +0100\nNikos Bosse <nikosbosse at gmail.com> ?????:\n\n> ?Found the following HTML validation problems:\n> ?ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning:\n> ",
+      "thread_id": "thread-e01e92d301f4",
+      "thread_depth": 1,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-553e5163a354",
+      "message_id": "<20241031230606.641cf104@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2024-10-31T23:06:06+03:00",
+      "subject": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "subject_clean": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "in_reply_to": "<f78c3ec9-30ba-4edb-afe2-0244dff37715@gmail.com>",
+      "references": [
+        "<CAAsVnmJ=EurBKD6ber9umE68bH5ZO6HhmHuhX4ryHbWgXJ+cqQ@mail.gmail.com>",
+        "<20241031193914.54310b7e@arachnoid>",
+        "<f78c3ec9-30ba-4edb-afe2-0244dff37715@gmail.com>"
+      ],
+      "body_plain": "On Thu, 31 Oct 2024 17:59:01 +0100\nTomas Kalibera <tomas.kalibera at gmail.com> wrote:\n\n> for now, if you know an elegant, minimal way how to suppress\n> this, and have the time and energy, a patch would be welcome\n\nA fresh R-4.4.2 build compiled with clang-19 -fsanitize=function gives\nthe error:\n\n$ bin/R -q -s -e 'library(survival); survdiff(Surv(futime, fustat) ~ rx,data=ovarian)'\ndotcode.c:2008:2: runtime error: call to function survdiff2 through pointer to incorrect function type 'void (*)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *)'\n/tmp/RtmpW0SC00/R.INSTALL5d1b3402d0c5/survival/src/survdiff2.c:10: note: survdiff2 defined here\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior dotcode.c:2008:2 \n\nA suppression file will avoid the error without patching R:\n\n$ cat dotcode.supp \nfunction:dotcode.c\n\nor more fine-grained:\n\n$ cat dotcode.supp\nfunction:do_dotCode\n\n$ UBSAN_OPTIONS=\"suppressions=$(realpath dotcode.supp)\" bin/R -q -s -e 'library(survival); survdiff(Surv(futime, fustat) ~ rx,data=ovarian)'\nCall:\nsurvdiff(formula = Surv(futime, fustat) ~ rx, data = ovarian)\n<and so on>\n\nAlternatively, the following patch will also suppress the error:\n\n--- src/main/dotcode.c     2024-03-26 23:02:08.000000000 +0000\n+++ src/main/dotcode.c  2024-10-31 19:53:36.272334541 +0000\n@@ -1658,6 +1658,9 @@\n #define FILL 0xee\n #define NG 64\n \n+#ifdef __clang__\n+__attribute__((no_sanitize(\"function\")))\n+#endif\n attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)\n {\n     void **cargs, **cargs0 = NULL /* -Wall */;\n\nI hope I understood you correctly that you're looking for a tested\nworkaround.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "On Thu, 31 Oct 2024 17:59:01 +0100\nTomas Kalibera <tomas.kalibera at gmail.com> wrote:\n\n> for now, if you know an elegant, minimal way how to suppress\n> this, and have the time and energy, a patch wou",
+      "thread_id": "thread-9c812ddd198d",
+      "thread_depth": 3,
+      "month": "2024-10"
+    },
+    {
+      "id": "msg-ae7555797502",
+      "message_id": "<c0a29815-a074-4e2b-a0e7-f945bd072fe7@Spark>",
+      "from_name": "Nikos Bosse",
+      "from_email_hash": "e89c8563c1a60a46186de5103b68997b40ea14abfa8adbd46295a2ac0fb21241",
+      "date": "2024-10-31T21:32:34+01:00",
+      "subject": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "subject_clean": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "in_reply_to": "<20241031210608.3c959584@Tarkus>",
+      "references": [
+        "<084d69e2-dc9e-41ba-aab9-21c0a5ef054f@Spark>",
+        "<20241031210608.3c959584@Tarkus>"
+      ],
+      "body_plain": "Hi Ivan,\n\nThanks SO much for your quick help. Removing the <div> did not work. However, I now did\n\n```\n#' \\if{html}{\n#'? ?\\out{<div style=\"text-align: left\">}\n#'? ?\\figure{metrics-binary-point.png}{options: style=\"width:750px;max-width:100\\%;\"}\n#'? ?\\out{</div><p>}\n#'? ?Overview of required input format for binary and point forecasts\n#' }\n```\n\nwith an addition <p> and some text, following your suggestion. And that worked like a charm. Also thank your for showing me R CMD Rdconv.\n\nYou made my day!\nWith gratitude and best regards,\nNikos\nOn 31 Oct 2024 at 19:06 +0100, Ivan Krylov <ikrylov at disroot.org>, wrote:\n> ? Thu, 31 Oct 2024 18:04:47 +0100\n> Nikos Bosse <nikosbosse at gmail.com> ?????:\n>\n> > ?Found the following HTML validation problems:\n> > ?ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning:\n> > inserting implicit <p>\n> > ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning:\n> > trimming empty <p>\n>\n> Thank you for providing the links to the source code!\n>\n> This can be diagnosed using R CMD Rdconv:\n>\n> R CMD Rdconv -o ae_median_quantile.html -t html ae_median_quantile.Rd\n> tidy ae_median_quantile.html >/dev/null\n>\n> Here are the lines around the problematic part of the HTML document:\n>\n> -----------------------------------8<-----------------------------------\n> <h3>Input format</h3>\n>\n>\n> <div style=\"text-align: left\">\n> <p><img src=\"../help/figures/metrics-quantile.png\"\n> style=\"width:750px;max-width:100%;\" alt=\"metrics-quantile.png\" /> </div>\n>\n>\n> </p> <!-- here: inserting implicit <p>, trimming empty <p> -->\n> -----------------------------------8<-----------------------------------\n>\n> This </p> is inserted here by Rd2HTML to terminate the paragraph\n> started above (I think by \\figure if not by \\section). Rd2HTML doesn't\n> know that you started and ended a <div> before this line, which\n> implicitly ended the previous <p>, which makes the present </p> an\n> error.\n>\n> The only way I was able to silence the warning while preserving the\n> existing tag structure was to make it \\out{</div><p>} to start the new\n> paragraph and provide some text for the auto-inserted </p> to finish\n> it. Maybe you'll come up with a better fix that doesn't rely on Rd2HTML\n> auto-inserting the terminating </p>. I'm not sure, but could it help to\n> set style=\"text-align: left;...\" on \\figure itself, without the <div>?\n>\n> --\n> Best regards,\n> Ivan\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Ivan,\n\nThanks SO much for your quick help. Removing the <div> did not work. However, I now did\n\n```\n#' \\if{html}{\n#'? ?\\out{<div style=\"text-align: left\">}\n#'? ?\\figure{metrics-binary-point.png}{op",
+      "thread_id": "thread-e01e92d301f4",
+      "thread_depth": 2,
+      "month": "2024-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-794deac68953",
+      "subject": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "message_count": 1,
+      "participants": [
+        "Jan van der Laan"
+      ],
+      "started": "2024-10-01T09:32:59+02:00",
+      "last_reply": "2024-10-01T09:32:59+02:00",
+      "root_message_id": "msg-794deac68953"
+    },
+    {
+      "id": "thread-980e176a5025",
+      "subject": "[R-pkg-devel] Question about Debian installation error",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "Yu Yang"
+      ],
+      "started": "2024-10-01T13:39:21+03:00",
+      "last_reply": "2024-10-01T21:05:03-04:00",
+      "root_message_id": "msg-980e176a5025"
+    },
+    {
+      "id": "thread-18fe02c0cf9d",
+      "subject": "[R-pkg-devel] Deprecating apparent S3 method, changing name",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "Murray Efford"
+      ],
+      "started": "2024-10-01T14:45:37+03:00",
+      "last_reply": "2024-10-02T01:04:29+00:00",
+      "root_message_id": "msg-18fe02c0cf9d"
+    },
+    {
+      "id": "thread-9960cf4951ef",
+      "subject": "[R-pkg-devel] Question about examples/tests run-time",
+      "message_count": 2,
+      "participants": [
+        "Lluís Revilla",
+        "Mallory Flynn"
+      ],
+      "started": "2024-10-09T13:26:24-07:00",
+      "last_reply": "2024-10-10T00:00:48+02:00",
+      "root_message_id": "msg-9960cf4951ef"
+    },
+    {
+      "id": "thread-c096028b7ada",
+      "subject": "[R-pkg-devel] Help with 2 NOTES",
+      "message_count": 4,
+      "participants": [
+        "Ivan Krylov",
+        "Jaime Salvador"
+      ],
+      "started": "2024-10-09T20:42:24+00:00",
+      "last_reply": "2024-10-10T16:29:17+03:00",
+      "root_message_id": "msg-c096028b7ada"
+    },
+    {
+      "id": "thread-1cb45de464b1",
+      "subject": "[R-pkg-devel] Installation took CPU time elapsed time for rust-based package",
+      "message_count": 3,
+      "participants": [
+        "D Z",
+        "Ivan Krylov",
+        "Josiah Parry"
+      ],
+      "started": "2024-10-16T17:38:27+00:00",
+      "last_reply": "2024-10-16T12:30:54-07:00",
+      "root_message_id": "msg-1cb45de464b1"
+    },
+    {
+      "id": "thread-8cf2da36eb81",
+      "subject": "[R-pkg-devel] Installation error when submitting package to CRAN",
+      "message_count": 6,
+      "participants": [
+        "Ivan Krylov",
+        "Jeff Newmiller",
+        "Michael Mahony",
+        "Simon Urbanek",
+        "Uwe Ligges"
+      ],
+      "started": "2024-10-16T20:04:54+00:00",
+      "last_reply": "2024-10-17T10:55:25+02:00",
+      "root_message_id": "msg-8cf2da36eb81"
+    },
+    {
+      "id": "thread-3b46dc5a5151",
+      "subject": "[R-pkg-devel] check_equal() test fails on ATLAS",
+      "message_count": 1,
+      "participants": [
+        "Noah Greifer"
+      ],
+      "started": "2024-10-24T12:55:32-04:00",
+      "last_reply": "2024-10-24T12:55:32-04:00",
+      "root_message_id": "msg-3b46dc5a5151"
+    },
+    {
+      "id": "thread-75e7d1019ec8",
+      "subject": "[R-pkg-devel]  *** caught segfault *** address (nil), cause 'unknown'",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "jérémy Gelb"
+      ],
+      "started": "2024-10-26T12:18:07-04:00",
+      "last_reply": "2024-10-28T14:42:53+03:00",
+      "root_message_id": "msg-75e7d1019ec8"
+    },
+    {
+      "id": "thread-4b614ade067e",
+      "subject": "[R-pkg-devel] DESCRIPTION file corrections for accepted package",
+      "message_count": 8,
+      "participants": [
+        "Duncan Murdoch",
+        "Georgi Boshnakov",
+        "Gianmarco Alberti",
+        "Joshua Ulrich",
+        "Simon Urbanek"
+      ],
+      "started": "2024-10-27T11:03:41+01:00",
+      "last_reply": "2024-10-30T11:04:14+13:00",
+      "root_message_id": "msg-4b614ade067e"
+    },
+    {
+      "id": "thread-c16b4621f76c",
+      "subject": "[R-pkg-devel] clang-san issue with R vignettes using ggplot2",
+      "message_count": 3,
+      "participants": [
+        "Ben Bolker",
+        "Ivan Krylov",
+        "Kaifeng Lu"
+      ],
+      "started": "2024-10-29T22:21:16-04:00",
+      "last_reply": "2024-10-30T09:57:29+03:00",
+      "root_message_id": "msg-c16b4621f76c"
+    },
+    {
+      "id": "thread-9c812ddd198d",
+      "subject": "[R-pkg-devel] Warnings related to functions from the survival package",
+      "message_count": 4,
+      "participants": [
+        "Ivan Krylov",
+        "Kaifeng Lu",
+        "Tomas Kalibera"
+      ],
+      "started": "2024-10-31T12:06:25-04:00",
+      "last_reply": "2024-10-31T23:06:06+03:00",
+      "root_message_id": "msg-9c812ddd198d"
+    },
+    {
+      "id": "thread-e01e92d301f4",
+      "subject": "[R-pkg-devel] HTML validation error in roxygen2 generated documentation",
+      "message_count": 3,
+      "participants": [
+        "Ivan Krylov",
+        "Nikos Bosse"
+      ],
+      "started": "2024-10-31T18:04:47+01:00",
+      "last_reply": "2024-10-31T21:32:34+01:00",
+      "root_message_id": "msg-e01e92d301f4"
+    }
+  ]
+}

@@ -1,0 +1,1120 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-02",
+  "messages": [
+    {
+      "id": "msg-a6dff9024806",
+      "message_id": "<CAA0dk0Hzbf+_Y0YdWjYBVD4fyaeLKwgyKgHOSfGbxGaGfySLAg@mail.gmail.com>",
+      "from_name": "Elias T. Krainski",
+      "from_email_hash": "4189cfc8e3819569c24fe06d8406fed4466253426dfb46daa7b2e849edf239c4",
+      "date": "2026-02-03T14:34:14+03:00",
+      "subject": "[R-pkg-devel] gcc-san fail with s2 package",
+      "subject_clean": "[R-pkg-devel] gcc-san fail with s2 package",
+      "in_reply_to": "<CAA0dk0Gst5e-BtGT=bE+c0OxwygQzwk9Ret9kXs_Df6K9oAGkw@mail.gmail.com>",
+      "references": [
+        "<CAA0dk0Gst5e-BtGT=bE+c0OxwygQzwk9Ret9kXs_Df6K9oAGkw@mail.gmail.com>"
+      ],
+      "body_plain": "Let me try to clarify the issue. An earlier version has failed a memory\nsanitize check. I was able to solve it. But, at the same time, some\ndependency was added, which includes the 's2' package but is not a direct\ndependency.\n\nWhat seems to happen now is that the gcc-san special check is performed in\nan environment where all the dependency is compiled, but it fails to\ncompile 's2', as far as I can see from\nhttps://win-builder.r-project.org/incoming_pretest/graphpcor_0.1.19_20260131_125536/specialChecks/gcc-san/\n\nMy current approach is to do a workaround to remove such a dependency. I\nhad to do it also to another one recently because of a similar issue (\nhttps://win-builder.r-project.org/incoming_pretest/graphpcor_0.1.17_20260126_215413/specialChecks/clang-san/\n)\n\nOn Sat, 31 Jan 2026 at 22:21, Elias T. Krainski <eliaskrainski at gmail.com>\nwrote:\n\n> I am trying to get a new version of a package; however, the gcc-san test\n> failed:\n>\n> /usr/include/absl/container/internal/raw_hash_set.h:4052:56:   in ?constexpr? expansion of ?absl::debian7::container_internal::hash_policy_traits<absl::debian7::container_internal::FlatHashSetPolicy<s2shapeutil::ShapeEdgeId>, void>::get_hash_slot_fn<absl::debian7::hash_internal::Hash<s2shapeutil::ShapeEdgeId> >()?\n> /usr/include/absl/container/internal/hash_policy_traits.h:163:54: error: ?(absl::debian7::container_internal::TypeErasedApplyToSlotFn<absl::debian7::hash_internal::Hash<s2shapeutil::ShapeEdgeId>, s2shapeutil::ShapeEdgeId> == 0)? is not a constant expression\n>   163 |     return Policy::template get_hash_slot_fn<Hash>() == nullptr\n>       |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~\n> make[1]: *** [/home/hornik/tmp/R-d-gcc-xtra/etc/Makeconf:201: s2-cell-union.o] Error 1\n> make[1]: Leaving directory '/home/hornik/tmp/scratch/RtmpVRwpdp/R.INSTALL260db63d7805ba/s2/src'\n> ERROR: compilation failed for package ?s2?\n> * removing ?/home/hornik/tmp/CRAN_special_gcc-san/Library/s2?\n>\n> Since my package isn't directly dependent on this one (it's fourth order),\n> I'm not sure how to proceed. Actually, I was surprised by this ERROR with a\n> package that is on CRAN.\n>\n> Elias\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Let me try to clarify the issue. An earlier version has failed a memory\nsanitize check. I was able to solve it. But, at the same time, some\ndependency was added, which includes the 's2' package but is",
+      "thread_id": "thread-a6dff9024806",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-558a95a1b99f",
+      "message_id": "<20260203150005.59ee8e8a@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-03T15:00:05+03:00",
+      "subject": "[R-pkg-devel] gcc-san fail with s2 package",
+      "subject_clean": "[R-pkg-devel] gcc-san fail with s2 package",
+      "in_reply_to": "<CAA0dk0Hzbf+_Y0YdWjYBVD4fyaeLKwgyKgHOSfGbxGaGfySLAg@mail.gmail.com>",
+      "references": [
+        "<CAA0dk0Gst5e-BtGT=bE+c0OxwygQzwk9Ret9kXs_Df6K9oAGkw@mail.gmail.com>",
+        "<CAA0dk0Hzbf+_Y0YdWjYBVD4fyaeLKwgyKgHOSfGbxGaGfySLAg@mail.gmail.com>"
+      ],
+      "body_plain": "? Tue, 3 Feb 2026 14:34:14 +0300\n\"Elias T. Krainski\" <eliaskrainski at gmail.com> ?????:\n\n> What seems to happen now is that the gcc-san special check is\n> performed in an environment where all the dependency is compiled, but\n> it fails to compile 's2', as far as I can see from\n> https://win-builder.r-project.org/incoming_pretest/graphpcor_0.1.19_20260131_125536/specialChecks/gcc-san/\n\nVery annoying situation to be in. g++ fails to compile these source\nfiles because of the -fsanitize=undefined flag. This is reproducible in\nthe rocker/r-devel-san container, or by hand in a Debian testing\ninstallation.\n\nThis is probably a compiler bug, although it could also be a bug in the\nlibabsl-dev version distributed in Debian testing. If you have the\ntime, try reducing the example to a minimal file that fails to compile\nwith constexpr-related errors when -fsanitize=undefined is added, then\nreporting it to the GCC developers, or at least asking in the #gcc\nchannel on libera.chat. I can try to find the time to help with this\nlater, but not right now.\n\n's2' developers seem to be aware of this [*], but there isn't much to\nfix in the package source code.\n\n[*] https://github.com/r-spatial/s2/issues/270#issuecomment-2881978818\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 3 Feb 2026 14:34:14 +0300\n\"Elias T. Krainski\" <eliaskrainski at gmail.com> ?????:\n\n> What seems to happen now is that the gcc-san special check is\n> performed in an environment where all the de",
+      "thread_id": "thread-a6dff9024806",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-4ab7cebb9e08",
+      "message_id": "<CAAsVnmLx2PpVEtKNkpc5DOEDRgvV4FFpbprHQaJ5tdJYMd0SQA@mail.gmail.com>",
+      "from_name": "Kaifeng Lu",
+      "from_email_hash": "17c92f9e64b6cdbbfd89f2c056558e287a7349939b641a7d0875418c8360a44c",
+      "date": "2026-02-06T10:23:27-05:00",
+      "subject": "[R-pkg-devel] macOS build error 'R_ext/Callbacks.h' file not found",
+      "subject_clean": "[R-pkg-devel] macOS build error 'R_ext/Callbacks.h' file not found",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am currently submitting a new version of the trtswitch package to CRAN\nand have encountered a fatal error during the macOS arm64 build process:\nfatal error: 'R_ext/Callbacks.h' file not found\nThe full build log for this submission is available here\nmacOS build result for 1770388945-93cbe1227ad944fa\n<https://mac.r-project.org/macbuilder/results/1770388945-93cbe1227ad944fa/>\n\nI was able to replicate this issue using rhub::rhub_check() on both m1-san\nand macos-arm64 (R-devel).\n\nWhile the Linux and Windows builds pass successfully, those logs do include\na note regarding R.h and Rinternals.h being included before Rcpp.h headers.\n\nInterestingly, when I attempted to rebuild the currently published version\n(v0.2.3), I encountered the same errors. This suggests that the issue may\nstem from recent changes in the macOS build environment or stricter R-devel\nchecks introduced earlier this year.\n\nI would appreciate any advice or suggestions you might have to resolve\nthese header conflicts and missing file errors.\n\nBest regards,\nKaifeng\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am currently submitting a new version of the trtswitch package to CRAN\nand have encountered a fatal error during the macOS arm64 build process:\nfatal error: 'R_ext/Callbacks.h' file not found\nThe fu",
+      "thread_id": "thread-4ab7cebb9e08",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-c50041bf7989",
+      "message_id": "<27014.4420.695763.665186@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "a92f4a07d4e3cad5fba985e30db2b0fff598d5ddfbadbb2e91ffe91636400c62",
+      "date": "2026-02-06T17:05:24+01:00",
+      "subject": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "subject_clean": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "in_reply_to": "<fake-VM-id.77899d03ec145cba95e903dc60d02ba7@talos.iv>",
+      "references": [
+        "<CAAsVnmLx2PpVEtKNkpc5DOEDRgvV4FFpbprHQaJ5tdJYMd0SQA@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> Kaifeng Lu \n>>>>>     on Fri, 6 Feb 2026 10:23:27 -0500 writes:\n\n    > I am currently submitting a new version of the trtswitch package to CRAN\n    > and have encountered a fatal error during the macOS arm64 build process:\n    > fatal error: 'R_ext/Callbacks.h' file not found\n    > The full build log for this submission is available here\n    > macOS build result for 1770388945-93cbe1227ad944fa\n    > <https://mac.r-project.org/macbuilder/results/1770388945-93cbe1227ad944fa/>\n\n    > I was able to replicate this issue using rhub::rhub_check() on both m1-san\n    > and macos-arm64 (R-devel).\n\nThe NEWS for R-devel (which will become the next version of R ca. in April)\nhave contained for a couple of weeks\n\n    * The non-API header files R_ext/Callbacks.h and R_ext/PrtUtil.h\n      are no longer copied to the installed includes directory. The\n      R_ObjectTable type definitions formally in R_ext/Callbacks.h are\n      now available in the new header file R_ext/ObjectTable.h.  This\n      new header file should be used in packages instead of\n      R_ext/Callbacks.h.\n\nSo, source code accessing these will have to be adapted.\nThey were never API, but people *could* misuse them.\n\nAs mention Rcpp, maybe you are using an outdated version of Rcpp?\nRcpp and the Rcpp<some> package were all adapted to the above\nnews, AFAIK mostly even before their exclusion became active.\n\nMartin\n\n\n    > While the Linux and Windows builds pass successfully, those logs do include\n    > a note regarding R.h and Rinternals.h being included before Rcpp.h headers.\n\n    > Interestingly, when I attempted to rebuild the currently published version\n    > (v0.2.3), I encountered the same errors. This suggests that the issue may\n    > stem from recent changes in the macOS build environment or stricter R-devel\n    > checks introduced earlier this year.\n\n    > I would appreciate any advice or suggestions you might have to resolve\n    > these header conflicts and missing file errors.\n\n    > Best regards,\n    > Kaifeng\n\n    > [[alternative HTML version deleted]]\n\n    > ______________________________________________\n    > R-package-devel at r-project.org mailing list\n    > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": ">>>>> Kaifeng Lu \n>>>>>     on Fri, 6 Feb 2026 10:23:27 -0500 writes:\n\n    > I am currently submitting a new version of the trtswitch package to CRAN\n    > and have encountered a fatal error during th",
+      "thread_id": "thread-4ab7cebb9e08",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-ed4bef50e5ca",
+      "message_id": "<20260206190751.09bf0c5c@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-06T19:07:51+03:00",
+      "subject": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "subject_clean": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "in_reply_to": "<CAAsVnmLx2PpVEtKNkpc5DOEDRgvV4FFpbprHQaJ5tdJYMd0SQA@mail.gmail.com>",
+      "references": [
+        "<CAAsVnmLx2PpVEtKNkpc5DOEDRgvV4FFpbprHQaJ5tdJYMd0SQA@mail.gmail.com>"
+      ],
+      "body_plain": "? Fri, 6 Feb 2026 10:23:27 -0500\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n> I am currently submitting a new version of the trtswitch package to\n> CRAN and have encountered a fatal error during the macOS arm64 build\n> process: fatal error: 'R_ext/Callbacks.h' file not found\n> The full build log for this submission is available here\n> macOS build result for 1770388945-93cbe1227ad944fa\n> <https://mac.r-project.org/macbuilder/results/1770388945-93cbe1227ad944fa/>\n\n>> In file included from\n>> .../Rcpp/include/Rcpp.h:27: ...Rcpp/include/RcppCommon.h:75:10:\n>> fatal error: 'R_ext/Callbacks.h' file not found\n\nThis was fixed in Rcpp in December 2025 [1] and should work well with\nthe latest version of Rcpp. The macOS Builder seems to be behind on\nsome package updates right now.\n\n-- \nBest regards,\nIvan\n\n[1] https://github.com/RcppCore/Rcpp/pull/1418",
+      "body_snippet": "? Fri, 6 Feb 2026 10:23:27 -0500\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n> I am currently submitting a new version of the trtswitch package to\n> CRAN and have encountered a fatal error during the ",
+      "thread_id": "thread-4ab7cebb9e08",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-d803256a7886",
+      "message_id": "<CAAsVnmLOAeNu8ieAbD6QovbFS3aXQmAnYnK54gdsyv7egBxZ6A@mail.gmail.com>",
+      "from_name": "Kaifeng Lu",
+      "from_email_hash": "17c92f9e64b6cdbbfd89f2c056558e287a7349939b641a7d0875418c8360a44c",
+      "date": "2026-02-06T11:58:42-05:00",
+      "subject": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "subject_clean": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "in_reply_to": "<20260206190751.09bf0c5c@arachnoid>",
+      "references": [
+        "<CAAsVnmLx2PpVEtKNkpc5DOEDRgvV4FFpbprHQaJ5tdJYMd0SQA@mail.gmail.com>",
+        "<20260206190751.09bf0c5c@arachnoid>"
+      ],
+      "body_plain": "Hi Martin and Ivan,\n\nThank you both for the clarification.\n\nI have confirmed that I am using the most recent versions for my\nenvironment: R 4.5.2, Rcpp 1.1.1, RcppParallel 5.1.11-1, and RcppThread\n2.3.0. Based on our discussion, I will wait for the macOS Builder updates\nto conclude before re-checking the build results.\n\nDoes anyone have an estimate on when the current CRAN macOS builder updates\nare expected to complete?\n\nThank you again for your guidance.\n\nBest regards,\nKaifeng\n\n\nOn Fri, Feb 6, 2026 at 11:07?AM Ivan Krylov <ikrylov at disroot.org> wrote:\n\n> ? Fri, 6 Feb 2026 10:23:27 -0500\n> Kaifeng Lu <kaifenglu at gmail.com> ?????:\n>\n> > I am currently submitting a new version of the trtswitch package to\n> > CRAN and have encountered a fatal error during the macOS arm64 build\n> > process: fatal error: 'R_ext/Callbacks.h' file not found\n> > The full build log for this submission is available here\n> > macOS build result for 1770388945-93cbe1227ad944fa\n> > <\n> https://mac.r-project.org/macbuilder/results/1770388945-93cbe1227ad944fa/>\n>\n> >> In file included from\n> >> .../Rcpp/include/Rcpp.h:27: ...Rcpp/include/RcppCommon.h:75:10:\n> >> fatal error: 'R_ext/Callbacks.h' file not found\n>\n> This was fixed in Rcpp in December 2025 [1] and should work well with\n> the latest version of Rcpp. The macOS Builder seems to be behind on\n> some package updates right now.\n>\n> --\n> Best regards,\n> Ivan\n>\n> [1] https://github.com/RcppCore/Rcpp/pull/1418\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Martin and Ivan,\n\nThank you both for the clarification.\n\nI have confirmed that I am using the most recent versions for my\nenvironment: R 4.5.2, Rcpp 1.1.1, RcppParallel 5.1.11-1, and RcppThread\n2.3",
+      "thread_id": "thread-4ab7cebb9e08",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-a94067715361",
+      "message_id": "<C0E02A3A-B6DE-45C5-A0FF-031AE1702A66@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-02-10T12:36:23+13:00",
+      "subject": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "subject_clean": "[R-pkg-devel]  macOS build error 'R_ext/Callbacks.h' file not found",
+      "in_reply_to": "<CAAsVnmLOAeNu8ieAbD6QovbFS3aXQmAnYnK54gdsyv7egBxZ6A@mail.gmail.com>",
+      "references": [
+        "<CAAsVnmLx2PpVEtKNkpc5DOEDRgvV4FFpbprHQaJ5tdJYMd0SQA@mail.gmail.com>",
+        "<20260206190751.09bf0c5c@arachnoid>",
+        "<CAAsVnmLOAeNu8ieAbD6QovbFS3aXQmAnYnK54gdsyv7egBxZ6A@mail.gmail.com>"
+      ],
+      "body_plain": "Kaifeng,\n\nthere was an issue where the MacBuilder was using inadvertently big-sur CRAN binaries instead of sonoma so the packages were outdated. This has been fixed so should ok now (thanks to Ivan earlier helping to chase the issue).\n\nCheers,\nSimon\n\n\n\n> On Feb 7, 2026, at 05:58, Kaifeng Lu <kaifenglu at gmail.com> wrote:\n> \n> Hi Martin and Ivan,\n> \n> Thank you both for the clarification.\n> \n> I have confirmed that I am using the most recent versions for my\n> environment: R 4.5.2, Rcpp 1.1.1, RcppParallel 5.1.11-1, and RcppThread\n> 2.3.0. Based on our discussion, I will wait for the macOS Builder updates\n> to conclude before re-checking the build results.\n> \n> Does anyone have an estimate on when the current CRAN macOS builder updates\n> are expected to complete?\n> \n> Thank you again for your guidance.\n> \n> Best regards,\n> Kaifeng\n> \n> \n> On Fri, Feb 6, 2026 at 11:07?AM Ivan Krylov <ikrylov at disroot.org> wrote:\n> \n>> ? Fri, 6 Feb 2026 10:23:27 -0500\n>> Kaifeng Lu <kaifenglu at gmail.com> ?????:\n>> \n>>> I am currently submitting a new version of the trtswitch package to\n>>> CRAN and have encountered a fatal error during the macOS arm64 build\n>>> process: fatal error: 'R_ext/Callbacks.h' file not found\n>>> The full build log for this submission is available here\n>>> macOS build result for 1770388945-93cbe1227ad944fa\n>>> <\n>> https://mac.r-project.org/macbuilder/results/1770388945-93cbe1227ad944fa/>\n>> \n>>>> In file included from\n>>>> .../Rcpp/include/Rcpp.h:27: ...Rcpp/include/RcppCommon.h:75:10:\n>>>> fatal error: 'R_ext/Callbacks.h' file not found\n>> \n>> This was fixed in Rcpp in December 2025 [1] and should work well with\n>> the latest version of Rcpp. The macOS Builder seems to be behind on\n>> some package updates right now.\n>> \n>> --\n>> Best regards,\n>> Ivan\n>> \n>> [1] https://github.com/RcppCore/Rcpp/pull/1418\n>> \n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Kaifeng,\n\nthere was an issue where the MacBuilder was using inadvertently big-sur CRAN binaries instead of sonoma so the packages were outdated. This has been fixed so should ok now (thanks to Ivan ea",
+      "thread_id": "thread-4ab7cebb9e08",
+      "thread_depth": 3,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-8904280fdb8b",
+      "message_id": "<CACrL82X87PrjuatgvDbEF34p2s31eM52qhoLFpC6NfkKePVb2w@mail.gmail.com>",
+      "from_name": "Nicholas Tierney",
+      "from_email_hash": "15ee301a0dc60167c9147bb3b0d9d877aa76d9c01e3e30623d3848b5b834f8d5",
+      "date": "2026-02-11T10:15:39+11:00",
+      "subject": "[R-pkg-devel]  Issue \"Re-building vignettes had CPU time 4.1 times elapsed time\"",
+      "subject_clean": "[R-pkg-devel]  Issue \"Re-building vignettes had CPU time 4.1 times elapsed time\"",
+      "in_reply_to": "<20260129172652.3f0aebf7@arachnoid>",
+      "references": [
+        "<CACrL82WnR_dM5QHJLHb_dRVn_xacsKEY0TLfOf1JDZ=PcDhgvg@mail.gmail.com>",
+        "<20260129172652.3f0aebf7@arachnoid>"
+      ],
+      "body_plain": "Hi Ivan,\n\nThank you for investigating this so thoroughly! My apologies for not\nreplying sooner.\n\nI think it is a good practice to assume up to 2 cores for most users.\nUnfortunately I am unable to trigger this NOTE locally, even running:\n\n```\n_R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_=1.1 \\\n R CMD check --timings greta_0.5.1.tar.gz\n```\n\nI have tried setting default chains and cpu to be 2, but it seems, based on\nyour evidence perhaps that there is something inside tensorflow, or in\nreticulate that might be triggering this. I will reach out to the\ndevelopers of tensorflow and reticulate to query this.\n\nThank you so much again for your help!\n\nNick\n\n\nOn Fri, 30 Jan 2026 at 01:26, Ivan Krylov <ikrylov at disroot.org> wrote:\n\n> ? Thu, 29 Jan 2026 11:36:00 +1100\n> Nicholas Tierney <nicholas.tierney at gmail.com> ?????:\n>\n> > I also note that I cannot reproduce the same error with:\n> >\n> > ```\n> > rcmdcheck::rcmdcheck(args = c(\"--no-manual\", \"--as-cran\",\n> > \"--no-multiarch\"), env =\n> > \"_R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_ = 53\")\n> > ```\n>\n> This threshold is very large. It makes more sense to lower it, not\n> raise, in order to make the test more sensitive. On a machine with 16\n> hyper-threads,\n>\n> _R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_=1.1 \\\n>  R CMD check --timings greta_0.5.1.tar.gz\n>\n> ...reproduces the NOTE. (The more CPUs on your machine, the more the\n> chance that something trying to use all of them will cause a noticeable\n> spike in CPU time. The machines running CRAN checks have even more\n> logical CPUs.) In particular,\n>\n> list.files(\"vignettes\", full.names=TRUE, patt = '[.]Rmd$') |>\n>  setNames(nm = _) |> lapply(\\(.)\n>   tools::buildVignette(., encoding='UTF-8') |> system.time()\n>  )\n>\n> shows that it's the get_started.Rmd vignette (62.765 s userspace CPU\n> time vs. 27.745 s elapsed time).\n>\n> What exactly starts these threads? 'pthread_create' is not the complete\n> answer, but it usually points out some suspects.\n>\n> ltrace -w 10 -f -e pthread_create -- \\\n>  env R_LIBS_USER=greta.Rcheck:%U \\\n>  R -f greta.Rcheck/greta/doc/get_started.R\n>\n> ...There are a lot of suspects.\n>\n> Here is a copy of OpenBLAS bundled with a Python wheel that 'greta'\n> installs starting 16 threads when greta:::check_tf_version is called:\n>\n> > knitr::opts_chunk$set(echo = TRUE,\n> +                       eval = greta:::check_tf_version(\"message\"),\n> +                       purl = greta:::check_tf_version(\"message\"),\n> +                       cache = TRUE,\n> +                       comment = NA,\n> +                       progress = FALSE)\n> ...\n> [pid 25013]\n> libopenblas64_p-r0-0cf96a72.3.23.dev.so->pthread_create(0x7f36ed7ccd80, 0,\n> 0x7f36ebb50660, 0) = 0\n>                         blas_thread_init.part.0 (ip = 0x7f36ebb50a2a)\n>                         blas_thread_init (ip = 0x7f36ebb50ba9)\n>                         gotoblas_init (ip = 0x7f36eb91807f)\n>                         __nptl_change_stack_perm (ip = 0x7f36ef0959ce)\n>                         __nptl_change_stack_perm (ip = 0x7f36ef095ab4)\n>                         _dl_catch_exception (ip = 0x7f36eeed9274)\n>                         _dl_rtld_di_serinfo (ip = 0x7f36ef09c21e)\n>                         _dl_catch_exception (ip = 0x7f36eeed921a)\n>                         _dl_find_dso_for_object (ip = 0x7f36ef09c5b8)\n>                         dlmopen (ip = 0x7f36eee0f4b8)\n>\n> By the time the following code block runs and tries to set\n> OMP_THREAD_LIMIT=2, it's too late. (It's usually too late to set\n> OpenMP-related variables inside an R script, because the OpenMP runtime\n> reads them once at process startup, before any R code can run.)\n>\n> It might help to set OPENBLAS_NUM_THREADS=2 first, then implicitly load\n> greta by calling greta:::check_tf_version(...). Though judging by later\n> results, it's probably a red herring.\n>\n> Here's node.js creating 16 worker threads through the 'V8' package:\n>\n> > DiagrammeR::export_graph(attr(gr, \"dgr_graph\"),\n> +                          file_name = \"figures/full_graph.png\",\n> +                          file_type = \"png\",\n> +                          width = 958 * 2,\n> +                          height = 450 * 2)\n> [pid 24967] libnode.so.108->pthread_create(0x555bfee583c0, 0x7ffde39e7c50,\n> 0x7fc7a9f49280, 0x555bfee582f0) = 0\n>                         _ZN2v84base6Thread5StartEv (ip = 0x7fc7a9f4a424)\n>\n> _ZN2v88platform30DefaultWorkerThreadsTaskRunner12WorkerThreadC1EPS1_ (ip =\n> 0x7fc7a95fab76)\n>\n> _ZN2v88platform30DefaultWorkerThreadsTaskRunnerC2EjPFdvE (ip =\n> 0x7fc7a95fadbc)\n>\n> _ZN2v88platform15DefaultPlatform37EnsureBackgroundTaskRunnerInitializedEv\n> (ip = 0x7fc7a95f861e)\n>\n> _ZN2v88platform18NewDefaultPlatformEiNS0_15IdleTaskSupportENS0_21InProcessStackDumpingESt10unique_p\n> (ip = 0x7fc7a95f8849)\n>                         R_init_V8 (ip = 0x7fc7b001d609)\n>                         AddDLL (ip = 0x555baec0a5f1)\n>                         do_dynload (ip = 0x555baec0d0d1)\n>                         bcEval_loop (ip = 0x555baecd7100)\n>                         bcEval (ip = 0x555baece5477)\n>\n> Here's librsvg -> pango creating worker threads:\n>\n> > DiagrammeR::export_graph(attr(gr, \"dgr_graph\"),\n> +                          file_name = \"figures/coef_graph.png\",\n> +                          file_type = \"png\",\n> +                          width = 325 * 2,\n> +                          height = 123 * 2)\n> [pid 24967] libglib-2.0.so.0->pthread_create(0x555bff3ad6d0,\n> 0x7ffde39e6c60, 0x7fc7a0003650, 0x555bff3ad6a0) = 0\n>                         g_mutex_init (ip = 0x7fc7a0003fb5)\n>                         g_thread_new (ip = 0x7fc79ffd9fa8)\n>                         pango_fc_font_map_get_config (ip = 0x7fc79fae816f)\n>                         pango_glyph_string_x_to_index (ip = 0x7fc7a00b5803)\n>                         pango_layout_line_get_extents (ip = 0x7fc7a00c583e)\n>                         pango_layout_index_to_line_x (ip = 0x7fc7a00c7efe)\n>                         pango_layout_get_size (ip = 0x7fc7a00c8126)\n>                         rsvg_pixbuf_from_file_at_max_size (ip =\n> 0x7fc7a074e6d2)\n>                         rsvg_pixbuf_from_file_at_max_size (ip =\n> 0x7fc7a06661c6)\n>                         rsvg_error_get_type (ip = 0x7fc7a05f869e)\n>\n> Do they consume a lot of CPU? Probably not.\n>\n> Here's Tensorflow creating 16 worker threads:\n>\n> > draws <- mcmc(m, n_samples = 1000)\n> [pid 24967] libtensorflow_framework.so.2->pthread_create(0x555bff178668,\n> 0x7ffde39e8ed8, 0x7fc7eb867150, 0x555bfea36d30) = 0\n>\n> _ZN3tsl12_GLOBAL__N_18PosixEnv11StartThreadERKNS_13ThreadOptionsERKNSt7__cxx1112basic_stringIcSt11c\n> (ip = 0x7fc7eb866567)\n>\n> _ZN3tsl6thread16EigenEnvironment12CreateThreadESt8functionIFvvEE (ip =\n> 0x7fc7eacd0a39)\n>\n> _ZN5Eigen15ThreadPoolTemplIN3tsl6thread16EigenEnvironmentEEC2EibS3_ (ip =\n> 0x7fc7eaccefaa)\n>\n> _ZN3tsl6thread10ThreadPoolC2EPNS_3EnvERKNS_13ThreadOptionsERKNSt7__cxx1112basic_stringIcSt11char_tr\n> (ip = 0x7fc7eacce92c)\n>\n> _ZN10tensorflow11LocalDevice19EigenThreadPoolInfoC2ERKNS_14SessionOptionsEiPN3tsl9AllocatorE\n> (ip = 0x7fc7ebcbacfc)\n>\n> _ZN10tensorflow11LocalDeviceC2ERKNS_14SessionOptionsERKNS_16DeviceAttributesE\n> (ip = 0x7fc7ebcba857)\n>\n> _ZN10tensorflow16ThreadPoolDeviceC1ERKNS_14SessionOptionsERKNSt7__cxx1112basic_stringIcSt11char_tra\n> (ip = 0x7fc7ebc1fc36)\n>\n> _ZN10tensorflow29GPUCompatibleCPUDeviceFactory13CreateDevicesERKNS_14SessionOptionsERKNSt7__cxx1112\n> (ip = 0x7fc7ebd30b64)\n>\n> _ZN10tensorflow13DeviceFactory13AddCpuDevicesERKNS_14SessionOptionsERKNSt7__cxx1112basic_stringIcSt\n> (ip = 0x7fc7eb60eabc)\n>\n> _ZN10tensorflow13DeviceFactory10AddDevicesERKNS_14SessionOptionsERKNSt7__cxx1112basic_stringIcSt11c\n> (ip = 0x7fc7eb60eb92)\n>\n> It _says_ it runs on \"up to 2 CPU cores\", but empirically it consumes\n> up to ~400% CPU (4 out of 16 logical CPUs on this computer) while\n> mcmc(...) is running. Judging by the profiling data, most of the CPU\n> usage is due to tensorflow/Eigen running multiple threads during the\n> call to mcmc(), possibly due to the default argument chains = 4?\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Ivan,\n\nThank you for investigating this so thoroughly! My apologies for not\nreplying sooner.\n\nI think it is a good practice to assume up to 2 cores for most users.\nUnfortunately I am unable to trig",
+      "thread_id": "thread-8904280fdb8b",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-432b62dcaed0",
+      "message_id": "<3ab06a6067874314a1d24e72b9eca482@krebsregister.nrw.de>",
+      "from_name": "Hüsing, Johannes",
+      "from_email_hash": "2f0e45d8c11aaf951a94bc85c4c0e7908426db1b84f2b3d86b47ad6abde8ee28",
+      "date": "2026-02-11T07:39:04Z",
+      "subject": "[R-pkg-devel] error message when trying to knit a vignette involving data import",
+      "subject_clean": "[R-pkg-devel] error message when trying to knit a vignette involving data import",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to puild a package including a vignette. The focus of this package is the generation of linkage tables connecting cancer diagnoses.\nThe following code is processed into a HTML document when invoked with rmarkdown::render(), but fails to be processed with devtools::build_vignettes():\n\n---\ntitle: \"staduicc\"\noutput: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{staduicc}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n---\n\n```{r, include = FALSE}\nknitr::opts_chunk$set(\n  collapse = TRUE,\n  comment = \"#>\"\n)\n```\n# headline\n\n```{r setup}\nlibrary(staduicc)\nspieldatenpfad <- system.file(\"./inst/extdata/spieldaten.rda\", package = \"staduicc\")\nmessage(spieldatenpfad)\nload(spieldatenpfad)\n```\n<end of Rmd code>\n\nThe message which comes with running the code is as follows:\n\n? Installing staduicc in temporary library\n? Building vignettes for staduicc\n--- re-building 'staduicc.Rmd' using rmarkdown\n\n\nprocessing file: staduicc.Rmd\n1/5\n2/5 [unnamed-chunk-1]\n3/5\n4/5 [setup]\n\nQuitting from staduicc.Rmd:19-24 [setup]\nError: processing vignette 'staduicc.Rmd' failed with diagnostics:\ncannot open the connection\n--- failed re-building 'staduicc.Rmd'\n\nSUMMARY: processing the following file failed:\n  'staduicc.Rmd'\n\nError:\n! in callr subprocess.\nCaused by error:\n! Vignette re-building failed.\n? See `$stdout` and `$stderr` for standard output and error.\nType .Last.error to see the more details.\n<end of error messages>\n\nI am suspecting it may have something to do which how system.path() is processed. But I?ll gladly take any hint that is more specific than my musings.\n\n\nDr. Johannes H?sing\nEpidemiologie\n\nLandeskrebsregister NRW gGmbH\nGesundheitscampus 10\n44801 Bochum\n\nT 0234 54509-216\nF 0234 54509-499\nJohannes.Huesing at krebsregister.nrw.de<mailto:Johannes.Huesing at krebsregister.nrw.de>\nwww.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>\n\nDas Landeskrebsregister NRW online\nFACEBOOK: https://www.facebook.com/LKRNordrheinWestfalen/\nINSTAGRAM: https://www.instagram.com/landeskrebsregister_nrw\nLINKEDIN: https://www.linkedin.com/company/87452209/admin/feed/posts/\n\nNewsletter LKR NRW - jetzt anmelden unter\n https://www.landeskrebsregister.nrw/aktuelles/newsletter\n\n\nGesch?ftsf?hrer\nDr. Andres Sch?tzend?bel\nVorsitzender der Gesellschafterversammlung\nStaatssekret?r Matthias Heidmeier\nSitz der Gesellschaft\nBochum\nRegistergericht\nAmtsgericht Bochum\nHRB 17715\n\nHINWEIS: Diese Nachricht ist nur f?r den Adressaten bestimmt. Es ist nicht erlaubt, diese Nachricht zu kopieren oder Dritten zug?nglich zu machen. Sollten Sie irrt?mlich diese Nachricht erhalten haben, bitte ich um Ihre Mitteilung per E-Mail oder unter der oben angegebenen Telefonnummer.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to puild a package including a vignette. The focus of this package is the generation of linkage tables connecting cancer diagnoses.\nThe following code is processed into a HTML document whe",
+      "thread_id": "thread-432b62dcaed0",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-56eb0f1d73ea",
+      "message_id": "<0b8539c3-c9c9-4c19-9c15-c0bb61f6b5e4@fau.de>",
+      "from_name": "Sebastian Meyer",
+      "from_email_hash": "b32c09dd3a31073d640ca6b0e4a9622b24387f298b03dc425beea12447839a33",
+      "date": "2026-02-11T09:58:56+01:00",
+      "subject": "[R-pkg-devel] error message when trying to knit a vignette involving data import",
+      "subject_clean": "[R-pkg-devel] error message when trying to knit a vignette involving data import",
+      "in_reply_to": "<3ab06a6067874314a1d24e72b9eca482@krebsregister.nrw.de>",
+      "references": [
+        "<3ab06a6067874314a1d24e72b9eca482@krebsregister.nrw.de>"
+      ],
+      "body_plain": "Am 11.02.26 um 08:39 schrieb H?sing, Johannes via R-package-devel:\n> spieldatenpfad <- system.file(\"./inst/extdata/spieldaten.rda\", package = \"staduicc\")\nsystem.file() finds files in an _installed_ package, which is what you \nwant to access in a vignette. However, './inst/' only exists in your \nsource package. At installation, the _contents_ of that subdirectory are \ncopied recursively to the installation directory, so that will have \n'./extdata' at the root. I recommend installing the package and checking \nout its installation directory to see for yourself:\n\n     (instdir <- find.package(\"staduicc\"))\n     browseURL(instdir)\n\n(Browsing the directory should work via 'xdg-open' on Linux; I'm not \nsure about Windows, but you will know the path.)\n\n\tSebastian Meyer",
+      "body_snippet": "Am 11.02.26 um 08:39 schrieb H?sing, Johannes via R-package-devel:\n> spieldatenpfad <- system.file(\"./inst/extdata/spieldaten.rda\", package = \"staduicc\")\nsystem.file() finds files in an _installed_ pa",
+      "thread_id": "thread-432b62dcaed0",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-5c50f4f6a50d",
+      "message_id": "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2026-02-11T10:17:31-08:00",
+      "subject": "[R-pkg-devel] False Error in CRAN checks",
+      "subject_clean": "[R-pkg-devel] False Error in CRAN checks",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "My package arcgisutils has an \"ERROR Installation failed\" recorded for arm64 macOS (1)\n\nHowever, if you go to the log (2) it shows ?Status: OK? and the installation log (3) also shows a clean install.\n\nThis is affecting my downstream packages arcgisgeocode (4),  arcgislayers (5), and arcpbf (6), which are showing Status OK and clean installs as well.\n\nIs this a ?blip? in the check system? Or am I missing something and am at risk of archival? \n\nThanks all! \n\n\n\n1) https://cran.r-project.org/web/checks/check_results_arcgisutils.html\n2) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00check.html\n3) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00install.html\n4) https://cran.r-project.org/web/checks/check_results_arcgisgeocode.html\n5) https://cran.r-project.org/web/checks/check_results_arcgislayers.html\n6) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcpbf-00check.html\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "My package arcgisutils has an \"ERROR Installation failed\" recorded for arm64 macOS (1)\n\nHowever, if you go to the log (2) it shows ?Status: OK? and the installation log (3) also shows a clean install.",
+      "thread_id": "thread-5c50f4f6a50d",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-d7315156a98d",
+      "message_id": "<20260211221054.73754f74@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-11T22:10:54+03:00",
+      "subject": "[R-pkg-devel] False Error in CRAN checks",
+      "subject_clean": "[R-pkg-devel] False Error in CRAN checks",
+      "in_reply_to": "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>",
+      "references": [
+        "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>"
+      ],
+      "body_plain": "? Wed, 11 Feb 2026 10:17:31 -0800\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> Is this a ?blip? in the check system? Or am I missing something and\n> am at risk of archival? \n\nSomething's not right with r-devel-macos-arm64. For many packages,\n<https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/PACKAGE-00check.html>\npoints to outdated results (sometimes a previous version of the\npackage) or a 404 error, and there's no corresponding binary for\nR-devel/Sonoma. Examples include 'bapred', 'aroma.affymetrix', 'b32',\n'RPostgreSQL' (approximately 197 packages in total). Try asking Simon\nUrbanek about this problem.\n\nAt least there's no deadline set right now:\n\ntools::CRAN_package_db() |>\nsubset(grepl('^arcgis|^arcpbf$', Package)) |>\n_$Deadline |> is.na() |> all()\n# [1] TRUE\n\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Wed, 11 Feb 2026 10:17:31 -0800\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> Is this a ?blip? in the check system? Or am I missing something and\n> am at risk of archival? \n\nSomething's not rig",
+      "thread_id": "thread-5c50f4f6a50d",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-d304828f28d9",
+      "message_id": "<49A2FF8C-CDCE-47CE-912F-3B37A71F7FA2@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-02-12T09:45:16+13:00",
+      "subject": "[R-pkg-devel] False Error in CRAN checks",
+      "subject_clean": "[R-pkg-devel] False Error in CRAN checks",
+      "in_reply_to": "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>",
+      "references": [
+        "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>"
+      ],
+      "body_plain": "Josiah,\n\nwe just enabled the r-devel logs and the websites are not entirely correct yet, because the logs on the website show from the old big-sur build instead of the new sonoma build - which is where the result status is from.\n\nThat said, In your particular case it failed in the sonoma build yesterday since it was a manual catch-up run and didn't have the rust compiler (hence the short test time - I have noticed and fixed it at the time), but the subsequent regular run succeeded. Give it another day or so before it all settles.\n\nCheers,\nSimon\n\n\n> On 12/02/2026, at 07:17, Josiah Parry <josiah.parry at gmail.com> wrote:\n> \n> My package arcgisutils has an \"ERROR Installation failed\" recorded for arm64 macOS (1)\n> \n> However, if you go to the log (2) it shows ?Status: OK? and the installation log (3) also shows a clean install.\n> \n> This is affecting my downstream packages arcgisgeocode (4),  arcgislayers (5), and arcpbf (6), which are showing Status OK and clean installs as well.\n> \n> Is this a ?blip? in the check system? Or am I missing something and am at risk of archival? \n> \n> Thanks all! \n> \n> \n> \n> 1) https://cran.r-project.org/web/checks/check_results_arcgisutils.html\n> 2) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00check.html\n> 3) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00install.html\n> 4) https://cran.r-project.org/web/checks/check_results_arcgisgeocode.html\n> 5) https://cran.r-project.org/web/checks/check_results_arcgislayers.html\n> 6) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcpbf-00check.html\n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Josiah,\n\nwe just enabled the r-devel logs and the websites are not entirely correct yet, because the logs on the website show from the old big-sur build instead of the new sonoma build - which is wher",
+      "thread_id": "thread-5c50f4f6a50d",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-2514654a513d",
+      "message_id": "<70CFE13F-3D30-4758-907F-76ACE96ED357@gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2026-02-11T12:45:57-08:00",
+      "subject": "[R-pkg-devel] False Error in CRAN checks",
+      "subject_clean": "[R-pkg-devel] False Error in CRAN checks",
+      "in_reply_to": "<49A2FF8C-CDCE-47CE-912F-3B37A71F7FA2@R-project.org>",
+      "references": [
+        "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>",
+        "<49A2FF8C-CDCE-47CE-912F-3B37A71F7FA2@R-project.org>"
+      ],
+      "body_plain": "Thank you so much for the update, Simon! Brilliant <3\n\n> On Feb 11, 2026, at 12:45, Simon Urbanek <simon.urbanek at R-project.org> wrote:\n> \n> Josiah,\n> \n> we just enabled the r-devel logs and the websites are not entirely correct yet, because the logs on the website show from the old big-sur build instead of the new sonoma build - which is where the result status is from.\n> \n> That said, In your particular case it failed in the sonoma build yesterday since it was a manual catch-up run and didn't have the rust compiler (hence the short test time - I have noticed and fixed it at the time), but the subsequent regular run succeeded. Give it another day or so before it all settles.\n> \n> Cheers,\n> Simon\n> \n> \n>> On 12/02/2026, at 07:17, Josiah Parry <josiah.parry at gmail.com> wrote:\n>> \n>> My package arcgisutils has an \"ERROR Installation failed\" recorded for arm64 macOS (1)\n>> \n>> However, if you go to the log (2) it shows ?Status: OK? and the installation log (3) also shows a clean install.\n>> \n>> This is affecting my downstream packages arcgisgeocode (4),  arcgislayers (5), and arcpbf (6), which are showing Status OK and clean installs as well.\n>> \n>> Is this a ?blip? in the check system? Or am I missing something and am at risk of archival? \n>> \n>> Thanks all! \n>> \n>> \n>> \n>> 1) https://cran.r-project.org/web/checks/check_results_arcgisutils.html\n>> 2) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00check.html\n>> 3) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00install.html\n>> 4) https://cran.r-project.org/web/checks/check_results_arcgisgeocode.html\n>> 5) https://cran.r-project.org/web/checks/check_results_arcgislayers.html\n>> 6) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcpbf-00check.html\n>> [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n>",
+      "body_snippet": "Thank you so much for the update, Simon! Brilliant <3\n\n> On Feb 11, 2026, at 12:45, Simon Urbanek <simon.urbanek at R-project.org> wrote:\n> \n> Josiah,\n> \n> we just enabled the r-devel logs and the web",
+      "thread_id": "thread-5c50f4f6a50d",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-12cb8c8f781b",
+      "message_id": "<20260212010628.32fb01dd@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-12T01:06:27+03:00",
+      "subject": "[R-pkg-devel]  Issue \"Re-building vignettes had CPU time 4.1 times elapsed time\"",
+      "subject_clean": "[R-pkg-devel]  Issue \"Re-building vignettes had CPU time 4.1 times elapsed time\"",
+      "in_reply_to": "<CACrL82X87PrjuatgvDbEF34p2s31eM52qhoLFpC6NfkKePVb2w@mail.gmail.com>",
+      "references": [
+        "<CACrL82WnR_dM5QHJLHb_dRVn_xacsKEY0TLfOf1JDZ=PcDhgvg@mail.gmail.com>",
+        "<20260129172652.3f0aebf7@arachnoid>",
+        "<CACrL82X87PrjuatgvDbEF34p2s31eM52qhoLFpC6NfkKePVb2w@mail.gmail.com>"
+      ],
+      "body_plain": "? Wed, 11 Feb 2026 10:15:39 +1100\nNicholas Tierney <nicholas.tierney at gmail.com> ?????:\n\n> Unfortunately I am unable to trigger this NOTE locally, even running:\n> \n> ```\n> _R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_=1.1 \\\n>  R CMD check --timings greta_0.5.1.tar.gz\n> ```\n\nWhat's your operating system? How many logical processors does it have?\nCould it be offloading Tensorflow operations to a GPU? This check\ndoesn't work on Windows, but should be very sensitive otherwise.\n\n> I have tried setting default chains and cpu to be 2, but it seems,\n> based on your evidence perhaps that there is something inside\n> tensorflow, or in reticulate that might be triggering this.\n\nSorry, my mistake. Setting the number of chains to 2 instead of 4\nseemed to lower the average CPU load closer to 2 on my computer, but\nthe instantaneous CPU load still spikes to around 400%. This is\ndefinitely happening in the threads created by Tensorflow, see the\nattached plot of approximate CPU load versus DLL name and process\nruntime.\n\n-- \nBest regards,\nIvan\n\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: perf_task_cycles.png\nType: image/png\nSize: 146050 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20260212/20e5aac1/attachment.png>",
+      "body_snippet": "? Wed, 11 Feb 2026 10:15:39 +1100\nNicholas Tierney <nicholas.tierney at gmail.com> ?????:\n\n> Unfortunately I am unable to trigger this NOTE locally, even running:\n> \n> ```\n> _R_CHECK_VIGNETTE_TIMING_C",
+      "thread_id": "thread-8904280fdb8b",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-9bd7044e46f6",
+      "message_id": "<27021.35052.329433.319406@hornik.net>",
+      "from_name": "Kurt Hornik",
+      "from_email_hash": "38d7001af840d889a64ba1cdcb8ec8beb738b8daf9643622801f3acb78b6052a",
+      "date": "2026-02-12T09:01:48+01:00",
+      "subject": "[R-pkg-devel] False Error in CRAN checks",
+      "subject_clean": "[R-pkg-devel] False Error in CRAN checks",
+      "in_reply_to": "<49A2FF8C-CDCE-47CE-912F-3B37A71F7FA2@R-project.org>",
+      "references": [
+        "<780D5159-81FC-47C1-B520-56D45CF91A2B@gmail.com>",
+        "<49A2FF8C-CDCE-47CE-912F-3B37A71F7FA2@R-project.org>"
+      ],
+      "body_plain": ">>>>> Simon Urbanek writes:\n\nSorry, my fault, I had added x86_64 where I should have added arm64 ...\n\nThat's what happens when doing these things along with running a\ndepartment etc.\n\nFixed now.\n\n-k\n\n> Josiah,\n> we just enabled the r-devel logs and the websites are not entirely correct yet, because the logs on the website show from the old big-sur build instead of the new sonoma build - which is where the result status is from.\n\n> That said, In your particular case it failed in the sonoma build yesterday since it was a manual catch-up run and didn't have the rust compiler (hence the short test time - I have noticed and fixed it at the time), but the subsequent regular run succeeded. Give it another day or so before it all settles.\n\n> Cheers,\n> Simon\n\n\n>> On 12/02/2026, at 07:17, Josiah Parry <josiah.parry at gmail.com> wrote:\n>> \n>> My package arcgisutils has an \"ERROR Installation failed\" recorded for arm64 macOS (1)\n>> \n>> However, if you go to the log (2) it shows ?Status: OK? and the installation log (3) also shows a clean install.\n>> \n>> This is affecting my downstream packages arcgisgeocode (4),  arcgislayers (5), and arcpbf (6), which are showing Status OK and clean installs as well.\n>> \n>> Is this a ?blip? in the check system? Or am I missing something and am at risk of archival? \n>> \n>> Thanks all! \n>> \n>> \n>> \n>> 1) https://cran.r-project.org/web/checks/check_results_arcgisutils.html\n>> 2) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00check.html\n>> 3) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcgisutils-00install.html\n>> 4) https://cran.r-project.org/web/checks/check_results_arcgisgeocode.html\n>> 5) https://cran.r-project.org/web/checks/check_results_arcgislayers.html\n>> 6) https://www.r-project.org/nosvn/R.check/r-devel-macos-arm64/arcpbf-00check.html\n>> [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>",
+      "body_snippet": ">>>>> Simon Urbanek writes:\n\nSorry, my fault, I had added x86_64 where I should have added arm64 ...\n\nThat's what happens when doing these things along with running a\ndepartment etc.\n\nFixed now.\n\n-k\n\n",
+      "thread_id": "thread-5c50f4f6a50d",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-d6b6ded32766",
+      "message_id": "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+      "from_name": "Bjarke Hautop",
+      "from_email_hash": "dc450caba5de96e3b82b6bb044a155ef2fc1af05dbf548f8562ecc26df4b7040",
+      "date": "2026-02-12T15:52:27+01:00",
+      "subject": "[R-pkg-devel] R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel] R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nR CMD check gives a false positive locally when the only usage of an\nimported package is through pkg::foo() inside an R6 class. This GitHub repo\ncontains a full MWE, with log files and a more elaborate explanation:\nhttps://github.com/BjarkeHautop/RCMDcheckFalsePositive\n\nThe R package contains a single .R file with this (I'm aware you don't have\nto import base packages explicitly, but this is an MWE with only base\npackages (except R6)):\n\nfilter <- function() {\n  message(\"This is a custom filter function.\")\n}\n\nDataProcessor <- R6::R6Class(\n  \"DataProcessor\",\n  public = list(\n    data = NULL,\n    initialize = function(data) self$data <- data,\n\n    filter_data = function(data) {\n      filter()\n      self$data <- stats::filter(self$data, rep(1, 3))\n    }\n  )\n)\n\nWhen running R CMD check, it will generate the following NOTE:\n\n* checking dependencies in R code ... NOTE\nNamespaces in Imports field not imported from:\n  ?R6? ?stats?\n\nInterestingly, the NOTE disappears on CRAN release/dev winbuilder.\n\nMy questions are:\n\n1. Is this the intended behavior of R CMD check, or is it a bug that it\nfails to detect usage of packages inside\nR6 classes? If intended (e.g., due to it being too expensive to check for\n:: in \"hidden places\") should this be\nmentioned somewhere on WRE? Currently\n[WRE](\nhttps://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1)\nsays:\n*\"The ?Imports? field should not contain packages which are not imported\nfrom (via the NAMESPACE file or :: or ::: operators)\"*\nindicating that `::` usage should be fully supported.\n\n2. How/Why does the NOTE disappear when checking on CRAN dev winbuilder?\nCan I replicate this behavior locally using R CMD check? Will it pass on\nCRAN?\n\nBest regards,\nBjarke\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nR CMD check gives a false positive locally when the only usage of an\nimported package is through pkg::foo() inside an R6 class. This GitHub repo\ncontains a full MWE, with log files and a more",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-6610746b02f3",
+      "message_id": "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-02-12T16:32:47-06:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>"
+      ],
+      "body_plain": "On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n| Hi all,\n| \n| R CMD check gives a false positive locally when the only usage of an\n| imported package is through pkg::foo() inside an R6 class. This GitHub repo\n| contains a full MWE, with log files and a more elaborate explanation:\n| https://github.com/BjarkeHautop/RCMDcheckFalsePositive\n| \n| The R package contains a single .R file with this (I'm aware you don't have\n| to import base packages explicitly, but this is an MWE with only base\n| packages (except R6)):\n| \n| filter <- function() {\n|   message(\"This is a custom filter function.\")\n| }\n| \n| DataProcessor <- R6::R6Class(\n|   \"DataProcessor\",\n|   public = list(\n|     data = NULL,\n|     initialize = function(data) self$data <- data,\n| \n|     filter_data = function(data) {\n|       filter()\n|       self$data <- stats::filter(self$data, rep(1, 3))\n|     }\n|   )\n| )\n| \n| When running R CMD check, it will generate the following NOTE:\n| \n| * checking dependencies in R code ... NOTE\n| Namespaces in Imports field not imported from:\n|   ?R6? ?stats?\n\nThanks for posting a full and complete example!  From a quick glance your\nproblem may be that while you DO have the the packages in DESCRIPTION you\nDO NOT import them in NAMESPACE.  The error message could arguably be more\nexplicit but that seems to be the case here.\n\nHope this helps, Dirk\n \n| Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n| \n| My questions are:\n| \n| 1. Is this the intended behavior of R CMD check, or is it a bug that it\n| fails to detect usage of packages inside\n| R6 classes? If intended (e.g., due to it being too expensive to check for\n| :: in \"hidden places\") should this be\n| mentioned somewhere on WRE? Currently\n| [WRE](\n| https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1)\n| says:\n| *\"The ?Imports? field should not contain packages which are not imported\n| from (via the NAMESPACE file or :: or ::: operators)\"*\n| indicating that `::` usage should be fully supported.\n| \n| 2. How/Why does the NOTE disappear when checking on CRAN dev winbuilder?\n| Can I replicate this behavior locally using R CMD check? Will it pass on\n| CRAN?\n| \n| Best regards,\n| Bjarke\n| \n| \t[[alternative HTML version deleted]]\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n| Hi all,\n| \n| R CMD check gives a false positive locally when the only usage of an\n| imported package is through pkg::foo() inside an R6 class. This",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-81a3e39bfa6c",
+      "message_id": "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-02-12T14:53:08-08:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "R6 is a _build-time_ dependency for your package. It may be possible for a\nuser without R6 installed to run your package without issue from the built\ntarball. R today doesn't really have a concept of a build-time dependency\nin the DESCRIPTION\n\n'stats' is more of a false positive -- {codetools} simply doesn't know how\nto check the R6 object DataProcessor (which it sees as an environment and\ndoesn't walk completely). It could find 'stats::' if it looked at\n\nbody(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n\nAnyway, Dirk's advice is correct: you can just add the entries to your\nNAMESPACE:\n\nimportFrom(R6, R6class)\nimportFrom(stats, filter)\n\nOnce that's done, you can choose whether to continue namespace-qualifying\nthe calls inside the sources.\n\nYou could also explore if just putting the packages in Suggests, not\nImports, works.\n\nMike C\n\nOn Thu, Feb 12, 2026 at 2:33?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n> | Hi all,\n> |\n> | R CMD check gives a false positive locally when the only usage of an\n> | imported package is through pkg::foo() inside an R6 class. This GitHub\n> repo\n> | contains a full MWE, with log files and a more elaborate explanation:\n> | https://github.com/BjarkeHautop/RCMDcheckFalsePositive\n> |\n> | The R package contains a single .R file with this (I'm aware you don't\n> have\n> | to import base packages explicitly, but this is an MWE with only base\n> | packages (except R6)):\n> |\n> | filter <- function() {\n> |   message(\"This is a custom filter function.\")\n> | }\n> |\n> | DataProcessor <- R6::R6Class(\n> |   \"DataProcessor\",\n> |   public = list(\n> |     data = NULL,\n> |     initialize = function(data) self$data <- data,\n> |\n> |     filter_data = function(data) {\n> |       filter()\n> |       self$data <- stats::filter(self$data, rep(1, 3))\n> |     }\n> |   )\n> | )\n> |\n> | When running R CMD check, it will generate the following NOTE:\n> |\n> | * checking dependencies in R code ... NOTE\n> | Namespaces in Imports field not imported from:\n> |   ?R6? ?stats?\n>\n> Thanks for posting a full and complete example!  From a quick glance your\n> problem may be that while you DO have the the packages in DESCRIPTION you\n> DO NOT import them in NAMESPACE.  The error message could arguably be more\n> explicit but that seems to be the case here.\n>\n> Hope this helps, Dirk\n>\n> | Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n> |\n> | My questions are:\n> |\n> | 1. Is this the intended behavior of R CMD check, or is it a bug that it\n> | fails to detect usage of packages inside\n> | R6 classes? If intended (e.g., due to it being too expensive to check for\n> | :: in \"hidden places\") should this be\n> | mentioned somewhere on WRE? Currently\n> | [WRE](\n> |\n> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1\n> )\n> | says:\n> | *\"The ?Imports? field should not contain packages which are not imported\n> | from (via the NAMESPACE file or :: or ::: operators)\"*\n> | indicating that `::` usage should be fully supported.\n> |\n> | 2. How/Why does the NOTE disappear when checking on CRAN dev winbuilder?\n> | Can I replicate this behavior locally using R CMD check? Will it pass on\n> | CRAN?\n> |\n> | Best regards,\n> | Bjarke\n> |\n> |       [[alternative HTML version deleted]]\n> |\n> | ______________________________________________\n> | R-package-devel at r-project.org mailing list\n> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "R6 is a _build-time_ dependency for your package. It may be possible for a\nuser without R6 installed to run your package without issue from the built\ntarball. R today doesn't really have a concept of ",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-9a345703c64d",
+      "message_id": "<CAPRVBcxxY69vA6Z1da6vhQ=2Y2Vt4hU2_WUbLenTB0LcQT_C7w@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-02-12T14:57:59-08:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+        "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>"
+      ],
+      "body_plain": "> Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n\nI suspect that's due to a difference of running the check on the built\npackage vs. on the package sources:\n\ntools:::.check_packages_used(dir = \".\") # nothing\ntools:::.check_packages_used(package = <pkg>)\n# Namespaces in Imports field not imported from:\n#   ?R6? ?stats?\n#   All declared Imports should be used.\n\nMike C\n\nOn Thu, Feb 12, 2026 at 2:53?PM Michael Chirico <michaelchirico4 at gmail.com>\nwrote:\n\n> R6 is a _build-time_ dependency for your package. It may be possible for a\n> user without R6 installed to run your package without issue from the built\n> tarball. R today doesn't really have a concept of a build-time dependency\n> in the DESCRIPTION\n>\n> 'stats' is more of a false positive -- {codetools} simply doesn't know how\n> to check the R6 object DataProcessor (which it sees as an environment and\n> doesn't walk completely). It could find 'stats::' if it looked at\n>\n>\n> body(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n>\n> Anyway, Dirk's advice is correct: you can just add the entries to your\n> NAMESPACE:\n>\n> importFrom(R6, R6class)\n> importFrom(stats, filter)\n>\n> Once that's done, you can choose whether to continue namespace-qualifying\n> the calls inside the sources.\n>\n> You could also explore if just putting the packages in Suggests, not\n> Imports, works.\n>\n> Mike C\n>\n> On Thu, Feb 12, 2026 at 2:33?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>>\n>> On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n>> | Hi all,\n>> |\n>> | R CMD check gives a false positive locally when the only usage of an\n>> | imported package is through pkg::foo() inside an R6 class. This GitHub\n>> repo\n>> | contains a full MWE, with log files and a more elaborate explanation:\n>> | https://github.com/BjarkeHautop/RCMDcheckFalsePositive\n>> |\n>> | The R package contains a single .R file with this (I'm aware you don't\n>> have\n>> | to import base packages explicitly, but this is an MWE with only base\n>> | packages (except R6)):\n>> |\n>> | filter <- function() {\n>> |   message(\"This is a custom filter function.\")\n>> | }\n>> |\n>> | DataProcessor <- R6::R6Class(\n>> |   \"DataProcessor\",\n>> |   public = list(\n>> |     data = NULL,\n>> |     initialize = function(data) self$data <- data,\n>> |\n>> |     filter_data = function(data) {\n>> |       filter()\n>> |       self$data <- stats::filter(self$data, rep(1, 3))\n>> |     }\n>> |   )\n>> | )\n>> |\n>> | When running R CMD check, it will generate the following NOTE:\n>> |\n>> | * checking dependencies in R code ... NOTE\n>> | Namespaces in Imports field not imported from:\n>> |   ?R6? ?stats?\n>>\n>> Thanks for posting a full and complete example!  From a quick glance your\n>> problem may be that while you DO have the the packages in DESCRIPTION you\n>> DO NOT import them in NAMESPACE.  The error message could arguably be more\n>> explicit but that seems to be the case here.\n>>\n>> Hope this helps, Dirk\n>>\n>> | Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n>> |\n>> | My questions are:\n>> |\n>> | 1. Is this the intended behavior of R CMD check, or is it a bug that it\n>> | fails to detect usage of packages inside\n>> | R6 classes? If intended (e.g., due to it being too expensive to check\n>> for\n>> | :: in \"hidden places\") should this be\n>> | mentioned somewhere on WRE? Currently\n>> | [WRE](\n>> |\n>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1\n>> )\n>> | says:\n>> | *\"The ?Imports? field should not contain packages which are not imported\n>> | from (via the NAMESPACE file or :: or ::: operators)\"*\n>> | indicating that `::` usage should be fully supported.\n>> |\n>> | 2. How/Why does the NOTE disappear when checking on CRAN dev winbuilder?\n>> | Can I replicate this behavior locally using R CMD check? Will it pass on\n>> | CRAN?\n>> |\n>> | Best regards,\n>> | Bjarke\n>> |\n>> |       [[alternative HTML version deleted]]\n>> |\n>> | ______________________________________________\n>> | R-package-devel at r-project.org mailing list\n>> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> --\n>> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "> Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n\nI suspect that's due to a difference of running the check on the built\npackage vs. on the package sources:\n\ntools:::.check_package",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 3,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-b8d6caaf407d",
+      "message_id": "<CAMjMs8dKrfvUVSHotWvUo3ZS67uaibMR-tKYZtZ1U9AtdL=iSQ@mail.gmail.com>",
+      "from_name": "Bjarke Hautop",
+      "from_email_hash": "dc450caba5de96e3b82b6bb044a155ef2fc1af05dbf548f8562ecc26df4b7040",
+      "date": "2026-02-13T08:31:16+01:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+        "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks, Dirk and Michael,\n\nIn my opinion, there are several reasons why you wouldn't want to just do\nimportFrom(stats, filter). Using devtools::load_all() typing \"filte\" in the\nconsole now only brings up Base::Filter and stats::filter and not the\nfunction that will actually be called from filter(),\ni.e., my internal filter function. Additionally, you can't do this if the\nreason you did pkg::foo() was to avoid nameclash between two different\npackages, e.g., extend my example with also dplyr::filter. You can't add\n\nimportFrom(stats, filter)\nimportFrom(dplyr, filter)\n\nHow I see it, the only safe way to do it in this case is to use\nstats::filter and dplyr::filter outside the R6 class, either by refactoring\n(which might make the code more unreadable) or adding an unused function,\nsuch as this:\n\navoid_cran_note() {\n  stats::filter(1:10, rep(1, 3))\n  my_data <- data.frame(\n    x = 1:5,\n    y = c(10, 20, 30, 40, 50)\n  )\n  dplyr::filter(my_data, my_data$x > 3)\n}\n\nNeither approach seems ideal to me.\n\nBest regards,\nBjarke\n\n\n\nDen tors. 12. feb. 2026 kl. 23.53 skrev Michael Chirico <\nmichaelchirico4 at gmail.com>:\n\n> R6 is a _build-time_ dependency for your package. It may be possible for a\n> user without R6 installed to run your package without issue from the built\n> tarball. R today doesn't really have a concept of a build-time dependency\n> in the DESCRIPTION\n>\n> 'stats' is more of a false positive -- {codetools} simply doesn't know how\n> to check the R6 object DataProcessor (which it sees as an environment and\n> doesn't walk completely). It could find 'stats::' if it looked at\n>\n>\n> body(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n>\n> Anyway, Dirk's advice is correct: you can just add the entries to your\n> NAMESPACE:\n>\n> importFrom(R6, R6class)\n> importFrom(stats, filter)\n>\n> Once that's done, you can choose whether to continue namespace-qualifying\n> the calls inside the sources.\n>\n> You could also explore if just putting the packages in Suggests, not\n> Imports, works.\n>\n> Mike C\n>\n> On Thu, Feb 12, 2026 at 2:33?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>>\n>> On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n>> | Hi all,\n>> |\n>> | R CMD check gives a false positive locally when the only usage of an\n>> | imported package is through pkg::foo() inside an R6 class. This GitHub\n>> repo\n>> | contains a full MWE, with log files and a more elaborate explanation:\n>> | https://github.com/BjarkeHautop/RCMDcheckFalsePositive\n>> |\n>> | The R package contains a single .R file with this (I'm aware you don't\n>> have\n>> | to import base packages explicitly, but this is an MWE with only base\n>> | packages (except R6)):\n>> |\n>> | filter <- function() {\n>> |   message(\"This is a custom filter function.\")\n>> | }\n>> |\n>> | DataProcessor <- R6::R6Class(\n>> |   \"DataProcessor\",\n>> |   public = list(\n>> |     data = NULL,\n>> |     initialize = function(data) self$data <- data,\n>> |\n>> |     filter_data = function(data) {\n>> |       filter()\n>> |       self$data <- stats::filter(self$data, rep(1, 3))\n>> |     }\n>> |   )\n>> | )\n>> |\n>> | When running R CMD check, it will generate the following NOTE:\n>> |\n>> | * checking dependencies in R code ... NOTE\n>> | Namespaces in Imports field not imported from:\n>> |   ?R6? ?stats?\n>>\n>> Thanks for posting a full and complete example!  From a quick glance your\n>> problem may be that while you DO have the the packages in DESCRIPTION you\n>> DO NOT import them in NAMESPACE.  The error message could arguably be more\n>> explicit but that seems to be the case here.\n>>\n>> Hope this helps, Dirk\n>>\n>> | Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n>> |\n>> | My questions are:\n>> |\n>> | 1. Is this the intended behavior of R CMD check, or is it a bug that it\n>> | fails to detect usage of packages inside\n>> | R6 classes? If intended (e.g., due to it being too expensive to check\n>> for\n>> | :: in \"hidden places\") should this be\n>> | mentioned somewhere on WRE? Currently\n>> | [WRE](\n>> |\n>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1\n>> )\n>> | says:\n>> | *\"The ?Imports? field should not contain packages which are not imported\n>> | from (via the NAMESPACE file or :: or ::: operators)\"*\n>> | indicating that `::` usage should be fully supported.\n>> |\n>> | 2. How/Why does the NOTE disappear when checking on CRAN dev winbuilder?\n>> | Can I replicate this behavior locally using R CMD check? Will it pass on\n>> | CRAN?\n>> |\n>> | Best regards,\n>> | Bjarke\n>> |\n>> |       [[alternative HTML version deleted]]\n>> |\n>> | ______________________________________________\n>> | R-package-devel at r-project.org mailing list\n>> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> --\n>> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks, Dirk and Michael,\n\nIn my opinion, there are several reasons why you wouldn't want to just do\nimportFrom(stats, filter). Using devtools::load_all() typing \"filte\" in the\nconsole now only brings",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 3,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-425492d2ad2a",
+      "message_id": "<CAMjMs8dQ5jpnTXqDduRMcDAT-f25cdfbg9rY=o3NA4hFveLSmA@mail.gmail.com>",
+      "from_name": "Bjarke Hautop",
+      "from_email_hash": "dc450caba5de96e3b82b6bb044a155ef2fc1af05dbf548f8562ecc26df4b7040",
+      "date": "2026-02-13T08:33:03+01:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+        "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>"
+      ],
+      "body_plain": "Sorry, clicked send too soon!\n\n> It could find 'stats::' if it looked at\n\n>\nbody(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n\nIs there a reason why it doesn't do this? Is it just for computational\nreasons?\n\nBest regards,\nBjarke\n\nDen tors. 12. feb. 2026 kl. 23.53 skrev Michael Chirico <\nmichaelchirico4 at gmail.com>:\n\n> R6 is a _build-time_ dependency for your package. It may be possible for a\n> user without R6 installed to run your package without issue from the built\n> tarball. R today doesn't really have a concept of a build-time dependency\n> in the DESCRIPTION\n>\n> 'stats' is more of a false positive -- {codetools} simply doesn't know how\n> to check the R6 object DataProcessor (which it sees as an environment and\n> doesn't walk completely). It could find 'stats::' if it looked at\n>\n>\n> body(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n>\n> Anyway, Dirk's advice is correct: you can just add the entries to your\n> NAMESPACE:\n>\n> importFrom(R6, R6class)\n> importFrom(stats, filter)\n>\n> Once that's done, you can choose whether to continue namespace-qualifying\n> the calls inside the sources.\n>\n> You could also explore if just putting the packages in Suggests, not\n> Imports, works.\n>\n> Mike C\n>\n> On Thu, Feb 12, 2026 at 2:33?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>>\n>> On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n>> | Hi all,\n>> |\n>> | R CMD check gives a false positive locally when the only usage of an\n>> | imported package is through pkg::foo() inside an R6 class. This GitHub\n>> repo\n>> | contains a full MWE, with log files and a more elaborate explanation:\n>> | https://github.com/BjarkeHautop/RCMDcheckFalsePositive\n>> |\n>> | The R package contains a single .R file with this (I'm aware you don't\n>> have\n>> | to import base packages explicitly, but this is an MWE with only base\n>> | packages (except R6)):\n>> |\n>> | filter <- function() {\n>> |   message(\"This is a custom filter function.\")\n>> | }\n>> |\n>> | DataProcessor <- R6::R6Class(\n>> |   \"DataProcessor\",\n>> |   public = list(\n>> |     data = NULL,\n>> |     initialize = function(data) self$data <- data,\n>> |\n>> |     filter_data = function(data) {\n>> |       filter()\n>> |       self$data <- stats::filter(self$data, rep(1, 3))\n>> |     }\n>> |   )\n>> | )\n>> |\n>> | When running R CMD check, it will generate the following NOTE:\n>> |\n>> | * checking dependencies in R code ... NOTE\n>> | Namespaces in Imports field not imported from:\n>> |   ?R6? ?stats?\n>>\n>> Thanks for posting a full and complete example!  From a quick glance your\n>> problem may be that while you DO have the the packages in DESCRIPTION you\n>> DO NOT import them in NAMESPACE.  The error message could arguably be more\n>> explicit but that seems to be the case here.\n>>\n>> Hope this helps, Dirk\n>>\n>> | Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n>> |\n>> | My questions are:\n>> |\n>> | 1. Is this the intended behavior of R CMD check, or is it a bug that it\n>> | fails to detect usage of packages inside\n>> | R6 classes? If intended (e.g., due to it being too expensive to check\n>> for\n>> | :: in \"hidden places\") should this be\n>> | mentioned somewhere on WRE? Currently\n>> | [WRE](\n>> |\n>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1\n>> )\n>> | says:\n>> | *\"The ?Imports? field should not contain packages which are not imported\n>> | from (via the NAMESPACE file or :: or ::: operators)\"*\n>> | indicating that `::` usage should be fully supported.\n>> |\n>> | 2. How/Why does the NOTE disappear when checking on CRAN dev winbuilder?\n>> | Can I replicate this behavior locally using R CMD check? Will it pass on\n>> | CRAN?\n>> |\n>> | Best regards,\n>> | Bjarke\n>> |\n>> |       [[alternative HTML version deleted]]\n>> |\n>> | ______________________________________________\n>> | R-package-devel at r-project.org mailing list\n>> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> --\n>> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Sorry, clicked send too soon!\n\n> It could find 'stats::' if it looked at\n\n>\nbody(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n\nIs there a reason why it doesn't do this?",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 3,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-8434a6855e88",
+      "message_id": "<CAPRVBcxOpCTnG7+_8sCKc_6sgO1+5BR-eSfWB2KfNUTK+4a=Ww@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-02-12T23:44:58-08:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAMjMs8dQ5jpnTXqDduRMcDAT-f25cdfbg9rY=o3NA4hFveLSmA@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+        "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+        "<CAMjMs8dQ5jpnTXqDduRMcDAT-f25cdfbg9rY=o3NA4hFveLSmA@mail.gmail.com>"
+      ],
+      "body_plain": "I reckon it was just written before R6 and could go for a patch:\nhttps://gitlab.com/luke-tierney/codetools\n\nPoint taken about masking. Working from memory (CMIIW) you can just import\nand name from stats to satisfy the static analysis:\n\nimportFrom(stats, setNames)\n\nR doesn't do two-way \"include what you use\" checks to insure the names you\nimport are actually used.\n\nMike C\n\nOn Thu, Feb 12, 2026, 11:33?PM Bjarke Hautop <bjarke.hautop at gmail.com>\nwrote:\n\n> Sorry, clicked send too soon!\n>\n> > It could find 'stats::' if it looked at\n>\n> >\n> body(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n>\n> Is there a reason why it doesn't do this? Is it just for computational\n> reasons?\n>\n> Best regards,\n> Bjarke\n>\n> Den tors. 12. feb. 2026 kl. 23.53 skrev Michael Chirico <\n> michaelchirico4 at gmail.com>:\n>\n>> R6 is a _build-time_ dependency for your package. It may be possible for\n>> a user without R6 installed to run your package without issue from the\n>> built tarball. R today doesn't really have a concept of a build-time\n>> dependency in the DESCRIPTION\n>>\n>> 'stats' is more of a false positive -- {codetools} simply doesn't know\n>> how to check the R6 object DataProcessor (which it sees as an environment\n>> and doesn't walk completely). It could find 'stats::' if it looked at\n>>\n>>\n>> body(getNamespace(<pkg>)$DataProcessor$public_methods$filter_data)[[3]][[3]][[1]]\n>>\n>> Anyway, Dirk's advice is correct: you can just add the entries to your\n>> NAMESPACE:\n>>\n>> importFrom(R6, R6class)\n>> importFrom(stats, filter)\n>>\n>> Once that's done, you can choose whether to continue namespace-qualifying\n>> the calls inside the sources.\n>>\n>> You could also explore if just putting the packages in Suggests, not\n>> Imports, works.\n>>\n>> Mike C\n>>\n>> On Thu, Feb 12, 2026 at 2:33?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n>>\n>>>\n>>> On 12 February 2026 at 15:52, Bjarke Hautop wrote:\n>>> | Hi all,\n>>> |\n>>> | R CMD check gives a false positive locally when the only usage of an\n>>> | imported package is through pkg::foo() inside an R6 class. This GitHub\n>>> repo\n>>> | contains a full MWE, with log files and a more elaborate explanation:\n>>> | https://github.com/BjarkeHautop/RCMDcheckFalsePositive\n>>> |\n>>> | The R package contains a single .R file with this (I'm aware you don't\n>>> have\n>>> | to import base packages explicitly, but this is an MWE with only base\n>>> | packages (except R6)):\n>>> |\n>>> | filter <- function() {\n>>> |   message(\"This is a custom filter function.\")\n>>> | }\n>>> |\n>>> | DataProcessor <- R6::R6Class(\n>>> |   \"DataProcessor\",\n>>> |   public = list(\n>>> |     data = NULL,\n>>> |     initialize = function(data) self$data <- data,\n>>> |\n>>> |     filter_data = function(data) {\n>>> |       filter()\n>>> |       self$data <- stats::filter(self$data, rep(1, 3))\n>>> |     }\n>>> |   )\n>>> | )\n>>> |\n>>> | When running R CMD check, it will generate the following NOTE:\n>>> |\n>>> | * checking dependencies in R code ... NOTE\n>>> | Namespaces in Imports field not imported from:\n>>> |   ?R6? ?stats?\n>>>\n>>> Thanks for posting a full and complete example!  From a quick glance your\n>>> problem may be that while you DO have the the packages in DESCRIPTION you\n>>> DO NOT import them in NAMESPACE.  The error message could arguably be\n>>> more\n>>> explicit but that seems to be the case here.\n>>>\n>>> Hope this helps, Dirk\n>>>\n>>> | Interestingly, the NOTE disappears on CRAN release/dev winbuilder.\n>>> |\n>>> | My questions are:\n>>> |\n>>> | 1. Is this the intended behavior of R CMD check, or is it a bug that it\n>>> | fails to detect usage of packages inside\n>>> | R6 classes? If intended (e.g., due to it being too expensive to check\n>>> for\n>>> | :: in \"hidden places\") should this be\n>>> | mentioned somewhere on WRE? Currently\n>>> | [WRE](\n>>> |\n>>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Package-Dependencies-1\n>>> )\n>>> | says:\n>>> | *\"The ?Imports? field should not contain packages which are not\n>>> imported\n>>> | from (via the NAMESPACE file or :: or ::: operators)\"*\n>>> | indicating that `::` usage should be fully supported.\n>>> |\n>>> | 2. How/Why does the NOTE disappear when checking on CRAN dev\n>>> winbuilder?\n>>> | Can I replicate this behavior locally using R CMD check? Will it pass\n>>> on\n>>> | CRAN?\n>>> |\n>>> | Best regards,\n>>> | Bjarke\n>>> |\n>>> |       [[alternative HTML version deleted]]\n>>> |\n>>> | ______________________________________________\n>>> | R-package-devel at r-project.org mailing list\n>>> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>> --\n>>> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I reckon it was just written before R6 and could go for a patch:\nhttps://gitlab.com/luke-tierney/codetools\n\nPoint taken about masking. Working from memory (CMIIW) you can just import\nand name from sta",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 4,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-375bbf200fcf",
+      "message_id": "<27023.9130.530925.732422@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-02-13T07:14:18-06:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAPRVBcxOpCTnG7+_8sCKc_6sgO1+5BR-eSfWB2KfNUTK+4a=Ww@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+        "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+        "<CAMjMs8dQ5jpnTXqDduRMcDAT-f25cdfbg9rY=o3NA4hFveLSmA@mail.gmail.com>",
+        "<CAPRVBcxOpCTnG7+_8sCKc_6sgO1+5BR-eSfWB2KfNUTK+4a=Ww@mail.gmail.com>"
+      ],
+      "body_plain": "Bjarke,\n\nI had sent you a minimal diff that silenced R CMD check after you replied to\nme off-list; if it were my package I'd stop there.\n\nBut you can of course continue to insist that you should be allowed to have a\nlocal, internal filtering function -- and \"yes you can\". But the common\n(documented) trick is to use _an internal function_ differentiated with a\nleading dot, i.e. `.filter()`.  So with the diff below I once again only have\na warning from your class being undocumented. That R6 needs to be imported\nseems par for the course; Michael rightly suggested that you could patch\n`codetools` if it really bugs you.\n\nCheers, Dirk\n\nedd at paul:/tmp/r/RCMDcheckFalsePositive(main)$ git diff\ndiff --git i/NAMESPACE w/NAMESPACE\nindex dbd6067..817a7ee 100644\n--- i/NAMESPACE\n+++ w/NAMESPACE\n@@ -1 +1,2 @@\n export(DataProcessor)\n+import(R6)\ndiff --git i/R/hello.R w/R/hello.R\nindex a608963..85befc4 100644\n--- i/R/hello.R\n+++ w/R/hello.R\n@@ -1,4 +1,4 @@\n-filter <- function() {\n+.filter <- function() {\n   message(\"This is a custom filter function.\")\n }\n \n@@ -9,7 +9,7 @@ DataProcessor <- R6::R6Class(\n     initialize = function(data) self$data <- data,\n \n     filter_data = function(data) {\n-      filter()\n+      .filter()\n       self$data <- stats::filter(self$data, rep(1, 3))\n     }\n   )\nedd at paul:/tmp/r/RCMDcheckFalsePositive(main)$ \n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Bjarke,\n\nI had sent you a minimal diff that silenced R CMD check after you replied to\nme off-list; if it were my package I'd stop there.\n\nBut you can of course continue to insist that you should be al",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 5,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-e506e77ec861",
+      "message_id": "<20260213163647.0a182694@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-13T16:36:47+03:00",
+      "subject": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "subject_clean": "[R-pkg-devel]  R CMD check false positive unused imports inside R6 class",
+      "in_reply_to": "<CAPRVBcxxY69vA6Z1da6vhQ=2Y2Vt4hU2_WUbLenTB0LcQT_C7w@mail.gmail.com>",
+      "references": [
+        "<CAMjMs8fPGWK9DqcqKM1Y2-A7ChAM1eyp6jSRGuowPFnt7J6GPw@mail.gmail.com>",
+        "<27022.21775.426830.878236@paul.eddelbuettel.com>",
+        "<CAPRVBcyJUM1iuJPpbHBQx-6_NbgfbErH18QvB+Cxs4oR4B7d-Q@mail.gmail.com>",
+        "<CAPRVBcxxY69vA6Z1da6vhQ=2Y2Vt4hU2_WUbLenTB0LcQT_C7w@mail.gmail.com>"
+      ],
+      "body_plain": "? Thu, 12 Feb 2026 14:57:59 -0800\nMichael Chirico <michaelchirico4 at gmail.com> ?????:\n\n> I suspect that's due to a difference of running the check on the built\n> package vs. on the package sources:\n> \n> tools:::.check_packages_used(dir = \".\") # nothing\n> tools:::.check_packages_used(package = <pkg>)\n> # Namespaces in Imports field not imported from:\n> #   ?R6? ?stats?\n> #   All declared Imports should be used.\n\nI wonder what happens on Win-Builder during the check. According to the\ncode (tools/R/check.R line 2156, function check_R_code),\ntools:::.check_packages_used(dir = ...) is only used if !do_install,\nand 00check.log from Win-Builder doesn't seem to divulge anything that\nwould set do_install to FALSE. (Checking with --install=fake or\n--install=check:... still sets do_install to TRUE and causes the NOTE).\nThe function is quite self-contained; indeed, it only walks LANGSXP\ncall objects, expression vectors, and pairlists made from functions.\n\nDoes tools:::.check_packages_used(package=...) really fail to notice\nthe \"unused\" imports on Win-Builder? Does something unseen really set\ndo_install <- FALSE? Is there a third reason?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Thu, 12 Feb 2026 14:57:59 -0800\nMichael Chirico <michaelchirico4 at gmail.com> ?????:\n\n> I suspect that's due to a difference of running the check on the built\n> package vs. on the package sources:\n",
+      "thread_id": "thread-d6b6ded32766",
+      "thread_depth": 4,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-4e4414fd95fd",
+      "message_id": "<20260214123955.55974a57@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-14T12:39:55+03:00",
+      "subject": "[R-pkg-devel] gcc-san fail with s2 package",
+      "subject_clean": "[R-pkg-devel] gcc-san fail with s2 package",
+      "in_reply_to": "<20260203150005.59ee8e8a@arachnoid>",
+      "references": [
+        "<CAA0dk0Gst5e-BtGT=bE+c0OxwygQzwk9Ret9kXs_Df6K9oAGkw@mail.gmail.com>",
+        "<CAA0dk0Hzbf+_Y0YdWjYBVD4fyaeLKwgyKgHOSfGbxGaGfySLAg@mail.gmail.com>",
+        "<20260203150005.59ee8e8a@arachnoid>"
+      ],
+      "body_plain": "? Tue, 3 Feb 2026 15:00:05 +0300\nIvan Krylov via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> 's2' developers seem to be aware of this\n\nAfter a different package maintainer complained, they are now working\non the fix for this issue:\nhttps://github.com/r-spatial/s2/issues/293\nhttps://github.com/r-spatial/s2/pull/295\n\nThis is actually a GCC bug and not just a C++17/C++20 constexpr\nproblem: <https://gcc.gnu.org/bugzilla/show_bug.cgi?id=71962>\n\n(Once again, many thanks to Gentoo developer sam_ and GCC developer\nArsen for pointing out the exact bug report from a vague description of\nthe problem!)\n\nSince the function pointer comparison against nullptr in constexpr\ncontext lives in the system-provided header file, the s2 maintainers\nwill probably have to build the full libabsl themselves in order to\nwork around this problem.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 3 Feb 2026 15:00:05 +0300\nIvan Krylov via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> 's2' developers seem to be aware of this\n\nAfter a different package maintainer complained,",
+      "thread_id": "thread-a6dff9024806",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-2d94c2c359ef",
+      "message_id": "<70EA4304-DFD7-45B7-933F-58B1BEEAE75A@gmx.de>",
+      "from_name": "Matthias Gondan",
+      "from_email_hash": "12b0545954a0501403703a872530938a93482b59f75617631dcb79dcebab786f",
+      "date": "2026-02-15T13:08:32+01:00",
+      "subject": "[R-pkg-devel] Forward SIGUSR1/2 to package",
+      "subject_clean": "[R-pkg-devel] Forward SIGUSR1/2 to package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear list,\n\nI understand that SIGUSR1 and 2 terminate an R session, and I cannot handle them in a package, or can I?\n\nAnd if I want to disable signal handling, I can do this only by writing my ?own? R that sets R_SignalHandlers = 0 on startup. Is this an accurate description?\n\nBest wishes,\n\nMatthias",
+      "body_snippet": "Dear list,\n\nI understand that SIGUSR1 and 2 terminate an R session, and I cannot handle them in a package, or can I?\n\nAnd if I want to disable signal handling, I can do this only by writing my ?own? R",
+      "thread_id": "thread-2d94c2c359ef",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-f7b38f53bd88",
+      "message_id": "<20260215162320.5600a492@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-15T16:23:20+03:00",
+      "subject": "[R-pkg-devel] Forward SIGUSR1/2 to package",
+      "subject_clean": "[R-pkg-devel] Forward SIGUSR1/2 to package",
+      "in_reply_to": "<70EA4304-DFD7-45B7-933F-58B1BEEAE75A@gmx.de>",
+      "references": [
+        "<70EA4304-DFD7-45B7-933F-58B1BEEAE75A@gmx.de>"
+      ],
+      "body_plain": "? Sun, 15 Feb 2026 13:08:32 +0100\nMatthias Gondan <matthias-gondan at gmx.de> ?????:\n\n> I understand that SIGUSR1 and 2 terminate an R session, and I cannot\n> handle them in a package, or can I?\n\nQuite a few packages on CRAN use sigaction() to temporarily set up a\ndifferent handler for a signal (SIGINT, SIGALRM, SIGCHLD, sometimes\neven SIGSEGV), retain the original handler (presumably set up by R),\nthen restore it when done.\n\nHow are you planning to use the signals?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Sun, 15 Feb 2026 13:08:32 +0100\nMatthias Gondan <matthias-gondan at gmx.de> ?????:\n\n> I understand that SIGUSR1 and 2 terminate an R session, and I cannot\n> handle them in a package, or can I?\n\nQuit",
+      "thread_id": "thread-2d94c2c359ef",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-038ad722804b",
+      "message_id": "<009d01dc9f25$25dae0e0$7190a2a0$@gmx.de>",
+      "from_name": "m@tthi@s-go@d@@ m@iii@g oii gmx@de",
+      "from_email_hash": "57190ccd5a917b2866daf4bf830b05836b59efcabacd9f07d64f27305ad42e6e",
+      "date": "2026-02-16T10:18:00+01:00",
+      "subject": "[R-pkg-devel] Forward SIGUSR1/2 to package (cont'd)",
+      "subject_clean": "[R-pkg-devel] Forward SIGUSR1/2 to package (cont'd)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Interesting! Can you point me to one of these packages, so that I see how\nthey solved the problem? Much appreciated.\n\nThe package (\"rswipl\") is a bridge to SWI-Prolog, and that uses signals for\ncommunication (e.g., between threads). Whenever SIGUSR2 is sent, R stops. I\ndon't really need this for my own purposes, but the signals are part of the\nunit tests of SWI-Prolog, and I wanted to invoke these unit tests on R CMD\ncheck.\n\n\n? Sun, 15 Feb 2026 13:08:32 +0100\nMatthias Gondan <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n?????:\n\n> I understand that SIGUSR1 and 2 terminate an R session, and I cannot\n> handle them in a package, or can I?\n\nQuite a few packages on CRAN use sigaction() to temporarily set up a\ndifferent handler for a signal (SIGINT, SIGALRM, SIGCHLD, sometimes\neven SIGSEGV), retain the original handler (presumably set up by R),\nthen restore it when done.\n\nHow are you planning to use the signals?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Interesting! Can you point me to one of these packages, so that I see how\nthey solved the problem? Much appreciated.\n\nThe package (\"rswipl\") is a bridge to SWI-Prolog, and that uses signals for\ncommun",
+      "thread_id": "thread-038ad722804b",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-1c5fcb526f8f",
+      "message_id": "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "from_name": "Pepijn de Vries",
+      "from_email_hash": "dd0c5d2cdda8911669049acce972fcebe4c60c73ecc4eb87c88f6f71516f4ce8",
+      "date": "2026-02-16T13:59:35Z",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nMy latest submission is failing on CRAN M1mac:\n\nhttps://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n\nHaving thought I fixed the issue, I resubmitted, but it is still failing on M1mac. My suspicion is that the M1mac machine is missing drivers to read the raster file used in the failing vignette. I would like to confirm my hypothesis before resubmitting. Is there a way to replicate the CRAN M1mac checks?\n\nClosest I got was using rhub with macos-arm64, but it shows no problems:\nhttps://github.com/pepijn-devries/CopernicusMarine/actions/runs/22064225101/job/63751799489\n\nOr should I go ahead, avoid running the code in the vignette if drivers are missing and hope that this was the problem (with the risk that it will fail again at CRAN if it?s a different issue)?\nYour thoughts are welcome.\n\nKind regards,\n\nPepijn",
+      "body_snippet": "Hi all,\n\nMy latest submission is failing on CRAN M1mac:\n\nhttps://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n\nHaving thought I fixed the issue, I resubmitted, but it is still failing on M1ma",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-e06643e8e802",
+      "message_id": "<20260216230020.6871bf93@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-16T23:00:20+03:00",
+      "subject": "[R-pkg-devel] Forward SIGUSR1/2 to package (cont'd)",
+      "subject_clean": "[R-pkg-devel] Forward SIGUSR1/2 to package (cont'd)",
+      "in_reply_to": "<009d01dc9f25$25dae0e0$7190a2a0$@gmx.de>",
+      "references": [
+        "<009d01dc9f25$25dae0e0$7190a2a0$@gmx.de>"
+      ],
+      "body_plain": "? Mon, 16 Feb 2026 10:18:00 +0100\n<matthias-gondan at gmx.de> ?????:\n\n> Interesting! Can you point me to one of these packages, so that I see\n> how they solved the problem? Much appreciated.\n\n'misha', 'naryn', 'tgstat' perform some operations with Unix shared\nmemory and set up custom signal handlers for the duration.\n\n'filelock' sets a timer to interrupt a locking operation in case it\nblocks and temporarily intercepts SIGALRM for this purpose.\n\n'processx' manages child processes and thus not only handles SIGCHLD by\nitself, but also sometimes has to call the original signal handler.\n\nThere are many other hits for \"sigaction\" on CRAN in third-party\nsources. (E.g. the mbedTLS implementation of SHA-256/512, bundled with\nsome packages, catches SIGILL to determine whether special hashing CPU\ninstructions are available.) Some of those may be unreachable from R.\n\n> The package (\"rswipl\") is a bridge to SWI-Prolog, and that uses\n> signals for communication (e.g., between threads). Whenever SIGUSR2\n> is sent, R stops.\n\nI see the code in pl-thread.c sending sig_alert to threads, but no code\nto set up a signal handler for this signal. It should be enough to set\nup an empty handler using sigaction() (without setting the SA_RESTART\nflag, since the Prolog runtime wants this to interrupt system calls),\nremember the old handler returned in the last argument, run the Prolog\ncode, and afterwards restore the original signal handler before\nreturning to R.\n\nBe careful around the less mainstream Unix-like operating systems.\nsigaction() is in POSIX, but it's still prudent to test the package on\nat least FreeBSD.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 16 Feb 2026 10:18:00 +0100\n<matthias-gondan at gmx.de> ?????:\n\n> Interesting! Can you point me to one of these packages, so that I see\n> how they solved the problem? Much appreciated.\n\n'misha',",
+      "thread_id": "thread-038ad722804b",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-ef473df19e9c",
+      "message_id": "<B46A2095-282B-4A76-99AF-07EB3BA4C5DE@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-02-17T16:17:52+13:00",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Pepijn,\n\nit passes on the MacBuilder:\nhttps://mac.r-project.org/macbuilder/results/1771269966-62e0321a80f19c03/\nso it looks all good to me with the official recipes binaries, but the error is very cryptic so you could probably add some more sane error handling to your code as what it is reporting is distinctly unhelpful to the user.\n\nCheers,\nSimon\n\n\n> On 17/02/2026, at 02:59, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n> \n> Hi all,\n> \n> My latest submission is failing on CRAN M1mac:\n> \n> https://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n> \n> Having thought I fixed the issue, I resubmitted, but it is still failing on M1mac. My suspicion is that the M1mac machine is missing drivers to read the raster file used in the failing vignette. I would like to confirm my hypothesis before resubmitting. Is there a way to replicate the CRAN M1mac checks?\n> \n> Closest I got was using rhub with macos-arm64, but it shows no problems:\n> https://github.com/pepijn-devries/CopernicusMarine/actions/runs/22064225101/job/63751799489\n> \n> Or should I go ahead, avoid running the code in the vignette if drivers are missing and hope that this was the problem (with the risk that it will fail again at CRAN if it?s a different issue)?\n> Your thoughts are welcome.\n> \n> Kind regards,\n> \n> Pepijn\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Pepijn,\n\nit passes on the MacBuilder:\nhttps://mac.r-project.org/macbuilder/results/1771269966-62e0321a80f19c03/\nso it looks all good to me with the official recipes binaries, but the error is very cry",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-55d1a7831763",
+      "message_id": "<AM8PR10MB4660079DCAB56CEC2F40F5CBA76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "from_name": "Pepijn de Vries",
+      "from_email_hash": "dd0c5d2cdda8911669049acce972fcebe4c60c73ecc4eb87c88f6f71516f4ce8",
+      "date": "2026-02-17T08:26:14Z",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": "<B46A2095-282B-4A76-99AF-07EB3BA4C5DE@R-project.org>",
+      "references": [
+        "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<B46A2095-282B-4A76-99AF-07EB3BA4C5DE@R-project.org>"
+      ],
+      "body_plain": "Hi Simon,\n\nThanks for the checks and the tips. I would like to improve the error-handling, but I'm not sure what is causing it. Without being able to replicate it, it's hard to implement an improvement. It seems that macbuilder is not replicating the error. Any other checks that will resemble the CRAN M1mac checks?\n\nThanks!\n\nPepijn\n\n________________________________________\nVan:?Simon Urbanek <simon.urbanek at R-project.org>\nVerzonden:?dinsdag 17 februari 2026 04:17\nAan:?Pepijn de Vries <pepijn.devries at outlook.com>\nCC:?R-package-devel <r-package-devel at r-project.org>\nOnderwerp:?Re: [R-pkg-devel] Replicating CRAN M1mac checks\n?\nPepijn,\n\nit passes on the MacBuilder:\nhttps://mac.r-project.org/macbuilder/results/1771269966-62e0321a80f19c03/\nso it looks all good to me with the official recipes binaries, but the error is very cryptic so you could probably add some more sane error handling to your code as what it is reporting is distinctly unhelpful to the user.\n\nCheers,\nSimon\n\n\n> On 17/02/2026, at 02:59, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>\n> Hi all,\n>\n> My latest submission is failing on CRAN M1mac:\n>\n> https://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n>\n> Having thought I fixed the issue, I resubmitted, but it is still failing on M1mac. My suspicion is that the M1mac machine is missing drivers to read the raster file used in the failing vignette. I would like to confirm my hypothesis before resubmitting. Is there a way to replicate the CRAN M1mac checks?\n>\n> Closest I got was using rhub with macos-arm64, but it shows no problems:\n> https://github.com/pepijn-devries/CopernicusMarine/actions/runs/22064225101/job/63751799489\n>\n> Or should I go ahead, avoid running the code in the vignette if drivers are missing and hope that this was the problem (with the risk that it will fail again at CRAN if it?s a different issue)?\n> Your thoughts are welcome.\n>\n> Kind regards,\n>\n> Pepijn\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Hi Simon,\n\nThanks for the checks and the tips. I would like to improve the error-handling, but I'm not sure what is causing it. Without being able to replicate it, it's hard to implement an improvemen",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-db3342de2a6e",
+      "message_id": "<20260217131236.6e4609f1@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-17T13:12:36+03:00",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "? Mon, 16 Feb 2026 13:59:35 +0000\nPepijn de Vries <pepijn.devries at outlook.com> ?????:\n\n> My suspicion is that the M1mac machine is missing drivers to read the\n> raster file used in the failing vignette. I would like to confirm my\n> hypothesis before resubmitting. Is there a way to replicate the CRAN\n> M1mac checks?\n\nTry compiling gdal-3.12.2 yourself with some drivers disabled, then\ninstalling 'sf' with that gdal, then checking your package.\n\nI've tried installing gdal with\n\ncmake ... -DCMAKE_BUILD_TYPE=Release \\\n -DCMAKE_INSTALL_PREFIX=$HOME/gdal-3.12.2/install \\\n -DGDAL_BUILD_OPTIONAL_DRIVERS:BOOL=OFF\n\nand then sf with\n\nLD_LIBRARY_PATH=$HOME/gdal-3.12.2/install/lib \\\n R CMD INSTALL sf_1.0-24.tar.gz \\\n --configure-args=--with-gdal-config=$HOME/gdal-3.12.2/install/bin/gdal-config\n\nand then the following check\n\nLD_LIBRARY_PATH=$HOME/gdal-3.12.2/install/lib \\\n R CMD check CopernicusMarine_0.4.0.tar.gz\n\nfails with similar but different output:\n\nQuitting from translate.Rmd:70-73 [download-translation]\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n<error/rlang_error>\nError:\n! file not found\n---\nBacktrace:\n    ?\n 1. ??base::do.call(cms_download_subset, translated)\n 2. ??CopernicusMarine (local) `<fn>`(...)\n 3.   ??CopernicusMarine:::.get_stars_proxy(...)\n 4.     ??CopernicusMarine:::.muffle_403(...)\n 5.     ? ??base::withCallingHandlers(...)\n 6.     ??stars::read_mdim(vsi, proxy = TRUE, variable = variable)\n 7.       ??sf::gdal_read_mdim(...)\n 8.         ??sf:::CPL_read_mdim(...)\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 16 Feb 2026 13:59:35 +0000\nPepijn de Vries <pepijn.devries at outlook.com> ?????:\n\n> My suspicion is that the M1mac machine is missing drivers to read the\n> raster file used in the failing vign",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-411fda4f9516",
+      "message_id": "<4470BAAA-3BA4-4EFD-BD6F-D0CDF80C84C1@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-02-17T23:33:04+13:00",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": "<AM8PR10MB4660079DCAB56CEC2F40F5CBA76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<B46A2095-282B-4A76-99AF-07EB3BA4C5DE@R-project.org>",
+        "<AM8PR10MB4660079DCAB56CEC2F40F5CBA76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Pepijn,\n\nI don't see any error handling in your code whatsoever so I would assume this is easily triggered by network issues, e.g if you don't get the file back or it's not what you expect. Remote calls are always tricky, because you can't guarantee they will work, so you should always guard against failure. You seem to be intentionally ignoring 403 so I wonder if that's what will trigger it.\n\nCheers,\nSimon\n\n\n\n> On 17/02/2026, at 21:26, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n> \n> Hi Simon,\n> \n> Thanks for the checks and the tips. I would like to improve the error-handling, but I'm not sure what is causing it. Without being able to replicate it, it's hard to implement an improvement. It seems that macbuilder is not replicating the error. Any other checks that will resemble the CRAN M1mac checks?\n> \n> Thanks!\n> \n> Pepijn\n> \n> ________________________________________\n> Van: Simon Urbanek <simon.urbanek at R-project.org>\n> Verzonden: dinsdag 17 februari 2026 04:17\n> Aan: Pepijn de Vries <pepijn.devries at outlook.com>\n> CC: R-package-devel <r-package-devel at r-project.org>\n> Onderwerp: Re: [R-pkg-devel] Replicating CRAN M1mac checks\n>  \n> Pepijn,\n> \n> it passes on the MacBuilder:\n> https://mac.r-project.org/macbuilder/results/1771269966-62e0321a80f19c03/\n> so it looks all good to me with the official recipes binaries, but the error is very cryptic so you could probably add some more sane error handling to your code as what it is reporting is distinctly unhelpful to the user.\n> \n> Cheers,\n> Simon\n> \n> \n>> On 17/02/2026, at 02:59, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>> \n>> Hi all,\n>> \n>> My latest submission is failing on CRAN M1mac:\n>> \n>> https://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n>> \n>> Having thought I fixed the issue, I resubmitted, but it is still failing on M1mac. My suspicion is that the M1mac machine is missing drivers to read the raster file used in the failing vignette. I would like to confirm my hypothesis before resubmitting. Is there a way to replicate the CRAN M1mac checks?\n>> \n>> Closest I got was using rhub with macos-arm64, but it shows no problems:\n>> https://github.com/pepijn-devries/CopernicusMarine/actions/runs/22064225101/job/63751799489\n>> \n>> Or should I go ahead, avoid running the code in the vignette if drivers are missing and hope that this was the problem (with the risk that it will fail again at CRAN if it?s a different issue)?\n>> Your thoughts are welcome.\n>> \n>> Kind regards,\n>> \n>> Pepijn\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n>",
+      "body_snippet": "Pepijn,\n\nI don't see any error handling in your code whatsoever so I would assume this is easily triggered by network issues, e.g if you don't get the file back or it's not what you expect. Remote cal",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 3,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-1e43f2d631e4",
+      "message_id": "<AM8PR10MB466086B841DB38C8E42F5218A76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "from_name": "Pepijn de Vries",
+      "from_email_hash": "dd0c5d2cdda8911669049acce972fcebe4c60c73ecc4eb87c88f6f71516f4ce8",
+      "date": "2026-02-17T12:21:14Z",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": "<4470BAAA-3BA4-4EFD-BD6F-D0CDF80C84C1@R-project.org>",
+      "references": [
+        "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<B46A2095-282B-4A76-99AF-07EB3BA4C5DE@R-project.org>",
+        "<AM8PR10MB4660079DCAB56CEC2F40F5CBA76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<4470BAAA-3BA4-4EFD-BD6F-D0CDF80C84C1@R-project.org>"
+      ],
+      "body_plain": "Hi all,\n\n@Elias: I'm pretty sure they tested the new submission.\n@Ivan: thanks for the hint, I'll see if I'm able to build sf with a different gdal version. But the file not being found is a more informative error.\n@Simon: I'm intentionally ignoring the 403 warnings, because GDAL is trying directory listing requests, that are not allowed by the server (responding with 403). It does not need the directory listing, and will proceed without them, so the function should still work. But you are right that it cannot be guaranteed that online services are available. The problem is that the online requests are made by GDAL (via the sf package) and cannot be caught that easily. I will have to work what the sf-package is handling.\n\nI'll give it some thought... Thanks!\n\nCheers,\n\nPepijn\n\n________________________________________\nVan:?Simon Urbanek <simon.urbanek at R-project.org>\nVerzonden:?dinsdag 17 februari 2026 11:33\nAan:?Pepijn de Vries <pepijn.devries at outlook.com>\nCC:?R-package-devel <r-package-devel at r-project.org>\nOnderwerp:?Re: [R-pkg-devel] Replicating CRAN M1mac checks\n?\nPepijn,\n\nI don't see any error handling in your code whatsoever so I would assume this is easily triggered by network issues, e.g if you don't get the file back or it's not what you expect. Remote calls are always tricky, because you can't guarantee they will work, so you should always guard against failure. You seem to be intentionally ignoring 403 so I wonder if that's what will trigger it.\n\nCheers,\nSimon\n\n\n\n> On 17/02/2026, at 21:26, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>\n> Hi Simon,\n>\n> Thanks for the checks and the tips. I would like to improve the error-handling, but I'm not sure what is causing it. Without being able to replicate it, it's hard to implement an improvement. It seems that macbuilder is not replicating the error. Any other checks that will resemble the CRAN M1mac checks?\n>\n> Thanks!\n>\n> Pepijn\n>\n> ________________________________________\n> Van: Simon Urbanek <simon.urbanek at R-project.org>\n> Verzonden: dinsdag 17 februari 2026 04:17\n> Aan: Pepijn de Vries <pepijn.devries at outlook.com>\n> CC: R-package-devel <r-package-devel at r-project.org>\n> Onderwerp: Re: [R-pkg-devel] Replicating CRAN M1mac checks\n>?\n> Pepijn,\n>\n> it passes on the MacBuilder:\n> https://mac.r-project.org/macbuilder/results/1771269966-62e0321a80f19c03/\n> so it looks all good to me with the official recipes binaries, but the error is very cryptic so you could probably add some more sane error handling to your code as what it is reporting is distinctly unhelpful to the user.\n>\n> Cheers,\n> Simon\n>\n>\n>> On 17/02/2026, at 02:59, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>>\n>> Hi all,\n>>\n>> My latest submission is failing on CRAN M1mac:\n>>\n>> https://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n>>\n>> Having thought I fixed the issue, I resubmitted, but it is still failing on M1mac. My suspicion is that the M1mac machine is missing drivers to read the raster file used in the failing vignette. I would like to confirm my hypothesis before resubmitting. Is there a way to replicate the CRAN M1mac checks?\n>>\n>> Closest I got was using rhub with macos-arm64, but it shows no problems:\n>> https://github.com/pepijn-devries/CopernicusMarine/actions/runs/22064225101/job/63751799489\n>>\n>> Or should I go ahead, avoid running the code in the vignette if drivers are missing and hope that this was the problem (with the risk that it will fail again at CRAN if it?s a different issue)?\n>> Your thoughts are welcome.\n>>\n>> Kind regards,\n>>\n>> Pepijn\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>",
+      "body_snippet": "Hi all,\n\n@Elias: I'm pretty sure they tested the new submission.\n@Ivan: thanks for the hint, I'll see if I'm able to build sf with a different gdal version. But the file not being found is a more info",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 4,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-d3be1fa71691",
+      "message_id": "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2026-02-17T13:41:08-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have an R package (RPointCloud) that contains three vignettes. Each \nvignette starts by loading a different example dataset, and then calls \n\"ls\" to show the reader what objects were loaded. It is abundantly clear \nthat the vignettes are all produced in the same R process. Thus, the \n\"ls\" in the later vignettes includes a list of all objects created \nduring earlier vignettes. Since each vignette is really intended to be \nstandalone, these lists are misleading.\n\nIn an early submission of the package, I included a command at the end \nof the form \"rm(list = ls())\", which I removed after objections from a \nCRAN reviewer that this process could/would remove things that a user \nalready had in their workspace before they started running the vignette \nthemselves. So, I took those commands out.\n\nWhat is the best way to ensure that objects are not carried over from \none vignette to another? I am thinking about the following:\n\n# at the top of each vignette:\norigobj <- ls()\n\n# at the bottom of each vignette\ncurrobj <- ls()\nourobj <- currobj[!(currobj %in% origobj)]\nrm(list = ourobj\n\nWill this procedure pass the CRAN review? Is there a better way to \naccomplish this goal?\n\nThanks,\n ? ?Kevin",
+      "body_snippet": "Hi,\n\nI have an R package (RPointCloud) that contains three vignettes. Each \nvignette starts by loading a different example dataset, and then calls \n\"ls\" to show the reader what objects were loaded. It",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-fec76da1e7d3",
+      "message_id": "<CABghstRmMaYo7ftzEA_UDZBVad+iJRBb3oDYRiO8YK_DR4FynQ@mail.gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "058f22460bce77c55c3340fec40d01e374409ed76ec5a897b62075a27eb9734c",
+      "date": "2026-02-17T13:47:43-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>"
+      ],
+      "body_plain": "It might run afoul of the \"don't use attach()\" rule, but attach()\nseems like a good solution for this? e.g\n\nattach(mydata)\nls(\"mydata\")\n\n... do stuff ...\n\ndetach(mydata)\n?  This assumes you don't modify the object ...\n\nOn Tue, Feb 17, 2026 at 1:41?PM Kevin R. Coombes\n<kevin.r.coombes at gmail.com> wrote:\n>\n> Hi,\n>\n> I have an R package (RPointCloud) that contains three vignettes. Each\n> vignette starts by loading a different example dataset, and then calls\n> \"ls\" to show the reader what objects were loaded. It is abundantly clear\n> that the vignettes are all produced in the same R process. Thus, the\n> \"ls\" in the later vignettes includes a list of all objects created\n> during earlier vignettes. Since each vignette is really intended to be\n> standalone, these lists are misleading.\n>\n> In an early submission of the package, I included a command at the end\n> of the form \"rm(list = ls())\", which I removed after objections from a\n> CRAN reviewer that this process could/would remove things that a user\n> already had in their workspace before they started running the vignette\n> themselves. So, I took those commands out.\n>\n> What is the best way to ensure that objects are not carried over from\n> one vignette to another? I am thinking about the following:\n>\n> # at the top of each vignette:\n> origobj <- ls()\n>\n> # at the bottom of each vignette\n> currobj <- ls()\n> ourobj <- currobj[!(currobj %in% origobj)]\n> rm(list = ourobj\n>\n> Will this procedure pass the CRAN review? Is there a better way to\n> accomplish this goal?\n>\n> Thanks,\n>     Kevin\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "It might run afoul of the \"don't use attach()\" rule, but attach()\nseems like a good solution for this? e.g\n\nattach(mydata)\nls(\"mydata\")\n\n... do stuff ...\n\ndetach(mydata)\n?  This assumes you don't modi",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-486d7063e77c",
+      "message_id": "<CAN+W6_uVBB+vY+ZHY3P8qxc4qpFBLu4kvYy70sW57vPAayQdqg@mail.gmail.com>",
+      "from_name": "Lluís Revilla",
+      "from_email_hash": "76a9726a6e0e47bbb7afccdf71a32cc468fa12b74f368ad4203569f7d7fbc065",
+      "date": "2026-02-17T20:00:11+01:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>"
+      ],
+      "body_plain": "Hi,\n\nHow are the datasets loaded in the first place?\nIf it uses readRDS you set the name.\n\nIf you use load or data it returns the name of the objects loaded:\n(data(\"datasets\"))\n## \"obj1\", \"obj2\", \"obj3\", \"obj4\"\n\nIf there are multiple you can collect them to just display them once:\ntreg <- data(\"treg\")\ncytof <- data(cytof)\nc(treg, cytof)\n# \"treg\", \"cytof\"\n\nCheers,\n\nLlu?s\n\nMissatge de Kevin R. Coombes <kevin.r.coombes at gmail.com> del dia dt.,\n17 de febr. 2026 a les 19:41:\n>\n> Hi,\n>\n> I have an R package (RPointCloud) that contains three vignettes. Each\n> vignette starts by loading a different example dataset, and then calls\n> \"ls\" to show the reader what objects were loaded. It is abundantly clear\n> that the vignettes are all produced in the same R process. Thus, the\n> \"ls\" in the later vignettes includes a list of all objects created\n> during earlier vignettes. Since each vignette is really intended to be\n> standalone, these lists are misleading.\n>\n> In an early submission of the package, I included a command at the end\n> of the form \"rm(list = ls())\", which I removed after objections from a\n> CRAN reviewer that this process could/would remove things that a user\n> already had in their workspace before they started running the vignette\n> themselves. So, I took those commands out.\n>\n> What is the best way to ensure that objects are not carried over from\n> one vignette to another? I am thinking about the following:\n>\n> # at the top of each vignette:\n> origobj <- ls()\n>\n> # at the bottom of each vignette\n> currobj <- ls()\n> ourobj <- currobj[!(currobj %in% origobj)]\n> rm(list = ourobj\n>\n> Will this procedure pass the CRAN review? Is there a better way to\n> accomplish this goal?\n>\n> Thanks,\n>     Kevin\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi,\n\nHow are the datasets loaded in the first place?\nIf it uses readRDS you set the name.\n\nIf you use load or data it returns the name of the objects loaded:\n(data(\"datasets\"))\n## \"obj1\", \"obj2\", \"obj",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-6ea269386259",
+      "message_id": "<47ceec72-3be2-4829-ac65-ef1b7f0aad9f@login.cuny.edu>",
+      "from_name": "Marcel Ramos Pérez",
+      "from_email_hash": "f005e0973281932b465b105ae9b1df987bef1d17fa0abbcd88587f37213d85b1",
+      "date": "2026-02-17T14:09:06-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<CABghstRmMaYo7ftzEA_UDZBVad+iJRBb3oDYRiO8YK_DR4FynQ@mail.gmail.com>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+        "<CABghstRmMaYo7ftzEA_UDZBVad+iJRBb3oDYRiO8YK_DR4FynQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Kevin,\n\nIt would be more preferable to just use the names of the datasets \nwithout having to do `ls()`.\n\nOtherwise, have you tried to load your data into an empty environment \nper vignette and\nthen do `ls()` on that environment?\n\nFor example,\n\n```{r, echo=FALSE}\nvig_data1 <- new.env(parent = emptyenv())\ndata(..., package = \"RPointCloud\", envir = vig_data1)\nls(envir = vig_data1)\n```\n\nand show the user a non-evaluated chunk\n\n```{r,eval=FALSE}\nls()\n```\n\nBest regards,\nMarcel\n\nOn 2/17/26 1:47 PM, Ben Bolker wrote:\n> * External Sender - Proceed Cautiously with Links and Attachments. *\n>\n>       It might run afoul of the \"don't use attach()\" rule, but attach()\n> seems like a good solution for this? e.g\n>\n> attach(mydata)\n> ls(\"mydata\")\n>\n> ... do stuff ...\n>\n> detach(mydata)\n> ?  This assumes you don't modify the object ...\n>\n> On Tue, Feb 17, 2026 at 1:41?PM Kevin R. Coombes\n> <kevin.r.coombes at gmail.com> wrote:\n>> Hi,\n>>\n>> I have an R package (RPointCloud) that contains three vignettes. Each\n>> vignette starts by loading a different example dataset, and then calls\n>> \"ls\" to show the reader what objects were loaded. It is abundantly clear\n>> that the vignettes are all produced in the same R process. Thus, the\n>> \"ls\" in the later vignettes includes a list of all objects created\n>> during earlier vignettes. Since each vignette is really intended to be\n>> standalone, these lists are misleading.\n>>\n>> In an early submission of the package, I included a command at the end\n>> of the form \"rm(list = ls())\", which I removed after objections from a\n>> CRAN reviewer that this process could/would remove things that a user\n>> already had in their workspace before they started running the vignette\n>> themselves. So, I took those commands out.\n>>\n>> What is the best way to ensure that objects are not carried over from\n>> one vignette to another? I am thinking about the following:\n>>\n>> # at the top of each vignette:\n>> origobj <- ls()\n>>\n>> # at the bottom of each vignette\n>> currobj <- ls()\n>> ourobj <- currobj[!(currobj %in% origobj)]\n>> rm(list = ourobj\n>>\n>> Will this procedure pass the CRAN review? Is there a better way to\n>> accomplish this goal?\n>>\n>> Thanks,\n>>      Kevin\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$\n-- \n\n____\n\n*Marcel Ramos, MPH*\nSr. Data Scientist\n\nCUNY Graduate School of Public Health & Health Policy\n55 W. 125th Street, Room 621| New York, NY 10027\nmarcel.ramos at sph.cuny.edu <mailto:marcel.ramos at sph.cuny.edu> | (646) \n364-9585\nCUNY Logo <https://sph.cuny.edu>",
+      "body_snippet": "Hi Kevin,\n\nIt would be more preferable to just use the names of the datasets \nwithout having to do `ls()`.\n\nOtherwise, have you tried to load your data into an empty environment \nper vignette and\nthen",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-67fd77acef49",
+      "message_id": "<f2a075e5-723e-4b43-9a09-8f6e9d0f2cd6@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2026-02-17T14:15:25-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<CAN+W6_uVBB+vY+ZHY3P8qxc4qpFBLu4kvYy70sW57vPAayQdqg@mail.gmail.com>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+        "<CAN+W6_uVBB+vY+ZHY3P8qxc4qpFBLu4kvYy70sW57vPAayQdqg@mail.gmail.com>"
+      ],
+      "body_plain": "Hi, Lluis,\n\nI don't think this works with \"data\". if I call \"data(cytof)\", then the \nreturn value is \"cytof\" (the name of the rda object called), but the \nobjects created from within that rda object are \"AML10.node287\", \n\"AML10.node287.rips\", and \"Arip\". (The documentation for \"data\" says \nthat there is no requirement that data(X) creates an object called X, or \nonly one object.) If no objects were already present in the workspace, \nthen \"ls\" would list those three (internal) objects, and not \"cytof\".\n\nI didn't check \"load\". since the whole point is to have the objects \navailable through \"data\" for users to play around with the package \nthemselves.\n\nBest,\n ? ? Kevin\n\nOn 2/17/2026 2:00 PM, Llu?s Revilla wrote:\n> Hi,\n>\n> How are the datasets loaded in the first place?\n> If it uses readRDS you set the name.\n>\n> If you use load or data it returns the name of the objects loaded:\n> (data(\"datasets\"))\n> ## \"obj1\", \"obj2\", \"obj3\", \"obj4\"\n>\n> If there are multiple you can collect them to just display them once:\n> treg <- data(\"treg\")\n> cytof <- data(cytof)\n> c(treg, cytof)\n> # \"treg\", \"cytof\"\n>\n> Cheers,\n>\n> Llu?s\n>\n> Missatge de Kevin R. Coombes <kevin.r.coombes at gmail.com> del dia dt.,\n> 17 de febr. 2026 a les 19:41:\n>> Hi,\n>>\n>> I have an R package (RPointCloud) that contains three vignettes. Each\n>> vignette starts by loading a different example dataset, and then calls\n>> \"ls\" to show the reader what objects were loaded. It is abundantly clear\n>> that the vignettes are all produced in the same R process. Thus, the\n>> \"ls\" in the later vignettes includes a list of all objects created\n>> during earlier vignettes. Since each vignette is really intended to be\n>> standalone, these lists are misleading.\n>>\n>> In an early submission of the package, I included a command at the end\n>> of the form \"rm(list = ls())\", which I removed after objections from a\n>> CRAN reviewer that this process could/would remove things that a user\n>> already had in their workspace before they started running the vignette\n>> themselves. So, I took those commands out.\n>>\n>> What is the best way to ensure that objects are not carried over from\n>> one vignette to another? I am thinking about the following:\n>>\n>> # at the top of each vignette:\n>> origobj <- ls()\n>>\n>> # at the bottom of each vignette\n>> currobj <- ls()\n>> ourobj <- currobj[!(currobj %in% origobj)]\n>> rm(list = ourobj\n>>\n>> Will this procedure pass the CRAN review? Is there a better way to\n>> accomplish this goal?\n>>\n>> Thanks,\n>>      Kevin\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi, Lluis,\n\nI don't think this works with \"data\". if I call \"data(cytof)\", then the \nreturn value is \"cytof\" (the name of the rda object called), but the \nobjects created from within that rda object a",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-1ac3d97c7c9b",
+      "message_id": "<8d931306-7dca-4d6a-871e-eb609b89942b@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2026-02-17T14:29:09-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<47ceec72-3be2-4829-ac65-ef1b7f0aad9f@login.cuny.edu>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+        "<CABghstRmMaYo7ftzEA_UDZBVad+iJRBb3oDYRiO8YK_DR4FynQ@mail.gmail.com>",
+        "<47ceec72-3be2-4829-ac65-ef1b7f0aad9f@login.cuny.edu>"
+      ],
+      "body_plain": "Hi Marcel,\n\nIt might be better to combine this idea with Ben Bolker's suggestion. \n(Using everything within a new environment means adding the appropriate \nreferences to dig into that environment every time I use one of the \nobjects, meaning I would have to carefully rewrite the whole vignette.) \nSomething like\n\n```{r vigdata}\nnenv <- new.env()\ndata(\"cytof\", envir = nenv)\nls(nenv)\nattach(nenv)\n```\n...do stuff...\n\n```{r cleanup}\ndetach(nenv)\nrm(nenv)\n```\n\nThanks,\n ? ? Kevin\n\nOn 2/17/2026 2:09 PM, Marcel Ramos P?rez wrote:\n> Hi Kevin,\n>\n> It would be more preferable to just use the names of the datasets \n> without having to do `ls()`.\n>\n> Otherwise, have you tried to load your data into an empty environment \n> per vignette and\n> then do `ls()` on that environment?\n>\n> For example,\n>\n> ```{r, echo=FALSE}\n> vig_data1 <- new.env(parent = emptyenv())\n> data(..., package = \"RPointCloud\", envir = vig_data1)\n> ls(envir = vig_data1)\n> ```\n>\n> and show the user a non-evaluated chunk\n>\n> ```{r,eval=FALSE}\n> ls()\n> ```\n>\n> Best regards,\n> Marcel\n>\n> On 2/17/26 1:47 PM, Ben Bolker wrote:\n>> * External Sender - Proceed Cautiously with Links and Attachments. *\n>>\n>> ????? It might run afoul of the \"don't use attach()\" rule, but attach()\n>> seems like a good solution for this? e.g\n>>\n>> attach(mydata)\n>> ls(\"mydata\")\n>>\n>> ... do stuff ...\n>>\n>> detach(mydata)\n>> ?? This assumes you don't modify the object ...\n>>\n>> On Tue, Feb 17, 2026 at 1:41?PM Kevin R. Coombes\n>> <kevin.r.coombes at gmail.com> wrote:\n>>> Hi,\n>>>\n>>> I have an R package (RPointCloud) that contains three vignettes. Each\n>>> vignette starts by loading a different example dataset, and then calls\n>>> \"ls\" to show the reader what objects were loaded. It is abundantly \n>>> clear\n>>> that the vignettes are all produced in the same R process. Thus, the\n>>> \"ls\" in the later vignettes includes a list of all objects created\n>>> during earlier vignettes. Since each vignette is really intended to be\n>>> standalone, these lists are misleading.\n>>>\n>>> In an early submission of the package, I included a command at the end\n>>> of the form \"rm(list = ls())\", which I removed after objections from a\n>>> CRAN reviewer that this process could/would remove things that a user\n>>> already had in their workspace before they started running the vignette\n>>> themselves. So, I took those commands out.\n>>>\n>>> What is the best way to ensure that objects are not carried over from\n>>> one vignette to another? I am thinking about the following:\n>>>\n>>> # at the top of each vignette:\n>>> origobj <- ls()\n>>>\n>>> # at the bottom of each vignette\n>>> currobj <- ls()\n>>> ourobj <- currobj[!(currobj %in% origobj)]\n>>> rm(list = ourobj\n>>>\n>>> Will this procedure pass the CRAN review? Is there a better way to\n>>> accomplish this goal?\n>>>\n>>> Thanks,\n>>> ???? Kevin\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$ \n>>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$ \n>>",
+      "body_snippet": "Hi Marcel,\n\nIt might be better to combine this idea with Ben Bolker's suggestion. \n(Using everything within a new environment means adding the appropriate \nreferences to dig into that environment ever",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 3,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-e6d639f2f5f3",
+      "message_id": "<997E1432-C7C8-4EF8-A3E4-C00128545584@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-02-18T09:18:11+13:00",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "subject_clean": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "in_reply_to": "<AM8PR10MB466086B841DB38C8E42F5218A76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB4660B574300927B1D798A06EA76CA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<B46A2095-282B-4A76-99AF-07EB3BA4C5DE@R-project.org>",
+        "<AM8PR10MB4660079DCAB56CEC2F40F5CBA76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<4470BAAA-3BA4-4EFD-BD6F-D0CDF80C84C1@R-project.org>",
+        "<AM8PR10MB466086B841DB38C8E42F5218A76DA@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Pepijn,\n\nI understand that the actual fetching code is in stars, but given that you know it can fail, you can recover gracefully instead of failing with an uninformative message (or provide a helpful error and catch it in the vignette). In the end it is your responsibility since you are providing the API, the user shouldn't' need to know anything about the intricacies of what happens under the hood in other packages.\n\nCheers,\nSimon\n\n\n> On 18/02/2026, at 01:21, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n> \n> Hi all,\n> \n> @Elias: I'm pretty sure they tested the new submission.\n> @Ivan: thanks for the hint, I'll see if I'm able to build sf with a different gdal version. But the file not being found is a more informative error.\n> @Simon: I'm intentionally ignoring the 403 warnings, because GDAL is trying directory listing requests, that are not allowed by the server (responding with 403). It does not need the directory listing, and will proceed without them, so the function should still work. But you are right that it cannot be guaranteed that online services are available. The problem is that the online requests are made by GDAL (via the sf package) and cannot be caught that easily. I will have to work what the sf-package is handling.\n> \n> I'll give it some thought... Thanks!\n> \n> Cheers,\n> \n> Pepijn\n> \n> ________________________________________\n> Van: Simon Urbanek <simon.urbanek at R-project.org>\n> Verzonden: dinsdag 17 februari 2026 11:33\n> Aan: Pepijn de Vries <pepijn.devries at outlook.com>\n> CC: R-package-devel <r-package-devel at r-project.org>\n> Onderwerp: Re: [R-pkg-devel] Replicating CRAN M1mac checks\n>  \n> Pepijn,\n> \n> I don't see any error handling in your code whatsoever so I would assume this is easily triggered by network issues, e.g if you don't get the file back or it's not what you expect. Remote calls are always tricky, because you can't guarantee they will work, so you should always guard against failure. You seem to be intentionally ignoring 403 so I wonder if that's what will trigger it.\n> \n> Cheers,\n> Simon\n> \n> \n> \n>> On 17/02/2026, at 21:26, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>> \n>> Hi Simon,\n>> \n>> Thanks for the checks and the tips. I would like to improve the error-handling, but I'm not sure what is causing it. Without being able to replicate it, it's hard to implement an improvement. It seems that macbuilder is not replicating the error. Any other checks that will resemble the CRAN M1mac checks?\n>> \n>> Thanks!\n>> \n>> Pepijn\n>> \n>> ________________________________________\n>> Van: Simon Urbanek <simon.urbanek at R-project.org>\n>> Verzonden: dinsdag 17 februari 2026 04:17\n>> Aan: Pepijn de Vries <pepijn.devries at outlook.com>\n>> CC: R-package-devel <r-package-devel at r-project.org>\n>> Onderwerp: Re: [R-pkg-devel] Replicating CRAN M1mac checks\n>>  \n>> Pepijn,\n>> \n>> it passes on the MacBuilder:\n>> https://mac.r-project.org/macbuilder/results/1771269966-62e0321a80f19c03/\n>> so it looks all good to me with the official recipes binaries, but the error is very cryptic so you could probably add some more sane error handling to your code as what it is reporting is distinctly unhelpful to the user.\n>> \n>> Cheers,\n>> Simon\n>> \n>> \n>>> On 17/02/2026, at 02:59, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>>> \n>>> Hi all,\n>>> \n>>> My latest submission is failing on CRAN M1mac:\n>>> \n>>> https://www.stats.ox.ac.uk/pub/bdr/M1mac/CopernicusMarine.out\n>>> \n>>> Having thought I fixed the issue, I resubmitted, but it is still failing on M1mac. My suspicion is that the M1mac machine is missing drivers to read the raster file used in the failing vignette. I would like to confirm my hypothesis before resubmitting. Is there a way to replicate the CRAN M1mac checks?\n>>> \n>>> Closest I got was using rhub with macos-arm64, but it shows no problems:\n>>> https://github.com/pepijn-devries/CopernicusMarine/actions/runs/22064225101/job/63751799489\n>>> \n>>> Or should I go ahead, avoid running the code in the vignette if drivers are missing and hope that this was the problem (with the risk that it will fail again at CRAN if it?s a different issue)?\n>>> Your thoughts are welcome.\n>>> \n>>> Kind regards,\n>>> \n>>> Pepijn\n>>> \n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>> \n>> \n>",
+      "body_snippet": "Pepijn,\n\nI understand that the actual fetching code is in stars, but given that you know it can fail, you can recover gracefully instead of failing with an uninformative message (or provide a helpful ",
+      "thread_id": "thread-1c5fcb526f8f",
+      "thread_depth": 5,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-ff6915621ea2",
+      "message_id": "<00ac01dca04f$3fe8bc70$bfba3550$@gmail.com>",
+      "from_name": "@vi@e@gross m@iii@g oii gm@ii@com",
+      "from_email_hash": "d6a4c55a185bab73b3c0ff3c4ff2919a7304ba1b26cb7598116213c48aa6f4dd",
+      "date": "2026-02-17T15:51:54-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<8d931306-7dca-4d6a-871e-eb609b89942b@gmail.com>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+        "<CABghstRmMaYo7ftzEA_UDZBVad+iJRBb3oDYRiO8YK_DR4FynQ@mail.gmail.com>",
+        "<47ceec72-3be2-4829-ac65-ef1b7f0aad9f@login.cuny.edu>",
+        "<8d931306-7dca-4d6a-871e-eb609b89942b@gmail.com>"
+      ],
+      "body_plain": "This may be a dumb question. If the names of variable to be extracted are in the file, should there be a function that does not extract the data but simply returns a list of some sort of the names of variables that would be created if it is extracted? \n\nIt would then be simple enough to gather the names and perhaps verify they are now in the environment and tell the user what to expect.\n\nAnd, of course, I can imagine an alternative function that extracts the data and ALSO (perhaps only on request) creates another named variable like \".Last_extraction\" containing the names of the other variables it created.\n\n-----Original Message-----\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Kevin R. Coombes\nSent: Tuesday, February 17, 2026 2:29 PM\nTo: marcel.ramos at sph.cuny.edu; Ben Bolker <bbolker at gmail.com>\nCc: R Package Development <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Carry over in package with multiple vignettes\n\nHi Marcel,\n\nIt might be better to combine this idea with Ben Bolker's suggestion. \n(Using everything within a new environment means adding the appropriate \nreferences to dig into that environment every time I use one of the \nobjects, meaning I would have to carefully rewrite the whole vignette.) \nSomething like\n\n```{r vigdata}\nnenv <- new.env()\ndata(\"cytof\", envir = nenv)\nls(nenv)\nattach(nenv)\n```\n...do stuff...\n\n```{r cleanup}\ndetach(nenv)\nrm(nenv)\n```\n\nThanks,\n     Kevin\n\nOn 2/17/2026 2:09 PM, Marcel Ramos P?rez wrote:\n> Hi Kevin,\n>\n> It would be more preferable to just use the names of the datasets \n> without having to do `ls()`.\n>\n> Otherwise, have you tried to load your data into an empty environment \n> per vignette and\n> then do `ls()` on that environment?\n>\n> For example,\n>\n> ```{r, echo=FALSE}\n> vig_data1 <- new.env(parent = emptyenv())\n> data(..., package = \"RPointCloud\", envir = vig_data1)\n> ls(envir = vig_data1)\n> ```\n>\n> and show the user a non-evaluated chunk\n>\n> ```{r,eval=FALSE}\n> ls()\n> ```\n>\n> Best regards,\n> Marcel\n>\n> On 2/17/26 1:47 PM, Ben Bolker wrote:\n>> * External Sender - Proceed Cautiously with Links and Attachments. *\n>>\n>>       It might run afoul of the \"don't use attach()\" rule, but attach()\n>> seems like a good solution for this? e.g\n>>\n>> attach(mydata)\n>> ls(\"mydata\")\n>>\n>> ... do stuff ...\n>>\n>> detach(mydata)\n>> ?  This assumes you don't modify the object ...\n>>\n>> On Tue, Feb 17, 2026 at 1:41?PM Kevin R. Coombes\n>> <kevin.r.coombes at gmail.com> wrote:\n>>> Hi,\n>>>\n>>> I have an R package (RPointCloud) that contains three vignettes. Each\n>>> vignette starts by loading a different example dataset, and then calls\n>>> \"ls\" to show the reader what objects were loaded. It is abundantly \n>>> clear\n>>> that the vignettes are all produced in the same R process. Thus, the\n>>> \"ls\" in the later vignettes includes a list of all objects created\n>>> during earlier vignettes. Since each vignette is really intended to be\n>>> standalone, these lists are misleading.\n>>>\n>>> In an early submission of the package, I included a command at the end\n>>> of the form \"rm(list = ls())\", which I removed after objections from a\n>>> CRAN reviewer that this process could/would remove things that a user\n>>> already had in their workspace before they started running the vignette\n>>> themselves. So, I took those commands out.\n>>>\n>>> What is the best way to ensure that objects are not carried over from\n>>> one vignette to another? I am thinking about the following:\n>>>\n>>> # at the top of each vignette:\n>>> origobj <- ls()\n>>>\n>>> # at the bottom of each vignette\n>>> currobj <- ls()\n>>> ourobj <- currobj[!(currobj %in% origobj)]\n>>> rm(list = ourobj\n>>>\n>>> Will this procedure pass the CRAN review? Is there a better way to\n>>> accomplish this goal?\n>>>\n>>> Thanks,\n>>>      Kevin\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$ \n>>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$ \n>>\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "This may be a dumb question. If the names of variable to be extracted are in the file, should there be a function that does not extract the data but simply returns a list of some sort of the names of ",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 4,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-2788890bbd8a",
+      "message_id": "<b68e5a0c-86cf-43b8-bf71-a2955ff200da@gmail.com>",
+      "from_name": "Kevin R. Coombes",
+      "from_email_hash": "a67caf6a84c4875f5779a659dc991da8d3e29a2825bf92cc388e68dd75ba02d6",
+      "date": "2026-02-17T16:15:37-05:00",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "subject_clean": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "in_reply_to": "<00ac01dca04f$3fe8bc70$bfba3550$@gmail.com>",
+      "references": [
+        "<19e8f794-2d7b-471b-ba65-2e15388477d9@gmail.com>",
+        "<CABghstRmMaYo7ftzEA_UDZBVad+iJRBb3oDYRiO8YK_DR4FynQ@mail.gmail.com>",
+        "<47ceec72-3be2-4829-ac65-ef1b7f0aad9f@login.cuny.edu>",
+        "<8d931306-7dca-4d6a-871e-eb609b89942b@gmail.com>",
+        "<00ac01dca04f$3fe8bc70$bfba3550$@gmail.com>"
+      ],
+      "body_plain": "Well, in a sense, there is such a function: \"load\". The problem is, \nthat's an awkward way to get at something that is stored in the \"data\" \ndirectory of a package and easily (and more standardly) loaded using the \n\"data\" function. You would have to do something like\n\nloc <- system.file(\"data/cytof.rda\", package = \"RPointCloud\")\nload(loc, verbose = TRUE) # list item names\n\nBut that's not how the user who wants to use the data in his or her own \ncode would ever do it. Nor should you teach them to do that, especially \nif they only need to write \"data(cytof)\" after including your library \npackage.\n\nBest,\n ? ? Kevin\n\nOn 2/17/2026 3:51 PM, avi.e.gross at gmail.com wrote:\n> This may be a dumb question. If the names of variable to be extracted are in the file, should there be a function that does not extract the data but simply returns a list of some sort of the names of variables that would be created if it is extracted?\n>\n> It would then be simple enough to gather the names and perhaps verify they are now in the environment and tell the user what to expect.\n>\n> And, of course, I can imagine an alternative function that extracts the data and ALSO (perhaps only on request) creates another named variable like \".Last_extraction\" containing the names of the other variables it created.\n>\n> -----Original Message-----\n> From: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Kevin R. Coombes\n> Sent: Tuesday, February 17, 2026 2:29 PM\n> To: marcel.ramos at sph.cuny.edu; Ben Bolker <bbolker at gmail.com>\n> Cc: R Package Development <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] Carry over in package with multiple vignettes\n>\n> Hi Marcel,\n>\n> It might be better to combine this idea with Ben Bolker's suggestion.\n> (Using everything within a new environment means adding the appropriate\n> references to dig into that environment every time I use one of the\n> objects, meaning I would have to carefully rewrite the whole vignette.)\n> Something like\n>\n> ```{r vigdata}\n> nenv <- new.env()\n> data(\"cytof\", envir = nenv)\n> ls(nenv)\n> attach(nenv)\n> ```\n> ...do stuff...\n>\n> ```{r cleanup}\n> detach(nenv)\n> rm(nenv)\n> ```\n>\n> Thanks,\n>       Kevin\n>\n> On 2/17/2026 2:09 PM, Marcel Ramos P?rez wrote:\n>> Hi Kevin,\n>>\n>> It would be more preferable to just use the names of the datasets\n>> without having to do `ls()`.\n>>\n>> Otherwise, have you tried to load your data into an empty environment\n>> per vignette and\n>> then do `ls()` on that environment?\n>>\n>> For example,\n>>\n>> ```{r, echo=FALSE}\n>> vig_data1 <- new.env(parent = emptyenv())\n>> data(..., package = \"RPointCloud\", envir = vig_data1)\n>> ls(envir = vig_data1)\n>> ```\n>>\n>> and show the user a non-evaluated chunk\n>>\n>> ```{r,eval=FALSE}\n>> ls()\n>> ```\n>>\n>> Best regards,\n>> Marcel\n>>\n>> On 2/17/26 1:47 PM, Ben Bolker wrote:\n>>> * External Sender - Proceed Cautiously with Links and Attachments. *\n>>>\n>>>        It might run afoul of the \"don't use attach()\" rule, but attach()\n>>> seems like a good solution for this? e.g\n>>>\n>>> attach(mydata)\n>>> ls(\"mydata\")\n>>>\n>>> ... do stuff ...\n>>>\n>>> detach(mydata)\n>>> ?  This assumes you don't modify the object ...\n>>>\n>>> On Tue, Feb 17, 2026 at 1:41?PM Kevin R. Coombes\n>>> <kevin.r.coombes at gmail.com> wrote:\n>>>> Hi,\n>>>>\n>>>> I have an R package (RPointCloud) that contains three vignettes. Each\n>>>> vignette starts by loading a different example dataset, and then calls\n>>>> \"ls\" to show the reader what objects were loaded. It is abundantly\n>>>> clear\n>>>> that the vignettes are all produced in the same R process. Thus, the\n>>>> \"ls\" in the later vignettes includes a list of all objects created\n>>>> during earlier vignettes. Since each vignette is really intended to be\n>>>> standalone, these lists are misleading.\n>>>>\n>>>> In an early submission of the package, I included a command at the end\n>>>> of the form \"rm(list = ls())\", which I removed after objections from a\n>>>> CRAN reviewer that this process could/would remove things that a user\n>>>> already had in their workspace before they started running the vignette\n>>>> themselves. So, I took those commands out.\n>>>>\n>>>> What is the best way to ensure that objects are not carried over from\n>>>> one vignette to another? I am thinking about the following:\n>>>>\n>>>> # at the top of each vignette:\n>>>> origobj <- ls()\n>>>>\n>>>> # at the bottom of each vignette\n>>>> currobj <- ls()\n>>>> ourobj <- currobj[!(currobj %in% origobj)]\n>>>> rm(list = ourobj\n>>>>\n>>>> Will this procedure pass the CRAN review? Is there a better way to\n>>>> accomplish this goal?\n>>>>\n>>>> Thanks,\n>>>>       Kevin\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$\n>>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!LRXxDv2l!TCoohdCCt53OwwimPx9i6UhVDPy6NpUMzn-z9-F1sE_GnHi5m8hgN1THdXv-vWXA0ooLFOUPO2-QzRgao6mHYQ$\n>>>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Well, in a sense, there is such a function: \"load\". The problem is, \nthat's an awkward way to get at something that is stored in the \"data\" \ndirectory of a package and easily (and more standardly) loa",
+      "thread_id": "thread-d3be1fa71691",
+      "thread_depth": 5,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-8023b1fe666b",
+      "message_id": "<20260219113519.43ce91ec@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-19T11:35:19+03:00",
+      "subject": "[R-pkg-devel] Using the connections interface to decode text",
+      "subject_clean": "[R-pkg-devel] Using the connections interface to decode text",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello R package developers,\n\nNow that R_GetConnection(), R_new_custom_connection(),\nR_ReadConnection(), R_WriteConnection() are marked as experimental, I'm\ncurious: is it a good idea to use the interface to decode text from a\nuser-provided connection? For example, this could be useful to stream\nthe data into a parser without loading it all into memory first.\n\nR_ReadConnection() is like readBin(), it won't decode any text. On the\nother hand, since R_new_custom_connection() is also part of the\ninterface, this implies that the user must know about struct Rconn and\nwhat its functions do, including the UTF8out flag and how readLines()\nuses it. (Without the readLines() trick, R will only attempt to decode\nthe data into the native encoding. With the readLines() trick, R will\nonly accept unopened connections and close them afterwards.)\n\nThe following example seems to work:\n\n// R_ExecWithCleanup(), R_CONNECTIONS_VERSION check omitted\nSEXP readFromConn(SEXP sconn) {\n Rconnection conn = R_GetConnection(sconn);\n\n if (!conn->isopen) {\n  conn->UTF8out = TRUE;\n  strcpy(conn->mode, \"rt\");\n  conn->open(conn);\n }\n\n for (;;) {\n   int c = conn->fgetc(conn);\n   if (c < 0 || c > 255) break; // R_EOF not declared\n   Rprintf(\"%02x \", c);\n }\n\n Rprintf(\"\\n\");\n conn->close(conn);\n\n return R_NilValue;\n}\n\nLC_ALL=en_GB.iso885915 luit R # non-UTF-8 locale\n\n'\\u5b98\\u8a71' |> iconv('UTF-8', 'GBK') |> writeLines('gbk.txt')\n.Call('readFromConn', file('gbk.txt', encoding = 'GBK'))\n# e5 ae 98 e8 a9 b1 0a\n'\\u5b98\\u8a71' |> charToRaw() # same UTF-8 as above\n# [1] e5 ae 98 e8 a9 b1\n\nIs it a good idea to adopt such an approach in a package? Would it be\nbetter to read data as binary and decode it using Riconv?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Hello R package developers,\n\nNow that R_GetConnection(), R_new_custom_connection(),\nR_ReadConnection(), R_WriteConnection() are marked as experimental, I'm\ncurious: is it a good idea to use the interf",
+      "thread_id": "thread-8023b1fe666b",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-15197dece32d",
+      "message_id": "<31C6DB49-0604-41CD-8D53-5EACF7A46CF5@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-02-20T09:56:11+13:00",
+      "subject": "[R-pkg-devel] Using the connections interface to decode text",
+      "subject_clean": "[R-pkg-devel] Using the connections interface to decode text",
+      "in_reply_to": "<20260219113519.43ce91ec@Tarkus>",
+      "references": [
+        "<20260219113519.43ce91ec@Tarkus>"
+      ],
+      "body_plain": "As the author of the custom connection API the answer is no, it was not the intention. The structure has to be exposed in order to implement the connection API for new connections types, there is no way around it (since implementing code need access to the internals), but it should not to be used outside of that context since it should be opaque to the *users* of the connections. So packages that do not implement new connections should not use the internal structures to access the internals of connections, because they are not intended to be part of the public API as they may change. That?s why this is strictly experimental - if we need to change it, only packages implementing new connections would have to adapt, but no one else should. Does that clarify?\n\nCheers,\nSimon\n\n\n> On 19 Feb 2026, at 21:35, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> Hello R package developers,\n> \n> Now that R_GetConnection(), R_new_custom_connection(),\n> R_ReadConnection(), R_WriteConnection() are marked as experimental, I'm\n> curious: is it a good idea to use the interface to decode text from a\n> user-provided connection? For example, this could be useful to stream\n> the data into a parser without loading it all into memory first.\n> \n> R_ReadConnection() is like readBin(), it won't decode any text. On the\n> other hand, since R_new_custom_connection() is also part of the\n> interface, this implies that the user must know about struct Rconn and\n> what its functions do, including the UTF8out flag and how readLines()\n> uses it. (Without the readLines() trick, R will only attempt to decode\n> the data into the native encoding. With the readLines() trick, R will\n> only accept unopened connections and close them afterwards.)\n> \n> The following example seems to work:\n> \n> // R_ExecWithCleanup(), R_CONNECTIONS_VERSION check omitted\n> SEXP readFromConn(SEXP sconn) {\n> Rconnection conn = R_GetConnection(sconn);\n> \n> if (!conn->isopen) {\n>  conn->UTF8out = TRUE;\n>  strcpy(conn->mode, \"rt\");\n>  conn->open(conn);\n> }\n> \n> for (;;) {\n>   int c = conn->fgetc(conn);\n>   if (c < 0 || c > 255) break; // R_EOF not declared\n>   Rprintf(\"%02x \", c);\n> }\n> \n> Rprintf(\"\\n\");\n> conn->close(conn);\n> \n> return R_NilValue;\n> }\n> \n> LC_ALL=en_GB.iso885915 luit R # non-UTF-8 locale\n> \n> '\\u5b98\\u8a71' |> iconv('UTF-8', 'GBK') |> writeLines('gbk.txt')\n> .Call('readFromConn', file('gbk.txt', encoding = 'GBK'))\n> # e5 ae 98 e8 a9 b1 0a\n> '\\u5b98\\u8a71' |> charToRaw() # same UTF-8 as above\n> # [1] e5 ae 98 e8 a9 b1\n> \n> Is it a good idea to adopt such an approach in a package? Would it be\n> better to read data as binary and decode it using Riconv?\n> \n> -- \n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "As the author of the custom connection API the answer is no, it was not the intention. The structure has to be exposed in order to implement the connection API for new connections types, there is no w",
+      "thread_id": "thread-8023b1fe666b",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-ec52e84fa714",
+      "message_id": "<20260220104401.7710bbb5@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-02-20T10:44:01+03:00",
+      "subject": "[R-pkg-devel] Using the connections interface to decode text",
+      "subject_clean": "[R-pkg-devel] Using the connections interface to decode text",
+      "in_reply_to": "<31C6DB49-0604-41CD-8D53-5EACF7A46CF5@R-project.org>",
+      "references": [
+        "<20260219113519.43ce91ec@Tarkus>",
+        "<31C6DB49-0604-41CD-8D53-5EACF7A46CF5@R-project.org>"
+      ],
+      "body_plain": "On Fri, 20 Feb 2026 09:56:11 +1300\nSimon Urbanek <simon.urbanek at R-project.org> wrote:\n\n> The structure has to be exposed in order to implement the connection\n> API for new connections types, there is no way around it (since\n> implementing code need access to the internals), but it should not to\n> be used outside of that context since it should be opaque to the\n> *users* of the connections.\n\nDuly noted, thank you for the explanation!\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "On Fri, 20 Feb 2026 09:56:11 +1300\nSimon Urbanek <simon.urbanek at R-project.org> wrote:\n\n> The structure has to be exposed in order to implement the connection\n> API for new connections types, there ",
+      "thread_id": "thread-8023b1fe666b",
+      "thread_depth": 2,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-6288f861ffa9",
+      "message_id": "<4bd25eb4-c507-4e57-94c3-ac1347b0072f@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-02-22T09:37:24-05:00",
+      "subject": "[R-pkg-devel] Help request for rgl update",
+      "subject_clean": "[R-pkg-devel] Help request for rgl update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Summary:\n\nI'm in the process of a major update to the rgl package and am \nrequesting two kinds of help:\n\n- that users of rgl or packages depending on it could report problems \n(and wishlist items).\n\n- that experts in setting up complex packages like rgl could help me to \nrewrite the configuration files.\n\nThe new version is available in the \"shaders\" branch of\nhttps://github.com/dmurdoch/rgl, and for now depends on the small \npackage https://github.com/dmurdoch/rasterText/.\n\n\nDetails:\n\nrgl is an old package to do 3D graphics, written by Daniel Adler and \nmyself with contributions from a large number of people.  It has a few \nhundred reverse dependencies.\n\nThe planned update replaces the code from OpenGL 1.2 (released in 1998) \nwith more modern code.  Currently I am targeting OpenGL 3.3 Core Profile \nfrom 2010, as that seems to be the most widely available version \nnowadays that is backward compatible with newer versions.\n\nThe main benefit of the update is to allow the use of \"shaders\" within \nR.  These are programs written in the GLSL language to allow fine \ncontrol of rendering that isn't possible in the (obsolete) \"fixed \npipeline\" used previously.  One application I hope to be able to \nimplement soon is the ability to show cross-sections of the interior of \n3D solids such as are shown in CT scans.\n\nBecause I have replaced essentially all the rendering code to make this \nupdate, it's very likely that I've missed some features and introduced \nsome new bugs.  Testing by existing users will help me to track down and \nfix those issues.\n\nI've also rewritten all the text-handling code.  Previously there were \nseveral different schemes for drawing text, and I'm hoping that nowadays \na single one (based on PangoCairo) will work on all platforms.  The \nproblem here is that this brings in a complicated set of system \ndependencies, and I really need help to get the configuration right.\n\nIn the current version of the update, this depends on a small package \nhttps://github.com/dmurdoch/rasterText/. I intend to bring that code \ninto the main rgl package before release, but first I'd like to get it \nto pass checks on all platforms, and I really don't know what I'm doing \nwith configuration files.\n\nIf anyone can help me in either of these ways, I'd really appreciate it.\n\nDuncan Murdoch",
+      "body_snippet": "Summary:\n\nI'm in the process of a major update to the rgl package and am \nrequesting two kinds of help:\n\n- that users of rgl or packages depending on it could report problems \n(and wishlist items).\n\n-",
+      "thread_id": "thread-6288f861ffa9",
+      "thread_depth": 0,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-23afb164f699",
+      "message_id": "<DAD35778-3282-4B6D-A3A0-017516F820D8@mcgill.ca>",
+      "from_name": "James Owen Ramsay, Dr.",
+      "from_email_hash": "860b38d8973fddaf3348fccb6376f11d7436a393827be09c9b951df5a107ed57",
+      "date": "2026-02-25T14:17:14Z",
+      "subject": "[R-pkg-devel] Help request for rgl update",
+      "subject_clean": "[R-pkg-devel] Help request for rgl update",
+      "in_reply_to": "<4bd25eb4-c507-4e57-94c3-ac1347b0072f@gmail.com>",
+      "references": [
+        "<4bd25eb4-c507-4e57-94c3-ac1347b0072f@gmail.com>"
+      ],
+      "body_plain": "Hi Duncan,\n\nHow great to hear from you. The lack of which is due to much neglect of the McGill side of my two inboxes.\n\nBut I?m still fiddling with another version of TestGardener, where we found rgl to be really helpful.\n\nHere?s my favorite problem:\n\nI construct a 3D curve with in very high manifold.  I do this with eigenanalysis of course.  It turns out that almost all of the variation is within 2 or 3 dimensions.  Percentages like 98.8% for example.  Hence a chance to see the curve can be very illuminating with in the testing context.  The 3D version would also benefit much by being able to view it from many viewpoints and by being able to move it smoothly.\n\nAt first I was able to use plotly for this purpose, this no works in R.\n\nAny suggestions?  I?d sure like to get back to using rgl.\n\nMaureen and I have moved into a seniors? residence in Ottawa and we find it actually very pleasant.  I?m fine but she is having more and more severe memory issues.  Nevertheless, I still love to tinker.\n\nI?d love to hear from you about things other than rgl, such as Duncan himself and his family.\n\nJim. Ramsay\n\n> On Feb 22, 2026, at 9:37?AM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> Summary:\n>\n> I'm in the process of a major update to the rgl package and am requesting two kinds of help:\n>\n> - that users of rgl or packages depending on it could report problems (and wishlist items).\n>\n> - that experts in setting up complex packages like rgl could help me to rewrite the configuration files.\n>\n> The new version is available in the \"shaders\" branch of\n> https://github.com/dmurdoch/rgl, and for now depends on the small package https://github.com/dmurdoch/rasterText/.\n>\n>\n> Details:\n>\n> rgl is an old package to do 3D graphics, written by Daniel Adler and myself with contributions from a large number of people.  It has a few hundred reverse dependencies.\n>\n> The planned update replaces the code from OpenGL 1.2 (released in 1998) with more modern code.  Currently I am targeting OpenGL 3.3 Core Profile from 2010, as that seems to be the most widely available version nowadays that is backward compatible with newer versions.\n>\n> The main benefit of the update is to allow the use of \"shaders\" within R.  These are programs written in the GLSL language to allow fine control of rendering that isn't possible in the (obsolete) \"fixed pipeline\" used previously.  One application I hope to be able to implement soon is the ability to show cross-sections of the interior of 3D solids such as are shown in CT scans.\n>\n> Because I have replaced essentially all the rendering code to make this update, it's very likely that I've missed some features and introduced some new bugs.  Testing by existing users will help me to track down and fix those issues.\n>\n> I've also rewritten all the text-handling code.  Previously there were several different schemes for drawing text, and I'm hoping that nowadays a single one (based on PangoCairo) will work on all platforms.  The problem here is that this brings in a complicated set of system dependencies, and I really need help to get the configuration right.\n>\n> In the current version of the update, this depends on a small package https://github.com/dmurdoch/rasterText/. I intend to bring that code into the main rgl package before release, but first I'd like to get it to pass checks on all platforms, and I really don't know what I'm doing with configuration files.\n>\n> If anyone can help me in either of these ways, I'd really appreciate it.\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi Duncan,\n\nHow great to hear from you. The lack of which is due to much neglect of the McGill side of my two inboxes.\n\nBut I?m still fiddling with another version of TestGardener, where we found rgl ",
+      "thread_id": "thread-6288f861ffa9",
+      "thread_depth": 1,
+      "month": "2026-02"
+    },
+    {
+      "id": "msg-3938fc34297f",
+      "message_id": "<YTBPR01MB37427BE8B9ABF83A8E529D698070A@YTBPR01MB3742.CANPRD01.PROD.OUTLOOK.COM>",
+      "from_name": "Azadeh Bayani",
+      "from_email_hash": "5f798d6e86ad1761610e5e3cc0eecc761b690892cd67cf1ea475fe277a108317",
+      "date": "2026-02-28T15:01:40Z",
+      "subject": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "subject_clean": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-package-devel,\nI am encountering a CRAN pretest installation WARNING under Debian clang (R-devel), and I would appreciate guidance.\nMy package (LABTNSCPSS) contains no compiled code.\nLocal R CMD check --as-cran on macOS results in 0 errors and 0 warnings.\nHowever, CRAN pretest reports:\n* checking whether package ?LABTNSCPSS? can be installed ... WARNING\nFound the following significant warnings:\n  font_matching.cpp:230:37: warning: comparison of floating-point type 'double' with enumeration type 'FontWidth' is deprecated [-Wdeprecated-enum-float-conversion]\n  ...\n  agg/src/agg_vcgen_stroke.cpp:202:42: warning: bitwise operation between different enumeration types ...\nThese warnings appear to originate from systemfonts (and its bundled agg code), which is being compiled during installation.\nMy DESCRIPTION Imports are:\nImports:\ndplyr, magrittr, tibble, checkmate, tidyselect,\ndata.table, stringi, lubridate, purrr, tidyr, glue\nThere is no direct dependency on ggplot2, systemfonts, ragg, or svglite.\nQuestions:\n\n  1.\nWhy would systemfonts be compiled during CRAN checks for this package?\n  2.\nIs this considered an upstream issue with systemfonts under clang 21?\n  3.\nIs there a recommended way to prevent this installation WARNING when the package itself contains no compiled code?\n\nThank you very much for your time and assistance.\nThe source tarball is available here:\nhttps://github.com/bayaniazadeh/LabTNSCPSSPackage/blob/main/LABTNSCPSS_1.0.2.tar.gz\nBest regards,\nAzadeh Bayani\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-package-devel,\nI am encountering a CRAN pretest installation WARNING under Debian clang (R-devel), and I would appreciate guidance.\nMy package (LABTNSCPSS) contains no compiled code.\nLocal R CM",
+      "thread_id": "thread-3938fc34297f",
+      "thread_depth": 0,
+      "month": "2026-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-a6dff9024806",
+      "subject": "[R-pkg-devel] gcc-san fail with s2 package",
+      "message_count": 3,
+      "participants": [
+        "Elias T. Krainski",
+        "Ivan Krylov"
+      ],
+      "started": "2026-02-03T14:34:14+03:00",
+      "last_reply": "2026-02-14T12:39:55+03:00",
+      "root_message_id": "msg-a6dff9024806"
+    },
+    {
+      "id": "thread-4ab7cebb9e08",
+      "subject": "[R-pkg-devel] macOS build error 'R_ext/Callbacks.h' file not found",
+      "message_count": 5,
+      "participants": [
+        "Ivan Krylov",
+        "Kaifeng Lu",
+        "Martin Maechler",
+        "Simon Urbanek"
+      ],
+      "started": "2026-02-06T10:23:27-05:00",
+      "last_reply": "2026-02-10T12:36:23+13:00",
+      "root_message_id": "msg-4ab7cebb9e08"
+    },
+    {
+      "id": "thread-432b62dcaed0",
+      "subject": "[R-pkg-devel] error message when trying to knit a vignette involving data import",
+      "message_count": 2,
+      "participants": [
+        "Hüsing, Johannes",
+        "Sebastian Meyer"
+      ],
+      "started": "2026-02-11T07:39:04+00:00",
+      "last_reply": "2026-02-11T09:58:56+01:00",
+      "root_message_id": "msg-432b62dcaed0"
+    },
+    {
+      "id": "thread-8904280fdb8b",
+      "subject": "[R-pkg-devel]  Issue \"Re-building vignettes had CPU time 4.1 times elapsed time\"",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "Nicholas Tierney"
+      ],
+      "started": "2026-02-11T10:15:39+11:00",
+      "last_reply": "2026-02-12T01:06:27+03:00",
+      "root_message_id": "msg-8904280fdb8b"
+    },
+    {
+      "id": "thread-5c50f4f6a50d",
+      "subject": "[R-pkg-devel] False Error in CRAN checks",
+      "message_count": 5,
+      "participants": [
+        "Ivan Krylov",
+        "Josiah Parry",
+        "Kurt Hornik",
+        "Simon Urbanek"
+      ],
+      "started": "2026-02-11T10:17:31-08:00",
+      "last_reply": "2026-02-12T09:01:48+01:00",
+      "root_message_id": "msg-5c50f4f6a50d"
+    },
+    {
+      "id": "thread-d6b6ded32766",
+      "subject": "[R-pkg-devel] R CMD check false positive unused imports inside R6 class",
+      "message_count": 9,
+      "participants": [
+        "Bjarke Hautop",
+        "Dirk Eddelbuettel",
+        "Ivan Krylov",
+        "Michael Chirico"
+      ],
+      "started": "2026-02-12T15:52:27+01:00",
+      "last_reply": "2026-02-13T16:36:47+03:00",
+      "root_message_id": "msg-d6b6ded32766"
+    },
+    {
+      "id": "thread-2d94c2c359ef",
+      "subject": "[R-pkg-devel] Forward SIGUSR1/2 to package",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "Matthias Gondan"
+      ],
+      "started": "2026-02-15T13:08:32+01:00",
+      "last_reply": "2026-02-15T16:23:20+03:00",
+      "root_message_id": "msg-2d94c2c359ef"
+    },
+    {
+      "id": "thread-038ad722804b",
+      "subject": "[R-pkg-devel] Forward SIGUSR1/2 to package (cont'd)",
+      "message_count": 2,
+      "participants": [
+        "Ivan Krylov",
+        "m@tthi@s-go@d@@ m@iii@g oii gmx@de"
+      ],
+      "started": "2026-02-16T10:18:00+01:00",
+      "last_reply": "2026-02-16T23:00:20+03:00",
+      "root_message_id": "msg-038ad722804b"
+    },
+    {
+      "id": "thread-1c5fcb526f8f",
+      "subject": "[R-pkg-devel] Replicating CRAN M1mac checks",
+      "message_count": 7,
+      "participants": [
+        "Ivan Krylov",
+        "Pepijn de Vries",
+        "Simon Urbanek"
+      ],
+      "started": "2026-02-16T13:59:35+00:00",
+      "last_reply": "2026-02-18T09:18:11+13:00",
+      "root_message_id": "msg-1c5fcb526f8f"
+    },
+    {
+      "id": "thread-d3be1fa71691",
+      "subject": "[R-pkg-devel] Carry over in package with multiple vignettes",
+      "message_count": 8,
+      "participants": [
+        "@vi@e@gross m@iii@g oii gm@ii@com",
+        "Ben Bolker",
+        "Kevin R. Coombes",
+        "Lluís Revilla",
+        "Marcel Ramos Pérez"
+      ],
+      "started": "2026-02-17T13:41:08-05:00",
+      "last_reply": "2026-02-17T16:15:37-05:00",
+      "root_message_id": "msg-d3be1fa71691"
+    },
+    {
+      "id": "thread-8023b1fe666b",
+      "subject": "[R-pkg-devel] Using the connections interface to decode text",
+      "message_count": 3,
+      "participants": [
+        "Ivan Krylov",
+        "Simon Urbanek"
+      ],
+      "started": "2026-02-19T11:35:19+03:00",
+      "last_reply": "2026-02-20T10:44:01+03:00",
+      "root_message_id": "msg-8023b1fe666b"
+    },
+    {
+      "id": "thread-6288f861ffa9",
+      "subject": "[R-pkg-devel] Help request for rgl update",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "James Owen Ramsay, Dr."
+      ],
+      "started": "2026-02-22T09:37:24-05:00",
+      "last_reply": "2026-02-25T14:17:14+00:00",
+      "root_message_id": "msg-6288f861ffa9"
+    },
+    {
+      "id": "thread-3938fc34297f",
+      "subject": "[R-pkg-devel] CRAN pretest WARNING from systemfonts",
+      "message_count": 1,
+      "participants": [
+        "Azadeh Bayani"
+      ],
+      "started": "2026-02-28T15:01:40+00:00",
+      "last_reply": "2026-02-28T15:01:40+00:00",
+      "root_message_id": "msg-3938fc34297f"
+    }
+  ]
+}

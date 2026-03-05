@@ -1,0 +1,989 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2017-07",
+  "messages": [
+    {
+      "id": "msg-18f0d5230d07",
+      "message_id": "<39868161-19f6-c4bc-243d-204cdebc7b18@mrc-bsu.cam.ac.uk>",
+      "from_name": "John Reid",
+      "from_email_hash": "5c8152810fc2d6f53be00c3c0c52f4be9492185b6ff4bce756da0ab3ac2fcf3e",
+      "date": "2017-07-03T11:53:39+01:00",
+      "subject": "[R-pkg-devel] Functions erroneously identified as S3 methods",
+      "subject_clean": "[R-pkg-devel] Functions erroneously identified as S3 methods",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI have some functions in my package that are getting confused for S3 \nmethods. I named them `filter.genes` and `filter.cells` which in \nhindsight looks like a mistake as `filter` is a S3 method.\n\nWhen I submit my package I receive a WARNING:\n\n* checking S3 generic/method consistency ... WARNING filter: function(x, \nfilter, method, sides, circular, init) filter.cells: function(dl, \n.filter, number, cells) filter: function(x, filter, method, sides, \ncircular, init) filter.genes: function(dl, .filter, number, genes) See \nsection ?Generic functions and methods? in the ?Writing R Extensions? \nmanual. Found the following apparent S3 methods exported but not \nregistered: filter.cells filter.genes See section ?Registering S3 \nmethods? in the ?Writing R Extensions? manual.\n\nI have deprecated the functions and replaced them with versions named \nwith underscores but do not want to remove them until a later release. \nHowever I received a `pre-test archived` email from the CRAN team:\n\npackage DeLorean_1.2.5.tar.gz does not pass the incoming checks automatically, please see the pre-test at:\n<https://win-builder.r-project.org/incoming_pretest/170703_114446_DeLorean_125/00check.log>\nStatus: 1 WARNING, 1 NOTE\n  \nCurrent CRAN status: WARN: 11, OK: 1\nSee:<https://CRAN.R-project.org/web/checks/check_results_DeLorean.html>\n  \nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\nIf you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n  \nMore details are given in the directory:\n<https://win-builder.r-project.org/incoming_pretest/170703_114446_DeLorean_125>\nThe files will be removed after roughly 7 days.\n\n\nHow should I proceed?\n\nFWIW here is the Roxygen documenation for one of the functions:\n\n#' Filter genes\n#'\n#' @param dl de.lorean object\n#' @param .filter Function that gakes a list of genes as input and returns\n#'     a vector of TRUE/FALSE\n#' @param number Number to sample if filter function or genes not supplied.\n#' @param genes The genes to keep.\n#' @examples\n#' \\dontrun{\n#' genes <- c('NANOG', 'DAZ1', 'SOX4', 'PRDM14')\n#' filter.genes(dl, .filter = function(x) x %in% genes)\n#' filter.genes(dl, number = 4)\n#' filter.genes(dl, genes = genes)\n#' }\n#'\n#' @export filter.genes\n#'\n\nThanks,\n-- \nJohn Reid <http://johnreid.github.io>\nMRC Biostatistics Unit\nCambridge, UK\nTwitter: @__Reidy__ <https://twitter.com/__Reidy__>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI have some functions in my package that are getting confused for S3 \nmethods. I named them `filter.genes` and `filter.cells` which in \nhindsight looks like a mistake as `filter` is a S3 method.\n",
+      "thread_id": "thread-18f0d5230d07",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-12ff0a9b6e7f",
+      "message_id": "<b45d1ad6-a096-e40f-18b1-223bf90796c1@bioinf.jku.at>",
+      "from_name": "Ulrich Bodenhofer",
+      "from_email_hash": "235a23b4b9d7ccb9626ce68d4d9248ea6e23014f9ccf9e135eb089e19ec666b3",
+      "date": "2017-07-03T18:14:19+02:00",
+      "subject": "[R-pkg-devel] Calling registered C methods with a \"variable name\"",
+      "subject_clean": "[R-pkg-devel] Calling registered C methods with a \"variable name\"",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nAs R CMD check is more pedantic about the registration of native \nroutines since version 3.4, I wanted to update my CRAN packages \naccordingly. While this worked nicely for my 'apcluster' packages (and, \nsome time ago, for my  Bioconductor packages), I am having problems with \nmy 'rococo' package. The problem is that I use string variables for some \nof the .NAME arguments of the calls to the .Call() function. In other \nword, the R function calling .Call() uses paste() to put together the \nfunction name into a string and then calls .Call() with the .NAME \nargument being this string variable. This is the simplest and most \nefficient approach under the given circumstances (I omit a detailed \njustification at this point, but I can provide it if wanted). Any other \napproach would require a lot more coding. It is also safe, since the \nvariable part of the name is secured against invalid names using \nmatch.arg() with a fixed list of options.\n\nIn more detail, here is a (slightly simplified) example: suppose there \nare three C functions rcor_matrix_min, rcor_matrix_prod, and \nrcor_matrix_lukasiewicz ...\n\n     dummy <- function(x, y, sim=c(\"min\", \"prod\", \"lukasiewicz\"))\n     {\n         sim <- match.arg(sim)\n\n         ...\n\n         funcName <- paste0(\"rcor_matrix_\", sim)\n         result <- .Call(funcName, x, y)\n\n         ...\n     }\n\n\nThe approach described above worked perfectly before I registered the \nnative routines rcor_matrix_min, rcor_matrix_prod, and \nrcor_matrix_lukasiewicz. And it still works now with registered native \nroutines. The whole package also passes 'R CMD check' without errors, \nwarnings, or notes. However, if I add the option '--as-cran', I get a \nbunch of notes saying that the symbol 'funcName' that I use as .NAME \nargument is not registered. Can anybody comment on that please? Can I \nsimply ignore this? Is it imperative to fix this? Or is it an issue in \nthe 'R CMD check *** --as-cran' that this special case is simply overlooked?\n\nThanks in advance and best regards,\nUlrich",
+      "body_snippet": "Hi,\n\nAs R CMD check is more pedantic about the registration of native \nroutines since version 3.4, I wanted to update my CRAN packages \naccordingly. While this worked nicely for my 'apcluster' package",
+      "thread_id": "thread-12ff0a9b6e7f",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-47651356ba29",
+      "message_id": "<DM5PR12MB128967B0F541D623A892072297D60@DM5PR12MB1289.namprd12.prod.outlook.com>",
+      "from_name": "Luis Gustavo Uzai",
+      "from_email_hash": "7a2f6c8c0072de18e9e1a63441a6932bad4e013200664665b8adfc4c356265b2",
+      "date": "2017-07-03T23:58:55Z",
+      "subject": "[R-pkg-devel]  A Survey on Automated Unit Test in R Language",
+      "subject_clean": "[R-pkg-devel]  A Survey on Automated Unit Test in R Language",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, my name is Luis Gustavo Uzai, I am a master's student at Federal Technology University in Brazil, I am studying Automated Unit Tests in the R.\n\nCould you help me with my research? To do so, could respond to this form:\nHttps://goo.gl/forms/i4jN4NPFKylEt8bF2\n\nIdentification is optional.\nThank you very much for your time.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi, my name is Luis Gustavo Uzai, I am a master's student at Federal Technology University in Brazil, I am studying Automated Unit Tests in the R.\n\nCould you help me with my research? To do so, could ",
+      "thread_id": "thread-47651356ba29",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-49dbe2e5e8fd",
+      "message_id": "<0e97e1f8-e194-1c51-a75a-44fa1592fe28@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2017-07-04T10:47:34+02:00",
+      "subject": "[R-pkg-devel] Functions erroneously identified as S3 methods",
+      "subject_clean": "[R-pkg-devel] Functions erroneously identified as S3 methods",
+      "in_reply_to": "<39868161-19f6-c4bc-243d-204cdebc7b18@mrc-bsu.cam.ac.uk>",
+      "references": [
+        "<39868161-19f6-c4bc-243d-204cdebc7b18@mrc-bsu.cam.ac.uk>"
+      ],
+      "body_plain": "On 03.07.2017 12:53, John Reid wrote:\n> Hi,\n> \n> I have some functions in my package that are getting confused for S3\n> methods. I named them `filter.genes` and `filter.cells` which in\n> hindsight looks like a mistake as `filter` is a S3 method.\n\nS3 generic, actually.\n\n\n> When I submit my package I receive a WARNING:\n> \n> * checking S3 generic/method consistency ... WARNING filter: function(x,\n> filter, method, sides, circular, init) filter.cells: function(dl,\n> .filter, number, cells) filter: function(x, filter, method, sides,\n> circular, init) filter.genes: function(dl, .filter, number, genes) See\n> section ?Generic functions and methods? in the ?Writing R Extensions?\n> manual. Found the following apparent S3 methods exported but not\n> registered: filter.cells filter.genes See section ?Registering S3\n> methods? in the ?Writing R Extensions? manual.\n> \n> I have deprecated the functions and replaced them with versions named\n> with underscores but do not want to remove them until a later release.\n> However I received a `pre-test archived` email from the CRAN team:\n\nResubmit and once you get the auto-rejection reply to the CRAN team \nexplaining it by what you wrote here.\n\nBest,\nUwe Ligges\n\n\n> \n> package DeLorean_1.2.5.tar.gz does not pass the incoming checks automatically, please see the pre-test at:\n> <https://win-builder.r-project.org/incoming_pretest/170703_114446_DeLorean_125/00check.log>\n> Status: 1 WARNING, 1 NOTE\n>    \n> Current CRAN status: WARN: 11, OK: 1\n> See:<https://CRAN.R-project.org/web/checks/check_results_DeLorean.html>\n>    \n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n>    \n> More details are given in the directory:\n> <https://win-builder.r-project.org/incoming_pretest/170703_114446_DeLorean_125>\n> The files will be removed after roughly 7 days.\n> \n> \n> How should I proceed?\n> \n> FWIW here is the Roxygen documenation for one of the functions:\n> \n> #' Filter genes\n> #'\n> #' @param dl de.lorean object\n> #' @param .filter Function that gakes a list of genes as input and returns\n> #'     a vector of TRUE/FALSE\n> #' @param number Number to sample if filter function or genes not supplied.\n> #' @param genes The genes to keep.\n> #' @examples\n> #' \\dontrun{\n> #' genes <- c('NANOG', 'DAZ1', 'SOX4', 'PRDM14')\n> #' filter.genes(dl, .filter = function(x) x %in% genes)\n> #' filter.genes(dl, number = 4)\n> #' filter.genes(dl, genes = genes)\n> #' }\n> #'\n> #' @export filter.genes\n> #'\n> \n> Thanks,\n>",
+      "body_snippet": "On 03.07.2017 12:53, John Reid wrote:\n> Hi,\n> \n> I have some functions in my package that are getting confused for S3\n> methods. I named them `filter.genes` and `filter.cells` which in\n> hindsight loo",
+      "thread_id": "thread-18f0d5230d07",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-908431b78224",
+      "message_id": "<CAO1zAVZaGZ9unLOZJ50RJ_LCdZcD6y_QU=s6rq9iQ-P+qMefAg@mail.gmail.com>",
+      "from_name": "Joris Meys",
+      "from_email_hash": "5ff4e02b7feaa87c66214932aa47608f4cef63acda47292fba56a8ce1cfb0110",
+      "date": "2017-07-05T21:19:08+02:00",
+      "subject": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "subject_clean": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI'm working on a very small package where I redesign the inputs of Shiny to\nhave the label inline instead of above the actual widget. To avoid having\nto rewrite quite big parts of Shiny, I need access to a number of internal\nfunctions. I do this using :::, but R CMD check obviously gives a note,\nindicating that this is \"a bad idea\".\n\nI understand why this is in most cases a bad idea, but I see no other\noption apart from literally copying these functions (and the ones they\ndepend on) all into my package.\n\nHence my questions:\n\n- is it acceptable to get a package using ::: on CRAN? When I run R CMD\ncheck --as-cran it only gives a note, but just to be sure...\n\n- anybody a better option to be able to use eg shiny:::selectizeIt,\nshiny:::selectOptions etc?\n\nThank you in advance\nJoris\n\n-- \nJoris Meys\nStatistical consultant\n\nGhent University\nFaculty of Bioscience Engineering\nDepartment of Mathematical Modelling, Statistics and Bio-Informatics\n\ntel : +32 9 264 59 87\nJoris.Meys at Ugent.be\n-------------------------------\nDisclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI'm working on a very small package where I redesign the inputs of Shiny to\nhave the label inline instead of above the actual widget. To avoid having\nto rewrite quite big parts of Shiny, I ne",
+      "thread_id": "thread-908431b78224",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-56227cbaf408",
+      "message_id": "<a4d6c2d9-5d0a-5ae1-9761-70762ac0f1dd@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2017-07-05T18:03:07-04:00",
+      "subject": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "subject_clean": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "in_reply_to": "<CAO1zAVZaGZ9unLOZJ50RJ_LCdZcD6y_QU=s6rq9iQ-P+qMefAg@mail.gmail.com>",
+      "references": [
+        "<CAO1zAVZaGZ9unLOZJ50RJ_LCdZcD6y_QU=s6rq9iQ-P+qMefAg@mail.gmail.com>"
+      ],
+      "body_plain": "On 05/07/2017 3:19 PM, Joris Meys wrote:\n> Hi all,\n>\n> I'm working on a very small package where I redesign the inputs of Shiny to\n> have the label inline instead of above the actual widget. To avoid having\n> to rewrite quite big parts of Shiny, I need access to a number of internal\n> functions. I do this using :::, but R CMD check obviously gives a note,\n> indicating that this is \"a bad idea\".\n>\n> I understand why this is in most cases a bad idea, but I see no other\n> option apart from literally copying these functions (and the ones they\n> depend on) all into my package.\n>\n> Hence my questions:\n>\n> - is it acceptable to get a package using ::: on CRAN? When I run R CMD\n> check --as-cran it only gives a note, but just to be sure...\n\nNo.\n\n>\n> - anybody a better option to be able to use eg shiny:::selectizeIt,\n> shiny:::selectOptions etc?\n\nTalk to the maintainer of shiny, and ask them to export those functions \n(or equivalent ones).  This might be more successful if you write the \nhelp pages and send them a Github pull request explaining your need, \nsince that makes it essentially no immediate work (just long term \nsupport work).\n\nDuncan Murdoch\n\n>\n> Thank you in advance\n> Joris\n>",
+      "body_snippet": "On 05/07/2017 3:19 PM, Joris Meys wrote:\n> Hi all,\n>\n> I'm working on a very small package where I redesign the inputs of Shiny to\n> have the label inline instead of above the actual widget. To avoid ",
+      "thread_id": "thread-908431b78224",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-30613e6f0cc5",
+      "message_id": "<CAO1zAVZRaV2MtvhE=acMnTNx8W7Xk-W=L2vxFSK=Ug22kyGrtQ@mail.gmail.com>",
+      "from_name": "Joris Meys",
+      "from_email_hash": "5ff4e02b7feaa87c66214932aa47608f4cef63acda47292fba56a8ce1cfb0110",
+      "date": "2017-07-06T11:52:12+02:00",
+      "subject": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "subject_clean": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "in_reply_to": "<a4d6c2d9-5d0a-5ae1-9761-70762ac0f1dd@gmail.com>",
+      "references": [
+        "<CAO1zAVZaGZ9unLOZJ50RJ_LCdZcD6y_QU=s6rq9iQ-P+qMefAg@mail.gmail.com>",
+        "<a4d6c2d9-5d0a-5ae1-9761-70762ac0f1dd@gmail.com>"
+      ],
+      "body_plain": "Hi Duncan,\n\nI hoped against all odds to get a different answer, but alas you confirm my\nbiggest fears. I'll get in touch with the shiny guys and hope they'll grant\nme my wishes.\n\nCheers\nJoris\n\nOn Thu, Jul 6, 2017 at 12:03 AM, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 05/07/2017 3:19 PM, Joris Meys wrote:\n>\n>> Hi all,\n>>\n>> I'm working on a very small package where I redesign the inputs of Shiny\n>> to\n>> have the label inline instead of above the actual widget. To avoid having\n>> to rewrite quite big parts of Shiny, I need access to a number of internal\n>> functions. I do this using :::, but R CMD check obviously gives a note,\n>> indicating that this is \"a bad idea\".\n>>\n>> I understand why this is in most cases a bad idea, but I see no other\n>> option apart from literally copying these functions (and the ones they\n>> depend on) all into my package.\n>>\n>> Hence my questions:\n>>\n>> - is it acceptable to get a package using ::: on CRAN? When I run R CMD\n>> check --as-cran it only gives a note, but just to be sure...\n>>\n>\n> No.\n>\n>\n>> - anybody a better option to be able to use eg shiny:::selectizeIt,\n>> shiny:::selectOptions etc?\n>>\n>\n> Talk to the maintainer of shiny, and ask them to export those functions\n> (or equivalent ones).  This might be more successful if you write the help\n> pages and send them a Github pull request explaining your need, since that\n> makes it essentially no immediate work (just long term support work).\n>\n> Duncan Murdoch\n>\n>\n>\n>> Thank you in advance\n>> Joris\n>>\n>>\n>\n\n\n-- \nJoris Meys\nStatistical consultant\n\nGhent University\nFaculty of Bioscience Engineering\nDepartment of Mathematical Modelling, Statistics and Bio-Informatics\n\ntel : +32 9 264 59 87\nJoris.Meys at Ugent.be\n-------------------------------\nDisclaimer : http://helpdesk.ugent.be/e-maildisclaimer.php\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Duncan,\n\nI hoped against all odds to get a different answer, but alas you confirm my\nbiggest fears. I'll get in touch with the shiny guys and hope they'll grant\nme my wishes.\n\nCheers\nJoris\n\nOn Thu,",
+      "thread_id": "thread-908431b78224",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-7a10ec9f4760",
+      "message_id": "<CAHnX4PG+V_TjxavVav7SY-uifRWcGfXFmZyv5N3-vOFc9sa8bQ@mail.gmail.com>",
+      "from_name": "Disa Mhembere",
+      "from_email_hash": "32705dfdb10e52a606484bc7ea3e8cb66d4b3d6b59e52795fd290f9968675f4d",
+      "date": "2017-07-06T17:58:38-04:00",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "subject_clean": "[R-pkg-devel] Question about selective platform for my R package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI made an R package that is specifically for OSX and Linux, and not\nWindows. I pass all checks locally on these platforms, but when I upload my\npackage to CRAN the system tries to compile my code on a Windows box which\nobviously results in an error. What is the traditional method of specifying\nsupported OSes and getting around this?\n\nThanks in advance,\nDisa\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nI made an R package that is specifically for OSX and Linux, and not\nWindows. I pass all checks locally on these platforms, but when I upload my\npackage to CRAN the system tries to compile my c",
+      "thread_id": "thread-7a10ec9f4760",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-945c7c5daa00",
+      "message_id": "<CAJZYZZ5os=S260VoFmLhjOxnUQiKDpdPjL8=Zas+E638avVOog@mail.gmail.com>",
+      "from_name": "Dason Kurkiewicz",
+      "from_email_hash": "c21e768ed7d073dbefd97d76c1a0592e96664c25eba368d96e067c612f0130f4",
+      "date": "2017-07-07T01:41:27-04:00",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "subject_clean": "[R-pkg-devel] Question about selective platform for my R package",
+      "in_reply_to": "<CAHnX4PG+V_TjxavVav7SY-uifRWcGfXFmZyv5N3-vOFc9sa8bQ@mail.gmail.com>",
+      "references": [
+        "<CAHnX4PG+V_TjxavVav7SY-uifRWcGfXFmZyv5N3-vOFc9sa8bQ@mail.gmail.com>"
+      ],
+      "body_plain": "What you want is to specify the OS_type in your DESCRIPTION file. This is\ndocumented in writing R extensions\nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file\n\n-Dason Kurkiewicz\n\nOn Jul 7, 2017 1:30 AM, \"Disa Mhembere\" <disa at jhu.edu> wrote:\n\n> Hello,\n>\n> I made an R package that is specifically for OSX and Linux, and not\n> Windows. I pass all checks locally on these platforms, but when I upload my\n> package to CRAN the system tries to compile my code on a Windows box which\n> obviously results in an error. What is the traditional method of specifying\n> supported OSes and getting around this?\n>\n> Thanks in advance,\n> Disa\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "What you want is to specify the OS_type in your DESCRIPTION file. This is\ndocumented in writing R extensions\nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file\n\n-Dason K",
+      "thread_id": "thread-7a10ec9f4760",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-995cfdaa569f",
+      "message_id": "<CAHnX4PEr5JNJ3JrUVc=hF4h9miEDG-WG2JGhNZGJBOjdnpA1dw@mail.gmail.com>",
+      "from_name": "Disa Mhembere",
+      "from_email_hash": "32705dfdb10e52a606484bc7ea3e8cb66d4b3d6b59e52795fd290f9968675f4d",
+      "date": "2017-07-07T09:31:01-04:00",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "subject_clean": "[R-pkg-devel] Question about selective platform for my R package",
+      "in_reply_to": "<CAJZYZZ5os=S260VoFmLhjOxnUQiKDpdPjL8=Zas+E638avVOog@mail.gmail.com>",
+      "references": [
+        "<CAHnX4PG+V_TjxavVav7SY-uifRWcGfXFmZyv5N3-vOFc9sa8bQ@mail.gmail.com>",
+        "<CAJZYZZ5os=S260VoFmLhjOxnUQiKDpdPjL8=Zas+E638avVOog@mail.gmail.com>"
+      ],
+      "body_plain": "Super -- exactly what I needed!\nMy other question was how to define OS level dependencies like `hwloc` for\nlinux that is obtainable via the system package manager?\n\nThanks,\n- Disa\n\nOn Fri, Jul 7, 2017 at 1:41 AM, Dason Kurkiewicz <dasonk at gmail.com> wrote:\n\n> What you want is to specify the OS_type in your DESCRIPTION file. This is\n> documented in writing R extensions https://cran.r-\n> project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file\n>\n> -Dason Kurkiewicz\n>\n> On Jul 7, 2017 1:30 AM, \"Disa Mhembere\" <disa at jhu.edu> wrote:\n>\n>> Hello,\n>>\n>> I made an R package that is specifically for OSX and Linux, and not\n>> Windows. I pass all checks locally on these platforms, but when I upload\n>> my\n>> package to CRAN the system tries to compile my code on a Windows box which\n>> obviously results in an error. What is the traditional method of\n>> specifying\n>> supported OSes and getting around this?\n>>\n>> Thanks in advance,\n>> Disa\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Super -- exactly what I needed!\nMy other question was how to define OS level dependencies like `hwloc` for\nlinux that is obtainable via the system package manager?\n\nThanks,\n- Disa\n\nOn Fri, Jul 7, 2017",
+      "thread_id": "thread-7a10ec9f4760",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-0a6125e39e6d",
+      "message_id": "<CAJZYZZ7BPcbwdRdTvNu45N-zDhv_nGjHHbnP_Nfuhs81bKnN0Q@mail.gmail.com>",
+      "from_name": "Dason Kurkiewicz",
+      "from_email_hash": "c21e768ed7d073dbefd97d76c1a0592e96664c25eba368d96e067c612f0130f4",
+      "date": "2017-07-07T09:37:51-04:00",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "subject_clean": "[R-pkg-devel] Question about selective platform for my R package",
+      "in_reply_to": "<CAJZYZZ5y5aaN1rLrS9EzK4WwZ2TJSTjyMdtzbZFVFX8ZYB7Y1Q@mail.gmail.com>",
+      "references": [
+        "<CAHnX4PG+V_TjxavVav7SY-uifRWcGfXFmZyv5N3-vOFc9sa8bQ@mail.gmail.com>",
+        "<CAJZYZZ5os=S260VoFmLhjOxnUQiKDpdPjL8=Zas+E638avVOog@mail.gmail.com>",
+        "<CAHnX4PEr5JNJ3JrUVc=hF4h9miEDG-WG2JGhNZGJBOjdnpA1dw@mail.gmail.com>",
+        "<CAJZYZZ5y5aaN1rLrS9EzK4WwZ2TJSTjyMdtzbZFVFX8ZYB7Y1Q@mail.gmail.com>"
+      ],
+      "body_plain": "You'll want to examine the note on the SystemRequirements field for the\nDESCRIPTION file in the same link as before. Actually maybe you should\nspend some time reading through that documentation - it's a bit dry but\nwill get you more familiar with what's possible.\n\n-Dason Kurkiewicz\n\nOn Jul 7, 2017 9:31 AM, \"Disa Mhembere\" <disa at jhu.edu> wrote:\n\nSuper -- exactly what I needed!\nMy other question was how to define OS level dependencies like `hwloc` for\nlinux that is obtainable via the system package manager?\n\nThanks,\n- Disa\n\nOn Fri, Jul 7, 2017 at 1:41 AM, Dason Kurkiewicz <dasonk at gmail.com> wrote:\n\n> What you want is to specify the OS_type in your DESCRIPTION file. This is\n> documented in writing R extensions https://cran.r-proj\n> ect.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file\n>\n> -Dason Kurkiewicz\n>\n> On Jul 7, 2017 1:30 AM, \"Disa Mhembere\" <disa at jhu.edu> wrote:\n>\n>> Hello,\n>>\n>> I made an R package that is specifically for OSX and Linux, and not\n>> Windows. I pass all checks locally on these platforms, but when I upload\n>> my\n>> package to CRAN the system tries to compile my code on a Windows box which\n>> obviously results in an error. What is the traditional method of\n>> specifying\n>> supported OSes and getting around this?\n>>\n>> Thanks in advance,\n>> Disa\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "You'll want to examine the note on the SystemRequirements field for the\nDESCRIPTION file in the same link as before. Actually maybe you should\nspend some time reading through that documentation - it's",
+      "thread_id": "thread-0a6125e39e6d",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-f3ee82cd55c7",
+      "message_id": "<CAHnX4PFMBPAhr0uuR_bgZHdRHgVzQu5NTJAoCF1s+BBKNdWk4Q@mail.gmail.com>",
+      "from_name": "Disa Mhembere",
+      "from_email_hash": "32705dfdb10e52a606484bc7ea3e8cb66d4b3d6b59e52795fd290f9968675f4d",
+      "date": "2017-07-07T09:45:43-04:00",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "subject_clean": "[R-pkg-devel] Question about selective platform for my R package",
+      "in_reply_to": "<CAJZYZZ7BPcbwdRdTvNu45N-zDhv_nGjHHbnP_Nfuhs81bKnN0Q@mail.gmail.com>",
+      "references": [
+        "<CAHnX4PG+V_TjxavVav7SY-uifRWcGfXFmZyv5N3-vOFc9sa8bQ@mail.gmail.com>",
+        "<CAJZYZZ5os=S260VoFmLhjOxnUQiKDpdPjL8=Zas+E638avVOog@mail.gmail.com>",
+        "<CAHnX4PEr5JNJ3JrUVc=hF4h9miEDG-WG2JGhNZGJBOjdnpA1dw@mail.gmail.com>",
+        "<CAJZYZZ5y5aaN1rLrS9EzK4WwZ2TJSTjyMdtzbZFVFX8ZYB7Y1Q@mail.gmail.com>",
+        "<CAJZYZZ7BPcbwdRdTvNu45N-zDhv_nGjHHbnP_Nfuhs81bKnN0Q@mail.gmail.com>"
+      ],
+      "body_plain": "Ok, sure. Thanks again :)\n\nOn Fri, Jul 7, 2017 at 9:37 AM, Dason Kurkiewicz <dasonk at gmail.com> wrote:\n\n> You'll want to examine the note on the SystemRequirements field for the\n> DESCRIPTION file in the same link as before. Actually maybe you should\n> spend some time reading through that documentation - it's a bit dry but\n> will get you more familiar with what's possible.\n>\n> -Dason Kurkiewicz\n>\n> On Jul 7, 2017 9:31 AM, \"Disa Mhembere\" <disa at jhu.edu> wrote:\n>\n> Super -- exactly what I needed!\n> My other question was how to define OS level dependencies like `hwloc` for\n> linux that is obtainable via the system package manager?\n>\n> Thanks,\n> - Disa\n>\n> On Fri, Jul 7, 2017 at 1:41 AM, Dason Kurkiewicz <dasonk at gmail.com> wrote:\n>\n>> What you want is to specify the OS_type in your DESCRIPTION file. This is\n>> documented in writing R extensions https://cran.r-proj\n>> ect.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file\n>>\n>> -Dason Kurkiewicz\n>>\n>> On Jul 7, 2017 1:30 AM, \"Disa Mhembere\" <disa at jhu.edu> wrote:\n>>\n>>> Hello,\n>>>\n>>> I made an R package that is specifically for OSX and Linux, and not\n>>> Windows. I pass all checks locally on these platforms, but when I upload\n>>> my\n>>> package to CRAN the system tries to compile my code on a Windows box\n>>> which\n>>> obviously results in an error. What is the traditional method of\n>>> specifying\n>>> supported OSes and getting around this?\n>>>\n>>> Thanks in advance,\n>>> Disa\n>>>\n>>>         [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Ok, sure. Thanks again :)\n\nOn Fri, Jul 7, 2017 at 9:37 AM, Dason Kurkiewicz <dasonk at gmail.com> wrote:\n\n> You'll want to examine the note on the SystemRequirements field for the\n> DESCRIPTION file i",
+      "thread_id": "thread-0a6125e39e6d",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-d31bfbb150c0",
+      "message_id": "<55129EE4-A431-4B0B-B5C8-C3E8FCA2832D@mpi-dortmund.mpg.de>",
+      "from_name": "Thorsten Wagner",
+      "from_email_hash": "5a0a4a59947aa9641ed40c51d4d8e4881c97a3b9640c9ec226f547b6fc04bdb3",
+      "date": "2017-07-11T08:19:33Z",
+      "subject": "[R-pkg-devel] MAP-DP Clustering Algorithm package",
+      "subject_clean": "[R-pkg-devel] MAP-DP Clustering Algorithm package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI?ve implemented the MAP-DP clustering algorithm in R  following MatLab scripts of this paper:\nhttp://journals.plos.org/plosone/article/citation?id=10.1371/journal.pone.0162259\n\nHere is the repository:\nhttps://github.com/thorstenwagner/R-ClustMAPDP\n\nI would like to add the package to CRAN but something seems to be wrong with my description file:\n\"Malformed Description field: should contain one or more complete sentences.?\n\nI would be happy if someone could tell me the reason.\n\nBest,\nThorsten",
+      "body_snippet": "Hi,\n\nI?ve implemented the MAP-DP clustering algorithm in R  following MatLab scripts of this paper:\nhttp://journals.plos.org/plosone/article/citation?id=10.1371/journal.pone.0162259\n\nHere is the repos",
+      "thread_id": "thread-d31bfbb150c0",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-00b155a22213",
+      "message_id": "<CAM_vju=cMRyuz7Dsnoig2tc1E4z7jkq8MTCxmsj-tm3k5HY2Lg@mail.gmail.com>",
+      "from_name": "Sarah Goslee",
+      "from_email_hash": "273eb6baae4ac25f2de5845f3f62dce55d161cfc7cf04eb5f3cc6d94b3d4aa24",
+      "date": "2017-07-11T08:10:18-04:00",
+      "subject": "[R-pkg-devel] MAP-DP Clustering Algorithm package",
+      "subject_clean": "[R-pkg-devel] MAP-DP Clustering Algorithm package",
+      "in_reply_to": "<55129EE4-A431-4B0B-B5C8-C3E8FCA2832D@mpi-dortmund.mpg.de>",
+      "references": [
+        "<55129EE4-A431-4B0B-B5C8-C3E8FCA2832D@mpi-dortmund.mpg.de>"
+      ],
+      "body_plain": "A complete sentence ends in a period.\n\n\n\nOn Tue, Jul 11, 2017 at 4:19 AM, Thorsten Wagner\n<thorsten.wagner at mpi-dortmund.mpg.de> wrote:\n> Hi,\n>\n> I?ve implemented the MAP-DP clustering algorithm in R  following MatLab scripts of this paper:\n> http://journals.plos.org/plosone/article/citation?id=10.1371/journal.pone.0162259\n>\n> Here is the repository:\n> https://github.com/thorstenwagner/R-ClustMAPDP\n>\n> I would like to add the package to CRAN but something seems to be wrong with my description file:\n> \"Malformed Description field: should contain one or more complete sentences.?\n>\n> I would be happy if someone could tell me the reason.\n>\n> Best,\n> Thorsten\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nSarah Goslee\nhttp://www.functionaldiversity.org",
+      "body_snippet": "A complete sentence ends in a period.\n\n\n\nOn Tue, Jul 11, 2017 at 4:19 AM, Thorsten Wagner\n<thorsten.wagner at mpi-dortmund.mpg.de> wrote:\n> Hi,\n>\n> I?ve implemented the MAP-DP clustering algorithm in ",
+      "thread_id": "thread-d31bfbb150c0",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-2dc588d5ce6e",
+      "message_id": "<CAC9Pq08VNOf9dbUt8yW+vLKyfnNMS0vaYyrh8P7uWync2CyHvg@mail.gmail.com>",
+      "from_name": "Ranjit Paul",
+      "from_email_hash": "5fa87f21c91958a9335fd20cf5aa9855acade1269fe12deb847140dfb77d5e00",
+      "date": "2017-07-12T16:30:38+05:30",
+      "subject": "[R-pkg-devel] Errors during R package development",
+      "subject_clean": "[R-pkg-devel] Errors during R package development",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to develop one package but getting the following errors and\nnotes. Please suggest for the possible solutions.\n\n\n* checking R code for possible problems ... NOTE\nStructuralBrekwithLongmemory: Error while checking: cannot open file\n  'd:/temp/RtmpeMJ2np/RLIBS_2fe0425c94fc3/fracdiff/R/fracdiff.rdb': No\n  such file or directory\n\n** running examples for arch 'i386' ... ERROR\nRunning examples in 'TSF-Ex.R' failed\nThe error most likely occurred in:\n\nbase::assign(\".ptime\", proc.time(), pos = \"CheckExEnv\")\n\nStructuralBrekwithLongmemory(Xt,bandwidth)\nError in StructuralBrekwithLongmemory(Xt, bandwidth) :\n  cannot open file\n'd:/temp/RtmpeMJ2np/RLIBS_2fe0425c94fc3/fracdiff/R/fracdiff.rdb':\nNo such file or directory\nExecution halted\n** running examples for arch 'x64' ... ERROR\nRunning examples in 'TSF-Ex.R' failed\nThe error most likely occurred in:\n\nbase::assign(\".ptime\", proc.time(), pos = \"CheckExEnv\")\n\n-- \nDr. Ranjit Kumar Paul\nScientist\nIASRI, New Delhi\nMob: +91-8287778896\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to develop one package but getting the following errors and\nnotes. Please suggest for the possible solutions.\n\n\n* checking R code for possible problems ... NOTE\nStructuralBrekwithLongmemor",
+      "thread_id": "thread-2dc588d5ce6e",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-3ae11fa27696",
+      "message_id": "<f7ccfd68-a8c2-e31f-20a5-1b67702e0e61@dewey.myzen.co.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "dae04c4953348ab1a35e8427343ae0b4fd8830bc053feb0d2b09ee16a3c19a2d",
+      "date": "2017-07-12T15:27:12+01:00",
+      "subject": "[R-pkg-devel] Errors during R package development",
+      "subject_clean": "[R-pkg-devel] Errors during R package development",
+      "in_reply_to": "<CAC9Pq08VNOf9dbUt8yW+vLKyfnNMS0vaYyrh8P7uWync2CyHvg@mail.gmail.com>",
+      "references": [
+        "<CAC9Pq08VNOf9dbUt8yW+vLKyfnNMS0vaYyrh8P7uWync2CyHvg@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Ranjit\n\nDo you in fact have fracdiff.rdb and if so where is it in your file \nstructure?\n\nOn 12/07/2017 12:00, Ranjit Paul wrote:\n> I am trying to develop one package but getting the following errors and\n> notes. Please suggest for the possible solutions.\n>\n>\n> * checking R code for possible problems ... NOTE\n> StructuralBrekwithLongmemory: Error while checking: cannot open file\n>   'd:/temp/RtmpeMJ2np/RLIBS_2fe0425c94fc3/fracdiff/R/fracdiff.rdb': No\n>   such file or directory\n>\n> ** running examples for arch 'i386' ... ERROR\n> Running examples in 'TSF-Ex.R' failed\n> The error most likely occurred in:\n>\n> base::assign(\".ptime\", proc.time(), pos = \"CheckExEnv\")\n>\n> StructuralBrekwithLongmemory(Xt,bandwidth)\n> Error in StructuralBrekwithLongmemory(Xt, bandwidth) :\n>   cannot open file\n> 'd:/temp/RtmpeMJ2np/RLIBS_2fe0425c94fc3/fracdiff/R/fracdiff.rdb':\n> No such file or directory\n> Execution halted\n> ** running examples for arch 'x64' ... ERROR\n> Running examples in 'TSF-Ex.R' failed\n> The error most likely occurred in:\n>\n> base::assign(\".ptime\", proc.time(), pos = \"CheckExEnv\")\n>\n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "Dear Ranjit\n\nDo you in fact have fracdiff.rdb and if so where is it in your file \nstructure?\n\nOn 12/07/2017 12:00, Ranjit Paul wrote:\n> I am trying to develop one package but getting the following err",
+      "thread_id": "thread-2dc588d5ce6e",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-e0bd33e44cea",
+      "message_id": "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+      "from_name": "Anderson,Brooke",
+      "from_email_hash": "330373840f624c81c49b958de517ef5be8d966358a68001604584c9bf4bff5ec",
+      "date": "2017-07-13T16:58:29Z",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I got the following warning when submitting a package to CRAN that I am struggling to understand:\n\n\nWarning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).\n\n\nHere is a link to the directory with the full logs from the CRAN pretest checks:\n\nhttps://win-builder.r-project.org/incoming_pretest/170713_171433_noaastormevents_010/\n\n\nI did not get this warning on any of the systems where I ran checks before submitting to CRAN\n\n(I ran checks on my local Mac OS X install, which is R 3.4.0, on win-builder, and on Travis using the\n\n?trusty? distribution, ubuntu 14.04.5 with R 3.4.0). Within the 00install.out file from the CRAN pretest\n\n(available in the link to the full log posted above), there is the message:\n\n\nPlease reinstall dplyr to avoid random crashes or undefined behavior.\n\n\nI am curious if reinstalling dplyr on my local system should fix this, given that I did not get this warning\n\nor message on my local system, or if the warning might result from the versions of dplyr and Rcpp on\n\nthe system used by the CRAN pretest? The only other example I could find through googling\n\nof someone having a similar problem is here: https://github.com/KopfLab/lans2r/blob/master/cran-comments.md.\n\nIt sounds like in that case the warning may have resulted from the configuration of win-builder at the\n\ntime and was not something that could be resolved by the package maintainer.\n\n\nThe package I submitted does not have a direct dependency on Rcpp but does import dplyr and other\n\ntidyverse  packages. My local system (on which I built the package I submitted to CRAN) has\n\nthe latest CRAN versions of both Rcpp (0.12.11) and dplyr (0.7.1). The full source code for the\n\npackage I submitted is at  https://github.com/geanders/noaastormevents.\n\n\nI have not had this warning or a similar in past packages I?ve submitted with dependencies on\n\ndplyr. I looked through recent threads here on r-pkg-devel and could not find any related posts.\n\nDoes anyone have a suggestion for what?s causing this warning on the CRAN pretest and\n\nhow I can resolve it? Thanks very much in advance for any advice.\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I got the following warning when submitting a package to CRAN that I am struggling to understand:\n\n\nWarning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).\n\n\nHere is a lin",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-9870d52d4047",
+      "message_id": "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2017-07-13T12:13:48-05:00",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>"
+      ],
+      "body_plain": "On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n| I got the following warning when submitting a package to CRAN that I am struggling to understand:\n| \n| \n| Warning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).\n\nIt's a dplyr \"thing\". And for them, 'thing := feature' but to me 'thing := bug'.\n\nFor more, see   https://github.com/tidyverse/dplyr/issues/2966   which Kirill\nopened after I brought this up in private. It even broke a Rcpp back test for me\nfor one package as it triggers a WARNING.\n\nMy world would be better without this, but it does not come from a package I\nhave control over.  So ... <shrugs> from here.  \n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n| I got the following warning when submitting a package to CRAN that I am struggling to understand:\n| \n| \n| Warning: Installed Rcpp (0.12.12) different",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-cf2ae020f347",
+      "message_id": "<22887.45398.685310.676106@bud.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2017-07-13T12:43:50-05:00",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+        "<22887.43596.880563.604643@bud.eddelbuettel.com>"
+      ],
+      "body_plain": "On 13 July 2017 at 12:13, Dirk Eddelbuettel wrote:\n| \n| On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n| | I got the following warning when submitting a package to CRAN that I am struggling to understand:\n| | \n| | \n| | Warning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).\n\nAnd what is worse is that you are now an innocent bystander injured by the\nshrapnel from our Rcpp upload (0.12.12 is as of yet unreleased and currently\nin testing at CRAN) which is about as orthogonal to your package upload as\ncan be.\n\nSystems like rhub use Docker container to seperate testing environments.  On\nwin-builder everything seems to be one big happy family ...\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 13 July 2017 at 12:13, Dirk Eddelbuettel wrote:\n| \n| On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n| | I got the following warning when submitting a package to CRAN that I am struggling to under",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-b2fab49afa64",
+      "message_id": "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>",
+      "from_name": "Iñaki Úcar",
+      "from_email_hash": "16318610b0621446e3c5d70993d944838cabdf1e979e93906e36793906af0c72",
+      "date": "2017-07-13T19:52:40+02:00",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+        "<22887.43596.880563.604643@bud.eddelbuettel.com>"
+      ],
+      "body_plain": "2017-07-13 19:13 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n> | I got the following warning when submitting a package to CRAN that I am struggling to understand:\n> |\n> |\n> | Warning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).\n>\n> It's a dplyr \"thing\". And for them, 'thing := feature' but to me 'thing := bug'.\n>\n> For more, see   https://github.com/tidyverse/dplyr/issues/2966   which Kirill\n> opened after I brought this up in private. It even broke a Rcpp back test for me\n> for one package as it triggers a WARNING.\n>\n> My world would be better without this, but it does not come from a package I\n> have control over.  So ... <shrugs> from here.\n\nOr, in other words, Brooke, now you have to wait until Rcpp 0.12.12\nappears on CRAN and then one or two days more until dplyr is rebuilt.\nThen, try to resubmit your package.\n\nI?aki",
+      "body_snippet": "2017-07-13 19:13 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n> | I got the following warning when submitting a package to CRAN that I am strug",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-0586294bf4e9",
+      "message_id": "<BLUPR0701MB10121610AFE7F9AECCF70D1AE6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+      "from_name": "Anderson,Brooke",
+      "from_email_hash": "330373840f624c81c49b958de517ef5be8d966358a68001604584c9bf4bff5ec",
+      "date": "2017-07-13T17:55:49Z",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+        "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+        "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>"
+      ],
+      "body_plain": "Great, thanks so much to you both for the tips. It's very useful to have an idea of why I got the warning and what I can do to resolve it.\n\n\nBest,\n\nBrooke\n\n________________________________\nFrom: I?aki ?car <i.ucar86 at gmail.com>\nSent: Thursday, July 13, 2017 11:52:40 AM\nTo: Dirk Eddelbuettel\nCc: Anderson,Brooke; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr\n\n2017-07-13 19:13 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 13 July 2017 at 16:58, Anderson,Brooke wrote:\n> | I got the following warning when submitting a package to CRAN that I am struggling to understand:\n> |\n> |\n> | Warning: Installed Rcpp (0.12.12) different from Rcpp used to build dplyr (0.12.11).\n>\n> It's a dplyr \"thing\". And for them, 'thing := feature' but to me 'thing := bug'.\n>\n> For more, see   https://github.com/tidyverse/dplyr/issues/2966   which Kirill\n> opened after I brought this up in private. It even broke a Rcpp back test for me\n> for one package as it triggers a WARNING.\n>\n> My world would be better without this, but it does not come from a package I\n> have control over.  So ... <shrugs> from here.\n\nOr, in other words, Brooke, now you have to wait until Rcpp 0.12.12\nappears on CRAN and then one or two days more until dplyr is rebuilt.\nThen, try to resubmit your package.\n\nI?aki\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Great, thanks so much to you both for the tips. It's very useful to have an idea of why I got the warning and what I can do to resolve it.\n\n\nBest,\n\nBrooke\n\n________________________________\nFrom: I?aki",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 3,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-815b68dd2f54",
+      "message_id": "<22887.47566.804816.11059@bud.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2017-07-13T13:19:58-05:00",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+        "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+        "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>"
+      ],
+      "body_plain": "On 13 July 2017 at 19:52, I?aki ?car wrote:\n| Or, in other words, Brooke, now you have to wait until Rcpp 0.12.12\n| appears on CRAN and then one or two days more until dplyr is rebuilt.\n| Then, try to resubmit your package.\n\nI disagree.\n\nThat was a false alert, and it can be ignored.  News at 11pm.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 13 July 2017 at 19:52, I?aki ?car wrote:\n| Or, in other words, Brooke, now you have to wait until Rcpp 0.12.12\n| appears on CRAN and then one or two days more until dplyr is rebuilt.\n| Then, try to",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 3,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-0fb18534e44d",
+      "message_id": "<50d3839c-b4a6-f016-235a-1161b3264412@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2017-07-13T23:52:35+02:00",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<22887.47566.804816.11059@bud.eddelbuettel.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+        "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+        "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>",
+        "<22887.47566.804816.11059@bud.eddelbuettel.com>"
+      ],
+      "body_plain": "Folks,\n\nthe behaviour on winbuilder is meant as a feature when people upload a \nseries of package updates so that each one is checked against the newly \nuploaded version of the others.\n\nIn this case it was a mis-feature of course.\nWe will re-echeck this one and the Rcpp version has been cleaned up as well.\n\nNote that I am not happy at all with the warning you got.\n\nBest,\nUwe Ligges\n\n\nOn 13.07.2017 20:19, Dirk Eddelbuettel wrote:\n> \n> On 13 July 2017 at 19:52, I?aki ?car wrote:\n> | Or, in other words, Brooke, now you have to wait until Rcpp 0.12.12\n> | appears on CRAN and then one or two days more until dplyr is rebuilt.\n> | Then, try to resubmit your package.\n> \n> I disagree.\n> \n> That was a false alert, and it can be ignored.  News at 11pm.\n> \n> Dirk\n>",
+      "body_snippet": "Folks,\n\nthe behaviour on winbuilder is meant as a feature when people upload a \nseries of package updates so that each one is checked against the newly \nuploaded version of the others.\n\nIn this case i",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 4,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-0b430dd9a49b",
+      "message_id": "<CALEXWq1YOwYoPAd=ks7X5Bizjcx4=HSUd5VJhbn3x+L67i3v5w@mail.gmail.com>",
+      "from_name": "Iñaki Úcar",
+      "from_email_hash": "16318610b0621446e3c5d70993d944838cabdf1e979e93906e36793906af0c72",
+      "date": "2017-07-14T00:13:01+02:00",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "subject_clean": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "in_reply_to": "<22887.47566.804816.11059@bud.eddelbuettel.com>",
+      "references": [
+        "<BLUPR0701MB1012F95851C7D6B42B836AA7E6AC0@BLUPR0701MB1012.namprd07.prod.outlook.com>",
+        "<22887.43596.880563.604643@bud.eddelbuettel.com>",
+        "<CALEXWq1JjZMyZ1H0T-giGCo+OOUmPAR=VxN0+kNFuL1o=z9Upw@mail.gmail.com>",
+        "<22887.47566.804816.11059@bud.eddelbuettel.com>"
+      ],
+      "body_plain": "2017-07-13 20:19 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 13 July 2017 at 19:52, I?aki ?car wrote:\n> | Or, in other words, Brooke, now you have to wait until Rcpp 0.12.12\n> | appears on CRAN and then one or two days more until dplyr is rebuilt.\n> | Then, try to resubmit your package.\n>\n> I disagree.\n>\n> That was a false alert, and it can be ignored.  News at 11pm.\n\nSo you just uploaded the package to win-builder? I thought you were\nalready submitting a new release.\n\nSorry, Brooke, then you can resubmit right away.\n\nI?aki",
+      "body_snippet": "2017-07-13 20:19 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 13 July 2017 at 19:52, I?aki ?car wrote:\n> | Or, in other words, Brooke, now you have to wait until Rcpp 0.12.12\n> | appears on",
+      "thread_id": "thread-e0bd33e44cea",
+      "thread_depth": 4,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-a6b8b6758fd7",
+      "message_id": "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>",
+      "from_name": "Jernej Jevšenak",
+      "from_email_hash": "b9a2101749e4bc58cbae76fc901cb909f7467c9e10f6a0326fd8b155cd5b3a73",
+      "date": "2017-07-20T08:01:31+02:00",
+      "subject": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "subject_clean": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nrecently, my first R package dendroExtra\n<https://cran.r-project.org/package=dendroExtra> was accepted on CRAN. I\nstill must fix one problem that is given by CRAN checks\n<https://cran.r-project.org/web/checks/check_results_dendroExtra.html>.\n\nIt says: Package required and available but unsuitable version: 'stats'.\n\nI see that probable I did not correctly import the stats package. If I\nremove the 'stats' package, I get an error in R CMD check. Is there any\nsuggestion how to properly solve the issue? How to properly import stats\npackage?\n\n\nThank you for your help.\n\n\nBests, Jernej\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nrecently, my first R package dendroExtra\n<https://cran.r-project.org/package=dendroExtra> was accepted on CRAN. I\nstill must fix one problem that is given by CRAN checks\n<https://cran.r-project.o",
+      "thread_id": "thread-a6b8b6758fd7",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-c590b16f12c1",
+      "message_id": "<BLUPR03MB1425FA5C6992FD64E8C10F72BAA70@BLUPR03MB1425.namprd03.prod.outlook.com>",
+      "from_name": "Maxime Turgeon",
+      "from_email_hash": "cb9f763d6a80adf8b1bd7ff22c29951f4d085e795a296dc0f73cfe84ecf7caa4",
+      "date": "2017-07-20T15:51:18Z",
+      "subject": "[R-pkg-devel] Package required and available but unsuitable\tversion: 'stats'",
+      "subject_clean": "[R-pkg-devel] Package required and available but unsuitable\tversion: 'stats'",
+      "in_reply_to": "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>",
+      "references": [
+        "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Jernej,\n\n\nThe check errors you get are for older releases of R (3.3.2 and 3.3.3). The issue arises from your requirement in DESCRIPTION that the version of stats should be 3.4.0. Therefore, the solution to your problem depends on whether you really need this requirement on the version of stats or not: if you don't, simply lower the requirements to whatever you need; if you do, then this check error is valid, in the sense that you don't want users to use your package if they don't have the appropriate version of the stats package.\n\n\nNote that if the latter applies, you should probably change your requirement on the version of R itself: currently you're requiring 3.1, which clashes with you're requiring 3.4 for stats.\n\n\nBest,\n\nMax\n\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Jernej Jev?enak <jernej.jevsenak at gmail.com>\nSent: July 20, 2017 2:01:31 AM\nTo: r-package-devel at r-project.org\nSubject: [R-pkg-devel] Package required and available but unsuitable version: 'stats'\n\nHi,\n\nrecently, my first R package dendroExtra\n<https://cran.r-project.org/package=dendroExtra> was accepted on CRAN. I\nstill must fix one problem that is given by CRAN checks\n<https://cran.r-project.org/web/checks/check_results_dendroExtra.html>.\n\nIt says: Package required and available but unsuitable version: 'stats'.\n\nI see that probable I did not correctly import the stats package. If I\nremove the 'stats' package, I get an error in R CMD check. Is there any\nsuggestion how to properly solve the issue? How to properly import stats\npackage?\n\n\nThank you for your help.\n\n\nBests, Jernej\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Jernej,\n\n\nThe check errors you get are for older releases of R (3.3.2 and 3.3.3). The issue arises from your requirement in DESCRIPTION that the version of stats should be 3.4.0. Therefore, the sol",
+      "thread_id": "thread-a6b8b6758fd7",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-d6f101395784",
+      "message_id": "<CAJZYZZ42zTF16g0WjUan+s9jbQm0iT02c_=tE=ArPLH4r6x1Sw@mail.gmail.com>",
+      "from_name": "Dason Kurkiewicz",
+      "from_email_hash": "c21e768ed7d073dbefd97d76c1a0592e96664c25eba368d96e067c612f0130f4",
+      "date": "2017-07-20T11:54:49-04:00",
+      "subject": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "subject_clean": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "in_reply_to": "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>",
+      "references": [
+        "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>"
+      ],
+      "body_plain": "If you truly require stats>=3.4 you will need to also specify R>=3.4. If\nyou don't require that version of stats then just remove the version\nspecification.\n\nYou are getting errors only on r-oldrel which runs older versions of R so\nit doesn't have access to stats>=3.4. With a specification on the minimum\nversion of R it would know not to run on those and you won't get the\nerrors.\n\n-Dason Kurkiewicz\n\nOn Jul 20, 2017 11:43 AM, \"Jernej Jev?enak\" <jernej.jevsenak at gmail.com>\nwrote:\n\n> Hi,\n>\n> recently, my first R package dendroExtra\n> <https://cran.r-project.org/package=dendroExtra> was accepted on CRAN. I\n> still must fix one problem that is given by CRAN checks\n> <https://cran.r-project.org/web/checks/check_results_dendroExtra.html>.\n>\n> It says: Package required and available but unsuitable version: 'stats'.\n>\n> I see that probable I did not correctly import the stats package. If I\n> remove the 'stats' package, I get an error in R CMD check. Is there any\n> suggestion how to properly solve the issue? How to properly import stats\n> package?\n>\n>\n> Thank you for your help.\n>\n>\n> Bests, Jernej\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If you truly require stats>=3.4 you will need to also specify R>=3.4. If\nyou don't require that version of stats then just remove the version\nspecification.\n\nYou are getting errors only on r-oldrel wh",
+      "thread_id": "thread-a6b8b6758fd7",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-560594f35572",
+      "message_id": "<22896.54248.114478.194987@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "2017-07-20T18:01:44+02:00",
+      "subject": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "subject_clean": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "in_reply_to": "<BLUPR03MB1425FA5C6992FD64E8C10F72BAA70@BLUPR03MB1425.namprd03.prod.outlook.com>",
+      "references": [
+        "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>",
+        "<BLUPR03MB1425FA5C6992FD64E8C10F72BAA70@BLUPR03MB1425.namprd03.prod.outlook.com>"
+      ],
+      "body_plain": ">>>>> Maxime Turgeon <maxime.turgeon at mail.mcgill.ca>\n>>>>>     on Thu, 20 Jul 2017 15:51:18 +0000 writes:\n\n    > Hi Jernej,\n    > The check errors you get are for older releases of R (3.3.2 and 3.3.3). The issue arises from your requirement in DESCRIPTION that the version of stats should be 3.4.0. Therefore, the solution to your problem depends on whether you really need this requirement on the version of stats or not: if you don't, simply lower the requirements to whatever you need; if you do, then this check error is valid, in the sense that you don't want users to use your package if they don't have the appropriate version of the stats package.\n\n\n    > Note that if the latter applies, you should probably change your requirement on the version of R itself: currently you're requiring 3.1, which clashes with you're requiring 3.4 for stats.\n\nI would go slightly further say that it is \"conceptually wrong\"\nto use any version requirement on 'stats':  The version of\n'stats' is *always* equal to the version of R.\n\nSo really, do replace\n     \"stats (>= 3.4.0)\"\nby   \"stats\"     \n\n\nAlso, are you sure that R 3.1.0 is sufficient for dendroExtra, i.e.,\ncan you check that, or did you at least check that for a\nslightly older version of dendroExtra in the past?\n\nThe CRAN \"robots\" will not be able to check that, but as you see\nchecks for the \"last before release\" version, in this case R 3.3.x,\nare made.\n\nTo be save, you'd say  \"R (>= 3.3.3)\"\nwhereas to be relaxed, you'd leave away any version requirement\nfor R unless you know that you are using a relatively new\nfeature of R (which includes 'stats', 'utils', etc). \n\nBest,\nMartin\n\n    > Best,\n    > Max\n\n    >> Hi,\n\n    >> recently, my first R package dendroExtra\n    >> <https://cran.r-project.org/package=dendroExtra> was accepted on CRAN. I\n    >> still must fix one problem that is given by CRAN checks\n    >> <https://cran.r-project.org/web/checks/check_results_dendroExtra.html>.\n\n    >> It says: Package required and available but unsuitable version: 'stats'.\n\n    >> I see that probable I did not correctly import the stats package. If I\n    >> remove the 'stats' package, I get an error in R CMD check. Is there any\n    >> suggestion how to properly solve the issue? How to properly import stats\n    >> package?\n\n\n    >> Thank you for your help.\n\n\n    >> Bests, Jernej",
+      "body_snippet": ">>>>> Maxime Turgeon <maxime.turgeon at mail.mcgill.ca>\n>>>>>     on Thu, 20 Jul 2017 15:51:18 +0000 writes:\n\n    > Hi Jernej,\n    > The check errors you get are for older releases of R (3.3.2 and 3.3",
+      "thread_id": "thread-a6b8b6758fd7",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-df1991a07d48",
+      "message_id": "<CACKka212dehxH3EY5Gy12Wzzwp+2ODQDFjKrTfReU5XTTz5G2w@mail.gmail.com>",
+      "from_name": "Jernej Jevšenak",
+      "from_email_hash": "b9a2101749e4bc58cbae76fc901cb909f7467c9e10f6a0326fd8b155cd5b3a73",
+      "date": "2017-07-21T08:28:06+02:00",
+      "subject": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "subject_clean": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "in_reply_to": "<22896.54248.114478.194987@stat.math.ethz.ch>",
+      "references": [
+        "<CACKka2357N9cYRDL6_m6JQSGP6G55RY3Uo2Z9KodWLUUCbs-6A@mail.gmail.com>",
+        "<BLUPR03MB1425FA5C6992FD64E8C10F72BAA70@BLUPR03MB1425.namprd03.prod.outlook.com>",
+        "<22896.54248.114478.194987@stat.math.ethz.ch>"
+      ],
+      "body_plain": "Thank you all for the helpful responses.\n\nBest, Jerry\n\n2017-07-20 18:01 GMT+02:00 Martin Maechler <maechler at stat.math.ethz.ch>:\n\n> >>>>> Maxime Turgeon <maxime.turgeon at mail.mcgill.ca>\n> >>>>>     on Thu, 20 Jul 2017 15:51:18 +0000 writes:\n>\n>     > Hi Jernej,\n>     > The check errors you get are for older releases of R (3.3.2 and\n> 3.3.3). The issue arises from your requirement in DESCRIPTION that the\n> version of stats should be 3.4.0. Therefore, the solution to your problem\n> depends on whether you really need this requirement on the version of stats\n> or not: if you don't, simply lower the requirements to whatever you need;\n> if you do, then this check error is valid, in the sense that you don't want\n> users to use your package if they don't have the appropriate version of the\n> stats package.\n>\n>\n>     > Note that if the latter applies, you should probably change your\n> requirement on the version of R itself: currently you're requiring 3.1,\n> which clashes with you're requiring 3.4 for stats.\n>\n> I would go slightly further say that it is \"conceptually wrong\"\n> to use any version requirement on 'stats':  The version of\n> 'stats' is *always* equal to the version of R.\n>\n> So really, do replace\n>      \"stats (>= 3.4.0)\"\n> by   \"stats\"\n>\n>\n> Also, are you sure that R 3.1.0 is sufficient for dendroExtra, i.e.,\n> can you check that, or did you at least check that for a\n> slightly older version of dendroExtra in the past?\n>\n> The CRAN \"robots\" will not be able to check that, but as you see\n> checks for the \"last before release\" version, in this case R 3.3.x,\n> are made.\n>\n> To be save, you'd say  \"R (>= 3.3.3)\"\n> whereas to be relaxed, you'd leave away any version requirement\n> for R unless you know that you are using a relatively new\n> feature of R (which includes 'stats', 'utils', etc).\n>\n> Best,\n> Martin\n>\n>     > Best,\n>     > Max\n>\n>     >> Hi,\n>\n>     >> recently, my first R package dendroExtra\n>     >> <https://cran.r-project.org/package=dendroExtra> was accepted on\n> CRAN. I\n>     >> still must fix one problem that is given by CRAN checks\n>     >> <https://cran.r-project.org/web/checks/check_results_\n> dendroExtra.html>.\n>\n>     >> It says: Package required and available but unsuitable version:\n> 'stats'.\n>\n>     >> I see that probable I did not correctly import the stats package.\n> If I\n>     >> remove the 'stats' package, I get an error in R CMD check. Is there\n> any\n>     >> suggestion how to properly solve the issue? How to properly import\n> stats\n>     >> package?\n>\n>\n>     >> Thank you for your help.\n>\n>\n>     >> Bests, Jernej\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you all for the helpful responses.\n\nBest, Jerry\n\n2017-07-20 18:01 GMT+02:00 Martin Maechler <maechler at stat.math.ethz.ch>:\n\n> >>>>> Maxime Turgeon <maxime.turgeon at mail.mcgill.ca>\n> >>>>>   ",
+      "thread_id": "thread-a6b8b6758fd7",
+      "thread_depth": 3,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-a4c614049100",
+      "message_id": "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+      "from_name": "Phil Chalmers",
+      "from_email_hash": "b45ac6bd147b1f78fb144fe04ddb8dfb20ad37048ef28b18d41f2c19e230c214",
+      "date": "2017-07-25T16:42:44-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nFirst time posting here, so hopefully I'm following the correct etiquette.\n\nI recently received the error:\n\n\"Package has help file(s) containing build-stage \\Sexpr{} expressions but\nno 'build/partial.rdb' file.\"\n\nwhen submitting a package to CRAN (source code: https://github.com/\nphilchalmers/mirtCAT). However, I'm having difficulty reproducing the exact\nproblem on my Windows and Linux computers with the latest R dev version\n(2017-07-25 r72968). Moreover, I don't really understand the issue, as I do\nnot use \\Sexpr{} anywhere in the package.\n\nAfter a quick search, I found a link on SO (https://stackoverflow.com/\nquestions/32357637/two-note-messages-from-r-cmd-check-as-cran), but it does\nnot appear too helpful as far as I can tell (I don't explicitly use\n\\package_____() commands anywhere). Can anyone shed some light on this\nwarning and my difficulty in reproducing the message? Thank you in advance.\n\nPhil\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nFirst time posting here, so hopefully I'm following the correct etiquette.\n\nI recently received the error:\n\n\"Package has help file(s) containing build-stage \\Sexpr{} expressions but\nno 'build",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-b89820e427bc",
+      "message_id": "<cacc93cd-5af6-11ff-9474-9c034c26c5f4@mail.mcgill.ca>",
+      "from_name": "MTurgeon",
+      "from_email_hash": "cb9f763d6a80adf8b1bd7ff22c29951f4d085e795a296dc0f73cfe84ecf7caa4",
+      "date": "2017-07-25T20:13:39-06:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Phil,\n\nAs you said yourself, if you can't reproduce the message locally, it \nwill be difficult to fix. But maybe the following will help: I looked at \nyour Github repository, Tand it seems the only changes that were made to \nyour files in the man/ directory since your successful release of \nmirtCAR 1.5 to CRAN is the doi's that you added. In particular, you're \nusing the macro \\doi. As explained in WRE \n(https://cran.r-project.org/doc/manuals/r-devel/R-exts.html#User_002ddefined-macros), \nsince R 3.2.0 users can define their own Latex-like macros to be used in \nthe documentation files. I don't know how to fix your error, but I would \nlook into that first. Maybe it's a matter of a missing dependency (e.g. \none of the base packages), maybe you need to add an extra file to your \npackage when you use macros. But it still doesn't explain why the error \ndoesn't appear on all/most platforms...\n\nHope my comments help,\n\nMax\n\n\nOn 2017-07-25 02:42 PM, Phil Chalmers wrote:\n> Hi all,\n>\n> First time posting here, so hopefully I'm following the correct etiquette.\n>\n> I recently received the error:\n>\n> \"Package has help file(s) containing build-stage \\Sexpr{} expressions but\n> no 'build/partial.rdb' file.\"\n>\n> when submitting a package to CRAN (source code: https://github.com/\n> philchalmers/mirtCAT). However, I'm having difficulty reproducing the exact\n> problem on my Windows and Linux computers with the latest R dev version\n> (2017-07-25 r72968). Moreover, I don't really understand the issue, as I do\n> not use \\Sexpr{} anywhere in the package.\n>\n> After a quick search, I found a link on SO (https://stackoverflow.com/\n> questions/32357637/two-note-messages-from-r-cmd-check-as-cran), but it does\n> not appear too helpful as far as I can tell (I don't explicitly use\n> \\package_____() commands anywhere). Can anyone shed some light on this\n> warning and my difficulty in reproducing the message? Thank you in advance.\n>\n> Phil\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \n-----------------------------------------------------------------\n\nMaxime Turgeon, PhD candidate\n\nDepartment of Epidemiology, Biostatistics and Occupational Health\nMcGill University",
+      "body_snippet": "Hi Phil,\n\nAs you said yourself, if you can't reproduce the message locally, it \nwill be difficult to fix. But maybe the following will help: I looked at \nyour Github repository, Tand it seems the only",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-08009a0ddb89",
+      "message_id": "<CAKYNACEjiPs=D0-0_K3nVxj107o7wyoPDkUK=4xUWmts+wh8Bw@mail.gmail.com>",
+      "from_name": "Phil Chalmers",
+      "from_email_hash": "b45ac6bd147b1f78fb144fe04ddb8dfb20ad37048ef28b18d41f2c19e230c214",
+      "date": "2017-07-26T00:31:47-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<cacc93cd-5af6-11ff-9474-9c034c26c5f4@mail.mcgill.ca>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+        "<cacc93cd-5af6-11ff-9474-9c034c26c5f4@mail.mcgill.ca>"
+      ],
+      "body_plain": "Hi Max,\n\nThank you for your reply and feedback. As an aside, I recently released a\npackage which also adopted the new \\doi{} macro, and it seems to have\npassed CRANs tests and is now available. So, I suspect it's not related to\nthis inherently macro, though perhaps you are right it could be related to\na missing dependency. What, exactly, I'm not sure, and tracking it down\nseems nearly impossible at the moment....\n\nPhil\n\nOn Tue, Jul 25, 2017 at 10:13 PM, MTurgeon <maxime.turgeon at mail.mcgill.ca>\nwrote:\n\n> Hi Phil,\n>\n> As you said yourself, if you can't reproduce the message locally, it will\n> be difficult to fix. But maybe the following will help: I looked at your\n> Github repository, Tand it seems the only changes that were made to your\n> files in the man/ directory since your successful release of mirtCAR 1.5 to\n> CRAN is the doi's that you added. In particular, you're using the macro\n> \\doi. As explained in WRE (https://cran.r-project.org/do\n> c/manuals/r-devel/R-exts.html#User_002ddefined-macros), since R 3.2.0\n> users can define their own Latex-like macros to be used in the\n> documentation files. I don't know how to fix your error, but I would look\n> into that first. Maybe it's a matter of a missing dependency (e.g. one of\n> the base packages), maybe you need to add an extra file to your package\n> when you use macros. But it still doesn't explain why the error doesn't\n> appear on all/most platforms...\n>\n> Hope my comments help,\n>\n> Max\n>\n>\n>\n> On 2017-07-25 02:42 PM, Phil Chalmers wrote:\n>\n>> Hi all,\n>>\n>> First time posting here, so hopefully I'm following the correct etiquette.\n>>\n>> I recently received the error:\n>>\n>> \"Package has help file(s) containing build-stage \\Sexpr{} expressions but\n>> no 'build/partial.rdb' file.\"\n>>\n>> when submitting a package to CRAN (source code: https://github.com/\n>> philchalmers/mirtCAT). However, I'm having difficulty reproducing the\n>> exact\n>> problem on my Windows and Linux computers with the latest R dev version\n>> (2017-07-25 r72968). Moreover, I don't really understand the issue, as I\n>> do\n>> not use \\Sexpr{} anywhere in the package.\n>>\n>> After a quick search, I found a link on SO (https://stackoverflow.com/\n>> questions/32357637/two-note-messages-from-r-cmd-check-as-cran), but it\n>> does\n>> not appear too helpful as far as I can tell (I don't explicitly use\n>> \\package_____() commands anywhere). Can anyone shed some light on this\n>> warning and my difficulty in reproducing the message? Thank you in\n>> advance.\n>>\n>> Phil\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> --\n> -----------------------------------------------------------------\n>\n> Maxime Turgeon, PhD candidate\n>\n> Department of Epidemiology, Biostatistics and Occupational Health\n> McGill University\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Max,\n\nThank you for your reply and feedback. As an aside, I recently released a\npackage which also adopted the new \\doi{} macro, and it seems to have\npassed CRANs tests and is now available. So, I ",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-2618a857ef12",
+      "message_id": "<49fd488c-eea5-e4a6-30c7-2b7f719f6a60@bath.edu>",
+      "from_name": "Simon Wood",
+      "from_email_hash": "f0f8aa30ea896575c0f96f8024b26fd60d2a6b5f25025778284dafd1a5b076a0",
+      "date": "2017-07-26T11:47:30+01:00",
+      "subject": "[R-pkg-devel] spell check in DESCRIPTION",
+      "subject_clean": "[R-pkg-devel] spell check in DESCRIPTION",
+      "in_reply_to": "<mailman.1024.1501065793.1137.r-package-devel@r-project.org>",
+      "references": [
+        "<mailman.1024.1501065793.1137.r-package-devel@r-project.org>"
+      ],
+      "body_plain": "I've just had my package (mgcv) bounced because of 3 notes. One of these\nis complaining about spelling in the DESCRIPTION file.\n\nPossibly mis-spelled words in DESCRIPTION:\n    AIC (5:47, 8:75)\n    GAM (5:14)\n    GAMMs (7:20)\n    GAMs (7:14)\n    GCV (5:43, 8:57)\n    REML (5:51, 8:62)\n    UBRE (8:70)\n    smoothers (9:59)\n\nHowever if I run\n\nR CMD check mgcv_1.8-18.tar.gz --as-cran\n\nusing the same rdevel version apparently used in the test then no problem is reported. Does anyone know how I can turn on the spell check? And how do I request that `smoothers' be allowed as a valid word (even if acronyms are to be banned)?\n(Full report in link below)\n\nbest,\nSimon\n\n\n<https://win-builder.r-project.org/incoming_pretest/170726_112041_mgcv_1818/00check.log>\n\n-- Simon Wood, School of Mathematics, University of Bristol BS8 1TW UK \n+44 (0)117 33 18273 http://www.maths.bris.ac.uk/~sw15190\n\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I've just had my package (mgcv) bounced because of 3 notes. One of these\nis complaining about spelling in the DESCRIPTION file.\n\nPossibly mis-spelled words in DESCRIPTION:\n    AIC (5:47, 8:75)\n    GAM",
+      "thread_id": "thread-2618a857ef12",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-f0ee2437e207",
+      "message_id": "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2017-07-26T07:06:38-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>"
+      ],
+      "body_plain": "On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n> Hi all,\n>\n> First time posting here, so hopefully I'm following the correct etiquette.\n>\n> I recently received the error:\n>\n> \"Package has help file(s) containing build-stage \\Sexpr{} expressions but\n> no 'build/partial.rdb' file.\"\n>\n> when submitting a package to CRAN (source code: https://github.com/\n> philchalmers/mirtCAT). However, I'm having difficulty reproducing the exact\n> problem on my Windows and Linux computers with the latest R dev version\n> (2017-07-25 r72968). Moreover, I don't really understand the issue, as I do\n> not use \\Sexpr{} anywhere in the package.\n>\n> After a quick search, I found a link on SO (https://stackoverflow.com/\n> questions/32357637/two-note-messages-from-r-cmd-check-as-cran), but it does\n> not appear too helpful as far as I can tell (I don't explicitly use\n> \\package_____() commands anywhere). Can anyone shed some light on this\n> warning and my difficulty in reproducing the message? Thank you in advance.\n\nHow did you produce the tar.gz file?  If you did it in some way other \nthan running \"R CMD build ...\", don't do that.   When I run R CMD build, \nI do get the build/partial.rdb file in the tarball.\n\nDuncan Murdoch",
+      "body_snippet": "On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n> Hi all,\n>\n> First time posting here, so hopefully I'm following the correct etiquette.\n>\n> I recently received the error:\n>\n> \"Package has help file(s) co",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-666980c442af",
+      "message_id": "<CAKYNACGbpv1mD6ktGHKsVWaf4YeTZoL7aRGW+ovMKFR0vUh9pA@mail.gmail.com>",
+      "from_name": "Phil Chalmers",
+      "from_email_hash": "b45ac6bd147b1f78fb144fe04ddb8dfb20ad37048ef28b18d41f2c19e230c214",
+      "date": "2017-07-26T09:05:03-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+        "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>"
+      ],
+      "body_plain": "Hi Duncan,\n\nI use the standard R CMD build/check --as-cran combo. Here's my output from\nmy Win 10 64-bit box:\n\nC:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD build mirtCAT\n* checking for file 'mirtCAT/DESCRIPTION' ... OK\n* preparing 'mirtCAT':\n* checking DESCRIPTION meta-information ... OK\n* cleaning src\n* installing the package to process help pages\n* saving partial Rd database\n* creating vignettes ... OK\n* cleaning src\n* checking for LF line-endings in source and make files and shell scripts\n* checking for empty or unneeded directories\n* building 'mirtCAT_1.6.tar.gz'\n\n\nC:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD check\nmirtCAT_1.6.tar.gz --as-cran\n* using log directory 'C:/Users/Phil/Desktop/mirtCAT.Rcheck'\n* using R Under development (unstable) (2017-07-25 r72968)\n* using platform: x86_64-w64-mingw32 (64-bit)\n* using session charset: ISO8859-1\n* using option '--as-cran'\n* checking for file 'mirtCAT/DESCRIPTION' ... OK\n* checking extension type ... Package\n* this is package 'mirtCAT' version '1.6'\n* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\nMaintainer: 'Phil Chalmers <rphilip.chalmers at gmail.com>'\n* checking package namespace information ... OK\n* checking package dependencies ... OK\n* checking if this is a source package ... OK\n* checking if there is a namespace ... OK\n* checking for executable files ... OK\n* checking for hidden files and directories ... OK\n* checking for portable file names ... OK\n* checking whether package 'mirtCAT' can be installed ... OK\n* checking installed package size ... OK\n* checking package directory ... OK\n* checking 'build' directory ... OK\n* checking DESCRIPTION meta-information ... OK\n* checking top-level files ... OK\n* checking for left-over files ... OK\n* checking index information ... OK\n* checking package subdirectories ... OK\n* checking R files for non-ASCII characters ... OK\n* checking R files for syntax errors ... OK\n* checking whether the package can be loaded ... OK\n* checking whether the package can be loaded with stated dependencies ... OK\n* checking whether the package can be unloaded cleanly ... OK\n* checking whether the namespace can be loaded with stated dependencies ...\nOK\n* checking whether the namespace can be unloaded cleanly ... OK\n* checking loading without being on the library search path ... OK\n* checking use of S3 registration ... OK\n* checking dependencies in R code ... OK\n* checking S3 generic/method consistency ... OK\n* checking replacement functions ... OK\n* checking foreign function calls ... OK\n* checking R code for possible problems ... OK\n* checking Rd files ... OK\n* checking Rd metadata ... OK\n* checking Rd line widths ... OK\n* checking Rd cross-references ... OK\n* checking for missing documentation entries ... OK\n* checking for code/documentation mismatches ... OK\n* checking Rd \\usage sections ... OK\n* checking Rd contents ... OK\n* checking for unstated dependencies in examples ... OK\n* checking line endings in C/C++/Fortran sources/headers ... OK\n* checking line endings in Makefiles ... OK\n* checking compilation flags in Makevars ... OK\n* checking for GNU extensions in Makefiles ... OK\n* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK\n* checking compiled code ... OK\n* checking installed files from 'inst/doc' ... OK\n* checking files in 'vignettes' ... OK\n* checking examples ... OK\n* checking for unstated dependencies in vignettes ... OK\n* checking package vignettes in 'inst/doc' ... OK\n* checking re-building of vignette outputs ... OK\n* checking PDF version of manual ... OK\n* DONE\n\nStatus: OK\n\n--------------------------------------------------------\n\nExactly the same thing occurs on my Ubuntu 64-bit box. So again, I'm still\nunsure how to proceed, particularly if only some OS's/versions are\ndetecting this error other than mine.\n\nPhil\n\nOn Wed, Jul 26, 2017 at 7:06 AM, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n>\n>> Hi all,\n>>\n>> First time posting here, so hopefully I'm following the correct etiquette.\n>>\n>> I recently received the error:\n>>\n>> \"Package has help file(s) containing build-stage \\Sexpr{} expressions but\n>> no 'build/partial.rdb' file.\"\n>>\n>> when submitting a package to CRAN (source code: https://github.com/\n>> philchalmers/mirtCAT). However, I'm having difficulty reproducing the\n>> exact\n>> problem on my Windows and Linux computers with the latest R dev version\n>> (2017-07-25 r72968). Moreover, I don't really understand the issue, as I\n>> do\n>> not use \\Sexpr{} anywhere in the package.\n>>\n>> After a quick search, I found a link on SO (https://stackoverflow.com/\n>> questions/32357637/two-note-messages-from-r-cmd-check-as-cran), but it\n>> does\n>> not appear too helpful as far as I can tell (I don't explicitly use\n>> \\package_____() commands anywhere). Can anyone shed some light on this\n>> warning and my difficulty in reproducing the message? Thank you in\n>> advance.\n>>\n>\n> How did you produce the tar.gz file?  If you did it in some way other than\n> running \"R CMD build ...\", don't do that.   When I run R CMD build, I do\n> get the build/partial.rdb file in the tarball.\n>\n> Duncan Murdoch\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Duncan,\n\nI use the standard R CMD build/check --as-cran combo. Here's my output from\nmy Win 10 64-bit box:\n\nC:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD build mirtCAT\n* checking for fi",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 2,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-720c0824de35",
+      "message_id": "<2c14ba39-7f97-0b92-c1c1-abe8b8c22d3f@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2017-07-26T10:30:00-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<CAKYNACGbpv1mD6ktGHKsVWaf4YeTZoL7aRGW+ovMKFR0vUh9pA@mail.gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+        "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>",
+        "<CAKYNACGbpv1mD6ktGHKsVWaf4YeTZoL7aRGW+ovMKFR0vUh9pA@mail.gmail.com>"
+      ],
+      "body_plain": "On 26/07/2017 9:05 AM, Phil Chalmers wrote:\n> Hi Duncan,\n>\n> I use the standard R CMD build/check --as-cran combo. Here's my output\n> from my Win 10 64-bit box:\n>\n> C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD build mirtCAT\n> * checking for file 'mirtCAT/DESCRIPTION' ... OK\n> * preparing 'mirtCAT':\n> * checking DESCRIPTION meta-information ... OK\n> * cleaning src\n> * installing the package to process help pages\n> * saving partial Rd database\n> * creating vignettes ... OK\n> * cleaning src\n> * checking for LF line-endings in source and make files and shell scripts\n> * checking for empty or unneeded directories\n> * building 'mirtCAT_1.6.tar.gz'\n>\n>\n> C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD check\n> mirtCAT_1.6.tar.gz --as-cran\n> * using log directory 'C:/Users/Phil/Desktop/mirtCAT.Rcheck'\n> * using R Under development (unstable) (2017-07-25 r72968)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: ISO8859-1\n> * using option '--as-cran'\n> * checking for file 'mirtCAT/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'mirtCAT' version '1.6'\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Phil Chalmers <rphilip.chalmers at gmail.com\n> <mailto:rphilip.chalmers at gmail.com>>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for executable files ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking whether package 'mirtCAT' can be installed ... OK\n> * checking installed package size ... OK\n> * checking package directory ... OK\n> * checking 'build' directory ... OK\n> * checking DESCRIPTION meta-information ... OK\n> * checking top-level files ... OK\n> * checking for left-over files ... OK\n> * checking index information ... OK\n> * checking package subdirectories ... OK\n> * checking R files for non-ASCII characters ... OK\n> * checking R files for syntax errors ... OK\n> * checking whether the package can be loaded ... OK\n> * checking whether the package can be loaded with stated dependencies ... OK\n> * checking whether the package can be unloaded cleanly ... OK\n> * checking whether the namespace can be loaded with stated dependencies\n> ... OK\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking loading without being on the library search path ... OK\n> * checking use of S3 registration ... OK\n> * checking dependencies in R code ... OK\n> * checking S3 generic/method consistency ... OK\n> * checking replacement functions ... OK\n> * checking foreign function calls ... OK\n> * checking R code for possible problems ... OK\n> * checking Rd files ... OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... OK\n> * checking Rd \\usage sections ... OK\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking line endings in C/C++/Fortran sources/headers ... OK\n> * checking line endings in Makefiles ... OK\n> * checking compilation flags in Makevars ... OK\n> * checking for GNU extensions in Makefiles ... OK\n> * checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK\n> * checking compiled code ... OK\n> * checking installed files from 'inst/doc' ... OK\n> * checking files in 'vignettes' ... OK\n> * checking examples ... OK\n> * checking for unstated dependencies in vignettes ... OK\n> * checking package vignettes in 'inst/doc' ... OK\n> * checking re-building of vignette outputs ... OK\n> * checking PDF version of manual ... OK\n> * DONE\n>\n> Status: OK\n>\n> --------------------------------------------------------\n>\n> Exactly the same thing occurs on my Ubuntu 64-bit box. So again, I'm\n> still unsure how to proceed, particularly if only some OS's/versions are\n> detecting this error other than mine.\n\nSounds like a bug somewhere.  Does the file you submitted to CRAN \ncontain the build/partial.rdb file?  If so, the bug is in the check code \nbeing run by CRAN.  If not, the bug is in the build code that you ran.\n\nYou can get a listing of the contents from within R using\n\nuntar(\"mirtCAT_1.6.tar.gz\", list = TRUE)\n\nWhen I do that, the partial.rdb file is entry 28.\n\nDuncan Murdoch\n\n>\n> Phil\n>\n> On Wed, Jul 26, 2017 at 7:06 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n>\n>     On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n>\n>         Hi all,\n>\n>         First time posting here, so hopefully I'm following the correct\n>         etiquette.\n>\n>         I recently received the error:\n>\n>         \"Package has help file(s) containing build-stage \\Sexpr{}\n>         expressions but\n>         no 'build/partial.rdb' file.\"\n>\n>         when submitting a package to CRAN (source code: https://github.com/\n>         philchalmers/mirtCAT). However, I'm having difficulty\n>         reproducing the exact\n>         problem on my Windows and Linux computers with the latest R dev\n>         version\n>         (2017-07-25 r72968). Moreover, I don't really understand the\n>         issue, as I do\n>         not use \\Sexpr{} anywhere in the package.\n>\n>         After a quick search, I found a link on SO\n>         (https://stackoverflow.com/\n>         questions/32357637/two-note-messages-from-r-cmd-check-as-cran),\n>         but it does\n>         not appear too helpful as far as I can tell (I don't explicitly use\n>         \\package_____() commands anywhere). Can anyone shed some light\n>         on this\n>         warning and my difficulty in reproducing the message? Thank you\n>         in advance.\n>\n>\n>     How did you produce the tar.gz file?  If you did it in some way\n>     other than running \"R CMD build ...\", don't do that.   When I run R\n>     CMD build, I do get the build/partial.rdb file in the tarball.\n>\n>     Duncan Murdoch\n>\n>",
+      "body_snippet": "On 26/07/2017 9:05 AM, Phil Chalmers wrote:\n> Hi Duncan,\n>\n> I use the standard R CMD build/check --as-cran combo. Here's my output\n> from my Win 10 64-bit box:\n>\n> C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 3,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-c6e1cd800f8d",
+      "message_id": "<081328ba-1734-7f13-d65a-0e34f1aee442@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2017-07-26T10:45:51-04:00",
+      "subject": "[R-pkg-devel] spell check in DESCRIPTION",
+      "subject_clean": "[R-pkg-devel] spell check in DESCRIPTION",
+      "in_reply_to": "<49fd488c-eea5-e4a6-30c7-2b7f719f6a60@bath.edu>",
+      "references": [
+        "<mailman.1024.1501065793.1137.r-package-devel@r-project.org>",
+        "<49fd488c-eea5-e4a6-30c7-2b7f719f6a60@bath.edu>"
+      ],
+      "body_plain": "On 26/07/2017 6:47 AM, Simon Wood wrote:\n> I've just had my package (mgcv) bounced because of 3 notes. One of these\n> is complaining about spelling in the DESCRIPTION file.\n>\n> Possibly mis-spelled words in DESCRIPTION:\n>     AIC (5:47, 8:75)\n>     GAM (5:14)\n>     GAMMs (7:20)\n>     GAMs (7:14)\n>     GCV (5:43, 8:57)\n>     REML (5:51, 8:62)\n>     UBRE (8:70)\n>     smoothers (9:59)\n>\n> However if I run\n>\n> R CMD check mgcv_1.8-18.tar.gz --as-cran\n>\n> using the same rdevel version apparently used in the test then no problem is reported. Does anyone know how I can turn on the spell check?\n\nIf you have aspell, you can set the environment variable\n\n_R_CHECK_CRAN_INCOMING_USE_ASPELL_\n\nto TRUE.  (This should be documented in \"R Internals\" along with the \nother incoming check variables, but appears to have been overlooked.)\n\n\n  And how do I request that `smoothers' be allowed as a valid word (even \nif acronyms are to be banned)?\n\nAcronyms aren't banned, those are false positives (as is \"smoothers\"). \nTo get words added, you would normally suggest they be added to \nshare/dictionaries/en_stats.txt in the R sources, but I see \"smoothers\" \nis already there, and has been since 2012.  Not sure why it showed up in \nyour check.\n\nDuncan Murdoch\n\n> (Full report in link below)\n>\n> best,\n> Simon\n>\n>\n> <https://win-builder.r-project.org/incoming_pretest/170726_112041_mgcv_1818/00check.log>\n>\n> -- Simon Wood, School of Mathematics, University of Bristol BS8 1TW UK\n> +44 (0)117 33 18273 http://www.maths.bris.ac.uk/~sw15190\n>\n>\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 26/07/2017 6:47 AM, Simon Wood wrote:\n> I've just had my package (mgcv) bounced because of 3 notes. One of these\n> is complaining about spelling in the DESCRIPTION file.\n>\n> Possibly mis-spelled wo",
+      "thread_id": "thread-2618a857ef12",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-1b23d31842c2",
+      "message_id": "<CAKYNACE1nsLtm5=F6B+mcw6Bz+rMgV-5r1PCcwoMR6gc8xmMcg@mail.gmail.com>",
+      "from_name": "Phil Chalmers",
+      "from_email_hash": "b45ac6bd147b1f78fb144fe04ddb8dfb20ad37048ef28b18d41f2c19e230c214",
+      "date": "2017-07-26T12:23:03-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<2c14ba39-7f97-0b92-c1c1-abe8b8c22d3f@gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+        "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>",
+        "<CAKYNACGbpv1mD6ktGHKsVWaf4YeTZoL7aRGW+ovMKFR0vUh9pA@mail.gmail.com>",
+        "<2c14ba39-7f97-0b92-c1c1-abe8b8c22d3f@gmail.com>"
+      ],
+      "body_plain": "Yes, I can see the partial.rdb file in the list, also in entry 28. So I\nbelieve the problem is on the CRAN build.\n\nPhil\n\nOn Wed, Jul 26, 2017 at 10:30 AM, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 26/07/2017 9:05 AM, Phil Chalmers wrote:\n>\n>> Hi Duncan,\n>>\n>> I use the standard R CMD build/check --as-cran combo. Here's my output\n>> from my Win 10 64-bit box:\n>>\n>> C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD build mirtCAT\n>> * checking for file 'mirtCAT/DESCRIPTION' ... OK\n>> * preparing 'mirtCAT':\n>> * checking DESCRIPTION meta-information ... OK\n>> * cleaning src\n>> * installing the package to process help pages\n>> * saving partial Rd database\n>> * creating vignettes ... OK\n>> * cleaning src\n>> * checking for LF line-endings in source and make files and shell scripts\n>> * checking for empty or unneeded directories\n>> * building 'mirtCAT_1.6.tar.gz'\n>>\n>>\n>> C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD check\n>> mirtCAT_1.6.tar.gz --as-cran\n>> * using log directory 'C:/Users/Phil/Desktop/mirtCAT.Rcheck'\n>> * using R Under development (unstable) (2017-07-25 r72968)\n>> * using platform: x86_64-w64-mingw32 (64-bit)\n>> * using session charset: ISO8859-1\n>> * using option '--as-cran'\n>> * checking for file 'mirtCAT/DESCRIPTION' ... OK\n>> * checking extension type ... Package\n>> * this is package 'mirtCAT' version '1.6'\n>> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n>> Maintainer: 'Phil Chalmers <rphilip.chalmers at gmail.com\n>> <mailto:rphilip.chalmers at gmail.com>>'\n>>\n>> * checking package namespace information ... OK\n>> * checking package dependencies ... OK\n>> * checking if this is a source package ... OK\n>> * checking if there is a namespace ... OK\n>> * checking for executable files ... OK\n>> * checking for hidden files and directories ... OK\n>> * checking for portable file names ... OK\n>> * checking whether package 'mirtCAT' can be installed ... OK\n>> * checking installed package size ... OK\n>> * checking package directory ... OK\n>> * checking 'build' directory ... OK\n>> * checking DESCRIPTION meta-information ... OK\n>> * checking top-level files ... OK\n>> * checking for left-over files ... OK\n>> * checking index information ... OK\n>> * checking package subdirectories ... OK\n>> * checking R files for non-ASCII characters ... OK\n>> * checking R files for syntax errors ... OK\n>> * checking whether the package can be loaded ... OK\n>> * checking whether the package can be loaded with stated dependencies ...\n>> OK\n>> * checking whether the package can be unloaded cleanly ... OK\n>> * checking whether the namespace can be loaded with stated dependencies\n>> ... OK\n>> * checking whether the namespace can be unloaded cleanly ... OK\n>> * checking loading without being on the library search path ... OK\n>> * checking use of S3 registration ... OK\n>> * checking dependencies in R code ... OK\n>> * checking S3 generic/method consistency ... OK\n>> * checking replacement functions ... OK\n>> * checking foreign function calls ... OK\n>> * checking R code for possible problems ... OK\n>> * checking Rd files ... OK\n>> * checking Rd metadata ... OK\n>> * checking Rd line widths ... OK\n>> * checking Rd cross-references ... OK\n>> * checking for missing documentation entries ... OK\n>> * checking for code/documentation mismatches ... OK\n>> * checking Rd \\usage sections ... OK\n>> * checking Rd contents ... OK\n>> * checking for unstated dependencies in examples ... OK\n>> * checking line endings in C/C++/Fortran sources/headers ... OK\n>> * checking line endings in Makefiles ... OK\n>> * checking compilation flags in Makevars ... OK\n>> * checking for GNU extensions in Makefiles ... OK\n>> * checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK\n>> * checking compiled code ... OK\n>> * checking installed files from 'inst/doc' ... OK\n>> * checking files in 'vignettes' ... OK\n>> * checking examples ... OK\n>> * checking for unstated dependencies in vignettes ... OK\n>> * checking package vignettes in 'inst/doc' ... OK\n>> * checking re-building of vignette outputs ... OK\n>> * checking PDF version of manual ... OK\n>> * DONE\n>>\n>> Status: OK\n>>\n>> --------------------------------------------------------\n>>\n>> Exactly the same thing occurs on my Ubuntu 64-bit box. So again, I'm\n>> still unsure how to proceed, particularly if only some OS's/versions are\n>> detecting this error other than mine.\n>>\n>\n> Sounds like a bug somewhere.  Does the file you submitted to CRAN contain\n> the build/partial.rdb file?  If so, the bug is in the check code being run\n> by CRAN.  If not, the bug is in the build code that you ran.\n>\n> You can get a listing of the contents from within R using\n>\n> untar(\"mirtCAT_1.6.tar.gz\", list = TRUE)\n>\n> When I do that, the partial.rdb file is entry 28.\n>\n> Duncan Murdoch\n>\n>\n>> Phil\n>>\n>> On Wed, Jul 26, 2017 at 7:06 AM, Duncan Murdoch\n>> <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n>>\n>>     On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n>>\n>>         Hi all,\n>>\n>>         First time posting here, so hopefully I'm following the correct\n>>         etiquette.\n>>\n>>         I recently received the error:\n>>\n>>         \"Package has help file(s) containing build-stage \\Sexpr{}\n>>         expressions but\n>>         no 'build/partial.rdb' file.\"\n>>\n>>         when submitting a package to CRAN (source code:\n>> https://github.com/\n>>         philchalmers/mirtCAT). However, I'm having difficulty\n>>         reproducing the exact\n>>         problem on my Windows and Linux computers with the latest R dev\n>>         version\n>>         (2017-07-25 r72968). Moreover, I don't really understand the\n>>         issue, as I do\n>>         not use \\Sexpr{} anywhere in the package.\n>>\n>>         After a quick search, I found a link on SO\n>>         (https://stackoverflow.com/\n>>         questions/32357637/two-note-messages-from-r-cmd-check-as-cran),\n>>         but it does\n>>         not appear too helpful as far as I can tell (I don't explicitly\n>> use\n>>         \\package_____() commands anywhere). Can anyone shed some light\n>>         on this\n>>         warning and my difficulty in reproducing the message? Thank you\n>>         in advance.\n>>\n>>\n>>     How did you produce the tar.gz file?  If you did it in some way\n>>     other than running \"R CMD build ...\", don't do that.   When I run R\n>>     CMD build, I do get the build/partial.rdb file in the tarball.\n>>\n>>     Duncan Murdoch\n>>\n>>\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Yes, I can see the partial.rdb file in the list, also in entry 28. So I\nbelieve the problem is on the CRAN build.\n\nPhil\n\nOn Wed, Jul 26, 2017 at 10:30 AM, Duncan Murdoch <murdoch.duncan at gmail.com>\n",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 4,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-872edcad75d2",
+      "message_id": "<d78edaed-5766-cb6b-7d81-68651d46984f@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2017-07-27T08:34:22-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<CAKYNACE1nsLtm5=F6B+mcw6Bz+rMgV-5r1PCcwoMR6gc8xmMcg@mail.gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+        "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>",
+        "<CAKYNACGbpv1mD6ktGHKsVWaf4YeTZoL7aRGW+ovMKFR0vUh9pA@mail.gmail.com>",
+        "<2c14ba39-7f97-0b92-c1c1-abe8b8c22d3f@gmail.com>",
+        "<CAKYNACE1nsLtm5=F6B+mcw6Bz+rMgV-5r1PCcwoMR6gc8xmMcg@mail.gmail.com>"
+      ],
+      "body_plain": "On 26/07/2017 12:23 PM, Phil Chalmers wrote:\n> Yes, I can see the partial.rdb file in the list, also in entry 28. So I\n> believe the problem is on the CRAN build.\n\nFor the rest of the list:  This claim is incorrect.  The tarball that \nwas submitted to CRAN did not contain the partial.rdb file.  The CRAN \nmessage was correct.\n\nPhil, it would be helpful if you explained how you really produced that \ntarball, so people know how not to do it.\n\nDuncan Murdoch\n\n>\n> Phil\n>\n> On Wed, Jul 26, 2017 at 10:30 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n>\n>     On 26/07/2017 9:05 AM, Phil Chalmers wrote:\n>\n>         Hi Duncan,\n>\n>         I use the standard R CMD build/check --as-cran combo. Here's my\n>         output\n>         from my Win 10 64-bit box:\n>\n>         C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD build\n>         mirtCAT\n>         * checking for file 'mirtCAT/DESCRIPTION' ... OK\n>         * preparing 'mirtCAT':\n>         * checking DESCRIPTION meta-information ... OK\n>         * cleaning src\n>         * installing the package to process help pages\n>         * saving partial Rd database\n>         * creating vignettes ... OK\n>         * cleaning src\n>         * checking for LF line-endings in source and make files and\n>         shell scripts\n>         * checking for empty or unneeded directories\n>         * building 'mirtCAT_1.6.tar.gz'\n>\n>\n>         C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD check\n>         mirtCAT_1.6.tar.gz --as-cran\n>         * using log directory 'C:/Users/Phil/Desktop/mirtCAT.Rcheck'\n>         * using R Under development (unstable) (2017-07-25 r72968)\n>         * using platform: x86_64-w64-mingw32 (64-bit)\n>         * using session charset: ISO8859-1\n>         * using option '--as-cran'\n>         * checking for file 'mirtCAT/DESCRIPTION' ... OK\n>         * checking extension type ... Package\n>         * this is package 'mirtCAT' version '1.6'\n>         * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n>         Maintainer: 'Phil Chalmers <rphilip.chalmers at gmail.com\n>         <mailto:rphilip.chalmers at gmail.com>\n>         <mailto:rphilip.chalmers at gmail.com\n>         <mailto:rphilip.chalmers at gmail.com>>>'\n>\n>         * checking package namespace information ... OK\n>         * checking package dependencies ... OK\n>         * checking if this is a source package ... OK\n>         * checking if there is a namespace ... OK\n>         * checking for executable files ... OK\n>         * checking for hidden files and directories ... OK\n>         * checking for portable file names ... OK\n>         * checking whether package 'mirtCAT' can be installed ... OK\n>         * checking installed package size ... OK\n>         * checking package directory ... OK\n>         * checking 'build' directory ... OK\n>         * checking DESCRIPTION meta-information ... OK\n>         * checking top-level files ... OK\n>         * checking for left-over files ... OK\n>         * checking index information ... OK\n>         * checking package subdirectories ... OK\n>         * checking R files for non-ASCII characters ... OK\n>         * checking R files for syntax errors ... OK\n>         * checking whether the package can be loaded ... OK\n>         * checking whether the package can be loaded with stated\n>         dependencies ... OK\n>         * checking whether the package can be unloaded cleanly ... OK\n>         * checking whether the namespace can be loaded with stated\n>         dependencies\n>         ... OK\n>         * checking whether the namespace can be unloaded cleanly ... OK\n>         * checking loading without being on the library search path ... OK\n>         * checking use of S3 registration ... OK\n>         * checking dependencies in R code ... OK\n>         * checking S3 generic/method consistency ... OK\n>         * checking replacement functions ... OK\n>         * checking foreign function calls ... OK\n>         * checking R code for possible problems ... OK\n>         * checking Rd files ... OK\n>         * checking Rd metadata ... OK\n>         * checking Rd line widths ... OK\n>         * checking Rd cross-references ... OK\n>         * checking for missing documentation entries ... OK\n>         * checking for code/documentation mismatches ... OK\n>         * checking Rd \\usage sections ... OK\n>         * checking Rd contents ... OK\n>         * checking for unstated dependencies in examples ... OK\n>         * checking line endings in C/C++/Fortran sources/headers ... OK\n>         * checking line endings in Makefiles ... OK\n>         * checking compilation flags in Makevars ... OK\n>         * checking for GNU extensions in Makefiles ... OK\n>         * checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS)\n>         ... OK\n>         * checking compiled code ... OK\n>         * checking installed files from 'inst/doc' ... OK\n>         * checking files in 'vignettes' ... OK\n>         * checking examples ... OK\n>         * checking for unstated dependencies in vignettes ... OK\n>         * checking package vignettes in 'inst/doc' ... OK\n>         * checking re-building of vignette outputs ... OK\n>         * checking PDF version of manual ... OK\n>         * DONE\n>\n>         Status: OK\n>\n>         --------------------------------------------------------\n>\n>         Exactly the same thing occurs on my Ubuntu 64-bit box. So again, I'm\n>         still unsure how to proceed, particularly if only some\n>         OS's/versions are\n>         detecting this error other than mine.\n>\n>\n>     Sounds like a bug somewhere.  Does the file you submitted to CRAN\n>     contain the build/partial.rdb file?  If so, the bug is in the check\n>     code being run by CRAN.  If not, the bug is in the build code that\n>     you ran.\n>\n>     You can get a listing of the contents from within R using\n>\n>     untar(\"mirtCAT_1.6.tar.gz\", list = TRUE)\n>\n>     When I do that, the partial.rdb file is entry 28.\n>\n>     Duncan Murdoch\n>\n>\n>         Phil\n>\n>         On Wed, Jul 26, 2017 at 7:06 AM, Duncan Murdoch\n>         <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>\n>         <mailto:murdoch.duncan at gmail.com\n>         <mailto:murdoch.duncan at gmail.com>>> wrote:\n>\n>             On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n>\n>                 Hi all,\n>\n>                 First time posting here, so hopefully I'm following the\n>         correct\n>                 etiquette.\n>\n>                 I recently received the error:\n>\n>                 \"Package has help file(s) containing build-stage \\Sexpr{}\n>                 expressions but\n>                 no 'build/partial.rdb' file.\"\n>\n>                 when submitting a package to CRAN (source code:\n>         https://github.com/\n>                 philchalmers/mirtCAT). However, I'm having difficulty\n>                 reproducing the exact\n>                 problem on my Windows and Linux computers with the\n>         latest R dev\n>                 version\n>                 (2017-07-25 r72968). Moreover, I don't really understand the\n>                 issue, as I do\n>                 not use \\Sexpr{} anywhere in the package.\n>\n>                 After a quick search, I found a link on SO\n>                 (https://stackoverflow.com/\n>\n>         questions/32357637/two-note-messages-from-r-cmd-check-as-cran),\n>                 but it does\n>                 not appear too helpful as far as I can tell (I don't\n>         explicitly use\n>                 \\package_____() commands anywhere). Can anyone shed some\n>         light\n>                 on this\n>                 warning and my difficulty in reproducing the message?\n>         Thank you\n>                 in advance.\n>\n>\n>             How did you produce the tar.gz file?  If you did it in some way\n>             other than running \"R CMD build ...\", don't do that.   When\n>         I run R\n>             CMD build, I do get the build/partial.rdb file in the tarball.\n>\n>             Duncan Murdoch\n>\n>\n>\n>",
+      "body_snippet": "On 26/07/2017 12:23 PM, Phil Chalmers wrote:\n> Yes, I can see the partial.rdb file in the list, also in entry 28. So I\n> believe the problem is on the CRAN build.\n\nFor the rest of the list:  This clai",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 5,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-dffad68cc3b5",
+      "message_id": "<CAKYNACFtjZQ6VktyaThMLy=JjGeE7UA0eP3qH95mZXyjuubh6w@mail.gmail.com>",
+      "from_name": "Phil Chalmers",
+      "from_email_hash": "b45ac6bd147b1f78fb144fe04ddb8dfb20ad37048ef28b18d41f2c19e230c214",
+      "date": "2017-07-27T09:34:23-04:00",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "subject_clean": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "in_reply_to": "<d78edaed-5766-cb6b-7d81-68651d46984f@gmail.com>",
+      "references": [
+        "<CAKYNACFtcSbcCdDxiQxnvCSK-w6u05qmK4ry3cuOf2V=cpfxuw@mail.gmail.com>",
+        "<e22c5830-3d8b-b3ca-b4a6-9ec45f91ffbb@gmail.com>",
+        "<CAKYNACGbpv1mD6ktGHKsVWaf4YeTZoL7aRGW+ovMKFR0vUh9pA@mail.gmail.com>",
+        "<2c14ba39-7f97-0b92-c1c1-abe8b8c22d3f@gmail.com>",
+        "<CAKYNACE1nsLtm5=F6B+mcw6Bz+rMgV-5r1PCcwoMR6gc8xmMcg@mail.gmail.com>",
+        "<d78edaed-5766-cb6b-7d81-68651d46984f@gmail.com>"
+      ],
+      "body_plain": "Thanks, Duncan. The tarball was created using the standard R CMD build\nfunction. But, as far as I can tell, I must have built the tarball with a\nprevious R version (e.g., version 3.3), which did not contain the\npartial.rdb file when constructing the tarball, and then checked with the\ndev version. For some reason my check didn't flag this missing file\nlocally; but, I suppose mixing and matching R command line versions is a\ndangerous game to play anyway.\n\nMoral: always check AND build the package for CRAN with the latest dev, as\neven the build process may have changed.\n\nPhil\n\nOn Thu, Jul 27, 2017 at 8:34 AM, Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 26/07/2017 12:23 PM, Phil Chalmers wrote:\n>\n>> Yes, I can see the partial.rdb file in the list, also in entry 28. So I\n>> believe the problem is on the CRAN build.\n>>\n>\n> For the rest of the list:  This claim is incorrect.  The tarball that was\n> submitted to CRAN did not contain the partial.rdb file.  The CRAN message\n> was correct.\n>\n> Phil, it would be helpful if you explained how you really produced that\n> tarball, so people know how not to do it.\n>\n> Duncan Murdoch\n>\n>\n>> Phil\n>>\n>> On Wed, Jul 26, 2017 at 10:30 AM, Duncan Murdoch\n>> <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n>>\n>>     On 26/07/2017 9:05 AM, Phil Chalmers wrote:\n>>\n>>         Hi Duncan,\n>>\n>>         I use the standard R CMD build/check --as-cran combo. Here's my\n>>         output\n>>         from my Win 10 64-bit box:\n>>\n>>         C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD build\n>>         mirtCAT\n>>         * checking for file 'mirtCAT/DESCRIPTION' ... OK\n>>         * preparing 'mirtCAT':\n>>         * checking DESCRIPTION meta-information ... OK\n>>         * cleaning src\n>>         * installing the package to process help pages\n>>         * saving partial Rd database\n>>         * creating vignettes ... OK\n>>         * cleaning src\n>>         * checking for LF line-endings in source and make files and\n>>         shell scripts\n>>         * checking for empty or unneeded directories\n>>         * building 'mirtCAT_1.6.tar.gz'\n>>\n>>\n>>         C:\\Users\\Phil\\Desktop>C:/PROGRA~1/R/R-devel/bin/x64/R CMD check\n>>         mirtCAT_1.6.tar.gz --as-cran\n>>         * using log directory 'C:/Users/Phil/Desktop/mirtCAT.Rcheck'\n>>         * using R Under development (unstable) (2017-07-25 r72968)\n>>         * using platform: x86_64-w64-mingw32 (64-bit)\n>>         * using session charset: ISO8859-1\n>>         * using option '--as-cran'\n>>         * checking for file 'mirtCAT/DESCRIPTION' ... OK\n>>         * checking extension type ... Package\n>>         * this is package 'mirtCAT' version '1.6'\n>>         * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n>>         Maintainer: 'Phil Chalmers <rphilip.chalmers at gmail.com\n>>         <mailto:rphilip.chalmers at gmail.com>\n>>         <mailto:rphilip.chalmers at gmail.com\n>>\n>>         <mailto:rphilip.chalmers at gmail.com>>>'\n>>\n>>         * checking package namespace information ... OK\n>>         * checking package dependencies ... OK\n>>         * checking if this is a source package ... OK\n>>         * checking if there is a namespace ... OK\n>>         * checking for executable files ... OK\n>>         * checking for hidden files and directories ... OK\n>>         * checking for portable file names ... OK\n>>         * checking whether package 'mirtCAT' can be installed ... OK\n>>         * checking installed package size ... OK\n>>         * checking package directory ... OK\n>>         * checking 'build' directory ... OK\n>>         * checking DESCRIPTION meta-information ... OK\n>>         * checking top-level files ... OK\n>>         * checking for left-over files ... OK\n>>         * checking index information ... OK\n>>         * checking package subdirectories ... OK\n>>         * checking R files for non-ASCII characters ... OK\n>>         * checking R files for syntax errors ... OK\n>>         * checking whether the package can be loaded ... OK\n>>         * checking whether the package can be loaded with stated\n>>         dependencies ... OK\n>>         * checking whether the package can be unloaded cleanly ... OK\n>>         * checking whether the namespace can be loaded with stated\n>>         dependencies\n>>         ... OK\n>>         * checking whether the namespace can be unloaded cleanly ... OK\n>>         * checking loading without being on the library search path ... OK\n>>         * checking use of S3 registration ... OK\n>>         * checking dependencies in R code ... OK\n>>         * checking S3 generic/method consistency ... OK\n>>         * checking replacement functions ... OK\n>>         * checking foreign function calls ... OK\n>>         * checking R code for possible problems ... OK\n>>         * checking Rd files ... OK\n>>         * checking Rd metadata ... OK\n>>         * checking Rd line widths ... OK\n>>         * checking Rd cross-references ... OK\n>>         * checking for missing documentation entries ... OK\n>>         * checking for code/documentation mismatches ... OK\n>>         * checking Rd \\usage sections ... OK\n>>         * checking Rd contents ... OK\n>>         * checking for unstated dependencies in examples ... OK\n>>         * checking line endings in C/C++/Fortran sources/headers ... OK\n>>         * checking line endings in Makefiles ... OK\n>>         * checking compilation flags in Makevars ... OK\n>>         * checking for GNU extensions in Makefiles ... OK\n>>         * checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS)\n>>         ... OK\n>>         * checking compiled code ... OK\n>>         * checking installed files from 'inst/doc' ... OK\n>>         * checking files in 'vignettes' ... OK\n>>         * checking examples ... OK\n>>         * checking for unstated dependencies in vignettes ... OK\n>>         * checking package vignettes in 'inst/doc' ... OK\n>>         * checking re-building of vignette outputs ... OK\n>>         * checking PDF version of manual ... OK\n>>         * DONE\n>>\n>>         Status: OK\n>>\n>>         --------------------------------------------------------\n>>\n>>         Exactly the same thing occurs on my Ubuntu 64-bit box. So again,\n>> I'm\n>>         still unsure how to proceed, particularly if only some\n>>         OS's/versions are\n>>         detecting this error other than mine.\n>>\n>>\n>>     Sounds like a bug somewhere.  Does the file you submitted to CRAN\n>>     contain the build/partial.rdb file?  If so, the bug is in the check\n>>     code being run by CRAN.  If not, the bug is in the build code that\n>>     you ran.\n>>\n>>     You can get a listing of the contents from within R using\n>>\n>>     untar(\"mirtCAT_1.6.tar.gz\", list = TRUE)\n>>\n>>     When I do that, the partial.rdb file is entry 28.\n>>\n>>     Duncan Murdoch\n>>\n>>\n>>         Phil\n>>\n>>         On Wed, Jul 26, 2017 at 7:06 AM, Duncan Murdoch\n>>         <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>\n>>         <mailto:murdoch.duncan at gmail.com\n>>\n>>         <mailto:murdoch.duncan at gmail.com>>> wrote:\n>>\n>>             On 25/07/2017 4:42 PM, Phil Chalmers wrote:\n>>\n>>                 Hi all,\n>>\n>>                 First time posting here, so hopefully I'm following the\n>>         correct\n>>                 etiquette.\n>>\n>>                 I recently received the error:\n>>\n>>                 \"Package has help file(s) containing build-stage \\Sexpr{}\n>>                 expressions but\n>>                 no 'build/partial.rdb' file.\"\n>>\n>>                 when submitting a package to CRAN (source code:\n>>         https://github.com/\n>>                 philchalmers/mirtCAT). However, I'm having difficulty\n>>                 reproducing the exact\n>>                 problem on my Windows and Linux computers with the\n>>         latest R dev\n>>                 version\n>>                 (2017-07-25 r72968). Moreover, I don't really understand\n>> the\n>>                 issue, as I do\n>>                 not use \\Sexpr{} anywhere in the package.\n>>\n>>                 After a quick search, I found a link on SO\n>>                 (https://stackoverflow.com/\n>>\n>>         questions/32357637/two-note-messages-from-r-cmd-check-as-cran),\n>>                 but it does\n>>                 not appear too helpful as far as I can tell (I don't\n>>         explicitly use\n>>                 \\package_____() commands anywhere). Can anyone shed some\n>>         light\n>>                 on this\n>>                 warning and my difficulty in reproducing the message?\n>>         Thank you\n>>                 in advance.\n>>\n>>\n>>             How did you produce the tar.gz file?  If you did it in some\n>> way\n>>             other than running \"R CMD build ...\", don't do that.   When\n>>         I run R\n>>             CMD build, I do get the build/partial.rdb file in the tarball.\n>>\n>>             Duncan Murdoch\n>>\n>>\n>>\n>>\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks, Duncan. The tarball was created using the standard R CMD build\nfunction. But, as far as I can tell, I must have built the tarball with a\nprevious R version (e.g., version 3.3), which did not c",
+      "thread_id": "thread-a4c614049100",
+      "thread_depth": 6,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-20228df1a1ba",
+      "message_id": "<1501245721.3057.19.camel@uow.edu.au>",
+      "from_name": "Pavel Krivitsky",
+      "from_email_hash": "2c5c5d8a0c0c672dc573715006c03b55eb5d6fd3594c27a5d79a0ed5b907b0e9",
+      "date": "2017-07-28T12:42:01Z",
+      "subject": "[R-pkg-devel] Seamless way for a CRAN-bound package to depend on a Bioconductor package?",
+      "subject_clean": "[R-pkg-devel] Seamless way for a CRAN-bound package to depend on a Bioconductor package?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All,\n\nThere is a Bioconductor package (S4Vectors) whose functionality I want\nto use in one of my packages, which I usually submit to CRAN.\n\nAt this time, install.packages() does not automatically fetch\ndependencies from Bioconductor as far as I can tell, though it can be\ntold to do so via setRepostitory().\n\nIs there any way to make it more seamless for the end-user?\n\nI know that there is the 'Additional_repositories:' setting, but I\nthink that's for R CMD check only: although devtools::install()\nunderstands it and the 'biocView:' setting, install.packages() does\nnot.\n\nAnother option might be to make it a Suggested package and then force\nits installation (if necessary) and loading in the .onLoad() function\nof my package, but it's not clear whether that's CRAN-appropriate\nbehaviour.\n\n\t\t\t\tThanks in advance,\n\t\t\t\tPavel\n\n\n\n\n-- \nPavel Krivitsky\nLecturer in Statistics\nNational Institute of Applied Statistics Research Australia (NIASRA)\nSchool of Mathematics and Applied Statistics | Building 39C Room 154\nUniversity of Wollongong NSW 2522 Australia\nT +61 2 4221 3713\nWeb (NIASRA): http://niasra.uow.edu.au/index.html\nWeb (Personal): http://www.krivitsky.net/research\nORCID: 0000-0002-9101-3362\n\nNOTICE: This email is intended for the addressee named and may contain\nconfidential information. If you are not the intended recipient, please\ndelete it and notify the sender. Please consider the environment before\nprinting this email.",
+      "body_snippet": "Dear All,\n\nThere is a Bioconductor package (S4Vectors) whose functionality I want\nto use in one of my packages, which I usually submit to CRAN.\n\nAt this time, install.packages() does not automatically",
+      "thread_id": "thread-20228df1a1ba",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-0cd8ff29096b",
+      "message_id": "<22907.13223.219898.384064@bud.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2017-07-28T07:52:55-05:00",
+      "subject": "[R-pkg-devel] Seamless way for a CRAN-bound package to depend on a Bioconductor package?",
+      "subject_clean": "[R-pkg-devel] Seamless way for a CRAN-bound package to depend on a Bioconductor package?",
+      "in_reply_to": "<1501245721.3057.19.camel@uow.edu.au>",
+      "references": [
+        "<1501245721.3057.19.camel@uow.edu.au>"
+      ],
+      "body_plain": "On 28 July 2017 at 12:42, Pavel Krivitsky wrote:\n| Dear All,\n| \n| There is a Bioconductor package (S4Vectors) whose functionality I want\n| to use in one of my packages, which I usually submit to CRAN.\n| \n| At this time, install.packages() does not automatically fetch\n| dependencies from Bioconductor as far as I can tell, though it can be\n| told to do so via setRepostitory().\n| \n| Is there any way to make it more seamless for the end-user?\n\nIt's there all along, see from the sources (and sorry for the linewrap):\n\nedd at bud:~/svn/r-devel$ cat etc/repositories\n## The fields here are tab-delimited: there is a row name\n## menu_name    is the name to be used in setRepositories()\n## URL          is the base URL (see R-admin.texi)\n## default      is whether this should be a default choice\n## source, win.binary, mac.binary   indicate if the corresponding type is \npresent\n##\n## BioC entries are version-specific, with %v getting expanded to the\n## BioC version associated with the current R version.\n## Also, %bm is substituted from the setting of getOption(\"BioC_mirror\")\n##\nmenu_name       URL     default source  win.binary      mac.binary\nCRAN    CRAN    @CRAN@  TRUE    TRUE    TRUE    TRUE\nBioCsoft        \"BioC software\" %bm/packages/%v/bioc    FALSE   TRUE    TRUE\nTRUE\nBioCann \"BioC annotation\"       %bm/packages/%v/data/annotation FALSE   TRUE\nTRUE    TRUE\nBioCexp \"BioC experiment\"       %bm/packages/%v/data/experiment FALSE   TRUE\nTRUE    TRUE\nBioCextra       \"BioC extra\"    %bm/packages/%v/extra   FALSE   TRUE    TRUE\nTRUE\nCRANextra       CRAN (extras)   https://www.stats.ox.ac.uk/pub/RWin     FALSE\nTRUE    TRUE    TRUE\nOmegahat        Omegahat        http://www.omegahat.net/R       FALSE   TRUE\nFALSE   FALSE\nR-Forge R-Forge https://R-Forge.R-project.org   FALSE   TRUE    TRUE    TRUE\nrforge.net      rforge.net      https://www.rforge.net  FALSE   TRUE    TRUE\nTRUE\nedd at bud:~/svn/r-devel$\n\nBut you simply cannot ensure that users have it enabled.\n\n| I know that there is the 'Additional_repositories:' setting, but I\n| think that's for R CMD check only: although devtools::install()\n| understands it and the 'biocView:' setting, install.packages() does\n| not.\n\nYou can use that for suggsted packages, see Anderson and Eddelbuettel in the\ncurrent issue of the R Journal for more.\n\n| Another option might be to make it a Suggested package and then force\n| its installation (if necessary) and loading in the .onLoad() function\n| of my package, but it's not clear whether that's CRAN-appropriate\n| behaviour.\n\nI'd say it is not.\n\nDirk\n| \n| \t\t\t\tThanks in advance,\n| \t\t\t\tPavel\n| \n| \n| \n| \n| -- \n| Pavel Krivitsky\n| Lecturer in Statistics\n| National Institute of Applied Statistics Research Australia (NIASRA)\n| School of Mathematics and Applied Statistics | Building 39C Room 154\n| University of Wollongong NSW 2522 Australia\n| T +61 2 4221 3713\n| Web (NIASRA): http://niasra.uow.edu.au/index.html\n| Web (Personal): http://www.krivitsky.net/research\n| ORCID: 0000-0002-9101-3362\n| \n| NOTICE: This email is intended for the addressee named and may contain\n| confidential information. If you are not the intended recipient, please\n| delete it and notify the sender. Please consider the environment before\n| printing this email.\n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 28 July 2017 at 12:42, Pavel Krivitsky wrote:\n| Dear All,\n| \n| There is a Bioconductor package (S4Vectors) whose functionality I want\n| to use in one of my packages, which I usually submit to CRAN.",
+      "thread_id": "thread-20228df1a1ba",
+      "thread_depth": 1,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-90c1c096d480",
+      "message_id": "<RO1P152MB0380DBC7A337903A14F5948AEDBF0@RO1P152MB0380.LAMP152.PROD.OUTLOOK.COM>",
+      "from_name": "Kévin A. S. R.",
+      "from_email_hash": "4fde47382f4c507f4c481b960377ba78cb3ded5566c54e1815da27b8687ada7b",
+      "date": "2017-07-28T15:30:58Z",
+      "subject": "[R-pkg-devel] Problems runing a example (shiny App) within a package",
+      "subject_clean": "[R-pkg-devel] Problems runing a example (shiny App) within a package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Problems running a example (shiny App) within a package\n\n\n#main code\n\n\nrunclt = function(){\n  shiny::runApp(system.file(\"shinyCLT\", package=\"CLT\"))\n}\n\n\n#example\n\n\n\\examples{\n runclt()\n}\n\n\n\n#Problem\n\n\nR CMD check breaks in \"checking examples ...\" and don't complete the tests.\n\nHow to solve it\n\n\nLink to source code https://1drv.ms/u/s!AqhYme4BRWAog3VVjYb7oJ4jopDN\n\n[https://r1.res.office365.com/owa/prem/images/dc-generic_40.png]<https://1drv.ms/u/s!AqhYme4BRWAog3VVjYb7oJ4jopDN>\nCLT_2.1.1.tar.gz<https://1drv.ms/u/s!AqhYme4BRWAog3VVjYb7oJ4jopDN>\nCompartilhado via OneDrive\n\n\n\n\nthanks in advance,\n\nKevin Allan S. R.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Problems running a example (shiny App) within a package\n\n\n#main code\n\n\nrunclt = function(){\n  shiny::runApp(system.file(\"shinyCLT\", package=\"CLT\"))\n}\n\n\n#example\n\n\n\\examples{\n runclt()\n}\n\n\n\n#Problem\n\n\n",
+      "thread_id": "thread-90c1c096d480",
+      "thread_depth": 0,
+      "month": "2017-07"
+    },
+    {
+      "id": "msg-68de8899a9ce",
+      "message_id": "<cfc12177-de64-149b-cfc8-d70cc30fcf51@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2017-07-29T04:43:01-04:00",
+      "subject": "[R-pkg-devel] Problems runing a example (shiny App) within a package",
+      "subject_clean": "[R-pkg-devel] Problems runing a example (shiny App) within a package",
+      "in_reply_to": "<RO1P152MB0380DBC7A337903A14F5948AEDBF0@RO1P152MB0380.LAMP152.PROD.OUTLOOK.COM>",
+      "references": [
+        "<RO1P152MB0380DBC7A337903A14F5948AEDBF0@RO1P152MB0380.LAMP152.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "On 28/07/2017 11:30 AM, K?vin A. S. R. wrote:\n> Problems running a example (shiny App) within a package\n>\n>\n> #main code\n>\n>\n> runclt = function(){\n>   shiny::runApp(system.file(\"shinyCLT\", package=\"CLT\"))\n> }\n>\n>\n> #example\n>\n>\n> \\examples{\n>  runclt()\n> }\n>\n>\n>\n> #Problem\n>\n>\n> R CMD check breaks in \"checking examples ...\" and don't complete the tests.\n>\n> How to solve it\n\nShiny apps are interactive, and the tests are performed in a batch \nsession, so one simple approach is to change your example to\n\nif (interactive())\n   runclt()\n\nDuncan Murdoch\n\n>\n>\n> Link to source code https://1drv.ms/u/s!AqhYme4BRWAog3VVjYb7oJ4jopDN\n>\n> [https://r1.res.office365.com/owa/prem/images/dc-generic_40.png]<https://1drv.ms/u/s!AqhYme4BRWAog3VVjYb7oJ4jopDN>\n> CLT_2.1.1.tar.gz<https://1drv.ms/u/s!AqhYme4BRWAog3VVjYb7oJ4jopDN>\n> Compartilhado via OneDrive\n>\n>\n>\n>\n> thanks in advance,\n>\n> Kevin Allan S. R.\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 28/07/2017 11:30 AM, K?vin A. S. R. wrote:\n> Problems running a example (shiny App) within a package\n>\n>\n> #main code\n>\n>\n> runclt = function(){\n>   shiny::runApp(system.file(\"shinyCLT\", package=\"C",
+      "thread_id": "thread-90c1c096d480",
+      "thread_depth": 1,
+      "month": "2017-07"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-18f0d5230d07",
+      "subject": "[R-pkg-devel] Functions erroneously identified as S3 methods",
+      "message_count": 2,
+      "participants": [
+        "John Reid",
+        "Uwe Ligges"
+      ],
+      "started": "2017-07-03T11:53:39+01:00",
+      "last_reply": "2017-07-04T10:47:34+02:00",
+      "root_message_id": "msg-18f0d5230d07"
+    },
+    {
+      "id": "thread-12ff0a9b6e7f",
+      "subject": "[R-pkg-devel] Calling registered C methods with a \"variable name\"",
+      "message_count": 1,
+      "participants": [
+        "Ulrich Bodenhofer"
+      ],
+      "started": "2017-07-03T18:14:19+02:00",
+      "last_reply": "2017-07-03T18:14:19+02:00",
+      "root_message_id": "msg-12ff0a9b6e7f"
+    },
+    {
+      "id": "thread-47651356ba29",
+      "subject": "[R-pkg-devel]  A Survey on Automated Unit Test in R Language",
+      "message_count": 1,
+      "participants": [
+        "Luis Gustavo Uzai"
+      ],
+      "started": "2017-07-03T23:58:55+00:00",
+      "last_reply": "2017-07-03T23:58:55+00:00",
+      "root_message_id": "msg-47651356ba29"
+    },
+    {
+      "id": "thread-908431b78224",
+      "subject": "[R-pkg-devel] Using non-exported functions from another package with :::",
+      "message_count": 3,
+      "participants": [
+        "Duncan Murdoch",
+        "Joris Meys"
+      ],
+      "started": "2017-07-05T21:19:08+02:00",
+      "last_reply": "2017-07-06T11:52:12+02:00",
+      "root_message_id": "msg-908431b78224"
+    },
+    {
+      "id": "thread-7a10ec9f4760",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "message_count": 3,
+      "participants": [
+        "Dason Kurkiewicz",
+        "Disa Mhembere"
+      ],
+      "started": "2017-07-06T17:58:38-04:00",
+      "last_reply": "2017-07-07T09:31:01-04:00",
+      "root_message_id": "msg-7a10ec9f4760"
+    },
+    {
+      "id": "thread-0a6125e39e6d",
+      "subject": "[R-pkg-devel] Question about selective platform for my R package",
+      "message_count": 2,
+      "participants": [
+        "Dason Kurkiewicz",
+        "Disa Mhembere"
+      ],
+      "started": "2017-07-07T09:37:51-04:00",
+      "last_reply": "2017-07-07T09:45:43-04:00",
+      "root_message_id": "msg-0a6125e39e6d"
+    },
+    {
+      "id": "thread-d31bfbb150c0",
+      "subject": "[R-pkg-devel] MAP-DP Clustering Algorithm package",
+      "message_count": 2,
+      "participants": [
+        "Sarah Goslee",
+        "Thorsten Wagner"
+      ],
+      "started": "2017-07-11T08:19:33+00:00",
+      "last_reply": "2017-07-11T08:10:18-04:00",
+      "root_message_id": "msg-d31bfbb150c0"
+    },
+    {
+      "id": "thread-2dc588d5ce6e",
+      "subject": "[R-pkg-devel] Errors during R package development",
+      "message_count": 2,
+      "participants": [
+        "Michael Dewey",
+        "Ranjit Paul"
+      ],
+      "started": "2017-07-12T16:30:38+05:30",
+      "last_reply": "2017-07-12T15:27:12+01:00",
+      "root_message_id": "msg-2dc588d5ce6e"
+    },
+    {
+      "id": "thread-e0bd33e44cea",
+      "subject": "[R-pkg-devel] CRAN submission pretest warning about Rcpp version used to build dplyr",
+      "message_count": 8,
+      "participants": [
+        "Anderson,Brooke",
+        "Dirk Eddelbuettel",
+        "Iñaki Úcar",
+        "Uwe Ligges"
+      ],
+      "started": "2017-07-13T16:58:29+00:00",
+      "last_reply": "2017-07-14T00:13:01+02:00",
+      "root_message_id": "msg-e0bd33e44cea"
+    },
+    {
+      "id": "thread-a6b8b6758fd7",
+      "subject": "[R-pkg-devel] Package required and available but unsuitable version: 'stats'",
+      "message_count": 5,
+      "participants": [
+        "Dason Kurkiewicz",
+        "Jernej Jevšenak",
+        "Martin Maechler",
+        "Maxime Turgeon"
+      ],
+      "started": "2017-07-20T08:01:31+02:00",
+      "last_reply": "2017-07-21T08:28:06+02:00",
+      "root_message_id": "msg-a6b8b6758fd7"
+    },
+    {
+      "id": "thread-a4c614049100",
+      "subject": "[R-pkg-devel] \\Sexpr{} expressions but no 'build/partial.rdb' file",
+      "message_count": 9,
+      "participants": [
+        "Duncan Murdoch",
+        "MTurgeon",
+        "Phil Chalmers"
+      ],
+      "started": "2017-07-25T16:42:44-04:00",
+      "last_reply": "2017-07-27T09:34:23-04:00",
+      "root_message_id": "msg-a4c614049100"
+    },
+    {
+      "id": "thread-2618a857ef12",
+      "subject": "[R-pkg-devel] spell check in DESCRIPTION",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Simon Wood"
+      ],
+      "started": "2017-07-26T11:47:30+01:00",
+      "last_reply": "2017-07-26T10:45:51-04:00",
+      "root_message_id": "msg-2618a857ef12"
+    },
+    {
+      "id": "thread-20228df1a1ba",
+      "subject": "[R-pkg-devel] Seamless way for a CRAN-bound package to depend on a Bioconductor package?",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Pavel Krivitsky"
+      ],
+      "started": "2017-07-28T12:42:01+00:00",
+      "last_reply": "2017-07-28T07:52:55-05:00",
+      "root_message_id": "msg-20228df1a1ba"
+    },
+    {
+      "id": "thread-90c1c096d480",
+      "subject": "[R-pkg-devel] Problems runing a example (shiny App) within a package",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Kévin A. S. R."
+      ],
+      "started": "2017-07-28T15:30:58+00:00",
+      "last_reply": "2017-07-29T04:43:01-04:00",
+      "root_message_id": "msg-90c1c096d480"
+    }
+  ]
+}

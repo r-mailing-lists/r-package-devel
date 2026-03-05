@@ -1,0 +1,605 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2016-04",
+  "messages": [
+    {
+      "id": "msg-46c407de2f60",
+      "message_id": "<5705389F.8090400@helsinki.fi>",
+      "from_name": "Pedro Aphalo",
+      "from_email_hash": "8ef86952a5dc4c98dc5888115778e034d5ee9e73d5c31c84e8dc39bb13854e53",
+      "date": "2016-04-06T19:26:07+03:00",
+      "subject": "[R-pkg-devel] Best approach to cascading errors",
+      "subject_clean": "[R-pkg-devel] Best approach to cascading errors",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nAt the moment three of my CRAN packages are reporting a NOTE. Although \nreported as a NOTE they are errors triggered by yesterday's update to \n'lubridate'.\n\nIn reality only one of the packages needs to be updated to resolve the \nproblems in the three packages. I am getting ready to submit an updated \nversion of package 'photobiology' to solve the problem. My doubt is it \nworthwhile to increase the version number of the two packages that \ndepend on it, even they do not need any code changes only changing in \nthe version number in the import of 'photobiology'? or is it abusing of \nCRAN's admins patience?\n\nBest regards,\n\nPedro.\n\n-- \n------------------------------------------------------------------------\nPedro J. Aphalo\nUniversity Lecturer, Principal Investigator\n(Office 3805, Biocenter 3, Viikinkaari 1)\n\nDepartment of Biosciences\nPlant Biology\nP.O. Box 65\n00014 University of Helsinki\nFinland\n\ne-mail: pedro.aphalo at helsinki.fi <mailto:pedro.aphalo at helsinki.fi>\nTel. (mobile) +358 50 4150623\nTel. (office) +358 2941 57897\n\n------------------------------------------------------------------------\n*Web sites and blogs*\nWeb site (research group): http://blogs.helsinki.fi/senpep-blog/\nWeb site (own teaching): http://www.helsinki.fi/people/pedro.aphalo/\nBlog (for plant science students): \nhttp://www.r4photobiology.info/blog4students/\nWeb site (using R in photobiology): http://www.r4photobiology.info/\n------------------------------------------------------------------------\n*Societies*\nUV4Plants <http://www.uv4plants.org/> (communications officer), PSB \n<http://www.plantbehavior.org/> (member), ESP \n<http://www.photobiology.eu/> (member) SEB <http://www.sebiology.org/> \n(member), BES <http://www.britishecologicalsociety.org/> (member), SPPS \n<http://www.spps.fi/> (member), SMS \n<http://www.metsatieteellinenseura.fi/english> (member), TUG \n<http://tug.org/> (member), FOAS <http://www.foastat.org/> (member).\n------------------------------------------------------------------------\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nAt the moment three of my CRAN packages are reporting a NOTE. Although \nreported as a NOTE they are errors triggered by yesterday's update to \n'lubridate'.\n\nIn reality only one of the packages",
+      "thread_id": "thread-46c407de2f60",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-2727d0b8c7c1",
+      "message_id": "<57055EAF.6030307@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-04-06T21:08:31+02:00",
+      "subject": "[R-pkg-devel] Best approach to cascading errors",
+      "subject_clean": "[R-pkg-devel] Best approach to cascading errors",
+      "in_reply_to": "<5705389F.8090400@helsinki.fi>",
+      "references": [
+        "<5705389F.8090400@helsinki.fi>"
+      ],
+      "body_plain": "On 06.04.2016 18:26, Pedro Aphalo wrote:\n> Hello,\n>\n> At the moment three of my CRAN packages are reporting a NOTE. Although\n> reported as a NOTE they are errors triggered by yesterday's update to\n> 'lubridate'.\n\nRight, it was my fault not looking carefully enough at reverse check \nresults - and of course the origibal package maintainer should havbe \nlooked in advanced anyway.\nI wrote him a message earlier this day asking to fix on his end or send \nyou an email.\n\n\n> In reality only one of the packages needs to be updated to resolve the\n> problems in the three packages. I am getting ready to submit an updated\n> version of package 'photobiology' to solve the problem. My doubt is it\n> worthwhile to increase the version number of the two packages that\n> depend on it, even they do not need any code changes only changing in\n> the version number in the import of 'photobiology'? or is it abusing of\n> CRAN's admins patience?\n\nPlease only fix the one that needs fixing, all other do not need to be \nchanged then.\n\nBest,\nUwe Ligges\n\n\n\n\n> Best regards,\n>\n> Pedro.\n>",
+      "body_snippet": "On 06.04.2016 18:26, Pedro Aphalo wrote:\n> Hello,\n>\n> At the moment three of my CRAN packages are reporting a NOTE. Although\n> reported as a NOTE they are errors triggered by yesterday's update to\n> '",
+      "thread_id": "thread-46c407de2f60",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-3cf6a1a4da7f",
+      "message_id": "<CA+mbi1c36dNFWkOK10SdznuNxN_5yzco=gj6fCoxDrBkprmThQ@mail.gmail.com>",
+      "from_name": "Julia Silge",
+      "from_email_hash": "ac9436deb842a173d8058ca8e7cf96bc18b3c6da22fcd7b9fc8e5f663c62d1c1",
+      "date": "2016-04-11T13:44:30Z",
+      "subject": "[R-pkg-devel] referencing Project Gutenberg license in my package",
+      "subject_clean": "[R-pkg-devel] referencing Project Gutenberg license in my package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello! I am working on my package for the text of Jane Austen's novels:\nhttps://github.com/juliasilge/janeaustenr\nI'm getting it ready to submit to CRAN. I think I have it about ready, but\nI believe I should add something about the Project Gutenberg license\nsomewhere (thanks to Bob Rudis for pointing this out to me; I so appreciate\nit). I sourced the text files from Project Gutenberg, processed them a bit,\nand packaged them together with documentation, a function to make a tidy\ndata frame, etc.\n\nHere is Project Gutenberg's license:\nhttp://www.gutenberg.org/wiki/Gutenberg:The_Project_Gutenberg_License\n\nMy inclination right now is to put the text of the short version of the\nlicense in a \"Details\" or \"Note\" in the documentation for each novel:\n\"This eBook is for the use of anyone anywhere in the United States and most\nother parts of the world at no cost and with almost no restrictions\nwhatsoever. You may copy it, give it away or re-use it under the terms of\nthe Project Gutenberg License included with this eBook or online at [\nwww.gutenberg.org]. If you are not located in the United States, you'll\nhave to check the laws of the country where you are located before using\nthis ebook.\"\n\nThoughts? Advice?\n\nThanks,\nJulia Silge\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello! I am working on my package for the text of Jane Austen's novels:\nhttps://github.com/juliasilge/janeaustenr\nI'm getting it ready to submit to CRAN. I think I have it about ready, but\nI believe I",
+      "thread_id": "thread-3cf6a1a4da7f",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-07e68297aec5",
+      "message_id": "<CAPPM_gSXWwYSY+s8iwaa5G3jxM=72aGwOy3p_+aA7tidZ8qP4g@mail.gmail.com>",
+      "from_name": "Joshua Ulrich",
+      "from_email_hash": "1c142a8ab2a2cd292396c50d658d894b0e8efcc0774aa9558978b89b50ac3080",
+      "date": "2016-04-11T10:10:46-05:00",
+      "subject": "[R-pkg-devel] [R-SIG-Finance] [VC++ calling R] How to create a real-time interactive ticking time-series chart using dygraph via RInside?",
+      "subject_clean": "[R-pkg-devel] [R-SIG-Finance] [VC++ calling R] How to create a real-time interactive ticking time-series chart using dygraph via RInside?",
+      "in_reply_to": "<CY1PR0201MB1818D3AEBC4F2B87B0A9C328C3940@CY1PR0201MB1818.namprd02.prod.outlook.com>",
+      "references": [
+        "<CY1PR0201MB1818D3AEBC4F2B87B0A9C328C3940@CY1PR0201MB1818.namprd02.prod.outlook.com>"
+      ],
+      "body_plain": "Please choose *one* _relevant_ mailing list.  Spamming 5 (!!!!!)\nmailing lists fragments the conversation and makes things difficult\nfor everyone involved.\n\nOn Mon, Apr 11, 2016 at 10:03 AM, Mike Deanza <mikedeanza at outlook.com> wrote:\n> Hi all,\n>\n>\n> I am trying to figure out how to do this in R and I need your help.\n>\n>\n> My journey started from something like the following:\n>\n>\n> http://stackoverflow.com/questions/11365857/real-time-auto-updating-incremental-plot-in-r/1#1\n>\n>\n> n=1000\n> df=data.frame(time=1:n,y=runif(n))\n> window=100\n> for(i in 1:(n?\\window)) {\n> flush.console()\n> plot(df$time,df$y,type='l',xlim=c(i,i+window))\n> Sys.sleep(.09)\n> }\n>\n>\n> Then I wanted to make it nicer looking so I went to dygraph.\n>\n>\n> And then, I would like to be able to live send tick data from within Visual C++ so I started to investigate RInside.\n>\n>\n> Following the example code here:\n>\n>\n> http://dirk.eddelbuettel.com/papers/useR2009RcppRInside.pdf\n>\n>\n> I can open an RInside object in VC++, and then send some data to it, and then execute some command in it, and then get data back.\n>\n>\n> It is really great.\n>\n>\n> However, is there a way to have the real-time updating ticking plots to be drawn on dygraph inside RInside?\n>\n>\n> It turns out the dygraph package tends to draw onto a browser. That makes the real-time updating pretty slow.\n>\n>\n> Is there a way to set the dygraph to plot to a GUI window in VC++? For example, a QT or MFC GUI window?\n>\n>\n> My working environment is Win7 64bit ,with VS 2013 and VS2015, QT 5.3 32bit.\n>\n>\n> Could anybody please shed some lights on me?\n>\n>\n> Thanks a lot!\n>\n>\n>\n>\n>\n>\n>\n>         [[alternative HTML version deleted]]\n>\n>\n> _______________________________________________\n> R-SIG-Finance at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-sig-finance\n> -- Subscriber-posting only. If you want to post, subscribe first.\n> -- Also note that this is not the r-help list where general R questions should go.\n\n\n\n-- \nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com\nR/Finance 2016 | www.rinfinance.com",
+      "body_snippet": "Please choose *one* _relevant_ mailing list.  Spamming 5 (!!!!!)\nmailing lists fragments the conversation and makes things difficult\nfor everyone involved.\n\nOn Mon, Apr 11, 2016 at 10:03 AM, Mike Dean",
+      "thread_id": "thread-07e68297aec5",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-8a1b9e01105c",
+      "message_id": "<CANnL8grjGA0Nryy6u89K5ekzkwcSPuK8SFNAXY6=omRxBNyWvA@mail.gmail.com>",
+      "from_name": "Tim Keitt",
+      "from_email_hash": "d1fbfc1cb7ef35401094f34c8b86be970c51c67d04033c5e7eff9b5bfec47e48",
+      "date": "2016-04-15T10:27:35-05:00",
+      "subject": "[R-pkg-devel] What to do with build-time-only utility scripts in package",
+      "subject_clean": "[R-pkg-devel] What to do with build-time-only utility scripts in package",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I created a couple of R scripts to assist my package 'configure' script. I\nput them in the top-level of the package and that gives a check error\nobviously. So I added them to .Rbuildignore and then the package would not\nbuild (at least on Travis CI) saying the script files were not found.\nThat's counter to how I thought .Rbuildignore worked. Where should these\nutility script go? Should they not be in .Rbuildignore?\n\nTHK\n\nhttp://www.keittlab.org/\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I created a couple of R scripts to assist my package 'configure' script. I\nput them in the top-level of the package and that gives a check error\nobviously. So I added them to .Rbuildignore and then th",
+      "thread_id": "thread-8a1b9e01105c",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-30e92bc3e106",
+      "message_id": "<22289.6524.104191.143954@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-04-15T11:40:28-05:00",
+      "subject": "[R-pkg-devel] What to do with build-time-only utility scripts in\tpackage",
+      "subject_clean": "[R-pkg-devel] What to do with build-time-only utility scripts in\tpackage",
+      "in_reply_to": "<CANnL8grjGA0Nryy6u89K5ekzkwcSPuK8SFNAXY6=omRxBNyWvA@mail.gmail.com>",
+      "references": [
+        "<CANnL8grjGA0Nryy6u89K5ekzkwcSPuK8SFNAXY6=omRxBNyWvA@mail.gmail.com>"
+      ],
+      "body_plain": "On 15 April 2016 at 10:27, Tim Keitt wrote:\n| I created a couple of R scripts to assist my package 'configure' script. I\n| put them in the top-level of the package and that gives a check error\n| obviously. So I added them to .Rbuildignore and then the package would not\n| build (at least on Travis CI) saying the script files were not found.\n| That's counter to how I thought .Rbuildignore worked. Where should these\n| utility script go? Should they not be in .Rbuildignore?\n\nThe legal name of '.Rbuildignore' is 'do not put these files into the tarball'.\n\nAs the check uses the tarball as source .... well I guess you can fill in the rest.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 15 April 2016 at 10:27, Tim Keitt wrote:\n| I created a couple of R scripts to assist my package 'configure' script. I\n| put them in the top-level of the package and that gives a check error\n| obvio",
+      "thread_id": "thread-8a1b9e01105c",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-bb861c207bd3",
+      "message_id": "<CANnL8gqhRLvHe4zWFvwze-_sSq7AbyR_RtJY_y2O+obNa=qaGg@mail.gmail.com>",
+      "from_name": "Tim Keitt",
+      "from_email_hash": "d1fbfc1cb7ef35401094f34c8b86be970c51c67d04033c5e7eff9b5bfec47e48",
+      "date": "2016-04-15T13:30:46-05:00",
+      "subject": "[R-pkg-devel] What to do with build-time-only utility scripts in package",
+      "subject_clean": "[R-pkg-devel] What to do with build-time-only utility scripts in package",
+      "in_reply_to": "<22289.6524.104191.143954@max.nulle.part>",
+      "references": [
+        "<CANnL8grjGA0Nryy6u89K5ekzkwcSPuK8SFNAXY6=omRxBNyWvA@mail.gmail.com>",
+        "<22289.6524.104191.143954@max.nulle.part>"
+      ],
+      "body_plain": "http://www.keittlab.org/\n\nOn Fri, Apr 15, 2016 at 11:40 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 15 April 2016 at 10:27, Tim Keitt wrote:\n> | I created a couple of R scripts to assist my package 'configure' script.\n> I\n> | put them in the top-level of the package and that gives a check error\n> | obviously. So I added them to .Rbuildignore and then the package would\n> not\n> | build (at least on Travis CI) saying the script files were not found.\n> | That's counter to how I thought .Rbuildignore worked. Where should these\n> | utility script go? Should they not be in .Rbuildignore?\n>\n> The legal name of '.Rbuildignore' is 'do not put these files into the\n> tarball'.\n>\n> As the check uses the tarball as source .... well I guess you can fill in\n> the rest.\n>\n\nGot it. Thought it was \"do not install these files with package\".\n\nI guess I'll stick them in <pkg>/src.\n\nTHK\n\n\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "http://www.keittlab.org/\n\nOn Fri, Apr 15, 2016 at 11:40 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 15 April 2016 at 10:27, Tim Keitt wrote:\n> | I created a couple of R scripts to assist ",
+      "thread_id": "thread-8a1b9e01105c",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-bc4ec8f44f34",
+      "message_id": "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>",
+      "from_name": "Oliver Keyes",
+      "from_email_hash": "c7d002ea4e432cc7c761323882818cf358e85a07c3af074afbdff56159667a5f",
+      "date": "2016-04-18T17:16:35-04:00",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "subject_clean": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Good day,\n\nI've written an Rcpp-backed R package\n(https://github.com/Ironholds/poster) that interfaces with the\nlibpostal (https://github.com/openvenues/libpostal) library, written\nin C.\n\nWhile the two play together perfectly nicely, the problem is\nsubmitting the package to CRAN: libpostal is not a common dependency\nand isn't available in a debianised form for CRAN's testing: the\nalternative approach, including libpostal *in* the R package, is made\nimpossible since it downloads gigabyte-sized databases for internal\nuse.\n\nWhat's the approach or guidance on submitting packages in this state?\nThe package includes a configuration script that recognises (in a\nuser-friendly way) when dependencies aren't met, and warns the user\nappropriately, but it is still ultimately an R package that will not\ncompile on CRAN. Can it be submitted, albeit with installation\nskipped, or is this unacceptable?\n\nBest,\nOliver",
+      "body_snippet": "Good day,\n\nI've written an Rcpp-backed R package\n(https://github.com/Ironholds/poster) that interfaces with the\nlibpostal (https://github.com/openvenues/libpostal) library, written\nin C.\n\nWhile the tw",
+      "thread_id": "thread-bc4ec8f44f34",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-1b7f223afe09",
+      "message_id": "<CAJ4QxaMZ1is-mNzVBNRCAYBHn42cWzy0oqZNPYOcw7U78h4_Lw@mail.gmail.com>",
+      "from_name": "boB Rudis",
+      "from_email_hash": "a26d124c455064db4d60c538894063c0f8cb488637af120b1e3326571e017cd6",
+      "date": "2016-04-18T20:23:15-04:00",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "subject_clean": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "in_reply_to": "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>",
+      "references": [
+        "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>"
+      ],
+      "body_plain": "I would hope CRAN would let this in with some validation (even to the\npoint of it possibly adding a new field to DESCRIPTION). It may never\nrun on Slolaris or Plan 9, and I - who now runs a CRAN mirror in the\nhopes to eventually have a MacBuilder equivalent service at some point\nin the near future - would also appreciate not having to support large\nscale library & database dependencies, even for a potentially useful\npackage like this. The inclusion in CRAN make packages like it usable\nin situations where (for example) github packages would not be (my\nprevious employer did not allow non-CRAN packages to be used in\nsensitive data applications).\n\nOn Mon, Apr 18, 2016 at 5:16 PM, Oliver Keyes <ironholds at gmail.com> wrote:\n> Good day,\n>\n> I've written an Rcpp-backed R package\n> (https://github.com/Ironholds/poster) that interfaces with the\n> libpostal (https://github.com/openvenues/libpostal) library, written\n> in C.\n>\n> While the two play together perfectly nicely, the problem is\n> submitting the package to CRAN: libpostal is not a common dependency\n> and isn't available in a debianised form for CRAN's testing: the\n> alternative approach, including libpostal *in* the R package, is made\n> impossible since it downloads gigabyte-sized databases for internal\n> use.\n>\n> What's the approach or guidance on submitting packages in this state?\n> The package includes a configuration script that recognises (in a\n> user-friendly way) when dependencies aren't met, and warns the user\n> appropriately, but it is still ultimately an R package that will not\n> compile on CRAN. Can it be submitted, albeit with installation\n> skipped, or is this unacceptable?\n>\n> Best,\n> Oliver\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I would hope CRAN would let this in with some validation (even to the\npoint of it possibly adding a new field to DESCRIPTION). It may never\nrun on Slolaris or Plan 9, and I - who now runs a CRAN mirro",
+      "thread_id": "thread-bc4ec8f44f34",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-51c080558772",
+      "message_id": "<22293.32141.36492.591853@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-04-18T19:36:29-05:00",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet\tdependencies",
+      "subject_clean": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet\tdependencies",
+      "in_reply_to": "<CAJ4QxaMZ1is-mNzVBNRCAYBHn42cWzy0oqZNPYOcw7U78h4_Lw@mail.gmail.com>",
+      "references": [
+        "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>",
+        "<CAJ4QxaMZ1is-mNzVBNRCAYBHn42cWzy0oqZNPYOcw7U78h4_Lw@mail.gmail.com>"
+      ],
+      "body_plain": "My $0.02:\n\nOn 18 April 2016 at 20:23, boB Rudis wrote:\n| I would hope CRAN would let this in with some validation (even to the\n| point of it possibly adding a new field to DESCRIPTION). It may never\n| run on Slolaris or Plan 9, and I - who now runs a CRAN mirror in the\n| hopes to eventually have a MacBuilder equivalent service at some point\n| in the near future - would also appreciate not having to support large\n| scale library & database dependencies, even for a potentially useful\n| package like this. The inclusion in CRAN make packages like it usable\n| in situations where (for example) github packages would not be (my\n| previous employer did not allow non-CRAN packages to be used in\n| sensitive data applications).\n\nWon't fly. Wishing and praying alone doesn't make it happen.  You are putting\nthe burden on CRAN, and the two of them already have 8270+ packages to look after.\n\nSuggestion below.\n \n| On Mon, Apr 18, 2016 at 5:16 PM, Oliver Keyes <ironholds at gmail.com> wrote:\n| > Good day,\n| >\n| > I've written an Rcpp-backed R package\n| > (https://github.com/Ironholds/poster) that interfaces with the\n| > libpostal (https://github.com/openvenues/libpostal) library, written\n| > in C.\n| >\n| > While the two play together perfectly nicely, the problem is\n| > submitting the package to CRAN: libpostal is not a common dependency\n| > and isn't available in a debianised form for CRAN's testing: the\n| > alternative approach, including libpostal *in* the R package, is made\n| > impossible since it downloads gigabyte-sized databases for internal\n| > use.\n\nHow about this:\n\n -- insert a new layer between poster and libpostal which satisfies the\n    build requirements for poster and lets it be installed\n    \n -- the layer intercepts calls, and with libpostal not present alerts the\n    user\n\nSo now postal has a wrapper which may come with its own installer support.\n\n| > What's the approach or guidance on submitting packages in this state?\n| > The package includes a configuration script that recognises (in a\n| > user-friendly way) when dependencies aren't met, and warns the user\n| > appropriately, but it is still ultimately an R package that will not\n| > compile on CRAN. Can it be submitted, albeit with installation\n| > skipped, or is this unacceptable?\n\nNo because it won't build so it cannot be tested.  You can do this, but not\non CRAN.  There is drat ...\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "My $0.02:\n\nOn 18 April 2016 at 20:23, boB Rudis wrote:\n| I would hope CRAN would let this in with some validation (even to the\n| point of it possibly adding a new field to DESCRIPTION). It may never\n|",
+      "thread_id": "thread-bc4ec8f44f34",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-cc96dd0d39f3",
+      "message_id": "<CAJ4QxaNOBMfFsVneimeA+kawdnrt8Fp3fXHf+=TYDU6dREfegg@mail.gmail.com>",
+      "from_name": "boB Rudis",
+      "from_email_hash": "a26d124c455064db4d60c538894063c0f8cb488637af120b1e3326571e017cd6",
+      "date": "2016-04-18T20:48:08-04:00",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "subject_clean": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "in_reply_to": "<22293.32141.36492.591853@max.nulle.part>",
+      "references": [
+        "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>",
+        "<CAJ4QxaMZ1is-mNzVBNRCAYBHn42cWzy0oqZNPYOcw7U78h4_Lw@mail.gmail.com>",
+        "<22293.32141.36492.591853@max.nulle.part>"
+      ],
+      "body_plain": "So, how do we create a solid alternative to CRAN? github drat wld have\nbeen impossible at my previous gig (for good reasons). Is it time to\ntry to get rOpenSci to be a legit CRAN alternative? Add enough process\naround it to support things like this (i.e. a less narrowly focused\nBioconductor)? Package complexities are only going to grow, not\nshrink. Such is this brave, new data science world we live in.\n\nOn Mon, Apr 18, 2016 at 8:36 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n> My $0.02:\n>\n> On 18 April 2016 at 20:23, boB Rudis wrote:\n> | I would hope CRAN would let this in with some validation (even to the\n> | point of it possibly adding a new field to DESCRIPTION). It may never\n> | run on Slolaris or Plan 9, and I - who now runs a CRAN mirror in the\n> | hopes to eventually have a MacBuilder equivalent service at some point\n> | in the near future - would also appreciate not having to support large\n> | scale library & database dependencies, even for a potentially useful\n> | package like this. The inclusion in CRAN make packages like it usable\n> | in situations where (for example) github packages would not be (my\n> | previous employer did not allow non-CRAN packages to be used in\n> | sensitive data applications).\n>\n> Won't fly. Wishing and praying alone doesn't make it happen.  You are putting\n> the burden on CRAN, and the two of them already have 8270+ packages to look after.\n>\n> Suggestion below.\n>\n> | On Mon, Apr 18, 2016 at 5:16 PM, Oliver Keyes <ironholds at gmail.com> wrote:\n> | > Good day,\n> | >\n> | > I've written an Rcpp-backed R package\n> | > (https://github.com/Ironholds/poster) that interfaces with the\n> | > libpostal (https://github.com/openvenues/libpostal) library, written\n> | > in C.\n> | >\n> | > While the two play together perfectly nicely, the problem is\n> | > submitting the package to CRAN: libpostal is not a common dependency\n> | > and isn't available in a debianised form for CRAN's testing: the\n> | > alternative approach, including libpostal *in* the R package, is made\n> | > impossible since it downloads gigabyte-sized databases for internal\n> | > use.\n>\n> How about this:\n>\n>  -- insert a new layer between poster and libpostal which satisfies the\n>     build requirements for poster and lets it be installed\n>\n>  -- the layer intercepts calls, and with libpostal not present alerts the\n>     user\n>\n> So now postal has a wrapper which may come with its own installer support.\n>\n> | > What's the approach or guidance on submitting packages in this state?\n> | > The package includes a configuration script that recognises (in a\n> | > user-friendly way) when dependencies aren't met, and warns the user\n> | > appropriately, but it is still ultimately an R package that will not\n> | > compile on CRAN. Can it be submitted, albeit with installation\n> | > skipped, or is this unacceptable?\n>\n> No because it won't build so it cannot be tested.  You can do this, but not\n> on CRAN.  There is drat ...\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "So, how do we create a solid alternative to CRAN? github drat wld have\nbeen impossible at my previous gig (for good reasons). Is it time to\ntry to get rOpenSci to be a legit CRAN alternative? Add enou",
+      "thread_id": "thread-bc4ec8f44f34",
+      "thread_depth": 3,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-08538f28b34e",
+      "message_id": "<CAK5DdKHAYj+9O4UwNM9_ckc5g_sTzf_S5bc6Nj=hue8=ER2VQQ@mail.gmail.com>",
+      "from_name": "Antonio Canale",
+      "from_email_hash": "389dd44414ff69bfd91154dc3aeff8b7e9c1c5d734f891b19ccc7b752b96f111",
+      "date": "2016-04-20T14:28:20+02:00",
+      "subject": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "subject_clean": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nmy problem is related to the new version of my msBP package but it\nactually applies also to the current version uploaded on CRAN\n(https://cran.r-project.org/web/checks/check_results_msBP.html).\n\nIt turns out that the package cannot be compiled under the new R-devel\nfor windows.\n\nThe problem is related to the isnan() function of <math.h> library of\nC++ which I call twice in one of my C++ scripts.\n\nConsider the function below as MWE\n\n#include<stdio.h>\n#include<stdlib.h>\n#include<math.h>\n#include<R.h>\n#include<Rmath.h>\nextern \"C\"{\nvoid gibbs(double *A)\n{\nif(isnan(A[i]) || (A[i]<=0))\n{ do stuff }\n}\n}\n\nPrecisely, the error that I get is reported at\nhttps://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/msBP-00install.html\n\nI've have found in the R-devel blog and check myself that from R\nversion 3.3.0 the header  file R.h is changed. In particular it is now\ngoing to include the C++ versions of system header ?<cmath>? rather\nthan the legacy header ?<math.h> which seems to be the source of my\nproblem.\n\nHowever I cannot understand why it causes the error and in particular\nwhy it is happening *only under windows* and not under other OS. I've\ncheck my new package both in OS X and Ubuntu (with R-devel) and\neverything is OK. It also compiles fine in Windows under R.3.2.5.\n\nThanks for your help.\n\nBest,\nAntonio\n\n--\nAntonio Canale\nUniversity of Turin and\nCollegio Carlo Alberto\nsites.carloalberto.org/canale",
+      "body_snippet": "Dear all,\n\nmy problem is related to the new version of my msBP package but it\nactually applies also to the current version uploaded on CRAN\n(https://cran.r-project.org/web/checks/check_results_msBP.ht",
+      "thread_id": "thread-08538f28b34e",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-663f215d713b",
+      "message_id": "<22295.32214.746124.705845@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-04-20T08:02:14-05:00",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "subject_clean": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "in_reply_to": "<CAJ4QxaNOBMfFsVneimeA+kawdnrt8Fp3fXHf+=TYDU6dREfegg@mail.gmail.com>",
+      "references": [
+        "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>",
+        "<CAJ4QxaMZ1is-mNzVBNRCAYBHn42cWzy0oqZNPYOcw7U78h4_Lw@mail.gmail.com>",
+        "<22293.32141.36492.591853@max.nulle.part>",
+        "<CAJ4QxaNOBMfFsVneimeA+kawdnrt8Fp3fXHf+=TYDU6dREfegg@mail.gmail.com>"
+      ],
+      "body_plain": "On 18 April 2016 at 20:48, boB Rudis wrote:\n| So, how do we create a solid alternative to CRAN? github drat wld have\n| been impossible at my previous gig (for good reasons). Is it time to\n| try to get rOpenSci to be a legit CRAN alternative? Add enough process\n| around it to support things like this (i.e. a less narrowly focused\n| Bioconductor)? Package complexities are only going to grow, not\n| shrink. Such is this brave, new data science world we live in.\n\nYou are just talking the talk which is cheap and doesn't get us anywhere.  If\nyou believe so strongly that this needs to be done, can you not rent a few gb\nof diskspace on S3 and get going?  Walk the walk!\n\nI (greatly) appreciate what CRAN has done for us, and continues to do for\nus. It is a gift economy, and with their free labour we get their rules, for\nbetter (mostly) or worse (rarely).  I happen to disagree with one or two\nminor aspects and may end up putting a support package or two onto a github\ndrat rather than CRAN itself.  But as I continue to benefit greatly from CRAN\nas both a user and as a package author, I am (mostly) happy to cooperate.\nThey have executed a pretty relentless drive for higher code quality, more\nand better code checks, better licensing conformance and more.\n\nAnd I honestly don't give a damn if some Brooklyn or Portland hipsters\ncomplain about Title Case nagging as that too has merit (as it makes\naggregation pages more readable).\n\n<end of rant>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 18 April 2016 at 20:48, boB Rudis wrote:\n| So, how do we create a solid alternative to CRAN? github drat wld have\n| been impossible at my previous gig (for good reasons). Is it time to\n| try to get",
+      "thread_id": "thread-bc4ec8f44f34",
+      "thread_depth": 4,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-6776abd7917b",
+      "message_id": "<22295.32360.186405.15762@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-04-20T08:04:40-05:00",
+      "subject": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "subject_clean": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "in_reply_to": "<CAK5DdKHAYj+9O4UwNM9_ckc5g_sTzf_S5bc6Nj=hue8=ER2VQQ@mail.gmail.com>",
+      "references": [
+        "<CAK5DdKHAYj+9O4UwNM9_ckc5g_sTzf_S5bc6Nj=hue8=ER2VQQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 20 April 2016 at 14:28, Antonio Canale wrote:\n| Dear all,\n| \n| my problem is related to the new version of my msBP package but it\n| actually applies also to the current version uploaded on CRAN\n| (https://cran.r-project.org/web/checks/check_results_msBP.html).\n| \n| It turns out that the package cannot be compiled under the new R-devel\n| for windows.\n| \n| The problem is related to the isnan() function of <math.h> library of\n| C++ which I call twice in one of my C++ scripts.\n| \n| Consider the function below as MWE\n| \n| #include<stdio.h>\n| #include<stdlib.h>\n| #include<math.h>\n| #include<R.h>\n| #include<Rmath.h>\n| extern \"C\"{\n| void gibbs(double *A)\n| {\n| if(isnan(A[i]) || (A[i]<=0))\n| { do stuff }\n| }\n| }\n| \n| Precisely, the error that I get is reported at\n| https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/msBP-00install.html\n\nNewer compilers get you more stringent enforcement of standards, so it is now\nstd::isnan.  That would be the same with g++-4.9 on other OSs.\n\nYou could avoid the whole issue and just use the macros included via the R\nheaders.  Or you could use a certain package ending in 'pp' which helps with\nC++ and R integration as it too gives you a few helpers ...\n \n| I've have found in the R-devel blog and check myself that from R\n| version 3.3.0 the header  file R.h is changed. In particular it is now\n| going to include the C++ versions of system header ?<cmath>? rather\n| than the legacy header ?<math.h> which seems to be the source of my\n| problem.\n\nThat is good C++ practice.\n \n| However I cannot understand why it causes the error and in particular\n| why it is happening *only under windows* and not under other OS. I've\n| check my new package both in OS X and Ubuntu (with R-devel) and\n| everything is OK. It also compiles fine in Windows under R.3.2.5.\n\nNot an R version issue but a compiler issue.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 20 April 2016 at 14:28, Antonio Canale wrote:\n| Dear all,\n| \n| my problem is related to the new version of my msBP package but it\n| actually applies also to the current version uploaded on CRAN\n| (",
+      "thread_id": "thread-08538f28b34e",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-7a25b2a52a5e",
+      "message_id": "<1461158524.32152.131.camel@iarc.fr>",
+      "from_name": "Martyn Plummer",
+      "from_email_hash": "2e099cb1222e34e2ab5938e6ef440a822400d8f04f0d3ca6299b8e1740ceeacb",
+      "date": "2016-04-20T13:22:05Z",
+      "subject": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "subject_clean": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "in_reply_to": "<CAK5DdKHAYj+9O4UwNM9_ckc5g_sTzf_S5bc6Nj=hue8=ER2VQQ@mail.gmail.com>",
+      "references": [
+        "<CAK5DdKHAYj+9O4UwNM9_ckc5g_sTzf_S5bc6Nj=hue8=ER2VQQ@mail.gmail.com>"
+      ],
+      "body_plain": "Short answer: use the R macro ISNAN instead. See the Writing R\nExtensions manual for details.\n\nLong answer: The default standard for C++ code in R packages is C++98,\nwhich does not define a function \"isnan\". The C++11 standard introduced\na std::isnan function to C++. What you were previously getting from the\ninclusion of the legacy header <math.h> was a C99 macro. Now the C++\nheader <cmath> is used instead of the legacy header <math.h> you should\nstick to the standard.?\n\nMartyn\n\n\nOn Wed, 2016-04-20 at 14:28 +0200, Antonio Canale wrote:\n> Dear all,\n> \n> my problem is related to the new version of my msBP package but it\n> actually applies also to the current version uploaded on CRAN\n> (https://cran.r-project.org/web/checks/check_results_msBP.html).\n> \n> It turns out that the package cannot be compiled under the new R-\n> devel\n> for windows.\n> \n> The problem is related to the isnan() function of <math.h> library of\n> C++ which I call twice in one of my C++ scripts.\n> \n> Consider the function below as MWE\n> \n> #include<stdio.h>\n> #include<stdlib.h>\n> #include<math.h>\n> #include<R.h>\n> #include<Rmath.h>\n> extern \"C\"{\n> void gibbs(double *A)\n> {\n> if(isnan(A[i]) || (A[i]<=0))\n> { do stuff }\n> }\n> }\n> \n> Precisely, the error that I get is reported at\n> https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/m\n> sBP-00install.html\n> \n> I've have found in the R-devel blog and check myself that from R\n> version 3.3.0 the header??file R.h is changed. In particular it is\n> now\n> going to include the C++ versions of system header ?<cmath>? rather\n> than the legacy header ?<math.h> which seems to be the source of my\n> problem.\n> \n> However I cannot understand why it causes the error and in particular\n> why it is happening *only under windows* and not under other OS. I've\n> check my new package both in OS X and Ubuntu (with R-devel) and\n> everything is OK. It also compiles fine in Windows under R.3.2.5.\n> \n> Thanks for your help.\n> \n> Best,\n> Antonio\n> \n> --\n> Antonio Canale\n> University of Turin and\n> Collegio Carlo Alberto\n> sites.carloalberto.org/canale\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Short answer: use the R macro ISNAN instead. See the Writing R\nExtensions manual for details.\n\nLong answer: The default standard for C++ code in R packages is C++98,\nwhich does not define a function \"",
+      "thread_id": "thread-08538f28b34e",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-0110b1a0c923",
+      "message_id": "<CADRwj988zdouij8Sk7POKs8vTgnF1XBUp7aJ+_qZSrWoyyF2SQ@mail.gmail.com>",
+      "from_name": "Oliver Keyes",
+      "from_email_hash": "c7d002ea4e432cc7c761323882818cf358e85a07c3af074afbdff56159667a5f",
+      "date": "2016-04-20T10:29:00-04:00",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "subject_clean": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "in_reply_to": "<22295.32214.746124.705845@max.nulle.part>",
+      "references": [
+        "<CADRwj9-sX3QizYpQzPQ3UcAVZ7dbAgfZxhu_FVjWOreDB4OxjA@mail.gmail.com>",
+        "<CAJ4QxaMZ1is-mNzVBNRCAYBHn42cWzy0oqZNPYOcw7U78h4_Lw@mail.gmail.com>",
+        "<22293.32141.36492.591853@max.nulle.part>",
+        "<CAJ4QxaNOBMfFsVneimeA+kawdnrt8Fp3fXHf+=TYDU6dREfegg@mail.gmail.com>",
+        "<22295.32214.746124.705845@max.nulle.part>"
+      ],
+      "body_plain": "I must have missed the bit where anyone mentioned Title Case.\n\nCRAN's rules are definitely solid the vast majority of the time, and I've\nopted for a GitHub/devtools based release.\n\nOn Wednesday, 20 April 2016, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 18 April 2016 at 20:48, boB Rudis wrote:\n> | So, how do we create a solid alternative to CRAN? github drat wld have\n> | been impossible at my previous gig (for good reasons). Is it time to\n> | try to get rOpenSci to be a legit CRAN alternative? Add enough process\n> | around it to support things like this (i.e. a less narrowly focused\n> | Bioconductor)? Package complexities are only going to grow, not\n> | shrink. Such is this brave, new data science world we live in.\n>\n> You are just talking the talk which is cheap and doesn't get us anywhere.\n> If\n> you believe so strongly that this needs to be done, can you not rent a few\n> gb\n> of diskspace on S3 and get going?  Walk the walk!\n>\n> I (greatly) appreciate what CRAN has done for us, and continues to do for\n> us. It is a gift economy, and with their free labour we get their rules,\n> for\n> better (mostly) or worse (rarely).  I happen to disagree with one or two\n> minor aspects and may end up putting a support package or two onto a github\n> drat rather than CRAN itself.  But as I continue to benefit greatly from\n> CRAN\n> as both a user and as a package author, I am (mostly) happy to cooperate.\n> They have executed a pretty relentless drive for higher code quality, more\n> and better code checks, better licensing conformance and more.\n>\n> And I honestly don't give a damn if some Brooklyn or Portland hipsters\n> complain about Title Case nagging as that too has merit (as it makes\n> aggregation pages more readable).\n>\n> <end of rant>\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> <javascript:;>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I must have missed the bit where anyone mentioned Title Case.\n\nCRAN's rules are definitely solid the vast majority of the time, and I've\nopted for a GitHub/devtools based release.\n\nOn Wednesday, 20 Ap",
+      "thread_id": "thread-bc4ec8f44f34",
+      "thread_depth": 5,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-3d8d1bc2838a",
+      "message_id": "<89832B2C-257A-432C-818B-8510332F0201@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-04-22T10:31:44-05:00",
+      "subject": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "subject_clean": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "All,\n\nBelow are two classes that I have created Scenario and Mtg.Scenario.\n\nMtg.Scenario contains Scenario when I run check I get the following warning.\n\nI have gone through my book R Packages and looked at the EPub writing extension but I cannot find an example.\n\nAny help is appreciated\nGlenn\n\n* checking for code/documentation mismatches ... WARNING\nS4 class codoc mismatches from documentation object 'Mtg.Scenario-class':\nSlots for class 'Mtg.Scenario'\n Code: BeginningBal Convexity EffConvexity EffDuration EndingBal\n       Formula Horizon HorizonReturn KeyRateConvexity KeyRateDuration\n       KeyRateTenor ModDuration Name PassThroughInterest Period\n       PmtDate PrepaidPrin SMM ScheduledPrin ShiftType Shiftbps\n       SpreadToInterCurve TimePeriod TotalCashFlow Type WAL\n       YieldToMaturity forwardrate spotrate\n Inherited: Name Type Horizon ShiftType Shiftbps Formula\n Docs: BeginningBal Convexity EffDuration EndingBal Formula Horizon\n       KeyConvexity KeyRateDuration KeyRateTenor ModDuration Name\n       PassThroughInterest Period PmtDate PrepaidPrin SMM\n       ScheduledPrin ShiftType Shiftbps SpreadToInterCurve TimePeriod\n       TotalCashFlow Type WAL YieldToMaturity forwardrate spotrate\n\n\n\n #' An S4 Class representing scenario analysis details\n #' \n #' The class Scenario is the representation of the \n #' scenario run by the investor\n #' @slot Name A character the name of the scenario\n #' @slot Type A character the type of the scenario\n #' @slot Horizon A character the time horizon over which the \n #' scenario is run\n #' @slot ShiftType A character the interest rate shift type (e.g.\n #' twist, parallel, bull flatten, or bull steepen)\n #' @slot Shiftbps A numeric value the scenario shift in basis points\n #' @slot Formula A function represnting the shift which applied to the term structure\n #' @exportClass Scenario\n setClass(\"Scenario\",\n        representation(\n          Name = \"character\",\n          Type = \"character\",\n          Horizon = \"character\",\n          ShiftType = \"character\",\n          Shiftbps = \"numeric\",\n          Formula = \"function\"\n        ))\n\n #' An S4 Class representing the results of mortgage return scenario analysis\n #' \n #' The class Mtg. Scenario holds the results of a scenario analysis run\n #' @slot Period A numeric value the period number forward from current\n #' @slot PmtDate A character the payment date on which the cashflow is expected to be received\n #' @slot TimePeriod A numeric value the period stated as a unit of time\n #' @slot BeginningBal A numeric value the forecasted beginning balance in the period\n #' @slot PassThroughInterest A numeric value the interest paid through to the investor\n #' @slot ScheduledPrin A numeric value the scheduled principal due in the period\n #' @slot PrepaidPrin A numeric value the forecasted prepaid principal in the period\n #' @slot EndingBal A numeric value the forecasted ending balance in the period\n #' @slot TotalCashFlow A numeric value the forecasted total cashflow received by\n #' the investor in the period\n #' @slot spotrate A numeric vector the spot rate curve\n #' @slot forwardrate A numeric vector the forward rate curve\n #' @slot SMM A numeric vector the forecasted SMM vector\n #' @slot YieldToMaturity A numeric value the scenario yield to maturity\n #' @slot WAL A numeric value the scenario weighted average life\n #' @slot SpreadToInterCurve A numeric value the spread to the interpolated curve\n #' @slot ModDuration A numeric value the scenario modified duration\n #' @slot Convexity A numeric value the scenario convexity\n #' @slot EffDuration A numeric value the effective duration which is the sum of the\n #' key rate durations\n #' @slot KeyRateTenor A numeric vector the key rate tenors\n #' @slot KeyRateDuration A numeric vector the duration of each key rate tenor\n #' @slot KeyConvexity A numeric vector the convexity of each each key rate tenor\n #' @exportClass Mtg.Scenario     \n setClass(\"Mtg.Scenario\",\n        representation( \n          Period = \"numeric\",\n          PmtDate = \"character\",\n          TimePeriod = \"numeric\",\n          BeginningBal = \"numeric\",\n          PassThroughInterest = \"numeric\",\n          ScheduledPrin = \"numeric\",\n          PrepaidPrin = \"numeric\",\n          EndingBal = \"numeric\",\n          TotalCashFlow = \"numeric\",\n          spotrate = \"numeric\",\n          forwardrate = \"numeric\",\n          SMM = \"numeric\",\n          YieldToMaturity = \"numeric\",\n          WAL = \"numeric\",\n          SpreadToInterCurve = \"numeric\",\n          ModDuration = \"numeric\",\n          Convexity = \"numeric\", \n          EffDuration = \"numeric\",\n          EffConvexity = \"numeric\",\n          KeyRateTenor = \"numeric\",\n          KeyRateDuration = \"numeric\",\n          KeyRateConvexity = \"numeric\",\n          HorizonReturn = \"numeric\"),\n        contains = \"Scenario\")",
+      "body_snippet": "All,\n\nBelow are two classes that I have created Scenario and Mtg.Scenario.\n\nMtg.Scenario contains Scenario when I run check I get the following warning.\n\nI have gone through my book R Packages and loo",
+      "thread_id": "thread-3d8d1bc2838a",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-6e7dddf9a1e0",
+      "message_id": "<CABdHhvE8t+d+B-_vn6OqBN-5e=aH3-eu+bLgaffa7yJBzZCbxA@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2016-04-22T17:47:12-05:00",
+      "subject": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "subject_clean": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "in_reply_to": "<89832B2C-257A-432C-818B-8510332F0201@me.com>",
+      "references": [
+        "<89832B2C-257A-432C-818B-8510332F0201@me.com>"
+      ],
+      "body_plain": "Does this help?\n\ncode <- c(\"BeginningBal\", \"Convexity\", \"EffConvexity\", \"EffDuration\",\n\"EndingBal\",\n  \"Formula\", \"Horizon\", \"HorizonReturn\", \"KeyRateConvexity\", \"KeyRateDuration\",\n  \"KeyRateTenor\", \"ModDuration\", \"Name\", \"PassThroughInterest\", \"Period\",\n  \"PmtDate\", \"PrepaidPrin\", \"SMM\", \"ScheduledPrin\", \"ShiftType\", \"Shiftbps\",\n  \"SpreadToInterCurve\", \"TimePeriod\", \"TotalCashFlow\", \"Type\", \"WAL\",\n  \"YieldToMaturity\", \"forwardrate\", \"spotrate\")\n\ndocs <- c(\"BeginningBal\", \"Convexity\", \"EffDuration\", \"EndingBal\",\n\"Formula\", \"Horizon\",\n\"KeyConvexity\", \"KeyRateDuration\", \"KeyRateTenor\", \"ModDuration\", \"Name\",\n\"PassThroughInterest\", \"Period\", \"PmtDate\", \"PrepaidPrin\", \"SMM\",\n\"ScheduledPrin\", \"ShiftType\", \"Shiftbps\", \"SpreadToInterCurve\", \"TimePeriod\",\n\"TotalCashFlow\", \"Type\", \"WAL\", \"YieldToMaturity\", \"forwardrate\", \"spotrate\" )\n\n\nsetdiff(code, docs)\nsetdiff(docs, code)\n\nHadley\n\nOn Fri, Apr 22, 2016 at 10:31 AM, Glenn Schultz <glennmschultz at me.com> wrote:\n> All,\n>\n> Below are two classes that I have created Scenario and Mtg.Scenario.\n>\n> Mtg.Scenario contains Scenario when I run check I get the following warning.\n>\n> I have gone through my book R Packages and looked at the EPub writing extension but I cannot find an example.\n>\n> Any help is appreciated\n> Glenn\n>\n> * checking for code/documentation mismatches ... WARNING\n> S4 class codoc mismatches from documentation object 'Mtg.Scenario-class':\n> Slots for class 'Mtg.Scenario'\n>  Code: BeginningBal Convexity EffConvexity EffDuration EndingBal\n>        Formula Horizon HorizonReturn KeyRateConvexity KeyRateDuration\n>        KeyRateTenor ModDuration Name PassThroughInterest Period\n>        PmtDate PrepaidPrin SMM ScheduledPrin ShiftType Shiftbps\n>        SpreadToInterCurve TimePeriod TotalCashFlow Type WAL\n>        YieldToMaturity forwardrate spotrate\n>  Inherited: Name Type Horizon ShiftType Shiftbps Formula\n>  Docs: BeginningBal Convexity EffDuration EndingBal Formula Horizon\n>        KeyConvexity KeyRateDuration KeyRateTenor ModDuration Name\n>        PassThroughInterest Period PmtDate PrepaidPrin SMM\n>        ScheduledPrin ShiftType Shiftbps SpreadToInterCurve TimePeriod\n>        TotalCashFlow Type WAL YieldToMaturity forwardrate spotrate\n>\n>\n>\n>  #' An S4 Class representing scenario analysis details\n>  #'\n>  #' The class Scenario is the representation of the\n>  #' scenario run by the investor\n>  #' @slot Name A character the name of the scenario\n>  #' @slot Type A character the type of the scenario\n>  #' @slot Horizon A character the time horizon over which the\n>  #' scenario is run\n>  #' @slot ShiftType A character the interest rate shift type (e.g.\n>  #' twist, parallel, bull flatten, or bull steepen)\n>  #' @slot Shiftbps A numeric value the scenario shift in basis points\n>  #' @slot Formula A function represnting the shift which applied to the term structure\n>  #' @exportClass Scenario\n>  setClass(\"Scenario\",\n>         representation(\n>           Name = \"character\",\n>           Type = \"character\",\n>           Horizon = \"character\",\n>           ShiftType = \"character\",\n>           Shiftbps = \"numeric\",\n>           Formula = \"function\"\n>         ))\n>\n>  #' An S4 Class representing the results of mortgage return scenario analysis\n>  #'\n>  #' The class Mtg. Scenario holds the results of a scenario analysis run\n>  #' @slot Period A numeric value the period number forward from current\n>  #' @slot PmtDate A character the payment date on which the cashflow is expected to be received\n>  #' @slot TimePeriod A numeric value the period stated as a unit of time\n>  #' @slot BeginningBal A numeric value the forecasted beginning balance in the period\n>  #' @slot PassThroughInterest A numeric value the interest paid through to the investor\n>  #' @slot ScheduledPrin A numeric value the scheduled principal due in the period\n>  #' @slot PrepaidPrin A numeric value the forecasted prepaid principal in the period\n>  #' @slot EndingBal A numeric value the forecasted ending balance in the period\n>  #' @slot TotalCashFlow A numeric value the forecasted total cashflow received by\n>  #' the investor in the period\n>  #' @slot spotrate A numeric vector the spot rate curve\n>  #' @slot forwardrate A numeric vector the forward rate curve\n>  #' @slot SMM A numeric vector the forecasted SMM vector\n>  #' @slot YieldToMaturity A numeric value the scenario yield to maturity\n>  #' @slot WAL A numeric value the scenario weighted average life\n>  #' @slot SpreadToInterCurve A numeric value the spread to the interpolated curve\n>  #' @slot ModDuration A numeric value the scenario modified duration\n>  #' @slot Convexity A numeric value the scenario convexity\n>  #' @slot EffDuration A numeric value the effective duration which is the sum of the\n>  #' key rate durations\n>  #' @slot KeyRateTenor A numeric vector the key rate tenors\n>  #' @slot KeyRateDuration A numeric vector the duration of each key rate tenor\n>  #' @slot KeyConvexity A numeric vector the convexity of each each key rate tenor\n>  #' @exportClass Mtg.Scenario\n>  setClass(\"Mtg.Scenario\",\n>         representation(\n>           Period = \"numeric\",\n>           PmtDate = \"character\",\n>           TimePeriod = \"numeric\",\n>           BeginningBal = \"numeric\",\n>           PassThroughInterest = \"numeric\",\n>           ScheduledPrin = \"numeric\",\n>           PrepaidPrin = \"numeric\",\n>           EndingBal = \"numeric\",\n>           TotalCashFlow = \"numeric\",\n>           spotrate = \"numeric\",\n>           forwardrate = \"numeric\",\n>           SMM = \"numeric\",\n>           YieldToMaturity = \"numeric\",\n>           WAL = \"numeric\",\n>           SpreadToInterCurve = \"numeric\",\n>           ModDuration = \"numeric\",\n>           Convexity = \"numeric\",\n>           EffDuration = \"numeric\",\n>           EffConvexity = \"numeric\",\n>           KeyRateTenor = \"numeric\",\n>           KeyRateDuration = \"numeric\",\n>           KeyRateConvexity = \"numeric\",\n>           HorizonReturn = \"numeric\"),\n>         contains = \"Scenario\")\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://hadley.nz",
+      "body_snippet": "Does this help?\n\ncode <- c(\"BeginningBal\", \"Convexity\", \"EffConvexity\", \"EffDuration\",\n\"EndingBal\",\n  \"Formula\", \"Horizon\", \"HorizonReturn\", \"KeyRateConvexity\", \"KeyRateDuration\",\n  \"KeyRateTenor\", \"M",
+      "thread_id": "thread-3d8d1bc2838a",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-0bc5ed62f217",
+      "message_id": "<E148A887-5EFE-4F9A-9A9F-FAA5959EA1F7@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-04-22T18:54:17-05:00",
+      "subject": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "subject_clean": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "in_reply_to": "<CABdHhvE8t+d+B-_vn6OqBN-5e=aH3-eu+bLgaffa7yJBzZCbxA@mail.gmail.com>",
+      "references": [
+        "<89832B2C-257A-432C-818B-8510332F0201@me.com>",
+        "<CABdHhvE8t+d+B-_vn6OqBN-5e=aH3-eu+bLgaffa7yJBzZCbxA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Hadley,\n\nThank-you for taking the time to help - Ha! nice trick - thanks!  Much better than staring at lines trying to figure out what went wrong.  First time I had seen that warning too. Now, I know what it means.\n\nThanks,\nGlenn \n\n> On Apr 22, 2016, at 5:47 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> \n> Does this help?\n> \n> code <- c(\"BeginningBal\", \"Convexity\", \"EffConvexity\", \"EffDuration\",\n> \"EndingBal\",\n>  \"Formula\", \"Horizon\", \"HorizonReturn\", \"KeyRateConvexity\", \"KeyRateDuration\",\n>  \"KeyRateTenor\", \"ModDuration\", \"Name\", \"PassThroughInterest\", \"Period\",\n>  \"PmtDate\", \"PrepaidPrin\", \"SMM\", \"ScheduledPrin\", \"ShiftType\", \"Shiftbps\",\n>  \"SpreadToInterCurve\", \"TimePeriod\", \"TotalCashFlow\", \"Type\", \"WAL\",\n>  \"YieldToMaturity\", \"forwardrate\", \"spotrate\")\n> \n> docs <- c(\"BeginningBal\", \"Convexity\", \"EffDuration\", \"EndingBal\",\n> \"Formula\", \"Horizon\",\n> \"KeyConvexity\", \"KeyRateDuration\", \"KeyRateTenor\", \"ModDuration\", \"Name\",\n> \"PassThroughInterest\", \"Period\", \"PmtDate\", \"PrepaidPrin\", \"SMM\",\n> \"ScheduledPrin\", \"ShiftType\", \"Shiftbps\", \"SpreadToInterCurve\", \"TimePeriod\",\n> \"TotalCashFlow\", \"Type\", \"WAL\", \"YieldToMaturity\", \"forwardrate\", \"spotrate\" )\n> \n> \n> setdiff(code, docs)\n> setdiff(docs, code)\n> \n> Hadley\n> \n> On Fri, Apr 22, 2016 at 10:31 AM, Glenn Schultz <glennmschultz at me.com> wrote:\n>> All,\n>> \n>> Below are two classes that I have created Scenario and Mtg.Scenario.\n>> \n>> Mtg.Scenario contains Scenario when I run check I get the following warning.\n>> \n>> I have gone through my book R Packages and looked at the EPub writing extension but I cannot find an example.\n>> \n>> Any help is appreciated\n>> Glenn\n>> \n>> * checking for code/documentation mismatches ... WARNING\n>> S4 class codoc mismatches from documentation object 'Mtg.Scenario-class':\n>> Slots for class 'Mtg.Scenario'\n>> Code: BeginningBal Convexity EffConvexity EffDuration EndingBal\n>>       Formula Horizon HorizonReturn KeyRateConvexity KeyRateDuration\n>>       KeyRateTenor ModDuration Name PassThroughInterest Period\n>>       PmtDate PrepaidPrin SMM ScheduledPrin ShiftType Shiftbps\n>>       SpreadToInterCurve TimePeriod TotalCashFlow Type WAL\n>>       YieldToMaturity forwardrate spotrate\n>> Inherited: Name Type Horizon ShiftType Shiftbps Formula\n>> Docs: BeginningBal Convexity EffDuration EndingBal Formula Horizon\n>>       KeyConvexity KeyRateDuration KeyRateTenor ModDuration Name\n>>       PassThroughInterest Period PmtDate PrepaidPrin SMM\n>>       ScheduledPrin ShiftType Shiftbps SpreadToInterCurve TimePeriod\n>>       TotalCashFlow Type WAL YieldToMaturity forwardrate spotrate\n>> \n>> \n>> \n>> #' An S4 Class representing scenario analysis details\n>> #'\n>> #' The class Scenario is the representation of the\n>> #' scenario run by the investor\n>> #' @slot Name A character the name of the scenario\n>> #' @slot Type A character the type of the scenario\n>> #' @slot Horizon A character the time horizon over which the\n>> #' scenario is run\n>> #' @slot ShiftType A character the interest rate shift type (e.g.\n>> #' twist, parallel, bull flatten, or bull steepen)\n>> #' @slot Shiftbps A numeric value the scenario shift in basis points\n>> #' @slot Formula A function represnting the shift which applied to the term structure\n>> #' @exportClass Scenario\n>> setClass(\"Scenario\",\n>>        representation(\n>>          Name = \"character\",\n>>          Type = \"character\",\n>>          Horizon = \"character\",\n>>          ShiftType = \"character\",\n>>          Shiftbps = \"numeric\",\n>>          Formula = \"function\"\n>>        ))\n>> \n>> #' An S4 Class representing the results of mortgage return scenario analysis\n>> #'\n>> #' The class Mtg. Scenario holds the results of a scenario analysis run\n>> #' @slot Period A numeric value the period number forward from current\n>> #' @slot PmtDate A character the payment date on which the cashflow is expected to be received\n>> #' @slot TimePeriod A numeric value the period stated as a unit of time\n>> #' @slot BeginningBal A numeric value the forecasted beginning balance in the period\n>> #' @slot PassThroughInterest A numeric value the interest paid through to the investor\n>> #' @slot ScheduledPrin A numeric value the scheduled principal due in the period\n>> #' @slot PrepaidPrin A numeric value the forecasted prepaid principal in the period\n>> #' @slot EndingBal A numeric value the forecasted ending balance in the period\n>> #' @slot TotalCashFlow A numeric value the forecasted total cashflow received by\n>> #' the investor in the period\n>> #' @slot spotrate A numeric vector the spot rate curve\n>> #' @slot forwardrate A numeric vector the forward rate curve\n>> #' @slot SMM A numeric vector the forecasted SMM vector\n>> #' @slot YieldToMaturity A numeric value the scenario yield to maturity\n>> #' @slot WAL A numeric value the scenario weighted average life\n>> #' @slot SpreadToInterCurve A numeric value the spread to the interpolated curve\n>> #' @slot ModDuration A numeric value the scenario modified duration\n>> #' @slot Convexity A numeric value the scenario convexity\n>> #' @slot EffDuration A numeric value the effective duration which is the sum of the\n>> #' key rate durations\n>> #' @slot KeyRateTenor A numeric vector the key rate tenors\n>> #' @slot KeyRateDuration A numeric vector the duration of each key rate tenor\n>> #' @slot KeyConvexity A numeric vector the convexity of each each key rate tenor\n>> #' @exportClass Mtg.Scenario\n>> setClass(\"Mtg.Scenario\",\n>>        representation(\n>>          Period = \"numeric\",\n>>          PmtDate = \"character\",\n>>          TimePeriod = \"numeric\",\n>>          BeginningBal = \"numeric\",\n>>          PassThroughInterest = \"numeric\",\n>>          ScheduledPrin = \"numeric\",\n>>          PrepaidPrin = \"numeric\",\n>>          EndingBal = \"numeric\",\n>>          TotalCashFlow = \"numeric\",\n>>          spotrate = \"numeric\",\n>>          forwardrate = \"numeric\",\n>>          SMM = \"numeric\",\n>>          YieldToMaturity = \"numeric\",\n>>          WAL = \"numeric\",\n>>          SpreadToInterCurve = \"numeric\",\n>>          ModDuration = \"numeric\",\n>>          Convexity = \"numeric\",\n>>          EffDuration = \"numeric\",\n>>          EffConvexity = \"numeric\",\n>>          KeyRateTenor = \"numeric\",\n>>          KeyRateDuration = \"numeric\",\n>>          KeyRateConvexity = \"numeric\",\n>>          HorizonReturn = \"numeric\"),\n>>        contains = \"Scenario\")\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n> \n> -- \n> http://hadley.nz",
+      "body_snippet": "Hi Hadley,\n\nThank-you for taking the time to help - Ha! nice trick - thanks!  Much better than staring at lines trying to figure out what went wrong.  First time I had seen that warning too. Now, I kn",
+      "thread_id": "thread-3d8d1bc2838a",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-d88de4524e95",
+      "message_id": "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+      "from_name": "Bruce Hoff",
+      "from_email_hash": "d06ebaa60976c742e2fa4e9f3ac1a394fff97e5fe8127dbfe9fdd334677e177d",
+      "date": "2016-04-27T06:00:33-07:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All:\n\ndevtools::install_github() is great but, as I understand it, limited to\ninstalling from source code.  Is there any precedent for using a public\nrepository like GitHub as a CRAN-style repository, so that one can install\nlike so:\n\ninstall.packages(\"mypackage\", repos= \"https://github.com/myrepo/mypackage\")\n\n?\nThis would allow the distribution of packages that need compilation without\nrequiring that the user set up a build system and would leverage R's\nability to find and install dependencies (by stringing together multiple\nURLs in the 'repos' parameter).  Of course there's a greater burden on the\npackage provider, who has to build their package for Mac and Windows.\n\nIt strikes me that this could be a good way to decentralize CRAN, allowing\nit to be maintained by package owners rather than a central authority.\n\nI searched around but could not find examples of people using Github in\nthis way.\n\nBruce Hoff\nSage Bionetworks\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear All:\n\ndevtools::install_github() is great but, as I understand it, limited to\ninstalling from source code.  Is there any precedent for using a public\nrepository like GitHub as a CRAN-style reposi",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-ba39890845b7",
+      "message_id": "<5720BA89.5090001@gmail.com>",
+      "from_name": "Ben Bolker",
+      "from_email_hash": "18f6c2b0b79bec76f7afe0fad5e36fffd27297982eaee9a3a21101b9461258e5",
+      "date": "2016-04-27T09:11:37-04:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>"
+      ],
+      "body_plain": "Check out the drat package.\n\nOn 16-04-27 09:00 AM, Bruce Hoff wrote:\n> Dear All:\n> \n> devtools::install_github() is great but, as I understand it, limited to\n> installing from source code.  Is there any precedent for using a public\n> repository like GitHub as a CRAN-style repository, so that one can install\n> like so:\n> \n> install.packages(\"mypackage\", repos= \"https://github.com/myrepo/mypackage\")\n> \n> ?\n> This would allow the distribution of packages that need compilation without\n> requiring that the user set up a build system and would leverage R's\n> ability to find and install dependencies (by stringing together multiple\n> URLs in the 'repos' parameter).  Of course there's a greater burden on the\n> package provider, who has to build their package for Mac and Windows.\n> \n> It strikes me that this could be a good way to decentralize CRAN, allowing\n> it to be maintained by package owners rather than a central authority.\n> \n> I searched around but could not find examples of people using Github in\n> this way.\n> \n> Bruce Hoff\n> Sage Bionetworks\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Check out the drat package.\n\nOn 16-04-27 09:00 AM, Bruce Hoff wrote:\n> Dear All:\n> \n> devtools::install_github() is great but, as I understand it, limited to\n> installing from source code.  Is there a",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-3bbde7be8b81",
+      "message_id": "<CAJuCY5wWSUKD5Hd4sUMndPS4nrONMMrKSJg48A9mAYxsXwWPEQ@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "939ccb0e8bbc2d0c7bbe22a43b9bdc551e1b9ce62c1e0af38d79ce042e5bddbe",
+      "date": "2016-04-27T15:14:55+02:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Bruce,\n\nHave a look at drat: http://dirk.eddelbuettel.com/code/drat.html I think\nthat is what you are looking for.\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature and\nForest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n\n2016-04-27 15:00 GMT+02:00 Bruce Hoff <bruce.hoff at sagebase.org>:\n\n> Dear All:\n>\n> devtools::install_github() is great but, as I understand it, limited to\n> installing from source code.  Is there any precedent for using a public\n> repository like GitHub as a CRAN-style repository, so that one can install\n> like so:\n>\n> install.packages(\"mypackage\", repos= \"https://github.com/myrepo/mypackage\n> \")\n>\n> ?\n> This would allow the distribution of packages that need compilation without\n> requiring that the user set up a build system and would leverage R's\n> ability to find and install dependencies (by stringing together multiple\n> URLs in the 'repos' parameter).  Of course there's a greater burden on the\n> package provider, who has to build their package for Mac and Windows.\n>\n> It strikes me that this could be a good way to decentralize CRAN, allowing\n> it to be maintained by package owners rather than a central authority.\n>\n> I searched around but could not find examples of people using Github in\n> this way.\n>\n> Bruce Hoff\n> Sage Bionetworks\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Bruce,\n\nHave a look at drat: http://dirk.eddelbuettel.com/code/drat.html I think\nthat is what you are looking for.\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Re",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-75ba7fe5e535",
+      "message_id": "<CAKywhkqeRw0QC-O6vVR_A9i7D=P70VJUPm-rdFj1XWBZOpwi5w@mail.gmail.com>",
+      "from_name": "Brian O'Meara",
+      "from_email_hash": "2c344f9ef072f67fd2184c6c44d3f6013ef79a14cb2fe39f8dd9d723d4657c61",
+      "date": "2016-04-27T09:21:59-04:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<5720BA89.5090001@gmail.com>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+        "<5720BA89.5090001@gmail.com>"
+      ],
+      "body_plain": "In addition to drat, R-forge may already do what you want: it's not\ncompletely decentralized, but it still allows distribution of packages,\nincluding binaries, without checking by CRAN maintainers (and it can build\nbinaries for you for some platforms). Work on R-Hub was funded as the next\ngeneration of CRAN + R-Forge:  https://github.com/r-hub/proposal.\n\nBest,\nBrian\n\n\n_______________________________________\nBrian O'Meara\nAssociate Professor\nDept. of Ecology & Evolutionary Biology\nU. of Tennessee, Knoxville\nhttp://www.brianomeara.info\n\n\n\nOn Wed, Apr 27, 2016 at 9:11 AM, Ben Bolker <bbolker at gmail.com> wrote:\n\n>\n>    Check out the drat package.\n>\n> On 16-04-27 09:00 AM, Bruce Hoff wrote:\n> > Dear All:\n> >\n> > devtools::install_github() is great but, as I understand it, limited to\n> > installing from source code.  Is there any precedent for using a public\n> > repository like GitHub as a CRAN-style repository, so that one can\n> install\n> > like so:\n> >\n> > install.packages(\"mypackage\", repos= \"\n> https://github.com/myrepo/mypackage\")\n> >\n> > ?\n> > This would allow the distribution of packages that need compilation\n> without\n> > requiring that the user set up a build system and would leverage R's\n> > ability to find and install dependencies (by stringing together multiple\n> > URLs in the 'repos' parameter).  Of course there's a greater burden on\n> the\n> > package provider, who has to build their package for Mac and Windows.\n> >\n> > It strikes me that this could be a good way to decentralize CRAN,\n> allowing\n> > it to be maintained by package owners rather than a central authority.\n> >\n> > I searched around but could not find examples of people using Github in\n> > this way.\n> >\n> > Bruce Hoff\n> > Sage Bionetworks\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "In addition to drat, R-forge may already do what you want: it's not\ncompletely decentralized, but it still allows distribution of packages,\nincluding binaries, without checking by CRAN maintainers (an",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-7cf82bcfbfcd",
+      "message_id": "<22304.49322.89140.670324@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-04-27T08:37:46-05:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<CAJuCY5wWSUKD5Hd4sUMndPS4nrONMMrKSJg48A9mAYxsXwWPEQ@mail.gmail.com>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+        "<CAJuCY5wWSUKD5Hd4sUMndPS4nrONMMrKSJg48A9mAYxsXwWPEQ@mail.gmail.com>"
+      ],
+      "body_plain": "Bruce,\n\nAs Ben and Thierry already mentioned (thanks!!) drat it pretty much designed\nto support that out of the box (but also supports repos elsewhere; however\nthere are reasons such as gh-pages that make GitHub uniquely suited).  I have\nsome moderately strongly-held beliefs about how install_github is IMHO\nunsuitable as a _release-mechanism_ which I think of as, say, tarballs taken\nat author-chosen points in time rather then semi-randomly selected commits\nyou may end with.  And drat supports such releases.  We do have a few\nexamples on CRAN for mixing CRAN with external releases, and some are in fact\nmanaged by drat.  We also rely on drat extensively at work for a local repo.\n\nWhen I first wrote drat about a year ago, not everybody \"got it\" -- so there\nare a bunch of vignettes, as well as my talk at useR! 2015 about.  Please\nperuse, and should you have questions do come back here (or file issues at it\nGitHub repo).\n\nChaers, Dirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Bruce,\n\nAs Ben and Thierry already mentioned (thanks!!) drat it pretty much designed\nto support that out of the box (but also supports repos elsewhere; however\nthere are reasons such as gh-pages that ",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-b9d68109868a",
+      "message_id": "<CAAeMkWui50xSji8rb_H08bDpJQgFQPSqmU+1hKAHUHnkfbaS3A@mail.gmail.com>",
+      "from_name": "Bruce Hoff",
+      "from_email_hash": "d06ebaa60976c742e2fa4e9f3ac1a394fff97e5fe8127dbfe9fdd334677e177d",
+      "date": "2016-04-27T10:00:19-07:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<22304.49322.89140.670324@max.nulle.part>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+        "<CAJuCY5wWSUKD5Hd4sUMndPS4nrONMMrKSJg48A9mAYxsXwWPEQ@mail.gmail.com>",
+        "<22304.49322.89140.670324@max.nulle.part>"
+      ],
+      "body_plain": "Following up to my earlier post:  It looks like Dirk Eddelbuettel has in\nfact built what I was asking for with 'drat',\nhttps://github.com/eddelbuettel/drat.  The element that I do not see in\n'drat' is a way to build Mac and Windows binaries, so I have two follow up\nquestons:\n(1) Has anyone extended 'drat' in this way, to create a continuous build\nsystem, e.g. using Github to host the source of their R package and drat to\npublish the binaries, with a source/Windows/MacOS build system in between?;\n(2) Has CRAN 'open sourced' how they build on Windows and MacOS to allow\nsomeone to duplicate their build process?  I'm familiar with Rtools,\nhttps://cran.r-project.org/bin/windows/Rtools/installer.html, which is\ncertainly a key element, but is there a way to somehow clone the CRAN build\nprocess, to have some assurance that one is building package binaries the\nsame way CRAN does?\n\nThanks,\n\nBruce Hoff\nSage Bionetworks\n\n\nOn Wed, Apr 27, 2016 at 6:37 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> Bruce,\n>\n> As Ben and Thierry already mentioned (thanks!!) drat it pretty much\n> designed\n> to support that out of the box (but also supports repos elsewhere; however\n> there are reasons such as gh-pages that make GitHub uniquely suited).  I\n> have\n> some moderately strongly-held beliefs about how install_github is IMHO\n> unsuitable as a _release-mechanism_ which I think of as, say, tarballs\n> taken\n> at author-chosen points in time rather then semi-randomly selected commits\n> you may end with.  And drat supports such releases.  We do have a few\n> examples on CRAN for mixing CRAN with external releases, and some are in\n> fact\n> managed by drat.  We also rely on drat extensively at work for a local\n> repo.\n>\n> When I first wrote drat about a year ago, not everybody \"got it\" -- so\n> there\n> are a bunch of vignettes, as well as my talk at useR! 2015 about.  Please\n> peruse, and should you have questions do come back here (or file issues at\n> it\n> GitHub repo).\n>\n> Chaers, Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Following up to my earlier post:  It looks like Dirk Eddelbuettel has in\nfact built what I was asking for with 'drat',\nhttps://github.com/eddelbuettel/drat.  The element that I do not see in\n'drat' is",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 3,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-ef16811916b9",
+      "message_id": "<8760v24z85.fsf@gmail.com>",
+      "from_name": "Ramon Diaz-Uriarte",
+      "from_email_hash": "633eb05920d53e5a830a8910e9d03c82c5ec23dabba76361dd72a360253a993b",
+      "date": "2016-04-27T21:40:26+02:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<CAAeMkWui50xSji8rb_H08bDpJQgFQPSqmU+1hKAHUHnkfbaS3A@mail.gmail.com>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+        "<CAJuCY5wWSUKD5Hd4sUMndPS4nrONMMrKSJg48A9mAYxsXwWPEQ@mail.gmail.com>",
+        "<22304.49322.89140.670324@max.nulle.part>",
+        "<CAAeMkWui50xSji8rb_H08bDpJQgFQPSqmU+1hKAHUHnkfbaS3A@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Bruce,\n\n\nOn Wed, 27-04-2016, at 19:00, Bruce Hoff <bruce.hoff at sagebase.org> wrote:\n> Following up to my earlier post:  It looks like Dirk Eddelbuettel has in\n> fact built what I was asking for with 'drat',\n> https://github.com/eddelbuettel/drat.  The element that I do not see in\n> 'drat' is a way to build Mac and Windows binaries, so I have two follow up\n> questons:\n> (1) Has anyone extended 'drat' in this way, to create a continuous build\n> system, e.g. using Github to host the source of their R package and drat to\n> publish the binaries, with a source/Windows/MacOS build system in between?;\n\nMaybe appveyor (https://github.com/krlmlr/r-appveyor) could be of help here\nfor the Windows part? Appveyor takes care of the continuous\nintegration. But appveyor also allows you to define (at least some)\n\"artifacts\"; they are used regularly to download the package-name.Rcheck to\nexamine the logs but maybe it could be tweaked to get it to produce the zip\nfile.\n\n(Note: this is just a quick idea and my experience with appveyor is fairly\nlimited; I use to check that some of my packages in github work in windows,\nso maybe this will not do what you want).\n\nBest,\n\nR.\n\n> (2) Has CRAN 'open sourced' how they build on Windows and MacOS to allow\n> someone to duplicate their build process?  I'm familiar with Rtools,\n> https://cran.r-project.org/bin/windows/Rtools/installer.html, which is\n> certainly a key element, but is there a way to somehow clone the CRAN build\n> process, to have some assurance that one is building package binaries the\n> same way CRAN does?\n>\n> Thanks,\n>\n> Bruce Hoff\n> Sage Bionetworks\n>\n>\n> On Wed, Apr 27, 2016 at 6:37 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>>\n>> Bruce,\n>>\n>> As Ben and Thierry already mentioned (thanks!!) drat it pretty much\n>> designed\n>> to support that out of the box (but also supports repos elsewhere; however\n>> there are reasons such as gh-pages that make GitHub uniquely suited).  I\n>> have\n>> some moderately strongly-held beliefs about how install_github is IMHO\n>> unsuitable as a _release-mechanism_ which I think of as, say, tarballs\n>> taken\n>> at author-chosen points in time rather then semi-randomly selected commits\n>> you may end with.  And drat supports such releases.  We do have a few\n>> examples on CRAN for mixing CRAN with external releases, and some are in\n>> fact\n>> managed by drat.  We also rely on drat extensively at work for a local\n>> repo.\n>>\n>> When I first wrote drat about a year ago, not everybody \"got it\" -- so\n>> there\n>> are a bunch of vignettes, as well as my talk at useR! 2015 about.  Please\n>> peruse, and should you have questions do come back here (or file issues at\n>> it\n>> GitHub repo).\n>>\n>> Chaers, Dirk\n>>\n>> --\n>> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n-- \nRamon Diaz-Uriarte\nDepartment of Biochemistry, Lab B-25\nFacultad de Medicina\nUniversidad Aut?noma de Madrid \nArzobispo Morcillo, 4\n28029 Madrid\nSpain\n\nPhone: +34-91-497-2412\n\nEmail: rdiaz02 at gmail.com\n       ramon.diaz at iib.uam.es\n\nhttp://ligarto.org/rdiaz",
+      "body_snippet": "Dear Bruce,\n\n\nOn Wed, 27-04-2016, at 19:00, Bruce Hoff <bruce.hoff at sagebase.org> wrote:\n> Following up to my earlier post:  It looks like Dirk Eddelbuettel has in\n> fact built what I was asking for",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 4,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-2d03fc0d41ea",
+      "message_id": "<CAFDcVCTxxwpSQ-sZrutvwXFNYn7yhJxwZLpzPvBDv4LaDeZu6Q@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "64a3206ab5ef5f3eb33045076d839aa0671d85aac05489628035c18ce53b4a6e",
+      "date": "2016-04-27T13:05:40-07:00",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "subject_clean": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "in_reply_to": "<8760v24z85.fsf@gmail.com>",
+      "references": [
+        "<CAAeMkWv_pT8G5FJOvBKQgeyLAT49ZC+G4k+4uiMazCAcYoBh0A@mail.gmail.com>",
+        "<CAJuCY5wWSUKD5Hd4sUMndPS4nrONMMrKSJg48A9mAYxsXwWPEQ@mail.gmail.com>",
+        "<22304.49322.89140.670324@max.nulle.part>",
+        "<CAAeMkWui50xSji8rb_H08bDpJQgFQPSqmU+1hKAHUHnkfbaS3A@mail.gmail.com>",
+        "<8760v24z85.fsf@gmail.com>"
+      ],
+      "body_plain": "On Wed, Apr 27, 2016 at 12:40 PM, Ramon Diaz-Uriarte <rdiaz02 at gmail.com> wrote:\n> Dear Bruce,\n>\n>\n> On Wed, 27-04-2016, at 19:00, Bruce Hoff <bruce.hoff at sagebase.org> wrote:\n>> Following up to my earlier post:  It looks like Dirk Eddelbuettel has in\n>> fact built what I was asking for with 'drat',\n>> https://github.com/eddelbuettel/drat.  The element that I do not see in\n>> 'drat' is a way to build Mac and Windows binaries, so I have two follow up\n>> questons:\n>> (1) Has anyone extended 'drat' in this way, to create a continuous build\n>> system, e.g. using Github to host the source of their R package and drat to\n>> publish the binaries, with a source/Windows/MacOS build system in between?;\n>\n> Maybe appveyor (https://github.com/krlmlr/r-appveyor) could be of help here\n> for the Windows part? Appveyor takes care of the continuous\n> integration. But appveyor also allows you to define (at least some)\n> \"artifacts\"; they are used regularly to download the package-name.Rcheck to\n> examine the logs but maybe it could be tweaked to get it to produce the zip\n> file.\n\nYes, AppVeyor CI can certainly output R CMD build artifacts, e.g.\n\n   https://ci.appveyor.com/project/HenrikBengtsson/r-utils/build/1.0.86/job/mcosxwjhqy1p7f5m/artifacts\n\nThis was using:\n\n   https://github.com/HenrikBengtsson/R.utils/blob/2.3.0/appveyor.yml\n\n/Henrik\n\n>\n> (Note: this is just a quick idea and my experience with appveyor is fairly\n> limited; I use to check that some of my packages in github work in windows,\n> so maybe this will not do what you want).\n>\n> Best,\n>\n> R.\n>\n>> (2) Has CRAN 'open sourced' how they build on Windows and MacOS to allow\n>> someone to duplicate their build process?  I'm familiar with Rtools,\n>> https://cran.r-project.org/bin/windows/Rtools/installer.html, which is\n>> certainly a key element, but is there a way to somehow clone the CRAN build\n>> process, to have some assurance that one is building package binaries the\n>> same way CRAN does?\n>>\n>> Thanks,\n>>\n>> Bruce Hoff\n>> Sage Bionetworks\n>>\n>>\n>> On Wed, Apr 27, 2016 at 6:37 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>>\n>>>\n>>> Bruce,\n>>>\n>>> As Ben and Thierry already mentioned (thanks!!) drat it pretty much\n>>> designed\n>>> to support that out of the box (but also supports repos elsewhere; however\n>>> there are reasons such as gh-pages that make GitHub uniquely suited).  I\n>>> have\n>>> some moderately strongly-held beliefs about how install_github is IMHO\n>>> unsuitable as a _release-mechanism_ which I think of as, say, tarballs\n>>> taken\n>>> at author-chosen points in time rather then semi-randomly selected commits\n>>> you may end with.  And drat supports such releases.  We do have a few\n>>> examples on CRAN for mixing CRAN with external releases, and some are in\n>>> fact\n>>> managed by drat.  We also rely on drat extensively at work for a local\n>>> repo.\n>>>\n>>> When I first wrote drat about a year ago, not everybody \"got it\" -- so\n>>> there\n>>> are a bunch of vignettes, as well as my talk at useR! 2015 about.  Please\n>>> peruse, and should you have questions do come back here (or file issues at\n>>> it\n>>> GitHub repo).\n>>>\n>>> Chaers, Dirk\n>>>\n>>> --\n>>> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>>\n>>\n>>       [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n> --\n> Ramon Diaz-Uriarte\n> Department of Biochemistry, Lab B-25\n> Facultad de Medicina\n> Universidad Aut?noma de Madrid\n> Arzobispo Morcillo, 4\n> 28029 Madrid\n> Spain\n>\n> Phone: +34-91-497-2412\n>\n> Email: rdiaz02 at gmail.com\n>        ramon.diaz at iib.uam.es\n>\n> http://ligarto.org/rdiaz\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On Wed, Apr 27, 2016 at 12:40 PM, Ramon Diaz-Uriarte <rdiaz02 at gmail.com> wrote:\n> Dear Bruce,\n>\n>\n> On Wed, 27-04-2016, at 19:00, Bruce Hoff <bruce.hoff at sagebase.org> wrote:\n>> Following up to m",
+      "thread_id": "thread-d88de4524e95",
+      "thread_depth": 5,
+      "month": "2016-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-46c407de2f60",
+      "subject": "[R-pkg-devel] Best approach to cascading errors",
+      "message_count": 2,
+      "participants": [
+        "Pedro Aphalo",
+        "Uwe Ligges"
+      ],
+      "started": "2016-04-06T19:26:07+03:00",
+      "last_reply": "2016-04-06T21:08:31+02:00",
+      "root_message_id": "msg-46c407de2f60"
+    },
+    {
+      "id": "thread-07e68297aec5",
+      "subject": "[R-pkg-devel] [R-SIG-Finance] [VC++ calling R] How to create a real-time interactive ticking time-series chart using dygraph via RInside?",
+      "message_count": 1,
+      "participants": [
+        "Joshua Ulrich"
+      ],
+      "started": "2016-04-11T10:10:46-05:00",
+      "last_reply": "2016-04-11T10:10:46-05:00",
+      "root_message_id": "msg-07e68297aec5"
+    },
+    {
+      "id": "thread-3cf6a1a4da7f",
+      "subject": "[R-pkg-devel] referencing Project Gutenberg license in my package",
+      "message_count": 1,
+      "participants": [
+        "Julia Silge"
+      ],
+      "started": "2016-04-11T13:44:30+00:00",
+      "last_reply": "2016-04-11T13:44:30+00:00",
+      "root_message_id": "msg-3cf6a1a4da7f"
+    },
+    {
+      "id": "thread-8a1b9e01105c",
+      "subject": "[R-pkg-devel] What to do with build-time-only utility scripts in package",
+      "message_count": 3,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Tim Keitt"
+      ],
+      "started": "2016-04-15T10:27:35-05:00",
+      "last_reply": "2016-04-15T13:30:46-05:00",
+      "root_message_id": "msg-8a1b9e01105c"
+    },
+    {
+      "id": "thread-bc4ec8f44f34",
+      "subject": "[R-pkg-devel] Submitting CRAN packages with hard-to-meet dependencies",
+      "message_count": 6,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Oliver Keyes",
+        "boB Rudis"
+      ],
+      "started": "2016-04-18T17:16:35-04:00",
+      "last_reply": "2016-04-20T10:29:00-04:00",
+      "root_message_id": "msg-bc4ec8f44f34"
+    },
+    {
+      "id": "thread-08538f28b34e",
+      "subject": "[R-pkg-devel] Compiling error with the new R.h header (R-devel 3.3.0 for Windows) when using the C++ function isnan() of <math.h>",
+      "message_count": 3,
+      "participants": [
+        "Antonio Canale",
+        "Dirk Eddelbuettel",
+        "Martyn Plummer"
+      ],
+      "started": "2016-04-20T14:28:20+02:00",
+      "last_reply": "2016-04-20T13:22:05+00:00",
+      "root_message_id": "msg-08538f28b34e"
+    },
+    {
+      "id": "thread-3d8d1bc2838a",
+      "subject": "[R-pkg-devel] Roxygen help documenting a S4 class",
+      "message_count": 3,
+      "participants": [
+        "Glenn Schultz",
+        "Hadley Wickham"
+      ],
+      "started": "2016-04-22T10:31:44-05:00",
+      "last_reply": "2016-04-22T18:54:17-05:00",
+      "root_message_id": "msg-3d8d1bc2838a"
+    },
+    {
+      "id": "thread-d88de4524e95",
+      "subject": "[R-pkg-devel] Has GitHub been used as a CRAN-style repository?",
+      "message_count": 8,
+      "participants": [
+        "Ben Bolker",
+        "Brian O'Meara",
+        "Bruce Hoff",
+        "Dirk Eddelbuettel",
+        "Henrik Bengtsson",
+        "Ramon Diaz-Uriarte",
+        "Thierry Onkelinx"
+      ],
+      "started": "2016-04-27T06:00:33-07:00",
+      "last_reply": "2016-04-27T13:05:40-07:00",
+      "root_message_id": "msg-d88de4524e95"
+    }
+  ]
+}

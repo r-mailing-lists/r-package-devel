@@ -1,0 +1,763 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2016-02",
+  "messages": [
+    {
+      "id": "msg-8142d74850a7",
+      "message_id": "<22191.7190.852199.122299@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "2016-02-01T09:49:26+01:00",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "subject_clean": "[R-pkg-devel] Problems with :::",
+      "in_reply_to": "<56AA44E4.3060205@ivt.baug.ethz.ch>",
+      "references": [
+        "<56AA0DF9.8020205@auckland.ac.nz>",
+        "<56AA15B0.7070000@gmail.com>",
+        "<56AA44E4.3060205@ivt.baug.ethz.ch>"
+      ],
+      "body_plain": ">>>>> Kirill M?ller <kirill.mueller at ivt.baug.ethz.ch>\n>>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n\n    > On 28.01.2016 14:20, Duncan Murdoch wrote:\n    >> If the class is just \"mytable\", then you'll have to\n    >> change it to \"ftable\" before calling stats::format().\n    > Side note: The following will fail, because format.ftable\n    > double-checks the class of its argument:\n\n    > format_ftable <- utils::getS3method(\"format\", \"ftable\")\n    > format_ftable(mytable)\n\n    > -Kirill\n\nWell, I don't think it would fail as that does\n\n    if (!inherits(x, \"ftable\")) \n        stop(\"'x' must be an \\\"ftable\\\" object\")\n\nand the OP did mention that his objects were flat tables.\n\nNote that the above is *good style* as opposed to the  \"bad\"\ncode I've seen so often in packages (and otherwise) which would\nuse something like\n\n   if(class(x) == \"ftable\")  ## really really bad\n\nbecause that code will work incorrectly for objects with S3\nclass attribute, say   c(\"myFtable\", \"ftable\")\n\nMartin",
+      "body_snippet": ">>>>> Kirill M?ller <kirill.mueller at ivt.baug.ethz.ch>\n>>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n\n    > On 28.01.2016 14:20, Duncan Murdoch wrote:\n    >> If the class is just \"mytable\", t",
+      "thread_id": "thread-8142d74850a7",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-d3d3315f7139",
+      "message_id": "<DUB127-W69D9BF9E743B88DF898D19D5DE0@phx.gbl>",
+      "from_name": "Berry Boessenkool",
+      "from_email_hash": "88183f5b02da143fd3450afd20b54db89006fcb0cebb65d9a124109bb7f2d3f0",
+      "date": "2016-02-01T10:39:59+01:00",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "subject_clean": "[R-pkg-devel] Problems with :::",
+      "in_reply_to": "<22191.7190.852199.122299@stat.math.ethz.ch>",
+      "references": [
+        "<56AA0DF9.8020205@auckland.ac.nz>",
+        "<56AA15B0.7070000@gmail.com>",
+        "<56AA44E4.3060205@ivt.baug.ethz.ch>",
+        "<22191.7190.852199.122299@stat.math.ethz.ch>"
+      ],
+      "body_plain": ">     if (!inherits(x, \"ftable\")) \n>    if(class(x) == \"ftable\")  ## really really bad\n\n\nThank you Martin, for pointing that out!\nI was not aware of it yet and changed all occurences in my package and added in note in my R course material.\n\n(This message is mainly an encouragement that some people actually read the mails and act on it, even if not usually replying).\n\nRegards,\nBerry\n\n\n> From: maechler at stat.math.ethz.ch\n> Date: Mon, 1 Feb 2016 09:49:26 +0100\n> To: kirill.mueller at ivt.baug.ethz.ch\n> CC: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] Problems with :::\n> \n> >>>>> Kirill M?ller <kirill.mueller at ivt.baug.ethz.ch>\n> >>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n> \n>     > On 28.01.2016 14:20, Duncan Murdoch wrote:\n>     >> If the class is just \"mytable\", then you'll have to\n>     >> change it to \"ftable\" before calling stats::format().\n>     > Side note: The following will fail, because format.ftable\n>     > double-checks the class of its argument:\n> \n>     > format_ftable <- utils::getS3method(\"format\", \"ftable\")\n>     > format_ftable(mytable)\n> \n>     > -Kirill\n> \n> Well, I don't think it would fail as that does\n> \n>     if (!inherits(x, \"ftable\")) \n>         stop(\"'x' must be an \\\"ftable\\\" object\")\n> \n> and the OP did mention that his objects were flat tables.\n> \n> Note that the above is *good style* as opposed to the  \"bad\"\n> code I've seen so often in packages (and otherwise) which would\n> use something like\n> \n>    if(class(x) == \"ftable\")  ## really really bad\n> \n> because that code will work incorrectly for objects with S3\n> class attribute, say   c(\"myFtable\", \"ftable\")\n> \n> Martin\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
+      "body_snippet": ">     if (!inherits(x, \"ftable\")) \n>    if(class(x) == \"ftable\")  ## really really bad\n\n\nThank you Martin, for pointing that out!\nI was not aware of it yet and changed all occurences in my package and",
+      "thread_id": "thread-8142d74850a7",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-16cf28d0b736",
+      "message_id": "<438D2EC9EAFE5946B2D5864670EA468E0179B0E0C8@MBXP01.ds.man.ac.uk>",
+      "from_name": "Georgi Boshnakov",
+      "from_email_hash": "7f9cf1d101e5f283d6c513194b7b3651e266057959d272dd3fc10966ecfad60f",
+      "date": "2016-02-01T13:46:10Z",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+      "references": [
+        "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi,\n\n>I have run into an issue while developing an R package. Specifically, my issue relates to what happens when I define an S3 length \n>method for my class. Here is my basic setup:\n\n># Here is the structure of myClass\n># uses an externalptr to operate on file using some C functions list(file = \"my/file/location\", handle = <externalptr>)\n\n># this function gets an S3Method() in NAMESPACE length.myClass <- function(x) {\n > .Call(\"get_class_length\",myPkg)\n>}\n\n>As you can see, myClass is just a list of two pieces of information about the particular object. Without a defined length method, length(myClass) would be 2. However, I defined a length method to give me the information about the amount of binary messages contained in the file the object points to. In one of my test files there are 82 messages and length(myObject) correctly returns 82. What I ran into is that I was crashing RStudio when rebuilding my package with an object of myClass in my environment. Only \n> removing my S3 length method caused the crash to not occur. After looking for memory leaks and other errors I finally noticed that > the str() on the object of myClass looked odd. It returned something like this:\n> List of 82\n> $ file  : chr \"my/file/location\"\n> $ handle:<externalptr>\n >$ NA:\n>Error in object[[i]] : subscript out of bounds\n\n\nYou could define methods for indexing (\"[\" and \"[[\") for objects from your class. \nSince you have not defined special subsetting methods for your class, R uses a default one,  but honours your length(), hence the mess.\n\nRegards,\nGeorgi Boshnkaov\n\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Nathan Wendt\nSent: 30 January 2016 19:25\nTo: r-package-devel at r-project.org\nSubject: [R-pkg-devel] S3 length method behavior\n\nHello,\n\nI have run into an issue while developing an R package. Specifically, my issue relates to what happens when I define an S3 length method for my class. Here is my basic setup:\n\n# Here is the structure of myClass\n# uses an externalptr to operate on file using some C functions list(file = \"my/file/location\", handle = <externalptr>)\n\n# this function gets an S3Method() in NAMESPACE length.myClass <- function(x) {\n  .Call(\"get_class_length\",myPkg)\n}\n\nAs you can see, myClass is just a list of two pieces of information about the particular object. Without a defined length method, length(myClass) would be 2. However, I defined a length method to give me the information about the amount of binary messages contained in the file the object points to. In one of my test files there are 82 messages and length(myObject) correctly returns 82. What I ran into is that I was crashing RStudio when rebuilding my package with an object of myClass in my environment. Only removing my S3 length method caused the crash to not occur. After looking for memory leaks and other errors I finally noticed that the str() on the object of myClass looked odd. It returned something like this:\n\nList of 82\n $ file  : chr \"my/file/location\"\n $ handle:<externalptr>\n $ NA:\nError in object[[i]] : subscript out of bounds\n\nIt seems that when I define an S3 method for length that somehow the object of myClass then gets restructured to have the length returned by the function. There are 82 messages in the file, but myClass objects should only have two elements. My best guess here is that the RStudio crash was happening because the object was misrepresented internally. Of course, I cannot be sure. None of my tests pointed to anything useful.\n\nMy questions are, then, whether this behavior makes sense and what to do about it. If I define my own str() method, will that fix it? I think I am just misunderstanding what is going on with the methods I have defined.\nHopefully, someone can offer some clarity.\n\nThanks,\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi,\n\n>I have run into an issue while developing an R package. Specifically, my issue relates to what happens when I define an S3 length \n>method for my class. Here is my basic setup:\n\n># Here is the s",
+      "thread_id": "thread-16cf28d0b736",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-d37c013189f3",
+      "message_id": "<CA+8X3fU+HjHeH1Wbz0BDa3yCENK9eA+FxNYRTW-9sadER4iYWA@mail.gmail.com>",
+      "from_name": "Jim Lemon",
+      "from_email_hash": "4fd4de8f79714fe62432d41802cdcfa3560d905c372a2f11e0e4da4166fd729b",
+      "date": "2016-02-02T09:24:29+11:00",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": "<438D2EC9EAFE5946B2D5864670EA468E0179B0E0C8@MBXP01.ds.man.ac.uk>",
+      "references": [
+        "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+        "<438D2EC9EAFE5946B2D5864670EA468E0179B0E0C8@MBXP01.ds.man.ac.uk>"
+      ],
+      "body_plain": "Hi Nathan,\nPerhaps if you defined your \"length\" object as \"nbm\" (number of binary\nmessages), it would not interfere with the default \"length\".\n\nJim\n\n\nOn Tue, Feb 2, 2016 at 12:46 AM, Georgi Boshnakov <\ngeorgi.boshnakov at manchester.ac.uk> wrote:\n\n> Hi,\n>\n> >I have run into an issue while developing an R package. Specifically, my\n> issue relates to what happens when I define an S3 length\n> >method for my class. Here is my basic setup:\n>\n> ># Here is the structure of myClass\n> ># uses an externalptr to operate on file using some C functions list(file\n> = \"my/file/location\", handle = <externalptr>)\n>\n> ># this function gets an S3Method() in NAMESPACE length.myClass <-\n> function(x) {\n>  > .Call(\"get_class_length\",myPkg)\n> >}\n>\n> >As you can see, myClass is just a list of two pieces of information about\n> the particular object. Without a defined length method, length(myClass)\n> would be 2. However, I defined a length method to give me the information\n> about the amount of binary messages contained in the file the object points\n> to. In one of my test files there are 82 messages and length(myObject)\n> correctly returns 82. What I ran into is that I was crashing RStudio when\n> rebuilding my package with an object of myClass in my environment. Only\n> > removing my S3 length method caused the crash to not occur. After\n> looking for memory leaks and other errors I finally noticed that > the\n> str() on the object of myClass looked odd. It returned something like this:\n> > List of 82\n> > $ file  : chr \"my/file/location\"\n> > $ handle:<externalptr>\n>  >$ NA:\n> >Error in object[[i]] : subscript out of bounds\n>\n>\n> You could define methods for indexing (\"[\" and \"[[\") for objects from your\n> class.\n> Since you have not defined special subsetting methods for your class, R\n> uses a default one,  but honours your length(), hence the mess.\n>\n> Regards,\n> Georgi Boshnkaov\n>\n>\n> -----Original Message-----\n> From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On\n> Behalf Of Nathan Wendt\n> Sent: 30 January 2016 19:25\n> To: r-package-devel at r-project.org\n> Subject: [R-pkg-devel] S3 length method behavior\n>\n> Hello,\n>\n> I have run into an issue while developing an R package. Specifically, my\n> issue relates to what happens when I define an S3 length method for my\n> class. Here is my basic setup:\n>\n> # Here is the structure of myClass\n> # uses an externalptr to operate on file using some C functions list(file\n> = \"my/file/location\", handle = <externalptr>)\n>\n> # this function gets an S3Method() in NAMESPACE length.myClass <-\n> function(x) {\n>   .Call(\"get_class_length\",myPkg)\n> }\n>\n> As you can see, myClass is just a list of two pieces of information about\n> the particular object. Without a defined length method, length(myClass)\n> would be 2. However, I defined a length method to give me the information\n> about the amount of binary messages contained in the file the object points\n> to. In one of my test files there are 82 messages and length(myObject)\n> correctly returns 82. What I ran into is that I was crashing RStudio when\n> rebuilding my package with an object of myClass in my environment. Only\n> removing my S3 length method caused the crash to not occur. After looking\n> for memory leaks and other errors I finally noticed that the str() on the\n> object of myClass looked odd. It returned something like this:\n>\n> List of 82\n>  $ file  : chr \"my/file/location\"\n>  $ handle:<externalptr>\n>  $ NA:\n> Error in object[[i]] : subscript out of bounds\n>\n> It seems that when I define an S3 method for length that somehow the\n> object of myClass then gets restructured to have the length returned by the\n> function. There are 82 messages in the file, but myClass objects should\n> only have two elements. My best guess here is that the RStudio crash was\n> happening because the object was misrepresented internally. Of course, I\n> cannot be sure. None of my tests pointed to anything useful.\n>\n> My questions are, then, whether this behavior makes sense and what to do\n> about it. If I define my own str() method, will that fix it? I think I am\n> just misunderstanding what is going on with the methods I have defined.\n> Hopefully, someone can offer some clarity.\n>\n> Thanks,\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Nathan,\nPerhaps if you defined your \"length\" object as \"nbm\" (number of binary\nmessages), it would not interfere with the default \"length\".\n\nJim\n\n\nOn Tue, Feb 2, 2016 at 12:46 AM, Georgi Boshnakov ",
+      "thread_id": "thread-16cf28d0b736",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-0ac4d34864fe",
+      "message_id": "<CABdHhvGMo4MzYDuphEaNrSBTnEU7EBdT8_K9n5ZwEE=W9pq1Cg@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "78ed178a2a834406115d2917490a5d6eb6217493116357bc9bb8ae3e96968152",
+      "date": "2016-02-02T09:28:48-06:00",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+      "references": [
+        "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>"
+      ],
+      "body_plain": "I've found that it's a very bad idea to provide length or names\nmethods for just this reason.\nHadley\n\nOn Sat, Jan 30, 2016 at 1:25 PM, Nathan Wendt <nawendt84 at gmail.com> wrote:\n> Hello,\n>\n> I have run into an issue while developing an R package. Specifically, my\n> issue relates to what happens when I define an S3 length method for my\n> class. Here is my basic setup:\n>\n> # Here is the structure of myClass\n> # uses an externalptr to operate on file using some C functions\n> list(file = \"my/file/location\", handle = <externalptr>)\n>\n> # this function gets an S3Method() in NAMESPACE\n> length.myClass <- function(x) {\n>   .Call(\"get_class_length\",myPkg)\n> }\n>\n> As you can see, myClass is just a list of two pieces of information about\n> the particular object. Without a defined length method, length(myClass)\n> would be 2. However, I defined a length method to give me the information\n> about the amount of binary messages contained in the file the object points\n> to. In one of my test files there are 82 messages and length(myObject)\n> correctly returns 82. What I ran into is that I was crashing RStudio when\n> rebuilding my package with an object of myClass in my environment. Only\n> removing my S3 length method caused the crash to not occur. After looking\n> for memory leaks and other errors I finally noticed that the str() on the\n> object of myClass looked odd. It returned something like this:\n>\n> List of 82\n>  $ file  : chr \"my/file/location\"\n>  $ handle:<externalptr>\n>  $ NA:\n> Error in object[[i]] : subscript out of bounds\n>\n> It seems that when I define an S3 method for length that somehow the object\n> of myClass then gets restructured to have the length returned by the\n> function. There are 82 messages in the file, but myClass objects should\n> only have two elements. My best guess here is that the RStudio crash was\n> happening because the object was misrepresented internally. Of course, I\n> cannot be sure. None of my tests pointed to anything useful.\n>\n> My questions are, then, whether this behavior makes sense and what to do\n> about it. If I define my own str() method, will that fix it? I think I am\n> just misunderstanding what is going on with the methods I have defined.\n> Hopefully, someone can offer some clarity.\n>\n> Thanks,\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_snippet": "I've found that it's a very bad idea to provide length or names\nmethods for just this reason.\nHadley\n\nOn Sat, Jan 30, 2016 at 1:25 PM, Nathan Wendt <nawendt84 at gmail.com> wrote:\n> Hello,\n>\n> I have ",
+      "thread_id": "thread-0ac4d34864fe",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-ca6c8edbb13c",
+      "message_id": "<CANVKczP-UhrEag0ea_LKc1MreezBMXpNMaL2v2ewMGacoe+DQw@mail.gmail.com>",
+      "from_name": "Barry Rowlingson",
+      "from_email_hash": "94f5c718996fafe3dcf7003ba82c6656414e43b8d3f2b04af298250f493ba5eb",
+      "date": "2016-02-02T17:23:46Z",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": "<CABdHhvGMo4MzYDuphEaNrSBTnEU7EBdT8_K9n5ZwEE=W9pq1Cg@mail.gmail.com>",
+      "references": [
+        "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+        "<CABdHhvGMo4MzYDuphEaNrSBTnEU7EBdT8_K9n5ZwEE=W9pq1Cg@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> I've found that it's a very bad idea to provide length or names\n> methods for just this reason.\n\n\n>> After looking\n>> for memory leaks and other errors I finally noticed that the str() on the\n>> object of myClass looked odd. It returned something like this:\n>>\n>> List of 82\n>>  $ file  : chr \"my/file/location\"\n>>  $ handle:<externalptr>\n>>  $ NA:\n>> Error in object[[i]] : subscript out of bounds\n\n\n>> My questions are, then, whether this behavior makes sense and what to do\n>> about it. If I define my own str() method, will that fix it? I think I am\n>> just misunderstanding what is going on with the methods I have defined.\n>> Hopefully, someone can offer some clarity.\n\n Defining a str on your class will at least fix the out of bounds error:\n\nCreate a trivial S3 class:\n\n > z=list(1,22)\n > class(z)=\"foo\"\n\nlength method looks at the second element:\n\n > length.foo=function(x){x[[2]]}\n > length(z)\n[1] 22\n\n and str barfs:\n\n > str(z)\nList of 22\n $ : num 1\n $ : num 22\n $ :Error in object[[i]] : subscript out of bounds\n\nDefine a str method:\n\n > str.foo=function(object,...){for(i in\n1:length(unclass(object))){str(unclass(object[[i]]))}}\n > str(z)\n num 1\n num 22\n\nBUT... the real problem is that S3 classes are seriously informal and\nthere's no concept of what methods you need to define on a class\nbecause there's no concept of an \"interface\" that new classes have to\nconform to. So stuff breaks, seemingly at random, and via action at a\ndistance. Somewhere something is going to expect z[[1]] to\nz[[length(z)]] to exist, which is what the default str is doing...\n\n+1 on Hadley - don't override any basic R structural methods, create\nnew ones with new names. You can make them more meaningful too. For\nyour example, maybe \"messageCount(myObject)\"?\n\nBarry",
+      "body_snippet": "On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> I've found that it's a very bad idea to provide length or names\n> methods for just this reason.\n\n\n>> After looking\n>> f",
+      "thread_id": "thread-0ac4d34864fe",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-680fc6df7aef",
+      "message_id": "<CAB3F6ByBDc0BDR_axD-Y=EdUY+A=tVPFf87G=Vg4C_8bSOuTeQ@mail.gmail.com>",
+      "from_name": "Nathan Wendt",
+      "from_email_hash": "1e0dcb722c3f59ed32f860fa4d88c51c25a14de686b92bab9105ed5d69d3ad61",
+      "date": "2016-02-02T12:00:33-06:00",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": "<CANVKczP-UhrEag0ea_LKc1MreezBMXpNMaL2v2ewMGacoe+DQw@mail.gmail.com>",
+      "references": [
+        "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+        "<CABdHhvGMo4MzYDuphEaNrSBTnEU7EBdT8_K9n5ZwEE=W9pq1Cg@mail.gmail.com>",
+        "<CANVKczP-UhrEag0ea_LKc1MreezBMXpNMaL2v2ewMGacoe+DQw@mail.gmail.com>"
+      ],
+      "body_plain": "After toying around with trying some of the suggested fixes, I have to\nagree that it's more trouble than it is worth to add my own primitive\nmethods. It'll work just fine to move on and write my own methods. Thanks\nto all for the explanations and suggestions.\n\nOn Tue, Feb 2, 2016 at 11:23 AM, Barry Rowlingson <\nb.rowlingson at lancaster.ac.uk> wrote:\n\n> On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com>\n> wrote:\n> > I've found that it's a very bad idea to provide length or names\n> > methods for just this reason.\n>\n>\n> >> After looking\n> >> for memory leaks and other errors I finally noticed that the str() on\n> the\n> >> object of myClass looked odd. It returned something like this:\n> >>\n> >> List of 82\n> >>  $ file  : chr \"my/file/location\"\n> >>  $ handle:<externalptr>\n> >>  $ NA:\n> >> Error in object[[i]] : subscript out of bounds\n>\n>\n> >> My questions are, then, whether this behavior makes sense and what to do\n> >> about it. If I define my own str() method, will that fix it? I think I\n> am\n> >> just misunderstanding what is going on with the methods I have defined.\n> >> Hopefully, someone can offer some clarity.\n>\n>  Defining a str on your class will at least fix the out of bounds error:\n>\n> Create a trivial S3 class:\n>\n>  > z=list(1,22)\n>  > class(z)=\"foo\"\n>\n> length method looks at the second element:\n>\n>  > length.foo=function(x){x[[2]]}\n>  > length(z)\n> [1] 22\n>\n>  and str barfs:\n>\n>  > str(z)\n> List of 22\n>  $ : num 1\n>  $ : num 22\n>  $ :Error in object[[i]] : subscript out of bounds\n>\n> Define a str method:\n>\n>  > str.foo=function(object,...){for(i in\n> 1:length(unclass(object))){str(unclass(object[[i]]))}}\n>  > str(z)\n>  num 1\n>  num 22\n>\n> BUT... the real problem is that S3 classes are seriously informal and\n> there's no concept of what methods you need to define on a class\n> because there's no concept of an \"interface\" that new classes have to\n> conform to. So stuff breaks, seemingly at random, and via action at a\n> distance. Somewhere something is going to expect z[[1]] to\n> z[[length(z)]] to exist, which is what the default str is doing...\n>\n> +1 on Hadley - don't override any basic R structural methods, create\n> new ones with new names. You can make them more meaningful too. For\n> your example, maybe \"messageCount(myObject)\"?\n>\n> Barry\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "After toying around with trying some of the suggested fixes, I have to\nagree that it's more trouble than it is worth to add my own primitive\nmethods. It'll work just fine to move on and write my own m",
+      "thread_id": "thread-0ac4d34864fe",
+      "thread_depth": 2,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-2e9a65bd9687",
+      "message_id": "<A7206C4442984C489FB32461F8E78C03@mail2world.com>",
+      "from_name": "Irucka Embry",
+      "from_email_hash": "a94abb2f80eb6c2c6f3a18549d076ac1f48a7d0b6bbd750518847973d41796df",
+      "date": "2016-02-02T11:23:51-08:00",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "subject_clean": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "https://gitlab.com/iembry/install.load/raw/master/R/install_load.R is\nthe link to raw R code for my package. I have been successful at\nbuilding the package on GNU/Linux, but building on Windows fails. I have\nused R 3.2.3 in both cases.\n\nOn Windows, using readLines, this is the result of the Line 1:\n\n[1] \"?#' Check, Install and Load CRAN & USGS GRAN Packages\"\n\n\nOn GNU/Linux, using readLines, this is the result of Line 1:\n\n[1] \"#' Check, Install and Load CRAN & USGS GRAN Packages\"\n\n\nCan someone offer suggestions on how to fix this character issue for\nWindows package development?\n\nI have created the R code with the Kate text editor. I have not had this\nissue in the past with any of my R packages using the Kate text editor.\n\nI have a few packages that have the same issue.\n\nThank you.\n\nIrucka Embry \n\n\n<span id=m2wTl><p><font face=\"Arial, Helvetica, sans-serif\" size=\"2\" style=\"font-size:13.5px\">_______________________________________________________________<BR>Get the Free email that has everyone talking at <a href=http://www.mail2world.com target=new>http://www.mail2world.com</a><br>  <font color=#999999>Unlimited Email Storage &#150; POP3 &#150; Calendar &#150; SMS &#150; Translator &#150; Much More!</font></font></span>\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "https://gitlab.com/iembry/install.load/raw/master/R/install_load.R is\nthe link to raw R code for my package. I have been successful at\nbuilding the package on GNU/Linux, but building on Windows fails.",
+      "thread_id": "thread-2e9a65bd9687",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-1858a9647c48",
+      "message_id": "<22193.45496.260831.363295@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "2016-02-03T08:52:24+01:00",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "subject_clean": "[R-pkg-devel] S3 length method behavior",
+      "in_reply_to": "<CANVKczP-UhrEag0ea_LKc1MreezBMXpNMaL2v2ewMGacoe+DQw@mail.gmail.com>",
+      "references": [
+        "<CAB3F6BwvNLQUFOJF_V4LzO86P17pQCaTe5ZjjHLW6OAgy88ZiA@mail.gmail.com>",
+        "<CABdHhvGMo4MzYDuphEaNrSBTnEU7EBdT8_K9n5ZwEE=W9pq1Cg@mail.gmail.com>",
+        "<CANVKczP-UhrEag0ea_LKc1MreezBMXpNMaL2v2ewMGacoe+DQw@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> Barry Rowlingson <b.rowlingson at lancaster.ac.uk>\n>>>>>     on Tue, 2 Feb 2016 17:23:46 +0000 writes:\n\n    > On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n    >> I've found that it's a very bad idea to provide length or names\n    >> methods for just this reason.\n\nwell, not quite, see below ..\n\n    >>> After looking\n    >>> for memory leaks and other errors I finally noticed that the str() on the\n    >>> object of myClass looked odd. It returned something like this:\n    >>> \n    >>> List of 82\n    >>> $ file  : chr \"my/file/location\"\n    >>> $ handle:<externalptr>\n    >>> $ NA:\n    >>> Error in object[[i]] : subscript out of bounds\n\n\n    >>> My questions are, then, whether this behavior makes sense and what to do\n    >>> about it. If I define my own str() method, will that fix it? I think I am\n    >>> just misunderstanding what is going on with the methods I have defined.\n    >>> Hopefully, someone can offer some clarity.\n\n    > Defining a str on your class will at least fix the out of bounds error:\n\n    > Create a trivial S3 class:\n\n    >> z=list(1,22)\n    >> class(z)=\"foo\"\n\n    > length method looks at the second element:\n\n    >> length.foo=function(x){x[[2]]}\n    >> length(z)\n    > [1] 22\n\n    > and str barfs:\n\n    >> str(z)\n    > List of 22\n    > $ : num 1\n    > $ : num 22\n    > $ :Error in object[[i]] : subscript out of bounds\n\n    > Define a str method:\n\n    >> str.foo=function(object,...){for(i in\n    > 1:length(unclass(object))){str(unclass(object[[i]]))}}\n    >> str(z)\n    > num 1\n    > num 22\n\n    > BUT... the real problem is that S3 classes are seriously informal and\n    > there's no concept of what methods you need to define on a class\n    > because there's no concept of an \"interface\" that new classes have to\n    > conform to. So stuff breaks, seemingly at random, and via action at a\n    > distance. Somewhere something is going to expect z[[1]] to\n    > z[[length(z)]] to exist, which is what the default str is doing...\n\nIndeed.\nStill, it can also be advantageous to define such methods *consistently*.\n\nWith *consistence*, I mean that at least\n\n- names(obj) either returns NULL or a character vector of\n  length length(obj), and that as Barry mentions,\n- obj[[ i ]]  is meaningful  for (i in  seq_along(obj))\n           [yes, seq_along(.) automatically works with your length() method !]\n\n- often you'd also want  obj[ i ]  to also work consistently\n  (sometimes identically to `[[`)\n\nI'd say that oftentimes it may be easier (and more \"rewarding\")\nto define such `[` and `[[` methods for your class anyway.\n\nAs author of str(), I'll declare the design(*) of str() to be such\nthat with these methods (length, names, `[`, `[[`) defined\nconsistently, str.default(obj) already works sensibly.  \nThe alternative is indeed to define your own str() method.  \n\nOne of the two you'd want often, because e.g.,\n  str( list( <obj1>, <obj2> ) )\nor similar things should work too.\n\n--\n(*) to be honest, str() grew and developed very much\n    historically, so the above is more an \"implementation principle\"\n\n    > +1 on Hadley - don't override any basic R structural methods, create\n    > new ones with new names. You can make them more meaningful too. For\n    > your example, maybe \"messageCount(myObject)\"?\n\n    > Barry",
+      "body_snippet": ">>>>> Barry Rowlingson <b.rowlingson at lancaster.ac.uk>\n>>>>>     on Tue, 2 Feb 2016 17:23:46 +0000 writes:\n\n    > On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n    >",
+      "thread_id": "thread-0ac4d34864fe",
+      "thread_depth": 2,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-c90dd924e2d4",
+      "message_id": "<CAA2dc0CCOND8iTUaHoBLA5yAn6YUpw5U+dzYVTqdPM-33ak00g@mail.gmail.com>",
+      "from_name": "code M",
+      "from_email_hash": "a1177a601f6f9f76384500f71a26ae11392f2f375c0b6211363e72ab1d992a32",
+      "date": "2016-02-03T09:37:23+01:00",
+      "subject": "[R-pkg-devel] compiling and executing binaries while testing",
+      "subject_clean": "[R-pkg-devel] compiling and executing binaries while testing",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "hi, i am sorry if this has been asked already,\nbut i could not find an answer.\n\nin short: am i allowed to download, compile and\nexecute (github) packages while testing?\n\nreason for this: the package i develop is a simple\n'bridge', the goal is to allow users to easily access\n(commonly used or their own) machine learning\nbinaries (like LIBSVM). obviously i will not add any\nkind of binary to the package itself, but on the other\nhand i cannot test the functionality of the package\nwithout having a binary. therefore it seems most\nreasonable to compile the binary while testing and\ndelete it afterwards.\n\nare there any objections to this procedure?\n\nthanks & all the best,\naydin",
+      "body_snippet": "hi, i am sorry if this has been asked already,\nbut i could not find an answer.\n\nin short: am i allowed to download, compile and\nexecute (github) packages while testing?\n\nreason for this: the package i",
+      "thread_id": "thread-c90dd924e2d4",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-c199da7f838e",
+      "message_id": "<56B1CD99.4020501@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-02-03T04:51:21-05:00",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "subject_clean": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "in_reply_to": "<A7206C4442984C489FB32461F8E78C03@mail2world.com>",
+      "references": [
+        "<A7206C4442984C489FB32461F8E78C03@mail2world.com>"
+      ],
+      "body_plain": "On 02/02/2016 2:23 PM, Irucka Embry wrote:\n> https://gitlab.com/iembry/install.load/raw/master/R/install_load.R is\n> the link to raw R code for my package. I have been successful at\n> building the package on GNU/Linux, but building on Windows fails. I have\n> used R 3.2.3 in both cases.\n>\n> On Windows, using readLines, this is the result of the Line 1:\n>\n> [1] \"?#' Check, Install and Load CRAN & USGS GRAN Packages\"\n>\n>\n> On GNU/Linux, using readLines, this is the result of Line 1:\n>\n> [1] \"#' Check, Install and Load CRAN & USGS GRAN Packages\"\n>\n>\n> Can someone offer suggestions on how to fix this character issue for\n> Windows package development?\n\nI can't see any difference there.  Is that the point, or do you see a \ndifference?\n\nWhat is the exact error message you get when parsing?\n\nDuncan Murdoch\n\n>\n> I have created the R code with the Kate text editor. I have not had this\n> issue in the past with any of my R packages using the Kate text editor.\n>\n> I have a few packages that have the same issue.\n>\n> Thank you.\n>\n> Irucka Embry\n>\n>\n> <span id=m2wTl><p><font face=\"Arial, Helvetica, sans-serif\" size=\"2\" style=\"font-size:13.5px\">_______________________________________________________________<BR>Get the Free email that has everyone talking at <a href=http://www.mail2world.com target=new>http://www.mail2world.com</a><br>  <font color=#999999>Unlimited Email Storage &#150; POP3 &#150; Calendar &#150; SMS &#150; Translator &#150; Much More!</font></font></span>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 02/02/2016 2:23 PM, Irucka Embry wrote:\n> https://gitlab.com/iembry/install.load/raw/master/R/install_load.R is\n> the link to raw R code for my package. I have been successful at\n> building the pac",
+      "thread_id": "thread-2e9a65bd9687",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-8ec6ba61c792",
+      "message_id": "<Zen-1aQxWo-0004Sg-O5@smarthost01a.mail.zen.net.uk>",
+      "from_name": "Michael Dewey",
+      "from_email_hash": "dae04c4953348ab1a35e8427343ae0b4fd8830bc053feb0d2b09ee16a3c19a2d",
+      "date": "2016-02-03T13:31:26Z",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "subject_clean": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n\n> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n> > https://gitlab.com/iembry/install.load/raw/master/R/install_load.R\n> is\n> > the link to raw R code for my package. I have been successful at\n> > building the package on GNU/Linux, but building on Windows fails. I have\n> > used R 3.2.3 in both cases.\n> >\n> > On Windows, using readLines, this is the result of the Line 1:\n> >\n> > [1] \"???#' Check, Install and Load CRAN & USGS GRAN Packages\"\n> >\n\nWhen I view that line via my webmail and using Chrome browser on Windows I see a string which seems to start:\n\nlower case i possibly with an umlaut\nclosing guillemet\ninverted question mark\nhash symbol\n\nwhereas the GNU/Linux example just starts hash symbol\n\nHope that helps someone\n\n> >\n> > On GNU/Linux, using readLines, this is the result of Line 1:\n> >\n> > [1] \"#' Check, Install and Load CRAN & USGS GRAN Packages\"\n> >\n> >\n> > Can someone offer suggestions on how to fix this character issue for\n> > Windows package development?\n> \n> I can't see any difference there.  Is that the point, or do you see a \n> difference?\n> \n> What is the exact error message you get when parsing?\n> \n> Duncan Murdoch\n> \n> >\n> > I have created the R code with the Kate text editor. I have not had this\n> > issue in the past with any of my R packages using the Kate text editor.\n> >\n> > I have a few packages that have the same issue.\n> >\n> > Thank you.\n> >\n> > Irucka Embry\n> >\n> >\n> > _______________________________________________________________Get\n> the Free email that has everyone talking at  \t[[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org\n> mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n> \n> ______________________________________________\n> R-package-devel at r-project.org\n> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n\n> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n> > https://gitlab.com/iembry/install.load/raw/master/R/install_load.R\n> is\n> > the link to raw R cod",
+      "thread_id": "thread-8ec6ba61c792",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-1494a9607ad6",
+      "message_id": "<56B202BD.2010807@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2016-02-03T14:38:05+01:00",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "subject_clean": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "in_reply_to": "<Zen-1aQxWo-0004Sg-O5@smarthost01a.mail.zen.net.uk>",
+      "references": [
+        "<Zen-1aQxWo-0004Sg-O5@smarthost01a.mail.zen.net.uk>"
+      ],
+      "body_plain": "On 03.02.2016 14:31, Michael Dewey wrote:\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n>\n>> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n>>> https://gitlab.com/iembry/install.load/raw/master/R/install_load.R\n>> is\n>>> the link to raw R code for my package. I have been successful at\n>>> building the package on GNU/Linux, but building on Windows fails. I have\n>>> used R 3.2.3 in both cases.\n>>>\n>>> On Windows, using readLines, this is the result of the Line 1:\n>>>\n>>> [1] \"???#' Check, Install and Load CRAN & USGS GRAN Packages\"\n>>>\n>\n> When I view that line via my webmail and using Chrome browser on Windows I see a string which seems to start:\n>\n> lower case i possibly with an umlaut\n> closing guillemet\n> inverted question mark\n> hash symbol\n>\n\n\nI guess the file is UTF-8 encoded and you read it under Windows as \nlatin1 or therelike, so declare an encoding.\n\nBest,\nUwe Ligges\n\n\n\n> whereas the GNU/Linux example just starts hash symbol\n>\n> Hope that helps someone\n>\n>>>\n>>> On GNU/Linux, using readLines, this is the result of Line 1:\n>>>\n>>> [1] \"#' Check, Install and Load CRAN & USGS GRAN Packages\"\n>>>\n>>>\n>>> Can someone offer suggestions on how to fix this character issue for\n>>> Windows package development?\n>>\n>> I can't see any difference there.  Is that the point, or do you see a\n>> difference?\n>>\n>> What is the exact error message you get when parsing?\n>>\n>> Duncan Murdoch\n>>\n>>>\n>>> I have created the R code with the Kate text editor. I have not had this\n>>> issue in the past with any of my R packages using the Kate text editor.\n>>>\n>>> I have a few packages that have the same issue.\n>>>\n>>> Thank you.\n>>>\n>>> Irucka Embry\n>>>\n>>>\n>>> _______________________________________________________________Get\n>> the Free email that has everyone talking at  \t[[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org\n>> mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org\n>> mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 03.02.2016 14:31, Michael Dewey wrote:\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n>\n>> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n>>> https://gitlab.com/iembry/install.load/raw/master/R",
+      "thread_id": "thread-8ec6ba61c792",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-f4151939ddf8",
+      "message_id": "<22194.17461.108363.350023@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-02-03T12:17:25-06:00",
+      "subject": "[R-pkg-devel] compiling and executing binaries while testing",
+      "subject_clean": "[R-pkg-devel] compiling and executing binaries while testing",
+      "in_reply_to": "<CAA2dc0CCOND8iTUaHoBLA5yAn6YUpw5U+dzYVTqdPM-33ak00g@mail.gmail.com>",
+      "references": [
+        "<CAA2dc0CCOND8iTUaHoBLA5yAn6YUpw5U+dzYVTqdPM-33ak00g@mail.gmail.com>"
+      ],
+      "body_plain": "Dear 'code M',\n\nWe all participate here with 'vizors up' and clear view of each other's\nidentities. Please consider doing the same.\n\nOn 3 February 2016 at 09:37, code M wrote:\n| hi, i am sorry if this has been asked already,\n| but i could not find an answer.\n| \n| in short: am i allowed to download, compile and\n| execute (github) packages while testing?\n\nOn you own machine: sure, do whatever.\n\nOn CRAN: I do not know, and I don't get to set the rules but at a minimum\nthere are time limits for tests.\n \n| reason for this: the package i develop is a simple\n| 'bridge', the goal is to allow users to easily access\n| (commonly used or their own) machine learning\n| binaries (like LIBSVM). obviously i will not add any\n\nThat is an odd example as LIBSVM has been packaged for R for years if not\ndecades -- eg starting the with common package 'e1071', see JSS Vol 15 Issue\n9 in 2006 for a paper by the authors.\n\n| kind of binary to the package itself, but on the other\n| hand i cannot test the functionality of the package\n| without having a binary. therefore it seems most\n| reasonable to compile the binary while testing and\n| delete it afterwards.\n\nMaybe you can mock the tests otherwise?  Or just depend on e1071 for testing?\n \n| are there any objections to this procedure?\n\n\"Maybe\".\n\nIn general, \"it is complicated\" and \"it depends\".  Christoph Sax and I just\ncreated and released a package acting as an installer for binaries off GitHub\nbut I don't think you one generalize this in as unqualified a manner as you\nsuggest here.\n\nDirk\n\n| \n| thanks & all the best,\n| aydin\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Dear 'code M',\n\nWe all participate here with 'vizors up' and clear view of each other's\nidentities. Please consider doing the same.\n\nOn 3 February 2016 at 09:37, code M wrote:\n| hi, i am sorry if this",
+      "thread_id": "thread-c90dd924e2d4",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-10261da35a7c",
+      "message_id": "<38D5BA98FA0A417D90A080268029836C@mail2world.com>",
+      "from_name": "Irucka Embry",
+      "from_email_hash": "a94abb2f80eb6c2c6f3a18549d076ac1f48a7d0b6bbd750518847973d41796df",
+      "date": "2016-02-03T14:20:50-08:00",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "subject_clean": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi everyone, thank you for the responses.\n\nI did some more searching after I had posted my question. It was a BOM\n(Byte Order Mark) issue. I removed the BOM from all of my files and I\nhave been successful at submitting the packages to CRAN.\n\nThank you again.\n\nIrucka\n\n\n<-----Original Message-----> \n>From: Uwe Ligges [ligges at statistik.tu-dortmund.de]\n>Sent: 2/3/2016 7:38:05 AM\n>To:\nlists at dewey.myzen.co.uk;murdoch.duncan at gmail.com;iruckaE at mail2world.com;\nr-package-devel at r-\n>project.org\n>Subject: Re: [R-pkg-devel] Package fails to build on Windows only,\nbuilds on GNU/Linux (parse issue)\n>\n>On 03.02.2016 14:31, Michael Dewey wrote:\n>> Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n>>\n>>> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n>>>> https://gitlab.com/iembry/install.load/raw/master/R/install_load.R\n>>> is\n>>>> the link to raw R code for my package. I have been successful at\n>>>> building the package on GNU/Linux, but building on Windows fails. I\nhave\n>>>> used R 3.2.3 in both cases.\n>>>>\n>>>> On Windows, using readLines, this is the result of the Line 1:\n>>>>\n>>>> [1] \"?#' Check, Install and Load CRAN & USGS GRAN Packages\"\n>>>>\n>>\n>> When I view that line via my webmail and using Chrome browser on\nWindows I see a string which \n>seems to start:\n>>\n>> lower case i possibly with an umlaut\n>> closing guillemet\n>> inverted question mark\n>> hash symbol\n>>\n>\n>\n>I guess the file is UTF-8 encoded and you read it under Windows as \n>latin1 or therelike, so declare an encoding.\n>\n>Best,\n>Uwe Ligges\n>\n>\n>\n>> whereas the GNU/Linux example just starts hash symbol\n>>\n>> Hope that helps someone\n>>\n>>>>\n>>>> On GNU/Linux, using readLines, this is the result of Line 1:\n>>>>\n>>>> [1] \"#' Check, Install and Load CRAN & USGS GRAN Packages\"\n>>>>\n>>>>\n>>>> Can someone offer suggestions on how to fix this character issue\nfor\n>>>> Windows package development?\n>>>\n>>> I can't see any difference there. Is that the point, or do you see a\n>>> difference?\n>>>\n>>> What is the exact error message you get when parsing?\n>>>\n>>> Duncan Murdoch\n>>>\n>>>>\n>>>> I have created the R code with the Kate text editor. I have not had\nthis\n>>>> issue in the past with any of my R packages using the Kate text\neditor.\n>>>>\n>>>> I have a few packages that have the same issue.\n>>>>\n>>>> Thank you.\n>>>>\n>>>> Irucka Embry\n>>>>\n>>>>\n>>>> _______________________________________________________________Get\n>>> the Free email that has everyone talking at [[alternative HTML\nversion deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org\n>>> mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org\n>>> mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>.\n> \n\n\n<span id=m2wTl><p><font face=\"Arial, Helvetica, sans-serif\" size=\"2\" style=\"font-size:13.5px\">_______________________________________________________________<BR>Get the Free email that has everyone talking at <a href=http://www.mail2world.com target=new>http://www.mail2world.com</a><br>  <font color=#999999>Unlimited Email Storage &#150; POP3 &#150; Calendar &#150; SMS &#150; Translator &#150; Much More!</font></font></span>\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi everyone, thank you for the responses.\n\nI did some more searching after I had posted my question. It was a BOM\n(Byte Order Mark) issue. I removed the BOM from all of my files and I\nhave been succes",
+      "thread_id": "thread-10261da35a7c",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-10d1ba53ddcb",
+      "message_id": "<CAKxd1KMiC_AC33qTYdZBWhyMx5NuxJFAh6qCPmNCaJQatwhjhw@mail.gmail.com>",
+      "from_name": "Charles Determan",
+      "from_email_hash": "fcc9a1e7c21371cee92703630056a3d910de1afb77217895dfe5b4bc47c007e1",
+      "date": "2016-02-05T07:30:41-06:00",
+      "subject": "[R-pkg-devel] Development Testers?",
+      "subject_clean": "[R-pkg-devel] Development Testers?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I'm not sure if this question is appropriate for the R mailing lists but\nI'm not sure where else to ask.\n\nI am wondering if there is any means by which package authors can solicit\ntesters for a package.  I believe this is often referred to as 'crowd\nsourced testing'.\n\nI am aware of continuous integration platforms and unit testing (e.g.\ntestthat) but that only gets me so far.  In my particular instance I am\ndeveloping packages for GPU computing (maybe this request would be best on\nthe HPC mailing list?).  As such, I can't possibly have access to every\ntype of GPU.  I would like to find a means of 'recruiting' users who may\nhave different pieces of hardware to test my package.  Of course this won't\nbe exhaustive but any additional testing that others could provide would\nmake the package all the more stable.\n\nRegards,\nCharles\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I'm not sure if this question is appropriate for the R mailing lists but\nI'm not sure where else to ask.\n\nI am wondering if there is any means by which package authors can solicit\ntesters for a packag",
+      "thread_id": "thread-10d1ba53ddcb",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-58221cc76062",
+      "message_id": "<560AD7FA-17DF-41B1-AE2D-B67B1081F65C@utoronto.ca>",
+      "from_name": "Boris Steipe",
+      "from_email_hash": "a41454b3645a140f39702275c1d4fca3b980a9fdf0861e407154805ae728380d",
+      "date": "2016-02-05T19:40:21-05:00",
+      "subject": "[R-pkg-devel] Development Testers?",
+      "subject_clean": "[R-pkg-devel] Development Testers?",
+      "in_reply_to": "<CAKxd1KMiC_AC33qTYdZBWhyMx5NuxJFAh6qCPmNCaJQatwhjhw@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KMiC_AC33qTYdZBWhyMx5NuxJFAh6qCPmNCaJQatwhjhw@mail.gmail.com>"
+      ],
+      "body_plain": "Of course I can speak only for myself, but I'd help out if asked and I think in general you'll find people here to be a pretty helpful bunch.\n\nCheers,\nBoris\n\n\nOn Feb 5, 2016, at 8:30 AM, Charles Determan <cdetermanjr at gmail.com> wrote:\n\n> I'm not sure if this question is appropriate for the R mailing lists but\n> I'm not sure where else to ask.\n> \n> I am wondering if there is any means by which package authors can solicit\n> testers for a package.  I believe this is often referred to as 'crowd\n> sourced testing'.\n> \n> I am aware of continuous integration platforms and unit testing (e.g.\n> testthat) but that only gets me so far.  In my particular instance I am\n> developing packages for GPU computing (maybe this request would be best on\n> the HPC mailing list?).  As such, I can't possibly have access to every\n> type of GPU.  I would like to find a means of 'recruiting' users who may\n> have different pieces of hardware to test my package.  Of course this won't\n> be exhaustive but any additional testing that others could provide would\n> make the package all the more stable.\n> \n> Regards,\n> Charles\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Of course I can speak only for myself, but I'd help out if asked and I think in general you'll find people here to be a pretty helpful bunch.\n\nCheers,\nBoris\n\n\nOn Feb 5, 2016, at 8:30 AM, Charles Deter",
+      "thread_id": "thread-10d1ba53ddcb",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-70ec6f962ab7",
+      "message_id": "<df4d931e4bf29de14e89b39a0831ecdc@www.webmail.co.za>",
+      "from_name": "David McPearson",
+      "from_email_hash": "1a74bbe195b3898a57f6b16ed087c2fd5ccd3825e8325ab88eafbd11229e79cf",
+      "date": "2016-02-06T11:20:59+02:00",
+      "subject": "[R-pkg-devel] double colon",
+      "subject_clean": "[R-pkg-devel] double colon",
+      "in_reply_to": "<DUB127-W321D010CC12F3B0892D673D5DB0@phx.gbl>",
+      "references": [
+        "<DUB127-W103F48A679D41783DF4427D5DB0@phx.gbl>",
+        "<56AB8BAC.2050208@statistik.tu-dortmund.de>",
+        "<DUB127-W321D010CC12F3B0892D673D5DB0@phx.gbl>"
+      ],
+      "body_plain": "On Fri, 29 Jan 2016 17:41:40 +0100 Berry Boessenkool\n<berryboessenkool at hotmail.com> wrote\n\n> Thanks for your reply, Uwe.\n> The guy yesterday very strongly suggested it for user readability, but I\n> wanted to get more opinions before doing so much work. (No offense, Steven).\n> \n> I'm not sure whether we talk about the same thing considering functions\n> *within* the package. Say I have 'MyPackage' with 'fun_a' and also 'fun_b',\n> which inside calls 'fun_a'. (Both exported) That wouldn't be in imports or\n> suggests, right? \n>\n> Now image by unfortunate history there is 'AnotherPackage' that also has\n(its\n> own and different) 'fun_a'. Is far as I remember, 'fun_b' will still call\n> 'fun_a' from 'MyPackage'. I can't find back where I read that, though.\n> For user readability and to be on the safe side, in the future I'll write\n> 'MyPackage::fun_a'. (Of course, if I'm aware, I'll avoid same-name functions\n> altogether). \n>\n> kind regards,\n> Berry\n> \n> \n> > Subject: Re: [R-pkg-devel] double colon\n<... cut for brevity...>\n\nIndeed you appear to be correct. Have a look at\nhttp://adv-r.had.co.nz/Environments.html#function-envs\n..and a much briefer (if a little less detailed) explanation in\nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-namespaces\n\n+ + + + +\n\nAnd Hadley, if you're reading this (if you're not I suppose it's a waste of\nbandwidth):\nThanks very much for \"Advanced R\" It has been of immeasurable help to me.\nI see you've put answers to (at least) some of the exercises. This is a good\nthing. When I worked through it last I usually came up with *an* answer to one\nof the exercise, but often I had little clue as to whether or not it was the\n(or a) correct answer (not you're writing, my brain turned into a brick a\ndecade or two ago, before I'd even heard of R). So thanks also for your\ncontinuing work, and I get to go back over it again.\n\nCheers all.\n\n____________________________________________________________\nSouth Africas premier free email service - www.webmail.co.za",
+      "body_snippet": "On Fri, 29 Jan 2016 17:41:40 +0100 Berry Boessenkool\n<berryboessenkool at hotmail.com> wrote\n\n> Thanks for your reply, Uwe.\n> The guy yesterday very strongly suggested it for user readability, but I\n>",
+      "thread_id": "thread-70ec6f962ab7",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-c275681e952e",
+      "message_id": "<CAKxd1KPSToQ9Rwq3kiiZVKGqVqGvWHu1a0kapvcqKhuop498Gw@mail.gmail.com>",
+      "from_name": "Charles Determan",
+      "from_email_hash": "fcc9a1e7c21371cee92703630056a3d910de1afb77217895dfe5b4bc47c007e1",
+      "date": "2016-02-06T10:33:03-06:00",
+      "subject": "[R-pkg-devel] Development Testers?",
+      "subject_clean": "[R-pkg-devel] Development Testers?",
+      "in_reply_to": "<560AD7FA-17DF-41B1-AE2D-B67B1081F65C@utoronto.ca>",
+      "references": [
+        "<CAKxd1KMiC_AC33qTYdZBWhyMx5NuxJFAh6qCPmNCaJQatwhjhw@mail.gmail.com>",
+        "<560AD7FA-17DF-41B1-AE2D-B67B1081F65C@utoronto.ca>"
+      ],
+      "body_plain": "Thanks Boris,\n\nMy main concern I suppose is if this mailing list is appropriate to\noccasionally solicit additional testers.  Just curious what people (i.e.\nAdmins) would think about using the list for such a purpose.\n\nRegards,\nCharles\n\nOn Friday, February 5, 2016, Boris Steipe <boris.steipe at utoronto.ca> wrote:\n\n> Of course I can speak only for myself, but I'd help out if asked and I\n> think in general you'll find people here to be a pretty helpful bunch.\n>\n> Cheers,\n> Boris\n>\n>\n> On Feb 5, 2016, at 8:30 AM, Charles Determan <cdetermanjr at gmail.com\n> <javascript:;>> wrote:\n>\n> > I'm not sure if this question is appropriate for the R mailing lists but\n> > I'm not sure where else to ask.\n> >\n> > I am wondering if there is any means by which package authors can solicit\n> > testers for a package.  I believe this is often referred to as 'crowd\n> > sourced testing'.\n> >\n> > I am aware of continuous integration platforms and unit testing (e.g.\n> > testthat) but that only gets me so far.  In my particular instance I am\n> > developing packages for GPU computing (maybe this request would be best\n> on\n> > the HPC mailing list?).  As such, I can't possibly have access to every\n> > type of GPU.  I would like to find a means of 'recruiting' users who may\n> > have different pieces of hardware to test my package.  Of course this\n> won't\n> > be exhaustive but any additional testing that others could provide would\n> > make the package all the more stable.\n> >\n> > Regards,\n> > Charles\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org <javascript:;> mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Boris,\n\nMy main concern I suppose is if this mailing list is appropriate to\noccasionally solicit additional testers.  Just curious what people (i.e.\nAdmins) would think about using the list for",
+      "thread_id": "thread-10d1ba53ddcb",
+      "thread_depth": 2,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-585deaec4904",
+      "message_id": "<22201.49898.902979.364802@stat.math.ethz.ch>",
+      "from_name": "Martin Maechler",
+      "from_email_hash": "c2c86f22f78a4ecfe6d0e6b4e2be505a3f5beb0470ea88c903688ac536018a98",
+      "date": "2016-02-09T11:43:54+01:00",
+      "subject": "[R-pkg-devel] Development Testers?",
+      "subject_clean": "[R-pkg-devel] Development Testers?",
+      "in_reply_to": "<CAKxd1KPSToQ9Rwq3kiiZVKGqVqGvWHu1a0kapvcqKhuop498Gw@mail.gmail.com>",
+      "references": [
+        "<CAKxd1KMiC_AC33qTYdZBWhyMx5NuxJFAh6qCPmNCaJQatwhjhw@mail.gmail.com>",
+        "<560AD7FA-17DF-41B1-AE2D-B67B1081F65C@utoronto.ca>",
+        "<CAKxd1KPSToQ9Rwq3kiiZVKGqVqGvWHu1a0kapvcqKhuop498Gw@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> Charles Determan <cdetermanjr at gmail.com>\n>>>>>     on Sat, 6 Feb 2016 10:33:03 -0600 writes:\n\n    > Thanks Boris, My main concern I suppose is if this mailing\n    > list is appropriate to occasionally solicit additional\n    > testers.  Just curious what people (i.e.  Admins) would\n    > think about using the list for such a purpose.\n\nI (as one of the moderators) don't have a strong view on this\nfor this special case, but would actually recommend to use\nR-devel (or even R-help) for this, rather than R-package-devel,\nbecause the latter is indeed quite focused (with a somewhat different\nfocus).\n\nAnd yes, for the specific, I'd strongly recommend  R-SIG-HPC (in\naddition, i.e., with the very rare case of sensible cross posting).\n\nBest regards,\nMartin\n\n\n--\nMartin Maechler\nETH Zurich and R Core Team\n\n    > Regards, Charles\n\n    > On Friday, February 5, 2016, Boris Steipe\n    > <boris.steipe at utoronto.ca> wrote:\n\n    >> Of course I can speak only for myself, but I'd help out\n    >> if asked and I think in general you'll find people here\n    >> to be a pretty helpful bunch.\n    >> \n    >> Cheers, Boris\n    >> \n    >> \n    >> On Feb 5, 2016, at 8:30 AM, Charles Determan\n    >> <cdetermanjr at gmail.com <javascript:;>> wrote:\n    >> \n    >> > I'm not sure if this question is appropriate for the R\n    >> mailing lists but > I'm not sure where else to ask.\n    >> >\n    >> > I am wondering if there is any means by which package\n    >> authors can solicit > testers for a package.  I believe\n    >> this is often referred to as 'crowd > sourced testing'.\n    >> >\n    >> > I am aware of continuous integration platforms and unit\n    >> testing (e.g.  > testthat) but that only gets me so far.\n    >> In my particular instance I am > developing packages for\n    >> GPU computing (maybe this request would be best on > the\n    >> HPC mailing list?).  As such, I can't possibly have\n    >> access to every > type of GPU.  I would like to find a\n    >> means of 'recruiting' users who may > have different\n    >> pieces of hardware to test my package.  Of course this\n    >> won't > be exhaustive but any additional testing that\n    >> others could provide would > make the package all the\n    >> more stable.\n    >> >\n    >> > Regards, > Charles\n    >> >\n    >> > [[alternative HTML version deleted]]\n    >> >\n    >> > ______________________________________________ >\n    >> R-package-devel at r-project.org <javascript:;> mailing list\n    >> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n    >> \n    >> \n\n    > \t[[alternative HTML version deleted]]\n\n    > ______________________________________________\n    > R-package-devel at r-project.org mailing list\n    > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": ">>>>> Charles Determan <cdetermanjr at gmail.com>\n>>>>>     on Sat, 6 Feb 2016 10:33:03 -0600 writes:\n\n    > Thanks Boris, My main concern I suppose is if this mailing\n    > list is appropriate to occ",
+      "thread_id": "thread-10d1ba53ddcb",
+      "thread_depth": 3,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-07fc222f2104",
+      "message_id": "<CAJuCY5xNceAXxPp57SSuYCz1UWK8mNW_rF90nmUhRLFczn-t3A@mail.gmail.com>",
+      "from_name": "Thierry Onkelinx",
+      "from_email_hash": "939ccb0e8bbc2d0c7bbe22a43b9bdc551e1b9ce62c1e0af38d79ce042e5bddbe",
+      "date": "2016-02-09T15:33:26+01:00",
+      "subject": "[R-pkg-devel] pdflatex crashes with R CMD check",
+      "subject_clean": "[R-pkg-devel] pdflatex crashes with R CMD check",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI have a package with a Rnw vignette. The vignette builds without a\nproblem. R CMD build and R CMD check run without problem on Ubuntu but fail\non Windows.\n\nThe problem starts at the point where \"R CMD build mypackage\" creates the\nvignettes.\n- First the log shows: \"* creating vignettes ...\"\n- Then I get a popup window stating \"pdflatex.EXE stops working\".\n- I choose to \"stop pdflatex.exe\".\n- R CMD build resumes and displays \"* creating vignettes ... OK\".\n\nA similar problem occurs wtih \"R CMD check --as-cran mypackage_x.z.y.tar.gz\"\n\n- The log shows: \"* checking re-building of vignette outputs ...\"\n- Then I get a popup window stating \"pdflatex.EXE stops working\".\n- I choose to \"stop pdflatex.exe\".\n- R CMD check resumes and displays \"* checking re-building of vignette\noutputs ... OK\".\n- The log shows: \"* checking PDF version of manual ...\"\n- Then I get a popup window stating \"pdflatex.EXE stops working\".\n- I choose to \"stop pdflatex.exe\".\n- R CMD check resumes and displays \"* checking PDF version of manual ...\nOK\".\n\nThe pdf of both the vignette and the manual are compiled in\nmypackage.Rcheck. The pdf of the vignette is present in the tar.gz and .zip\n\nThe only warning I can find it in Rdaltex.log:\nWarning: running command '\"C:\\R\\MIKTEX~1.9\\miktex\\bin\\x64\\texify.exe\"\n --pdf \"Rd2.tex\" --max-iterations=20 -I\n\"c:/R/R-32~1.3/share/texmf/tex/latex\" -I\n\"c:/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n\nDoes someone has a clue what is going wrong?\n\nBest regards,\n\nThierry\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature and\nForest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nI have a package with a Rnw vignette. The vignette builds without a\nproblem. R CMD build and R CMD check run without problem on Ubuntu but fail\non Windows.\n\nThe problem starts at the point ",
+      "thread_id": "thread-07fc222f2104",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-b4482766077f",
+      "message_id": "<56B9FECB.8020809@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-02-09T09:59:23-05:00",
+      "subject": "[R-pkg-devel] pdflatex crashes with R CMD check",
+      "subject_clean": "[R-pkg-devel] pdflatex crashes with R CMD check",
+      "in_reply_to": "<CAJuCY5xNceAXxPp57SSuYCz1UWK8mNW_rF90nmUhRLFczn-t3A@mail.gmail.com>",
+      "references": [
+        "<CAJuCY5xNceAXxPp57SSuYCz1UWK8mNW_rF90nmUhRLFczn-t3A@mail.gmail.com>"
+      ],
+      "body_plain": "On 09/02/2016 9:33 AM, Thierry Onkelinx wrote:\n> Dear all,\n>\n> I have a package with a Rnw vignette. The vignette builds without a\n> problem. R CMD build and R CMD check run without problem on Ubuntu but fail\n> on Windows.\n>\n> The problem starts at the point where \"R CMD build mypackage\" creates the\n> vignettes.\n> - First the log shows: \"* creating vignettes ...\"\n> - Then I get a popup window stating \"pdflatex.EXE stops working\".\n> - I choose to \"stop pdflatex.exe\".\n> - R CMD build resumes and displays \"* creating vignettes ... OK\".\n>\n> A similar problem occurs wtih \"R CMD check --as-cran mypackage_x.z.y.tar.gz\"\n>\n> - The log shows: \"* checking re-building of vignette outputs ...\"\n> - Then I get a popup window stating \"pdflatex.EXE stops working\".\n> - I choose to \"stop pdflatex.exe\".\n> - R CMD check resumes and displays \"* checking re-building of vignette\n> outputs ... OK\".\n> - The log shows: \"* checking PDF version of manual ...\"\n> - Then I get a popup window stating \"pdflatex.EXE stops working\".\n> - I choose to \"stop pdflatex.exe\".\n> - R CMD check resumes and displays \"* checking PDF version of manual ...\n> OK\".\n>\n> The pdf of both the vignette and the manual are compiled in\n> mypackage.Rcheck. The pdf of the vignette is present in the tar.gz and .zip\n>\n> The only warning I can find it in Rdaltex.log:\n> Warning: running command '\"C:\\R\\MIKTEX~1.9\\miktex\\bin\\x64\\texify.exe\"\n>   --pdf \"Rd2.tex\" --max-iterations=20 -I\n> \"c:/R/R-32~1.3/share/texmf/tex/latex\" -I\n> \"c:/R/R-32~1.3/share/texmf/bibtex/bst\"' had status 1\n>\n> Does someone has a clue what is going wrong?\n\nMiktex has been messing around with texify, and possibly with pdflatex \n(I'm just guessing from your popups).  You might try updating it, or \nswitching to a different version, or switching to texlive.\n\nDuncan Murdoch",
+      "body_snippet": "On 09/02/2016 9:33 AM, Thierry Onkelinx wrote:\n> Dear all,\n>\n> I have a package with a Rnw vignette. The vignette builds without a\n> problem. R CMD build and R CMD check run without problem on Ubuntu ",
+      "thread_id": "thread-07fc222f2104",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-a4baaeb77707",
+      "message_id": "<34A4BBE3-B4C1-4685-8697-C1CACE0CF00E@gmail.com>",
+      "from_name": "Guillaume Chapron",
+      "from_email_hash": "02f0693d3cf4841364a66299e93b6e320512d36e2bc8437af934be976baf96cc",
+      "date": "2016-02-11T16:45:40+01:00",
+      "subject": "[R-pkg-devel] Rprintf with mclapply",
+      "subject_clean": "[R-pkg-devel] Rprintf with mclapply",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI have a R package with a compiled C executable to run simulations. Simulations can be very long so I use mclapply to launch several instances (each with a different R seed). I would need to follow the simulation progress and I used to do that with printf in the C code. But this is not allowed on CRAN and I have to use Rprintf. The problem is that with mclapply, Rprintf prints nothing in the R console! Any idea how can I fix this? Thanks!\n\nGuillaume",
+      "body_snippet": "Hello,\n\nI have a R package with a compiled C executable to run simulations. Simulations can be very long so I use mclapply to launch several instances (each with a different R seed). I would need to f",
+      "thread_id": "thread-a4baaeb77707",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-f8bbb47ae63b",
+      "message_id": "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>",
+      "from_name": "Glenn Schultz",
+      "from_email_hash": "c9945efe9f9e4a62f4f31e8b2030602702aa667142f0edcbd362fbceb98450c9",
+      "date": "2016-02-16T17:14:18Z",
+      "subject": "[R-pkg-devel] Namespace error",
+      "subject_clean": "[R-pkg-devel] Namespace error",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "All\n\nI am not sure why I am getting this error and I cannot find anything on the net other than try to restart R. I am\nusing Roxygen2 and it clearly says don't edit by hand at the top of the namespace so I am stuck as what to do or look for.\n\nGlenn\n\nError in namespaceExport(ns, exports) : undefined exports: View\nError: package or namespace load failed for ?BondLab?\nExecution halted\n* checking whether the namespace can be loaded with stated dependencies ... WARNING\nError in namespaceExport(ns, exports) : undefined exports: View\nCalls: loadNamespace ... namespaceImportFrom -> asNamespace -> loadNamespace -> namespaceExport\nExecution halted\n\nA namespace must be able to be loaded with just the base namespace\nloaded: otherwise if the namespace gets loaded by a saved object, the\nsession will be unable to start.\n\nProbably some imports need to be declared in the NAMESPACE file.\n* checking whether the namespace can be unloaded cleanly ... OK\n* checking dependencies in R code ... NOTE\nError: package or namespace load failed for ?BondLab?\nCall sequence:\n2: stop(gettextf(\"package or namespace load failed for %s\", sQuote(package)), \ncall. = FALSE, domain = NA)\n\n\nHere is my namespace:\n\n# Generated by roxygen2: do not edit by hand\n\nexport(AtomsData)\nexport(BeginBal)\nexport(Bond)\nexport(BondAnalytics)\nexport(BondBasisConversion)\nexport(BondCashFlows)\nexport(CDR.To.MDR)\nexport(CIRBondPrice)\nexport(CIRSim)\nexport(CPR.To.SMM)\nexport(CalibrateCIR)\nexport(CashFlowTable)\nexport(CollateralGroup)\nexport(CusipRecord)\nexport(DollarRoll)\nexport(DollarRollAnalytics)\nexport(Effective.Convexity)\nexport(Effective.Duration)\nexport(Effective.Measure)\nexport(EndingBal)\nexport(EstimYTM)\nexport(Forward.Rate)\nexport(ForwardPassThrough)\nexport(HPISim)\nexport(Interest)\nexport(MBS)\nexport(MakeBondDetails)\nexport(MakeCollateral)\nexport(MakeMBSDetails)\nexport(MakeModelTune)\nexport(MakeRAID)\nexport(MakeRDME)\nexport(MakeScenario)\nexport(MakeSchedule)\nexport(MakeTranche)\nexport(ModelTune)\nexport(Mortgage.Monthly.Payment)\nexport(Mortgage.OAS)\nexport(MortgageCashFlow)\nexport(MortgageCashFlowArray)\nexport(MortgageCashFlow_Array)\nexport(MortgageRate)\nexport(Mtg.Scenario)\nexport(MtgRate)\nexport(MtgTermStructure)\nexport(PPC.Ramp)\nexport(PassThroughOAS)\nexport(PaymentDate)\nexport(PrepaymentAssumption)\nexport(RDMEData)\nexport(RDMEFactor)\nexport(REMICDeal)\nexport(REMICGroupConn)\nexport(REMICSchedules)\nexport(REMICWaterFall)\nexport(Rates)\nexport(ReadRAID)\nexport(Remain.Balance)\nexport(RemicStructure)\nexport(SMM.To.CPR)\nexport(SMMVector.To.CPR)\nexport(SaveCollGroup)\nexport(SaveMBS)\nexport(SaveModelTune)\nexport(SaveRAID)\nexport(SaveRDME)\nexport(SaveREMIC)\nexport(SaveScenario)\nexport(SaveSchedules)\nexport(SaveTranche)\nexport(SaveTranches)\nexport(ScenarioCall)\nexport(Sched.Prin)\nexport(SwapRateData)\nexport(TermStructure)\nexport(TimeValue)\nexport(Tranches)\nexport(ULTV)\nexport(bondprice)\nexportClasses(AtomsAnalytics)\nexportClasses(AtomsData)\nexportClasses(AtomsScenario)\nexportClasses(BondCashFlows)\nexportClasses(BondDetails)\nexportClasses(BondTermStructure)\nexportClasses(MBSDetails)\nexportClasses(TermStructure)\nimport(data.tree)\nimport(methods)\nimport(optimx)\nimportFrom(lubridate,\"%m+%\")\nimportFrom(lubridate,day)\nimportFrom(lubridate,month)\nimportFrom(lubridate,year)\nimportFrom(lubridate,years)\nimportFrom(termstrc,create_cashflows_matrix)\nimportFrom(termstrc,create_maturities_matrix)\nimportFrom(termstrc,estim_cs)\nimportFrom(termstrc,estim_nss)\nimportFrom(termstrc,forwardrates)\nimportFrom(termstrc,spotrates)",
+      "body_snippet": "All\n\nI am not sure why I am getting this error and I cannot find anything on the net other than try to restart R. I am\nusing Roxygen2 and it clearly says don't edit by hand at the top of the namespace",
+      "thread_id": "thread-f8bbb47ae63b",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-63ef3d502d31",
+      "message_id": "<56C3C732.9030702@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-02-16T20:04:50-05:00",
+      "subject": "[R-pkg-devel] Namespace error",
+      "subject_clean": "[R-pkg-devel] Namespace error",
+      "in_reply_to": "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>",
+      "references": [
+        "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>"
+      ],
+      "body_plain": "On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n> All\n>\n> I am not sure why I am getting this error and I cannot find anything on the net other than try to restart R. I am\n> using Roxygen2 and it clearly says don't edit by hand at the top of the namespace so I am stuck as what to do or look for.\n\nYou will need to contact the Roxygen2 maintainers about this.  We don't \nsupport it.\n\nDuncan Murdoch\n\n> Glenn\n>\n> Error in namespaceExport(ns, exports) : undefined exports: View\n> Error: package or namespace load failed for ?BondLab?\n> Execution halted\n> * checking whether the namespace can be loaded with stated dependencies ... WARNING\n> Error in namespaceExport(ns, exports) : undefined exports: View\n> Calls: loadNamespace ... namespaceImportFrom -> asNamespace -> loadNamespace -> namespaceExport\n> Execution halted\n>\n> A namespace must be able to be loaded with just the base namespace\n> loaded: otherwise if the namespace gets loaded by a saved object, the\n> session will be unable to start.\n>\n> Probably some imports need to be declared in the NAMESPACE file.\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking dependencies in R code ... NOTE\n> Error: package or namespace load failed for ?BondLab?\n> Call sequence:\n> 2: stop(gettextf(\"package or namespace load failed for %s\", sQuote(package)),\n> call. = FALSE, domain = NA)\n>\n>\n> Here is my namespace:\n>\n> # Generated by roxygen2: do not edit by hand\n>\n> export(AtomsData)\n> export(BeginBal)\n> export(Bond)\n> export(BondAnalytics)\n> export(BondBasisConversion)\n> export(BondCashFlows)\n> export(CDR.To.MDR)\n> export(CIRBondPrice)\n> export(CIRSim)\n> export(CPR.To.SMM)\n> export(CalibrateCIR)\n> export(CashFlowTable)\n> export(CollateralGroup)\n> export(CusipRecord)\n> export(DollarRoll)\n> export(DollarRollAnalytics)\n> export(Effective.Convexity)\n> export(Effective.Duration)\n> export(Effective.Measure)\n> export(EndingBal)\n> export(EstimYTM)\n> export(Forward.Rate)\n> export(ForwardPassThrough)\n> export(HPISim)\n> export(Interest)\n> export(MBS)\n> export(MakeBondDetails)\n> export(MakeCollateral)\n> export(MakeMBSDetails)\n> export(MakeModelTune)\n> export(MakeRAID)\n> export(MakeRDME)\n> export(MakeScenario)\n> export(MakeSchedule)\n> export(MakeTranche)\n> export(ModelTune)\n> export(Mortgage.Monthly.Payment)\n> export(Mortgage.OAS)\n> export(MortgageCashFlow)\n> export(MortgageCashFlowArray)\n> export(MortgageCashFlow_Array)\n> export(MortgageRate)\n> export(Mtg.Scenario)\n> export(MtgRate)\n> export(MtgTermStructure)\n> export(PPC.Ramp)\n> export(PassThroughOAS)\n> export(PaymentDate)\n> export(PrepaymentAssumption)\n> export(RDMEData)\n> export(RDMEFactor)\n> export(REMICDeal)\n> export(REMICGroupConn)\n> export(REMICSchedules)\n> export(REMICWaterFall)\n> export(Rates)\n> export(ReadRAID)\n> export(Remain.Balance)\n> export(RemicStructure)\n> export(SMM.To.CPR)\n> export(SMMVector.To.CPR)\n> export(SaveCollGroup)\n> export(SaveMBS)\n> export(SaveModelTune)\n> export(SaveRAID)\n> export(SaveRDME)\n> export(SaveREMIC)\n> export(SaveScenario)\n> export(SaveSchedules)\n> export(SaveTranche)\n> export(SaveTranches)\n> export(ScenarioCall)\n> export(Sched.Prin)\n> export(SwapRateData)\n> export(TermStructure)\n> export(TimeValue)\n> export(Tranches)\n> export(ULTV)\n> export(bondprice)\n> exportClasses(AtomsAnalytics)\n> exportClasses(AtomsData)\n> exportClasses(AtomsScenario)\n> exportClasses(BondCashFlows)\n> exportClasses(BondDetails)\n> exportClasses(BondTermStructure)\n> exportClasses(MBSDetails)\n> exportClasses(TermStructure)\n> import(data.tree)\n> import(methods)\n> import(optimx)\n> importFrom(lubridate,\"%m+%\")\n> importFrom(lubridate,day)\n> importFrom(lubridate,month)\n> importFrom(lubridate,year)\n> importFrom(lubridate,years)\n> importFrom(termstrc,create_cashflows_matrix)\n> importFrom(termstrc,create_maturities_matrix)\n> importFrom(termstrc,estim_cs)\n> importFrom(termstrc,estim_nss)\n> importFrom(termstrc,forwardrates)\n> importFrom(termstrc,spotrates)\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n> All\n>\n> I am not sure why I am getting this error and I cannot find anything on the net other than try to restart R. I am\n> using Roxygen2 and it clearly",
+      "thread_id": "thread-f8bbb47ae63b",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-d34ca44ff2e4",
+      "message_id": "<CABtg=KnimXCZswsQoU+7hhUCeb0V_cpVBw6W4QDNLmDp=3rxhg@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2016-02-17T09:25:23Z",
+      "subject": "[R-pkg-devel] Namespace error",
+      "subject_clean": "[R-pkg-devel] Namespace error",
+      "in_reply_to": "<56C3C732.9030702@gmail.com>",
+      "references": [
+        "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>",
+        "<56C3C732.9030702@gmail.com>"
+      ],
+      "body_plain": "On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n> On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n>>\n>> All\n>>\n>> I am not sure why I am getting this error and I cannot find anything on\n>> the net other than try to restart R. I am\n>> using Roxygen2 and it clearly says don't edit by hand at the top of the\n>> namespace so I am stuck as what to do or look for.\n>\n>\n> You will need to contact the Roxygen2 maintainers about this.  We don't\n> support it.\n\nSo, this mailing list is about developing packages using base R\npackages only and exclusively?\n\nI suggest that the owners clarify this on the \"about\" page, because I\ntotally missed it, and almost answered this question. :)\n\nGabor\n\n> Duncan Murdoch\n[...]",
+      "body_snippet": "On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n> On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n>>\n>> All\n>>\n>> I am not sure why I am getting this error and I cann",
+      "thread_id": "thread-f8bbb47ae63b",
+      "thread_depth": 2,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-f2d57f31f4f2",
+      "message_id": "<E69610B4-9908-42C7-BBF8-C13913EBD695@gmail.com>",
+      "from_name": "peter dalgaard",
+      "from_email_hash": "d2573f0c0a474184a9d96c815fc6bf37ff7c6392082069d810139c562d5a6f71",
+      "date": "2016-02-17T11:07:37+01:00",
+      "subject": "[R-pkg-devel] Namespace error",
+      "subject_clean": "[R-pkg-devel] Namespace error",
+      "in_reply_to": "<CABtg=KnimXCZswsQoU+7hhUCeb0V_cpVBw6W4QDNLmDp=3rxhg@mail.gmail.com>",
+      "references": [
+        "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>",
+        "<56C3C732.9030702@gmail.com>",
+        "<CABtg=KnimXCZswsQoU+7hhUCeb0V_cpVBw6W4QDNLmDp=3rxhg@mail.gmail.com>"
+      ],
+      "body_plain": "On 17 Feb 2016, at 10:25 , G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>> On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n>>> \n>>> All\n>>> \n>>> I am not sure why I am getting this error and I cannot find anything on\n>>> the net other than try to restart R. I am\n>>> using Roxygen2 and it clearly says don't edit by hand at the top of the\n>>> namespace so I am stuck as what to do or look for.\n>> \n>> \n>> You will need to contact the Roxygen2 maintainers about this.  We don't\n>> support it.\n> \n> So, this mailing list is about developing packages using base R\n> packages only and exclusively?\n> \n> I suggest that the owners clarify this on the \"about\" page, because I\n> totally missed it, and almost answered this question. :)\n\n\nWell, by all means, then....\n\nIt's like r-help. Sometimes a question seems better directed at RStudio support or the platform specific mailing lists, and people get redirected, but hey, we're supposed to be friendly in here, so if you happen to know the answer, just tell. \n\n(The list was mainly set up to facilitate issues between CRAN and package maintainers, so the expertise that you can assume to be present is that of people who know why CRAN is being picky, etc. There's little point in keeping the expertise of others out, but there's a blurry line towards doing 3rd party maintainers' work for them.)\n\n-pd\n\n> \n> Gabor\n> \n>> Duncan Murdoch\n> [...]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "On 17 Feb 2016, at 10:25 , G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>> On 16/02/2016 12:14 PM, Glenn Sc",
+      "thread_id": "thread-f8bbb47ae63b",
+      "thread_depth": 3,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-b8009ee84ed5",
+      "message_id": "<56CC385A.9000106@ivt.baug.ethz.ch>",
+      "from_name": "Kirill Müller",
+      "from_email_hash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
+      "date": "2016-02-23T11:45:46+01:00",
+      "subject": "[R-pkg-devel] Namespace error",
+      "subject_clean": "[R-pkg-devel] Namespace error",
+      "in_reply_to": "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>",
+      "references": [
+        "<c7b28371-1da8-4f01-a897-6c513098c728@me.com>"
+      ],
+      "body_plain": "It's difficult to tell without seeing the source code, but the NAMESPACE \nyou posted doesn't seem to contain \"View\". This file usually gets \nupdated when you call devtools::document() or roxygen2::roxygenize(). \nWhat happens if you run one of these functions?\n\n\n-Kirill\n\n\nOn 16.02.2016 18:14, Glenn Schultz wrote:\n> All\n>\n> I am not sure why I am getting this error and I cannot find anything \n> on the net other than try to restart R. I am\n> using Roxygen2 and it clearly says don't edit by hand at the top of \n> the namespace so I am stuck as what to do or look for.\n>\n> Glenn\n>\n> Error in namespaceExport(ns, exports) : undefined exports: View\n> Error: package or namespace load failed for ?BondLab?\n> Execution halted\n> * checking whether the namespace can be loaded with stated \n> dependencies ... WARNING\n> Error in namespaceExport(ns, exports) : undefined exports: View\n> Calls: loadNamespace ... namespaceImportFrom -> asNamespace -> \n> loadNamespace -> namespaceExport\n> Execution halted\n>\n> A namespace must be able to be loaded with just the base namespace\n> loaded: otherwise if the namespace gets loaded by a saved object, the\n> session will be unable to start.\n>\n> Probably some imports need to be declared in the NAMESPACE file.\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking dependencies in R code ... NOTE\n> Error: package or namespace load failed for ?BondLab?\n> Call sequence:\n> 2: stop(gettextf(\"package or namespace load failed for %s\", \n> sQuote(package)), call. = FALSE, domain = NA)\n>\n>\n> Here is my namespace:\n>\n> # Generated by roxygen2: do not edit by hand\n>\n> export(AtomsData)\n> export(BeginBal)\n> export(Bond)\n> export(BondAnalytics)\n> export(BondBasisConversion)\n> export(BondCashFlows)\n> export(CDR.To.MDR)\n> export(CIRBondPrice)\n> export(CIRSim)\n> export(CPR.To.SMM)\n> export(CalibrateCIR)\n> export(CashFlowTable)\n> export(CollateralGroup)\n> export(CusipRecord)\n> export(DollarRoll)\n> export(DollarRollAnalytics)\n> export(Effective.Convexity)\n> export(Effective.Duration)\n> export(Effective.Measure)\n> export(EndingBal)\n> export(EstimYTM)\n> export(Forward.Rate)\n> export(ForwardPassThrough)\n> export(HPISim)\n> export(Interest)\n> export(MBS)\n> export(MakeBondDetails)\n> export(MakeCollateral)\n> export(MakeMBSDetails)\n> export(MakeModelTune)\n> export(MakeRAID)\n> export(MakeRDME)\n> export(MakeScenario)\n> export(MakeSchedule)\n> export(MakeTranche)\n> export(ModelTune)\n> export(Mortgage.Monthly.Payment)\n> export(Mortgage.OAS)\n> export(MortgageCashFlow)\n> export(MortgageCashFlowArray)\n> export(MortgageCashFlow_Array)\n> export(MortgageRate)\n> export(Mtg.Scenario)\n> export(MtgRate)\n> export(MtgTermStructure)\n> export(PPC.Ramp)\n> export(PassThroughOAS)\n> export(PaymentDate)\n> export(PrepaymentAssumption)\n> export(RDMEData)\n> export(RDMEFactor)\n> export(REMICDeal)\n> export(REMICGroupConn)\n> export(REMICSchedules)\n> export(REMICWaterFall)\n> export(Rates)\n> export(ReadRAID)\n> export(Remain.Balance)\n> export(RemicStructure)\n> export(SMM.To.CPR)\n> export(SMMVector.To.CPR)\n> export(SaveCollGroup)\n> export(SaveMBS)\n> export(SaveModelTune)\n> export(SaveRAID)\n> export(SaveRDME)\n> export(SaveREMIC)\n> export(SaveScenario)\n> export(SaveSchedules)\n> export(SaveTranche)\n> export(SaveTranches)\n> export(ScenarioCall)\n> export(Sched.Prin)\n> export(SwapRateData)\n> export(TermStructure)\n> export(TimeValue)\n> export(Tranches)\n> export(ULTV)\n> export(bondprice)\n> exportClasses(AtomsAnalytics)\n> exportClasses(AtomsData)\n> exportClasses(AtomsScenario)\n> exportClasses(BondCashFlows)\n> exportClasses(BondDetails)\n> exportClasses(BondTermStructure)\n> exportClasses(MBSDetails)\n> exportClasses(TermStructure)\n> import(data.tree)\n> import(methods)\n> import(optimx)\n> importFrom(lubridate,\"%m+%\")\n> importFrom(lubridate,day)\n> importFrom(lubridate,month)\n> importFrom(lubridate,year)\n> importFrom(lubridate,years)\n> importFrom(termstrc,create_cashflows_matrix)\n> importFrom(termstrc,create_maturities_matrix)\n> importFrom(termstrc,estim_cs)\n> importFrom(termstrc,estim_nss)\n> importFrom(termstrc,forwardrates)\n> importFrom(termstrc,spotrates)\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "It's difficult to tell without seeing the source code, but the NAMESPACE \nyou posted doesn't seem to contain \"View\". This file usually gets \nupdated when you call devtools::document() or roxygen2::rox",
+      "thread_id": "thread-f8bbb47ae63b",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-2f0ed4384f26",
+      "message_id": "<688B0979-C9D3-4699-BF97-2B29F333FA96@uke.de>",
+      "from_name": "Daniel Lüdecke",
+      "from_email_hash": "6f8df6b19ecb9c605277ecfa1677451a38bf3dc3ef7b4c357f841ed131fe14cf",
+      "date": "2016-02-26T10:32:30+01:00",
+      "subject": "[R-pkg-devel] Issue with nlme-package on Windows",
+      "subject_clean": "[R-pkg-devel] Issue with nlme-package on Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while the nlme-package version that come along with the R installation is still in my Program Files directory. So I have two nlme-versions: 3.1-122 in my R-installation folder, and 3.1-124 in my Documents folder.\n\nI recognized this because my package does not install when running R CMD check. The log states that ?nlme 3.1-122 is being loaded, but nlme 3.1-124 is required?. I then saw that both nlme-versions are installed.\n\nIs this a Windows-, R- or nlme-issue? When installing R on Windows, I?m being asked to choose a library-folder because ?Program Files? is write protected?\n\nBest\nDaniel\n\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_snippet": "I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while th",
+      "thread_id": "thread-2f0ed4384f26",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-6f398f03b49d",
+      "message_id": "<56D06AC8.5020507@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-02-26T10:10:00-05:00",
+      "subject": "[R-pkg-devel] Issue with nlme-package on Windows",
+      "subject_clean": "[R-pkg-devel] Issue with nlme-package on Windows",
+      "in_reply_to": "<688B0979-C9D3-4699-BF97-2B29F333FA96@uke.de>",
+      "references": [
+        "<688B0979-C9D3-4699-BF97-2B29F333FA96@uke.de>"
+      ],
+      "body_plain": "On 26/02/2016 4:32 AM, Daniel L?decke wrote:\n> I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while the nlme-package version that come along with the R installation is still in my Program Files directory. So I have two nlme-versions: 3.1-122 in my R-installation folder, and 3.1-124 in my Documents folder.\n>\n> I recognized this because my package does not install when running R CMD check. The log states that ?nlme 3.1-122 is being loaded, but nlme 3.1-124 is required?. I then saw that both nlme-versions are installed.\n>\n> Is this a Windows-, R- or nlme-issue? When installing R on Windows, I?m being asked to choose a library-folder because ?Program Files? is write protected?\n\nIt's a user-issue.  You need to tell R to use your user folder as a \nlibrary upon startup.  Since installing and checking of packages is done \nin a separate R process, you would do this by setting an environment \nvariable.\n\nQuoting Brian Ripley recently in R-devel:\n\n> Set R_LIBS to change the library path for new sessions: see ?.libPath .\n\nDuncan Murdoch",
+      "body_snippet": "On 26/02/2016 4:32 AM, Daniel L?decke wrote:\n> I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write pr",
+      "thread_id": "thread-2f0ed4384f26",
+      "thread_depth": 1,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-75334ab229c4",
+      "message_id": "<56D4104F.8050104@tu-dresden.de>",
+      "from_name": "Thomas Petzoldt",
+      "from_email_hash": "293b878c929b08957b39d343bd395f26896f90270369e5ed65be3d670401efdc",
+      "date": "2016-02-29T10:33:03+01:00",
+      "subject": "[R-pkg-devel] S4 generic with variable naming of arguments",
+      "subject_clean": "[R-pkg-devel] S4 generic with variable naming of arguments",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear colleagues,\n\nafter testing one of my packages with students, I'm trying to improve\nthe user interface, to make it even simpler and more robust. The package\nuses S4 classes and I was very happy with this, but my aim is now to\nallow non-named arguments with different ordering, depending on their\nclass and with and 'speaking argument names', not simply x and y.\n\nIt looks to me as this could be a FAQ and please excuse if I overlooked\nsomething, but I still wonder. Let's assume a generic like this:\n\nfoo <- function(formula, data, grouping, ...)\n\nIt is of course easy in S4 write methods that allow either\n\n'foo(y ~ x, df)' or 'foo(data = df, grouping = g)'\n\nbut I want to allow also 'foo(df, g)'\n\nThis works easily in S3 (see below), but [how] can this also be done\nwith S4 to avoid mixture of class systems in the package?\n\nThanks a lot!\n\nThomas\n\n\n### Example ######################################################\n\nfoo <- function(formula, data, grouping = NULL, ...) UseMethod(\"foo\")\n\nfoo.formula <- function(formula, data, ...) {\n   cat(\"formula method\\n\")\n}\n\nfoo.data.frame <- function(data, grouping, ...) {\n   cat(\"data method\\n\")\n}\n\nfoo.default <- function(data, ...)\n   cat(\"method for class\", class(data), \"not yet implemented\\n\")\n\n\ndf <- data.frame(x=1:10, y=runif(10), groups=rep(c(\"a\", \"b\"), 5))\n\nfoo(y~x, df)    # easy in S4\n\nfoo(df, grouping=\"groups\") # easy in S3, but how in S4?\n\nfoo(1)\n\n##################################################################",
+      "body_snippet": "Dear colleagues,\n\nafter testing one of my packages with students, I'm trying to improve\nthe user interface, to make it even simpler and more robust. The package\nuses S4 classes and I was very happy wi",
+      "thread_id": "thread-75334ab229c4",
+      "thread_depth": 0,
+      "month": "2016-02"
+    },
+    {
+      "id": "msg-9bfd8f845e74",
+      "message_id": "<CAAeMkWsncRAxX1X3rc-R+XVYcP9F_06f-ndkxycJr5an_8z1VQ@mail.gmail.com>",
+      "from_name": "Bruce Hoff",
+      "from_email_hash": "d06ebaa60976c742e2fa4e9f3ac1a394fff97e5fe8127dbfe9fdd334677e177d",
+      "date": "2016-02-29T13:01:06-08:00",
+      "subject": "[R-pkg-devel] Linking an R package to the Python library",
+      "subject_clean": "[R-pkg-devel] Linking an R package to the Python library",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to create a self-contained R package wrapping Python that works\ncross platform and have not been able to do this on Windows.  There is\nalready an R package which calls Python, requiring Python to be installed\non the target machine: https://github.com/cjgb/rPython-win.  When the R\npackage is built it successfully links to the resident Python dll.\n\nI retrieved the Python source code plus associated Visual Studio projects\nas described here: https://docs.python.org/devguide/setup.html  I ran the\nPython 3.6 build and verified that rPython-win can link to the generated\ndll, as expected.  In order to make a portable, self-contained R package, I\nchanged the build to create a _static_ Python library as described in the\nfile PCbuild\\readme.txt.  This creates a 31MB file \"python36.lib\" but when\nI try to build the rPython-win package under R i386 (and using the latest\nRTools) I get:\n\ngcc -m32 -shared -s -static-libgcc -o rPython.dll tmp.def pycall.o\n-LC:/cpython/PCbuild/win32 -lpython3stub -lpython36\n-Ld:/RCompile/r-compiling/local/local323/lib/i386\n-Ld:/RCompile/r-compiling/local/local323/lib\n-LC:/PROGRA~1/R/R-32~1.3/bin/i386 -lR\nC:/cpython/PCbuild/win32/python36.lib: *error adding symbols: File format\nnot recognized*\ncollect2.exe: error: ld returned 1 exit status\nno DLL was created\nERROR: compilation failed for package 'rPython'\n\nI see some mention of the link error here:\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=17910\nIt looks like a related bug was in binutils 2.25 on 2/27/2015.  It seems\nlike the fix would have made it into Rtools 3.3 since:\n1) this page suggests that the aforementioned was resolved before the\nlatest release of binutils, 2.25.1, 9/15/2015:\nhttps://sourceforge.net/projects/mingw/files/MinGW/Base/binutils/\n2) Installing Rtools 3.3, one can see that the binaries which are part of\nbinutils (like ld.exe) are dated 9/22/2015.\n\nI don't know if MinGW is 'buggy', if I'm doing something wrong, and/or what\nto do to fix the link error.\n\nIs there anyone on this list with experience linking an R package to a\nstatic library built on Windows using Visual Studio?\n\nAny suggestions are appreciated!\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to create a self-contained R package wrapping Python that works\ncross platform and have not been able to do this on Windows.  There is\nalready an R package which calls Python, requiring Py",
+      "thread_id": "thread-9bfd8f845e74",
+      "thread_depth": 0,
+      "month": "2016-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-8142d74850a7",
+      "subject": "[R-pkg-devel] Problems with :::",
+      "message_count": 2,
+      "participants": [
+        "Berry Boessenkool",
+        "Martin Maechler"
+      ],
+      "started": "2016-02-01T09:49:26+01:00",
+      "last_reply": "2016-02-01T10:39:59+01:00",
+      "root_message_id": "msg-8142d74850a7"
+    },
+    {
+      "id": "thread-16cf28d0b736",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "message_count": 2,
+      "participants": [
+        "Georgi Boshnakov",
+        "Jim Lemon"
+      ],
+      "started": "2016-02-01T13:46:10+00:00",
+      "last_reply": "2016-02-02T09:24:29+11:00",
+      "root_message_id": "msg-16cf28d0b736"
+    },
+    {
+      "id": "thread-0ac4d34864fe",
+      "subject": "[R-pkg-devel] S3 length method behavior",
+      "message_count": 4,
+      "participants": [
+        "Barry Rowlingson",
+        "Hadley Wickham",
+        "Martin Maechler",
+        "Nathan Wendt"
+      ],
+      "started": "2016-02-02T09:28:48-06:00",
+      "last_reply": "2016-02-03T08:52:24+01:00",
+      "root_message_id": "msg-0ac4d34864fe"
+    },
+    {
+      "id": "thread-2e9a65bd9687",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Irucka Embry"
+      ],
+      "started": "2016-02-02T11:23:51-08:00",
+      "last_reply": "2016-02-03T04:51:21-05:00",
+      "root_message_id": "msg-2e9a65bd9687"
+    },
+    {
+      "id": "thread-c90dd924e2d4",
+      "subject": "[R-pkg-devel] compiling and executing binaries while testing",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "code M"
+      ],
+      "started": "2016-02-03T09:37:23+01:00",
+      "last_reply": "2016-02-03T12:17:25-06:00",
+      "root_message_id": "msg-c90dd924e2d4"
+    },
+    {
+      "id": "thread-8ec6ba61c792",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "message_count": 2,
+      "participants": [
+        "Michael Dewey",
+        "Uwe Ligges"
+      ],
+      "started": "2016-02-03T13:31:26+00:00",
+      "last_reply": "2016-02-03T14:38:05+01:00",
+      "root_message_id": "msg-8ec6ba61c792"
+    },
+    {
+      "id": "thread-10261da35a7c",
+      "subject": "[R-pkg-devel] Package fails to build on Windows only, builds on GNU/Linux (parse issue)",
+      "message_count": 1,
+      "participants": [
+        "Irucka Embry"
+      ],
+      "started": "2016-02-03T14:20:50-08:00",
+      "last_reply": "2016-02-03T14:20:50-08:00",
+      "root_message_id": "msg-10261da35a7c"
+    },
+    {
+      "id": "thread-10d1ba53ddcb",
+      "subject": "[R-pkg-devel] Development Testers?",
+      "message_count": 4,
+      "participants": [
+        "Boris Steipe",
+        "Charles Determan",
+        "Martin Maechler"
+      ],
+      "started": "2016-02-05T07:30:41-06:00",
+      "last_reply": "2016-02-09T11:43:54+01:00",
+      "root_message_id": "msg-10d1ba53ddcb"
+    },
+    {
+      "id": "thread-70ec6f962ab7",
+      "subject": "[R-pkg-devel] double colon",
+      "message_count": 1,
+      "participants": [
+        "David McPearson"
+      ],
+      "started": "2016-02-06T11:20:59+02:00",
+      "last_reply": "2016-02-06T11:20:59+02:00",
+      "root_message_id": "msg-70ec6f962ab7"
+    },
+    {
+      "id": "thread-07fc222f2104",
+      "subject": "[R-pkg-devel] pdflatex crashes with R CMD check",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Thierry Onkelinx"
+      ],
+      "started": "2016-02-09T15:33:26+01:00",
+      "last_reply": "2016-02-09T09:59:23-05:00",
+      "root_message_id": "msg-07fc222f2104"
+    },
+    {
+      "id": "thread-a4baaeb77707",
+      "subject": "[R-pkg-devel] Rprintf with mclapply",
+      "message_count": 1,
+      "participants": [
+        "Guillaume Chapron"
+      ],
+      "started": "2016-02-11T16:45:40+01:00",
+      "last_reply": "2016-02-11T16:45:40+01:00",
+      "root_message_id": "msg-a4baaeb77707"
+    },
+    {
+      "id": "thread-f8bbb47ae63b",
+      "subject": "[R-pkg-devel] Namespace error",
+      "message_count": 5,
+      "participants": [
+        "Duncan Murdoch",
+        "Glenn Schultz",
+        "Gábor Csárdi",
+        "Kirill Müller",
+        "peter dalgaard"
+      ],
+      "started": "2016-02-16T17:14:18+00:00",
+      "last_reply": "2016-02-23T11:45:46+01:00",
+      "root_message_id": "msg-f8bbb47ae63b"
+    },
+    {
+      "id": "thread-2f0ed4384f26",
+      "subject": "[R-pkg-devel] Issue with nlme-package on Windows",
+      "message_count": 2,
+      "participants": [
+        "Daniel Lüdecke",
+        "Duncan Murdoch"
+      ],
+      "started": "2016-02-26T10:32:30+01:00",
+      "last_reply": "2016-02-26T10:10:00-05:00",
+      "root_message_id": "msg-2f0ed4384f26"
+    },
+    {
+      "id": "thread-75334ab229c4",
+      "subject": "[R-pkg-devel] S4 generic with variable naming of arguments",
+      "message_count": 1,
+      "participants": [
+        "Thomas Petzoldt"
+      ],
+      "started": "2016-02-29T10:33:03+01:00",
+      "last_reply": "2016-02-29T10:33:03+01:00",
+      "root_message_id": "msg-75334ab229c4"
+    },
+    {
+      "id": "thread-9bfd8f845e74",
+      "subject": "[R-pkg-devel] Linking an R package to the Python library",
+      "message_count": 1,
+      "participants": [
+        "Bruce Hoff"
+      ],
+      "started": "2016-02-29T13:01:06-08:00",
+      "last_reply": "2016-02-29T13:01:06-08:00",
+      "root_message_id": "msg-9bfd8f845e74"
+    }
+  ]
+}

@@ -1,0 +1,690 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2025-11",
+  "messages": [
+    {
+      "id": "msg-91a9368173da",
+      "message_id": "<1a5e9150-2b00-41ad-aa60-092d9cc3eebe@app.fastmail.com>",
+      "from_name": "Nan Xiao",
+      "from_email_hash": "5730c1dc440c8ac20e04086764f618f8ad4183ec3b2a8fab93b7329e433f9cb3",
+      "date": "2025-11-01T21:59:50-04:00",
+      "subject": "[R-pkg-devel]  revdeprun: Rust CLI for automating revdep checks on cloud instances",
+      "subject_clean": "[R-pkg-devel]  revdeprun: Rust CLI for automating revdep checks on cloud instances",
+      "in_reply_to": "<26883.11675.153312.314802@stat.math.ethz.ch>",
+      "references": [
+        "<f9f74e36-274c-4e2e-a359-8c141398fa9c@app.fastmail.com>",
+        "<26883.11675.153312.314802@stat.math.ethz.ch>"
+      ],
+      "body_plain": "Dear Martin,\n\nThank you for the kind words and the excellent suggestion. I'm pleased to share that tarball input support has been added in revdeprun 1.1.0 (among other improvements since the announcement). You can now run `revdeprun pkg_version.tar.gz` to check a tarball directly.\n\nBest,\n-Nan\n\nOn Thu, Oct 30, 2025, at 05:19, Martin Maechler wrote:\n>>>>>> Nan Xiao \n>>>>>>     on Mon, 27 Oct 2025 23:07:59 -0400 writes:\n>\n>     > Dear all,\n>     > I wanted to share a tool revdeprun that I built over the weekend. \n> It might be useful if you maintain R packages with many reverse \n> dependencies.\n>\n>     > If you ever needed to run revdepcheck on a disposable cloud \n> instance, you will know that the setup can be tedious. Install R, set \n> environment variables, and handle other details before you can even \n> start the actual checking. revdeprun automates all that. Once \n> installed, you can run a full reverse dependency check with a single \n> command:\n>\n>     > revdeprun https://github.com/username/repo.git\n>\n>     > It is written as a Rust CLI tool rather than an R package or a \n> shell script, which makes it a bit easier to compile and run without \n> setting up language runtime.\n>\n>     > Blog post: https://nanx.me/blog/post/revdeprun/\n>     > GitHub: https://github.com/nanxstats/revdeprun\n>\n> Thank you,  Nan, in the name of the R community.\n>\n> As most of my packages are not with Microsoft, i.e., not on Github,\n> I'd be more interested in a version of your tool that works with\n> a simple source package tarball, i.e., the file  <pkg>_<version>.tar.gz \n> resulting from  'R CMD build <pkgdir>'\n>\n> In principle that should even be simpler than first getting the\n> package from the github repos, no?\n>\n> Best regards,\n> Martin\n>\n> --\n> Martin Maechler\n> ETH Zurich and R Core team",
+      "body_snippet": "Dear Martin,\n\nThank you for the kind words and the excellent suggestion. I'm pleased to share that tarball input support has been added in revdeprun 1.1.0 (among other improvements since the announcem",
+      "thread_id": "thread-91a9368173da",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-e4db31717fc7",
+      "message_id": "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>",
+      "from_name": "Peter Carbonetto",
+      "from_email_hash": "960452094ed96a43b1a151498bb2aaaa84dc67b713fb5d1b2ac5578703cfc22c",
+      "date": "2025-11-03T10:18:11-06:00",
+      "subject": "[R-pkg-devel] Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "subject_clean": "[R-pkg-devel] Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi All,\n\nA recent update to my package has generated an unexpected error in the\nclang-UBSAN test environment (as well as gcc-UBSAN):\nhttps://cran.r-project.org/web/checks/check_results_fastTopics.html\n\nHowever, I could not reproduce this error using rhub (platform =\n\"gcc-ubsan\"), which makes it difficult to troubleshoot (and eventually\ncorrect) this error.\n\nDoes anyone have suggestions for how I could reproduce the error (rhub or\notherwise), or is there more detailed documentation somewhere on the\nclang-UBSAN environment? I'm at a bit of a loss for how to proceed.\n\nThank you,\n\nPeter Carbonetto\nResearch Assistant Professor\nDept. of Human Genetics\nUniversity of Chicago\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi All,\n\nA recent update to my package has generated an unexpected error in the\nclang-UBSAN test environment (as well as gcc-UBSAN):\nhttps://cran.r-project.org/web/checks/check_results_fastTopics.html",
+      "thread_id": "thread-e4db31717fc7",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-3dea0d38a663",
+      "message_id": "<976baf88-74c1-4e29-aac8-8c284933f844@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-11-03T17:53:08+01:00",
+      "subject": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "subject_clean": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "in_reply_to": "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>",
+      "references": [
+        "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>"
+      ],
+      "body_plain": "On 11/3/25 17:18, Peter Carbonetto wrote:\n> Hi All,\n>\n> A recent update to my package has generated an unexpected error in the\n> clang-UBSAN test environment (as well as gcc-UBSAN):\n> https://cran.r-project.org/web/checks/check_results_fastTopics.html\n>\n> However, I could not reproduce this error using rhub (platform =\n> \"gcc-ubsan\"), which makes it difficult to troubleshoot (and eventually\n> correct) this error.\n>\n> Does anyone have suggestions for how I could reproduce the error (rhub or\n> otherwise), or is there more detailed documentation somewhere on the\n> clang-UBSAN environment? I'm at a bit of a loss for how to proceed.\n\nhttps://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt\n\nThough, my recommendation would be first to try to figure out the \nproblem from the check output - the big advantage of sanitizer checks is \nthat one gets a stack trace. And if that doesn't help, add some \nadditional runtime (bounds) checks to the code, perhaps the lowest frame \n(last frame) from your package that is included in the stack trace. Once \nthat detects the error, then fix it, try again with the added check \nstill enabled, and eventually remove (or disable) the check.\n\nBest\nTomas\n\n>\n> Thank you,\n>\n> Peter Carbonetto\n> Research Assistant Professor\n> Dept. of Human Genetics\n> University of Chicago\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 11/3/25 17:18, Peter Carbonetto wrote:\n> Hi All,\n>\n> A recent update to my package has generated an unexpected error in the\n> clang-UBSAN test environment (as well as gcc-UBSAN):\n> https://cran.r-p",
+      "thread_id": "thread-e4db31717fc7",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-b965e967938f",
+      "message_id": "<26888.58879.930849.144637@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-11-03T11:27:27-06:00",
+      "subject": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "subject_clean": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "in_reply_to": "<976baf88-74c1-4e29-aac8-8c284933f844@gmail.com>",
+      "references": [
+        "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>",
+        "<976baf88-74c1-4e29-aac8-8c284933f844@gmail.com>"
+      ],
+      "body_plain": "Peter,\n\nBesides the comments Tomas already made, consider looking more closely at the\nvignettes. The error in [0] indicates that this comes from vignettes, not\nexamples or tests.\n\nI have been providing Docker containers for gcc and clang ASAN/UBSAN for what\nmust be close to a decade. These often work as they try to follow the setup\nused by BDR on his machines. [1] When they fail the very useful 'sumo'\ncontainer by Winston often referenced here in threads can also be useful.\n\nSo as a test, I pulled a refreshed version of the rocker/r-devel-san\ncontainer [2] and installed the (considerable) dependency set of your\npackages. As expected, nothing in tests or examples. I then purl'ed the code\nout of the vignettes and ran those, and that seems to replicate the issue:\n\n../../src/tbbmalloc/backref.cpp:150:21: runtime error: index 1 out of bounds for type 'BackRefBlock *[1]'\nFitting rank-6 Poisson NMF to 100 x 16791 sparse matrix.        \nRunning at most 20 SCD updates, without extrapolation (fastTopics 0.7-30). \n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/Mat_meat.hpp:7043:26: runtime error: reference binding to null pointer of type 'const double'\n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/access.hpp:26:100: runtime error: reference binding to null pointer of type 'double'\n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/Mat_meat.hpp:7043:26: runtime error: reference binding to null pointer of type 'const double'\n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/access.hpp:26:100: runtime error: reference binding to null pointer of type 'double'\n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/subview_meat.hpp:1420:54: runtime error: reference binding to null pointer of type 'const double'\n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/access.hpp:26:100: runtime error: reference binding to null pointer of type 'double'\n\nThis could be an upstream issue is Armadillo as wrapped in RcppArmadillo. I\nas maintainer need to balance the (frequent) updates upstream with the CRAN\nPolicy of \"no more than six releases in six month\" so I have sat out the bug\nfix release 15.0.3 as well as the new releases 15.2 and 15.2.1 and not\nuploaded them to CRAN.  However, they are packaged at my master branch and\navailable via R-universe.\n\nSo as a test I fetched 15.2.1 from there, installed it, re-installed your\npackage and ran the test again.  The errors persist suggesting it may be your\ncode and it creates matrices or matrix views. (Needless to say, the error\ncould of course also be on our end in RcppArmadillo.)\n\nWould it be possible to simplify the code down to a simpler, self-contained\nmatrix example not requiring all the packages?  That would also make testing\nwith the other container quicker as we would not have to reinstall all those\ndependencies. \n\nAnother possibility is parallelism as the message comes from tbbmalloc so\nmaybe trying in serial mode may help?\n\nLastly, as you asked about rhub: I am not involved with rhub and do not use\nit much myself so I cannot help much on that aspect. But if this does not\nreplicate under their container you should be able to hook up the one used\nhere, i.e. rocker/r-devel-san (as well as the other one) under GitHub Actions\nas they let you pull in other Docker containers (when running under Linux).\n\nIt's too nice outside right now here in Chicagoland so I'll now disappear for\na bit on my bike but we can possibly pick this up later.\n\nCheers, Dirk\n\n[0] https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-UBSAN/fastTopics/build_vignettes.log\n[1] In a more ideal world, his tests could be based on containers and these\ncontainers could be provided. Alas, on this planet we're not there yet.\n[2] Both containers are refreshed regularly via schedule GitHub Actions.\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Peter,\n\nBesides the comments Tomas already made, consider looking more closely at the\nvignettes. The error in [0] indicates that this comes from vignettes, not\nexamples or tests.\n\nI have been providin",
+      "thread_id": "thread-e4db31717fc7",
+      "thread_depth": 2,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-4f0989625860",
+      "message_id": "<20251103204614.6a719ec4@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2025-11-03T20:46:14+03:00",
+      "subject": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "subject_clean": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "in_reply_to": "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>",
+      "references": [
+        "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>"
+      ],
+      "body_plain": "? Mon, 3 Nov 2025 10:18:11 -0600\nPeter Carbonetto <peter.carbonetto at gmail.com> ?????:\n\n> However, I could not reproduce this error using rhub (platform =\n> \"gcc-ubsan\"), which makes it difficult to troubleshoot (and eventually\n> correct) this error.\n\nThe UBSan warnings are reported not directly in your package, but in\n.../src/tbbmalloc/backref.cpp (RcppParallel) and some paths in\nRcppArmadillo. I think the reason why you cannot reproduce the problem\non R-hub is because R-hub containers install dependencies pre-built,\nwithout instrumentation: the check for the problem in your package\nneeds to happen inside a different package. This usually saves a lot of\nCPU-hours running CI for people whose problems are easier to reproduce,\nbut didn't help this time.\n\nWhile I was writing this, Dirk has already confirmed that the Rocker\ncontainer image is sufficient to reproduce the problem, so hopefully\nthere's now enough information now to solve it.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 3 Nov 2025 10:18:11 -0600\nPeter Carbonetto <peter.carbonetto at gmail.com> ?????:\n\n> However, I could not reproduce this error using rhub (platform =\n> \"gcc-ubsan\"), which makes it difficult to",
+      "thread_id": "thread-e4db31717fc7",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-9a6604c08736",
+      "message_id": "<CADNULg8GfVMdECZgCybAtniGMh_vt_KoQV19nbU59CScE3v8iQ@mail.gmail.com>",
+      "from_name": "Iris Simmons",
+      "from_email_hash": "40b01f168beec35ef27cb62ca97f7a4b288ecbda9c188bcf84504fdbe44290e9",
+      "date": "2025-11-05T22:02:39-05:00",
+      "subject": "[R-pkg-devel] Rf_lazy_duplicate moved to nonAPI",
+      "subject_clean": "[R-pkg-devel] Rf_lazy_duplicate moved to nonAPI",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\n\nI see Rf_lazy_duplicate was placed on the list of non-API C functions.\nIs there going to be a replacement, or some alternative? None is\nmentioned in Writing R Extensions.\n\n\nThanks,\n    Iris",
+      "body_snippet": "Hi,\n\n\nI see Rf_lazy_duplicate was placed on the list of non-API C functions.\nIs there going to be a replacement, or some alternative? None is\nmentioned in Writing R Extensions.\n\n\nThanks,\n    Iris",
+      "thread_id": "thread-9a6604c08736",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-e7d63ffd6557",
+      "message_id": "<9dfce08f-4c55-b4b0-6adb-cb3535f80876@uiowa.edu>",
+      "from_name": "iuke-tier@ey m@iii@g oii uiow@@edu",
+      "from_email_hash": "d99ccb54811d841ac041f12e5dfc823053fe0bdf1cebd8d1047b8e5f0d6a24b7",
+      "date": "2025-11-05T21:37:09-06:00",
+      "subject": "[R-pkg-devel] [External]  Rf_lazy_duplicate moved to nonAPI",
+      "subject_clean": "[R-pkg-devel] [External]  Rf_lazy_duplicate moved to nonAPI",
+      "in_reply_to": "<CADNULg8GfVMdECZgCybAtniGMh_vt_KoQV19nbU59CScE3v8iQ@mail.gmail.com>",
+      "references": [
+        "<CADNULg8GfVMdECZgCybAtniGMh_vt_KoQV19nbU59CScE3v8iQ@mail.gmail.com>"
+      ],
+      "body_plain": "On Thu, 6 Nov 2025, Iris Simmons wrote:\n\n> Hi,\n>\n>\n> I see Rf_lazy_duplicate was placed on the list of non-API C functions.\n\nThat is not quite right. Rf_lazy_duplicate was never in the API. Using\nit in a package has been producing a NOTE in R CMD check for a while;\nthat NOTE has now been upgraded to a WARNING.\n\n> Is there going to be a replacement, or some alternative? None is\n> mentioned in Writing R Extensions.\n\nIt has been essentially a no-op since the change to reference counting\nseveral years ago. So Rf_lazy_duplicate(x) is now essentially the same\nas x.\n\nBest,\n\nluke\n\n>\n>\n> Thanks,\n>    Iris\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/",
+      "body_snippet": "On Thu, 6 Nov 2025, Iris Simmons wrote:\n\n> Hi,\n>\n>\n> I see Rf_lazy_duplicate was placed on the list of non-API C functions.\n\nThat is not quite right. Rf_lazy_duplicate was never in the API. Using\nit i",
+      "thread_id": "thread-9a6604c08736",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-2e3788a3dcbc",
+      "message_id": "<CADNULg-gUPaQRM5D9k9Yr1to3eWe49bMGF3mXW=buSrJj17Tiw@mail.gmail.com>",
+      "from_name": "Iris Simmons",
+      "from_email_hash": "40b01f168beec35ef27cb62ca97f7a4b288ecbda9c188bcf84504fdbe44290e9",
+      "date": "2025-11-06T00:54:00-05:00",
+      "subject": "[R-pkg-devel] [External]  Rf_lazy_duplicate moved to nonAPI",
+      "subject_clean": "[R-pkg-devel] [External]  Rf_lazy_duplicate moved to nonAPI",
+      "in_reply_to": "<9dfce08f-4c55-b4b0-6adb-cb3535f80876@uiowa.edu>",
+      "references": [
+        "<CADNULg8GfVMdECZgCybAtniGMh_vt_KoQV19nbU59CScE3v8iQ@mail.gmail.com>",
+        "<9dfce08f-4c55-b4b0-6adb-cb3535f80876@uiowa.edu>"
+      ],
+      "body_plain": "> That is not quite right. Rf_lazy_duplicate was never in the API.\n\nI wish you wouldn't be contrarian just for the sake of it, and I wish\nyou'd at least be correct when you are. I never said Rf_lazy_duplicate\nwas part of the API. I said it was placed on the list of non-API C\nfunctions, which is true.\nhttps://github.com/wch/r-source/commit/42b67e1c9bd29506d5e1de8c50389cb4ad39f74a#diff-85fcd7ad89c2b2a608f20c34b99001203b2bc8d2f41c5aedef8239a4e4e98590R697\n\n> Using it in a package has been producing a NOTE in R CMD check for a while; that NOTE has now been upgraded to a WARNING.\n\n3 weeks is not a while.\n\n> It has been essentially a no-op since the change to reference counting several years ago. So Rf_lazy_duplicate(x) is now essentially the same as x.\n\nThanks.\n\nOn Wed, Nov 5, 2025 at 10:37?PM <luke-tierney at uiowa.edu> wrote:\n>\n> On Thu, 6 Nov 2025, Iris Simmons wrote:\n>\n> > Hi,\n> >\n> >\n> > I see Rf_lazy_duplicate was placed on the list of non-API C functions.\n>\n> That is not quite right. Rf_lazy_duplicate was never in the API. Using\n> it in a package has been producing a NOTE in R CMD check for a while;\n> that NOTE has now been upgraded to a WARNING.\n>\n> > Is there going to be a replacement, or some alternative? None is\n> > mentioned in Writing R Extensions.\n>\n> It has been essentially a no-op since the change to reference counting\n> several years ago. So Rf_lazy_duplicate(x) is now essentially the same\n> as x.\n>\n> Best,\n>\n> luke\n>\n> >\n> >\n> > Thanks,\n> >    Iris\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n> --\n> Luke Tierney\n> Ralph E. Wareham Professor of Mathematical Sciences\n> University of Iowa                  Phone:             319-335-3386\n> Department of Statistics and        Fax:               319-335-3017\n>     Actuarial Science\n> 241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\n> Iowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/",
+      "body_snippet": "> That is not quite right. Rf_lazy_duplicate was never in the API.\n\nI wish you wouldn't be contrarian just for the sake of it, and I wish\nyou'd at least be correct when you are. I never said Rf_lazy_d",
+      "thread_id": "thread-9a6604c08736",
+      "thread_depth": 2,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-fb98509c89dc",
+      "message_id": "<2dcc956e-27a1-4c8d-94a3-b4da8185a110@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-11-06T16:36:10+01:00",
+      "subject": "[R-pkg-devel] [External] Rf_lazy_duplicate moved to nonAPI",
+      "subject_clean": "[R-pkg-devel] [External] Rf_lazy_duplicate moved to nonAPI",
+      "in_reply_to": "<CADNULg-gUPaQRM5D9k9Yr1to3eWe49bMGF3mXW=buSrJj17Tiw@mail.gmail.com>",
+      "references": [
+        "<CADNULg8GfVMdECZgCybAtniGMh_vt_KoQV19nbU59CScE3v8iQ@mail.gmail.com>",
+        "<9dfce08f-4c55-b4b0-6adb-cb3535f80876@uiowa.edu>",
+        "<CADNULg-gUPaQRM5D9k9Yr1to3eWe49bMGF3mXW=buSrJj17Tiw@mail.gmail.com>"
+      ],
+      "body_plain": "On 11/6/25 06:54, Iris Simmons wrote:\n>> That is not quite right. Rf_lazy_duplicate was never in the API.\n> I wish you wouldn't be contrarian just for the sake of it, and I wish\n> you'd at least be correct when you are. I never said Rf_lazy_duplicate\n> was part of the API. I said it was placed on the list of non-API C\n> functions, which is true.\n> https://github.com/wch/r-source/commit/42b67e1c9bd29506d5e1de8c50389cb4ad39f74a#diff-85fcd7ad89c2b2a608f20c34b99001203b2bc8d2f41c5aedef8239a4e4e98590R697\n\nRight, you didn't write that you thought Rf_lazy_duplicate was part of \nthe API. And you got a very polite response, perhaps something worth \ntaking an inspiration from. It was polite because it assumed your \nquestion made sense - it would only have made sense if you thought \nRf_lazy_duplicate was in the API (and you didn't write otherwise). It is \nunreasonable to expect WRE would discuss replacements for private \nfunctions for the R engine (after all, before Luke's work on indexing \nthe API, functions mentioned in WRE were part of the API by the virtue \nof being mentioned there). Discussing functions private to the R engine \nis out of scope of WRE (or R-pkg-devel for that matter).\n\nReporting non-API functions used in packages is an important service to \nresponsible package authors, who want to cooperate in keeping the R \necosystem maintainable.\n\nBest\nTomas\n\n>\n>> Using it in a package has been producing a NOTE in R CMD check for a while; that NOTE has now been upgraded to a WARNING.\n> 3 weeks is not a while.\n>\n>> It has been essentially a no-op since the change to reference counting several years ago. So Rf_lazy_duplicate(x) is now essentially the same as x.\n> Thanks.\n>\n> On Wed, Nov 5, 2025 at 10:37?PM <luke-tierney at uiowa.edu> wrote:\n>> On Thu, 6 Nov 2025, Iris Simmons wrote:\n>>\n>>> Hi,\n>>>\n>>>\n>>> I see Rf_lazy_duplicate was placed on the list of non-API C functions.\n>> That is not quite right. Rf_lazy_duplicate was never in the API. Using\n>> it in a package has been producing a NOTE in R CMD check for a while;\n>> that NOTE has now been upgraded to a WARNING.\n>>\n>>> Is there going to be a replacement, or some alternative? None is\n>>> mentioned in Writing R Extensions.\n>> It has been essentially a no-op since the change to reference counting\n>> several years ago. So Rf_lazy_duplicate(x) is now essentially the same\n>> as x.\n>>\n>> Best,\n>>\n>> luke\n>>\n>>>\n>>> Thanks,\n>>>     Iris\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>> --\n>> Luke Tierney\n>> Ralph E. Wareham Professor of Mathematical Sciences\n>> University of Iowa                  Phone:             319-335-3386\n>> Department of Statistics and        Fax:               319-335-3017\n>>      Actuarial Science\n>> 241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\n>> Iowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 11/6/25 06:54, Iris Simmons wrote:\n>> That is not quite right. Rf_lazy_duplicate was never in the API.\n> I wish you wouldn't be contrarian just for the sake of it, and I wish\n> you'd at least be co",
+      "thread_id": "thread-9a6604c08736",
+      "thread_depth": 3,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-8f0bc735b4b0",
+      "message_id": "<CAPvCojKZ9Jj9kJunbz9k8b+AhG7LD_f+QL9=zqUXPpt02r5X2A@mail.gmail.com>",
+      "from_name": "Peter Carbonetto",
+      "from_email_hash": "960452094ed96a43b1a151498bb2aaaa84dc67b713fb5d1b2ac5578703cfc22c",
+      "date": "2025-11-07T15:14:10-06:00",
+      "subject": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "subject_clean": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "in_reply_to": "<26888.58879.930849.144637@paul.eddelbuettel.com>",
+      "references": [
+        "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>",
+        "<976baf88-74c1-4e29-aac8-8c284933f844@gmail.com>",
+        "<26888.58879.930849.144637@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Thanks to all of you (Ivan, Ben, Tomas, Dirk) for your detailed and\ninformative suggestions, all of which have been deeply helpful, but it took\nme some time to act on these suggestions since I am not well versed in\nthese tools and concepts. (Despite having developed several packages over\nthe years that use Rcpp and the accompanying packages?RcppArmadillo,\nRcppParallel, etc?all of this is almost entirely new to me.)\n\nMost urgently, I have a specific question based on Dirk's response:\n\nThe rocker images were indeed super helpful, and I think is getting me very\nclose to reproducing the original issues (\"reference binding to null\npointer?\"). I was able to (eventually) set up a r-devel-ubsan-clang\ncontainer on my MacBook Pro, install the fastTopics package, and run the\nbasic checks using \"R CMD check ?\". (I will share the steps I took since I\nfigured it might be useful for others trying to reproduce the clang-UBSAN\nenvironment.)\n\nHowever, I was not able to reproduce the exact errors Dirk obtained by\nrunning the R code purl'ed from the single_cell_rnaseq_basic.Rmd vignette.\nI thought that this might work:\n\nR -d valgrind --vanilla < single_cell_rnaseq_basic.R\n\nbut this did not produce any of the \"runtime errors\" such as:\n\n/usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/Mat_meat.hpp:7043:26:\nruntime error: reference binding to null pointer of type 'const double'\n\nDirk, could you please share the exact R or Rscript command you ran to\nobtain these errors? In addition, do I need to install fastTopics and the\nother R packages in a specific way as well? That is, are there special\nflags (perhaps existing somewhere in\nhttps://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt) that are needed to\nactivate these extra debugging checks?\n\nThanks again,\nPeter\n\n\nOn Mon, Nov 3, 2025 at 11:27?AM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> Peter,\n>\n> Besides the comments Tomas already made, consider looking more closely at\n> the\n> vignettes. The error in [0] indicates that this comes from vignettes, not\n> examples or tests.\n>\n> I have been providing Docker containers for gcc and clang ASAN/UBSAN for\n> what\n> must be close to a decade. These often work as they try to follow the setup\n> used by BDR on his machines. [1] When they fail the very useful 'sumo'\n> container by Winston often referenced here in threads can also be useful.\n>\n> So as a test, I pulled a refreshed version of the rocker/r-devel-san\n> container [2] and installed the (considerable) dependency set of your\n> packages. As expected, nothing in tests or examples. I then purl'ed the\n> code\n> out of the vignettes and ran those, and that seems to replicate the issue:\n>\n> ../../src/tbbmalloc/backref.cpp:150:21: runtime error: index 1 out of\n> bounds for type 'BackRefBlock *[1]'\n> Fitting rank-6 Poisson NMF to 100 x 16791 sparse matrix.\n> Running at most 20 SCD updates, without extrapolation (fastTopics 0.7-30).\n> /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/Mat_meat.hpp:7043:26:\n> runtime error: reference binding to null pointer of type 'const double'\n> /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/access.hpp:26:100:\n> runtime error: reference binding to null pointer of type 'double'\n> /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/Mat_meat.hpp:7043:26:\n> runtime error: reference binding to null pointer of type 'const double'\n> /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/access.hpp:26:100:\n> runtime error: reference binding to null pointer of type 'double'\n> /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/subview_meat.hpp:1420:54:\n> runtime error: reference binding to null pointer of type 'const double'\n> /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/access.hpp:26:100:\n> runtime error: reference binding to null pointer of type 'double'\n>\n> This could be an upstream issue is Armadillo as wrapped in RcppArmadillo. I\n> as maintainer need to balance the (frequent) updates upstream with the CRAN\n> Policy of \"no more than six releases in six month\" so I have sat out the\n> bug\n> fix release 15.0.3 as well as the new releases 15.2 and 15.2.1 and not\n> uploaded them to CRAN.  However, they are packaged at my master branch and\n> available via R-universe.\n>\n> So as a test I fetched 15.2.1 from there, installed it, re-installed your\n> package and ran the test again.  The errors persist suggesting it may be\n> your\n> code and it creates matrices or matrix views. (Needless to say, the error\n> could of course also be on our end in RcppArmadillo.)\n>\n> Would it be possible to simplify the code down to a simpler, self-contained\n> matrix example not requiring all the packages?  That would also make\n> testing\n> with the other container quicker as we would not have to reinstall all\n> those\n> dependencies.\n>\n> Another possibility is parallelism as the message comes from tbbmalloc so\n> maybe trying in serial mode may help?\n>\n> Lastly, as you asked about rhub: I am not involved with rhub and do not use\n> it much myself so I cannot help much on that aspect. But if this does not\n> replicate under their container you should be able to hook up the one used\n> here, i.e. rocker/r-devel-san (as well as the other one) under GitHub\n> Actions\n> as they let you pull in other Docker containers (when running under Linux).\n>\n> It's too nice outside right now here in Chicagoland so I'll now disappear\n> for\n> a bit on my bike but we can possibly pick this up later.\n>\n> Cheers, Dirk\n>\n> [0]\n> https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-UBSAN/fastTopics/build_vignettes.log\n> [1] In a more ideal world, his tests could be based on containers and these\n> containers could be provided. Alas, on this planet we're not there yet.\n> [2] Both containers are refreshed regularly via schedule GitHub Actions.\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks to all of you (Ivan, Ben, Tomas, Dirk) for your detailed and\ninformative suggestions, all of which have been deeply helpful, but it took\nme some time to act on these suggestions since I am not ",
+      "thread_id": "thread-e4db31717fc7",
+      "thread_depth": 3,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-bf9f357018d5",
+      "message_id": "<26894.40554.133312.526224@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-11-07T19:35:38-06:00",
+      "subject": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "subject_clean": "[R-pkg-devel]  Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "in_reply_to": "<CAPvCojKZ9Jj9kJunbz9k8b+AhG7LD_f+QL9=zqUXPpt02r5X2A@mail.gmail.com>",
+      "references": [
+        "<CAPvCojKkPyoiC1Y8PsYCC4=Z2-jfGi-3OhxOmAkzv9fEnnknPA@mail.gmail.com>",
+        "<976baf88-74c1-4e29-aac8-8c284933f844@gmail.com>",
+        "<26888.58879.930849.144637@paul.eddelbuettel.com>",
+        "<CAPvCojKZ9Jj9kJunbz9k8b+AhG7LD_f+QL9=zqUXPpt02r5X2A@mail.gmail.com>"
+      ],
+      "body_plain": "On 7 November 2025 at 15:14, Peter Carbonetto wrote:\n| However, I was not able to reproduce the exact errors Dirk obtained by\n| running the R code purl'ed from the single_cell_rnaseq_basic.Rmd vignette.\n| I thought that this might work:\n| \n| R -d valgrind --vanilla < single_cell_rnaseq_basic.R\n| \n| but this did not produce any of the \"runtime errors\" such as:\n| \n| /usr/local/lib/R/site-library/RcppArmadillo/include/current/armadillo_bits/Mat_meat.hpp:7043:26:\n| runtime error: reference binding to null pointer of type 'const double'\n| \n| Dirk, could you please share the exact R or Rscript command you ran to\n| obtain these errors? In addition, do I need to install fastTopics and the\n| other R packages in a specific way as well? That is, are there special\n| flags (perhaps existing somewhere in\n| https://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt) that are needed to\n| activate these extra debugging checks?\n\nYou want 'RD', not 'R'.  From the container's github repo README.mdL\n\n   Note that the instrumented version of R is available on the path as\n   Rdevel, symbolically linked as RD, and that the instrumented versions of\n   Rscript is Rscriptdevel with symbolic link RDscript. Based on the R-devel\n   sources, they use the sanitizer setup that is the focuse here whereas the\n   R and Rscript binaries come from the standard binary package and\n   correspond to R-release without any sanitizer instrumentation. So use RD\n   and RDscript to inspect undefined behavior.\n\nAlso not sure why you added '-d valgrind'. That is a very fine tool, but its\nuse tends to be independent of ASAN/UBSAN and result in separate reports.\n\nBest, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 7 November 2025 at 15:14, Peter Carbonetto wrote:\n| However, I was not able to reproduce the exact errors Dirk obtained by\n| running the R code purl'ed from the single_cell_rnaseq_basic.Rmd vignett",
+      "thread_id": "thread-e4db31717fc7",
+      "thread_depth": 4,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-1d21a690972b",
+      "message_id": "<AS4P195MB1430F30A36C749B016AD680DBEC8A@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+      "from_name": "Tony Wilkes",
+      "from_email_hash": "6136bb32e737ef21100ebbcea9efbb7efdaa4349bc12a55dea6e0aec4798b535",
+      "date": "2025-11-16T17:18:04Z",
+      "subject": "[R-pkg-devel] NOTE on URLs",
+      "subject_clean": "[R-pkg-devel] NOTE on URLs",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\n\nThe 'broadcast' package produces a NOTE on r-devel-linux-x86_64-debian-gcc (not on the other OS) regarding the BugReports URL on my Description file.\n\nThe NOTE (found here https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/broadcast-00check.html) says:\n\"The BugReports field in DESCRIPTION has https://github.com/tony-aw/broadcast/issues/ which should likely be https://github.com/tony-aw/broadcast/issues/issues instead.\"\n\nI tried the suggested URL given by CRAN (https://github.com/tony-aw/broadcast/issues/issues) but it re-directs me to https://github.com/tony-aw/broadcast/issues/created_by/issues, which is not what I intended.\n\nThe URL I placed on the DESCRIPTION file myself (https://github.com/tony-aw/broadcast/issues/) works correctly for me. It works on multiple different web browsers. It works whether I'm logged in on GitHub or not. It works also when I clear all my cookies on my browser. It works on browsers I've never used before. And it works - according to CRAN's own checks - on all other OS configurations.\n\nI know CRAN checks URLs differently, but it is weird that this NOTE is only produced for r-devel-linux-x86_64-debian-gcc, and not the other OS configurations.\n\nIs this a mistake on my part, or a mistake on the part of CRAN?\nIf it is on my part, what did I do wrong?\nIf it is a mistake on the part of CRAN, I would like to kindly to ask them to correct whatever happened on their side.\n\n\nKind regards,\n\nTony\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\n\nThe 'broadcast' package produces a NOTE on r-devel-linux-x86_64-debian-gcc (not on the other OS) regarding the BugReports URL on my Description file.\n\nThe NOTE (found here https://www.r-project.",
+      "thread_id": "thread-1d21a690972b",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-a24af947dd93",
+      "message_id": "<CAPRVBcyF1pAJ8oKho_6fwoUqcz1QQE_01mnWmDH_n688a1B1jQ@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2025-11-16T09:47:57-08:00",
+      "subject": "[R-pkg-devel] NOTE on URLs",
+      "subject_clean": "[R-pkg-devel] NOTE on URLs",
+      "in_reply_to": "<AS4P195MB1430F30A36C749B016AD680DBEC8A@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AS4P195MB1430F30A36C749B016AD680DBEC8A@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "this is a mistake in R CMD check.\n\nand it looks like Kurt just fixed it too :)\n\nhttps://github.com/r-devel/r-svn/commit/f3495aec2388881bac38f76b8fbd4396b33b36b9\n\nOn Sun, Nov 16, 2025, 9:18?AM Tony Wilkes <tony_a_wilkes at outlook.com> wrote:\n\n> Hi,\n>\n>\n> The 'broadcast' package produces a NOTE on r-devel-linux-x86_64-debian-gcc\n> (not on the other OS) regarding the BugReports URL on my Description file.\n>\n> The NOTE (found here\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/broadcast-00check.html)\n> says:\n> \"The BugReports field in DESCRIPTION has\n> https://github.com/tony-aw/broadcast/issues/ which should likely be\n> https://github.com/tony-aw/broadcast/issues/issues instead.\"\n>\n> I tried the suggested URL given by CRAN (\n> https://github.com/tony-aw/broadcast/issues/issues) but it re-directs me\n> to https://github.com/tony-aw/broadcast/issues/created_by/issues, which\n> is not what I intended.\n>\n> The URL I placed on the DESCRIPTION file myself (\n> https://github.com/tony-aw/broadcast/issues/) works correctly for me. It\n> works on multiple different web browsers. It works whether I'm logged in on\n> GitHub or not. It works also when I clear all my cookies on my browser. It\n> works on browsers I've never used before. And it works - according to\n> CRAN's own checks - on all other OS configurations.\n>\n> I know CRAN checks URLs differently, but it is weird that this NOTE is\n> only produced for r-devel-linux-x86_64-debian-gcc, and not the other OS\n> configurations.\n>\n> Is this a mistake on my part, or a mistake on the part of CRAN?\n> If it is on my part, what did I do wrong?\n> If it is a mistake on the part of CRAN, I would like to kindly to ask them\n> to correct whatever happened on their side.\n>\n>\n> Kind regards,\n>\n> Tony\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "this is a mistake in R CMD check.\n\nand it looks like Kurt just fixed it too :)\n\nhttps://github.com/r-devel/r-svn/commit/f3495aec2388881bac38f76b8fbd4396b33b36b9\n\nOn Sun, Nov 16, 2025, 9:18?AM Tony Wil",
+      "thread_id": "thread-1d21a690972b",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-ff483bf1d84d",
+      "message_id": "<AS4P195MB1430B284B9D3F2D9B7EC4706BEC8A@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+      "from_name": "Tony Wilkes",
+      "from_email_hash": "6136bb32e737ef21100ebbcea9efbb7efdaa4349bc12a55dea6e0aec4798b535",
+      "date": "2025-11-16T17:56:19Z",
+      "subject": "[R-pkg-devel] NOTE on URLs",
+      "subject_clean": "[R-pkg-devel] NOTE on URLs",
+      "in_reply_to": "<CAPRVBcyF1pAJ8oKho_6fwoUqcz1QQE_01mnWmDH_n688a1B1jQ@mail.gmail.com>",
+      "references": [
+        "<AS4P195MB1430F30A36C749B016AD680DBEC8A@AS4P195MB1430.EURP195.PROD.OUTLOOK.COM>",
+        "<CAPRVBcyF1pAJ8oKho_6fwoUqcz1QQE_01mnWmDH_n688a1B1jQ@mail.gmail.com>"
+      ],
+      "body_plain": "Thanks! Good to know.\n\n________________________________\nVan: Michael Chirico <michaelchirico4 at gmail.com>\nVerstuurd: zondag, november 16, 2025 6:48:13 p.m.\nAan: Tony Wilkes <tony_a_wilkes at outlook.com>\nCC: R Package Development <r-package-devel at r-project.org>; CRAN <cran-submissions at r-project.org>\nOnderwerp: Re: [R-pkg-devel] NOTE on URLs\n\nthis is a mistake in R CMD check.\n\nand it looks like Kurt just fixed it too :)\n\nhttps://github.com/r-devel/r-svn/commit/f3495aec2388881bac38f76b8fbd4396b33b36b9\n\nOn Sun, Nov 16, 2025, 9:18?AM Tony Wilkes <tony_a_wilkes at outlook.com<mailto:tony_a_wilkes at outlook.com>> wrote:\nHi,\n\n\nThe 'broadcast' package produces a NOTE on r-devel-linux-x86_64-debian-gcc (not on the other OS) regarding the BugReports URL on my Description file.\n\nThe NOTE (found here https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/broadcast-00check.html) says:\n\"The BugReports field in DESCRIPTION has https://github.com/tony-aw/broadcast/issues/ which should likely be https://github.com/tony-aw/broadcast/issues/issues instead.\"\n\nI tried the suggested URL given by CRAN (https://github.com/tony-aw/broadcast/issues/issues) but it re-directs me to https://github.com/tony-aw/broadcast/issues/created_by/issues, which is not what I intended.\n\nThe URL I placed on the DESCRIPTION file myself (https://github.com/tony-aw/broadcast/issues/) works correctly for me. It works on multiple different web browsers. It works whether I'm logged in on GitHub or not. It works also when I clear all my cookies on my browser. It works on browsers I've never used before. And it works - according to CRAN's own checks - on all other OS configurations.\n\nI know CRAN checks URLs differently, but it is weird that this NOTE is only produced for r-devel-linux-x86_64-debian-gcc, and not the other OS configurations.\n\nIs this a mistake on my part, or a mistake on the part of CRAN?\nIf it is on my part, what did I do wrong?\nIf it is a mistake on the part of CRAN, I would like to kindly to ask them to correct whatever happened on their side.\n\n\nKind regards,\n\nTony\n\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks! Good to know.\n\n________________________________\nVan: Michael Chirico <michaelchirico4 at gmail.com>\nVerstuurd: zondag, november 16, 2025 6:48:13 p.m.\nAan: Tony Wilkes <tony_a_wilkes at outlook",
+      "thread_id": "thread-1d21a690972b",
+      "thread_depth": 2,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-10a16a1d07f2",
+      "message_id": "<CAJxQVAP0h3FPTf7DRLZxc=16v89Yo5nTsvTBp0zBLq5y5pU0CA@mail.gmail.com>",
+      "from_name": "Julian Grimm",
+      "from_email_hash": "5977efbb693a86580ea55e7d4afdaf7a936bda0a9fc9ca51c98cd7e2c07f2541",
+      "date": "2025-11-18T03:24:07+01:00",
+      "subject": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "subject_clean": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "in_reply_to": "<CAJxQVANnsacVhz5rvWuy3igePkpt8QmS8MXKOSKp2PJ1ZkK9-w@mail.gmail.com>",
+      "references": [
+        "<CAJxQVANnsacVhz5rvWuy3igePkpt8QmS8MXKOSKp2PJ1ZkK9-w@mail.gmail.com>"
+      ],
+      "body_plain": "Hello together,\n\nI have a question regarding the Authors at R field.\nWhen I run R CMD check . in a package either created by myself with\npkgKitten::kitten, usethis::create_package or even on existing packages on\nCran (e.g. the validate package),\nI get the following error:\n\n* checking for file ?./DESCRIPTION? ... ERROR\nRequired fields missing or empty:\n  ?Author? ?Maintainer?\n* DONE\n\nThe corresponding line in the DESCRIPTION file is:\n\nAuthors at R: person(\"Your\", \"Name\", role = c(\"aut\", \"cre\"),\n       email = \"your at email.com\")\n\nand Authors at R:\n    person(\"First\", \"Last\", , \"first.last at example.com\", role = c(\"aut\",\n\"cre\"))\n\nfor pkgKitten and usethis respectively.\n\nWhy does this error occur?\n\nWith best wishes\nJulian\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello together,\n\nI have a question regarding the Authors at R field.\nWhen I run R CMD check . in a package either created by myself with\npkgKitten::kitten, usethis::create_package or even on existing ",
+      "thread_id": "thread-10a16a1d07f2",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-665cfe2aed02",
+      "message_id": "<55017ecf-4b51-4743-9efc-6733e1111148@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-11-18T05:37:02-05:00",
+      "subject": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "subject_clean": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "in_reply_to": "<CAJxQVAP0h3FPTf7DRLZxc=16v89Yo5nTsvTBp0zBLq5y5pU0CA@mail.gmail.com>",
+      "references": [
+        "<CAJxQVANnsacVhz5rvWuy3igePkpt8QmS8MXKOSKp2PJ1ZkK9-w@mail.gmail.com>",
+        "<CAJxQVAP0h3FPTf7DRLZxc=16v89Yo5nTsvTBp0zBLq5y5pU0CA@mail.gmail.com>"
+      ],
+      "body_plain": "On 2025-11-17 9:24 p.m., Julian Grimm wrote:\n> Hello together,\n> \n> I have a question regarding the Authors at R field.\n> When I run R CMD check . in a package either created by myself with\n> pkgKitten::kitten, usethis::create_package or even on existing packages on\n> Cran (e.g. the validate package),\n> I get the following error:\n> \n> * checking for file ?./DESCRIPTION? ... ERROR\n> Required fields missing or empty:\n>    ?Author? ?Maintainer?\n> * DONE\n> \n> The corresponding line in the DESCRIPTION file is:\n> \n> Authors at R: person(\"Your\", \"Name\", role = c(\"aut\", \"cre\"),\n>         email = \"your at email.com\")\n> \n> and Authors at R:\n>      person(\"First\", \"Last\", , \"first.last at example.com\", role = c(\"aut\",\n> \"cre\"))\n> \n> for pkgKitten and usethis respectively.\n> \n> Why does this error occur?\n\nYou haven't built the package.  Some checks only succeed on a built copy \nof a package, i.e. the *.tar.gz file.  The devtools::check() function \nwill do both the build and test.\n\nPart of building the package modifies the DESCRIPTION file to insert the \nAuthor and Maintainer fields.  Another important difference is that \n.Rbuildignore is processed, so you won't get warnings about files that \nshouldn't be there, or false success if you accidentally specify \nignoring a file that should be kept.\n\nDuncan Murdoch",
+      "body_snippet": "On 2025-11-17 9:24 p.m., Julian Grimm wrote:\n> Hello together,\n> \n> I have a question regarding the Authors at R field.\n> When I run R CMD check . in a package either created by myself with\n> pkgKitte",
+      "thread_id": "thread-10a16a1d07f2",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-86f78d5145b2",
+      "message_id": "<2E5FDFD2-E37C-4134-815A-B11F1DC689FE@mac.com>",
+      "from_name": "John Benninghoff",
+      "from_email_hash": "9aa09f1812475b81092e5b073cb153838981649217cb0da3a5fc3c059eba77a2",
+      "date": "2025-11-18T17:30:18-06:00",
+      "subject": "[R-pkg-devel] CRAN macOS arm status problem?",
+      "subject_clean": "[R-pkg-devel] CRAN macOS arm status problem?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Is there an issue with the macOS arm binary builder for CRAN? Searching through the archives, I found a message (https://stat.ethz.ch/pipermail/r-package-devel/2023q2/009192.html) that included a link to https://mac.r-project.org/reports/status.html.\n\nThe status page shows that x86 packages were last updated today (2025-11-18), but arm packages were last updated on 11-13 and 11-14. I?ve noticed that a number of recently updated binary packages are available for x86 but not arm.\n\nAlso, is there a preferred way to report or inquire about build status (other than ask here)?\n\nThanks,\nJohn\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Is there an issue with the macOS arm binary builder for CRAN? Searching through the archives, I found a message (https://stat.ethz.ch/pipermail/r-package-devel/2023q2/009192.html) that included a link",
+      "thread_id": "thread-86f78d5145b2",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-c0f07f424c5e",
+      "message_id": "<CAC2h7ut03PEBEPH0i13gnJUGxk62B1b=raNEFCTBy3geH6DX+Q@mail.gmail.com>",
+      "from_name": "Kasper Daniel Hansen",
+      "from_email_hash": "d93d2b6e7e026786d1329cc362094fa8cf7678c5556ec56db24b97db9e327685",
+      "date": "2025-11-20T08:58:14-05:00",
+      "subject": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "subject_clean": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "in_reply_to": "<55017ecf-4b51-4743-9efc-6733e1111148@gmail.com>",
+      "references": [
+        "<CAJxQVANnsacVhz5rvWuy3igePkpt8QmS8MXKOSKp2PJ1ZkK9-w@mail.gmail.com>",
+        "<CAJxQVAP0h3FPTf7DRLZxc=16v89Yo5nTsvTBp0zBLq5y5pU0CA@mail.gmail.com>",
+        "<55017ecf-4b51-4743-9efc-6733e1111148@gmail.com>"
+      ],
+      "body_plain": "So to be super explicit, the thing you need to do on the command line to\ncheck a package fully is\n  R CMD build packageDirectory\n  R CMD check packageDirectory_x.y.z.tar.gz\nie. always run it on a source tarball. You can run R CMD check directly on\npackageDirectory, but it is not the same\n\nEncapsulated in a Makefile, it looks something like this\n\nbase_minfi: minfi\nifneq (,$(wildcard minfi/DESCRIPTION))\nminfi_VERSION:=$(shell grep ^Version minfi/DESCRIPTION | sed 's_Version:\n__')\nendif\n\n\n\nOn Tue, Nov 18, 2025 at 5:37?AM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 2025-11-17 9:24 p.m., Julian Grimm wrote:\n> > Hello together,\n> >\n> > I have a question regarding the Authors at R field.\n> > When I run R CMD check . in a package either created by myself with\n> > pkgKitten::kitten, usethis::create_package or even on existing packages\n> on\n> > Cran (e.g. the validate package),\n> > I get the following error:\n> >\n> > * checking for file ?./DESCRIPTION? ... ERROR\n> > Required fields missing or empty:\n> >    ?Author? ?Maintainer?\n> > * DONE\n> >\n> > The corresponding line in the DESCRIPTION file is:\n> >\n> > Authors at R: person(\"Your\", \"Name\", role = c(\"aut\", \"cre\"),\n> >         email = \"your at email.com\")\n> >\n> > and Authors at R:\n> >      person(\"First\", \"Last\", , \"first.last at example.com\", role = c(\"aut\",\n> > \"cre\"))\n> >\n> > for pkgKitten and usethis respectively.\n> >\n> > Why does this error occur?\n>\n> You haven't built the package.  Some checks only succeed on a built copy\n> of a package, i.e. the *.tar.gz file.  The devtools::check() function\n> will do both the build and test.\n>\n> Part of building the package modifies the DESCRIPTION file to insert the\n> Author and Maintainer fields.  Another important difference is that\n> .Rbuildignore is processed, so you won't get warnings about files that\n> shouldn't be there, or false success if you accidentally specify\n> ignoring a file that should be kept.\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nBest,\nKasper\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "So to be super explicit, the thing you need to do on the command line to\ncheck a package fully is\n  R CMD build packageDirectory\n  R CMD check packageDirectory_x.y.z.tar.gz\nie. always run it on a sour",
+      "thread_id": "thread-10a16a1d07f2",
+      "thread_depth": 2,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-37f0fdf7f910",
+      "message_id": "<CAC2h7utj9_eugAXiNWasfWM9od5PCaJViEy=oRq2N1dFK8F4Jg@mail.gmail.com>",
+      "from_name": "Kasper Daniel Hansen",
+      "from_email_hash": "d93d2b6e7e026786d1329cc362094fa8cf7678c5556ec56db24b97db9e327685",
+      "date": "2025-11-20T09:03:09-05:00",
+      "subject": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "subject_clean": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "in_reply_to": "<CAC2h7ut03PEBEPH0i13gnJUGxk62B1b=raNEFCTBy3geH6DX+Q@mail.gmail.com>",
+      "references": [
+        "<CAJxQVANnsacVhz5rvWuy3igePkpt8QmS8MXKOSKp2PJ1ZkK9-w@mail.gmail.com>",
+        "<CAJxQVAP0h3FPTf7DRLZxc=16v89Yo5nTsvTBp0zBLq5y5pU0CA@mail.gmail.com>",
+        "<55017ecf-4b51-4743-9efc-6733e1111148@gmail.com>",
+        "<CAC2h7ut03PEBEPH0i13gnJUGxk62B1b=raNEFCTBy3geH6DX+Q@mail.gmail.com>"
+      ],
+      "body_plain": "Sorry, pressed send too soon\n\nbase_minfi: minfi\n     ifneq (,$(wildcard minfi/DESCRIPTION))\n       minfi_VERSION:=$(shell grep ^Version minfi/DESCRIPTION | sed\n's_Version: __')\n      endif\n\nbuild_minfi: base_minfi\n        rm -Rf minfi/inst/doc\n        R CMD build  minfi\n\ncheck_minfi: build_minfi\n        R CMD check minfi_$(minfi_VERSION).tar.gz\n\n(minfi being a package name). Makefiles need TABs and I am pretty sure some\nof these might be messed up by copy and paste, so you need to fix that. I\ntend to add --no-build-vignettes to the R CMD build call, to speed things\nup.\n\nOn Thu, Nov 20, 2025 at 8:58?AM Kasper Daniel Hansen <\nkasperdanielhansen at gmail.com> wrote:\n\n> So to be super explicit, the thing you need to do on the command line to\n> check a package fully is\n>   R CMD build packageDirectory\n>   R CMD check packageDirectory_x.y.z.tar.gz\n> ie. always run it on a source tarball. You can run R CMD check directly on\n> packageDirectory, but it is not the same\n>\n> Encapsulated in a Makefile, it looks something like this\n>\n> base_minfi: minfi\n> ifneq (,$(wildcard minfi/DESCRIPTION))\n> minfi_VERSION:=$(shell grep ^Version minfi/DESCRIPTION | sed 's_Version:\n> __')\n> endif\n>\n>\n>\n> On Tue, Nov 18, 2025 at 5:37?AM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n>\n>> On 2025-11-17 9:24 p.m., Julian Grimm wrote:\n>> > Hello together,\n>> >\n>> > I have a question regarding the Authors at R field.\n>> > When I run R CMD check . in a package either created by myself with\n>> > pkgKitten::kitten, usethis::create_package or even on existing packages\n>> on\n>> > Cran (e.g. the validate package),\n>> > I get the following error:\n>> >\n>> > * checking for file ?./DESCRIPTION? ... ERROR\n>> > Required fields missing or empty:\n>> >    ?Author? ?Maintainer?\n>> > * DONE\n>> >\n>> > The corresponding line in the DESCRIPTION file is:\n>> >\n>> > Authors at R: person(\"Your\", \"Name\", role = c(\"aut\", \"cre\"),\n>> >         email = \"your at email.com\")\n>> >\n>> > and Authors at R:\n>> >      person(\"First\", \"Last\", , \"first.last at example.com\", role =\n>> c(\"aut\",\n>> > \"cre\"))\n>> >\n>> > for pkgKitten and usethis respectively.\n>> >\n>> > Why does this error occur?\n>>\n>> You haven't built the package.  Some checks only succeed on a built copy\n>> of a package, i.e. the *.tar.gz file.  The devtools::check() function\n>> will do both the build and test.\n>>\n>> Part of building the package modifies the DESCRIPTION file to insert the\n>> Author and Maintainer fields.  Another important difference is that\n>> .Rbuildignore is processed, so you won't get warnings about files that\n>> shouldn't be there, or false success if you accidentally specify\n>> ignoring a file that should be kept.\n>>\n>> Duncan Murdoch\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>\n> --\n> Best,\n> Kasper\n>\n\n\n-- \nBest,\nKasper\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Sorry, pressed send too soon\n\nbase_minfi: minfi\n     ifneq (,$(wildcard minfi/DESCRIPTION))\n       minfi_VERSION:=$(shell grep ^Version minfi/DESCRIPTION | sed\n's_Version: __')\n      endif\n\nbuild_minf",
+      "thread_id": "thread-10a16a1d07f2",
+      "thread_depth": 3,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-70c5982513dc",
+      "message_id": "<AM8PR10MB466091459A1B31734D75A441A7D2A@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "from_name": "Pepijn de Vries",
+      "from_email_hash": "dd0c5d2cdda8911669049acce972fcebe4c60c73ecc4eb87c88f6f71516f4ce8",
+      "date": "2025-11-22T10:04:53Z",
+      "subject": "[R-pkg-devel] stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "subject_clean": "[R-pkg-devel] stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nAfter submitting a package, I get errors for two specific CRAN checks (both MacOS ARM64 machines) where the install log (see below) tells me that the compiler cannot find 'stdio.h' and 'assert.h'. I've never had this issue before, and the package builds fine on the other CRAN machines (including the other MacOS machines). I suspect that there is an issue with these particular CRAN machines. Or am I missing something?\n\nThis is the problematic install log:\n\nhttps://www.r-project.org/nosvn/R.check/r-release-macos-arm64/ProTrackR2-00install.html\n\nCheers,\n\nPepijn",
+      "body_snippet": "Hi all,\n\nAfter submitting a package, I get errors for two specific CRAN checks (both MacOS ARM64 machines) where the install log (see below) tells me that the compiler cannot find 'stdio.h' and 'asser",
+      "thread_id": "thread-70c5982513dc",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-a5abddd96ff8",
+      "message_id": "<6E33EFA4-9288-4EC3-88B7-C304BAB642AD@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-11-23T09:02:34+13:00",
+      "subject": "[R-pkg-devel]  stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "subject_clean": "[R-pkg-devel]  stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "in_reply_to": "<AM8PR10MB466091459A1B31734D75A441A7D2A@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB466091459A1B31734D75A441A7D2A@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Pepijn,\n\nthis was a temporary failure due to an SSD dying in the arm64 build machine (the error means the SDK is not present) which has been fixed so whenever new results are synced it will go away. Please use R-SIG-Mac to report any Mac-related issues.\n\nCheers,\nSimon\n\n\n> On 22/11/2025, at 11:04 PM, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n> \n> Hi all,\n> \n> After submitting a package, I get errors for two specific CRAN checks (both MacOS ARM64 machines) where the install log (see below) tells me that the compiler cannot find 'stdio.h' and 'assert.h'. I've never had this issue before, and the package builds fine on the other CRAN machines (including the other MacOS machines). I suspect that there is an issue with these particular CRAN machines. Or am I missing something?\n> \n> This is the problematic install log:\n> \n> https://www.r-project.org/nosvn/R.check/r-release-macos-arm64/ProTrackR2-00install.html\n> \n> Cheers,\n> \n> Pepijn\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Pepijn,\n\nthis was a temporary failure due to an SSD dying in the arm64 build machine (the error means the SDK is not present) which has been fixed so whenever new results are synced it will go away. P",
+      "thread_id": "thread-70c5982513dc",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-106478f6f7fd",
+      "message_id": "<AM8PR10MB46604372476B0A6F3A468838A7D2A@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "from_name": "Pepijn de Vries",
+      "from_email_hash": "dd0c5d2cdda8911669049acce972fcebe4c60c73ecc4eb87c88f6f71516f4ce8",
+      "date": "2025-11-22T20:03:07Z",
+      "subject": "[R-pkg-devel]  stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "subject_clean": "[R-pkg-devel]  stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "in_reply_to": "<AM8PR10MB466091459A1B31734D75A441A7D2A@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB466091459A1B31734D75A441A7D2A@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Never mind. The error has suddenly disappeared. So, I guess it was a temporary issue with the CRAN machine.\n\nPepijn\n\n________________________________________\nVan:?R-package-devel <r-package-devel-bounces at r-project.org> namens Pepijn de Vries <pepijn.devries at outlook.com>\nVerzonden:?zaterdag 22 november 2025 11:04\nAan:?Ivan Krylov via R-package-devel <r-package-devel at r-project.org>\nOnderwerp:?[R-pkg-devel] stdio.h and assert.h not found on CRAN MacOS ARM64 machines\n?\nHi all,\n\nAfter submitting a package, I get errors for two specific CRAN checks (both MacOS ARM64 machines) where the install log (see below) tells me that the compiler cannot find 'stdio.h' and 'assert.h'. I've never had this issue before, and the package builds fine on the other CRAN machines (including the other MacOS machines). I suspect that there is an issue with these particular CRAN machines. Or am I missing something?\n\nThis is the problematic install log:\n\nhttps://www.r-project.org/nosvn/R.check/r-release-macos-arm64/ProTrackR2-00install.html\n\nCheers,\n\nPepijn\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Never mind. The error has suddenly disappeared. So, I guess it was a temporary issue with the CRAN machine.\n\nPepijn\n\n________________________________________\nVan:?R-package-devel <r-package-devel-boun",
+      "thread_id": "thread-70c5982513dc",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-07e93e599b79",
+      "message_id": "<CCEECDB3-ED1C-4A70-BD14-A159D9056069@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-11-23T09:10:54+13:00",
+      "subject": "[R-pkg-devel] CRAN macOS arm status problem?",
+      "subject_clean": "[R-pkg-devel] CRAN macOS arm status problem?",
+      "in_reply_to": "<2E5FDFD2-E37C-4134-815A-B11F1DC689FE@mac.com>",
+      "references": [
+        "<2E5FDFD2-E37C-4134-815A-B11F1DC689FE@mac.com>"
+      ],
+      "body_plain": "John,\n\n\n> On 19/11/2025, at 12:30 PM, John Benninghoff <jbenninghoff at mac.com> wrote:\n> \n> Is there an issue with the macOS arm binary builder for CRAN? Searching through the archives, I found a message (https://stat.ethz.ch/pipermail/r-package-devel/2023q2/009192.html) that included a link to https://mac.r-project.org/reports/status.html.\n> \n> The status page shows that x86 packages were last updated today (2025-11-18), but arm packages were last updated on 11-13 and 11-14. I?ve noticed that a number of recently updated binary packages are available for x86 but not arm.\n> \n\n\nYes, one of the SSDs in the arm64 build machine died while I was traveling in Australia for the R dev day. I was able to setup a new build VM on another machine remotely and things should be back to normal, but if you still see any issues, let me know.\n\n\n> Also, is there a preferred way to report or inquire about build status (other than ask here)?\n> \n\n\nThe most preferred way to is email me, but you can also email R-SIG-Mac which is more appropriate than this list (which is for package development).\n\nCheers,\nSimon",
+      "body_snippet": "John,\n\n\n> On 19/11/2025, at 12:30 PM, John Benninghoff <jbenninghoff at mac.com> wrote:\n> \n> Is there an issue with the macOS arm binary builder for CRAN? Searching through the archives, I found a mes",
+      "thread_id": "thread-86f78d5145b2",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-eb2a4251e438",
+      "message_id": "<26915.14318.779343.978007@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2025-11-23T10:35:58-06:00",
+      "subject": "[R-pkg-devel] oldrel-macos-arm64 missing Fortran",
+      "subject_clean": "[R-pkg-devel] oldrel-macos-arm64 missing Fortran",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi Simon,\n\nThanks for resetting the box after the SSD fail.\n\nIt looks like something is still amiss on oldrel-macos-arm64:\n\n  ld: warning: directory not found for option '-L/opt/gfortran/lib/gcc/aarch64-apple-darwin20.0/12.2.0'\n  ld: library not found for -lgfortran\n  clang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nIt is talking about both version 14.0.*\n\n  using C++ compiler: ?Apple clang version 14.0.3 (clang-1403.0.22.14.1)?\n\nyet looking for 12.0.* Fortran:\n\n  -L/opt/gfortran/lib/gcc/aarch64-apple-darwin20.0/12.2.0\n  \nThat is from the RcppArmadillo update yesterday:\n\n  https://www.r-project.org/nosvn/R.check/r-oldrel-macos-arm64/RcppArmadillo-00install.html\n\nPosting here as it is a CRAN infrastructure issue, not a question that is\nmacOS specific (and as a non-macOS user I have no subscription to r-sig-mac).\n\nThanks in advance for taking care of this, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Hi Simon,\n\nThanks for resetting the box after the SSD fail.\n\nIt looks like something is still amiss on oldrel-macos-arm64:\n\n  ld: warning: directory not found for option '-L/opt/gfortran/lib/gcc/aarch",
+      "thread_id": "thread-eb2a4251e438",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-b394055ddf23",
+      "message_id": "<D81C2E9E-0F09-48FA-9553-00287ABE3CA0@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2025-11-24T08:37:24+13:00",
+      "subject": "[R-pkg-devel] oldrel-macos-arm64 missing Fortran",
+      "subject_clean": "[R-pkg-devel] oldrel-macos-arm64 missing Fortran",
+      "in_reply_to": "<26915.14318.779343.978007@paul.eddelbuettel.com>",
+      "references": [
+        "<26915.14318.779343.978007@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Dirk,\n\nthanks, you're right - I forgot that oldrel still uses the older Fortran. I have added the Fortran switching according to the R version, so it should work now.\n\nThanks,\nSimon\n\n\n\n> On 24/11/2025, at 5:35 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> Hi Simon,\n> \n> Thanks for resetting the box after the SSD fail.\n> \n> It looks like something is still amiss on oldrel-macos-arm64:\n> \n>  ld: warning: directory not found for option '-L/opt/gfortran/lib/gcc/aarch64-apple-darwin20.0/12.2.0'\n>  ld: library not found for -lgfortran\n>  clang: error: linker command failed with exit code 1 (use -v to see invocation)\n> \n> It is talking about both version 14.0.*\n> \n>  using C++ compiler: ?Apple clang version 14.0.3 (clang-1403.0.22.14.1)?\n> \n> yet looking for 12.0.* Fortran:\n> \n>  -L/opt/gfortran/lib/gcc/aarch64-apple-darwin20.0/12.2.0\n> \n> That is from the RcppArmadillo update yesterday:\n> \n>  https://www.r-project.org/nosvn/R.check/r-oldrel-macos-arm64/RcppArmadillo-00install.html\n> \n> Posting here as it is a CRAN infrastructure issue, not a question that is\n> macOS specific (and as a non-macOS user I have no subscription to r-sig-mac).\n> \n> Thanks in advance for taking care of this, Dirk\n> \n> -- \n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>",
+      "body_snippet": "Dirk,\n\nthanks, you're right - I forgot that oldrel still uses the older Fortran. I have added the Fortran switching according to the R version, so it should work now.\n\nThanks,\nSimon\n\n\n\n> On 24/11/2025",
+      "thread_id": "thread-eb2a4251e438",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-59b5937a7132",
+      "message_id": "<CAJxQVAOQN0+GhCCg5wg4NESxZvJA+PRd7-ed2Q7=dLdqczTwOQ@mail.gmail.com>",
+      "from_name": "Julian Grimm",
+      "from_email_hash": "5977efbb693a86580ea55e7d4afdaf7a936bda0a9fc9ca51c98cd7e2c07f2541",
+      "date": "2025-11-28T12:36:32+01:00",
+      "subject": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "subject_clean": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "in_reply_to": "<CAC2h7utj9_eugAXiNWasfWM9od5PCaJViEy=oRq2N1dFK8F4Jg@mail.gmail.com>",
+      "references": [
+        "<CAJxQVANnsacVhz5rvWuy3igePkpt8QmS8MXKOSKp2PJ1ZkK9-w@mail.gmail.com>",
+        "<CAJxQVAP0h3FPTf7DRLZxc=16v89Yo5nTsvTBp0zBLq5y5pU0CA@mail.gmail.com>",
+        "<55017ecf-4b51-4743-9efc-6733e1111148@gmail.com>",
+        "<CAC2h7ut03PEBEPH0i13gnJUGxk62B1b=raNEFCTBy3geH6DX+Q@mail.gmail.com>",
+        "<CAC2h7utj9_eugAXiNWasfWM9od5PCaJViEy=oRq2N1dFK8F4Jg@mail.gmail.com>"
+      ],
+      "body_plain": "Hello,\n\nthanks for the detailed response and the example. That helps a lot!\n\nBest,\nJulian\n\nAm Do., 20. Nov. 2025 um 15:03 Uhr schrieb Kasper Daniel Hansen <\nkasperdanielhansen at gmail.com>:\n\n> Sorry, pressed send too soon\n>\n> base_minfi: minfi\n>      ifneq (,$(wildcard minfi/DESCRIPTION))\n>        minfi_VERSION:=$(shell grep ^Version minfi/DESCRIPTION | sed\n> 's_Version: __')\n>       endif\n>\n> build_minfi: base_minfi\n>         rm -Rf minfi/inst/doc\n>         R CMD build  minfi\n>\n> check_minfi: build_minfi\n>         R CMD check minfi_$(minfi_VERSION).tar.gz\n>\n> (minfi being a package name). Makefiles need TABs and I am pretty sure\n> some of these might be messed up by copy and paste, so you need to fix\n> that. I tend to add --no-build-vignettes to the R CMD build call, to speed\n> things up.\n>\n> On Thu, Nov 20, 2025 at 8:58?AM Kasper Daniel Hansen <\n> kasperdanielhansen at gmail.com> wrote:\n>\n>> So to be super explicit, the thing you need to do on the command line to\n>> check a package fully is\n>>   R CMD build packageDirectory\n>>   R CMD check packageDirectory_x.y.z.tar.gz\n>> ie. always run it on a source tarball. You can run R CMD check directly\n>> on packageDirectory, but it is not the same\n>>\n>> Encapsulated in a Makefile, it looks something like this\n>>\n>> base_minfi: minfi\n>> ifneq (,$(wildcard minfi/DESCRIPTION))\n>> minfi_VERSION:=$(shell grep ^Version minfi/DESCRIPTION | sed 's_Version:\n>> __')\n>> endif\n>>\n>>\n>>\n>> On Tue, Nov 18, 2025 at 5:37?AM Duncan Murdoch <murdoch.duncan at gmail.com>\n>> wrote:\n>>\n>>> On 2025-11-17 9:24 p.m., Julian Grimm wrote:\n>>> > Hello together,\n>>> >\n>>> > I have a question regarding the Authors at R field.\n>>> > When I run R CMD check . in a package either created by myself with\n>>> > pkgKitten::kitten, usethis::create_package or even on existing\n>>> packages on\n>>> > Cran (e.g. the validate package),\n>>> > I get the following error:\n>>> >\n>>> > * checking for file ?./DESCRIPTION? ... ERROR\n>>> > Required fields missing or empty:\n>>> >    ?Author? ?Maintainer?\n>>> > * DONE\n>>> >\n>>> > The corresponding line in the DESCRIPTION file is:\n>>> >\n>>> > Authors at R: person(\"Your\", \"Name\", role = c(\"aut\", \"cre\"),\n>>> >         email = \"your at email.com\")\n>>> >\n>>> > and Authors at R:\n>>> >      person(\"First\", \"Last\", , \"first.last at example.com\", role =\n>>> c(\"aut\",\n>>> > \"cre\"))\n>>> >\n>>> > for pkgKitten and usethis respectively.\n>>> >\n>>> > Why does this error occur?\n>>>\n>>> You haven't built the package.  Some checks only succeed on a built copy\n>>> of a package, i.e. the *.tar.gz file.  The devtools::check() function\n>>> will do both the build and test.\n>>>\n>>> Part of building the package modifies the DESCRIPTION file to insert the\n>>> Author and Maintainer fields.  Another important difference is that\n>>> .Rbuildignore is processed, so you won't get warnings about files that\n>>> shouldn't be there, or false success if you accidentally specify\n>>> ignoring a file that should be kept.\n>>>\n>>> Duncan Murdoch\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>>\n>> --\n>> Best,\n>> Kasper\n>>\n>\n>\n> --\n> Best,\n> Kasper\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\n\nthanks for the detailed response and the example. That helps a lot!\n\nBest,\nJulian\n\nAm Do., 20. Nov. 2025 um 15:03 Uhr schrieb Kasper Daniel Hansen <\nkasperdanielhansen at gmail.com>:\n\n> Sorry,",
+      "thread_id": "thread-10a16a1d07f2",
+      "thread_depth": 4,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-e20709bbd827",
+      "message_id": "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>",
+      "from_name": "Mark Bravington",
+      "from_email_hash": "5a11f8e6de417c7560e3824c71b0eec2a168ed8249d192c939ce927c72435ea0",
+      "date": "2025-11-29T21:55:52+11:00",
+      "subject": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "subject_clean": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi--- My package 'lyxport' has R code with several raw strings (see ?Quotes) which contain UTF-8 characters (FWIW: in order to deal with wacky legacy Latex characters). For example, one of the strings is:\n\n  converto <- r\"--{\n      ?   \\\"A ?   \\\"a ?   \\'A ?   \\'a ?   \\.A ?   \\.a ?   \\=A\n      ?   \\=a ?   \\^A ?   \\^a ?   \\`A ?   \\`a ?   \\k{A} ?   \\k{a}\n<snipped>\n      ?   {\\NG} ?   {\\O}  ?   {\\o}  ?   {\\oe} ?   {\\OE} ?   {\\ss} ?   {\\th}\n      ?   {\\TH}\n    }--\"\n\nRCMD CHECK is not happy, and gives a Warning:\n\n\"Portable packages must use only ASCII characters in their R code and NAMESPACE directives, except perhaps in comments. Use \\uxxxx escapes for other characters.\"\n\nand indeed that is as stated in \"Writing R extensions\", section 1.1.5 (\"Package subdirectories\") and section 1.6.3, \"Encoding issues\".\n\nBut I wonder if this is still sensible now that\n\n(i) R has raw strings (since ~R 4.0);\n(ii) the DESCRIPTION file explicitly says \"Encoding: UTF-8\"; and \n(iii) R >= 4.2 pretty much now enforces UTF-8 in Windows (and UTF-8 could even be a \"requirement\" of this package, if that helped).\n\nWith \"normal\" strings then maybe the \\uxxxx thing is reasonable; but shouldn't the contents of raw strings be exempt? You can't put \\uxxxx into a raw string, for obvious reasons...\n\ncheers\nMark\n\n\nPS Of course, there are ways around the Warning (eg storing the strings as files elsewhere in the package, and reading those files during the code) but they are tedious, harder to maintain, and reduce clarity (imagine using \\uxxxx in the above!). Since I don't particularly care whether the package goes on CRAN or not (it's living quite happily in R-universe), I've no plans to change my code, but I would prefer to avoid Warnings that then have to be explained to would-be users. And I am probably not the only person affected.\n\nPPS The package has been working fine on Windows, Macs, and Linux.",
+      "body_snippet": "Hi--- My package 'lyxport' has R code with several raw strings (see ?Quotes) which contain UTF-8 characters (FWIW: in order to deal with wacky legacy Latex characters). For example, one of the strings",
+      "thread_id": "thread-e20709bbd827",
+      "thread_depth": 0,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-15f4f50ec2df",
+      "message_id": "<4F6BA782-7BA8-4ACE-8DB2-EB69C32D4B4F@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2025-11-29T08:44:57-08:00",
+      "subject": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "subject_clean": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "in_reply_to": "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>",
+      "references": [
+        "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>"
+      ],
+      "body_plain": "Wouldn't the obvious thing be to not use an r string here? Using r strings does not imply the use of non-ascii characters (AFAIK they are intended for regex patterns), and using regular strings does not imply you cannot use Unicode (with \\uxxxx).\n\nAt some point I would think that accepting Unicode in package source code would become acceptable... but supporting Unicode in data objects does not implicitly suggest that allowing Unicode in source code has to be supported so your arguments don't IMO really bring any weight to the discussion.\n\nOn November 29, 2025 2:55:52 AM PST, Mark Bravington <markinr at summerinsouth.net> wrote:\n>Hi--- My package 'lyxport' has R code with several raw strings (see ?Quotes) which contain UTF-8 characters (FWIW: in order to deal with wacky legacy Latex characters). For example, one of the strings is:\n>\n>  converto <- r\"--{\n>      ?   \\\"A ?   \\\"a ?   \\'A ?   \\'a ?   \\.A ?   \\.a ?   \\=A\n>      ?   \\=a ?   \\^A ?   \\^a ?   \\`A ?   \\`a ?   \\k{A} ?   \\k{a}\n><snipped>\n>      ?   {\\NG} ?   {\\O}  ?   {\\o}  ?   {\\oe} ?   {\\OE} ?   {\\ss} ?   {\\th}\n>      ?   {\\TH}\n>    }--\"\n>\n>RCMD CHECK is not happy, and gives a Warning:\n>\n>\"Portable packages must use only ASCII characters in their R code and NAMESPACE directives, except perhaps in comments. Use \\uxxxx escapes for other characters.\"\n>\n>and indeed that is as stated in \"Writing R extensions\", section 1.1.5 (\"Package subdirectories\") and section 1.6.3, \"Encoding issues\".\n>\n>But I wonder if this is still sensible now that\n>\n>(i) R has raw strings (since ~R 4.0);\n>(ii) the DESCRIPTION file explicitly says \"Encoding: UTF-8\"; and \n>(iii) R >= 4.2 pretty much now enforces UTF-8 in Windows (and UTF-8 could even be a \"requirement\" of this package, if that helped).\n>\n>With \"normal\" strings then maybe the \\uxxxx thing is reasonable; but shouldn't the contents of raw strings be exempt? You can't put \\uxxxx into a raw string, for obvious reasons...\n>\n>cheers\n>Mark\n>\n>\n>PS Of course, there are ways around the Warning (eg storing the strings as files elsewhere in the package, and reading those files during the code) but they are tedious, harder to maintain, and reduce clarity (imagine using \\uxxxx in the above!). Since I don't particularly care whether the package goes on CRAN or not (it's living quite happily in R-universe), I've no plans to change my code, but I would prefer to avoid Warnings that then have to be explained to would-be users. And I am probably not the only person affected.\n>\n>PPS The package has been working fine on Windows, Macs, and Linux.\n>\n>______________________________________________\n>R-package-devel at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Wouldn't the obvious thing be to not use an r string here? Using r strings does not imply the use of non-ascii characters (AFAIK they are intended for regex patterns), and using regular strings does n",
+      "thread_id": "thread-e20709bbd827",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-7eafbb2c8e21",
+      "message_id": "<3edf475c-f2fd-4a84-88a2-9fd467b76067@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2025-11-29T12:31:04-05:00",
+      "subject": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "subject_clean": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "in_reply_to": "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>",
+      "references": [
+        "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>"
+      ],
+      "body_plain": "I'd prefer a change that said that R and NAMESPACE files must contain \nUTF-8, rather than an exception for raw strings.  ASCII is a subset, so \nany package that is currently compliant would still be compliant.\n\nDuncan Murdoch\n\nOn 2025-11-29 5:55 a.m., Mark Bravington wrote:\n> Hi--- My package 'lyxport' has R code with several raw strings (see ?Quotes) which contain UTF-8 characters (FWIW: in order to deal with wacky legacy Latex characters). For example, one of the strings is:\n> \n>    converto <- r\"--{\n>        ?   \\\"A ?   \\\"a ?   \\'A ?   \\'a ?   \\.A ?   \\.a ?   \\=A\n>        ?   \\=a ?   \\^A ?   \\^a ?   \\`A ?   \\`a ?   \\k{A} ?   \\k{a}\n> <snipped>\n>        ?   {\\NG} ?   {\\O}  ?   {\\o}  ?   {\\oe} ?   {\\OE} ?   {\\ss} ?   {\\th}\n>        ?   {\\TH}\n>      }--\"\n> \n> RCMD CHECK is not happy, and gives a Warning:\n> \n> \"Portable packages must use only ASCII characters in their R code and NAMESPACE directives, except perhaps in comments. Use \\uxxxx escapes for other characters.\"\n> \n> and indeed that is as stated in \"Writing R extensions\", section 1.1.5 (\"Package subdirectories\") and section 1.6.3, \"Encoding issues\".\n> \n> But I wonder if this is still sensible now that\n> \n> (i) R has raw strings (since ~R 4.0);\n> (ii) the DESCRIPTION file explicitly says \"Encoding: UTF-8\"; and\n> (iii) R >= 4.2 pretty much now enforces UTF-8 in Windows (and UTF-8 could even be a \"requirement\" of this package, if that helped).\n> \n> With \"normal\" strings then maybe the \\uxxxx thing is reasonable; but shouldn't the contents of raw strings be exempt? You can't put \\uxxxx into a raw string, for obvious reasons...\n> \n> cheers\n> Mark\n> \n> \n> PS Of course, there are ways around the Warning (eg storing the strings as files elsewhere in the package, and reading those files during the code) but they are tedious, harder to maintain, and reduce clarity (imagine using \\uxxxx in the above!). Since I don't particularly care whether the package goes on CRAN or not (it's living quite happily in R-universe), I've no plans to change my code, but I would prefer to avoid Warnings that then have to be explained to would-be users. And I am probably not the only person affected.\n> \n> PPS The package has been working fine on Windows, Macs, and Linux.\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I'd prefer a change that said that R and NAMESPACE files must contain \nUTF-8, rather than an exception for raw strings.  ASCII is a subset, so \nany package that is currently compliant would still be c",
+      "thread_id": "thread-e20709bbd827",
+      "thread_depth": 1,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-21c368b13797",
+      "message_id": "<1d85c062-9552-4aa2-9db1-dbd22a4c452c@app.fastmail.com>",
+      "from_name": "Mark Bravington",
+      "from_email_hash": "5a11f8e6de417c7560e3824c71b0eec2a168ed8249d192c939ce927c72435ea0",
+      "date": "2025-11-30T10:57:01+11:00",
+      "subject": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "subject_clean": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "in_reply_to": "<4F6BA782-7BA8-4ACE-8DB2-EB69C32D4B4F@dcn.davis.ca.us>",
+      "references": [
+        "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>",
+        "<4F6BA782-7BA8-4ACE-8DB2-EB69C32D4B4F@dcn.davis.ca.us>"
+      ],
+      "body_plain": "> Wouldn't the obvious thing be to not use an r string here? \n\n\"Obvious\" in terms of keeping RCMD CHECK happy, certainly, but it'd be antithetical to clear code--- the string I included in the post would become incomprehensible to the maintainer (me). \n\nIME raw strings in R are under-appreciated and little-known. They have lots of uses besides regexes, whatever the intention(s) may or may not have been! EG I use raw strings for formatted multi-line comments, and documentation, and  templated bits of text. Nicer code results.\n\nAnyway, I'd be perfectly happy with Duncan Murdoch's suggestion of making UTF-8 legit in R & NAMESPACE generally. I suggested the minor incremental change of \"only raw strings\" (i) because that's the only thing that affects me ATM, and (ii) just in case there were unwelcome implications of UTF-8 for (iii) strings in general, or (iv) legal variable names etc.\n\ncheers\nMark\n\n\nOn Sun, Nov 30, 2025, at 03:44, Jeff Newmiller via R-package-devel wrote:\n> Wouldn't the obvious thing be to not use an r string here? Using r strings does not imply the use of non-ascii characters (AFAIK they are intended for regex patterns), and using regular strings does not imply you cannot use Unicode (with \\uxxxx).\n> \n> At some point I would think that accepting Unicode in package source code would become acceptable... but supporting Unicode in data objects does not implicitly suggest that allowing Unicode in source code has to be supported so your arguments don't IMO really bring any weight to the discussion.\n> \n> On November 29, 2025 2:55:52 AM PST, Mark Bravington <markinr at summerinsouth.net> wrote:\n> >Hi--- My package 'lyxport' has R code with several raw strings (see ?Quotes) which contain UTF-8 characters (FWIW: in order to deal with wacky legacy Latex characters). For example, one of the strings is:\n> >\n> >  converto <- r\"--{\n> >      ?   \\\"A ?   \\\"a ?   \\'A ?   \\'a ?   \\.A ?   \\.a ?   \\=A\n> >      ?   \\=a ?   \\^A ?   \\^a ?   \\`A ?   \\`a ?   \\k{A} ?   \\k{a}\n> ><snipped>\n> >      ?   {\\NG} ?   {\\O}  ?   {\\o}  ?   {\\oe} ?   {\\OE} ?   {\\ss} ?   {\\th}\n> >      ?   {\\TH}\n> >    }--\"\n> >\n> >RCMD CHECK is not happy, and gives a Warning:\n> >\n> >\"Portable packages must use only ASCII characters in their R code and NAMESPACE directives, except perhaps in comments. Use \\uxxxx escapes for other characters.\"\n> >\n> >and indeed that is as stated in \"Writing R extensions\", section 1.1.5 (\"Package subdirectories\") and section 1.6.3, \"Encoding issues\".\n> >\n> >But I wonder if this is still sensible now that\n> >\n> >(i) R has raw strings (since ~R 4.0);\n> >(ii) the DESCRIPTION file explicitly says \"Encoding: UTF-8\"; and \n> >(iii) R >= 4.2 pretty much now enforces UTF-8 in Windows (and UTF-8 could even be a \"requirement\" of this package, if that helped).\n> >\n> >With \"normal\" strings then maybe the \\uxxxx thing is reasonable; but shouldn't the contents of raw strings be exempt? You can't put \\uxxxx into a raw string, for obvious reasons...\n> >\n> >cheers\n> >Mark\n> >\n> >\n> >PS Of course, there are ways around the Warning (eg storing the strings as files elsewhere in the package, and reading those files during the code) but they are tedious, harder to maintain, and reduce clarity (imagine using \\uxxxx in the above!). Since I don't particularly care whether the package goes on CRAN or not (it's living quite happily in R-universe), I've no plans to change my code, but I would prefer to avoid Warnings that then have to be explained to would-be users. And I am probably not the only person affected.\n> >\n> >PPS The package has been working fine on Windows, Macs, and Linux.\n> >\n> >______________________________________________\n> >R-package-devel at r-project.org mailing list\n> >https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> --\n> Sent from my phone. Please excuse my brevity.\n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "> Wouldn't the obvious thing be to not use an r string here? \n\n\"Obvious\" in terms of keeping RCMD CHECK happy, certainly, but it'd be antithetical to clear code--- the string I included in the post wo",
+      "thread_id": "thread-e20709bbd827",
+      "thread_depth": 2,
+      "month": "2025-11"
+    },
+    {
+      "id": "msg-b469cbfe985d",
+      "message_id": "<c04d05e2-d766-62e9-c57d-68800709932c@uiowa.edu>",
+      "from_name": "iuke-tier@ey m@iii@g oii uiow@@edu",
+      "from_email_hash": "d99ccb54811d841ac041f12e5dfc823053fe0bdf1cebd8d1047b8e5f0d6a24b7",
+      "date": "2025-11-29T20:10:24-06:00",
+      "subject": "[R-pkg-devel]  [External] Re: UTF-8 and raw strings in package code",
+      "subject_clean": "[R-pkg-devel]  [External] Re: UTF-8 and raw strings in package code",
+      "in_reply_to": "<1d85c062-9552-4aa2-9db1-dbd22a4c452c@app.fastmail.com>",
+      "references": [
+        "<990f723d-de12-4bbc-80a2-f13439e8912b@app.fastmail.com>",
+        "<4F6BA782-7BA8-4ACE-8DB2-EB69C32D4B4F@dcn.davis.ca.us>",
+        "<1d85c062-9552-4aa2-9db1-dbd22a4c452c@app.fastmail.com>"
+      ],
+      "body_plain": "On Sat, 29 Nov 2025, Mark Bravington wrote:\n\n> [You don't often get email from markinr at summerinsouth.net. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]\n>\n>> Wouldn't the obvious thing be to not use an r string here?\n>\n> \"Obvious\" in terms of keeping RCMD CHECK happy, certainly, but it'd be antithetical to clear code--- the string I included in the post would become incomprehensible to the maintainer (me).\n>\n> IME raw strings in R are under-appreciated and little-known. They have lots of uses besides regexes, whatever the intention(s) may or may not have been! EG I use raw strings for formatted multi-line comments, and documentation, and  templated bits of text. Nicer code results.\n\nRaw strings are very useful in a number of ways. That is why they were\nadded to R.\n\n> Anyway, I'd be perfectly happy with Duncan Murdoch's suggestion of making UTF-8 legit in R & NAMESPACE generally. I suggested the minor incremental change of \"only raw strings\" (i) because that's the only thing that affects me ATM, and (ii) just in case there were unwelcome implications of UTF-8 for (iii) strings in general, or (iv) legal variable names etc.\n\nKeeping the ASCII-only restriction for code is important as it makes\nthe code easier to understand by a wider audience.\n\nAllowing non-ASCII characters in literal strings, raw or regular, does\nseem reasonable to me in principle, but others may see issues I am not\naware of.\n\nBut checking for non-ASCII characters in code while allowing non-ASCII\ncharacters in string literals needs much more sophisticated check code\nthan we currently have. If you or anyone else want to see this happen\nyou can explore creating a patch and submit to bugzilla for\nconsideration.\n\nBest,\n\nluke\n\n> cheers\n> Mark\n>\n>\n> On Sun, Nov 30, 2025, at 03:44, Jeff Newmiller via R-package-devel wrote:\n>> Wouldn't the obvious thing be to not use an r string here? Using r strings does not imply the use of non-ascii characters (AFAIK they are intended for regex patterns), and using regular strings does not imply you cannot use Unicode (with \\uxxxx).\n>>\n>> At some point I would think that accepting Unicode in package source code would become acceptable... but supporting Unicode in data objects does not implicitly suggest that allowing Unicode in source code has to be supported so your arguments don't IMO really bring any weight to the discussion.\n>>\n>> On November 29, 2025 2:55:52 AM PST, Mark Bravington <markinr at summerinsouth.net> wrote:\n>>> Hi--- My package 'lyxport' has R code with several raw strings (see ?Quotes) which contain UTF-8 characters (FWIW: in order to deal with wacky legacy Latex characters). For example, one of the strings is:\n>>>\n>>>  converto <- r\"--{\n>>>      ?   \\\"A ?   \\\"a ?   \\'A ?   \\'a ?   \\.A ?   \\.a ?   \\=A\n>>>      ?   \\=a ?   \\^A ?   \\^a ?   \\`A ?   \\`a ?   \\k{A} ?   \\k{a}\n>>> <snipped>\n>>>      ?   {\\NG} ?   {\\O}  ?   {\\o}  ?   {\\oe} ?   {\\OE} ?   {\\ss} ?   {\\th}\n>>>      ?   {\\TH}\n>>>    }--\"\n>>>\n>>> RCMD CHECK is not happy, and gives a Warning:\n>>>\n>>> \"Portable packages must use only ASCII characters in their R code and NAMESPACE directives, except perhaps in comments. Use \\uxxxx escapes for other characters.\"\n>>>\n>>> and indeed that is as stated in \"Writing R extensions\", section 1.1.5 (\"Package subdirectories\") and section 1.6.3, \"Encoding issues\".\n>>>\n>>> But I wonder if this is still sensible now that\n>>>\n>>> (i) R has raw strings (since ~R 4.0);\n>>> (ii) the DESCRIPTION file explicitly says \"Encoding: UTF-8\"; and\n>>> (iii) R >= 4.2 pretty much now enforces UTF-8 in Windows (and UTF-8 could even be a \"requirement\" of this package, if that helped).\n>>>\n>>> With \"normal\" strings then maybe the \\uxxxx thing is reasonable; but shouldn't the contents of raw strings be exempt? You can't put \\uxxxx into a raw string, for obvious reasons...\n>>>\n>>> cheers\n>>> Mark\n>>>\n>>>\n>>> PS Of course, there are ways around the Warning (eg storing the strings as files elsewhere in the package, and reading those files during the code) but they are tedious, harder to maintain, and reduce clarity (imagine using \\uxxxx in the above!). Since I don't particularly care whether the package goes on CRAN or not (it's living quite happily in R-universe), I've no plans to change my code, but I would prefer to avoid Warnings that then have to be explained to would-be users. And I am probably not the only person affected.\n>>>\n>>> PPS The package has been working fine on Windows, Macs, and Linux.\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> --\n>> Sent from my phone. Please excuse my brevity.\n>> [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/",
+      "body_snippet": "On Sat, 29 Nov 2025, Mark Bravington wrote:\n\n> [You don't often get email from markinr at summerinsouth.net. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]\n>\n>> Wouldn'",
+      "thread_id": "thread-e20709bbd827",
+      "thread_depth": 3,
+      "month": "2025-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-91a9368173da",
+      "subject": "[R-pkg-devel]  revdeprun: Rust CLI for automating revdep checks on cloud instances",
+      "message_count": 1,
+      "participants": [
+        "Nan Xiao"
+      ],
+      "started": "2025-11-01T21:59:50-04:00",
+      "last_reply": "2025-11-01T21:59:50-04:00",
+      "root_message_id": "msg-91a9368173da"
+    },
+    {
+      "id": "thread-e4db31717fc7",
+      "subject": "[R-pkg-devel] Reproducing the clang-UBSAN test environment in rhub or somewhere else?",
+      "message_count": 6,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Ivan Krylov",
+        "Peter Carbonetto",
+        "Tomas Kalibera"
+      ],
+      "started": "2025-11-03T10:18:11-06:00",
+      "last_reply": "2025-11-07T19:35:38-06:00",
+      "root_message_id": "msg-e4db31717fc7"
+    },
+    {
+      "id": "thread-9a6604c08736",
+      "subject": "[R-pkg-devel] Rf_lazy_duplicate moved to nonAPI",
+      "message_count": 4,
+      "participants": [
+        "Iris Simmons",
+        "Tomas Kalibera",
+        "iuke-tier@ey m@iii@g oii uiow@@edu"
+      ],
+      "started": "2025-11-05T22:02:39-05:00",
+      "last_reply": "2025-11-06T16:36:10+01:00",
+      "root_message_id": "msg-9a6604c08736"
+    },
+    {
+      "id": "thread-1d21a690972b",
+      "subject": "[R-pkg-devel] NOTE on URLs",
+      "message_count": 3,
+      "participants": [
+        "Michael Chirico",
+        "Tony Wilkes"
+      ],
+      "started": "2025-11-16T17:18:04+00:00",
+      "last_reply": "2025-11-16T17:56:19+00:00",
+      "root_message_id": "msg-1d21a690972b"
+    },
+    {
+      "id": "thread-10a16a1d07f2",
+      "subject": "[R-pkg-devel] Fwd: Authors@R: R CMD check . fail",
+      "message_count": 5,
+      "participants": [
+        "Duncan Murdoch",
+        "Julian Grimm",
+        "Kasper Daniel Hansen"
+      ],
+      "started": "2025-11-18T03:24:07+01:00",
+      "last_reply": "2025-11-28T12:36:32+01:00",
+      "root_message_id": "msg-10a16a1d07f2"
+    },
+    {
+      "id": "thread-86f78d5145b2",
+      "subject": "[R-pkg-devel] CRAN macOS arm status problem?",
+      "message_count": 2,
+      "participants": [
+        "John Benninghoff",
+        "Simon Urbanek"
+      ],
+      "started": "2025-11-18T17:30:18-06:00",
+      "last_reply": "2025-11-23T09:10:54+13:00",
+      "root_message_id": "msg-86f78d5145b2"
+    },
+    {
+      "id": "thread-70c5982513dc",
+      "subject": "[R-pkg-devel] stdio.h and assert.h not found on CRAN MacOS ARM64 machines",
+      "message_count": 3,
+      "participants": [
+        "Pepijn de Vries",
+        "Simon Urbanek"
+      ],
+      "started": "2025-11-22T10:04:53+00:00",
+      "last_reply": "2025-11-22T20:03:07+00:00",
+      "root_message_id": "msg-70c5982513dc"
+    },
+    {
+      "id": "thread-eb2a4251e438",
+      "subject": "[R-pkg-devel] oldrel-macos-arm64 missing Fortran",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Simon Urbanek"
+      ],
+      "started": "2025-11-23T10:35:58-06:00",
+      "last_reply": "2025-11-24T08:37:24+13:00",
+      "root_message_id": "msg-eb2a4251e438"
+    },
+    {
+      "id": "thread-e20709bbd827",
+      "subject": "[R-pkg-devel] UTF-8 and raw strings in package code",
+      "message_count": 5,
+      "participants": [
+        "Duncan Murdoch",
+        "Jeff Newmiller",
+        "Mark Bravington",
+        "iuke-tier@ey m@iii@g oii uiow@@edu"
+      ],
+      "started": "2025-11-29T21:55:52+11:00",
+      "last_reply": "2025-11-29T20:10:24-06:00",
+      "root_message_id": "msg-e20709bbd827"
+    }
+  ]
+}
