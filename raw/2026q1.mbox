@@ -9943,3 +9943,53 @@ Best regards,
 Ivan
 
 
+From Je@@e@Koop@ @end|ng |rom c|to@n|  Fri Mar  6 14:30:32 2026
+From: Je@@e@Koop@ @end|ng |rom c|to@n| (Jesse Koops)
+Date: Fri, 6 Mar 2026 13:30:32 +0000
+Subject: [R-pkg-devel] R scripts evaluated in a package
+In-Reply-To: <DAD35778-3282-4B6D-A3A0-017516F820D8@mcgill.ca>
+References: <4bd25eb4-c507-4e57-94c3-ac1347b0072f@gmail.com>
+ <DAD35778-3282-4B6D-A3A0-017516F820D8@mcgill.ca>
+Message-ID: <DU0PR10MB580331D403BF72D0ED6397F8EB7AA@DU0PR10MB5803.EURPRD10.PROD.OUTLOOK.COM>
+
+Dear R-devel,
+
+I recently volunteered to help maintain an orphaned package that supplies some shiny widgets. When looking at the reverse dependencies I see that quite a few packages supply a shiny app via R scripts in the inst-directory. In the /R directory there is a script with a function like:
+
+myapp <- function()
+{
+        run_app_R_script <- '
+    appDir <- system.file("shinyapp", package = "apackage")
+
+    if (appDir == "") {
+      stop("Could not find the shinyapp directory. Try re-installing
+        the `apackage` package.", call. = FALSE
+      )
+    }
+
+    shiny::runApp(appDir, launch.browser = TRUE, display.mode = "normal")'
+
+  eval(parse(text = run_app_R_script))
+}
+
+This is so common it seems to be a design pattern, but it is absolutely not necessary. Shiny applications can be run just as easily from functions in the R directory of a package and do not need external scripts or directories.
+
+The app scripts in the inst/shinyapp directory typically contain a number of `library` statements. The thus loaded packages may or may not be listed in the imports or suggests. Sometimes it seems like a means to get around the allowed maximum number of packages to import note. One can easily imagine more serious violations (I have not seen any).
+
+A problem that results is that potential breaking changes in the package I help maintain, e.g. removing a function, do not show up in the revdepcheck, since R files that live outside the R directory are not included in Rcmd check. Yet such changes will leave `apackage` completely broken (often these packages contain only one function).
+
+I cannot find anything in WRE directly forbidding this practice but it seems to at least go against the intent of WRE.
+
+My question: is this allowed? If not, could this be added to Rcmd check or should it be reported in some way?
+
+Kind regards,
+Jesse
+
+
+
+
+
+
+
+[https://mailing.cito.nl/handtekeningen/citolab.png]
+

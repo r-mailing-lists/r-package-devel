@@ -2095,24 +2095,6 @@
       "month": "2019-01"
     },
     {
-      "id": "msg-ea54b4aaf297",
-      "message_id": "<622701d4b0e7$ed2f48e0$c78ddaa0$@gvdnet.dk>",
-      "from_name": "Troels Ring",
-      "from_email_hash": "3f353990682b97f6c4e5f292709c789ba9e1c2f3904944bff6cb6ac6f93802b1",
-      "date": "2019-01-20T18:45:26+01:00",
-      "subject": "[R-pkg-devel] problems documenting data sets",
-      "subject_clean": "[R-pkg-devel] problems documenting data sets",
-      "in_reply_to": "kzNyg1BXtwUhzkzO0gM1HP",
-      "references": [
-        "<691701d4afe4$31d2cd50$957867f0$@gvdnet.dk>"
-      ],
-      "body_plain": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goes on\n\nBW\n\nTroels\n\n \n\nFra: Berry Boessenkool <berryboessenkool at hotmail.com> \nSendt: 19. januar 2019 23:47\nTil: Troels Ring <tring at gvdnet.dk>; R package devel\n<r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] problems documenting data sets\n\n \n\n \n\nI was first thinking there could be an occurence of Brom with a capital B in\nthe package somewhere.\n\nIn which case you could run from the current package main directory:\n\n \n\ncat(\"All files in R folder\\n\", file=\"AllFiles.R\")\n\nfor(f in dir(\"R\",full=T)) cat(readLines(f), file=\"AllFiles.R\", sep=\"\\n\",\nappend=TRUE)\n\n \n\nand search for Brom in that file...\n\nBut Rolf is likely right. I was thinking the wrong way around...\n\n \n\nBerry\n\n \n\n  _____  \n\nFrom: R-package-devel <r-package-devel-bounces at r-project.org\n<mailto:r-package-devel-bounces at r-project.org> > on behalf of Troels Ring\n<tring at gvdnet.dk <mailto:tring at gvdnet.dk> >\nSent: Saturday, January 19, 2019 11:46\nTo: package-develop\nSubject: [R-pkg-devel] problems documenting data sets \n\n \n\nDear friends - I still get some warning although the package runs just fine.\n\nchecking for missing documentation entries ... WARNING\n\n  Undocumented data sets:\n\n    'Cl' 'K' 'Na' 'TOTAL' 'WA' 'INPUT' 'Alb' 'Ca' 'Lact' 'Mg' 'PCO2' 'S1'\n\n    'Brom' 'pHOBS'\n\n  All user-level objects in a package should have documentation entries.\n[SNIP]\n\n  \n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goe",
-      "thread_id": "thread-c6701f4f3dae",
-      "thread_depth": 1,
-      "month": "2019-01"
-    },
-    {
       "id": "msg-d6602fbd7299",
       "message_id": "<622c01d4b0e7$edbfa200$c93ee600$@gvdnet.dk>",
       "from_name": "Troels Ring",
@@ -2126,6 +2108,24 @@
       ],
       "body_plain": "Thank you so much - I used the search in files function in RStudio and also looked everywhere as well as I could - but seemingly: no - everywhere only \"brom\". So since the functions runs as expected and I can make a workable binary package I guess I will just continue improving the functionalities and see if I eventually get a hunch\n\nAll best wishes\nTroels \n\n-----Oprindelig meddelelse-----\nFra: Rolf Turner <r.turner at auckland.ac.nz> \nSendt: 19. januar 2019 23:12\nTil: Troels Ring <tring at gvdnet.dk>\nCc: package-develop <r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] problems documenting data sets\n\n\nIt's hard to be sure without seeing your package, but it *sounds* as though you have a data set \"Brom\" (in <package>/data ?) but you have\n*documented* a data set named \"brom\".  So you should either change the name of the data set to \"brom\" or change your help file to document \"Brom\".\n\nIt is of course entirely possible that I am misunderstanding what is going on, in which case I apologise for the noise.\n\ncheers,\n\nRolf\n\n--\nHonorary Research Fellow\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276\n\nOn 1/19/19 11:46 PM, Troels Ring wrote:\n> Dear friends ? I still get some warning although the package runs just fine.\n> \n> checking for missing documentation entries ... WARNING\n> \n>    Undocumented data sets:\n> \n>      'Cl' 'K' 'Na' 'TOTAL' 'WA' 'INPUT' 'Alb' 'Ca' 'Lact' 'Mg' 'PCO2' 'S1'\n> \n>      'Brom' 'pHOBS'\n> \n>    All user-level objects in a package should have documentation entries.\n> \n>    See chapter 'Writing R documentation files' in the 'Writing R\n> \n>    Extensions' manual.\n> \n>   \n> \n> 0 errors v | 1 warning x | 0 notes v\n> \n> Fejl: R CMD check found WARNINGs\n> \n> K rsel stoppet (run stopped)\n> \n>   \n> \n> But the only place I have  any mentions of brom is here below and in no place I have capital Brom. So what should I make of this?\n> \n>   \n> \n> \\name{brom}\n> \n> \\alias{brom}\n> \n> \\docType{data}\n> \n> \\title{\n> \n> Bromic acid data from Glaser et al 2014\n> \n> }\n> \n> \\description{\n> \n>    Data to find optimal pK for bromic acid\n> \n> }\n> \n> \\usage{data(\"brom\")}\n> \n> \\format{\n> \n> A workspace.\n> \n>    \\describe{\n> \n>      \\item{brom}{Dataframe of Table S4 in Glaser et al.}\n> \n>      \\item{WA}{List of buffers with list of dissociation constants.}\n> \n>    }\n> \n> }\n> \n> \\source{\n> \n> Glaser RE et al. Dynamical approach to multiequilibriia problems for \n> mixtures of\n> \n> acids and their conjugate bases. J Chem Educ 2014; 91: 1009-1016\n> \n> }\n> \n> \\examples{\n> \n> data(brom)\n> \n> ## maybe str(brom) ; plot(brom) ...\n> \n> }\n> \n> \\keyword{datasets}",
       "body_snippet": "Thank you so much - I used the search in files function in RStudio and also looked everywhere as well as I could - but seemingly: no - everywhere only \"brom\". So since the functions runs as expected a",
+      "thread_id": "thread-c6701f4f3dae",
+      "thread_depth": 1,
+      "month": "2019-01"
+    },
+    {
+      "id": "msg-ea54b4aaf297",
+      "message_id": "<622701d4b0e7$ed2f48e0$c78ddaa0$@gvdnet.dk>",
+      "from_name": "Troels Ring",
+      "from_email_hash": "3f353990682b97f6c4e5f292709c789ba9e1c2f3904944bff6cb6ac6f93802b1",
+      "date": "2019-01-20T18:45:26+01:00",
+      "subject": "[R-pkg-devel] problems documenting data sets",
+      "subject_clean": "[R-pkg-devel] problems documenting data sets",
+      "in_reply_to": "kzNyg1BXtwUhzkzO0gM1HP",
+      "references": [
+        "<691701d4afe4$31d2cd50$957867f0$@gvdnet.dk>"
+      ],
+      "body_plain": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goes on\n\nBW\n\nTroels\n\n \n\nFra: Berry Boessenkool <berryboessenkool at hotmail.com> \nSendt: 19. januar 2019 23:47\nTil: Troels Ring <tring at gvdnet.dk>; R package devel\n<r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] problems documenting data sets\n\n \n\n \n\nI was first thinking there could be an occurence of Brom with a capital B in\nthe package somewhere.\n\nIn which case you could run from the current package main directory:\n\n \n\ncat(\"All files in R folder\\n\", file=\"AllFiles.R\")\n\nfor(f in dir(\"R\",full=T)) cat(readLines(f), file=\"AllFiles.R\", sep=\"\\n\",\nappend=TRUE)\n\n \n\nand search for Brom in that file...\n\nBut Rolf is likely right. I was thinking the wrong way around...\n\n \n\nBerry\n\n \n\n  _____  \n\nFrom: R-package-devel <r-package-devel-bounces at r-project.org\n<mailto:r-package-devel-bounces at r-project.org> > on behalf of Troels Ring\n<tring at gvdnet.dk <mailto:tring at gvdnet.dk> >\nSent: Saturday, January 19, 2019 11:46\nTo: package-develop\nSubject: [R-pkg-devel] problems documenting data sets \n\n \n\nDear friends - I still get some warning although the package runs just fine.\n\nchecking for missing documentation entries ... WARNING\n\n  Undocumented data sets:\n\n    'Cl' 'K' 'Na' 'TOTAL' 'WA' 'INPUT' 'Alb' 'Ca' 'Lact' 'Mg' 'PCO2' 'S1'\n\n    'Brom' 'pHOBS'\n\n  All user-level objects in a package should have documentation entries.\n[SNIP]\n\n  \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goe",
       "thread_id": "thread-c6701f4f3dae",
       "thread_depth": 1,
       "month": "2019-01"
