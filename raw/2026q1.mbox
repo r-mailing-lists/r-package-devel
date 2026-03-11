@@ -9943,3 +9943,210 @@ Best regards,
 Ivan
 
 
+From Je@@e@Koop@ @end|ng |rom c|to@n|  Fri Mar  6 14:30:32 2026
+From: Je@@e@Koop@ @end|ng |rom c|to@n| (Jesse Koops)
+Date: Fri, 6 Mar 2026 13:30:32 +0000
+Subject: [R-pkg-devel] R scripts evaluated in a package
+In-Reply-To: <DAD35778-3282-4B6D-A3A0-017516F820D8@mcgill.ca>
+References: <4bd25eb4-c507-4e57-94c3-ac1347b0072f@gmail.com>
+ <DAD35778-3282-4B6D-A3A0-017516F820D8@mcgill.ca>
+Message-ID: <DU0PR10MB580331D403BF72D0ED6397F8EB7AA@DU0PR10MB5803.EURPRD10.PROD.OUTLOOK.COM>
+
+Dear R-devel,
+
+I recently volunteered to help maintain an orphaned package that supplies some shiny widgets. When looking at the reverse dependencies I see that quite a few packages supply a shiny app via R scripts in the inst-directory. In the /R directory there is a script with a function like:
+
+myapp <- function()
+{
+        run_app_R_script <- '
+    appDir <- system.file("shinyapp", package = "apackage")
+
+    if (appDir == "") {
+      stop("Could not find the shinyapp directory. Try re-installing
+        the `apackage` package.", call. = FALSE
+      )
+    }
+
+    shiny::runApp(appDir, launch.browser = TRUE, display.mode = "normal")'
+
+  eval(parse(text = run_app_R_script))
+}
+
+This is so common it seems to be a design pattern, but it is absolutely not necessary. Shiny applications can be run just as easily from functions in the R directory of a package and do not need external scripts or directories.
+
+The app scripts in the inst/shinyapp directory typically contain a number of `library` statements. The thus loaded packages may or may not be listed in the imports or suggests. Sometimes it seems like a means to get around the allowed maximum number of packages to import note. One can easily imagine more serious violations (I have not seen any).
+
+A problem that results is that potential breaking changes in the package I help maintain, e.g. removing a function, do not show up in the revdepcheck, since R files that live outside the R directory are not included in Rcmd check. Yet such changes will leave `apackage` completely broken (often these packages contain only one function).
+
+I cannot find anything in WRE directly forbidding this practice but it seems to at least go against the intent of WRE.
+
+My question: is this allowed? If not, could this be added to Rcmd check or should it be reported in some way?
+
+Kind regards,
+Jesse
+
+
+
+
+
+
+
+[https://mailing.cito.nl/handtekeningen/citolab.png]
+
+From ex@@ex@ @end|ng |rom gm@||@com  Mon Mar  9 10:14:31 2026
+From: ex@@ex@ @end|ng |rom gm@||@com (Miroslav Kratochvil)
+Date: Mon, 9 Mar 2026 10:14:31 +0100
+Subject: [R-pkg-devel] failure on windows builder ("only Win32 target is
+ supported")
+Message-ID: <CAO0uZ+_6t+fto-nAO8BtM3Lp6nLwwYaCdC9oCSogVy9P-_=Xgw@mail.gmail.com>
+
+Dear all,
+
+I've been trying to submit a package update, and I found a completely
+new issue that I'm failing to replicate locally: at
+https://win-builder.r-project.org/incoming_pretest/EmbedSOM_2.2.1_20260308_225310/Windows/00install.out
+the builder fails with this error:
+
+d:/rtools45/x86_64-w64-mingw32.static.posix/include/sys/types.h:10:2:
+error: #error Only Win32 target is supported!
+   10 | #error Only Win32 target is supported!
+
+The error is triggered by including a std c++ <thread> header from a
+.cpp file. As far as I can tell this might be a compiler setup that
+doesn't support #include<thread> at all. Is there any way to make the
+threads work on windows? Notably, the source files seem to build right
+with my local copy of mingw (but that one is likely different from the
+one used at the build machine.)
+
+The package in question is EmbedSOM, source is at
+https://github.com/exaexa/EmbedSOM . I mirrored the build log to
+https://pastebin.com/rmePqADD just to be sure it doesn't disappear too
+early.
+
+A skim through the packaging guide didn't reveal any obvious mistake
+that I'd be doing. Any help or even hints on where to start logging is
+very welcome.
+
+Thanks a lot!
+
+
+From |kry|ov @end|ng |rom d|@root@org  Mon Mar  9 16:31:48 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Mon, 9 Mar 2026 18:31:48 +0300
+Subject: [R-pkg-devel] failure on windows builder ("only Win32 target is
+ supported")
+In-Reply-To: <CAO0uZ+_6t+fto-nAO8BtM3Lp6nLwwYaCdC9oCSogVy9P-_=Xgw@mail.gmail.com>
+References: <CAO0uZ+_6t+fto-nAO8BtM3Lp6nLwwYaCdC9oCSogVy9P-_=Xgw@mail.gmail.com>
+Message-ID: <20260309183148.2eb08460@Tarkus>
+
+Dear Miroslav & Uwe,
+
+On Mon, 9 Mar 2026 10:14:31 +0100
+Miroslav Kratochvil <exa.exa at gmail.com> wrote:
+
+> https://win-builder.r-project.org/incoming_pretest/EmbedSOM_2.2.1_20260308_225310/Windows/00install.out
+
+Here's the strange part:
+
+>> using C++ compiler: 'g++ (GCC) 15.2.0'
+
+The currently available version of RTools 4.5 only has GCC 14.3 (and
+compiles EmbedSOM without a problem).
+
+Judging by the include paths containing /usr/lib/gcc/x86_64-pc-cygwin/,
+it might be a %PATH% problem on Win-Builder, with the MSYS/Cygwin
+toolchain being picked up instead of the desired UCRT one.
+
+-- 
+Best regards,
+Ivan
+
+
+From n@r@@ @end|ng |rom @t@n|ord@edu  Mon Mar  9 19:51:49 2026
+From: n@r@@ @end|ng |rom @t@n|ord@edu (Balasubramanian Narasimhan)
+Date: Mon, 9 Mar 2026 11:51:49 -0700
+Subject: [R-pkg-devel] "Enhances" issue with stub package Rmosek
+Message-ID: <b30b1c3c-3e6a-489f-802b-5bf0f549a71a@stanford.edu>
+
+Package `Rmosek` on CRAN is actually a stub, essentially:
+
+```r
+mosek <- function(...) message("Download binary package Rmosek from 
+www.mosek.com")
+```
+
+And "www.mosek.com" provides a meaty `Rmosek::mosek(...)` that does 
+actual work.
+
+Package CVXR "Enhances" `Rmosek` and uses, for "special situations":
+
+```r
+if (requireNamespace("Rmosek", quietly = TRUE)) {
+ ? Rmosek::mosek(x)
+} else {
+ ? not.as.good::mosek_equivalent(x)
+}
+```
+
+There is no way for package `CVXR` to ascertain which version of 
+`Rmosek::mosek()` is available at runtime, the stub, or the actual one 
+from "www.mosek.com".
+
+This would cause `CVXR` to fail CRAN checks during submission since 
+"Enhances" packages get loaded during checks. But we took care to avoid 
+tests that would exercise "special situations", so it is on CRAN.
+
+But some examples in our reverse dependencies trigger those "special 
+situations", causing problems with their CRAN submission.
+
+Does anyone have any suggestions on how to handle this?
+
+PS. `Rcplex` is different, as it gets linked to commercial libraries 
+during **install**, unlike `Rmosek`.
+
+PPS. I recall that the author Rmosek requested that this package be 
+removed from CRAN via personal email, but never followed up my 
+suggestion to directly contact CRAN. Unfortunately, I can't seem to find 
+that email.
+
+
+From ex@@ex@ @end|ng |rom gm@||@com  Tue Mar 10 21:09:51 2026
+From: ex@@ex@ @end|ng |rom gm@||@com (Miroslav Kratochvil)
+Date: Tue, 10 Mar 2026 21:09:51 +0100
+Subject: [R-pkg-devel] failure on windows builder ("only Win32 target is
+ supported")
+In-Reply-To: <20260309183148.2eb08460@Tarkus>
+References: <CAO0uZ+_6t+fto-nAO8BtM3Lp6nLwwYaCdC9oCSogVy9P-_=Xgw@mail.gmail.com>
+ <20260309183148.2eb08460@Tarkus>
+Message-ID: <CAO0uZ+9tpc2Sut=0Z+ifubJ0zBYvKcA0hAwBB2r9rCBy+R-2jg@mail.gmail.com>
+
+Hello,
+I see that Uwe has re-triggered the build, and now it looks like that
+all went through just right. Thanks for help to both of you!
+-mk
+
+On Mon, 9 Mar 2026 at 16:31, Ivan Krylov <ikrylov at disroot.org> wrote:
+>
+> Dear Miroslav & Uwe,
+>
+> On Mon, 9 Mar 2026 10:14:31 +0100
+> Miroslav Kratochvil <exa.exa at gmail.com> wrote:
+>
+> > https://win-builder.r-project.org/incoming_pretest/EmbedSOM_2.2.1_20260308_225310/Windows/00install.out
+>
+> Here's the strange part:
+>
+> >> using C++ compiler: 'g++ (GCC) 15.2.0'
+>
+> The currently available version of RTools 4.5 only has GCC 14.3 (and
+> compiles EmbedSOM without a problem).
+>
+> Judging by the include paths containing /usr/lib/gcc/x86_64-pc-cygwin/,
+> it might be a %PATH% problem on Win-Builder, with the MSYS/Cygwin
+> toolchain being picked up instead of the desired UCRT one.
+>
+> --
+> Best regards,
+> Ivan
+
+
