@@ -932,24 +932,6 @@
       "month": "2019-01"
     },
     {
-      "id": "msg-168845cb123c",
-      "message_id": "<547201d4aa7e$106e43d0$314acb70$@gvdnet.dk>",
-      "from_name": "Troels Ring",
-      "from_email_hash": "57e488bafcc5d8e0251d3b14b332d9a9d17de239ac8ea884b8595611e24e2171",
-      "date": "2019-01-12T13:52:31Z",
-      "subject": "[R-pkg-devel] using @inheritParams in documenting data",
-      "subject_clean": "[R-pkg-devel] using @inheritParams in documenting data",
-      "in_reply_to": "iIeogPYcntXDiiIeqgM8wl",
-      "references": [
-        "<11f401d4aa4a$f2b1d6f0$d81584d0$@gvdnet.dk>"
-      ],
-      "body_plain": "Hi Dirk - thank you for your kind mail - I can see I better follow the basic\nways! Also since I seem by my shortcuts to have accomplished a major\nproblem: I had two *.RData files with similar variables of same names in\n/data - if I included both and had no rda files to document data, I had this\npreviously mentioned problem of \"following objects are masked by \"glovalEnv\"\n- but if I used the rda files on data directly from RStudio the data were\nkept to be from only one of the RData files, I think the first one -\nload(\"*.RData\") of course was still correct. \nThanks a lot for your patience \nTroels\n\n-----Oprindelig meddelelse-----\nFra: Dirk Eddelbuettel <dirk.eddelbuettel at gmail.com> P? vegne af Dirk\nEddelbuettel\nSendt: 12. januar 2019 13:45\nTil: Troels Ring <tring at gvdnet.dk>\nCc: package-develop <r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] using @inheritParams in documenting data\n\n\nHi Troels,\n\nAlways good to see someone work on packaging with so much energy.\n\nOn 12 January 2019 at 08:46, Troels Ring wrote:\n| BUT where and how to put the @inheritParams CMB I cannot find documented.\n| Otherwise it seems to run OK\n\nI fear you are getting confused between 'roxygen2' and base R.\n\n'roxygen2' is a very handy and powerful add-on package extending R. But none\nof its variables, (which conveniently all start with a @) will be documented\nin the proper manual, Writing R Extension.\n\nYou question about \\describe, however, is about Rd which is base R. And that\nvery command is 'shadowed' by roxygen2 which generates that section. That is\nnot unlike your previous question about exporting / registration.\n\nPersonally, I see value in working old-school here, and continue to argue\nthat one should be familiar with the _basic_ and _portable_ commands in\nWriting R Extensions before putting another layer on top.  Just how I find\nit helps to explain what Rcpp does if one has a mental image of the\nunderlying 'SEXP .Call(funcname, SEXP, SEXP)' it is working with.  So I do\nuse roxygen to create Rd files but I also spent a decade or so writing Rd\nfiles -- and quite a few people (hi, Duncan) still recommend doing it by\nhand.  I think it helps. And you can mix and match.\n\nAlso, a decent trick is to search on GitHub with 'user:cran' to restrict\nyour search to the mirror (thanks, Gabor!) of CRAN packages. For just about\nany question, it quite likely that there will be someone who has been there\nbefore among the now (almost) 13,700 packages out there.\n\nDirk\n\n--\nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "Hi Dirk - thank you for your kind mail - I can see I better follow the basic\nways! Also since I seem by my shortcuts to have accomplished a major\nproblem: I had two *.RData files with similar variable",
-      "thread_id": "thread-4ad2c3bd4efa",
-      "thread_depth": 1,
-      "month": "2019-01"
-    },
-    {
       "id": "msg-abad87bb8798",
       "message_id": "<547301d4aa7e$108c2c10$31a48430$@gvdnet.dk>",
       "from_name": "Troels Ring",
@@ -963,6 +945,24 @@
       ],
       "body_plain": "Thanks a lot! I stumbled over the RStudio way of producing *.rda files for data sets individually instead of making a *.R file as Hadley writes in the book if I understand it correctly. \n\nIt certainly is fun to find out about !!\n\nAll best wishes\n\nTroels\n\n \n\nFra: Alexandre Courtiol <alexandre.courtiol at gmail.com> \nSendt: 12. januar 2019 14:28\nTil: Troels Ring <tring at gvdnet.dk>\nCc: package-develop <r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] using @inheritParams in documenting data\n\n \n\nHi Troels,\n\nIf you want to create a R package (using roxygen2), I would highly recommend you to read Hadley Wickham's book on the topic.\n\nThe book is easy, short, practical and legally free (here: http://r-pkgs.had.co.nz/).\n\nIf you follow it step by step, everything should work fine.\n\nFor anything not covered by the book, as Dirk said, look for examples of packages you know in GitHub.\n\n++\n\nAlex\n\n \n\n \n\nOn Sat, 12 Jan 2019 at 08:46, Troels Ring <tring at gvdnet.dk <mailto:tring at gvdnet.dk> > wrote:\n\nDearfriends , with your help I'm rapidly improving package development. When\ndocumenting data, I seem to be helped mpst by making the rda directly from\nRStudio via file, new file, R documentation then choosing data. However, my\ndata files have a lot of params, so I thought I might use @inheritParams\nsince these params are already documented elsewhere in the package. Hence,\nin the rda file created directly from RStudio I tried to add @inheritParams\nCMB (since the params are already documented in CMB) but I cannot find\nexactly how to put it in the rda file.\n\nThe skeleton has\n\n\\describe{\n\n                           \\item{\\code(x)}{vector}\n\nAnd if I put some the params in a comma separated row instead of x they are\nacknowledged in the final rda file -\n\nBUT where and how to put the @inheritParams CMB I cannot find documented.\nOtherwise it seems to run OK\n\n\n\nAll best wishes\n\nTroels\n\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org <mailto:R-package-devel at r-project.org>  mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n\n\n\n-- \n\nAlexandre Courtiol\n\nhttp://sites.google.com/site/alexandrecourtiol/home\n\n\"Science is the belief in the ignorance of experts\", R. Feynman\n\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks a lot! I stumbled over the RStudio way of producing *.rda files for data sets individually instead of making a *.R file as Hadley writes in the book if I understand it correctly. \n\nIt certainly",
+      "thread_id": "thread-4ad2c3bd4efa",
+      "thread_depth": 1,
+      "month": "2019-01"
+    },
+    {
+      "id": "msg-168845cb123c",
+      "message_id": "<547201d4aa7e$106e43d0$314acb70$@gvdnet.dk>",
+      "from_name": "Troels Ring",
+      "from_email_hash": "57e488bafcc5d8e0251d3b14b332d9a9d17de239ac8ea884b8595611e24e2171",
+      "date": "2019-01-12T13:52:31Z",
+      "subject": "[R-pkg-devel] using @inheritParams in documenting data",
+      "subject_clean": "[R-pkg-devel] using @inheritParams in documenting data",
+      "in_reply_to": "iIeogPYcntXDiiIeqgM8wl",
+      "references": [
+        "<11f401d4aa4a$f2b1d6f0$d81584d0$@gvdnet.dk>"
+      ],
+      "body_plain": "Hi Dirk - thank you for your kind mail - I can see I better follow the basic\nways! Also since I seem by my shortcuts to have accomplished a major\nproblem: I had two *.RData files with similar variables of same names in\n/data - if I included both and had no rda files to document data, I had this\npreviously mentioned problem of \"following objects are masked by \"glovalEnv\"\n- but if I used the rda files on data directly from RStudio the data were\nkept to be from only one of the RData files, I think the first one -\nload(\"*.RData\") of course was still correct. \nThanks a lot for your patience \nTroels\n\n-----Oprindelig meddelelse-----\nFra: Dirk Eddelbuettel <dirk.eddelbuettel at gmail.com> P? vegne af Dirk\nEddelbuettel\nSendt: 12. januar 2019 13:45\nTil: Troels Ring <tring at gvdnet.dk>\nCc: package-develop <r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] using @inheritParams in documenting data\n\n\nHi Troels,\n\nAlways good to see someone work on packaging with so much energy.\n\nOn 12 January 2019 at 08:46, Troels Ring wrote:\n| BUT where and how to put the @inheritParams CMB I cannot find documented.\n| Otherwise it seems to run OK\n\nI fear you are getting confused between 'roxygen2' and base R.\n\n'roxygen2' is a very handy and powerful add-on package extending R. But none\nof its variables, (which conveniently all start with a @) will be documented\nin the proper manual, Writing R Extension.\n\nYou question about \\describe, however, is about Rd which is base R. And that\nvery command is 'shadowed' by roxygen2 which generates that section. That is\nnot unlike your previous question about exporting / registration.\n\nPersonally, I see value in working old-school here, and continue to argue\nthat one should be familiar with the _basic_ and _portable_ commands in\nWriting R Extensions before putting another layer on top.  Just how I find\nit helps to explain what Rcpp does if one has a mental image of the\nunderlying 'SEXP .Call(funcname, SEXP, SEXP)' it is working with.  So I do\nuse roxygen to create Rd files but I also spent a decade or so writing Rd\nfiles -- and quite a few people (hi, Duncan) still recommend doing it by\nhand.  I think it helps. And you can mix and match.\n\nAlso, a decent trick is to search on GitHub with 'user:cran' to restrict\nyour search to the mirror (thanks, Gabor!) of CRAN packages. For just about\nany question, it quite likely that there will be someone who has been there\nbefore among the now (almost) 13,700 packages out there.\n\nDirk\n\n--\nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Hi Dirk - thank you for your kind mail - I can see I better follow the basic\nways! Also since I seem by my shortcuts to have accomplished a major\nproblem: I had two *.RData files with similar variable",
       "thread_id": "thread-4ad2c3bd4efa",
       "thread_depth": 1,
       "month": "2019-01"
@@ -2095,24 +2095,6 @@
       "month": "2019-01"
     },
     {
-      "id": "msg-ea54b4aaf297",
-      "message_id": "<622701d4b0e7$ed2f48e0$c78ddaa0$@gvdnet.dk>",
-      "from_name": "Troels Ring",
-      "from_email_hash": "3f353990682b97f6c4e5f292709c789ba9e1c2f3904944bff6cb6ac6f93802b1",
-      "date": "2019-01-20T17:45:26Z",
-      "subject": "[R-pkg-devel] problems documenting data sets",
-      "subject_clean": "[R-pkg-devel] problems documenting data sets",
-      "in_reply_to": "kzNyg1BXtwUhzkzO0gM1HP",
-      "references": [
-        "<691701d4afe4$31d2cd50$957867f0$@gvdnet.dk>"
-      ],
-      "body_plain": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goes on\n\nBW\n\nTroels\n\n \n\nFra: Berry Boessenkool <berryboessenkool at hotmail.com> \nSendt: 19. januar 2019 23:47\nTil: Troels Ring <tring at gvdnet.dk>; R package devel\n<r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] problems documenting data sets\n\n \n\n \n\nI was first thinking there could be an occurence of Brom with a capital B in\nthe package somewhere.\n\nIn which case you could run from the current package main directory:\n\n \n\ncat(\"All files in R folder\\n\", file=\"AllFiles.R\")\n\nfor(f in dir(\"R\",full=T)) cat(readLines(f), file=\"AllFiles.R\", sep=\"\\n\",\nappend=TRUE)\n\n \n\nand search for Brom in that file...\n\nBut Rolf is likely right. I was thinking the wrong way around...\n\n \n\nBerry\n\n \n\n  _____  \n\nFrom: R-package-devel <r-package-devel-bounces at r-project.org\n<mailto:r-package-devel-bounces at r-project.org> > on behalf of Troels Ring\n<tring at gvdnet.dk <mailto:tring at gvdnet.dk> >\nSent: Saturday, January 19, 2019 11:46\nTo: package-develop\nSubject: [R-pkg-devel] problems documenting data sets \n\n \n\nDear friends - I still get some warning although the package runs just fine.\n\nchecking for missing documentation entries ... WARNING\n\n  Undocumented data sets:\n\n    'Cl' 'K' 'Na' 'TOTAL' 'WA' 'INPUT' 'Alb' 'Ca' 'Lact' 'Mg' 'PCO2' 'S1'\n\n    'Brom' 'pHOBS'\n\n  All user-level objects in a package should have documentation entries.\n[SNIP]\n\n  \n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goe",
-      "thread_id": "thread-c6701f4f3dae",
-      "thread_depth": 1,
-      "month": "2019-01"
-    },
-    {
       "id": "msg-d6602fbd7299",
       "message_id": "<622c01d4b0e7$edbfa200$c93ee600$@gvdnet.dk>",
       "from_name": "Troels Ring",
@@ -2126,6 +2108,24 @@
       ],
       "body_plain": "Thank you so much - I used the search in files function in RStudio and also looked everywhere as well as I could - but seemingly: no - everywhere only \"brom\". So since the functions runs as expected and I can make a workable binary package I guess I will just continue improving the functionalities and see if I eventually get a hunch\n\nAll best wishes\nTroels \n\n-----Oprindelig meddelelse-----\nFra: Rolf Turner <r.turner at auckland.ac.nz> \nSendt: 19. januar 2019 23:12\nTil: Troels Ring <tring at gvdnet.dk>\nCc: package-develop <r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] problems documenting data sets\n\n\nIt's hard to be sure without seeing your package, but it *sounds* as though you have a data set \"Brom\" (in <package>/data ?) but you have\n*documented* a data set named \"brom\".  So you should either change the name of the data set to \"brom\" or change your help file to document \"Brom\".\n\nIt is of course entirely possible that I am misunderstanding what is going on, in which case I apologise for the noise.\n\ncheers,\n\nRolf\n\n--\nHonorary Research Fellow\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276\n\nOn 1/19/19 11:46 PM, Troels Ring wrote:\n> Dear friends ? I still get some warning although the package runs just fine.\n> \n> checking for missing documentation entries ... WARNING\n> \n>    Undocumented data sets:\n> \n>      'Cl' 'K' 'Na' 'TOTAL' 'WA' 'INPUT' 'Alb' 'Ca' 'Lact' 'Mg' 'PCO2' 'S1'\n> \n>      'Brom' 'pHOBS'\n> \n>    All user-level objects in a package should have documentation entries.\n> \n>    See chapter 'Writing R documentation files' in the 'Writing R\n> \n>    Extensions' manual.\n> \n>   \n> \n> 0 errors v | 1 warning x | 0 notes v\n> \n> Fejl: R CMD check found WARNINGs\n> \n> K rsel stoppet (run stopped)\n> \n>   \n> \n> But the only place I have  any mentions of brom is here below and in no place I have capital Brom. So what should I make of this?\n> \n>   \n> \n> \\name{brom}\n> \n> \\alias{brom}\n> \n> \\docType{data}\n> \n> \\title{\n> \n> Bromic acid data from Glaser et al 2014\n> \n> }\n> \n> \\description{\n> \n>    Data to find optimal pK for bromic acid\n> \n> }\n> \n> \\usage{data(\"brom\")}\n> \n> \\format{\n> \n> A workspace.\n> \n>    \\describe{\n> \n>      \\item{brom}{Dataframe of Table S4 in Glaser et al.}\n> \n>      \\item{WA}{List of buffers with list of dissociation constants.}\n> \n>    }\n> \n> }\n> \n> \\source{\n> \n> Glaser RE et al. Dynamical approach to multiequilibriia problems for \n> mixtures of\n> \n> acids and their conjugate bases. J Chem Educ 2014; 91: 1009-1016\n> \n> }\n> \n> \\examples{\n> \n> data(brom)\n> \n> ## maybe str(brom) ; plot(brom) ...\n> \n> }\n> \n> \\keyword{datasets}",
       "body_snippet": "Thank you so much - I used the search in files function in RStudio and also looked everywhere as well as I could - but seemingly: no - everywhere only \"brom\". So since the functions runs as expected a",
+      "thread_id": "thread-c6701f4f3dae",
+      "thread_depth": 1,
+      "month": "2019-01"
+    },
+    {
+      "id": "msg-ea54b4aaf297",
+      "message_id": "<622701d4b0e7$ed2f48e0$c78ddaa0$@gvdnet.dk>",
+      "from_name": "Troels Ring",
+      "from_email_hash": "3f353990682b97f6c4e5f292709c789ba9e1c2f3904944bff6cb6ac6f93802b1",
+      "date": "2019-01-20T17:45:26Z",
+      "subject": "[R-pkg-devel] problems documenting data sets",
+      "subject_clean": "[R-pkg-devel] problems documenting data sets",
+      "in_reply_to": "kzNyg1BXtwUhzkzO0gM1HP",
+      "references": [
+        "<691701d4afe4$31d2cd50$957867f0$@gvdnet.dk>"
+      ],
+      "body_plain": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goes on\n\nBW\n\nTroels\n\n \n\nFra: Berry Boessenkool <berryboessenkool at hotmail.com> \nSendt: 19. januar 2019 23:47\nTil: Troels Ring <tring at gvdnet.dk>; R package devel\n<r-package-devel at r-project.org>\nEmne: Re: [R-pkg-devel] problems documenting data sets\n\n \n\n \n\nI was first thinking there could be an occurence of Brom with a capital B in\nthe package somewhere.\n\nIn which case you could run from the current package main directory:\n\n \n\ncat(\"All files in R folder\\n\", file=\"AllFiles.R\")\n\nfor(f in dir(\"R\",full=T)) cat(readLines(f), file=\"AllFiles.R\", sep=\"\\n\",\nappend=TRUE)\n\n \n\nand search for Brom in that file...\n\nBut Rolf is likely right. I was thinking the wrong way around...\n\n \n\nBerry\n\n \n\n  _____  \n\nFrom: R-package-devel <r-package-devel-bounces at r-project.org\n<mailto:r-package-devel-bounces at r-project.org> > on behalf of Troels Ring\n<tring at gvdnet.dk <mailto:tring at gvdnet.dk> >\nSent: Saturday, January 19, 2019 11:46\nTo: package-develop\nSubject: [R-pkg-devel] problems documenting data sets \n\n \n\nDear friends - I still get some warning although the package runs just fine.\n\nchecking for missing documentation entries ... WARNING\n\n  Undocumented data sets:\n\n    'Cl' 'K' 'Na' 'TOTAL' 'WA' 'INPUT' 'Alb' 'Ca' 'Lact' 'Mg' 'PCO2' 'S1'\n\n    'Brom' 'pHOBS'\n\n  All user-level objects in a package should have documentation entries.\n[SNIP]\n\n  \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks a lot - I tried your script but it didn't turn up anything like Brom\nbut  in one place I had Bromic acid - which I changed to bromic acid to no\navail.\n\nSo I continue trying to find out what goe",
       "thread_id": "thread-c6701f4f3dae",
       "thread_depth": 1,
       "month": "2019-01"
