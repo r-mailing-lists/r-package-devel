@@ -2059,26 +2059,6 @@
       "month": "2020-12"
     },
     {
-      "id": "msg-458a5ffe9daa",
-      "message_id": "<AD04CC4E-0E80-4ED4-AEA8-77DA43BA8EC1@ic.ac.uk>",
-      "from_name": "Jendoubi Bedhiafi, Takoua",
-      "from_email_hash": "7e6f1d79f97ced9fb2bb5de41aca386c35a94b490c22d1f9b59d85604a72b21e",
-      "date": "2020-12-22T04:45:39Z",
-      "subject": "[R-pkg-devel] f319",
-      "subject_clean": "[R-pkg-devel] f319",
-      "in_reply_to": "<8FC316AA-0229-48A2-AC54-7CAAE39331F8@noaa.gov>",
-      "references": [
-        "<016B78F5-EFED-4DC9-BED2-031D55C8656C@noaa.gov>",
-        "<d7af87bb-569d-bf71-42bc-3afec1693ab5@gmail.com>",
-        "<8FC316AA-0229-48A2-AC54-7CAAE39331F8@noaa.gov>"
-      ],
-      "body_plain": "I am out of office with occasional email access until the new year.\n\nOn 25 Jul 2019, at 20:47, Roy Mendelssohn - NOAA Federal via R-package-devel <r-package-devel at r-project.org> wrote:\n\nOkay I added rgeos but now it can't find rgdal.  as in:\n\nError: processing vignette 'using_plotdap.Rmd' failed with diagnostics:\npackage 'rgdal' is not available\n--- failed re-building 'using_plotdap.Rmd'\n\n\nA question I asked before is if there is anyway to check that 'rgdal' and 'rgeos' are properly installed on the winbuider servers, as well as 'sf' and 'sp'?  'devtools::check()' on my mac produces no errors,  same with  'rhub' using Fedora,  but I get the same errors on 'rhub' using Windows.    So it appears to be a problem with Windows,  and again I am not calling these packages directly so I should not need to Import them.\n\nThanks,\n\n-Roy\n\n\nOn Jul 25, 2019, at 12:38 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\nOn 25/07/2019 3:21 p.m., Roy Mendelssohn - NOAA Federal via R-package-devel wrote:\nI have been testing a package for resubmission with bug fixes.  On the present CRAN builds I get:\nResult: NOTE\n   Namespaces in Imports field not imported from:\n    ?mapdata? ?maptools? ?plot3D? ?rgdal? ?rgeos?\n    All declared Imports should be used.\nHowever,  if I remove rgeos from the imports I get from win builder:\nError in st_as_sfc.SpatialPolygons(sp::geometry(x), ...) :\n    package rgeos required for finding out which hole belongs to which exterior ring\nNote that I am not calling 'rgeos',  either 'sf' or 'sp' is,  but does not appear to be properly importing all the need namespaces.\nBest way  to proceed?  Include rgeos in Import and get the Note,  or ????\n\nA simple workaround would be to add a function that calls something from rgeos just to satisfy the check, e.g.\n\n# Just to satisfy the checks...\ndummy <- function() rgeos::getScale()\n\nI don't think there are warnings if dummy is never used or exported, but if there are, I think that's a pretty harmless call to make.\n\nDuncan Murdoch\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\"\n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I am out of office with occasional email access until the new year.\n\nOn 25 Jul 2019, at 20:47, Roy Mendelssohn - NOAA Federal via R-package-devel <r-package-devel at r-project.org> wrote:\n\nOkay I adde",
-      "thread_id": "thread-458a5ffe9daa",
-      "thread_depth": 0,
-      "month": "2020-12"
-    },
-    {
       "id": "msg-0b0823bc781d",
       "message_id": "<757C78EE-394C-469A-B5F6-7D75AF5BCD5B@ic.ac.uk>",
       "from_name": "Jendoubi Bedhiafi, Takoua",
@@ -2097,6 +2077,26 @@
       "body_plain": "I am out of office with occasional email access until the new year.\n\nOn 25 Jul 2019, at 21:49, Roy Mendelssohn - NOAA Federal via R-package-devel <r-package-devel at r-project.org> wrote:\n\nThanks,  actually have similar code for some other packages that must have been causing similar problems  (that part was from the original author,  I am now the maintainer).  Now I understand why he had something similar in the code.  There is a comment about Namespaces not being handled properly in those packages.\n\nWill try that.  I actually have rgdal and rgeos in Imports,  they were getting flagged in the CRAN nightly builds.  If I have them in that one statement,  that should take care of both issues I believe.\n\nBut it would be nice to figure out why this is happening,  and only on Windows.  Sort of frustrating when you follow the guidelines but get failures,  but what also what is good about things like CRAN,  for whatever reason this will insure I work across platforms.\n\n-Roy\n\n\nOn Jul 25, 2019, at 12:56 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\nOn 25/07/2019 3:47 p.m., Roy Mendelssohn - NOAA Federal wrote:\nOkay I added rgeos but now it can't find rgdal.  as in:\nError: processing vignette 'using_plotdap.Rmd' failed with diagnostics:\npackage 'rgdal' is not available\n--- failed re-building 'using_plotdap.Rmd'\n\nA question I asked before is if there is anyway to check that 'rgdal' and 'rgeos' are properly installed on the winbuider servers, as well as 'sf' and 'sp'?  'devtools::check()' on my mac produces no errors,  same with  'rhub' using Fedora,  but I get the same errors on 'rhub' using Windows.    So it appears to be a problem with Windows,  and again I am not calling these packages directly so I should not need to Import them.\n\nYou're right, you shouldn't need to import them if you don't call them directly.  However, if some package that you do need requires them, then your build or checks will fail without them.\n\nIt's probably getting tedious, but you could work around this as well, by figuring out what part of using_plotdap.Rmd needs rgdal, and wrapping that code in something like\n\nif (requireNamespace(\"rgdal\")) {\n# code that needs it\n}\n\nI think this will mean you need to add rgdal to the Suggests list for your package to avoid other warnings.\n\nDuncan Murdoch\n\nThanks,\n-Roy\nOn Jul 25, 2019, at 12:38 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\nOn 25/07/2019 3:21 p.m., Roy Mendelssohn - NOAA Federal via R-package-devel wrote:\nI have been testing a package for resubmission with bug fixes.  On the present CRAN builds I get:\nResult: NOTE\n   Namespaces in Imports field not imported from:\n    ?mapdata? ?maptools? ?plot3D? ?rgdal? ?rgeos?\n    All declared Imports should be used.\nHowever,  if I remove rgeos from the imports I get from win builder:\nError in st_as_sfc.SpatialPolygons(sp::geometry(x), ...) :\n    package rgeos required for finding out which hole belongs to which exterior ring\nNote that I am not calling 'rgeos',  either 'sf' or 'sp' is,  but does not appear to be properly importing all the need namespaces.\nBest way  to proceed?  Include rgeos in Import and get the Note,  or ????\n\nA simple workaround would be to add a function that calls something from rgeos just to satisfy the check, e.g.\n\n# Just to satisfy the checks...\ndummy <- function() rgeos::getScale()\n\nI don't think there are warnings if dummy is never used or exported, but if there are, I think that's a pretty harmless call to make.\n\nDuncan Murdoch\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\"\n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.\n\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\"\n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "I am out of office with occasional email access until the new year.\n\nOn 25 Jul 2019, at 21:49, Roy Mendelssohn - NOAA Federal via R-package-devel <r-package-devel at r-project.org> wrote:\n\nThanks,  ac",
       "thread_id": "thread-0b0823bc781d",
+      "thread_depth": 0,
+      "month": "2020-12"
+    },
+    {
+      "id": "msg-458a5ffe9daa",
+      "message_id": "<AD04CC4E-0E80-4ED4-AEA8-77DA43BA8EC1@ic.ac.uk>",
+      "from_name": "Jendoubi Bedhiafi, Takoua",
+      "from_email_hash": "7e6f1d79f97ced9fb2bb5de41aca386c35a94b490c22d1f9b59d85604a72b21e",
+      "date": "2020-12-22T04:45:39Z",
+      "subject": "[R-pkg-devel] f319",
+      "subject_clean": "[R-pkg-devel] f319",
+      "in_reply_to": "<8FC316AA-0229-48A2-AC54-7CAAE39331F8@noaa.gov>",
+      "references": [
+        "<016B78F5-EFED-4DC9-BED2-031D55C8656C@noaa.gov>",
+        "<d7af87bb-569d-bf71-42bc-3afec1693ab5@gmail.com>",
+        "<8FC316AA-0229-48A2-AC54-7CAAE39331F8@noaa.gov>"
+      ],
+      "body_plain": "I am out of office with occasional email access until the new year.\n\nOn 25 Jul 2019, at 20:47, Roy Mendelssohn - NOAA Federal via R-package-devel <r-package-devel at r-project.org> wrote:\n\nOkay I added rgeos but now it can't find rgdal.  as in:\n\nError: processing vignette 'using_plotdap.Rmd' failed with diagnostics:\npackage 'rgdal' is not available\n--- failed re-building 'using_plotdap.Rmd'\n\n\nA question I asked before is if there is anyway to check that 'rgdal' and 'rgeos' are properly installed on the winbuider servers, as well as 'sf' and 'sp'?  'devtools::check()' on my mac produces no errors,  same with  'rhub' using Fedora,  but I get the same errors on 'rhub' using Windows.    So it appears to be a problem with Windows,  and again I am not calling these packages directly so I should not need to Import them.\n\nThanks,\n\n-Roy\n\n\nOn Jul 25, 2019, at 12:38 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\nOn 25/07/2019 3:21 p.m., Roy Mendelssohn - NOAA Federal via R-package-devel wrote:\nI have been testing a package for resubmission with bug fixes.  On the present CRAN builds I get:\nResult: NOTE\n   Namespaces in Imports field not imported from:\n    ?mapdata? ?maptools? ?plot3D? ?rgdal? ?rgeos?\n    All declared Imports should be used.\nHowever,  if I remove rgeos from the imports I get from win builder:\nError in st_as_sfc.SpatialPolygons(sp::geometry(x), ...) :\n    package rgeos required for finding out which hole belongs to which exterior ring\nNote that I am not calling 'rgeos',  either 'sf' or 'sp' is,  but does not appear to be properly importing all the need namespaces.\nBest way  to proceed?  Include rgeos in Import and get the Note,  or ????\n\nA simple workaround would be to add a function that calls something from rgeos just to satisfy the check, e.g.\n\n# Just to satisfy the checks...\ndummy <- function() rgeos::getScale()\n\nI don't think there are warnings if dummy is never used or exported, but if there are, I think that's a pretty harmless call to make.\n\nDuncan Murdoch\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: http://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\"\n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am out of office with occasional email access until the new year.\n\nOn 25 Jul 2019, at 20:47, Roy Mendelssohn - NOAA Federal via R-package-devel <r-package-devel at r-project.org> wrote:\n\nOkay I adde",
+      "thread_id": "thread-458a5ffe9daa",
       "thread_depth": 0,
       "month": "2020-12"
     },
@@ -2607,17 +2607,6 @@
       "root_message_id": "msg-b3c2d700ab75"
     },
     {
-      "id": "thread-0a55e8d5331d",
-      "subject": "[R-pkg-devel] 3097",
-      "message_count": 1,
-      "participants": [
-        "Jendoubi Bedhiafi, Takoua"
-      ],
-      "started": "2020-12-22T04:42:15Z",
-      "last_reply": "2020-12-22T04:42:15Z",
-      "root_message_id": "msg-0a55e8d5331d"
-    },
-    {
       "id": "thread-ba607bcdb6d6",
       "subject": "[R-pkg-devel] 3097",
       "message_count": 1,
@@ -2627,6 +2616,17 @@
       "started": "2020-12-22T04:42:15Z",
       "last_reply": "2020-12-22T04:42:15Z",
       "root_message_id": "msg-ba607bcdb6d6"
+    },
+    {
+      "id": "thread-0a55e8d5331d",
+      "subject": "[R-pkg-devel] 3097",
+      "message_count": 1,
+      "participants": [
+        "Jendoubi Bedhiafi, Takoua"
+      ],
+      "started": "2020-12-22T04:42:15Z",
+      "last_reply": "2020-12-22T04:42:15Z",
+      "root_message_id": "msg-0a55e8d5331d"
     },
     {
       "id": "thread-764f6b0a7673",
@@ -2651,17 +2651,6 @@
       "root_message_id": "msg-b817fbed5d07"
     },
     {
-      "id": "thread-0b0823bc781d",
-      "subject": "[R-pkg-devel] f319",
-      "message_count": 1,
-      "participants": [
-        "Jendoubi Bedhiafi, Takoua"
-      ],
-      "started": "2020-12-22T04:45:39Z",
-      "last_reply": "2020-12-22T04:45:39Z",
-      "root_message_id": "msg-0b0823bc781d"
-    },
-    {
       "id": "thread-458a5ffe9daa",
       "subject": "[R-pkg-devel] f319",
       "message_count": 1,
@@ -2671,6 +2660,17 @@
       "started": "2020-12-22T04:45:39Z",
       "last_reply": "2020-12-22T04:45:39Z",
       "root_message_id": "msg-458a5ffe9daa"
+    },
+    {
+      "id": "thread-0b0823bc781d",
+      "subject": "[R-pkg-devel] f319",
+      "message_count": 1,
+      "participants": [
+        "Jendoubi Bedhiafi, Takoua"
+      ],
+      "started": "2020-12-22T04:45:39Z",
+      "last_reply": "2020-12-22T04:45:39Z",
+      "root_message_id": "msg-0b0823bc781d"
     },
     {
       "id": "thread-5e9252c1f995",
