@@ -1,0 +1,84 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-04",
+  "messages": [
+    {
+      "id": "msg-386dbcf794d1",
+      "message_id": "<643cacd2-007a-6caa-7360-492a299acda3@uiowa.edu>",
+      "from_name": "iuke-tier@ey m@iii@g oii uiow@@edu",
+      "from_email_hash": "d99ccb54811d841ac041f12e5dfc823053fe0bdf1cebd8d1047b8e5f0d6a24b7",
+      "date": "2026-04-01T16:06:30Z",
+      "subject": "[R-pkg-devel] [External] R_MissingArg is now non-API",
+      "subject_clean": "[R-pkg-devel] [External] R_MissingArg is now non-API",
+      "in_reply_to": "<26b5b21d-a178-4a81-8357-e683cf99b148@milberg.dev>",
+      "references": [
+        "<26b5b21d-a178-4a81-8357-e683cf99b148@milberg.dev>"
+      ],
+      "body_plain": "Thanks -- ported now\n\nluke\n\nOn Wed, 1 Apr 2026, Sadao Milberg wrote:\n\n> [You don't often get email from sadao at milberg.dev. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]\n>\n> Hi, I'm still getting a note on Winbuilder:\n>\n>     ...\n>     * using R version 4.6.0 alpha (2026-03-31 r89747 ucrt)\n>     ...\n>     Found non-API call to R: 'R_MissingArg'\n>\n> I _think_ it is because the below mentioned change did not get ported over:\n>\n>     trunk$ svn info | grep Revision\n>     Revision: 89769\n>     trunk$ svn log -r89739\n>     ------------------------------------------------------------------------\n>     r89739 | luke | 2026-03-29 19:07:17 -0400 (Sun, 29 Mar 2026) | 1 line\n>\n>     Mark R_MissingArg as @apivar.\n>     ------------------------------------------------------------------------\n>\n>     trunk$ svn cat https://svn.r-project.org/R/branches/R-4-6-branch/src/library/tools/R/sotools.R | grep -n -C 2\n> \"\\bR_MissingArg\\b\"\n>     679-            \"R_NamespaceRegistry\", \"R_Srcref\", \"R_UnboundValue\",\n>     680-            \"R_InBCInterpreter\", \"R_CurrentExpression\",\n>     681:            \"R_CStackDir\", \"R_MB_CUR_MAX\", \"R_MissingArg\",\n>     682-            \"R_compact_intseq_class\", \"R_compact_realseq_class\",\n>     683-            \"R_num_math_threads\", \"R_max_num_math_threads\",\n>\n>     trunk$ svn log -l2 https://svn.r-project.org/R/branches/R-4-6-branch/src/library/tools/R/sotools.R\n>     ------------------------------------------------------------------------\n>     r89728 | luke | 2026-03-26 22:24:39 -0400 (Thu, 26 Mar 2026) | 2 lines\n>\n>     Merge r89724 and r89725 from the trunk.\n>\n>     ------------------------------------------------------------------------\n>     r89719 | pd | 2026-03-26 19:02:00 -0400 (Thu, 26 Mar 2026) | 1 line\n>\n>     Create R-4-6-branch\n>     ------------------------------------------------------------------------\n>\n> Best,\n>\n> Sadao\n>\n>\n> On Sunday, March 29, 2026 at 07:09:24 PM EDT, Luke Tierney via R-package-devel <r-package-devel at r-project.org> wrote:\n>\n>\n> On Sun, 29 Mar 2026, Iris Simmons wrote:\n>\n> > I understand that R has put Rf_findVarInFrame and R_UnboundValue on the\n> > non-API list in order to deny direct access to PROMSXP objects.\n> >\n> > What I can't understand is why R put R_MissingArg on the non-API list. I've\n> > been using it to allocate functions in C, and now I'm not sure how I'm\n> > going to get around it. Right now I would write:\n> >\n> > Does anyone know how I might get around this?\n> >\n> > [[alternative HTML version deleted]]\n>\n> You are right: R_MissingArg is needed for this so it should be in the\n> variables API. It is now and should no longer generate a check NOTE.\n>\n> Thanks,\n>\n> luke\n>\n>\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/",
+      "body_snippet": "Thanks -- ported now\n\nluke\n\nOn Wed, 1 Apr 2026, Sadao Milberg wrote:\n\n> [You don't often get email from sadao at milberg.dev. Learn why this is important at https://aka.ms/LearnAboutSenderIdentificati",
+      "thread_id": "thread-386dbcf794d1",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-737af3ab69dc",
+      "message_id": "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>",
+      "from_name": "Henrik Bengtsson",
+      "from_email_hash": "4861a2b833132ccee758def2caa0ac4dc6bbdf1b2c4e2f28a1b1b8a43ceeb278",
+      "date": "2026-04-01T20:32:41Z",
+      "subject": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "subject_clean": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "(bcc:ing the CRAN team)\n\nIs the CRAN submission down? I submitted a package to CRAN ~30 minutes\nago via <https://cran.r-project.org/submit.html>, and I still haven't\ngot the expected email confirmation, which normally comes instantly.\nLooking at the CRAN incoming server (e.g. https://nx10.dev/cransubs/)\nit looks like the most recent submission was eight hours ago (Apr 01\n14:16 server's local time) - I would expect quite a few submissions\nsince then.\n\n/Henrik\n\nPS. win-builder's processing and email notifications work just fine",
+      "body_snippet": "(bcc:ing the CRAN team)\n\nIs the CRAN submission down? I submitted a package to CRAN ~30 minutes\nago via <https://cran.r-project.org/submit.html>, and I still haven't\ngot the expected email confirmatio",
+      "thread_id": "thread-737af3ab69dc",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-cd74649201dd",
+      "message_id": "<278915F4-EB3F-4EF4-A575-2E745D16EF1C@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-04-01T21:29:39Z",
+      "subject": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "subject_clean": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "in_reply_to": "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>"
+      ],
+      "body_plain": "Yes, the submissions are currently down. The server decided to observe Easter early ;) - the team is aware and working on it, but it may take some time depending where the fault is.\n\nCheers,\nSimon\n\n\n> On 2 Apr 2026, at 09:32, Henrik Bengtsson <henrik.bengtsson at gmail.com> wrote:\n> \n> (bcc:ing the CRAN team)\n> \n> Is the CRAN submission down? I submitted a package to CRAN ~30 minutes\n> ago via <https://cran.r-project.org/submit.html>, and I still haven't\n> got the expected email confirmation, which normally comes instantly.\n> Looking at the CRAN incoming server (e.g. https://nx10.dev/cransubs/)\n> it looks like the most recent submission was eight hours ago (Apr 01\n> 14:16 server's local time) - I would expect quite a few submissions\n> since then.\n> \n> /Henrik\n> \n> PS. win-builder's processing and email notifications work just fine\n>",
+      "body_snippet": "Yes, the submissions are currently down. The server decided to observe Easter early ;) - the team is aware and working on it, but it may take some time depending where the fault is.\n\nCheers,\nSimon\n\n\n>",
+      "thread_id": "thread-737af3ab69dc",
+      "thread_depth": 1,
+      "month": "2026-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-386dbcf794d1",
+      "subject": "[R-pkg-devel] [External] R_MissingArg is now non-API",
+      "message_count": 1,
+      "participants": [
+        "iuke-tier@ey m@iii@g oii uiow@@edu"
+      ],
+      "started": "2026-04-01T16:06:30Z",
+      "last_reply": "2026-04-01T16:06:30Z",
+      "root_message_id": "msg-386dbcf794d1"
+    },
+    {
+      "id": "thread-737af3ab69dc",
+      "subject": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "message_count": 2,
+      "participants": [
+        "Henrik Bengtsson",
+        "Simon Urbanek"
+      ],
+      "started": "2026-04-01T20:32:41Z",
+      "last_reply": "2026-04-01T21:29:39Z",
+      "root_message_id": "msg-737af3ab69dc"
+    }
+  ]
+}

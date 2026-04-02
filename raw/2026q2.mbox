@@ -1,0 +1,150 @@
+From iuke-tier@ey m@iii@g oii uiow@@edu  Wed Apr  1 18:06:30 2026
+From: iuke-tier@ey m@iii@g oii uiow@@edu (iuke-tier@ey m@iii@g oii uiow@@edu)
+Date: Wed, 1 Apr 2026 11:06:30 -0500 (CDT)
+Subject: [R-pkg-devel] [External] R_MissingArg is now non-API
+In-Reply-To: <26b5b21d-a178-4a81-8357-e683cf99b148@milberg.dev>
+References: <26b5b21d-a178-4a81-8357-e683cf99b148@milberg.dev>
+Message-ID: <643cacd2-007a-6caa-7360-492a299acda3@uiowa.edu>
+
+Thanks -- ported now
+
+luke
+
+On Wed, 1 Apr 2026, Sadao Milberg wrote:
+
+> [You don't often get email from sadao at milberg.dev. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>
+> Hi, I'm still getting a note on Winbuilder:
+>
+>     ...
+>     * using R version 4.6.0 alpha (2026-03-31 r89747 ucrt)
+>     ...
+>     Found non-API call to R: 'R_MissingArg'
+>
+> I _think_ it is because the below mentioned change did not get ported over:
+>
+>     trunk$ svn info | grep Revision
+>     Revision: 89769
+>     trunk$ svn log -r89739
+>     ------------------------------------------------------------------------
+>     r89739 | luke | 2026-03-29 19:07:17 -0400 (Sun, 29 Mar 2026) | 1 line
+>
+>     Mark R_MissingArg as @apivar.
+>     ------------------------------------------------------------------------
+>
+>     trunk$ svn cat https://svn.r-project.org/R/branches/R-4-6-branch/src/library/tools/R/sotools.R | grep -n -C 2
+> "\bR_MissingArg\b"
+>     679-            "R_NamespaceRegistry", "R_Srcref", "R_UnboundValue",
+>     680-            "R_InBCInterpreter", "R_CurrentExpression",
+>     681:            "R_CStackDir", "R_MB_CUR_MAX", "R_MissingArg",
+>     682-            "R_compact_intseq_class", "R_compact_realseq_class",
+>     683-            "R_num_math_threads", "R_max_num_math_threads",
+>
+>     trunk$ svn log -l2 https://svn.r-project.org/R/branches/R-4-6-branch/src/library/tools/R/sotools.R
+>     ------------------------------------------------------------------------
+>     r89728 | luke | 2026-03-26 22:24:39 -0400 (Thu, 26 Mar 2026) | 2 lines
+>
+>     Merge r89724 and r89725 from the trunk.
+>
+>     ------------------------------------------------------------------------
+>     r89719 | pd | 2026-03-26 19:02:00 -0400 (Thu, 26 Mar 2026) | 1 line
+>
+>     Create R-4-6-branch
+>     ------------------------------------------------------------------------
+>
+> Best,
+>
+> Sadao
+>
+>
+> On Sunday, March 29, 2026 at 07:09:24 PM EDT, Luke Tierney via R-package-devel <r-package-devel at r-project.org> wrote:
+>
+>
+> On Sun, 29 Mar 2026, Iris Simmons wrote:
+>
+> > I understand that R has put Rf_findVarInFrame and R_UnboundValue on the
+> > non-API list in order to deny direct access to PROMSXP objects.
+> >
+> > What I can't understand is why R put R_MissingArg on the non-API list. I've
+> > been using it to allocate functions in C, and now I'm not sure how I'm
+> > going to get around it. Right now I would write:
+> >
+> > Does anyone know how I might get around this?
+> >
+> > [[alternative HTML version deleted]]
+>
+> You are right: R_MissingArg is needed for this so it should be in the
+> variables API. It is now and should no longer generate a check NOTE.
+>
+> Thanks,
+>
+> luke
+>
+>
+>
+
+-- 
+Luke Tierney
+Ralph E. Wareham Professor of Mathematical Sciences
+University of Iowa                  Phone:             319-335-3386
+Department of Statistics and        Fax:               319-335-3017
+    Actuarial Science
+241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu
+Iowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/
+
+
+From henr|k@bengt@@on @end|ng |rom gm@||@com  Wed Apr  1 22:32:41 2026
+From: henr|k@bengt@@on @end|ng |rom gm@||@com (Henrik Bengtsson)
+Date: Wed, 1 Apr 2026 13:32:41 -0700
+Subject: [R-pkg-devel] CRAN submission down?: Not getting the expected
+ confirmation email - last submission was 8 hours ago
+Message-ID: <CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>
+
+(bcc:ing the CRAN team)
+
+Is the CRAN submission down? I submitted a package to CRAN ~30 minutes
+ago via <https://cran.r-project.org/submit.html>, and I still haven't
+got the expected email confirmation, which normally comes instantly.
+Looking at the CRAN incoming server (e.g. https://nx10.dev/cransubs/)
+it looks like the most recent submission was eight hours ago (Apr 01
+14:16 server's local time) - I would expect quite a few submissions
+since then.
+
+/Henrik
+
+PS. win-builder's processing and email notifications work just fine
+
+
+From @|mon@urb@nek @end|ng |rom R-project@org  Wed Apr  1 23:29:39 2026
+From: @|mon@urb@nek @end|ng |rom R-project@org (Simon Urbanek)
+Date: Thu, 2 Apr 2026 10:29:39 +1300
+Subject: [R-pkg-devel] CRAN submission down?: Not getting the expected
+ confirmation email - last submission was 8 hours ago
+In-Reply-To: <CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>
+References: <CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>
+Message-ID: <278915F4-EB3F-4EF4-A575-2E745D16EF1C@R-project.org>
+
+Yes, the submissions are currently down. The server decided to observe Easter early ;) - the team is aware and working on it, but it may take some time depending where the fault is.
+
+Cheers,
+Simon
+
+
+> On 2 Apr 2026, at 09:32, Henrik Bengtsson <henrik.bengtsson at gmail.com> wrote:
+> 
+> (bcc:ing the CRAN team)
+> 
+> Is the CRAN submission down? I submitted a package to CRAN ~30 minutes
+> ago via <https://cran.r-project.org/submit.html>, and I still haven't
+> got the expected email confirmation, which normally comes instantly.
+> Looking at the CRAN incoming server (e.g. https://nx10.dev/cransubs/)
+> it looks like the most recent submission was eight hours ago (Apr 01
+> 14:16 server's local time) - I would expect quite a few submissions
+> since then.
+> 
+> /Henrik
+> 
+> PS. win-builder's processing and email notifications work just fine
+> 
+
+
