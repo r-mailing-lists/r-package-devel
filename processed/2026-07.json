@@ -1,0 +1,36 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-07",
+  "messages": [
+    {
+      "id": "msg-6ff99266b3a7",
+      "message_id": "<AS8P192MB17023BF62C0E49FE2161A17193F62@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>",
+      "from_name": "Karline Soetaert",
+      "from_email_hash": "81469b3aa0eb2619d4056e17d35c71773460e9773064d6ab452cae00ca444d82",
+      "date": "2026-07-01T06:46:34Z",
+      "subject": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "subject_clean": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nThank you all so much for your useful answers!\n\n\nI managed to solve the issue, by replacing the calls to xDCOPY that led to the overlapping memory by two new subroutines, XDMOVE (for vectors) and XDMOVE2D (for matrices).\n(The explanation below is a bit technical.)\n\n\n*The problem was:*\n\nThe original xDCOPY is defined as:\n      SUBROUTINE XDCOPY(N, DX,INCX, DY,INCY)\n\nwhere DX is the vector to copy *from* and DY is the vector to copy *to*, and INCX and INCY are the increments for DX and DY respectively in the DO loop.\n\nAn error could be triggered if xDCOPY was used, for instance, as:\n\n           CALL xDCOPY (N, X(J+1), 1, X(J), 1)\n\nas it was called with two overlapping subsections from the same vector (X)\n\n*The solution*\n\nFor such cases, a new subroutine, called xDMOVE is now used,\nthat is defined as:\n\n        SUBROUTINE XDMOVE(N, DX, Ifrom, INCfrom,   Ito, INCto)\n\nwhere vector DX is passed only once, and\n*Ifrom* and *Ito* are the *index* of the first position to copy *from* and to parts of DX.\n\n\nFor instance, the original call:\n           CALL xDCOPY (N, X(J+1), 1, X(J), 1)\nbecomes:\n           CALL xDMOVE (N, X, J+1,1,    J,1)\n\nand:\n          CALL xDCOPY(N, X,   0, X,  1)\nbecomes\n          CALL xDMOVE(N, X, 1,0,   1,1)\n\n\n\n\nWhen the input array is a *matrix*, xDCOPY is replaced by xDMOVE2D that is defined as follows:\n\n        SUBROUTINE XDMOVE2D(N, MDX, DX, Ifrom,Jfrom,INCfrom, Ito,Jto,INCto)\n\nwhere MDX is the leading dimension of the assumed-size matrix DX(MDX,*),\nand Ifrom,Jfrom and Ito,Jto are the indices to the first position to copy from and to in DX(I,J).\n\n\nIn practice, XDMOVE2D calls XDMOVE, with the indices to the vector that corresponds to DX:\n\n      ...\n      IXvec = (Jfrom - 1)*MDX + Ifrom\n      IYvec = (Jto       - 1)*MDX + Ito\n\n      CALL XDMOVE(N, DX, IXvec,INCfrom, IYvec,INCto)\n\n\n\nAs an example of a call, the original call :\n          CALL xDCOPY   (M-ME,    W(ME+1,J), 1, W(KRANKE+1,J), 1)\nbecomes:\n          CALL xDMOVE2D (M-ME, MDW, W, ME+1,J,1, KRANKE+1,J,1)\n\nwhere W is an assumed-size matrix defined as W(MDW, *)\n\n\n\nSo, it was not as difficult to fix as I originally feared!\nThanks again for all the valuable suggestions.\n\n\nkarline\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nThank you all so much for your useful answers!\n\n\nI managed to solve the issue, by replacing the calls to xDCOPY that led to the overlapping memory by two new subroutines, XDMOVE (for vectors)",
+      "thread_id": "thread-6ff99266b3a7",
+      "thread_depth": 0,
+      "month": "2026-07"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-6ff99266b3a7",
+      "subject": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "message_count": 1,
+      "participants": [
+        "Karline Soetaert"
+      ],
+      "started": "2026-07-01T06:46:34Z",
+      "last_reply": "2026-07-01T06:46:34Z",
+      "root_message_id": "msg-6ff99266b3a7"
+    }
+  ]
+}

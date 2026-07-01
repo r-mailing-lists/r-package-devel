@@ -1,0 +1,90 @@
+From K@r||ne@Soet@ert @end|ng |rom n|oz@n|  Wed Jul  1 08:46:34 2026
+From: K@r||ne@Soet@ert @end|ng |rom n|oz@n| (Karline Soetaert)
+Date: Wed, 1 Jul 2026 06:46:34 +0000
+Subject: [R-pkg-devel] 
+ Assumed-size arrays in fortran and memory sanitizer
+Message-ID: <AS8P192MB17023BF62C0E49FE2161A17193F62@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>
+
+Hi all,
+
+Thank you all so much for your useful answers!
+
+
+I managed to solve the issue, by replacing the calls to xDCOPY that led to the overlapping memory by two new subroutines, XDMOVE (for vectors) and XDMOVE2D (for matrices).
+(The explanation below is a bit technical.)
+
+
+*The problem was:*
+
+The original xDCOPY is defined as:
+      SUBROUTINE XDCOPY(N, DX,INCX, DY,INCY)
+
+where DX is the vector to copy *from* and DY is the vector to copy *to*, and INCX and INCY are the increments for DX and DY respectively in the DO loop.
+
+An error could be triggered if xDCOPY was used, for instance, as:
+
+           CALL xDCOPY (N, X(J+1), 1, X(J), 1)
+
+as it was called with two overlapping subsections from the same vector (X)
+
+*The solution*
+
+For such cases, a new subroutine, called xDMOVE is now used,
+that is defined as:
+
+        SUBROUTINE XDMOVE(N, DX, Ifrom, INCfrom,   Ito, INCto)
+
+where vector DX is passed only once, and
+*Ifrom* and *Ito* are the *index* of the first position to copy *from* and to parts of DX.
+
+
+For instance, the original call:
+           CALL xDCOPY (N, X(J+1), 1, X(J), 1)
+becomes:
+           CALL xDMOVE (N, X, J+1,1,    J,1)
+
+and:
+          CALL xDCOPY(N, X,   0, X,  1)
+becomes
+          CALL xDMOVE(N, X, 1,0,   1,1)
+
+
+
+
+When the input array is a *matrix*, xDCOPY is replaced by xDMOVE2D that is defined as follows:
+
+        SUBROUTINE XDMOVE2D(N, MDX, DX, Ifrom,Jfrom,INCfrom, Ito,Jto,INCto)
+
+where MDX is the leading dimension of the assumed-size matrix DX(MDX,*),
+and Ifrom,Jfrom and Ito,Jto are the indices to the first position to copy from and to in DX(I,J).
+
+
+In practice, XDMOVE2D calls XDMOVE, with the indices to the vector that corresponds to DX:
+
+      ...
+      IXvec = (Jfrom - 1)*MDX + Ifrom
+      IYvec = (Jto       - 1)*MDX + Ito
+
+      CALL XDMOVE(N, DX, IXvec,INCfrom, IYvec,INCto)
+
+
+
+As an example of a call, the original call :
+          CALL xDCOPY   (M-ME,    W(ME+1,J), 1, W(KRANKE+1,J), 1)
+becomes:
+          CALL xDMOVE2D (M-ME, MDW, W, ME+1,J,1, KRANKE+1,J,1)
+
+where W is an assumed-size matrix defined as W(MDW, *)
+
+
+
+So, it was not as difficult to fix as I originally feared!
+Thanks again for all the valuable suggestions.
+
+
+karline
+
+
+	[[alternative HTML version deleted]]
+
+
