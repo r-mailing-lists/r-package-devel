@@ -1,0 +1,489 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-05",
+  "messages": [
+    {
+      "id": "msg-6f9d447b2846",
+      "message_id": "<2d1bdd66-26e4-43f9-aaf8-e58d0a248cc4@unimib.it>",
+      "from_name": "Andrea Gilardi - Unimib",
+      "from_email_hash": "ec81c591006c38106490d5548a452b1027d187b0b8c26642997f3bd3a958e33e",
+      "date": "2026-05-04T16:21:09Z",
+      "subject": "[R-pkg-devel] Help understanding R pkg development policy on patch level",
+      "subject_clean": "[R-pkg-devel] Help understanding R pkg development policy on patch level",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nI'm writing you this message since, if possible, I would like to better \nunderstand a policy behind the development of an R package. For \nsimplicity, assume that I'm developing a package that, for some reason, \nrequires parsing objects' names in a function call via ...names(). As \nfar as I know, the ...names() syntax was introduced in R 4.1.0 and \nreceived a bug fix in R 4.1.3 \n(https://bugs.r-project.org/show_bug.cgi?id=18247). Hence, I believe \nthat the minimum R version I should set should be something like \n\"Depends: R (>= 4.1.3)\". However, the \"Writing R Extensions\" manual \n(https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-namespaces) \nsays:\n\n > It is inadvisable to use a dependence on R with patch level (the \nthird digit) other than zero. Doing so with packages which others depend \non will cause the other packages to become unusable under earlier \nversions in the series, and e.g. versions 4.x.1 are widely used \nthroughout the Northern Hemisphere academic year.\n\nI don't understand this explanation and I also don't understand why \nspecifying R >=? 4.2.0 would be preferable to R >= 4.1.3 when all the \nfeatures I need are already satisfied by R 4.1.3. Can you help? I guess \nthat the issue is that, in this case, R 4.1.1 users wouldn't be able to \ninstall my package, but the same issue persists even if I set R >= 4.2.0 \nas the minimum R version. Is that right?\n\nFinally, I also noticed that R CMD check raises a warning in such \ncases?until R 4.3.3.\n\nJust to be clear: this is a very minor issue and, considering how much \ntime has passed since the release of those two R versions, I don't see \nany problem with both specifications.\n\nThanks for your assistance\n\nAndrea\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear all,\n\nI'm writing you this message since, if possible, I would like to better \nunderstand a policy behind the development of an R package. For \nsimplicity, assume that I'm developing a package th",
+      "thread_id": "thread-6f9d447b2846",
+      "thread_depth": 0,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-9cc20d12db44",
+      "message_id": "<458F8325-E9B5-4E5D-8C01-990A0E348BF4@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-05-05T00:03:16Z",
+      "subject": "[R-pkg-devel]  Help understanding R pkg development policy on patch level",
+      "subject_clean": "[R-pkg-devel]  Help understanding R pkg development policy on patch level",
+      "in_reply_to": "<2d1bdd66-26e4-43f9-aaf8-e58d0a248cc4@unimib.it>",
+      "references": [
+        "<2d1bdd66-26e4-43f9-aaf8-e58d0a248cc4@unimib.it>"
+      ],
+      "body_plain": "Andrea,\n\nif the bug affects your use case then you should use 4.1.3 otherwise 4.1.0. Normally, ABI compatibility is guaranteed across all patch versions - hence the comment to make sure the requirement is not unnecessary, but if your package does not work with 4.1.0 but does with 4.1.3 then it's a perfectly justified special case.\n\nCheers,\nSimon\n\n\n> On 5 May 2026, at 04:21, Andrea Gilardi - Unimib <andrea.gilardi at unimib.it> wrote:\n> \n> Dear all,\n> \n> I'm writing you this message since, if possible, I would like to better \n> understand a policy behind the development of an R package. For \n> simplicity, assume that I'm developing a package that, for some reason, \n> requires parsing objects' names in a function call via ...names(). As \n> far as I know, the ...names() syntax was introduced in R 4.1.0 and \n> received a bug fix in R 4.1.3 \n> (https://bugs.r-project.org/show_bug.cgi?id=18247). Hence, I believe \n> that the minimum R version I should set should be something like \n> \"Depends: R (>= 4.1.3)\". However, the \"Writing R Extensions\" manual \n> (https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-namespaces) \n> says:\n> \n>> It is inadvisable to use a dependence on R with patch level (the\n> third digit) other than zero. Doing so with packages which others depend \n> on will cause the other packages to become unusable under earlier \n> versions in the series, and e.g. versions 4.x.1 are widely used \n> throughout the Northern Hemisphere academic year.\n> \n> I don't understand this explanation and I also don't understand why \n> specifying R >=  4.2.0 would be preferable to R >= 4.1.3 when all the \n> features I need are already satisfied by R 4.1.3. Can you help? I guess \n> that the issue is that, in this case, R 4.1.1 users wouldn't be able to \n> install my package, but the same issue persists even if I set R >= 4.2.0 \n> as the minimum R version. Is that right?\n> \n> Finally, I also noticed that R CMD check raises a warning in such \n> cases until R 4.3.3.\n> \n> Just to be clear: this is a very minor issue and, considering how much \n> time has passed since the release of those two R versions, I don't see \n> any problem with both specifications.\n> \n> Thanks for your assistance\n> \n> Andrea\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Andrea,\n\nif the bug affects your use case then you should use 4.1.3 otherwise 4.1.0. Normally, ABI compatibility is guaranteed across all patch versions - hence the comment to make sure the requiremen",
+      "thread_id": "thread-6f9d447b2846",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-aaaa430710e7",
+      "message_id": "<3E437E2C-336B-4E90-A02D-D1BCF8A41447@gmail.com>",
+      "from_name": "Peter Dalgaard",
+      "from_email_hash": "5d0f61ffffc9a67fd86f4b9a1ea3fac7d731c19e1d8679b6ae315232b22874e8",
+      "date": "2026-05-05T08:48:42Z",
+      "subject": "[R-pkg-devel]  Help understanding R pkg development policy on patch level",
+      "subject_clean": "[R-pkg-devel]  Help understanding R pkg development policy on patch level",
+      "in_reply_to": "<458F8325-E9B5-4E5D-8C01-990A0E348BF4@R-project.org>",
+      "references": [
+        "<2d1bdd66-26e4-43f9-aaf8-e58d0a248cc4@unimib.it>",
+        "<458F8325-E9B5-4E5D-8C01-990A0E348BF4@R-project.org>"
+      ],
+      "body_plain": "Andrea,\n\nAt this distance in time it is mostly immaterial whether you depend on a patch release. On the other hand, the gain from not just depending on 4.2.0+ must also be negligible by now. \n\nThe reason for the policy was an incident somewhere around R 3.3-3.4, when a relatively minor package (pbkrtest) decided to depend on a patch release (possibly due to an updated sigma() function in 3.4.2, but I may misremember). However, pbkrtest had quite a lot of reverse dependencies, including Rcmdr, which several sites were using for teaching. After that point sites that updated their installation yearly suddenly could not install Rcmdr on their auditorium/computer lab setups, whether or not they actually intenden to use pbkrtest for anything. For the same reason, we have become much more careful not to introduce new functionality in base R between major releases.\n\n-pd\n\n> On 5 May 2026, at 02.03, Simon Urbanek <Simon.Urbanek at r-project.org> wrote:\n> \n> Andrea,\n> \n> if the bug affects your use case then you should use 4.1.3 otherwise 4.1.0. Normally, ABI compatibility is guaranteed across all patch versions - hence the comment to make sure the requirement is not unnecessary, but if your package does not work with 4.1.0 but does with 4.1.3 then it's a perfectly justified special case.\n> \n> Cheers,\n> Simon\n> \n> \n>> On 5 May 2026, at 04:21, Andrea Gilardi - Unimib <andrea.gilardi at unimib.it> wrote:\n>> \n>> Dear all,\n>> \n>> I'm writing you this message since, if possible, I would like to better \n>> understand a policy behind the development of an R package. For \n>> simplicity, assume that I'm developing a package that, for some reason, \n>> requires parsing objects' names in a function call via ...names(). As \n>> far as I know, the ...names() syntax was introduced in R 4.1.0 and \n>> received a bug fix in R 4.1.3 \n>> (https://bugs.r-project.org/show_bug.cgi?id=18247). Hence, I believe \n>> that the minimum R version I should set should be something like \n>> \"Depends: R (>= 4.1.3)\". However, the \"Writing R Extensions\" manual \n>> (https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-namespaces) \n>> says:\n>> \n>>> It is inadvisable to use a dependence on R with patch level (the\n>> third digit) other than zero. Doing so with packages which others depend \n>> on will cause the other packages to become unusable under earlier \n>> versions in the series, and e.g. versions 4.x.1 are widely used \n>> throughout the Northern Hemisphere academic year.\n>> \n>> I don't understand this explanation and I also don't understand why \n>> specifying R >=  4.2.0 would be preferable to R >= 4.1.3 when all the \n>> features I need are already satisfied by R 4.1.3. Can you help? I guess \n>> that the issue is that, in this case, R 4.1.1 users wouldn't be able to \n>> install my package, but the same issue persists even if I set R >= 4.2.0 \n>> as the minimum R version. Is that right?\n>> \n>> Finally, I also noticed that R CMD check raises a warning in such \n>> cases until R 4.3.3.\n>> \n>> Just to be clear: this is a very minor issue and, considering how much \n>> time has passed since the release of those two R versions, I don't see \n>> any problem with both specifications.\n>> \n>> Thanks for your assistance\n>> \n>> Andrea\n>> \n>> [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "Andrea,\n\nAt this distance in time it is mostly immaterial whether you depend on a patch release. On the other hand, the gain from not just depending on 4.2.0+ must also be negligible by now. \n\nThe rea",
+      "thread_id": "thread-6f9d447b2846",
+      "thread_depth": 2,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-06f5db4c13db",
+      "message_id": "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
+      "date": "2026-05-15T20:04:31Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi All:\n\nI have run into this before,  and I have seen others with the same problem.  The machine that CRAN uses for its automatic testing of package submissions appears to be slower for the Debian server than some of the other serves, particularly when web access is involved.  On submission,  the Debian machine shows times for examples that I can? t reproduce on any of the other test machines I use,  and this includes Macbuilder,  WInbuilder,  r-universe and r-hub.  Is there a test machine that is known to have about the same speed and bandwidth as the Debian test machine.  More than happy to test against it,  just need to know where I can point to that will produce about the same results.  Again,  it is not an issue of code failure but rather run time of examples.\n\nThanks for any help.\n\n-Roy",
+      "body_snippet": "Hi All:\n\nI have run into this before,  and I have seen others with the same problem.  The machine that CRAN uses for its automatic testing of package submissions appears to be slower for the Debian se",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 0,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-888eddb956c8",
+      "message_id": "<27143.60441.830751.172566@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-05-16T04:01:29Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>"
+      ],
+      "body_plain": "Roy,\n\nOn 15 May 2026 at 13:04, Roy Mendelssohn - NOAA Federal via R-package-devel wrote:\n| I have run into this before,  and I have seen others with the same problem.  The machine that CRAN uses for its automatic testing of package submissions appears to be slower for the Debian server than some of the other serves, particularly when web access is involved.  On submission,  the Debian machine shows times for examples that I can? t reproduce on any of the other test machines I use,  and this includes Macbuilder,  WInbuilder,  r-universe and r-hub.  Is there a test machine that is known to have about the same speed and bandwidth as the Debian test machine.  More than happy to test against it,  just need to know where I can point to that will produce about the same results.  Again,  it is not an issue of code failure but rather run time of examples.\n\nWhat is your actual question? Comparitive run-time?\n\nNote that there are (per [1] and [2]) about four Debian machines among the\ntotal of current 13 (?) reporting machines (and as with the titanic and\nicebergs, there is an unknown (?) and invisible number of extra machines\nrunning the various extra checks):\n \n  r-devel-linux-x86_64-debian-clang\n  r-devel-linux-x86_64-debian-gcc\n  r-patched-linux-x86_64\n  r-release-linux-x86_64\n\nOne of these one serves as 'gatekeeper' for new uploads. I would assume the\nmachine suffers under parallel load so questions about run-time may be\ndifficult to answer.\n\nOne of the charms of CRAN is that make their work 'irreproducible' in the\nsense that they could, but don't, share their setups in, say, reproducible\nDocker setups. But such is life: everybody here is a volunteer, working on\ndonated free time, and there is always more to do. It is hard to change that,\ngiven mindsets and resources.\n\nCheers, Dirk  (obviously not speaking for CRAN, or blaming anyone)\n \n[1] https://cran.r-project.org/web/checks/check_summary.html\n[2] https://cran.r-project.org/web/checks/check_flavors.html\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "Roy,\n\nOn 15 May 2026 at 13:04, Roy Mendelssohn - NOAA Federal via R-package-devel wrote:\n| I have run into this before,  and I have seen others with the same problem.  The machine that CRAN uses for i",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-082c142608c9",
+      "message_id": "<CANAiAiVeGT8xRu_0SGwbr6Vf3J0e0tSOBxqjGORrK6vZa3sjOA@mail.gmail.com>",
+      "from_name": "John Harrold",
+      "from_email_hash": "0f53f69ac2785a2d17633f1d532dede0aa987900af88d8b55517725bad30f5fa",
+      "date": "2026-05-16T19:06:58Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<27143.60441.830751.172566@paul.eddelbuettel.com>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+        "<27143.60441.830751.172566@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "I think this is the question:\n\nIs there a test machine that is known to have about the same speed and\nbandwidth as the Debian test machine.\n\n\nOn Fri, May 15, 2026 at 9:01?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> Roy,\n>\n> On 15 May 2026 at 13:04, Roy Mendelssohn - NOAA Federal via\n> R-package-devel wrote:\n> | I have run into this before,  and I have seen others with the same\n> problem.  The machine that CRAN uses for its automatic testing of package\n> submissions appears to be slower for the Debian server than some of the\n> other serves, particularly when web access is involved.  On submission,\n> the Debian machine shows times for examples that I can? t reproduce on any\n> of the other test machines I use,  and this includes Macbuilder,\n> WInbuilder,  r-universe and r-hub.  Is there a test machine that is known\n> to have about the same speed and bandwidth as the Debian test machine.\n> More than happy to test against it,  just need to know where I can point to\n> that will produce about the same results.  Again,  it is not an issue of\n> code failure but rather run time of examples.\n>\n> What is your actual question? Comparitive run-time?\n>\n> Note that there are (per [1] and [2]) about four Debian machines among the\n> total of current 13 (?) reporting machines (and as with the titanic and\n> icebergs, there is an unknown (?) and invisible number of extra machines\n> running the various extra checks):\n>\n>   r-devel-linux-x86_64-debian-clang\n>   r-devel-linux-x86_64-debian-gcc\n>   r-patched-linux-x86_64\n>   r-release-linux-x86_64\n>\n> One of these one serves as 'gatekeeper' for new uploads. I would assume the\n> machine suffers under parallel load so questions about run-time may be\n> difficult to answer.\n>\n> One of the charms of CRAN is that make their work 'irreproducible' in the\n> sense that they could, but don't, share their setups in, say, reproducible\n> Docker setups. But such is life: everybody here is a volunteer, working on\n> donated free time, and there is always more to do. It is hard to change\n> that,\n> given mindsets and resources.\n>\n> Cheers, Dirk  (obviously not speaking for CRAN, or blaming anyone)\n>\n> [1] https://cran.r-project.org/web/checks/check_summary.html\n> [2] https://cran.r-project.org/web/checks/check_flavors.html\n>\n> --\n> Dirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n>\n> Support my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info\n> at\n> https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I think this is the question:\n\nIs there a test machine that is known to have about the same speed and\nbandwidth as the Debian test machine.\n\n\nOn Fri, May 15, 2026 at 9:01?PM Dirk Eddelbuettel <edd at ",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 2,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-7d2825218ef7",
+      "message_id": "<6D171F1B-6804-43E2-AFB6-ECD7CEBF2F78@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
+      "date": "2026-05-16T19:12:14Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<CANAiAiVeGT8xRu_0SGwbr6Vf3J0e0tSOBxqjGORrK6vZa3sjOA@mail.gmail.com>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+        "<27143.60441.830751.172566@paul.eddelbuettel.com>",
+        "<CANAiAiVeGT8xRu_0SGwbr6Vf3J0e0tSOBxqjGORrK6vZa3sjOA@mail.gmail.com>"
+      ],
+      "body_plain": "yes exactly - whatever is used by CRAN for the automated pre-test on submission.  Not a complaint.  Just would like not to have to keep resubmitting to CRAN because the Debian pre-tests fail.  Would prefer to catch that before submission.  If not, that is fine,  I will just do resubmissions\n\nThanks,\n\n-Roy\n\n\n> On May 16, 2026, at 12:06?PM, John Harrold <john.m.harrold at gmail.com> wrote:\n> \n> I think this is the question:\n> \n> Is there a test machine that is known to have about the same speed and bandwidth as the Debian test machine.\n> \n> \n> On Fri, May 15, 2026 at 9:01?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> Roy,\n> \n> On 15 May 2026 at 13:04, Roy Mendelssohn - NOAA Federal via R-package-devel wrote:\n> | I have run into this before,  and I have seen others with the same problem.  The machine that CRAN uses for its automatic testing of package submissions appears to be slower for the Debian server than some of the other serves, particularly when web access is involved.  On submission,  the Debian machine shows times for examples that I can? t reproduce on any of the other test machines I use,  and this includes Macbuilder,  WInbuilder,  r-universe and r-hub.  Is there a test machine that is known to have about the same speed and bandwidth as the Debian test machine.  More than happy to test against it,  just need to know where I can point to that will produce about the same results.  Again,  it is not an issue of code failure but rather run time of examples.\n> \n> What is your actual question? Comparitive run-time?\n> \n> Note that there are (per [1] and [2]) about four Debian machines among the\n> total of current 13 (?) reporting machines (and as with the titanic and\n> icebergs, there is an unknown (?) and invisible number of extra machines\n> running the various extra checks):\n> \n>   r-devel-linux-x86_64-debian-clang\n>   r-devel-linux-x86_64-debian-gcc\n>   r-patched-linux-x86_64\n>   r-release-linux-x86_64\n> \n> One of these one serves as 'gatekeeper' for new uploads. I would assume the\n> machine suffers under parallel load so questions about run-time may be\n> difficult to answer.\n> \n> One of the charms of CRAN is that make their work 'irreproducible' in the\n> sense that they could, but don't, share their setups in, say, reproducible\n> Docker setups. But such is life: everybody here is a volunteer, working on\n> donated free time, and there is always more to do. It is hard to change that,\n> given mindsets and resources.\n> \n> Cheers, Dirk  (obviously not speaking for CRAN, or blaming anyone)\n> \n> [1] https://cran.r-project.org/web/checks/check_summary.html\n> [2] https://cran.r-project.org/web/checks/check_flavors.html\n> \n> -- \n> Dirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n> \n> Support my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\n> https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "yes exactly - whatever is used by CRAN for the automated pre-test on submission.  Not a complaint.  Just would like not to have to keep resubmitting to CRAN because the Debian pre-tests fail.  Would p",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 3,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-f92597661220",
+      "message_id": "<27144.51191.119006.846080@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-05-16T19:39:35Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<6D171F1B-6804-43E2-AFB6-ECD7CEBF2F78@noaa.gov>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+        "<27143.60441.830751.172566@paul.eddelbuettel.com>",
+        "<CANAiAiVeGT8xRu_0SGwbr6Vf3J0e0tSOBxqjGORrK6vZa3sjOA@mail.gmail.com>",
+        "<6D171F1B-6804-43E2-AFB6-ECD7CEBF2F78@noaa.gov>"
+      ],
+      "body_plain": "On 16 May 2026 at 12:12, Roy Mendelssohn - NOAA Federal wrote:\n| yes exactly - whatever is used by CRAN for the automated pre-test on submission.  Not a complaint.  Just would like not to have to keep resubmitting to CRAN because the Debian pre-tests fail.  Would prefer to catch that before submission.  If not, that is fine,  I will just do resubmissions\n\nI mentioned that CRAN does not provide, say, Docker containers.  That said,\nrocker/r-base (Debian) and rocker/r2u (Ubuntu) are close. You could use them.\n\n>From an \"ideally someone else should take care of it\" angle, your best bet is\nprobably the Linux builds at r-universe which happen to be on Debian and use\nsimilar sets of packages. But again, the exact parameterisation is not the\none CRAN uses for reasons already mentioned. There are a number of tutorials\nabout how to get going with r-universe, it is very much worth it.\n\nCompletely avoiding rejection is hard. I happened to have had issues for the\nlast few months where the Vienna (Debian) machine was more stringent on URL\nchecking in pdfs too, and it took some effort to discover that ... the very\nvariant of qpdf I am using on Ubuntu 25.10 had a change in its command-line\narguments (since reversed, it seems) that influenced the URL extraction.\nSadly even when we try our hardest given the current setup we still do not\ncome perfectly close. C'est la vie.\n\n| > On May 16, 2026, at 12:06?PM, John Harrold <john.m.harrold at gmail.com> wrote:\n| > I think this is the question:\n| > \n| > Is there a test machine that is known to have about the same speed and bandwidth as the Debian test machine.\n\nEven if it existed, how would you account for variable, unobservable, and\npresumably significant, load on the CRAN machine?  \n\nDirk\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 16 May 2026 at 12:12, Roy Mendelssohn - NOAA Federal wrote:\n| yes exactly - whatever is used by CRAN for the automated pre-test on submission.  Not a complaint.  Just would like not to have to keep",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 4,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-e701764f45be",
+      "message_id": "<084a01dce583$a9dc8430$fd958c90$@gmail.com>",
+      "from_name": "@vi@e@gross m@iii@g oii gm@ii@com",
+      "from_email_hash": "d6a4c55a185bab73b3c0ff3c4ff2919a7304ba1b26cb7598116213c48aa6f4dd",
+      "date": "2026-05-16T22:30:56Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<27144.51191.119006.846080@paul.eddelbuettel.com>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+        "<27143.60441.830751.172566@paul.eddelbuettel.com>",
+        "<CANAiAiVeGT8xRu_0SGwbr6Vf3J0e0tSOBxqjGORrK6vZa3sjOA@mail.gmail.com>",
+        "<6D171F1B-6804-43E2-AFB6-ECD7CEBF2F78@noaa.gov>",
+        "<27144.51191.119006.846080@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "This may be a dumb question but are the tests meant to test actual resource usage beyond some levels OR meant to allow the existing machines to handle the load?\n\nThe former case might measure not elapsed time on a busy machine, but the time-shared time that remains about the same even on a busy machine or the number of bytes transferred over a network rather than how long it took on the clock.\n\nOf course, measuring such things can add an extra layer of overhead so we may be stuck with what is being used, and it can be random whether a tests fails if done during some rush hour versus at 3 AM.\n\n\n\n-----Original Message-----\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Dirk Eddelbuettel\nSent: Saturday, May 16, 2026 3:40 PM\nTo: Roy Mendelssohn - NOAA Federal <roy.mendelssohn at noaa.gov>\nCc: List r-package-devel <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] CRAN Debian test machine\n\n\nOn 16 May 2026 at 12:12, Roy Mendelssohn - NOAA Federal wrote:\n| yes exactly - whatever is used by CRAN for the automated pre-test on submission.  Not a complaint.  Just would like not to have to keep resubmitting to CRAN because the Debian pre-tests fail.  Would prefer to catch that before submission.  If not, that is fine,  I will just do resubmissions\n\nI mentioned that CRAN does not provide, say, Docker containers.  That said,\nrocker/r-base (Debian) and rocker/r2u (Ubuntu) are close. You could use them.\n\n>From an \"ideally someone else should take care of it\" angle, your best bet is\nprobably the Linux builds at r-universe which happen to be on Debian and use\nsimilar sets of packages. But again, the exact parameterisation is not the\none CRAN uses for reasons already mentioned. There are a number of tutorials\nabout how to get going with r-universe, it is very much worth it.\n\nCompletely avoiding rejection is hard. I happened to have had issues for the\nlast few months where the Vienna (Debian) machine was more stringent on URL\nchecking in pdfs too, and it took some effort to discover that ... the very\nvariant of qpdf I am using on Ubuntu 25.10 had a change in its command-line\narguments (since reversed, it seems) that influenced the URL extraction.\nSadly even when we try our hardest given the current setup we still do not\ncome perfectly close. C'est la vie.\n\n| > On May 16, 2026, at 12:06?PM, John Harrold <john.m.harrold at gmail.com> wrote:\n| > I think this is the question:\n| > \n| > Is there a test machine that is known to have about the same speed and bandwidth as the Debian test machine.\n\nEven if it existed, how would you account for variable, unobservable, and\npresumably significant, load on the CRAN machine?  \n\nDirk\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "This may be a dumb question but are the tests meant to test actual resource usage beyond some levels OR meant to allow the existing machines to handle the load?\n\nThe former case might measure not elap",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 5,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-e9fb57570d96",
+      "message_id": "<20260518170322.0ba34923@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-05-18T14:03:22Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>"
+      ],
+      "body_plain": "On Fri, 15 May 2026 13:04:31 -0700\nRoy Mendelssohn - NOAA Federal via R-package-devel\n<r-package-devel at r-project.org> wrote:\n\n> On submission,  the Debian machine shows times for examples that I\n> can? t reproduce on any of the other test machines I use,  and this\n> includes Macbuilder,  WInbuilder,  r-universe and r-hub.\n\nIs this about rerddapUtils [1]? I think that the example timings can be\nreproduced on the Mac Builder, it's just that R CMD check runs without\n--as-cran, so the NOTE doesn't happen.\n\nOn CRAN submission, the package had\n\n>> * checking examples ... [4s/17s] NOTE\n\nOn the Mac Builder [2], I see\n\n>> * checking examples ... [0s/40s] OK\n\nThrough a cheap proxy in the Netherlands, I can observe\n\n>> * checking examples ... [3s/47s] NOTE\n>> Examples with CPU (user + system) or elapsed time > 5s\n>>                 user system elapsed\n>> griddap_season 1.471  0.099  14.665\n>> griddap_split  0.727  0.062  12.058\n>> latlon_to_xy   0.053  0.000  10.011\n>> xy_to_latlon   0.049  0.000  10.010\n\nInterestingly, latlon_to_xy & xy_to_latlon do really time out for me,\nwhile griddap_season & griddap_split succeed, just take a while.\n\nIt's not obvious how to reproduce the NOTE without paying for a proxy\nin a different country.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://win-builder.r-project.org/incoming_pretest/rerddapUtils_1.0.0_20260515_012921/Debian/00check.log\n\n[2]\nhttps://mac.r-project.org/macbuilder/results/1779005055-10cb78439b8b3f0a/",
+      "body_snippet": "On Fri, 15 May 2026 13:04:31 -0700\nRoy Mendelssohn - NOAA Federal via R-package-devel\n<r-package-devel at r-project.org> wrote:\n\n> On submission,  the Debian machine shows times for examples that I\n> ",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-4b5938b06a50",
+      "message_id": "<28568167-31DC-42C3-BF34-3999F2ABF255@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
+      "date": "2026-05-18T14:26:44Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<20260518170322.0ba34923@arachnoid>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+        "<20260518170322.0ba34923@arachnoid>"
+      ],
+      "body_plain": "Thanks for the taking the time, great feedback.  Yesterday was the first day I ran into problems on Macbuilder and Winbuilder.  I run tests on everything I can.  I have to go back and look at this - the examples are already not very meaningful to stay within the time limits,  and I am starting to see inconsistent numbers.  I prefer to have packages on CRAN,  but I am not totally certain I can solve this,  and since there are binaries on r-universe I don?t know.  If you look at the code in the examples I have done all sorts of stuff to try to fault proof the calls - will have to look more closely if there are other things I can do.\n\nThanks again for taking the time to do this.\n\n-Roy\n\n\n\n> On May 18, 2026, at 7:03?AM, Ivan Krylov <ikrylov at disroot.org> wrote:\n> \n> On Fri, 15 May 2026 13:04:31 -0700\n> Roy Mendelssohn - NOAA Federal via R-package-devel\n> <r-package-devel at r-project.org> wrote:\n> \n>> On submission,  the Debian machine shows times for examples that I\n>> can? t reproduce on any of the other test machines I use,  and this\n>> includes Macbuilder,  WInbuilder,  r-universe and r-hub.\n> \n> Is this about rerddapUtils [1]? I think that the example timings can be\n> reproduced on the Mac Builder, it's just that R CMD check runs without\n> --as-cran, so the NOTE doesn't happen.\n> \n> On CRAN submission, the package had\n> \n>>> * checking examples ... [4s/17s] NOTE\n> \n> On the Mac Builder [2], I see\n> \n>>> * checking examples ... [0s/40s] OK\n> \n> Through a cheap proxy in the Netherlands, I can observe\n> \n>>> * checking examples ... [3s/47s] NOTE\n>>> Examples with CPU (user + system) or elapsed time > 5s\n>>>                user system elapsed\n>>> griddap_season 1.471  0.099  14.665\n>>> griddap_split  0.727  0.062  12.058\n>>> latlon_to_xy   0.053  0.000  10.011\n>>> xy_to_latlon   0.049  0.000  10.010\n> \n> Interestingly, latlon_to_xy & xy_to_latlon do really time out for me,\n> while griddap_season & griddap_split succeed, just take a while.\n> \n> It's not obvious how to reproduce the NOTE without paying for a proxy\n> in a different country.\n> \n> -- \n> Best regards,\n> Ivan\n> \n> [1]\n> https://win-builder.r-project.org/incoming_pretest/rerddapUtils_1.0.0_20260515_012921/Debian/00check.log\n> \n> [2]\n> https://mac.r-project.org/macbuilder/results/1779005055-10cb78439b8b3f0a/",
+      "body_snippet": "Thanks for the taking the time, great feedback.  Yesterday was the first day I ran into problems on Macbuilder and Winbuilder.  I run tests on everything I can.  I have to go back and look at this - t",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 2,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-fdbca2c2f414",
+      "message_id": "<33a26b0572724f18b099241fb712853c@pasteur.fr>",
+      "from_name": "Gael  MILLOT",
+      "from_email_hash": "edef23db6ba32d07211b90d5654151c1e43cf2bbfe2f76748fcbaa77387c3bbe",
+      "date": "2026-05-18T15:44:36Z",
+      "subject": "[R-pkg-devel] saferDev package can be accepted in CRAN as it is?",
+      "subject_clean": "[R-pkg-devel] saferDev package can be accepted in CRAN as it is?",
+      "in_reply_to": "<3ff8c8d401784021a923bace3c77cebf@pasteur.fr>",
+      "references": [
+        "<20260511153613.7AD36A023E@xmpalantir.wu.ac.at>",
+        "<01dce16d$Blat.v3.2.24$f1f3f068$14f78445d@mail.statistik.tu-dortmund.de>",
+        "<bceafddea98e41e89b221ea15064b1a9@pasteur.fr>",
+        "<9fee45887ef5436a95cd032140571166@pasteur.fr>",
+        "<120e998fa5134907921a7a71f0e324c2@pasteur.fr>",
+        "<e7bee410d6d24c65bcb716829fd7690c@pasteur.fr>",
+        "<2b57a223710c4fd89d228941ffbad1f0@pasteur.fr>",
+        "<9fb3577357604aa6bcd61dea23dfb32d@pasteur.fr>",
+        "<3ff8c8d401784021a923bace3c77cebf@pasteur.fr>"
+      ],
+      "body_plain": "Hi.\n\nI have these 2 notes that hamper the submission process:\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: CRAN incoming feasibility, Result: NOTE\n  Maintainer: 'Gael Millot <gael.millot at pasteur.fr>'\n  \n  New submission\n  \n  Found the following (possibly) invalid URLs:\n    URL: \n      From: README.md\n      Message: Empty URL\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: dependencies in R code, Result: NOTE\n  There are ::: calls to the package's namespace in its code. A package\n    almost never needs to use ::: for its own objects:\n    '.all_args_here_fill' '.base_op_check' '.colons_check_message'\n    '.extract_all_fun_names' '.fun_args_pos' '.functions_detect'\n    '.has_odd_number_of_quotes' '.in_parenthesis_replacement'\n    '.in_quotes_replacement' '.noclean_functions'\n    '.pack_and_function_check'\n\n\n1) I cannot find the empty url in the README document.\n2) They are indeed ::: calls to the package's namespace in the code. It is on purpose. It is related to the safer-r project requirements:\nhttps://github.com/safer-r#features-of-the-safer-r-functions\nSince this is only NOTES and not ERROR or WARNINGS, I would like to know if the saferDev package can be accepted as it is.\n\nMany thanks for your understanding.\n\nBest,\n\nGael Millot.\n\n\n\n\n-----Message d'origine-----\nDe?: ligges at statistik.tu-dortmund.de [mailto:ligges at statistik.tu-dortmund.de]\nEnvoy??: lundi 11 mai 2026 19:45\n??: Gael MILLOT\nCc?: CRAN-submissions at R-project.org\nObjet?: [CRAN-pretest-archived] CRAN Submission saferDev 1.0.0\n\nDear maintainer,\n \npackage saferDev_1.0.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\nWindows: <https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Windows/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto2xkffFgA$ >\nStatus: 2 NOTEs\nDebian: <https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Debian/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3hurc5aA$ >\nStatus: 2 NOTEs\n \n\n \nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n<https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto1oGF_YHw$ > If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n \nMore details are given in the directory:\n<https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3TVQNyIw$ > The files will be removed after roughly 7 days.\n \nNo strong reverse dependencies to be checked.\n \nBest regards,\nCRAN teams' auto-check service",
+      "body_snippet": "Hi.\n\nI have these 2 notes that hamper the submission process:\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: CRAN incoming feasibility, Result: NOTE\n  Maintainer: 'Gael Millot",
+      "thread_id": "thread-fdbca2c2f414",
+      "thread_depth": 0,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-ac4370121614",
+      "message_id": "<CAL3ufUL-G4UX2OSfX6mbrzeJqVws5hZvm-Tzq0AHhTgNv_a-RA@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2026-05-18T16:27:12Z",
+      "subject": "[R-pkg-devel]  saferDev package can be accepted in CRAN as it is?",
+      "subject_clean": "[R-pkg-devel]  saferDev package can be accepted in CRAN as it is?",
+      "in_reply_to": "<33a26b0572724f18b099241fb712853c@pasteur.fr>",
+      "references": [
+        "<20260511153613.7AD36A023E@xmpalantir.wu.ac.at>",
+        "<01dce16d$Blat.v3.2.24$f1f3f068$14f78445d@mail.statistik.tu-dortmund.de>",
+        "<bceafddea98e41e89b221ea15064b1a9@pasteur.fr>",
+        "<9fee45887ef5436a95cd032140571166@pasteur.fr>",
+        "<120e998fa5134907921a7a71f0e324c2@pasteur.fr>",
+        "<e7bee410d6d24c65bcb716829fd7690c@pasteur.fr>",
+        "<2b57a223710c4fd89d228941ffbad1f0@pasteur.fr>",
+        "<9fb3577357604aa6bcd61dea23dfb32d@pasteur.fr>",
+        "<3ff8c8d401784021a923bace3c77cebf@pasteur.fr>",
+        "<33a26b0572724f18b099241fb712853c@pasteur.fr>"
+      ],
+      "body_plain": "While not necessarily recommended you can be cheeky and call\ngetFromNamespace() (I may not have the name correct) and assign it to your\nown object and call that directly to elide the ::: note.\n\nAs for the URL, use the urlchecker package to find where you?ve done that.\nOr, ignore the README in .Rbuildignore.\n\nOn Mon, May 18, 2026 at 09:23 Gael MILLOT <gael.millot at pasteur.fr> wrote:\n\n> Hi.\n>\n> I have these 2 notes that hamper the submission process:\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\n> Check: CRAN incoming feasibility, Result: NOTE\n>   Maintainer: 'Gael Millot <gael.millot at pasteur.fr>'\n>\n>   New submission\n>\n>   Found the following (possibly) invalid URLs:\n>     URL:\n>       From: README.md\n>       Message: Empty URL\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\n> Check: dependencies in R code, Result: NOTE\n>   There are ::: calls to the package's namespace in its code. A package\n>     almost never needs to use ::: for its own objects:\n>     '.all_args_here_fill' '.base_op_check' '.colons_check_message'\n>     '.extract_all_fun_names' '.fun_args_pos' '.functions_detect'\n>     '.has_odd_number_of_quotes' '.in_parenthesis_replacement'\n>     '.in_quotes_replacement' '.noclean_functions'\n>     '.pack_and_function_check'\n>\n>\n> 1) I cannot find the empty url in the README document.\n> 2) They are indeed ::: calls to the package's namespace in the code. It is\n> on purpose. It is related to the safer-r project requirements:\n> https://github.com/safer-r#features-of-the-safer-r-functions\n> Since this is only NOTES and not ERROR or WARNINGS, I would like to know\n> if the saferDev package can be accepted as it is.\n>\n> Many thanks for your understanding.\n>\n> Best,\n>\n> Gael Millot.\n>\n>\n>\n>\n> -----Message d'origine-----\n> De : ligges at statistik.tu-dortmund.de [mailto:\n> ligges at statistik.tu-dortmund.de]\n> Envoy? : lundi 11 mai 2026 19:45\n> ? : Gael MILLOT\n> Cc : CRAN-submissions at R-project.org\n> Objet : [CRAN-pretest-archived] CRAN Submission saferDev 1.0.0\n>\n> Dear maintainer,\n>\n> package saferDev_1.0.0.tar.gz does not pass the incoming checks\n> automatically, please see the following pre-tests (additional issue checks):\n> Windows: <\n> https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Windows/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto2xkffFgA$\n> >\n> Status: 2 NOTEs\n> Debian: <\n> https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Debian/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3hurc5aA$\n> >\n> Status: 2 NOTEs\n>\n>\n>\n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help on\n> the R-package-devel mailing list:\n> <\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto1oGF_YHw$\n> > If you are fairly certain the rejection is a false positive, please\n> reply-all to this message and explain.\n>\n> More details are given in the directory:\n> <\n> https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3TVQNyIw$\n> > The files will be removed after roughly 7 days.\n>\n> No strong reverse dependencies to be checked.\n>\n> Best regards,\n> CRAN teams' auto-check service\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "While not necessarily recommended you can be cheeky and call\ngetFromNamespace() (I may not have the name correct) and assign it to your\nown object and call that directly to elide the ::: note.\n\nAs for",
+      "thread_id": "thread-fdbca2c2f414",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-4b009010fc75",
+      "message_id": "<CAPRVBcwabo+Nv=rbLcNyHmzdEP8o-HPeW60MrdtTyHbtHihfmQ@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-05-18T16:47:40Z",
+      "subject": "[R-pkg-devel]  saferDev package can be accepted in CRAN as it is?",
+      "subject_clean": "[R-pkg-devel]  saferDev package can be accepted in CRAN as it is?",
+      "in_reply_to": "<CAL3ufUL-G4UX2OSfX6mbrzeJqVws5hZvm-Tzq0AHhTgNv_a-RA@mail.gmail.com>",
+      "references": [
+        "<20260511153613.7AD36A023E@xmpalantir.wu.ac.at>",
+        "<01dce16d$Blat.v3.2.24$f1f3f068$14f78445d@mail.statistik.tu-dortmund.de>",
+        "<bceafddea98e41e89b221ea15064b1a9@pasteur.fr>",
+        "<9fee45887ef5436a95cd032140571166@pasteur.fr>",
+        "<120e998fa5134907921a7a71f0e324c2@pasteur.fr>",
+        "<e7bee410d6d24c65bcb716829fd7690c@pasteur.fr>",
+        "<2b57a223710c4fd89d228941ffbad1f0@pasteur.fr>",
+        "<9fb3577357604aa6bcd61dea23dfb32d@pasteur.fr>",
+        "<3ff8c8d401784021a923bace3c77cebf@pasteur.fr>",
+        "<33a26b0572724f18b099241fb712853c@pasteur.fr>",
+        "<CAL3ufUL-G4UX2OSfX6mbrzeJqVws5hZvm-Tzq0AHhTgNv_a-RA@mail.gmail.com>"
+      ],
+      "body_plain": "In your package README I see the empty link right at the top: `<a href=\"\">`\n\nhttps://raw.githubusercontent.com/safer-r/saferDev/refs/heads/main/README.md\n\nIt's been there since the file was added, but probably 'check' only looks\nfor empty href more recently:\n\nhttps://github.com/safer-r/saferDev/commit/dbdc60613ec7023a7f4dde19dd36a64a91834e75#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5\n\nWe can also reproduce the 'check' finding:\n\nurl = \"\nhttps://raw.githubusercontent.com/safer-r/saferDev/refs/heads/main/README.md\n\"\nmd = tempfile(fileext = \".md\")\nhtml = tempfile(fileext = \".html\")\n\ndownload.file(url, md)\ntools:::.pandoc_md_for_CRAN(md, html)\n# spliced out of tools:::.get_urls_from_HTML_file\nhtml |>\n  xml2::read_html() |>\n  xml2::xml_find_first(\"//a\") |> # NB: xml_find_all for all URLs\n  xml2::xml_parent() # to give some context of where to find it\n\nMike C\n\n\nOn Mon, May 18, 2026 at 9:28?AM Josiah Parry <josiah.parry at gmail.com> wrote:\n\n> While not necessarily recommended you can be cheeky and call\n> getFromNamespace() (I may not have the name correct) and assign it to your\n> own object and call that directly to elide the ::: note.\n>\n> As for the URL, use the urlchecker package to find where you?ve done that.\n> Or, ignore the README in .Rbuildignore.\n>\n> On Mon, May 18, 2026 at 09:23 Gael MILLOT <gael.millot at pasteur.fr> wrote:\n>\n> > Hi.\n> >\n> > I have these 2 notes that hamper the submission process:\n> >\n> > Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\n> > Check: CRAN incoming feasibility, Result: NOTE\n> >   Maintainer: 'Gael Millot <gael.millot at pasteur.fr>'\n> >\n> >   New submission\n> >\n> >   Found the following (possibly) invalid URLs:\n> >     URL:\n> >       From: README.md\n> >       Message: Empty URL\n> >\n> > Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\n> > Check: dependencies in R code, Result: NOTE\n> >   There are ::: calls to the package's namespace in its code. A package\n> >     almost never needs to use ::: for its own objects:\n> >     '.all_args_here_fill' '.base_op_check' '.colons_check_message'\n> >     '.extract_all_fun_names' '.fun_args_pos' '.functions_detect'\n> >     '.has_odd_number_of_quotes' '.in_parenthesis_replacement'\n> >     '.in_quotes_replacement' '.noclean_functions'\n> >     '.pack_and_function_check'\n> >\n> >\n> > 1) I cannot find the empty url in the README document.\n> > 2) They are indeed ::: calls to the package's namespace in the code. It\n> is\n> > on purpose. It is related to the safer-r project requirements:\n> > https://github.com/safer-r#features-of-the-safer-r-functions\n> > Since this is only NOTES and not ERROR or WARNINGS, I would like to know\n> > if the saferDev package can be accepted as it is.\n> >\n> > Many thanks for your understanding.\n> >\n> > Best,\n> >\n> > Gael Millot.\n> >\n> >\n> >\n> >\n> > -----Message d'origine-----\n> > De : ligges at statistik.tu-dortmund.de [mailto:\n> > ligges at statistik.tu-dortmund.de]\n> > Envoy? : lundi 11 mai 2026 19:45\n> > ? : Gael MILLOT\n> > Cc : CRAN-submissions at R-project.org\n> > Objet : [CRAN-pretest-archived] CRAN Submission saferDev 1.0.0\n> >\n> > Dear maintainer,\n> >\n> > package saferDev_1.0.0.tar.gz does not pass the incoming checks\n> > automatically, please see the following pre-tests (additional issue\n> checks):\n> > Windows: <\n> >\n> https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Windows/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto2xkffFgA$\n> > >\n> > Status: 2 NOTEs\n> > Debian: <\n> >\n> https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Debian/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3hurc5aA$\n> > >\n> > Status: 2 NOTEs\n> >\n> >\n> >\n> > Please fix all problems and resubmit a fixed version via the webform.\n> > If you are not sure how to fix the problems shown, please ask for help on\n> > the R-package-devel mailing list:\n> > <\n> >\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto1oGF_YHw$\n> > > If you are fairly certain the rejection is a false positive, please\n> > reply-all to this message and explain.\n> >\n> > More details are given in the directory:\n> > <\n> >\n> https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3TVQNyIw$\n> > > The files will be removed after roughly 7 days.\n> >\n> > No strong reverse dependencies to be checked.\n> >\n> > Best regards,\n> > CRAN teams' auto-check service\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "In your package README I see the empty link right at the top: `<a href=\"\">`\n\nhttps://raw.githubusercontent.com/safer-r/saferDev/refs/heads/main/README.md\n\nIt's been there since the file was added, but",
+      "thread_id": "thread-fdbca2c2f414",
+      "thread_depth": 2,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-6fe53c7daa59",
+      "message_id": "<6871ccf3-ecd7-466b-8654-1fee11e28c1d@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-05-18T19:12:28Z",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "subject_clean": "[R-pkg-devel] CRAN Debian test machine",
+      "in_reply_to": "<28568167-31DC-42C3-BF34-3999F2ABF255@noaa.gov>",
+      "references": [
+        "<31C65EDE-6914-4A43-974D-4B95D3A035DC@noaa.gov>",
+        "<20260518170322.0ba34923@arachnoid>",
+        "<28568167-31DC-42C3-BF34-3999F2ABF255@noaa.gov>"
+      ],
+      "body_plain": "Given the timings I guess these are internet access issues with US \ngovernment web sites that we frequently observe.\nSimply define a timeout for internet access and exit gracefully if you \nhit it.\nI doubt this is realated to the speed of the mach9nes but related to \nwhen the websites decide to answer when you are not US based....\n\nBest,\nUwe Ligges\n\n\n\nOn 18.05.2026 16:26, Roy Mendelssohn - NOAA Federal via R-package-devel \nwrote:\n> Thanks for the taking the time, great feedback.  Yesterday was the first day I ran into problems on Macbuilder and Winbuilder.  I run tests on everything I can.  I have to go back and look at this - the examples are already not very meaningful to stay within the time limits,  and I am starting to see inconsistent numbers.  I prefer to have packages on CRAN,  but I am not totally certain I can solve this,  and since there are binaries on r-universe I don?t know.  If you look at the code in the examples I have done all sorts of stuff to try to fault proof the calls - will have to look more closely if there are other things I can do.\n> \n> Thanks again for taking the time to do this.\n> \n> -Roy\n> \n> \n> \n>> On May 18, 2026, at 7:03?AM, Ivan Krylov <ikrylov at disroot.org> wrote:\n>>\n>> On Fri, 15 May 2026 13:04:31 -0700\n>> Roy Mendelssohn - NOAA Federal via R-package-devel\n>> <r-package-devel at r-project.org> wrote:\n>>\n>>> On submission,  the Debian machine shows times for examples that I\n>>> can? t reproduce on any of the other test machines I use,  and this\n>>> includes Macbuilder,  WInbuilder,  r-universe and r-hub.\n>>\n>> Is this about rerddapUtils [1]? I think that the example timings can be\n>> reproduced on the Mac Builder, it's just that R CMD check runs without\n>> --as-cran, so the NOTE doesn't happen.\n>>\n>> On CRAN submission, the package had\n>>\n>>>> * checking examples ... [4s/17s] NOTE\n>>\n>> On the Mac Builder [2], I see\n>>\n>>>> * checking examples ... [0s/40s] OK\n>>\n>> Through a cheap proxy in the Netherlands, I can observe\n>>\n>>>> * checking examples ... [3s/47s] NOTE\n>>>> Examples with CPU (user + system) or elapsed time > 5s\n>>>>                 user system elapsed\n>>>> griddap_season 1.471  0.099  14.665\n>>>> griddap_split  0.727  0.062  12.058\n>>>> latlon_to_xy   0.053  0.000  10.011\n>>>> xy_to_latlon   0.049  0.000  10.010\n>>\n>> Interestingly, latlon_to_xy & xy_to_latlon do really time out for me,\n>> while griddap_season & griddap_split succeed, just take a while.\n>>\n>> It's not obvious how to reproduce the NOTE without paying for a proxy\n>> in a different country.\n>>\n>> -- \n>> Best regards,\n>> Ivan\n>>\n>> [1]\n>> https://win-builder.r-project.org/incoming_pretest/rerddapUtils_1.0.0_20260515_012921/Debian/00check.log\n>>\n>> [2]\n>> https://mac.r-project.org/macbuilder/results/1779005055-10cb78439b8b3f0a/\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Given the timings I guess these are internet access issues with US \ngovernment web sites that we frequently observe.\nSimply define a timeout for internet access and exit gracefully if you \nhit it.\nI d",
+      "thread_id": "thread-06f5db4c13db",
+      "thread_depth": 3,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-c85f979f9dfa",
+      "message_id": "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>",
+      "from_name": "Alexis Dinno",
+      "from_email_hash": "2b3e155708230c59f6a195eae74bb19b0638aefcf0f804cc4e82775ea7888455",
+      "date": "2026-05-24T17:39:36Z",
+      "subject": "[R-pkg-devel] Two questions about reverse dependencies",
+      "subject_clean": "[R-pkg-devel] Two questions about reverse dependencies",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R-Dev Community,\n\n\nI have a social etiquette question and a technical question about reverse\ndependency conflicts.\n\nContext note 1: I recently submitted an update for one of my packages on\nCRAN, and got back a cautioning email about a strong first order reverse\ndependency conflict. I try and do my due diligence (i.e. viz R CMD check\n--as-cran, and using all three winbuilder checks, as well as by examining\nexisting notes for my packages).\n\nContext note 2: The recent reverse dependency conflict was a result of my\nadding a new option. If I abstract the nature of this conflict (which\nmatters to me, because I suppose this can happen to multiple packages), the\nformer version look something like my.function(opt1, opt2, opt3), and my\nupdate looked like my.function(opt1, opt2, opt2a, opt3). Because a package\ndepending on mine uses example code with implicit argument ordering, my\nupdate breaks their dependency (although all the functionality of the\nprevious version remains available with explicit argument naming, or\nadjustment to implicit argument syntax).\n\nQuestion 1: Is there a recommended way to communicate to maintainers of\ndependent packages changes which may break their examples? Should this be\nseen as a negotiation or collaboration, or more as a courtesy? It is quite\neasy for me to revise my package update so that it does not create a\nconflict by revising to my.function(opt1, opt2, opt3, opt2a), although I\nfeel this will be 'less logical' in terms of documentation and where one\nmight expect to see the new functionality of opt2a documented and\nimplemented.\n\nQuestion 2: Is there a way for me to check for these kinds of reverse\ndependencies as part of my due diligence, and without having to rely on the\nCRAN mavens' to catch them for me?\n\n\nSincerely,\nAlexis\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear R-Dev Community,\n\n\nI have a social etiquette question and a technical question about reverse\ndependency conflicts.\n\nContext note 1: I recently submitted an update for one of my packages on\nCRAN, ",
+      "thread_id": "thread-c85f979f9dfa",
+      "thread_depth": 0,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-3c68a4d85243",
+      "message_id": "<CACrL82XWOG4-tUxonhuQY8JKUpVgq6Kumdt3Wirw2xp8NiVQfQ@mail.gmail.com>",
+      "from_name": "Nicholas Tierney",
+      "from_email_hash": "15ee301a0dc60167c9147bb3b0d9d877aa76d9c01e3e30623d3848b5b834f8d5",
+      "date": "2026-05-25T08:51:13Z",
+      "subject": "[R-pkg-devel] Two questions about reverse dependencies",
+      "subject_clean": "[R-pkg-devel] Two questions about reverse dependencies",
+      "in_reply_to": "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Alexis,\n\nI believe the answer to question 2 can be achieved with revdepcheck -\nhttps://github.com/r-lib/revdepcheck and you could explore using github\nactions for this with https://github.com/yihui/crandalf\n\nHowever I do not know specifically if they check example usages, I would\nassume so.\n\nBest of luck!\n\nNick\n\nOn Mon, 25 May 2026 at 16:43, Alexis Dinno via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> Dear R-Dev Community,\n>\n>\n> I have a social etiquette question and a technical question about reverse\n> dependency conflicts.\n>\n> Context note 1: I recently submitted an update for one of my packages on\n> CRAN, and got back a cautioning email about a strong first order reverse\n> dependency conflict. I try and do my due diligence (i.e. viz R CMD check\n> --as-cran, and using all three winbuilder checks, as well as by examining\n> existing notes for my packages).\n>\n> Context note 2: The recent reverse dependency conflict was a result of my\n> adding a new option. If I abstract the nature of this conflict (which\n> matters to me, because I suppose this can happen to multiple packages), the\n> former version look something like my.function(opt1, opt2, opt3), and my\n> update looked like my.function(opt1, opt2, opt2a, opt3). Because a package\n> depending on mine uses example code with implicit argument ordering, my\n> update breaks their dependency (although all the functionality of the\n> previous version remains available with explicit argument naming, or\n> adjustment to implicit argument syntax).\n>\n> Question 1: Is there a recommended way to communicate to maintainers of\n> dependent packages changes which may break their examples? Should this be\n> seen as a negotiation or collaboration, or more as a courtesy? It is quite\n> easy for me to revise my package update so that it does not create a\n> conflict by revising to my.function(opt1, opt2, opt3, opt2a), although I\n> feel this will be 'less logical' in terms of documentation and where one\n> might expect to see the new functionality of opt2a documented and\n> implemented.\n>\n> Question 2: Is there a way for me to check for these kinds of reverse\n> dependencies as part of my due diligence, and without having to rely on the\n> CRAN mavens' to catch them for me?\n>\n>\n> Sincerely,\n> Alexis\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Alexis,\n\nI believe the answer to question 2 can be achieved with revdepcheck -\nhttps://github.com/r-lib/revdepcheck and you could explore using github\nactions for this with https://github.com/yihui",
+      "thread_id": "thread-c85f979f9dfa",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-d8c4a990d803",
+      "message_id": "<2f47f67e-f722-4a6e-b840-af017df66d97@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-05-25T09:15:33Z",
+      "subject": "[R-pkg-devel] Two questions about reverse dependencies",
+      "subject_clean": "[R-pkg-devel] Two questions about reverse dependencies",
+      "in_reply_to": "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>"
+      ],
+      "body_plain": "On 2026-05-24 1:39 p.m., Alexis Dinno via R-package-devel wrote:\n> Dear R-Dev Community,\n> \n> \n> I have a social etiquette question and a technical question about reverse\n> dependency conflicts.\n> \n> Context note 1: I recently submitted an update for one of my packages on\n> CRAN, and got back a cautioning email about a strong first order reverse\n> dependency conflict. I try and do my due diligence (i.e. viz R CMD check\n> --as-cran, and using all three winbuilder checks, as well as by examining\n> existing notes for my packages).\n> \n> Context note 2: The recent reverse dependency conflict was a result of my\n> adding a new option. If I abstract the nature of this conflict (which\n> matters to me, because I suppose this can happen to multiple packages), the\n> former version look something like my.function(opt1, opt2, opt3), and my\n> update looked like my.function(opt1, opt2, opt2a, opt3). Because a package\n> depending on mine uses example code with implicit argument ordering, my\n> update breaks their dependency (although all the functionality of the\n> previous version remains available with explicit argument naming, or\n> adjustment to implicit argument syntax).\n> \n> Question 1: Is there a recommended way to communicate to maintainers of\n> dependent packages changes which may break their examples? Should this be\n> seen as a negotiation or collaboration, or more as a courtesy? It is quite\n> easy for me to revise my package update so that it does not create a\n> conflict by revising to my.function(opt1, opt2, opt3, opt2a), although I\n> feel this will be 'less logical' in terms of documentation and where one\n> might expect to see the new functionality of opt2a documented and\n> implemented.\n\nFirst, I would advise you against the change you made.  If you're adding \na new parameter to a function, the safest way to do so is to add it \nafter all the other parameters, and set a default value so the old usage \nwill still produced the same results.\n\nThat is, your new function should have a definition like\n\n   my.function <- function(opt1, opt2, opt3, opt2a = \"old option value\") \n{ ... }\n\nso that any call using only the 3 old parameters will produce the same \nresult in the old version and the new one.  Then you don't need to worry \nabout communicating with the maintainers of reverse dependencies, \nbecause you didn't break anything.\n\nMore importantly, you also won't break scripts that your users put \ntogether using the old function definition.  You have no way of knowing \nabout those unless those users tell you that you've messed up their \nworkflow.  So be nice to your users, and don't cause them trouble.\n\nSometimes this is impossible, i.e. the new change fixes some issue and \ncan't be made automatically compatible with the old one.  Then the best \nsolution is to change the name of the function, and redefine \n`my.function` to a wrapper for the new one.\n\nIf you don't want to do that, then you need to communicate with the \npackage maintainers and with your users about how to fix things.\n\nYou can find the list of reverse dependencies from the CRAN page for \nyour package, or automatically using the tools::dependsOnPkgs function, \nor various other functions from contributed packages.\n\nYou should write to each of the maintainers, telling them about the \nchange and what they need to do to remain compatible.  If you want to be \nnice, you can examine each of those packages and put together a patch to \nfix the change, but CRAN doesn't expect that much work.\n\nCommunicating with your users is harder.  One way to include code in the \nnew function that tries to detect if it is being called using the old \nconvention, and if so, immediately fail with an informative message.\n\n> \n> Question 2: Is there a way for me to check for these kinds of reverse\n> dependencies as part of my due diligence, and without having to rely on the\n> CRAN mavens' to catch them for me?\n\nSee above.\n\nDuncan Murdoch\n\n> \n> \n> Sincerely,\n> Alexis\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 2026-05-24 1:39 p.m., Alexis Dinno via R-package-devel wrote:\n> Dear R-Dev Community,\n> \n> \n> I have a social etiquette question and a technical question about reverse\n> dependency conflicts.\n> \n> ",
+      "thread_id": "thread-c85f979f9dfa",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-2ed3627d98de",
+      "message_id": "<d10512b7a52f410587a6cf3536802ef9@pasteur.fr>",
+      "from_name": "Gael  MILLOT",
+      "from_email_hash": "edef23db6ba32d07211b90d5654151c1e43cf2bbfe2f76748fcbaa77387c3bbe",
+      "date": "2026-05-25T10:24:50Z",
+      "subject": "[R-pkg-devel]  saferDev package can be accepted in CRAN as it is?",
+      "subject_clean": "[R-pkg-devel]  saferDev package can be accepted in CRAN as it is?",
+      "in_reply_to": "<CAL3ufUL-G4UX2OSfX6mbrzeJqVws5hZvm-Tzq0AHhTgNv_a-RA@mail.gmail.com>",
+      "references": [
+        "<20260511153613.7AD36A023E@xmpalantir.wu.ac.at>",
+        "<01dce16d$Blat.v3.2.24$f1f3f068$14f78445d@mail.statistik.tu-dortmund.de>",
+        "<bceafddea98e41e89b221ea15064b1a9@pasteur.fr>",
+        "<9fee45887ef5436a95cd032140571166@pasteur.fr>",
+        "<120e998fa5134907921a7a71f0e324c2@pasteur.fr>",
+        "<e7bee410d6d24c65bcb716829fd7690c@pasteur.fr>",
+        "<2b57a223710c4fd89d228941ffbad1f0@pasteur.fr>",
+        "<9fb3577357604aa6bcd61dea23dfb32d@pasteur.fr>",
+        "<3ff8c8d401784021a923bace3c77cebf@pasteur.fr>",
+        "<33a26b0572724f18b099241fb712853c@pasteur.fr>",
+        "<CAL3ufUL-G4UX2OSfX6mbrzeJqVws5hZvm-Tzq0AHhTgNv_a-RA@mail.gmail.com>"
+      ],
+      "body_plain": "Hello Josiah and Michael.\n\n\n\nThanks for your kind response !\n\nIt seems I have solved the two problems thanks to your help since\n\nI am now waiting for the human approval of my package submission.\n\nBest.\n\n\n\nGael.\n\n\nFrom: Josiah Parry <josiah.parry at gmail.com>\nSent: Monday, May 18, 2026 6:27 PM\nTo: Gael MILLOT <gael.millot at pasteur.fr>\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] saferDev package can be accepted in CRAN as it is?\n\nWhile not necessarily recommended you can be cheeky and call getFromNamespace() (I may not have the name correct) and assign it to your own object and call that directly to elide the ::: note.\n\nAs for the URL, use the urlchecker package to find where you?ve done that. Or, ignore the README in .Rbuildignore.\n\nOn Mon, May 18, 2026 at 09:23 Gael MILLOT <gael.millot at pasteur.fr<mailto:gael.millot at pasteur.fr>> wrote:\nHi.\n\nI have these 2 notes that hamper the submission process:\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: CRAN incoming feasibility, Result: NOTE\n  Maintainer: 'Gael Millot <gael.millot at pasteur.fr<mailto:gael.millot at pasteur.fr>>'\n\n  New submission\n\n  Found the following (possibly) invalid URLs:\n    URL:\n      From: README.md\n      Message: Empty URL\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: dependencies in R code, Result: NOTE\n  There are ::: calls to the package's namespace in its code. A package\n    almost never needs to use ::: for its own objects:\n    '.all_args_here_fill' '.base_op_check' '.colons_check_message'\n    '.extract_all_fun_names' '.fun_args_pos' '.functions_detect'\n    '.has_odd_number_of_quotes' '.in_parenthesis_replacement'\n    '.in_quotes_replacement' '.noclean_functions'\n    '.pack_and_function_check'\n\n\n1) I cannot find the empty url in the README document.\n2) They are indeed ::: calls to the package's namespace in the code. It is on purpose. It is related to the safer-r project requirements:\nhttps://github.com/safer-r#features-of-the-safer-r-functions<https://urldefense.com/v3/__https:/github.com/safer-r*features-of-the-safer-r-functions__;Iw!!JFdNOqOXpB6UZW0!r-JM5BFpTCsKdtNVjVcjhkxzmlwk989G_SGLINynP6jfkY53V_aFm0YNWv_LqnQkQE-u6aeYvmYAh2bjeC-dD3B5iA$>\nSince this is only NOTES and not ERROR or WARNINGS, I would like to know if the saferDev package can be accepted as it is.\n\nMany thanks for your understanding.\n\nBest,\n\nGael Millot.\n\n\n\n\n-----Message d'origine-----\nDe : ligges at statistik.tu-dortmund.de<mailto:ligges at statistik.tu-dortmund.de> [mailto:ligges at statistik.tu-dortmund.de<mailto:ligges at statistik.tu-dortmund.de>]\nEnvoy? : lundi 11 mai 2026 19:45\n? : Gael MILLOT\nCc : CRAN-submissions at R-project.org\nObjet : [CRAN-pretest-archived] CRAN Submission saferDev 1.0.0\n\nDear maintainer,\n\npackage saferDev_1.0.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\nWindows: <https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Windows/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto2xkffFgA$<https://urldefense.com/v3/__https:/win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Windows/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto2xkffFgA$> >\nStatus: 2 NOTEs\nDebian: <https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Debian/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3hurc5aA$<https://urldefense.com/v3/__https:/win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/Debian/00check.log__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3hurc5aA$> >\nStatus: 2 NOTEs\n\n\n\nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n<https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto1oGF_YHw$<https://urldefense.com/v3/__https:/stat.ethz.ch/mailman/listinfo/r-package-devel__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto1oGF_YHw$> > If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n\nMore details are given in the directory:\n<https://urldefense.com/v3/__https://win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3TVQNyIw$<https://urldefense.com/v3/__https:/win-builder.r-project.org/incoming_pretest/saferDev_1.0.0_20260511_173613/__;!!JFdNOqOXpB6UZW0!uIDe6BU9qv-JuR4vpGG_LOYlzxr3ACXmewJxw-tGqDfACBNilZg4aWBhAo6UnEfIs4Rzc20WjiNuoC6Wr54pEvrwto3TVQNyIw$> > The files will be removed after roughly 7 days.\n\nNo strong reverse dependencies to be checked.\n\nBest regards,\nCRAN teams' auto-check service\n\n______________________________________________\nR-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel<https://urldefense.com/v3/__https:/stat.ethz.ch/mailman/listinfo/r-package-devel__;!!JFdNOqOXpB6UZW0!r-JM5BFpTCsKdtNVjVcjhkxzmlwk989G_SGLINynP6jfkY53V_aFm0YNWv_LqnQkQE-u6aeYvmYAh2bjeC_hxFEbaw$>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello Josiah and Michael.\n\n\n\nThanks for your kind response !\n\nIt seems I have solved the two problems thanks to your help since\n\nI am now waiting for the human approval of my package submission.\n\nBest",
+      "thread_id": "thread-fdbca2c2f414",
+      "thread_depth": 2,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-7b4241f19728",
+      "message_id": "<00e001dcec76$355744c0$a005ce40$@gmail.com>",
+      "from_name": "@vi@e@gross m@iii@g oii gm@ii@com",
+      "from_email_hash": "d6a4c55a185bab73b3c0ff3c4ff2919a7304ba1b26cb7598116213c48aa6f4dd",
+      "date": "2026-05-25T18:42:15Z",
+      "subject": "[R-pkg-devel] Two questions about reverse dependencies",
+      "subject_clean": "[R-pkg-devel] Two questions about reverse dependencies",
+      "in_reply_to": "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>"
+      ],
+      "body_plain": "Alexis,\n\nI like your question and it is indeed a barrier to make changes to your\nfunctions if they require others outside your control to adjust.\n\nI suggest you may consider another choice for your function argument you\ncall opt2a that does not break things.\n\nmy.function(opt1, opt2, opt2a, opt3)\n\nFirst, ask yourself if opt2a is needed each time or can default to\nsomething. If it can be say NA, then code like this which moves it to a\nnon-positional argument may work for you:\n\nmy.function(opt1, opt2, opt3, opt2a=NA)\n\nThe person using the old version of the function can call it with the usual\nthree arguments. If they want to use the new and enhanced version, they add\na fourth argument.\n\nThe other solution at times can be to write a second function  like:\n\nmy.function4(opt1, opt2, opt2a, opt3)\n\nThen simply change your earlier function to look like this:\n\nmy.function <- function(opt1, opt2, opt3) { \nopt2a = NA # or whatever your default is such as a copy of op2\nmy.function4(opt1, opt2, opt2a, opt3)\n}\n\n\nThe above would work for many cases unless you are playing with things like\ndeferred evaluation. Older users can keep using their code in your new\npackage, albeit a tad more slowly with the extra function call. New users\ncan simply start using my.function4() and the old function may eventually be\ndeprecated.\n\nYour situation, of course, may not allow this if the new argument is not\nonly required but has no default.\n\n\n-----Original Message-----\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of\nAlexis Dinno via R-package-devel\nSent: Sunday, May 24, 2026 1:40 PM\nTo: List r-package-devel <r-package-devel at r-project.org>\nSubject: [R-pkg-devel] Two questions about reverse dependencies\n\nDear R-Dev Community,\n\n\nI have a social etiquette question and a technical question about reverse\ndependency conflicts.\n\nContext note 1: I recently submitted an update for one of my packages on\nCRAN, and got back a cautioning email about a strong first order reverse\ndependency conflict. I try and do my due diligence (i.e. viz R CMD check\n--as-cran, and using all three winbuilder checks, as well as by examining\nexisting notes for my packages).\n\nContext note 2: The recent reverse dependency conflict was a result of my\nadding a new option. If I abstract the nature of this conflict (which\nmatters to me, because I suppose this can happen to multiple packages), the\nformer version look something like my.function(opt1, opt2, opt3), and my\nupdate looked like my.function(opt1, opt2, opt2a, opt3). Because a package\ndepending on mine uses example code with implicit argument ordering, my\nupdate breaks their dependency (although all the functionality of the\nprevious version remains available with explicit argument naming, or\nadjustment to implicit argument syntax).\n\nQuestion 1: Is there a recommended way to communicate to maintainers of\ndependent packages changes which may break their examples? Should this be\nseen as a negotiation or collaboration, or more as a courtesy? It is quite\neasy for me to revise my package update so that it does not create a\nconflict by revising to my.function(opt1, opt2, opt3, opt2a), although I\nfeel this will be 'less logical' in terms of documentation and where one\nmight expect to see the new functionality of opt2a documented and\nimplemented.\n\nQuestion 2: Is there a way for me to check for these kinds of reverse\ndependencies as part of my due diligence, and without having to rely on the\nCRAN mavens' to catch them for me?\n\n\nSincerely,\nAlexis\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Alexis,\n\nI like your question and it is indeed a barrier to make changes to your\nfunctions if they require others outside your control to adjust.\n\nI suggest you may consider another choice for your fu",
+      "thread_id": "thread-c85f979f9dfa",
+      "thread_depth": 1,
+      "month": "2026-05"
+    },
+    {
+      "id": "msg-f70e82aad5fa",
+      "message_id": "<20260526155847.5287fa4c@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-05-26T12:58:47Z",
+      "subject": "[R-pkg-devel] Two questions about reverse dependencies",
+      "subject_clean": "[R-pkg-devel] Two questions about reverse dependencies",
+      "in_reply_to": "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgLTO2wheirumxRmZgtZiMaJTZ7Rj=c2Xm8p8U=hrVH9ig@mail.gmail.com>"
+      ],
+      "body_plain": "? Sun, 24 May 2026 10:39:36 -0700\nAlexis Dinno via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> Is there a way for me to check for these kinds of reverse\n> dependencies as part of my due diligence, and without having to rely\n> on the CRAN mavens' to catch them for me?\n\nThe base R tools for this are tools::package_dependencies(reverse=TRUE,\nwhich = \"most\", recursive = \"strong\") to get the list of dependencies,\nutils::download.packages(...) to obtain their latest tarballs and\ntools::check_packages_in_dir() to check them (with the new version of\nyour package installed).\n\nOnce the list of packages to check gets into hundreds, some automation\nbecomes necessary to schedule the checks to run in parallel, sometimes\nfor more than a day, and to maintain their dependency trees as well:\n\nhttps://CRAN.R-project.org/package=prrd\nhttps://github.com/r-lib/revdepcheck\nhttps://cran.r-project.org/web/packages/xfun/refman/xfun.html#rev_check\n\nYou'll need to install 436 packages, but run only 23 checks.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Sun, 24 May 2026 10:39:36 -0700\nAlexis Dinno via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> Is there a way for me to check for these kinds of reverse\n> dependencies as part of my d",
+      "thread_id": "thread-c85f979f9dfa",
+      "thread_depth": 1,
+      "month": "2026-05"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-6f9d447b2846",
+      "subject": "[R-pkg-devel] Help understanding R pkg development policy on patch level",
+      "message_count": 3,
+      "participants": [
+        "Andrea Gilardi - Unimib",
+        "Peter Dalgaard",
+        "Simon Urbanek"
+      ],
+      "started": "2026-05-04T16:21:09Z",
+      "last_reply": "2026-05-05T08:48:42Z",
+      "root_message_id": "msg-6f9d447b2846"
+    },
+    {
+      "id": "thread-06f5db4c13db",
+      "subject": "[R-pkg-devel] CRAN Debian test machine",
+      "message_count": 9,
+      "participants": [
+        "@vi@e@gross m@iii@g oii gm@ii@com",
+        "Dirk Eddelbuettel",
+        "Ivan Krylov",
+        "John Harrold",
+        "Roy Mendelssohn - NOAA Federal",
+        "Uwe Ligges"
+      ],
+      "started": "2026-05-15T20:04:31Z",
+      "last_reply": "2026-05-18T19:12:28Z",
+      "root_message_id": "msg-06f5db4c13db"
+    },
+    {
+      "id": "thread-fdbca2c2f414",
+      "subject": "[R-pkg-devel] saferDev package can be accepted in CRAN as it is?",
+      "message_count": 4,
+      "participants": [
+        "Gael  MILLOT",
+        "Josiah Parry",
+        "Michael Chirico"
+      ],
+      "started": "2026-05-18T15:44:36Z",
+      "last_reply": "2026-05-25T10:24:50Z",
+      "root_message_id": "msg-fdbca2c2f414"
+    },
+    {
+      "id": "thread-c85f979f9dfa",
+      "subject": "[R-pkg-devel] Two questions about reverse dependencies",
+      "message_count": 5,
+      "participants": [
+        "@vi@e@gross m@iii@g oii gm@ii@com",
+        "Alexis Dinno",
+        "Duncan Murdoch",
+        "Ivan Krylov",
+        "Nicholas Tierney"
+      ],
+      "started": "2026-05-24T17:39:36Z",
+      "last_reply": "2026-05-26T12:58:47Z",
+      "root_message_id": "msg-c85f979f9dfa"
+    }
+  ]
+}

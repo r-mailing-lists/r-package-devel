@@ -54,6 +54,599 @@
       "thread_id": "thread-737af3ab69dc",
       "thread_depth": 1,
       "month": "2026-04"
+    },
+    {
+      "id": "msg-7371470797ae",
+      "message_id": "<27085.63652.217902.743145@hornik.net>",
+      "from_name": "Kurt Hornik",
+      "from_email_hash": "38d7001af840d889a64ba1cdcb8ec8beb738b8daf9643622801f3acb78b6052a",
+      "date": "2026-04-02T05:03:32Z",
+      "subject": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "subject_clean": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "in_reply_to": "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> Henrik Bengtsson writes:\n\nSorry, submissions are currently down as email does not work.\nThe CRAN sysadmins are trying to get them up again as quickly as\npossible.\n\n-k\n\n> (bcc:ing the CRAN team)\n> Is the CRAN submission down? I submitted a package to CRAN ~30 minutes\n> ago via <https://cran.r-project.org/submit.html>, and I still haven't\n> got the expected email confirmation, which normally comes instantly.\n> Looking at the CRAN incoming server (e.g. https://nx10.dev/cransubs/)\n> it looks like the most recent submission was eight hours ago (Apr 01\n> 14:16 server's local time) - I would expect quite a few submissions\n> since then.\n\n> /Henrik\n\n> PS. win-builder's processing and email notifications work just fine",
+      "body_snippet": ">>>>> Henrik Bengtsson writes:\n\nSorry, submissions are currently down as email does not work.\nThe CRAN sysadmins are trying to get them up again as quickly as\npossible.\n\n-k\n\n> (bcc:ing the CRAN team)\n",
+      "thread_id": "thread-737af3ab69dc",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-be570d3584d5",
+      "message_id": "<27086.6720.651251.84878@hornik.net>",
+      "from_name": "Kurt Hornik",
+      "from_email_hash": "38d7001af840d889a64ba1cdcb8ec8beb738b8daf9643622801f3acb78b6052a",
+      "date": "2026-04-02T07:26:56Z",
+      "subject": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "subject_clean": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
+      "in_reply_to": "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>",
+      "references": [
+        "<CAFDcVCQtKx1AnQtwuMFtqW7nqfWMNheWWVKL6DQ4m0nQW=eBYw@mail.gmail.com>"
+      ],
+      "body_plain": ">>>>> Henrik Bengtsson writes:\n\nLooks like we're back in business now ...\n\nBest\n-k\n\n\n> (bcc:ing the CRAN team)\n> Is the CRAN submission down? I submitted a package to CRAN ~30 minutes\n> ago via <https://cran.r-project.org/submit.html>, and I still haven't\n> got the expected email confirmation, which normally comes instantly.\n> Looking at the CRAN incoming server (e.g. https://nx10.dev/cransubs/)\n> it looks like the most recent submission was eight hours ago (Apr 01\n> 14:16 server's local time) - I would expect quite a few submissions\n> since then.\n\n> /Henrik\n\n> PS. win-builder's processing and email notifications work just fine",
+      "body_snippet": ">>>>> Henrik Bengtsson writes:\n\nLooks like we're back in business now ...\n\nBest\n-k\n\n\n> (bcc:ing the CRAN team)\n> Is the CRAN submission down? I submitted a package to CRAN ~30 minutes\n> ago via <https",
+      "thread_id": "thread-737af3ab69dc",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-5e5f947f75d5",
+      "message_id": "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+      "from_name": "Maciej Nasinski",
+      "from_email_hash": "899a57c25edef611ff5a60e182ca5fda70ef12c29d779b8d0b366aabb69b25a6",
+      "date": "2026-04-09T14:24:32Z",
+      "subject": "[R-pkg-devel] Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel] Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear members,\n\nI would like to highlight an ecosystem-wide issue regarding lower-level\n(not in-build in R) packages significantly increasing their minimum\nrequired R version in their Depends or Imports fields.\n\nA recent (a few months) example is the gsl package, which was updated to\nrequire Depends: R (>= 4.5.0). Because of this, all 200+ of its reverse\ndependencies now implicitly inherit this strict requirement.\n\nThis creates a highly misleading experience for everyday users. For\ninstance, the copula package explicitly states Depends: R (>= 3.6.0) on\nCRAN. However, in reality, it requires R >= 4.5.0 to successfully\ninstall.packages.\n\nA user can try to install an older version of a package but is that\nexpected user experience.\nMoreover I know many R users who are not even aware that this is an option.\n\nWhat is the current policy and CRAN expectations in such situations?\n\nThank you for your support.\n\nBest regards,\n\nMaciej Nasinski\nUniversity of Warsaw\n\nAttachment:\n\n> tools::package_dependencies(\"gsl\",  which = c(\"Depends\", \"Imports\"),\nreverse = TRUE, recursive = TRUE)\n$gsl\n  [1] \"altR2\"                     \"asteRisk\"                  \"aws\"\n              \"Bayenet\"                   \"BayesLN\"\n\"BayesPower\"                \"BFF\"                       \"ChernoffDist\"\n\n  [9] \"copula\"                    \"covEB\"                     \"crandep\"\n              \"ctmm\"                      \"diffpriv\"\n \"distTails\"                 \"Dpit\"                      \"dti\"\n\n [17] \"energy\"                    \"energyGOF\"                 \"evmix\"\n              \"flexCountReg\"              \"gamCopula\"\n\"gbeta\"                     \"GenEst\"                    \"geospt\"\n\n [25] \"geosptdb\"                  \"gmvarkit\"                  \"LBPG\"\n               \"mlmi\"                      \"ModStatR\"\n \"movedesign\"                \"nlmm\"                      \"NovelDistns\"\n\n [33] \"palm\"                      \"polykde\"\n\"pvaluefunctions\"           \"QRM\"                       \"Raquifer\"\n         \"reslife\"                   \"rtdists\"\n\"salmonMSE\"\n [41] \"semEff\"                    \"shrinkGPR\"\n\"spatialwarnings\"           \"sphunif\"                   \"SubTS\"\n        \"TempStable\"                \"tggd\"                      \"uGMAR\"\n\n [49] \"RSquaredMI\"                \"BBEST\"                     \"fmri\"\n               \"GLAD\"                      \"qMRI\"\n \"survML\"                    \"bfboinet\"                  \"bivgeom\"\n\n [57] \"boinet\"                    \"BSL\"                       \"cascsim\"\n              \"cases\"                     \"censorcopula\"\n \"ClusterStability\"          \"ClustImpute\"               \"CoClust\"\n\n [65] \"CoFM\"                      \"CoImp\"\n\"CompAREdesign\"             \"CopCTS\"                    \"CopulaCenR\"\n         \"COST\"                      \"cylcop\"\n \"depCensoring\"\n [73] \"depcoeff\"                  \"discnorm\"                  \"dMrs\"\n               \"drought\"                   \"EFDR\"\n \"ExtremalDep\"               \"ExtremeRisks\"              \"fastqrs\"\n\n [81] \"flood\"                     \"gasmodel\"                  \"GJRM\"\n               \"gnn\"                       \"gofCopula\"\n\"HAC\"                       \"HMMcopula\"                 \"Kcop\"\n\n [89] \"lcopula\"                   \"LMMstar\"\n\"LongDecompHE\"              \"MCARtest\"                  \"MD2sample\"\n        \"MDgof\"                     \"MixedIndTests\"             \"MLCOPULA\"\n\n [97] \"MOsemiind\"                 \"multinma\"\n \"MultivariateTrendAnalysis\" \"mvnormalTest\"              \"NCSCopula\"\n          \"nvmix\"                     \"Omisc\"\n\"outstandR\"\n[105] \"pgee.mixed\"                \"PPMiss\"\n \"psBayesborrow\"             \"pvars\"                     \"pwSEM\"\n          \"qad\"                       \"qch\"                       \"RCTrep\"\n\n[113] \"RGENERATEPREC\"             \"scBFA\"\n\"SemiPar.depCens\"           \"sgee\"                      \"STCCGEV\"\n        \"STCYP\"                     \"surrosurv\"\n\"survivalMPLdc\"\n[121] \"svars\"                     \"tailDepFun\"                \"tsissm\"\n               \"VC2copula\"                 \"WINS\"\n \"zipfextR\"                  \"amt\"                       \"GRANDpriv\"\n\n[129] \"ANCOMBC\"                   \"biosensors.usc\"            \"cassowaryr\"\n               \"CircMLE\"                   \"Compositional\"\n\"dda\"                       \"EnergyOnlineCPM\"           \"etree\"\n\n[137] \"FAfA\"                      \"fAssets\"\n\"GiniDistance\"              \"hbsaems\"                   \"HellCor\"\n        \"hySAINT\"                   \"itdr\"\n \"linkspotter\"\n[145] \"MBC\"                       \"metrica\"                   \"mgc\"\n              \"miRLAB\"                    \"miRSM\"                     \"MVN\"\n                      \"nda\"                       \"pgraph\"\n[153] \"PhyloProfile\"              \"scperturbR\"                \"semidist\"\n               \"stops\"                     \"TDAkit\"\n \"tourr\"                     \"VariableScreening\"         \"DiSCos\"\n\n[161] \"GRIDCOPULA\"                \"powerTCR\"                  \"WData\"\n              \"zcurve\"                    \"eoa3\"\n \"AZIAD\"                     \"BFpack\"                    \"DstarM\"\n\n[169] \"RegDDM\"                    \"ridgetorus\"                \"benchdamic\"\n               \"microbiomeMarker\"          \"BANAM\"\n\"BGGM\"                      \"autovi\"                    \"spinebil\"\n\n[177] \"eselect\"                   \"CompositionalClust\"\n \"CompositionalHDDA\"         \"CompositionalML\"           \"CompositionalRF\"\n          \"CompositionalSR\"           \"MLE\"                       \"QFASA\"\n\n[185] \"fPortfolio\"                \"TCIU\"                      \"flexmsm\"\n              \"micemd\"                    \"penfa\"\n\"ADaCGH2\"                   \"ITALICS\"                   \"MANOR\"\n\n[193] \"seqCNA\"                    \"snapCGH\"                   \"WQM\"\n              \"PAGE\"                      \"coveR2\"\n \"mineSweepR\"                \"IndGenErrors\"              \"AssumpSure\"\n\n[201] \"DFA.CANCOR\"                \"KarsTS\"                    \"RSP\"\n              \"stats4teaching\"            \"scRepertoire\"              \"qmd\"\n                      \"vaccine\"                   \"detourr\"\n\n[209] \"ferrn\"                     \"lionfish\"                  \"loon.tourr\"\n               \"pandemonium\"               \"polarisR\"\n \"PPbigdata\"                 \"spinifex\"                  \"woylier\"\n\n[217] \"AVGAS\"                     \"CoTiMA\"                    \"easybgm\"\n              \"iClick\"                    \"RMOPI\"\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear members,\n\nI would like to highlight an ecosystem-wide issue regarding lower-level\n(not in-build in R) packages significantly increasing their minimum\nrequired R version in their Depends or Import",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-24053bbba2e5",
+      "message_id": "<CALEXWq3CKwfFUyzhc+xaKGF8m9vSsDO2Do0WnxHRDNk1JEpr3g@mail.gmail.com>",
+      "from_name": "Iñaki Ucar",
+      "from_email_hash": "0faf0f82f2ae7a03780f35561a3913efe7fa8a6118b8feae1bd8f2f6c8ab74c8",
+      "date": "2026-04-09T14:41:03Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>"
+      ],
+      "body_plain": "On Thu, 9 Apr 2026 at 16:24, Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n>\n> Dear members,\n>\n> I would like to highlight an ecosystem-wide issue regarding lower-level\n> (not in-build in R) packages significantly increasing their minimum\n> required R version in their Depends or Imports fields.\n>\n> A recent (a few months) example is the gsl package, which was updated to\n> require Depends: R (>= 4.5.0). Because of this, all 200+ of its reverse\n> dependencies now implicitly inherit this strict requirement.\n>\n> This creates a highly misleading experience for everyday users. For\n> instance, the copula package explicitly states Depends: R (>= 3.6.0) on\n> CRAN. However, in reality, it requires R >= 4.5.0 to successfully\n> install.packages.\n>\n> A user can try to install an older version of a package but is that\n> expected user experience.\n> Moreover I know many R users who are not even aware that this is an option.\n>\n> What is the current policy and CRAN expectations in such situations?\n\nI don't think there's a policy about this. But there's the paradox\nthat a package, like gsl with v4.5.0, may depend on R >= r-release,\nand yet it's being tested and should therefore work on r-oldrel (4.4.0\nin this case). So I think that such dependency should generate an\nERROR.\n\nI also see that this is being discussed upstream in [1], so adding the\nlink for visibility.\n\n[1] https://github.com/RobinHankin/gsl/issues/28\n\nBest,\nI?aki\n\n>\n> Thank you for your support.\n>\n> Best regards,\n>\n> Maciej Nasinski\n> University of Warsaw\n>\n> Attachment:\n>\n> > tools::package_dependencies(\"gsl\",  which = c(\"Depends\", \"Imports\"),\n> reverse = TRUE, recursive = TRUE)\n> $gsl\n>   [1] \"altR2\"                     \"asteRisk\"                  \"aws\"\n>               \"Bayenet\"                   \"BayesLN\"\n> \"BayesPower\"                \"BFF\"                       \"ChernoffDist\"\n>\n>   [9] \"copula\"                    \"covEB\"                     \"crandep\"\n>               \"ctmm\"                      \"diffpriv\"\n>  \"distTails\"                 \"Dpit\"                      \"dti\"\n>\n>  [17] \"energy\"                    \"energyGOF\"                 \"evmix\"\n>               \"flexCountReg\"              \"gamCopula\"\n> \"gbeta\"                     \"GenEst\"                    \"geospt\"\n>\n>  [25] \"geosptdb\"                  \"gmvarkit\"                  \"LBPG\"\n>                \"mlmi\"                      \"ModStatR\"\n>  \"movedesign\"                \"nlmm\"                      \"NovelDistns\"\n>\n>  [33] \"palm\"                      \"polykde\"\n> \"pvaluefunctions\"           \"QRM\"                       \"Raquifer\"\n>          \"reslife\"                   \"rtdists\"\n> \"salmonMSE\"\n>  [41] \"semEff\"                    \"shrinkGPR\"\n> \"spatialwarnings\"           \"sphunif\"                   \"SubTS\"\n>         \"TempStable\"                \"tggd\"                      \"uGMAR\"\n>\n>  [49] \"RSquaredMI\"                \"BBEST\"                     \"fmri\"\n>                \"GLAD\"                      \"qMRI\"\n>  \"survML\"                    \"bfboinet\"                  \"bivgeom\"\n>\n>  [57] \"boinet\"                    \"BSL\"                       \"cascsim\"\n>               \"cases\"                     \"censorcopula\"\n>  \"ClusterStability\"          \"ClustImpute\"               \"CoClust\"\n>\n>  [65] \"CoFM\"                      \"CoImp\"\n> \"CompAREdesign\"             \"CopCTS\"                    \"CopulaCenR\"\n>          \"COST\"                      \"cylcop\"\n>  \"depCensoring\"\n>  [73] \"depcoeff\"                  \"discnorm\"                  \"dMrs\"\n>                \"drought\"                   \"EFDR\"\n>  \"ExtremalDep\"               \"ExtremeRisks\"              \"fastqrs\"\n>\n>  [81] \"flood\"                     \"gasmodel\"                  \"GJRM\"\n>                \"gnn\"                       \"gofCopula\"\n> \"HAC\"                       \"HMMcopula\"                 \"Kcop\"\n>\n>  [89] \"lcopula\"                   \"LMMstar\"\n> \"LongDecompHE\"              \"MCARtest\"                  \"MD2sample\"\n>         \"MDgof\"                     \"MixedIndTests\"             \"MLCOPULA\"\n>\n>  [97] \"MOsemiind\"                 \"multinma\"\n>  \"MultivariateTrendAnalysis\" \"mvnormalTest\"              \"NCSCopula\"\n>           \"nvmix\"                     \"Omisc\"\n> \"outstandR\"\n> [105] \"pgee.mixed\"                \"PPMiss\"\n>  \"psBayesborrow\"             \"pvars\"                     \"pwSEM\"\n>           \"qad\"                       \"qch\"                       \"RCTrep\"\n>\n> [113] \"RGENERATEPREC\"             \"scBFA\"\n> \"SemiPar.depCens\"           \"sgee\"                      \"STCCGEV\"\n>         \"STCYP\"                     \"surrosurv\"\n> \"survivalMPLdc\"\n> [121] \"svars\"                     \"tailDepFun\"                \"tsissm\"\n>                \"VC2copula\"                 \"WINS\"\n>  \"zipfextR\"                  \"amt\"                       \"GRANDpriv\"\n>\n> [129] \"ANCOMBC\"                   \"biosensors.usc\"            \"cassowaryr\"\n>                \"CircMLE\"                   \"Compositional\"\n> \"dda\"                       \"EnergyOnlineCPM\"           \"etree\"\n>\n> [137] \"FAfA\"                      \"fAssets\"\n> \"GiniDistance\"              \"hbsaems\"                   \"HellCor\"\n>         \"hySAINT\"                   \"itdr\"\n>  \"linkspotter\"\n> [145] \"MBC\"                       \"metrica\"                   \"mgc\"\n>               \"miRLAB\"                    \"miRSM\"                     \"MVN\"\n>                       \"nda\"                       \"pgraph\"\n> [153] \"PhyloProfile\"              \"scperturbR\"                \"semidist\"\n>                \"stops\"                     \"TDAkit\"\n>  \"tourr\"                     \"VariableScreening\"         \"DiSCos\"\n>\n> [161] \"GRIDCOPULA\"                \"powerTCR\"                  \"WData\"\n>               \"zcurve\"                    \"eoa3\"\n>  \"AZIAD\"                     \"BFpack\"                    \"DstarM\"\n>\n> [169] \"RegDDM\"                    \"ridgetorus\"                \"benchdamic\"\n>                \"microbiomeMarker\"          \"BANAM\"\n> \"BGGM\"                      \"autovi\"                    \"spinebil\"\n>\n> [177] \"eselect\"                   \"CompositionalClust\"\n>  \"CompositionalHDDA\"         \"CompositionalML\"           \"CompositionalRF\"\n>           \"CompositionalSR\"           \"MLE\"                       \"QFASA\"\n>\n> [185] \"fPortfolio\"                \"TCIU\"                      \"flexmsm\"\n>               \"micemd\"                    \"penfa\"\n> \"ADaCGH2\"                   \"ITALICS\"                   \"MANOR\"\n>\n> [193] \"seqCNA\"                    \"snapCGH\"                   \"WQM\"\n>               \"PAGE\"                      \"coveR2\"\n>  \"mineSweepR\"                \"IndGenErrors\"              \"AssumpSure\"\n>\n> [201] \"DFA.CANCOR\"                \"KarsTS\"                    \"RSP\"\n>               \"stats4teaching\"            \"scRepertoire\"              \"qmd\"\n>                       \"vaccine\"                   \"detourr\"\n>\n> [209] \"ferrn\"                     \"lionfish\"                  \"loon.tourr\"\n>                \"pandemonium\"               \"polarisR\"\n>  \"PPbigdata\"                 \"spinifex\"                  \"woylier\"\n>\n> [217] \"AVGAS\"                     \"CoTiMA\"                    \"easybgm\"\n>               \"iClick\"                    \"RMOPI\"\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nI?aki ?car",
+      "body_snippet": "On Thu, 9 Apr 2026 at 16:24, Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n>\n> Dear members,\n>\n> I would like to highlight an ecosystem-wide issue regarding lower-level\n> (not in-build in R) p",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-f935ad5b079c",
+      "message_id": "<CALEXWq0Q6OjsRcQDDAbQ3oP74TFRJLR-kAoV_N5TZigGCXQNRw@mail.gmail.com>",
+      "from_name": "Iñaki Ucar",
+      "from_email_hash": "0faf0f82f2ae7a03780f35561a3913efe7fa8a6118b8feae1bd8f2f6c8ab74c8",
+      "date": "2026-04-09T14:42:18Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<CALEXWq3CKwfFUyzhc+xaKGF8m9vSsDO2Do0WnxHRDNk1JEpr3g@mail.gmail.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<CALEXWq3CKwfFUyzhc+xaKGF8m9vSsDO2Do0WnxHRDNk1JEpr3g@mail.gmail.com>"
+      ],
+      "body_plain": "On Thu, 9 Apr 2026 at 16:41, I?aki Ucar <iucar at fedoraproject.org> wrote:\n>\n> On Thu, 9 Apr 2026 at 16:24, Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n> >\n> > Dear members,\n> >\n> > I would like to highlight an ecosystem-wide issue regarding lower-level\n> > (not in-build in R) packages significantly increasing their minimum\n> > required R version in their Depends or Imports fields.\n> >\n> > A recent (a few months) example is the gsl package, which was updated to\n> > require Depends: R (>= 4.5.0). Because of this, all 200+ of its reverse\n> > dependencies now implicitly inherit this strict requirement.\n> >\n> > This creates a highly misleading experience for everyday users. For\n> > instance, the copula package explicitly states Depends: R (>= 3.6.0) on\n> > CRAN. However, in reality, it requires R >= 4.5.0 to successfully\n> > install.packages.\n> >\n> > A user can try to install an older version of a package but is that\n> > expected user experience.\n> > Moreover I know many R users who are not even aware that this is an option.\n> >\n> > What is the current policy and CRAN expectations in such situations?\n>\n> I don't think there's a policy about this. But there's the paradox\n> that a package, like gsl with v4.5.0, may depend on R >= r-release,\n> and yet it's being tested and should therefore work on r-oldrel (4.4.0\n> in this case). So I think that such dependency should generate an\n> ERROR.\n>\n> I also see that this is being discussed upstream in [1], so adding the\n> link for visibility.\n>\n> [1] https://github.com/RobinHankin/gsl/issues/28\n\nApologies, that's the issue that motivated the update. I was referring\nto https://github.com/RobinHankin/gsl/issues/35.\n\nI?aki\n\n>\n> Best,\n> I?aki\n>\n> >\n> > Thank you for your support.\n> >\n> > Best regards,\n> >\n> > Maciej Nasinski\n> > University of Warsaw\n> >\n> > Attachment:\n> >\n> > > tools::package_dependencies(\"gsl\",  which = c(\"Depends\", \"Imports\"),\n> > reverse = TRUE, recursive = TRUE)\n> > $gsl\n> >   [1] \"altR2\"                     \"asteRisk\"                  \"aws\"\n> >               \"Bayenet\"                   \"BayesLN\"\n> > \"BayesPower\"                \"BFF\"                       \"ChernoffDist\"\n> >\n> >   [9] \"copula\"                    \"covEB\"                     \"crandep\"\n> >               \"ctmm\"                      \"diffpriv\"\n> >  \"distTails\"                 \"Dpit\"                      \"dti\"\n> >\n> >  [17] \"energy\"                    \"energyGOF\"                 \"evmix\"\n> >               \"flexCountReg\"              \"gamCopula\"\n> > \"gbeta\"                     \"GenEst\"                    \"geospt\"\n> >\n> >  [25] \"geosptdb\"                  \"gmvarkit\"                  \"LBPG\"\n> >                \"mlmi\"                      \"ModStatR\"\n> >  \"movedesign\"                \"nlmm\"                      \"NovelDistns\"\n> >\n> >  [33] \"palm\"                      \"polykde\"\n> > \"pvaluefunctions\"           \"QRM\"                       \"Raquifer\"\n> >          \"reslife\"                   \"rtdists\"\n> > \"salmonMSE\"\n> >  [41] \"semEff\"                    \"shrinkGPR\"\n> > \"spatialwarnings\"           \"sphunif\"                   \"SubTS\"\n> >         \"TempStable\"                \"tggd\"                      \"uGMAR\"\n> >\n> >  [49] \"RSquaredMI\"                \"BBEST\"                     \"fmri\"\n> >                \"GLAD\"                      \"qMRI\"\n> >  \"survML\"                    \"bfboinet\"                  \"bivgeom\"\n> >\n> >  [57] \"boinet\"                    \"BSL\"                       \"cascsim\"\n> >               \"cases\"                     \"censorcopula\"\n> >  \"ClusterStability\"          \"ClustImpute\"               \"CoClust\"\n> >\n> >  [65] \"CoFM\"                      \"CoImp\"\n> > \"CompAREdesign\"             \"CopCTS\"                    \"CopulaCenR\"\n> >          \"COST\"                      \"cylcop\"\n> >  \"depCensoring\"\n> >  [73] \"depcoeff\"                  \"discnorm\"                  \"dMrs\"\n> >                \"drought\"                   \"EFDR\"\n> >  \"ExtremalDep\"               \"ExtremeRisks\"              \"fastqrs\"\n> >\n> >  [81] \"flood\"                     \"gasmodel\"                  \"GJRM\"\n> >                \"gnn\"                       \"gofCopula\"\n> > \"HAC\"                       \"HMMcopula\"                 \"Kcop\"\n> >\n> >  [89] \"lcopula\"                   \"LMMstar\"\n> > \"LongDecompHE\"              \"MCARtest\"                  \"MD2sample\"\n> >         \"MDgof\"                     \"MixedIndTests\"             \"MLCOPULA\"\n> >\n> >  [97] \"MOsemiind\"                 \"multinma\"\n> >  \"MultivariateTrendAnalysis\" \"mvnormalTest\"              \"NCSCopula\"\n> >           \"nvmix\"                     \"Omisc\"\n> > \"outstandR\"\n> > [105] \"pgee.mixed\"                \"PPMiss\"\n> >  \"psBayesborrow\"             \"pvars\"                     \"pwSEM\"\n> >           \"qad\"                       \"qch\"                       \"RCTrep\"\n> >\n> > [113] \"RGENERATEPREC\"             \"scBFA\"\n> > \"SemiPar.depCens\"           \"sgee\"                      \"STCCGEV\"\n> >         \"STCYP\"                     \"surrosurv\"\n> > \"survivalMPLdc\"\n> > [121] \"svars\"                     \"tailDepFun\"                \"tsissm\"\n> >                \"VC2copula\"                 \"WINS\"\n> >  \"zipfextR\"                  \"amt\"                       \"GRANDpriv\"\n> >\n> > [129] \"ANCOMBC\"                   \"biosensors.usc\"            \"cassowaryr\"\n> >                \"CircMLE\"                   \"Compositional\"\n> > \"dda\"                       \"EnergyOnlineCPM\"           \"etree\"\n> >\n> > [137] \"FAfA\"                      \"fAssets\"\n> > \"GiniDistance\"              \"hbsaems\"                   \"HellCor\"\n> >         \"hySAINT\"                   \"itdr\"\n> >  \"linkspotter\"\n> > [145] \"MBC\"                       \"metrica\"                   \"mgc\"\n> >               \"miRLAB\"                    \"miRSM\"                     \"MVN\"\n> >                       \"nda\"                       \"pgraph\"\n> > [153] \"PhyloProfile\"              \"scperturbR\"                \"semidist\"\n> >                \"stops\"                     \"TDAkit\"\n> >  \"tourr\"                     \"VariableScreening\"         \"DiSCos\"\n> >\n> > [161] \"GRIDCOPULA\"                \"powerTCR\"                  \"WData\"\n> >               \"zcurve\"                    \"eoa3\"\n> >  \"AZIAD\"                     \"BFpack\"                    \"DstarM\"\n> >\n> > [169] \"RegDDM\"                    \"ridgetorus\"                \"benchdamic\"\n> >                \"microbiomeMarker\"          \"BANAM\"\n> > \"BGGM\"                      \"autovi\"                    \"spinebil\"\n> >\n> > [177] \"eselect\"                   \"CompositionalClust\"\n> >  \"CompositionalHDDA\"         \"CompositionalML\"           \"CompositionalRF\"\n> >           \"CompositionalSR\"           \"MLE\"                       \"QFASA\"\n> >\n> > [185] \"fPortfolio\"                \"TCIU\"                      \"flexmsm\"\n> >               \"micemd\"                    \"penfa\"\n> > \"ADaCGH2\"                   \"ITALICS\"                   \"MANOR\"\n> >\n> > [193] \"seqCNA\"                    \"snapCGH\"                   \"WQM\"\n> >               \"PAGE\"                      \"coveR2\"\n> >  \"mineSweepR\"                \"IndGenErrors\"              \"AssumpSure\"\n> >\n> > [201] \"DFA.CANCOR\"                \"KarsTS\"                    \"RSP\"\n> >               \"stats4teaching\"            \"scRepertoire\"              \"qmd\"\n> >                       \"vaccine\"                   \"detourr\"\n> >\n> > [209] \"ferrn\"                     \"lionfish\"                  \"loon.tourr\"\n> >                \"pandemonium\"               \"polarisR\"\n> >  \"PPbigdata\"                 \"spinifex\"                  \"woylier\"\n> >\n> > [217] \"AVGAS\"                     \"CoTiMA\"                    \"easybgm\"\n> >               \"iClick\"                    \"RMOPI\"\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n> --\n> I?aki ?car\n\n\n\n-- \nI?aki ?car",
+      "body_snippet": "On Thu, 9 Apr 2026 at 16:41, I?aki Ucar <iucar at fedoraproject.org> wrote:\n>\n> On Thu, 9 Apr 2026 at 16:24, Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n> >\n> > Dear members,\n> >\n> > I would",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 2,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-d9ed4f20dfa7",
+      "message_id": "<27095.47932.765231.500001@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-04-09T14:44:12Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>"
+      ],
+      "body_plain": "On 9 April 2026 at 16:24, Maciej Nasinski wrote:\n| What is the current policy and CRAN expectations in such situations?\n\nThe only written 'policy' is, as you likely know, at\n\n https://cran.r-project.org/web/packages/policies.html\n\nThe recursive nature of dependencies certainly applies as you observe. I\nwould offer two comments based on my experience with R:\n\n i)  CRAN operates 'at @HEAD' (to use a software engineering term). It cares\n     mostly about _current packages_ working flawlessly together on the\n     _current R version_ (and effectively one version back).\n\n     That fits within the realm of the constraint you saw imposed.\n\n     Asking for more i.e. 'any combination of packages at any past moment in\n     time' is not practical given the CRAN resources (of four people, give or\n     take, for three decades -- their choice).\n\n ii) All this is still open source. You could patch your local copy of 'gsl'\n     and remove the constraint, or use an older versions, or do something\n     else creative.\n\n     The power of _local_ repositories that _you_ control should not be\n     underestimated. I helped a little to use this power via the `drat`\n     package; these days it is even easier to set up an r-universe repo which\n     will also give you binaries.\n\nIn short, it is what it is \"for a reason\" as well as history, but you are\nfree to navigate around it.\n\nHope this helps, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\nSponsor me for Tour de Shore 2026! Donate at\n   https://www.pledgereg.com/536435 \nMore about the ride at\n   https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 9 April 2026 at 16:24, Maciej Nasinski wrote:\n| What is the current policy and CRAN expectations in such situations?\n\nThe only written 'policy' is, as you likely know, at\n\n https://cran.r-project.o",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-cf3c4cb18538",
+      "message_id": "<1AB6ACB9-BB4B-4FA0-B7B6-803EFFBB2FCD@gmail.com>",
+      "from_name": "Maciej Nasinski",
+      "from_email_hash": "899a57c25edef611ff5a60e182ca5fda70ef12c29d779b8d0b366aabb69b25a6",
+      "date": "2026-04-09T16:01:47Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<27095.47932.765231.500001@paul.eddelbuettel.com>",
+      "references": [
+        "<27095.47932.765231.500001@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Thank you both for your time and clear clarifications.\n\nOne of the proper solution that I see is to build containers images regularly. However I used to see in industries that a one image can exist for more than a few years and users are enable or not to install additional packages or update existing. Such case exists especially for validated environments for ?some? reasons.\n\nKR\nMaciej Nasinski\nUniversity of Warsaw\n\n> On 9 Apr 2026, at 16:44, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> ?\n> On 9 April 2026 at 16:24, Maciej Nasinski wrote:\n> | What is the current policy and CRAN expectations in such situations?\n> \n> The only written 'policy' is, as you likely know, at\n> \n> https://cran.r-project.org/web/packages/policies.html\n> \n> The recursive nature of dependencies certainly applies as you observe. I\n> would offer two comments based on my experience with R:\n> \n> i)  CRAN operates 'at @HEAD' (to use a software engineering term). It cares\n>     mostly about _current packages_ working flawlessly together on the\n>     _current R version_ (and effectively one version back).\n> \n>     That fits within the realm of the constraint you saw imposed.\n> \n>     Asking for more i.e. 'any combination of packages at any past moment in\n>     time' is not practical given the CRAN resources (of four people, give or\n>     take, for three decades -- their choice).\n> \n> ii) All this is still open source. You could patch your local copy of 'gsl'\n>     and remove the constraint, or use an older versions, or do something\n>     else creative.\n> \n>     The power of _local_ repositories that _you_ control should not be\n>     underestimated. I helped a little to use this power via the `drat`\n>     package; these days it is even easier to set up an r-universe repo which\n>     will also give you binaries.\n> \n> In short, it is what it is \"for a reason\" as well as history, but you are\n> free to navigate around it.\n> \n> Hope this helps, Dirk\n> \n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> \n> Sponsor me for Tour de Shore 2026! Donate at\n>   https://www.pledgereg.com/536435\n> More about the ride at\n>   https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "Thank you both for your time and clear clarifications.\n\nOne of the proper solution that I see is to build containers images regularly. However I used to see in industries that a one image can exist fo",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 2,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-b3cfe142879e",
+      "message_id": "<20260410143650.45bf2ce2@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-04-10T11:36:50Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>"
+      ],
+      "body_plain": "Part of the problem is that it's not easy to verify that the minimal\ndeclared R version is actually correct, so in many cases it stays\nincorrect. Besides, which one is \"correct\"? Is it the oldest one where\nthe package installs? Passes R CMD check? Which NOTES or WARNINGs are\nacceptable?\n\nHere are the minimal R versions that packages on CRAN currently ask for:\n\ntools::CRAN_package_db() -> db\ndb$Depends |> lapply(\\(x)\n if (!is.na(x)) {\n  v <- tools:::.split_dependencies(x)[['R']]\n  if (!is.null(v) && v$op == '>=')\n   as.character(v$version)\n }\n) |> unlist() |> table() -> versions\nversions[versions |> names() |> numeric_version() |> order()] |> plot()\n\nThe three largest peaks are 3.5, 2.10, and 4.1, likely added\nautomatically by R CMD build. Usually it's an optimistic lower bound,\nat worst the maintainer's requirement is overly strict (as you observed\nwith 'gsl'). Sometimes the R version in question (e.g. 3.8, 3.10, 3.10,\n3.21, 3.50, 3.60, 3.63) never existed at all.\n\n-- \nBest regards,\nIvan\n\n-------------- next part --------------\nA non-text attachment was scrubbed...\nName: R_versions.png\nType: image/png\nSize: 25176 bytes\nDesc: not available\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20260410/cef809b5/attachment.png>",
+      "body_snippet": "Part of the problem is that it's not easy to verify that the minimal\ndeclared R version is actually correct, so in many cases it stays\nincorrect. Besides, which one is \"correct\"? Is it the oldest one ",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-c3fc0bf1dc46",
+      "message_id": "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2026-04-10T20:43:02Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<20260410143650.45bf2ce2@arachnoid>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>"
+      ],
+      "body_plain": "I?d suspect that the min version changes are in part due to the movement\ntowards flagging non-API calls. It?s easier to mark > 4.5 and use new\nfunctions than create effective backports.\n\nIn the extendr project we?re continually creating backports and\nconditionally changing which functions are called based on the version of R\nused to compile. It?s a lot of work but I hope the API will stabilize here.\nHaving a stable C API would be a nice reason to mark >= 4.6\n\n\nOn Fri, Apr 10, 2026 at 04:37 Ivan Krylov via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> Part of the problem is that it's not easy to verify that the minimal\n> declared R version is actually correct, so in many cases it stays\n> incorrect. Besides, which one is \"correct\"? Is it the oldest one where\n> the package installs? Passes R CMD check? Which NOTES or WARNINGs are\n> acceptable?\n>\n> Here are the minimal R versions that packages on CRAN currently ask for:\n>\n> tools::CRAN_package_db() -> db\n> db$Depends |> lapply(\\(x)\n>  if (!is.na(x)) {\n>   v <- tools:::.split_dependencies(x)[['R']]\n>   if (!is.null(v) && v$op == '>=')\n>    as.character(v$version)\n>  }\n> ) |> unlist() |> table() -> versions\n> versions[versions |> names() |> numeric_version() |> order()] |> plot()\n>\n> The three largest peaks are 3.5, 2.10, and 4.1, likely added\n> automatically by R CMD build. Usually it's an optimistic lower bound,\n> at worst the maintainer's requirement is overly strict (as you observed\n> with 'gsl'). Sometimes the R version in question (e.g. 3.8, 3.10, 3.10,\n> 3.21, 3.50, 3.60, 3.63) never existed at all.\n>\n> --\n> Best regards,\n> Ivan\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I?d suspect that the min version changes are in part due to the movement\ntowards flagging non-API calls. It?s easier to mark > 4.5 and use new\nfunctions than create effective backports.\n\nIn the extend",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 2,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-673b45de2239",
+      "message_id": "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-04-10T20:58:37Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>"
+      ],
+      "body_plain": "On 10 April 2026 at 13:43, Josiah Parry wrote:\n| I?d suspect that the min version changes are in part due to the movement\n| towards flagging non-API calls. It?s easier to mark > 4.5 and use new\n| functions than create effective backports.\n\n... and exclude lots of users stuck by choice or bad luck with older R.\n\nIt's not hard to write\n\n  #if R_VERSION >= R_Version(4,5,0)\n    do_something_old()\n  #else\n    do something_new()\n  #endif\n\nand a search for R_VERSION at the GitHub CRAN mirror has 2.1k hits showing\nthat I appear to not be alone in thinking \"this ain't that hard\" ;-)\n\nSee https://github.com/search?q=org%3Acran+R_VERSION&type=code\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\nSponsor me for Tour de Shore 2026 supporting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 10 April 2026 at 13:43, Josiah Parry wrote:\n| I?d suspect that the min version changes are in part due to the movement\n| towards flagging non-API calls. It?s easier to mark > 4.5 and use new\n| func",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 3,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-e4cd8237032f",
+      "message_id": "<27097.26552.656638.978522@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-04-10T21:12:24Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+        "<27097.25725.879850.546826@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "PS Search in previous post was imprecise. A better one is\n\n   https://github.com/search?q=org%3Acran+%22%23if+R_VERSION%22&type=code\n\nhitting 110 files.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\nSponsor me for Tour de Shore 2026 supporting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "PS Search in previous post was imprecise. A better one is\n\n   https://github.com/search?q=org%3Acran+%22%23if+R_VERSION%22&type=code\n\nhitting 110 files.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuette",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 4,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-b9887baf27ad",
+      "message_id": "<2FADE1B1-2720-45CC-994B-015E550F39F3@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-04-10T23:42:58Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+        "<27097.25725.879850.546826@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "> On 11/04/2026, at 08:58, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 10 April 2026 at 13:43, Josiah Parry wrote:\n> | I?d suspect that the min version changes are in part due to the movement\n> | towards flagging non-API calls. It?s easier to mark > 4.5 and use new\n> | functions than create effective backports.\n> \n> ... and exclude lots of users stuck by choice or bad luck with older R.\n> \n> It's not hard to write\n> \n>  #if R_VERSION >= R_Version(4,5,0)\n>    do_something_old()\n>  #else\n>    do something_new()\n>  #endif\n> \n> and a search for R_VERSION at the GitHub CRAN mirror has 2.1k hits showing\n> that I appear to not be alone in thinking \"this ain't that hard\" ;-)\n> \n> See https://github.com/search?q=org%3Acran+R_VERSION&type=code\n> \n\n\nI fully agree. Anyone not doing that doesn't care about their users so is not a package you want to rely on. I would first ask the author as it may be simply ignorance, but if it's not, then we're in open source so you can either a) remove the dependency or b) create a fork with the fixes.\n\nBut back to gsl (the above was not directly related to it): in this case the problem is that Robin may be misunderstanding the purpose of that declaration as he seem to see it as \"I didn't test it\" while it really means \"you're not allowed to install it, it won't work\". gsl actually works perfectly fine (i.e. passes all checks with OK) at from R 3.2.0 on, so the declaration is just blatantly wrong - it should read (R >= 3.2.0). FWIW the package actually works at as far back as R 2.5.0 (that's as far as it's easy to test on Ubuntu) - the only check issues are newer macros in the documentation files, but it passes all code tests.\n\nCheers,\nSimon",
+      "body_snippet": "> On 11/04/2026, at 08:58, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 10 April 2026 at 13:43, Josiah Parry wrote:\n> | I?d suspect that the min version changes are in part due to the movem",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 4,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-c437164d32f9",
+      "message_id": "<27097.45952.496874.438201@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-04-11T02:35:44Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+        "<27097.25725.879850.546826@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "On 10 April 2026 at 15:58, Dirk Eddelbuettel wrote:\n| It's not hard to write\n| \n|   #if R_VERSION >= R_Version(4,5,0)\n|     do_something_old()\n|   #else\n|     do something_new()\n|   #endif\n\nSecond correction. I have the comparison and use of old/new wrong so I meant\n\n   #if R_VERSION >= R_Version(4,5,0)\n     do_something_new()\n   #else\n     do_something_old()\n   #endif\n\nbut all the smart readers got the intent I am sure. Sorry about the rushed post.\n\nDirk\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com",
+      "body_snippet": "On 10 April 2026 at 15:58, Dirk Eddelbuettel wrote:\n| It's not hard to write\n| \n|   #if R_VERSION >= R_Version(4,5,0)\n|     do_something_old()\n|   #else\n|     do something_new()\n|   #endif\n\nSecond cor",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 4,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-90c7f4d360ac",
+      "message_id": "<1A3A103F-A078-4C05-AA7C-FFD1BCBE0711@collocations.de>",
+      "from_name": "Stephanie Evert",
+      "from_email_hash": "37e383762e5cc983a3042ab8f08c7ae8141238da895e1b7e5406ac4e2a2a1b12",
+      "date": "2026-04-11T07:14:03Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<2FADE1B1-2720-45CC-994B-015E550F39F3@R-project.org>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+        "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+        "<2FADE1B1-2720-45CC-994B-015E550F39F3@R-project.org>"
+      ],
+      "body_plain": "> On 11 Apr 2026, at 01:42, Simon Urbanek <simon.urbanek at r-project.org> wrote:\n> \n> I fully agree. Anyone not doing that doesn't care about their users so is not a package you want to rely on. I would first ask the author as it may be simply ignorance, but if it's not, then we're in open source so you can either a) remove the dependency or b) create a fork with the fixes.\n\nThat's not quite true for us ?normal people?, who aren't full-time R hackers and just want to develop some specialised packages.\n\nIt might be feasible for compatibility fixes, where we could keep the old code path with a version check. But even then, (a) perhaps the new code is better and also works in older versions of R and (b) usually we're given such a tight deadline to keep the package on CRAN that we can't take the time to implement things properly.\n\nIt's much worse when you want to adopt newer R features, because there's no easy way to find out when they were introduced and to test alternative code for earlier R versions. So I typically use whatever the current R version offers and either keep an older version requirement until someone complains or bump the requirement to the version I know works.\n\nBest,\nStephanie\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "> On 11 Apr 2026, at 01:42, Simon Urbanek <simon.urbanek at r-project.org> wrote:\n> \n> I fully agree. Anyone not doing that doesn't care about their users so is not a package you want to rely on. I wo",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 5,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-cd77be1bb67d",
+      "message_id": "<c87ede0f-2248-4372-8f83-83124b3914e5@thuenen.de>",
+      "from_name": "Roland Fuß",
+      "from_email_hash": "243f1f07b635e588b0367a74c0c2f87431caaf932c18d2788f8cd6ddc047116c",
+      "date": "2026-04-13T05:59:28Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<2FADE1B1-2720-45CC-994B-015E550F39F3@R-project.org>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+        "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+        "<2FADE1B1-2720-45CC-994B-015E550F39F3@R-project.org>"
+      ],
+      "body_plain": "I'm not aware of any rule that packages must support older R versions, \nplease correct me if I'm wrong. Package authors are volunteers and \nusually have limited resources. It's a valid decision to only support \nnew(er) R versions.\n\nAm 11.04.2026 um 01:42 schrieb Simon Urbanek:\n> I fully agree. Anyone not doing that doesn't care about their users so is not a package you want to rely on.\n\nDr. Roland Fu?\n\nTh?nen-Institut f?r Agrarklimaschutz/\nTh?nen Institute of Climate-Smart Agriculture\n\nBundesallee 65\nD-38116 Braunschweig, Germany\n\nTel./Webex: ++49 531 25701967\nEmail:roland.fuss at thuenen.de\n\nArbeitsgruppe \"Emissionsberichterstattung\"/\nWorking group \"Emission Inventories\"\nEmail:emissionsinventare at thuenen.de\n\nDas Johann Heinrich von Th?nen-Institut,\nBundesforschungsinstitut f?r L?ndliche R?ume,\nWald und Fischerei ? kurz: Th?nen-Institut ?\nbesteht aus 15 Fachinstituten, die in den\nBereichen ?konomie, ?kologie und Technologie\nforschen und die Politik beraten.\n\nThe Johann Heinrich von Th?nen Institute,\nFederal Research Institute for Rural Areas,\nForestry and Fisheries ? Th?nen Institute in brief ?\nconsists of 15 specialized institutes that\ncarry out research and provide policy advice\nin the fields of economy, ecology and technology.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I'm not aware of any rule that packages must support older R versions, \nplease correct me if I'm wrong. Package authors are volunteers and \nusually have limited resources. It's a valid decision to onl",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 5,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-d0987b6506de",
+      "message_id": "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+      "from_name": "M. B. Anand",
+      "from_email_hash": "c7d8818f2a103857095478fb21bc843ecbd2429c05efc500840ce202dd474aed",
+      "date": "2026-04-14T02:18:17Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\nI submitted a package recently to CRAN and the initial\nwin-builder,r-project,org pretest shows an SSL error only in the Windows\nServer 2022 x64 (build 20348) platform:\n\n-------------\n\nFound the following (possibly) invalid URLs:\n  URL: https://www.shiny-webawesome.org\n    From: DESCRIPTION\n          man/shiny.webawesome-package.Rd\n          inst/CITATION\n          README.md\n    Status: Error\n    Message: SSL connect error [www.shiny-webawesome.org]:\n      Recv failure: Connection was reset\n  URL: https://www.shiny-webawesome.org/llms.txt\n    From: README.md\n    Status: Error\n    Message: SSL connect error [www.shiny-webawesome.org]:\n      Recv failure: Connection was reset\n\n-------------\n\nThis happens only on the Windows platform check, the x86_64-pc-linux-gnu\npretest shows no errors.\n\nI checked separately using the win-builder.r-project.org package upload\ndirectly and it produced the same error.\n\nThe site itself is fine, both curl -I -L and browser access work fine, and\nthe website logs show a request originating in Germany at about the same\ntime succeeded for / as well as all the dependencies the pkgdown site loads.\n\nIs this anything to be concerned about or to be corrected?\n\nApologies if it has been addressed elsewhere, a quick search of the\narchives didn't show anything relevant.\n\nThanks,\n\nRegards,\nAnand.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\nI submitted a package recently to CRAN and the initial\nwin-builder,r-project,org pretest shows an SSL error only in the Windows\nServer 2022 x64 (build 20348) platform:\n\n-------------\n\nFound th",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-e10ef668ece6",
+      "message_id": "<3366D460-3E51-4D2B-ADA8-DC0C2CD13539@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-04-14T23:23:06Z",
+      "subject": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "subject_clean": "[R-pkg-devel]  Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "in_reply_to": "<c87ede0f-2248-4372-8f83-83124b3914e5@thuenen.de>",
+      "references": [
+        "<CA+h+x0bM2yQvEMM+Zr+e4-NuJz8JiNz7bc5bTBczxLMoZLz0sQ@mail.gmail.com>",
+        "<20260410143650.45bf2ce2@arachnoid>",
+        "<CAL3ufUJC3sngJqiKy_O4pPi6m8HcRstThRx4Pvjy3MP1akmgNw@mail.gmail.com>",
+        "<27097.25725.879850.546826@paul.eddelbuettel.com>",
+        "<2FADE1B1-2720-45CC-994B-015E550F39F3@R-project.org>",
+        "<c87ede0f-2248-4372-8f83-83124b3914e5@thuenen.de>"
+      ],
+      "body_plain": "Roland,\n\nis it not a requirement, but not doing so makes your work essentially useless to others, so you are free to make that decision if you don't care. However, some of us write software with the goal to enable others to do important work so they can make a difference and thus need some reliability.\n\nAlso I'm not sure you noticed, but in R core we are all volunteers -- and yet for decades we put in the work to make sure R is available for as many people as possible including many that cannot afford the latest and greatest, so being a volunteer is not an excuse for doing a bad job. And I don't see this being about resources, since e.g. GitHub actions allow you to test any R version very easily with no resources required.\n\nCheers,\nSimon\n\n\n> On 13/04/2026, at 17:59, Roland Fu? <roland.fuss at thuenen.de> wrote:\n> \n> I'm not aware of any rule that packages must support older R versions, please correct me if I'm wrong. Package authors are volunteers and usually have limited resources. It's a valid decision to only support new(er) R versions.\n> \n> Am 11.04.2026 um 01:42 schrieb Simon Urbanek:\n>> I fully agree. Anyone not doing that doesn't care about their users so is not a package you want to rely on.\n> \n> Dr. Roland Fu?\n> \n> Th?nen-Institut f?r Agrarklimaschutz/\n> Th?nen Institute of Climate-Smart Agriculture\n> \n> Bundesallee 65\n> D-38116 Braunschweig, Germany\n> \n> Tel./Webex: ++49 531 25701967\n> Email:roland.fuss at thuenen.de\n> \n> Arbeitsgruppe \"Emissionsberichterstattung\"/\n> Working group \"Emission Inventories\"\n> Email:emissionsinventare at thuenen.de\n> \n> Das Johann Heinrich von Th?nen-Institut,\n> Bundesforschungsinstitut f?r L?ndliche R?ume,\n> Wald und Fischerei ? kurz: Th?nen-Institut ?\n> besteht aus 15 Fachinstituten, die in den\n> Bereichen ?konomie, ?kologie und Technologie\n> forschen und die Politik beraten.\n> \n> The Johann Heinrich von Th?nen Institute,\n> Federal Research Institute for Rural Areas,\n> Forestry and Fisheries ? Th?nen Institute in brief ?\n> consists of 15 specialized institutes that\n> carry out research and provide policy advice\n> in the fields of economy, ecology and technology.\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Roland,\n\nis it not a requirement, but not doing so makes your work essentially useless to others, so you are free to make that decision if you don't care. However, some of us write software with the g",
+      "thread_id": "thread-5e5f947f75d5",
+      "thread_depth": 6,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-c7d1d0bdb135",
+      "message_id": "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-04-15T14:21:19Z",
+      "subject": "[R-pkg-devel] [SUSPECTED SPAM]  SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] [SUSPECTED SPAM]  SSL error in Windows pretest",
+      "in_reply_to": "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>"
+      ],
+      "body_plain": "On 14.04.2026 04:18, M. B. Anand wrote:\n> Hi all,\n> I submitted a package recently to CRAN and the initial\n> win-builder,r-project,org pretest shows an SSL error only in the Windows\n> Server 2022 x64 (build 20348) platform:\n> \n> -------------\n> \n> Found the following (possibly) invalid URLs:\n>    URL: https://www.shiny-webawesome.org\n>      From: DESCRIPTION\n>            man/shiny.webawesome-package.Rd\n>            inst/CITATION\n>            README.md\n>      Status: Error\n>      Message: SSL connect error [www.shiny-webawesome.org]:\n>        Recv failure: Connection was reset\n>    URL: https://www.shiny-webawesome.org/llms.txt\n>      From: README.md\n>      Status: Error\n>      Message: SSL connect error [www.shiny-webawesome.org]:\n>        Recv failure: Connection was reset\n> \n> -------------\n\n\nI tried to access that site witrh Firefox manually, same issue, Firefox \nreports \" PR_CONNECT_RESET_ERROR\" from my location.\n\nBest,\nUwe Ligges\n\n\n\n> This happens only on the Windows platform check, the x86_64-pc-linux-gnu\n> pretest shows no errors.\n> \n> I checked separately using the win-builder.r-project.org package upload\n> directly and it produced the same error.\n> \n> The site itself is fine, both curl -I -L and browser access work fine, and\n> the website logs show a request originating in Germany at about the same\n> time succeeded for / as well as all the dependencies the pkgdown site loads.\n> \n> Is this anything to be concerned about or to be corrected?\n> \n> Apologies if it has been addressed elsewhere, a quick search of the\n> archives didn't show anything relevant.\n> \n> Thanks,\n> \n> Regards,\n> Anand.\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 14.04.2026 04:18, M. B. Anand wrote:\n> Hi all,\n> I submitted a package recently to CRAN and the initial\n> win-builder,r-project,org pretest shows an SSL error only in the Windows\n> Server 2022 x64 ",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-9a4461a86d0f",
+      "message_id": "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>",
+      "from_name": "M. B. Anand",
+      "from_email_hash": "c7d8818f2a103857095478fb21bc843ecbd2429c05efc500840ce202dd474aed",
+      "date": "2026-04-15T15:27:19Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+        "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Hi Uwe,\nThanks for the response.\n\nIt's a bit strange since Firefox access works for me, and I am wondering if\nit is some manner of firefox certificate cache, or other local network\nblocks or geoblocks on the server side (unlikely).\n\nMay I ask you to run, from your location:\n\ncurl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n\nand let me know the results?\n\nThanks,\n\nBest regards,\nAnand.\n\n\nOn Wed, Apr 15, 2026 at 10:21?AM Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n>\n>\n> On 14.04.2026 04:18, M. B. Anand wrote:\n> > Hi all,\n> > I submitted a package recently to CRAN and the initial\n> > win-builder,r-project,org pretest shows an SSL error only in the Windows\n> > Server 2022 x64 (build 20348) platform:\n> >\n> > -------------\n> >\n> > Found the following (possibly) invalid URLs:\n> >    URL: https://www.shiny-webawesome.org\n> >      From: DESCRIPTION\n> >            man/shiny.webawesome-package.Rd\n> >            inst/CITATION\n> >            README.md\n> >      Status: Error\n> >      Message: SSL connect error [www.shiny-webawesome.org]:\n> >        Recv failure: Connection was reset\n> >    URL: https://www.shiny-webawesome.org/llms.txt\n> >      From: README.md\n> >      Status: Error\n> >      Message: SSL connect error [www.shiny-webawesome.org]:\n> >        Recv failure: Connection was reset\n> >\n> > -------------\n>\n>\n> I tried to access that site witrh Firefox manually, same issue, Firefox\n> reports \" PR_CONNECT_RESET_ERROR\" from my location.\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n> > This happens only on the Windows platform check, the x86_64-pc-linux-gnu\n> > pretest shows no errors.\n> >\n> > I checked separately using the win-builder.r-project.org package upload\n> > directly and it produced the same error.\n> >\n> > The site itself is fine, both curl -I -L and browser access work fine,\n> and\n> > the website logs show a request originating in Germany at about the same\n> > time succeeded for / as well as all the dependencies the pkgdown site\n> loads.\n> >\n> > Is this anything to be concerned about or to be corrected?\n> >\n> > Apologies if it has been addressed elsewhere, a quick search of the\n> > archives didn't show anything relevant.\n> >\n> > Thanks,\n> >\n> > Regards,\n> > Anand.\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Uwe,\nThanks for the response.\n\nIt's a bit strange since Firefox access works for me, and I am wondering if\nit is some manner of firefox certificate cache, or other local network\nblocks or geoblocks",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 2,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-36a71c0c1ae2",
+      "message_id": "<403a6650-74de-4621-bc21-57dd822e60f3@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-04-15T15:39:16Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+        "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+        "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>"
+      ],
+      "body_plain": "Sure:\n\n$curl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n\n* Host www.shiny-webawesome.org:443 was resolved.\n* IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n* IPv4: 63.176.8.218, 35.157.26.135\n*   Trying [2a05:d014:58f:6200::259]:443...\n* ALPN: curl offers h2,http/1.1\n} [5 bytes data]\n* TLSv1.3 (OUT), TLS handshake, Client hello (1):\n} [512 bytes data]\n*  CAfile: /usr/ssl/certs/ca-bundle.crt\n*  CApath: none\n* Recv failure: Connection reset by peer\n* TLS connect error: error:00000000:lib(0)::reason(0)\n* OpenSSL SSL_connect: Connection reset by peer in connection to \nwww.shiny-webawesome.org:443\n* closing connection #0\n\n\nOn 15.04.2026 17:27, M. B. Anand wrote:\n> Hi Uwe,\n> Thanks for the response.\n> \n> It's a bit strange since Firefox access works for me, and I am wondering \n> if it is some manner of firefox certificate cache, or other local \n> network blocks or geoblocks on the server side (unlikely).\n> \n> May I ask you?to run, from your location:\n> \n> |curl --compressed -Lsvo /dev/null |https://www.shiny-webawesome.org <https://www.shiny-webawesome.org>\n> \n> and let me know the results?\n> \n> Thanks,\n> \n> Best regards,\n> Anand.\n> \n> \n> On Wed, Apr 15, 2026 at 10:21?AM Uwe Ligges <ligges at statistik.tu- \n> dortmund.de <mailto:ligges at statistik.tu-dortmund.de>> wrote:\n> \n> \n> \n>     On 14.04.2026 04:18, M. B. Anand wrote:\n>      > Hi all,\n>      > I submitted a package recently to CRAN and the initial\n>      > win-builder,r-project,org pretest shows an SSL error only in the\n>     Windows\n>      > Server 2022 x64 (build 20348) platform:\n>      >\n>      > -------------\n>      >\n>      > Found the following (possibly) invalid URLs:\n>      >? ? URL: https://www.shiny-webawesome.org <https://www.shiny-\n>     webawesome.org>\n>      >? ? ? From: DESCRIPTION\n>      >? ? ? ? ? ? man/shiny.webawesome-package.Rd\n>      >? ? ? ? ? ? inst/CITATION\n>      >? ? ? ? ? ? README.md\n>      >? ? ? Status: Error\n>      >? ? ? Message: SSL connect error [www.shiny-webawesome.org\n>     <http://www.shiny-webawesome.org>]:\n>      >? ? ? ? Recv failure: Connection was reset\n>      >? ? URL: https://www.shiny-webawesome.org/llms.txt <https://\n>     www.shiny-webawesome.org/llms.txt>\n>      >? ? ? From: README.md\n>      >? ? ? Status: Error\n>      >? ? ? Message: SSL connect error [www.shiny-webawesome.org\n>     <http://www.shiny-webawesome.org>]:\n>      >? ? ? ? Recv failure: Connection was reset\n>      >\n>      > -------------\n> \n> \n>     I tried to access that site witrh Firefox manually, same issue, Firefox\n>     reports \" PR_CONNECT_RESET_ERROR\" from my location.\n> \n>     Best,\n>     Uwe Ligges\n> \n> \n> \n>      > This happens only on the Windows platform check, the x86_64-pc-\n>     linux-gnu\n>      > pretest shows no errors.\n>      >\n>      > I checked separately using the win-builder.r-project.org <http://\n>     win-builder.r-project.org> package upload\n>      > directly and it produced the same error.\n>      >\n>      > The site itself is fine, both curl -I -L and browser access work\n>     fine, and\n>      > the website logs show a request originating in Germany at about\n>     the same\n>      > time succeeded for / as well as all the dependencies the pkgdown\n>     site loads.\n>      >\n>      > Is this anything to be concerned about or to be corrected?\n>      >\n>      > Apologies if it has been addressed elsewhere, a quick search of the\n>      > archives didn't show anything relevant.\n>      >\n>      > Thanks,\n>      >\n>      > Regards,\n>      > Anand.\n>      >\n>      >? ? ? ?[[alternative HTML version deleted]]\n>      >\n>      > ______________________________________________\n>      > R-package-devel at r-project.org <mailto:R-package-devel at r-\n>     project.org> mailing list\n>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://\n>     stat.ethz.ch/mailman/listinfo/r-package-devel>\n>",
+      "body_snippet": "Sure:\n\n$curl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n\n* Host www.shiny-webawesome.org:443 was resolved.\n* IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n* IPv4: 63.176.8.",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 3,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-fcdf23f30089",
+      "message_id": "<CAJUgR5VR=QJEM2+JV7ay0Qe+wZoNo9NpD1iawf1LFGHw1_DCYw@mail.gmail.com>",
+      "from_name": "M. B. Anand",
+      "from_email_hash": "c7d8818f2a103857095478fb21bc843ecbd2429c05efc500840ce202dd474aed",
+      "date": "2026-04-15T21:05:46Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": "<403a6650-74de-4621-bc21-57dd822e60f3@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+        "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+        "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>",
+        "<403a6650-74de-4621-bc21-57dd822e60f3@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Strangely, the site seems inaccessible in Germany but working fine in\npractically every other place I tried - Spain, Netherlands, UK, as well as\nvarious Asian locations and of course US and Canada.\n\nI am not sure what that is about, will proceed to debug further, but in any\ncase, it definitely has nothing to with the pretest etc, so I am closing it\nhere. Apologies for posting this on r-package-devel.\n\nThanks,\n\nBest regards,\nAnand.\n\n\n\nOn Wed, Apr 15, 2026 at 11:39?AM Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n> Sure:\n>\n> $curl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n>\n> * Host www.shiny-webawesome.org:443 was resolved.\n> * IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n> * IPv4: 63.176.8.218, 35.157.26.135\n> *   Trying [2a05:d014:58f:6200::259]:443...\n> * ALPN: curl offers h2,http/1.1\n> } [5 bytes data]\n> * TLSv1.3 (OUT), TLS handshake, Client hello (1):\n> } [512 bytes data]\n> *  CAfile: /usr/ssl/certs/ca-bundle.crt\n> *  CApath: none\n> * Recv failure: Connection reset by peer\n> * TLS connect error: error:00000000:lib(0)::reason(0)\n> * OpenSSL SSL_connect: Connection reset by peer in connection to\n> www.shiny-webawesome.org:443\n> * closing connection #0\n>\n>\n> On 15.04.2026 17:27, M. B. Anand wrote:\n> > Hi Uwe,\n> > Thanks for the response.\n> >\n> > It's a bit strange since Firefox access works for me, and I am wondering\n> > if it is some manner of firefox certificate cache, or other local\n> > network blocks or geoblocks on the server side (unlikely).\n> >\n> > May I ask you to run, from your location:\n> >\n> > |curl --compressed -Lsvo /dev/null |https://www.shiny-webawesome.org <\n> https://www.shiny-webawesome.org>\n> >\n> > and let me know the results?\n> >\n> > Thanks,\n> >\n> > Best regards,\n> > Anand.\n> >\n> >\n> > On Wed, Apr 15, 2026 at 10:21?AM Uwe Ligges <ligges at statistik.tu-\n> > dortmund.de <mailto:ligges at statistik.tu-dortmund.de>> wrote:\n> >\n> >\n> >\n> >     On 14.04.2026 04:18, M. B. Anand wrote:\n> >      > Hi all,\n> >      > I submitted a package recently to CRAN and the initial\n> >      > win-builder,r-project,org pretest shows an SSL error only in the\n> >     Windows\n> >      > Server 2022 x64 (build 20348) platform:\n> >      >\n> >      > -------------\n> >      >\n> >      > Found the following (possibly) invalid URLs:\n> >      >    URL: https://www.shiny-webawesome.org <https://www.shiny-\n> >     webawesome.org>\n> >      >      From: DESCRIPTION\n> >      >            man/shiny.webawesome-package.Rd\n> >      >            inst/CITATION\n> >      >            README.md\n> >      >      Status: Error\n> >      >      Message: SSL connect error [www.shiny-webawesome.org\n> >     <http://www.shiny-webawesome.org>]:\n> >      >        Recv failure: Connection was reset\n> >      >    URL: https://www.shiny-webawesome.org/llms.txt <https://\n> >     www.shiny-webawesome.org/llms.txt>\n> >      >      From: README.md\n> >      >      Status: Error\n> >      >      Message: SSL connect error [www.shiny-webawesome.org\n> >     <http://www.shiny-webawesome.org>]:\n> >      >        Recv failure: Connection was reset\n> >      >\n> >      > -------------\n> >\n> >\n> >     I tried to access that site witrh Firefox manually, same issue,\n> Firefox\n> >     reports \" PR_CONNECT_RESET_ERROR\" from my location.\n> >\n> >     Best,\n> >     Uwe Ligges\n> >\n> >\n> >\n> >      > This happens only on the Windows platform check, the x86_64-pc-\n> >     linux-gnu\n> >      > pretest shows no errors.\n> >      >\n> >      > I checked separately using the win-builder.r-project.org <http://\n> >     win-builder.r-project.org> package upload\n> >      > directly and it produced the same error.\n> >      >\n> >      > The site itself is fine, both curl -I -L and browser access work\n> >     fine, and\n> >      > the website logs show a request originating in Germany at about\n> >     the same\n> >      > time succeeded for / as well as all the dependencies the pkgdown\n> >     site loads.\n> >      >\n> >      > Is this anything to be concerned about or to be corrected?\n> >      >\n> >      > Apologies if it has been addressed elsewhere, a quick search of\n> the\n> >      > archives didn't show anything relevant.\n> >      >\n> >      > Thanks,\n> >      >\n> >      > Regards,\n> >      > Anand.\n> >      >\n> >      >       [[alternative HTML version deleted]]\n> >      >\n> >      > ______________________________________________\n> >      > R-package-devel at r-project.org <mailto:R-package-devel at r-\n> >     project.org> mailing list\n> >      > https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://\n> >     stat.ethz.ch/mailman/listinfo/r-package-devel>\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Strangely, the site seems inaccessible in Germany but working fine in\npractically every other place I tried - Spain, Netherlands, UK, as well as\nvarious Asian locations and of course US and Canada.\n\nI",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 4,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-0e9bf35e8f48",
+      "message_id": "<e2103254-1f42-4798-b979-10ce82bf9529@tu-dresden.de>",
+      "from_name": "Thomas Petzoldt",
+      "from_email_hash": "e871618caee0d484df5874c7cc9c594f1afc357c0eb65e14adf2706f13485c98",
+      "date": "2026-04-16T05:40:27Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": "<CAJUgR5VR=QJEM2+JV7ay0Qe+wZoNo9NpD1iawf1LFGHw1_DCYw@mail.gmail.com>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+        "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+        "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>",
+        "<403a6650-74de-4621-bc21-57dd822e60f3@statistik.tu-dortmund.de>",
+        "<CAJUgR5VR=QJEM2+JV7ay0Qe+wZoNo9NpD1iawf1LFGHw1_DCYw@mail.gmail.com>"
+      ],
+      "body_plain": "Perhaps a temporary timeout?\n\nI tested it successfully yesterday with Firefox and right now with curl \nas described by Uwe without problems.\n\nThomas, from Germany\n\n$ curl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n* Host www.shiny-webawesome.org:443 was resolved.\n* IPv6: 2a05:d014:58f:6200::258, 2a05:d014:58f:6200::259\n* IPv4: 35.157.26.135, 63.176.8.218\n*? ?Trying 35.157.26.135:443...\n* Connected to www.shiny-webawesome.org (35.157.26.135) port 443\n\n[...]\n\n< content-type: text/html; charset=UTF-8\n< date: Thu, 16 Apr 2026 05:33:04 GMT\n< etag: \"ce53fac14bd7eb0e56082d1619298c97-ssl-df\"\n< server: Netlify\n< strict-transport-security: max-age=31536000\n< vary: Accept-Encoding\n< x-nf-request-id: 01KPACEN3ST1VBRX71G1YADWFJ\n< content-length: 4073\n<\n{ [4073 bytes data]\n* Connection #0 to host www.shiny-webawesome.org left intact\n\n\nOn 15.04.2026 at 23:05 M. B. Anand wrote:\n> Strangely, the site seems inaccessible in Germany but working fine in\n> practically every other place I tried - Spain, Netherlands, UK, as well as\n> various Asian locations and of course US and Canada.\n>\n> I am not sure what that is about, will proceed to debug further, but in any\n> case, it definitely has nothing to with the pretest etc, so I am closing it\n> here. Apologies for posting this on r-package-devel.\n>\n> Thanks,\n>\n> Best regards,\n> Anand.\n>\n>\n>\n> On Wed, Apr 15, 2026 at 11:39?AM Uwe Ligges<ligges at statistik.tu-dortmund.de>\n> wrote:\n>\n>> Sure:\n>>\n>> $curl --compressed -Lsvo /dev/nullhttps://www.shiny-webawesome.org\n>>\n>> * Hostwww.shiny-webawesome.org:443 was resolved.\n>> * IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n>> * IPv4: 63.176.8.218, 35.157.26.135\n>> *   Trying [2a05:d014:58f:6200::259]:443...\n>> * ALPN: curl offers h2,http/1.1\n>> } [5 bytes data]\n>> * TLSv1.3 (OUT), TLS handshake, Client hello (1):\n>> } [512 bytes data]\n>> *  CAfile: /usr/ssl/certs/ca-bundle.crt\n>> *  CApath: none\n>> * Recv failure: Connection reset by peer\n>> * TLS connect error: error:00000000:lib(0)::reason(0)\n>> * OpenSSL SSL_connect: Connection reset by peer in connection to\n>> www.shiny-webawesome.org:443\n>> * closing connection #0\n>>\n>>\n>> On 15.04.2026 17:27, M. B. Anand wrote:\n>>> Hi Uwe,\n>>> Thanks for the response.\n>>>\n>>> It's a bit strange since Firefox access works for me, and I am wondering\n>>> if it is some manner of firefox certificate cache, or other local\n>>> network blocks or geoblocks on the server side (unlikely).\n>>>\n>>> May I ask you to run, from your location:\n>>>\n>>> |curl --compressed -Lsvo /dev/null |https://www.shiny-webawesome.org <\n>> https://www.shiny-webawesome.org>\n>>> and let me know the results?\n>>>\n>>> Thanks,\n>>>\n>>> Best regards,\n>>> Anand.\n>>>\n>>>\n>>> On Wed, Apr 15, 2026 at 10:21?AM Uwe Ligges <ligges at statistik.tu-\n>>> dortmund.de<mailto:ligges at statistik.tu-dortmund.de>> wrote:\n>>>\n>>>\n>>>\n>>>      On 14.04.2026 04:18, M. B. Anand wrote:\n>>>       > Hi all,\n>>>       > I submitted a package recently to CRAN and the initial\n>>>       > win-builder,r-project,org pretest shows an SSL error only in the\n>>>      Windows\n>>>       > Server 2022 x64 (build 20348) platform:\n>>>       >\n>>>       > -------------\n>>>       >\n>>>       > Found the following (possibly) invalid URLs:\n>>>       >    URL:https://www.shiny-webawesome.org <https://www.shiny- webawesome.org>\n>>>       >      From: DESCRIPTION\n>>>       >            man/shiny.webawesome-package.Rd\n>>>       >            inst/CITATION\n>>>       >            README.md\n>>>       >      Status: Error\n>>>       >      Message: SSL connect error [www.shiny-webawesome.org\n>>>      <http://www.shiny-webawesome.org>]:\n>>>       >        Recv failure: Connection was reset\n>>>       >    URL:https://www.shiny-webawesome.org/llms.txt <https:// www.shiny-webawesome.org/llms.txt>\n>>>       >      From: README.md\n>>>       >      Status: Error\n>>>       >      Message: SSL connect error [www.shiny-webawesome.org\n>>>      <http://www.shiny-webawesome.org>]:\n>>>       >        Recv failure: Connection was reset\n>>>       >\n>>>       > -------------\n>>>\n>>>\n>>>      I tried to access that site witrh Firefox manually, same issue,\n>> Firefox\n>>>      reports \" PR_CONNECT_RESET_ERROR\" from my location.\n>>>\n>>>      Best,\n>>>      Uwe Ligges\n>>>\n>>>\n>>>\n>>>       > This happens only on the Windows platform check, the x86_64-pc-\n>>>      linux-gnu\n>>>       > pretest shows no errors.\n>>>       >\n>>>       > I checked separately using the win-builder.r-project.org<http:// win-builder.r-project.org> package upload\n>>>       > directly and it produced the same error.\n>>>       >\n>>>       > The site itself is fine, both curl -I -L and browser access work\n>>>      fine, and\n>>>       > the website logs show a request originating in Germany at about\n>>>      the same\n>>>       > time succeeded for / as well as all the dependencies the pkgdown\n>>>      site loads.\n>>>       >\n>>>       > Is this anything to be concerned about or to be corrected?\n>>>       >\n>>>       > Apologies if it has been addressed elsewhere, a quick search of\n>> the\n>>>       > archives didn't show anything relevant.\n>>>       >\n>>>       > Thanks,\n>>>       >\n>>>       > Regards,\n>>>       > Anand.\n>>>       >\n>>>       >       [[alternative HTML version deleted]]\n>>>       >\n>>>       > ______________________________________________\n>>>       >R-package-devel at r-project.org <mailto:R-package-devel at r- project.org> mailing list\n>>>       >https://stat.ethz.ch/mailman/listinfo/r-package-devel <https:// stat.ethz.ch/mailman/listinfo/r-package-devel>\n>>>\n>>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n-- \n\nDr. Thomas Petzoldt\n\nTUD Dresden University of Technology\nFaculty of Environmental Sciences\nInstitute of Hydrobiology\n01062 Dresden, Germany\n\nE-Mail:thomas.petzoldt at tu-dresden.de\nhttps://tu-dresden.de/Members/thomas.petzoldt\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Perhaps a temporary timeout?\n\nI tested it successfully yesterday with Firefox and right now with curl \nas described by Uwe without problems.\n\nThomas, from Germany\n\n$ curl --compressed -Lsvo /dev/null ",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 5,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-d110290562a4",
+      "message_id": "<5f391004-8143-4063-8dbe-202808c6818c@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-04-16T07:06:03Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": "<e2103254-1f42-4798-b979-10ce82bf9529@tu-dresden.de>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+        "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+        "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>",
+        "<403a6650-74de-4621-bc21-57dd822e60f3@statistik.tu-dortmund.de>",
+        "<CAJUgR5VR=QJEM2+JV7ay0Qe+wZoNo9NpD1iawf1LFGHw1_DCYw@mail.gmail.com>",
+        "<e2103254-1f42-4798-b979-10ce82bf9529@tu-dresden.de>"
+      ],
+      "body_plain": "Maybe my university blocks it:\n\n$ curl -6 --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n* Host www.shiny-webawesome.org:443 was resolved.\n* IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n* IPv4: (none)\n*   Trying [2a05:d014:58f:6200::259]:443...\n* connect to 2a05:d014:58f:6200::259 port 443 from :: port 1895 failed: \nHost unreachable\n*   Trying [2a05:d014:58f:6200::258]:443...\n* connect to 2a05:d014:58f:6200::258 port 443 from :: port 1896 failed: \nHost unreachable\n* Failed to connect to www.shiny-webawesome.org port 443 after 60 ms: \nCould not connect to server\n* closing connection #0\n\n$ curl -4 --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n* Host www.shiny-webawesome.org:443 was resolved.\n* IPv6: (none)\n* IPv4: 63.176.8.218, 35.157.26.135\n*   Trying 63.176.8.218:443...\n* schannel: disabled automatic use of client certificate\n* ALPN: curl offers http/1.1\n* Recv failure: Connection was reset\n* schannel: failed to receive handshake, SSL/TLS connection failed\n* closing connection #0\n\n\nAnyway, please simply say so in your submission comments or tell me \nwhich package we are talking about.\n\nBest,\nUwe Ligges\n\n\n\nOn 16.04.2026 07:40, Thomas Petzoldt wrote:\n> Perhaps a temporary timeout?\n> \n> I tested it successfully yesterday with Firefox and right now with curl\n> as described by Uwe without problems.\n> \n> Thomas, from Germany\n> \n> $ curl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n> * Host www.shiny-webawesome.org:443 was resolved.\n> * IPv6: 2a05:d014:58f:6200::258, 2a05:d014:58f:6200::259\n> * IPv4: 35.157.26.135, 63.176.8.218\n> *? ?Trying 35.157.26.135:443...\n> * Connected to www.shiny-webawesome.org (35.157.26.135) port 443\n> \n> [...]\n> \n> < content-type: text/html; charset=UTF-8\n> < date: Thu, 16 Apr 2026 05:33:04 GMT\n> < etag: \"ce53fac14bd7eb0e56082d1619298c97-ssl-df\"\n> < server: Netlify\n> < strict-transport-security: max-age=31536000\n> < vary: Accept-Encoding\n> < x-nf-request-id: 01KPACEN3ST1VBRX71G1YADWFJ\n> < content-length: 4073\n> <\n> { [4073 bytes data]\n> * Connection #0 to host www.shiny-webawesome.org left intact\n> \n> \n> On 15.04.2026 at 23:05 M. B. Anand wrote:\n>> Strangely, the site seems inaccessible in Germany but working fine in\n>> practically every other place I tried - Spain, Netherlands, UK, as well as\n>> various Asian locations and of course US and Canada.\n>>\n>> I am not sure what that is about, will proceed to debug further, but in any\n>> case, it definitely has nothing to with the pretest etc, so I am closing it\n>> here. Apologies for posting this on r-package-devel.\n>>\n>> Thanks,\n>>\n>> Best regards,\n>> Anand.\n>>\n>>\n>>\n>> On Wed, Apr 15, 2026 at 11:39?AM Uwe Ligges<ligges at statistik.tu-dortmund.de>\n>> wrote:\n>>\n>>> Sure:\n>>>\n>>> $curl --compressed -Lsvo /dev/nullhttps://www.shiny-webawesome.org\n>>>\n>>> * Hostwww.shiny-webawesome.org:443 was resolved.\n>>> * IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n>>> * IPv4: 63.176.8.218, 35.157.26.135\n>>> *   Trying [2a05:d014:58f:6200::259]:443...\n>>> * ALPN: curl offers h2,http/1.1\n>>> } [5 bytes data]\n>>> * TLSv1.3 (OUT), TLS handshake, Client hello (1):\n>>> } [512 bytes data]\n>>> *  CAfile: /usr/ssl/certs/ca-bundle.crt\n>>> *  CApath: none\n>>> * Recv failure: Connection reset by peer\n>>> * TLS connect error: error:00000000:lib(0)::reason(0)\n>>> * OpenSSL SSL_connect: Connection reset by peer in connection to\n>>> www.shiny-webawesome.org:443\n>>> * closing connection #0\n>>>\n>>>\n>>> On 15.04.2026 17:27, M. B. Anand wrote:\n>>>> Hi Uwe,\n>>>> Thanks for the response.\n>>>>\n>>>> It's a bit strange since Firefox access works for me, and I am wondering\n>>>> if it is some manner of firefox certificate cache, or other local\n>>>> network blocks or geoblocks on the server side (unlikely).\n>>>>\n>>>> May I ask you to run, from your location:\n>>>>\n>>>> |curl --compressed -Lsvo /dev/null |https://www.shiny-webawesome.org <\n>>> https://www.shiny-webawesome.org>\n>>>> and let me know the results?\n>>>>\n>>>> Thanks,\n>>>>\n>>>> Best regards,\n>>>> Anand.\n>>>>\n>>>>\n>>>> On Wed, Apr 15, 2026 at 10:21?AM Uwe Ligges <ligges at statistik.tu-\n>>>> dortmund.de<mailto:ligges at statistik.tu-dortmund.de>> wrote:\n>>>>\n>>>>\n>>>>\n>>>>       On 14.04.2026 04:18, M. B. Anand wrote:\n>>>>        > Hi all,\n>>>>        > I submitted a package recently to CRAN and the initial\n>>>>        > win-builder,r-project,org pretest shows an SSL error only in the\n>>>>       Windows\n>>>>        > Server 2022 x64 (build 20348) platform:\n>>>>        >\n>>>>        > -------------\n>>>>        >\n>>>>        > Found the following (possibly) invalid URLs:\n>>>>        >    URL:https://www.shiny-webawesome.org <https://www.shiny- webawesome.org>\n>>>>        >      From: DESCRIPTION\n>>>>        >            man/shiny.webawesome-package.Rd\n>>>>        >            inst/CITATION\n>>>>        >            README.md\n>>>>        >      Status: Error\n>>>>        >      Message: SSL connect error [www.shiny-webawesome.org\n>>>>       <http://www.shiny-webawesome.org>]:\n>>>>        >        Recv failure: Connection was reset\n>>>>        >    URL:https://www.shiny-webawesome.org/llms.txt <https:// www.shiny-webawesome.org/llms.txt>\n>>>>        >      From: README.md\n>>>>        >      Status: Error\n>>>>        >      Message: SSL connect error [www.shiny-webawesome.org\n>>>>       <http://www.shiny-webawesome.org>]:\n>>>>        >        Recv failure: Connection was reset\n>>>>        >\n>>>>        > -------------\n>>>>\n>>>>\n>>>>       I tried to access that site witrh Firefox manually, same issue,\n>>> Firefox\n>>>>       reports \" PR_CONNECT_RESET_ERROR\" from my location.\n>>>>\n>>>>       Best,\n>>>>       Uwe Ligges\n>>>>\n>>>>\n>>>>\n>>>>        > This happens only on the Windows platform check, the x86_64-pc-\n>>>>       linux-gnu\n>>>>        > pretest shows no errors.\n>>>>        >\n>>>>        > I checked separately using the win-builder.r-project.org<http:// win-builder.r-project.org> package upload\n>>>>        > directly and it produced the same error.\n>>>>        >\n>>>>        > The site itself is fine, both curl -I -L and browser access work\n>>>>       fine, and\n>>>>        > the website logs show a request originating in Germany at about\n>>>>       the same\n>>>>        > time succeeded for / as well as all the dependencies the pkgdown\n>>>>       site loads.\n>>>>        >\n>>>>        > Is this anything to be concerned about or to be corrected?\n>>>>        >\n>>>>        > Apologies if it has been addressed elsewhere, a quick search of\n>>> the\n>>>>        > archives didn't show anything relevant.\n>>>>        >\n>>>>        > Thanks,\n>>>>        >\n>>>>        > Regards,\n>>>>        > Anand.\n>>>>        >\n>>>>        >       [[alternative HTML version deleted]]\n>>>>        >\n>>>>        > ______________________________________________\n>>>>        >R-package-devel at r-project.org <mailto:R-package-devel at r- project.org> mailing list\n>>>>        >https://stat.ethz.ch/mailman/listinfo/r-package-devel <https:// stat.ethz.ch/mailman/listinfo/r-package-devel>\n>>>>\n>>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Maybe my university blocks it:\n\n$ curl -6 --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n* Host www.shiny-webawesome.org:443 was resolved.\n* IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 6,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-5222bb1d56b2",
+      "message_id": "<CAJUgR5UYgAOSXsCokHjERwufhanPJn59JD1CaWs4CAfGf_9ktQ@mail.gmail.com>",
+      "from_name": "M. B. Anand",
+      "from_email_hash": "c7d8818f2a103857095478fb21bc843ecbd2429c05efc500840ce202dd474aed",
+      "date": "2026-04-16T12:26:43Z",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "subject_clean": "[R-pkg-devel] SSL error in Windows pretest",
+      "in_reply_to": "<5f391004-8143-4063-8dbe-202808c6818c@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAJUgR5Uru1ps0cya=VLPfXfaJKmfykShRvEWjq-SbYZRo_JBRw@mail.gmail.com>",
+        "<5d215167-a780-47e4-8cb4-a78b5ed345e7@statistik.tu-dortmund.de>",
+        "<CAJUgR5UDkbPZos9UO0Eq-Lx1Vz2O+zJHNUiCyLniHzxw44orug@mail.gmail.com>",
+        "<403a6650-74de-4621-bc21-57dd822e60f3@statistik.tu-dortmund.de>",
+        "<CAJUgR5VR=QJEM2+JV7ay0Qe+wZoNo9NpD1iawf1LFGHw1_DCYw@mail.gmail.com>",
+        "<e2103254-1f42-4798-b979-10ce82bf9529@tu-dresden.de>",
+        "<5f391004-8143-4063-8dbe-202808c6818c@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Great, thank you, Thomas,\n\nUwe --> the package is shiny.webawesome.\n\nThanks for your help, guys,\n\nBest regards,\nAnand.\n\n\nOn Thu, Apr 16, 2026 at 3:06?AM Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n> Maybe my university blocks it:\n>\n> $ curl -6 --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n> * Host www.shiny-webawesome.org:443 was resolved.\n> * IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n> * IPv4: (none)\n> *   Trying [2a05:d014:58f:6200::259]:443...\n> * connect to 2a05:d014:58f:6200::259 port 443 from :: port 1895 failed:\n> Host unreachable\n> *   Trying [2a05:d014:58f:6200::258]:443...\n> * connect to 2a05:d014:58f:6200::258 port 443 from :: port 1896 failed:\n> Host unreachable\n> * Failed to connect to www.shiny-webawesome.org port 443 after 60 ms:\n> Could not connect to server\n> * closing connection #0\n>\n> $ curl -4 --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n> * Host www.shiny-webawesome.org:443 was resolved.\n> * IPv6: (none)\n> * IPv4: 63.176.8.218, 35.157.26.135\n> *   Trying 63.176.8.218:443...\n> * schannel: disabled automatic use of client certificate\n> * ALPN: curl offers http/1.1\n> * Recv failure: Connection was reset\n> * schannel: failed to receive handshake, SSL/TLS connection failed\n> * closing connection #0\n>\n>\n> Anyway, please simply say so in your submission comments or tell me\n> which package we are talking about.\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n> On 16.04.2026 07:40, Thomas Petzoldt wrote:\n> > Perhaps a temporary timeout?\n> >\n> > I tested it successfully yesterday with Firefox and right now with curl\n> > as described by Uwe without problems.\n> >\n> > Thomas, from Germany\n> >\n> > $ curl --compressed -Lsvo /dev/null https://www.shiny-webawesome.org\n> > * Host www.shiny-webawesome.org:443 was resolved.\n> > * IPv6: 2a05:d014:58f:6200::258, 2a05:d014:58f:6200::259\n> > * IPv4: 35.157.26.135, 63.176.8.218\n> > *   Trying 35.157.26.135:443...\n> > * Connected to www.shiny-webawesome.org (35.157.26.135) port 443\n> >\n> > [...]\n> >\n> > < content-type: text/html; charset=UTF-8\n> > < date: Thu, 16 Apr 2026 05:33:04 GMT\n> > < etag: \"ce53fac14bd7eb0e56082d1619298c97-ssl-df\"\n> > < server: Netlify\n> > < strict-transport-security: max-age=31536000\n> > < vary: Accept-Encoding\n> > < x-nf-request-id: 01KPACEN3ST1VBRX71G1YADWFJ\n> > < content-length: 4073\n> > <\n> > { [4073 bytes data]\n> > * Connection #0 to host www.shiny-webawesome.org left intact\n> >\n> >\n> > On 15.04.2026 at 23:05 M. B. Anand wrote:\n> >> Strangely, the site seems inaccessible in Germany but working fine in\n> >> practically every other place I tried - Spain, Netherlands, UK, as well\n> as\n> >> various Asian locations and of course US and Canada.\n> >>\n> >> I am not sure what that is about, will proceed to debug further, but in\n> any\n> >> case, it definitely has nothing to with the pretest etc, so I am\n> closing it\n> >> here. Apologies for posting this on r-package-devel.\n> >>\n> >> Thanks,\n> >>\n> >> Best regards,\n> >> Anand.\n> >>\n> >>\n> >>\n> >> On Wed, Apr 15, 2026 at 11:39?AM Uwe Ligges<\n> ligges at statistik.tu-dortmund.de>\n> >> wrote:\n> >>\n> >>> Sure:\n> >>>\n> >>> $curl --compressed -Lsvo /dev/nullhttps://www.shiny-webawesome.org\n> >>>\n> >>> * Hostwww.shiny-webawesome.org:443 was resolved.\n> >>> * IPv6: 2a05:d014:58f:6200::259, 2a05:d014:58f:6200::258\n> >>> * IPv4: 63.176.8.218, 35.157.26.135\n> >>> *   Trying [2a05:d014:58f:6200::259]:443...\n> >>> * ALPN: curl offers h2,http/1.1\n> >>> } [5 bytes data]\n> >>> * TLSv1.3 (OUT), TLS handshake, Client hello (1):\n> >>> } [512 bytes data]\n> >>> *  CAfile: /usr/ssl/certs/ca-bundle.crt\n> >>> *  CApath: none\n> >>> * Recv failure: Connection reset by peer\n> >>> * TLS connect error: error:00000000:lib(0)::reason(0)\n> >>> * OpenSSL SSL_connect: Connection reset by peer in connection to\n> >>> www.shiny-webawesome.org:443\n> >>> * closing connection #0\n> >>>\n> >>>\n> >>> On 15.04.2026 17:27, M. B. Anand wrote:\n> >>>> Hi Uwe,\n> >>>> Thanks for the response.\n> >>>>\n> >>>> It's a bit strange since Firefox access works for me, and I am\n> wondering\n> >>>> if it is some manner of firefox certificate cache, or other local\n> >>>> network blocks or geoblocks on the server side (unlikely).\n> >>>>\n> >>>> May I ask you to run, from your location:\n> >>>>\n> >>>> |curl --compressed -Lsvo /dev/null |https://www.shiny-webawesome.org\n> <\n> >>> https://www.shiny-webawesome.org>\n> >>>> and let me know the results?\n> >>>>\n> >>>> Thanks,\n> >>>>\n> >>>> Best regards,\n> >>>> Anand.\n> >>>>\n> >>>>\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Great, thank you, Thomas,\n\nUwe --> the package is shiny.webawesome.\n\nThanks for your help, guys,\n\nBest regards,\nAnand.\n\n\nOn Thu, Apr 16, 2026 at 3:06?AM Uwe Ligges <ligges at statistik.tu-dortmund.de>",
+      "thread_id": "thread-d0987b6506de",
+      "thread_depth": 7,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-178b9ecfb8ca",
+      "message_id": "<F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>",
+      "from_name": "Adelchi Azzalini",
+      "from_email_hash": "177cb33ef7923c4c9732332adc7391f023c771d8cefaa4048bd3733cab3de17d",
+      "date": "2026-04-16T15:15:17Z",
+      "subject": "[R-pkg-devel] how to suppress undesired messages",
+      "subject_clean": "[R-pkg-devel] how to suppress undesired messages",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi. I am preparing a new package, called gg.sn, which in essence provides ggplot2-style graphics as a replacement for the existing graphics produced by package sn.  The new package works by loading new functions and methods with the same names and calling statements of those in package sn (after sn has been loaded), effectively superseding them with the new ones.\n\nMy current task is to get rid of a spate of undesired messages which appear at start-up of gg.sn, as show in the list copied at the end of this message; the line numbers have been added for helping referencing the lines.\n\nFor lines 3 to 5, I know where they come from: they are start-up messages from ?sn?; so I can drop them, since I am the author of sn. All the rest is outside my control. Question: is it possible to get rid of these other messages and, in case, how?\n\nThe DESCRIPTION file includes these lines:\nDepends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2) \nImports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2) \n\nGiven these declarations, there are no loading commands to which I could possibly apply suppressPackageStartupMessages().\n\nAlso, there is no start-up message issued by gg.sn, whose .onAttach function only contains  \n.onAttach <- function(library, pkg)\n{\n if(interactive())\n  {\n    meta <- packageDescription(\"gg.sn?)\n  } \n invisible()\n}\n\napart from various comment lines.\n\nBest regards.\n\n---\nAdelchi Azzalini\nhttp://azzalini.stat.unipd.it\n\n\n 0 R> library(gg.sn)\n 1 Loading required package: sn\n 2 Loading required package: stats4\n 3 Package 'sn', 2.1.3 (2026-02-24). \n 4 Type 'help(SN)' and 'help(\"overview-sn\")' for basic information.\n 5 The package redefines function 'sd' but its usual working is unchanged.\n 6 \n 7 Attaching package: ?sn?\n 8 \n 9 The following object is masked from ?package:stats?:\n10 \n11     sd\n12 \n13 Loading required package: ggplot2\n14 Registered S3 method overwritten by 'gg.sn':\n15   method                from\n16   plot.fitdistr.grouped sn  \n17 \n18 Attaching package: ?gg.sn?\n19 \n20 The following object is masked from ?package:sn?:\n21 \n22     plot2D.SymmModulated",
+      "body_snippet": "Hi. I am preparing a new package, called gg.sn, which in essence provides ggplot2-style graphics as a replacement for the existing graphics produced by package sn.  The new package works by loading ne",
+      "thread_id": "thread-178b9ecfb8ca",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-64646db87ecf",
+      "message_id": "<CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-04-16T20:25:17Z",
+      "subject": "[R-pkg-devel] how to suppress undesired messages",
+      "subject_clean": "[R-pkg-devel] how to suppress undesired messages",
+      "in_reply_to": "<F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>",
+      "references": [
+        "<F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>"
+      ],
+      "body_plain": "Hey Adelchi,\n\nWhy do you have sn and ggplot2 as Depends? My own very strong opinion is\nthat authors of new packages should never use it.\n\nMove them to Imports, and use 'import(sn)' and 'import(ggplot2)' in your\nNAMESPACE if you really want the whole packages.\n\nMike C\n\nOn Thu, Apr 16, 2026 at 8:15?AM Adelchi Azzalini <azzalini at stat.unipd.it>\nwrote:\n\n> Hi. I am preparing a new package, called gg.sn, which in essence provides\n> ggplot2-style graphics as a replacement for the existing graphics produced\n> by package sn.  The new package works by loading new functions and methods\n> with the same names and calling statements of those in package sn (after sn\n> has been loaded), effectively superseding them with the new ones.\n>\n> My current task is to get rid of a spate of undesired messages which\n> appear at start-up of gg.sn, as show in the list copied at the end of\n> this message; the line numbers have been added for helping referencing the\n> lines.\n>\n> For lines 3 to 5, I know where they come from: they are start-up messages\n> from ?sn?; so I can drop them, since I am the author of sn. All the rest is\n> outside my control. Question: is it possible to get rid of these other\n> messages and, in case, how?\n>\n> The DESCRIPTION file includes these lines:\n> Depends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2)\n> Imports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2)\n>\n> Given these declarations, there are no loading commands to which I could\n> possibly apply suppressPackageStartupMessages().\n>\n> Also, there is no start-up message issued by gg.sn, whose .onAttach\n> function only contains\n> .onAttach <- function(library, pkg)\n> {\n>  if(interactive())\n>   {\n>     meta <- packageDescription(\"gg.sn?)\n>   }\n>  invisible()\n> }\n>\n> apart from various comment lines.\n>\n> Best regards.\n>\n> ---\n> Adelchi Azzalini\n> http://azzalini.stat.unipd.it\n>\n>\n>  0 R> library(gg.sn)\n>  1 Loading required package: sn\n>  2 Loading required package: stats4\n>  3 Package 'sn', 2.1.3 (2026-02-24).\n>  4 Type 'help(SN)' and 'help(\"overview-sn\")' for basic information.\n>  5 The package redefines function 'sd' but its usual working is unchanged.\n>  6\n>  7 Attaching package: ?sn?\n>  8\n>  9 The following object is masked from ?package:stats?:\n> 10\n> 11     sd\n> 12\n> 13 Loading required package: ggplot2\n> 14 Registered S3 method overwritten by 'gg.sn':\n> 15   method                from\n> 16   plot.fitdistr.grouped sn\n> 17\n> 18 Attaching package: ?gg.sn?\n> 19\n> 20 The following object is masked from ?package:sn?:\n> 21\n> 22     plot2D.SymmModulated\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hey Adelchi,\n\nWhy do you have sn and ggplot2 as Depends? My own very strong opinion is\nthat authors of new packages should never use it.\n\nMove them to Imports, and use 'import(sn)' and 'import(ggplot2",
+      "thread_id": "thread-178b9ecfb8ca",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-fba2c833ef5a",
+      "message_id": "<6A03EED5-DCF0-43A3-BDD5-B83C1D93FD29@dal.ca>",
+      "from_name": "Daniel Kelley",
+      "from_email_hash": "86414ba1595edb5f4e2a1571b3d5ac6193ddbcd5e87fdb7d177bfbc459d736f0",
+      "date": "2026-04-28T17:46:19Z",
+      "subject": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "subject_clean": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello.  I am a developer of the `oce` package, a package in fairly wide use that has been on CRAN for over a decade. I just noticed that the `r-devel-windows-x86_64` entry at https://cran.hafro.is/web/checks/check_results_oce.html is showing an error in the building of a vignette relating to map projections in `oce`.\n\nTo investigate this further, I updated my R to 4.6.0, and now when I build `oce` (from the \"develop\" branch on www.github.com/dankelley/oce) I see a NOTE about R not being abot to find a file named `proj.db` (see Appendix 1 below). This file is not mentioned within `oce`, and I assume it is being used by `sf`, which is used by `oce` for map projections. Indeed, I see copies of that file in various places on my system (see Appendix 2 below).\n\nI hope to get some advice on how to deal with this issue.\n\nThanks in advance, for any help that can be sent my way.\n\nDan Kelley / Department of Oceanography / Dalhousie University / Halifax NS Canada\n\n\n# Appendix 1: portion of `R CMD check` results.\n\n```\n* checking use of S3 registration ... OK\n* checking dependencies in R code ... NOTE\nproj_create: Cannot find proj.db\nproj_create: no database context specified\n* checking S3 generic/method consistency ... OK\n```\n\n# Appendix 2. finding locations of proj.db files\n\n```\n$ find / -name \"proj.db\" 2>/dev/null\n/Library/Frameworks/PROJ.framework/Versions/7/Resources/proj/proj.db\n/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/sf/proj/proj.db\n/Library/Frameworks/R.framework/Versions/4.6/Resources/library/sf/proj/proj.db\n/System/Volumes/Data/Library/Frameworks/PROJ.framework/Versions/7/Resources/proj/proj.db\n/System/Volumes/Data/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/sf/proj/proj.db\n/System/Volumes/Data/Library/Frameworks/R.framework/Versions/4.6/Resources/library/sf/proj/proj.db\n/System/Volumes/Data/Users/kelley/.julia/artifacts/71f842209dc88269523ab21f38b8696ed4039b5b/share/proj/proj.db\n/System/Volumes/Data/Users/kelley/.julia/artifacts/d670a07cc0bfca9c3c5944a29098877444869f68/share/proj/proj.db\n/Users/kelley/.julia/artifacts/71f842209dc88269523ab21f38b8696ed4039b5b/share/proj/proj.db\n/Users/kelley/.julia/artifacts/d670a07cc0bfca9c3c5944a29098877444869f68/share/proj/proj.db\n```",
+      "body_snippet": "Hello.  I am a developer of the `oce` package, a package in fairly wide use that has been on CRAN for over a decade. I just noticed that the `r-devel-windows-x86_64` entry at https://cran.hafro.is/web",
+      "thread_id": "thread-fba2c833ef5a",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-604e626a22b0",
+      "message_id": "<408C874F-FCBB-4EB0-92E9-2488535CB32C@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
+      "date": "2026-04-28T18:19:15Z",
+      "subject": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "subject_clean": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "in_reply_to": "<6A03EED5-DCF0-43A3-BDD5-B83C1D93FD29@dal.ca>",
+      "references": [
+        "<6A03EED5-DCF0-43A3-BDD5-B83C1D93FD29@dal.ca>"
+      ],
+      "body_plain": "Hi Dan:\n\nThis issue has arisen before if you check for proj.db in the mail archives.    If you go through the archives,  one issue that had arisen was ?sf? as not being built with the appropriate flags through softlinks  (I may have this a little off - Simon Urbanek noticed the issue back then) so that either the prob.db is not being found or else it is not on the test machine.  Since you only fail on the one platform,  I have a feeling that this is where the problem lies on this particular machine.  And yes,  proj.db is suppose to be explicitly included in ?sf? as you show for your install.\n\nSo hopefully whomever runs the Windows develop  test machine  (and thanks for your efforts) can look into this. \n\nHTH,  and I hope I am not totally nuts on this.\n\n-Roy\n\n\n\n> On Apr 28, 2026, at 10:46?AM, Daniel Kelley <kelley at dal.ca> wrote:\n> \n> Hello.  I am a developer of the `oce` package, a package in fairly wide use that has been on CRAN for over a decade. I just noticed that the `r-devel-windows-x86_64` entry at https://cran.hafro.is/web/checks/check_results_oce.html is showing an error in the building of a vignette relating to map projections in `oce`.\n> \n> To investigate this further, I updated my R to 4.6.0, and now when I build `oce` (from the \"develop\" branch on www.github.com/dankelley/oce) I see a NOTE about R not being abot to find a file named `proj.db` (see Appendix 1 below). This file is not mentioned within `oce`, and I assume it is being used by `sf`, which is used by `oce` for map projections. Indeed, I see copies of that file in various places on my system (see Appendix 2 below).\n> \n> I hope to get some advice on how to deal with this issue.\n> \n> Thanks in advance, for any help that can be sent my way.\n> \n> Dan Kelley / Department of Oceanography / Dalhousie University / Halifax NS Canada\n> \n> \n> # Appendix 1: portion of `R CMD check` results.\n> \n> ```\n> * checking use of S3 registration ... OK\n> * checking dependencies in R code ... NOTE\n> proj_create: Cannot find proj.db\n> proj_create: no database context specified\n> * checking S3 generic/method consistency ... OK\n> ```\n> \n> # Appendix 2. finding locations of proj.db files\n> \n> ```\n> $ find / -name \"proj.db\" 2>/dev/null\n> /Library/Frameworks/PROJ.framework/Versions/7/Resources/proj/proj.db\n> /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/sf/proj/proj.db\n> /Library/Frameworks/R.framework/Versions/4.6/Resources/library/sf/proj/proj.db\n> /System/Volumes/Data/Library/Frameworks/PROJ.framework/Versions/7/Resources/proj/proj.db\n> /System/Volumes/Data/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/sf/proj/proj.db\n> /System/Volumes/Data/Library/Frameworks/R.framework/Versions/4.6/Resources/library/sf/proj/proj.db\n> /System/Volumes/Data/Users/kelley/.julia/artifacts/71f842209dc88269523ab21f38b8696ed4039b5b/share/proj/proj.db\n> /System/Volumes/Data/Users/kelley/.julia/artifacts/d670a07cc0bfca9c3c5944a29098877444869f68/share/proj/proj.db\n> /Users/kelley/.julia/artifacts/71f842209dc88269523ab21f38b8696ed4039b5b/share/proj/proj.db\n> /Users/kelley/.julia/artifacts/d670a07cc0bfca9c3c5944a29098877444869f68/share/proj/proj.db\n> ```\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi Dan:\n\nThis issue has arisen before if you check for proj.db in the mail archives.    If you go through the archives,  one issue that had arisen was ?sf? as not being built with the appropriate flag",
+      "thread_id": "thread-fba2c833ef5a",
+      "thread_depth": 1,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-ffe2e4a4a8fd",
+      "message_id": "<44b6a7d0-da65-4457-9855-e8e81d0a0ee9@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-04-29T09:32:43Z",
+      "subject": "[R-pkg-devel] May 1, 7pm to May 2, 8pm (CEST): downtime for svn, CRAN incoming checks, winbuilder services",
+      "subject_clean": "[R-pkg-devel] May 1, 7pm to May 2, 8pm (CEST): downtime for svn, CRAN incoming checks, winbuilder services",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\ndue to construction works some R / CRAN servers have to be shut down from\n* Friday, May 1, 7 pm to Saturday, May 2, 8 pm (CEST)*\n\nThis affects the *svn* server (svn.R-project.org), *winbuilder* queues \n(r-devel and r-release) and the *CRAN incoming check* services.\n\nBest wishes,\nUwe Ligges",
+      "body_snippet": "Dear all,\n\ndue to construction works some R / CRAN servers have to be shut down from\n* Friday, May 1, 7 pm to Saturday, May 2, 8 pm (CEST)*\n\nThis affects the *svn* server (svn.R-project.org), *winbuil",
+      "thread_id": "thread-ffe2e4a4a8fd",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-218d98589000",
+      "message_id": "<SV0P279MB047503F36AB108B751B890F3EE342@SV0P279MB0475.NORP279.PROD.OUTLOOK.COM>",
+      "from_name": "Roger Bivand",
+      "from_email_hash": "37a3c7637f7cdc3576966201a0fd58853d44abb21284a9eb85afffcb057c33b5",
+      "date": "2026-04-29T11:32:34Z",
+      "subject": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "subject_clean": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Unfortunately, the proj/ and gdal/ directories were not built into the macOS R-4.6.0 arm64 binary package of 'terra'. The proj/ and gdal/ directories are present in the macOS R-4.6.0 x86_64 'terra', and as far as I can see in 'sf' on macOS and Windows. The 'oce' Windows case may be transient, and would be worth checking locally if possible with R 4.6.0 and a binary install of 'sf' and other packages.\n\nIn 'terra' as in other packages inheriting configure.ac from defunct 'rgdal', the configure argument: --with-data-copy=yes is needed to ensure that the GDAL and PROJ metadata corresponding exactly to the GDAL and PROJ versions used for building the binary package is copied into the binary package. The proj.db SQLite file is also versioned, as new tables are added to proj.db.\n\nSome time ago we did look at shipping a data only package with version(s) of proj.db, but then found that users may have installed 'terra' with an earlier PROJ and proj.db, and 'sf' with later ones, leading to confusion. The proj.db is about 10.4MB, up from 9.1MB two years ago, but growing as the table count and complexity grows especially for transformations between datums.\n\n--\nRoger Bivand\nEmeritus Professor\nNorwegian School of Economics\nPostboks 3490 Ytre Sandviken, 5045 Bergen, Norway\nRoger.Bivand at nhh.no",
+      "body_snippet": "Unfortunately, the proj/ and gdal/ directories were not built into the macOS R-4.6.0 arm64 binary package of 'terra'. The proj/ and gdal/ directories are present in the macOS R-4.6.0 x86_64 'terra', a",
+      "thread_id": "thread-218d98589000",
+      "thread_depth": 0,
+      "month": "2026-04"
+    },
+    {
+      "id": "msg-e593d9e4bcfc",
+      "message_id": "<20260430001252.611c256e@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-04-29T21:12:52Z",
+      "subject": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "subject_clean": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "in_reply_to": "<6A03EED5-DCF0-43A3-BDD5-B83C1D93FD29@dal.ca>",
+      "references": [
+        "<6A03EED5-DCF0-43A3-BDD5-B83C1D93FD29@dal.ca>"
+      ],
+      "body_plain": "? Tue, 28 Apr 2026 17:46:19 +0000\nDaniel Kelley <kelley at dal.ca> ?????:\n\n> I just noticed that the `r-devel-windows-x86_64` entry at\n> https://cran.hafro.is/web/checks/check_results_oce.html is showing an\n> error in the building of a vignette relating to map projections in\n> `oce`.\n\nWith LC_TIME=C (so that the tests won't fail), I was able to observe\nthe following crash (in sf, not oce!) on R-devel/Windows:\n\n* checking examples ...\nRterm.exe caused an Access Violation at location 00007FFD890530ED in module sf.dll Reading from location 0000029641BE9610.\nAddrPC           Params\n00007FFD890530ED 0000000000000000 0000029641BE91E0 000000A5499F50F0  sf.dll!GEOSGeom_destroy_r+0xd\n00007FFD89949B00 000000A5499F5110 0000029600000000 0000029636011E80  sf.dll!std::vector<std::unique_ptr<GEOSGeom_t, std::function<void (GEOSGeom_t*)> >, std::allocator<std::unique_ptr<GEOSGeom_t, std::function<void (GEOSGeom_t*)> > > >::~vector+0x40  [C:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/invoke.h @ 61]\n00007FFD84C9E8E7 000000A5499F5270 000000A5499F5290 000000A5499F5230  sf.dll!CPL_geos_op2+0xa27  [C:/rtools45/tmp/Rtmpo1NCzc/R.INSTALLe3043e11033/sf/src/geos.cpp @ 1063]\n00007FFD84C4AA17 0000000000000002 0000000000000000 0000000000000000  sf.dll!_sf_CPL_geos_op2+0xe7  [C:/rtools45/tmp/Rtmpo1NCzc/R.INSTALLe3043e11033/sf/src/RcppExports.cpp @ 754]\n00007FFD9ECD74DE 0000000000000000 0000000000000000 0000029632430788  R.dll!R_doDotCall+0x639e  [C:/R/R-svn/src/main/dotcode.c @ 760]\n\n ERROR\nRunning examples in 'oce-Ex.R' failed\nThe error most likely occurred in:\n\n> ### Name: subset,coastline-method\n> ### Title: Subset a coastline Object\n> ### Aliases: subset,coastline-method subset.coastline\n>\n> ### ** Examples\n>\n> library(oce)\n> data(coastlineWorld)\n> # Subset to a box centred on Nova Scotia, Canada\n> if (requireNamespace(\"sf\")) {\n+     cl <- subset(coastlineWorld, -80 < lon & lon <- 50 & 30 < lat & lat < 60)\n+     # The plot demonstrates that the trimming is as requested.\n+     plot(cl, clon = -65, clat = 45, span = 6000)\n+     rect(-80, 30, -50, 60, bg = \"transparent\", border = \"red\")\n+ }\n\nRunning just example(subset.coastline) is not enough, but running\noce-Ex.R usually is. The crash doesn't happen always, but when it does,\nit happens in the same place:\n\ngeos.cpp:951     Rcpp::List CPL_geos_op2(std::string op, Rcpp::List sfcx, Rcpp::List sfcy) {\n\ngeos.cpp:957             std::vector<GeomPtr> x = geometries_from_sfc(hGEOSCtxt, sfcx, &dim);\n\nThe variable being corrupted is the sole element of the vector 'x'; the\ncrash happens inside its destructor at the end of the function. I'll\nsee what else I can find out later.\n\nThe problems with proj.db you're observing on macOS are unrelated to\nthe problem on Windows.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 28 Apr 2026 17:46:19 +0000\nDaniel Kelley <kelley at dal.ca> ?????:\n\n> I just noticed that the `r-devel-windows-x86_64` entry at\n> https://cran.hafro.is/web/checks/check_results_oce.html is show",
+      "thread_id": "thread-fba2c833ef5a",
+      "thread_depth": 1,
+      "month": "2026-04"
     }
   ],
   "threads": [
@@ -71,14 +664,93 @@
     {
       "id": "thread-737af3ab69dc",
       "subject": "[R-pkg-devel] CRAN submission down?: Not getting the expected confirmation email - last submission was 8 hours ago",
-      "message_count": 2,
+      "message_count": 4,
       "participants": [
         "Henrik Bengtsson",
+        "Kurt Hornik",
         "Simon Urbanek"
       ],
       "started": "2026-04-01T20:32:41Z",
-      "last_reply": "2026-04-01T21:29:39Z",
+      "last_reply": "2026-04-02T07:26:56Z",
       "root_message_id": "msg-737af3ab69dc"
+    },
+    {
+      "id": "thread-5e5f947f75d5",
+      "subject": "[R-pkg-devel] Depends: R (≥ 4.5.0) in gsl package - a case for inconsistent requirements",
+      "message_count": 14,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Ivan Krylov",
+        "Iñaki Ucar",
+        "Josiah Parry",
+        "Maciej Nasinski",
+        "Roland Fuß",
+        "Simon Urbanek",
+        "Stephanie Evert"
+      ],
+      "started": "2026-04-09T14:24:32Z",
+      "last_reply": "2026-04-14T23:23:06Z",
+      "root_message_id": "msg-5e5f947f75d5"
+    },
+    {
+      "id": "thread-d0987b6506de",
+      "subject": "[R-pkg-devel] SSL error in Windows pretest",
+      "message_count": 8,
+      "participants": [
+        "M. B. Anand",
+        "Thomas Petzoldt",
+        "Uwe Ligges"
+      ],
+      "started": "2026-04-14T02:18:17Z",
+      "last_reply": "2026-04-16T12:26:43Z",
+      "root_message_id": "msg-d0987b6506de"
+    },
+    {
+      "id": "thread-178b9ecfb8ca",
+      "subject": "[R-pkg-devel] how to suppress undesired messages",
+      "message_count": 2,
+      "participants": [
+        "Adelchi Azzalini",
+        "Michael Chirico"
+      ],
+      "started": "2026-04-16T15:15:17Z",
+      "last_reply": "2026-04-16T20:25:17Z",
+      "root_message_id": "msg-178b9ecfb8ca"
+    },
+    {
+      "id": "thread-fba2c833ef5a",
+      "subject": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "message_count": 3,
+      "participants": [
+        "Daniel Kelley",
+        "Ivan Krylov",
+        "Roy Mendelssohn - NOAA Federal"
+      ],
+      "started": "2026-04-28T17:46:19Z",
+      "last_reply": "2026-04-29T21:12:52Z",
+      "root_message_id": "msg-fba2c833ef5a"
+    },
+    {
+      "id": "thread-ffe2e4a4a8fd",
+      "subject": "[R-pkg-devel] May 1, 7pm to May 2, 8pm (CEST): downtime for svn, CRAN incoming checks, winbuilder services",
+      "message_count": 1,
+      "participants": [
+        "Uwe Ligges"
+      ],
+      "started": "2026-04-29T09:32:43Z",
+      "last_reply": "2026-04-29T09:32:43Z",
+      "root_message_id": "msg-ffe2e4a4a8fd"
+    },
+    {
+      "id": "thread-218d98589000",
+      "subject": "[R-pkg-devel] question about map projections in R 4.6.0",
+      "message_count": 1,
+      "participants": [
+        "Roger Bivand"
+      ],
+      "started": "2026-04-29T11:32:34Z",
+      "last_reply": "2026-04-29T11:32:34Z",
+      "root_message_id": "msg-218d98589000"
     }
   ]
 }

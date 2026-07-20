@@ -10150,3 +10150,1302 @@ On Mon, 9 Mar 2026 at 16:31, Ivan Krylov <ikrylov at disroot.org> wrote:
 > Ivan
 
 
+From |kry|ov @end|ng |rom d|@root@org  Wed Mar 11 08:40:09 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Wed, 11 Mar 2026 10:40:09 +0300
+Subject: [R-pkg-devel] "Enhances" issue with stub package Rmosek
+In-Reply-To: <b30b1c3c-3e6a-489f-802b-5bf0f549a71a@stanford.edu>
+References: <b30b1c3c-3e6a-489f-802b-5bf0f549a71a@stanford.edu>
+Message-ID: <20260311104009.7d813457@Tarkus>
+
+? Mon, 9 Mar 2026 11:51:49 -0700
+Balasubramanian Narasimhan <naras at stanford.edu> ?????:
+
+> There is no way for package `CVXR` to ascertain which version of 
+> `Rmosek::mosek()` is available at runtime, the stub, or the actual
+> one from "www.mosek.com".
+
+If you're willing to use a kludge, consider adding a test for
+
+!identical(
+ Rmosek::mosek, function (...) { stop(fmsg) },
+ ignore.environment=TRUE, ignore.srcref=TRUE
+)
+
+in the "special situations". Although it would be, of course, better,
+if Rmosek either provided an API to detect which version of the package
+is installed (e.g. Rmosek::in_working_condition()) or didn't exist as
+an incompatible stub on CRAN.
+
+-- 
+Best regards,
+Ivan
+
+
+From v|ncentv@nhee@ @end|ng |rom gm@||@com  Wed Mar 11 12:01:16 2026
+From: v|ncentv@nhee@ @end|ng |rom gm@||@com (Vincent van Hees)
+Date: Wed, 11 Mar 2026 12:01:16 +0100
+Subject: [R-pkg-devel] failure on windows builder ("only Win32 target is
+ supported")
+In-Reply-To: <CAO0uZ+9tpc2Sut=0Z+ifubJ0zBYvKcA0hAwBB2r9rCBy+R-2jg@mail.gmail.com>
+References: <CAO0uZ+_6t+fto-nAO8BtM3Lp6nLwwYaCdC9oCSogVy9P-_=Xgw@mail.gmail.com>
+ <20260309183148.2eb08460@Tarkus>
+ <CAO0uZ+9tpc2Sut=0Z+ifubJ0zBYvKcA0hAwBB2r9rCBy+R-2jg@mail.gmail.com>
+Message-ID: <CALnEB148bX1fjgoiOJCsdSep4owdUAOSUjembx2868a_ma8oMQ@mail.gmail.com>
+
+I have the same issue for package GGIRread:
+https://win-builder.r-project.org/incoming_pretest/GGIRread_1.0.8_20260311_110257/Windows/00install.out
+Should I contact Uwe Ligges and ask him to re-trigger the build for my
+package too or is there anything I can do before bothering him with such a
+request?
+
+Thanks,
+
+Vincent
+
+On Tue, 10 Mar 2026 at 21:10, Miroslav Kratochvil <exa.exa at gmail.com> wrote:
+
+> Hello,
+> I see that Uwe has re-triggered the build, and now it looks like that
+> all went through just right. Thanks for help to both of you!
+> -mk
+>
+> On Mon, 9 Mar 2026 at 16:31, Ivan Krylov <ikrylov at disroot.org> wrote:
+> >
+> > Dear Miroslav & Uwe,
+> >
+> > On Mon, 9 Mar 2026 10:14:31 +0100
+> > Miroslav Kratochvil <exa.exa at gmail.com> wrote:
+> >
+> > >
+> https://win-builder.r-project.org/incoming_pretest/EmbedSOM_2.2.1_20260308_225310/Windows/00install.out
+> >
+> > Here's the strange part:
+> >
+> > >> using C++ compiler: 'g++ (GCC) 15.2.0'
+> >
+> > The currently available version of RTools 4.5 only has GCC 14.3 (and
+> > compiles EmbedSOM without a problem).
+> >
+> > Judging by the include paths containing /usr/lib/gcc/x86_64-pc-cygwin/,
+> > it might be a %PATH% problem on Win-Builder, with the MSYS/Cygwin
+> > toolchain being picked up instead of the desired UCRT one.
+> >
+> > --
+> > Best regards,
+> > Ivan
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Wed Mar 11 12:58:35 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Wed, 11 Mar 2026 12:58:35 +0100
+Subject: [R-pkg-devel] failure on windows builder ("only Win32 target is
+ supported")
+In-Reply-To: <CALnEB148bX1fjgoiOJCsdSep4owdUAOSUjembx2868a_ma8oMQ@mail.gmail.com>
+References: <CAO0uZ+_6t+fto-nAO8BtM3Lp6nLwwYaCdC9oCSogVy9P-_=Xgw@mail.gmail.com>
+ <20260309183148.2eb08460@Tarkus>
+ <CAO0uZ+9tpc2Sut=0Z+ifubJ0zBYvKcA0hAwBB2r9rCBy+R-2jg@mail.gmail.com>
+ <CALnEB148bX1fjgoiOJCsdSep4owdUAOSUjembx2868a_ma8oMQ@mail.gmail.com>
+Message-ID: <f61a932f-a95c-45fc-833d-ac6a3b9a0363@statistik.tu-dortmund.de>
+
+
+
+On 11.03.2026 12:01, Vincent van Hees wrote:
+> I have the same issue for package GGIRread:
+> https://win-builder.r-project.org/incoming_pretest/GGIRread_1.0.8_20260311_110257/Windows/00install.out
+> Should I contact Uwe Ligges and ask him to re-trigger the build for my
+> package too or is there anything I can do before bothering him with such a
+> request?
+
+It's sorted out and new check triggered.
+
+Some package was apparently able to run an update for the msys 
+environment (which must not happen). Apparently the installer was not 
+restricting access rights sufficiently. Now improved.
+
+Best,
+Uwe Ligges
+
+
+
+
+> Thanks,
+> 
+> Vincent
+> 
+> On Tue, 10 Mar 2026 at 21:10, Miroslav Kratochvil <exa.exa at gmail.com> wrote:
+> 
+>> Hello,
+>> I see that Uwe has re-triggered the build, and now it looks like that
+>> all went through just right. Thanks for help to both of you!
+>> -mk
+>>
+>> On Mon, 9 Mar 2026 at 16:31, Ivan Krylov <ikrylov at disroot.org> wrote:
+>>>
+>>> Dear Miroslav & Uwe,
+>>>
+>>> On Mon, 9 Mar 2026 10:14:31 +0100
+>>> Miroslav Kratochvil <exa.exa at gmail.com> wrote:
+>>>
+>>>>
+>> https://win-builder.r-project.org/incoming_pretest/EmbedSOM_2.2.1_20260308_225310/Windows/00install.out
+>>>
+>>> Here's the strange part:
+>>>
+>>>>> using C++ compiler: 'g++ (GCC) 15.2.0'
+>>>
+>>> The currently available version of RTools 4.5 only has GCC 14.3 (and
+>>> compiles EmbedSOM without a problem).
+>>>
+>>> Judging by the include paths containing /usr/lib/gcc/x86_64-pc-cygwin/,
+>>> it might be a %PATH% problem on Win-Builder, with the MSYS/Cygwin
+>>> toolchain being picked up instead of the desired UCRT one.
+>>>
+>>> --
+>>> Best regards,
+>>> Ivan
+>>
+>> ______________________________________________
+>> R-package-devel at r-project.org mailing list
+>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>>
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From n@r@@ @end|ng |rom @t@n|ord@edu  Wed Mar 11 20:56:09 2026
+From: n@r@@ @end|ng |rom @t@n|ord@edu (Balasubramanian Narasimhan)
+Date: Wed, 11 Mar 2026 19:56:09 +0000
+Subject: [R-pkg-devel] "Enhances" issue with stub package Rmosek
+In-Reply-To: <20260311104009.7d813457@Tarkus>
+References: <b30b1c3c-3e6a-489f-802b-5bf0f549a71a@stanford.edu>
+ <20260311104009.7d813457@Tarkus>
+Message-ID: <SA5PR02MB1126814C9222A03C5FFB70621D847A@SA5PR02MB11268.namprd02.prod.outlook.com>
+
+Thank you, Ivan, for your suggestion.
+
+Luckily, we were able to suggest another solution involving .onLoad? and .onUnload? hooks that excluded/un-excluded MOSEK? as one of the available solver at runtime. The only disadvantage is that if one ever wants to use that solver, they need to explicitly request it, or add it to what?s available, a bit less than ideal.
+
+Best wishes,
+-Naras
+
+From: Ivan Krylov <ikrylov at disroot.org>
+Date: Wednesday, March 11, 2026 at 12:40?AM
+To: Balasubramanian Narasimhan <naras at stanford.edu>
+Cc: r-package-devel at r-project.org <r-package-devel at r-project.org>
+Subject: Re: [R-pkg-devel] "Enhances" issue with stub package Rmosek
+
+? Mon, 9 Mar 2026 11:51:49 -0700
+Balasubramanian Narasimhan <naras at stanford.edu> ?????:
+
+> There is no way for package `CVXR` to ascertain which version of
+> `Rmosek::mosek()` is available at runtime, the stub, or the actual
+> one from "https://urldefense.com/v3/__http://www.mosek.com__;!!G92We9drHetJ8EofZw!e06uuiKs99ze8Mh44z6Sc48uKTHB7m_rZR8QGW-VnkbtyfNBpLJ7QFV3tTkG6FKuHOE1jg-4IfGlzj5zPQ$ ".
+
+If you're willing to use a kludge, consider adding a test for
+
+!identical(
+ Rmosek::mosek, function (...) { stop(fmsg) },
+ ignore.environment=TRUE, ignore.srcref=TRUE
+)
+
+in the "special situations". Although it would be, of course, better,
+if Rmosek either provided an API to detect which version of the package
+is installed (e.g. Rmosek::in_working_condition()) or didn't exist as
+an incompatible stub on CRAN.
+
+--
+Best regards,
+Ivan
+
+	[[alternative HTML version deleted]]
+
+
+From henr|k@bengt@@on @end|ng |rom gm@||@com  Fri Mar 13 00:00:12 2026
+From: henr|k@bengt@@on @end|ng |rom gm@||@com (Henrik Bengtsson)
+Date: Thu, 12 Mar 2026 16:00:12 -0700
+Subject: [R-pkg-devel] BugZilla is now serving tea
+Message-ID: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+
+R CMD check started complaining about R BugZilla URLs. I get:
+
+$ curl --head https://bugs.r-project.org/show_bug.cgi?id=17641
+HTTP/2 418
+server: nginx
+date: Thu, 12 Mar 2026 22:52:46 GMT
+content-type: text/html
+content-length: 461
+etag: "69b0a9a9-1cd"
+
+HTTP/2 status code 418 is "I'm a teapot"
+(https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+/Henrik
+
+
+From @|mon@urb@nek @end|ng |rom R-project@org  Fri Mar 13 01:03:50 2026
+From: @|mon@urb@nek @end|ng |rom R-project@org (Simon Urbanek)
+Date: Fri, 13 Mar 2026 13:03:50 +1300
+Subject: [R-pkg-devel] BugZilla is now serving tea
+In-Reply-To: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+References: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+Message-ID: <C5D2B398-0B14-47BA-AF08-560E0E684C7C@R-project.org>
+
+Henrik,
+
+yes, due to a large DDoS attack on our Bugzilla which has been going on for last several days we had to implement a defensive measure to protect our infrastructure. Even after blocking some countries and adding countermeasures we still have more than 3 attack requests per second, but at least I only give them tea ;). We may need to add some special-case code for the bugzilla link checks, but that's not easy without exposing ourselves again, so watch this space is my answer for now.
+
+Cheers,
+Simon
+
+
+> On 13 Mar 2026, at 12:00, Henrik Bengtsson <henrik.bengtsson at gmail.com> wrote:
+> 
+> R CMD check started complaining about R BugZilla URLs. I get:
+> 
+> $ curl --head https://bugs.r-project.org/show_bug.cgi?id=17641
+> HTTP/2 418
+> server: nginx
+> date: Thu, 12 Mar 2026 22:52:46 GMT
+> content-type: text/html
+> content-length: 461
+> etag: "69b0a9a9-1cd"
+> 
+> HTTP/2 status code 418 is "I'm a teapot"
+> (https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+> 
+> /Henrik
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> 
+
+
+From edd @end|ng |rom deb|@n@org  Fri Mar 13 14:56:26 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Fri, 13 Mar 2026 08:56:26 -0500
+Subject: [R-pkg-devel] BugZilla is now serving tea
+In-Reply-To: <C5D2B398-0B14-47BA-AF08-560E0E684C7C@R-project.org>
+References: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+ <C5D2B398-0B14-47BA-AF08-560E0E684C7C@R-project.org>
+Message-ID: <27060.6026.84834.245269@paul.eddelbuettel.com>
+
+
+Simon,
+
+On 13 March 2026 at 13:03, Simon Urbanek wrote:
+| yes, due to a large DDoS attack on our Bugzilla which has been going on for last several days we had to implement a defensive measure to protect our infrastructure. Even after blocking some countries and adding countermeasures we still have more than 3 attack requests per second, but at least I only give them tea ;). We may need to add some special-case code for the bugzilla link checks, but that's not easy without exposing ourselves again, so watch this space is my answer for now.
+
+CI jobs at GH which request rfortran and openmp from mac.r-project.org have
+started to fail fail / timeout so I had to turn that off. 
+
+Is that related?
+
+The URLs I used are still documented on your webpage. 
+
+Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From @|mon@urb@nek @end|ng |rom R-project@org  Fri Mar 13 20:27:54 2026
+From: @|mon@urb@nek @end|ng |rom R-project@org (Simon Urbanek)
+Date: Sat, 14 Mar 2026 08:27:54 +1300
+Subject: [R-pkg-devel] BugZilla is now serving tea
+In-Reply-To: <27060.6026.84834.245269@paul.eddelbuettel.com>
+References: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+ <C5D2B398-0B14-47BA-AF08-560E0E684C7C@R-project.org>
+ <27060.6026.84834.245269@paul.eddelbuettel.com>
+Message-ID: <BD7CAA87-C979-4EF1-B3D2-7B1B7005D1DB@R-project.org>
+
+Dirk,
+
+actually, yes - one of the blocked DDoS attacker blocks (13.105.117.0/24) was apparently GitHub. I have removed that one so things should be back to normal.
+
+Thanks,
+Simon
+
+
+> On 14/03/2026, at 02:56, Dirk Eddelbuettel <edd at debian.org> wrote:
+> 
+> 
+> Simon,
+> 
+> On 13 March 2026 at 13:03, Simon Urbanek wrote:
+> | yes, due to a large DDoS attack on our Bugzilla which has been going on for last several days we had to implement a defensive measure to protect our infrastructure. Even after blocking some countries and adding countermeasures we still have more than 3 attack requests per second, but at least I only give them tea ;). We may need to add some special-case code for the bugzilla link checks, but that's not easy without exposing ourselves again, so watch this space is my answer for now.
+> 
+> CI jobs at GH which request rfortran and openmp from mac.r-project.org have
+> started to fail fail / timeout so I had to turn that off. 
+> 
+> Is that related?
+> 
+> The URLs I used are still documented on your webpage. 
+> 
+> Dirk
+> 
+> -- 
+> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+> 
+
+
+From henr|k@bengt@@on @end|ng |rom gm@||@com  Fri Mar 13 20:51:54 2026
+From: henr|k@bengt@@on @end|ng |rom gm@||@com (Henrik Bengtsson)
+Date: Fri, 13 Mar 2026 12:51:54 -0700
+Subject: [R-pkg-devel] BugZilla is now serving tea
+In-Reply-To: <BD7CAA87-C979-4EF1-B3D2-7B1B7005D1DB@R-project.org>
+References: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+ <C5D2B398-0B14-47BA-AF08-560E0E684C7C@R-project.org>
+ <27060.6026.84834.245269@paul.eddelbuettel.com>
+ <BD7CAA87-C979-4EF1-B3D2-7B1B7005D1DB@R-project.org>
+Message-ID: <CAFDcVCRaBgvVK5P0xa1A=VBFi3+b+pLkzd+YM2UTt5+Xf7PRGA@mail.gmail.com>
+
+Do you have enough granular control to add the win-builder and CRAN
+incoming servers to the acceptance list (return HTTP/2 200) so that
+BugZilla URLs do not trigger a check NOTE there?
+
+/Henrik
+
+
+On Fri, Mar 13, 2026 at 12:27?PM Simon Urbanek
+<simon.urbanek at r-project.org> wrote:
+>
+> Dirk,
+>
+> actually, yes - one of the blocked DDoS attacker blocks (13.105.117.0/24) was apparently GitHub. I have removed that one so things should be back to normal.
+>
+> Thanks,
+> Simon
+>
+>
+> > On 14/03/2026, at 02:56, Dirk Eddelbuettel <edd at debian.org> wrote:
+> >
+> >
+> > Simon,
+> >
+> > On 13 March 2026 at 13:03, Simon Urbanek wrote:
+> > | yes, due to a large DDoS attack on our Bugzilla which has been going on for last several days we had to implement a defensive measure to protect our infrastructure. Even after blocking some countries and adding countermeasures we still have more than 3 attack requests per second, but at least I only give them tea ;). We may need to add some special-case code for the bugzilla link checks, but that's not easy without exposing ourselves again, so watch this space is my answer for now.
+> >
+> > CI jobs at GH which request rfortran and openmp from mac.r-project.org have
+> > started to fail fail / timeout so I had to turn that off.
+> >
+> > Is that related?
+> >
+> > The URLs I used are still documented on your webpage.
+> >
+> > Dirk
+> >
+> > --
+> > dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+> >
+>
+
+
+From edd @end|ng |rom deb|@n@org  Fri Mar 13 20:58:51 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Fri, 13 Mar 2026 14:58:51 -0500
+Subject: [R-pkg-devel] BugZilla is now serving tea
+In-Reply-To: <BD7CAA87-C979-4EF1-B3D2-7B1B7005D1DB@R-project.org>
+References: <CAFDcVCS+qDYHRwRFMr5=dYHZwi53BLPmq2_Xg7Mu+Ka2Wz1Yhg@mail.gmail.com>
+ <C5D2B398-0B14-47BA-AF08-560E0E684C7C@R-project.org>
+ <27060.6026.84834.245269@paul.eddelbuettel.com>
+ <BD7CAA87-C979-4EF1-B3D2-7B1B7005D1DB@R-project.org>
+Message-ID: <27060.27771.445538.166962@paul.eddelbuettel.com>
+
+
+Hi Simon,
+
+On 14 March 2026 at 08:27, Simon Urbanek wrote:
+| actually, yes - one of the blocked DDoS attacker blocks (13.105.117.0/24) was apparently GitHub. I have removed that one so things should be back to normal.
+
+Thanks -- and in the meantime I updated my script used by my 'r-ci' setup.
+
+The gfortran binary file is also available (thanks to you) from GitHub
+itself, so I now use that URL (thanks to Jeroen for the hint). For the OpenMP
+binary I found not GitHub URL you provide so as it is small enough I now host
+that.
+
+When you update these the next time, maybe consider dual hosting at
+mac.project.org and github. Many jobs may be local to the latter, so may as
+well keep the files on a shorter leach.
+
+Cheers, Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From @pencer@gr@ve@ @end|ng |rom e||ect|vede|en@e@org  Sat Mar 14 04:05:07 2026
+From: @pencer@gr@ve@ @end|ng |rom e||ect|vede|en@e@org (Spencer Graves)
+Date: Fri, 13 Mar 2026 22:05:07 -0500
+Subject: [R-pkg-devel] bad markup from R CMD check in GitHub action
+Message-ID: <21c9ed60-ac01-446e-8d48-07f238da6bed@effectivedefense.org>
+
+Hello, All:
+
+
+I'm two complaints from R CMD check in GitHub action:
+
+
+https://github.com/sbgraves237/Ecfun/actions/runs/23078486810/job/67043185290
+
+
+ONE says:
+
+
+"Warning: bad markup (extra space?) at readDW_NOMINATE.Rd:224:31"
+
+
+Rows 224:226 of readDW_NOMINATE.Rd are:
+
+
+   \item{Party, Party2, Party3}{
+     as described above with the argument \code{party_code}.
+   }
+
+
+What's wrong with this?
+
+
+ALSO:
+
+
+checkRd: (-1) compareOverlap.Rd:24-26: Lost braces
+     24 |   Also if(\code{Plot}){
+        |                       ^
+
+
+Lines 24-26 of compareOverlap.Rd are in \description and read as follows:
+
+
+   Also if(\code{Plot}){
+     if(\code{any(is.na(dyRef))}) \code{plot(dyRef)} else \code{plot(dy)}
+   }
+
+
+I cannot see what's wrong with this, either.
+
+
+Suggestions? Thanks, Spencer Graves
+
+
+From m|ch@e|ch|r|co4 @end|ng |rom gm@||@com  Sat Mar 14 07:26:46 2026
+From: m|ch@e|ch|r|co4 @end|ng |rom gm@||@com (Michael Chirico)
+Date: Fri, 13 Mar 2026 23:26:46 -0700
+Subject: [R-pkg-devel] bad markup from R CMD check in GitHub action
+In-Reply-To: <21c9ed60-ac01-446e-8d48-07f238da6bed@effectivedefense.org>
+References: <21c9ed60-ac01-446e-8d48-07f238da6bed@effectivedefense.org>
+Message-ID: <CAPRVBcwd8E496hvFVHo1DUCRuzSwGiOYXMquR=gRVviNMpqD-A@mail.gmail.com>
+
+Hi Spencer,
+
+I sent you two PRs with fixes:
+
+ - https://github.com/sbgraves237/Ecfun/pull/1
+ - https://github.com/sbgraves237/Ecfun/pull/2
+
+I hope they're self-explanatory, but do follow-up in the comments
+there as needed.
+
+Mike C
+
+On Fri, Mar 13, 2026 at 8:05?PM Spencer Graves
+<spencer.graves at effectivedefense.org> wrote:
+>
+> Hello, All:
+>
+>
+> I'm two complaints from R CMD check in GitHub action:
+>
+>
+> https://github.com/sbgraves237/Ecfun/actions/runs/23078486810/job/67043185290
+>
+>
+> ONE says:
+>
+>
+> "Warning: bad markup (extra space?) at readDW_NOMINATE.Rd:224:31"
+>
+>
+> Rows 224:226 of readDW_NOMINATE.Rd are:
+>
+>
+>    \item{Party, Party2, Party3}{
+>      as described above with the argument \code{party_code}.
+>    }
+>
+>
+> What's wrong with this?
+>
+>
+> ALSO:
+>
+>
+> checkRd: (-1) compareOverlap.Rd:24-26: Lost braces
+>      24 |   Also if(\code{Plot}){
+>         |                       ^
+>
+>
+> Lines 24-26 of compareOverlap.Rd are in \description and read as follows:
+>
+>
+>    Also if(\code{Plot}){
+>      if(\code{any(is.na(dyRef))}) \code{plot(dyRef)} else \code{plot(dy)}
+>    }
+>
+>
+> I cannot see what's wrong with this, either.
+>
+>
+> Suggestions? Thanks, Spencer Graves
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From @eb@meyer @end|ng |rom |@u@de  Sat Mar 14 13:59:57 2026
+From: @eb@meyer @end|ng |rom |@u@de (Sebastian Meyer)
+Date: Sat, 14 Mar 2026 13:59:57 +0100
+Subject: [R-pkg-devel] bad markup from R CMD check in GitHub action
+In-Reply-To: <21c9ed60-ac01-446e-8d48-07f238da6bed@effectivedefense.org>
+References: <21c9ed60-ac01-446e-8d48-07f238da6bed@effectivedefense.org>
+Message-ID: <13bcc85b-ce6d-46dd-b13f-7a4990252f76@fau.de>
+
+Am 14.03.26 um 04:05 schrieb Spencer Graves:
+> Lines 24-26 of compareOverlap.Rd are in \description and read as follows:
+> 
+> 
+>     Also if(\code{Plot}){
+>       if(\code{any(is.na(dyRef))}) \code{plot(dyRef)} else \code{plot(dy)}
+>     }
+> 
+> 
+> I cannot see what's wrong with this, either.
+> 
+The outer braces occur in normal text here, so are "lost" if not escaped 
+(similar as in LaTeX). You can see what happens if you render your Rd 
+file as plain-text help in your R console, via
+
+R> tools::Rd2txt("PATH/TO/compareOverlap.Rd")
+
+[...]
+      Also if(?Plot?) if(?any(is.na(dyRef))?) ?plot(dyRef)? else
+      ?plot(dy)?
+[...]
+
+Mike C already provided a solution. As a general comment: if needed, 
+larger code chunks are usually better displayed in a \preformatted{} 
+block, preserving line breaks, for example:
+
+\preformatted{
+if (Plot) {
+   ## ... more code ...
+}
+}
+
+Best,
+	Sebastian Meyer
+
+
+From jeroenoom@ @end|ng |rom gm@||@com  Thu Mar 26 16:42:05 2026
+From: jeroenoom@ @end|ng |rom gm@||@com (Jeroen Ooms)
+Date: Thu, 26 Mar 2026 16:42:05 +0100
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+Message-ID: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+
+How can I get ghostscript to work on a headless linux server? Some
+ancient packages are failing to build vignettes on my server with the
+following error:
+
+   Error in postscript(file = cmd, width = width, height = height,
+pointsize = pointsize,  :
+  cannot open 'postscript' pipe to ''/usr/bin/gs' -dNOPAUSE -dBATCH -q
+-sDEVICE=png16m -r72 -dAutoRotatePages=/None -g504x504
+
+I can reproduce the problem on my Ubuntu 24.04 server (which has ghostscript):
+
+   gs --version #10.02.1
+   nohup Xvfb :6 -screen 0 1280x1024x24 > ~/X.log 2>&1 &
+   export DISPLAY=:6
+   R -e "bitmap('test.bmp')"
+
+This shows the above error, indeed, but no further error message from
+ghostscript what the problem is.
+
+
+
+
+
+
+
+
+
+
+
+
+     cannot open 'postscript' pipe to ''/usr/bin/gs' -dNOPAUSE -dBATCH
+-q -sDEVICE=png16m -r72 -dAutoRotatePages=/None -g720x360 -
+
+The server has ghostscript installed, and
+
+
+From henr|k@bengt@@on @end|ng |rom gm@||@com  Thu Mar 26 17:09:21 2026
+From: henr|k@bengt@@on @end|ng |rom gm@||@com (Henrik Bengtsson)
+Date: Thu, 26 Mar 2026 09:09:21 -0700
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+In-Reply-To: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+References: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+Message-ID: <CAFDcVCTL6WGBX-YgGFd7SvUuJo1FTgTU=sT5C=9eHBkGJLgR9g@mail.gmail.com>
+
+I fail to reproduce your error on my setups, but does 'xvfb-run' ("Run
+COMMAND (usually an X client) in a virtual X server environment")
+help? For example,
+
+xvfb-run R -e "bitmap('test.bmp')"
+
+/Henrik
+
+On Thu, Mar 26, 2026 at 8:42?AM Jeroen Ooms <jeroenooms at gmail.com> wrote:
+>
+> How can I get ghostscript to work on a headless linux server? Some
+> ancient packages are failing to build vignettes on my server with the
+> following error:
+>
+>    Error in postscript(file = cmd, width = width, height = height,
+> pointsize = pointsize,  :
+>   cannot open 'postscript' pipe to ''/usr/bin/gs' -dNOPAUSE -dBATCH -q
+> -sDEVICE=png16m -r72 -dAutoRotatePages=/None -g504x504
+>
+> I can reproduce the problem on my Ubuntu 24.04 server (which has ghostscript):
+>
+>    gs --version #10.02.1
+>    nohup Xvfb :6 -screen 0 1280x1024x24 > ~/X.log 2>&1 &
+>    export DISPLAY=:6
+>    R -e "bitmap('test.bmp')"
+>
+> This shows the above error, indeed, but no further error message from
+> ghostscript what the problem is.
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>      cannot open 'postscript' pipe to ''/usr/bin/gs' -dNOPAUSE -dBATCH
+> -q -sDEVICE=png16m -r72 -dAutoRotatePages=/None -g720x360 -
+>
+> The server has ghostscript installed, and
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From edd @end|ng |rom deb|@n@org  Thu Mar 26 17:34:33 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Thu, 26 Mar 2026 11:34:33 -0500
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+In-Reply-To: <CAFDcVCTL6WGBX-YgGFd7SvUuJo1FTgTU=sT5C=9eHBkGJLgR9g@mail.gmail.com>
+References: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+ <CAFDcVCTL6WGBX-YgGFd7SvUuJo1FTgTU=sT5C=9eHBkGJLgR9g@mail.gmail.com>
+Message-ID: <27077.24601.253715.630269@paul.eddelbuettel.com>
+
+
+I also generally rely on xvfb-run for Debian and Ubuntu package builds,
+including of course full r2u battery of all CRAN packages across several
+releases and by now also dual architectures. These days the scripted
+automation is good enough for all 'sane' packages (and I can live with one
+know exception that is a package group which forces a tcl/tk frontend).
+
+For r2u my builder calls
+
+  xvfb-run -a -n 20 \
+      R CMD INSTALL -l ../../${pkg}/debian/r-${repo}-${lcpkg}/usr/lib/R/site-library ${pkg}
+
+and I have forgotten where I got the `-a -n 20` arguments from (possible the
+Debian package building context) so you could try those.
+
+Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From |kry|ov @end|ng |rom d|@root@org  Thu Mar 26 18:18:33 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Thu, 26 Mar 2026 20:18:33 +0300
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+In-Reply-To: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+References: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+Message-ID: <20260326201833.67126bd8@arachnoid>
+
+? Thu, 26 Mar 2026 16:42:05 +0100
+Jeroen Ooms <jeroenooms at gmail.com> ?????:
+
+>  gs --version #10.02.1
+>    nohup Xvfb :6 -screen 0 1280x1024x24 > ~/X.log 2>&1 &
+>    export DISPLAY=:6
+>    R -e "bitmap('test.bmp')"
+> 
+> This shows the above error, indeed, but no further error message from
+> ghostscript what the problem is.
+
+Couldn't reproduce that on a fresh Docker image of Ubuntu 24.04, and
+the only thing we know is that R_popen() seemed to fail, either because
+it returned a NULL pointer, or because it set 'errno' to a nonzero
+value.
+
+If all else fails, it could be useful to trawl through the output of
+strace -f R -e "bitmap('test.bmp')". It might be possible that the test
+for errno != 0 independently from the return value being NULL is a
+mistake, but that's just a low-probability guess now.
+
+-- 
+Best regards,
+Ivan
+
+
+From jeroenoom@ @end|ng |rom gm@||@com  Fri Mar 27 14:41:18 2026
+From: jeroenoom@ @end|ng |rom gm@||@com (Jeroen Ooms)
+Date: Fri, 27 Mar 2026 14:41:18 +0100
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+In-Reply-To: <20260326201833.67126bd8@arachnoid>
+References: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+ <20260326201833.67126bd8@arachnoid>
+Message-ID: <CABFfbXswnP2a-C-pQ0GrGdRH6FfnHr+Udytvh1Sr-RyRsunygQ@mail.gmail.com>
+
+On Thu, Mar 26, 2026 at 6:18?PM Ivan Krylov <ikrylov at disroot.org> wrote:
+>
+> ? Thu, 26 Mar 2026 16:42:05 +0100
+> Jeroen Ooms <jeroenooms at gmail.com> ?????:
+>
+> >  gs --version #10.02.1
+> >    nohup Xvfb :6 -screen 0 1280x1024x24 > ~/X.log 2>&1 &
+> >    export DISPLAY=:6
+> >    R -e "bitmap('test.bmp')"
+> >
+> > This shows the above error, indeed, but no further error message from
+> > ghostscript what the problem is.
+>
+> Couldn't reproduce that on a fresh Docker image of Ubuntu 24.04, and
+> the only thing we know is that R_popen() seemed to fail, either because
+> it returned a NULL pointer, or because it set 'errno' to a nonzero
+> value.
+
+That is surprising. Here is a reproducer of a Dockerfile based on
+Ubuntu 24.04 that fails for me:
+https://github.com/jeroen/ubuntu-gs-bug
+
+It also fails on GitHub actions: https://github.com/jeroen/ubuntu-gs-bug/actions
+
+How is your Docker setup different?
+
+
+From |kry|ov @end|ng |rom d|@root@org  Fri Mar 27 16:13:09 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Fri, 27 Mar 2026 18:13:09 +0300
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+In-Reply-To: <CABFfbXswnP2a-C-pQ0GrGdRH6FfnHr+Udytvh1Sr-RyRsunygQ@mail.gmail.com>
+References: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+ <20260326201833.67126bd8@arachnoid>
+ <CABFfbXswnP2a-C-pQ0GrGdRH6FfnHr+Udytvh1Sr-RyRsunygQ@mail.gmail.com>
+Message-ID: <20260327181309.2bf34414@arachnoid>
+
+? Fri, 27 Mar 2026 14:41:18 +0100
+Jeroen Ooms <jeroenooms at gmail.com> ?????:
+
+> Here is a reproducer of a Dockerfile based on Ubuntu 24.04 that fails
+> for me:
+> https://github.com/jeroen/ubuntu-gs-bug
+
+Thanks for providing a reliable reproducer!
+
+> How is your Docker setup different?
+
+Initially I've tried 'podman run --rm -it ubuntu:24.04' (on a Debian
+oldstable machine) and typed the commands interactively. I've also
+downloaded your Dockerfile and ran 'podman build -f Dockerfile', and it
+still succeeded. Surprisingly, if I try to run the same commands in
+GitHub Actions outside of the Docker build process, they don't fail
+either:
+https://github.com/aitap/ubuntu-gs-bug/actions/runs/23650220744/job/68892769311
+
+But in Docker they do fail:
+https://github.com/aitap/ubuntu-gs-bug/actions/runs/23651007509/job/68895554293
+
+If I force the build to succeed and smuggle the strace output out of
+the container, the difference is due to how popen() works:
+
+Outside Docker, popen() calls clone3() and succeeds on the first try:
+
+[pid 29802] clone3({flags=CLONE_VM|CLONE_VFORK, exit_signal=SIGCHLD,
+stack=0x7fcf8d8f9000, stack_size=0 x9000}, 88 <unfinished ...>
+...
+[pid 29802] <... clone3 resumed>)       = 29836
+
+Inside Docker on GitHub Actions, clone3() doesn't work, so popen()
+falls back to clone():
+
+10    clone3({flags=CLONE_VM|CLONE_VFORK|CLONE_CLEAR_SIGHAND,
+exit_signal=SIGCHLD, stack=0x7f2f23a15000, stack_size=0x9000}, 88) = -1
+ENOSYS (Function not implemented)
+10    clone(child_stack=0x7f2f23a1dff0,
+flags=CLONE_VM|CLONE_VFORK|SIGCHLD <unfinished ...>
+...
+10    <... clone resumed>)              = 28
+
+PID 10 is R. PID 28 eventually runs sh and later vfork()s to run gs
+without a problem. I think this first clone3() failure in R's (PID 10)
+call to popen() sets errno to a nonzero value, which fails the
+following bit of code inside .External(C_PostScript, ...):
+
+    } else if (pd->filename[0] == '|') {
+	errno = 0;
+	pd->psfp = R_popen(pd->filename + 1, "w");
+	pd->open_type = 1;
+        // popen() is successful, but errno is non-zero!
+	if (!pd->psfp || errno != 0) {
+	    char errbuf[strlen(pd->filename + 1) + 1];
+	    strcpy(errbuf, pd->filename + 1);
+	    PS_cleanup(4, dd, pd);
+	    error(_("cannot open 'postscript' pipe to '%s'"),
+		     errbuf);
+
+Patching postscript() to ignore non-zero errno when popen() returns a
+non-null pointer seems to make the Docker build succeed:
+https://github.com/aitap/ubuntu-gs-bug/actions/runs/23652228769/job/68899856614
+
+Will report this on Bugzilla.
+
+-- 
+Best regards,
+Ivan
+
+
+From jeroenoom@ @end|ng |rom gm@||@com  Fri Mar 27 23:52:51 2026
+From: jeroenoom@ @end|ng |rom gm@||@com (Jeroen Ooms)
+Date: Fri, 27 Mar 2026 23:52:51 +0100
+Subject: [R-pkg-devel] Using ghostscript on a headless linux server?
+In-Reply-To: <20260327181309.2bf34414@arachnoid>
+References: <CABFfbXuxC8Ld45srFM5KiftSKhcUQReze8BxAvYV2cnc91YpsQ@mail.gmail.com>
+ <20260326201833.67126bd8@arachnoid>
+ <CABFfbXswnP2a-C-pQ0GrGdRH6FfnHr+Udytvh1Sr-RyRsunygQ@mail.gmail.com>
+ <20260327181309.2bf34414@arachnoid>
+Message-ID: <CABFfbXu2To5mm4AswDsth+9+++SCswGZi1pNVcc7ucGS_HWkVA@mail.gmail.com>
+
+On Fri, Mar 27, 2026 at 4:13?PM Ivan Krylov <ikrylov at disroot.org> wrote:
+>
+> ? Fri, 27 Mar 2026 14:41:18 +0100
+> Jeroen Ooms <jeroenooms at gmail.com> ?????:
+>
+> > Here is a reproducer of a Dockerfile based on Ubuntu 24.04 that fails
+> > for me:
+> > https://github.com/jeroen/ubuntu-gs-bug
+>
+> Thanks for providing a reliable reproducer!
+>
+> > How is your Docker setup different?
+>
+> Initially I've tried 'podman run --rm -it ubuntu:24.04' (on a Debian
+> oldstable machine) and typed the commands interactively. I've also
+> downloaded your Dockerfile and ran 'podman build -f Dockerfile', and it
+> still succeeded. Surprisingly, if I try to run the same commands in
+> GitHub Actions outside of the Docker build process, they don't fail
+> either:
+> https://github.com/aitap/ubuntu-gs-bug/actions/runs/23650220744/job/68892769311
+>
+> But in Docker they do fail:
+> https://github.com/aitap/ubuntu-gs-bug/actions/runs/23651007509/job/68895554293
+>
+> If I force the build to succeed and smuggle the strace output out of
+> the container, the difference is due to how popen() works:
+>
+> Outside Docker, popen() calls clone3() and succeeds on the first try:
+>
+> [pid 29802] clone3({flags=CLONE_VM|CLONE_VFORK, exit_signal=SIGCHLD,
+> stack=0x7fcf8d8f9000, stack_size=0 x9000}, 88 <unfinished ...>
+> ...
+> [pid 29802] <... clone3 resumed>)       = 29836
+>
+> Inside Docker on GitHub Actions, clone3() doesn't work, so popen()
+> falls back to clone():
+>
+> 10    clone3({flags=CLONE_VM|CLONE_VFORK|CLONE_CLEAR_SIGHAND,
+> exit_signal=SIGCHLD, stack=0x7f2f23a15000, stack_size=0x9000}, 88) = -1
+> ENOSYS (Function not implemented)
+> 10    clone(child_stack=0x7f2f23a1dff0,
+> flags=CLONE_VM|CLONE_VFORK|SIGCHLD <unfinished ...>
+> ...
+> 10    <... clone resumed>)              = 28
+>
+> PID 10 is R. PID 28 eventually runs sh and later vfork()s to run gs
+> without a problem. I think this first clone3() failure in R's (PID 10)
+> call to popen() sets errno to a nonzero value, which fails the
+> following bit of code inside .External(C_PostScript, ...):
+>
+>     } else if (pd->filename[0] == '|') {
+>         errno = 0;
+>         pd->psfp = R_popen(pd->filename + 1, "w");
+>         pd->open_type = 1;
+>         // popen() is successful, but errno is non-zero!
+>         if (!pd->psfp || errno != 0) {
+>             char errbuf[strlen(pd->filename + 1) + 1];
+>             strcpy(errbuf, pd->filename + 1);
+>             PS_cleanup(4, dd, pd);
+>             error(_("cannot open 'postscript' pipe to '%s'"),
+>                      errbuf);
+>
+> Patching postscript() to ignore non-zero errno when popen() returns a
+> non-null pointer seems to make the Docker build succeed:
+> https://github.com/aitap/ubuntu-gs-bug/actions/runs/23652228769/job/68899856614
+
+Thank you for the detective work. I confirmed that the patch fixes the
+problem, and checks cleanly.
+
+Afaik errno should indeed only be inspected iff popen() returns NULL,
+as it may contain lingering values as a side effect from internal
+calls, as is the case here. Some archaeology revealed that this code
+was added 24 years ago by BDR to work around what seems like a buggy
+in popen() in linux (trunk at 21072 PR#1959):
+https://github.com/r-devel/r-svn/commit/9d4edc552a6b8c93a2e04f41f7a6ac713c3a0a66
+
+
+From r@|@@pere|r@@br @end|ng |rom gm@||@com  Sun Mar 29 00:55:45 2026
+From: r@|@@pere|r@@br @end|ng |rom gm@||@com (Rafael H. M. Pereira)
+Date: Sat, 28 Mar 2026 20:55:45 -0300
+Subject: [R-pkg-devel] installation time
+Message-ID: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+
+Hi all,
+
+Does CRAN have a policy on maximum installation time? I couldn't find any
+info on this. We're trying a package idea but the installation of the
+package takes aprox. 1 minute. I'm wondering how that would be considered
+by CRAN maintainer.
+
+best,
+Rafa Pereira
+
+	[[alternative HTML version deleted]]
+
+
+From edd @end|ng |rom deb|@n@org  Sun Mar 29 01:44:24 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Sat, 28 Mar 2026 19:44:24 -0500
+Subject: [R-pkg-devel] installation time
+In-Reply-To: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+References: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+Message-ID: <27080.30184.576197.478746@paul.eddelbuettel.com>
+
+
+On 28 March 2026 at 20:55, Rafael H. M. Pereira wrote:
+| Does CRAN have a policy on maximum installation time? I couldn't find any
+| info on this. We're trying a package idea but the installation of the
+| package takes aprox. 1 minute. I'm wondering how that would be considered
+| by CRAN maintainer.
+
+No worries as e.g. duckdb and arrow can take 20+ minutes [0]. There are also
+a few more esoteric packages taking a jolly long time. [1] And there is AFAIK
+_no_ formal limit in either WRE or the CRAN Repo Policy. [2]
+
+Dirk
+
+
+[0] On linux, and depends on cpu architecture as e.g. arrow can bring in
+pre-compilated blobs on amd64 but not on arm64.
+[1] Filed from the department of "things you learn when you recompile all of
+CRAN all the time for r2u, currently for Ubuntu 26.04".
+[2] I could go and mention a number of packages now vendoring their
+dependencies even when WRE suggests to pretty-please use system libraries.
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From |kw@|mmo @end|ng |rom gm@||@com  Sun Mar 29 10:26:05 2026
+From: |kw@|mmo @end|ng |rom gm@||@com (Iris Simmons)
+Date: Sun, 29 Mar 2026 04:26:05 -0400
+Subject: [R-pkg-devel] R_MissingArg is now non-API
+Message-ID: <CADNULg-MjK0fuBGAx+maaHvBgMaBUQOet+ss0W8EfKq83ksiqg@mail.gmail.com>
+
+I understand that R has put Rf_findVarInFrame and R_UnboundValue on the
+non-API list in order to deny direct access to PROMSXP objects.
+
+What I can't understand is why R put R_MissingArg on the non-API list. I've
+been using it to allocate functions in C, and now I'm not sure how I'm
+going to get around it. Right now I would write:
+
+SEXP formals = Rf_allocLang(1);
+SET_TAG(formals, Rf_install("x"));
+SETCAR (formals, R_MissingArg);
+SEXP body = <...>;
+SEXP env = <...>;
+SEXP fun = R_mkClosure(formals, body, env);
+
+Does anyone know how I might get around this?
+
+	[[alternative HTML version deleted]]
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Sun Mar 29 18:03:50 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Sun, 29 Mar 2026 18:03:50 +0200
+Subject: [R-pkg-devel] installation time
+In-Reply-To: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+References: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+Message-ID: <e6c3338b-b897-4316-8024-3805ecfd09e3@statistik.tu-dortmund.de>
+
+1 minute is perfectly fine.
+
+The oeverall check time should not exceed 10 minutes.
+
+Best,
+Uwe Ligges
+
+
+
+
+On 29.03.2026 00:55, Rafael H. M. Pereira wrote:
+> Hi all,
+> 
+> Does CRAN have a policy on maximum installation time? I couldn't find any
+> info on this. We're trying a package idea but the installation of the
+> package takes aprox. 1 minute. I'm wondering how that would be considered
+> by CRAN maintainer.
+> 
+> best,
+> Rafa Pereira
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From r@|@@pere|r@@br @end|ng |rom gm@||@com  Sun Mar 29 18:06:32 2026
+From: r@|@@pere|r@@br @end|ng |rom gm@||@com (Rafael H. M. Pereira)
+Date: Sun, 29 Mar 2026 13:06:32 -0300
+Subject: [R-pkg-devel] installation time
+In-Reply-To: <e6c3338b-b897-4316-8024-3805ecfd09e3@statistik.tu-dortmund.de>
+References: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+ <e6c3338b-b897-4316-8024-3805ecfd09e3@statistik.tu-dortmund.de>
+Message-ID: <CAA42DGn93VJokrUjCzXPVOb0kKp1r8cczH54rKo3OEuCp8OgHg@mail.gmail.com>
+
+??
+
+Rafael H. M. Pereira reacted via Gmail
+<https://www.google.com/gmail/about/?utm_source=gmail-in-product&utm_medium=et&utm_campaign=emojireactionemail#app>
+
+On Sun, Mar 29, 2026 at 1:04?PM Uwe Ligges <ligges at statistik.tu-dortmund.de>
+wrote:
+
+> 1 minute is perfectly fine.
+>
+> The oeverall check time should not exceed 10 minutes.
+>
+> Best,
+> Uwe Ligges
+>
+>
+>
+>
+> On 29.03.2026 00:55, Rafael H. M. Pereira wrote:
+> > Hi all,
+> >
+> > Does CRAN have a policy on maximum installation time? I couldn't find any
+> > info on this. We're trying a package idea but the installation of the
+> > package takes aprox. 1 minute. I'm wondering how that would be considered
+> > by CRAN maintainer.
+> >
+> > best,
+> > Rafa Pereira
+> >
+> >       [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+>
+
+From r@|@@pere|r@@br @end|ng |rom gm@||@com  Sun Mar 29 18:06:39 2026
+From: r@|@@pere|r@@br @end|ng |rom gm@||@com (Rafael H. M. Pereira)
+Date: Sun, 29 Mar 2026 13:06:39 -0300
+Subject: [R-pkg-devel] installation time
+In-Reply-To: <e6c3338b-b897-4316-8024-3805ecfd09e3@statistik.tu-dortmund.de>
+References: <CAA42DGnrq+nTqqm7AXh_cfREU68sbpMRF98_z3puzaCLC2mxmA@mail.gmail.com>
+ <e6c3338b-b897-4316-8024-3805ecfd09e3@statistik.tu-dortmund.de>
+Message-ID: <CAA42DG=YKdEn3HwqAAYmbv-rHK0y_MgKGLqq_iL4N-Ltb5hSRg@mail.gmail.com>
+
+Hi Uwe,
+
+Thanks a lot for clarifying this! That's a relief.
+
+best,
+
+Rafa
+
+On Sun, Mar 29, 2026 at 1:04?PM Uwe Ligges <ligges at statistik.tu-dortmund.de>
+wrote:
+
+> 1 minute is perfectly fine.
+>
+> The oeverall check time should not exceed 10 minutes.
+>
+> Best,
+> Uwe Ligges
+>
+>
+>
+>
+> On 29.03.2026 00:55, Rafael H. M. Pereira wrote:
+> > Hi all,
+> >
+> > Does CRAN have a policy on maximum installation time? I couldn't find any
+> > info on this. We're trying a package idea but the installation of the
+> > package takes aprox. 1 minute. I'm wondering how that would be considered
+> > by CRAN maintainer.
+> >
+> > best,
+> > Rafa Pereira
+> >
+> >       [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+>
+
+	[[alternative HTML version deleted]]
+
+
+From iuke-tier@ey m@iii@g oii uiow@@edu  Mon Mar 30 01:09:00 2026
+From: iuke-tier@ey m@iii@g oii uiow@@edu (iuke-tier@ey m@iii@g oii uiow@@edu)
+Date: Sun, 29 Mar 2026 18:09:00 -0500 (CDT)
+Subject: [R-pkg-devel] [External]  R_MissingArg is now non-API
+In-Reply-To: <CADNULg-MjK0fuBGAx+maaHvBgMaBUQOet+ss0W8EfKq83ksiqg@mail.gmail.com>
+References: <CADNULg-MjK0fuBGAx+maaHvBgMaBUQOet+ss0W8EfKq83ksiqg@mail.gmail.com>
+Message-ID: <2c30ca23-73ec-8010-7f60-f254788dae78@uiowa.edu>
+
+On Sun, 29 Mar 2026, Iris Simmons wrote:
+
+> I understand that R has put Rf_findVarInFrame and R_UnboundValue on the
+> non-API list in order to deny direct access to PROMSXP objects.
+>
+> What I can't understand is why R put R_MissingArg on the non-API list. I've
+> been using it to allocate functions in C, and now I'm not sure how I'm
+> going to get around it. Right now I would write:
+>
+> SEXP formals = Rf_allocLang(1);
+> SET_TAG(formals, Rf_install("x"));
+> SETCAR (formals, R_MissingArg);
+> SEXP body = <...>;
+> SEXP env = <...>;
+> SEXP fun = R_mkClosure(formals, body, env);
+>
+> Does anyone know how I might get around this?
+>
+> 	[[alternative HTML version deleted]]
+
+You are right: R_MissingArg is needed for this so it should be in the
+variables API. It is now and should no longer generate a check NOTE.
+
+Thanks,
+
+luke
+
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+-- 
+Luke Tierney
+Ralph E. Wareham Professor of Mathematical Sciences
+University of Iowa                  Phone:             319-335-3386
+Department of Statistics and        Fax:               319-335-3017
+    Actuarial Science
+241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu
+Iowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/
+
+
+From @pencer@gr@ve@ @end|ng |rom e||ect|vede|en@e@org  Mon Mar 30 03:47:06 2026
+From: @pencer@gr@ve@ @end|ng |rom e||ect|vede|en@e@org (Spencer Graves)
+Date: Sun, 29 Mar 2026 20:47:06 -0500
+Subject: [R-pkg-devel] bad markup from R CMD check in GitHub action
+In-Reply-To: <13bcc85b-ce6d-46dd-b13f-7a4990252f76@fau.de>
+References: <21c9ed60-ac01-446e-8d48-07f238da6bed@effectivedefense.org>
+ <13bcc85b-ce6d-46dd-b13f-7a4990252f76@fau.de>
+Message-ID: <a1d4d404-4440-4db9-9fb1-e4962c65752b@effectivedefense.org>
+
+Thanks very much to Mike and Sebastian. I was able to get past the 
+problem with Mike's help and to better understand the problem with 
+Sebastian's input.
+
+
+Please excuse the delay in responding. Too many interrupts ;-)
+
+
+Spencer Graves
+
+
+On 3/14/26 07:59, Sebastian Meyer wrote:
+> Am 14.03.26 um 04:05 schrieb Spencer Graves:
+>> Lines 24-26 of compareOverlap.Rd are in \description and read as follows:
+>>
+>>
+>> ??? Also if(\code{Plot}){
+>> ????? if(\code{any(is.na(dyRef))}) \code{plot(dyRef)} else 
+>> \code{plot(dy)}
+>> ??? }
+>>
+>>
+>> I cannot see what's wrong with this, either.
+>>
+> The outer braces occur in normal text here, so are "lost" if not escaped 
+> (similar as in LaTeX). You can see what happens if you render your Rd 
+> file as plain-text help in your R console, via
+> 
+> R> tools::Rd2txt("PATH/TO/compareOverlap.Rd")
+> 
+> [...]
+>  ???? Also if(?Plot?) if(?any(is.na(dyRef))?) ?plot(dyRef)? else
+>  ???? ?plot(dy)?
+> [...]
+> 
+> Mike C already provided a solution. As a general comment: if needed, 
+> larger code chunks are usually better displayed in a \preformatted{} 
+> block, preserving line breaks, for example:
+> 
+> \preformatted{
+> if (Plot) {
+>  ? ## ... more code ...
+> }
+> }
+> 
+> Best,
+>  ????Sebastian Meyer
+>
+
+

@@ -1,0 +1,711 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-06",
+  "messages": [
+    {
+      "id": "msg-8758bce1a75f",
+      "message_id": "<CALECgPY2ed4POK+QvLe59JbWjbmYLFffe5A7aM1qLe0ksy9fmg@mail.gmail.com>",
+      "from_name": "Brad Eck",
+      "from_email_hash": "7c6e520b3d13665cf86fa5db319fd7db4e0924b98f97d1b85f6dc47a1e46644e",
+      "date": "2026-06-01T10:09:19Z",
+      "subject": "[R-pkg-devel] image with R-devel and gcc-16",
+      "subject_clean": "[R-pkg-devel] image with R-devel and gcc-16",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear List\n\nI received a note that my package -- epanet2toolkit -- was showing a\nwarning in the debian-gcc results on CRAN.\nhttps://cran.r-project.org/web/checks/check_results_epanet2toolkit.html\n\nI'd like to reproduce the warning and fix it.\n\nIs anyone aware of a docker image with this setup?\n\nWhen I pull rocker/r-devel:latest, I see gcc-15. Same with debian:testing.\n\nAny pointers appreciated.\n\nThanks,\n\nBrad\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear List\n\nI received a note that my package -- epanet2toolkit -- was showing a\nwarning in the debian-gcc results on CRAN.\nhttps://cran.r-project.org/web/checks/check_results_epanet2toolkit.html\n\nI'd ",
+      "thread_id": "thread-8758bce1a75f",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-bf7cc2ce77f9",
+      "message_id": "<27165.31682.375681.807741@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-06-01T12:32:02Z",
+      "subject": "[R-pkg-devel] image with R-devel and gcc-16",
+      "subject_clean": "[R-pkg-devel] image with R-devel and gcc-16",
+      "in_reply_to": "<CALECgPY2ed4POK+QvLe59JbWjbmYLFffe5A7aM1qLe0ksy9fmg@mail.gmail.com>",
+      "references": [
+        "<CALECgPY2ed4POK+QvLe59JbWjbmYLFffe5A7aM1qLe0ksy9fmg@mail.gmail.com>"
+      ],
+      "body_plain": "On 1 June 2026 at 11:09, Brad Eck wrote:\n| I received a note that my package -- epanet2toolkit -- was showing a\n| warning in the debian-gcc results on CRAN.\n| https://cran.r-project.org/web/checks/check_results_epanet2toolkit.html\n| \n| I'd like to reproduce the warning and fix it.\n| \n| Is anyone aware of a docker image with this setup?\n| \n| When I pull rocker/r-devel:latest, I see gcc-15. Same with debian:testing.\n\nThe _default compiler_ in Debian changes more slowly than the _available\ncompilers_. But you were very close. Use either one of\n\n  rocker/r-base\n  r-base         (same as previous one, but under different 'official' handle)\n\nfor the default container with R 'release', or as you did\n\n  rocker/r-devel\n\nto get a weekly build of R-devel on top of it (and remember to use RD for for\nR-devel, R is still 'R-releasse' in it) and then do\n\n  apt update -q\n  apt install gcc-16\n\n(followed by as-needed the gfortran and g++ versions if your package need\nthem) and do the usual bit via the compiler variable in your src/Makevars, or\na ~/.R/Makevars, to make that compiler the default.  Come to r-sig-debian if\nyou have more 'Debian-specific' questions on the process.\n\nI have used this approach a few times myself for such tasks. \n\nHope this helps,  Dirk (who maintains these containers)\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 1 June 2026 at 11:09, Brad Eck wrote:\n| I received a note that my package -- epanet2toolkit -- was showing a\n| warning in the debian-gcc results on CRAN.\n| https://cran.r-project.org/web/checks/che",
+      "thread_id": "thread-8758bce1a75f",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-f4bb7d6faa00",
+      "message_id": "<27165.54487.872885.160014@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-06-01T18:52:07Z",
+      "subject": "[R-pkg-devel] image with R-devel and gcc-16",
+      "subject_clean": "[R-pkg-devel] image with R-devel and gcc-16",
+      "in_reply_to": "<27165.31682.375681.807741@paul.eddelbuettel.com>",
+      "references": [
+        "<CALECgPY2ed4POK+QvLe59JbWjbmYLFffe5A7aM1qLe0ksy9fmg@mail.gmail.com>",
+        "<27165.31682.375681.807741@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "On 1 June 2026 at 07:32, Dirk Eddelbuettel wrote:\n| The _default compiler_ in Debian changes more slowly than the _available\n| compilers_. But you were very close. Use either one of\n| \n|   rocker/r-base\n|   r-base         (same as previous one, but under different 'official' handle)\n| \n| for the default container with R 'release', or as you did\n| \n|   rocker/r-devel\n| \n| to get a weekly build of R-devel on top of it (and remember to use RD for for\n| R-devel, R is still 'R-releasse' in it) and then do\n| \n|   apt update -q\n|   apt install gcc-16\n| \n| (followed by as-needed the gfortran and g++ versions if your package need\n| them) and do the usual bit via the compiler variable in your src/Makevars, or\n| a ~/.R/Makevars, to make that compiler the default.  Come to r-sig-debian if\n| you have more 'Debian-specific' questions on the process.\n\nI always forget about this part but I just needed it myself (!!) so for that\ndebugging task twenty minutes ago I did\n\n    mkdir ~/.R\n    $EDIT ~/.R/Makevars\n\ninside the container (installing `mg` as a lightweight version with the\nkeybindings of The One True Editor (TM), I sometimes pick `vim-tiny` too) to\nset CXX20=g++-16 which was what I needed right now. My need was also for\ng++-16 which seemingly tightens again what headers are auto-included, and did\nnot involve R-devel.\n\nDirk\n\n-- \nDirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n\nSupport my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info at\nhttps://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026",
+      "body_snippet": "On 1 June 2026 at 07:32, Dirk Eddelbuettel wrote:\n| The _default compiler_ in Debian changes more slowly than the _available\n| compilers_. But you were very close. Use either one of\n| \n|   rocker/r-ba",
+      "thread_id": "thread-8758bce1a75f",
+      "thread_depth": 2,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-c4a19d3dc4a0",
+      "message_id": "<CALECgPYL2-1xXaw5KSTu0=1Q=2kRAtuZQHWUeOCHxnvyFK=ENg@mail.gmail.com>",
+      "from_name": "Brad Eck",
+      "from_email_hash": "7c6e520b3d13665cf86fa5db319fd7db4e0924b98f97d1b85f6dc47a1e46644e",
+      "date": "2026-06-01T19:13:56Z",
+      "subject": "[R-pkg-devel] image with R-devel and gcc-16",
+      "subject_clean": "[R-pkg-devel] image with R-devel and gcc-16",
+      "in_reply_to": "<27165.54487.872885.160014@paul.eddelbuettel.com>",
+      "references": [
+        "<CALECgPY2ed4POK+QvLe59JbWjbmYLFffe5A7aM1qLe0ksy9fmg@mail.gmail.com>",
+        "<27165.31682.375681.807741@paul.eddelbuettel.com>",
+        "<27165.54487.872885.160014@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Thanks Dirk,\n\nI was able to reproduce the warning by adding the line:\nCC=gcc-16\n\nto ~/.R/Makevars  in the container.\n\nBrad\n\n\n\n\nOn Mon, Jun 1, 2026 at 7:52?PM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 1 June 2026 at 07:32, Dirk Eddelbuettel wrote:\n> | The _default compiler_ in Debian changes more slowly than the _available\n> | compilers_. But you were very close. Use either one of\n> |\n> |   rocker/r-base\n> |   r-base         (same as previous one, but under different 'official'\n> handle)\n> |\n> | for the default container with R 'release', or as you did\n> |\n> |   rocker/r-devel\n> |\n> | to get a weekly build of R-devel on top of it (and remember to use RD\n> for for\n> | R-devel, R is still 'R-releasse' in it) and then do\n> |\n> |   apt update -q\n> |   apt install gcc-16\n> |\n> | (followed by as-needed the gfortran and g++ versions if your package need\n> | them) and do the usual bit via the compiler variable in your\n> src/Makevars, or\n> | a ~/.R/Makevars, to make that compiler the default.  Come to\n> r-sig-debian if\n> | you have more 'Debian-specific' questions on the process.\n>\n> I always forget about this part but I just needed it myself (!!) so for\n> that\n> debugging task twenty minutes ago I did\n>\n>     mkdir ~/.R\n>     $EDIT ~/.R/Makevars\n>\n> inside the container (installing `mg` as a lightweight version with the\n> keybindings of The One True Editor (TM), I sometimes pick `vim-tiny` too)\n> to\n> set CXX20=g++-16 which was what I needed right now. My need was also for\n> g++-16 which seemingly tightens again what headers are auto-included, and\n> did\n> not involve R-devel.\n>\n> Dirk\n>\n> --\n> Dirk Eddelbuettel | edd at debian.org | http://dirk.eddelbuettel.com\n>\n> Support my Tour de Shore 2026 ride benefiting Maywood Fine Arts! More info\n> at\n> https://dirk.eddelbuettel.com/blog/2026/04/03#sponsor_tour_de_shore_2026\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Dirk,\n\nI was able to reproduce the warning by adding the line:\nCC=gcc-16\n\nto ~/.R/Makevars  in the container.\n\nBrad\n\n\n\n\nOn Mon, Jun 1, 2026 at 7:52?PM Dirk Eddelbuettel <edd at debian.org> wrot",
+      "thread_id": "thread-8758bce1a75f",
+      "thread_depth": 3,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-12f67c17c386",
+      "message_id": "<9a72f06.2277f.19e8df0c42f.Webtop.29@sympatico.ca>",
+      "from_name": "D B",
+      "from_email_hash": "5738c06d6c392891e4e3ec3fa965ce217d1f58558f90e22bf5a705d922ea199d",
+      "date": "2026-06-03T14:43:46Z",
+      "subject": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN Submission akin 0.3.5",
+      "subject_clean": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN Submission akin 0.3.5",
+      "in_reply_to": "<20260529145611.D96A1A026E@xmpalantir.wu.ac.at>",
+      "references": [
+        "<20260529145611.D96A1A026E@xmpalantir.wu.ac.at>"
+      ],
+      "body_plain": "Hello,\nI do not understand the issues with package akin 0.3.5. Please advise.\nThank you,\nDragos\n------ Original Message ------\nFrom: ligges at statistik.tu-dortmund.de\nTo: dbandur at sympatico.ca Cc: CRAN-submissions at R-project.org\nSent: Saturday, May 30th 2026, 01:06 AM\nSubject: [CRAN-pretest-archived] CRAN Submission akin 0.3.5\nDear maintainer, package akin_0.3.5.tar.gz does not pass the incoming \nchecks automatically, please see the following pre-tests (additional \nissue checks): Windows:?Status: 1 NOTE Debian: Status: 1 NOTE Additional \nissues checked: linux-arm64: Status: 4 WARNINGs, 5 NOTEs Last released \nversion's CRAN status: OK: 13 See: Last released version's additional \nissues: linux-arm64 CRAN Web: Please fix all problems and resubmit a \nfixed version via the webform. If you are not sure how to fix the \nproblems shown, please ask for help on the R-package-devel mailing list: \nIf you are fairly certain the rejection is a false positive, please \nreply-all to this message and explain. More details are given in the \ndirectory: The files will be removed after roughly 7 days. No strong \nreverse dependencies to be checked. Best regards, CRAN teams' auto-check \nservice ------------------------------ Flavor: \nr-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64 Check: CRAN \nincoming feasibility, Result: NOTE Maintainer: 'Dragos Bandur ' Number \nof updates in past 6 months: 7 Flavor: \nr-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: whether startup \nmessages can be suppressed, Result: NOTE sh: 1: /bin/kstat: not found It \nlooks like this package (or a package it requires) has a startup message \nwhich cannot be suppressed: see ?packageStartupMessage. Flavor: \nr-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: dependencies in \nR code, Result: NOTE sh: 1: /bin/kstat: not found Flavor: \nr-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: S3 \ngeneric/method consistency, Result: WARNING sh: 1: /bin/kstat: not found \nSee section 'Generic functions and methods' in the 'Writing R \nExtensions' manual. Flavor: \nr-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: replacement \nfunctions, Result: WARNING sh: 1: /bin/kstat: not found The argument of \na replacement function which corresponds to the right hand side must be \nnamed 'value'. Flavor: r-devel-linux-aarch64-ubuntu-special-linux-arm64 \nCheck: foreign function calls, Result: NOTE sh: 1: /bin/kstat: not found \nSee chapter 'System and foreign language interfaces' in the 'Writing R \nExtensions' manual. Flavor: \nr-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: R code for \npossible problems, Result: NOTE sh: 1: /bin/kstat: not found Flavor: \nr-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: for missing \ndocumentation entries, Result: WARNING sh: 1: /bin/kstat: not found All \nuser-level objects in a package should have documentation entries. See \nchapter 'Writing R documentation files' in the 'Writing R Extensions' \nmanual. Flavor: r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: \nfor code/documentation mismatches, Result: WARNING sh: 1: /bin/kstat: \nnot found sh: 1: /bin/kstat: not found sh: 1: /bin/kstat: not found \nFlavor: r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: Rd \n\\usage sections, Result: NOTE sh: 1: /bin/kstat: not found The \\usage \nentries for S3 methods should use the \\method markup and not their full \nname. See chapter 'Writing R documentation files' in the 'Writing R \nExtensions' manual.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello,\nI do not understand the issues with package akin 0.3.5. Please advise.\nThank you,\nDragos\n------ Original Message ------\nFrom: ligges at statistik.tu-dortmund.de\nTo: dbandur at sympatico.ca Cc: ",
+      "thread_id": "thread-12f67c17c386",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-c2a1ae3aaedd",
+      "message_id": "<5fca852a-8a0d-4be4-a1b4-42da101279ad@gmail.com>",
+      "from_name": "Serguei Sokol",
+      "from_email_hash": "80fbfa5a2fb090124371607c0b9b0616dc1e4e6ae0e3aa8a3ca78397eadc432a",
+      "date": "2026-06-04T08:47:42Z",
+      "subject": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN Submission akin 0.3.5",
+      "subject_clean": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN Submission akin 0.3.5",
+      "in_reply_to": "<9a72f06.2277f.19e8df0c42f.Webtop.29@sympatico.ca>",
+      "references": [
+        "<20260529145611.D96A1A026E@xmpalantir.wu.ac.at>",
+        "<9a72f06.2277f.19e8df0c42f.Webtop.29@sympatico.ca>"
+      ],
+      "body_plain": "Dear Dragos,\n\nYour email is difficult to read due to bad automatic formatting of your \nemailer. Please, use the plain ascii text next time.\nFor your issue, can you post the links with the test results which \nshould be in the CRAN's message?\n\nBest,\nSerguei.\n\nLe 03/06/2026 ? 16:43, D B a ?crit?:\n> \n> Hello,\n> I do not understand the issues with package akin 0.3.5. Please advise.\n> Thank you,\n> Dragos\n> ------ Original Message ------\n> From: ligges at statistik.tu-dortmund.de\n> To: dbandur at sympatico.ca Cc: CRAN-submissions at R-project.org\n> Sent: Saturday, May 30th 2026, 01:06 AM\n> Subject: [CRAN-pretest-archived] CRAN Submission akin 0.3.5\n> Dear maintainer, package akin_0.3.5.tar.gz does not pass the incoming\n> checks automatically, please see the following pre-tests (additional\n> issue checks): Windows:?Status: 1 NOTE Debian: Status: 1 NOTE Additional\n> issues checked: linux-arm64: Status: 4 WARNINGs, 5 NOTEs Last released\n> version's CRAN status: OK: 13 See: Last released version's additional\n> issues: linux-arm64 CRAN Web: Please fix all problems and resubmit a\n> fixed version via the webform. If you are not sure how to fix the\n> problems shown, please ask for help on the R-package-devel mailing list:\n> If you are fairly certain the rejection is a false positive, please\n> reply-all to this message and explain. More details are given in the\n> directory: The files will be removed after roughly 7 days. No strong\n> reverse dependencies to be checked. Best regards, CRAN teams' auto-check\n> service ------------------------------ Flavor:\n> r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64 Check: CRAN\n> incoming feasibility, Result: NOTE Maintainer: 'Dragos Bandur ' Number\n> of updates in past 6 months: 7 Flavor:\n> r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: whether startup\n> messages can be suppressed, Result: NOTE sh: 1: /bin/kstat: not found It\n> looks like this package (or a package it requires) has a startup message\n> which cannot be suppressed: see ?packageStartupMessage. Flavor:\n> r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: dependencies in\n> R code, Result: NOTE sh: 1: /bin/kstat: not found Flavor:\n> r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: S3\n> generic/method consistency, Result: WARNING sh: 1: /bin/kstat: not found\n> See section 'Generic functions and methods' in the 'Writing R\n> Extensions' manual. Flavor:\n> r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: replacement\n> functions, Result: WARNING sh: 1: /bin/kstat: not found The argument of\n> a replacement function which corresponds to the right hand side must be\n> named 'value'. Flavor: r-devel-linux-aarch64-ubuntu-special-linux-arm64\n> Check: foreign function calls, Result: NOTE sh: 1: /bin/kstat: not found\n> See chapter 'System and foreign language interfaces' in the 'Writing R\n> Extensions' manual. Flavor:\n> r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: R code for\n> possible problems, Result: NOTE sh: 1: /bin/kstat: not found Flavor:\n> r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: for missing\n> documentation entries, Result: WARNING sh: 1: /bin/kstat: not found All\n> user-level objects in a package should have documentation entries. See\n> chapter 'Writing R documentation files' in the 'Writing R Extensions'\n> manual. Flavor: r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check:\n> for code/documentation mismatches, Result: WARNING sh: 1: /bin/kstat:\n> not found sh: 1: /bin/kstat: not found sh: 1: /bin/kstat: not found\n> Flavor: r-devel-linux-aarch64-ubuntu-special-linux-arm64 Check: Rd\n> \\usage sections, Result: NOTE sh: 1: /bin/kstat: not found The \\usage\n> entries for S3 methods should use the \\method markup and not their full\n> name. See chapter 'Writing R documentation files' in the 'Writing R\n> Extensions' manual.\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Dear Dragos,\n\nYour email is difficult to read due to bad automatic formatting of your \nemailer. Please, use the plain ascii text next time.\nFor your issue, can you post the links with the test results",
+      "thread_id": "thread-12f67c17c386",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-e0bf983f0c7b",
+      "message_id": "<560319f.22417.19e94099dbf.Webtop.19@sympatico.ca>",
+      "from_name": "D B",
+      "from_email_hash": "5738c06d6c392891e4e3ec3fa965ce217d1f58558f90e22bf5a705d922ea199d",
+      "date": "2026-06-04T19:08:38Z",
+      "subject": "[R-pkg-devel] akin 0.3.5 CRAN Test Results",
+      "subject_clean": "[R-pkg-devel] akin 0.3.5 CRAN Test Results",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello,\n\nI do not understand the issues with package akin 0.3.5. Please advise.\n\nHere are the links from CRAN test results:\n\nWindows: \n<https://win-builder.r-project.org/incoming_pretest/akin_0.3.5_20260529_165611/Windows/00check.log>;\nStatus: 1 NOTE\nDebian: \n<https://win-builder.r-project.org/incoming_pretest/akin_0.3.5_20260529_165611/Debian/00check.log>;\nStatus: 1 NOTE\n\nAdditional issues checked: \n<https://win-builder.r-project.org/incoming_pretest/akin_0.3.5_20260529_165611/specialChecks/>;\nlinux-arm64: Status: 4 WARNINGs, 5 NOTEs\n\nLast released version's CRAN status: OK: 13\nSee: <https://CRAN.R-project.org/web/checks/check_results_akin.html>;\n\nLast released version's additional issues:\n   linux-arm64 \n<https://github.com/r-devel/linux-arm64-checks/tree/HEAD/akin>;\n\nCRAN Web: <https://cran.r-project.org/package=akin>;\n\nThank you,\n\nDragos",
+      "body_snippet": "Hello,\n\nI do not understand the issues with package akin 0.3.5. Please advise.\n\nHere are the links from CRAN test results:\n\nWindows: \n<https://win-builder.r-project.org/incoming_pretest/akin_0.3.5_202",
+      "thread_id": "thread-e0bf983f0c7b",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-b6d56d781d6d",
+      "message_id": "<20260605001125.2d4ffba7@parabola>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-06-04T21:11:25Z",
+      "subject": "[R-pkg-devel] akin 0.3.5 CRAN Test Results",
+      "subject_clean": "[R-pkg-devel] akin 0.3.5 CRAN Test Results",
+      "in_reply_to": "<560319f.22417.19e94099dbf.Webtop.19@sympatico.ca>",
+      "references": [
+        "<560319f.22417.19e94099dbf.Webtop.19@sympatico.ca>"
+      ],
+      "body_plain": "Dear Dragos,\n\n? Thu, 4 Jun 2026 15:08:38 -0400 (EDT)\nD B <dbandur at sympatico.ca> ?????:\n\n> Last released version's additional issues:\n>    linux-arm64 \n> <https://github.com/r-devel/linux-arm64-checks/tree/HEAD/akin>;\n\nThis is a problem in the RcppAlgos package:\nhttps://github.com/r-devel/linux-arm64-checks/tree/HEAD/RcppAlgos\n\nThe code fails the check for grepl(\"darwin|solaris\", R.version$os)\n(what's R.version$os on linux-arm64?) and ends up trying to run the\ncommand for Solaris to detect the number of cores:\n\nhttps://github.com/jwood000/RcppAlgos/blob/94055646055da88e714fd3e1c2c8dee2a4ba05d7/R/zzz.R#L46\n\n...and system(\"/bin/kstat ...\", TRUE) does not swallow the error\nmessage printed on the standard error.\n\n-- \nBest regards,\nIvan\n\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Dear Dragos,\n\n? Thu, 4 Jun 2026 15:08:38 -0400 (EDT)\nD B <dbandur at sympatico.ca> ?????:\n\n> Last released version's additional issues:\n>    linux-arm64 \n> <https://github.com/r-devel/linux-arm64-chec",
+      "thread_id": "thread-e0bf983f0c7b",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-daa594c005e6",
+      "message_id": "<AM8PR08MB6484999C373C6FC8E18AE7D0BE1F2@AM8PR08MB6484.eurprd08.prod.outlook.com>",
+      "from_name": "Tony Wilkes",
+      "from_email_hash": "6136bb32e737ef21100ebbcea9efbb7efdaa4349bc12a55dea6e0aec4798b535",
+      "date": "2026-06-07T18:09:24Z",
+      "subject": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi everyone,\n\nI see that R package 'tinycodet' v 0.6.2 (this version has been up for several months now) suddenly has an error, but only for `r-devel-linux-x86_64-debian-gcc`. The package fails at the check \"DESCRIPTION meta-information\". CRAN has not provided any additional information.\n\nIt's odd that the DESCRIPTION file is considered bad for Debian-gcc, but not for all other operating systems. If there's a mistake in the DESCRIPTION file, I'd expect there to be an error for every OS.\n\nLink to package: https://cran.r-project.org/package=tinycodet\n\nI wanted to update my package (update is already on GitHub), but I need to know why this fail happens before I can update my package.\n\nThanks in advance for any help/info!\n\nKind regards,\n\nTony\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi everyone,\n\nI see that R package 'tinycodet' v 0.6.2 (this version has been up for several months now) suddenly has an error, but only for `r-devel-linux-x86_64-debian-gcc`. The package fails at the",
+      "thread_id": "thread-daa594c005e6",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-c8f7e9c00e68",
+      "message_id": "<52f884e5-e70a-4606-9ad5-905faca54154@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-06-07T20:00:39Z",
+      "subject": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "in_reply_to": "<AM8PR08MB6484999C373C6FC8E18AE7D0BE1F2@AM8PR08MB6484.eurprd08.prod.outlook.com>",
+      "references": [
+        "<AM8PR08MB6484999C373C6FC8E18AE7D0BE1F2@AM8PR08MB6484.eurprd08.prod.outlook.com>"
+      ],
+      "body_plain": "On 2026-06-07 2:09 p.m., Tony Wilkes wrote:\n> Hi everyone,\n> \n> I see that R package 'tinycodet' v 0.6.2 (this version has been up for several months now) suddenly has an error, but only for `r-devel-linux-x86_64-debian-gcc`. The package fails at the check \"DESCRIPTION meta-information\". CRAN has not provided any additional information.\n> \n> It's odd that the DESCRIPTION file is considered bad for Debian-gcc, but not for all other operating systems. If there's a mistake in the DESCRIPTION file, I'd expect there to be an error for every OS.\n> \n> Link to package: https://cran.r-project.org/package=tinycodet\n> \n> I wanted to update my package (update is already on GitHub), but I need to know why this fail happens before I can update my package.\n> \n> Thanks in advance for any help/info!\n> \n\nIt's not very unusual to have a failure on only one system, or only a \nfew.  It could be that there's a new test that has been added and it has \nonly been deployed on one R-devel system so far, or the error really \ndoes only affect one platform.\n\nHowever, the `tinycodet` example you posted does look like there's an \nissue with the test machine.  It doesn't give complete test results, it \nappears to have failed during the test:  we see \"checking DESCRIPTION \nmeta-information ...\" but don't see \"OK\" or \"FAIL\", that's the end of \nthe display.\n\nSo I think if you don't see a comment here about the issue in the next \nday or two, it would be reasonable to write to CRAN to ask what \nhappened, and what you need to do to fix it.\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-06-07 2:09 p.m., Tony Wilkes wrote:\n> Hi everyone,\n> \n> I see that R package 'tinycodet' v 0.6.2 (this version has been up for several months now) suddenly has an error, but only for `r-devel-",
+      "thread_id": "thread-daa594c005e6",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-dc2acd585167",
+      "message_id": "<CAPVJd2WE_AXCZYecL09r4Q=QAXmsR7eyjW-viztX-_LQo-+-Kg@mail.gmail.com>",
+      "from_name": "Shu Fai Cheung",
+      "from_email_hash": "0be9f3a279a4f25faa7ec4a45b7bb7a2dde4ce4b538bc86bc7317dddd44a6dc7",
+      "date": "2026-06-07T23:25:44Z",
+      "subject": "[R-pkg-devel] ERROR on r-devel-linux-x86_64-debian-gcc",
+      "subject_clean": "[R-pkg-devel] ERROR on r-devel-linux-x86_64-debian-gcc",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI found that a few of my packages, along with some others I used, had\nvarious errors on r-devel-linux-x86_64-debian-gcc this morning. These\nare some examples:\n\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/semlbci-00check.html\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/modelbpp-00check.html\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/lmhelprs-00check.html\n\nThey do not appear to be related to the packages. Are they false\nalarms (platform-related and not package-related) that I can ignore? I\nam going to submit a new version of one of them to CRAN to fix another\nissue. I would like to make sure I don't need to address them before\nsubmitting.\n\nThanks.\n\nRegards,\nShu Fai",
+      "body_snippet": "Hi all,\n\nI found that a few of my packages, along with some others I used, had\nvarious errors on r-devel-linux-x86_64-debian-gcc this morning. These\nare some examples:\n\nhttps://www.r-project.org/nosvn",
+      "thread_id": "thread-dc2acd585167",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-b16a6548cd32",
+      "message_id": "<affef994-7d5c-46bc-8575-597d9d854ace@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-06-08T07:06:37Z",
+      "subject": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "in_reply_to": "<52f884e5-e70a-4606-9ad5-905faca54154@gmail.com>",
+      "references": [
+        "<AM8PR08MB6484999C373C6FC8E18AE7D0BE1F2@AM8PR08MB6484.eurprd08.prod.outlook.com>",
+        "<52f884e5-e70a-4606-9ad5-905faca54154@gmail.com>"
+      ],
+      "body_plain": "Same from here: I would wait few days if the FAIL status disappears \n(likely just some hicc up on the server during that check) and if it \npersists ask Kurt Hornik who runs the Debian check machine as the rest \nof the CRAN team also does not have any clue about this.\n\nBest,\nUwe Ligges\n\n\n\nOn 07.06.2026 22:00, Duncan Murdoch wrote:\n> On 2026-06-07 2:09 p.m., Tony Wilkes wrote:\n>> Hi everyone,\n>>\n>> I see that R package 'tinycodet' v 0.6.2 (this version has been up for \n>> several months now) suddenly has an error, but only for `r-devel- \n>> linux-x86_64-debian-gcc`. The package fails at the check \"DESCRIPTION \n>> meta-information\". CRAN has not provided any additional information.\n>>\n>> It's odd that the DESCRIPTION file is considered bad for Debian-gcc, \n>> but not for all other operating systems. If there's a mistake in the \n>> DESCRIPTION file, I'd expect there to be an error for every OS.\n>>\n>> Link to package: https://cran.r-project.org/package=tinycodet\n>>\n>> I wanted to update my package (update is already on GitHub), but I \n>> need to know why this fail happens before I can update my package.\n>>\n>> Thanks in advance for any help/info!\n>>\n> \n> It's not very unusual to have a failure on only one system, or only a \n> few.? It could be that there's a new test that has been added and it has \n> only been deployed on one R-devel system so far, or the error really \n> does only affect one platform.\n> \n> However, the `tinycodet` example you posted does look like there's an \n> issue with the test machine.? It doesn't give complete test results, it \n> appears to have failed during the test:? we see \"checking DESCRIPTION \n> meta-information ...\" but don't see \"OK\" or \"FAIL\", that's the end of \n> the display.\n> \n> So I think if you don't see a comment here about the issue in the next \n> day or two, it would be reasonable to write to CRAN to ask what \n> happened, and what you need to do to fix it.\n> \n> Duncan Murdoch\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Same from here: I would wait few days if the FAIL status disappears \n(likely just some hicc up on the server during that check) and if it \npersists ask Kurt Hornik who runs the Debian check machine as",
+      "thread_id": "thread-daa594c005e6",
+      "thread_depth": 2,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-65c067dc79ab",
+      "message_id": "<DB9PR08MB64909EEDC7AB2A7A7D079F3BBE1C2@DB9PR08MB6490.eurprd08.prod.outlook.com>",
+      "from_name": "Tony Wilkes",
+      "from_email_hash": "6136bb32e737ef21100ebbcea9efbb7efdaa4349bc12a55dea6e0aec4798b535",
+      "date": "2026-06-08T20:09:54Z",
+      "subject": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "subject_clean": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "in_reply_to": "<affef994-7d5c-46bc-8575-597d9d854ace@statistik.tu-dortmund.de>",
+      "references": [
+        "<AM8PR08MB6484999C373C6FC8E18AE7D0BE1F2@AM8PR08MB6484.eurprd08.prod.outlook.com>",
+        "<52f884e5-e70a-4606-9ad5-905faca54154@gmail.com>",
+        "<affef994-7d5c-46bc-8575-597d9d854ace@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Hi all,\n\nThank you for your time & responses.\nThe R-devel-Debian-gcc issue has disappeared by itself, and I've uploaded the new package version.\n\nKind regards,\n\nTony\n\n\n\nVerzonden vanaf Outlook voor Android<https://aka.ms/AAb9ysg>\n\n________________________________\nVan: Uwe Ligges <ligges at statistik.tu-dortmund.de>\nVerstuurd: maandag, juni 8, 2026 9:06:56 a.m.\nAan: Duncan Murdoch <murdoch.duncan at gmail.com>; Tony Wilkes <tony_a_wilkes at outlook.com>; R Package Development <r-package-devel at r-project.org>\nOnderwerp: Re: [R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC\n\nSame from here: I would wait few days if the FAIL status disappears\n(likely just some hicc up on the server during that check) and if it\npersists ask Kurt Hornik who runs the Debian check machine as the rest\nof the CRAN team also does not have any clue about this.\n\nBest,\nUwe Ligges\n\n\n\nOn 07.06.2026 22:00, Duncan Murdoch wrote:\n> On 2026-06-07 2:09 p.m., Tony Wilkes wrote:\n>> Hi everyone,\n>>\n>> I see that R package 'tinycodet' v 0.6.2 (this version has been up for\n>> several months now) suddenly has an error, but only for `r-devel-\n>> linux-x86_64-debian-gcc`. The package fails at the check \"DESCRIPTION\n>> meta-information\". CRAN has not provided any additional information.\n>>\n>> It's odd that the DESCRIPTION file is considered bad for Debian-gcc,\n>> but not for all other operating systems. If there's a mistake in the\n>> DESCRIPTION file, I'd expect there to be an error for every OS.\n>>\n>> Link to package: https://cran.r-project.org/package=tinycodet\n>>\n>> I wanted to update my package (update is already on GitHub), but I\n>> need to know why this fail happens before I can update my package.\n>>\n>> Thanks in advance for any help/info!\n>>\n>\n> It's not very unusual to have a failure on only one system, or only a\n> few.  It could be that there's a new test that has been added and it has\n> only been deployed on one R-devel system so far, or the error really\n> does only affect one platform.\n>\n> However, the `tinycodet` example you posted does look like there's an\n> issue with the test machine.  It doesn't give complete test results, it\n> appears to have failed during the test:  we see \"checking DESCRIPTION\n> meta-information ...\" but don't see \"OK\" or \"FAIL\", that's the end of\n> the display.\n>\n> So I think if you don't see a comment here about the issue in the next\n> day or two, it would be reasonable to write to CRAN to ask what\n> happened, and what you need to do to fix it.\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nThank you for your time & responses.\nThe R-devel-Debian-gcc issue has disappeared by itself, and I've uploaded the new package version.\n\nKind regards,\n\nTony\n\n\n\nVerzonden vanaf Outlook voor An",
+      "thread_id": "thread-daa594c005e6",
+      "thread_depth": 3,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-d3c2ba400ac5",
+      "message_id": "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+      "from_name": "m@tthi@s-go@d@@ m@iii@g oii gmx@de",
+      "from_email_hash": "57190ccd5a917b2866daf4bf830b05836b59efcabacd9f07d64f27305ad42e6e",
+      "date": "2026-06-22T21:21:31Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear package developers, dear CRAN team,\n\nI hope you find my problem interesting: I have two packages, rswipl and\nrolog, both enable to interface R with SWI-Prolog. rswipl packages the\nentire SWI-Prolog-sources (except for a few dependencies), rolog is meant to\nbe lightweight and tries to connect either to rswipl or to an existing\ninstallation of SWI-Prolog on the system. Now, SWI-Prolog is not available\non the CRAN testing machines, so rswipl needs to be added as a dependency\n(\"LinkingTo\") to rolog.\n\nOf course, this implies that whenever rolog is installed, rswipl is also\ninstalled, which is against rolog's spirit (it should connect to SWI-Prolog\nand only fall back to rswipl if SWI-Prolog is missing). I tried to move\nrswipl from \"LinkingTo\" to \"Suggests\", but this only works on some machines:\n\nhttps://cran.r-project.org/web/checks/check_results_rolog.html\n\n(Please ignore the \"musl\" problem shown below, that is unrelated and has\nbeen fixed)\n\nCan I do something about this? Some, but not all, CRAN machines seem to\ninstall rswipl automatically, even though it's _just_ mentioned in Suggests,\nothers don't. Your thoughts are much appreciated. If everything fails, I can\nrevert the dependencies.\n\nBest wishes,\n\nMatthias",
+      "body_snippet": "Dear package developers, dear CRAN team,\n\nI hope you find my problem interesting: I have two packages, rswipl and\nrolog, both enable to interface R with SWI-Prolog. rswipl packages the\nentire SWI-Prol",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-44af7b9df60b",
+      "message_id": "<27193.55939.395640.952786@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-06-23T00:59:47Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>"
+      ],
+      "body_plain": "On 22 June 2026 at 23:21, matthias-gondan at gmx.de wrote:\n| Dear package developers, dear CRAN team,\n| \n| I hope you find my problem interesting: I have two packages, rswipl and\n| rolog, both enable to interface R with SWI-Prolog. rswipl packages the\n| entire SWI-Prolog-sources (except for a few dependencies), rolog is meant to\n| be lightweight and tries to connect either to rswipl or to an existing\n| installation of SWI-Prolog on the system. Now, SWI-Prolog is not available\n| on the CRAN testing machines, so rswipl needs to be added as a dependency\n| (\"LinkingTo\") to rolog.\n|\n| Of course, this implies that whenever rolog is installed, rswipl is also\n| installed, which is against rolog's spirit (it should connect to SWI-Prolog\n| and only fall back to rswipl if SWI-Prolog is missing). I tried to move\n| rswipl from \"LinkingTo\" to \"Suggests\", but this only works on some machines:\n| \n| https://cran.r-project.org/web/checks/check_results_rolog.html\n| \n| (Please ignore the \"musl\" problem shown below, that is unrelated and has\n| been fixed)\n| \n| Can I do something about this? Some, but not all, CRAN machines seem to\n| install rswipl automatically, even though it's _just_ mentioned in Suggests,\n| others don't. Your thoughts are much appreciated. If everything fails, I can\n| revert the dependencies.\n\nI have pointed out in the past that R / CRAN conflate 'build-time' and\n'run-time' dependencies by giving us only a single 'depends' (using the term\nhere as a catch-all for what CRAN calls 'strong dependencies', ie Imports,\nDepends, or LinkingTo).\n\nThat leads to situations where eg my BH package with its footprint of 155 MB\nends up being installed even though it was only needed at compile-time /\nbuild-time. This is somewhat suboptimal, but it is also I can do here.\n\nYou are in a similar situation.\n\nThere is a related one. Sometimes we have build-dependencies that can only\nexist on some platforms. Other platforms nag, or signal a fail. Which gets\nold after a while. So one can protect against available / not-available with\nappropriate pre-processor macros. I have done so for some of my packages (two\nthat I can think of right now) and you could do the same: then rolog would\nalways \"build\" but of course only be functional if rswipl, or a full\nSWI-Prolog, were found at build-time so that the #if turns to true,\n \nSo in short, we once again play the hand we are dealt.\n\nAt CRAN our choices as package developers are limited; on the other hand what\nbuilds generally does so predictably. It is what it is: generally quite good,\nbut could be improved. But given that CRAN has historically been averse to\ndelegating or changing things, improvements may not be exactly around the\ncorner. Proving binaries via r-universe is possible alternative.\n\nCheers, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 22 June 2026 at 23:21, matthias-gondan at gmx.de wrote:\n| Dear package developers, dear CRAN team,\n| \n| I hope you find my problem interesting: I have two packages, rswipl and\n| rolog, both enable ",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-b8dbc20c591c",
+      "message_id": "<CAL3ufU+VH8MHs=ZkFgJB3HAOMF+fmiETCRcTgPgQYtH2SkfvZg@mail.gmail.com>",
+      "from_name": "Josiah Parry",
+      "from_email_hash": "cb0d462f2d6a78e97bcd7aede4de6b2170d3c662db9c89c80e1b85568990f9dc",
+      "date": "2026-06-23T02:48:47Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<27193.55939.395640.952786@paul.eddelbuettel.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<27193.55939.395640.952786@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Relatedly, I believe that R6 is only needed at build time and not as an\nactual dependency. I think creating a canonical distinction for these would\nbe a net positive.\n\nOn Mon, Jun 22, 2026 at 18:00 Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 22 June 2026 at 23:21, matthias-gondan at gmx.de wrote:\n> | Dear package developers, dear CRAN team,\n> |\n> | I hope you find my problem interesting: I have two packages, rswipl and\n> | rolog, both enable to interface R with SWI-Prolog. rswipl packages the\n> | entire SWI-Prolog-sources (except for a few dependencies), rolog is\n> meant to\n> | be lightweight and tries to connect either to rswipl or to an existing\n> | installation of SWI-Prolog on the system. Now, SWI-Prolog is not\n> available\n> | on the CRAN testing machines, so rswipl needs to be added as a dependency\n> | (\"LinkingTo\") to rolog.\n> |\n> | Of course, this implies that whenever rolog is installed, rswipl is also\n> | installed, which is against rolog's spirit (it should connect to\n> SWI-Prolog\n> | and only fall back to rswipl if SWI-Prolog is missing). I tried to move\n> | rswipl from \"LinkingTo\" to \"Suggests\", but this only works on some\n> machines:\n> |\n> | https://cran.r-project.org/web/checks/check_results_rolog.html\n> |\n> | (Please ignore the \"musl\" problem shown below, that is unrelated and has\n> | been fixed)\n> |\n> | Can I do something about this? Some, but not all, CRAN machines seem to\n> | install rswipl automatically, even though it's _just_ mentioned in\n> Suggests,\n> | others don't. Your thoughts are much appreciated. If everything fails, I\n> can\n> | revert the dependencies.\n>\n> I have pointed out in the past that R / CRAN conflate 'build-time' and\n> 'run-time' dependencies by giving us only a single 'depends' (using the\n> term\n> here as a catch-all for what CRAN calls 'strong dependencies', ie Imports,\n> Depends, or LinkingTo).\n>\n> That leads to situations where eg my BH package with its footprint of 155\n> MB\n> ends up being installed even though it was only needed at compile-time /\n> build-time. This is somewhat suboptimal, but it is also I can do here.\n>\n> You are in a similar situation.\n>\n> There is a related one. Sometimes we have build-dependencies that can only\n> exist on some platforms. Other platforms nag, or signal a fail. Which gets\n> old after a while. So one can protect against available / not-available\n> with\n> appropriate pre-processor macros. I have done so for some of my packages\n> (two\n> that I can think of right now) and you could do the same: then rolog would\n> always \"build\" but of course only be functional if rswipl, or a full\n> SWI-Prolog, were found at build-time so that the #if turns to true,\n>\n> So in short, we once again play the hand we are dealt.\n>\n> At CRAN our choices as package developers are limited; on the other hand\n> what\n> builds generally does so predictably. It is what it is: generally quite\n> good,\n> but could be improved. But given that CRAN has historically been averse to\n> delegating or changing things, improvements may not be exactly around the\n> corner. Proving binaries via r-universe is possible alternative.\n>\n> Cheers, Dirk\n>\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Relatedly, I believe that R6 is only needed at build time and not as an\nactual dependency. I think creating a canonical distinction for these would\nbe a net positive.\n\nOn Mon, Jun 22, 2026 at 18:00 Di",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 2,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-a62de577fb8f",
+      "message_id": "<438618A7-DEE3-4FE2-8DAA-516C2C8417D3@dcn.davis.ca.us>",
+      "from_name": "Jeff Newmiller",
+      "from_email_hash": "b0534b2df56689de62a07ef0e2eefa136a2b7e536d83dd9445d2bc1683bb09fe",
+      "date": "2026-06-23T04:10:09Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<CAL3ufU+VH8MHs=ZkFgJB3HAOMF+fmiETCRcTgPgQYtH2SkfvZg@mail.gmail.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<27193.55939.395640.952786@paul.eddelbuettel.com>",
+        "<CAL3ufU+VH8MHs=ZkFgJB3HAOMF+fmiETCRcTgPgQYtH2SkfvZg@mail.gmail.com>"
+      ],
+      "body_plain": "Sigh. Really? \n\nWhat code is going to implement the machinery of the facade of conventions that forms R6 if you don't have R6Class at run time? Or do you think that compiling your R package actually inlines all that capability? (hint... it doesn't. R is an interpreted language.)\n\nFWIW I tried my hand at R6 and concluded that it enables much of the worst design patterns of other OO languages and I omit the dependency by not using those design patterns anymore.\n\nOn June 22, 2026 7:48:47 PM PDT, Josiah Parry <josiah.parry at gmail.com> wrote:\n>Relatedly, I believe that R6 is only needed at build time and not as an\n>actual dependency. I think creating a canonical distinction for these would\n>be a net positive.\n>\n>On Mon, Jun 22, 2026 at 18:00 Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>>\n>> On 22 June 2026 at 23:21, matthias-gondan at gmx.de wrote:\n>> | Dear package developers, dear CRAN team,\n>> |\n>> | I hope you find my problem interesting: I have two packages, rswipl and\n>> | rolog, both enable to interface R with SWI-Prolog. rswipl packages the\n>> | entire SWI-Prolog-sources (except for a few dependencies), rolog is\n>> meant to\n>> | be lightweight and tries to connect either to rswipl or to an existing\n>> | installation of SWI-Prolog on the system. Now, SWI-Prolog is not\n>> available\n>> | on the CRAN testing machines, so rswipl needs to be added as a dependency\n>> | (\"LinkingTo\") to rolog.\n>> |\n>> | Of course, this implies that whenever rolog is installed, rswipl is also\n>> | installed, which is against rolog's spirit (it should connect to\n>> SWI-Prolog\n>> | and only fall back to rswipl if SWI-Prolog is missing). I tried to move\n>> | rswipl from \"LinkingTo\" to \"Suggests\", but this only works on some\n>> machines:\n>> |\n>> | https://cran.r-project.org/web/checks/check_results_rolog.html\n>> |\n>> | (Please ignore the \"musl\" problem shown below, that is unrelated and has\n>> | been fixed)\n>> |\n>> | Can I do something about this? Some, but not all, CRAN machines seem to\n>> | install rswipl automatically, even though it's _just_ mentioned in\n>> Suggests,\n>> | others don't. Your thoughts are much appreciated. If everything fails, I\n>> can\n>> | revert the dependencies.\n>>\n>> I have pointed out in the past that R / CRAN conflate 'build-time' and\n>> 'run-time' dependencies by giving us only a single 'depends' (using the\n>> term\n>> here as a catch-all for what CRAN calls 'strong dependencies', ie Imports,\n>> Depends, or LinkingTo).\n>>\n>> That leads to situations where eg my BH package with its footprint of 155\n>> MB\n>> ends up being installed even though it was only needed at compile-time /\n>> build-time. This is somewhat suboptimal, but it is also I can do here.\n>>\n>> You are in a similar situation.\n>>\n>> There is a related one. Sometimes we have build-dependencies that can only\n>> exist on some platforms. Other platforms nag, or signal a fail. Which gets\n>> old after a while. So one can protect against available / not-available\n>> with\n>> appropriate pre-processor macros. I have done so for some of my packages\n>> (two\n>> that I can think of right now) and you could do the same: then rolog would\n>> always \"build\" but of course only be functional if rswipl, or a full\n>> SWI-Prolog, were found at build-time so that the #if turns to true,\n>>\n>> So in short, we once again play the hand we are dealt.\n>>\n>> At CRAN our choices as package developers are limited; on the other hand\n>> what\n>> builds generally does so predictably. It is what it is: generally quite\n>> good,\n>> but could be improved. But given that CRAN has historically been averse to\n>> delegating or changing things, improvements may not be exactly around the\n>> corner. Proving binaries via r-universe is possible alternative.\n>>\n>> Cheers, Dirk\n>>\n>> --\n>> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>\t[[alternative HTML version deleted]]\n>\n>______________________________________________\n>R-package-devel at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n--\nSent from my phone. Please excuse my brevity.\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Sigh. Really? \n\nWhat code is going to implement the machinery of the facade of conventions that forms R6 if you don't have R6Class at run time? Or do you think that compiling your R package actually i",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 3,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-f647f674011d",
+      "message_id": "<0f66d54d-1907-443f-8008-64d0036dd665@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-06-23T08:47:01Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<438618A7-DEE3-4FE2-8DAA-516C2C8417D3@dcn.davis.ca.us>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<27193.55939.395640.952786@paul.eddelbuettel.com>",
+        "<CAL3ufU+VH8MHs=ZkFgJB3HAOMF+fmiETCRcTgPgQYtH2SkfvZg@mail.gmail.com>",
+        "<438618A7-DEE3-4FE2-8DAA-516C2C8417D3@dcn.davis.ca.us>"
+      ],
+      "body_plain": "On 2026-06-23 12:10 a.m., Jeff Newmiller via R-package-devel wrote:\n  ...\n\n> FWIW I tried my hand at R6 and concluded that it enables much of the worst design patterns of other OO languages and I omit the dependency by not using those design patterns anymore.\nHave you written an \"R6 considered harmful\" article?  If so, I'd like to \nread it.\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-06-23 12:10 a.m., Jeff Newmiller via R-package-devel wrote:\n  ...\n\n> FWIW I tried my hand at R6 and concluded that it enables much of the worst design patterns of other OO languages and I omit",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 4,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-786029a33b61",
+      "message_id": "<20260623170644.3911c520@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-06-23T14:06:44Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>"
+      ],
+      "body_plain": "? Mon, 22 Jun 2026 23:21:31 +0200\n<matthias-gondan at gmx.de> ?????:\n\n> Some, but not all, CRAN machines seem to\n> install rswipl automatically, even though it's _just_ mentioned in\n> Suggests, others don't. \n\nIt's probably better if at least some of them don't test with rswipl\ninstalled, so that the code paths in rolog that use the system\ninstallation of SWI-Prolog are also exercised.\n\nThe rcheckserver meta-package at https://statmath.wu.ac.at/AASC/ (which\nis used by Prof. Kurt Hornik's systems that currently fail to install\nthe rolog package) now depends on swi-prolog, so next time they run the\nchecks, they should be able to use the system Prolog runtime.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Mon, 22 Jun 2026 23:21:31 +0200\n<matthias-gondan at gmx.de> ?????:\n\n> Some, but not all, CRAN machines seem to\n> install rswipl automatically, even though it's _just_ mentioned in\n> Suggests, others",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-f8c5992688c1",
+      "message_id": "<27194.38755.487380.713978@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-06-23T14:25:39Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<20260623170644.3911c520@arachnoid>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<20260623170644.3911c520@arachnoid>"
+      ],
+      "body_plain": "On 23 June 2026 at 17:06, Ivan Krylov via R-package-devel wrote:\n| ? Mon, 22 Jun 2026 23:21:31 +0200\n| <matthias-gondan at gmx.de> ?????:\n| \n| > Some, but not all, CRAN machines seem to\n| > install rswipl automatically, even though it's _just_ mentioned in\n| > Suggests, others don't. \n| \n| It's probably better if at least some of them don't test with rswipl\n| installed, so that the code paths in rolog that use the system\n| installation of SWI-Prolog are also exercised.\n\nSeconded, and that should be fairly easily achievable at GitHub in standard\ncontinuous integration 'actions' which can run standard Ubuntu and/or any\ndocker container you can prepare. \n \n| The rcheckserver meta-package at https://statmath.wu.ac.at/AASC/ (which\n| is used by Prof. Kurt Hornik's systems that currently fail to install\n| the rolog package) now depends on swi-prolog, so next time they run the\n| checks, they should be able to use the system Prolog runtime.\n\nIf memory serves that package also has an existence in a container Jeroen\nbuilt which would connect nicely back to the suggestion involving GitHub and\ncontinuous integration check via their actions.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 23 June 2026 at 17:06, Ivan Krylov via R-package-devel wrote:\n| ? Mon, 22 Jun 2026 23:21:31 +0200\n| <matthias-gondan at gmx.de> ?????:\n| \n| > Some, but not all, CRAN machines seem to\n| > install rs",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 2,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-1b1007b35b2d",
+      "message_id": "<CAPRVBcywhsWCmhMq2Tyt2aCE=nQLdg6dCdjj5jp-w1sf_9kDBQ@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-06-23T14:43:24Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<27194.38755.487380.713978@paul.eddelbuettel.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<20260623170644.3911c520@arachnoid>",
+        "<27194.38755.487380.713978@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Adding my +1 to R having some canonical way to declare build-time-only\ndependencies, which can be missed by R CMD check and result in DESCRIPTION\nbeing an incomplete accounting of the dependencies required to install a\ngiven package. When I find such omissions I usually put them in Suggests\nbut WRE description of that field is different.\n\nMike C\n\nOn Tue, Jun 23, 2026, 7:25?AM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 23 June 2026 at 17:06, Ivan Krylov via R-package-devel wrote:\n> | ? Mon, 22 Jun 2026 23:21:31 +0200\n> | <matthias-gondan at gmx.de> ?????:\n> |\n> | > Some, but not all, CRAN machines seem to\n> | > install rswipl automatically, even though it's _just_ mentioned in\n> | > Suggests, others don't.\n> |\n> | It's probably better if at least some of them don't test with rswipl\n> | installed, so that the code paths in rolog that use the system\n> | installation of SWI-Prolog are also exercised.\n>\n> Seconded, and that should be fairly easily achievable at GitHub in standard\n> continuous integration 'actions' which can run standard Ubuntu and/or any\n> docker container you can prepare.\n>\n> | The rcheckserver meta-package at https://statmath.wu.ac.at/AASC/ (which\n> | is used by Prof. Kurt Hornik's systems that currently fail to install\n> | the rolog package) now depends on swi-prolog, so next time they run the\n> | checks, they should be able to use the system Prolog runtime.\n>\n> If memory serves that package also has an existence in a container Jeroen\n> built which would connect nicely back to the suggestion involving GitHub\n> and\n> continuous integration check via their actions.\n>\n> Dirk\n>\n> --\n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Adding my +1 to R having some canonical way to declare build-time-only\ndependencies, which can be missed by R CMD check and result in DESCRIPTION\nbeing an incomplete accounting of the dependencies req",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 3,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-d73d8340f75e",
+      "message_id": "<20260623195601.5dfe10e1@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-06-23T16:56:01Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<CAL3ufU+VH8MHs=ZkFgJB3HAOMF+fmiETCRcTgPgQYtH2SkfvZg@mail.gmail.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<27193.55939.395640.952786@paul.eddelbuettel.com>",
+        "<CAL3ufU+VH8MHs=ZkFgJB3HAOMF+fmiETCRcTgPgQYtH2SkfvZg@mail.gmail.com>"
+      ],
+      "body_plain": "? Mon, 22 Jun 2026 19:48:47 -0700\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> I believe that R6 is only needed at build time and not as an\n> actual dependency.\n\nWhile the environment chain of an R6 class does include the R6 package\nnamespace, all the important bits of the R6 package live in the\nenclosed non-namespace environment that is automatically serialised\ntogether with the class:\n\nhttps://github.com/r-lib/R6/blob/main/R/aaa.R\n\nR6::R6Class() |> parent.env() |> parent.env() |>\nidentical(loadNamespace('R6'))\n# [1] TRUE\n\nbut:\n\nRscript -e '\n R6::R6Class(\"foo\", list(bar = \\() \"baz\")) |> saveRDS(\"foo.rds\")\n'\nR CMD REMOVE R6\nRscript -e '\"foo.rds\" |> readRDS() |> parent.env()'\n# <environment: 0x557cc5db1070>\n# attr(,\"name\")\n# [1] \"R6_capsule\" # <-- R6 mostly lives here\nRscript -e 'readRDS(\"foo.rds\")$new()$bar()' # class works regardless\n# [1] \"baz\"\n\nWhen R CMD INSTALL evaluates the source code of the package, it\nsimilarly saves the contents of the resulting environment to the\nlazy-load database. The resulting binary package doesn't have to\nrequire R6 to be installed.\n\nI think that the R6 developers could make the class objects even more\n\"officially\" independent from the R6 namespace making the capsule\nenvironment enclosed by the base namespace instead of the package\nnamespace.\n\n> I think creating a canonical distinction for these would be a net\n> positive.\n\nWhen a binary package has less dependencies than the corresponding\nsource package, it's annoying to install the extra dependencies, but at\nleast nothing breaks. Unfortunately, it's also possible for a binary\npackage to have more strict dependencies than the corresponding source\npackage. For example, a package missing an S4 class import can copy the\nclass to its own namespace, including references to private objects\nthat can later be broken [1]. A package that offers a C-callable\ninterface could undergo a source-compatible but binary-incompatible\nchange [2]. There are probably more ways in which a binary package\ncould break despite the source package still being compatible, which is\nwhy R now checks the build dates in old.packages() [3]. (See also SVN\nr89371 by Simon Urbanek.) Some of these binary dependencies can\nprobably be determined automatically (? la ${shlibs:Depends} in\nDebian?), others will require work from the maintainer (similar to how\nMatrix::Matrix.Version()[[\"abi\"]] works), but how to declare the\nabsence of binary dependency?\n\nMike also mentions build-time dependencies: are those for R CMD INSTALL\n--build, or R CMD build?\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://stat.ethz.ch/pipermail/r-devel/2025-January/083779.html\n\n[2]\nhttps://stat.ethz.ch/pipermail/r-package-devel/2025q1/011376.html\n\n[3]\nhttps://stat.ethz.ch/pipermail/r-help/2026-June/481694.html\nIt's a shame that the post by Jinsong Zhao didn't reach the mailing\nlist.",
+      "body_snippet": "? Mon, 22 Jun 2026 19:48:47 -0700\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> I believe that R6 is only needed at build time and not as an\n> actual dependency.\n\nWhile the environment chain of a",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 3,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-e2c16cd53852",
+      "message_id": "<11dc71cb-2e39-4647-b8c0-a7d02e183739@portamana.org>",
+      "from_name": "PierGianLuca Porta Mana",
+      "from_email_hash": "3fd470b2b908e36f799236d1d58c6a297eef9fa9b9d89dfeff69a2eccf01c2b4",
+      "date": "2026-06-24T07:08:13Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<CAPRVBcywhsWCmhMq2Tyt2aCE=nQLdg6dCdjj5jp-w1sf_9kDBQ@mail.gmail.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<20260623170644.3911c520@arachnoid>",
+        "<27194.38755.487380.713978@paul.eddelbuettel.com>",
+        "<CAPRVBcywhsWCmhMq2Tyt2aCE=nQLdg6dCdjj5jp-w1sf_9kDBQ@mail.gmail.com>"
+      ],
+      "body_plain": "My +1 as well.\n\nMore generally, I think there is need to distinguish packages that are required by a given package, and that need to be loaded or attached when the given package is; versus those that do *not* need to be loaded into RAM when the given package is attached.\n\nI have one such example in a package under development. My way to handle this situation is to list the dependency in the \"Imports:\" field in DESCRIPTION, but not to list it in any `import()` or `importFrom()` in the NAMESPACE. I doubt CRAN will accept that, but I'll try to explain the reasons for doing so.\n\nLuca\n\nOn 260623 16:43, Michael Chirico wrote:\n> Adding my +1 to R having some canonical way to declare build-time-only\n> dependencies, which can be missed by R CMD check and result in DESCRIPTION\n> being an incomplete accounting of the dependencies required to install a\n> given package. When I find such omissions I usually put them in Suggests\n> but WRE description of that field is different.\n> \n> Mike C",
+      "body_snippet": "My +1 as well.\n\nMore generally, I think there is need to distinguish packages that are required by a given package, and that need to be loaded or attached when the given package is; versus those that ",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 4,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-ba57907ea961",
+      "message_id": "<c8180839-0b0c-4cd0-8ea9-3d2618c1aa6b@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-06-24T22:17:37Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<11dc71cb-2e39-4647-b8c0-a7d02e183739@portamana.org>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<20260623170644.3911c520@arachnoid>",
+        "<27194.38755.487380.713978@paul.eddelbuettel.com>",
+        "<CAPRVBcywhsWCmhMq2Tyt2aCE=nQLdg6dCdjj5jp-w1sf_9kDBQ@mail.gmail.com>",
+        "<11dc71cb-2e39-4647-b8c0-a7d02e183739@portamana.org>"
+      ],
+      "body_plain": "On 2026-06-24 3:08 a.m., PierGianLuca Porta Mana via R-package-devel wrote:\n> My +1 as well.\n> \n> More generally, I think there is need to distinguish packages that are required by a given package, and that need to be loaded or attached when the given package is; versus those that do *not* need to be loaded into RAM when the given package is attached.\n> \n> I have one such example in a package under development. My way to handle this situation is to list the dependency in the \"Imports:\" field in DESCRIPTION, but not to list it in any `import()` or `importFrom()` in the NAMESPACE. I doubt CRAN will accept that, but I'll try to explain the reasons for doing so.\n\nI think that is the accepted solution.  I think WRE doesn't say this \nexplicitly, but it says:\n\n\"The ?Imports? field should not contain packages which are not imported \nfrom (via the NAMESPACE file or :: or ::: operators), as all the \npackages listed in that field need to be installed for the current \npackage to be installed. (This is checked by R CMD check.)\".\n\nTo me this implies the package doesn't need to be mentioned in the \nNAMESPACE file.  I think the manuals don't specify when a package like \nthat will be loaded, but I think currently it will be loaded on first \nuse, not when the package declaring its import is loaded.\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-06-24 3:08 a.m., PierGianLuca Porta Mana via R-package-devel wrote:\n> My +1 as well.\n> \n> More generally, I think there is need to distinguish packages that are required by a given package, an",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 5,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-56865cb3d65c",
+      "message_id": "<CAPRVBcwV7XEJUQiB3ZFYjXos9LHC7jCYsJkMw0ek_rPNxzk-ig@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-06-24T22:25:26Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<c8180839-0b0c-4cd0-8ea9-3d2618c1aa6b@gmail.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<20260623170644.3911c520@arachnoid>",
+        "<27194.38755.487380.713978@paul.eddelbuettel.com>",
+        "<CAPRVBcywhsWCmhMq2Tyt2aCE=nQLdg6dCdjj5jp-w1sf_9kDBQ@mail.gmail.com>",
+        "<11dc71cb-2e39-4647-b8c0-a7d02e183739@portamana.org>",
+        "<c8180839-0b0c-4cd0-8ea9-3d2618c1aa6b@gmail.com>"
+      ],
+      "body_plain": "IIRC, R CMD check might bark if there is no mention. You can silence this\nby using pkg::foo anywhere in your package e.g. as a no-op at build time.\n\nOn Wed, Jun 24, 2026, 3:17?PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 2026-06-24 3:08 a.m., PierGianLuca Porta Mana via R-package-devel wrote:\n> > My +1 as well.\n> >\n> > More generally, I think there is need to distinguish packages that are\n> required by a given package, and that need to be loaded or attached when\n> the given package is; versus those that do *not* need to be loaded into RAM\n> when the given package is attached.\n> >\n> > I have one such example in a package under development. My way to handle\n> this situation is to list the dependency in the \"Imports:\" field in\n> DESCRIPTION, but not to list it in any `import()` or `importFrom()` in the\n> NAMESPACE. I doubt CRAN will accept that, but I'll try to explain the\n> reasons for doing so.\n>\n> I think that is the accepted solution.  I think WRE doesn't say this\n> explicitly, but it says:\n>\n> \"The ?Imports? field should not contain packages which are not imported\n> from (via the NAMESPACE file or :: or ::: operators), as all the\n> packages listed in that field need to be installed for the current\n> package to be installed. (This is checked by R CMD check.)\".\n>\n> To me this implies the package doesn't need to be mentioned in the\n> NAMESPACE file.  I think the manuals don't specify when a package like\n> that will be loaded, but I think currently it will be loaded on first\n> use, not when the package declaring its import is loaded.\n>\n> Duncan Murdoch\n>\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "IIRC, R CMD check might bark if there is no mention. You can silence this\nby using pkg::foo anywhere in your package e.g. as a no-op at build time.\n\nOn Wed, Jun 24, 2026, 3:17?PM Duncan Murdoch <murdo",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 6,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-d30c18f6ec3b",
+      "message_id": "<6508183a-c1a0-4202-9a3e-309c04a4c1ea@portamana.org>",
+      "from_name": "PierGianLuca Porta Mana",
+      "from_email_hash": "3fd470b2b908e36f799236d1d58c6a297eef9fa9b9d89dfeff69a2eccf01c2b4",
+      "date": "2026-06-25T04:36:37Z",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "subject_clean": "[R-pkg-devel] Advice on dependencies",
+      "in_reply_to": "<CAPRVBcwV7XEJUQiB3ZFYjXos9LHC7jCYsJkMw0ek_rPNxzk-ig@mail.gmail.com>",
+      "references": [
+        "<006701dd028d$18e72a30$4ab57e90$@gmx.de>",
+        "<20260623170644.3911c520@arachnoid>",
+        "<27194.38755.487380.713978@paul.eddelbuettel.com>",
+        "<CAPRVBcywhsWCmhMq2Tyt2aCE=nQLdg6dCdjj5jp-w1sf_9kDBQ@mail.gmail.com>",
+        "<11dc71cb-2e39-4647-b8c0-a7d02e183739@portamana.org>",
+        "<c8180839-0b0c-4cd0-8ea9-3d2618c1aa6b@gmail.com>",
+        "<CAPRVBcwV7XEJUQiB3ZFYjXos9LHC7jCYsJkMw0ek_rPNxzk-ig@mail.gmail.com>"
+      ],
+      "body_plain": "Thank you Duncan and Michael, this is a clever idea. I'll try it out.\n\nOn 260625 00:25, Michael Chirico wrote:\n> IIRC, R CMD check might bark if there is no mention. You can silence this\n> by using pkg::foo anywhere in your package e.g. as a no-op at build time.\n> \nOn Wed, Jun 24, 2026, 3:17?PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n>>\n>> I think that is the accepted solution.  I think WRE doesn't say this\n>> explicitly, but it says:\n>>\n>> \"The ?Imports? field should not contain packages which are not imported\n>> from (via the NAMESPACE file or :: or ::: operators), as all the\n>> packages listed in that field need to be installed for the current\n>> package to be installed. (This is checked by R CMD check.)\".\n>>\n>> To me this implies the package doesn't need to be mentioned in the\n>> NAMESPACE file.  I think the manuals don't specify when a package like\n>> that will be loaded, but I think currently it will be loaded on first\n>> use, not when the package declaring its import is loaded.\n>>\n>> Duncan Murdoch",
+      "body_snippet": "Thank you Duncan and Michael, this is a clever idea. I'll try it out.\n\nOn 260625 00:25, Michael Chirico wrote:\n> IIRC, R CMD check might bark if there is no mention. You can silence this\n> by using pk",
+      "thread_id": "thread-d3c2ba400ac5",
+      "thread_depth": 7,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-0eabdf9e3d83",
+      "message_id": "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>",
+      "from_name": "Karline Soetaert",
+      "from_email_hash": "81469b3aa0eb2619d4056e17d35c71773460e9773064d6ab452cae00ca444d82",
+      "date": "2026-06-25T12:00:22Z",
+      "subject": "[R-pkg-devel] Assumed-size arrays in fortran and memory sanitizer",
+      "subject_clean": "[R-pkg-devel] Assumed-size arrays in fortran and memory sanitizer",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nI am the maintainer of an R-package, called limSolve, that solves least-squares problems. The package does not survive the clang-ASAN compilation, and is now scheduled to be removed from CRAN.\n\nThe error I get is (simplified):\nERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [...) and [..) overlap.\n\nI have tried to make fixes to the exact location where this error emerges, but, even if I am successful, then a similar error emerges somewhere else.\n\nAfter trying many things, my best guess now is that this is due to the use of *assumed-size arrays* in this old fortran code, which may not be compatible with the address sanitizer.\n\nAs a simple example of what I think is happening:\nin the function *DLSEI* a matrix called *W* is defined as:\n                double precision :: W(MDA, *)\nThis means that W has MDA rows, and an undefined number of columns (but, as the exact size of this matrix is set in R, its memory location is known).\nNow several functions are called that operate on *rows* of W.  Let?s say, somewhere it calls a function *FUN*:\n                call FUN ( W(5,1), ...)\nwhich would operate on row 5 of W.\n\nThe problem, I think, is that, within FUN, W is also defined as:\n                 double precision :: W(MDA, *)\nBut, as in the calling function (DLSEI), the address is passed of the 5th element in W (the first column of row 5), and not of the first element, this means that the array W in FUN extends 5 elements beyond the memory that is actually allocated to it.\nMy guess is that the address sanitizer finds that this matrix overlaps with some other matrix or vector, hence the error?\n\nI am wondering whether this *is* an error in this code, as the memory extending beyond the original memory will not be altered (although I cannot be sure of this).\n\nThis is not something that is easily fixed, also given the large number of such constructs in this fortran code, and the complexity of the code.\nMy question is then: how am I supposed to deal with this? If I abandon this package, then some dependencies will also need to be abandoned or alternatives will need to be found. So if I can avoid this I would definitely prefer this.\nI realise this is not a very simple problem, but I would be grateful for any suggestions that people might have,\n\nThanks,\nKarline\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI am the maintainer of an R-package, called limSolve, that solves least-squares problems. The package does not survive the clang-ASAN compilation, and is now scheduled to be removed from CRAN",
+      "thread_id": "thread-0eabdf9e3d83",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-df1185cb154e",
+      "message_id": "<AA88B7F1-41A4-4185-A006-72732FE1D3BF@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-06-26T02:52:22Z",
+      "subject": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "subject_clean": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "in_reply_to": "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Karline,\n\nas far as I can tell, the issue (assuming we're talking about  https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-ASAN/limSolve/00check.log ) looks like a compiler optimisation issue where the compiler tries to optimise the copy (since the xDCOPY code does it one element at at a time for subsequent entries in the same column) by using memcpy() of the region (the output shows 32 bytes so 4 elements are being copied), but that is illegal for overlapping regions - which is the case here. The Fortran code is specifying the copy to be done sequentially (it is a element-wise loop) so the algorithm works fine as long as the second (target) region comes before the first region (which is it true as the code guarantees it) so the compiler should not be attempting to use memcpy() to do that, but at best should use memmove() in that case. The problem is that the resulting code will actually be wrong, so ASAN is correct, but it's not the Fortran's code fault. I'd try to reduce optimisations to see if that problem goes away. Unfortunately, I could not find anything on the optimisation in flang nor if there is a way to disable it in the code itself. Probably best would be to report it and see what the flang authors think (I could be wrong).\n\nCheers,\nSimon\n\n\n> On 26 Jun 2026, at 00:00, Karline Soetaert <karline.soetaert at nioz.nl> wrote:\n> \n> Hi all,\n> \n> I am the maintainer of an R-package, called limSolve, that solves least-squares problems. The package does not survive the clang-ASAN compilation, and is now scheduled to be removed from CRAN.\n> \n> The error I get is (simplified):\n> ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [...) and [..) overlap.\n> \n> I have tried to make fixes to the exact location where this error emerges, but, even if I am successful, then a similar error emerges somewhere else.\n> \n> After trying many things, my best guess now is that this is due to the use of *assumed-size arrays* in this old fortran code, which may not be compatible with the address sanitizer.\n> \n> As a simple example of what I think is happening:\n> in the function *DLSEI* a matrix called *W* is defined as:\n>                double precision :: W(MDA, *)\n> This means that W has MDA rows, and an undefined number of columns (but, as the exact size of this matrix is set in R, its memory location is known).\n> Now several functions are called that operate on *rows* of W.  Let?s say, somewhere it calls a function *FUN*:\n>                call FUN ( W(5,1), ...)\n> which would operate on row 5 of W.\n> \n> The problem, I think, is that, within FUN, W is also defined as:\n>                 double precision :: W(MDA, *)\n> But, as in the calling function (DLSEI), the address is passed of the 5th element in W (the first column of row 5), and not of the first element, this means that the array W in FUN extends 5 elements beyond the memory that is actually allocated to it.\n> My guess is that the address sanitizer finds that this matrix overlaps with some other matrix or vector, hence the error?\n> \n> I am wondering whether this *is* an error in this code, as the memory extending beyond the original memory will not be altered (although I cannot be sure of this).\n> \n> This is not something that is easily fixed, also given the large number of such constructs in this fortran code, and the complexity of the code.\n> My question is then: how am I supposed to deal with this? If I abandon this package, then some dependencies will also need to be abandoned or alternatives will need to be found. So if I can avoid this I would definitely prefer this.\n> I realise this is not a very simple problem, but I would be grateful for any suggestions that people might have,\n> \n> Thanks,\n> Karline\n> \n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Karline,\n\nas far as I can tell, the issue (assuming we're talking about  https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-ASAN/limSolve/00check.log ) looks like a compiler optimisation issue where th",
+      "thread_id": "thread-0eabdf9e3d83",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-20f45836a5d6",
+      "message_id": "<20260626161649.7e4c14ee@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-06-26T13:16:49Z",
+      "subject": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "subject_clean": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "in_reply_to": "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "? Thu, 25 Jun 2026 12:00:22 +0000\nKarline Soetaert <Karline.Soetaert at nioz.nl> ?????:\n\n> The error I get is (simplified):\n> ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [...)\n> and [..) overlap.\n\nIn example(RigaWeb), the line\n\nCALL xDCOPY (M-ME, W(ME+1,J), 1, W(KRANKE+1,J), 1)\n\nis evaluated for\n\nM-ME = 46\nME+1 = 15\nKRANKE+1 = 14\nNP1 = 27\n\nThat is, the local copy of the BLAS DCOPY() subroutine is asked to copy\n46 elements between W(15:60,J) and W(14:59,J) for all J in 1:27. These\nregions overlap. I think this violates the Fortran standard on aliasing\nbetween dummy arguments [*], because the same part of the vector is\naccessible through different arguments to xDCOPY(). \n\nI'm afraid you'll have to create a different subroutine, say, xDMOVE,\nto move elements of the same column, and use it in the two places where\nregions of the same array are currently given to xDCOPY.\n\n-- \nBest regards,\nIvan\n\n[*] See <https://j3-fortran.org/doc/year/18/18-007r1.pdf> for the 2018\ndraft, in particular \"NOTE 2\" at page 313 about partial overlap.",
+      "body_snippet": "? Thu, 25 Jun 2026 12:00:22 +0000\nKarline Soetaert <Karline.Soetaert at nioz.nl> ?????:\n\n> The error I get is (simplified):\n> ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [...)\n> and [",
+      "thread_id": "thread-0eabdf9e3d83",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-b618de1a7ea9",
+      "message_id": "<7c84ecbb-bb86-407c-bad5-1714500e8788@mx.uni-saarland.de>",
+      "from_name": "Martin Becker",
+      "from_email_hash": "41f47ddc94bb3c61c7fcb1a50ad2722515e793ed8186184b7cc13b51f01a18e5",
+      "date": "2026-06-27T10:55:44Z",
+      "subject": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "subject_clean": "[R-pkg-devel]  Assumed-size arrays in fortran and memory sanitizer",
+      "in_reply_to": "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AS8P192MB1702D05BD5E1B03F26140D6493EC2@AS8P192MB1702.EURP192.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Dear Karline,\n\nI had (very) similar problems with my MSCMT package, which is hardly \nsurprising, as I had (with your kind permission) adopted parts of the \nFortran code from the limSolve package years ago.\nMy workaround involved enlarging a WORK array so that overlapping copies \ncould be replaced by non-overlapping ones (and adapting the surrounding \ncode accordingly).\nThe changes that worked for me can be found here:\nhttps://github.com/mabe0033/MSCMT/commit/6241141e616d71d15c7b3ca62e4c8a2e7c9be62b\n\nI hope this helps you to resolve the issues in the limSolve package. If \nyou have any questions about this or if there?s anything else I can do \nto help, please do get in touch.\n\nBest,\nMartin\n\nAm 25.06.26 um 14:00 schrieb Karline Soetaert:\n> Hi all,\n> \n> I am the maintainer of an R-package, called limSolve, that solves least-squares problems. The package does not survive the clang-ASAN compilation, and is now scheduled to be removed from CRAN.\n> \n> The error I get is (simplified):\n> ERROR: AddressSanitizer: memcpy-param-overlap: memory ranges [...) and [..) overlap.\n> \n> I have tried to make fixes to the exact location where this error emerges, but, even if I am successful, then a similar error emerges somewhere else.\n> \n> After trying many things, my best guess now is that this is due to the use of *assumed-size arrays* in this old fortran code, which may not be compatible with the address sanitizer.\n> \n> As a simple example of what I think is happening:\n> in the function *DLSEI* a matrix called *W* is defined as:\n>                  double precision :: W(MDA, *)\n> This means that W has MDA rows, and an undefined number of columns (but, as the exact size of this matrix is set in R, its memory location is known).\n> Now several functions are called that operate on *rows* of W.  Let?s say, somewhere it calls a function *FUN*:\n>                  call FUN ( W(5,1), ...)\n> which would operate on row 5 of W.\n> \n> The problem, I think, is that, within FUN, W is also defined as:\n>                   double precision :: W(MDA, *)\n> But, as in the calling function (DLSEI), the address is passed of the 5th element in W (the first column of row 5), and not of the first element, this means that the array W in FUN extends 5 elements beyond the memory that is actually allocated to it.\n> My guess is that the address sanitizer finds that this matrix overlaps with some other matrix or vector, hence the error?\n> \n> I am wondering whether this *is* an error in this code, as the memory extending beyond the original memory will not be altered (although I cannot be sure of this).\n> \n> This is not something that is easily fixed, also given the large number of such constructs in this fortran code, and the complexity of the code.\n> My question is then: how am I supposed to deal with this? If I abandon this package, then some dependencies will also need to be abandoned or alternatives will need to be found. So if I can avoid this I would definitely prefer this.\n> I realise this is not a very simple problem, but I would be grateful for any suggestions that people might have,\n> \n> Thanks,\n> Karline\n> \n> \n> \t[[alternative HTML version deleted]]\n> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \napl. Prof. Dr. Martin Becker, Akad. Oberrat\nLehrstab Statistik\nQuantitative Methoden\nFakult?t f?r Empirische Humanwissenschaften und Wirtschaftswissenschaft\nUniversit?t des Saarlandes\nCampus C3 1, Raum 2.17\n66123 Saarbr?cken\nDeutschland",
+      "body_snippet": "Dear Karline,\n\nI had (very) similar problems with my MSCMT package, which is hardly \nsurprising, as I had (with your kind permission) adopted parts of the \nFortran code from the limSolve package years",
+      "thread_id": "thread-0eabdf9e3d83",
+      "thread_depth": 1,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-b4939d58c632",
+      "message_id": "<B4F9AFB1-174A-47C7-967B-D7EBD1104932@dal.ca>",
+      "from_name": "Daniel Kelley",
+      "from_email_hash": "86414ba1595edb5f4e2a1571b3d5ac6193ddbcd5e87fdb7d177bfbc459d736f0",
+      "date": "2026-06-30T17:47:19Z",
+      "subject": "[R-pkg-devel] help with understanding a failing-pretest message",
+      "subject_clean": "[R-pkg-devel] help with understanding a failing-pretest message",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello.  I submitted an update to the oce package a couple of hours ago, and got an email (pasted below a line of three dashes, below) that states that it fails pretests.  I've followed each of the links, and cannot see what the problem is, *except* for the test taking 16 minutes, in excess of 10 minutes.\n\nThis package has been on CRAN for maybe a decade (times flies faster as I grow older) and it has taken over 10 minutes to build for several years.  I think I once determined that even removing all the documentation and tests would still have it over 10 minutes, although I can't quite remember how I determined that.  Plus, I think documentation and tests are a big advantage of CRAN over, for example, Python repositories.\n\nI had noted the time issue in my cran-comments.md file, stating near the start: \"As in previous CRAN submissions, we request an exception to the 10-minute rule, on account of the package size (300+ functions, covering 60k lines of R, 6k lines of C/C++ and 1k line of Fortran).\"\n\nIs there another action I ought to undertake?\n\nThanks.  Oh, and happy day-before-Canada-day.\n\nDan E. Kelley [he/him/his 314ppm]\nProfessor, Department of Oceanography\nDalhousie University\nPO BOX 15000\nHalifax, NS, Canada B3H 4R2\nDan.Kelley at Dal.CA\n\n---\n\nDear maintainer,\n\npackage oce_1.8-4.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\nWindows: <https://win-builder.r-project.org/incoming_pretest/oce_1.8-4_20260630_160701/Windows/00check.log>\nStatus: OK\nDebian: <https://win-builder.r-project.org/incoming_pretest/oce_1.8-4_20260630_160701/Debian/00check.log>\nStatus: OK\n\nLast released version's CRAN status: OK: 13\nSee: <https://CRAN.R-project.org/web/checks/check_results_oce.html>\n\nCRAN Web: <https://cran.r-project.org/package=oce>\n\nPlease fix all problems and resubmit a fixed version via the webform.\nIf you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\nIf you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n\nMore details are given in the directory:\n<https://win-builder.r-project.org/incoming_pretest/oce_1.8-4_20260630_160701/>\nThe files will be removed after roughly 7 days.\n\n*** Strong rev. depends ***: argoFloats callsync dendroTools locaR morphomap seacarb skiftiTools soundecology SWMPr Toothnroll\n\nBest regards,\nCRAN teams' auto-check service\nFlavor: r-devel-windows-x86_64\nCheck: *, Result: NA\n\n\nFlavor: r-devel-windows-x86_64\nCheck: Overall checktime, Result: NOTE\nOverall checktime 16 min > 10 min\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: *, Result: OK\n\n\n\nDan E. Kelley [he/him/his 314ppm]\nProfessor, Department of Oceanography\nDalhousie University\nPO BOX 15000\nHalifax, NS, Canada B3H 4R2\nDan.Kelley at Dal.CA",
+      "body_snippet": "Hello.  I submitted an update to the oce package a couple of hours ago, and got an email (pasted below a line of three dashes, below) that states that it fails pretests.  I've followed each of the lin",
+      "thread_id": "thread-b4939d58c632",
+      "thread_depth": 0,
+      "month": "2026-06"
+    },
+    {
+      "id": "msg-531d9cbf0829",
+      "message_id": "<6CBEDDA2-1264-4D10-B463-EEFDA540B5C9@noaa.gov>",
+      "from_name": "Roy Mendelssohn - NOAA Federal",
+      "from_email_hash": "85b144d8f821c255c37ab81c3161d7be181befc9b6dd8f140f0346a2dce36d36",
+      "date": "2026-06-30T17:55:57Z",
+      "subject": "[R-pkg-devel] help with understanding a failing-pretest message",
+      "subject_clean": "[R-pkg-devel] help with understanding a failing-pretest message",
+      "in_reply_to": "<B4F9AFB1-174A-47C7-967B-D7EBD1104932@dal.ca>",
+      "references": [
+        "<B4F9AFB1-174A-47C7-967B-D7EBD1104932@dal.ca>"
+      ],
+      "body_plain": "Hi Dan:\n\nI am no expert on this,  but the automated pretests are just that,  and they have certain built-in rules that they check for,  and if one is violated you get a note.  Each time you submit it will take a human to look and decide to waive the requirement,  so if you have responded as they suggest I would say just hold on for a day or two for a real person to  look at that.  I have a package whose examples always where just over the limit and I had to go through the same process.   The main thing is there are only a limited number of people who can waive the requirement and they are pretty busy.\n\nAnd since I work in related areas,  ?oce? is a great package and should be allowed.\n\n-Roy\n\n\n> On Jun 30, 2026, at 10:47?AM, Daniel Kelley <kelley at dal.ca> wrote:\n> \n> Hello.  I submitted an update to the oce package a couple of hours ago, and got an email (pasted below a line of three dashes, below) that states that it fails pretests.  I've followed each of the links, and cannot see what the problem is, *except* for the test taking 16 minutes, in excess of 10 minutes.\n> \n> This package has been on CRAN for maybe a decade (times flies faster as I grow older) and it has taken over 10 minutes to build for several years.  I think I once determined that even removing all the documentation and tests would still have it over 10 minutes, although I can't quite remember how I determined that.  Plus, I think documentation and tests are a big advantage of CRAN over, for example, Python repositories.\n> \n> I had noted the time issue in my cran-comments.md file, stating near the start: \"As in previous CRAN submissions, we request an exception to the 10-minute rule, on account of the package size (300+ functions, covering 60k lines of R, 6k lines of C/C++ and 1k line of Fortran).\"\n> \n> Is there another action I ought to undertake?\n> \n> Thanks.  Oh, and happy day-before-Canada-day.\n> \n> Dan E. Kelley [he/him/his 314ppm]\n> Professor, Department of Oceanography\n> Dalhousie University\n> PO BOX 15000\n> Halifax, NS, Canada B3H 4R2\n> Dan.Kelley at Dal.CA\n> \n> ---\n> \n> Dear maintainer,\n> \n> package oce_1.8-4.tar.gz does not pass the incoming checks automatically, please see the following pre-tests (additional issue checks):\n> Windows: <https://win-builder.r-project.org/incoming_pretest/oce_1.8-4_20260630_160701/Windows/00check.log>\n> Status: OK\n> Debian: <https://win-builder.r-project.org/incoming_pretest/oce_1.8-4_20260630_160701/Debian/00check.log>\n> Status: OK\n> \n> Last released version's CRAN status: OK: 13\n> See: <https://CRAN.R-project.org/web/checks/check_results_oce.html>\n> \n> CRAN Web: <https://cran.r-project.org/package=oce>\n> \n> Please fix all problems and resubmit a fixed version via the webform.\n> If you are not sure how to fix the problems shown, please ask for help on the R-package-devel mailing list:\n> <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> If you are fairly certain the rejection is a false positive, please reply-all to this message and explain.\n> \n> More details are given in the directory:\n> <https://win-builder.r-project.org/incoming_pretest/oce_1.8-4_20260630_160701/>\n> The files will be removed after roughly 7 days.\n> \n> *** Strong rev. depends ***: argoFloats callsync dendroTools locaR morphomap seacarb skiftiTools soundecology SWMPr Toothnroll\n> \n> Best regards,\n> CRAN teams' auto-check service\n> Flavor: r-devel-windows-x86_64\n> Check: *, Result: NA\n> \n> \n> Flavor: r-devel-windows-x86_64\n> Check: Overall checktime, Result: NOTE\n> Overall checktime 16 min > 10 min\n> \n> Flavor: r-devel-linux-x86_64-debian-gcc\n> Check: *, Result: OK\n> \n> \n> \n> Dan E. Kelley [he/him/his 314ppm]\n> Professor, Department of Oceanography\n> Dalhousie University\n> PO BOX 15000\n> Halifax, NS, Canada B3H 4R2\n> Dan.Kelley at Dal.CA\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi Dan:\n\nI am no expert on this,  but the automated pretests are just that,  and they have certain built-in rules that they check for,  and if one is violated you get a note.  Each time you submit it ",
+      "thread_id": "thread-b4939d58c632",
+      "thread_depth": 1,
+      "month": "2026-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-8758bce1a75f",
+      "subject": "[R-pkg-devel] image with R-devel and gcc-16",
+      "message_count": 4,
+      "participants": [
+        "Brad Eck",
+        "Dirk Eddelbuettel"
+      ],
+      "started": "2026-06-01T10:09:19Z",
+      "last_reply": "2026-06-01T19:13:56Z",
+      "root_message_id": "msg-8758bce1a75f"
+    },
+    {
+      "id": "thread-12f67c17c386",
+      "subject": "[R-pkg-devel] Fwd: [CRAN-pretest-archived] CRAN Submission akin 0.3.5",
+      "message_count": 2,
+      "participants": [
+        "D B",
+        "Serguei Sokol"
+      ],
+      "started": "2026-06-03T14:43:46Z",
+      "last_reply": "2026-06-04T08:47:42Z",
+      "root_message_id": "msg-12f67c17c386"
+    },
+    {
+      "id": "thread-e0bf983f0c7b",
+      "subject": "[R-pkg-devel] akin 0.3.5 CRAN Test Results",
+      "message_count": 2,
+      "participants": [
+        "D B",
+        "Ivan Krylov"
+      ],
+      "started": "2026-06-04T19:08:38Z",
+      "last_reply": "2026-06-04T21:11:25Z",
+      "root_message_id": "msg-e0bf983f0c7b"
+    },
+    {
+      "id": "thread-daa594c005e6",
+      "subject": "[R-pkg-devel] DESCRIPTION meta-information, but only for R-devel-Debian-GCC",
+      "message_count": 4,
+      "participants": [
+        "Duncan Murdoch",
+        "Tony Wilkes",
+        "Uwe Ligges"
+      ],
+      "started": "2026-06-07T18:09:24Z",
+      "last_reply": "2026-06-08T20:09:54Z",
+      "root_message_id": "msg-daa594c005e6"
+    },
+    {
+      "id": "thread-dc2acd585167",
+      "subject": "[R-pkg-devel] ERROR on r-devel-linux-x86_64-debian-gcc",
+      "message_count": 1,
+      "participants": [
+        "Shu Fai Cheung"
+      ],
+      "started": "2026-06-07T23:25:44Z",
+      "last_reply": "2026-06-07T23:25:44Z",
+      "root_message_id": "msg-dc2acd585167"
+    },
+    {
+      "id": "thread-d3c2ba400ac5",
+      "subject": "[R-pkg-devel] Advice on dependencies",
+      "message_count": 13,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Duncan Murdoch",
+        "Ivan Krylov",
+        "Jeff Newmiller",
+        "Josiah Parry",
+        "Michael Chirico",
+        "PierGianLuca Porta Mana",
+        "m@tthi@s-go@d@@ m@iii@g oii gmx@de"
+      ],
+      "started": "2026-06-22T21:21:31Z",
+      "last_reply": "2026-06-25T04:36:37Z",
+      "root_message_id": "msg-d3c2ba400ac5"
+    },
+    {
+      "id": "thread-0eabdf9e3d83",
+      "subject": "[R-pkg-devel] Assumed-size arrays in fortran and memory sanitizer",
+      "message_count": 4,
+      "participants": [
+        "Ivan Krylov",
+        "Karline Soetaert",
+        "Martin Becker",
+        "Simon Urbanek"
+      ],
+      "started": "2026-06-25T12:00:22Z",
+      "last_reply": "2026-06-27T10:55:44Z",
+      "root_message_id": "msg-0eabdf9e3d83"
+    },
+    {
+      "id": "thread-b4939d58c632",
+      "subject": "[R-pkg-devel] help with understanding a failing-pretest message",
+      "message_count": 2,
+      "participants": [
+        "Daniel Kelley",
+        "Roy Mendelssohn - NOAA Federal"
+      ],
+      "started": "2026-06-30T17:47:19Z",
+      "last_reply": "2026-06-30T17:55:57Z",
+      "root_message_id": "msg-b4939d58c632"
+    }
+  ]
+}
