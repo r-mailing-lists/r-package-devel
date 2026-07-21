@@ -3830,3 +3830,296 @@ Best regards,
 Ivan
 
 
+From ch@|n@@wt|ney @end|ng |rom gm@||@com  Mon Jul 20 15:34:04 2026
+From: ch@|n@@wt|ney @end|ng |rom gm@||@com (Chung-hong Chan)
+Date: Mon, 20 Jul 2026 15:34:04 +0200
+Subject: [R-pkg-devel] Rules / etiquette: Fork package,
+ modify and release to CRAN
+In-Reply-To: <0e6544db37374d6fa9740298eff0558d@uni-mainz.de>
+References: <ca357221de8e4cc4b78ad6b66cde14e5@uni-mainz.de>
+ <20260719173557.63d18f49@trisector>
+ <0e6544db37374d6fa9740298eff0558d@uni-mainz.de>
+Message-ID: <CAHfK2MvHZsWpLeDK3dja58ndYZcB3x+GBB7QxNEpFCEwrNm4rA@mail.gmail.com>
+
+I think I was in a similar situation (not exactly the same though).
+The R package minty was a fork from the superseded code of the popular
+R package readr.
+
+Although legally speaking it is okay to fork and release open source
+code, it would be much better to ask for permission from the origin
+authors first before releasing it.
+https://github.com/tidyverse/readr/issues/1517
+
+As forking can sometimes be perceived as splitting up the community,
+asking for permission shows that it's in good faith.
+
+
+On Sun, Jul 19, 2026 at 5:01?PM Wollschlaeger, Daniel
+<wollschlaeger at uni-mainz.de> wrote:
+>
+> Thank you very much, Dirk and Ivan, for quickly providing encouraging feedback!
+>
+> With respect to adopting the archived packages: That would indeed be ideal as it would provide most value to other users / developers. However, I hesitate for two reasons: First, taking over the packages strikes me as even more intrusive than forking them (maybe this is a temporary situation). Second, the functionality provided by the original packages is very broad, and really beyond my expertise (both with respect to C++ template code and math). A modified and trimmed-down package would be easier for me to understand and maintain.
+>
+> ________________________________________
+> Von: Ivan Krylov <ikrylov at disroot.org>
+> Gesendet: Sonntag, 19. Juli 2026 16:35:57
+> An: Wollschlaeger, Daniel
+> Cc: r-package-devel at r-project.org
+> Betreff: Re: [R-pkg-devel] Rules / etiquette: Fork package, modify and release to CRAN
+>
+> On Sun, 19 Jul 2026 14:05:06 +0000
+> "Wollschlaeger, Daniel" <wollschlaeger at uni-mainz.de> wrote:
+>
+> > My understanding is that the GPL-3 license of the packages allows me
+> > to fork, modify, and release them to CRAN under a new name.
+>
+> Dirk is right. Since you're retaining the package functionality and
+> API, it's even better to retain the name of the package. You're just
+> taking over from where the original maintainer left off.
+>
+> According to the CRAN policy, it would be ideal to have the author's
+> blessing for that, but not necessary:
+>
+> >> Package maintainers give the right to use that package name to CRAN
+> >> when they submit, so the CRAN team may orphan a package and allow
+> >> another maintainer to take it over.
+>
+>
+> > Aside from <...> including him in the DESCRIPTION's Authors at R field
+> > with roles 'aut' and 'cph'
+>
+> According to ?person in latest versions of R, 'aut' already implies
+> holding the copyright. 'cph' is intended for entities "other than the
+> package authors".
+>
+> Best of luck and thank you for doing the right thing!
+>
+> --
+> Best regards,
+> Ivan
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From wo||@ch|@eger @end|ng |rom un|-m@|nz@de  Mon Jul 20 16:22:17 2026
+From: wo||@ch|@eger @end|ng |rom un|-m@|nz@de (Wollschlaeger, Daniel)
+Date: Mon, 20 Jul 2026 14:22:17 +0000
+Subject: [R-pkg-devel] Rules / etiquette: Fork package,
+ modify and release to CRAN
+In-Reply-To: <CAHfK2MvHZsWpLeDK3dja58ndYZcB3x+GBB7QxNEpFCEwrNm4rA@mail.gmail.com>
+References: <ca357221de8e4cc4b78ad6b66cde14e5@uni-mainz.de>
+ <20260719173557.63d18f49@trisector>
+ <0e6544db37374d6fa9740298eff0558d@uni-mainz.de>,
+ <CAHfK2MvHZsWpLeDK3dja58ndYZcB3x+GBB7QxNEpFCEwrNm4rA@mail.gmail.com>
+Message-ID: <962f6846de5d405aa71674d323991d93@uni-mainz.de>
+
+Thank you, Chung-hong and Duncan, for your assessments!
+
+Following your recommendations, I'd be grateful if anybody could put me in contact with St?phane Laurent (https://laustep.github.io/stlahblog/), developer of packages Boov (https://github.com/stla/Boov/) and cgalMeshes (https://github.com/stla/cgalMeshes/) to inform him about my idea, and maybe discuss a coordinated path forward.
+
+________________________________________
+Von: Chung-hong Chan <chainsawtiney at gmail.com>
+Gesendet: Montag, 20. Juli 2026 15:34:04
+An: Wollschlaeger, Daniel
+Cc: r-package-devel at r-project.org
+Betreff: Re: [R-pkg-devel] Rules / etiquette: Fork package, modify and release to CRAN
+
+I think I was in a similar situation (not exactly the same though).
+The R package minty was a fork from the superseded code of the popular
+R package readr.
+
+Although legally speaking it is okay to fork and release open source
+code, it would be much better to ask for permission from the origin
+authors first before releasing it.
+https://github.com/tidyverse/readr/issues/1517
+
+As forking can sometimes be perceived as splitting up the community,
+asking for permission shows that it's in good faith.
+
+
+On Sun, Jul 19, 2026 at 5:01?PM Wollschlaeger, Daniel
+<wollschlaeger at uni-mainz.de> wrote:
+>
+> Thank you very much, Dirk and Ivan, for quickly providing encouraging feedback!
+>
+> With respect to adopting the archived packages: That would indeed be ideal as it would provide most value to other users / developers. However, I hesitate for two reasons: First, taking over the packages strikes me as even more intrusive than forking them (maybe this is a temporary situation). Second, the functionality provided by the original packages is very broad, and really beyond my expertise (both with respect to C++ template code and math). A modified and trimmed-down package would be easier for me to understand and maintain.
+>
+> ________________________________________
+> Von: Ivan Krylov <ikrylov at disroot.org>
+> Gesendet: Sonntag, 19. Juli 2026 16:35:57
+> An: Wollschlaeger, Daniel
+> Cc: r-package-devel at r-project.org
+> Betreff: Re: [R-pkg-devel] Rules / etiquette: Fork package, modify and release to CRAN
+>
+> On Sun, 19 Jul 2026 14:05:06 +0000
+> "Wollschlaeger, Daniel" <wollschlaeger at uni-mainz.de> wrote:
+>
+> > My understanding is that the GPL-3 license of the packages allows me
+> > to fork, modify, and release them to CRAN under a new name.
+>
+> Dirk is right. Since you're retaining the package functionality and
+> API, it's even better to retain the name of the package. You're just
+> taking over from where the original maintainer left off.
+>
+> According to the CRAN policy, it would be ideal to have the author's
+> blessing for that, but not necessary:
+>
+> >> Package maintainers give the right to use that package name to CRAN
+> >> when they submit, so the CRAN team may orphan a package and allow
+> >> another maintainer to take it over.
+>
+>
+> > Aside from <...> including him in the DESCRIPTION's Authors at R field
+> > with roles 'aut' and 'cph'
+>
+> According to ?person in latest versions of R, 'aut' already implies
+> holding the copyright. 'cph' is intended for entities "other than the
+> package authors".
+>
+> Best of luck and thank you for doing the right thing!
+>
+> --
+> Best regards,
+> Ivan
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+From bj@rke@h@utop @end|ng |rom gm@||@com  Mon Jul 20 16:27:54 2026
+From: bj@rke@h@utop @end|ng |rom gm@||@com (Bjarke Hautop)
+Date: Mon, 20 Jul 2026 16:27:54 +0200
+Subject: [R-pkg-devel] Unused \usage NOTE in plot to allow ?pkg::plot to work
+Message-ID: <CAMjMs8cjdAdH9u_1hGUsTpdV=eWWOc_T9ngoyE9yAJAaZbcmKA@mail.gmail.com>
+
+Hi all,
+
+CRAN checks for my package
+https://cran.r-project.org/web/checks/check_results_causalDisco.html
+gives a NOTE for unused \usage in plot.Rd, and so does the incoming
+pre-test on CRAN on Debian.
+It was made so users could type ?causalDisco::plot with links to the
+dispatches
+?causalDisco::plot.Knowledge and ?causalDisco::plot.Disco.
+
+Am I supposed to do something different, or is it fine and I can leave it
+as is?
+
+For ease here is a link to my code for my planned next release:
+https://github.com/BjarkeHautop/causalDisco/blob/main/R/plot.R#L397-L427
+
+Best regards,
+Bjarke
+
+	[[alternative HTML version deleted]]
+
+
+From |kry|ov @end|ng |rom d|@root@org  Mon Jul 20 17:26:32 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Mon, 20 Jul 2026 18:26:32 +0300
+Subject: [R-pkg-devel] Unused \usage NOTE in plot to allow ?pkg::plot to
+ work
+In-Reply-To: <CAMjMs8cjdAdH9u_1hGUsTpdV=eWWOc_T9ngoyE9yAJAaZbcmKA@mail.gmail.com>
+References: <CAMjMs8cjdAdH9u_1hGUsTpdV=eWWOc_T9ngoyE9yAJAaZbcmKA@mail.gmail.com>
+Message-ID: <20260720182632.643831f5@arachnoid>
+
+? Mon, 20 Jul 2026 16:27:54 +0200
+Bjarke Hautop <bjarke.hautop at gmail.com> ?????:
+
+> CRAN checks for my package
+> https://cran.r-project.org/web/checks/check_results_causalDisco.html
+> gives a NOTE for unused \usage in plot.Rd, and so does the incoming
+> pre-test on CRAN on Debian.
+
+It's not unused, it's missing:
+https://cran.r-project.org/web/packages/causalDisco/refman/causalDisco.html#plot
+
+> Am I supposed to do something different, or is it fine and I can
+> leave it as is?
+
+Since roxygen only sees NULL as the object being documented, it cannot
+derive a valid \usage{...} from the information it is given. You can
+provide
+
+#' @usage plot(x, ...)
+
+by hand (or remove the @param tags).
+
+-- 
+Best regards,
+Ivan
+
+
+From @eb@meyer @end|ng |rom |@u@de  Mon Jul 20 17:38:43 2026
+From: @eb@meyer @end|ng |rom |@u@de (Sebastian Meyer)
+Date: Mon, 20 Jul 2026 17:38:43 +0200
+Subject: [R-pkg-devel] Unused \usage NOTE in plot to allow ?pkg::plot to
+ work
+In-Reply-To: <CAMjMs8cjdAdH9u_1hGUsTpdV=eWWOc_T9ngoyE9yAJAaZbcmKA@mail.gmail.com>
+References: <CAMjMs8cjdAdH9u_1hGUsTpdV=eWWOc_T9ngoyE9yAJAaZbcmKA@mail.gmail.com>
+Message-ID: <6b09f3a2-52d0-46db-a4a1-930c6ba08b7f@fau.de>
+
+Am 20.07.26 um 16:27 schrieb Bjarke Hautop:
+> It was made so users could type ?causalDisco::plot with links to the
+> dispatches
+> ?causalDisco::plot.Knowledge and ?causalDisco::plot.Disco.
+> 
+> Am I supposed to do something different, or is it fine and I can leave it
+> as is?
+
+You could keep the overview help page for your plot methods if it helps 
+but you should remove its Arguments section as there is no corresponding 
+Usage, see, e.g., the rendered HTML help for the current CRAN version:
+
+<https://cran.r-project.org/web/packages/causalDisco/refman/causalDisco.html#plot>
+
+Best regards,
+
+	Sebastian Meyer
+
+
+From bj@rke@h@utop @end|ng |rom gm@||@com  Mon Jul 20 20:36:33 2026
+From: bj@rke@h@utop @end|ng |rom gm@||@com (Bjarke Hautop)
+Date: Mon, 20 Jul 2026 20:36:33 +0200
+Subject: [R-pkg-devel] Unused \usage NOTE in plot to allow ?pkg::plot to
+ work
+In-Reply-To: <6b09f3a2-52d0-46db-a4a1-930c6ba08b7f@fau.de>
+References: <CAMjMs8cjdAdH9u_1hGUsTpdV=eWWOc_T9ngoyE9yAJAaZbcmKA@mail.gmail.com>
+ <6b09f3a2-52d0-46db-a4a1-930c6ba08b7f@fau.de>
+Message-ID: <CAMjMs8c78_75Br_2aM6RYDEyKnEhvWmgcYoVZEJa0Z1KbGOa=A@mail.gmail.com>
+
+Thanks, both! Fixed it.
+
+Best regards,
+Bjarke
+
+Den man. 20. jul. 2026 kl. 17.38 skrev Sebastian Meyer <seb.meyer at fau.de>:
+
+> Am 20.07.26 um 16:27 schrieb Bjarke Hautop:
+> > It was made so users could type ?causalDisco::plot with links to the
+> > dispatches
+> > ?causalDisco::plot.Knowledge and ?causalDisco::plot.Disco.
+> >
+> > Am I supposed to do something different, or is it fine and I can leave it
+> > as is?
+>
+> You could keep the overview help page for your plot methods if it helps
+> but you should remove its Arguments section as there is no corresponding
+> Usage, see, e.g., the rendered HTML help for the current CRAN version:
+>
+> <
+> https://cran.r-project.org/web/packages/causalDisco/refman/causalDisco.html#plot
+> >
+>
+> Best regards,
+>
+>         Sebastian Meyer
+>
+>
+
+	[[alternative HTML version deleted]]
+
+
