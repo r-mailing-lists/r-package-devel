@@ -4123,3 +4123,101 @@ Den man. 20. jul. 2026 kl. 17.38 skrev Sebastian Meyer <seb.meyer at fau.de>:
 	[[alternative HTML version deleted]]
 
 
+From ||u|@@rev|||@ @end|ng |rom gm@||@com  Tue Jul 21 23:09:47 2026
+From: ||u|@@rev|||@ @end|ng |rom gm@||@com (=?UTF-8?Q?Llu=C3=ADs_Revilla?=)
+Date: Tue, 21 Jul 2026 23:09:47 +0200
+Subject: [R-pkg-devel] Identify multiple occurrences of connectivity faster
+Message-ID: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+
+Hi all,
+
+Some time ago one of my packages was archived from CRAN because it
+accessed the internet and I had checked the connection in one place
+but not in others on the same file.
+The approach I had used was to disconnect the internet connection and
+check the package without it. But this failed to find when there were
+multiple attempts to connect to the internet on the same test/example
+and only the first one was found.
+
+Recently, I found some tests in a different package that uses many
+suggested packages
+The way I've been testing if any suggested package is required is
+checking it using .Renviron with
+
+_R_CHECK_DEPENDS_ONLY_="true"
+_R_CHECK_FORCE_SUGGESTS_="false"
+
+Similarly to the previous situation, when multiple suggested packages
+are used on the same files it requires multiple rounds.
+
+In both cases the solution is to check the package as many times as
+needed until it no longer fails. It can take a lot of time to get all
+the cases if the package has long examples and/or tests.
+
+Does anyone have suggestions to find all these occurrences in a single
+attempt? Is there any faster approach to identify those problems (when
+code is already written)?
+
+Many thanks,
+
+Llu?s
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Tue Jul 21 23:38:24 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Tue, 21 Jul 2026 17:38:24 -0400
+Subject: [R-pkg-devel] 
+ Identify multiple occurrences of connectivity faster
+In-Reply-To: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+References: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+Message-ID: <c195f9c9-60a2-4cb4-992c-63bc7b959c17@gmail.com>
+
+On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:
+> Hi all,
+> 
+> Some time ago one of my packages was archived from CRAN because it
+> accessed the internet and I had checked the connection in one place
+> but not in others on the same file.
+> The approach I had used was to disconnect the internet connection andtemp
+> check the package without it. But this failed to find when there were
+> multiple attempts to connect to the internet on the same test/example
+> and only the first one was found.
+> 
+> Recently, I found some tests in a different package that uses many
+> suggested packages
+> The way I've been testing if any suggested package is required is
+> checking it using .Renviron with
+> 
+> _R_CHECK_DEPENDS_ONLY_="true"
+> _R_CHECK_FORCE_SUGGESTS_="false"
+> 
+> Similarly to the previous situation, when multiple suggested packages
+> are used on the same files it requires multiple rounds.
+> 
+> In both cases the solution is to check the package as many times as
+> needed until it no longer fails. It can take a lot of time to get all
+> the cases if the package has long examples and/or tests.
+> 
+> Does anyone have suggestions to find all these occurrences in a single
+> attempt? Is there any faster approach to identify those problems (when
+> code is already written)?
+I don't think you can do that, but it's fairly easy to detect all calls 
+to a particular function.  So if all your Internet connections were via 
+download.file(), then just write a function local to your package of the 
+form
+
+    download.file <- function(url, ...) {
+      message("Trying to download ", url)
+      message("Current calls:")
+      print(sys.calls())
+    }
+
+Then, as long as your code doesn't use "utils::download.file(...)", 
+you'll get a message for every attempted download.  But if you access 
+the Internet in multiple ways, you'll need to do this for each different 
+way.  (And once you've fixed things, remember to delete those dummy 
+functions...)
+
+Duncan Murdoch
+
+

@@ -806,6 +806,40 @@
       "thread_id": "thread-84fd4680b8c4",
       "thread_depth": 2,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-0371ab74585a",
+      "message_id": "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+      "from_name": "Lluís Revilla",
+      "from_email_hash": "76a9726a6e0e47bbb7afccdf71a32cc468fa12b74f368ad4203569f7d7fbc065",
+      "date": "2026-07-21T21:09:47Z",
+      "subject": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nSome time ago one of my packages was archived from CRAN because it\naccessed the internet and I had checked the connection in one place\nbut not in others on the same file.\nThe approach I had used was to disconnect the internet connection and\ncheck the package without it. But this failed to find when there were\nmultiple attempts to connect to the internet on the same test/example\nand only the first one was found.\n\nRecently, I found some tests in a different package that uses many\nsuggested packages\nThe way I've been testing if any suggested package is required is\nchecking it using .Renviron with\n\n_R_CHECK_DEPENDS_ONLY_=\"true\"\n_R_CHECK_FORCE_SUGGESTS_=\"false\"\n\nSimilarly to the previous situation, when multiple suggested packages\nare used on the same files it requires multiple rounds.\n\nIn both cases the solution is to check the package as many times as\nneeded until it no longer fails. It can take a lot of time to get all\nthe cases if the package has long examples and/or tests.\n\nDoes anyone have suggestions to find all these occurrences in a single\nattempt? Is there any faster approach to identify those problems (when\ncode is already written)?\n\nMany thanks,\n\nLlu?s",
+      "body_snippet": "Hi all,\n\nSome time ago one of my packages was archived from CRAN because it\naccessed the internet and I had checked the connection in one place\nbut not in others on the same file.\nThe approach I had u",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-74b3cb6dcb01",
+      "message_id": "<c195f9c9-60a2-4cb4-992c-63bc7b959c17@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-07-21T21:38:24Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>"
+      ],
+      "body_plain": "On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:\n> Hi all,\n> \n> Some time ago one of my packages was archived from CRAN because it\n> accessed the internet and I had checked the connection in one place\n> but not in others on the same file.\n> The approach I had used was to disconnect the internet connection andtemp\n> check the package without it. But this failed to find when there were\n> multiple attempts to connect to the internet on the same test/example\n> and only the first one was found.\n> \n> Recently, I found some tests in a different package that uses many\n> suggested packages\n> The way I've been testing if any suggested package is required is\n> checking it using .Renviron with\n> \n> _R_CHECK_DEPENDS_ONLY_=\"true\"\n> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n> \n> Similarly to the previous situation, when multiple suggested packages\n> are used on the same files it requires multiple rounds.\n> \n> In both cases the solution is to check the package as many times as\n> needed until it no longer fails. It can take a lot of time to get all\n> the cases if the package has long examples and/or tests.\n> \n> Does anyone have suggestions to find all these occurrences in a single\n> attempt? Is there any faster approach to identify those problems (when\n> code is already written)?\nI don't think you can do that, but it's fairly easy to detect all calls \nto a particular function.  So if all your Internet connections were via \ndownload.file(), then just write a function local to your package of the \nform\n\n    download.file <- function(url, ...) {\n      message(\"Trying to download \", url)\n      message(\"Current calls:\")\n      print(sys.calls())\n    }\n\nThen, as long as your code doesn't use \"utils::download.file(...)\", \nyou'll get a message for every attempted download.  But if you access \nthe Internet in multiple ways, you'll need to do this for each different \nway.  (And once you've fixed things, remember to delete those dummy \nfunctions...)\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:\n> Hi all,\n> \n> Some time ago one of my packages was archived from CRAN because it\n> accessed the internet and I had checked the connection in one place\n> ",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 1,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -917,6 +951,18 @@
       "started": "2026-07-20T14:27:54Z",
       "last_reply": "2026-07-20T18:36:33Z",
       "root_message_id": "msg-84fd4680b8c4"
+    },
+    {
+      "id": "thread-0371ab74585a",
+      "subject": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Lluís Revilla"
+      ],
+      "started": "2026-07-21T21:09:47Z",
+      "last_reply": "2026-07-21T21:38:24Z",
+      "root_message_id": "msg-0371ab74585a"
     }
   ]
 }
