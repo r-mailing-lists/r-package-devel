@@ -859,6 +859,83 @@
       "thread_id": "thread-0371ab74585a",
       "thread_depth": 2,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-171c1519c42f",
+      "message_id": "<CAPRVBcx1VxTK7UEraxytouNzt3=sT3iw0a7rK1qQbG7i9HqFtg@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-07-23T05:57:49Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_t4tFZ_m1PG6Ez6k4DNsfxeNXWdC55QCgE9aAwV3Lc94Q@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+        "<c195f9c9-60a2-4cb4-992c-63bc7b959c17@gmail.com>",
+        "<CAN+W6_t4tFZ_m1PG6Ez6k4DNsfxeNXWdC55QCgE9aAwV3Lc94Q@mail.gmail.com>"
+      ],
+      "body_plain": "It seems like more generic Linux utilities like 'strace' / 'netstat' would\nbe hard to top:\nhttps://unix.stackexchange.com/questions/375387/how-to-trace-networking-activity-of-a-command\n\nIf you wanted to keep the download.file() route, you could resort to\nassignInNamespace:\n\n# (not 100% necessary to skip attaching utils on start-up, but does help\nwith symbol resolution from .GlobalEnv)\nR_DEFAULT_PACKAGES=NULL R\n\nutils::assignInNamespace(\"download.file\", \\(...) message('masked'),\nasNamespace('utils'))\n\nutils::download.file('...')\n# masked\nlibrary(utils)\ndownload.file('...')\n# masked\n\nMike C\n\nOn Wed, Jul 22, 2026 at 2:39?PM Llu?s Revilla <lluis.revilla at gmail.com>\nwrote:\n\n> Hi Duncan,\n>\n> Nice idea, I do now have a helper function where this would be helpful.\n>\n> However, the problem is not only with my own code but dependencies too\n> like with base R code too.\n> This package uses available.packages() and I've seen some cases where\n> it fails when there is no internet connection.\n> Unfortunately, I can't reproduce it, but the error message is related\n> to not being able to download and no mirrors are available/set.\n>\n> Thanks,\n>\n> Llu?s\n>\n>\n> Missatge de Duncan Murdoch <murdoch.duncan at gmail.com> del dia dt., 21\n> de jul. 2026 a les 23:38:\n> >\n> > On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:\n> > > Hi all,\n> > >\n> > > Some time ago one of my packages was archived from CRAN because it\n> > > accessed the internet and I had checked the connection in one place\n> > > but not in others on the same file.\n> > > The approach I had used was to disconnect the internet connection\n> andtemp\n> > > check the package without it. But this failed to find when there were\n> > > multiple attempts to connect to the internet on the same test/example\n> > > and only the first one was found.\n> > >\n> > > Recently, I found some tests in a different package that uses many\n> > > suggested packages\n> > > The way I've been testing if any suggested package is required is\n> > > checking it using .Renviron with\n> > >\n> > > _R_CHECK_DEPENDS_ONLY_=\"true\"\n> > > _R_CHECK_FORCE_SUGGESTS_=\"false\"\n> > >\n> > > Similarly to the previous situation, when multiple suggested packages\n> > > are used on the same files it requires multiple rounds.\n> > >\n> > > In both cases the solution is to check the package as many times as\n> > > needed until it no longer fails. It can take a lot of time to get all\n> > > the cases if the package has long examples and/or tests.\n> > >\n> > > Does anyone have suggestions to find all these occurrences in a single\n> > > attempt? Is there any faster approach to identify those problems (when\n> > > code is already written)?\n> > I don't think you can do that, but it's fairly easy to detect all calls\n> > to a particular function.  So if all your Internet connections were via\n> > download.file(), then just write a function local to your package of the\n> > form\n> >\n> >     download.file <- function(url, ...) {\n> >       message(\"Trying to download \", url)\n> >       message(\"Current calls:\")\n> >       print(sys.calls())\n> >     }\n> >\n> > Then, as long as your code doesn't use \"utils::download.file(...)\",\n> > you'll get a message for every attempted download.  But if you access\n> > the Internet in multiple ways, you'll need to do this for each different\n> > way.  (And once you've fixed things, remember to delete those dummy\n> > functions...)\n> >\n> > Duncan Murdoch\n> >\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "It seems like more generic Linux utilities like 'strace' / 'netstat' would\nbe hard to top:\nhttps://unix.stackexchange.com/questions/375387/how-to-trace-networking-activity-of-a-command\n\nIf you wanted ",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 3,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-54b3af52b785",
+      "message_id": "<fd658f40-b478-4187-ad8d-ac8cf2228dc4@thuenen.de>",
+      "from_name": "Roland Fuß",
+      "from_email_hash": "243f1f07b635e588b0367a74c0c2f87431caaf932c18d2788f8cd6ddc047116c",
+      "date": "2026-07-23T07:41:57Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAPRVBcx1VxTK7UEraxytouNzt3=sT3iw0a7rK1qQbG7i9HqFtg@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+        "<c195f9c9-60a2-4cb4-992c-63bc7b959c17@gmail.com>",
+        "<CAN+W6_t4tFZ_m1PG6Ez6k4DNsfxeNXWdC55QCgE9aAwV3Lc94Q@mail.gmail.com>",
+        "<CAPRVBcx1VxTK7UEraxytouNzt3=sT3iw0a7rK1qQbG7i9HqFtg@mail.gmail.com>"
+      ],
+      "body_plain": "Isn't base::trace designed for this?\n\nfoo <- \\() \ndownload.file('https://cran.r-project.org/doc/manuals/r-release/NEWS.html',\n ? ? ? ? ? ? ? ? ? ? ? ? ?tempfile())\n\ntrace(utils::download.file,\n ? ? ? tracer = quote({\n ? ? ? ? ? ? ? ? ? ? ? print(head(sys.calls(), -4))\n ? ? ? ? ? ? ? ? ? ? ? }))\n\nfoo()\n\nuntrace(utils::download.file)\n\nIf you prefer preventing downloads add this to the tracer:\n\nmethod <- \"wget\" system <- function(...) 0\n\nAm 23.07.2026 um 07:57 schrieb Michael Chirico:\n> It seems like more generic Linux utilities like 'strace' / 'netstat' would\n> be hard to top:\n> https://unix.stackexchange.com/questions/375387/how-to-trace-networking-activity-of-a-command\n>\n> If you wanted to keep the download.file() route, you could resort to\n> assignInNamespace:\n>\n> # (not 100% necessary to skip attaching utils on start-up, but does help\n> with symbol resolution from .GlobalEnv)\n> R_DEFAULT_PACKAGES=NULL R\n>\n> utils::assignInNamespace(\"download.file\", \\(...) message('masked'),\n> asNamespace('utils'))\n>\n> utils::download.file('...')\n> # masked\n> library(utils)\n> download.file('...')\n> # masked\n>\n> Mike C\n>\n> On Wed, Jul 22, 2026 at 2:39?PM Llu?s Revilla <lluis.revilla at gmail.com>\n> wrote:\n>\n>> Hi Duncan,\n>>\n>> Nice idea, I do now have a helper function where this would be helpful.\n>>\n>> However, the problem is not only with my own code but dependencies too\n>> like with base R code too.\n>> This package uses available.packages() and I've seen some cases where\n>> it fails when there is no internet connection.\n>> Unfortunately, I can't reproduce it, but the error message is related\n>> to not being able to download and no mirrors are available/set.\n>>\n>> Thanks,\n>>\n>> Llu?s\n>>\n>>\n>> Missatge de Duncan Murdoch <murdoch.duncan at gmail.com> del dia dt., 21\n>> de jul. 2026 a les 23:38:\n>>> On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:\n>>>> Hi all,\n>>>>\n>>>> Some time ago one of my packages was archived from CRAN because it\n>>>> accessed the internet and I had checked the connection in one place\n>>>> but not in others on the same file.\n>>>> The approach I had used was to disconnect the internet connection\n>> andtemp\n>>>> check the package without it. But this failed to find when there were\n>>>> multiple attempts to connect to the internet on the same test/example\n>>>> and only the first one was found.\n>>>>\n>>>> Recently, I found some tests in a different package that uses many\n>>>> suggested packages\n>>>> The way I've been testing if any suggested package is required is\n>>>> checking it using .Renviron with\n>>>>\n>>>> _R_CHECK_DEPENDS_ONLY_=\"true\"\n>>>> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n>>>>\n>>>> Similarly to the previous situation, when multiple suggested packages\n>>>> are used on the same files it requires multiple rounds.\n>>>>\n>>>> In both cases the solution is to check the package as many times as\n>>>> needed until it no longer fails. It can take a lot of time to get all\n>>>> the cases if the package has long examples and/or tests.\n>>>>\n>>>> Does anyone have suggestions to find all these occurrences in a single\n>>>> attempt? Is there any faster approach to identify those problems (when\n>>>> code is already written)?\n>>> I don't think you can do that, but it's fairly easy to detect all calls\n>>> to a particular function.  So if all your Internet connections were via\n>>> download.file(), then just write a function local to your package of the\n>>> form\n>>>\n>>>      download.file <- function(url, ...) {\n>>>        message(\"Trying to download \", url)\n>>>        message(\"Current calls:\")\n>>>        print(sys.calls())\n>>>      }\n>>>\n>>> Then, as long as your code doesn't use \"utils::download.file(...)\",\n>>> you'll get a message for every attempted download.  But if you access\n>>> the Internet in multiple ways, you'll need to do this for each different\n>>> way.  (And once you've fixed things, remember to delete those dummy\n>>> functions...)\n>>>\n>>> Duncan Murdoch\n>>>\n>>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Isn't base::trace designed for this?\n\nfoo <- \\() \ndownload.file('https://cran.r-project.org/doc/manuals/r-release/NEWS.html',\n ? ? ? ? ? ? ? ? ? ? ? ? ?tempfile())\n\ntrace(utils::download.file,\n ? ? ? ",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 4,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-f56d935dda3a",
+      "message_id": "<CABdHhvGwkP5KDMTbtmM1DdpcUuPS178td3DSLdfO1KqvEGwB8Q@mail.gmail.com>",
+      "from_name": "Hadley Wickham",
+      "from_email_hash": "ca0ecd97ae88c22ed6e7f3889e08db1f732ad5eadb66671b2dc01d355cc20bf9",
+      "date": "2026-07-23T14:01:26Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>"
+      ],
+      "body_plain": "It doesn't help with the iterative part of it, but you can use some\nsort of sandboxing tool (e.g.\nhttps://github.com/containers/bubblewrap) to prevent any network\naccess from the process running R. That at least allows you to use the\ninternet for other tasks while you're doing this.\n\nThis is also a task that LLMs are great at. You could ask it to run R\nCMD check in a sandbox then systematically fix all the problems until\nR CMD check passes clean. It will probably take about as long as doing\nit by hand, but it's the LLM's time, not yours.\n\nHadley\n\n\nOn Tue, Jul 21, 2026 at 4:10?PM Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n>\n> Hi all,\n>\n> Some time ago one of my packages was archived from CRAN because it\n> accessed the internet and I had checked the connection in one place\n> but not in others on the same file.\n> The approach I had used was to disconnect the internet connection and\n> check the package without it. But this failed to find when there were\n> multiple attempts to connect to the internet on the same test/example\n> and only the first one was found.\n>\n> Recently, I found some tests in a different package that uses many\n> suggested packages\n> The way I've been testing if any suggested package is required is\n> checking it using .Renviron with\n>\n> _R_CHECK_DEPENDS_ONLY_=\"true\"\n> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n>\n> Similarly to the previous situation, when multiple suggested packages\n> are used on the same files it requires multiple rounds.\n>\n> In both cases the solution is to check the package as many times as\n> needed until it no longer fails. It can take a lot of time to get all\n> the cases if the package has long examples and/or tests.\n>\n> Does anyone have suggestions to find all these occurrences in a single\n> attempt? Is there any faster approach to identify those problems (when\n> code is already written)?\n>\n> Many thanks,\n>\n> Llu?s\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n--\nhttp://hadley.nz",
+      "body_snippet": "It doesn't help with the iterative part of it, but you can use some\nsort of sandboxing tool (e.g.\nhttps://github.com/containers/bubblewrap) to prevent any network\naccess from the process running R. Th",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-787abc6fbc22",
+      "message_id": "<CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>",
+      "from_name": "Iñaki Ucar",
+      "from_email_hash": "0faf0f82f2ae7a03780f35561a3913efe7fa8a6118b8feae1bd8f2f6c8ab74c8",
+      "date": "2026-07-23T14:25:35Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, 21 Jul 2026 at 23:10, Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n\n> Hi all,\n>\n> Some time ago one of my packages was archived from CRAN because it\n> accessed the internet and I had checked the connection in one place\n> but not in others on the same file.\n> The approach I had used was to disconnect the internet connection and\n> check the package without it. But this failed to find when there were\n> multiple attempts to connect to the internet on the same test/example\n> and only the first one was found.\n>\n> Recently, I found some tests in a different package that uses many\n> suggested packages\n> The way I've been testing if any suggested package is required is\n> checking it using .Renviron with\n>\n> _R_CHECK_DEPENDS_ONLY_=\"true\"\n> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n>\n> Similarly to the previous situation, when multiple suggested packages\n> are used on the same files it requires multiple rounds.\n>\n> In both cases the solution is to check the package as many times as\n> needed until it no longer fails. It can take a lot of time to get all\n> the cases if the package has long examples and/or tests.\n>\n> Does anyone have suggestions to find all these occurrences in a single\n> attempt? Is there any faster approach to identify those problems (when\n> code is already written)?\n>\n\nDid you try R-CMD-check's --no-stop-on-test-error flag?\n\n-- \nI?aki ?car\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "On Tue, 21 Jul 2026 at 23:10, Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n\n> Hi all,\n>\n> Some time ago one of my packages was archived from CRAN because it\n> accessed the internet and I had chec",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 1,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -974,13 +1051,17 @@
     {
       "id": "thread-0371ab74585a",
       "subject": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
-      "message_count": 3,
+      "message_count": 7,
       "participants": [
         "Duncan Murdoch",
-        "Lluís Revilla"
+        "Hadley Wickham",
+        "Iñaki Ucar",
+        "Lluís Revilla",
+        "Michael Chirico",
+        "Roland Fuß"
       ],
       "started": "2026-07-21T21:09:47Z",
-      "last_reply": "2026-07-22T16:51:28Z",
+      "last_reply": "2026-07-23T14:25:35Z",
       "root_message_id": "msg-0371ab74585a"
     }
   ]
