@@ -936,6 +936,45 @@
       "thread_id": "thread-0371ab74585a",
       "thread_depth": 1,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-e4d8b986259f",
+      "message_id": "<CAN+W6_vVRfnt6WqwEWFsA5rh14SMajKVYgJyc5dr8hzJ3y2n5g@mail.gmail.com>",
+      "from_name": "Lluís Revilla",
+      "from_email_hash": "76a9726a6e0e47bbb7afccdf71a32cc468fa12b74f368ad4203569f7d7fbc065",
+      "date": "2026-07-24T13:15:51Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+        "<CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Duncan, Michael, Roland, Hadley, I?aki and readers,\n\nThanks all for the good suggestions.\nI'll try them out, for now at least the most promising is the\n--no-stop-on-test-error, that will help with the suggested packages\nproblem too.\nRegarding internet connection, I'll start with the simpler idea and\nbring in external tools if needed.\n\nBest,\n\nLlu?s Revilla\n\nMissatge de I?aki Ucar <iucar at fedoraproject.org> del dia dj., 23 de\njul. 2026 a les 16:25:\n>\n>\n>\n> On Tue, 21 Jul 2026 at 23:10, Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n>>\n>> Hi all,\n>>\n>> Some time ago one of my packages was archived from CRAN because it\n>> accessed the internet and I had checked the connection in one place\n>> but not in others on the same file.\n>> The approach I had used was to disconnect the internet connection and\n>> check the package without it. But this failed to find when there were\n>> multiple attempts to connect to the internet on the same test/example\n>> and only the first one was found.\n>>\n>> Recently, I found some tests in a different package that uses many\n>> suggested packages\n>> The way I've been testing if any suggested package is required is\n>> checking it using .Renviron with\n>>\n>> _R_CHECK_DEPENDS_ONLY_=\"true\"\n>> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n>>\n>> Similarly to the previous situation, when multiple suggested packages\n>> are used on the same files it requires multiple rounds.\n>>\n>> In both cases the solution is to check the package as many times as\n>> needed until it no longer fails. It can take a lot of time to get all\n>> the cases if the package has long examples and/or tests.\n>>\n>> Does anyone have suggestions to find all these occurrences in a single\n>> attempt? Is there any faster approach to identify those problems (when\n>> code is already written)?\n>\n>\n> Did you try R-CMD-check's --no-stop-on-test-error flag?\n>\n> --\n> I?aki ?car",
+      "body_snippet": "Hi Duncan, Michael, Roland, Hadley, I?aki and readers,\n\nThanks all for the good suggestions.\nI'll try them out, for now at least the most promising is the\n--no-stop-on-test-error, that will help with ",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 2,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-8e3f0990285b",
+      "message_id": "<27235.28256.80262.118356@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-07-24T13:53:36Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_vVRfnt6WqwEWFsA5rh14SMajKVYgJyc5dr8hzJ3y2n5g@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+        "<CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>",
+        "<CAN+W6_vVRfnt6WqwEWFsA5rh14SMajKVYgJyc5dr8hzJ3y2n5g@mail.gmail.com>"
+      ],
+      "body_plain": "On 24 July 2026 at 15:15, Llu?s Revilla wrote:\n| Regarding internet connection, I'll start with the simpler idea and\n| bring in external tools if needed.\n\nI needed something simple (and ideally without external tools) and (with help\nfrom on online discussion) worked out function isConnected in my dang\npackage.  Given that R has (lib)curl everywhere it should be enough.\n\nisConnected <- function(site=\"https://www.google.com\") {\n    uoc <- function(site) {\n        con <- url(site)                # need to assign so that we can close\n        open(con)                       # in case of success we have a connection\n        close(con)                      # ... so we need to clean up\n    }\n    suppressWarnings(!inherits(try(uoc(site), silent=TRUE), \"try-error\"))\n}\n\nFull file with documentation header at \n\n   https://github.com/eddelbuettel/dang/blob/master/R/isConnected.R\n\nand looking at that just spotted yet another typo in docs.\n\nCheers, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 24 July 2026 at 15:15, Llu?s Revilla wrote:\n| Regarding internet connection, I'll start with the simpler idea and\n| bring in external tools if needed.\n\nI needed something simple (and ideally withou",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 3,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -1051,8 +1090,9 @@
     {
       "id": "thread-0371ab74585a",
       "subject": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
-      "message_count": 7,
+      "message_count": 9,
       "participants": [
+        "Dirk Eddelbuettel",
         "Duncan Murdoch",
         "Hadley Wickham",
         "Iñaki Ucar",
@@ -1061,7 +1101,7 @@
         "Roland Fuß"
       ],
       "started": "2026-07-21T21:09:47Z",
-      "last_reply": "2026-07-23T14:25:35Z",
+      "last_reply": "2026-07-24T13:53:36Z",
       "root_message_id": "msg-0371ab74585a"
     }
   ]

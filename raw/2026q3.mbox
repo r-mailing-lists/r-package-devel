@@ -4668,3 +4668,110 @@ I?aki ?car
 	[[alternative HTML version deleted]]
 
 
+From ||u|@@rev|||@ @end|ng |rom gm@||@com  Fri Jul 24 15:15:51 2026
+From: ||u|@@rev|||@ @end|ng |rom gm@||@com (=?UTF-8?Q?Llu=C3=ADs_Revilla?=)
+Date: Fri, 24 Jul 2026 15:15:51 +0200
+Subject: [R-pkg-devel] 
+ Identify multiple occurrences of connectivity faster
+In-Reply-To: <CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>
+References: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+ <CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>
+Message-ID: <CAN+W6_vVRfnt6WqwEWFsA5rh14SMajKVYgJyc5dr8hzJ3y2n5g@mail.gmail.com>
+
+Hi Duncan, Michael, Roland, Hadley, I?aki and readers,
+
+Thanks all for the good suggestions.
+I'll try them out, for now at least the most promising is the
+--no-stop-on-test-error, that will help with the suggested packages
+problem too.
+Regarding internet connection, I'll start with the simpler idea and
+bring in external tools if needed.
+
+Best,
+
+Llu?s Revilla
+
+Missatge de I?aki Ucar <iucar at fedoraproject.org> del dia dj., 23 de
+jul. 2026 a les 16:25:
+>
+>
+>
+> On Tue, 21 Jul 2026 at 23:10, Llu?s Revilla <lluis.revilla at gmail.com> wrote:
+>>
+>> Hi all,
+>>
+>> Some time ago one of my packages was archived from CRAN because it
+>> accessed the internet and I had checked the connection in one place
+>> but not in others on the same file.
+>> The approach I had used was to disconnect the internet connection and
+>> check the package without it. But this failed to find when there were
+>> multiple attempts to connect to the internet on the same test/example
+>> and only the first one was found.
+>>
+>> Recently, I found some tests in a different package that uses many
+>> suggested packages
+>> The way I've been testing if any suggested package is required is
+>> checking it using .Renviron with
+>>
+>> _R_CHECK_DEPENDS_ONLY_="true"
+>> _R_CHECK_FORCE_SUGGESTS_="false"
+>>
+>> Similarly to the previous situation, when multiple suggested packages
+>> are used on the same files it requires multiple rounds.
+>>
+>> In both cases the solution is to check the package as many times as
+>> needed until it no longer fails. It can take a lot of time to get all
+>> the cases if the package has long examples and/or tests.
+>>
+>> Does anyone have suggestions to find all these occurrences in a single
+>> attempt? Is there any faster approach to identify those problems (when
+>> code is already written)?
+>
+>
+> Did you try R-CMD-check's --no-stop-on-test-error flag?
+>
+> --
+> I?aki ?car
+
+
+From edd @end|ng |rom deb|@n@org  Fri Jul 24 15:53:36 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Fri, 24 Jul 2026 08:53:36 -0500
+Subject: [R-pkg-devel] 
+ Identify multiple occurrences of connectivity faster
+In-Reply-To: <CAN+W6_vVRfnt6WqwEWFsA5rh14SMajKVYgJyc5dr8hzJ3y2n5g@mail.gmail.com>
+References: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+ <CALEXWq2AAm7+O=oPMSrDc6TLj9KYxmr1zf3RMi4xRBkD+o8RHg@mail.gmail.com>
+ <CAN+W6_vVRfnt6WqwEWFsA5rh14SMajKVYgJyc5dr8hzJ3y2n5g@mail.gmail.com>
+Message-ID: <27235.28256.80262.118356@paul.eddelbuettel.com>
+
+
+On 24 July 2026 at 15:15, Llu?s Revilla wrote:
+| Regarding internet connection, I'll start with the simpler idea and
+| bring in external tools if needed.
+
+I needed something simple (and ideally without external tools) and (with help
+from on online discussion) worked out function isConnected in my dang
+package.  Given that R has (lib)curl everywhere it should be enough.
+
+isConnected <- function(site="https://www.google.com") {
+    uoc <- function(site) {
+        con <- url(site)                # need to assign so that we can close
+        open(con)                       # in case of success we have a connection
+        close(con)                      # ... so we need to clean up
+    }
+    suppressWarnings(!inherits(try(uoc(site), silent=TRUE), "try-error"))
+}
+
+Full file with documentation header at 
+
+   https://github.com/eddelbuettel/dang/blob/master/R/isConnected.R
+
+and looking at that just spotted yet another typo in docs.
+
+Cheers, Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
