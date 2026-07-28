@@ -4775,3 +4775,325 @@ Cheers, Dirk
 dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
 
 
+From pg| @end|ng |rom port@m@n@@org  Mon Jul 27 19:27:06 2026
+From: pg| @end|ng |rom port@m@n@@org (PierGianLuca Porta Mana)
+Date: Mon, 27 Jul 2026 19:27:06 +0200
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+Message-ID: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+
+Hi everyone,
+
+In a package that I'm developing, the typical usage is that the user first generates an object, call it `X`, through a particular function in the package. Then the user performs various kinds of analyses using other functions, most of which rely on the results saved in `X`. Calls to these functions are typically of the form
+
+```
+result <- fun1(arg1, arg2, X = X)
+```
+
+where the argument `X=` needs the object `X` previously calculated.
+
+I wonder if there is a way to allow the user to save some typing by omitting this `X=X` from the functions, if a given object `X` has been calculated and it's in the workspace.
+
+Some questions and thoughts:
+
+1. Is this a bad idea? In some situations the user may have calculated different objects `X1`, `X2`, etc, and might be using all of them for comparing analyses. But in this case the user would just need to call "X=X1" etc. explicitly.
+
+
+2. I noticed that the package 'parallel' has a similar feature: once a cluster, say `cl`, is created, the user can declare it to be "default", and then the "cl=cl" argument may be omitted from various 'parallel' functions. For example:
+
+```
+library('parallel')
+
+cl <- makeCluster(2)
+
+setDefaultCluster(cl)
+
+## note missing "cl = cl" below
+parSapply(X = 1:3, FUN = function(x){x + 1})
+# 2 3 4
+```
+
+I see that `setDefaultCluster()` does this by assigning `cl` to some environment ".reg":
+
+```
+assign("default", cl, envir = .reg)
+```
+
+and the parApply-family functions look for this object when their argument `cl=` is `NULL` (default when missing).
+
+Would this be a viable ? and acceptable ? solution for a package?
+
+
+3. Other alternatives?
+
+
+Very grateful for all input, thoughts, suggestions!
+Kind regards,
+Luca
+
+
+From m|ch@e|ch|r|co4 @end|ng |rom gm@||@com  Mon Jul 27 19:32:33 2026
+From: m|ch@e|ch|r|co4 @end|ng |rom gm@||@com (Michael Chirico)
+Date: Mon, 27 Jul 2026 10:32:33 -0700
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+In-Reply-To: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+References: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+Message-ID: <CAPRVBcwiQ_DSR3M17zvOeYTYywWP06pfffo8HD0_Otq+ChX-4w@mail.gmail.com>
+
+You might consider an object-oriented design, where 'X' is your object
+and then your function calls become method calls, e.g.
+
+X <- MyObject(...) # initialize
+X$fun1(arg1, arg2)
+X$fun2(arg3, arg4)
+
+In parallel analog this (pseudo-code) would be:
+
+cl <- makeOOOcluster(2)
+cl$parSapply(X = 1:3, \(x) x+1)
+
+Depending on all your goals, a package-internal cache like the '.reg'
+approach can also work and is not uncommon.
+
+Mike C
+
+On Mon, Jul 27, 2026 at 10:27?AM PierGianLuca Porta Mana via
+R-package-devel <r-package-devel at r-project.org> wrote:
+>
+> Hi everyone,
+>
+> In a package that I'm developing, the typical usage is that the user first generates an object, call it `X`, through a particular function in the package. Then the user performs various kinds of analyses using other functions, most of which rely on the results saved in `X`. Calls to these functions are typically of the form
+>
+> ```
+> result <- fun1(arg1, arg2, X = X)
+> ```
+>
+> where the argument `X=` needs the object `X` previously calculated.
+>
+> I wonder if there is a way to allow the user to save some typing by omitting this `X=X` from the functions, if a given object `X` has been calculated and it's in the workspace.
+>
+> Some questions and thoughts:
+>
+> 1. Is this a bad idea? In some situations the user may have calculated different objects `X1`, `X2`, etc, and might be using all of them for comparing analyses. But in this case the user would just need to call "X=X1" etc. explicitly.
+>
+>
+> 2. I noticed that the package 'parallel' has a similar feature: once a cluster, say `cl`, is created, the user can declare it to be "default", and then the "cl=cl" argument may be omitted from various 'parallel' functions. For example:
+>
+> ```
+> library('parallel')
+>
+> cl <- makeCluster(2)
+>
+> setDefaultCluster(cl)
+>
+> ## note missing "cl = cl" below
+> parSapply(X = 1:3, FUN = function(x){x + 1})
+> # 2 3 4
+> ```
+>
+> I see that `setDefaultCluster()` does this by assigning `cl` to some environment ".reg":
+>
+> ```
+> assign("default", cl, envir = .reg)
+> ```
+>
+> and the parApply-family functions look for this object when their argument `cl=` is `NULL` (default when missing).
+>
+> Would this be a viable ? and acceptable ? solution for a package?
+>
+>
+> 3. Other alternatives?
+>
+>
+> Very grateful for all input, thoughts, suggestions!
+> Kind regards,
+> Luca
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From rob@ch@||en @end|ng |rom br|@to|@@c@uk  Mon Jul 27 18:45:15 2026
+From: rob@ch@||en @end|ng |rom br|@to|@@c@uk (Robert Challen)
+Date: Mon, 27 Jul 2026 16:45:15 +0000
+Subject: [R-pkg-devel] Please help: Slightly mysterious automated compliance
+ check
+Message-ID: <AS8PR06MB7429D953BFBDDE35FF6DC36EABCC2@AS8PR06MB7429.eurprd06.prod.outlook.com>
+
+Sorry to ask I'm looking for some help fixing a package that has hit an automated check:
+
+Dear maintainer,
+Please see the problems shown on
+<https://cran.r-project.org/web/checks/check_results_rsurvstat.html>.
+Please correct before 2026-08-21 to safely retain your package on CRAN.
+Do remember to look at the 'Additional issues'.
+
+Everything seems as far as I can see to be OK.
+
+The only thing I can see out of order is a note on the donttest section which says (abridged):
+
+
+* checking for detritus in the temp directory ... OK
+* checking for new files in some other directories ... NOTE
+Found the following files/directories:
+  ?~/.cache/rsurvstat/022e3d1edce617738e145996fea14ed7.xml?
+  ?~/.cache/rsurvstat/02f9b931631e00e1279b5f04e9a76b2a.xml?
+  ?~/.cache/rsurvstat/0ffcd6aad6b507547e438a561d2ae04c.xml?
+  ?~/.cache/rsurvstat/efdbfa7c0a7fb89dd075adcfe8f1096d.xml?
+  ?~/.cache/rsurvstat/f1d3a36bb69f3c5e48965233fc97008f.xml?
+  ?~/.cache/rsurvstat/fa9399b384bcf9f12bbadc8ec00c893e.xml?
+  ?~/.cache/rsurvstat/ff2f525e97e504bac069750ca7b24a71.xml?
+  ?~/.cache/rsurvstat/ff9a8999853955764abe03deb8a3b48a.xml?
+* DONE
+
+Status: 1 NOTE
+
+I'm using what I though was sanctioned caching directories and in line with the policy:
+
+"For R version 4.0 or later (hence a version dependency is required or only conditional use is possible), packages may store user-specific data, configuration and cache files in their respective user directories obtained from tools::R_user_dir(), provided that by default sizes are kept as small as possible and the contents are actively managed (including removing outdated material)."
+
+Currently the package states it is R>=3.5.
+Is it as simple as updating this to R>=4.0 to comply here? or is there a need to disable the caching specifically for the CRAN checks or have I missed the point completely?
+
+Many thanks for any help
+All the best,
+Rob.
+
+
+	[[alternative HTML version deleted]]
+
+
+From th|erry@onke||nx @end|ng |rom |nbo@be  Mon Jul 27 20:25:52 2026
+From: th|erry@onke||nx @end|ng |rom |nbo@be (Thierry Onkelinx)
+Date: Mon, 27 Jul 2026 20:25:52 +0200
+Subject: [R-pkg-devel] 
+ Please help: Slightly mysterious automated compliance check
+In-Reply-To: <AS8PR06MB7429D953BFBDDE35FF6DC36EABCC2@AS8PR06MB7429.eurprd06.prod.outlook.com>
+References: <AS8PR06MB7429D953BFBDDE35FF6DC36EABCC2@AS8PR06MB7429.eurprd06.prod.outlook.com>
+Message-ID: <CAJuCY5zFmrHDzcw7B_v2y8m5KAxZLmcUQFFJbugPFjakGvrk4Q@mail.gmail.com>
+
+Dear Robert,
+
+I assume that the unit tests are creating those cache files. Maybe cleaning
+files created by the unit tests might remove the NOTE.
+
+Best regards,
+
+
+ir. Thierry Onkelinx
+Statisticus / Statistician
+
+Vlaamse Overheid / Government of Flanders
+INSTITUUT VOOR NATUUR- EN BOSONDERZOEK / RESEARCH INSTITUTE FOR NATURE AND
+FOREST
+Team Biometrie & Kwaliteitszorg / Team Biometrics & Quality Assurance
+thierry.onkelinx at inbo.be
+Havenlaan 88 bus 73, 1000 Brussel
+*Postadres:* Koning Albert II-laan 15 bus 186, 1210 Brussel
+*Poststukken die naar dit adres worden gestuurd, worden ingescand en
+digitaal aan de geadresseerde bezorgd. Zo kan de Vlaamse overheid haar
+dossiers volledig digitaal behandelen. Poststukken met de vermelding
+?vertrouwelijk? worden niet ingescand, maar ongeopend aan de geadresseerde
+bezorgd.*
+www.inbo.be
+
+///////////////////////////////////////////////////////////////////////////////////////////
+To call in the statistician after the experiment is done may be no more
+than asking him to perform a post-mortem examination: he may be able to say
+what the experiment died of. ~ Sir Ronald Aylmer Fisher
+The plural of anecdote is not data. ~ Roger Brinner
+The combination of some data and an aching desire for an answer does not
+ensure that a reasonable answer can be extracted from a given body of data.
+~ John Tukey
+///////////////////////////////////////////////////////////////////////////////////////////
+
+<https://www.inbo.be>
+
+
+Op ma 27 jul 2026 om 20:14 schreef Robert Challen <rob.challen at bristol.ac.uk
+>:
+
+> Sorry to ask I'm looking for some help fixing a package that has hit an
+> automated check:
+>
+> Dear maintainer,
+> Please see the problems shown on
+> <https://cran.r-project.org/web/checks/check_results_rsurvstat.html>.
+> Please correct before 2026-08-21 to safely retain your package on CRAN.
+> Do remember to look at the 'Additional issues'.
+>
+> Everything seems as far as I can see to be OK.
+>
+> The only thing I can see out of order is a note on the donttest section
+> which says (abridged):
+>
+>
+> * checking for detritus in the temp directory ... OK
+> * checking for new files in some other directories ... NOTE
+> Found the following files/directories:
+>   ?~/.cache/rsurvstat/022e3d1edce617738e145996fea14ed7.xml?
+>   ?~/.cache/rsurvstat/02f9b931631e00e1279b5f04e9a76b2a.xml?
+>   ?~/.cache/rsurvstat/0ffcd6aad6b507547e438a561d2ae04c.xml?
+>   ?~/.cache/rsurvstat/efdbfa7c0a7fb89dd075adcfe8f1096d.xml?
+>   ?~/.cache/rsurvstat/f1d3a36bb69f3c5e48965233fc97008f.xml?
+>   ?~/.cache/rsurvstat/fa9399b384bcf9f12bbadc8ec00c893e.xml?
+>   ?~/.cache/rsurvstat/ff2f525e97e504bac069750ca7b24a71.xml?
+>   ?~/.cache/rsurvstat/ff9a8999853955764abe03deb8a3b48a.xml?
+> * DONE
+>
+> Status: 1 NOTE
+>
+> I'm using what I though was sanctioned caching directories and in line
+> with the policy:
+>
+> "For R version 4.0 or later (hence a version dependency is required or
+> only conditional use is possible), packages may store user-specific data,
+> configuration and cache files in their respective user directories obtained
+> from tools::R_user_dir(), provided that by default sizes are kept as small
+> as possible and the contents are actively managed (including removing
+> outdated material)."
+>
+> Currently the package states it is R>=3.5.
+> Is it as simple as updating this to R>=4.0 to comply here? or is there a
+> need to disable the caching specifically for the CRAN checks or have I
+> missed the point completely?
+>
+> Many thanks for any help
+> All the best,
+> Rob.
+>
+>
+>         [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From |kry|ov @end|ng |rom d|@root@org  Mon Jul 27 20:30:59 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Mon, 27 Jul 2026 21:30:59 +0300
+Subject: [R-pkg-devel] 
+ Please help: Slightly mysterious automated compliance check
+In-Reply-To: <AS8PR06MB7429D953BFBDDE35FF6DC36EABCC2@AS8PR06MB7429.eurprd06.prod.outlook.com>
+References: <AS8PR06MB7429D953BFBDDE35FF6DC36EABCC2@AS8PR06MB7429.eurprd06.prod.outlook.com>
+Message-ID: <20260727213059.273d464e@trisector>
+
+? Mon, 27 Jul 2026 16:45:15 +0000
+Robert Challen <rob.challen at bristol.ac.uk> ?????:
+
+> or is there a need to disable the caching specifically for the CRAN
+> checks
+
+Yes. In addition to caching files in designated places during normal
+usage (as your package does), running R CMD check shouldn't create or
+modify user files (including the cache).
+
+-- 
+Best regards,
+Ivan
+
+
