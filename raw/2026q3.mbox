@@ -5097,3 +5097,323 @@ Best regards,
 Ivan
 
 
+From pg| @end|ng |rom port@m@n@@org  Tue Jul 28 08:15:17 2026
+From: pg| @end|ng |rom port@m@n@@org (PierGianLuca Porta Mana)
+Date: Tue, 28 Jul 2026 08:15:17 +0200
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+In-Reply-To: <CAPRVBcwiQ_DSR3M17zvOeYTYywWP06pfffo8HD0_Otq+ChX-4w@mail.gmail.com>
+References: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+ <CAPRVBcwiQ_DSR3M17zvOeYTYywWP06pfffo8HD0_Otq+ChX-4w@mail.gmail.com>
+Message-ID: <18671af7-24ab-46dd-bf5a-1c5bbf2ee756@portamana.org>
+
+Hi Mike, thank you for the excellent suggestion. I had not thought about that, it's elegant.
+
+Kind regards,
+Luca
+
+On 260727 19:32, Michael Chirico wrote:
+> You might consider an object-oriented design, where 'X' is your object
+> and then your function calls become method calls, e.g.
+> 
+> X <- MyObject(...) # initialize
+> X$fun1(arg1, arg2)
+> X$fun2(arg3, arg4)
+> 
+> In parallel analog this (pseudo-code) would be:
+> 
+> cl <- makeOOOcluster(2)
+> cl$parSapply(X = 1:3, \(x) x+1)
+> 
+> Depending on all your goals, a package-internal cache like the '.reg'
+> approach can also work and is not uncommon.
+> 
+> Mike C
+> 
+> On Mon, Jul 27, 2026 at 10:27?AM PierGianLuca Porta Mana via
+> R-package-devel <r-package-devel at r-project.org> wrote:
+>>
+>> Hi everyone,
+>>
+>> In a package that I'm developing, the typical usage is that the user first generates an object, call it `X`, through a particular function in the package. Then the user performs various kinds of analyses using other functions, most of which rely on the results saved in `X`. Calls to these functions are typically of the form
+>>
+>> ```
+>> result <- fun1(arg1, arg2, X = X)
+>> ```
+>>
+>> where the argument `X=` needs the object `X` previously calculated.
+>>
+>> I wonder if there is a way to allow the user to save some typing by omitting this `X=X` from the functions, if a given object `X` has been calculated and it's in the workspace.
+>>
+>> Some questions and thoughts:
+>>
+>> 1. Is this a bad idea? In some situations the user may have calculated different objects `X1`, `X2`, etc, and might be using all of them for comparing analyses. But in this case the user would just need to call "X=X1" etc. explicitly.
+>>
+>>
+>> 2. I noticed that the package 'parallel' has a similar feature: once a cluster, say `cl`, is created, the user can declare it to be "default", and then the "cl=cl" argument may be omitted from various 'parallel' functions. For example:
+>>
+>> ```
+>> library('parallel')
+>>
+>> cl <- makeCluster(2)
+>>
+>> setDefaultCluster(cl)
+>>
+>> ## note missing "cl = cl" below
+>> parSapply(X = 1:3, FUN = function(x){x + 1})
+>> # 2 3 4
+>> ```
+>>
+>> I see that `setDefaultCluster()` does this by assigning `cl` to some environment ".reg":
+>>
+>> ```
+>> assign("default", cl, envir = .reg)
+>> ```
+>>
+>> and the parApply-family functions look for this object when their argument `cl=` is `NULL` (default when missing).
+>>
+>> Would this be a viable ? and acceptable ? solution for a package?
+>>
+>>
+>> 3. Other alternatives?
+>>
+>>
+>> Very grateful for all input, thoughts, suggestions!
+>> Kind regards,
+>> Luca
+>>
+>> ______________________________________________
+>> R-package-devel at r-project.org mailing list
+>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From r@c@rtwr|ght @end|ng |rom gm@||@com  Tue Jul 28 10:23:47 2026
+From: r@c@rtwr|ght @end|ng |rom gm@||@com (Reed A. Cartwright)
+Date: Tue, 28 Jul 2026 01:23:47 -0700
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+In-Reply-To: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+References: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+Message-ID: <CALOkxuyu+cUVYokwyntW3Fs58vkJpvZDSkrudjRDPgHCA-_Xnw@mail.gmail.com>
+
+My package RBedrock [1] includes a lot of functions for reading and writing
+data to a LevelDB database. Since I do not want users to have to pass a
+database object every time they want to call a function, I use the
+following design (roughly paraphrased).
+
+# read and parse data from `db`
+get_data <- function(key, db = default_db()) {
+  data <- db$read(key)
+  data <- parse_data(data)
+  data
+}
+
+# global object holding the default database connection
+the$db <- NULL
+
+# return or set the default data
+default_db <- function(db) {
+  db_old <- the$db
+  if (!missing(db)) {
+    the$db <- db
+  }
+  invisible(db_old)
+}
+
+# return a connection to a database, and optionally set it as the default db
+open_db <- function(path, default = TRUE) {
+  # open a database connection. It is stored in an environment to get
+reference semantics and object-oriented functions.
+  # The database can be closed directly or during garbage collection
+  db <- open_database_obj(path)
+  if (default) {
+    the$db <- db
+  }
+  invisible(db)
+}
+
+With this structure, the following two snippets are identical.
+
+db <- open_db(path)
+dat <- get_data(key, db = db)
+write_data(dat, key2, db = db)
+
+open_db(path)
+get_data(key) |> write_data(key2)
+
+Note that users can change the default db at any time, and control whether
+opening a database updates the default db.
+
+[1] https://github.com/reedacartwright/rbedrock
+
+--
+Reed A. Cartwright, PhD
+Associate Professor of Life Sciences
+TEACh Representative - Evolution and Computational Courses
+School of Life Sciences and The Biodesign Institute
+Arizona State University
+==================
+Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA
+Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ
+85287-6401 USA
+Office: Biodesign B-220C, 1-480-965-9949
+Website: http://cartwrig.ht/
+
+On Mon, Jul 27, 2026 at 10:27?AM PierGianLuca Porta Mana via
+R-package-devel <r-package-devel at r-project.org> wrote:
+>
+> Hi everyone,
+>
+> In a package that I'm developing, the typical usage is that the user
+first generates an object, call it `X`, through a particular function in
+the package. Then the user performs various kinds of analyses using other
+functions, most of which rely on the results saved in `X`. Calls to these
+functions are typically of the form
+>
+> ```
+> result <- fun1(arg1, arg2, X = X)
+> ```
+>
+> where the argument `X=` needs the object `X` previously calculated.
+>
+> I wonder if there is a way to allow the user to save some typing by
+omitting this `X=X` from the functions, if a given object `X` has been
+calculated and it's in the workspace.
+>
+> Some questions and thoughts:
+>
+> 1. Is this a bad idea? In some situations the user may have calculated
+different objects `X1`, `X2`, etc, and might be using all of them for
+comparing analyses. But in this case the user would just need to call
+"X=X1" etc. explicitly.
+>
+>
+> 2. I noticed that the package 'parallel' has a similar feature: once a
+cluster, say `cl`, is created, the user can declare it to be "default", and
+then the "cl=cl" argument may be omitted from various 'parallel' functions.
+For example:
+>
+> ```
+> library('parallel')
+>
+> cl <- makeCluster(2)
+>
+> setDefaultCluster(cl)
+>
+> ## note missing "cl = cl" below
+> parSapply(X = 1:3, FUN = function(x){x + 1})
+> # 2 3 4
+> ```
+>
+> I see that `setDefaultCluster()` does this by assigning `cl` to some
+environment ".reg":
+>
+> ```
+> assign("default", cl, envir = .reg)
+> ```
+>
+> and the parApply-family functions look for this object when their
+argument `cl=` is `NULL` (default when missing).
+>
+> Would this be a viable ? and acceptable ? solution for a package?
+>
+>
+> 3. Other alternatives?
+>
+>
+> Very grateful for all input, thoughts, suggestions!
+> Kind regards,
+> Luca
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+	[[alternative HTML version deleted]]
+
+
+From edd @end|ng |rom deb|@n@org  Tue Jul 28 12:45:44 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Tue, 28 Jul 2026 05:45:44 -0500
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+In-Reply-To: <CALOkxuyu+cUVYokwyntW3Fs58vkJpvZDSkrudjRDPgHCA-_Xnw@mail.gmail.com>
+References: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+ <CALOkxuyu+cUVYokwyntW3Fs58vkJpvZDSkrudjRDPgHCA-_Xnw@mail.gmail.com>
+Message-ID: <27240.34904.348264.574735@paul.eddelbuettel.com>
+
+
+Many packages do something similar to what Reed showed for only one global
+argument (say the database 'handle', or cache of some sort, and often created
+via 'new.env()') rather than two (also a default data argument).
+
+Similarly, you can make your signature contain argument with a helper
+
+   date = .getDefaultData()
+
+that knows how to access the environment you created. This can be overriden
+easily by the user with second argument. In the accessor helper you can even
+consider behavior driven by other options or environment variables or ...
+
+Maybe have a look at the (informal) CRAN mirror at github where you can
+search for a term, here 'new.env':
+
+  https://github.com/search?q=org%3Acran%20new.env&type=code
+
+Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From jo@|@h@p@rry @end|ng |rom gm@||@com  Tue Jul 28 17:11:11 2026
+From: jo@|@h@p@rry @end|ng |rom gm@||@com (Josiah Parry)
+Date: Tue, 28 Jul 2026 08:11:11 -0700
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+In-Reply-To: <27240.34904.348264.574735@paul.eddelbuettel.com>
+References: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+ <CALOkxuyu+cUVYokwyntW3Fs58vkJpvZDSkrudjRDPgHCA-_Xnw@mail.gmail.com>
+ <27240.34904.348264.574735@paul.eddelbuettel.com>
+Message-ID: <CAL3ufULRd9RcrxFmZaUSSX3N7QQ1QvbVemNvq9tgVbFCtiG5eA@mail.gmail.com>
+
+For yet another example: in the R package {arcgisutils} we create
+credentials using auth_user() these are set in a global environment via
+set_arc_token() and fetched via default argument per Dirk?s suggestion
+which is token = arc_token().
+
+We use environments to permit storing a default and alternative value. The
+implementation is at
+https://github.com/R-ArcGIS/arcgisutils/blob/main/R/arc-token.R
+
+On Tue, Jul 28, 2026 at 03:54 Dirk Eddelbuettel <edd at debian.org> wrote:
+
+>
+> Many packages do something similar to what Reed showed for only one global
+> argument (say the database 'handle', or cache of some sort, and often
+> created
+> via 'new.env()') rather than two (also a default data argument).
+>
+> Similarly, you can make your signature contain argument with a helper
+>
+>    date = .getDefaultData()
+>
+> that knows how to access the environment you created. This can be overriden
+> easily by the user with second argument. In the accessor helper you can
+> even
+> consider behavior driven by other options or environment variables or ...
+>
+> Maybe have a look at the (informal) CRAN mirror at github where you can
+> search for a term, here 'new.env':
+>
+>   https://github.com/search?q=org%3Acran%20new.env&type=code
+>
+> Dirk
+>
+> --
+> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
