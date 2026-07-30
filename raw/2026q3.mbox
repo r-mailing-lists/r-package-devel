@@ -5417,3 +5417,180 @@ On Tue, Jul 28, 2026 at 03:54 Dirk Eddelbuettel <edd at debian.org> wrote:
 	[[alternative HTML version deleted]]
 
 
+From |kry|ov @end|ng |rom d|@root@org  Wed Jul 29 14:59:18 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Wed, 29 Jul 2026 15:59:18 +0300
+Subject: [R-pkg-devel] 
+ Identify multiple occurrences of connectivity faster
+In-Reply-To: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+References: <CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>
+Message-ID: <20260729155918.01e4744a@trisector>
+
+? Tue, 21 Jul 2026 23:09:47 +0200
+Llu?s Revilla <lluis.revilla at gmail.com> ?????:
+
+> Does anyone have suggestions to find all these occurrences in a single
+> attempt? Is there any faster approach to identify those problems (when
+> code is already written)?
+
+These are both hard problems.
+
+It's always possible that some network requests (e.g.
+curlGetHeaders('https://google.com')) will succeed while others (e.g.
+those to the service that your package needs to access) will fail,
+temporarily or permanently. One way to handle this is to have the
+network-accessing functions in your package signal a special kind of
+exception when they fail, and then wrap your tests and examples in
+tryCatch(..., your_special_network_exception = identity).
+
+To test that, you could try fault injection (something like strace -o
+/dev/null -f --fault=connect:when=1 R -f tests/..., then
+--fault=connect:when=2, and so on), but that's a very slow process, and
+you would need some way to figure out when to stop.
+
+A user may have installed any valid subset of your package's recursive
+weak dependencies, and the number of such possible subsets grows by a
+factor of 2^(number of direct independent weak dependencies) for every
+package in the dependency tree. Many of those dependencies are probably
+not independent, but that's still a lot of configurations to try.
+
+-- 
+Best regards,
+Ivan
+
+
+From |kry|ov @end|ng |rom d|@root@org  Wed Jul 29 17:41:23 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Wed, 29 Jul 2026 18:41:23 +0300
+Subject: [R-pkg-devel] Planning maintainer absence
+Message-ID: <20260729184123.28ede675@trisector>
+
+Hello R package developers,
+
+Suppose that the scientific work of a package maintainer takes them on
+a month-long expedition somewhere far away without Internet access. How
+should they prepare their CRAN packages for maintainer absence?
+
+It's vitally important to prevent the archival of packages with reverse
+dependencies. Should the maintainer:
+
+ - Submit new versions of such packages, naming a trusted colleague
+   as the maintainer who will put out fires in their absence? This
+   would require manual approval from the CRAN team for every package.
+ - Preemptively ask CRAN at R-project.org for an extension on potential
+   deadlines? It's only a month and chances are that there won't be any
+   issues.
+
+Archival hurts the users much less when the package has no reverse
+dependencies or compiled code: anyone who still wants it can just
+install the source package straight from the archive. Still, archival
+is a manual process that costs CRAN team time and thus must be
+prevented if possible [*]. If the right thing to do is a temporary
+maintainer change, should this be done to all potentially affected
+packages?
+
+-- 
+Best regards,
+Ivan
+
+[*] https://onlinelibrary.wiley.com/doi/pdf/10.1111/anzs.70039
+
+
+From pg| @end|ng |rom port@m@n@@org  Wed Jul 29 17:55:40 2026
+From: pg| @end|ng |rom port@m@n@@org (PierGianLuca Porta Mana)
+Date: Wed, 29 Jul 2026 17:55:40 +0200
+Subject: [R-pkg-devel] Handling "default objects" in workspace
+In-Reply-To: <CAL3ufULRd9RcrxFmZaUSSX3N7QQ1QvbVemNvq9tgVbFCtiG5eA@mail.gmail.com>
+References: <88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>
+ <CALOkxuyu+cUVYokwyntW3Fs58vkJpvZDSkrudjRDPgHCA-_Xnw@mail.gmail.com>
+ <27240.34904.348264.574735@paul.eddelbuettel.com>
+ <CAL3ufULRd9RcrxFmZaUSSX3N7QQ1QvbVemNvq9tgVbFCtiG5eA@mail.gmail.com>
+Message-ID: <fff0ab4c-67ac-4ff1-92e7-0d9031fa44ca@portamana.org>
+
+Thank you so much Reed, Dirk, Josiah!
+
+Reed and Josiah, thanks for the explicit snippets and for the link to the source code! Dirk, brilliant the idea of searching for that keyword on the GitHub sources!
+
+Great to know now that something like this is possible, and even with different approaches :) I'll work on this now.
+
+Kind regards,
+Luca
+
+On 260728 17:11, Josiah Parry wrote:
+> For yet another example: in the R package {arcgisutils} we create
+> credentials using auth_user() these are set in a global environment via
+> set_arc_token() and fetched via default argument per Dirk?s suggestion
+> which is token = arc_token().
+> 
+> We use environments to permit storing a default and alternative value. The
+> implementation is at
+> https://github.com/R-ArcGIS/arcgisutils/blob/main/R/arc-token.R
+> 
+> On Tue, Jul 28, 2026 at 03:54 Dirk Eddelbuettel <edd at debian.org> wrote:
+> 
+>>
+>> Many packages do something similar to what Reed showed for only one global
+>> argument (say the database 'handle', or cache of some sort, and often
+>> created
+>> via 'new.env()') rather than two (also a default data argument).
+>>
+>> Similarly, you can make your signature contain argument with a helper
+>>
+>>     date = .getDefaultData()
+>>
+>> that knows how to access the environment you created. This can be overriden
+>> easily by the user with second argument. In the accessor helper you can
+>> even
+>> consider behavior driven by other options or environment variables or ...
+>>
+>> Maybe have a look at the (informal) CRAN mirror at github where you can
+>> search for a term, here 'new.env':
+>>
+>>    https://github.com/search?q=org%3Acran%20new.env&type=code
+>>
+>> Dirk
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Wed Jul 29 21:37:52 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Wed, 29 Jul 2026 15:37:52 -0400
+Subject: [R-pkg-devel] Planning maintainer absence
+In-Reply-To: <20260729184123.28ede675@trisector>
+References: <20260729184123.28ede675@trisector>
+Message-ID: <05eb50f7-8e0b-449f-bc85-0c8c4676ff16@gmail.com>
+
+Would it be possible to set up forwarding of messages with "Reply-to: 
+CRAN at r-project.org" to your trusted colleague?  I'd also let CRAN know 
+in case things don't work.
+
+Duncan Murdoch
+
+
+
+On 2026-07-29 11:41 a.m., Ivan Krylov via R-package-devel wrote:
+> Hello R package developers,
+> 
+> Suppose that the scientific work of a package maintainer takes them on
+> a month-long expedition somewhere far away without Internet access. How
+> should they prepare their CRAN packages for maintainer absence?
+> 
+> It's vitally important to prevent the archival of packages with reverse
+> dependencies. Should the maintainer:
+> 
+>   - Submit new versions of such packages, naming a trusted colleague
+>     as the maintainer who will put out fires in their absence? This
+>     would require manual approval from the CRAN team for every package.
+>   - Preemptively ask CRAN at R-project.org for an extension on potential
+>     deadlines? It's only a month and chances are that there won't be any
+>     issues.
+> 
+> Archival hurts the users much less when the package has no reverse
+> dependencies or compiled code: anyone who still wants it can just
+> install the source package straight from the archive. Still, archival
+> is a manual process that costs CRAN team time and thus must be
+> prevented if possible [*]. If the right thing to do is a temporary
+> maintainer change, should this be done to all potentially affected
+> packages?
+>
+
+

@@ -1137,6 +1137,79 @@
       "thread_id": "thread-1a192d291d3f",
       "thread_depth": 3,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-b4972657f585",
+      "message_id": "<20260729155918.01e4744a@trisector>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-07-29T12:59:18Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>"
+      ],
+      "body_plain": "? Tue, 21 Jul 2026 23:09:47 +0200\nLlu?s Revilla <lluis.revilla at gmail.com> ?????:\n\n> Does anyone have suggestions to find all these occurrences in a single\n> attempt? Is there any faster approach to identify those problems (when\n> code is already written)?\n\nThese are both hard problems.\n\nIt's always possible that some network requests (e.g.\ncurlGetHeaders('https://google.com')) will succeed while others (e.g.\nthose to the service that your package needs to access) will fail,\ntemporarily or permanently. One way to handle this is to have the\nnetwork-accessing functions in your package signal a special kind of\nexception when they fail, and then wrap your tests and examples in\ntryCatch(..., your_special_network_exception = identity).\n\nTo test that, you could try fault injection (something like strace -o\n/dev/null -f --fault=connect:when=1 R -f tests/..., then\n--fault=connect:when=2, and so on), but that's a very slow process, and\nyou would need some way to figure out when to stop.\n\nA user may have installed any valid subset of your package's recursive\nweak dependencies, and the number of such possible subsets grows by a\nfactor of 2^(number of direct independent weak dependencies) for every\npackage in the dependency tree. Many of those dependencies are probably\nnot independent, but that's still a lot of configurations to try.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 21 Jul 2026 23:09:47 +0200\nLlu?s Revilla <lluis.revilla at gmail.com> ?????:\n\n> Does anyone have suggestions to find all these occurrences in a single\n> attempt? Is there any faster approach to",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 1,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-b2e4d7f5080c",
+      "message_id": "<20260729184123.28ede675@trisector>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-07-29T15:41:23Z",
+      "subject": "[R-pkg-devel] Planning maintainer absence",
+      "subject_clean": "[R-pkg-devel] Planning maintainer absence",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello R package developers,\n\nSuppose that the scientific work of a package maintainer takes them on\na month-long expedition somewhere far away without Internet access. How\nshould they prepare their CRAN packages for maintainer absence?\n\nIt's vitally important to prevent the archival of packages with reverse\ndependencies. Should the maintainer:\n\n - Submit new versions of such packages, naming a trusted colleague\n   as the maintainer who will put out fires in their absence? This\n   would require manual approval from the CRAN team for every package.\n - Preemptively ask CRAN at R-project.org for an extension on potential\n   deadlines? It's only a month and chances are that there won't be any\n   issues.\n\nArchival hurts the users much less when the package has no reverse\ndependencies or compiled code: anyone who still wants it can just\ninstall the source package straight from the archive. Still, archival\nis a manual process that costs CRAN team time and thus must be\nprevented if possible [*]. If the right thing to do is a temporary\nmaintainer change, should this be done to all potentially affected\npackages?\n\n-- \nBest regards,\nIvan\n\n[*] https://onlinelibrary.wiley.com/doi/pdf/10.1111/anzs.70039",
+      "body_snippet": "Hello R package developers,\n\nSuppose that the scientific work of a package maintainer takes them on\na month-long expedition somewhere far away without Internet access. How\nshould they prepare their CR",
+      "thread_id": "thread-b2e4d7f5080c",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-45c342baefba",
+      "message_id": "<fff0ab4c-67ac-4ff1-92e7-0d9031fa44ca@portamana.org>",
+      "from_name": "PierGianLuca Porta Mana",
+      "from_email_hash": "3fd470b2b908e36f799236d1d58c6a297eef9fa9b9d89dfeff69a2eccf01c2b4",
+      "date": "2026-07-29T15:55:40Z",
+      "subject": "[R-pkg-devel] Handling \"default objects\" in workspace",
+      "subject_clean": "[R-pkg-devel] Handling \"default objects\" in workspace",
+      "in_reply_to": "<CAL3ufULRd9RcrxFmZaUSSX3N7QQ1QvbVemNvq9tgVbFCtiG5eA@mail.gmail.com>",
+      "references": [
+        "<88fc1dc1-64ab-4044-b1e0-027264c8bfad@portamana.org>",
+        "<CALOkxuyu+cUVYokwyntW3Fs58vkJpvZDSkrudjRDPgHCA-_Xnw@mail.gmail.com>",
+        "<27240.34904.348264.574735@paul.eddelbuettel.com>",
+        "<CAL3ufULRd9RcrxFmZaUSSX3N7QQ1QvbVemNvq9tgVbFCtiG5eA@mail.gmail.com>"
+      ],
+      "body_plain": "Thank you so much Reed, Dirk, Josiah!\n\nReed and Josiah, thanks for the explicit snippets and for the link to the source code! Dirk, brilliant the idea of searching for that keyword on the GitHub sources!\n\nGreat to know now that something like this is possible, and even with different approaches :) I'll work on this now.\n\nKind regards,\nLuca\n\nOn 260728 17:11, Josiah Parry wrote:\n> For yet another example: in the R package {arcgisutils} we create\n> credentials using auth_user() these are set in a global environment via\n> set_arc_token() and fetched via default argument per Dirk?s suggestion\n> which is token = arc_token().\n> \n> We use environments to permit storing a default and alternative value. The\n> implementation is at\n> https://github.com/R-ArcGIS/arcgisutils/blob/main/R/arc-token.R\n> \n> On Tue, Jul 28, 2026 at 03:54 Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n>>\n>> Many packages do something similar to what Reed showed for only one global\n>> argument (say the database 'handle', or cache of some sort, and often\n>> created\n>> via 'new.env()') rather than two (also a default data argument).\n>>\n>> Similarly, you can make your signature contain argument with a helper\n>>\n>>     date = .getDefaultData()\n>>\n>> that knows how to access the environment you created. This can be overriden\n>> easily by the user with second argument. In the accessor helper you can\n>> even\n>> consider behavior driven by other options or environment variables or ...\n>>\n>> Maybe have a look at the (informal) CRAN mirror at github where you can\n>> search for a term, here 'new.env':\n>>\n>>    https://github.com/search?q=org%3Acran%20new.env&type=code\n>>\n>> Dirk",
+      "body_snippet": "Thank you so much Reed, Dirk, Josiah!\n\nReed and Josiah, thanks for the explicit snippets and for the link to the source code! Dirk, brilliant the idea of searching for that keyword on the GitHub sourc",
+      "thread_id": "thread-1a192d291d3f",
+      "thread_depth": 4,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-798a9974129c",
+      "message_id": "<05eb50f7-8e0b-449f-bc85-0c8c4676ff16@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-07-29T19:37:52Z",
+      "subject": "[R-pkg-devel] Planning maintainer absence",
+      "subject_clean": "[R-pkg-devel] Planning maintainer absence",
+      "in_reply_to": "<20260729184123.28ede675@trisector>",
+      "references": [
+        "<20260729184123.28ede675@trisector>"
+      ],
+      "body_plain": "Would it be possible to set up forwarding of messages with \"Reply-to: \nCRAN at r-project.org\" to your trusted colleague?  I'd also let CRAN know \nin case things don't work.\n\nDuncan Murdoch\n\n\n\nOn 2026-07-29 11:41 a.m., Ivan Krylov via R-package-devel wrote:\n> Hello R package developers,\n> \n> Suppose that the scientific work of a package maintainer takes them on\n> a month-long expedition somewhere far away without Internet access. How\n> should they prepare their CRAN packages for maintainer absence?\n> \n> It's vitally important to prevent the archival of packages with reverse\n> dependencies. Should the maintainer:\n> \n>   - Submit new versions of such packages, naming a trusted colleague\n>     as the maintainer who will put out fires in their absence? This\n>     would require manual approval from the CRAN team for every package.\n>   - Preemptively ask CRAN at R-project.org for an extension on potential\n>     deadlines? It's only a month and chances are that there won't be any\n>     issues.\n> \n> Archival hurts the users much less when the package has no reverse\n> dependencies or compiled code: anyone who still wants it can just\n> install the source package straight from the archive. Still, archival\n> is a manual process that costs CRAN team time and thus must be\n> prevented if possible [*]. If the right thing to do is a temporary\n> maintainer change, should this be done to all potentially affected\n> packages?\n>",
+      "body_snippet": "Would it be possible to set up forwarding of messages with \"Reply-to: \nCRAN at r-project.org\" to your trusted colleague?  I'd also let CRAN know \nin case things don't work.\n\nDuncan Murdoch\n\n\n\nOn 2026-",
+      "thread_id": "thread-b2e4d7f5080c",
+      "thread_depth": 1,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -1252,18 +1325,19 @@
     {
       "id": "thread-0371ab74585a",
       "subject": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
-      "message_count": 9,
+      "message_count": 10,
       "participants": [
         "Dirk Eddelbuettel",
         "Duncan Murdoch",
         "Hadley Wickham",
+        "Ivan Krylov",
         "Iñaki Ucar",
         "Lluís Revilla",
         "Michael Chirico",
         "Roland Fuß"
       ],
       "started": "2026-07-21T21:09:47Z",
-      "last_reply": "2026-07-24T13:53:36Z",
+      "last_reply": "2026-07-29T12:59:18Z",
       "root_message_id": "msg-0371ab74585a"
     },
     {
@@ -1282,7 +1356,7 @@
     {
       "id": "thread-1a192d291d3f",
       "subject": "[R-pkg-devel] Handling \"default objects\" in workspace",
-      "message_count": 6,
+      "message_count": 7,
       "participants": [
         "Dirk Eddelbuettel",
         "Josiah Parry",
@@ -1291,8 +1365,20 @@
         "Reed A. Cartwright"
       ],
       "started": "2026-07-27T17:27:06Z",
-      "last_reply": "2026-07-28T15:11:11Z",
+      "last_reply": "2026-07-29T15:55:40Z",
       "root_message_id": "msg-1a192d291d3f"
+    },
+    {
+      "id": "thread-b2e4d7f5080c",
+      "subject": "[R-pkg-devel] Planning maintainer absence",
+      "message_count": 2,
+      "participants": [
+        "Duncan Murdoch",
+        "Ivan Krylov"
+      ],
+      "started": "2026-07-29T15:41:23Z",
+      "last_reply": "2026-07-29T19:37:52Z",
+      "root_message_id": "msg-b2e4d7f5080c"
     }
   ]
 }
