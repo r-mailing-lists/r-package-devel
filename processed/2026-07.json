@@ -1210,6 +1210,63 @@
       "thread_id": "thread-b2e4d7f5080c",
       "thread_depth": 1,
       "month": "2026-07"
+    },
+    {
+      "id": "msg-91a5e07af6c1",
+      "message_id": "<9671472a-ea81-4f12-961d-7ae0b98e3128@app.fastmail.com>",
+      "from_name": "Nan Xiao",
+      "from_email_hash": "5730c1dc440c8ac20e04086764f618f8ad4183ec3b2a8fab93b7329e433f9cb3",
+      "date": "2026-07-30T03:57:46Z",
+      "subject": "[R-pkg-devel] revdeprun 2.3.0: more reliable large-scale checks",
+      "subject_clean": "[R-pkg-devel] revdeprun 2.3.0: more reliable large-scale checks",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear all,\n\nA quick update on revdeprun, the Rust CLI tool I built for automating reverse dependency checks on disposable cloud instances, which I last shared here in December 2025.\n\nrevdeprun 2.3.0 is now available. Highlights:\n\n- Prevent P3M (Posit Public Package Manager) rate limit failures during large-scale checks: binary and source tarball downloads now share a request budget. It pauses after every 1800 package downloads and resumes after a 5 minutes cooldown.\n- The `--skip-r-install` argument now truly bypasses R version resolution.\n- Formalize support for Ubuntu 26.04 LTS.\n\nSince my last post, there is also a new documentation site describing the workflow and the key design decisions behind it.\n\nDocs: https://nanx.me/revdeprun/\nRepo: https://github.com/nanxstats/revdeprun\n\nCheers,\n-Nan",
+      "body_snippet": "Dear all,\n\nA quick update on revdeprun, the Rust CLI tool I built for automating reverse dependency checks on disposable cloud instances, which I last shared here in December 2025.\n\nrevdeprun 2.3.0 is",
+      "thread_id": "thread-91a5e07af6c1",
+      "thread_depth": 0,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-99afb4bd1ed5",
+      "message_id": "<177aa98d-7118-45d9-84b7-50e840c93e5a@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-07-30T11:29:01Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<CAN+W6_t4tFZ_m1PG6Ez6k4DNsfxeNXWdC55QCgE9aAwV3Lc94Q@mail.gmail.com>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+        "<c195f9c9-60a2-4cb4-992c-63bc7b959c17@gmail.com>",
+        "<CAN+W6_t4tFZ_m1PG6Ez6k4DNsfxeNXWdC55QCgE9aAwV3Lc94Q@mail.gmail.com>"
+      ],
+      "body_plain": "On 22.07.2026 18:51, Llu?s Revilla wrote:\n> Hi Duncan,\n> \n> Nice idea, I do now have a helper function where this would be helpful.\n> \n> However, the problem is not only with my own code but dependencies too\n> like with base R code too.\n> This package uses available.packages() and I've seen some cases where\n> it fails when there is no internet connection.\n> Unfortunately, I can't reproduce it, but the error message is related\n> to not being able to download and no mirrors are available/set.\n\nThe next question is why available.packages() is called during checks at \nall which would only be needed for doing comoputations on the package \ndata base itself?\n\nBest,\nUwe Ligges\n\n\n\n\n> Thanks,\n> \n> Llu?s\n> \n> \n> Missatge de Duncan Murdoch <murdoch.duncan at gmail.com> del dia dt., 21\n> de jul. 2026 a les 23:38:\n>>\n>> On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:\n>>> Hi all,\n>>>\n>>> Some time ago one of my packages was archived from CRAN because it\n>>> accessed the internet and I had checked the connection in one place\n>>> but not in others on the same file.\n>>> The approach I had used was to disconnect the internet connection andtemp\n>>> check the package without it. But this failed to find when there were\n>>> multiple attempts to connect to the internet on the same test/example\n>>> and only the first one was found.\n>>>\n>>> Recently, I found some tests in a different package that uses many\n>>> suggested packages\n>>> The way I've been testing if any suggested package is required is\n>>> checking it using .Renviron with\n>>>\n>>> _R_CHECK_DEPENDS_ONLY_=\"true\"\n>>> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n>>>\n>>> Similarly to the previous situation, when multiple suggested packages\n>>> are used on the same files it requires multiple rounds.\n>>>\n>>> In both cases the solution is to check the package as many times as\n>>> needed until it no longer fails. It can take a lot of time to get all\n>>> the cases if the package has long examples and/or tests.\n>>>\n>>> Does anyone have suggestions to find all these occurrences in a single\n>>> attempt? Is there any faster approach to identify those problems (when\n>>> code is already written)?\n>> I don't think you can do that, but it's fairly easy to detect all calls\n>> to a particular function.  So if all your Internet connections were via\n>> download.file(), then just write a function local to your package of the\n>> form\n>>\n>>      download.file <- function(url, ...) {\n>>        message(\"Trying to download \", url)\n>>        message(\"Current calls:\")\n>>        print(sys.calls())\n>>      }\n>>\n>> Then, as long as your code doesn't use \"utils::download.file(...)\",\n>> you'll get a message for every attempted download.  But if you access\n>> the Internet in multiple ways, you'll need to do this for each different\n>> way.  (And once you've fixed things, remember to delete those dummy\n>> functions...)\n>>\n>> Duncan Murdoch\n>>\n>>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 22.07.2026 18:51, Llu?s Revilla wrote:\n> Hi Duncan,\n> \n> Nice idea, I do now have a helper function where this would be helpful.\n> \n> However, the problem is not only with my own code but dependenc",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 3,
+      "month": "2026-07"
+    },
+    {
+      "id": "msg-88e1b32b862c",
+      "message_id": "<CAN+W6_sQvS37oxYn-3ZuuJZxeXf53u1Mbmt0w-7RA=+NaDHyVA@mail.gmail.com>",
+      "from_name": "Lluís Revilla",
+      "from_email_hash": "76a9726a6e0e47bbb7afccdf71a32cc468fa12b74f368ad4203569f7d7fbc065",
+      "date": "2026-07-30T19:16:51Z",
+      "subject": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "subject_clean": "[R-pkg-devel]  Identify multiple occurrences of connectivity faster",
+      "in_reply_to": "<177aa98d-7118-45d9-84b7-50e840c93e5a@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAN+W6_tkC7p=N-d_2MuGg4sixQE0k_x60SMSj5-QQ7owrfFN5A@mail.gmail.com>",
+        "<c195f9c9-60a2-4cb4-992c-63bc7b959c17@gmail.com>",
+        "<CAN+W6_t4tFZ_m1PG6Ez6k4DNsfxeNXWdC55QCgE9aAwV3Lc94Q@mail.gmail.com>",
+        "<177aa98d-7118-45d9-84b7-50e840c93e5a@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Missatge de Uwe Ligges <ligges at statistik.tu-dortmund.de> del dia dj., 30 de\njul. 2026 a les 13:29:\n\n>\n>\n> On 22.07.2026 18:51, Llu?s Revilla wrote:\n> > Hi Duncan,\n> >\n> > Nice idea, I do now have a helper function where this would be helpful.\n> >\n> > However, the problem is not only with my own code but dependencies too\n> > like with base R code too.\n> > This package uses available.packages() and I've seen some cases where\n> > it fails when there is no internet connection.\n> > Unfortunately, I can't reproduce it, but the error message is related\n> > to not being able to download and no mirrors are available/set.\n>\n> The next question is why available.packages() is called during checks at\n> all which would only be needed for doing comoputations on the package\n> data base itself?\n>\n\nWhich is exactly the purpose of the package: analyze and do computations\nwith CRAN-like repositories and the data they provide: packages, links,\nalias, ...\nThe package is repo.data, and in the examples it uses several\ndatabases from different repositories: CRAN and Bioconductor.\nOne of the use cases is to find which packages depend on packages on other\nrepositories (and which ones).\n\nBest,\n\n\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n>\n> > Thanks,\n> >\n> > Llu?s\n> >\n> >\n> > Missatge de Duncan Murdoch <murdoch.duncan at gmail.com> del dia dt., 21\n> > de jul. 2026 a les 23:38:\n> >>\n> >> On 2026-07-21 5:09 p.m., Llu?s Revilla wrote:\n> >>> Hi all,\n> >>>\n> >>> Some time ago one of my packages was archived from CRAN because it\n> >>> accessed the internet and I had checked the connection in one place\n> >>> but not in others on the same file.\n> >>> The approach I had used was to disconnect the internet connection\n> andtemp\n> >>> check the package without it. But this failed to find when there were\n> >>> multiple attempts to connect to the internet on the same test/example\n> >>> and only the first one was found.\n> >>>\n> >>> Recently, I found some tests in a different package that uses many\n> >>> suggested packages\n> >>> The way I've been testing if any suggested package is required is\n> >>> checking it using .Renviron with\n> >>>\n> >>> _R_CHECK_DEPENDS_ONLY_=\"true\"\n> >>> _R_CHECK_FORCE_SUGGESTS_=\"false\"\n> >>>\n> >>> Similarly to the previous situation, when multiple suggested packages\n> >>> are used on the same files it requires multiple rounds.\n> >>>\n> >>> In both cases the solution is to check the package as many times as\n> >>> needed until it no longer fails. It can take a lot of time to get all\n> >>> the cases if the package has long examples and/or tests.\n> >>>\n> >>> Does anyone have suggestions to find all these occurrences in a single\n> >>> attempt? Is there any faster approach to identify those problems (when\n> >>> code is already written)?\n> >> I don't think you can do that, but it's fairly easy to detect all calls\n> >> to a particular function.  So if all your Internet connections were via\n> >> download.file(), then just write a function local to your package of the\n> >> form\n> >>\n> >>      download.file <- function(url, ...) {\n> >>        message(\"Trying to download \", url)\n> >>        message(\"Current calls:\")\n> >>        print(sys.calls())\n> >>      }\n> >>\n> >> Then, as long as your code doesn't use \"utils::download.file(...)\",\n> >> you'll get a message for every attempted download.  But if you access\n> >> the Internet in multiple ways, you'll need to do this for each different\n> >> way.  (And once you've fixed things, remember to delete those dummy\n> >> functions...)\n> >>\n> >> Duncan Murdoch\n> >>\n> >>\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Missatge de Uwe Ligges <ligges at statistik.tu-dortmund.de> del dia dj., 30 de\njul. 2026 a les 13:29:\n\n>\n>\n> On 22.07.2026 18:51, Llu?s Revilla wrote:\n> > Hi Duncan,\n> >\n> > Nice idea, I do now have a",
+      "thread_id": "thread-0371ab74585a",
+      "thread_depth": 4,
+      "month": "2026-07"
     }
   ],
   "threads": [
@@ -1325,7 +1382,7 @@
     {
       "id": "thread-0371ab74585a",
       "subject": "[R-pkg-devel] Identify multiple occurrences of connectivity faster",
-      "message_count": 10,
+      "message_count": 12,
       "participants": [
         "Dirk Eddelbuettel",
         "Duncan Murdoch",
@@ -1334,10 +1391,11 @@
         "Iñaki Ucar",
         "Lluís Revilla",
         "Michael Chirico",
-        "Roland Fuß"
+        "Roland Fuß",
+        "Uwe Ligges"
       ],
       "started": "2026-07-21T21:09:47Z",
-      "last_reply": "2026-07-29T12:59:18Z",
+      "last_reply": "2026-07-30T19:16:51Z",
       "root_message_id": "msg-0371ab74585a"
     },
     {
@@ -1379,6 +1437,17 @@
       "started": "2026-07-29T15:41:23Z",
       "last_reply": "2026-07-29T19:37:52Z",
       "root_message_id": "msg-b2e4d7f5080c"
+    },
+    {
+      "id": "thread-91a5e07af6c1",
+      "subject": "[R-pkg-devel] revdeprun 2.3.0: more reliable large-scale checks",
+      "message_count": 1,
+      "participants": [
+        "Nan Xiao"
+      ],
+      "started": "2026-07-30T03:57:46Z",
+      "last_reply": "2026-07-30T03:57:46Z",
+      "root_message_id": "msg-91a5e07af6c1"
     }
   ]
 }
