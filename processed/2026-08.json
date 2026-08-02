@@ -1,0 +1,36 @@
+{
+  "list": "r-package-devel",
+  "description": "",
+  "month": "2026-08",
+  "messages": [
+    {
+      "id": "msg-371dc74f86dd",
+      "message_id": "<EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>",
+      "from_name": "Balasubramanian Narasimhan",
+      "from_email_hash": "8ac399d76c818e61c909b0156cca82cebf32dadd634d34e61e47628c6ff29cd0",
+      "date": "2026-08-01T15:29:28Z",
+      "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "subject_clean": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n\n\n* checking compiled code ... NOTE\nError in ccE(lines, flags = new_flags, include = include) :\n  'cc' is not on the path\nCalls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE\nExecution halted\n\n\nSee 'Writing portable packages' in the 'Writing R Extensions' manual.\n* checking installed files from 'inst/doc' ? OK\n\nThat seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which(\"cc?))\n\nEnvironment variable not being set?\n\nAs a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.\n\n-Naras\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n\n\n* checking compiled code ... NOTE\nError in ccE(lines, flags = new",
+      "thread_id": "thread-371dc74f86dd",
+      "thread_depth": 0,
+      "month": "2026-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-371dc74f86dd",
+      "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "message_count": 1,
+      "participants": [
+        "Balasubramanian Narasimhan"
+      ],
+      "started": "2026-08-01T15:29:28Z",
+      "last_reply": "2026-08-01T15:29:28Z",
+      "root_message_id": "msg-371dc74f86dd"
+    }
+  ]
+}

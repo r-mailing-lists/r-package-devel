@@ -5837,3 +5837,35 @@ Best,
 	[[alternative HTML version deleted]]
 
 
+From n@r@@ @end|ng |rom @t@n|ord@edu  Sat Aug  1 17:29:28 2026
+From: n@r@@ @end|ng |rom @t@n|ord@edu (Balasubramanian Narasimhan)
+Date: Sat, 1 Aug 2026 15:29:28 +0000
+Subject: [R-pkg-devel] Winbuilder issue on R API checks
+Message-ID: <EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>
+
+I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:
+
+
+* checking compiled code ... NOTE
+Error in ccE(lines, flags = new_flags, include = include) :
+  'cc' is not on the path
+Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE
+Execution halted
+
+
+See 'Writing portable packages' in the 'Writing R Extensions' manual.
+* checking installed files from 'inst/doc' ? OK
+
+That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which("cc?))
+
+Environment variable not being set?
+
+As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.
+
+-Naras
+
+
+
+	[[alternative HTML version deleted]]
+
+
