@@ -18,19 +18,134 @@
       "thread_id": "thread-371dc74f86dd",
       "thread_depth": 0,
       "month": "2026-08"
+    },
+    {
+      "id": "msg-23846056c25e",
+      "message_id": "<SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>",
+      "from_name": "Murray Efford",
+      "from_email_hash": "82bfe0c72bb61f0f38c9ced4d7d6ebe1e213c779150a721c41da24aa8495d9a0",
+      "date": "2026-08-02T04:45:41Z",
+      "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "subject_clean": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "in_reply_to": "<EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>",
+      "references": [
+        "<EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>"
+      ],
+      "body_plain": "I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\nMurray\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>\nSent: Sunday, 2 August 2026 03:29\nTo: R-pkg-devel <r-package-devel at r-project.org>\nSubject: [R-pkg-devel] Winbuilder issue on R API checks\n\nI believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n\n\n* checking compiled code ... NOTE\nError in ccE(lines, flags = new_flags, include = include) :\n  'cc' is not on the path\nCalls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE\nExecution halted\n\n\nSee 'Writing portable packages' in the 'Writing R Extensions' manual.\n* checking installed files from 'inst/doc' ? OK\n\nThat seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which(\"cc?))\n\nEnvironment variable not being set?\n\nAs a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.\n\n-Naras\n\n\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\nMurray\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of ",
+      "thread_id": "thread-371dc74f86dd",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-3f1a66afa61e",
+      "message_id": "<AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "from_name": "Pepijn de Vries",
+      "from_email_hash": "dd0c5d2cdda8911669049acce972fcebe4c60c73ecc4eb87c88f6f71516f4ce8",
+      "date": "2026-08-02T09:31:45Z",
+      "subject": "[R-pkg-devel] CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "subject_clean": "[R-pkg-devel] CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi all,\n\nJut recently, I got a CRAN NOTE on all of my packages (<https://cran.rstudio.com/web/checks/check_results_pepijn.devries_at_outlook.com.html>):\n\n>? Found the following files/directories: ?~/tmp/scratch/Rtmp...?\n\nIs this a new check implemented on the CRAN check machines, or is it just a quirk?\n\nI've started inspecting one of my simpler and light-weight packages (opensimplex2), and I'm pretty sure it doesn't write to the tempdir (or anywhere else). If this is not a quirk, how can I reproduce the check-result and trace the problem?\n\nSuggestions are welcome.\n\nCheers,\n\nPepijn",
+      "body_snippet": "Hi all,\n\nJut recently, I got a CRAN NOTE on all of my packages (<https://cran.rstudio.com/web/checks/check_results_pepijn.devries_at_outlook.com.html>):\n\n>? Found the following files/directories: ?~/t",
+      "thread_id": "thread-3f1a66afa61e",
+      "thread_depth": 0,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-e3c6a5b1edcf",
+      "message_id": "<20260802125727.66bf5d9d@trisector>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-08-02T09:57:27Z",
+      "subject": "[R-pkg-devel] Planning maintainer absence",
+      "subject_clean": "[R-pkg-devel] Planning maintainer absence",
+      "in_reply_to": "<05eb50f7-8e0b-449f-bc85-0c8c4676ff16@gmail.com>",
+      "references": [
+        "<20260729184123.28ede675@trisector>",
+        "<05eb50f7-8e0b-449f-bc85-0c8c4676ff16@gmail.com>"
+      ],
+      "body_plain": "On Wed, 29 Jul 2026 15:37:52 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> Would it be possible to set up forwarding of messages with \"Reply-to: \n> CRAN at r-project.org\" to your trusted colleague?\n\nThank you for the suggestion, this sounds like the best of both worlds.\nI'll start by trying to implement it.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "On Wed, 29 Jul 2026 15:37:52 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> Would it be possible to set up forwarding of messages with \"Reply-to: \n> CRAN at r-project.org\" to your truste",
+      "thread_id": "thread-e3c6a5b1edcf",
+      "thread_depth": 0,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-8534ae3c0c8d",
+      "message_id": "<20260802130933.08b15242@trisector>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-08-02T10:09:33Z",
+      "subject": "[R-pkg-devel]  CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "subject_clean": "[R-pkg-devel]  CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "in_reply_to": "<AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+      "references": [
+        "<AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
+      ],
+      "body_plain": "Dear Kurt,\n\nThe temporary files created for Xvfb seem to interfere with the check\nfor new files on the r-devel-linux-x86_64-debian-gcc machine. Almost\nall packages got a NOTE. Apologies if you've already received messages\nabout this.\n\nOn Sun, 2 Aug 2026 09:31:45 +0000\nPepijn de Vries <pepijn.devries at outlook.com> wrote:\n\n> >? Found the following files/directories: ?~/tmp/scratch/Rtmp...?  \n> \n> Is this a new check implemented on the CRAN check machines, or is it\n> just a quirk?\n\nMust be a quirk: it affects almost all packages on one of the machines.\n\ntools::CRAN_check_details() -> db\ndb |> with(aggregate(\n grepl('Found the following files/directories', Output),\n list(Flavor = Flavor, Package = Package),\n max\n)) |> aggregate(\n x ~ Flavor, data = _,\n \\(x) round(mean(x)*100)\n)\n\n                              Flavor   x\n1  r-devel-linux-x86_64-debian-clang   0\n2    r-devel-linux-x86_64-debian-gcc 100\n3  r-devel-linux-x86_64-fedora-clang   0\n4    r-devel-linux-x86_64-fedora-gcc   0\n5             r-devel-windows-x86_64   0\n6               r-oldrel-macos-arm64   0\n7              r-oldrel-macos-x86_64   0\n8            r-oldrel-windows-x86_64   0\n9             r-patched-linux-x86_64   0\n10            r-release-linux-x86_64   0\n11             r-release-macos-arm64   0\n12            r-release-macos-x86_64   0\n13          r-release-windows-x86_64   0\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Dear Kurt,\n\nThe temporary files created for Xvfb seem to interfere with the check\nfor new files on the r-devel-linux-x86_64-debian-gcc machine. Almost\nall packages got a NOTE. Apologies if you've alre",
+      "thread_id": "thread-3f1a66afa61e",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-968a869dd885",
+      "message_id": "<27247.12804.145900.762184@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-08-02T12:03:16Z",
+      "subject": "[R-pkg-devel]  CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "subject_clean": "[R-pkg-devel]  CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "in_reply_to": "<20260802130933.08b15242@trisector>",
+      "references": [
+        "<AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
+        "<20260802130933.08b15242@trisector>"
+      ],
+      "body_plain": "On 2 August 2026 at 13:09, Ivan Krylov via R-package-devel wrote:\n| Must be a quirk: it affects almost all packages on one of the machines.\n\nYep.\n\nI happen to regularly look at 'my' per-maintainer page at CRAN [1] and it got\na new entry by this new check for each package, ie from each build on the\nr-devel-linux platform, irrespective of, say, native code or not.\n\nDirk\n\n\n[1] These are all by maintainer email using _at_ as separator, so my page is\n    https://cran.r-project.org/web/checks/check_results_edd_at_debian.org.html\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 2 August 2026 at 13:09, Ivan Krylov via R-package-devel wrote:\n| Must be a quirk: it affects almost all packages on one of the machines.\n\nYep.\n\nI happen to regularly look at 'my' per-maintainer pag",
+      "thread_id": "thread-3f1a66afa61e",
+      "thread_depth": 2,
+      "month": "2026-08"
     }
   ],
   "threads": [
     {
       "id": "thread-371dc74f86dd",
       "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
-        "Balasubramanian Narasimhan"
+        "Balasubramanian Narasimhan",
+        "Murray Efford"
       ],
       "started": "2026-08-01T15:29:28Z",
-      "last_reply": "2026-08-01T15:29:28Z",
+      "last_reply": "2026-08-02T04:45:41Z",
       "root_message_id": "msg-371dc74f86dd"
+    },
+    {
+      "id": "thread-3f1a66afa61e",
+      "subject": "[R-pkg-devel] CRAN NOTE Found the following files/directories: ‘~/tmp/scratch/Rtmp...’",
+      "message_count": 3,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Ivan Krylov",
+        "Pepijn de Vries"
+      ],
+      "started": "2026-08-02T09:31:45Z",
+      "last_reply": "2026-08-02T12:03:16Z",
+      "root_message_id": "msg-3f1a66afa61e"
+    },
+    {
+      "id": "thread-e3c6a5b1edcf",
+      "subject": "[R-pkg-devel] Planning maintainer absence",
+      "message_count": 1,
+      "participants": [
+        "Ivan Krylov"
+      ],
+      "started": "2026-08-02T09:57:27Z",
+      "last_reply": "2026-08-02T09:57:27Z",
+      "root_message_id": "msg-e3c6a5b1edcf"
     }
   ]
 }

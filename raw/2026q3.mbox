@@ -5869,3 +5869,185 @@ As a check I uploaded an existing package on CRAN to Winbuilder and it ran into 
 	[[alternative HTML version deleted]]
 
 
+From murr@y@e||ord @end|ng |rom ot@go@@c@nz  Sun Aug  2 06:45:41 2026
+From: murr@y@e||ord @end|ng |rom ot@go@@c@nz (Murray Efford)
+Date: Sun, 2 Aug 2026 04:45:41 +0000
+Subject: [R-pkg-devel] Winbuilder issue on R API checks
+In-Reply-To: <EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>
+References: <EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>
+Message-ID: <SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>
+
+I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)
+Murray
+________________________________
+From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>
+Sent: Sunday, 2 August 2026 03:29
+To: R-pkg-devel <r-package-devel at r-project.org>
+Subject: [R-pkg-devel] Winbuilder issue on R API checks
+
+I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:
+
+
+* checking compiled code ... NOTE
+Error in ccE(lines, flags = new_flags, include = include) :
+  'cc' is not on the path
+Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE
+Execution halted
+
+
+See 'Writing portable packages' in the 'Writing R Extensions' manual.
+* checking installed files from 'inst/doc' ? OK
+
+That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which("cc?))
+
+Environment variable not being set?
+
+As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.
+
+-Naras
+
+
+
+        [[alternative HTML version deleted]]
+
+______________________________________________
+R-package-devel at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>
+
+	[[alternative HTML version deleted]]
+
+
+From pep|jn@devr|e@ @end|ng |rom out|ook@com  Sun Aug  2 11:31:45 2026
+From: pep|jn@devr|e@ @end|ng |rom out|ook@com (Pepijn de Vries)
+Date: Sun, 2 Aug 2026 09:31:45 +0000
+Subject: [R-pkg-devel] =?windows-1252?q?CRAN_NOTE_Found_the_following_fil?=
+ =?windows-1252?q?es/directories=3A_=91=7E/tmp/scratch/Rtmp=2E=2E=2E=92?=
+Message-ID: <AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>
+
+Hi all,
+
+Jut recently, I got a CRAN NOTE on all of my packages (<https://cran.rstudio.com/web/checks/check_results_pepijn.devries_at_outlook.com.html>):
+
+>? Found the following files/directories: ?~/tmp/scratch/Rtmp...?
+
+Is this a new check implemented on the CRAN check machines, or is it just a quirk?
+
+I've started inspecting one of my simpler and light-weight packages (opensimplex2), and I'm pretty sure it doesn't write to the tempdir (or anywhere else). If this is not a quirk, how can I reproduce the check-result and trace the problem?
+
+Suggestions are welcome.
+
+Cheers,
+
+Pepijn
+
+From |kry|ov @end|ng |rom d|@root@org  Sun Aug  2 11:57:27 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Sun, 2 Aug 2026 12:57:27 +0300
+Subject: [R-pkg-devel] Planning maintainer absence
+In-Reply-To: <05eb50f7-8e0b-449f-bc85-0c8c4676ff16@gmail.com>
+References: <20260729184123.28ede675@trisector>
+ <05eb50f7-8e0b-449f-bc85-0c8c4676ff16@gmail.com>
+Message-ID: <20260802125727.66bf5d9d@trisector>
+
+On Wed, 29 Jul 2026 15:37:52 -0400
+Duncan Murdoch <murdoch.duncan at gmail.com> wrote:
+
+> Would it be possible to set up forwarding of messages with "Reply-to: 
+> CRAN at r-project.org" to your trusted colleague?
+
+Thank you for the suggestion, this sounds like the best of both worlds.
+I'll start by trying to implement it.
+
+-- 
+Best regards,
+Ivan
+
+
+From |kry|ov @end|ng |rom d|@root@org  Sun Aug  2 12:09:33 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Sun, 2 Aug 2026 13:09:33 +0300
+Subject: [R-pkg-devel] 
+ =?utf-8?q?CRAN_NOTE_Found_the_following_files/dire?=
+ =?utf-8?b?Y3Rvcmllczog4oCYfi90bXAvc2NyYXRjaC9SdG1wLi4u4oCZ?=
+In-Reply-To: <AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>
+References: <AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>
+Message-ID: <20260802130933.08b15242@trisector>
+
+Dear Kurt,
+
+The temporary files created for Xvfb seem to interfere with the check
+for new files on the r-devel-linux-x86_64-debian-gcc machine. Almost
+all packages got a NOTE. Apologies if you've already received messages
+about this.
+
+On Sun, 2 Aug 2026 09:31:45 +0000
+Pepijn de Vries <pepijn.devries at outlook.com> wrote:
+
+> >? Found the following files/directories: ?~/tmp/scratch/Rtmp...?  
+> 
+> Is this a new check implemented on the CRAN check machines, or is it
+> just a quirk?
+
+Must be a quirk: it affects almost all packages on one of the machines.
+
+tools::CRAN_check_details() -> db
+db |> with(aggregate(
+ grepl('Found the following files/directories', Output),
+ list(Flavor = Flavor, Package = Package),
+ max
+)) |> aggregate(
+ x ~ Flavor, data = _,
+ \(x) round(mean(x)*100)
+)
+
+                              Flavor   x
+1  r-devel-linux-x86_64-debian-clang   0
+2    r-devel-linux-x86_64-debian-gcc 100
+3  r-devel-linux-x86_64-fedora-clang   0
+4    r-devel-linux-x86_64-fedora-gcc   0
+5             r-devel-windows-x86_64   0
+6               r-oldrel-macos-arm64   0
+7              r-oldrel-macos-x86_64   0
+8            r-oldrel-windows-x86_64   0
+9             r-patched-linux-x86_64   0
+10            r-release-linux-x86_64   0
+11             r-release-macos-arm64   0
+12            r-release-macos-x86_64   0
+13          r-release-windows-x86_64   0
+
+-- 
+Best regards,
+Ivan
+
+
+From edd @end|ng |rom deb|@n@org  Sun Aug  2 14:03:16 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Sun, 2 Aug 2026 07:03:16 -0500
+Subject: [R-pkg-devel] 
+ =?utf-8?q?CRAN_NOTE_Found_the_following_files/dire?=
+ =?utf-8?b?Y3Rvcmllczog4oCYfi90bXAvc2NyYXRjaC9SdG1wLi4u4oCZ?=
+In-Reply-To: <20260802130933.08b15242@trisector>
+References: <AM8PR10MB46602DC7A14A4DEF6A53DC7AA7D62@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>
+ <20260802130933.08b15242@trisector>
+Message-ID: <27247.12804.145900.762184@paul.eddelbuettel.com>
+
+
+On 2 August 2026 at 13:09, Ivan Krylov via R-package-devel wrote:
+| Must be a quirk: it affects almost all packages on one of the machines.
+
+Yep.
+
+I happen to regularly look at 'my' per-maintainer page at CRAN [1] and it got
+a new entry by this new check for each package, ie from each build on the
+r-devel-linux platform, irrespective of, say, native code or not.
+
+Dirk
+
+
+[1] These are all by maintainer email using _at_ as separator, so my page is
+    https://cran.r-project.org/web/checks/check_results_edd_at_debian.org.html
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
