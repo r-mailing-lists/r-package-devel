@@ -6051,3 +6051,68 @@ Dirk
 dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
 
 
+From N|co|@@@R@|||@rd @end|ng |rom ||remer@|r  Mon Aug  3 15:45:04 2026
+From: N|co|@@@R@|||@rd @end|ng |rom ||remer@|r (Nicolas Raillard)
+Date: Mon, 3 Aug 2026 15:45:04 +0200
+Subject: [R-pkg-devel] Winbuilder issue on R API checks
+In-Reply-To: <SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>
+References: <EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>
+ <SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>
+Message-ID: <7d0c04fa-5d71-4d60-b5e7-62d78050bbd9@ifremer.fr>
+
+Hi,
+
+I am having the same issue, and my submission gets refused by CRAN 
+teams' auto-check service, even if I stated this in the cran-comments.md
+
+Is?there a way to make the new submission pass CRAN checks?
+
+Thx,
+Nicolas.
+
+Le 02/08/2026 ? 06:45, Murray Efford via R-package-devel a ?crit?:
+> I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)
+> Murray
+> ________________________________
+> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>
+> Sent: Sunday, 2 August 2026 03:29
+> To: R-pkg-devel <r-package-devel at r-project.org>
+> Subject: [R-pkg-devel] Winbuilder issue on R API checks
+>
+> I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:
+>
+>
+> * checking compiled code ... NOTE
+> Error in ccE(lines, flags = new_flags, include = include) :
+>    'cc' is not on the path
+> Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE
+> Execution halted
+>
+>
+> See 'Writing portable packages' in the 'Writing R Extensions' manual.
+> * checking installed files from 'inst/doc' ? OK
+>
+> That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which("cc?))
+>
+> Environment variable not being set?
+>
+> As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.
+>
+> -Naras
+>
+>
+>
+>          [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>
+>
+> 	[[alternative HTML version deleted]]
+>
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+

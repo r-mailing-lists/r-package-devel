@@ -108,19 +108,39 @@
       "thread_id": "thread-3f1a66afa61e",
       "thread_depth": 2,
       "month": "2026-08"
+    },
+    {
+      "id": "msg-d4b884e08dcc",
+      "message_id": "<7d0c04fa-5d71-4d60-b5e7-62d78050bbd9@ifremer.fr>",
+      "from_name": "Nicolas Raillard",
+      "from_email_hash": "fa7c6a13e0760c8ff9345ed02c31e62ba20040f46d21e697ae65c7929193428a",
+      "date": "2026-08-03T13:45:04Z",
+      "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "subject_clean": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "in_reply_to": "<SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>",
+      "references": [
+        "<EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>",
+        "<SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>"
+      ],
+      "body_plain": "Hi,\n\nI am having the same issue, and my submission gets refused by CRAN \nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs?there a way to make the new submission pass CRAN checks?\n\nThx,\nNicolas.\n\nLe 02/08/2026 ? 06:45, Murray Efford via R-package-devel a ?crit?:\n> I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\n> Murray\n> ________________________________\n> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>\n> Sent: Sunday, 2 August 2026 03:29\n> To: R-pkg-devel <r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] Winbuilder issue on R API checks\n>\n> I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n>\n>\n> * checking compiled code ... NOTE\n> Error in ccE(lines, flags = new_flags, include = include) :\n>    'cc' is not on the path\n> Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE\n> Execution halted\n>\n>\n> See 'Writing portable packages' in the 'Writing R Extensions' manual.\n> * checking installed files from 'inst/doc' ? OK\n>\n> That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which(\"cc?))\n>\n> Environment variable not being set?\n>\n> As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.\n>\n> -Naras\n>\n>\n>\n>          [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>\n> \t[[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi,\n\nI am having the same issue, and my submission gets refused by CRAN \nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs?there a way to make the new submission pass CRAN c",
+      "thread_id": "thread-371dc74f86dd",
+      "thread_depth": 2,
+      "month": "2026-08"
     }
   ],
   "threads": [
     {
       "id": "thread-371dc74f86dd",
       "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
-      "message_count": 2,
+      "message_count": 3,
       "participants": [
         "Balasubramanian Narasimhan",
-        "Murray Efford"
+        "Murray Efford",
+        "Nicolas Raillard"
       ],
       "started": "2026-08-01T15:29:28Z",
-      "last_reply": "2026-08-02T04:45:41Z",
+      "last_reply": "2026-08-03T13:45:04Z",
       "root_message_id": "msg-371dc74f86dd"
     },
     {
