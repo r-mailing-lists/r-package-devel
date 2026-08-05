@@ -127,20 +127,111 @@
       "thread_id": "thread-371dc74f86dd",
       "thread_depth": 2,
       "month": "2026-08"
+    },
+    {
+      "id": "msg-976106f9742c",
+      "message_id": "<SY9PR01MB9897D6571DB9400FFE86F3CEACD42@SY9PR01MB9897.ausprd01.prod.outlook.com>",
+      "from_name": "Murray Efford",
+      "from_email_hash": "82bfe0c72bb61f0f38c9ced4d7d6ebe1e213c779150a721c41da24aa8495d9a0",
+      "date": "2026-08-04T07:40:51Z",
+      "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "subject_clean": "[R-pkg-devel] Winbuilder issue on R API checks",
+      "in_reply_to": "<7d0c04fa-5d71-4d60-b5e7-62d78050bbd9@ifremer.fr>",
+      "references": [
+        "<EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>",
+        "<SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>",
+        "<7d0c04fa-5d71-4d60-b5e7-62d78050bbd9@ifremer.fr>"
+      ],
+      "body_plain": "This appears to have been fixed at the CRAN end - my package has now been accepted.\nMurray\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Nicolas Raillard <Nicolas.Raillard at ifremer.fr>\nSent: Tuesday, 4 August 2026 01:45\nTo: r-package-devel at r-project.org <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Winbuilder issue on R API checks\n\n[You don't often get email from nicolas.raillard at ifremer.fr. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]\n\nHi,\n\nI am having the same issue, and my submission gets refused by CRAN\nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs there a way to make the new submission pass CRAN checks?\n\nThx,\nNicolas.\n\nLe 02/08/2026 ? 06:45, Murray Efford via R-package-devel a ?crit :\n> I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\n> Murray\n> ________________________________\n> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>\n> Sent: Sunday, 2 August 2026 03:29\n> To: R-pkg-devel <r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] Winbuilder issue on R API checks\n>\n> I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n>\n>\n> * checking compiled code ... NOTE\n> Error in ccE(lines, flags = new_flags, include = include) :\n>    'cc' is not on the path\n> Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE\n> Execution halted\n>\n>\n> See 'Writing portable packages' in the 'Writing R Extensions' manual.\n> * checking installed files from 'inst/doc' ? OK\n>\n> That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which(\"cc?))\n>\n> Environment variable not being set?\n>\n> As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.\n>\n> -Naras\n>\n>\n>\n>          [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel><https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>\n>       [[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This appears to have been fixed at the CRAN end - my package has now been accepted.\nMurray\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf o",
+      "thread_id": "thread-371dc74f86dd",
+      "thread_depth": 3,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-0a9a03877413",
+      "message_id": "<8CE37812-3826-4A72-97B6-5E6F3BD98C53@dal.ca>",
+      "from_name": "Daniel Kelley",
+      "from_email_hash": "86414ba1595edb5f4e2a1571b3d5ac6193ddbcd5e87fdb7d177bfbc459d736f0",
+      "date": "2026-08-04T13:32:28Z",
+      "subject": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "subject_clean": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I've noticed this in several of my R packages (see e.g. https://cran.r-project.org/web/checks/check_results_oce.html) and also in other packages on CRAN.\n\nIs this something that authors are meant to address, or is it a temporary thing that we can ignore?\n\nThanks\n\nDan Kelley / Dept. Oceanography / Dalhousie University / Halifax NS Canada",
+      "body_snippet": "I've noticed this in several of my R packages (see e.g. https://cran.r-project.org/web/checks/check_results_oce.html) and also in other packages on CRAN.\n\nIs this something that authors are meant to a",
+      "thread_id": "thread-0a9a03877413",
+      "thread_depth": 0,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-40a2a8e92554",
+      "message_id": "<52f85bca-0b8a-4796-8700-7adea6eeb334@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-08-04T13:34:39Z",
+      "subject": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "subject_clean": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "in_reply_to": "<8CE37812-3826-4A72-97B6-5E6F3BD98C53@dal.ca>",
+      "references": [
+        "<8CE37812-3826-4A72-97B6-5E6F3BD98C53@dal.ca>"
+      ],
+      "body_plain": "If it is true that you generate files elsewhere without cleaning up: Yes!\n\nBest,\nUwe Ligges\n\n\n\n\nOn 04.08.2026 15:32, Daniel Kelley wrote:\n> I've noticed this in several of my R packages (see e.g. https://cran.r-project.org/web/checks/check_results_oce.html) and also in other packages on CRAN.\n> \n> Is this something that authors are meant to address, or is it a temporary thing that we can ignore?\n> \n> Thanks\n> \n> Dan Kelley / Dept. Oceanography / Dalhousie University / Halifax NS Canada\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "If it is true that you generate files elsewhere without cleaning up: Yes!\n\nBest,\nUwe Ligges\n\n\n\n\nOn 04.08.2026 15:32, Daniel Kelley wrote:\n> I've noticed this in several of my R packages (see e.g. http",
+      "thread_id": "thread-0a9a03877413",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-5543c2f0158f",
+      "message_id": "<20260804164321.6ed97112@trisector>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "d5e69509b1e550954e7dc7df9fde68d8fd4a7973fb076b5d966efe67850be3c9",
+      "date": "2026-08-04T13:43:21Z",
+      "subject": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "subject_clean": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "in_reply_to": "<8CE37812-3826-4A72-97B6-5E6F3BD98C53@dal.ca>",
+      "references": [
+        "<8CE37812-3826-4A72-97B6-5E6F3BD98C53@dal.ca>"
+      ],
+      "body_plain": "? Tue, 4 Aug 2026 13:32:28 +0000\nDaniel Kelley <kelley at dal.ca> ?????:\n\n> Is this something that authors are meant to address, or is it a\n> temporary thing that we can ignore?\n\nThis was due to a temporary configuration change and will go away after\nthe next round of checks.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 4 Aug 2026 13:32:28 +0000\nDaniel Kelley <kelley at dal.ca> ?????:\n\n> Is this something that authors are meant to address, or is it a\n> temporary thing that we can ignore?\n\nThis was due to a tem",
+      "thread_id": "thread-0a9a03877413",
+      "thread_depth": 1,
+      "month": "2026-08"
+    },
+    {
+      "id": "msg-03d5563c58ec",
+      "message_id": "<27249.60975.403414.70875@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-08-04T13:50:39Z",
+      "subject": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "subject_clean": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "in_reply_to": "<20260804164321.6ed97112@trisector>",
+      "references": [
+        "<8CE37812-3826-4A72-97B6-5E6F3BD98C53@dal.ca>",
+        "<20260804164321.6ed97112@trisector>"
+      ],
+      "body_plain": "On 4 August 2026 at 16:43, Ivan Krylov via R-package-devel wrote:\n| ? Tue, 4 Aug 2026 13:32:28 +0000\n| Daniel Kelley <kelley at dal.ca> ?????:\n| \n| > Is this something that authors are meant to address, or is it a\n| > temporary thing that we can ignore?\n| \n| This was due to a temporary configuration change and will go away after\n| the next round of checks.\n\nAs was discussed in the previous thread on this list that started with this\nmessage: \n\n   https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012500.html\n\nThat particular CRAN machine appears to take longer than a day to refresh, so\nthe summary page I mentioned in my message in that thread currently shows\nsome / most of my packages still affected but some now again ok just as Ivan\nalluded to.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 4 August 2026 at 16:43, Ivan Krylov via R-package-devel wrote:\n| ? Tue, 4 Aug 2026 13:32:28 +0000\n| Daniel Kelley <kelley at dal.ca> ?????:\n| \n| > Is this something that authors are meant to addres",
+      "thread_id": "thread-0a9a03877413",
+      "thread_depth": 2,
+      "month": "2026-08"
     }
   ],
   "threads": [
     {
       "id": "thread-371dc74f86dd",
       "subject": "[R-pkg-devel] Winbuilder issue on R API checks",
-      "message_count": 3,
+      "message_count": 4,
       "participants": [
         "Balasubramanian Narasimhan",
         "Murray Efford",
         "Nicolas Raillard"
       ],
       "started": "2026-08-01T15:29:28Z",
-      "last_reply": "2026-08-03T13:45:04Z",
+      "last_reply": "2026-08-04T07:40:51Z",
       "root_message_id": "msg-371dc74f86dd"
     },
     {
@@ -166,6 +257,20 @@
       "started": "2026-08-02T09:57:27Z",
       "last_reply": "2026-08-02T09:57:27Z",
       "root_message_id": "msg-e3c6a5b1edcf"
+    },
+    {
+      "id": "thread-0a9a03877413",
+      "subject": "[R-pkg-devel] CRAN check message about \"Found the following files/directories\"",
+      "message_count": 4,
+      "participants": [
+        "Daniel Kelley",
+        "Dirk Eddelbuettel",
+        "Ivan Krylov",
+        "Uwe Ligges"
+      ],
+      "started": "2026-08-04T13:32:28Z",
+      "last_reply": "2026-08-04T13:50:39Z",
+      "root_message_id": "msg-0a9a03877413"
     }
   ]
 }
