@@ -6303,3 +6303,215 @@ Dirk
 dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
 
 
+From tony_@_w||ke@ @end|ng |rom out|ook@com  Sat Aug  8 10:49:50 2026
+From: tony_@_w||ke@ @end|ng |rom out|ook@com (Tony Wilkes)
+Date: Sat, 8 Aug 2026 08:49:50 +0000
+Subject: [R-pkg-devel] windows devel builder down?
+Message-ID: <PAXSPR01MB0006D855D600B0036AA2034ABED02@PAXSPR01MB0006.eurprd08.prod.outlook.com>
+
+Hi all,
+
+
+Is the windows R-devel builder (at win-builder.r-project.org) down?
+
+I've uploaded the newest version of the 'broadcast' package to the windows R-devel for testing yesterday and the day before yesterday.
+I have verified with 'foghorn::winbuilder_queue()' that my package was placed on the queue.
+I've uploaded the package using 'devtools::check_win_devel()', and also tried uploading directly to the site (win-builder.r-project.org). In neither case have I received an e-mail, even after 24 hours.
+I've also checked if the e-mail is correct in the Description file - it is.
+I've tried accessing win-builder via an FTP client (File Zilla), to have a look at the folders, but the client is unable to connect to ftp://win-builder.r-project.org/, even after several attempts.
+And of course, I've checked my e-mail's spam folder.
+
+So, is there something wrong with the windows R-devel builder at win-builder.r-project.org?
+If not, what could be the reason I'm not receiving e-mails?
+
+(The R package itself is unlikely to have caused problems on the server, I think, as it passes all  R cmd checks on my laptop, on GitHUb actions (which includes windows platform), and on r-hub's valgrind checks.)
+
+Kind regards,
+
+Tony
+
+	[[alternative HTML version deleted]]
+
+
+From ||@t@ @end|ng |rom dewey@myzen@co@uk  Sat Aug  8 14:25:29 2026
+From: ||@t@ @end|ng |rom dewey@myzen@co@uk (Michael Dewey)
+Date: Sat, 8 Aug 2026 13:25:29 +0100
+Subject: [R-pkg-devel] windows devel builder down?
+In-Reply-To: <PAXSPR01MB0006D855D600B0036AA2034ABED02@PAXSPR01MB0006.eurprd08.prod.outlook.com>
+References: <PAXSPR01MB0006D855D600B0036AA2034ABED02@PAXSPR01MB0006.eurprd08.prod.outlook.com>
+Message-ID: <b32eb080-1afa-48d8-9553-f0df843339b3@dewey.myzen.co.uk>
+
+Dear Tony
+
+Perhaps explained by them going on their annual holiday? It lasts from 
+the 5th to the 19th.
+
+Michael
+
+On 08/08/2026 09:49, Tony Wilkes wrote:
+> Hi all,
+> 
+> 
+> Is the windows R-devel builder (at win-builder.r-project.org) down?
+> 
+> I've uploaded the newest version of the 'broadcast' package to the windows R-devel for testing yesterday and the day before yesterday.
+> I have verified with 'foghorn::winbuilder_queue()' that my package was placed on the queue.
+> I've uploaded the package using 'devtools::check_win_devel()', and also tried uploading directly to the site (win-builder.r-project.org). In neither case have I received an e-mail, even after 24 hours.
+> I've also checked if the e-mail is correct in the Description file - it is.
+> I've tried accessing win-builder via an FTP client (File Zilla), to have a look at the folders, but the client is unable to connect to ftp://win-builder.r-project.org/, even after several attempts.
+> And of course, I've checked my e-mail's spam folder.
+> 
+> So, is there something wrong with the windows R-devel builder at win-builder.r-project.org?
+> If not, what could be the reason I'm not receiving e-mails?
+> 
+> (The R package itself is unlikely to have caused problems on the server, I think, as it passes all  R cmd checks on my laptop, on GitHUb actions (which includes windows platform), and on r-hub's valgrind checks.)
+> 
+> Kind regards,
+> 
+> Tony
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+-- 
+Michael Dewey
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Sat Aug  8 14:55:21 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Sat, 8 Aug 2026 14:55:21 +0200
+Subject: [R-pkg-devel] windows devel builder down?
+In-Reply-To: <b32eb080-1afa-48d8-9553-f0df843339b3@dewey.myzen.co.uk>
+References: <PAXSPR01MB0006D855D600B0036AA2034ABED02@PAXSPR01MB0006.eurprd08.prod.outlook.com>
+ <b32eb080-1afa-48d8-9553-f0df843339b3@dewey.myzen.co.uk>
+Message-ID: <77f371c5-3e8b-4c40-8a5f-7016c95274ae@statistik.tu-dortmund.de>
+
+
+
+On 08.08.2026 14:25, Michael Dewey wrote:
+> Dear Tony
+> 
+> Perhaps explained by them going on their annual holiday? It lasts from 
+> the 5th to the 19th.
+
+Well, as far as I can see all queues are clean and packages have been 
+processed.
+
+I see you have an outlook.com address. outlook.com frequently blocks our 
+mail servers or mark the mails as spam  as we send out lots of mails 
+when people check packages. So maybe the mail could not be delivered.
+Perhaps you can simply whitelist mail from my address and try again.
+
+Best,
+Uwe Ligges
+
+
+
+	
+
+> Michael
+> 
+> On 08/08/2026 09:49, Tony Wilkes wrote:
+>> Hi all,
+>>
+>>
+>> Is the windows R-devel builder (at win-builder.r-project.org) down?
+>>
+>> I've uploaded the newest version of the 'broadcast' package to the 
+>> windows R-devel for testing yesterday and the day before yesterday.
+>> I have verified with 'foghorn::winbuilder_queue()' that my package was 
+>> placed on the queue.
+>> I've uploaded the package using 'devtools::check_win_devel()', and 
+>> also tried uploading directly to the site (win-builder.r-project.org). 
+>> In neither case have I received an e-mail, even after 24 hours.
+>> I've also checked if the e-mail is correct in the Description file - 
+>> it is.
+>> I've tried accessing win-builder via an FTP client (File Zilla), to 
+>> have a look at the folders, but the client is unable to connect to 
+>> ftp://win-builder.r-project.org/, even after several attempts.
+>> And of course, I've checked my e-mail's spam folder.
+>>
+>> So, is there something wrong with the windows R-devel builder at win- 
+>> builder.r-project.org?
+>> If not, what could be the reason I'm not receiving e-mails?
+>>
+>> (The R package itself is unlikely to have caused problems on the 
+>> server, I think, as it passes all? R cmd checks on my laptop, on 
+>> GitHUb actions (which includes windows platform), and on r-hub's 
+>> valgrind checks.)
+>>
+>> Kind regards,
+>>
+>> Tony
+>>
+>> ????[[alternative HTML version deleted]]
+>>
+>> ______________________________________________
+>> R-package-devel at r-project.org mailing list
+>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> 
+
+
+From tony_@_w||ke@ @end|ng |rom out|ook@com  Sat Aug  8 15:10:20 2026
+From: tony_@_w||ke@ @end|ng |rom out|ook@com (Tony Wilkes)
+Date: Sat, 8 Aug 2026 13:10:20 +0000
+Subject: [R-pkg-devel] windows devel builder down?
+In-Reply-To: <b32eb080-1afa-48d8-9553-f0df843339b3@dewey.myzen.co.uk>
+References: <PAXSPR01MB0006D855D600B0036AA2034ABED02@PAXSPR01MB0006.eurprd08.prod.outlook.com>
+ <b32eb080-1afa-48d8-9553-f0df843339b3@dewey.myzen.co.uk>
+Message-ID: <DB9PR08MB64909CC825D967B1D4DE7B2BBED02@DB9PR08MB6490.eurprd08.prod.outlook.com>
+
+Ah, of course. I missed that part. Thanks for the reply!
+
+Verzonden vanaf Outlook voor Android<https://aka.ms/AAb9ysg>
+________________________________
+From: Michael Dewey <lists at dewey.myzen.co.uk>
+Sent: Saturday, 08 August 2026 14:25:29
+To: Tony Wilkes <tony_a_wilkes at outlook.com>; R Package Development <r-package-devel at r-project.org>
+Subject: Re: [R-pkg-devel] windows devel builder down?
+
+Dear Tony
+
+Perhaps explained by them going on their annual holiday? It lasts from
+the 5th to the 19th.
+
+Michael
+
+On 08/08/2026 09:49, Tony Wilkes wrote:
+> Hi all,
+>
+>
+> Is the windows R-devel builder (at win-builder.r-project.org) down?
+>
+> I've uploaded the newest version of the 'broadcast' package to the windows R-devel for testing yesterday and the day before yesterday.
+> I have verified with 'foghorn::winbuilder_queue()' that my package was placed on the queue.
+> I've uploaded the package using 'devtools::check_win_devel()', and also tried uploading directly to the site (win-builder.r-project.org). In neither case have I received an e-mail, even after 24 hours.
+> I've also checked if the e-mail is correct in the Description file - it is.
+> I've tried accessing win-builder via an FTP client (File Zilla), to have a look at the folders, but the client is unable to connect to ftp://win-builder.r-project.org/<ftp://win-builder.r-project.org/>, even after several attempts.
+> And of course, I've checked my e-mail's spam folder.
+>
+> So, is there something wrong with the windows R-devel builder at win-builder.r-project.org?
+> If not, what could be the reason I'm not receiving e-mails?
+>
+> (The R package itself is unlikely to have caused problems on the server, I think, as it passes all  R cmd checks on my laptop, on GitHUb actions (which includes windows platform), and on r-hub's valgrind checks.)
+>
+> Kind regards,
+>
+> Tony
+>
+>        [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>
+
+--
+Michael Dewey
+
+
+	[[alternative HTML version deleted]]
+
+
