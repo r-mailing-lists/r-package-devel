@@ -6515,3 +6515,54 @@ Michael Dewey
 	[[alternative HTML version deleted]]
 
 
+From tony_@_w||ke@ @end|ng |rom out|ook@com  Sun Aug  9 21:14:38 2026
+From: tony_@_w||ke@ @end|ng |rom out|ook@com (Tony Wilkes)
+Date: Sun, 9 Aug 2026 19:14:38 +0000
+Subject: [R-pkg-devel] windows devel builder down?
+In-Reply-To: <20260809220837.3662aa8e@trisector>
+References: <PAXSPR01MB0006D855D600B0036AA2034ABED02@PAXSPR01MB0006.eurprd08.prod.outlook.com>
+ <20260809220837.3662aa8e@trisector>
+Message-ID: <AM8PR08MB64844A946A1732F819650749BEDF2@AM8PR08MB6484.eurprd08.prod.outlook.com>
+
+Thanks for the info Ivan!
+
+Verzonden vanaf Outlook voor Android<https://aka.ms/AAb9ysg>
+
+________________________________
+Van: Ivan Krylov <ikrylov at disroot.org>
+Verstuurd: zondag, augustus 9, 2026 9:08:44 p.m.
+Aan: Tony Wilkes <tony_a_wilkes at outlook.com>
+CC: R Package Development <r-package-devel at r-project.org>
+Onderwerp: Re: [R-pkg-devel] windows devel builder down?
+
+? Sat, 8 Aug 2026 08:49:50 +0000
+Tony Wilkes <tony_a_wilkes at outlook.com> ?????:
+
+> I've tried accessing win-builder via an FTP client (File Zilla), to
+> have a look at the folders, but the client is unable to connect to
+> ftp://win-builder.r-project.org/<ftp://win-builder.r-project.org/>, even after several attempts.
+
+FileZilla stopped working with Win-Builder a few years ago. The server
+doesn't seem to advertise EPSV support in reply to the FEAT command, so
+FileZilla tries to use the standard passive mode ("PASV"), to which the
+FTP server replies with an IP address that the client is unable to
+reach. There are unanswered feature requests for EPSV support
+preferences [*] in FileZilla.
+
+Other clients (e.g. libcurl) work because they use the extended passive
+mode ("EPSV") by default, without even asking for a list of features.
+In reply to the EPSV command the FTP server gives an accessible port
+number, and all works well.
+
+--
+Best regards,
+Ivan
+
+[*]
+https://trac.filezilla-project.org/ticket/13100<https://trac.filezilla-project.org/ticket/13100>
+https://trac.filezilla-project.org/ticket/10301<https://trac.filezilla-project.org/ticket/10301>
+
+
+	[[alternative HTML version deleted]]
+
+
