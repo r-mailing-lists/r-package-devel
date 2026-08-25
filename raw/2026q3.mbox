@@ -6771,3 +6771,331 @@ tel: 1-877-GKX-GROUP
 email: ggrothendieck at gmail.com
 
 
+From m@ech|er @end|ng |rom @t@t@m@th@ethz@ch  Mon Aug 24 12:21:53 2026
+From: m@ech|er @end|ng |rom @t@t@m@th@ethz@ch (Martin Maechler)
+Date: Mon, 24 Aug 2026 12:21:53 +0200
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+Message-ID: <27276.6977.408809.93987@stat.math.ethz.ch>
+
+Because my CRAN package DPQ
+	https://cran.r-project.org/package=DPQ
+fails some of its checks on  "linux/arm64",
+      https://cran.r-project.org/web/checks/check_results_DPQ.html
+      --> https://github.com/r-devel/linux-arm64-checks/tree/HEAD/DPQ
+
+I've tried to findand run a docker image for that platform.
+
+Quickly one is lead to  https://github.com/r-devel/rcheckserver
+which gives some details, mentioning amd64 and arm64.
+However, running or pulling the rcheckserver image
+
+	 podman pull ghcr.io/r-devel/rcheckserver/ubuntu
+
+(yes, I'm on Fedora, where 'podman' is strongy recommended as a
+ safer version of 'docker')
+
+does only provide amd64, but I do need arm64 to reproduce the
+DPQ check problem ('Inf' results which do not appear on any other platform).
+
+On the above `rcheckserver` github page, the README.md has a 2 x 2 matrix 
+of available docker images
+2 rows: "Debian" \\ "Ubuntu"
+2 cols: "x86_64"  | "ARM64"
+
+Clicking on the "Image Size | 4.7 GiB" button for the
+["Ubuntu" , "ARM64"] entry one gets to the same web page as for
+["Ubuntu" , "x86_64"]
+which is  https://hub.docker.com/r/cran/ubuntu
+
+I then found that I could/should use the 'tag'  "latest_arm64"
+          https://hub.docker.com/r/cran/ubuntu/tags
+but that then gave "source docker" error i.e., "did not work" :
+
+---o<-------------o<-------------o<-------------o<-------------o<------------
+$ podman pull cran/ubuntu:latest_arm64
+
+? docker.io/cran/ubuntu:latest_arm64
+Trying to pull docker.io/cran/ubuntu:latest_arm64...
+Error: unable to copy from source docker://cran/ubuntu:latest_arm64: choosing an image from manifest list docker://cran/ubuntu:latest_arm64: no image found in image index for architecture "amd64", variant "", OS "linux"
+
+$ 
+---o<-------------o<-------------o<-------------o<-------------o<------------
+And very similar error, if I try e.g.,
+    podman pull ghcr.io/r-devel/rcheckserver/debian:latest_arm64
+
+What did I do wrongly?
+ - is it a temporary glitch with the docker.io/cran/ images
+ - is it not possible to _use_ arm64 docker images on Fedora ??
+ - ??
+
+Thank you for help,
+Martin
+
+--
+Martin Maechler
+R-Core  and  ETH Zurich
+
+
+From kry|ov@r00t @end|ng |rom gm@||@com  Mon Aug 24 13:18:12 2026
+From: kry|ov@r00t @end|ng |rom gm@||@com (Ivan Krylov)
+Date: Mon, 24 Aug 2026 14:18:12 +0300
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <27276.6977.408809.93987@stat.math.ethz.ch>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+Message-ID: <20260824141812.03ed0b56@trisector>
+
+On Mon, 24 Aug 2026 12:21:53 +0200
+Martin Maechler <maechler at stat.math.ethz.ch> wrote:
+
+> However, running or pulling the rcheckserver image
+> 
+> 	 podman pull ghcr.io/r-devel/rcheckserver/ubuntu
+> 
+> (yes, I'm on Fedora, where 'podman' is strongy recommended as a
+>  safer version of 'docker')
+> 
+> does only provide amd64, but I do need arm64 to reproduce the
+> DPQ check problem ('Inf' results which do not appear on any other
+> platform).
+
+The problem here is that you're running an amd64 computer. If you
+install QEMU (dnf install qemu-user-static), it should become possible
+for you to run the container images on an emulated processor:
+
+podman run --platform linux/arm64 ghcr.io/r-devel/rcheckserver/ubuntu
+
+It will be very slow and may not reproduce the problem exactly, but
+it's easier than shopping for a real 64-bit ARM machine to test on or
+running everything remotely on GitHub Actions.
+
+(QEMU did help me reproduce a problem on RISC-V a few months ago.)
+
+-- 
+Best regards,
+Ivan
+
+(Sorry if you receive this twice. I'll try to fix my delivery problems.)
+
+
+From edd @end|ng |rom deb|@n@org  Mon Aug 24 13:59:42 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Mon, 24 Aug 2026 06:59:42 -0500
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <20260824141812.03ed0b56@trisector>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+ <20260824141812.03ed0b56@trisector>
+Message-ID: <27276.12846.538824.95631@paul.eddelbuettel.com>
+
+
+rocker/r2u exists for the two newer Ubuntu releases 24.04 and 26.04 in both
+the common 'amd64' and the newer 'arm64' variant.  (r-universe also has it.)
+
+So besides working with the qemu emulator you could rely on GitHub Actions.
+Create or fork a repo, and add an action based on the standard one proposed
+by r-ci [1] but add one line in the 'matrix' containing
+
+          - {os: ubuntu-latest}
+
+to add one or both of
+
+          - {os: ubuntu-26.04-arm}
+          - {os: ubuntu-24.04-arm}
+
+and your job will run on arm64 as well. As the rest of the action relies on
+r2u, all your dependencies are taken care of.  I can set up a demo repo if
+you prefer. If you find the 'matrix' confusing a simpler one-off is below [2]. 
+
+As mentioned, you can rely on r-universe which builds on linux arm64 for you
+to. No special setup from your side needed, but you have finer control for
+your debugging via your own action.
+
+Hope this helps, Dirk
+
+
+[1] See http://eddelbuettel.github.io/r-ci
+[2] Quick one-off yaml file to run R CMD check on arm for a give repo.
+
+-----------------------------------------------------------------------------
+# Run CI for R using https://eddelbuettel.github.io/r-ci/
+
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  _R_CHECK_FORCE_SUGGESTS_: "false"
+
+jobs:
+  ci:
+    runs-on: ubuntu-26.04-arm
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout at v7
+        
+      - name: Setup
+        uses: eddelbuettel/github-actions/r-ci at master
+        
+      - name: Dependencies
+        run: ./run.sh install_all
+        
+      - name: Test
+        run: ./run.sh run_tests
+        
+      - name: Logs
+        run: ./run.sh dump_logs
+        if: failure()
+-----------------------------------------------------------------------------
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From edd @end|ng |rom deb|@n@org  Mon Aug 24 14:15:19 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Mon, 24 Aug 2026 07:15:19 -0500
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <27276.12846.538824.95631@paul.eddelbuettel.com>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+ <20260824141812.03ed0b56@trisector>
+ <27276.12846.538824.95631@paul.eddelbuettel.com>
+Message-ID: <27276.13783.596078.45935@paul.eddelbuettel.com>
+
+
+PS On the narrow question in the Subject, there are of course also rocker/r2u
+containers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan explained
+you actually either real or emulated arm64 hardware for this. GitHub Actions
+is one fairly simple way to get cpu cycles on such hardware.
+
+Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From m@ech|er @end|ng |rom @t@t@m@th@ethz@ch  Mon Aug 24 16:13:51 2026
+From: m@ech|er @end|ng |rom @t@t@m@th@ethz@ch (Martin Maechler)
+Date: Mon, 24 Aug 2026 16:13:51 +0200
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <fake-VM-id.5ac39a86131167d287a0f9537bf8b981@talos.iv>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+ <20260824141812.03ed0b56@trisector>
+ <27276.12846.538824.95631@paul.eddelbuettel.com>
+ <27276.13783.596078.45935@paul.eddelbuettel.com>
+Message-ID: <27276.20895.252302.913255@stat.math.ethz.ch>
+
+>>>>> Dirk Eddelbuettel 
+>>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:
+
+    > PS On the narrow question in the Subject, there are of course also rocker/r2u
+    > containers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan explained
+    > you actually either real or emulated arm64 hardware for this. GitHub Actions
+    > is one fairly simple way to get cpu cycles on such hardware.
+
+    > Dirk
+
+Thank you, both Ivan and Dirk  for your help.
+
+Dirk answered a question I did not ask, but could have well
+asked given the "CRAN package checking problem", and one that
+may be useful also to others in any case.
+
+I really did want an interactive R session inside a
+docker/podman image where I can  install.package() {also a from
+source in my case} and try things interactively.
+
+Hence, I will try the QEMU route first
+
+(@Ivan: Yes, I got it twice, but "R-package-devel" only got it
+	once, see the list archives at
+	https://stat.ethz.ch/pipermail/r-package-devel/2026q3/thread.html )
+
+Martin
+
+
+From edd @end|ng |rom deb|@n@org  Mon Aug 24 16:41:52 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Mon, 24 Aug 2026 09:41:52 -0500
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <27276.20895.252302.913255@stat.math.ethz.ch>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+ <20260824141812.03ed0b56@trisector>
+ <27276.12846.538824.95631@paul.eddelbuettel.com>
+ <27276.13783.596078.45935@paul.eddelbuettel.com>
+ <27276.20895.252302.913255@stat.math.ethz.ch>
+Message-ID: <27276.22576.27444.74279@paul.eddelbuettel.com>
+
+
+On 24 August 2026 at 16:13, Martin Maechler wrote:
+| Dirk answered a question I did not ask, but could have well
+| asked given the "CRAN package checking problem", and one that
+| may be useful also to others in any case.
+| 
+| I really did want an interactive R session inside a
+| docker/podman image where I can  install.package() {also a from
+| source in my case} and try things interactively.
+
+For completeness, and I have not used / needed it in a while but there are in
+fact even tricks to get an interactive ssh prompt in a GitHub Action.
+
+A quick query 'ssh into github actions runner' points to a few actions to
+install / repos with demos.
+
+Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From bbo|ker @end|ng |rom gm@||@com  Mon Aug 24 16:58:54 2026
+From: bbo|ker @end|ng |rom gm@||@com (Ben Bolker)
+Date: Mon, 24 Aug 2026 10:58:54 -0400
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <27276.22576.27444.74279@paul.eddelbuettel.com>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+ <20260824141812.03ed0b56@trisector>
+ <27276.12846.538824.95631@paul.eddelbuettel.com>
+ <27276.13783.596078.45935@paul.eddelbuettel.com>
+ <27276.20895.252302.913255@stat.math.ethz.ch>
+ <27276.22576.27444.74279@paul.eddelbuettel.com>
+Message-ID: <CABghstRsRwArhuC2TvBmXw=Cc0YE3z_cFDiZxp+p4cVKbAgcjw@mail.gmail.com>
+
+  For what it's worth -- if this is for Matrix (hosted on Codeberg now), it
+does look like Codeberg offers (limited) support for CI runs on ARM64:
+https://forgejo.org/docs/latest/user/actions/reference/ . Don't know
+about interactivity ...
+
+On Mon, Aug 24, 2026 at 10:49?AM Dirk Eddelbuettel <edd at debian.org> wrote:
+
+>
+> On 24 August 2026 at 16:13, Martin Maechler wrote:
+> | Dirk answered a question I did not ask, but could have well
+> | asked given the "CRAN package checking problem", and one that
+> | may be useful also to others in any case.
+> |
+> | I really did want an interactive R session inside a
+> | docker/podman image where I can  install.package() {also a from
+> | source in my case} and try things interactively.
+>
+> For completeness, and I have not used / needed it in a while but there are
+> in
+> fact even tricks to get an interactive ssh prompt in a GitHub Action.
+>
+> A quick query 'ssh into github actions runner' points to a few actions to
+> install / repos with demos.
+>
+> Dirk
+>
+> --
+> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
