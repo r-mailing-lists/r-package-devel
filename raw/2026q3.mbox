@@ -7099,3 +7099,56 @@ On Mon, Aug 24, 2026 at 10:49?AM Dirk Eddelbuettel <edd at debian.org> wrote:
 	[[alternative HTML version deleted]]
 
 
+From jeroenoom@ @end|ng |rom gm@||@com  Wed Aug 26 11:42:32 2026
+From: jeroenoom@ @end|ng |rom gm@||@com (Jeroen Ooms)
+Date: Wed, 26 Aug 2026 11:42:32 +0200
+Subject: [R-pkg-devel] Docker image for "linux/arm64" ?
+In-Reply-To: <27276.20895.252302.913255@stat.math.ethz.ch>
+References: <27276.6977.408809.93987@stat.math.ethz.ch>
+ <20260824141812.03ed0b56@trisector>
+ <27276.12846.538824.95631@paul.eddelbuettel.com>
+ <27276.13783.596078.45935@paul.eddelbuettel.com>
+ <fake-VM-id.5ac39a86131167d287a0f9537bf8b981@talos.iv>
+ <27276.20895.252302.913255@stat.math.ethz.ch>
+Message-ID: <CABFfbXv5iv4JjGKC=p9XorDAbEtYP+cJExk0hbghmq2VPayZfg@mail.gmail.com>
+
+On Mon, Aug 24, 2026 at 4:14?PM Martin Maechler <maechler at stat.math.ethz.ch>
+wrote:
+
+> >>>>> Dirk Eddelbuettel
+> >>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:
+>
+>     > PS On the narrow question in the Subject, there are of course also
+> rocker/r2u
+>     > containers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan
+> explained
+>     > you actually either real or emulated arm64 hardware for this. GitHub
+> Actions
+>     > is one fairly simple way to get cpu cycles on such hardware.
+>
+>     > Dirk
+>
+> Thank you, both Ivan and Dirk  for your help.
+>
+> Dirk answered a question I did not ask, but could have well
+> asked given the "CRAN package checking problem", and one that
+> may be useful also to others in any case.
+>
+> I really did want an interactive R session inside a
+> docker/podman image where I can  install.package() {also a from
+> source in my case} and try things interactively.
+>
+> Hence, I will try the QEMU route first
+>
+
+Sebastian reproduced an ARM bug for 'nlme' on his Raspberry PI hardware, so
+that is also a way.
+
+Interestingly R-universe showed that the problem only occurred on arm64 on
+Linux, and not on arm64 on windows/mac.  Attached the AI diagnosis/fix.
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: DQP.txt
+URL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20260826/b7f06bee/attachment.txt>
+

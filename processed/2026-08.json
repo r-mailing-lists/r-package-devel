@@ -555,6 +555,29 @@
       "thread_id": "thread-f32962089e80",
       "thread_depth": 6,
       "month": "2026-08"
+    },
+    {
+      "id": "msg-7a42608eb335",
+      "message_id": "<CABFfbXv5iv4JjGKC=p9XorDAbEtYP+cJExk0hbghmq2VPayZfg@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "6d6b57f7dfdacdb11068763c49af518a12f1ee23bc379f749098f057c1d6df69",
+      "date": "2026-08-26T09:42:32Z",
+      "subject": "[R-pkg-devel] Docker image for \"linux/arm64\" ?",
+      "subject_clean": "[R-pkg-devel] Docker image for \"linux/arm64\" ?",
+      "in_reply_to": "<27276.20895.252302.913255@stat.math.ethz.ch>",
+      "references": [
+        "<27276.6977.408809.93987@stat.math.ethz.ch>",
+        "<20260824141812.03ed0b56@trisector>",
+        "<27276.12846.538824.95631@paul.eddelbuettel.com>",
+        "<27276.13783.596078.45935@paul.eddelbuettel.com>",
+        "<fake-VM-id.5ac39a86131167d287a0f9537bf8b981@talos.iv>",
+        "<27276.20895.252302.913255@stat.math.ethz.ch>"
+      ],
+      "body_plain": "On Mon, Aug 24, 2026 at 4:14?PM Martin Maechler <maechler at stat.math.ethz.ch>\nwrote:\n\n> >>>>> Dirk Eddelbuettel\n> >>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:\n>\n>     > PS On the narrow question in the Subject, there are of course also\n> rocker/r2u\n>     > containers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan\n> explained\n>     > you actually either real or emulated arm64 hardware for this. GitHub\n> Actions\n>     > is one fairly simple way to get cpu cycles on such hardware.\n>\n>     > Dirk\n>\n> Thank you, both Ivan and Dirk  for your help.\n>\n> Dirk answered a question I did not ask, but could have well\n> asked given the \"CRAN package checking problem\", and one that\n> may be useful also to others in any case.\n>\n> I really did want an interactive R session inside a\n> docker/podman image where I can  install.package() {also a from\n> source in my case} and try things interactively.\n>\n> Hence, I will try the QEMU route first\n>\n\nSebastian reproduced an ARM bug for 'nlme' on his Raspberry PI hardware, so\nthat is also a way.\n\nInterestingly R-universe showed that the problem only occurred on arm64 on\nLinux, and not on arm64 on windows/mac.  Attached the AI diagnosis/fix.\n\n-------------- next part --------------\nAn embedded and charset-unspecified text was scrubbed...\nName: DQP.txt\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20260826/b7f06bee/attachment.txt>",
+      "body_snippet": "On Mon, Aug 24, 2026 at 4:14?PM Martin Maechler <maechler at stat.math.ethz.ch>\nwrote:\n\n> >>>>> Dirk Eddelbuettel\n> >>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:\n>\n>     > PS On the narrow ques",
+      "thread_id": "thread-f32962089e80",
+      "thread_depth": 5,
+      "month": "2026-08"
     }
   ],
   "threads": [
@@ -651,15 +674,16 @@
     {
       "id": "thread-f32962089e80",
       "subject": "[R-pkg-devel] Docker image for \"linux/arm64\" ?",
-      "message_count": 7,
+      "message_count": 8,
       "participants": [
         "Ben Bolker",
         "Dirk Eddelbuettel",
         "Ivan Krylov",
+        "Jeroen Ooms",
         "Martin Maechler"
       ],
       "started": "2026-08-24T10:21:53Z",
-      "last_reply": "2026-08-24T14:58:54Z",
+      "last_reply": "2026-08-26T09:42:32Z",
       "root_message_id": "msg-f32962089e80"
     }
   ]
