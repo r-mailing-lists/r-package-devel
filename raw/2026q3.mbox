@@ -7264,3 +7264,645 @@ With repeated thanks,
 Martin
 
 
+From @zz@||n| @end|ng |rom @t@t@un|pd@|t  Thu Sep 10 09:40:06 2026
+From: @zz@||n| @end|ng |rom @t@t@un|pd@|t (Adelchi Azzalini)
+Date: Thu, 10 Sep 2026 09:40:06 +0200
+Subject: [R-pkg-devel] how to suppress undesired messages
+In-Reply-To: <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+References: <F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>
+ <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+Message-ID: <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+
+Hello,  Mike.
+
+Thanks for your kind advice and apologies for my *very* late reply. It so happened that when your message arrived, it was automatically moved from the email inbox to my R-pkg-develop mailbox, but somehow I did not spot it until now. I have no explantion for this, ...except that this looks like a case of ageing effect!
+
+I have now made the changes that you suggested. Specifically, in the DESCRIPTION file, there are these lines
+
+Depends: R (>= 4.2.0),
+Imports: sn (>= 2.1.3), ggplot2 (>= 3.4.2), methods, mnormt (>= 2.1.2),  patchwork (>= 1.1.2) 
+
+and in NAMESPACE there is
+
+import(sn)
+import(ggplot2)
+
+Unfortunately, when I run  R CMD check --as-cran  gg.sn_0.1.1.tar.gz, I now get an error message whenever an example of the documentation uses a function of package sn, such as 
+
+> f1 <- makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN")
+Error in makeSECdistr(dp = c(3, 2, 5), family = "SN", name = "First-SN") :    could not find function ?makeSECdistr"
+
+Even if I include a line like
+
+importFrom(sn, dp2cp, makeSECdistr, modeSECdistr, marginalSECdistr)  
+
+in NAMESPACE, still the error persists.
+
+The only solution which worked was to write 
+f1 <- sn::makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN?)
+but this make the usage and coding less smooth.
+
+Am I missing something? 
+
+Best regards,
+
+Adelchi
+
+
+
+> On 16 Apr 2026, at 22:25, Michael Chirico <michaelchirico4 at gmail.com> wrote:
+> 
+> Hey Adelchi,
+> 
+> Why do you have sn and ggplot2 as Depends? My own very strong opinion is that authors of new packages should never use it.
+> 
+> Move them to Imports, and use 'import(sn)' and 'import(ggplot2)' in your NAMESPACE if you really want the whole packages.
+> 
+> Mike C
+> 
+> On Thu, Apr 16, 2026 at 8:15?AM Adelchi Azzalini <azzalini at stat.unipd.it> wrote:
+> Hi. I am preparing a new package, called gg.sn, which in essence provides ggplot2-style graphics as a replacement for the existing graphics produced by package sn.  The new package works by loading new functions and methods with the same names and calling statements of those in package sn (after sn has been loaded), effectively superseding them with the new ones.
+> 
+> My current task is to get rid of a spate of undesired messages which appear at start-up of gg.sn, as show in the list copied at the end of this message; the line numbers have been added for helping referencing the lines.
+> 
+> For lines 3 to 5, I know where they come from: they are start-up messages from ?sn?; so I can drop them, since I am the author of sn. All the rest is outside my control. Question: is it possible to get rid of these other messages and, in case, how?
+> 
+> The DESCRIPTION file includes these lines:
+> Depends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2) 
+> Imports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2) 
+> 
+> Given these declarations, there are no loading commands to which I could possibly apply suppressPackageStartupMessages().
+> 
+> Also, there is no start-up message issued by gg.sn, whose .onAttach function only contains  
+> .onAttach <- function(library, pkg)
+> {
+>  if(interactive())
+>   {
+>     meta <- packageDescription("gg.sn?)
+>   } 
+>  invisible()
+> }
+> 
+> apart from various comment lines.
+> 
+> Best regards.
+> 
+> ---
+> Adelchi Azzalini
+> http://azzalini.stat.unipd.it
+> 
+> 
+>  0 R> library(gg.sn)
+>  1 Loading required package: sn
+>  2 Loading required package: stats4
+>  3 Package 'sn', 2.1.3 (2026-02-24). 
+>  4 Type 'help(SN)' and 'help("overview-sn")' for basic information.
+>  5 The package redefines function 'sd' but its usual working is unchanged.
+>  6 
+>  7 Attaching package: ?sn?
+>  8 
+>  9 The following object is masked from ?package:stats?:
+> 10 
+> 11     sd
+> 12 
+> 13 Loading required package: ggplot2
+> 14 Registered S3 method overwritten by 'gg.sn':
+> 15   method                from
+> 16   plot.fitdistr.grouped sn  
+> 17 
+> 18 Attaching package: ?gg.sn?
+> 19 
+> 20 The following object is masked from ?package:sn?:
+> 21 
+> 22     plot2D.SymmModulated
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From Scott@Fo@ter @end|ng |rom c@|ro@@u  Thu Sep 10 08:06:28 2026
+From: Scott@Fo@ter @end|ng |rom c@|ro@@u (Foster, Scott (Technology, Hobart))
+Date: Thu, 10 Sep 2026 06:06:28 +0000
+Subject: [R-pkg-devel] Change of maintainer's email address,
+ or something else? [SEC=OFFICIAL]
+In-Reply-To: <SY1P282MB6324883FEDF0CB3AD0941E27ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+References: <SY1P282MB63249FC0B0A0DAC63AC108C7ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB6324883FEDF0CB3AD0941E27ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+Message-ID: <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+
+OFFICIAL
+
+Dear list,
+
+I have been trying to resubmit my package MBHdesign to CRAN.  It passes --check-as-cran on both the current release and the devel release. However, it is not passing the incoming checks to CRAN.  The check log is pasted below.
+
+1) My email domain has changed (from @data61.csiro.au to @csiro.au) but I will receive email to both but only send from the latter. It was my understanding that this is probably the problem previously.  I emailed CRAN-submissions at R-project.org to ask for advice, but did not receive anything back.
+2) The log states that the package was removed from CRAN. This means that the current submission is a new submission.  Yet I'm still getting the note and the rejection. Does that mean that it isn't an email address problem?
+
+What is the pathway to fixing this note?  Any help is appreciated.
+
+Thanks in advance,
+
+Scott
+
+
+* using log directory ?/home/hornik/tmp/CRAN_pretest/MBHdesign.Rcheck?
+* using R Under development (unstable) (2026-09-09 r90510)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    Debian clang version 23.1.0 (2)
+    Debian flang version 23.1.0 (2)
+* running under: Debian GNU/Linux forky/sid
+* using session charset: UTF-8
+* current time: 2026-09-10 02:06:18 UTC
+* checking for file ?MBHdesign/DESCRIPTION? ... OK
+* this is package ?MBHdesign? version ?2.3.21?
+* checking CRAN incoming feasibility ... [3s/6s] NOTE
+Maintainer: ?Scott Foster <scott.foster at csiro.au>?
+
+New submission
+
+Package was archived on CRAN
+
+Possibly misspelled words in DESCRIPTION:
+  MBHdesign (12:166)
+  al (12:281, 12:369, 12:449, 12:564, 12:628)
+  et (12:278, 12:366, 12:446, 12:561, 12:625)
+
+CRAN repository db overrides:
+  X-CRAN-Comment: Archived on 2026-09-06 as issues were not corrected
+    despite reminders.
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ?MBHdesign? can be installed ... [12s/12s] OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking ?build? directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... [4s/4s] OK
+* checking whether the package can be loaded with stated dependencies ... [4s/4s] OK
+* checking whether the package can be unloaded cleanly ... [4s/4s] OK
+* checking whether the namespace can be loaded with stated dependencies ... [4s/4s] OK
+* checking whether the namespace can be unloaded cleanly ... [4s/4s] OK
+* checking loading without being on the library search path ... [4s/4s] OK
+* checking whether startup messages can be suppressed ... [4s/4s] OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [18s/18s] OK
+* checking Rd files ... [0s/0s] OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking sizes of PDF files under ?inst/doc? ... OK
+* checking installed files from ?inst/doc? ... OK
+* checking files in ?vignettes? ... OK
+* checking examples ... [5s/5s] OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [1m/16m] OK
+* checking PDF version of manual ... [2s/2s] OK
+* checking HTML version of manual ... [0s/0s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 1 NOTE
+
+--
+Scott Foster
+Research Scientist
+Technology, CSIRO
+E scott.foster at csiro.au<mailto:scott.foster at data61.csiro.au> T +61 3 6232 5178
+Postal Address: CSIRO Marine Laboratories, GPO Box 1538, Hobart Tas 7001
+Street Address: CSRIO, Castray Esplanade, Hobart Tas 7001, Australia
+
+
+
+
+
+	[[alternative HTML version deleted]]
+
+
+From |kry|ov @end|ng |rom d|@root@org  Thu Sep 10 17:05:23 2026
+From: |kry|ov @end|ng |rom d|@root@org (Ivan Krylov)
+Date: Thu, 10 Sep 2026 18:05:23 +0300
+Subject: [R-pkg-devel] Change of maintainer's email address,
+ or something else? [SEC=OFFICIAL]
+In-Reply-To: <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+References: <SY1P282MB63249FC0B0A0DAC63AC108C7ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB6324883FEDF0CB3AD0941E27ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+Message-ID: <20260910180523.40fb0377@arachnoid>
+
+Dear Scott,
+
+? Thu, 10 Sep 2026 06:06:28 +0000
+"Foster, Scott \(Technology, Hobart\) via R-package-devel"
+<r-package-devel at r-project.org> ?????:
+
+> It passes --check-as-cran on both the current release and the devel
+> release. However, it is not passing the incoming checks to CRAN.  
+
+The one NOTE from R CMD check --as-cran is expected (New submission +
+Package was archived on CRAN).
+
+Regarding the "Possibly misspelled words in DESCRIPTION", it should be
+possible to reply-to-all to the e-mail with [CRAN-pretest-archived] in
+the subject and explain that these are false positives.
+
+The "X-CRAN-Comment" part is purely informative and will disappear once
+the new version is accepted.
+
+Good luck!
+
+-- 
+Best regards,
+Ivan
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Thu Sep 10 17:14:15 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Thu, 10 Sep 2026 17:14:15 +0200
+Subject: [R-pkg-devel] Change of maintainer's email address,
+ or something else? [SEC=OFFICIAL]
+In-Reply-To: <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+References: <SY1P282MB63249FC0B0A0DAC63AC108C7ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB6324883FEDF0CB3AD0941E27ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+Message-ID: <f256c972-8ffb-426f-b111-17701a9c07d0@statistik.tu-dortmund.de>
+
+At the bottom of the message reasons are always attached and this time 
+it was
+
+
+Flavor: r-devel-windows-x86_64
+Check: Overall checktime, Result: NOTE
+   Overall checktime 25 min > 10 min
+
+mainly from
+
+* checking tests ... [14m] OK
+
+for me as discussed in a direct message already.
+If you really want help from this list you should post the full message 
+we send including the links to the full logs.
+
+Best,
+Uwe Ligges
+
+
+
+
+On 10.09.2026 08:06, Foster, Scott (Technology, Hobart) via 
+R-package-devel wrote:
+> OFFICIAL
+> 
+> Dear list,
+> 
+> I have been trying to resubmit my package MBHdesign to CRAN.  It passes --check-as-cran on both the current release and the devel release. However, it is not passing the incoming checks to CRAN.  The check log is pasted below.
+> 
+> 1) My email domain has changed (from @data61.csiro.au to @csiro.au) but I will receive email to both but only send from the latter. It was my understanding that this is probably the problem previously.  I emailed CRAN-submissions at R-project.org to ask for advice, but did not receive anything back.
+> 2) The log states that the package was removed from CRAN. This means that the current submission is a new submission.  Yet I'm still getting the note and the rejection. Does that mean that it isn't an email address problem?
+> 
+> What is the pathway to fixing this note?  Any help is appreciated.
+> 
+> Thanks in advance,
+> 
+> Scott
+> 
+> 
+> * using log directory ?/home/hornik/tmp/CRAN_pretest/MBHdesign.Rcheck?
+> * using R Under development (unstable) (2026-09-09 r90510)
+> * using platform: x86_64-pc-linux-gnu
+> * R was compiled by
+>      Debian clang version 23.1.0 (2)
+>      Debian flang version 23.1.0 (2)
+> * running under: Debian GNU/Linux forky/sid
+> * using session charset: UTF-8
+> * current time: 2026-09-10 02:06:18 UTC
+> * checking for file ?MBHdesign/DESCRIPTION? ... OK
+> * this is package ?MBHdesign? version ?2.3.21?
+> * checking CRAN incoming feasibility ... [3s/6s] NOTE
+> Maintainer: ?Scott Foster <scott.foster at csiro.au>?
+> 
+> New submission
+> 
+> Package was archived on CRAN
+> 
+> Possibly misspelled words in DESCRIPTION:
+>    MBHdesign (12:166)
+>    al (12:281, 12:369, 12:449, 12:564, 12:628)
+>    et (12:278, 12:366, 12:446, 12:561, 12:625)
+> 
+> CRAN repository db overrides:
+>    X-CRAN-Comment: Archived on 2026-09-06 as issues were not corrected
+>      despite reminders.
+> * checking package namespace information ... OK
+> * checking package dependencies ... OK
+> * checking if this is a source package ... OK
+> * checking if there is a namespace ... OK
+> * checking for executable files ... OK
+> * checking for hidden files and directories ... OK
+> * checking for portable file names ... OK
+> * checking for sufficient/correct file permissions ... OK
+> * checking whether package ?MBHdesign? can be installed ... [12s/12s] OK
+> * checking package directory ... OK
+> * checking for future file timestamps ... OK
+> * checking ?build? directory ... OK
+> * checking DESCRIPTION meta-information ... OK
+> * checking top-level files ... OK
+> * checking for left-over files ... OK
+> * checking index information ... OK
+> * checking package subdirectories ... OK
+> * checking code files for non-ASCII characters ... OK
+> * checking R files for syntax errors ... OK
+> * checking whether the package can be loaded ... [4s/4s] OK
+> * checking whether the package can be loaded with stated dependencies ... [4s/4s] OK
+> * checking whether the package can be unloaded cleanly ... [4s/4s] OK
+> * checking whether the namespace can be loaded with stated dependencies ... [4s/4s] OK
+> * checking whether the namespace can be unloaded cleanly ... [4s/4s] OK
+> * checking loading without being on the library search path ... [4s/4s] OK
+> * checking whether startup messages can be suppressed ... [4s/4s] OK
+> * checking use of S3 registration ... OK
+> * checking dependencies in R code ... OK
+> * checking S3 generic/method consistency ... OK
+> * checking replacement functions ... OK
+> * checking foreign function calls ... OK
+> * checking R code for possible problems ... [18s/18s] OK
+> * checking Rd files ... [0s/0s] OK
+> * checking Rd metadata ... OK
+> * checking Rd line widths ... OK
+> * checking Rd cross-references ... OK
+> * checking for missing documentation entries ... OK
+> * checking for code/documentation mismatches ... OK
+> * checking Rd \usage sections ... OK
+> * checking Rd contents ... OK
+> * checking for unstated dependencies in examples ... OK
+> * checking sizes of PDF files under ?inst/doc? ... OK
+> * checking installed files from ?inst/doc? ... OK
+> * checking files in ?vignettes? ... OK
+> * checking examples ... [5s/5s] OK
+> * checking for unstated dependencies in vignettes ... OK
+> * checking package vignettes ... OK
+> * checking re-building of vignette outputs ... [1m/16m] OK
+> * checking PDF version of manual ... [2s/2s] OK
+> * checking HTML version of manual ... [0s/0s] OK
+> * checking for non-standard things in the check directory ... OK
+> * checking for detritus in the temp directory ... OK
+> * DONE
+> Status: 1 NOTE
+> 
+> --
+> Scott Foster
+> Research Scientist
+> Technology, CSIRO
+> E scott.foster at csiro.au<mailto:scott.foster at data61.csiro.au> T +61 3 6232 5178
+> Postal Address: CSIRO Marine Laboratories, GPO Box 1538, Hobart Tas 7001
+> Street Address: CSRIO, Castray Esplanade, Hobart Tas 7001, Australia
+> 
+> 
+> 
+> 
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From bbo|ker @end|ng |rom gm@||@com  Thu Sep 10 17:52:03 2026
+From: bbo|ker @end|ng |rom gm@||@com (Ben Bolker)
+Date: Thu, 10 Sep 2026 11:52:03 -0400
+Subject: [R-pkg-devel] Change of maintainer's email address,
+ or something else? [SEC=OFFICIAL]
+In-Reply-To: <f256c972-8ffb-426f-b111-17701a9c07d0@statistik.tu-dortmund.de>
+References: <SY1P282MB63249FC0B0A0DAC63AC108C7ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB6324883FEDF0CB3AD0941E27ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <f256c972-8ffb-426f-b111-17701a9c07d0@statistik.tu-dortmund.de>
+Message-ID: <CABghstT7sQYqb+o+p+vNgJdiZSCXh7_0YiA3vwTTKeq66qncaw@mail.gmail.com>
+
+   I will say that this timing report is really easy to miss (I've missed
+it at least once before) -- it would be nice if it were listed more
+prominently/consistently with other CRAN-blocking issues ...
+
+   cheers
+   Ben Bolker
+
+
+On Thu, Sep 10, 2026 at 11:15?AM Uwe Ligges <ligges at statistik.tu-dortmund.de>
+wrote:
+
+> At the bottom of the message reasons are always attached and this time
+> it was
+>
+>
+> Flavor: r-devel-windows-x86_64
+> Check: Overall checktime, Result: NOTE
+>    Overall checktime 25 min > 10 min
+>
+> mainly from
+>
+> * checking tests ... [14m] OK
+>
+> for me as discussed in a direct message already.
+> If you really want help from this list you should post the full message
+> we send including the links to the full logs.
+>
+> Best,
+> Uwe Ligges
+>
+>
+>
+>
+> On 10.09.2026 08:06, Foster, Scott (Technology, Hobart) via
+> R-package-devel wrote:
+> > OFFICIAL
+> >
+> > Dear list,
+> >
+> > I have been trying to resubmit my package MBHdesign to CRAN.  It passes
+> --check-as-cran on both the current release and the devel release. However,
+> it is not passing the incoming checks to CRAN.  The check log is pasted
+> below.
+> >
+> > 1) My email domain has changed (from @data61.csiro.au to @csiro.au) but
+> I will receive email to both but only send from the latter. It was my
+> understanding that this is probably the problem previously.  I emailed
+> CRAN-submissions at R-project.org to ask for advice, but did not receive
+> anything back.
+> > 2) The log states that the package was removed from CRAN. This means
+> that the current submission is a new submission.  Yet I'm still getting the
+> note and the rejection. Does that mean that it isn't an email address
+> problem?
+> >
+> > What is the pathway to fixing this note?  Any help is appreciated.
+> >
+> > Thanks in advance,
+> >
+> > Scott
+> >
+> >
+> > * using log directory ?/home/hornik/tmp/CRAN_pretest/MBHdesign.Rcheck?
+> > * using R Under development (unstable) (2026-09-09 r90510)
+> > * using platform: x86_64-pc-linux-gnu
+> > * R was compiled by
+> >      Debian clang version 23.1.0 (2)
+> >      Debian flang version 23.1.0 (2)
+> > * running under: Debian GNU/Linux forky/sid
+> > * using session charset: UTF-8
+> > * current time: 2026-09-10 02:06:18 UTC
+> > * checking for file ?MBHdesign/DESCRIPTION? ... OK
+> > * this is package ?MBHdesign? version ?2.3.21?
+> > * checking CRAN incoming feasibility ... [3s/6s] NOTE
+> > Maintainer: ?Scott Foster <scott.foster at csiro.au>?
+> >
+> > New submission
+> >
+> > Package was archived on CRAN
+> >
+> > Possibly misspelled words in DESCRIPTION:
+> >    MBHdesign (12:166)
+> >    al (12:281, 12:369, 12:449, 12:564, 12:628)
+> >    et (12:278, 12:366, 12:446, 12:561, 12:625)
+> >
+> > CRAN repository db overrides:
+> >    X-CRAN-Comment: Archived on 2026-09-06 as issues were not corrected
+> >      despite reminders.
+> > * checking package namespace information ... OK
+> > * checking package dependencies ... OK
+> > * checking if this is a source package ... OK
+> > * checking if there is a namespace ... OK
+> > * checking for executable files ... OK
+> > * checking for hidden files and directories ... OK
+> > * checking for portable file names ... OK
+> > * checking for sufficient/correct file permissions ... OK
+> > * checking whether package ?MBHdesign? can be installed ... [12s/12s] OK
+> > * checking package directory ... OK
+> > * checking for future file timestamps ... OK
+> > * checking ?build? directory ... OK
+> > * checking DESCRIPTION meta-information ... OK
+> > * checking top-level files ... OK
+> > * checking for left-over files ... OK
+> > * checking index information ... OK
+> > * checking package subdirectories ... OK
+> > * checking code files for non-ASCII characters ... OK
+> > * checking R files for syntax errors ... OK
+> > * checking whether the package can be loaded ... [4s/4s] OK
+> > * checking whether the package can be loaded with stated dependencies
+> ... [4s/4s] OK
+> > * checking whether the package can be unloaded cleanly ... [4s/4s] OK
+> > * checking whether the namespace can be loaded with stated dependencies
+> ... [4s/4s] OK
+> > * checking whether the namespace can be unloaded cleanly ... [4s/4s] OK
+> > * checking loading without being on the library search path ... [4s/4s]
+> OK
+> > * checking whether startup messages can be suppressed ... [4s/4s] OK
+> > * checking use of S3 registration ... OK
+> > * checking dependencies in R code ... OK
+> > * checking S3 generic/method consistency ... OK
+> > * checking replacement functions ... OK
+> > * checking foreign function calls ... OK
+> > * checking R code for possible problems ... [18s/18s] OK
+> > * checking Rd files ... [0s/0s] OK
+> > * checking Rd metadata ... OK
+> > * checking Rd line widths ... OK
+> > * checking Rd cross-references ... OK
+> > * checking for missing documentation entries ... OK
+> > * checking for code/documentation mismatches ... OK
+> > * checking Rd \usage sections ... OK
+> > * checking Rd contents ... OK
+> > * checking for unstated dependencies in examples ... OK
+> > * checking sizes of PDF files under ?inst/doc? ... OK
+> > * checking installed files from ?inst/doc? ... OK
+> > * checking files in ?vignettes? ... OK
+> > * checking examples ... [5s/5s] OK
+> > * checking for unstated dependencies in vignettes ... OK
+> > * checking package vignettes ... OK
+> > * checking re-building of vignette outputs ... [1m/16m] OK
+> > * checking PDF version of manual ... [2s/2s] OK
+> > * checking HTML version of manual ... [0s/0s] OK
+> > * checking for non-standard things in the check directory ... OK
+> > * checking for detritus in the temp directory ... OK
+> > * DONE
+> > Status: 1 NOTE
+> >
+> > --
+> > Scott Foster
+> > Research Scientist
+> > Technology, CSIRO
+> > E scott.foster at csiro.au<mailto:scott.foster at data61.csiro.au> T +61 3
+> 6232 5178 <+61%203%206232%205178>
+> > Postal Address: CSIRO Marine Laboratories, GPO Box 1538, Hobart Tas 7001
+> > Street Address: CSRIO, Castray Esplanade, Hobart Tas 7001, Australia
+> >
+> >
+> >
+> >
+> >
+> >       [[alternative HTML version deleted]]
+> >
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From @eb@meyer @end|ng |rom |@u@de  Thu Sep 10 18:23:40 2026
+From: @eb@meyer @end|ng |rom |@u@de (Sebastian Meyer)
+Date: Thu, 10 Sep 2026 18:23:40 +0200
+Subject: [R-pkg-devel] Change of maintainer's email address,
+ or something else? [SEC=OFFICIAL]
+In-Reply-To: <f256c972-8ffb-426f-b111-17701a9c07d0@statistik.tu-dortmund.de>
+References: <SY1P282MB63249FC0B0A0DAC63AC108C7ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB6324883FEDF0CB3AD0941E27ECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <SY1P282MB632493AF963D018A362CB2CCECBF2@SY1P282MB6324.AUSP282.PROD.OUTLOOK.COM>
+ <f256c972-8ffb-426f-b111-17701a9c07d0@statistik.tu-dortmund.de>
+Message-ID: <4c1f1f3b-0939-44a0-a529-cad01b54b998@fau.de>
+
+Am 10.09.26 um 17:14 schrieb Uwe Ligges:
+> Flavor: r-devel-windows-x86_64
+> Check: Overall checktime, Result: NOTE
+>     Overall checktime 25 min > 10 min
+> 
+> mainly from
+* checking re-building of vignette outputs ... [23m] OK
+
+presumably due to a change in MBHdesign.rnw to
+
+     usePrecompiledData <- FALSE
+
+Best,
+
+	Sebastian Meyer
+
+
