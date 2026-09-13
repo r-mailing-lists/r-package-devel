@@ -7906,3 +7906,20 @@ Best,
 	Sebastian Meyer
 
 
+From jeroenoom@ @end|ng |rom gm@||@com  Sat Sep 12 12:26:50 2026
+From: jeroenoom@ @end|ng |rom gm@||@com (Jeroen Ooms)
+Date: Sat, 12 Sep 2026 12:26:50 +0200
+Subject: [R-pkg-devel] Generalize checkBuilt parameter to built date
+Message-ID: <CABFfbXs4c6_kc_WAQt+v1O_Ea+6RX+ardA+NBASOCgTjqfUbQQ@mail.gmail.com>
+
+A while ago there was discussion on this list about new behavior in
+R-4.6 of update.packages to reinstall packages if the "Built"
+timestamp has changed. This leads to many unnecessary updates for e.g.
+Windows users because CRAN rebuilds most Windows binary packages every
+few days.
+
+Maybe it makes sense to let users opt-in to this behavior via the
+existing 'checkBuilt' parameter. This would be a trivial change:
+https://github.com/r-devel/r-svn/pull/338/changes
+
+
