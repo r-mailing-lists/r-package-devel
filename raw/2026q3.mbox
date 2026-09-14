@@ -7923,3 +7923,32 @@ existing 'checkBuilt' parameter. This would be a trivial change:
 https://github.com/r-devel/r-svn/pull/338/changes
 
 
+From @|mon@urb@nek @end|ng |rom R-project@org  Mon Sep 14 00:49:33 2026
+From: @|mon@urb@nek @end|ng |rom R-project@org (Simon Urbanek)
+Date: Mon, 14 Sep 2026 10:49:33 +1200
+Subject: [R-pkg-devel] Generalize checkBuilt parameter to built date
+In-Reply-To: <CABFfbXs4c6_kc_WAQt+v1O_Ea+6RX+ardA+NBASOCgTjqfUbQQ@mail.gmail.com>
+References: <CABFfbXs4c6_kc_WAQt+v1O_Ea+6RX+ardA+NBASOCgTjqfUbQQ@mail.gmail.com>
+Message-ID: <B94E9C9F-7FE4-47EA-B4F6-2F79531A79BB@R-project.org>
+
+The discussion continued on the issue[1]. Quick summary: checkBuilt is a misnomer since it is documented to only check the major R version and was used to upgrade between R versions - it is too late to change that now. The current behavior was introduced specifically to avoid broken libraries when dependencies are not updated when they need to be and thus it has to be the default. A package binary should only change if there was an update. We now have a mechanism to flag rev dep changes to prevent unnecessary re-builds, but it is not been used everywhere yet so the over-eager re-building is a conservative approach to used before that mechanism was in place, but go away eventually.
+
+Cheers,
+Simon
+
+[1] - https://github.com/r-devel/r-svn/pull/338/changes
+
+
+> On 12 Sep 2026, at 22:26, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+> 
+> A while ago there was discussion on this list about new behavior in R-4.6 of update.packages to reinstall packages if the "Built" timestamp has changed. This leads to many unnecessary updates for e.g. Windows users because CRAN rebuilds most Windows binary packages every few days.
+> 
+> Maybe it makes sense to let users opt-in to this behavior via the existing 'checkBuilt' parameter. This would be a trivial change:
+> https://github.com/r-devel/r-svn/pull/338/changes
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> 
+
+
