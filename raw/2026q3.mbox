@@ -8192,3 +8192,786 @@ Dirk
 dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
 
 
+From kry|ov@r00t @end|ng |rom gm@||@com  Wed Sep 16 15:01:36 2026
+From: kry|ov@r00t @end|ng |rom gm@||@com (Ivan Krylov)
+Date: Wed, 16 Sep 2026 16:01:36 +0300
+Subject: [R-pkg-devel] how to suppress undesired messages
+In-Reply-To: <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+References: <F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>
+ <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+ <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+Message-ID: <20260916160136.1c6b9726@arachnoid>
+
+Dear Adelchi Azzalini,
+
+? Thu, 10 Sep 2026 09:40:06 +0200
+Adelchi Azzalini <azzalini at stat.unipd.it> ?????:
+
+> Specifically, in the DESCRIPTION file, there are these lines
+> 
+> Depends: R (>= 4.2.0),
+> Imports: sn (>= 2.1.3), ggplot2 (>= 3.4.2), methods, mnormt (>=
+> 2.1.2),  patchwork (>= 1.1.2) 
+> 
+> and in NAMESPACE there is
+> 
+> import(sn)
+> import(ggplot2)
+> 
+> Unfortunately, when I run  R CMD check --as-cran  gg.sn_0.1.1.tar.gz,
+> I now get an error message whenever an example of the documentation
+> uses a function of package sn, such as 
+> 
+> > f1 <- makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN")  
+> Error in makeSECdistr(dp = c(3, 2, 5), family = "SN", name =
+> "First-SN") :    could not find function ?makeSECdistr"
+
+> The only solution which worked was to write 
+> f1 <- sn::makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN?)
+> but this make the usage and coding less smooth.
+> 
+> Am I missing something? 
+
+This seems very counter-intuitive. Could you please share the package
+code with us somehow? A link to your website, an off-list attachment,
+or the code being published on a "forge" website would work well.
+
+-- 
+Best regards,
+Ivan
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Wed Sep 16 15:32:13 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Wed, 16 Sep 2026 09:32:13 -0400
+Subject: [R-pkg-devel] how to suppress undesired messages
+In-Reply-To: <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+References: <F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>
+ <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+ <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+Message-ID: <b2769e6d-504b-4523-878e-77ba17180374@gmail.com>
+
+The examples in a help page are evaluated in the user's environment. 
+They don't have access to all the symbols that functions in your package 
+can see, only the ones that the user can see.
+
+If you import sn, then its functions are available within your package, 
+but they aren't available to users.
+
+So the best solution to your problem is the one you found (i.e. use 
+sn::makeSECdistr).  It would also work to use "library(sn)" in the 
+example, but that modifies the user's search list, so it's not such a 
+good idea.  (I don't remember if CRAN will object to it, but it might.)
+
+Duncan Murdoch
+
+On 2026-09-10 3:40 a.m., Adelchi Azzalini wrote:
+> Hello,  Mike.
+> 
+> Thanks for your kind advice and apologies for my *very* late reply. It so happened that when your message arrived, it was automatically moved from the email inbox to my R-pkg-develop mailbox, but somehow I did not spot it until now. I have no explantion for this, ...except that this looks like a case of ageing effect!
+> 
+> I have now made the changes that you suggested. Specifically, in the DESCRIPTION file, there are these lines
+> 
+> Depends: R (>= 4.2.0),
+> Imports: sn (>= 2.1.3), ggplot2 (>= 3.4.2), methods, mnormt (>= 2.1.2),  patchwork (>= 1.1.2)
+> 
+> and in NAMESPACE there is
+> 
+> import(sn)
+> import(ggplot2)
+> 
+> Unfortunately, when I run  R CMD check --as-cran  gg.sn_0.1.1.tar.gz, I now get an error message whenever an example of the documentation uses a function of package sn, such as
+> 
+>> f1 <- makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN")
+> Error in makeSECdistr(dp = c(3, 2, 5), family = "SN", name = "First-SN") :    could not find function ?makeSECdistr"
+> 
+> Even if I include a line like
+> 
+> importFrom(sn, dp2cp, makeSECdistr, modeSECdistr, marginalSECdistr)
+> 
+> in NAMESPACE, still the error persists.
+> 
+> The only solution which worked was to write
+> f1 <- sn::makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN?)
+> but this make the usage and coding less smooth.
+> 
+> Am I missing something?
+> 
+> Best regards,
+> 
+> Adelchi
+> 
+> 
+> 
+>> On 16 Apr 2026, at 22:25, Michael Chirico <michaelchirico4 at gmail.com> wrote:
+>>
+>> Hey Adelchi,
+>>
+>> Why do you have sn and ggplot2 as Depends? My own very strong opinion is that authors of new packages should never use it.
+>>
+>> Move them to Imports, and use 'import(sn)' and 'import(ggplot2)' in your NAMESPACE if you really want the whole packages.
+>>
+>> Mike C
+>>
+>> On Thu, Apr 16, 2026 at 8:15?AM Adelchi Azzalini <azzalini at stat.unipd.it> wrote:
+>> Hi. I am preparing a new package, called gg.sn, which in essence provides ggplot2-style graphics as a replacement for the existing graphics produced by package sn.  The new package works by loading new functions and methods with the same names and calling statements of those in package sn (after sn has been loaded), effectively superseding them with the new ones.
+>>
+>> My current task is to get rid of a spate of undesired messages which appear at start-up of gg.sn, as show in the list copied at the end of this message; the line numbers have been added for helping referencing the lines.
+>>
+>> For lines 3 to 5, I know where they come from: they are start-up messages from ?sn?; so I can drop them, since I am the author of sn. All the rest is outside my control. Question: is it possible to get rid of these other messages and, in case, how?
+>>
+>> The DESCRIPTION file includes these lines:
+>> Depends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2)
+>> Imports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2)
+>>
+>> Given these declarations, there are no loading commands to which I could possibly apply suppressPackageStartupMessages().
+>>
+>> Also, there is no start-up message issued by gg.sn, whose .onAttach function only contains
+>> .onAttach <- function(library, pkg)
+>> {
+>>   if(interactive())
+>>    {
+>>      meta <- packageDescription("gg.sn?)
+>>    }
+>>   invisible()
+>> }
+>>
+>> apart from various comment lines.
+>>
+>> Best regards.
+>>
+>> ---
+>> Adelchi Azzalini
+>> http://azzalini.stat.unipd.it
+>>
+>>
+>>   0 R> library(gg.sn)
+>>   1 Loading required package: sn
+>>   2 Loading required package: stats4
+>>   3 Package 'sn', 2.1.3 (2026-02-24).
+>>   4 Type 'help(SN)' and 'help("overview-sn")' for basic information.
+>>   5 The package redefines function 'sd' but its usual working is unchanged.
+>>   6
+>>   7 Attaching package: ?sn?
+>>   8
+>>   9 The following object is masked from ?package:stats?:
+>> 10
+>> 11     sd
+>> 12
+>> 13 Loading required package: ggplot2
+>> 14 Registered S3 method overwritten by 'gg.sn':
+>> 15   method                from
+>> 16   plot.fitdistr.grouped sn
+>> 17
+>> 18 Attaching package: ?gg.sn?
+>> 19
+>> 20 The following object is masked from ?package:sn?:
+>> 21
+>> 22     plot2D.SymmModulated
+>>
+>> ______________________________________________
+>> R-package-devel at r-project.org mailing list
+>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From m@ech|er @end|ng |rom @t@t@m@th@ethz@ch  Wed Sep 16 18:21:33 2026
+From: m@ech|er @end|ng |rom @t@t@m@th@ethz@ch (Martin Maechler)
+Date: Wed, 16 Sep 2026 18:21:33 +0200
+Subject: [R-pkg-devel] how to suppress undesired messages
+In-Reply-To: <fake-VM-id.c923c1fd9e7ea6818d1306e0c92950aa@talos.iv>
+References: <F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>
+ <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+ <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+ <b2769e6d-504b-4523-878e-77ba17180374@gmail.com>
+Message-ID: <27306.49677.482423.422901@stat.math.ethz.ch>
+
+>>>>> Duncan Murdoch 
+>>>>>     on Wed, 16 Sep 2026 09:32:13 -0400 writes:
+
+    > The examples in a help page are evaluated in the user's
+    > environment.  They don't have access to all the symbols
+    > that functions in your package can see, only the ones that
+    > the user can see.
+
+    > If you import sn, then its functions are available within
+    > your package, but they aren't available to users.
+
+    > So the best solution to your problem is the one you found
+    > (i.e. use sn::makeSECdistr).  It would also work to use
+    > "library(sn)" in the example, but that modifies the user's
+    > search list, so it's not such a good idea.  (I don't
+    > remember if CRAN will object to it, but it might.)
+
+    > Duncan Murdoch
+
+Just MHO:  *If* your package uses functions (or data) from
+package {sn} in most of the examples, this would be a strong
+indication that you 'd say that your package should always have
+the  sn  package functionality "at hand" of the users.
+
+In that case, I would move 'sn'  from
+
+"Imports: .."  to
+"Depends: .."  in your DESCRIPTION  --
+
+and typically do not change anything else.
+
+That way, __none__ of your examples, demos, or vignettes
+would need  sn::<...> nor would your users have to do so, once
+they have done  library(*)  or  require(<your_package>) .
+
+On the internet you find advice to never do the above, and I
+__strongly__ disagree with that advice.
+
+Martin
+
+--
+Martin Maechler
+R Core Team  and  ETH Zurich
+
+    > On 2026-09-10 3:40 a.m., Adelchi Azzalini wrote:
+    >> Hello,  Mike.
+    >> 
+    >> Thanks for your kind advice and apologies for my *very* late reply. It so happened that when your message arrived, it was automatically moved from the email inbox to my R-pkg-develop mailbox, but somehow I did not spot it until now. I have no explantion for this, ...except that this looks like a case of ageing effect!
+    >> 
+    >> I have now made the changes that you suggested. Specifically, in the DESCRIPTION file, there are these lines
+    >> 
+    >> Depends: R (>= 4.2.0),
+    >> Imports: sn (>= 2.1.3), ggplot2 (>= 3.4.2), methods, mnormt (>= 2.1.2),  patchwork (>= 1.1.2)
+    >> 
+    >> and in NAMESPACE there is
+    >> 
+    >> import(sn)
+    >> import(ggplot2)
+    >> 
+    >> Unfortunately, when I run  R CMD check --as-cran  gg.sn_0.1.1.tar.gz, I now get an error message whenever an example of the documentation uses a function of package sn, such as
+    >> 
+    >>> f1 <- makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN")
+    >> Error in makeSECdistr(dp = c(3, 2, 5), family = "SN", name = "First-SN") :    could not find function ?makeSECdistr"
+    >> 
+    >> Even if I include a line like
+    >> 
+    >> importFrom(sn, dp2cp, makeSECdistr, modeSECdistr, marginalSECdistr)
+    >> 
+    >> in NAMESPACE, still the error persists.
+    >> 
+    >> The only solution which worked was to write
+    >> f1 <- sn::makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN?)
+    >> but this make the usage and coding less smooth.
+    >> 
+    >> Am I missing something?
+    >> 
+    >> Best regards,
+    >> 
+    >> Adelchi
+    >> 
+    >> 
+    >> 
+    >>> On 16 Apr 2026, at 22:25, Michael Chirico <michaelchirico4 at gmail.com> wrote:
+    >>> 
+    >>> Hey Adelchi,
+    >>> 
+    >>> Why do you have sn and ggplot2 as Depends? My own very strong opinion is that authors of new packages should never use it.
+    >>> 
+    >>> Move them to Imports, and use 'import(sn)' and 'import(ggplot2)' in your NAMESPACE if you really want the whole packages.
+    >>> 
+    >>> Mike C
+    >>> 
+    >>> On Thu, Apr 16, 2026 at 8:15?AM Adelchi Azzalini <azzalini at stat.unipd.it> wrote:
+    >>> Hi. I am preparing a new package, called gg.sn, which in essence provides ggplot2-style graphics as a replacement for the existing graphics produced by package sn.  The new package works by loading new functions and methods with the same names and calling statements of those in package sn (after sn has been loaded), effectively superseding them with the new ones.
+    >>> 
+    >>> My current task is to get rid of a spate of undesired messages which appear at start-up of gg.sn, as show in the list copied at the end of this message; the line numbers have been added for helping referencing the lines.
+    >>> 
+    >>> For lines 3 to 5, I know where they come from: they are start-up messages from ?sn?; so I can drop them, since I am the author of sn. All the rest is outside my control. Question: is it possible to get rid of these other messages and, in case, how?
+    >>> 
+    >>> The DESCRIPTION file includes these lines:
+    >>> Depends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2)
+    >>> Imports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2)
+    >>> 
+    >>> Given these declarations, there are no loading commands to which I could possibly apply suppressPackageStartupMessages().
+    >>> 
+    >>> Also, there is no start-up message issued by gg.sn, whose .onAttach function only contains
+    >>> .onAttach <- function(library, pkg)
+    >>> {
+    >>>     if(interactive())
+    >>>     {
+    >>>        meta <- packageDescription("gg.sn?)
+    >>>     }
+    >>>     invisible()
+    >>> }
+    >>> 
+    >>> apart from various comment lines.
+    >>> 
+    >>> Best regards.
+    >>> 
+    >>> ---
+    >>> Adelchi Azzalini
+    >>> http://azzalini.stat.unipd.it
+
+
+    >>> 0 R> library(gg.sn)
+    >>> 1 Loading required package: sn
+    >>> 2 Loading required package: stats4
+    >>> 3 Package 'sn', 2.1.3 (2026-02-24).
+    >>> 4 Type 'help(SN)' and 'help("overview-sn")' for basic information.
+    >>> 5 The package redefines function 'sd' but its usual working is unchanged.
+    >>> 6
+    >>> 7 Attaching package: ?sn?
+    >>> 8
+    >>> 9 The following object is masked from ?package:stats?:
+    >>> 10
+    >>> 11     sd
+    >>> 12
+    >>> 13 Loading required package: ggplot2
+    >>> 14 Registered S3 method overwritten by 'gg.sn':
+    >>> 15   method                from
+    >>> 16   plot.fitdistr.grouped sn
+    >>> 17
+    >>> 18 Attaching package: ?gg.sn?
+    >>> 19
+    >>> 20 The following object is masked from ?package:sn?:
+    >>> 21
+    >>> 22     plot2D.SymmModulated
+    >>> 
+    >>> ______________________________________________
+    >>> R-package-devel at r-project.org mailing list
+    >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From murdoch@dunc@n @end|ng |rom gm@||@com  Wed Sep 16 19:15:17 2026
+From: murdoch@dunc@n @end|ng |rom gm@||@com (Duncan Murdoch)
+Date: Wed, 16 Sep 2026 13:15:17 -0400
+Subject: [R-pkg-devel] how to suppress undesired messages
+In-Reply-To: <27306.49677.482423.422901@stat.math.ethz.ch>
+References: <F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>
+ <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+ <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+ <b2769e6d-504b-4523-878e-77ba17180374@gmail.com>
+ <27306.49677.482423.422901@stat.math.ethz.ch>
+Message-ID: <ed714171-4bad-4784-8bb2-685f8178b244@gmail.com>
+
+On 2026-09-16 12:21 p.m., Martin Maechler wrote:
+>>>>>> Duncan Murdoch
+>>>>>>      on Wed, 16 Sep 2026 09:32:13 -0400 writes:
+> 
+>      > The examples in a help page are evaluated in the user's
+>      > environment.  They don't have access to all the symbols
+>      > that functions in your package can see, only the ones that
+>      > the user can see.
+> 
+>      > If you import sn, then its functions are available within
+>      > your package, but they aren't available to users.
+> 
+>      > So the best solution to your problem is the one you found
+>      > (i.e. use sn::makeSECdistr).  It would also work to use
+>      > "library(sn)" in the example, but that modifies the user's
+>      > search list, so it's not such a good idea.  (I don't
+>      > remember if CRAN will object to it, but it might.)
+> 
+>      > Duncan Murdoch
+> 
+> Just MHO:  *If* your package uses functions (or data) from
+> package {sn} in most of the examples, this would be a strong
+> indication that you 'd say that your package should always have
+> the  sn  package functionality "at hand" of the users.
+> 
+> In that case, I would move 'sn'  from
+> 
+> "Imports: .."  to
+> "Depends: .."  in your DESCRIPTION  --
+> 
+> and typically do not change anything else.
+> 
+> That way, __none__ of your examples, demos, or vignettes
+> would need  sn::<...> nor would your users have to do so, once
+> they have done  library(*)  or  require(<your_package>) .
+> 
+> On the internet you find advice to never do the above, and I
+> __strongly__ disagree with that advice.
+
+I tend to agree with the advice to avoid Depends.  If your package lists 
+"sn" in Depends, then the user's search list will not be modified if 
+your package is loaded but not attached, e.g. someone calling 
+gg.sn::foo() will not have their search list modified.  But if 
+gg.sn::foo() depends on having some function from sn available, it will 
+fail.
+
+Another solution to the problem is to export the sn functions you need 
+from your package.  You can use Imports to make them visible in your 
+package, then export them from it.  That's a fairly common thing for 
+packages (e.g. dplyr) using magrittr to do:  they export `%>%`, but not 
+the rest of the magrittr functions.
+
+Duncan Murdoch
+
+> 
+> Martin
+> 
+> --
+> Martin Maechler
+> R Core Team  and  ETH Zurich
+> 
+>      > On 2026-09-10 3:40 a.m., Adelchi Azzalini wrote:
+>      >> Hello,  Mike.
+>      >>
+>      >> Thanks for your kind advice and apologies for my *very* late reply. It so happened that when your message arrived, it was automatically moved from the email inbox to my R-pkg-develop mailbox, but somehow I did not spot it until now. I have no explantion for this, ...except that this looks like a case of ageing effect!
+>      >>
+>      >> I have now made the changes that you suggested. Specifically, in the DESCRIPTION file, there are these lines
+>      >>
+>      >> Depends: R (>= 4.2.0),
+>      >> Imports: sn (>= 2.1.3), ggplot2 (>= 3.4.2), methods, mnormt (>= 2.1.2),  patchwork (>= 1.1.2)
+>      >>
+>      >> and in NAMESPACE there is
+>      >>
+>      >> import(sn)
+>      >> import(ggplot2)
+>      >>
+>      >> Unfortunately, when I run  R CMD check --as-cran  gg.sn_0.1.1.tar.gz, I now get an error message whenever an example of the documentation uses a function of package sn, such as
+>      >>
+>      >>> f1 <- makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN")
+>      >> Error in makeSECdistr(dp = c(3, 2, 5), family = "SN", name = "First-SN") :    could not find function ?makeSECdistr"
+>      >>
+>      >> Even if I include a line like
+>      >>
+>      >> importFrom(sn, dp2cp, makeSECdistr, modeSECdistr, marginalSECdistr)
+>      >>
+>      >> in NAMESPACE, still the error persists.
+>      >>
+>      >> The only solution which worked was to write
+>      >> f1 <- sn::makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN?)
+>      >> but this make the usage and coding less smooth.
+>      >>
+>      >> Am I missing something?
+>      >>
+>      >> Best regards,
+>      >>
+>      >> Adelchi
+>      >>
+>      >>
+>      >>
+>      >>> On 16 Apr 2026, at 22:25, Michael Chirico <michaelchirico4 at gmail.com> wrote:
+>      >>>
+>      >>> Hey Adelchi,
+>      >>>
+>      >>> Why do you have sn and ggplot2 as Depends? My own very strong opinion is that authors of new packages should never use it.
+>      >>>
+>      >>> Move them to Imports, and use 'import(sn)' and 'import(ggplot2)' in your NAMESPACE if you really want the whole packages.
+>      >>>
+>      >>> Mike C
+>      >>>
+>      >>> On Thu, Apr 16, 2026 at 8:15?AM Adelchi Azzalini <azzalini at stat.unipd.it> wrote:
+>      >>> Hi. I am preparing a new package, called gg.sn, which in essence provides ggplot2-style graphics as a replacement for the existing graphics produced by package sn.  The new package works by loading new functions and methods with the same names and calling statements of those in package sn (after sn has been loaded), effectively superseding them with the new ones.
+>      >>>
+>      >>> My current task is to get rid of a spate of undesired messages which appear at start-up of gg.sn, as show in the list copied at the end of this message; the line numbers have been added for helping referencing the lines.
+>      >>>
+>      >>> For lines 3 to 5, I know where they come from: they are start-up messages from ?sn?; so I can drop them, since I am the author of sn. All the rest is outside my control. Question: is it possible to get rid of these other messages and, in case, how?
+>      >>>
+>      >>> The DESCRIPTION file includes these lines:
+>      >>> Depends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2)
+>      >>> Imports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2)
+>      >>>
+>      >>> Given these declarations, there are no loading commands to which I could possibly apply suppressPackageStartupMessages().
+>      >>>
+>      >>> Also, there is no start-up message issued by gg.sn, whose .onAttach function only contains
+>      >>> .onAttach <- function(library, pkg)
+>      >>> {
+>      >>>     if(interactive())
+>      >>>     {
+>      >>>        meta <- packageDescription("gg.sn?)
+>      >>>     }
+>      >>>     invisible()
+>      >>> }
+>      >>>
+>      >>> apart from various comment lines.
+>      >>>
+>      >>> Best regards.
+>      >>>
+>      >>> ---
+>      >>> Adelchi Azzalini
+>      >>> http://azzalini.stat.unipd.it
+> 
+> 
+>      >>> 0 R> library(gg.sn)
+>      >>> 1 Loading required package: sn
+>      >>> 2 Loading required package: stats4
+>      >>> 3 Package 'sn', 2.1.3 (2026-02-24).
+>      >>> 4 Type 'help(SN)' and 'help("overview-sn")' for basic information.
+>      >>> 5 The package redefines function 'sd' but its usual working is unchanged.
+>      >>> 6
+>      >>> 7 Attaching package: ?sn?
+>      >>> 8
+>      >>> 9 The following object is masked from ?package:stats?:
+>      >>> 10
+>      >>> 11     sd
+>      >>> 12
+>      >>> 13 Loading required package: ggplot2
+>      >>> 14 Registered S3 method overwritten by 'gg.sn':
+>      >>> 15   method                from
+>      >>> 16   plot.fitdistr.grouped sn
+>      >>> 17
+>      >>> 18 Attaching package: ?gg.sn?
+>      >>> 19
+>      >>> 20 The following object is masked from ?package:sn?:
+>      >>> 21
+>      >>> 22     plot2D.SymmModulated
+>      >>>
+>      >>> ______________________________________________
+>      >>> R-package-devel at r-project.org mailing list
+>      >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From m|ch@e|ch|r|co4 @end|ng |rom gm@||@com  Wed Sep 16 19:30:54 2026
+From: m|ch@e|ch|r|co4 @end|ng |rom gm@||@com (Michael Chirico)
+Date: Wed, 16 Sep 2026 10:30:54 -0700
+Subject: [R-pkg-devel] how to suppress undesired messages
+In-Reply-To: <ed714171-4bad-4784-8bb2-685f8178b244@gmail.com>
+References: <F9BC75B4-0B72-4670-A7BC-DC835CA55C47@stat.unipd.it>
+ <CAPRVBcx2goKtXbwfZy=34KqY9jwPOBFmhvsNzaSpB0g55TeVAg@mail.gmail.com>
+ <8787EC49-636E-4F85-926B-AAA995E33CB2@stat.unipd.it>
+ <b2769e6d-504b-4523-878e-77ba17180374@gmail.com>
+ <27306.49677.482423.422901@stat.math.ethz.ch>
+ <ed714171-4bad-4784-8bb2-685f8178b244@gmail.com>
+Message-ID: <CAPRVBcwf4UqXMf-bY7wzdrBgxGZcyMwiFXUYJ87YOzGs2nsmgQ@mail.gmail.com>
+
++1 to Duncan -- I am pretty strongly against Depends. If there really are
+certain functions you think your users should definitely have at hand in
+every session, limited re-export is a good compromise.
+
+IMO, moving from examples with a 'magical' symbol 'makeSECdistr' to ones
+that have explicitly
+
+library(sn)
+makeSECdistr(...)
+
+dramatically improves the clarity of your code. In a completely
+self-contained and evident manner, we can figure out where every function
+in the examples (and tests) come from.
+
+Another option (one I personally don't particularly like) to avoid
+attaching sn is to write
+
+makeSECdistr = sn::makeSECdistr
+
+Mike C
+
+On Wed, Sep 16, 2026 at 10:15?AM Duncan Murdoch <murdoch.duncan at gmail.com>
+wrote:
+
+> On 2026-09-16 12:21 p.m., Martin Maechler wrote:
+> >>>>>> Duncan Murdoch
+> >>>>>>      on Wed, 16 Sep 2026 09:32:13 -0400 writes:
+> >
+> >      > The examples in a help page are evaluated in the user's
+> >      > environment.  They don't have access to all the symbols
+> >      > that functions in your package can see, only the ones that
+> >      > the user can see.
+> >
+> >      > If you import sn, then its functions are available within
+> >      > your package, but they aren't available to users.
+> >
+> >      > So the best solution to your problem is the one you found
+> >      > (i.e. use sn::makeSECdistr).  It would also work to use
+> >      > "library(sn)" in the example, but that modifies the user's
+> >      > search list, so it's not such a good idea.  (I don't
+> >      > remember if CRAN will object to it, but it might.)
+> >
+> >      > Duncan Murdoch
+> >
+> > Just MHO:  *If* your package uses functions (or data) from
+> > package {sn} in most of the examples, this would be a strong
+> > indication that you 'd say that your package should always have
+> > the  sn  package functionality "at hand" of the users.
+> >
+> > In that case, I would move 'sn'  from
+> >
+> > "Imports: .."  to
+> > "Depends: .."  in your DESCRIPTION  --
+> >
+> > and typically do not change anything else.
+> >
+> > That way, __none__ of your examples, demos, or vignettes
+> > would need  sn::<...> nor would your users have to do so, once
+> > they have done  library(*)  or  require(<your_package>) .
+> >
+> > On the internet you find advice to never do the above, and I
+> > __strongly__ disagree with that advice.
+>
+> I tend to agree with the advice to avoid Depends.  If your package lists
+> "sn" in Depends, then the user's search list will not be modified if
+> your package is loaded but not attached, e.g. someone calling
+> gg.sn::foo() will not have their search list modified.  But if
+> gg.sn::foo() depends on having some function from sn available, it will
+> fail.
+>
+> Another solution to the problem is to export the sn functions you need
+> from your package.  You can use Imports to make them visible in your
+> package, then export them from it.  That's a fairly common thing for
+> packages (e.g. dplyr) using magrittr to do:  they export `%>%`, but not
+> the rest of the magrittr functions.
+>
+> Duncan Murdoch
+>
+> >
+> > Martin
+> >
+> > --
+> > Martin Maechler
+> > R Core Team  and  ETH Zurich
+> >
+> >      > On 2026-09-10 3:40 a.m., Adelchi Azzalini wrote:
+> >      >> Hello,  Mike.
+> >      >>
+> >      >> Thanks for your kind advice and apologies for my *very* late
+> reply. It so happened that when your message arrived, it was automatically
+> moved from the email inbox to my R-pkg-develop mailbox, but somehow I did
+> not spot it until now. I have no explantion for this, ...except that this
+> looks like a case of ageing effect!
+> >      >>
+> >      >> I have now made the changes that you suggested. Specifically, in
+> the DESCRIPTION file, there are these lines
+> >      >>
+> >      >> Depends: R (>= 4.2.0),
+> >      >> Imports: sn (>= 2.1.3), ggplot2 (>= 3.4.2), methods, mnormt (>=
+> 2.1.2),  patchwork (>= 1.1.2)
+> >      >>
+> >      >> and in NAMESPACE there is
+> >      >>
+> >      >> import(sn)
+> >      >> import(ggplot2)
+> >      >>
+> >      >> Unfortunately, when I run  R CMD check --as-cran
+> gg.sn_0.1.1.tar.gz, I now get an error message whenever an example of the
+> documentation uses a function of package sn, such as
+> >      >>
+> >      >>> f1 <- makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN")
+> >      >> Error in makeSECdistr(dp = c(3, 2, 5), family = "SN", name =
+> "First-SN") :    could not find function ?makeSECdistr"
+> >      >>
+> >      >> Even if I include a line like
+> >      >>
+> >      >> importFrom(sn, dp2cp, makeSECdistr, modeSECdistr,
+> marginalSECdistr)
+> >      >>
+> >      >> in NAMESPACE, still the error persists.
+> >      >>
+> >      >> The only solution which worked was to write
+> >      >> f1 <- sn::makeSECdistr(dp=c(3,2,5), family="SN", name="First-SN?)
+> >      >> but this make the usage and coding less smooth.
+> >      >>
+> >      >> Am I missing something?
+> >      >>
+> >      >> Best regards,
+> >      >>
+> >      >> Adelchi
+> >      >>
+> >      >>
+> >      >>
+> >      >>> On 16 Apr 2026, at 22:25, Michael Chirico <
+> michaelchirico4 at gmail.com> wrote:
+> >      >>>
+> >      >>> Hey Adelchi,
+> >      >>>
+> >      >>> Why do you have sn and ggplot2 as Depends? My own very strong
+> opinion is that authors of new packages should never use it.
+> >      >>>
+> >      >>> Move them to Imports, and use 'import(sn)' and
+> 'import(ggplot2)' in your NAMESPACE if you really want the whole packages.
+> >      >>>
+> >      >>> Mike C
+> >      >>>
+> >      >>> On Thu, Apr 16, 2026 at 8:15?AM Adelchi Azzalini <
+> azzalini at stat.unipd.it> wrote:
+> >      >>> Hi. I am preparing a new package, called gg.sn, which in
+> essence provides ggplot2-style graphics as a replacement for the existing
+> graphics produced by package sn.  The new package works by loading new
+> functions and methods with the same names and calling statements of those
+> in package sn (after sn has been loaded), effectively superseding them with
+> the new ones.
+> >      >>>
+> >      >>> My current task is to get rid of a spate of undesired messages
+> which appear at start-up of gg.sn, as show in the list copied at the end
+> of this message; the line numbers have been added for helping referencing
+> the lines.
+> >      >>>
+> >      >>> For lines 3 to 5, I know where they come from: they are
+> start-up messages from ?sn?; so I can drop them, since I am the author of
+> sn. All the rest is outside my control. Question: is it possible to get rid
+> of these other messages and, in case, how?
+> >      >>>
+> >      >>> The DESCRIPTION file includes these lines:
+> >      >>> Depends: R (>= 4.2.0), sn (>= 2.1.3),  ggplot2 (>= 3.4.2)
+> >      >>> Imports: methods, mnormt (>= 2.1.2), patchwork (>= 1.1.2)
+> >      >>>
+> >      >>> Given these declarations, there are no loading commands to
+> which I could possibly apply suppressPackageStartupMessages().
+> >      >>>
+> >      >>> Also, there is no start-up message issued by gg.sn, whose
+> .onAttach function only contains
+> >      >>> .onAttach <- function(library, pkg)
+> >      >>> {
+> >      >>>     if(interactive())
+> >      >>>     {
+> >      >>>        meta <- packageDescription("gg.sn?)
+> >      >>>     }
+> >      >>>     invisible()
+> >      >>> }
+> >      >>>
+> >      >>> apart from various comment lines.
+> >      >>>
+> >      >>> Best regards.
+> >      >>>
+> >      >>> ---
+> >      >>> Adelchi Azzalini
+> >      >>> http://azzalini.stat.unipd.it
+> >
+> >
+> >      >>> 0 R> library(gg.sn)
+> >      >>> 1 Loading required package: sn
+> >      >>> 2 Loading required package: stats4
+> >      >>> 3 Package 'sn', 2.1.3 (2026-02-24).
+> >      >>> 4 Type 'help(SN)' and 'help("overview-sn")' for basic
+> information.
+> >      >>> 5 The package redefines function 'sd' but its usual working is
+> unchanged.
+> >      >>> 6
+> >      >>> 7 Attaching package: ?sn?
+> >      >>> 8
+> >      >>> 9 The following object is masked from ?package:stats?:
+> >      >>> 10
+> >      >>> 11     sd
+> >      >>> 12
+> >      >>> 13 Loading required package: ggplot2
+> >      >>> 14 Registered S3 method overwritten by 'gg.sn':
+> >      >>> 15   method                from
+> >      >>> 16   plot.fitdistr.grouped sn
+> >      >>> 17
+> >      >>> 18 Attaching package: ?gg.sn?
+> >      >>> 19
+> >      >>> 20 The following object is masked from ?package:sn?:
+> >      >>> 21
+> >      >>> 22     plot2D.SymmModulated
+> >      >>>
+> >      >>> ______________________________________________
+> >      >>> R-package-devel at r-project.org mailing list
+> >      >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
