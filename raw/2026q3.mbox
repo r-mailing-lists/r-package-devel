@@ -9246,3 +9246,23 @@ http://azzalini.stat.unipd.it
 > https://stat.ethz.ch/mailman/listinfo/r-package-devel
 
 
+From wo||@ch|@eger @end|ng |rom un|-m@|nz@de  Mon Sep 21 16:18:18 2026
+From: wo||@ch|@eger @end|ng |rom un|-m@|nz@de (Wollschlaeger, Daniel)
+Date: Mon, 21 Sep 2026 14:18:18 +0000
+Subject: [R-pkg-devel] CRAN submission fails with RcppEigen related warning
+ (Windows only)
+Message-ID: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+
+I've tried to submit a new package SurfaceMesh (https://github.com/dwoll/SurfaceMesh) to CRAN which uses C++ library CGAL via packages Rcpp and RcppCGAL. The submission fails due to warnings that appear related to RcppEigen (see below). The warnings do not appear on Debian or MacOS.
+
+Unfortunately, the 00install.out file with warnings on lines 132689, 132703 (both internal_repair.cpp) and 145040, 145054 (both internal_rtocpp.cpp) are very hard to read for me. The warnings seems to come from deep in the involved libraries. I'd very much appreciate recommendations on how find and fix the cause of these warnings!
+
+Thank you very much
+
+Daniel
+
+Warning (https://win-builder.r-project.org/incoming_pretest/SurfaceMesh_0.0.2_20260921_151256/Windows/):
+D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:512:17: warning: '<unnamed>.Eigen::Matrix<double, 4, 4, 2, 4, 4>::<unnamed>.Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 2, 4, 4> >::m_storage' is used uninitialized [-Wuninitialized]
+D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, long long unsigned int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
+
+
