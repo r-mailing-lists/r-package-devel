@@ -9266,3 +9266,546 @@ D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:5
 D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, long long unsigned int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
 
 
+From wo||@ch|@eger @end|ng |rom un|-m@|nz@de  Tue Sep 22 17:32:55 2026
+From: wo||@ch|@eger @end|ng |rom un|-m@|nz@de (Wollschlaeger, Daniel)
+Date: Tue, 22 Sep 2026 15:32:55 +0000
+Subject: [R-pkg-devel] 
+ CRAN submission fails with RcppEigen related warning (Windows only)
+In-Reply-To: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+References: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+Message-ID: <cbbc1eb38dd0449fa5ad3b68ad1b1106@uni-mainz.de>
+
+As a follow-up, two AIs suggested that this is a false positive where GCC does not understand some Eigen performance optimization strategy. Indeed, searching for "GCC array-bounds false positive" gets a lot of results, including entries in GCC's bug tracker.
+
+Compiling with -Wno-array-bounds -Wno-uninitialized -Wno-stringop-overflow silences the warning. These compiler flags are non portable, but Windows is the only affected platform, so putting them in Makevars.win in theory overcomes this issue. However, the check still generates a non-portability warning which means the package will not pass the CRAN pre-test. Moreover, in a GitHub search, I could not find a package on CRAN that uses these flags, so I guess it is not a good approach.
+
+Any hints on how to find out whether this really is a false positive, and in that case, how to proceed / how to negotiate with CRAN would be great.
+
+Thank you! Daniel
+
+________________________________________
+Von: R-package-devel <r-package-devel-bounces at r-project.org> im Auftrag von Wollschlaeger, Daniel <wollschlaeger at uni-mainz.de>
+Gesendet: Montag, 21. September 2026 16:18:18
+An: r-package-devel at r-project.org
+Betreff: [R-pkg-devel] CRAN submission fails with RcppEigen related warning (Windows only)
+
+I've tried to submit a new package SurfaceMesh (https://github.com/dwoll/SurfaceMesh) to CRAN which uses C++ library CGAL via packages Rcpp and RcppCGAL. The submission fails due to warnings that appear related to RcppEigen (see below). The warnings do not appear on Debian or MacOS.
+
+Unfortunately, the 00install.out file with warnings on lines 132689, 132703 (both internal_repair.cpp) and 145040, 145054 (both internal_rtocpp.cpp) are very hard to read for me. The warnings seems to come from deep in the involved libraries. I'd very much appreciate recommendations on how find and fix the cause of these warnings!
+
+Thank you very much
+
+Daniel
+
+Warning (https://win-builder.r-project.org/incoming_pretest/SurfaceMesh_0.0.2_20260921_151256/Windows/):
+D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:512:17: warning: '<unnamed>.Eigen::Matrix<double, 4, 4, 2, 4, 4>::<unnamed>.Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 2, 4, 4> >::m_storage' is used uninitialized [-Wuninitialized]
+D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, long long unsigned int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
+
+______________________________________________
+R-package-devel at r-project.org mailing list
+https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From m|ch@e|ch|r|co4 @end|ng |rom gm@||@com  Tue Sep 22 17:38:07 2026
+From: m|ch@e|ch|r|co4 @end|ng |rom gm@||@com (Michael Chirico)
+Date: Tue, 22 Sep 2026 08:38:07 -0700
+Subject: [R-pkg-devel] 
+ CRAN submission fails with RcppEigen related warning (Windows only)
+In-Reply-To: <cbbc1eb38dd0449fa5ad3b68ad1b1106@uni-mainz.de>
+References: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+ <cbbc1eb38dd0449fa5ad3b68ad1b1106@uni-mainz.de>
+Message-ID: <CAPRVBcy1fkKs0f8okDqXSMroFdq00cHUTb=CEN37mLjV01TRqA@mail.gmail.com>
+
+My own LLM prompt agreed with both compiler warnings being correct and
+proposed a patch around Eigen initializing arrays with 0s. I will send
+along a PR for your perusal -- I was trying to find time to understand it
+better before sending it off.
+
+Possibly, the LLMs on your side were distracted by all the noise in the
+compilation logs from Eigen that CRAN doesn't enforce.
+
+Mike C
+
+On Tue, Sep 22, 2026, 8:33?AM Wollschlaeger, Daniel <
+wollschlaeger at uni-mainz.de> wrote:
+
+> As a follow-up, two AIs suggested that this is a false positive where GCC
+> does not understand some Eigen performance optimization strategy. Indeed,
+> searching for "GCC array-bounds false positive" gets a lot of results,
+> including entries in GCC's bug tracker.
+>
+> Compiling with -Wno-array-bounds -Wno-uninitialized -Wno-stringop-overflow
+> silences the warning. These compiler flags are non portable, but Windows is
+> the only affected platform, so putting them in Makevars.win in theory
+> overcomes this issue. However, the check still generates a non-portability
+> warning which means the package will not pass the CRAN pre-test. Moreover,
+> in a GitHub search, I could not find a package on CRAN that uses these
+> flags, so I guess it is not a good approach.
+>
+> Any hints on how to find out whether this really is a false positive, and
+> in that case, how to proceed / how to negotiate with CRAN would be great.
+>
+> Thank you! Daniel
+>
+> ________________________________________
+> Von: R-package-devel <r-package-devel-bounces at r-project.org> im Auftrag
+> von Wollschlaeger, Daniel <wollschlaeger at uni-mainz.de>
+> Gesendet: Montag, 21. September 2026 16:18:18
+> An: r-package-devel at r-project.org
+> Betreff: [R-pkg-devel] CRAN submission fails with RcppEigen related
+> warning (Windows only)
+>
+> I've tried to submit a new package SurfaceMesh (
+> https://github.com/dwoll/SurfaceMesh) to CRAN which uses C++ library CGAL
+> via packages Rcpp and RcppCGAL. The submission fails due to warnings that
+> appear related to RcppEigen (see below). The warnings do not appear on
+> Debian or MacOS.
+>
+> Unfortunately, the 00install.out file with warnings on lines 132689,
+> 132703 (both internal_repair.cpp) and 145040, 145054 (both
+> internal_rtocpp.cpp) are very hard to read for me. The warnings seems to
+> come from deep in the involved libraries. I'd very much appreciate
+> recommendations on how find and fix the cause of these warnings!
+>
+> Thank you very much
+>
+> Daniel
+>
+> Warning (
+> https://win-builder.r-project.org/incoming_pretest/SurfaceMesh_0.0.2_20260921_151256/Windows/
+> ):
+> D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:512:17:
+> warning: '<unnamed>.Eigen::Matrix<double, 4, 4, 2, 4,
+> 4>::<unnamed>.Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 2, 4, 4>
+> >::m_storage' is used uninitialized [-Wuninitialized]
+> D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30:
+> warning: 'void* __builtin_memmove(void*, const void*, long long unsigned
+> int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From wo||@ch|@eger @end|ng |rom un|-m@|nz@de  Tue Sep 22 17:46:03 2026
+From: wo||@ch|@eger @end|ng |rom un|-m@|nz@de (Wollschlaeger, Daniel)
+Date: Tue, 22 Sep 2026 15:46:03 +0000
+Subject: [R-pkg-devel] 
+ CRAN submission fails with RcppEigen related warning (Windows only)
+In-Reply-To: <CAPRVBcy1fkKs0f8okDqXSMroFdq00cHUTb=CEN37mLjV01TRqA@mail.gmail.com>
+References: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+ <cbbc1eb38dd0449fa5ad3b68ad1b1106@uni-mainz.de>,
+ <CAPRVBcy1fkKs0f8okDqXSMroFdq00cHUTb=CEN37mLjV01TRqA@mail.gmail.com>
+Message-ID: <a5636b26e6634e6cbf569aae3bc7ea94@uni-mainz.de>
+
+Great, thank you four your support! Daniel
+
+
+--
+Prof. Dr. Daniel Wollschl?ger
+University Medical Center Mainz
+Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI)
+Radiation Epidemiology
+Tel: +49 6131 17 7029
+
+
+________________________________________
+Von: Michael Chirico <michaelchirico4 at gmail.com>
+Gesendet: Dienstag, 22. September 2026 17:38:07
+An: Wollschlaeger, Daniel
+Cc: R Package Development
+Betreff: Re: [R-pkg-devel] CRAN submission fails with RcppEigen related warning (Windows only)
+
+My own LLM prompt agreed with both compiler warnings being correct and proposed a patch around Eigen initializing arrays with 0s. I will send along a PR for your perusal -- I was trying to find time to understand it better before sending it off.
+
+Possibly, the LLMs on your side were distracted by all the noise in the compilation logs from Eigen that CRAN doesn't enforce.
+
+Mike C
+
+On Tue, Sep 22, 2026, 8:33?AM Wollschlaeger, Daniel <wollschlaeger at uni-mainz.de<mailto:wollschlaeger at uni-mainz.de>> wrote:
+As a follow-up, two AIs suggested that this is a false positive where GCC does not understand some Eigen performance optimization strategy. Indeed, searching for "GCC array-bounds false positive" gets a lot of results, including entries in GCC's bug tracker.
+
+Compiling with -Wno-array-bounds -Wno-uninitialized -Wno-stringop-overflow silences the warning. These compiler flags are non portable, but Windows is the only affected platform, so putting them in Makevars.win in theory overcomes this issue. However, the check still generates a non-portability warning which means the package will not pass the CRAN pre-test. Moreover, in a GitHub search, I could not find a package on CRAN that uses these flags, so I guess it is not a good approach.
+
+Any hints on how to find out whether this really is a false positive, and in that case, how to proceed / how to negotiate with CRAN would be great.
+
+Thank you! Daniel
+
+________________________________________
+Von: R-package-devel <r-package-devel-bounces at r-project.org<mailto:r-package-devel-bounces at r-project.org>> im Auftrag von Wollschlaeger, Daniel <wollschlaeger at uni-mainz.de<mailto:wollschlaeger at uni-mainz.de>>
+Gesendet: Montag, 21. September 2026 16:18:18
+An: r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>
+Betreff: [R-pkg-devel] CRAN submission fails with RcppEigen related warning (Windows only)
+
+I've tried to submit a new package SurfaceMesh (https://github.com/dwoll/SurfaceMesh) to CRAN which uses C++ library CGAL via packages Rcpp and RcppCGAL. The submission fails due to warnings that appear related to RcppEigen (see below). The warnings do not appear on Debian or MacOS.
+
+Unfortunately, the 00install.out file with warnings on lines 132689, 132703 (both internal_repair.cpp) and 145040, 145054 (both internal_rtocpp.cpp) are very hard to read for me. The warnings seems to come from deep in the involved libraries. I'd very much appreciate recommendations on how find and fix the cause of these warnings!
+
+Thank you very much
+
+Daniel
+
+Warning (https://win-builder.r-project.org/incoming_pretest/SurfaceMesh_0.0.2_20260921_151256/Windows/):
+D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:512:17: warning: '<unnamed>.Eigen::Matrix<double, 4, 4, 2, 4, 4>::<unnamed>.Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 2, 4, 4> >::m_storage' is used uninitialized [-Wuninitialized]
+D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30: warning: 'void* __builtin_memmove(void*, const void*, long long unsigned int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
+
+______________________________________________
+R-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list
+https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+______________________________________________
+R-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list
+https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+From edd @end|ng |rom deb|@n@org  Tue Sep 22 18:00:30 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Tue, 22 Sep 2026 11:00:30 -0500
+Subject: [R-pkg-devel] 
+ CRAN submission fails with RcppEigen related warning (Windows only)
+In-Reply-To: <CAPRVBcy1fkKs0f8okDqXSMroFdq00cHUTb=CEN37mLjV01TRqA@mail.gmail.com>
+References: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+ <cbbc1eb38dd0449fa5ad3b68ad1b1106@uni-mainz.de>
+ <CAPRVBcy1fkKs0f8okDqXSMroFdq00cHUTb=CEN37mLjV01TRqA@mail.gmail.com>
+Message-ID: <27314.42526.551225.390791@paul.eddelbuettel.com>
+
+
+On 22 September 2026 at 08:38, Michael Chirico wrote:
+| My own LLM prompt agreed with both compiler warnings being correct and
+| proposed a patch around Eigen initializing arrays with 0s. I will send
+| along a PR for your perusal -- I was trying to find time to understand it
+| better before sending it off.
+
+Michael: Could you possibly test with the 'RcppEigen 5.*' release candidate
+in the GH repo?  It is next in line for some reverse dependency checking now
+that some known issue in dependent packages have been addressed. 
+
+And for what it is worth, I also just saw "weird" interactions between g++-16
+and (Rcpp)Eigen in a (small) package of mine using it, and pointing at
+aggressive (internal) multi-word `memcpy`.  It goes away when we outlaw
+inlining, or tone down optimization, or turn off debugging.  It all suggests
+"some" level of compiler interaction. If you have a moment for that I'd love
+to take that off-list.
+ 
+| Possibly, the LLMs on your side were distracted by all the noise in the
+| compilation logs from Eigen that CRAN doesn't enforce.
+
+That is such a pain but CRAN Policy is what it is and we all suffer for it.
+Somewhat recently I realized I could (legally in the CRAN Policy sense)
+adjust this at least for local builds by testing for .git/ present (which
+CRAN will never have). See the blog post from a few weeks ago at
+
+  https://dirk.eddelbuettel.com/blog/2026/07/27/#057_conditionally_quieten_compilers
+
+Daniel: RcppEigen "is complicated" and help is always appreciated. As
+mentioned, we may (at last) have an updated upstream soon.
+
+Dirk 
+ 
+| Mike C
+| 
+| On Tue, Sep 22, 2026, 8:33?AM Wollschlaeger, Daniel <
+| wollschlaeger at uni-mainz.de> wrote:
+| 
+| > As a follow-up, two AIs suggested that this is a false positive where GCC
+| > does not understand some Eigen performance optimization strategy. Indeed,
+| > searching for "GCC array-bounds false positive" gets a lot of results,
+| > including entries in GCC's bug tracker.
+| >
+| > Compiling with -Wno-array-bounds -Wno-uninitialized -Wno-stringop-overflow
+| > silences the warning. These compiler flags are non portable, but Windows is
+| > the only affected platform, so putting them in Makevars.win in theory
+| > overcomes this issue. However, the check still generates a non-portability
+| > warning which means the package will not pass the CRAN pre-test. Moreover,
+| > in a GitHub search, I could not find a package on CRAN that uses these
+| > flags, so I guess it is not a good approach.
+| >
+| > Any hints on how to find out whether this really is a false positive, and
+| > in that case, how to proceed / how to negotiate with CRAN would be great.
+| >
+| > Thank you! Daniel
+| >
+| > ________________________________________
+| > Von: R-package-devel <r-package-devel-bounces at r-project.org> im Auftrag
+| > von Wollschlaeger, Daniel <wollschlaeger at uni-mainz.de>
+| > Gesendet: Montag, 21. September 2026 16:18:18
+| > An: r-package-devel at r-project.org
+| > Betreff: [R-pkg-devel] CRAN submission fails with RcppEigen related
+| > warning (Windows only)
+| >
+| > I've tried to submit a new package SurfaceMesh (
+| > https://github.com/dwoll/SurfaceMesh) to CRAN which uses C++ library CGAL
+| > via packages Rcpp and RcppCGAL. The submission fails due to warnings that
+| > appear related to RcppEigen (see below). The warnings do not appear on
+| > Debian or MacOS.
+| >
+| > Unfortunately, the 00install.out file with warnings on lines 132689,
+| > 132703 (both internal_repair.cpp) and 145040, 145054 (both
+| > internal_rtocpp.cpp) are very hard to read for me. The warnings seems to
+| > come from deep in the involved libraries. I'd very much appreciate
+| > recommendations on how find and fix the cause of these warnings!
+| >
+| > Thank you very much
+| >
+| > Daniel
+| >
+| > Warning (
+| > https://win-builder.r-project.org/incoming_pretest/SurfaceMesh_0.0.2_20260921_151256/Windows/
+| > ):
+| > D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:512:17:
+| > warning: '<unnamed>.Eigen::Matrix<double, 4, 4, 2, 4,
+| > 4>::<unnamed>.Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 2, 4, 4>
+| > >::m_storage' is used uninitialized [-Wuninitialized]
+| > D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30:
+| > warning: 'void* __builtin_memmove(void*, const void*, long long unsigned
+| > int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
+| >
+| > ______________________________________________
+| > R-package-devel at r-project.org mailing list
+| > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+| >
+| > ______________________________________________
+| > R-package-devel at r-project.org mailing list
+| > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+| >
+| 
+| 	[[alternative HTML version deleted]]
+| 
+| ______________________________________________
+| R-package-devel at r-project.org mailing list
+| https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From m|ch@e|ch|r|co4 @end|ng |rom gm@||@com  Tue Sep 22 20:51:54 2026
+From: m|ch@e|ch|r|co4 @end|ng |rom gm@||@com (Michael Chirico)
+Date: Tue, 22 Sep 2026 11:51:54 -0700
+Subject: [R-pkg-devel] 
+ CRAN submission fails with RcppEigen related warning (Windows only)
+In-Reply-To: <27314.42526.551225.390791@paul.eddelbuettel.com>
+References: <b48c3a2ee6c3489ea032200a02ab2739@uni-mainz.de>
+ <cbbc1eb38dd0449fa5ad3b68ad1b1106@uni-mainz.de>
+ <CAPRVBcy1fkKs0f8okDqXSMroFdq00cHUTb=CEN37mLjV01TRqA@mail.gmail.com>
+ <27314.42526.551225.390791@paul.eddelbuettel.com>
+Message-ID: <CAPRVBcywUcq8qvZm8aW9Nd7CpVJytKA6tYkqKeMawLvTP2DMLA@mail.gmail.com>
+
+Thanks for the pointer Dirk! Pointing the LLM further upstream appears to
+have borne fruit -- a proposed fix in RcppCGAL would resolve the
+SurfaceMesh issues:
+
+https://github.com/ericdunipace/RcppCGAL/pull/28
+
+Using the dev version of RcppEigen resolved the -Wuninitialized warning,
+but not the -Warray-bounds one.
+
+I'm now pondering if CGAL itself should consider the same patches...
+
+Mike C
+
+
+On Tue, Sep 22, 2026 at 9:00?AM Dirk Eddelbuettel <edd at debian.org> wrote:
+
+>
+> On 22 September 2026 at 08:38, Michael Chirico wrote:
+> | My own LLM prompt agreed with both compiler warnings being correct and
+> | proposed a patch around Eigen initializing arrays with 0s. I will send
+> | along a PR for your perusal -- I was trying to find time to understand it
+> | better before sending it off.
+>
+> Michael: Could you possibly test with the 'RcppEigen 5.*' release candidate
+> in the GH repo?  It is next in line for some reverse dependency checking
+> now
+> that some known issue in dependent packages have been addressed.
+>
+> And for what it is worth, I also just saw "weird" interactions between
+> g++-16
+> and (Rcpp)Eigen in a (small) package of mine using it, and pointing at
+> aggressive (internal) multi-word `memcpy`.  It goes away when we outlaw
+> inlining, or tone down optimization, or turn off debugging.  It all
+> suggests
+> "some" level of compiler interaction. If you have a moment for that I'd
+> love
+> to take that off-list.
+>
+> | Possibly, the LLMs on your side were distracted by all the noise in the
+> | compilation logs from Eigen that CRAN doesn't enforce.
+>
+> That is such a pain but CRAN Policy is what it is and we all suffer for it.
+> Somewhat recently I realized I could (legally in the CRAN Policy sense)
+> adjust this at least for local builds by testing for .git/ present (which
+> CRAN will never have). See the blog post from a few weeks ago at
+>
+>
+> https://dirk.eddelbuettel.com/blog/2026/07/27/#057_conditionally_quieten_compilers
+>
+> Daniel: RcppEigen "is complicated" and help is always appreciated. As
+> mentioned, we may (at last) have an updated upstream soon.
+>
+> Dirk
+>
+> | Mike C
+> |
+> | On Tue, Sep 22, 2026, 8:33?AM Wollschlaeger, Daniel <
+> | wollschlaeger at uni-mainz.de> wrote:
+> |
+> | > As a follow-up, two AIs suggested that this is a false positive where
+> GCC
+> | > does not understand some Eigen performance optimization strategy.
+> Indeed,
+> | > searching for "GCC array-bounds false positive" gets a lot of results,
+> | > including entries in GCC's bug tracker.
+> | >
+> | > Compiling with -Wno-array-bounds -Wno-uninitialized
+> -Wno-stringop-overflow
+> | > silences the warning. These compiler flags are non portable, but
+> Windows is
+> | > the only affected platform, so putting them in Makevars.win in theory
+> | > overcomes this issue. However, the check still generates a
+> non-portability
+> | > warning which means the package will not pass the CRAN pre-test.
+> Moreover,
+> | > in a GitHub search, I could not find a package on CRAN that uses these
+> | > flags, so I guess it is not a good approach.
+> | >
+> | > Any hints on how to find out whether this really is a false positive,
+> and
+> | > in that case, how to proceed / how to negotiate with CRAN would be
+> great.
+> | >
+> | > Thank you! Daniel
+> | >
+> | > ________________________________________
+> | > Von: R-package-devel <r-package-devel-bounces at r-project.org> im
+> Auftrag
+> | > von Wollschlaeger, Daniel <wollschlaeger at uni-mainz.de>
+> | > Gesendet: Montag, 21. September 2026 16:18:18
+> | > An: r-package-devel at r-project.org
+> | > Betreff: [R-pkg-devel] CRAN submission fails with RcppEigen related
+> | > warning (Windows only)
+> | >
+> | > I've tried to submit a new package SurfaceMesh (
+> | > https://github.com/dwoll/SurfaceMesh) to CRAN which uses C++ library
+> CGAL
+> | > via packages Rcpp and RcppCGAL. The submission fails due to warnings
+> that
+> | > appear related to RcppEigen (see below). The warnings do not appear on
+> | > Debian or MacOS.
+> | >
+> | > Unfortunately, the 00install.out file with warnings on lines 132689,
+> | > 132703 (both internal_repair.cpp) and 145040, 145054 (both
+> | > internal_rtocpp.cpp) are very hard to read for me. The warnings seems
+> to
+> | > come from deep in the involved libraries. I'd very much appreciate
+> | > recommendations on how find and fix the cause of these warnings!
+> | >
+> | > Thank you very much
+> | >
+> | > Daniel
+> | >
+> | > Warning (
+> | >
+> https://win-builder.r-project.org/incoming_pretest/SurfaceMesh_0.0.2_20260921_151256/Windows/
+> | > ):
+> | >
+> D:/RCompile/CRANpkg/lib/4.7/RcppEigen/include/Eigen/src/Core/PlainObjectBase.h:512:17:
+> | > warning: '<unnamed>.Eigen::Matrix<double, 4, 4, 2, 4,
+> | > 4>::<unnamed>.Eigen::PlainObjectBase<Eigen::Matrix<double, 4, 4, 2, 4,
+> 4>
+> | > >::m_storage' is used uninitialized [-Wuninitialized]
+> | >
+> D:/rtools45/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/14.3.0/include/c++/bits/stl_algobase.h:452:30:
+> | > warning: 'void* __builtin_memmove(void*, const void*, long long
+> unsigned
+> | > int)' forming offset 8 is out of the bounds [0, 8] [-Warray-bounds=]
+> | >
+> | > ______________________________________________
+> | > R-package-devel at r-project.org mailing list
+> | > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> | >
+> | > ______________________________________________
+> | > R-package-devel at r-project.org mailing list
+> | > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> | >
+> |
+> |       [[alternative HTML version deleted]]
+> |
+> | ______________________________________________
+> | R-package-devel at r-project.org mailing list
+> | https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+> --
+> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+>
+
+	[[alternative HTML version deleted]]
+
+
+From otoomet @end|ng |rom gm@||@com  Wed Sep 23 02:16:23 2026
+From: otoomet @end|ng |rom gm@||@com (Ott Toomet)
+Date: Tue, 22 Sep 2026 17:16:23 -0700
+Subject: [R-pkg-devel] How to export both S3 and S4 methods for a generic
+Message-ID: <CAMMJQ0aiwDSi0okz2osm2KUJK6em5V0bQ8yhJ0OYojojVD6xSQ@mail.gmail.com>
+
+What is a correct way to define methods both for S3 and S4 classes for
+the same generic in a package?
+
+I am updating my maxLik package and I am struggling to get rid of a
+warning that occurs when another package that depends on maxLik
+(e.g. censReg) is loaded.  For instance:
+
+> Warning: replacing previous import ?maxLik::nobs? by ?stats::nobs?
+> when loading ?censReg?
+
+(Applies to several packages that depend on maxLik.)
+
+I define nobs for maxLik as suggested in ?Methods_for_S3:
+
+> nobs.maxLik <- function(object, ...) { ... }
+> setMethod("nobs", "maxLik", nobs.maxLik)
+
+In the NAMESPACE I have (as suggested by Methods_for_S3):
+
+> importFrom("stats4", "nobs")
+> ...
+> exportMethods("nobs")
+> ...
+> S3method( "nobs", "maxLik" )
+
+In case of censReg, the NAMESPACE contains
+
+> import( "maxLik" )
+> ...
+> importFrom( "stats", "nobs" )
+> ...
+> S3method( "nobs", "censReg" )
+
+I can get of the warning if I either a) remove the corresponding S4
+method from my code; or b) I replace "import('maxLik')" with
+"import('maxLik', except = nobs)" in censReg (which is not my
+package).  I can also import nobs from stats instead of stats4, but
+that leads to another wawning when censReg import plm:
+
+> Attaching package: 'plm'
+>
+> The following object is masked from 'package:stats4':
+>
+>     nobs
+
+What is the best way to proceed?  Although S4 methods are not
+currently needed in my package, I'd like to keep the option open to
+use these at a later point of time.
+
+Best,
+Ott
+
+	[[alternative HTML version deleted]]
+
+
