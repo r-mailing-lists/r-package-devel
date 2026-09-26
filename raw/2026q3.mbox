@@ -9809,3 +9809,54 @@ Ott
 	[[alternative HTML version deleted]]
 
 
+From kry|ov@r00t @end|ng |rom gm@||@com  Fri Sep 25 17:52:58 2026
+From: kry|ov@r00t @end|ng |rom gm@||@com (Ivan Krylov)
+Date: Fri, 25 Sep 2026 18:52:58 +0300
+Subject: [R-pkg-devel] 
+ How to export both S3 and S4 methods for a generic
+In-Reply-To: <CAMMJQ0aiwDSi0okz2osm2KUJK6em5V0bQ8yhJ0OYojojVD6xSQ@mail.gmail.com>
+References: <CAMMJQ0aiwDSi0okz2osm2KUJK6em5V0bQ8yhJ0OYojojVD6xSQ@mail.gmail.com>
+Message-ID: <20260925185258.34fa170d@arachnoid>
+
+? Tue, 22 Sep 2026 17:16:23 -0700
+Ott Toomet <otoomet at gmail.com> ?????:
+
+> In the NAMESPACE I have (as suggested by Methods_for_S3):
+> 
+> > exportMethods("nobs")
+
+R automatically exports the generic when exporting S4 methods from a
+package. There's no good way around this.
+
+> In case of censReg, the NAMESPACE contains
+> 
+> > import( "maxLik" )
+> > ...
+> > importFrom( "stats", "nobs" )
+
+R silences the warning when overriding a function with a generic it's
+been derived from (?setMethod, section "Exporting Methods"). Thus,
+swapping the lines:
+
+importFrom(stats, nobs)
+import(maxLik)
+
+...would avoid the warning (and the code would be using the S4 generic
+stats4::nobs instead of the S3 generic stats::nobs it's been importing).
+R also silences the warning when the override is identical to the
+previous import. Thus
+
+importFrom(stats4, nobs)
+import(maxLik)
+
+...would work in either order, again giving the downstream code the S4
+generic.
+
+But that's a fix for downstream packages (that will be getting the S4
+generic they don't necessarily expect).
+
+-- 
+Best regards,
+Ivan
+
+

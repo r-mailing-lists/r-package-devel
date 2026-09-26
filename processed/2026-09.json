@@ -534,6 +534,24 @@
       "thread_id": "thread-2f92eea1fc01",
       "thread_depth": 0,
       "month": "2026-09"
+    },
+    {
+      "id": "msg-8313d51c8e70",
+      "message_id": "<20260925185258.34fa170d@arachnoid>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "72bda76034efaa18cd166b722c373c5159885b988468de351df8992020f3856a",
+      "date": "2026-09-25T15:52:58Z",
+      "subject": "[R-pkg-devel]  How to export both S3 and S4 methods for a generic",
+      "subject_clean": "[R-pkg-devel]  How to export both S3 and S4 methods for a generic",
+      "in_reply_to": "<CAMMJQ0aiwDSi0okz2osm2KUJK6em5V0bQ8yhJ0OYojojVD6xSQ@mail.gmail.com>",
+      "references": [
+        "<CAMMJQ0aiwDSi0okz2osm2KUJK6em5V0bQ8yhJ0OYojojVD6xSQ@mail.gmail.com>"
+      ],
+      "body_plain": "? Tue, 22 Sep 2026 17:16:23 -0700\nOtt Toomet <otoomet at gmail.com> ?????:\n\n> In the NAMESPACE I have (as suggested by Methods_for_S3):\n> \n> > exportMethods(\"nobs\")\n\nR automatically exports the generic when exporting S4 methods from a\npackage. There's no good way around this.\n\n> In case of censReg, the NAMESPACE contains\n> \n> > import( \"maxLik\" )\n> > ...\n> > importFrom( \"stats\", \"nobs\" )\n\nR silences the warning when overriding a function with a generic it's\nbeen derived from (?setMethod, section \"Exporting Methods\"). Thus,\nswapping the lines:\n\nimportFrom(stats, nobs)\nimport(maxLik)\n\n...would avoid the warning (and the code would be using the S4 generic\nstats4::nobs instead of the S3 generic stats::nobs it's been importing).\nR also silences the warning when the override is identical to the\nprevious import. Thus\n\nimportFrom(stats4, nobs)\nimport(maxLik)\n\n...would work in either order, again giving the downstream code the S4\ngeneric.\n\nBut that's a fix for downstream packages (that will be getting the S4\ngeneric they don't necessarily expect).\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "? Tue, 22 Sep 2026 17:16:23 -0700\nOtt Toomet <otoomet at gmail.com> ?????:\n\n> In the NAMESPACE I have (as suggested by Methods_for_S3):\n> \n> > exportMethods(\"nobs\")\n\nR automatically exports the generi",
+      "thread_id": "thread-2f92eea1fc01",
+      "thread_depth": 1,
+      "month": "2026-09"
     }
   ],
   "threads": [
@@ -609,12 +627,13 @@
     {
       "id": "thread-2f92eea1fc01",
       "subject": "[R-pkg-devel] How to export both S3 and S4 methods for a generic",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
+        "Ivan Krylov",
         "Ott Toomet"
       ],
       "started": "2026-09-23T00:16:23Z",
-      "last_reply": "2026-09-23T00:16:23Z",
+      "last_reply": "2026-09-25T15:52:58Z",
       "root_message_id": "msg-2f92eea1fc01"
     }
   ]
