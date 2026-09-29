@@ -552,6 +552,167 @@
       "thread_id": "thread-2f92eea1fc01",
       "thread_depth": 1,
       "month": "2026-09"
+    },
+    {
+      "id": "msg-5f373c434eb9",
+      "message_id": "<AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>",
+      "from_name": "Tim Band",
+      "from_email_hash": "9174f569292482b2e97a1432882f4ed60b4700626d5e30cafafe36f32ee117ab",
+      "date": "2026-09-28T16:22:56Z",
+      "subject": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "subject_clean": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi-\nI have this weird problem with my package shinylight. It's a simple way to serve your R functions over the web (like Shiny but with much less functionality and much fewer dependencies).\nThe build has suddenly broken at CRAN without any change in the code. There are many notes (mostly related to the JavaScript functions not having \\usage, because obviously I don't want them run by the automatic checks), but the big problem is:\n\n\"createTcpServer: address already in use: 50050\".\n\nSo, this looks like this port has been blocked by something on the CRAN machines, quite possibly an old test run hanging. So the simplest solution would seem to be change the port to 50051 and re-submit. I have done this but now when I re-submit I still get an email saying it has failed, with the same error, with port 50050.\n\nSo I unzipped the package that I uploaded and checked; there's no 50050 in the file mentioned, or anywhere in the source.\n\nI'd like to download the exact thing I uploaded so I can check what they think they built. Or is this a normal thing? Is there something I need to do to say \"no, really rebuild from clean\"?\n\nAlso, am I going to get hit with the \\usage issue? And is there a good way to annotate the JavaScript properly without causing notes?\n\nThanks for any help,\n-Tim\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi-\nI have this weird problem with my package shinylight. It's a simple way to serve your R functions over the web (like Shiny but with much less functionality and much fewer dependencies).\nThe build ",
+      "thread_id": "thread-5f373c434eb9",
+      "thread_depth": 0,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-c486aeb104ff",
+      "message_id": "<b31193d6-66a6-4bcc-a70d-faf8d80b5ec3@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
+      "date": "2026-09-28T18:29:23Z",
+      "subject": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "subject_clean": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "in_reply_to": "<AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>",
+      "references": [
+        "<AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>"
+      ],
+      "body_plain": "I think you are looking into the check results of the last version on \nCRAN, not of the new submission. Both are linked from the mail you received.\n\nThe only issue I see is\n\n\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: Rd contents, Result: NOTE\n   Rd files without \\usage:\n     'framework.shinylightFrameworkStart.Rd' 'shinylight.call.Rd'\n     'shinylight.makeTable.Rd' 'shinylight.passToOther.Rd'\n     'shinylight.runR.Rd' 'shinylight.setElementJson.Rd'\n     'shinylight.setElementPlot.Rd' 'shinylight.setElementText.Rd'\n     'shinylight.setGridResult.Rd'\n     'shinylight.setGridResultWithNamedRows.Rd' 'toolkit.all.Rd'\n     'toolkit.any.Rd' 'toolkit.banner.Rd' 'toolkit.button.Rd'\n     'toolkit.deref.Rd' 'toolkit.footer.Rd' 'toolkit.forEach.Rd'\n     'toolkit.groupTitle.Rd' 'toolkit.header.Rd' 'toolkit.image.Rd'\n     'toolkit.leftSideBar.Rd' 'toolkit.loadFileButton.Rd'\n     'toolkit.makeLabel.Rd' 'toolkit.nonScrollingWrapper.Rd'\n     'toolkit.overlay.Rd' 'toolkit.pages.Rd' 'toolkit.paramBoolean.Rd'\n     'toolkit.paramColor.Rd' 'toolkit.paramFloat.Rd'\n     'toolkit.paramInteger.Rd' 'toolkit.paramSelector.Rd'\n     'toolkit.paramText.Rd' 'toolkit.preformattedText.Rd'\n     'toolkit.rightSideBar.Rd' 'toolkit.scrollingWrapper.Rd'\n     'toolkit.setAsBody.Rd' 'toolkit.stack.Rd' 'toolkit.staticText.Rd'\n     'toolkit.verticalDivide.Rd' 'toolkit.whenQuiet.Rd'\n     'toolkit.withTimeout.Rd'\n   \\arguments should not be documented without \\usage.\n\nAnd you should really add the usage line, a usage line does not mean \nthese are executed. An example would....\n\nBest,\nUwe Ligges\n\n\n\n\n\n\n\nOn 28.09.2026 18:22, Tim Band wrote:\n> Hi-\n> I have this weird problem with my package shinylight. It's a simple way to serve your R functions over the web (like Shiny but with much less functionality and much fewer dependencies).\n> The build has suddenly broken at CRAN without any change in the code. There are many notes (mostly related to the JavaScript functions not having \\usage, because obviously I don't want them run by the automatic checks), but the big problem is:\n> \n> \"createTcpServer: address already in use: 50050\".\n> \n> So, this looks like this port has been blocked by something on the CRAN machines, quite possibly an old test run hanging. So the simplest solution would seem to be change the port to 50051 and re-submit. I have done this but now when I re-submit I still get an email saying it has failed, with the same error, with port 50050.\n> \n> So I unzipped the package that I uploaded and checked; there's no 50050 in the file mentioned, or anywhere in the source.\n> \n> I'd like to download the exact thing I uploaded so I can check what they think they built. Or is this a normal thing? Is there something I need to do to say \"no, really rebuild from clean\"?\n> \n> Also, am I going to get hit with the \\usage issue? And is there a good way to annotate the JavaScript properly without causing notes?\n> \n> Thanks for any help,\n> -Tim\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I think you are looking into the check results of the last version on \nCRAN, not of the new submission. Both are linked from the mail you received.\n\nThe only issue I see is\n\n\n\nFlavor: r-devel-linux-x8",
+      "thread_id": "thread-5f373c434eb9",
+      "thread_depth": 1,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-2250540317bd",
+      "message_id": "<20260928213439.656e883c@Tarkus>",
+      "from_name": "Ivan Krylov",
+      "from_email_hash": "72bda76034efaa18cd166b722c373c5159885b988468de351df8992020f3856a",
+      "date": "2026-09-28T18:34:39Z",
+      "subject": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "subject_clean": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "in_reply_to": "<AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>",
+      "references": [
+        "<AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>"
+      ],
+      "body_plain": "Hi Tim!\n\n? Mon, 28 Sep 2026 16:22:56 +0000\nTim Band <t.band at ucl.ac.uk> ?????:\n\n> There are many notes (mostly related to the JavaScript functions not\n> having \\usage, because obviously I don't want them run by the\n> automatic checks)\n\nAs Uwe just said, R CMD check runs functions because they have\n\\examples{}, not because they have \\usage{}. It's unorthodox but not\nverboten to have help pages in your package for things that aren't even\nexported as R objects from your namespace, like your JavaScript\nfunctions. If your JavaScript prototypes can be parsed as valid R, it's\nfine to include them in a \\usage{} section. You could also replace the\n\\arguments{} with a custom \\describe{} environment (and \\usage{} with\n\\preformatted{}) to avoid the NOTE.\n\n> but the big problem is:\n> \n> \"createTcpServer: address already in use: 50050\".\n> \n> So, this looks like this port has been blocked by something on the\n> CRAN machines, quite possibly an old test run hanging. So the\n> simplest solution would seem to be change the port to 50051 and\n> re-submit.\n\n50050 is a high port number in the ephemeral port range. Some other\nprocess was probably making an outgoing TCP connection and bound to\nthis port in a coincidence.\n\nIn general, no fixed port number can be assumed to be available on the\nmachine running R CMD check. I recommend capturing that exception from\nhttpuv::startServer(...), signalling it with a specific class (e.g.\n\"shinyserver_startServer_failed\") and wrapping your example in\ntryCatch(..., shinyserver_startServer_failed = identity). This way your\nexample will not spuriously fail for network-related reasons not under\nyour control.\n\n> I have done this but now when I re-submit I still get an email saying\n> it has failed, with the same error, with port 50050.\n\nI see two submission attempts:\n\nhttps://win-builder.r-project.org/incoming_pretest/shinylight_1.3_20260904_194215/\nhttps://win-builder.r-project.org/incoming_pretest/shinylight_1.3_20260928_165547/\n\nNeither shows an error message about \"address already in use\". Are you\nsure it's not \"Last released version's additional issues:\"? In fact,\nI'm not seeing any issues except the \\usage{} NOTE.\n\n> So I unzipped the package that I uploaded and checked; there's no\n> 50050 in the file mentioned, or anywhere in the source.\n> \n> I'd like to download the exact thing I uploaded so I can check what\n> they think they built.\n\nYour latest submission does use port 50051 in the ?runR example:\nhttps://cran.r-project.org/incoming/archive/shinylight_1.3.tar.gz\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "Hi Tim!\n\n? Mon, 28 Sep 2026 16:22:56 +0000\nTim Band <t.band at ucl.ac.uk> ?????:\n\n> There are many notes (mostly related to the JavaScript functions not\n> having \\usage, because obviously I don't want",
+      "thread_id": "thread-5f373c434eb9",
+      "thread_depth": 1,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-96a59c13ea40",
+      "message_id": "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>",
+      "from_name": "Alexis Dinno",
+      "from_email_hash": "2b3e155708230c59f6a195eae74bb19b0638aefcf0f804cc4e82775ea7888455",
+      "date": "2026-09-28T20:36:13Z",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "subject_clean": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello Listers,\n\nIn my efforts to be helpfully guided away from blythely cat()ing and\nprint()ing in my packages published on CRAN (along with stop()ping and\nwarn()ing :), I have moved to a practice of using these\n  rlang::abort()\n  rlang::warn()\n  rlang::inform()\n\nIn order to support somewhat standardized ways for users to suppress output\nto stdout.\n\nI am looking for something in this spirit to replace print(M) where M is a\nmatrix object, since rlang::inform(M) does not work, and\nrlang::inform(print(M)) works (as far as output goes, though I haven't\nactually tested its suppressability), though it complains bitterly when I\ndo this in a manner I would like to spare users from.\n\nBasically, I am looking for a solution where something like the following\nwould make sense:\n\n > supressable.print(M)\n       a  b  c\n a   -1  1  1\n b    0  0  1\n c    1  0 -1\n > options(rlib_message_verbosity = \"quiet\")\n > supressable.print(M)\n >\n\nThank you for your guidance!\n\nAside: I would like this thread to NOT be a place to discuss philosophical\npreferences for approaches like rlang::inform() versus approaches like\nmy_fun(...,verbose=TRUE). Although that would be a worthwhile discussion to\nhave, the latter has some specific problems for my use case, and I would be\nhappy to discuss elsewhere.\n\n\nSincerely,\nAlexis Dinno\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello Listers,\n\nIn my efforts to be helpfully guided away from blythely cat()ing and\nprint()ing in my packages published on CRAN (along with stop()ping and\nwarn()ing :), I have moved to a practice of ",
+      "thread_id": "thread-96a59c13ea40",
+      "thread_depth": 0,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-8a67941cc022",
+      "message_id": "<0e6f9d4c-0fbe-410e-92fd-484b811ef34e@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "f9a415d339fb179db05d60d3dad3c3f8a3545457db293eaaaa76ffc7f4ce0713",
+      "date": "2026-09-28T21:42:17Z",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "subject_clean": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "in_reply_to": "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>"
+      ],
+      "body_plain": "On 2026-09-28 4:36 p.m., Alexis Dinno via R-package-devel wrote:\n> Hello Listers,\n> \n> In my efforts to be helpfully guided away from blythely cat()ing and\n> print()ing in my packages published on CRAN (along with stop()ping and\n> warn()ing :), I have moved to a practice of using these\n>    rlang::abort()\n>    rlang::warn()\n>    rlang::inform()\n> \n> In order to support somewhat standardized ways for users to suppress output\n> to stdout.\n> \n> I am looking for something in this spirit to replace print(M) where M is a\n> matrix object, since rlang::inform(M) does not work, and\n> rlang::inform(print(M)) works (as far as output goes, though I haven't\n> actually tested its suppressability), though it complains bitterly when I\n> do this in a manner I would like to spare users from.\n> \n> Basically, I am looking for a solution where something like the following\n> would make sense:\n> \n>   > supressable.print(M)\n>         a  b  c\n>   a   -1  1  1\n>   b    0  0  1\n>   c    1  0 -1\n>   > options(rlib_message_verbosity = \"quiet\")\n>   > supressable.print(M)\n>   >\n> \n> Thank you for your guidance!\nI don't quite understand your question.  Why not just write your own \nsuppressable.print() function?  It's pretty trivial to get one that \nbehaves the way you want:\n\n   suppressable.print <- function(M) {\n     suppress <- getOption(\"rlib_message_verbosity\", \"normal\")\n     if (suppress == \"normal\")\n       print(M)\n     else\n       invisible(M)\n   }\n\nDuncan Murdoch",
+      "body_snippet": "On 2026-09-28 4:36 p.m., Alexis Dinno via R-package-devel wrote:\n> Hello Listers,\n> \n> In my efforts to be helpfully guided away from blythely cat()ing and\n> print()ing in my packages published on CRA",
+      "thread_id": "thread-96a59c13ea40",
+      "thread_depth": 1,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-2586b840ce13",
+      "message_id": "<CADNULg9qXhqRFo6kom_qSfWoV7HWrGo97-kVJHN4qmmWhyqbqQ@mail.gmail.com>",
+      "from_name": "Iris Simmons",
+      "from_email_hash": "40b01f168beec35ef27cb62ca97f7a4b288ecbda9c188bcf84504fdbe44290e9",
+      "date": "2026-09-28T21:47:28Z",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "subject_clean": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "in_reply_to": "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>"
+      ],
+      "body_plain": "I would use something like utils::capture.output(M) to turn the matrix into\na character vector and then use whichever of the rlang message function\nprefer.\n\nOn Mon, Sep 28, 2026, 17:34 Alexis Dinno via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> Hello Listers,\n>\n> In my efforts to be helpfully guided away from blythely cat()ing and\n> print()ing in my packages published on CRAN (along with stop()ping and\n> warn()ing :), I have moved to a practice of using these\n>   rlang::abort()\n>   rlang::warn()\n>   rlang::inform()\n>\n> In order to support somewhat standardized ways for users to suppress output\n> to stdout.\n>\n> I am looking for something in this spirit to replace print(M) where M is a\n> matrix object, since rlang::inform(M) does not work, and\n> rlang::inform(print(M)) works (as far as output goes, though I haven't\n> actually tested its suppressability), though it complains bitterly when I\n> do this in a manner I would like to spare users from.\n>\n> Basically, I am looking for a solution where something like the following\n> would make sense:\n>\n>  > supressable.print(M)\n>        a  b  c\n>  a   -1  1  1\n>  b    0  0  1\n>  c    1  0 -1\n>  > options(rlib_message_verbosity = \"quiet\")\n>  > supressable.print(M)\n>  >\n>\n> Thank you for your guidance!\n>\n> Aside: I would like this thread to NOT be a place to discuss philosophical\n> preferences for approaches like rlang::inform() versus approaches like\n> my_fun(...,verbose=TRUE). Although that would be a worthwhile discussion to\n> have, the latter has some specific problems for my use case, and I would be\n> happy to discuss elsewhere.\n>\n>\n> Sincerely,\n> Alexis Dinno\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I would use something like utils::capture.output(M) to turn the matrix into\na character vector and then use whichever of the rlang message function\nprefer.\n\nOn Mon, Sep 28, 2026, 17:34 Alexis Dinno vi",
+      "thread_id": "thread-96a59c13ea40",
+      "thread_depth": 1,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-39613bc56870",
+      "message_id": "<CAPRVBcysr1_fUooYt8h3-kQukvd7KqC71G3036Zzp8OhF3Yj2g@mail.gmail.com>",
+      "from_name": "Michael Chirico",
+      "from_email_hash": "c7ae14eea7523abfb41c3b0b883332081fc591538823e9bc107ad314c96d8583",
+      "date": "2026-09-28T21:49:25Z",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "subject_clean": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "in_reply_to": "<0e6f9d4c-0fbe-410e-92fd-484b811ef34e@gmail.com>",
+      "references": [
+        "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>",
+        "<0e6f9d4c-0fbe-410e-92fd-484b811ef34e@gmail.com>"
+      ],
+      "body_plain": "utils::capture.output() seems appropriate:\n\ns <- capture.output(print(M))\n\nIf you find that awkward, you might like a textConnection (IMO even more\ncumbersome):\n\ns <- character(nrow(M))\nlocal({\n  con <- textConnection('s', 'w'); on.exit(close(con))\n  write.csv(M, row.names=FALSE, con)\n})\n\nWith other objects, using format() to get a string representation of an\nobject is often fruitful, but matrices in particular are \"special\".\n\nMike C\n\nOn Mon, Sep 28, 2026 at 2:44?PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 2026-09-28 4:36 p.m., Alexis Dinno via R-package-devel wrote:\n> > Hello Listers,\n> >\n> > In my efforts to be helpfully guided away from blythely cat()ing and\n> > print()ing in my packages published on CRAN (along with stop()ping and\n> > warn()ing :), I have moved to a practice of using these\n> >    rlang::abort()\n> >    rlang::warn()\n> >    rlang::inform()\n> >\n> > In order to support somewhat standardized ways for users to suppress\n> output\n> > to stdout.\n> >\n> > I am looking for something in this spirit to replace print(M) where M is\n> a\n> > matrix object, since rlang::inform(M) does not work, and\n> > rlang::inform(print(M)) works (as far as output goes, though I haven't\n> > actually tested its suppressability), though it complains bitterly when I\n> > do this in a manner I would like to spare users from.\n> >\n> > Basically, I am looking for a solution where something like the following\n> > would make sense:\n> >\n> >   > supressable.print(M)\n> >         a  b  c\n> >   a   -1  1  1\n> >   b    0  0  1\n> >   c    1  0 -1\n> >   > options(rlib_message_verbosity = \"quiet\")\n> >   > supressable.print(M)\n> >   >\n> >\n> > Thank you for your guidance!\n> I don't quite understand your question.  Why not just write your own\n> suppressable.print() function?  It's pretty trivial to get one that\n> behaves the way you want:\n>\n>    suppressable.print <- function(M) {\n>      suppress <- getOption(\"rlib_message_verbosity\", \"normal\")\n>      if (suppress == \"normal\")\n>        print(M)\n>      else\n>        invisible(M)\n>    }\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "utils::capture.output() seems appropriate:\n\ns <- capture.output(print(M))\n\nIf you find that awkward, you might like a textConnection (IMO even more\ncumbersome):\n\ns <- character(nrow(M))\nlocal({\n  con ",
+      "thread_id": "thread-96a59c13ea40",
+      "thread_depth": 2,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-27c7a21e6764",
+      "message_id": "<CAN-eFgJ_VYH9qnssgnWfgxKVU_vew5ksncKjBGUDaNhLGOwG7A@mail.gmail.com>",
+      "from_name": "Alexis Dinno",
+      "from_email_hash": "2b3e155708230c59f6a195eae74bb19b0638aefcf0f804cc4e82775ea7888455",
+      "date": "2026-09-28T21:58:31Z",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "subject_clean": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "in_reply_to": "<0e6f9d4c-0fbe-410e-92fd-484b811ef34e@gmail.com>",
+      "references": [
+        "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>",
+        "<0e6f9d4c-0fbe-410e-92fd-484b811ef34e@gmail.com>"
+      ],
+      "body_plain": "My Dear Duncan,\n\n\nYou are really more generous than you need be in writing such a function! I\nsincerely thank you.\n\nI suppose, to directly answer your question, \"Because there might already\nbe a canned function to do just this.\" A little less directly, but probably\nfar more central to my experience: \"Because I'm just a scientist, not a CS\nperson, and my self-confidence is not high (does the learning curve *ever*\nflatten?!).\" :)\n\nThank you again.\n\n\nSincerely,\nAlexis\n\nOn Mon, Sep 28, 2026 at 2:42?PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> On 2026-09-28 4:36 p.m., Alexis Dinno via R-package-devel wrote:\n> > Hello Listers,\n> >\n> > In my efforts to be helpfully guided away from blythely cat()ing and\n> > print()ing in my packages published on CRAN (along with stop()ping and\n> > warn()ing :), I have moved to a practice of using these\n> >    rlang::abort()\n> >    rlang::warn()\n> >    rlang::inform()\n> >\n> > In order to support somewhat standardized ways for users to suppress\n> output\n> > to stdout.\n> >\n> > I am looking for something in this spirit to replace print(M) where M is\n> a\n> > matrix object, since rlang::inform(M) does not work, and\n> > rlang::inform(print(M)) works (as far as output goes, though I haven't\n> > actually tested its suppressability), though it complains bitterly when I\n> > do this in a manner I would like to spare users from.\n> >\n> > Basically, I am looking for a solution where something like the following\n> > would make sense:\n> >\n> >   > supressable.print(M)\n> >         a  b  c\n> >   a   -1  1  1\n> >   b    0  0  1\n> >   c    1  0 -1\n> >   > options(rlib_message_verbosity = \"quiet\")\n> >   > supressable.print(M)\n> >   >\n> >\n> > Thank you for your guidance!\n> I don't quite understand your question.  Why not just write your own\n> suppressable.print() function?  It's pretty trivial to get one that\n> behaves the way you want:\n>\n>    suppressable.print <- function(M) {\n>      suppress <- getOption(\"rlib_message_verbosity\", \"normal\")\n>      if (suppress == \"normal\")\n>        print(M)\n>      else\n>        invisible(M)\n>    }\n>\n> Duncan Murdoch\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "My Dear Duncan,\n\n\nYou are really more generous than you need be in writing such a function! I\nsincerely thank you.\n\nI suppose, to directly answer your question, \"Because there might already\nbe a canne",
+      "thread_id": "thread-96a59c13ea40",
+      "thread_depth": 2,
+      "month": "2026-09"
+    },
+    {
+      "id": "msg-f2100ea69967",
+      "message_id": "<CAN-eFg+yAnQHrG7OpkBAE1oWSTuWcX7MzefsU_RKW=UMJ2yuhg@mail.gmail.com>",
+      "from_name": "Alexis Dinno",
+      "from_email_hash": "2b3e155708230c59f6a195eae74bb19b0638aefcf0f804cc4e82775ea7888455",
+      "date": "2026-09-28T21:59:34Z",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "subject_clean": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "in_reply_to": "<CADNULg9qXhqRFo6kom_qSfWoV7HWrGo97-kVJHN4qmmWhyqbqQ@mail.gmail.com>",
+      "references": [
+        "<CAN-eFgJpxbcdoW3HwxYUjnznz8w7LUrKMOjBA77Mv4R9C3eaUg@mail.gmail.com>",
+        "<CADNULg9qXhqRFo6kom_qSfWoV7HWrGo97-kVJHN4qmmWhyqbqQ@mail.gmail.com>"
+      ],
+      "body_plain": "Dear Iris,\n\nWonderful! I may explore combining that with something like Duncan's\napproach. Thank you.\n\n\nAlexis\n\nOn Mon, Sep 28, 2026 at 2:47?PM Iris Simmons <ikwsimmo at gmail.com> wrote:\n\n> I would use something like utils::capture.output(M) to turn the matrix\n> into a character vector and then use whichever of the rlang message\n> function prefer.\n>\n> On Mon, Sep 28, 2026, 17:34 Alexis Dinno via R-package-devel <\n> r-package-devel at r-project.org> wrote:\n>\n>> Hello Listers,\n>>\n>> In my efforts to be helpfully guided away from blythely cat()ing and\n>> print()ing in my packages published on CRAN (along with stop()ping and\n>> warn()ing :), I have moved to a practice of using these\n>>   rlang::abort()\n>>   rlang::warn()\n>>   rlang::inform()\n>>\n>> In order to support somewhat standardized ways for users to suppress\n>> output\n>> to stdout.\n>>\n>> I am looking for something in this spirit to replace print(M) where M is a\n>> matrix object, since rlang::inform(M) does not work, and\n>> rlang::inform(print(M)) works (as far as output goes, though I haven't\n>> actually tested its suppressability), though it complains bitterly when I\n>> do this in a manner I would like to spare users from.\n>>\n>> Basically, I am looking for a solution where something like the following\n>> would make sense:\n>>\n>>  > supressable.print(M)\n>>        a  b  c\n>>  a   -1  1  1\n>>  b    0  0  1\n>>  c    1  0 -1\n>>  > options(rlib_message_verbosity = \"quiet\")\n>>  > supressable.print(M)\n>>  >\n>>\n>> Thank you for your guidance!\n>>\n>> Aside: I would like this thread to NOT be a place to discuss philosophical\n>> preferences for approaches like rlang::inform() versus approaches like\n>> my_fun(...,verbose=TRUE). Although that would be a worthwhile discussion\n>> to\n>> have, the latter has some specific problems for my use case, and I would\n>> be\n>> happy to discuss elsewhere.\n>>\n>>\n>> Sincerely,\n>> Alexis Dinno\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Iris,\n\nWonderful! I may explore combining that with something like Duncan's\napproach. Thank you.\n\n\nAlexis\n\nOn Mon, Sep 28, 2026 at 2:47?PM Iris Simmons <ikwsimmo at gmail.com> wrote:\n\n> I would u",
+      "thread_id": "thread-96a59c13ea40",
+      "thread_depth": 2,
+      "month": "2026-09"
     }
   ],
   "threads": [
@@ -635,6 +796,33 @@
       "started": "2026-09-23T00:16:23Z",
       "last_reply": "2026-09-25T15:52:58Z",
       "root_message_id": "msg-2f92eea1fc01"
+    },
+    {
+      "id": "thread-5f373c434eb9",
+      "subject": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "message_count": 3,
+      "participants": [
+        "Ivan Krylov",
+        "Tim Band",
+        "Uwe Ligges"
+      ],
+      "started": "2026-09-28T16:22:56Z",
+      "last_reply": "2026-09-28T18:34:39Z",
+      "root_message_id": "msg-5f373c434eb9"
+    },
+    {
+      "id": "thread-96a59c13ea40",
+      "subject": "[R-pkg-devel] Seeking alternative to print() for matrix objects",
+      "message_count": 6,
+      "participants": [
+        "Alexis Dinno",
+        "Duncan Murdoch",
+        "Iris Simmons",
+        "Michael Chirico"
+      ],
+      "started": "2026-09-28T20:36:13Z",
+      "last_reply": "2026-09-28T21:59:34Z",
+      "root_message_id": "msg-96a59c13ea40"
     }
   ]
 }
