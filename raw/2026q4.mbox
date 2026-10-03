@@ -1,0 +1,481 @@
+From u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de  Fri Oct  2 20:19:31 2026
+From: u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de (=?UTF-8?Q?Ulrike_Gr=C3=B6mping?=)
+Date: Fri, 2 Oct 2026 20:19:31 +0200
+Subject: [R-pkg-devel] set.seed in a package
+Message-ID: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+
+Hi all,
+
+I am looking for advice, how I can provide reproducibility for a design 
+whose creation involves random steps for cases where the user did not 
+set a seed.
+My current approach, which was rejected by CRAN (I'm still trying to 
+argue):
+
+create a seed randomly via "if (is.null(seed)) seed <- sample(32000, 1)",
+use that seed (instead of NULL) for design creation,
+and store it with the output object.
+
+Of course this modifies .Random.seed, but the algorithm itself also 
+modifies that. The benefit is?that the user can reproduce the same 
+design even if they didn't use a seed. I don't see any harm, as the user 
+can also run many attempts with seed NULL and get different results each 
+and every time.
+
+I think that the reproducibility of an experimental plan is important, 
+and I don't want to sacrifice that.?Are there any ideas what I could do 
+instead if I cannot convince CRAN of my strategy?
+
+Best, Ulrike
+
+
+From br|@n @end|ng |rom br@verock@com  Fri Oct  2 20:28:59 2026
+From: br|@n @end|ng |rom br@verock@com (Brian G. Peterson)
+Date: Fri, 02 Oct 2026 13:28:59 -0500
+Subject: [R-pkg-devel] set.seed in a package
+In-Reply-To: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+References: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+Message-ID: <0b5100ed4e27e552cc4c46dbb0097c81c98d5c5c.camel@braverock.com>
+
+We simply record the value of .Random.seed at the time of beginning the
+item that we wish to be reproducible later. This way the seed can be
+anything, and you still preserve reproducibility.
+
+so in your case your function could default NULL, and you still record
+the seed that was used with your output object.
+ 
+-- 
+Brian G. Peterson
+ph: +1.773.459.4973
+im: bgpbraverock
+
+On Fri, 2026-10-02 at 20:19 +0200, Ulrike Gr?mping wrote:
+> Hi all,
+> 
+> I am looking for advice, how I can provide reproducibility for a
+> design 
+> whose creation involves random steps for cases where the user did not
+> set a seed.
+> My current approach, which was rejected by CRAN (I'm still trying to 
+> argue):
+> 
+> create a seed randomly via "if (is.null(seed)) seed <- sample(32000,
+> 1)",
+> use that seed (instead of NULL) for design creation,
+> and store it with the output object.
+> 
+> Of course this modifies .Random.seed, but the algorithm itself also 
+> modifies that. The benefit is?that the user can reproduce the same 
+> design even if they didn't use a seed. I don't see any harm, as the
+> user 
+> can also run many attempts with seed NULL and get different results
+> each 
+> and every time.
+> 
+> I think that the reproducibility of an experimental plan is
+> important, 
+> and I don't want to sacrifice that.?Are there any ideas what I could
+> do 
+> instead if I cannot convince CRAN of my strategy?
+> 
+> Best, Ulrike
+> 
+> ______________________________________________
+> R-package-devel at r-project.org?mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Fri Oct  2 20:30:51 2026
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Fri, 2 Oct 2026 20:30:51 +0200
+Subject: [R-pkg-devel] set.seed in a package
+In-Reply-To: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+References: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+Message-ID: <7c662605-4ab8-4710-88fc-a0022f17cf11@statistik.tu-dortmund.de>
+
+I have not had the time to answer on CRAN.
+
+There are good reasons now to allow for changing a seed.
+
+If generating that plan is part of a simulation. You will always set the 
+seed to a rather random  place in the random number stream which may 
+cause randomly starting at a place where you have been before and you 
+may end up with repeated random number. Also for running in parallel: 
+you won't benefit from parallel indeoendent random number streams any more.
+
+So please don't do that.
+
+If you want to make it reproducible, you could simply store the 
+.Random.seed object (at the state before you started to generate the 
+plan) with your plan.
+
+Best,
+Uwe Ligges
+
+
+On 02.10.2026 20:19, Ulrike Gr?mping wrote:
+> Hi all,
+> 
+> I am looking for advice, how I can provide reproducibility for a design 
+> whose creation involves random steps for cases where the user did not 
+> set a seed.
+> My current approach, which was rejected by CRAN (I'm still trying to 
+> argue):
+> 
+> create a seed randomly via "if (is.null(seed)) seed <- sample(32000, 1)",
+> use that seed (instead of NULL) for design creation,
+> and store it with the output object.
+> 
+> Of course this modifies .Random.seed, but the algorithm itself also 
+> modifies that. The benefit is?that the user can reproduce the same 
+> design even if they didn't use a seed. I don't see any harm, as the user 
+> can also run many attempts with seed NULL and get different results each 
+> and every time.
+> 
+> I think that the reproducibility of an experimental plan is important, 
+> and I don't want to sacrifice that.?Are there any ideas what I could do 
+> instead if I cannot convince CRAN of my strategy?
+> 
+> Best, Ulrike
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From r@c@rtwr|ght @end|ng |rom gm@||@com  Fri Oct  2 20:45:12 2026
+From: r@c@rtwr|ght @end|ng |rom gm@||@com (Reed Cartwright)
+Date: Fri, 2 Oct 2026 11:45:12 -0700
+Subject: [R-pkg-devel] set.seed in a package
+In-Reply-To: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+References: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+Message-ID: <CAHoyoSKdcVbHyKWb5XCLWNo6tNNGh2DahtbWK6D=9nB8vd25cA@mail.gmail.com>
+
+The easiest way to use a reproducible seed by default is to call
+withr::local_seed to set the seed within the function because it will reset
+the seed when the function exists.
+
+function(..., seed = NULL) {
+  withr::local_seed(seed %||% 1L)
+  # rest of function
+}
+
+If you don't want to depend on withr, you can achieve a similar thing with
+on.exit.
+
+
+On Fri, Oct 2, 2026 at 11:19?AM Ulrike Gr?mping <
+ulrike.groemping at bht-berlin.de> wrote:
+
+> Hi all,
+>
+> I am looking for advice, how I can provide reproducibility for a design
+> whose creation involves random steps for cases where the user did not
+> set a seed.
+> My current approach, which was rejected by CRAN (I'm still trying to
+> argue):
+>
+> create a seed randomly via "if (is.null(seed)) seed <- sample(32000, 1)",
+> use that seed (instead of NULL) for design creation,
+> and store it with the output object.
+>
+> Of course this modifies .Random.seed, but the algorithm itself also
+> modifies that. The benefit is that the user can reproduce the same
+> design even if they didn't use a seed. I don't see any harm, as the user
+> can also run many attempts with seed NULL and get different results each
+> and every time.
+>
+> I think that the reproducibility of an experimental plan is important,
+> and I don't want to sacrifice that. Are there any ideas what I could do
+> instead if I cannot convince CRAN of my strategy?
+>
+> Best, Ulrike
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From henr|k@bengt@@on @end|ng |rom gm@||@com  Fri Oct  2 20:49:25 2026
+From: henr|k@bengt@@on @end|ng |rom gm@||@com (Henrik Bengtsson)
+Date: Fri, 2 Oct 2026 11:49:25 -0700
+Subject: [R-pkg-devel] set.seed in a package
+In-Reply-To: <7c662605-4ab8-4710-88fc-a0022f17cf11@statistik.tu-dortmund.de>
+References: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+ <7c662605-4ab8-4710-88fc-a0022f17cf11@statistik.tu-dortmund.de>
+Message-ID: <CAFDcVCRVzUko_EyjsE9ow2jTE2MGXwyp=4pWupPZ7=rE231HXw@mail.gmail.com>
+
+> If you want to make it reproducible, you could simply store the .Random.seed object (at the state before you started to generate the plan) with your plan.
+
+I agree with this. There is one corner case, though, that is hard to
+control for: when you run in a fresh R session where .Random.seed does
+not exist. Recording that state won't help reproducibility because
+then R will use a "random" RNG state.
+
+Related: The fact that .Random.seed is unset in a fresh R session
+requires lots of special handling in many scenario, e.g. if
+(exists(".Random.seed", envir = globalenv()) ... else ... It's been on
+my wish list to have R always initiate the RNG state, avoiding this
+special case that requires careful handling (and is often overlooked).
+
+/Henrik
+
+On Fri, Oct 2, 2026 at 11:39?AM Uwe Ligges
+<ligges at statistik.tu-dortmund.de> wrote:
+>
+> I have not had the time to answer on CRAN.
+>
+> There are good reasons now to allow for changing a seed.
+>
+> If generating that plan is part of a simulation. You will always set the
+> seed to a rather random  place in the random number stream which may
+> cause randomly starting at a place where you have been before and you
+> may end up with repeated random number. Also for running in parallel:
+> you won't benefit from parallel indeoendent random number streams any more.
+>
+> So please don't do that.
+>
+> If you want to make it reproducible, you could simply store the
+> .Random.seed object (at the state before you started to generate the
+> plan) with your plan.
+>
+> Best,
+> Uwe Ligges
+>
+>
+> On 02.10.2026 20:19, Ulrike Gr?mping wrote:
+> > Hi all,
+> >
+> > I am looking for advice, how I can provide reproducibility for a design
+> > whose creation involves random steps for cases where the user did not
+> > set a seed.
+> > My current approach, which was rejected by CRAN (I'm still trying to
+> > argue):
+> >
+> > create a seed randomly via "if (is.null(seed)) seed <- sample(32000, 1)",
+> > use that seed (instead of NULL) for design creation,
+> > and store it with the output object.
+> >
+> > Of course this modifies .Random.seed, but the algorithm itself also
+> > modifies that. The benefit is that the user can reproduce the same
+> > design even if they didn't use a seed. I don't see any harm, as the user
+> > can also run many attempts with seed NULL and get different results each
+> > and every time.
+> >
+> > I think that the reproducibility of an experimental plan is important,
+> > and I don't want to sacrifice that. Are there any ideas what I could do
+> > instead if I cannot convince CRAN of my strategy?
+> >
+> > Best, Ulrike
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+From r@c@rtwr|ght @end|ng |rom gm@||@com  Fri Oct  2 20:53:59 2026
+From: r@c@rtwr|ght @end|ng |rom gm@||@com (Reed Cartwright)
+Date: Fri, 2 Oct 2026 11:53:59 -0700
+Subject: [R-pkg-devel] set.seed in a package
+In-Reply-To: <CAFDcVCRVzUko_EyjsE9ow2jTE2MGXwyp=4pWupPZ7=rE231HXw@mail.gmail.com>
+References: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+ <7c662605-4ab8-4710-88fc-a0022f17cf11@statistik.tu-dortmund.de>
+ <CAFDcVCRVzUko_EyjsE9ow2jTE2MGXwyp=4pWupPZ7=rE231HXw@mail.gmail.com>
+Message-ID: <CAHoyoSKF-ukaCv_nuNmk4L9jm3MRUuGFrMZTTvKvWZ3YBuJhSA@mail.gmail.com>
+
+I can't help but plug my ironseed package here for anyone interested in
+robust and reproducible seeding in R scripts etc.
+
+https://github.com/reedacartwright/ironseed
+
+On Fri, Oct 2, 2026 at 11:49?AM Henrik Bengtsson <henrik.bengtsson at gmail.com>
+wrote:
+
+> > If you want to make it reproducible, you could simply store the
+> .Random.seed object (at the state before you started to generate the plan)
+> with your plan.
+>
+> I agree with this. There is one corner case, though, that is hard to
+> control for: when you run in a fresh R session where .Random.seed does
+> not exist. Recording that state won't help reproducibility because
+> then R will use a "random" RNG state.
+>
+> Related: The fact that .Random.seed is unset in a fresh R session
+> requires lots of special handling in many scenario, e.g. if
+> (exists(".Random.seed", envir = globalenv()) ... else ... It's been on
+> my wish list to have R always initiate the RNG state, avoiding this
+> special case that requires careful handling (and is often overlooked).
+>
+> /Henrik
+>
+> On Fri, Oct 2, 2026 at 11:39?AM Uwe Ligges
+> <ligges at statistik.tu-dortmund.de> wrote:
+> >
+> > I have not had the time to answer on CRAN.
+> >
+> > There are good reasons now to allow for changing a seed.
+> >
+> > If generating that plan is part of a simulation. You will always set the
+> > seed to a rather random  place in the random number stream which may
+> > cause randomly starting at a place where you have been before and you
+> > may end up with repeated random number. Also for running in parallel:
+> > you won't benefit from parallel indeoendent random number streams any
+> more.
+> >
+> > So please don't do that.
+> >
+> > If you want to make it reproducible, you could simply store the
+> > .Random.seed object (at the state before you started to generate the
+> > plan) with your plan.
+> >
+> > Best,
+> > Uwe Ligges
+> >
+> >
+> > On 02.10.2026 20:19, Ulrike Gr?mping wrote:
+> > > Hi all,
+> > >
+> > > I am looking for advice, how I can provide reproducibility for a design
+> > > whose creation involves random steps for cases where the user did not
+> > > set a seed.
+> > > My current approach, which was rejected by CRAN (I'm still trying to
+> > > argue):
+> > >
+> > > create a seed randomly via "if (is.null(seed)) seed <- sample(32000,
+> 1)",
+> > > use that seed (instead of NULL) for design creation,
+> > > and store it with the output object.
+> > >
+> > > Of course this modifies .Random.seed, but the algorithm itself also
+> > > modifies that. The benefit is that the user can reproduce the same
+> > > design even if they didn't use a seed. I don't see any harm, as the
+> user
+> > > can also run many attempts with seed NULL and get different results
+> each
+> > > and every time.
+> > >
+> > > I think that the reproducibility of an experimental plan is important,
+> > > and I don't want to sacrifice that. Are there any ideas what I could do
+> > > instead if I cannot convince CRAN of my strategy?
+> > >
+> > > Best, Ulrike
+> > >
+> > > ______________________________________________
+> > > R-package-devel at r-project.org mailing list
+> > > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de  Fri Oct  2 22:44:48 2026
+From: u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de (=?UTF-8?Q?Ulrike_Gr=C3=B6mping?=)
+Date: Fri, 2 Oct 2026 22:44:48 +0200
+Subject: [R-pkg-devel] set.seed in a package
+In-Reply-To: <CAFDcVCRVzUko_EyjsE9ow2jTE2MGXwyp=4pWupPZ7=rE231HXw@mail.gmail.com>
+References: <bc7ceea9-f84b-4214-b2d6-4300b9f9fe67@bht-berlin.de>
+ <7c662605-4ab8-4710-88fc-a0022f17cf11@statistik.tu-dortmund.de>
+ <CAFDcVCRVzUko_EyjsE9ow2jTE2MGXwyp=4pWupPZ7=rE231HXw@mail.gmail.com>
+Message-ID: <6e756504-c81c-463a-b628-96d763a1c9e6@bht-berlin.de>
+
+Thanks, everybody, I guess I now understand that my previous take was 
+somewhat naive.
+
+Providing a single integer as seed makes it very easy to reproduce a 
+design. Providing .Random.seed is more complicated for the user to 
+handle, especially for users who are not into programming. Storing the 
+design itself may be not much more difficult than storing .Random.seed. 
+Thus, I guess I drop the plan to enforce reproducibility if a seed is 
+not provided,
+and instead make the user aware why it may be particularly important to 
+specify a seed.
+
+Thanks again!
+
+Best, Ulrike
+
+Am 02.10.2026 um 20:49 schrieb Henrik Bengtsson:
+>> If you want to make it reproducible, you could simply store the .Random.seed object (at the state before you started to generate the plan) with your plan.
+> I agree with this. There is one corner case, though, that is hard to
+> control for: when you run in a fresh R session where .Random.seed does
+> not exist. Recording that state won't help reproducibility because
+> then R will use a "random" RNG state.
+>
+> Related: The fact that .Random.seed is unset in a fresh R session
+> requires lots of special handling in many scenario, e.g. if
+> (exists(".Random.seed", envir = globalenv()) ... else ... It's been on
+> my wish list to have R always initiate the RNG state, avoiding this
+> special case that requires careful handling (and is often overlooked).
+>
+> /Henrik
+>
+> On Fri, Oct 2, 2026 at 11:39?AM Uwe Ligges
+> <ligges at statistik.tu-dortmund.de> wrote:
+>> I have not had the time to answer on CRAN.
+>>
+>> There are good reasons now to allow for changing a seed.
+>>
+>> If generating that plan is part of a simulation. You will always set the
+>> seed to a rather random  place in the random number stream which may
+>> cause randomly starting at a place where you have been before and you
+>> may end up with repeated random number. Also for running in parallel:
+>> you won't benefit from parallel indeoendent random number streams any more.
+>>
+>> So please don't do that.
+>>
+>> If you want to make it reproducible, you could simply store the
+>> .Random.seed object (at the state before you started to generate the
+>> plan) with your plan.
+>>
+>> Best,
+>> Uwe Ligges
+>>
+>>
+>> On 02.10.2026 20:19, Ulrike Gr?mping wrote:
+>>> Hi all,
+>>>
+>>> I am looking for advice, how I can provide reproducibility for a design
+>>> whose creation involves random steps for cases where the user did not
+>>> set a seed.
+>>> My current approach, which was rejected by CRAN (I'm still trying to
+>>> argue):
+>>>
+>>> create a seed randomly via "if (is.null(seed)) seed <- sample(32000, 1)",
+>>> use that seed (instead of NULL) for design creation,
+>>> and store it with the output object.
+>>>
+>>> Of course this modifies .Random.seed, but the algorithm itself also
+>>> modifies that. The benefit is that the user can reproduce the same
+>>> design even if they didn't use a seed. I don't see any harm, as the user
+>>> can also run many attempts with seed NULL and get different results each
+>>> and every time.
+>>>
+>>> I think that the reproducibility of an experimental plan is important,
+>>> and I don't want to sacrifice that. Are there any ideas what I could do
+>>> instead if I cannot convince CRAN of my strategy?
+>>>
+>>> Best, Ulrike
+>>>
+>>> ______________________________________________
+>>> R-package-devel at r-project.org mailing list
+>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>> ______________________________________________
+>> R-package-devel at r-project.org mailing list
+>> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
