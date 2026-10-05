@@ -775,3 +775,62 @@ Sent from my phone. Please excuse my brevity.
 	[[alternative HTML version deleted]]
 
 
+From u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de  Sun Oct  4 16:03:54 2026
+From: u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de (=?UTF-8?Q?Ulrike_Gr=C3=B6mping?=)
+Date: Sun, 4 Oct 2026 16:03:54 +0200
+Subject: [R-pkg-devel] \donttest, \dontrun, @examplesIf
+In-Reply-To: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+References: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+Message-ID: <b34ea68f-915b-403f-bf92-54a00b9bc5db@bht-berlin.de>
+
+@Jeff Newmiller,
+
+according to the cookbook 
+(https://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples), 
+\donttest is infrequently tested by CRAN as well. And the wrapped code 
+is part of the example() code. This makes the run time relevant, in my 
+opinion, even though the answer may well be NA (at the moment).
+
+Best, Ulrike
+
+Am 03.10.2026 um 14:31 schrieb Ulrike Gr?mping:
+> Hi all,
+>
+> now I am looking for advice on how to handle \donttest, \dontrun or 
+> @examplesIf.
+>
+> I have various examples that would increase run time beyond 5s, but 
+> not dramatically so. I understand that I should wrap those in 
+> \donttest, and they will be occasionally checked on CRAN and be 
+> included by examples().
+>
+> I have a few examples that only make sense to run interactively, as 
+> they require a user interrupt and would otherwise run for a very long 
+> time (basically unpredictably long, among other reasons because of 
+> random seeds). These should only be run intentionally, if someone 
+> wants to look exactly at that example (i.e., also not be part of an 
+> examples() run in an interactive session). I consider it suitable to 
+> put those in \dontrun, explaining why in the example comments. Is that 
+> acceptable?
+>
+> I have other examples that can run automatically but will also take 
+> very long and should not be part of an examples() call, unless a user 
+> decides to have them. They should also not be run on CRAN and consume 
+> CRAN run time, and should not routinely be run in my own checks. I 
+> want to run these under the condition that the user (or the tester) 
+> wants them to be run, which is controlled by an option 
+> "run_heavy_examples". Following AI recommendation, I have thus moved 
+> those behind an
+> @examplesIf getOption("run_heavy_examples", default = FALSE)
+> tag in Roxygen, with comments for users how they can achieve that the 
+> example is included in an examples() run.
+>
+> Does that sound reasonable, or are there better ways to handle this?
+>
+> Are there rules how much example runtime is acceptable under 
+> --run-donttest? (Where would I find that info without having to ask?)
+>
+> Best, Ulrike
+>
+
+

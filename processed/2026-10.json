@@ -204,6 +204,24 @@
       "thread_id": "thread-a0272e56cb5d",
       "thread_depth": 3,
       "month": "2026-10"
+    },
+    {
+      "id": "msg-f0d5685bc875",
+      "message_id": "<b34ea68f-915b-403f-bf92-54a00b9bc5db@bht-berlin.de>",
+      "from_name": "Ulrike Grömping",
+      "from_email_hash": "d1b89fda10720b35ca3c2fd065c988906ad1ae322df66ebb53297f332277baa2",
+      "date": "2026-10-04T14:03:54Z",
+      "subject": "[R-pkg-devel] \\donttest, \\dontrun, @examplesIf",
+      "subject_clean": "[R-pkg-devel] \\donttest, \\dontrun, @examplesIf",
+      "in_reply_to": "<52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>",
+      "references": [
+        "<52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>"
+      ],
+      "body_plain": "@Jeff Newmiller,\n\naccording to the cookbook \n(https://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples), \n\\donttest is infrequently tested by CRAN as well. And the wrapped code \nis part of the example() code. This makes the run time relevant, in my \nopinion, even though the answer may well be NA (at the moment).\n\nBest, Ulrike\n\nAm 03.10.2026 um 14:31 schrieb Ulrike Gr?mping:\n> Hi all,\n>\n> now I am looking for advice on how to handle \\donttest, \\dontrun or \n> @examplesIf.\n>\n> I have various examples that would increase run time beyond 5s, but \n> not dramatically so. I understand that I should wrap those in \n> \\donttest, and they will be occasionally checked on CRAN and be \n> included by examples().\n>\n> I have a few examples that only make sense to run interactively, as \n> they require a user interrupt and would otherwise run for a very long \n> time (basically unpredictably long, among other reasons because of \n> random seeds). These should only be run intentionally, if someone \n> wants to look exactly at that example (i.e., also not be part of an \n> examples() run in an interactive session). I consider it suitable to \n> put those in \\dontrun, explaining why in the example comments. Is that \n> acceptable?\n>\n> I have other examples that can run automatically but will also take \n> very long and should not be part of an examples() call, unless a user \n> decides to have them. They should also not be run on CRAN and consume \n> CRAN run time, and should not routinely be run in my own checks. I \n> want to run these under the condition that the user (or the tester) \n> wants them to be run, which is controlled by an option \n> \"run_heavy_examples\". Following AI recommendation, I have thus moved \n> those behind an\n> @examplesIf getOption(\"run_heavy_examples\", default = FALSE)\n> tag in Roxygen, with comments for users how they can achieve that the \n> example is included in an examples() run.\n>\n> Does that sound reasonable, or are there better ways to handle this?\n>\n> Are there rules how much example runtime is acceptable under \n> --run-donttest? (Where would I find that info without having to ask?)\n>\n> Best, Ulrike\n>",
+      "body_snippet": "@Jeff Newmiller,\n\naccording to the cookbook \n(https://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples), \n\\donttest is infrequently tested by CRAN as well. And the w",
+      "thread_id": "thread-a0272e56cb5d",
+      "thread_depth": 1,
+      "month": "2026-10"
     }
   ],
   "threads": [
@@ -225,14 +243,14 @@
     {
       "id": "thread-a0272e56cb5d",
       "subject": "[R-pkg-devel] \\donttest, \\dontrun, @examplesIf",
-      "message_count": 4,
+      "message_count": 5,
       "participants": [
         "Jeff Newmiller",
         "Lluís Revilla",
         "Ulrike Grömping"
       ],
       "started": "2026-10-03T12:31:53Z",
-      "last_reply": "2026-10-03T17:06:43Z",
+      "last_reply": "2026-10-04T14:03:54Z",
       "root_message_id": "msg-a0272e56cb5d"
     }
   ]
