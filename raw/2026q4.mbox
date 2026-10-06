@@ -834,3 +834,221 @@ Am 03.10.2026 um 14:31 schrieb Ulrike Gr?mping:
 >
 
 
+From kry|ov@r00t @end|ng |rom gm@||@com  Mon Oct  5 15:42:10 2026
+From: kry|ov@r00t @end|ng |rom gm@||@com (Ivan Krylov)
+Date: Mon, 5 Oct 2026 16:42:10 +0300
+Subject: [R-pkg-devel] \donttest, \dontrun, @examplesIf
+In-Reply-To: <51f8fb67-a6a6-4022-9313-b32315882b00@bht-berlin.de>
+References: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+ <CAN+W6_vK9hez1j=cNXXV-a7ntVDBnyCQ_qH8HwzxA-uPMi3abQ@mail.gmail.com>
+ <51f8fb67-a6a6-4022-9313-b32315882b00@bht-berlin.de>
+Message-ID: <20261005164210.4531d401@arachnoid>
+
+On Sat, 3 Oct 2026 18:38:34 +0200
+Ulrike Gr?mping <ulrike.groemping at bht-berlin.de> wrote:
+
+> Unfortunately, none of them references run times of \donttest code,
+> although I cannot imagine that there is no limit on that, I think
+> there should be one. Maybe there is not a set limit (like the 5s for
+> the usual examples), but some kind of range?
+
+\donttest{} sections are not penalised for running out of the 5 second
+limit, but there is an overall check time limit. Win-Builder will give
+you an additional note if your tests, vignettes, or \donttest{}
+examples take more than 10 minutes:
+
+Flavor: r-devel-windows-x86_64
+Check: Overall checktime, Result: NOTE
+   Overall checktime 25 min > 10 min
+
+-- 
+Best regards,
+Ivan
+
+
+From ||@t@ @end|ng |rom dewey@myzen@co@uk  Mon Oct  5 16:34:29 2026
+From: ||@t@ @end|ng |rom dewey@myzen@co@uk (Michael Dewey)
+Date: Mon, 5 Oct 2026 15:34:29 +0100
+Subject: [R-pkg-devel] \donttest, \dontrun, @examplesIf
+In-Reply-To: <20261005164210.4531d401@arachnoid>
+References: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+ <CAN+W6_vK9hez1j=cNXXV-a7ntVDBnyCQ_qH8HwzxA-uPMi3abQ@mail.gmail.com>
+ <51f8fb67-a6a6-4022-9313-b32315882b00@bht-berlin.de>
+ <20261005164210.4531d401@arachnoid>
+Message-ID: <15ec92c4-2a6a-420c-9860-5ff92012ca78@dewey.myzen.co.uk>
+
+Dear Ulrike
+
+Just going off at a tangent here would it be better to put some of 
+these, especially your heavy examples, into a vignette? Perhaps that 
+just introduces new problems. It would not help for the interactive ones 
+of course.
+
+Michael
+
+On 05/10/2026 14:42, Ivan Krylov wrote:
+> On Sat, 3 Oct 2026 18:38:34 +0200
+> Ulrike Gr?mping <ulrike.groemping at bht-berlin.de> wrote:
+> 
+>> Unfortunately, none of them references run times of \donttest code,
+>> although I cannot imagine that there is no limit on that, I think
+>> there should be one. Maybe there is not a set limit (like the 5s for
+>> the usual examples), but some kind of range?
+> 
+> \donttest{} sections are not penalised for running out of the 5 second
+> limit, but there is an overall check time limit. Win-Builder will give
+> you an additional note if your tests, vignettes, or \donttest{}
+> examples take more than 10 minutes:
+> 
+> Flavor: r-devel-windows-x86_64
+> Check: Overall checktime, Result: NOTE
+>     Overall checktime 25 min > 10 min
+> 
+
+-- 
+Michael Dewey
+
+
+From u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de  Mon Oct  5 17:07:52 2026
+From: u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de (=?UTF-8?Q?Ulrike_Gr=C3=B6mping?=)
+Date: Mon, 5 Oct 2026 17:07:52 +0200
+Subject: [R-pkg-devel] \donttest, \dontrun, @examplesIf
+In-Reply-To: <15ec92c4-2a6a-420c-9860-5ff92012ca78@dewey.myzen.co.uk>
+References: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+ <CAN+W6_vK9hez1j=cNXXV-a7ntVDBnyCQ_qH8HwzxA-uPMi3abQ@mail.gmail.com>
+ <51f8fb67-a6a6-4022-9313-b32315882b00@bht-berlin.de>
+ <20261005164210.4531d401@arachnoid>
+ <15ec92c4-2a6a-420c-9860-5ff92012ca78@dewey.myzen.co.uk>
+Message-ID: <44168c62-7841-47d9-8ea2-a663946a98dd@bht-berlin.de>
+
+Dear Michael,
+
+eventually that may be a good idea. At the moment, I don't want to write 
+vignettes just yet, but I would like to keep the examples.
+For the lengthy interactive examples, I have now argued for \dontrun, I 
+think that they should never be run by an example() call, not even in an 
+interactive session.
+
+Best, Ulrike
+
+Am 05.10.2026 um 16:34 schrieb Michael Dewey:
+> Dear Ulrike
+>
+> Just going off at a tangent here would it be better to put some of 
+> these, especially your heavy examples, into a vignette? Perhaps that 
+> just introduces new problems. It would not help for the interactive 
+> ones of course.
+>
+> Michael
+>
+> On 05/10/2026 14:42, Ivan Krylov wrote:
+>> On Sat, 3 Oct 2026 18:38:34 +0200
+>> Ulrike Gr?mping <ulrike.groemping at bht-berlin.de> wrote:
+>>
+>>> Unfortunately, none of them references run times of \donttest code,
+>>> although I cannot imagine that there is no limit on that, I think
+>>> there should be one. Maybe there is not a set limit (like the 5s for
+>>> the usual examples), but some kind of range?
+>>
+>> \donttest{} sections are not penalised for running out of the 5 second
+>> limit, but there is an overall check time limit. Win-Builder will give
+>> you an additional note if your tests, vignettes, or \donttest{}
+>> examples take more than 10 minutes:
+>>
+>> Flavor: r-devel-windows-x86_64
+>> Check: Overall checktime, Result: NOTE
+>> ??? Overall checktime 25 min > 10 min
+>>
+>
+
+
+From u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de  Mon Oct  5 17:31:33 2026
+From: u|r|ke@groemp|ng @end|ng |rom bht-ber||n@de (=?UTF-8?Q?Ulrike_Gr=C3=B6mping?=)
+Date: Mon, 5 Oct 2026 17:31:33 +0200
+Subject: [R-pkg-devel] \donttest, \dontrun, @examplesIf
+In-Reply-To: <20261005164210.4531d401@arachnoid>
+References: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+ <CAN+W6_vK9hez1j=cNXXV-a7ntVDBnyCQ_qH8HwzxA-uPMi3abQ@mail.gmail.com>
+ <51f8fb67-a6a6-4022-9313-b32315882b00@bht-berlin.de>
+ <20261005164210.4531d401@arachnoid>
+Message-ID: <95dc49a8-a770-40e2-9aa9-c82760fa3030@bht-berlin.de>
+
+Thank you, Ivan!
+
+my \donttest{} examples stay under 10min on my Windows 11 machine after 
+removing long and interactive examples, but total check time including 
+\donttest{} may not. I have uploaded the new version yesterday. 
+win-builder did not complain about check time, but I don't think it 
+tested the \donttest{} examples, it was too fast for that. I'll have to 
+wait what CRAN says ...
+
+Best, Ulrike
+
+Am 05.10.2026 um 15:42 schrieb Ivan Krylov:
+> On Sat, 3 Oct 2026 18:38:34 +0200
+> Ulrike Gr?mping <ulrike.groemping at bht-berlin.de> wrote:
+>
+>> Unfortunately, none of them references run times of \donttest code,
+>> although I cannot imagine that there is no limit on that, I think
+>> there should be one. Maybe there is not a set limit (like the 5s for
+>> the usual examples), but some kind of range?
+> \donttest{} sections are not penalised for running out of the 5 second
+> limit, but there is an overall check time limit. Win-Builder will give
+> you an additional note if your tests, vignettes, or \donttest{}
+> examples take more than 10 minutes:
+>
+> Flavor: r-devel-windows-x86_64
+> Check: Overall checktime, Result: NOTE
+>     Overall checktime 25 min > 10 min
+>
+
+
+From @eb@meyer @end|ng |rom |@u@de  Mon Oct  5 21:38:59 2026
+From: @eb@meyer @end|ng |rom |@u@de (Sebastian Meyer)
+Date: Mon, 5 Oct 2026 21:38:59 +0200
+Subject: [R-pkg-devel] \donttest, \dontrun, @examplesIf
+In-Reply-To: <44168c62-7841-47d9-8ea2-a663946a98dd@bht-berlin.de>
+References: <52813d62-9cc3-4e62-b031-f01ef3e5ddbe@bht-berlin.de>
+ <CAN+W6_vK9hez1j=cNXXV-a7ntVDBnyCQ_qH8HwzxA-uPMi3abQ@mail.gmail.com>
+ <51f8fb67-a6a6-4022-9313-b32315882b00@bht-berlin.de>
+ <20261005164210.4531d401@arachnoid>
+ <15ec92c4-2a6a-420c-9860-5ff92012ca78@dewey.myzen.co.uk>
+ <44168c62-7841-47d9-8ea2-a663946a98dd@bht-berlin.de>
+Message-ID: <40691d07-8726-4f01-ae5d-aea7ba4af0f1@fau.de>
+
+Am 05.10.26 um 17:07 schrieb Ulrike Gr?mping:
+> At the moment, I don't want to write
+> vignettes just yet, but I would like to keep the examples.
+> For the lengthy interactive examples, I have now argued for \dontrun, I
+> think that they should never be run by an example() call, not even in an
+> interactive session.
+I'd provide such lengthy interactive examples as demo scripts and 
+reference them on the help page, maybe even in the example section:
+
+     ## see the demo scripts for more sophisticated examples
+     demo(package = "PKGNAME")
+
+     ## see the interactive demo("XYZ") installed at:
+     demoscript <- system.file("demo", "XYZ.R", package = "PKGNAME")
+     #file.show(demoscript)
+     \dontrun{demo("XYZ")}
+
+R CMD check --run-demo exists since R 4.5.0 to exercise these scripts on 
+demand. Here is an excerpt from the R Journal News and Notes section 
+(<https://journal.r-project.org/news/RJ-2024-2-rcore/>):
+
+>   Demos may be interactive (e.g., some await a browser response, require
+>   authentication, or contain instructions for special data or software
+>   setups) and are sometimes used for computationally intensive examples
+>   (e.g., replication scripts from associated publications), so `R CMD check`
+>   does not run demo scripts by default (similar to `\donttest` examples,
+>   which are only checked with option `--run-donttest`).
+>   Package maintainers could add an explicit condition such as
+>   `if (!interactive()) quit()` to demo scripts that require interaction,
+>   so (occasional) checks with `--run-demo` can be used to cover the others.
+
+Best,
+
+	Sebastian Meyer
+
+
