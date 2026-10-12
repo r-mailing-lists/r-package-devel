@@ -10482,3 +10482,92 @@ Best regards,
 Ivan
 
 
+From t@b@nd @end|ng |rom uc|@@c@uk  Tue Sep 29 11:14:57 2026
+From: t@b@nd @end|ng |rom uc|@@c@uk (Tim Band)
+Date: Tue, 29 Sep 2026 09:14:57 +0000
+Subject: [R-pkg-devel] Mysterious problem re-submitting shinylight
+In-Reply-To: <b31193d6-66a6-4bcc-a70d-faf8d80b5ec3@statistik.tu-dortmund.de>
+References: <AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>
+ <b31193d6-66a6-4bcc-a70d-faf8d80b5ec3@statistik.tu-dortmund.de>
+Message-ID: <AMDPR01MB11550F89AA37F62A7EE24C23ACF8C2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>
+
+Thank you Uwe, Sebastian and Ivan for all your insights, and so quickly! I will try those suggestions!
+-Tim
+
+________________________________
+From: Uwe Ligges
+Sent: Monday, September 28, 2026 19:29
+To: Tim Band; r-package-devel at r-project.org
+Subject: Re: [R-pkg-devel] Mysterious problem re-submitting shinylight
+
+I think you are looking into the check results of the last version on
+CRAN, not of the new submission. Both are linked from the mail you received.
+
+The only issue I see is
+
+
+
+Flavor: r-devel-linux-x86_64-debian-gcc
+Check: Rd contents, Result: NOTE
+   Rd files without \usage:
+     'framework.shinylightFrameworkStart.Rd' 'shinylight.call.Rd'
+     'shinylight.makeTable.Rd' 'shinylight.passToOther.Rd'
+     'shinylight.runR.Rd' 'shinylight.setElementJson.Rd'
+     'shinylight.setElementPlot.Rd' 'shinylight.setElementText.Rd'
+     'shinylight.setGridResult.Rd'
+     'shinylight.setGridResultWithNamedRows.Rd' 'toolkit.all.Rd'
+     'toolkit.any.Rd' 'toolkit.banner.Rd' 'toolkit.button.Rd'
+     'toolkit.deref.Rd' 'toolkit.footer.Rd' 'toolkit.forEach.Rd'
+     'toolkit.groupTitle.Rd' 'toolkit.header.Rd' 'toolkit.image.Rd'
+     'toolkit.leftSideBar.Rd' 'toolkit.loadFileButton.Rd'
+     'toolkit.makeLabel.Rd' 'toolkit.nonScrollingWrapper.Rd'
+     'toolkit.overlay.Rd' 'toolkit.pages.Rd' 'toolkit.paramBoolean.Rd'
+     'toolkit.paramColor.Rd' 'toolkit.paramFloat.Rd'
+     'toolkit.paramInteger.Rd' 'toolkit.paramSelector.Rd'
+     'toolkit.paramText.Rd' 'toolkit.preformattedText.Rd'
+     'toolkit.rightSideBar.Rd' 'toolkit.scrollingWrapper.Rd'
+     'toolkit.setAsBody.Rd' 'toolkit.stack.Rd' 'toolkit.staticText.Rd'
+     'toolkit.verticalDivide.Rd' 'toolkit.whenQuiet.Rd'
+     'toolkit.withTimeout.Rd'
+   \arguments should not be documented without \usage.
+
+And you should really add the usage line, a usage line does not mean
+these are executed. An example would....
+
+Best,
+Uwe Ligges
+
+
+
+
+
+
+
+On 28.09.2026 18:22, Tim Band wrote:
+> Hi-
+> I have this weird problem with my package shinylight. It's a simple way to serve your R functions over the web (like Shiny but with much less functionality and much fewer dependencies).
+> The build has suddenly broken at CRAN without any change in the code. There are many notes (mostly related to the JavaScript functions not having \usage, because obviously I don't want them run by the automatic checks), but the big problem is:
+>
+> "createTcpServer: address already in use: 50050".
+>
+> So, this looks like this port has been blocked by something on the CRAN machines, quite possibly an old test run hanging. So the simplest solution would seem to be change the port to 50051 and re-submit. I have done this but now when I re-submit I still get an email saying it has failed, with the same error, with port 50050.
+>
+> So I unzipped the package that I uploaded and checked; there's no 50050 in the file mentioned, or anywhere in the source.
+>
+> I'd like to download the exact thing I uploaded so I can check what they think they built. Or is this a normal thing? Is there something I need to do to say "no, really rebuild from clean"?
+>
+> Also, am I going to get hit with the \usage issue? And is there a good way to annotate the JavaScript properly without causing notes?
+>
+> Thanks for any help,
+> -Tim
+>
+>        [[alternative HTML version deleted]]
+>
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
+	[[alternative HTML version deleted]]
+
+

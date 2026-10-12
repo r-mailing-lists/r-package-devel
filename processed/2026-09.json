@@ -715,6 +715,25 @@
       "month": "2026-09"
     },
     {
+      "id": "msg-df8afe9a06cb",
+      "message_id": "<AMDPR01MB11550F89AA37F62A7EE24C23ACF8C2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>",
+      "from_name": "Tim Band",
+      "from_email_hash": "9174f569292482b2e97a1432882f4ed60b4700626d5e30cafafe36f32ee117ab",
+      "date": "2026-09-29T09:14:57Z",
+      "subject": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "subject_clean": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
+      "in_reply_to": "<b31193d6-66a6-4bcc-a70d-faf8d80b5ec3@statistik.tu-dortmund.de>",
+      "references": [
+        "<AMDPR01MB11550D34B3BE14B6832E51C1ECF8D2@AMDPR01MB11550.eurprd01.prod.exchangelabs.com>",
+        "<b31193d6-66a6-4bcc-a70d-faf8d80b5ec3@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "Thank you Uwe, Sebastian and Ivan for all your insights, and so quickly! I will try those suggestions!\n-Tim\n\n________________________________\nFrom: Uwe Ligges\nSent: Monday, September 28, 2026 19:29\nTo: Tim Band; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] Mysterious problem re-submitting shinylight\n\nI think you are looking into the check results of the last version on\nCRAN, not of the new submission. Both are linked from the mail you received.\n\nThe only issue I see is\n\n\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: Rd contents, Result: NOTE\n   Rd files without \\usage:\n     'framework.shinylightFrameworkStart.Rd' 'shinylight.call.Rd'\n     'shinylight.makeTable.Rd' 'shinylight.passToOther.Rd'\n     'shinylight.runR.Rd' 'shinylight.setElementJson.Rd'\n     'shinylight.setElementPlot.Rd' 'shinylight.setElementText.Rd'\n     'shinylight.setGridResult.Rd'\n     'shinylight.setGridResultWithNamedRows.Rd' 'toolkit.all.Rd'\n     'toolkit.any.Rd' 'toolkit.banner.Rd' 'toolkit.button.Rd'\n     'toolkit.deref.Rd' 'toolkit.footer.Rd' 'toolkit.forEach.Rd'\n     'toolkit.groupTitle.Rd' 'toolkit.header.Rd' 'toolkit.image.Rd'\n     'toolkit.leftSideBar.Rd' 'toolkit.loadFileButton.Rd'\n     'toolkit.makeLabel.Rd' 'toolkit.nonScrollingWrapper.Rd'\n     'toolkit.overlay.Rd' 'toolkit.pages.Rd' 'toolkit.paramBoolean.Rd'\n     'toolkit.paramColor.Rd' 'toolkit.paramFloat.Rd'\n     'toolkit.paramInteger.Rd' 'toolkit.paramSelector.Rd'\n     'toolkit.paramText.Rd' 'toolkit.preformattedText.Rd'\n     'toolkit.rightSideBar.Rd' 'toolkit.scrollingWrapper.Rd'\n     'toolkit.setAsBody.Rd' 'toolkit.stack.Rd' 'toolkit.staticText.Rd'\n     'toolkit.verticalDivide.Rd' 'toolkit.whenQuiet.Rd'\n     'toolkit.withTimeout.Rd'\n   \\arguments should not be documented without \\usage.\n\nAnd you should really add the usage line, a usage line does not mean\nthese are executed. An example would....\n\nBest,\nUwe Ligges\n\n\n\n\n\n\n\nOn 28.09.2026 18:22, Tim Band wrote:\n> Hi-\n> I have this weird problem with my package shinylight. It's a simple way to serve your R functions over the web (like Shiny but with much less functionality and much fewer dependencies).\n> The build has suddenly broken at CRAN without any change in the code. There are many notes (mostly related to the JavaScript functions not having \\usage, because obviously I don't want them run by the automatic checks), but the big problem is:\n>\n> \"createTcpServer: address already in use: 50050\".\n>\n> So, this looks like this port has been blocked by something on the CRAN machines, quite possibly an old test run hanging. So the simplest solution would seem to be change the port to 50051 and re-submit. I have done this but now when I re-submit I still get an email saying it has failed, with the same error, with port 50050.\n>\n> So I unzipped the package that I uploaded and checked; there's no 50050 in the file mentioned, or anywhere in the source.\n>\n> I'd like to download the exact thing I uploaded so I can check what they think they built. Or is this a normal thing? Is there something I need to do to say \"no, really rebuild from clean\"?\n>\n> Also, am I going to get hit with the \\usage issue? And is there a good way to annotate the JavaScript properly without causing notes?\n>\n> Thanks for any help,\n> -Tim\n>\n>        [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you Uwe, Sebastian and Ivan for all your insights, and so quickly! I will try those suggestions!\n-Tim\n\n________________________________\nFrom: Uwe Ligges\nSent: Monday, September 28, 2026 19:29\nTo",
+      "thread_id": "thread-5f373c434eb9",
+      "thread_depth": 2,
+      "month": "2026-09"
+    },
+    {
       "id": "msg-dc6a1169f4d4",
       "message_id": "<20260929122855.0f13305a@arachnoid>",
       "from_name": "Ivan Krylov",
@@ -819,7 +838,7 @@
     {
       "id": "thread-5f373c434eb9",
       "subject": "[R-pkg-devel] Mysterious problem re-submitting shinylight",
-      "message_count": 4,
+      "message_count": 5,
       "participants": [
         "Ivan Krylov",
         "Tim Band",
