@@ -1166,3 +1166,94 @@ Simon
 > 
 
 
+From edd @end|ng |rom deb|@n@org  Tue Oct 13 12:54:38 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Tue, 13 Oct 2026 05:54:38 -0500
+Subject: [R-pkg-devel] macOS x86_64 does not fully support C++20
+Message-ID: <27342.3566.16639.364226@paul.eddelbuettel.com>
+
+
+Simon,
+
+I have another package (using C++20 quite heavily) fail on your macOS x86_64
+setup yet pass on the one by Jeroen for r-universe. [1] That makes it two
+packages of mine using C++20 (via their upstream) I can compile at r-universe
+but not at CRAN on macOS x86_64: For the other I already fall back to C++17
+for it to build.
+
+As I understand it, you select an older 'baseline' with the SDK. This appears
+to conflict with a desire to 'just work' for C++20.  Can this be upgraded? I
+see this to be in conflicts with R-exts which has
+
+  C++20 will become the default (`where available') in @R{} 4.6.0: it has
+  been supported on all known platforms since at least 2021. Since the default
+  changes with @R{} version, packages which only compile with C++17 or C++20
+  should specify that (see below).
+
+This does not say anything about forced downgrades for packages that compile
+C++20 fine on all but one platform.
+
+Best,  Dirk
+
+[1] Current fail at
+https://www.r-project.org/nosvn/R.check/r-release-macos-x86_64/RcppSimdJson-00install.html
+
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From edd @end|ng |rom deb|@n@org  Tue Oct 13 15:11:33 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Tue, 13 Oct 2026 08:11:33 -0500
+Subject: [R-pkg-devel] macOS x86_64 does not fully support C++20
+In-Reply-To: <27342.3566.16639.364226@paul.eddelbuettel.com>
+References: <27342.3566.16639.364226@paul.eddelbuettel.com>
+Message-ID: <27342.11781.300641.394944@paul.eddelbuettel.com>
+
+
+Quick follow-up: R-exts correctly points out that features in C++ can be
+tested (see eg the list at https://cppreference.com/cpp/feature_test) but in
+practice I cannot test this as we have no access to a machine configured like
+your macOS x86_64. If a macbuilder variant ran it I could test buildability
+along the lines of the little C++20 tester below and finetune exactly which
+library level I need (and that 'feature tests' support).  But now I cannot so
+all I have the blunt instrument of turning C++17 on for that machine.
+
+I am not a macOS user, but it is my understanding that macOS x86_64 is also
+already end-of-lifed. So why bother with the box, and why impose an
+additional development burden on us package developers when you could just
+configure it the way r-universe has where I have yet find a 'delta' in
+buildability to macOS arm64?
+
+Dirk
+
+
+#include <algorithm>
+#include <array>
+#include <iostream>
+#include <format>
+#include <ranges>
+#include <version>
+
+int main() {
+    std::array<int,5> numbers = { 1, 2, 3, 4, 5 };
+
+    std::ranges::reverse(numbers);
+    std::ranges::for_each(numbers, [](int n) {
+        std::cout << std::format("{} ", n);
+    });
+    std::cout << "\n";
+
+#if defined(__cpp_lib_ranges) && __cpp_lib_ranges >= 201911L
+    std::cout << "Minimal ranges\n";
+#endif
+#if defined(__cpp_concepts) && __cpp_concepts >= 201907L
+    std::cout << "Minimal concept\n";
+#endif
+}
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+

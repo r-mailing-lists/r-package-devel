@@ -387,6 +387,40 @@
       "thread_id": "thread-1a7f4d4b5e3c",
       "thread_depth": 1,
       "month": "2026-10"
+    },
+    {
+      "id": "msg-d16854a3facc",
+      "message_id": "<27342.3566.16639.364226@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-10-13T10:54:38Z",
+      "subject": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "subject_clean": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Simon,\n\nI have another package (using C++20 quite heavily) fail on your macOS x86_64\nsetup yet pass on the one by Jeroen for r-universe. [1] That makes it two\npackages of mine using C++20 (via their upstream) I can compile at r-universe\nbut not at CRAN on macOS x86_64: For the other I already fall back to C++17\nfor it to build.\n\nAs I understand it, you select an older 'baseline' with the SDK. This appears\nto conflict with a desire to 'just work' for C++20.  Can this be upgraded? I\nsee this to be in conflicts with R-exts which has\n\n  C++20 will become the default (`where available') in @R{} 4.6.0: it has\n  been supported on all known platforms since at least 2021. Since the default\n  changes with @R{} version, packages which only compile with C++17 or C++20\n  should specify that (see below).\n\nThis does not say anything about forced downgrades for packages that compile\nC++20 fine on all but one platform.\n\nBest,  Dirk\n\n[1] Current fail at\nhttps://www.r-project.org/nosvn/R.check/r-release-macos-x86_64/RcppSimdJson-00install.html\n\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Simon,\n\nI have another package (using C++20 quite heavily) fail on your macOS x86_64\nsetup yet pass on the one by Jeroen for r-universe. [1] That makes it two\npackages of mine using C++20 (via their u",
+      "thread_id": "thread-d16854a3facc",
+      "thread_depth": 0,
+      "month": "2026-10"
+    },
+    {
+      "id": "msg-7ac34796857a",
+      "message_id": "<27342.11781.300641.394944@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-10-13T13:11:33Z",
+      "subject": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "subject_clean": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "in_reply_to": "<27342.3566.16639.364226@paul.eddelbuettel.com>",
+      "references": [
+        "<27342.3566.16639.364226@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Quick follow-up: R-exts correctly points out that features in C++ can be\ntested (see eg the list at https://cppreference.com/cpp/feature_test) but in\npractice I cannot test this as we have no access to a machine configured like\nyour macOS x86_64. If a macbuilder variant ran it I could test buildability\nalong the lines of the little C++20 tester below and finetune exactly which\nlibrary level I need (and that 'feature tests' support).  But now I cannot so\nall I have the blunt instrument of turning C++17 on for that machine.\n\nI am not a macOS user, but it is my understanding that macOS x86_64 is also\nalready end-of-lifed. So why bother with the box, and why impose an\nadditional development burden on us package developers when you could just\nconfigure it the way r-universe has where I have yet find a 'delta' in\nbuildability to macOS arm64?\n\nDirk\n\n\n#include <algorithm>\n#include <array>\n#include <iostream>\n#include <format>\n#include <ranges>\n#include <version>\n\nint main() {\n    std::array<int,5> numbers = { 1, 2, 3, 4, 5 };\n\n    std::ranges::reverse(numbers);\n    std::ranges::for_each(numbers, [](int n) {\n        std::cout << std::format(\"{} \", n);\n    });\n    std::cout << \"\\n\";\n\n#if defined(__cpp_lib_ranges) && __cpp_lib_ranges >= 201911L\n    std::cout << \"Minimal ranges\\n\";\n#endif\n#if defined(__cpp_concepts) && __cpp_concepts >= 201907L\n    std::cout << \"Minimal concept\\n\";\n#endif\n}\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Quick follow-up: R-exts correctly points out that features in C++ can be\ntested (see eg the list at https://cppreference.com/cpp/feature_test) but in\npractice I cannot test this as we have no access t",
+      "thread_id": "thread-d16854a3facc",
+      "thread_depth": 1,
+      "month": "2026-10"
     }
   ],
   "threads": [
@@ -433,6 +467,17 @@
       "started": "2026-10-07T17:45:33Z",
       "last_reply": "2026-10-09T01:15:06Z",
       "root_message_id": "msg-1a7f4d4b5e3c"
+    },
+    {
+      "id": "thread-d16854a3facc",
+      "subject": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "message_count": 2,
+      "participants": [
+        "Dirk Eddelbuettel"
+      ],
+      "started": "2026-10-13T10:54:38Z",
+      "last_reply": "2026-10-13T13:11:33Z",
+      "root_message_id": "msg-d16854a3facc"
     }
   ]
 }
