@@ -421,6 +421,45 @@
       "thread_id": "thread-d16854a3facc",
       "thread_depth": 1,
       "month": "2026-10"
+    },
+    {
+      "id": "msg-c4a3047b0502",
+      "message_id": "<1013573D-A3C3-45DA-8135-C6D952020FFF@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-10-14T06:19:27Z",
+      "subject": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "subject_clean": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "in_reply_to": "<27342.11781.300641.394944@paul.eddelbuettel.com>",
+      "references": [
+        "<27342.3566.16639.364226@paul.eddelbuettel.com>",
+        "<27342.11781.300641.394944@paul.eddelbuettel.com>"
+      ],
+      "body_plain": "Dirk,\n\nthe short answer is because we care about our users.\n\nThere is still a significant fraction of users with Intel Macs (last time I checked our logs it was around 20% - arguably one of the drivers is that Apple has never made any arm64-based 27\" iMacs so they are still commonly used today - they do last forever ;)). To make things worse, Apple has been dropping drivers from later macOS versions so most Intel Mac users cannot upgrade their macOS even if they wanted to and thus we cannot raise the SDK versions to the arm64 levels as the binaries would simply fail on any macOS below the SDK version (just as r-universe binaries would) due to missing run-time entry points.\n\nPlease note that the CRAN build setup is not special in any way and easily reproducible on any Mac including GitHub actions (GH provides Intel macOS runners) - all it takes is downloading the Command Line Tools for Xcode 14.3.1[1] in /Library/Developer/CommandLineTools and MacOSX11.3.sdk[2] in /Library/Developer/CommandLineTools/SDKs. For any CRAN-built dependent libraries (if needed) see https://mac.r-project.org/bin/ (specifically fetch any necessary files from https://mac.r-project.org/bin/darwin20/x86_64/ ).\n\nThat said, I have several spare Intel Macs since we only use one for the builds now, so if you need access I'd be happy to arrange it for you.\n\nAs for your test code - regardless of the SDK this that seems to fail:\n\n$ clang++ -std=c++20 test.cpp \ntest.cpp:13:26: error: no member named 'format' in namespace 'std'\n       std::cout << std::format(\"{} \", n);\n                    ~~~~~^\n1 error generated.\n\npresumably due that fact that std::format has only been introduced in clang 16. Note that, technically, full C++20 support is not present in any version of clang even today, so if you want to rely on C++20 features you'll have to navigate the minefield regardless.\n\nAs long as Apple Intel Macs see significant use, we will strive to continue to support them. Every year before the x.y.0 release we are evaluating the usage stats to see what is worth supporting, they are just not dropping as fast as you would expect. It is not my call whether failures on the x86_64 macOS platform are considered significant for packages, so it is certainly possible to move that build to a best-effort basis, but that would be a discussion to have with the CRAN team.\n\nCheers,\nSimon\n\n\n[1] - https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_for_Xcode_14.3.1/Command_Line_Tools_for_Xcode_14.3.1.dmg\n[2] - from any corresponding CLT such as https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_for_Xcode_13/Command_Line_Tools_for_Xcode_13.dmg or directly https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX11.3.sdk.tar.xz\n\n\n\n> On 14/10/2026, at 02:11, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> Quick follow-up: R-exts correctly points out that features in C++ can be\n> tested (see eg the list at https://cppreference.com/cpp/feature_test) but in\n> practice I cannot test this as we have no access to a machine configured like\n> your macOS x86_64. If a macbuilder variant ran it I could test buildability\n> along the lines of the little C++20 tester below and finetune exactly which\n> library level I need (and that 'feature tests' support).  But now I cannot so\n> all I have the blunt instrument of turning C++17 on for that machine.\n> \n> I am not a macOS user, but it is my understanding that macOS x86_64 is also\n> already end-of-lifed. So why bother with the box, and why impose an\n> additional development burden on us package developers when you could just\n> configure it the way r-universe has where I have yet find a 'delta' in\n> buildability to macOS arm64?\n> \n> Dirk\n> \n> \n> #include <algorithm>\n> #include <array>\n> #include <iostream>\n> #include <format>\n> #include <ranges>\n> #include <version>\n> \n> int main() {\n>    std::array<int,5> numbers = { 1, 2, 3, 4, 5 };\n> \n>    std::ranges::reverse(numbers);\n>    std::ranges::for_each(numbers, [](int n) {\n>        std::cout << std::format(\"{} \", n);\n>    });\n>    std::cout << \"\\n\";\n> \n> #if defined(__cpp_lib_ranges) && __cpp_lib_ranges >= 201911L\n>    std::cout << \"Minimal ranges\\n\";\n> #endif\n> #if defined(__cpp_concepts) && __cpp_concepts >= 201907L\n>    std::cout << \"Minimal concept\\n\";\n> #endif\n> }\n> \n> -- \n> dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>",
+      "body_snippet": "Dirk,\n\nthe short answer is because we care about our users.\n\nThere is still a significant fraction of users with Intel Macs (last time I checked our logs it was around 20% - arguably one of the driver",
+      "thread_id": "thread-d16854a3facc",
+      "thread_depth": 2,
+      "month": "2026-10"
+    },
+    {
+      "id": "msg-caa261d33a8b",
+      "message_id": "<27343.29439.630612.722574@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-10-14T12:18:07Z",
+      "subject": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "subject_clean": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
+      "in_reply_to": "<1013573D-A3C3-45DA-8135-C6D952020FFF@R-project.org>",
+      "references": [
+        "<27342.3566.16639.364226@paul.eddelbuettel.com>",
+        "<27342.11781.300641.394944@paul.eddelbuettel.com>",
+        "<1013573D-A3C3-45DA-8135-C6D952020FFF@R-project.org>"
+      ],
+      "body_plain": "Simon,\n\nWe actually had this very discussion already once before when you, as I\nrecall, installed an explicit override to not use C++20 on this package on\nthat machine of your which lacks a more complete C++20 installation: no\nstd::format, no concepts.\n\nI have since adopted a more drastic approach that is already used in another\npackage of mine: `configure` now aims to compile a short program with\nstd::format and concepts, and when that fails, uses C++17.\n\nIt really is too bad you cannot follow the approach taken by Jeroen. This\ncreates extra work for maintainers of more feature-complete C++20 packages.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "Simon,\n\nWe actually had this very discussion already once before when you, as I\nrecall, installed an explicit override to not use C++20 on this package on\nthat machine of your which lacks a more compl",
+      "thread_id": "thread-d16854a3facc",
+      "thread_depth": 3,
+      "month": "2026-10"
     }
   ],
   "threads": [
@@ -471,12 +510,13 @@
     {
       "id": "thread-d16854a3facc",
       "subject": "[R-pkg-devel] macOS x86_64 does not fully support C++20",
-      "message_count": 2,
+      "message_count": 4,
       "participants": [
-        "Dirk Eddelbuettel"
+        "Dirk Eddelbuettel",
+        "Simon Urbanek"
       ],
       "started": "2026-10-13T10:54:38Z",
-      "last_reply": "2026-10-13T13:11:33Z",
+      "last_reply": "2026-10-14T12:18:07Z",
       "root_message_id": "msg-d16854a3facc"
     }
   ]
