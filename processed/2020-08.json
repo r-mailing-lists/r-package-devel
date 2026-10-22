@@ -17,7 +17,8 @@
       "body_snippet": "Hello everyone,\n\nI've got at package on CRAN which uses C++17. Package is at https://cran.r-project.org/web/packages/image.binarization/index.html\nThe package fails on Solaris with the following messa",
       "thread_id": "thread-91b4138a363c",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005837.html"
     },
     {
       "id": "msg-f56d652135dc",
@@ -33,7 +34,8 @@
       "body_snippet": "Dear R community,\n\nin an effort to re-submit one of my packages (thurstonianIRT) to CRAN\nbecause of some test failures after updates of other packages, I get the\nfollowing error from the CRAN debian i",
       "thread_id": "thread-f56d652135dc",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005838.html"
     },
     {
       "id": "msg-1e556c35d485",
@@ -51,7 +53,8 @@
       "body_snippet": "I have triggered new checks on the CRAN machines.\n\nBest,\nUwe Ligges\n\nOn 03.08.2020 16:42, Paul Buerkner wrote:\n> Dear R community,\n> \n> in an effort to re-submit one of my packages (thurstonianIRT) to",
       "thread_id": "thread-f56d652135dc",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005839.html"
     },
     {
       "id": "msg-cc59e3611fb1",
@@ -69,7 +72,8 @@
       "body_snippet": "On 3 August 2020 at 16:42, Paul Buerkner wrote:\n| Dear R community,\n| \n| in an effort to re-submit one of my packages (thurstonianIRT) to CRAN\n| because of some test failures after updates of other pa",
       "thread_id": "thread-f56d652135dc",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005840.html"
     },
     {
       "id": "msg-9570133c4119",
@@ -88,7 +92,8 @@
       "body_snippet": "On 3 August 2020 at 10:07, Dirk Eddelbuettel wrote:\n| Tracing it:\n| \n|   edd at rob:~$ locate libnode.so.64\n|   /usr/lib/x86_64-linux-gnu/libnode.so.64\n|   edd at rob:~$ dpkg -S $(locate libnode.so.64",
       "thread_id": "thread-f56d652135dc",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005841.html"
     },
     {
       "id": "msg-6ab1fddb85fb",
@@ -100,11 +105,12 @@
       "subject_clean": "[R-pkg-devel] Package can't be imported with Suggests",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi all,\n\nI?m wondering if someone an offer advice on a problem I?m facing in developing a package.\n\nMy package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n\nUnfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I?ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n\nI thought I?d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n? checking dependencies in R code ... NOTE\n  'library' or 'require' call to ?nimble? in package code.\n    Please use :: or requireNamespace() instead.\n    See section 'Suggested packages' in the 'Writing R Extensions' manual\n\nWhat is the recommendation?\n\nI see two options:\n\n\n  1.  Include nimble in Depends and force user to install it.\n  2.  Ignore the note and explain the problem when I resubmit to CRAN.\n\nAm I missing anything?\n\nThanks in advance!\n\nSimon\n\n\n\n\n\nSimon Bonner\nAssistant Professor of Environmetrics\nDepartment of Statistical and Actuarial Sciences\nUniversity of Western Ontario\n\nOffice: Western Science Centre rm 276\n\nEmail: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\nTwitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi all,\n\nI?m wondering if someone an offer advice on a problem I?m facing in developing a package.\n\nMy package essentially generates code and formats data for one of two MCMC sampling engines, JAGS ac",
+      "body_plain": "Hi all,\n\nI’m wondering if someone an offer advice on a problem I’m facing in developing a package.\n\nMy package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n\nUnfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I’ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n\nI thought I’d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n❯ checking dependencies in R code ... NOTE\n  'library' or 'require' call to ‘nimble’ in package code.\n    Please use :: or requireNamespace() instead.\n    See section 'Suggested packages' in the 'Writing R Extensions' manual\n\nWhat is the recommendation?\n\nI see two options:\n\n\n  1.  Include nimble in Depends and force user to install it.\n  2.  Ignore the note and explain the problem when I resubmit to CRAN.\n\nAm I missing anything?\n\nThanks in advance!\n\nSimon\n\n\n\n\n\nSimon Bonner\nAssistant Professor of Environmetrics\nDepartment of Statistical and Actuarial Sciences\nUniversity of Western Ontario\n\nOffice: Western Science Centre rm 276\n\nEmail: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\nTwitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI’m wondering if someone an offer advice on a problem I’m facing in developing a package.\n\nMy package essentially generates code and formats data for one of two MCMC sampling engines, JAGS ac",
       "thread_id": "thread-6ab1fddb85fb",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005842.html"
     },
     {
       "id": "msg-dce40ca04f28",
@@ -118,11 +124,12 @@
       "references": [
         "<YQXPR0101MB1671B95AEDBE24142A674445F94B0@YQXPR0101MB1671.CANPRD01.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "I think the key line = \" Unfortunately, nimble will not work with this\nmechanism. \"\n\nGiven that, depends seems like a good short-term solution. Change it to\nsuggests once the upstream problem is fixed.\n\n\nOn Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n\n> Hi all,\n>\n> I?m wondering if someone an offer advice on a problem I?m facing in\n> developing a package.\n>\n> My package essentially generates code and formats data for one of two MCMC\n> sampling engines, JAGS accessed via rjags or nimble (a native R package),\n> calls the engines, and then provides functions to access the results. Since\n> only one of the engines is needed I would like to include rjags and nimble\n> in Suggests in the DESCRIPTION and use requireNamespace() to load the\n> appropriate package when its functionality is needed.\n>\n> Unfortunately, nimble will not work with this mechanism. It relies on a\n> complex mechanism to compile C++ code to run the sampler, and some of the\n> functions cannot be found when the package is loaded in this way. I?ve been\n> in touch with the maintainers and they are aware of the issue but the\n> current fix is to include the package under Depends. However, this forces a\n> user to install nimble (which itself requires compiling lengthy C++ code)\n> even if the user intends to run the sampler in JAGS.\n>\n> I thought I?d solved the problem by including nimble in Suggests and then\n> loading it via library() so that all of its functions are attached. This\n> works, but produces a note during the check:\n> ? checking dependencies in R code ... NOTE\n>   'library' or 'require' call to ?nimble? in package code.\n>     Please use :: or requireNamespace() instead.\n>     See section 'Suggested packages' in the 'Writing R Extensions' manual\n>\n> What is the recommendation?\n>\n> I see two options:\n>\n>\n>   1.  Include nimble in Depends and force user to install it.\n>   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n>\n> Am I missing anything?\n>\n> Thanks in advance!\n>\n> Simon\n>\n>\n>\n>\n>\n> Simon Bonner\n> Assistant Professor of Environmetrics\n> Department of Statistical and Actuarial Sciences\n> University of Western Ontario\n>\n> Office: Western Science Centre rm 276\n>\n> Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111\n> x88205 | Fax: 519-661-3813\n> Twitter: @bonnerstatslab | Website:\n> http://simon.bonners.ca/bonner-lab/wpblog/\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "I think the key line = \" Unfortunately, nimble will not work with this\nmechanism. \"\n\nGiven that, depends seems like a good short-term solution. Change it to\nsuggests once the upstream problem is fixed.\n\n\nOn Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n\n> Hi all,\n>\n> I’m wondering if someone an offer advice on a problem I’m facing in\n> developing a package.\n>\n> My package essentially generates code and formats data for one of two MCMC\n> sampling engines, JAGS accessed via rjags or nimble (a native R package),\n> calls the engines, and then provides functions to access the results. Since\n> only one of the engines is needed I would like to include rjags and nimble\n> in Suggests in the DESCRIPTION and use requireNamespace() to load the\n> appropriate package when its functionality is needed.\n>\n> Unfortunately, nimble will not work with this mechanism. It relies on a\n> complex mechanism to compile C++ code to run the sampler, and some of the\n> functions cannot be found when the package is loaded in this way. I’ve been\n> in touch with the maintainers and they are aware of the issue but the\n> current fix is to include the package under Depends. However, this forces a\n> user to install nimble (which itself requires compiling lengthy C++ code)\n> even if the user intends to run the sampler in JAGS.\n>\n> I thought I’d solved the problem by including nimble in Suggests and then\n> loading it via library() so that all of its functions are attached. This\n> works, but produces a note during the check:\n> ❯ checking dependencies in R code ... NOTE\n>   'library' or 'require' call to ‘nimble’ in package code.\n>     Please use :: or requireNamespace() instead.\n>     See section 'Suggested packages' in the 'Writing R Extensions' manual\n>\n> What is the recommendation?\n>\n> I see two options:\n>\n>\n>   1.  Include nimble in Depends and force user to install it.\n>   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n>\n> Am I missing anything?\n>\n> Thanks in advance!\n>\n> Simon\n>\n>\n>\n>\n>\n> Simon Bonner\n> Assistant Professor of Environmetrics\n> Department of Statistical and Actuarial Sciences\n> University of Western Ontario\n>\n> Office: Western Science Centre rm 276\n>\n> Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111\n> x88205 | Fax: 519-661-3813\n> Twitter: @bonnerstatslab | Website:\n> http://simon.bonners.ca/bonner-lab/wpblog/\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "I think the key line = \" Unfortunately, nimble will not work with this\nmechanism. \"\n\nGiven that, depends seems like a good short-term solution. Change it to\nsuggests once the upstream problem is fixed",
       "thread_id": "thread-6ab1fddb85fb",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005843.html"
     },
     {
       "id": "msg-77d0e6f9e40a",
@@ -136,11 +143,12 @@
       "references": [
         "<YQXPR0101MB1671B95AEDBE24142A674445F94B0@YQXPR0101MB1671.CANPRD01.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "You might make a second package that depends only on nimble and your\nmain package can then suggest that second package and JAGS.\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n>\n> Hi all,\n>\n> I?m wondering if someone an offer advice on a problem I?m facing in developing a package.\n>\n> My package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n>\n> Unfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I?ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n>\n> I thought I?d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n> ? checking dependencies in R code ... NOTE\n>   'library' or 'require' call to ?nimble? in package code.\n>     Please use :: or requireNamespace() instead.\n>     See section 'Suggested packages' in the 'Writing R Extensions' manual\n>\n> What is the recommendation?\n>\n> I see two options:\n>\n>\n>   1.  Include nimble in Depends and force user to install it.\n>   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n>\n> Am I missing anything?\n>\n> Thanks in advance!\n>\n> Simon\n>\n>\n>\n>\n>\n> Simon Bonner\n> Assistant Professor of Environmetrics\n> Department of Statistical and Actuarial Sciences\n> University of Western Ontario\n>\n> Office: Western Science Centre rm 276\n>\n> Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\n> Twitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "You might make a second package that depends only on nimble and your\nmain package can then suggest that second package and JAGS.\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n>\n> Hi all,\n>\n> I’m wondering if someone an offer advice on a problem I’m facing in developing a package.\n>\n> My package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n>\n> Unfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I’ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n>\n> I thought I’d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n> ❯ checking dependencies in R code ... NOTE\n>   'library' or 'require' call to ‘nimble’ in package code.\n>     Please use :: or requireNamespace() instead.\n>     See section 'Suggested packages' in the 'Writing R Extensions' manual\n>\n> What is the recommendation?\n>\n> I see two options:\n>\n>\n>   1.  Include nimble in Depends and force user to install it.\n>   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n>\n> Am I missing anything?\n>\n> Thanks in advance!\n>\n> Simon\n>\n>\n>\n>\n>\n> Simon Bonner\n> Assistant Professor of Environmetrics\n> Department of Statistical and Actuarial Sciences\n> University of Western Ontario\n>\n> Office: Western Science Centre rm 276\n>\n> Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\n> Twitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "You might make a second package that depends only on nimble and your\nmain package can then suggest that second package and JAGS.\n\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\nOn Wed, Aug 5, 2020 at 3",
       "thread_id": "thread-6ab1fddb85fb",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005844.html"
     },
     {
       "id": "msg-de3edb695e85",
@@ -155,11 +163,12 @@
         "<YQXPR0101MB1671B95AEDBE24142A674445F94B0@YQXPR0101MB1671.CANPRD01.PROD.OUTLOOK.COM>",
         "<CAF8bMcZPSK_REDHmw9iR9rkEjUOApOt3AjGUgnUKD--w-aTBYw@mail.gmail.com>"
       ],
-      "body_plain": "On 5 August 2020 at 16:25, William Dunlap wrote:\n| You might make a second package that depends only on nimble and your\n| main package can then suggest that second package and JAGS.\n\nNice. \"We can solve any problem by introducing an extra level of indirection.\"\n\nSee https://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering\n\nDirk\n \n| Bill Dunlap\n| TIBCO Software\n| wdunlap tibco.com\n| \n| On Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n| >\n| > Hi all,\n| >\n| > I?m wondering if someone an offer advice on a problem I?m facing in developing a package.\n| >\n| > My package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n| >\n| > Unfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I?ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n| >\n| > I thought I?d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n| > ? checking dependencies in R code ... NOTE\n| >   'library' or 'require' call to ?nimble? in package code.\n| >     Please use :: or requireNamespace() instead.\n| >     See section 'Suggested packages' in the 'Writing R Extensions' manual\n| >\n| > What is the recommendation?\n| >\n| > I see two options:\n| >\n| >\n| >   1.  Include nimble in Depends and force user to install it.\n| >   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n| >\n| > Am I missing anything?\n| >\n| > Thanks in advance!\n| >\n| > Simon\n| >\n| >\n| >\n| >\n| >\n| > Simon Bonner\n| > Assistant Professor of Environmetrics\n| > Department of Statistical and Actuarial Sciences\n| > University of Western Ontario\n| >\n| > Office: Western Science Centre rm 276\n| >\n| > Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\n| > Twitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n| >\n| >\n| >         [[alternative HTML version deleted]]\n| >\n| > ______________________________________________\n| > R-package-devel at r-project.org mailing list\n| > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nhttps://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_plain": "On 5 August 2020 at 16:25, William Dunlap wrote:\n| You might make a second package that depends only on nimble and your\n| main package can then suggest that second package and JAGS.\n\nNice. \"We can solve any problem by introducing an extra level of indirection.\"\n\nSee https://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering\n\nDirk\n \n| Bill Dunlap\n| TIBCO Software\n| wdunlap tibco.com\n| \n| On Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n| >\n| > Hi all,\n| >\n| > I’m wondering if someone an offer advice on a problem I’m facing in developing a package.\n| >\n| > My package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n| >\n| > Unfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I’ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n| >\n| > I thought I’d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n| > ❯ checking dependencies in R code ... NOTE\n| >   'library' or 'require' call to ‘nimble’ in package code.\n| >     Please use :: or requireNamespace() instead.\n| >     See section 'Suggested packages' in the 'Writing R Extensions' manual\n| >\n| > What is the recommendation?\n| >\n| > I see two options:\n| >\n| >\n| >   1.  Include nimble in Depends and force user to install it.\n| >   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n| >\n| > Am I missing anything?\n| >\n| > Thanks in advance!\n| >\n| > Simon\n| >\n| >\n| >\n| >\n| >\n| > Simon Bonner\n| > Assistant Professor of Environmetrics\n| > Department of Statistical and Actuarial Sciences\n| > University of Western Ontario\n| >\n| > Office: Western Science Centre rm 276\n| >\n| > Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\n| > Twitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n| >\n| >\n| >         [[alternative HTML version deleted]]\n| >\n| > ______________________________________________\n| > R-package-devel at r-project.org mailing list\n| > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nhttps://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
       "body_snippet": "On 5 August 2020 at 16:25, William Dunlap wrote:\n| You might make a second package that depends only on nimble and your\n| main package can then suggest that second package and JAGS.\n\nNice. \"We can sol",
       "thread_id": "thread-6ab1fddb85fb",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005845.html"
     },
     {
       "id": "msg-fa76c3989b45",
@@ -175,7 +184,8 @@
       "body_snippet": "Dear package developers,\n\nMy package offers a few methods whose generics are in other packages; for example, 'cld', for which the generic is in the 'multcomp' package. Unless the user wants to use cld",
       "thread_id": "thread-fa76c3989b45",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005846.html"
     },
     {
       "id": "msg-948faa5c7fec",
@@ -193,7 +203,8 @@
       "body_snippet": "",
       "thread_id": "thread-fa76c3989b45",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005847.html"
     },
     {
       "id": "msg-63ce48ac0e04",
@@ -209,11 +220,12 @@
         "<CAF8bMcZPSK_REDHmw9iR9rkEjUOApOt3AjGUgnUKD--w-aTBYw@mail.gmail.com>",
         "<24363.16649.607570.550014@rob.eddelbuettel.com>"
       ],
-      "body_plain": "Dirk,\n\nThis sounds familiar: in package 'bit' for  \n\nbit | bitwhich \n\nR did neither S3-dispatch to \"|.bit\" nor to \"|.bitwhich\" but nonsensically to the default method. \n\nIt took me a while to reverse my class thinking enough to realize that I could get control by forcing dispatch to a common class 'booltype'.  So far this sounds harmless. But the truth is that to make this work 'booltype' must not be a common superclass but needs to be a subclass of 'bit' in bit-objects and needs to be a subclass of 'bitwhich' in bitwhich-objects. Only then the dispatch to \"|.booltype\" dominates and we get a seemingly conflict-free dispatch to \"|.booltype\" which then resolves possible conflicts. I hope using R's S3 class system upside-down does not introduce \"another problem\". Citing from \"Beautiful Code\":\n\n\"\nit is worth bringing our discussion to an end by noting that Lampson attributes the aphorism that started our exploration (all problems in computer science can be solved by another level of indirection) to David Wheeler, the inventor of the subroutine. Significantly, Wheeler completed his quote with another phrase: \"But that usually will create another problem.\"\n\"\n\nBest\n\nJens\n\n\n\n#\n> Gesendet: Donnerstag, 06. August 2020 um 01:30 Uhr\n> Von: \"Dirk Eddelbuettel\" <edd at debian.org>\n> An: \"William Dunlap\" <wdunlap at tibco.com>\n> Cc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\n> Betreff: Re: [R-pkg-devel] Package can't be imported with Suggests\n>\n> \n> On 5 August 2020 at 16:25, William Dunlap wrote:\n> | You might make a second package that depends only on nimble and your\n> | main package can then suggest that second package and JAGS.\n> \n> Nice. \"We can solve any problem by introducing an extra level of indirection.\"\n> \n> See https://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering\n> \n> Dirk\n>  \n> | Bill Dunlap\n> | TIBCO Software\n> | wdunlap tibco.com\n> | \n> | On Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n> | >\n> | > Hi all,\n> | >\n> | > I?m wondering if someone an offer advice on a problem I?m facing in developing a package.\n> | >\n> | > My package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n> | >\n> | > Unfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I?ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n> | >\n> | > I thought I?d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n> | > ? checking dependencies in R code ... NOTE\n> | >   'library' or 'require' call to ?nimble? in package code.\n> | >     Please use :: or requireNamespace() instead.\n> | >     See section 'Suggested packages' in the 'Writing R Extensions' manual\n> | >\n> | > What is the recommendation?\n> | >\n> | > I see two options:\n> | >\n> | >\n> | >   1.  Include nimble in Depends and force user to install it.\n> | >   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n> | >\n> | > Am I missing anything?\n> | >\n> | > Thanks in advance!\n> | >\n> | > Simon\n> | >\n> | >\n> | >\n> | >\n> | >\n> | > Simon Bonner\n> | > Assistant Professor of Environmetrics\n> | > Department of Statistical and Actuarial Sciences\n> | > University of Western Ontario\n> | >\n> | > Office: Western Science Centre rm 276\n> | >\n> | > Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\n> | > Twitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n> | >\n> | >\n> | >         [[alternative HTML version deleted]]\n> | >\n> | > ______________________________________________\n> | > R-package-devel at r-project.org mailing list\n> | > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> | \n> | ______________________________________________\n> | R-package-devel at r-project.org mailing list\n> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> -- \n> https://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "Dirk,\n\nThis sounds familiar: in package 'bit' for  \n\nbit | bitwhich \n\nR did neither S3-dispatch to \"|.bit\" nor to \"|.bitwhich\" but nonsensically to the default method. \n\nIt took me a while to reverse my class thinking enough to realize that I could get control by forcing dispatch to a common class 'booltype'.  So far this sounds harmless. But the truth is that to make this work 'booltype' must not be a common superclass but needs to be a subclass of 'bit' in bit-objects and needs to be a subclass of 'bitwhich' in bitwhich-objects. Only then the dispatch to \"|.booltype\" dominates and we get a seemingly conflict-free dispatch to \"|.booltype\" which then resolves possible conflicts. I hope using R's S3 class system upside-down does not introduce \"another problem\". Citing from \"Beautiful Code\":\n\n\"\nit is worth bringing our discussion to an end by noting that Lampson attributes the aphorism that started our exploration (all problems in computer science can be solved by another level of indirection) to David Wheeler, the inventor of the subroutine. Significantly, Wheeler completed his quote with another phrase: \"But that usually will create another problem.\"\n\"\n\nBest\n\nJens\n\n\n\n#\n> Gesendet: Donnerstag, 06. August 2020 um 01:30 Uhr\n> Von: \"Dirk Eddelbuettel\" <edd at debian.org>\n> An: \"William Dunlap\" <wdunlap at tibco.com>\n> Cc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\n> Betreff: Re: [R-pkg-devel] Package can't be imported with Suggests\n>\n> \n> On 5 August 2020 at 16:25, William Dunlap wrote:\n> | You might make a second package that depends only on nimble and your\n> | main package can then suggest that second package and JAGS.\n> \n> Nice. \"We can solve any problem by introducing an extra level of indirection.\"\n> \n> See https://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering\n> \n> Dirk\n>  \n> | Bill Dunlap\n> | TIBCO Software\n> | wdunlap tibco.com\n> | \n> | On Wed, Aug 5, 2020 at 3:36 PM Simon Bonner <simon.bonner at uwo.ca> wrote:\n> | >\n> | > Hi all,\n> | >\n> | > I’m wondering if someone an offer advice on a problem I’m facing in developing a package.\n> | >\n> | > My package essentially generates code and formats data for one of two MCMC sampling engines, JAGS accessed via rjags or nimble (a native R package), calls the engines, and then provides functions to access the results. Since only one of the engines is needed I would like to include rjags and nimble in Suggests in the DESCRIPTION and use requireNamespace() to load the appropriate package when its functionality is needed.\n> | >\n> | > Unfortunately, nimble will not work with this mechanism. It relies on a complex mechanism to compile C++ code to run the sampler, and some of the functions cannot be found when the package is loaded in this way. I’ve been in touch with the maintainers and they are aware of the issue but the current fix is to include the package under Depends. However, this forces a user to install nimble (which itself requires compiling lengthy C++ code) even if the user intends to run the sampler in JAGS.\n> | >\n> | > I thought I’d solved the problem by including nimble in Suggests and then loading it via library() so that all of its functions are attached. This works, but produces a note during the check:\n> | > ❯ checking dependencies in R code ... NOTE\n> | >   'library' or 'require' call to ‘nimble’ in package code.\n> | >     Please use :: or requireNamespace() instead.\n> | >     See section 'Suggested packages' in the 'Writing R Extensions' manual\n> | >\n> | > What is the recommendation?\n> | >\n> | > I see two options:\n> | >\n> | >\n> | >   1.  Include nimble in Depends and force user to install it.\n> | >   2.  Ignore the note and explain the problem when I resubmit to CRAN.\n> | >\n> | > Am I missing anything?\n> | >\n> | > Thanks in advance!\n> | >\n> | > Simon\n> | >\n> | >\n> | >\n> | >\n> | >\n> | > Simon Bonner\n> | > Assistant Professor of Environmetrics\n> | > Department of Statistical and Actuarial Sciences\n> | > University of Western Ontario\n> | >\n> | > Office: Western Science Centre rm 276\n> | >\n> | > Email: sbonner6 at uwo.ca<mailto:sbonner6 at uwo.ca> | Telephone: 519-661-2111 x88205 | Fax: 519-661-3813\n> | > Twitter: @bonnerstatslab | Website: http://simon.bonners.ca/bonner-lab/wpblog/\n> | >\n> | >\n> | >         [[alternative HTML version deleted]]\n> | >\n> | > ______________________________________________\n> | > R-package-devel at r-project.org mailing list\n> | > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> | \n> | ______________________________________________\n> | R-package-devel at r-project.org mailing list\n> | https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> -- \n> https://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "Dirk,\n\nThis sounds familiar: in package 'bit' for  \n\nbit | bitwhich \n\nR did neither S3-dispatch to \"|.bit\" nor to \"|.bitwhich\" but nonsensically to the default method. \n\nIt took me a while to reverse ",
       "thread_id": "thread-6ab1fddb85fb",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005848.html"
     },
     {
       "id": "msg-26c6c1a6ab9e",
@@ -229,7 +241,8 @@
       "body_snippet": "Thanks, Bert. \n\nThis looks potentially useful as an alternative to the way I currently dynamically register the method. It does seem to require that 'pkg' must actually be installed on the system in o",
       "thread_id": "thread-26c6c1a6ab9e",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005849.html"
     },
     {
       "id": "msg-df5015c7158b",
@@ -248,7 +261,8 @@
       "body_snippet": "Testing results for Bert's suggestion...\n\nI tested this with a different -- much smaller -- package: Put the S3method() construct in NAMESPACE but the generic package is not mentioned at all in any DE",
       "thread_id": "thread-df5015c7158b",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005850.html"
     },
     {
       "id": "msg-7ca5c9c31e95",
@@ -269,7 +283,8 @@
       "body_snippet": "Hi all,\n\nThanks for the suggestions and comments. I found a way to allow nimble to work and avoid the note when checking the package. My solution is to use:\n\nrequireNamespace(nimble)\nattachNamespace(\"",
       "thread_id": "thread-6ab1fddb85fb",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005851.html"
     },
     {
       "id": "msg-e45025fb0c73",
@@ -281,11 +296,12 @@
       "subject_clean": "[R-pkg-devel] NOTE in r-devel-linux-x86_64-fedora-clang",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear all,\n\nI'm struggling to understand this NOTE in \nr-devel-linux-x86_64-fedora-clang (only)\nhttps://cran.r-project.org/web/checks/check_results_PowerTOST.html\nemmeans is a great package (THX Russell!) but we don't use it anywhere \nin ours.\n\nOnly in two man pages we have\n... obtained via \\code{\\link[emmeans]{emmeans}} of package \\code{emmeans}.\n\nPreviously we had plain text and were asked by users for details.\nAFAIK, this is the correct syntax acc. to the REM linking to the man \npage of another package. In the library links work as intended.\n\nOur package is used in a regulated environment where even a NOTE raises \neyebrows.\nIn all other R-versions and operating systems there is no problem. What \nsurprises me is that on Fedora the results depends on the C-compiler. \nStrange.\n\nOf course, we could use in NAMESPACE\n ? importFrom(emmeans, emmeans)\nbut that would force users to install a package they might not need at all.\n\n\nHelmut\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
+      "body_plain": "Dear all,\n\nI'm struggling to understand this NOTE in \nr-devel-linux-x86_64-fedora-clang (only)\nhttps://cran.r-project.org/web/checks/check_results_PowerTOST.html\nemmeans is a great package (THX Russell!) but we don't use it anywhere \nin ours.\n\nOnly in two man pages we have\n... obtained via \\code{\\link[emmeans]{emmeans}} of package \\code{emmeans}.\n\nPreviously we had plain text and were asked by users for details.\nAFAIK, this is the correct syntax acc. to the REM linking to the man \npage of another package. In the library links work as intended.\n\nOur package is used in a regulated environment where even a NOTE raises \neyebrows.\nIn all other R-versions and operating systems there is no problem. What \nsurprises me is that on Fedora the results depends on the C-compiler. \nStrange.\n\nOf course, we could use in NAMESPACE\n   importFrom(emmeans, emmeans)\nbut that would force users to install a package they might not need at all.\n\n\nHelmut\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
       "body_snippet": "Dear all,\n\nI'm struggling to understand this NOTE in \nr-devel-linux-x86_64-fedora-clang (only)\nhttps://cran.r-project.org/web/checks/check_results_PowerTOST.html\nemmeans is a great package (THX Russel",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005852.html"
     },
     {
       "id": "msg-093fc07eef42",
@@ -299,11 +315,12 @@
       "references": [
         "<2d2b52d7-e243-2cb2-7a71-c1b2b19ca363@bebac.at>"
       ],
-      "body_plain": "If you want to link to a package in the documentation, you'll have to\nadd it to Suggests.\n\nGabor\n\nOn Fri, Aug 7, 2020 at 3:45 PM Helmut Sch?tz <helmut.schuetz at bebac.at> wrote:\n>\n> Dear all,\n>\n> I'm struggling to understand this NOTE in\n> r-devel-linux-x86_64-fedora-clang (only)\n> https://cran.r-project.org/web/checks/check_results_PowerTOST.html\n> emmeans is a great package (THX Russell!) but we don't use it anywhere\n> in ours.\n>\n> Only in two man pages we have\n> ... obtained via \\code{\\link[emmeans]{emmeans}} of package \\code{emmeans}.\n>\n> Previously we had plain text and were asked by users for details.\n> AFAIK, this is the correct syntax acc. to the REM linking to the man\n> page of another package. In the library links work as intended.\n>\n> Our package is used in a regulated environment where even a NOTE raises\n> eyebrows.\n> In all other R-versions and operating systems there is no problem. What\n> surprises me is that on Fedora the results depends on the C-compiler.\n> Strange.\n>\n> Of course, we could use in NAMESPACE\n>    importFrom(emmeans, emmeans)\n> but that would force users to install a package they might not need at all.\n>\n>\n> Helmut\n>\n> --\n> Ing. Helmut Sch?tz\n> BEBAC ? Consultancy Services for\n> Bioequivalence and Bioavailability Studies\n> Neubaugasse 36/11\n> 1070 Vienna, Austria\n> E helmut.schuetz at bebac.at\n> W https://bebac.at/\n> F https://forum.bebac.at/\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "If you want to link to a package in the documentation, you'll have to\nadd it to Suggests.\n\nGabor\n\nOn Fri, Aug 7, 2020 at 3:45 PM Helmut Sch?tz <helmut.schuetz at bebac.at> wrote:\n>\n> Dear all,\n>\n> I'm",
+      "body_plain": "If you want to link to a package in the documentation, you'll have to\nadd it to Suggests.\n\nGabor\n\nOn Fri, Aug 7, 2020 at 3:45 PM Helmut Schütz <helmut.schuetz at bebac.at> wrote:\n>\n> Dear all,\n>\n> I'm struggling to understand this NOTE in\n> r-devel-linux-x86_64-fedora-clang (only)\n> https://cran.r-project.org/web/checks/check_results_PowerTOST.html\n> emmeans is a great package (THX Russell!) but we don't use it anywhere\n> in ours.\n>\n> Only in two man pages we have\n> ... obtained via \\code{\\link[emmeans]{emmeans}} of package \\code{emmeans}.\n>\n> Previously we had plain text and were asked by users for details.\n> AFAIK, this is the correct syntax acc. to the REM linking to the man\n> page of another package. In the library links work as intended.\n>\n> Our package is used in a regulated environment where even a NOTE raises\n> eyebrows.\n> In all other R-versions and operating systems there is no problem. What\n> surprises me is that on Fedora the results depends on the C-compiler.\n> Strange.\n>\n> Of course, we could use in NAMESPACE\n>    importFrom(emmeans, emmeans)\n> but that would force users to install a package they might not need at all.\n>\n>\n> Helmut\n>\n> --\n> Ing. Helmut Schütz\n> BEBAC – Consultancy Services for\n> Bioequivalence and Bioavailability Studies\n> Neubaugasse 36/11\n> 1070 Vienna, Austria\n> E helmut.schuetz at bebac.at\n> W https://bebac.at/\n> F https://forum.bebac.at/\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "If you want to link to a package in the documentation, you'll have to\nadd it to Suggests.\n\nGabor\n\nOn Fri, Aug 7, 2020 at 3:45 PM Helmut Schütz <helmut.schuetz at bebac.at> wrote:\n>\n> Dear all,\n>\n> I'm",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005853.html"
     },
     {
       "id": "msg-cfaaff4ef1dc",
@@ -318,11 +335,12 @@
         "<2d2b52d7-e243-2cb2-7a71-c1b2b19ca363@bebac.at>",
         "<CABtg=Kk_sGEE3AxAEgBKWBhiM9++QTV8Y1W20fZ0BT4JPd8nfg@mail.gmail.com>"
       ],
-      "body_plain": "Hi G?bor,\n\nG?bor Cs?rdi wrote on 2020-08-07 16:46:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nTHX, will do. Is this documented somewhere? Any why don't the *other* \ninstallations of CRAN complain as well?\n\nHelmut\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nT +43 1 2311746\nM +43 699 10792458\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/\nGIS 24799386, VAT?ATU61115625, DUNS?300370568, EORI?ATEOS1000096209\nGDPR https://bebac.at/Data-Protection.htm",
-      "body_snippet": "Hi G?bor,\n\nG?bor Cs?rdi wrote on 2020-08-07 16:46:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nTHX, will do. Is this documented somewhere? Any why do",
+      "body_plain": "Hi Gábor,\n\nGábor Csárdi wrote on 2020-08-07 16:46:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nTHX, will do. Is this documented somewhere? Any why don't the *other* \ninstallations of CRAN complain as well?\n\nHelmut\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nT +43 1 2311746\nM +43 699 10792458\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/\nGIS 24799386, VAT ATU61115625, DUNS 300370568, EORI ATEOS1000096209\nGDPR https://bebac.at/Data-Protection.htm",
+      "body_snippet": "Hi Gábor,\n\nGábor Csárdi wrote on 2020-08-07 16:46:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nTHX, will do. Is this documented somewhere? Any why do",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005854.html"
     },
     {
       "id": "msg-fca6293ca6f2",
@@ -338,11 +356,12 @@
         "<CABtg=Kk_sGEE3AxAEgBKWBhiM9++QTV8Y1W20fZ0BT4JPd8nfg@mail.gmail.com>",
         "<ac77de5b-bc40-9791-6079-4c77c1fd7968@bebac.at>"
       ],
-      "body_plain": "On Fri, Aug 7, 2020 at 3:51 PM Helmut Sch?tz <helmut.schuetz at bebac.at> wrote:\n>\n> Hi G?bor,\n>\n> G?bor Cs?rdi wrote on 2020-08-07 16:46:\n> > If you want to link to a package in the documentation, you'll have to\n> > add it to Suggests.\n>\n> THX, will do. Is this documented somewhere?\n\nThe check is documented in\nhttps://cran.r-project.org/doc/manuals/r-devel/R-ints.html\nYou can turn it on with the _R_CHECK_XREFS_PKGS_ARE_DECLARED_\nenvironment variable.\n\n> Any why don't the *other*\n> installations of CRAN complain as well?\n\nI don't know if they run a different set of checks on purpose or by accident.\n\nG.\n\n> Helmut\n>\n> --\n> Ing. Helmut Sch?tz\n> BEBAC ? Consultancy Services for\n> Bioequivalence and Bioavailability Studies\n> Neubaugasse 36/11\n> 1070 Vienna, Austria\n> T +43 1 2311746\n> M +43 699 10792458\n> E helmut.schuetz at bebac.at\n> W https://bebac.at/\n> C https://bebac.at/Contact.htm\n> F https://forum.bebac.at/\n> GIS 24799386, VAT ATU61115625, DUNS 300370568, EORI ATEOS1000096209\n> GDPR https://bebac.at/Data-Protection.htm\n>\n>",
-      "body_snippet": "On Fri, Aug 7, 2020 at 3:51 PM Helmut Sch?tz <helmut.schuetz at bebac.at> wrote:\n>\n> Hi G?bor,\n>\n> G?bor Cs?rdi wrote on 2020-08-07 16:46:\n> > If you want to link to a package in the documentation, yo",
+      "body_plain": "On Fri, Aug 7, 2020 at 3:51 PM Helmut Schütz <helmut.schuetz at bebac.at> wrote:\n>\n> Hi Gábor,\n>\n> Gábor Csárdi wrote on 2020-08-07 16:46:\n> > If you want to link to a package in the documentation, you'll have to\n> > add it to Suggests.\n>\n> THX, will do. Is this documented somewhere?\n\nThe check is documented in\nhttps://cran.r-project.org/doc/manuals/r-devel/R-ints.html\nYou can turn it on with the _R_CHECK_XREFS_PKGS_ARE_DECLARED_\nenvironment variable.\n\n> Any why don't the *other*\n> installations of CRAN complain as well?\n\nI don't know if they run a different set of checks on purpose or by accident.\n\nG.\n\n> Helmut\n>\n> --\n> Ing. Helmut Schütz\n> BEBAC – Consultancy Services for\n> Bioequivalence and Bioavailability Studies\n> Neubaugasse 36/11\n> 1070 Vienna, Austria\n> T +43 1 2311746\n> M +43 699 10792458\n> E helmut.schuetz at bebac.at\n> W https://bebac.at/\n> C https://bebac.at/Contact.htm\n> F https://forum.bebac.at/\n> GIS 24799386, VAT ATU61115625, DUNS 300370568, EORI ATEOS1000096209\n> GDPR https://bebac.at/Data-Protection.htm\n>\n>",
+      "body_snippet": "On Fri, Aug 7, 2020 at 3:51 PM Helmut Schütz <helmut.schuetz at bebac.at> wrote:\n>\n> Hi Gábor,\n>\n> Gábor Csárdi wrote on 2020-08-07 16:46:\n> > If you want to link to a package in the documentation, yo",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005855.html"
     },
     {
       "id": "msg-9c3761e7f737",
@@ -357,11 +376,12 @@
         "<2d2b52d7-e243-2cb2-7a71-c1b2b19ca363@bebac.at>",
         "<CABtg=Kk_sGEE3AxAEgBKWBhiM9++QTV8Y1W20fZ0BT4JPd8nfg@mail.gmail.com>"
       ],
-      "body_plain": "On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nThis doesn't make any sense.  If you don't use the code from that\npackage anywhere, then a cross-reference to that package should not\nrequire the extra dependency in Suggests.  \n\nCross references should be able to point to other functionality that\nmight be useful to the user, or might add extra depth of understanding\nto a concept.  If the user doesn't have the package installed, no\nworries, it is just a cross reference.\n\nThe requirement you are suggesting is also not discussed in Writing R\nExtensions:\n\nhttps://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n\nIn fact, it explicitly allows links to potentially uninstalled\npackages.\n\nRegards,\n\nBrian",
-      "body_snippet": "On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nThis doesn't make any sense.  If you don't use the",
+      "body_plain": "On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nThis doesn't make any sense.  If you don't use the code from that\npackage anywhere, then a cross-reference to that package should not\nrequire the extra dependency in Suggests.  \n\nCross references should be able to point to other functionality that\nmight be useful to the user, or might add extra depth of understanding\nto a concept.  If the user doesn't have the package installed, no\nworries, it is just a cross reference.\n\nThe requirement you are suggesting is also not discussed in Writing R\nExtensions:\n\nhttps://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n\nIn fact, it explicitly allows links to potentially uninstalled\npackages.\n\nRegards,\n\nBrian",
+      "body_snippet": "On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n> If you want to link to a package in the documentation, you'll have to\n> add it to Suggests.\n\nThis doesn't make any sense.  If you don't use the",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005856.html"
     },
     {
       "id": "msg-9b2d2c5f31fa",
@@ -378,11 +398,12 @@
         "<ac77de5b-bc40-9791-6079-4c77c1fd7968@bebac.at>",
         "<CABtg=KmuUWbjsF9hggLvpPA+WiB7ruxqdCbqxL=D1c80__13Pg@mail.gmail.com>"
       ],
-      "body_plain": "Hi G?bor,\n\nTHX again. Case closed.\n\nHelmut\n\nG?bor Cs?rdi wrote on 2020-08-07 17:02:\n> On Fri, Aug 7, 2020 at 3:51 PM Helmut Sch?tz <helmut.schuetz at bebac.at> wrote:\n>> Hi G?bor,\n>>\n>> G?bor Cs?rdi wrote on 2020-08-07 16:46:\n>>> If you want to link to a package in the documentation, you'll have to\n>>> add it to Suggests.\n>> THX, will do. Is this documented somewhere?\n> The check is documented in\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html\n> You can turn it on with the _R_CHECK_XREFS_PKGS_ARE_DECLARED_\n> environment variable.\n>\n>> Any why don't the *other*\n>> installations of CRAN complain as well?\n> I don't know if they run a different set of checks on purpose or by accident.\n>\n> G.\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
-      "body_snippet": "Hi G?bor,\n\nTHX again. Case closed.\n\nHelmut\n\nG?bor Cs?rdi wrote on 2020-08-07 17:02:\n> On Fri, Aug 7, 2020 at 3:51 PM Helmut Sch?tz <helmut.schuetz at bebac.at> wrote:\n>> Hi G?bor,\n>>\n>> G?bor Cs?rdi w",
+      "body_plain": "Hi Gábor,\n\nTHX again. Case closed.\n\nHelmut\n\nGábor Csárdi wrote on 2020-08-07 17:02:\n> On Fri, Aug 7, 2020 at 3:51 PM Helmut Schütz <helmut.schuetz at bebac.at> wrote:\n>> Hi Gábor,\n>>\n>> Gábor Csárdi wrote on 2020-08-07 16:46:\n>>> If you want to link to a package in the documentation, you'll have to\n>>> add it to Suggests.\n>> THX, will do. Is this documented somewhere?\n> The check is documented in\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html\n> You can turn it on with the _R_CHECK_XREFS_PKGS_ARE_DECLARED_\n> environment variable.\n>\n>> Any why don't the *other*\n>> installations of CRAN complain as well?\n> I don't know if they run a different set of checks on purpose or by accident.\n>\n> G.\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
+      "body_snippet": "Hi Gábor,\n\nTHX again. Case closed.\n\nHelmut\n\nGábor Csárdi wrote on 2020-08-07 17:02:\n> On Fri, Aug 7, 2020 at 3:51 PM Helmut Schütz <helmut.schuetz at bebac.at> wrote:\n>> Hi Gábor,\n>>\n>> Gábor Csárdi w",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005857.html"
     },
     {
       "id": "msg-5258530c7a5a",
@@ -398,11 +419,12 @@
         "<CABtg=Kk_sGEE3AxAEgBKWBhiM9++QTV8Y1W20fZ0BT4JPd8nfg@mail.gmail.com>",
         "<aed6a1c6fac25ee9f98e38a8c56ed6eb46e0eb46.camel@braverock.com>"
       ],
-      "body_plain": "Hi Brian,\n\nyou take the words out of my mouth. However, we were slapped in the face...\n\nHelmut\n\nBrian G. Peterson wrote on 2020-08-07 17:02:\n> On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Suggests.\n> This doesn't make any sense.  If you don't use the code from that\n> package anywhere, then a cross-reference to that package should not\n> require the extra dependency in Suggests.\n>\n> Cross references should be able to point to other functionality that\n> might be useful to the user, or might add extra depth of understanding\n> to a concept.  If the user doesn't have the package installed, no\n> worries, it is just a cross reference.\n>\n> The requirement you are suggesting is also not discussed in Writing R\n> Extensions:\n>\n> https://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n>\n> In fact, it explicitly allows links to potentially uninstalled\n> packages.\n>\n> Regards,\n>\n> Brian\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
-      "body_snippet": "Hi Brian,\n\nyou take the words out of my mouth. However, we were slapped in the face...\n\nHelmut\n\nBrian G. Peterson wrote on 2020-08-07 17:02:\n> On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n>>",
+      "body_plain": "Hi Brian,\n\nyou take the words out of my mouth. However, we were slapped in the face...\n\nHelmut\n\nBrian G. Peterson wrote on 2020-08-07 17:02:\n> On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Suggests.\n> This doesn't make any sense.  If you don't use the code from that\n> package anywhere, then a cross-reference to that package should not\n> require the extra dependency in Suggests.\n>\n> Cross references should be able to point to other functionality that\n> might be useful to the user, or might add extra depth of understanding\n> to a concept.  If the user doesn't have the package installed, no\n> worries, it is just a cross reference.\n>\n> The requirement you are suggesting is also not discussed in Writing R\n> Extensions:\n>\n> https://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n>\n> In fact, it explicitly allows links to potentially uninstalled\n> packages.\n>\n> Regards,\n>\n> Brian\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
+      "body_snippet": "Hi Brian,\n\nyou take the words out of my mouth. However, we were slapped in the face...\n\nHelmut\n\nBrian G. Peterson wrote on 2020-08-07 17:02:\n> On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n>>",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005858.html"
     },
     {
       "id": "msg-eee661ce50f0",
@@ -418,11 +440,12 @@
         "<CABtg=Kk_sGEE3AxAEgBKWBhiM9++QTV8Y1W20fZ0BT4JPd8nfg@mail.gmail.com>",
         "<aed6a1c6fac25ee9f98e38a8c56ed6eb46e0eb46.camel@braverock.com>"
       ],
-      "body_plain": "The whole point of the Suggests package relationship is that you don't actually have to have it installed to use the package. It does have to be installed to check the package, which allows the link to be tested at least once before being released.\n\nOn August 7, 2020 8:02:47 AM PDT, \"Brian G. Peterson\" <brian at braverock.com> wrote:\n>\n>On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Suggests.\n>\n>This doesn't make any sense.  If you don't use the code from that\n>package anywhere, then a cross-reference to that package should not\n>require the extra dependency in Suggests.  \n>\n>Cross references should be able to point to other functionality that\n>might be useful to the user, or might add extra depth of understanding\n>to a concept.  If the user doesn't have the package installed, no\n>worries, it is just a cross reference.\n>\n>The requirement you are suggesting is also not discussed in Writing R\n>Extensions:\n>\n>https://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n>\n>In fact, it explicitly allows links to potentially uninstalled\n>packages.\n>\n>Regards,\n>\n>Brian\n>\n>______________________________________________\n>R-package-devel at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nSent from my phone. Please excuse my brevity.",
+      "body_plain": "The whole point of the Suggests package relationship is that you don't actually have to have it installed to use the package. It does have to be installed to check the package, which allows the link to be tested at least once before being released.\n\nOn August 7, 2020 8:02:47 AM PDT, \"Brian G. Peterson\" <brian at braverock.com> wrote:\n>\n>On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Suggests.\n>\n>This doesn't make any sense.  If you don't use the code from that\n>package anywhere, then a cross-reference to that package should not\n>require the extra dependency in Suggests.  \n>\n>Cross references should be able to point to other functionality that\n>might be useful to the user, or might add extra depth of understanding\n>to a concept.  If the user doesn't have the package installed, no\n>worries, it is just a cross reference.\n>\n>The requirement you are suggesting is also not discussed in Writing R\n>Extensions:\n>\n>https://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n>\n>In fact, it explicitly allows links to potentially uninstalled\n>packages.\n>\n>Regards,\n>\n>Brian\n>\n>______________________________________________\n>R-package-devel at r-project.org mailing list\n>https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nSent from my phone. Please excuse my brevity.",
       "body_snippet": "The whole point of the Suggests package relationship is that you don't actually have to have it installed to use the package. It does have to be installed to check the package, which allows the link t",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005859.html"
     },
     {
       "id": "msg-042e9d066782",
@@ -438,11 +461,12 @@
         "<CABtg=Kk_sGEE3AxAEgBKWBhiM9++QTV8Y1W20fZ0BT4JPd8nfg@mail.gmail.com>",
         "<aed6a1c6fac25ee9f98e38a8c56ed6eb46e0eb46.camel@braverock.com>"
       ],
-      "body_plain": "On 07/08/2020 11:02 a.m., Brian G. Peterson wrote:\n> \n> On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Suggests.\n> \n> This doesn't make any sense.  If you don't use the code from that\n> package anywhere, then a cross-reference to that package should not\n> require the extra dependency in Suggests.\n> \n> Cross references should be able to point to other functionality that\n> might be useful to the user, or might add extra depth of understanding\n> to a concept.  If the user doesn't have the package installed, no\n> worries, it is just a cross reference.\n> \n> The requirement you are suggesting is also not discussed in Writing R\n> Extensions:\n> \n> https://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n> \n> In fact, it explicitly allows links to potentially uninstalled\n> packages.\n\nYou're reading the wrong version of the manual.  This is in the R-devel \nmanual:\n\n\"Packages referred to by these ?other forms? should be declared in the \nDESCRIPTION file, in the ?Depends?, ?Imports?, ?Suggests? or ?Enhances? \nfields. \"\n\nThis is at the end of section 2.5 in \nhttps://cran.r-project.org/doc/manuals/r-devel/R-exts.html.\n\nDuncan Murdoch",
-      "body_snippet": "On 07/08/2020 11:02 a.m., Brian G. Peterson wrote:\n> \n> On Fri, 2020-08-07 at 15:46 +0100, G?bor Cs?rdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Sug",
+      "body_plain": "On 07/08/2020 11:02 a.m., Brian G. Peterson wrote:\n> \n> On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Suggests.\n> \n> This doesn't make any sense.  If you don't use the code from that\n> package anywhere, then a cross-reference to that package should not\n> require the extra dependency in Suggests.\n> \n> Cross references should be able to point to other functionality that\n> might be useful to the user, or might add extra depth of understanding\n> to a concept.  If the user doesn't have the package installed, no\n> worries, it is just a cross reference.\n> \n> The requirement you are suggesting is also not discussed in Writing R\n> Extensions:\n> \n> https://cran.r-project.org/doc/manuals/r-patched/R-exts.html#Cross_002dreferences\n> \n> In fact, it explicitly allows links to potentially uninstalled\n> packages.\n\nYou're reading the wrong version of the manual.  This is in the R-devel \nmanual:\n\n\"Packages referred to by these ‘other forms’ should be declared in the \nDESCRIPTION file, in the ‘Depends’, ‘Imports’, ‘Suggests’ or ‘Enhances’ \nfields. \"\n\nThis is at the end of section 2.5 in \nhttps://cran.r-project.org/doc/manuals/r-devel/R-exts.html.\n\nDuncan Murdoch",
+      "body_snippet": "On 07/08/2020 11:02 a.m., Brian G. Peterson wrote:\n> \n> On Fri, 2020-08-07 at 15:46 +0100, Gábor Csárdi wrote:\n>> If you want to link to a package in the documentation, you'll have to\n>> add it to Sug",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005860.html"
     },
     {
       "id": "msg-980ae52366f3",
@@ -459,11 +483,12 @@
         "<aed6a1c6fac25ee9f98e38a8c56ed6eb46e0eb46.camel@braverock.com>",
         "<592a71c9-8a49-98e5-1b23-4339f02111d2@gmail.com>"
       ],
-      "body_plain": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 18:39:\n> You're reading the wrong version of the manual.? This is in the \n> R-devel manual:\n>\n> \"Packages referred to by these ?other forms? should be declared in the \n> DESCRIPTION file, in the ?Depends?, ?Imports?, ?Suggests? or \n> ?Enhances? fields. \"\n>\n> This is at the end of section 2.5 in \n> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html.\n\nI see. However, the HTML-source states\nThis manual is for R, version 4.1.0 Under development (2020-08-06).\n\nI was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not* \ncontain this sentence. Hence, I fell into the trap. Should be stated in \nthe PDF as well, IMHO.\n\nHelmut\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
-      "body_snippet": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 18:39:\n> You're reading the wrong version of the manual.? This is in the \n> R-devel manual:\n>\n> \"Packages referred to by these ?other forms? should be de",
+      "body_plain": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 18:39:\n> You're reading the wrong version of the manual.  This is in the \n> R-devel manual:\n>\n> \"Packages referred to by these ‘other forms’ should be declared in the \n> DESCRIPTION file, in the ‘Depends’, ‘Imports’, ‘Suggests’ or \n> ‘Enhances’ fields. \"\n>\n> This is at the end of section 2.5 in \n> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html.\n\nI see. However, the HTML-source states\nThis manual is for R, version 4.1.0 Under development (2020-08-06).\n\nI was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not* \ncontain this sentence. Hence, I fell into the trap. Should be stated in \nthe PDF as well, IMHO.\n\nHelmut\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
+      "body_snippet": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 18:39:\n> You're reading the wrong version of the manual.  This is in the \n> R-devel manual:\n>\n> \"Packages referred to by these ‘other forms’ should be de",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005861.html"
     },
     {
       "id": "msg-30b9f0c3db6c",
@@ -481,11 +506,12 @@
         "<592a71c9-8a49-98e5-1b23-4339f02111d2@gmail.com>",
         "<f0e39912-1c89-df16-fd1a-c28785bb002b@bebac.at>"
       ],
-      "body_plain": "On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 18:39:\n>> You're reading the wrong version of the manual.? This is in the\n>> R-devel manual:\n>>\n>> \"Packages referred to by these ?other forms? should be declared in the\n>> DESCRIPTION file, in the ?Depends?, ?Imports?, ?Suggests? or\n>> ?Enhances? fields. \"\n>>\n>> This is at the end of section 2.5 in\n>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html.\n> \n> I see. However, the HTML-source states\n> This manual is for R, version 4.1.0 Under development (2020-08-06).\n> \n> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not*\n> contain this sentence. Hence, I fell into the trap. Should be stated in\n> the PDF as well, IMHO.\n\nOh, c'mon.  It will be a new requirement in R 4.1.0  It's not a \nrequirement in 4.0.2, and you didn't get a NOTE about it there, you only \ngot the note in one of the r-devel platforms.\n\nThe general way things work in R is that changes get announced well in \nadvance of release *by putting them in R-devel*.  That's why you're \nasked to check your package against R-devel before submitting:  so that \nit meets upcoming announced changes to requirements as well as ones that \nare in the current release.\n\nDuncan Murdoch",
-      "body_snippet": "On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 18:39:\n>> You're reading the wrong version of the manual.? This is in the\n>> R-devel manual:\n>>\n>> \"P",
+      "body_plain": "On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 18:39:\n>> You're reading the wrong version of the manual.  This is in the\n>> R-devel manual:\n>>\n>> \"Packages referred to by these ‘other forms’ should be declared in the\n>> DESCRIPTION file, in the ‘Depends’, ‘Imports’, ‘Suggests’ or\n>> ‘Enhances’ fields. \"\n>>\n>> This is at the end of section 2.5 in\n>> https://cran.r-project.org/doc/manuals/r-devel/R-exts.html.\n> \n> I see. However, the HTML-source states\n> This manual is for R, version 4.1.0 Under development (2020-08-06).\n> \n> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not*\n> contain this sentence. Hence, I fell into the trap. Should be stated in\n> the PDF as well, IMHO.\n\nOh, c'mon.  It will be a new requirement in R 4.1.0  It's not a \nrequirement in 4.0.2, and you didn't get a NOTE about it there, you only \ngot the note in one of the r-devel platforms.\n\nThe general way things work in R is that changes get announced well in \nadvance of release *by putting them in R-devel*.  That's why you're \nasked to check your package against R-devel before submitting:  so that \nit meets upcoming announced changes to requirements as well as ones that \nare in the current release.\n\nDuncan Murdoch",
+      "body_snippet": "On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 18:39:\n>> You're reading the wrong version of the manual.  This is in the\n>> R-devel manual:\n>>\n>> \"P",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 5,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005862.html"
     },
     {
       "id": "msg-1576f418597c",
@@ -504,11 +530,12 @@
         "<f0e39912-1c89-df16-fd1a-c28785bb002b@bebac.at>",
         "<509c7cb5-f155-dd82-d015-930c219cf909@gmail.com>"
       ],
-      "body_plain": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 21:55:\n> On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n>> I see. However, the HTML-source states\n>> This manual is for R, version 4.1.0 Under development (2020-08-06).\n>>\n>> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not*\n>> contain this sentence. Hence, I fell into the trap. Should be stated in\n>> the PDF as well, IMHO.\n>\n> Oh, c'mon.? It will be a new requirement in R 4.1.0? It's not a \n> requirement in 4.0.2, and you didn't get a NOTE about it there, you \n> only got the note in one of the r-devel platforms.\n\nYep, but why are the others not configured in the same way (with setenv \n_R_CHECK_SUGGESTS_ONLY_ false)? Doesn't sound consistent to me.\n\n> The general way things work in R is that changes get announced well in \n> advance of release *by putting them in R-devel*.? That's why you're \n> asked to check your package against R-devel before submitting:? so \n> that it meets upcoming announced changes to requirements as well as \n> ones that are in the current release.\n\nOf course, we checked the package on winbuilder... Are you suggesting to \nset up a multi-boot system for all those OSs? Even if one -- not us -- \nwould aim at that: Where to get Solaris v10? Buy a Mac to run checks on \nmaxOS?\n\nAt least I understand now the differences between \nr-devel-linux-x86_64-debian-gcc and r-devel-linux-x86_64-debian-gcc \n(given in the last line there: \nhttps://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc).\n\nHelmut\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
-      "body_snippet": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 21:55:\n> On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n>> I see. However, the HTML-source states\n>> This manual is for R, version 4.1.0 Under development",
+      "body_plain": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 21:55:\n> On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n>> I see. However, the HTML-source states\n>> This manual is for R, version 4.1.0 Under development (2020-08-06).\n>>\n>> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not*\n>> contain this sentence. Hence, I fell into the trap. Should be stated in\n>> the PDF as well, IMHO.\n>\n> Oh, c'mon.  It will be a new requirement in R 4.1.0  It's not a \n> requirement in 4.0.2, and you didn't get a NOTE about it there, you \n> only got the note in one of the r-devel platforms.\n\nYep, but why are the others not configured in the same way (with setenv \n_R_CHECK_SUGGESTS_ONLY_ false)? Doesn't sound consistent to me.\n\n> The general way things work in R is that changes get announced well in \n> advance of release *by putting them in R-devel*.  That's why you're \n> asked to check your package against R-devel before submitting:  so \n> that it meets upcoming announced changes to requirements as well as \n> ones that are in the current release.\n\nOf course, we checked the package on winbuilder... Are you suggesting to \nset up a multi-boot system for all those OSs? Even if one -- not us -- \nwould aim at that: Where to get Solaris v10? Buy a Mac to run checks on \nmaxOS?\n\nAt least I understand now the differences between \nr-devel-linux-x86_64-debian-gcc and r-devel-linux-x86_64-debian-gcc \n(given in the last line there: \nhttps://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc).\n\nHelmut\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nF https://forum.bebac.at/",
+      "body_snippet": "Hi Duncan,\n\nDuncan Murdoch wrote on 2020-08-07 21:55:\n> On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n>> I see. However, the HTML-source states\n>> This manual is for R, version 4.1.0 Under development",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 6,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005863.html"
     },
     {
       "id": "msg-5983f759e751",
@@ -528,11 +555,12 @@
         "<509c7cb5-f155-dd82-d015-930c219cf909@gmail.com>",
         "<01a4ccdb-f6a2-0b32-d0a4-ff23678630f9@bebac.at>"
       ],
-      "body_plain": "On 07/08/2020 6:53 p.m., Helmut Sch?tz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 21:55:\n>> On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n>>> I see. However, the HTML-source states\n>>> This manual is for R, version 4.1.0 Under development (2020-08-06).\n>>>\n>>> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not*\n>>> contain this sentence. Hence, I fell into the trap. Should be stated in\n>>> the PDF as well, IMHO.\n>>\n>> Oh, c'mon.? It will be a new requirement in R 4.1.0? It's not a\n>> requirement in 4.0.2, and you didn't get a NOTE about it there, you\n>> only got the note in one of the r-devel platforms.\n> \n> Yep, but why are the others not configured in the same way (with setenv\n> _R_CHECK_SUGGESTS_ONLY_ false)? Doesn't sound consistent to me.\n\nWhat has this got to do with your suggestion that changes that will be \nreleased in R 4.1.0 next year should be documented in R 4.0.2?\n\nDuncan Murdoch\n\n> \n>> The general way things work in R is that changes get announced well in\n>> advance of release *by putting them in R-devel*.? That's why you're\n>> asked to check your package against R-devel before submitting:? so\n>> that it meets upcoming announced changes to requirements as well as\n>> ones that are in the current release.\n> \n> Of course, we checked the package on winbuilder... Are you suggesting to\n> set up a multi-boot system for all those OSs? Even if one -- not us --\n> would aim at that: Where to get Solaris v10? Buy a Mac to run checks on\n> maxOS?\n> \n> At least I understand now the differences between\n> r-devel-linux-x86_64-debian-gcc and r-devel-linux-x86_64-debian-gcc\n> (given in the last line there:\n> https://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc).\n> \n> Helmut\n>",
-      "body_snippet": "On 07/08/2020 6:53 p.m., Helmut Sch?tz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 21:55:\n>> On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n>>> I see. However, the HTML-source states\n>>",
+      "body_plain": "On 07/08/2020 6:53 p.m., Helmut Schütz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 21:55:\n>> On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n>>> I see. However, the HTML-source states\n>>> This manual is for R, version 4.1.0 Under development (2020-08-06).\n>>>\n>>> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does *not*\n>>> contain this sentence. Hence, I fell into the trap. Should be stated in\n>>> the PDF as well, IMHO.\n>>\n>> Oh, c'mon.  It will be a new requirement in R 4.1.0  It's not a\n>> requirement in 4.0.2, and you didn't get a NOTE about it there, you\n>> only got the note in one of the r-devel platforms.\n> \n> Yep, but why are the others not configured in the same way (with setenv\n> _R_CHECK_SUGGESTS_ONLY_ false)? Doesn't sound consistent to me.\n\nWhat has this got to do with your suggestion that changes that will be \nreleased in R 4.1.0 next year should be documented in R 4.0.2?\n\nDuncan Murdoch\n\n> \n>> The general way things work in R is that changes get announced well in\n>> advance of release *by putting them in R-devel*.  That's why you're\n>> asked to check your package against R-devel before submitting:  so\n>> that it meets upcoming announced changes to requirements as well as\n>> ones that are in the current release.\n> \n> Of course, we checked the package on winbuilder... Are you suggesting to\n> set up a multi-boot system for all those OSs? Even if one -- not us --\n> would aim at that: Where to get Solaris v10? Buy a Mac to run checks on\n> maxOS?\n> \n> At least I understand now the differences between\n> r-devel-linux-x86_64-debian-gcc and r-devel-linux-x86_64-debian-gcc\n> (given in the last line there:\n> https://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc).\n> \n> Helmut\n>",
+      "body_snippet": "On 07/08/2020 6:53 p.m., Helmut Schütz wrote:\n> Hi Duncan,\n> \n> Duncan Murdoch wrote on 2020-08-07 21:55:\n>> On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n>>> I see. However, the HTML-source states\n>>",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 7,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005864.html"
     },
     {
       "id": "msg-0fb2b9d8e5ed",
@@ -553,11 +581,12 @@
         "<01a4ccdb-f6a2-0b32-d0a4-ff23678630f9@bebac.at>",
         "<93a0d939-e6a5-4bba-3d99-06691eec4103@gmail.com>"
       ],
-      "body_plain": "On 8/7/20 8:35 PM, Duncan Murdoch wrote:\n> On 07/08/2020 6:53 p.m., Helmut Sch?tz wrote:\n>> Hi Duncan,\n>>\n>> Duncan Murdoch wrote on 2020-08-07 21:55:\n>>> On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:\n>>>> I see. However, the HTML-source states\n>>>> This manual is for R, version 4.1.0 Under development (2020-08-06).\n>>>>\n>>>> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does \n>>>> *not*\n>>>> contain this sentence. Hence, I fell into the trap. Should be \n>>>> stated in\n>>>> the PDF as well, IMHO.\n>>>\n>>> Oh, c'mon.? It will be a new requirement in R 4.1.0? It's not a\n>>> requirement in 4.0.2, and you didn't get a NOTE about it there, you\n>>> only got the note in one of the r-devel platforms.\n>>\n>> Yep, but why are the others not configured in the same way (with setenv\n>> _R_CHECK_SUGGESTS_ONLY_ false)? Doesn't sound consistent to me.\n>\n> What has this got to do with your suggestion that changes that will be \n> released in R 4.1.0 next year should be documented in R 4.0.2?\n>\n> Duncan Murdoch\n ? I agree that package developers should always be reading the very \nmost recent version of the docs. But I also agree that it gets confusing \nwhen the settings for different r-devel platforms on CRAN are \ndifferent/inconsistent in ways that don't seem required by intrinsic \nbetween-platform differences ...\n>\n>>\n>>> The general way things work in R is that changes get announced well in\n>>> advance of release *by putting them in R-devel*.? That's why you're\n>>> asked to check your package against R-devel before submitting:? so\n>>> that it meets upcoming announced changes to requirements as well as\n>>> ones that are in the current release.\n>>\n>> Of course, we checked the package on winbuilder... Are you suggesting to\n>> set up a multi-boot system for all those OSs? Even if one -- not us --\n>> would aim at that: Where to get Solaris v10? Buy a Mac to run checks on\n>> maxOS?\n>>\n>> At least I understand now the differences between\n>> r-devel-linux-x86_64-debian-gcc and r-devel-linux-x86_64-debian-gcc\n>> (given in the last line there:\n>> https://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc). \n>>\n>>\n>> Helmut\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "On 8/7/20 8:35 PM, Duncan Murdoch wrote:\n> On 07/08/2020 6:53 p.m., Helmut Sch?tz wrote:\n>> Hi Duncan,\n>>\n>> Duncan Murdoch wrote on 2020-08-07 21:55:\n>>> On 07/08/2020 3:22 p.m., Helmut Sch?tz wrote:",
+      "body_plain": "On 8/7/20 8:35 PM, Duncan Murdoch wrote:\n> On 07/08/2020 6:53 p.m., Helmut Schütz wrote:\n>> Hi Duncan,\n>>\n>> Duncan Murdoch wrote on 2020-08-07 21:55:\n>>> On 07/08/2020 3:22 p.m., Helmut Schütz wrote:\n>>>> I see. However, the HTML-source states\n>>>> This manual is for R, version 4.1.0 Under development (2020-08-06).\n>>>>\n>>>> I was relying on the PDF-version (4.0.2 of 2020-06-22) which does \n>>>> *not*\n>>>> contain this sentence. Hence, I fell into the trap. Should be \n>>>> stated in\n>>>> the PDF as well, IMHO.\n>>>\n>>> Oh, c'mon.  It will be a new requirement in R 4.1.0  It's not a\n>>> requirement in 4.0.2, and you didn't get a NOTE about it there, you\n>>> only got the note in one of the r-devel platforms.\n>>\n>> Yep, but why are the others not configured in the same way (with setenv\n>> _R_CHECK_SUGGESTS_ONLY_ false)? Doesn't sound consistent to me.\n>\n> What has this got to do with your suggestion that changes that will be \n> released in R 4.1.0 next year should be documented in R 4.0.2?\n>\n> Duncan Murdoch\n   I agree that package developers should always be reading the very \nmost recent version of the docs. But I also agree that it gets confusing \nwhen the settings for different r-devel platforms on CRAN are \ndifferent/inconsistent in ways that don't seem required by intrinsic \nbetween-platform differences ...\n>\n>>\n>>> The general way things work in R is that changes get announced well in\n>>> advance of release *by putting them in R-devel*.  That's why you're\n>>> asked to check your package against R-devel before submitting:  so\n>>> that it meets upcoming announced changes to requirements as well as\n>>> ones that are in the current release.\n>>\n>> Of course, we checked the package on winbuilder... Are you suggesting to\n>> set up a multi-boot system for all those OSs? Even if one -- not us --\n>> would aim at that: Where to get Solaris v10? Buy a Mac to run checks on\n>> maxOS?\n>>\n>> At least I understand now the differences between\n>> r-devel-linux-x86_64-debian-gcc and r-devel-linux-x86_64-debian-gcc\n>> (given in the last line there:\n>> https://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc). \n>>\n>>\n>> Helmut\n>>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 8/7/20 8:35 PM, Duncan Murdoch wrote:\n> On 07/08/2020 6:53 p.m., Helmut Schütz wrote:\n>> Hi Duncan,\n>>\n>> Duncan Murdoch wrote on 2020-08-07 21:55:\n>>> On 07/08/2020 3:22 p.m., Helmut Schütz wrote:",
       "thread_id": "thread-e45025fb0c73",
       "thread_depth": 8,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005865.html"
     },
     {
       "id": "msg-12a4d723a9f8",
@@ -573,7 +602,8 @@
       "body_snippet": "With \"R Under development (unstable) (2020-07-05 r78784)\" (Windows) documentation references such as \"\\link[utils]{dump.frames}\" trigger \"Non-file package-anchored link(s) in documentation object\" war",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005866.html"
     },
     {
       "id": "msg-1909467c8567",
@@ -591,7 +621,8 @@
       "body_snippet": "This might have to be \\link[utils:debugger]{dump.frames} now, i.e.\nexplicitly linking to the man page on which dump.frames is found\nrather than following aliases?\n\nOn Sun, Aug 9, 2020 at 2:01 PM John ",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005867.html"
     },
     {
       "id": "msg-b816edce1bd6",
@@ -610,7 +641,8 @@
       "body_snippet": "Thanks Ben!\n\nI'll see if that style change works for me.\n\n> On Aug 9, 2020, at 11:04 AM, Ben Bolker <bbolker at gmail.com> wrote:\n> \n> This might have to be \\link[utils:debugger]{dump.frames} now, i.e",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005868.html"
     },
     {
       "id": "msg-fb485ebc8397",
@@ -629,7 +661,8 @@
       "body_snippet": "On 09/08/2020 2:04 p.m., Ben Bolker wrote:\n> This might have to be \\link[utils:debugger]{dump.frames} now, i.e.\n> explicitly linking to the man page on which dump.frames is found\n> rather than followi",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005869.html"
     },
     {
       "id": "msg-f847959541b9",
@@ -648,7 +681,8 @@
       "body_snippet": "Firstly: thanks to Ben for the help/fix.\n\nI know nobody asked, but.\n\nHaving to guess where the documentation is just to refer to it is just going to be really brittle going forward. Previous: if the f",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005870.html"
     },
     {
       "id": "msg-99c84cffb47c",
@@ -668,7 +702,8 @@
       "body_snippet": "On 09/08/2020 2:59 p.m., John Mount wrote:\n> Firstly: thanks to Ben for the help/fix.\n> \n> I know nobody asked, but.\n> \n> Having to guess where the documentation is just to refer to it is just going t",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005871.html"
     },
     {
       "id": "msg-b5bde6bd7526",
@@ -689,7 +724,8 @@
       "body_snippet": "On 8/9/20 3:08 PM, Duncan Murdoch wrote:\n> On 09/08/2020 2:59 p.m., John Mount wrote:\n>> Firstly: thanks to Ben for the help/fix.\n>>\n>> I know nobody asked, but.\n>>\n>> Having to guess where the docume",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005872.html"
     },
     {
       "id": "msg-2bcaa6c7f41b",
@@ -711,7 +747,8 @@
       "body_snippet": "On 09/08/2020 3:15 p.m., Ben Bolker wrote:\n> \n> On 8/9/20 3:08 PM, Duncan Murdoch wrote:\n>> On 09/08/2020 2:59 p.m., John Mount wrote:\n>>> Firstly: thanks to Ben for the help/fix.\n>>>\n>>> I know nobod",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 5,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005873.html"
     },
     {
       "id": "msg-da445c792a9a",
@@ -734,7 +771,8 @@
       "body_snippet": "To all: I'd like to apologize for my negative tone and imprecision in my points. Thanks for the discussion and the effort you put into these systems.\n\n> On Aug 9, 2020, at 12:35 PM, Duncan Murdoch <mu",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 6,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005874.html"
     },
     {
       "id": "msg-b9048e574144",
@@ -758,7 +796,8 @@
       "body_snippet": "These recently introduced 'R CMD check' WARNINGs were disabled again\nin R-devel on July 8, 2020:\n\nr78793: https://github.com/wch/r-source/commit/ccd903e47ab42e1c181396256aea56454a2e70c9\nr78794: https:",
       "thread_id": "thread-12a4d723a9f8",
       "thread_depth": 7,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005875.html"
     },
     {
       "id": "msg-9b101f4db7c1",
@@ -774,7 +813,8 @@
       "body_snippet": "Hi R-pkg-devel,\n\nMy package\n\nhttps://github.com/knausb/vcfR\n\nhas been archived on CRAN because I was asked by CRAN to address issues\nthat I was unable to address before the deadline I was given. The i",
       "thread_id": "thread-9b101f4db7c1",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005876.html"
     },
     {
       "id": "msg-54ee2c721a33",
@@ -792,7 +832,8 @@
       "body_snippet": "Hi Brian,\n\nThe checkbashisms script is invoked by the R checks automatically:\n\nhttps://github.com/wch/r-source/blob/trunk/src/library/tools/R/check.R#L1216-L1267\n\nThus there shouldn't be any need for ",
       "thread_id": "thread-9b101f4db7c1",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005877.html"
     },
     {
       "id": "msg-110795e269d9",
@@ -804,11 +845,12 @@
       "subject_clean": "[R-pkg-devel] Conditional linking in Makevars",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "I am having issues with undefined compiler symbols in a package with C\ncode that I recently updated:\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/poismf-00install.html\nThe issue seems to be connected with usage of OpenMP, and happens only\nwhen compiling with clang:\n?Error: package or namespace load failed for 'poismf' in dyn.load(file,\nDLLpath = DLLpath, ...):\n unable to load shared object '/home/hornik/tmp/R.check/r-devel-\nclang/Work/build/Packages/00LOCK-poismf/00new/poismf/libs/poismf.so':\n  /home/hornik/tmp/R.check/r-devel-clang/Work/build/Packages/00LOCK-\npoismf/00new/poismf/libs/poismf.so: undefined symbol:\n__atomic_compare_exchange?\n\n\nProf. Ripley left the following comment:\n?I don't know what makes your use of OpenMP uniquely different but\nwhen \nusing clang you need to include -latomic in the link (where it exists, \nas it does on Linux and probably on FreeBSD).?\n\nI am wondering if it is somehow possible to add conditional link\narguments in a Makevars file depending on the user?s operating system,\nor if not possible, whether it would somehow hurt in windows/mac\ninstallations to add a raw -latomic in there.\n\n\nBest regards,\nDavid Cortes",
+      "body_plain": "I am having issues with undefined compiler symbols in a package with C\ncode that I recently updated:\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/poismf-00install.html\nThe issue seems to be connected with usage of OpenMP, and happens only\nwhen compiling with clang:\n“Error: package or namespace load failed for 'poismf' in dyn.load(file,\nDLLpath = DLLpath, ...):\n unable to load shared object '/home/hornik/tmp/R.check/r-devel-\nclang/Work/build/Packages/00LOCK-poismf/00new/poismf/libs/poismf.so':\n  /home/hornik/tmp/R.check/r-devel-clang/Work/build/Packages/00LOCK-\npoismf/00new/poismf/libs/poismf.so: undefined symbol:\n__atomic_compare_exchange”\n\n\nProf. Ripley left the following comment:\n“I don't know what makes your use of OpenMP uniquely different but\nwhen \nusing clang you need to include -latomic in the link (where it exists, \nas it does on Linux and probably on FreeBSD).”\n\nI am wondering if it is somehow possible to add conditional link\narguments in a Makevars file depending on the user’s operating system,\nor if not possible, whether it would somehow hurt in windows/mac\ninstallations to add a raw -latomic in there.\n\n\nBest regards,\nDavid Cortes",
       "body_snippet": "I am having issues with undefined compiler symbols in a package with C\ncode that I recently updated:\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/poismf-00install.html\nThe",
       "thread_id": "thread-110795e269d9",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005878.html"
     },
     {
       "id": "msg-4ee62785e279",
@@ -827,7 +869,8 @@
       "body_snippet": "Thank you Dirk \"Eddelbuettel\" (apologies for my spelling, it's your name,\nso I should be able to spell it correctly, particularly if I'm asking you\nfor help) and Rodrigo Tobar for the responses! It so",
       "thread_id": "thread-9b101f4db7c1",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005879.html"
     },
     {
       "id": "msg-7d5420178d8b",
@@ -847,7 +890,8 @@
       "body_snippet": "Hi Brian,\n\nOn 12/8/20 10:21 am, brian knaus wrote:\n> [...] It sounds like I can assume that CRAN machines will have \n> ```checkbashisms``` installed where necessary \n\nThat's my reading, yes.\n\n> and ha",
       "thread_id": "thread-9b101f4db7c1",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005880.html"
     },
     {
       "id": "msg-b877ae560566",
@@ -868,7 +912,8 @@
       "body_snippet": "Thank you again for your responses Rodrigo Tobar. I'm happy to call this a\nsolution. I've got some testing to do but I'm hoping to get this sent back\nto CRAN soon.\n\nThank you for your help!\nBrian\n\nOn ",
       "thread_id": "thread-9b101f4db7c1",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005881.html"
     },
     {
       "id": "msg-b63d89def61e",
@@ -884,7 +929,8 @@
       "body_snippet": "? install.packages(\"ps\", repos = \"https://cran.r-project.org\")\nInstalling package into ?/Users/gaborcsardi/Library/R/4.0/library?\n(as ?lib? is unspecified)\ntrying URL 'https://cran.r-project.org/bin/m",
       "thread_id": "thread-b63d89def61e",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005882.html"
     },
     {
       "id": "msg-3156bf1db1ae",
@@ -900,7 +946,8 @@
       "body_snippet": "A while ago, I submitted an update to my package 'buildmer' that does not pass R CMD check. This is deliberate. The package contains functionality to run on cluster nodes that were set up by the user ",
       "thread_id": "thread-3156bf1db1ae",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005883.html"
     },
     {
       "id": "msg-71877a1dfe55",
@@ -918,7 +965,8 @@
       "body_snippet": "On 14/08/2020 3:08 p.m., Cesko Voeten wrote:\n> A while ago, I submitted an update to my package 'buildmer' that does not pass R CMD check. This is deliberate. The package contains functionality to run",
       "thread_id": "thread-3156bf1db1ae",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005884.html"
     },
     {
       "id": "msg-767c48e864b0",
@@ -937,7 +985,8 @@
       "body_snippet": "On Fri, Aug 14, 2020 at 2:54 PM Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> On 14/08/2020 3:08 p.m., Cesko Voeten wrote:\n> > A while ago, I submitted an update to my package 'buildmer' tha",
       "thread_id": "thread-3156bf1db1ae",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005885.html"
     },
     {
       "id": "msg-5150de503cbd",
@@ -957,7 +1006,8 @@
       "body_snippet": "Duncan, Joshua,\n\nThanks for the feedback. I had indeed forgotten to increment the version number, so that may explain it. I'll give it until a few days after the 24th, and then just resubmit with a ne",
       "thread_id": "thread-3156bf1db1ae",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005886.html"
     },
     {
       "id": "msg-311c50ace05b",
@@ -973,7 +1023,8 @@
       "body_snippet": "Hi everyone,\n\nBackground:\n\nThe package rminizinc <https://github.com/acharaakshit/RMiniZinc> provides\nan interface to MiniZinc\n<https://www.minizinc.org/tutorial/minizinc-tute.pdf> in R. The package\np",
       "thread_id": "thread-311c50ace05b",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005887.html"
     },
     {
       "id": "msg-5af790cbc617",
@@ -991,7 +1042,8 @@
       "body_snippet": "Dear Akshit,\n\nin the configure script of my package RcppCWB, I use the command line call 'R CMD config ...' to get the installation flags. \n\nCalling 'R CMD config' will display options. For your scena",
       "thread_id": "thread-311c50ace05b",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005888.html"
     },
     {
       "id": "msg-e0c9057b7f89",
@@ -1009,7 +1061,8 @@
       "body_snippet": "Dear Cesko,\n\nOn Fri, 14 Aug 2020 21:08:55 +0200\nCesko Voeten <c.c.voeten at hum.leidenuniv.nl> wrote:\n\n> The package contains functionality to run on cluster nodes that were\n> set up by the user and n",
       "thread_id": "thread-3156bf1db1ae",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005889.html"
     },
     {
       "id": "msg-3b13f1c1f732",
@@ -1024,11 +1077,12 @@
         "<CAJ=u__OOabSyH-+kbgF+wkRCbge8RtvZ2OspSynSx5cfj9XCdA@mail.gmail.com>",
         "<A68CECDA-D52E-462D-A308-9DADB32F0FA2@uni-due.de>"
       ],
-      "body_plain": "Dear Andreas,\n\nThanks for your answer!\n\nI also got an answer from Rcpp-devel list by Nik Pocuca. He suggested me to\ncreate an .RData or .rda file\n(say config.RData) in the data folder of my package and then execute the\nstatement given below in Makevars.in\nto save the flag in the .RData file.\n$(R_HOME)/bin/Rscript -e \"LIBMINIZINC_PATH <- '@MZN_LIBS@';\nsave(LIBMINIZINC_PATH, file='../data/config.RData')\"\n\nThis way the flag would be saved in the data file. Then in the script I\ncall data(\"config\") and the LIBMINIZINC_PATH flag is\nloaded in the global environment from where I can access and use it. I am\ncurrently using this solution and haven't faced\nany issues.\n\nThanks,\nAkshit\n\n\nOn Mon, Aug 17, 2020 at 3:36 PM Bl?tte, Andreas <andreas.blaette at uni-due.de>\nwrote:\n\n> Dear Akshit,\n>\n> in the configure script of my package RcppCWB, I use the command line call\n> 'R CMD config ...' to get the installation flags.\n>\n> Calling 'R CMD config' will display options. For your scenario, you can\n> use 'R CMD config CPPFLAGS' to get the value of CPPFLAGS.\n>\n> To call R CMD config safely, you will need to prepend $R_HOME/bin. In the\n> configure script of RcppCWB, I need to detect the compiler used and I do it\n> using this snippet:\n> CC_R=`$R_HOME/bin/R CMD config CC`\n>\n> More experienced people following R-package-devel than myself may be aware\n> of a better solution, and I would also be happy to learn about it.\n>\n> Kind regards\n> Andreas\n>\n>\n> ?Am 15.08.20, 16:25 schrieb \"R-package-devel im Auftrag von Akshit Achara\"\n> <r-package-devel-bounces at r-project.org im Auftrag von\n> acharaakshit at gmail.com>:\n>\n>     Hi everyone,\n>\n>     Background:\n>\n>     The package rminizinc <https://github.com/acharaakshit/RMiniZinc>\n> provides\n>     an interface to MiniZinc\n>     <https://www.minizinc.org/tutorial/minizinc-tute.pdf> in R. The\n> package\n>     provides various functionalities to parse, solve and manipulate\n> MiniZinc\n>     models. This is done by using the MiniZinc C++ API (libminizinc\n>     <https://github.com/MiniZinc/libminizinc>).\n>\n>     The installation requires linking of the library an including the\n> header\n>     files for which PKG_LIBS flag(-L/path/to/libminizinc -lmzn) , and\n>     PKG_CPPFLAGS (-I/path/to/libminizinc/include) are filled in Makevars.in\n>     which is set by configure based on the path of the library provided by\n> the\n>     user using --configure-args or if the user doesn't provide any\n> arguments, a\n>     default path is passed from configure (using configure.ac).\n>\n>     Question:\n>\n>     In one of my Rcpp functions mzn_parse() which is used to parse MiniZinc\n>     models, I sometimes need to use the files in the subdirectories of the\n>     libminizinc library. To access these files, I need to use the path of\n>     libminizinc (which can change per installation). I want to extract this\n>     path from either Makevars or configure to use it in my package. Is\n> there\n>     any way I could retrieve this path in my scripts?\n>\n>     Please let me know if this question is not relevant to the mailing\n> list.\n>\n>     The Makevars.in looks like this:\n>\n>     CXX_STD = CXX11\n>     PKG_CPPFLAGS = -I. @MZN_INCLUDE@\n>     PKG_LIBS = @MZN_LIBS@\n>     OBJECTS.tests = cpp_tests/test-runner.o cpp_tests/test-mzn_parse.o\n>     cpp_tests/test-\n>     set_params.o cpp_tests/test-mzn_eval.o cpp_tests/test-sol_parse.o\n>     cpp_tests/test-\n>     getMissingPars.o\n>     OBJECTS.sources = RcppExports.o set_params.o mzn_parse.o mzn_eval.o\n> sol_parse.o\n>     getMissingPars.o\n>     OBJECTS.helpers = filetoString.o helper_parse.o expDetails.o\n> pathStringcheck.o\n>     OBJECTS = $(OBJECTS.sources) $(OBJECTS.tests) $(OBJECTS.helpers)\n>     $(SOURCES:.cpp=.o)\n>     strippedLib: $(SHLIB)\n>         if test -e \"/usr/bin/strip\"; then /usr/bin/strip --strip-debug\n>     $(SHLIB); fi.phony: strippedLib\n>     all: clean\n>     clean:\n>         rm -f $(OBJECTS.sources) $(OBJECTS.tests) $(OBJECTS.helpers)  *.so\n>\n>     Thanks!\n>\n>         [[alternative HTML version deleted]]\n>\n>     ______________________________________________\n>     R-package-devel at r-project.org mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear Andreas,\n\nThanks for your answer!\n\nI also got an answer from Rcpp-devel list by Nik Pocuca. He suggested me to\ncreate an .RData or .rda file\n(say config.RData) in the data folder of my package and then execute the\nstatement given below in Makevars.in\nto save the flag in the .RData file.\n$(R_HOME)/bin/Rscript -e \"LIBMINIZINC_PATH <- '@MZN_LIBS@';\nsave(LIBMINIZINC_PATH, file='../data/config.RData')\"\n\nThis way the flag would be saved in the data file. Then in the script I\ncall data(\"config\") and the LIBMINIZINC_PATH flag is\nloaded in the global environment from where I can access and use it. I am\ncurrently using this solution and haven't faced\nany issues.\n\nThanks,\nAkshit\n\n\nOn Mon, Aug 17, 2020 at 3:36 PM Blätte, Andreas <andreas.blaette at uni-due.de>\nwrote:\n\n> Dear Akshit,\n>\n> in the configure script of my package RcppCWB, I use the command line call\n> 'R CMD config ...' to get the installation flags.\n>\n> Calling 'R CMD config' will display options. For your scenario, you can\n> use 'R CMD config CPPFLAGS' to get the value of CPPFLAGS.\n>\n> To call R CMD config safely, you will need to prepend $R_HOME/bin. In the\n> configure script of RcppCWB, I need to detect the compiler used and I do it\n> using this snippet:\n> CC_R=`$R_HOME/bin/R CMD config CC`\n>\n> More experienced people following R-package-devel than myself may be aware\n> of a better solution, and I would also be happy to learn about it.\n>\n> Kind regards\n> Andreas\n>\n>\n> ﻿Am 15.08.20, 16:25 schrieb \"R-package-devel im Auftrag von Akshit Achara\"\n> <r-package-devel-bounces at r-project.org im Auftrag von\n> acharaakshit at gmail.com>:\n>\n>     Hi everyone,\n>\n>     Background:\n>\n>     The package rminizinc <https://github.com/acharaakshit/RMiniZinc>\n> provides\n>     an interface to MiniZinc\n>     <https://www.minizinc.org/tutorial/minizinc-tute.pdf> in R. The\n> package\n>     provides various functionalities to parse, solve and manipulate\n> MiniZinc\n>     models. This is done by using the MiniZinc C++ API (libminizinc\n>     <https://github.com/MiniZinc/libminizinc>).\n>\n>     The installation requires linking of the library an including the\n> header\n>     files for which PKG_LIBS flag(-L/path/to/libminizinc -lmzn) , and\n>     PKG_CPPFLAGS (-I/path/to/libminizinc/include) are filled in Makevars.in\n>     which is set by configure based on the path of the library provided by\n> the\n>     user using --configure-args or if the user doesn't provide any\n> arguments, a\n>     default path is passed from configure (using configure.ac).\n>\n>     Question:\n>\n>     In one of my Rcpp functions mzn_parse() which is used to parse MiniZinc\n>     models, I sometimes need to use the files in the subdirectories of the\n>     libminizinc library. To access these files, I need to use the path of\n>     libminizinc (which can change per installation). I want to extract this\n>     path from either Makevars or configure to use it in my package. Is\n> there\n>     any way I could retrieve this path in my scripts?\n>\n>     Please let me know if this question is not relevant to the mailing\n> list.\n>\n>     The Makevars.in looks like this:\n>\n>     CXX_STD = CXX11\n>     PKG_CPPFLAGS = -I. @MZN_INCLUDE@\n>     PKG_LIBS = @MZN_LIBS@\n>     OBJECTS.tests = cpp_tests/test-runner.o cpp_tests/test-mzn_parse.o\n>     cpp_tests/test-\n>     set_params.o cpp_tests/test-mzn_eval.o cpp_tests/test-sol_parse.o\n>     cpp_tests/test-\n>     getMissingPars.o\n>     OBJECTS.sources = RcppExports.o set_params.o mzn_parse.o mzn_eval.o\n> sol_parse.o\n>     getMissingPars.o\n>     OBJECTS.helpers = filetoString.o helper_parse.o expDetails.o\n> pathStringcheck.o\n>     OBJECTS = $(OBJECTS.sources) $(OBJECTS.tests) $(OBJECTS.helpers)\n>     $(SOURCES:.cpp=.o)\n>     strippedLib: $(SHLIB)\n>         if test -e \"/usr/bin/strip\"; then /usr/bin/strip --strip-debug\n>     $(SHLIB); fi.phony: strippedLib\n>     all: clean\n>     clean:\n>         rm -f $(OBJECTS.sources) $(OBJECTS.tests) $(OBJECTS.helpers)  *.so\n>\n>     Thanks!\n>\n>         [[alternative HTML version deleted]]\n>\n>     ______________________________________________\n>     R-package-devel at r-project.org mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear Andreas,\n\nThanks for your answer!\n\nI also got an answer from Rcpp-devel list by Nik Pocuca. He suggested me to\ncreate an .RData or .rda file\n(say config.RData) in the data folder of my package an",
       "thread_id": "thread-311c50ace05b",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005890.html"
     },
     {
       "id": "msg-1c2a69201676",
@@ -1044,7 +1098,8 @@
       "body_snippet": "Dear all,\n\nCan we add blank lines in .Rbuildignore? Or lines with only comments (line\nstarting with #)?\n\nBest regards,\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse Overheid / Government o",
       "thread_id": "thread-1c2a69201676",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005891.html"
     },
     {
       "id": "msg-4e96c297b991",
@@ -1062,7 +1117,8 @@
       "body_snippet": "On Sat, 15 Aug 2020 19:50:41 +0530\nAkshit Achara <acharaakshit at gmail.com> wrote:\n\n> To access these files, I need to use the path of libminizinc (which\n> can change per installation). I want to ext",
       "thread_id": "thread-311c50ace05b",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005892.html"
     },
     {
       "id": "msg-20102c975026",
@@ -1080,7 +1136,8 @@
       "body_snippet": "On Mon, 17 Aug 2020 15:56:07 +0200\nThierry Onkelinx <thierry.onkelinx at inbo.be> wrote:\n\n> Can we add blank lines in .Rbuildignore? Or lines with only comments\n> (line starting with #)?\n\n.Rbuildignor",
       "thread_id": "thread-1c2a69201676",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005893.html"
     },
     {
       "id": "msg-5606dc89c3f0",
@@ -1099,7 +1156,8 @@
       "body_snippet": "I just tried this out with R-4.0.2 on Linux and it looks like\n.Rbuildignore does not treat lines with '#'s as comments.  E.g.,\n\n% mkdir test test/inst\n% touch 'test/inst/#octothorp.txt' 'test/inst/nor",
       "thread_id": "thread-1c2a69201676",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005894.html"
     },
     {
       "id": "msg-53cd5612202c",
@@ -1119,7 +1177,8 @@
       "body_snippet": "Thanks for the feedback. It seems like I was under the impression that\n.Rbuildignore would follow similar rules as .gitignore.\n\nBest regards,\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse ",
       "thread_id": "thread-1c2a69201676",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005895.html"
     },
     {
       "id": "msg-75ebe5b678e3",
@@ -1138,7 +1197,8 @@
       "body_snippet": "Dear Ivan,\n\n> Apologies for derailing the thread, but I had a similar problem a few\n> months ago [*], found what looks like a different solution but did not\n> have time to investigate it further.\n> \n>",
       "thread_id": "thread-3156bf1db1ae",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005896.html"
     },
     {
       "id": "msg-4f7ecf7673c4",
@@ -1154,7 +1214,8 @@
       "body_snippet": "If a user is using this command to install my package,\n\nR CMD INSTALL -l /path/lib  package_r.tar.gz\n\n\nHow can I get the lib value within the configure file?\n\n\n--Sameh\n\n\t[[alternative HTML version del",
       "thread_id": "thread-4f7ecf7673c4",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005897.html"
     },
     {
       "id": "msg-17e0b4dc2a2c",
@@ -1172,7 +1233,8 @@
       "body_snippet": ">From https://cran.r-project.org/doc/manuals/R-exts.html:\n\n> The script is run in a separate R environment containing the following\nvariables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURC",
       "thread_id": "thread-4f7ecf7673c4",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005898.html"
     },
     {
       "id": "msg-e626289f7d3d",
@@ -1187,11 +1249,12 @@
         "<8C19E54E-6E49-40C3-9259-8249DE0B4583@kaust.edu.sa>",
         "<CABtg=KnGvYCtaK-d+0jJ-F89QDwb_GyQgEPWdE_we34+J_vZNQ@mail.gmail.com>"
       ],
-      "body_plain": "On 19 August 2020 at 13:01, G?bor Cs?rdi wrote:\n| >From https://cran.r-project.org/doc/manuals/R-exts.html:\n| \n| > The script is run in a separate R environment containing the following\n| variables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURCE (the\n| path to the source directory of the package), R_PACKAGE_DIR (the path of\n| the target installation directory of the package), R_ARCH (the\n| arch-dependent part of the path, often empty), SHLIB_EXT (the extension of\n| shared objects) and WINDOWS (TRUE on Windows, FALSE elsewhere).\n| \n| This is for `install.libs.R`, but AFAIR it is also true for `configure`. So\n| you need the `R_PACKAGE_DIR` env var.\n\nNice. An alternate approach I have used is to call\n\n    $(R_HOME)/bin/Rscript -e 'cat(.libPaths()[1])'\n\nfrom configure but Gabor's approach saves a process.\n\nDirk\n\n-- \nhttps://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 19 August 2020 at 13:01, G?bor Cs?rdi wrote:\n| >From https://cran.r-project.org/doc/manuals/R-exts.html:\n| \n| > The script is run in a separate R environment containing the following\n| variables: R",
+      "body_plain": "On 19 August 2020 at 13:01, Gábor Csárdi wrote:\n| >From https://cran.r-project.org/doc/manuals/R-exts.html:\n| \n| > The script is run in a separate R environment containing the following\n| variables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURCE (the\n| path to the source directory of the package), R_PACKAGE_DIR (the path of\n| the target installation directory of the package), R_ARCH (the\n| arch-dependent part of the path, often empty), SHLIB_EXT (the extension of\n| shared objects) and WINDOWS (TRUE on Windows, FALSE elsewhere).\n| \n| This is for `install.libs.R`, but AFAIR it is also true for `configure`. So\n| you need the `R_PACKAGE_DIR` env var.\n\nNice. An alternate approach I have used is to call\n\n    $(R_HOME)/bin/Rscript -e 'cat(.libPaths()[1])'\n\nfrom configure but Gabor's approach saves a process.\n\nDirk\n\n-- \nhttps://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 19 August 2020 at 13:01, Gábor Csárdi wrote:\n| >From https://cran.r-project.org/doc/manuals/R-exts.html:\n| \n| > The script is run in a separate R environment containing the following\n| variables: R",
       "thread_id": "thread-4f7ecf7673c4",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005899.html"
     },
     {
       "id": "msg-a271ca0de3ae",
@@ -1206,11 +1269,12 @@
         "<8C19E54E-6E49-40C3-9259-8249DE0B4583@kaust.edu.sa>",
         "<CABtg=KnGvYCtaK-d+0jJ-F89QDwb_GyQgEPWdE_we34+J_vZNQ@mail.gmail.com>"
       ],
-      "body_plain": "On Wed, 19 Aug 2020 at 14:02, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>\n> From https://cran.r-project.org/doc/manuals/R-exts.html:\n>\n> > The script is run in a separate R environment containing the following\n> variables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURCE (the\n> path to the source directory of the package), R_PACKAGE_DIR (the path of\n> the target installation directory of the package), R_ARCH (the\n> arch-dependent part of the path, often empty), SHLIB_EXT (the extension of\n> shared objects) and WINDOWS (TRUE on Windows, FALSE elsewhere).\n>\n> This is for `install.libs.R`, but AFAIR it is also true for `configure`. So\n> you need the `R_PACKAGE_DIR` env var.\n\nBut R_PACKAGE_DIR contains the temporary path for staged\ninstallations. Instead, I think R_LIBRARY_DIR is the desired path.\n\n> Gabor\n>\n> On Wed, Aug 19, 2020 at 12:03 PM Sameh M. Abdulah <\n> sameh.abdulah at kaust.edu.sa> wrote:\n>\n> > If a user is using this command to install my package,\n> >\n> > R CMD INSTALL -l /path/lib  package_r.tar.gz\n> >\n> >\n> > How can I get the lib value within the configure file?\n> >\n> >\n> > --Sameh\n\n-- \nI?aki ?car",
-      "body_snippet": "On Wed, 19 Aug 2020 at 14:02, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>\n> From https://cran.r-project.org/doc/manuals/R-exts.html:\n>\n> > The script is run in a separate R environment containin",
+      "body_plain": "On Wed, 19 Aug 2020 at 14:02, Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n>\n> From https://cran.r-project.org/doc/manuals/R-exts.html:\n>\n> > The script is run in a separate R environment containing the following\n> variables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURCE (the\n> path to the source directory of the package), R_PACKAGE_DIR (the path of\n> the target installation directory of the package), R_ARCH (the\n> arch-dependent part of the path, often empty), SHLIB_EXT (the extension of\n> shared objects) and WINDOWS (TRUE on Windows, FALSE elsewhere).\n>\n> This is for `install.libs.R`, but AFAIR it is also true for `configure`. So\n> you need the `R_PACKAGE_DIR` env var.\n\nBut R_PACKAGE_DIR contains the temporary path for staged\ninstallations. Instead, I think R_LIBRARY_DIR is the desired path.\n\n> Gabor\n>\n> On Wed, Aug 19, 2020 at 12:03 PM Sameh M. Abdulah <\n> sameh.abdulah at kaust.edu.sa> wrote:\n>\n> > If a user is using this command to install my package,\n> >\n> > R CMD INSTALL -l /path/lib  package_r.tar.gz\n> >\n> >\n> > How can I get the lib value within the configure file?\n> >\n> >\n> > --Sameh\n\n-- \nIñaki Úcar",
+      "body_snippet": "On Wed, 19 Aug 2020 at 14:02, Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n>\n> From https://cran.r-project.org/doc/manuals/R-exts.html:\n>\n> > The script is run in a separate R environment containin",
       "thread_id": "thread-4f7ecf7673c4",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005900.html"
     },
     {
       "id": "msg-6f0281ce9226",
@@ -1226,11 +1290,12 @@
         "<CABtg=KnGvYCtaK-d+0jJ-F89QDwb_GyQgEPWdE_we34+J_vZNQ@mail.gmail.com>",
         "<CALEXWq25Z+JLF=Fc2nCziOq_nzUQjRQmcirma+pE7dp_VzEPQw@mail.gmail.com>"
       ],
-      "body_plain": "Many Thanks Gabor! It works with me.\n\n?Sameh\n\n\nOn Aug 19, 2020, at 6:44 PM, I?aki Ucar <iucar at fedoraproject.org> wrote:\n> \n> ?On Wed, 19 Aug 2020 at 14:02, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>> \n>> From https://cran.r-project.org/doc/manuals/R-exts.html:\n>> \n>>> The script is run in a separate R environment containing the following\n>> variables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURCE (the\n>> path to the source directory of the package), R_PACKAGE_DIR (the path of\n>> the target installation directory of the package), R_ARCH (the\n>> arch-dependent part of the path, often empty), SHLIB_EXT (the extension of\n>> shared objects) and WINDOWS (TRUE on Windows, FALSE elsewhere).\n>> \n>> This is for `install.libs.R`, but AFAIR it is also true for `configure`. So\n>> you need the `R_PACKAGE_DIR` env var.\n> \n> But R_PACKAGE_DIR contains the temporary path for staged\n> installations. Instead, I think R_LIBRARY_DIR is the desired path.\n> \n>> Gabor\n>> \n>>> On Wed, Aug 19, 2020 at 12:03 PM Sameh M. Abdulah <\n>>> sameh.abdulah at kaust.edu.sa> wrote:\n>>> \n>>> If a user is using this command to install my package,\n>>> \n>>> R CMD INSTALL -l /path/lib  package_r.tar.gz\n>>> \n>>> \n>>> How can I get the lib value within the configure file?\n>>> \n>>> \n>>> --Sameh\n> \n> -- \n> I?aki ?car",
-      "body_snippet": "Many Thanks Gabor! It works with me.\n\n?Sameh\n\n\nOn Aug 19, 2020, at 6:44 PM, I?aki Ucar <iucar at fedoraproject.org> wrote:\n> \n> ?On Wed, 19 Aug 2020 at 14:02, G?bor Cs?rdi <csardi.gabor at gmail.com> ",
+      "body_plain": "Many Thanks Gabor! It works with me.\n\n—Sameh\n\n\nOn Aug 19, 2020, at 6:44 PM, Iñaki Ucar <iucar at fedoraproject.org> wrote:\n> \n> ﻿On Wed, 19 Aug 2020 at 14:02, Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n>> \n>> From https://cran.r-project.org/doc/manuals/R-exts.html:\n>> \n>>> The script is run in a separate R environment containing the following\n>> variables: R_PACKAGE_NAME (the name of the package), R_PACKAGE_SOURCE (the\n>> path to the source directory of the package), R_PACKAGE_DIR (the path of\n>> the target installation directory of the package), R_ARCH (the\n>> arch-dependent part of the path, often empty), SHLIB_EXT (the extension of\n>> shared objects) and WINDOWS (TRUE on Windows, FALSE elsewhere).\n>> \n>> This is for `install.libs.R`, but AFAIR it is also true for `configure`. So\n>> you need the `R_PACKAGE_DIR` env var.\n> \n> But R_PACKAGE_DIR contains the temporary path for staged\n> installations. Instead, I think R_LIBRARY_DIR is the desired path.\n> \n>> Gabor\n>> \n>>> On Wed, Aug 19, 2020 at 12:03 PM Sameh M. Abdulah <\n>>> sameh.abdulah at kaust.edu.sa> wrote:\n>>> \n>>> If a user is using this command to install my package,\n>>> \n>>> R CMD INSTALL -l /path/lib  package_r.tar.gz\n>>> \n>>> \n>>> How can I get the lib value within the configure file?\n>>> \n>>> \n>>> --Sameh\n> \n> -- \n> Iñaki Úcar",
+      "body_snippet": "Many Thanks Gabor! It works with me.\n\n—Sameh\n\n\nOn Aug 19, 2020, at 6:44 PM, Iñaki Ucar <iucar at fedoraproject.org> wrote:\n> \n> ﻿On Wed, 19 Aug 2020 at 14:02, Gábor Csárdi <csardi.gabor at gmail.com> ",
       "thread_id": "thread-4f7ecf7673c4",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005901.html"
     },
     {
       "id": "msg-fd069236127a",
@@ -1246,7 +1311,8 @@
       "body_snippet": "I am using install_git to download my package from Github. The problem that I am using submodule on my repo and install_git always uses the master branch of this submodule.\nI defined mu submodules to ",
       "thread_id": "thread-fd069236127a",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005902.html"
     },
     {
       "id": "msg-bb5e98cec40c",
@@ -1264,7 +1330,8 @@
       "body_snippet": "Hi, If you mean remotes::install_git(), and you think this is a bug in\nremotes, then please open an issue in the remotes issue tracker:\nhttps://github.com/r-lib/remotes/issues\n\nThanks,\nGabor\n\n\nOn Sat,",
       "thread_id": "thread-fd069236127a",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005903.html"
     },
     {
       "id": "msg-96ce7b99faaf",
@@ -1280,7 +1347,8 @@
       "body_snippet": "Dear fellow package developers,\n\nI send this email for advice whether if I should submit a package to CRAN.\n\nI have written a GPL-3 licensed package, that allows one to install and use a command-line ",
       "thread_id": "thread-96ce7b99faaf",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005904.html"
     },
     {
       "id": "msg-c07c7ea2cfc3",
@@ -1296,7 +1364,8 @@
       "body_snippet": "Dear Mac users,\n\nCan someone of you identify the cause of the problem in\n\nhttps://www.r-project.org/nosvn/R.check/r-oldrel-macos-x86_64/ff-00check.html\n\nI can't because I don't have access to a Mac.\n\n",
       "thread_id": "thread-c07c7ea2cfc3",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005905.html"
     },
     {
       "id": "msg-29fae9ff1511",
@@ -1312,7 +1381,8 @@
       "body_snippet": "Hi all,\n\nI am reaching out to seeking help in debugging my package.\nThe package has been already on CRAN for some time, updated twice. Also, I have been checking the package regularly on rhub, since m",
       "thread_id": "thread-29fae9ff1511",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005906.html"
     },
     {
       "id": "msg-abf0712c1cca",
@@ -1330,7 +1400,8 @@
       "body_snippet": "Is this reproducible on R-hub? Do you see it with the other R-devel\ncontainers as well?\n\nSome things to try:\n\nTry running address sanitizer on your package to see if it can find\nany memory errors. You",
       "thread_id": "thread-29fae9ff1511",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005907.html"
     },
     {
       "id": "msg-f04008340044",
@@ -1346,7 +1417,8 @@
       "body_snippet": "Hi Everyone,\n\nI have an error when submitting to Winbuilder for my R package, naniar\n<https://github.com/njtierney/naniar>.\n\nWhen using `devtools::check_win_devel()` or `devtools::check_win_release()`",
       "thread_id": "thread-f04008340044",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005908.html"
     },
     {
       "id": "msg-03d6dac52d29",
@@ -1362,7 +1434,8 @@
       "body_snippet": "Hi all,\n\nI cannot get my package to correctly build on Windows because of an\nencoding error that I just can't figure out. The package builds on my Mac\n(10.14.6) and on a recent Debian release.\n\nThe so",
       "thread_id": "thread-03d6dac52d29",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005909.html"
     },
     {
       "id": "msg-86318f0b231d",
@@ -1378,7 +1451,8 @@
       "body_snippet": "Hello,\nURL errors in my DESCRIPTION file and package vignette are not picked up\nwhen I do R CMD check --as-cran or devtools::check(). I only know about\nthese errors because CRAN has rejected my packag",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005910.html"
     },
     {
       "id": "msg-863bf538ad38",
@@ -1396,7 +1470,8 @@
       "body_snippet": "At the minimum you should look at the ?moved to? URLs and change your links to those (some are outright changes in URLs that were redirected and some are http to https changes).\n\nBryan\n\n> On Aug 26, 2",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005911.html"
     },
     {
       "id": "msg-3a09b41a4ee1",
@@ -1415,7 +1490,8 @@
       "body_snippet": "Addressing the errors is not the problem. I want to be able to detect these\nproblems when I do: R CMD check --as-cran.\nAt the moment, I can only detect the errors by submitting the package to\nCRAN, be",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005912.html"
     },
     {
       "id": "msg-1f42d5435f3d",
@@ -1433,7 +1509,8 @@
       "body_snippet": "Dear Nicholas\n\nDo you in fact have many examples in the package? Perhaps for some \nmysterious reason they take longer there than when you check at home.\n\nMichael\n\nOn 25/08/2020 14:54, Nicholas Tierney",
       "thread_id": "thread-f04008340044",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005913.html"
     },
     {
       "id": "msg-73c0fab2c1a2",
@@ -1453,7 +1530,8 @@
       "body_snippet": "On Wed, Aug 26, 2020 at 7:43 AM Vincent van Hees\n<vincentvanhees at gmail.com> wrote:\n>\n> Addressing the errors is not the problem. I want to be able to detect these\n> problems when I do: R CMD check ",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005914.html"
     },
     {
       "id": "msg-127a7b326346",
@@ -1473,7 +1551,8 @@
       "body_snippet": "On 26 August 2020 at 14:34, Vincent van Hees wrote:\n| Addressing the errors is not the problem. I want to be able to detect these\n| problems when I do: R CMD check --as-cran.\n\nYou cannot :-/. I pointe",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005915.html"
     },
     {
       "id": "msg-9a2ba3b49dd2",
@@ -1493,7 +1572,8 @@
       "body_snippet": "Sorry, I was reading too fast.  One possibility is your R version is wee bit old.  Try a more recently daily build.\n\nI recently saw such errors when submitting to Win-Builder, but was fine locally (pe",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005916.html"
     },
     {
       "id": "msg-89263e5db6af",
@@ -1512,7 +1592,8 @@
       "body_snippet": "Hi Michael,\n\nI do indeed have quite a few examples in the package, this hasn't been a\nproblem in the past, but I guess I could try reducing them down. Have you\nhad this problem before?\n\nCheers,\n\nNick\n",
       "thread_id": "thread-f04008340044",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005917.html"
     },
     {
       "id": "msg-7497ec4c855e",
@@ -1532,7 +1613,8 @@
       "body_snippet": "Friends, thias looks like a hang in the CRAN incoming feasibility \nchecks, hence may well be some web related issue as it seems it ran into \nthe timeout there.\n\nBest,\nUwe Ligges\n\nOn 26.08.2020 14:57, ",
       "thread_id": "thread-f04008340044",
       "thread_depth": 3,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005918.html"
     },
     {
       "id": "msg-68544d76eb54",
@@ -1553,7 +1635,8 @@
       "body_snippet": "Hi Uwe,\n\nOK thank you for that, good to know! I imagine it might be a bit tricky to\nknow when, but do you have an idea of when submissions might return to\nnormal? Or should I be good to submit again s",
       "thread_id": "thread-f04008340044",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005919.html"
     },
     {
       "id": "msg-9d4584c84abd",
@@ -1575,7 +1658,8 @@
       "body_snippet": "Pls try agaibn, if it fails again, pls let me know privately.\n\nBest,\nUwe Ligges\n\n\n\nOn 26.08.2020 15:13, Nicholas Tierney wrote:\n> Hi Uwe,\n> \n> OK thank you for that, good to know! I imagine it might b",
       "thread_id": "thread-f04008340044",
       "thread_depth": 5,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005920.html"
     },
     {
       "id": "msg-81487bbc695a",
@@ -1596,7 +1680,8 @@
       "body_snippet": "Ok, Uwe was kind enough to take me to task off-list and I can now confirm\nthat I _can_ replicate the URL issue locally by ensuring all three of\n\n - recent enough r-devel build (that was true, I may ad",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 4,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005921.html"
     },
     {
       "id": "msg-9d50b140fd8d",
@@ -1618,7 +1703,8 @@
       "body_snippet": "On 26 August 2020 at 08:46, Dirk Eddelbuettel wrote:\n| One way to ensure the last point is to have a file\n| \n|   ~/.R/check.Renviron-Rdevel\n| \n| which I had (but where I had commented out 'incoming' a",
       "thread_id": "thread-86318f0b231d",
       "thread_depth": 5,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005922.html"
     },
     {
       "id": "msg-de10ba4cbee2",
@@ -1636,7 +1722,8 @@
       "body_snippet": "Hyphens that, e.g., get auto generated in MS Word are non ASCII. You \nhave to declare an appropriate encoding, or even better, replace by \nregular hypehsn.\n\nSee functions\n\ntools:::showNonASCII     too",
       "thread_id": "thread-03d6dac52d29",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005923.html"
     },
     {
       "id": "msg-4526ec1abad1",
@@ -1655,7 +1742,8 @@
       "body_snippet": "Hi Uwe,\n\nThanks for the response and for mentioning the 'tools::' functions. Those\nfunctions were super helpful in identifying a hyphen that I missed in a\nsupporting file that roxygen used to build th",
       "thread_id": "thread-03d6dac52d29",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005924.html"
     },
     {
       "id": "msg-4d1dfcb745c3",
@@ -1671,7 +1759,8 @@
       "body_snippet": "Hi,\n\nI submitted a package, \"PhysActBedRest\" to the CRAN a couple of years ago and am trying to update it.  In writing the update, I realized I forgot to update my email address when I changed institu",
       "thread_id": "thread-4d1dfcb745c3",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005925.html"
     },
     {
       "id": "msg-8953a187d388",
@@ -1687,7 +1776,8 @@
       "body_snippet": "Dear r-package-devel list members,\n\nI got the following note when checking two different packages today \n--as-cran, both under R 4.0.2 and under R-devel, on my Windows 10 and \nmacOS Catalina systems, ",
       "thread_id": "thread-8953a187d388",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005926.html"
     },
     {
       "id": "msg-72f6e33ddc97",
@@ -1701,11 +1791,12 @@
       "references": [
         "<BN8PR11MB3764BA377999AFE4DC898AD3A5550@BN8PR11MB3764.namprd11.prod.outlook.com>"
       ],
-      "body_plain": "Dear Josef\n\n From the policy\n\nExplain any change in the maintainer?s email address and if possible \nsend confirmation from the previous address (by a separate email to \nCRAN-submissions at R-project.org) or explain why it is not possible.\n\nBurned into my cortex since I did it incorrectly a few years back.\n\nMichael\n\nOn 27/08/2020 17:45, Tracy, Josef wrote:\n> Hi,\n> \n> I submitted a package, \"PhysActBedRest\" to the CRAN a couple of years ago and am trying to update it.  In writing the update, I realized I forgot to update my email address when I changed institutions.  As a consequence, when I run CMD check on the updated package there is a NOTE that the maintainer has changed.  How to I get my update to pass the check and correct my email address?\n> \n> Thanks,\n> Dustin\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
-      "body_snippet": "Dear Josef\n\n From the policy\n\nExplain any change in the maintainer?s email address and if possible \nsend confirmation from the previous address (by a separate email to \nCRAN-submissions at R-project.o",
+      "body_plain": "Dear Josef\n\n From the policy\n\nExplain any change in the maintainer’s email address and if possible \nsend confirmation from the previous address (by a separate email to \nCRAN-submissions at R-project.org) or explain why it is not possible.\n\nBurned into my cortex since I did it incorrectly a few years back.\n\nMichael\n\nOn 27/08/2020 17:45, Tracy, Josef wrote:\n> Hi,\n> \n> I submitted a package, \"PhysActBedRest\" to the CRAN a couple of years ago and am trying to update it.  In writing the update, I realized I forgot to update my email address when I changed institutions.  As a consequence, when I run CMD check on the updated package there is a NOTE that the maintainer has changed.  How to I get my update to pass the check and correct my email address?\n> \n> Thanks,\n> Dustin\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "Dear Josef\n\n From the policy\n\nExplain any change in the maintainer’s email address and if possible \nsend confirmation from the previous address (by a separate email to \nCRAN-submissions at R-project.o",
       "thread_id": "thread-4d1dfcb745c3",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005927.html"
     },
     {
       "id": "msg-230cc5d41f1a",
@@ -1723,7 +1814,8 @@
       "body_snippet": "R tries to get the time from\n\nhttp://worldtimeapi.org/api/timezone/UTC or\nhttp://worldclockapi.com/api/json/utc/now\n\nThe first one doesn't accept UTC as a timezone; it appears to want \netc/UTC instead",
       "thread_id": "thread-8953a187d388",
       "thread_depth": 1,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005928.html"
     },
     {
       "id": "msg-aff01b77d587",
@@ -1742,7 +1834,8 @@
       "body_snippet": "Dear Duncan,\n\nThank you and the others who responded to my message.\n\nJohn\n\nOn 2020-08-27 2:17 p.m., Duncan Murdoch wrote:\n> R tries to get the time from\n> \n> http://worldtimeapi.org/api/timezone/UTC o",
       "thread_id": "thread-8953a187d388",
       "thread_depth": 2,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005929.html"
     },
     {
       "id": "msg-ecd30a7b9fd3",
@@ -1765,11 +1858,12 @@
         "<CABtg=KkCqvw=yB+bsMUMX8mkp0BxGzUB=ufdFgjOE5-_aGf7Eg@mail.gmail.com>",
         "<FCBE4919-D8E9-4171-813E-3DC7899F9A46@krugs.de>"
       ],
-      "body_plain": "It seems to have gotten worse at the moment (package checking on my \nlocal machine hangs at this step).  Sorry if this is cross-threading.\n\nOn 3/19/19 7:11 AM, Rainer M Krug wrote:\n> Can anyone confirm if this has been fixed? I would like to remove the _R_CHECK_SYSTEM_CLOCK_=0 but would like to know in advance.\n> \n> Thanks\n> \n> Rainer\n> \n> \n>> On 8 Mar 2019, at 10:03, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>>\n>> I think you can put this in appveyor.yml:\n>>\n>> environment:\n>>    _R_CHECK_SYSTEM_CLOCK_: 0\n>>\n>> before the \"build_script\" section.\n>>\n>> Gabor\n>>\n>> On Fri, Mar 8, 2019 at 5:15 AM Marta Kara? <marta.karass at gmail.com> wrote:\n>>>\n>>> I have faced the same problem with using http://worldclockapi.com/. I dealt\n>>> with Travis fail (because warnings are changed to errors) after setting\n>>> environment variable _R_CHECK_SYSTEM_CLOCK_ to zero, as adviced above.\n>>>\n>>> How I deal with appveyor fail for the same reason? It may be seen in my\n>>> built output here (link)\n>>> <https://ci.appveyor.com/project/martakarass/adept/build/job/vq4ncvg6qbh526u4>.\n>>> I googled but was unable to find the equivalent of\n>>>\n>>> env:\n>>>   - _R_CHECK_SYSTEM_CLOCK_=0\n>>>\n>>>\n>>> for appveyor. Would appreciate any hint a lot - thank you!\n>>> Marta\n>>>\n>>> On Thu, Mar 7, 2019 at 2:53 PM Hadley Wickham <h.wickham at gmail.com> wrote:\n>>>\n>>>> As of ~7 hours ago, the warning is suppressed:\n>>>>\n>>>> https://github.com/wch/r-source/commit/31ee14c620eb1b939acd322f3b5617f998aab8e8\n>>>>\n>>>> (But the service still doesn't work)\n>>>>\n>>>> Hadley\n>>>>\n>>>> On Thu, Mar 7, 2019 at 11:03 AM Hadley Wickham <h.wickham at gmail.com>\n>>>> wrote:\n>>>>>\n>>>>> It appears that the code was added by BDR on 2 Sep 2018:\n>>>>>\n>>>> https://github.com/wch/r-source/commit/d839b1e04e173f90b51ad809ef0bdb18095abe6f\n>>>>>\n>>>>> I assume we are seeing failing R CMD check results because\n>>>>> http://worldclockapi.com/api/json/utc/now has recently died.\n>>>>>\n>>>>> It would be appreciated if someone from R-core could look into this as\n>>>>> it's currently causing all R-devel builds on travis to fail.\n>>>>>\n>>>>> Hadley\n>>>>>\n>>>>> On Thu, Mar 7, 2019 at 9:32 AM Bob Rudis <bob at rud.is> wrote:\n>>>>>>\n>>>>>> (a) that's gd news (#ty)\n>>>>>> (b) genuine apologies for my confusion\n>>>>>> (c) why was the introduction of reliance on a third-party site even\n>>>> under consideration?\n>>>>>>\n>>>>>>> On Mar 7, 2019, at 09:32, peter dalgaard <pdalgd at gmail.com> wrote:\n>>>>>>>\n>>>>>>> It's not \"stealth fixed\"! It was never there... (on the release\n>>>> branch)\n>>>>>>>\n>>>>>>> The timestamp checking code is still present in R-devel. I presume\n>>>> something needs to be done about the breakage.\n>>>>>>>\n>>>>>>> - pd\n>>>>>>>\n>>>>>>>> On 7 Mar 2019, at 14:38 , Bob Rudis <bob at rud.is> wrote:\n>>>>>>>>\n>>>>>>>> It's fixed in the RC that's GA on the 11th.\n>>>>>>>>\n>>>>>>>> I think perhaps \"stealth fixed\" may be more appropro since it's not\n>>>> in SVN logs, Bugzilla nor noted prominently in any of the various NEWS*\n>>>> files.\n>>>>>>>>\n>>>>>>>> Then there's the \"why was the core R installation using a third\n>>>> party, non-HTTPS site for this to begin with\".\n>>>>>>>>\n>>>>>>>> And, in other news, there are tests in the R source that rely on a\n>>>> check of `foo.bar` for connectivity. `.bar` is a valid domain and `foo.bar`\n>>>> is registered. Thankfully there's no current IP address associated with it.\n>>>> Anything under `*.invalid` (https://en.wikipedia.org/wiki/.invalid) might\n>>>> be a better choice as well since that won't break the reason for the\n>>>> connectivity checks and won't arbitrarily send telemetry pings to third\n>>>> parties in the even anyone outside of R Core decides to run the tests (say,\n>>>> when patching something in R).\n>>>>>>>>\n>>>>>>>> -boB\n>>>>>>>>\n>>>>>>>>> On Mar 7, 2019, at 07:54, Rainer M Krug <Rainer at krugs.de> wrote:\n>>>>>>>>>\n>>>>>>>>> I can confirm the same when checking on travis with r-devel.\n>>>>>>>>>\n>>>>>>>>> And thanks for the tip with\n>>>>>>>>>\n>>>>>>>>> env:\n>>>>>>>>> - _R_CHECK_SYSTEM_CLOCK_=0\n>>>>>>>>>\n>>>>>>>>> In .travis.yml\n>>>>>>>>>\n>>>>>>>>> Seems to be working now\n>>>>>>>>>\n>>>>>>>>> Rainer\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>> On 7 Mar 2019, at 12:48, Ralf Herold <ralf.herold at mailbox.org>\n>>>> wrote:\n>>>>>>>>>>\n>>>>>>>>>> Dear All,\n>>>>>>>>>>\n>>>>>>>>>> Checking a new package under development produces a warning in a\n>>>> local R-devel MS Windows environment (output below).\n>>>>>>>>>>\n>>>>>>>>>> Building it with R-devel on Travis fails (because warnings are\n>>>> changed to errors), but is successful when setting environment variable\n>>>> _R_CHECK_SYSTEM_CLOCK_ to zero.\n>>>>>>>>>>\n>>>>>>>>>> No issue occurs when checking and building with R-stable and\n>>>> R-oldrel on Travis, or with any R version on win-builder.r-project.org.\n>>>>>>>>>>\n>>>>>>>>>> The warning concerns using http://worldclockapi.com/, which\n>>>> however seems out of service (\"The web app you have attempted to reach is\n>>>> currently stopped and does not accept any requests.\"). This is referenced\n>>>> in the main function for R CMD check (\n>>>> https://svn.r-project.org/R/trunk/src/library/tools/R/check.R) and may\n>>>> concern more R-devel than R-package-devel. I am posting here to check if\n>>>> the issue was noticed by other package developers and to check the impact.\n>>>>>>>>>>\n>>>>>>>>>> Thanks for any suggestions.\n>>>>>>>>>> Best regards,\n>>>>>>>>>> Ralf\n>>>>>>>>>>\n>>>>>>>>>>\n>>>>>>>>>> PS C:\\Users\\username> & 'C:\\Program Files\\R\\R-devel\\bin\\R.exe'\n>>>> CMD check E:\\mypackage_0.1.2.3.tar.gz --as-cran\n>>>>>>>>>> * using log directory 'C:/Users/username/ctrdata.Rcheck'\n>>>>>>>>>> * using R Under development (unstable) (2019-03-05 r76200)\n>>>>>>>>>> * using platform: x86_64-w64-mingw32 (64-bit)\n>>>>>>>>>> * using session charset: ISO8859-1\n>>>>>>>>>> * using option '--as-cran'\n>>>>>>>>>> [...]\n>>>>>>>>>> * checking package directory ... OK\n>>>>>>>>>> * checking for future file timestamps ...Warning in file(con,\n>>>> \"r\") :\n>>>>>>>>>> cannot open URL 'http://worldclockapi.com/api/json/utc/now':\n>>>> HTTP status was '403 Site Disabled'\n>>>>>>>>>> WARNING\n>>>>>>>>>> unable to verify current time\n>>>>>>>>>> * checking 'build' directory ? OK\n>>>>>>>>>> [...]\n>>>>>>>>>>\n>>>>>>>>>>\n>>>>>>>>>>\n>>>>>>>>>> ## Ralf Herold\n>>>>>>>>>> ## mailto: ralf.herold at mailbox.org [S/MIME]\n>>>>>>>>>> ## https://paediatricdata.eu/\n>>>>>>>>>>\n>>>>>>>>>> ______________________________________________\n>>>>>>>>>> R-package-devel at r-project.org mailing list\n>>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>> --\n>>>>>>>>> Rainer M. Krug\n>>>>>>>>> email: Rainer<at>krugs<dot>de\n>>>>>>>>> PGP: 0x0F52F982\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>     [[alternative HTML version deleted]]\n>>>>>>>>>\n>>>>>>>>> ______________________________________________\n>>>>>>>>> R-package-devel at r-project.org mailing list\n>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>>>>\n>>>>>>>> ______________________________________________\n>>>>>>>> R-package-devel at r-project.org mailing list\n>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>>>\n>>>>>>> --\n>>>>>>> Peter Dalgaard, Professor,\n>>>>>>> Center for Statistics, Copenhagen Business School\n>>>>>>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark\n>>>>>>> Phone: (+45)38153501\n>>>>>>> Office: A 4.23\n>>>>>>> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>\n>>>>>> ______________________________________________\n>>>>>> R-package-devel at r-project.org mailing list\n>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>\n>>>>>\n>>>>>\n>>>>> --\n>>>>> http://hadley.nz\n>>>>\n>>>>\n>>>>\n>>>> --\n>>>> http://hadley.nz\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>>         [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "It seems to have gotten worse at the moment (package checking on my \nlocal machine hangs at this step).  Sorry if this is cross-threading.\n\nOn 3/19/19 7:11 AM, Rainer M Krug wrote:\n> Can anyone confirm if this has been fixed? I would like to remove the _R_CHECK_SYSTEM_CLOCK_=0 but would like to know in advance.\n> \n> Thanks\n> \n> Rainer\n> \n> \n>> On 8 Mar 2019, at 10:03, Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n>>\n>> I think you can put this in appveyor.yml:\n>>\n>> environment:\n>>    _R_CHECK_SYSTEM_CLOCK_: 0\n>>\n>> before the \"build_script\" section.\n>>\n>> Gabor\n>>\n>> On Fri, Mar 8, 2019 at 5:15 AM Marta Karaś <marta.karass at gmail.com> wrote:\n>>>\n>>> I have faced the same problem with using http://worldclockapi.com/. I dealt\n>>> with Travis fail (because warnings are changed to errors) after setting\n>>> environment variable _R_CHECK_SYSTEM_CLOCK_ to zero, as adviced above.\n>>>\n>>> How I deal with appveyor fail for the same reason? It may be seen in my\n>>> built output here (link)\n>>> <https://ci.appveyor.com/project/martakarass/adept/build/job/vq4ncvg6qbh526u4>.\n>>> I googled but was unable to find the equivalent of\n>>>\n>>> env:\n>>>   - _R_CHECK_SYSTEM_CLOCK_=0\n>>>\n>>>\n>>> for appveyor. Would appreciate any hint a lot - thank you!\n>>> Marta\n>>>\n>>> On Thu, Mar 7, 2019 at 2:53 PM Hadley Wickham <h.wickham at gmail.com> wrote:\n>>>\n>>>> As of ~7 hours ago, the warning is suppressed:\n>>>>\n>>>> https://github.com/wch/r-source/commit/31ee14c620eb1b939acd322f3b5617f998aab8e8\n>>>>\n>>>> (But the service still doesn't work)\n>>>>\n>>>> Hadley\n>>>>\n>>>> On Thu, Mar 7, 2019 at 11:03 AM Hadley Wickham <h.wickham at gmail.com>\n>>>> wrote:\n>>>>>\n>>>>> It appears that the code was added by BDR on 2 Sep 2018:\n>>>>>\n>>>> https://github.com/wch/r-source/commit/d839b1e04e173f90b51ad809ef0bdb18095abe6f\n>>>>>\n>>>>> I assume we are seeing failing R CMD check results because\n>>>>> http://worldclockapi.com/api/json/utc/now has recently died.\n>>>>>\n>>>>> It would be appreciated if someone from R-core could look into this as\n>>>>> it's currently causing all R-devel builds on travis to fail.\n>>>>>\n>>>>> Hadley\n>>>>>\n>>>>> On Thu, Mar 7, 2019 at 9:32 AM Bob Rudis <bob at rud.is> wrote:\n>>>>>>\n>>>>>> (a) that's gd news (#ty)\n>>>>>> (b) genuine apologies for my confusion\n>>>>>> (c) why was the introduction of reliance on a third-party site even\n>>>> under consideration?\n>>>>>>\n>>>>>>> On Mar 7, 2019, at 09:32, peter dalgaard <pdalgd at gmail.com> wrote:\n>>>>>>>\n>>>>>>> It's not \"stealth fixed\"! It was never there... (on the release\n>>>> branch)\n>>>>>>>\n>>>>>>> The timestamp checking code is still present in R-devel. I presume\n>>>> something needs to be done about the breakage.\n>>>>>>>\n>>>>>>> - pd\n>>>>>>>\n>>>>>>>> On 7 Mar 2019, at 14:38 , Bob Rudis <bob at rud.is> wrote:\n>>>>>>>>\n>>>>>>>> It's fixed in the RC that's GA on the 11th.\n>>>>>>>>\n>>>>>>>> I think perhaps \"stealth fixed\" may be more appropro since it's not\n>>>> in SVN logs, Bugzilla nor noted prominently in any of the various NEWS*\n>>>> files.\n>>>>>>>>\n>>>>>>>> Then there's the \"why was the core R installation using a third\n>>>> party, non-HTTPS site for this to begin with\".\n>>>>>>>>\n>>>>>>>> And, in other news, there are tests in the R source that rely on a\n>>>> check of `foo.bar` for connectivity. `.bar` is a valid domain and `foo.bar`\n>>>> is registered. Thankfully there's no current IP address associated with it.\n>>>> Anything under `*.invalid` (https://en.wikipedia.org/wiki/.invalid) might\n>>>> be a better choice as well since that won't break the reason for the\n>>>> connectivity checks and won't arbitrarily send telemetry pings to third\n>>>> parties in the even anyone outside of R Core decides to run the tests (say,\n>>>> when patching something in R).\n>>>>>>>>\n>>>>>>>> -boB\n>>>>>>>>\n>>>>>>>>> On Mar 7, 2019, at 07:54, Rainer M Krug <Rainer at krugs.de> wrote:\n>>>>>>>>>\n>>>>>>>>> I can confirm the same when checking on travis with r-devel.\n>>>>>>>>>\n>>>>>>>>> And thanks for the tip with\n>>>>>>>>>\n>>>>>>>>> env:\n>>>>>>>>> - _R_CHECK_SYSTEM_CLOCK_=0\n>>>>>>>>>\n>>>>>>>>> In .travis.yml\n>>>>>>>>>\n>>>>>>>>> Seems to be working now\n>>>>>>>>>\n>>>>>>>>> Rainer\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>> On 7 Mar 2019, at 12:48, Ralf Herold <ralf.herold at mailbox.org>\n>>>> wrote:\n>>>>>>>>>>\n>>>>>>>>>> Dear All,\n>>>>>>>>>>\n>>>>>>>>>> Checking a new package under development produces a warning in a\n>>>> local R-devel MS Windows environment (output below).\n>>>>>>>>>>\n>>>>>>>>>> Building it with R-devel on Travis fails (because warnings are\n>>>> changed to errors), but is successful when setting environment variable\n>>>> _R_CHECK_SYSTEM_CLOCK_ to zero.\n>>>>>>>>>>\n>>>>>>>>>> No issue occurs when checking and building with R-stable and\n>>>> R-oldrel on Travis, or with any R version on win-builder.r-project.org.\n>>>>>>>>>>\n>>>>>>>>>> The warning concerns using http://worldclockapi.com/, which\n>>>> however seems out of service (\"The web app you have attempted to reach is\n>>>> currently stopped and does not accept any requests.\"). This is referenced\n>>>> in the main function for R CMD check (\n>>>> https://svn.r-project.org/R/trunk/src/library/tools/R/check.R) and may\n>>>> concern more R-devel than R-package-devel. I am posting here to check if\n>>>> the issue was noticed by other package developers and to check the impact.\n>>>>>>>>>>\n>>>>>>>>>> Thanks for any suggestions.\n>>>>>>>>>> Best regards,\n>>>>>>>>>> Ralf\n>>>>>>>>>>\n>>>>>>>>>>\n>>>>>>>>>> PS C:\\Users\\username> & 'C:\\Program Files\\R\\R-devel\\bin\\R.exe'\n>>>> CMD check E:\\mypackage_0.1.2.3.tar.gz --as-cran\n>>>>>>>>>> * using log directory 'C:/Users/username/ctrdata.Rcheck'\n>>>>>>>>>> * using R Under development (unstable) (2019-03-05 r76200)\n>>>>>>>>>> * using platform: x86_64-w64-mingw32 (64-bit)\n>>>>>>>>>> * using session charset: ISO8859-1\n>>>>>>>>>> * using option '--as-cran'\n>>>>>>>>>> [...]\n>>>>>>>>>> * checking package directory ... OK\n>>>>>>>>>> * checking for future file timestamps ...Warning in file(con,\n>>>> \"r\") :\n>>>>>>>>>> cannot open URL 'http://worldclockapi.com/api/json/utc/now':\n>>>> HTTP status was '403 Site Disabled'\n>>>>>>>>>> WARNING\n>>>>>>>>>> unable to verify current time\n>>>>>>>>>> * checking 'build' directory … OK\n>>>>>>>>>> [...]\n>>>>>>>>>>\n>>>>>>>>>>\n>>>>>>>>>>\n>>>>>>>>>> ## Ralf Herold\n>>>>>>>>>> ## mailto: ralf.herold at mailbox.org [S/MIME]\n>>>>>>>>>> ## https://paediatricdata.eu/\n>>>>>>>>>>\n>>>>>>>>>> ______________________________________________\n>>>>>>>>>> R-package-devel at r-project.org mailing list\n>>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>> --\n>>>>>>>>> Rainer M. Krug\n>>>>>>>>> email: Rainer<at>krugs<dot>de\n>>>>>>>>> PGP: 0x0F52F982\n>>>>>>>>>\n>>>>>>>>>\n>>>>>>>>>     [[alternative HTML version deleted]]\n>>>>>>>>>\n>>>>>>>>> ______________________________________________\n>>>>>>>>> R-package-devel at r-project.org mailing list\n>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>>>>\n>>>>>>>> ______________________________________________\n>>>>>>>> R-package-devel at r-project.org mailing list\n>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>>>\n>>>>>>> --\n>>>>>>> Peter Dalgaard, Professor,\n>>>>>>> Center for Statistics, Copenhagen Business School\n>>>>>>> Solbjerg Plads 3, 2000 Frederiksberg, Denmark\n>>>>>>> Phone: (+45)38153501\n>>>>>>> Office: A 4.23\n>>>>>>> Email: pd.mes at cbs.dk  Priv: PDalgd at gmail.com\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>>\n>>>>>>\n>>>>>> ______________________________________________\n>>>>>> R-package-devel at r-project.org mailing list\n>>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>>\n>>>>>\n>>>>>\n>>>>> --\n>>>>> http://hadley.nz\n>>>>\n>>>>\n>>>>\n>>>> --\n>>>> http://hadley.nz\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>>         [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "It seems to have gotten worse at the moment (package checking on my \nlocal machine hangs at this step).  Sorry if this is cross-threading.\n\nOn 3/19/19 7:11 AM, Rainer M Krug wrote:\n> Can anyone confir",
       "thread_id": "thread-ecd30a7b9fd3",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005930.html"
     },
     {
       "id": "msg-4b6bb91602d5",
@@ -1786,11 +1880,12 @@
         "<ac3f6fa8-8dc4-78b1-65ed-6f970bf81a85@mcmaster.ca>",
         "<BN8PR11MB3764C33BE4514B31BD98B258A5520@BN8PR11MB3764.namprd11.prod.outlook.com>"
       ],
-      "body_plain": "Dear Dustin,\n\nOn 2020-08-27 8:26 p.m., Tracy, Josef wrote:\n> Hi John,\n> \n> Duncan explained the cause of the problem, but i'm afraid I didn't \n> follow how one solves it.? Did you manage to get a check without that note?\n\nI didn't -- I just disregarded the note assuming that it would go away \nwhen the time server was back up.\n\n(I've cc'd the R-package-devel list so that others can see your question \nand my response.)\n\nBest,\n  John\n\n> \n> Thanks You,\n> Dustin\n> \n> Dustin Tracy\n> \n> Postdoctoral Researcher\n> \n> Economic Science Institute\n> \n> Chapman University\n> \n> www.DustinTracy.com <http://www.DustinTracy.com>\n> \n> \n> \n> ------------------------------------------------------------------------\n> *From:* R-package-devel <r-package-devel-bounces at r-project.org> on \n> behalf of John Fox <jfox at mcmaster.ca>\n> *Sent:* Thursday, August 27, 2020 11:39 AM\n> *To:* Duncan Murdoch <murdoch.duncan at gmail.com>; \n> r-package-devel at r-project.org <r-package-devel at r-project.org>\n> *Subject:* Re: [R-pkg-devel] R CMD check \"unable to verify current time\"\n> External Message\n> \n> \n> [External Message]\n> \n> Dear Duncan,\n> \n> Thank you and the others who responded to my message.\n> \n> John\n> \n> On 2020-08-27 2:17 p.m., Duncan Murdoch wrote:\n>> R tries to get the time from\n>>\n>> https://nam03.safelinks.protection.outlook.com/?url=http%3A%2F%2Fworldtimeapi.org%2Fapi%2Ftimezone%2FUTC&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=GHBn6K9Yl7qaRU6tYzAEzymO3751Uczj51xB9c17Zm4%3D&amp;reserved=0 \n> or\n>> https://nam03.safelinks.protection.outlook.com/?url=http%3A%2F%2Fworldclockapi.com%2Fapi%2Fjson%2Futc%2Fnow&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=psttxEnhMO6MjLyEv%2BchRopHyhLvgCxgqLT0JDPQVys%3D&amp;reserved=0\n>>\n>> The first one doesn't accept UTC as a timezone; it appears to want\n>> etc/UTC instead.? The second one is offline.\n>>\n>> Duncan Murdoch\n>>\n>> If both of those fail, you'll get the message you saw.\n>>\n>> On 27/08/2020 1:23 p.m., John Fox wrote:\n>>> Dear r-package-devel list members,\n>>>\n>>> I got the following note when checking two different packages today\n>>> --as-cran, both under R 4.0.2 and under R-devel, on my Windows 10 and\n>>> macOS Catalina systems, and on several platforms on rhub:\n>>>\n>>>???? * checking for future file timestamps ... NOTE\n>>> unable to verify current time\n>>>\n>>> I'm writing to inquire about the note because no one else has mentioned\n>>> this problem recently, in case it's produced by something that I'm\n>>> doing. There is a discussion of a similar problem from 2019 at\n>>> <https://nam03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstat.ethz.ch%2Fpipermail%2Fr-package-devel%2F2019q1%2F003577.html&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=GWnhngNH3UypXzbCzQOOwVHa8q87slWBhEW6n4PthGQ%3D&amp;reserved=0>.\n>>>\n>>> Both packages that I was checking are close to CRAN releases and so I'd\n>>> like to know whether I can disregard the note.\n>>>\n>>> Any help would be appreciated.\n>>>\n>>> John\n>>>\n>>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://nam03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstat.ethz.ch%2Fmailman%2Flistinfo%2Fr-package-devel&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=rMlgTGg8rp7hxPhaiADuBl4%2FWSqGgx4wbKLIPgPS9o8%3D&amp;reserved=0\n> - NOTE: This email originated from outside Chapman?s network. Do not \n> click links or open attachments unless you recognize the sender and know \n> content is safe.\n> \n> NOTE: This email originated from outside Chapman?s network. Do not click \n> links or open attachments unless you recognize the sender and know \n> content is safe.\n>",
-      "body_snippet": "Dear Dustin,\n\nOn 2020-08-27 8:26 p.m., Tracy, Josef wrote:\n> Hi John,\n> \n> Duncan explained the cause of the problem, but i'm afraid I didn't \n> follow how one solves it.? Did you manage to get a chec",
+      "body_plain": "Dear Dustin,\n\nOn 2020-08-27 8:26 p.m., Tracy, Josef wrote:\n> Hi John,\n> \n> Duncan explained the cause of the problem, but i'm afraid I didn't \n> follow how one solves it.  Did you manage to get a check without that note?\n\nI didn't -- I just disregarded the note assuming that it would go away \nwhen the time server was back up.\n\n(I've cc'd the R-package-devel list so that others can see your question \nand my response.)\n\nBest,\n  John\n\n> \n> Thanks You,\n> Dustin\n> \n> Dustin Tracy\n> \n> Postdoctoral Researcher\n> \n> Economic Science Institute\n> \n> Chapman University\n> \n> www.DustinTracy.com <http://www.DustinTracy.com>\n> \n> \n> \n> ------------------------------------------------------------------------\n> *From:* R-package-devel <r-package-devel-bounces at r-project.org> on \n> behalf of John Fox <jfox at mcmaster.ca>\n> *Sent:* Thursday, August 27, 2020 11:39 AM\n> *To:* Duncan Murdoch <murdoch.duncan at gmail.com>; \n> r-package-devel at r-project.org <r-package-devel at r-project.org>\n> *Subject:* Re: [R-pkg-devel] R CMD check \"unable to verify current time\"\n> External Message\n> \n> \n> [External Message]\n> \n> Dear Duncan,\n> \n> Thank you and the others who responded to my message.\n> \n> John\n> \n> On 2020-08-27 2:17 p.m., Duncan Murdoch wrote:\n>> R tries to get the time from\n>>\n>> https://nam03.safelinks.protection.outlook.com/?url=http%3A%2F%2Fworldtimeapi.org%2Fapi%2Ftimezone%2FUTC&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=GHBn6K9Yl7qaRU6tYzAEzymO3751Uczj51xB9c17Zm4%3D&amp;reserved=0 \n> or\n>> https://nam03.safelinks.protection.outlook.com/?url=http%3A%2F%2Fworldclockapi.com%2Fapi%2Fjson%2Futc%2Fnow&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=psttxEnhMO6MjLyEv%2BchRopHyhLvgCxgqLT0JDPQVys%3D&amp;reserved=0\n>>\n>> The first one doesn't accept UTC as a timezone; it appears to want\n>> etc/UTC instead.  The second one is offline.\n>>\n>> Duncan Murdoch\n>>\n>> If both of those fail, you'll get the message you saw.\n>>\n>> On 27/08/2020 1:23 p.m., John Fox wrote:\n>>> Dear r-package-devel list members,\n>>>\n>>> I got the following note when checking two different packages today\n>>> --as-cran, both under R 4.0.2 and under R-devel, on my Windows 10 and\n>>> macOS Catalina systems, and on several platforms on rhub:\n>>>\n>>>     * checking for future file timestamps ... NOTE\n>>> unable to verify current time\n>>>\n>>> I'm writing to inquire about the note because no one else has mentioned\n>>> this problem recently, in case it's produced by something that I'm\n>>> doing. There is a discussion of a similar problem from 2019 at\n>>> <https://nam03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstat.ethz.ch%2Fpipermail%2Fr-package-devel%2F2019q1%2F003577.html&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=GWnhngNH3UypXzbCzQOOwVHa8q87slWBhEW6n4PthGQ%3D&amp;reserved=0>.\n>>>\n>>> Both packages that I was checking are close to CRAN releases and so I'd\n>>> like to know whether I can disregard the note.\n>>>\n>>> Any help would be appreciated.\n>>>\n>>> John\n>>>\n>>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://nam03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstat.ethz.ch%2Fmailman%2Flistinfo%2Fr-package-devel&amp;data=02%7C01%7Ctracy%40chapman.edu%7Ce1a2215e59904aaee08708d84ab888d0%7C809929af2d2545bf9837089eb9cfbd01%7C1%7C0%7C637341504003489320&amp;sdata=rMlgTGg8rp7hxPhaiADuBl4%2FWSqGgx4wbKLIPgPS9o8%3D&amp;reserved=0\n> - NOTE: This email originated from outside Chapman’s network. Do not \n> click links or open attachments unless you recognize the sender and know \n> content is safe.\n> \n> NOTE: This email originated from outside Chapman’s network. Do not click \n> links or open attachments unless you recognize the sender and know \n> content is safe.\n>",
+      "body_snippet": "Dear Dustin,\n\nOn 2020-08-27 8:26 p.m., Tracy, Josef wrote:\n> Hi John,\n> \n> Duncan explained the cause of the problem, but i'm afraid I didn't \n> follow how one solves it.  Did you manage to get a chec",
       "thread_id": "thread-4b6bb91602d5",
       "thread_depth": 0,
-      "month": "2020-08"
+      "month": "2020-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2020q3/005931.html"
     }
   ],
   "threads": [

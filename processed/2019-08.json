@@ -17,7 +17,8 @@
       "body_snippet": "I'm having some trouble with travis builds of a package (local checks\nwork fine) and hoping if I can get suggestions for diagnosis &\ntroubleshooting ...\n\nThe package is 'broom.mixed'; I hadn't changed",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004232.html"
     },
     {
       "id": "msg-0a97c4393581",
@@ -31,11 +32,12 @@
       "references": [
         "<5377b497-fd20-4269-adc4-0f5498faa758@gmail.com>"
       ],
-      "body_plain": "On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>\n>   I'm having some trouble with travis builds of a package (local checks\n> work fine) and hoping if I can get suggestions for diagnosis &\n> troubleshooting ...\n>\n> The package is 'broom.mixed'; I hadn't changed it in a while, but\n> recently got a minor pull request which seemed reasonable. I believe the\n> problems I'm having now are dependency and/or caching problems, not\n> actually related to the changes in the package.\n>\n> The failing build is here\n>\n> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n\nI see various \"package x was installed by an R version with different\ninternals; it needs to be reinstalled for use with this R version\".\n\nTop of the page, right side, you should see More options > Caches. Try\nremoving them and restart the build.\n\nI?aki",
+      "body_plain": "On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>\n>   I'm having some trouble with travis builds of a package (local checks\n> work fine) and hoping if I can get suggestions for diagnosis &\n> troubleshooting ...\n>\n> The package is 'broom.mixed'; I hadn't changed it in a while, but\n> recently got a minor pull request which seemed reasonable. I believe the\n> problems I'm having now are dependency and/or caching problems, not\n> actually related to the changes in the package.\n>\n> The failing build is here\n>\n> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n\nI see various \"package x was installed by an R version with different\ninternals; it needs to be reinstalled for use with this R version\".\n\nTop of the page, right side, you should see More options > Caches. Try\nremoving them and restart the build.\n\nIñaki",
       "body_snippet": "On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>\n>   I'm having some trouble with travis builds of a package (local checks\n> work fine) and hoping if I can get suggestions for",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004233.html"
     },
     {
       "id": "msg-735ff45635a5",
@@ -50,11 +52,12 @@
         "<5377b497-fd20-4269-adc4-0f5498faa758@gmail.com>",
         "<CALEXWq27kWKrSz=mdRXZf021ZLu4_3nhyPnDssSAq3Ud=8vMug@mail.gmail.com>"
       ],
-      "body_plain": "On 2019-08-04 5:43 p.m., I?aki Ucar wrote:\n> On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>>\n>>   I'm having some trouble with travis builds of a package (local checks\n>> work fine) and hoping if I can get suggestions for diagnosis &\n>> troubleshooting ...\n>>\n>> The package is 'broom.mixed'; I hadn't changed it in a while, but\n>> recently got a minor pull request which seemed reasonable. I believe the\n>> problems I'm having now are dependency and/or caching problems, not\n>> actually related to the changes in the package.\n>>\n>> The failing build is here\n>>\n>> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n> \n> I see various \"package x was installed by an R version with different\n> internals; it needs to be reinstalled for use with this R version\".\n> \n> Top of the page, right side, you should see More options > Caches. Try\n> removing them and restart the build.\n> \n> I?aki\n\n  I tried that already, thanks.  That's why I'm now suspecting it's some\nkind of mismatch between the Rutter PPAs and the default (?) repos that\nTravis uses.  It would be a little painful, but I could edit out the\nrstan dependency and try the builds with and without Rutter's PPA to\ntest that hypothesis ...\n\n  cheers\n    Ben Bolker\n\n\n\n>",
-      "body_snippet": "On 2019-08-04 5:43 p.m., I?aki Ucar wrote:\n> On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>>\n>>   I'm having some trouble with travis builds of a package (local checks\n>> w",
+      "body_plain": "On 2019-08-04 5:43 p.m., Iñaki Ucar wrote:\n> On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>>\n>>   I'm having some trouble with travis builds of a package (local checks\n>> work fine) and hoping if I can get suggestions for diagnosis &\n>> troubleshooting ...\n>>\n>> The package is 'broom.mixed'; I hadn't changed it in a while, but\n>> recently got a minor pull request which seemed reasonable. I believe the\n>> problems I'm having now are dependency and/or caching problems, not\n>> actually related to the changes in the package.\n>>\n>> The failing build is here\n>>\n>> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n> \n> I see various \"package x was installed by an R version with different\n> internals; it needs to be reinstalled for use with this R version\".\n> \n> Top of the page, right side, you should see More options > Caches. Try\n> removing them and restart the build.\n> \n> Iñaki\n\n  I tried that already, thanks.  That's why I'm now suspecting it's some\nkind of mismatch between the Rutter PPAs and the default (?) repos that\nTravis uses.  It would be a little painful, but I could edit out the\nrstan dependency and try the builds with and without Rutter's PPA to\ntest that hypothesis ...\n\n  cheers\n    Ben Bolker\n\n\n\n>",
+      "body_snippet": "On 2019-08-04 5:43 p.m., Iñaki Ucar wrote:\n> On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>>\n>>   I'm having some trouble with travis builds of a package (local checks\n>> w",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004234.html"
     },
     {
       "id": "msg-d7bd199e36c1",
@@ -70,11 +73,12 @@
         "<CALEXWq27kWKrSz=mdRXZf021ZLu4_3nhyPnDssSAq3Ud=8vMug@mail.gmail.com>",
         "<da712bfc-ef8f-925d-7b07-ca1287012472@gmail.com>"
       ],
-      "body_plain": "On Sun, 4 Aug 2019 at 23:45, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>   I tried that already, thanks.\n\nSorry, I should have read til the end of the email before posting.\n\n> That's why I'm now suspecting it's some\n> kind of mismatch between the Rutter PPAs and the default (?) repos that\n> Travis uses.  It would be a little painful, but I could edit out the\n> rstan dependency and try the builds with and without Rutter's PPA to\n> test that hypothesis ...\n\nYes, it seems that Rutter's repo is causing the trouble. You could try\nto install those erroring packages from CRAN, i.e., by adding:\n\nr_packages:\n  - scales\n  - ps\n  - fansi\n\nto your travis file.\n\nI?aki",
+      "body_plain": "On Sun, 4 Aug 2019 at 23:45, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>   I tried that already, thanks.\n\nSorry, I should have read til the end of the email before posting.\n\n> That's why I'm now suspecting it's some\n> kind of mismatch between the Rutter PPAs and the default (?) repos that\n> Travis uses.  It would be a little painful, but I could edit out the\n> rstan dependency and try the builds with and without Rutter's PPA to\n> test that hypothesis ...\n\nYes, it seems that Rutter's repo is causing the trouble. You could try\nto install those erroring packages from CRAN, i.e., by adding:\n\nr_packages:\n  - scales\n  - ps\n  - fansi\n\nto your travis file.\n\nIñaki",
       "body_snippet": "On Sun, 4 Aug 2019 at 23:45, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>   I tried that already, thanks.\n\nSorry, I should have read til the end of the email before posting.\n\n> That's why I'm now susp",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004235.html"
     },
     {
       "id": "msg-afc9659b8e6f",
@@ -91,11 +95,12 @@
         "<da712bfc-ef8f-925d-7b07-ca1287012472@gmail.com>",
         "<CALEXWq3d-Gy72Ghpt1v2furdTbCO62ms=ErS64z0LBJKOunWCg@mail.gmail.com>"
       ],
-      "body_plain": "Yeah, I might try that, or I might try installing the downstream\npackages that are causing problems from Rutter's repo.  (Right now I'm\nchecking whether I can get it to build on travis without Rutter's repo,\nand with rstan/rstanarm removed from the Suggests: list ...\n\n  thanks,\n    Ben Bolker\n\n\nOn 2019-08-04 6:05 p.m., I?aki Ucar wrote:\n> On Sun, 4 Aug 2019 at 23:45, Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>>   I tried that already, thanks.\n> \n> Sorry, I should have read til the end of the email before posting.\n> \n>> That's why I'm now suspecting it's some\n>> kind of mismatch between the Rutter PPAs and the default (?) repos that\n>> Travis uses.  It would be a little painful, but I could edit out the\n>> rstan dependency and try the builds with and without Rutter's PPA to\n>> test that hypothesis ...\n> \n> Yes, it seems that Rutter's repo is causing the trouble. You could try\n> to install those erroring packages from CRAN, i.e., by adding:\n> \n> r_packages:\n>   - scales\n>   - ps\n>   - fansi\n> \n> to your travis file.\n> \n> I?aki\n>",
+      "body_plain": "Yeah, I might try that, or I might try installing the downstream\npackages that are causing problems from Rutter's repo.  (Right now I'm\nchecking whether I can get it to build on travis without Rutter's repo,\nand with rstan/rstanarm removed from the Suggests: list ...\n\n  thanks,\n    Ben Bolker\n\n\nOn 2019-08-04 6:05 p.m., Iñaki Ucar wrote:\n> On Sun, 4 Aug 2019 at 23:45, Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>>   I tried that already, thanks.\n> \n> Sorry, I should have read til the end of the email before posting.\n> \n>> That's why I'm now suspecting it's some\n>> kind of mismatch between the Rutter PPAs and the default (?) repos that\n>> Travis uses.  It would be a little painful, but I could edit out the\n>> rstan dependency and try the builds with and without Rutter's PPA to\n>> test that hypothesis ...\n> \n> Yes, it seems that Rutter's repo is causing the trouble. You could try\n> to install those erroring packages from CRAN, i.e., by adding:\n> \n> r_packages:\n>   - scales\n>   - ps\n>   - fansi\n> \n> to your travis file.\n> \n> Iñaki\n>",
       "body_snippet": "Yeah, I might try that, or I might try installing the downstream\npackages that are causing problems from Rutter's repo.  (Right now I'm\nchecking whether I can get it to build on travis without Rutter'",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004236.html"
     },
     {
       "id": "msg-e9ca04dc8e0c",
@@ -111,11 +116,12 @@
         "<CALEXWq27kWKrSz=mdRXZf021ZLu4_3nhyPnDssSAq3Ud=8vMug@mail.gmail.com>",
         "<da712bfc-ef8f-925d-7b07-ca1287012472@gmail.com>"
       ],
-      "body_plain": "On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>\n> On 2019-08-04 5:43 p.m., I?aki Ucar wrote:\n> > On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n> >>\n> >>\n> >>   I'm having some trouble with travis builds of a package (local checks\n> >> work fine) and hoping if I can get suggestions for diagnosis &\n> >> troubleshooting ...\n> >>\n> >> The package is 'broom.mixed'; I hadn't changed it in a while, but\n> >> recently got a minor pull request which seemed reasonable. I believe the\n> >> problems I'm having now are dependency and/or caching problems, not\n> >> actually related to the changes in the package.\n> >>\n> >> The failing build is here\n> >>\n> >> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n> >\n> > I see various \"package x was installed by an R version with different\n> > internals; it needs to be reinstalled for use with this R version\".\n> >\n> > Top of the page, right side, you should see More options > Caches. Try\n> > removing them and restart the build.\n> >\n> > I?aki\n>\n>   I tried that already, thanks.  That's why I'm now suspecting it's some\n> kind of mismatch between the Rutter PPAs and the default (?) repos that\n> Travis uses.  It would be a little painful, but I could edit out the\n> rstan dependency and try the builds with and without Rutter's PPA to\n> test that hypothesis ...\n>\nTry changing:\nsudo add-apt-repository -y \"ppa:marutter/rrutter\"\nsudo add-apt-repository -y \"ppa:marutter/c2d4u\"\nto:\nsudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\nsudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n\nThe R C API changed between R-3.4.x and R-3.5.x, which created\nincompatibility in packages installed using different versions.  Any R\n> 3.6.x should use the \"ppa:*3.5\" PPAs.\n\n\n>   cheers\n>     Ben Bolker\n>\n>\n>\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com",
-      "body_snippet": "On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>\n> On 2019-08-04 5:43 p.m., I?aki Ucar wrote:\n> > On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n> >>\n> ",
+      "body_plain": "On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>\n> On 2019-08-04 5:43 p.m., Iñaki Ucar wrote:\n> > On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n> >>\n> >>\n> >>   I'm having some trouble with travis builds of a package (local checks\n> >> work fine) and hoping if I can get suggestions for diagnosis &\n> >> troubleshooting ...\n> >>\n> >> The package is 'broom.mixed'; I hadn't changed it in a while, but\n> >> recently got a minor pull request which seemed reasonable. I believe the\n> >> problems I'm having now are dependency and/or caching problems, not\n> >> actually related to the changes in the package.\n> >>\n> >> The failing build is here\n> >>\n> >> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n> >\n> > I see various \"package x was installed by an R version with different\n> > internals; it needs to be reinstalled for use with this R version\".\n> >\n> > Top of the page, right side, you should see More options > Caches. Try\n> > removing them and restart the build.\n> >\n> > Iñaki\n>\n>   I tried that already, thanks.  That's why I'm now suspecting it's some\n> kind of mismatch between the Rutter PPAs and the default (?) repos that\n> Travis uses.  It would be a little painful, but I could edit out the\n> rstan dependency and try the builds with and without Rutter's PPA to\n> test that hypothesis ...\n>\nTry changing:\nsudo add-apt-repository -y \"ppa:marutter/rrutter\"\nsudo add-apt-repository -y \"ppa:marutter/c2d4u\"\nto:\nsudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\nsudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n\nThe R C API changed between R-3.4.x and R-3.5.x, which created\nincompatibility in packages installed using different versions.  Any R\n> 3.6.x should use the \"ppa:*3.5\" PPAs.\n\n\n>   cheers\n>     Ben Bolker\n>\n>\n>\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nJoshua Ulrich  |  about.me/joshuaulrich\nFOSS Trading  |  www.fosstrading.com",
+      "body_snippet": "On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>\n> On 2019-08-04 5:43 p.m., Iñaki Ucar wrote:\n> > On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n> >>\n> ",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004237.html"
     },
     {
       "id": "msg-a14b1309409c",
@@ -132,11 +138,12 @@
         "<da712bfc-ef8f-925d-7b07-ca1287012472@gmail.com>",
         "<CAPPM_gSvYB+LS54KtMVzPqgMwpj42YRKv=_=Yjd=M943wJnHFQ@mail.gmail.com>"
       ],
-      "body_plain": "On 2019-08-04 6:08 p.m., Joshua Ulrich wrote:\n> On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>> On 2019-08-04 5:43 p.m., I?aki Ucar wrote:\n>>> On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>>>>\n>>>>\n>>>>   I'm having some trouble with travis builds of a package (local checks\n>>>> work fine) and hoping if I can get suggestions for diagnosis &\n>>>> troubleshooting ...\n>>>>\n>>>> The package is 'broom.mixed'; I hadn't changed it in a while, but\n>>>> recently got a minor pull request which seemed reasonable. I believe the\n>>>> problems I'm having now are dependency and/or caching problems, not\n>>>> actually related to the changes in the package.\n>>>>\n>>>> The failing build is here\n>>>>\n>>>> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n>>>\n>>> I see various \"package x was installed by an R version with different\n>>> internals; it needs to be reinstalled for use with this R version\".\n>>>\n>>> Top of the page, right side, you should see More options > Caches. Try\n>>> removing them and restart the build.\n>>>\n>>> I?aki\n>>\n>>   I tried that already, thanks.  That's why I'm now suspecting it's some\n>> kind of mismatch between the Rutter PPAs and the default (?) repos that\n>> Travis uses.  It would be a little painful, but I could edit out the\n>> rstan dependency and try the builds with and without Rutter's PPA to\n>> test that hypothesis ...\n>>\n> Try changing:\n> sudo add-apt-repository -y \"ppa:marutter/rrutter\"\n> sudo add-apt-repository -y \"ppa:marutter/c2d4u\"\n> to:\n> sudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\n> sudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n> \n> The R C API changed between R-3.4.x and R-3.5.x, which created\n> incompatibility in packages installed using different versions.  Any R\n>> 3.6.x should use the \"ppa:*3.5\" PPAs.\n> \n> \n>>   cheers\n>>     Ben Bolker\n>>\n>>\n\n  Aha! That sounds like it might be the right answer.  I almost tried\nit, but I thought that the non-specifically tagged PPA\n(ppa:marutter/c2d4u) was *post*-3.5 instead of *pre*-3.5 (and that\ntherefore it wouldn't help since I'm building on r-release (3.6) and\nr-devel (3.x) ...)\n\n  cheers\n    Ben Bolker\n\n\n\n>>\n>>>\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n>",
-      "body_snippet": "On 2019-08-04 6:08 p.m., Joshua Ulrich wrote:\n> On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>> On 2019-08-04 5:43 p.m., I?aki Ucar wrote:\n>>> On Sun, 4 Aug 2019 at 23:26",
+      "body_plain": "On 2019-08-04 6:08 p.m., Joshua Ulrich wrote:\n> On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>> On 2019-08-04 5:43 p.m., Iñaki Ucar wrote:\n>>> On Sun, 4 Aug 2019 at 23:26, Ben Bolker <bbolker at gmail.com> wrote:\n>>>>\n>>>>\n>>>>   I'm having some trouble with travis builds of a package (local checks\n>>>> work fine) and hoping if I can get suggestions for diagnosis &\n>>>> troubleshooting ...\n>>>>\n>>>> The package is 'broom.mixed'; I hadn't changed it in a while, but\n>>>> recently got a minor pull request which seemed reasonable. I believe the\n>>>> problems I'm having now are dependency and/or caching problems, not\n>>>> actually related to the changes in the package.\n>>>>\n>>>> The failing build is here\n>>>>\n>>>> https://travis-ci.org/bbolker/broom.mixed/builds/567597217\n>>>\n>>> I see various \"package x was installed by an R version with different\n>>> internals; it needs to be reinstalled for use with this R version\".\n>>>\n>>> Top of the page, right side, you should see More options > Caches. Try\n>>> removing them and restart the build.\n>>>\n>>> Iñaki\n>>\n>>   I tried that already, thanks.  That's why I'm now suspecting it's some\n>> kind of mismatch between the Rutter PPAs and the default (?) repos that\n>> Travis uses.  It would be a little painful, but I could edit out the\n>> rstan dependency and try the builds with and without Rutter's PPA to\n>> test that hypothesis ...\n>>\n> Try changing:\n> sudo add-apt-repository -y \"ppa:marutter/rrutter\"\n> sudo add-apt-repository -y \"ppa:marutter/c2d4u\"\n> to:\n> sudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\n> sudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n> \n> The R C API changed between R-3.4.x and R-3.5.x, which created\n> incompatibility in packages installed using different versions.  Any R\n>> 3.6.x should use the \"ppa:*3.5\" PPAs.\n> \n> \n>>   cheers\n>>     Ben Bolker\n>>\n>>\n\n  Aha! That sounds like it might be the right answer.  I almost tried\nit, but I thought that the non-specifically tagged PPA\n(ppa:marutter/c2d4u) was *post*-3.5 instead of *pre*-3.5 (and that\ntherefore it wouldn't help since I'm building on r-release (3.6) and\nr-devel (3.x) ...)\n\n  cheers\n    Ben Bolker\n\n\n\n>>\n>>>\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n>",
+      "body_snippet": "On 2019-08-04 6:08 p.m., Joshua Ulrich wrote:\n> On Sun, Aug 4, 2019 at 4:54 PM Ben Bolker <bbolker at gmail.com> wrote:\n>>\n>> On 2019-08-04 5:43 p.m., Iñaki Ucar wrote:\n>>> On Sun, 4 Aug 2019 at 23:26",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004238.html"
     },
     {
       "id": "msg-3ecfbc4c727a",
@@ -154,11 +161,12 @@
         "<CALEXWq3d-Gy72Ghpt1v2furdTbCO62ms=ErS64z0LBJKOunWCg@mail.gmail.com>",
         "<0b217f5a-70a2-a957-fc50-5686d4d55680@gmail.com>"
       ],
-      "body_plain": "On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>\n>   Yeah, I might try that, or I might try installing the downstream\n> packages that are causing problems from Rutter's repo.\n\nAFAICT from the build log, the packages that are causing problems are\nbeing installed precisely from Rutter's repo:\n\nGet:7 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main amd64\nr-cran-ps amd64 1.3.0-1cran1ppa0 [149 kB]\nGet:20 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\namd64 r-cran-fansi amd64 0.4.0-1cran1ppa0 [133 kB]\nGet:42 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\namd64 r-cran-scales amd64 1.0.0-1cran1ppa0 [422 kB]\n\nbut not from c2d4u3.5.\n\nI?aki",
+      "body_plain": "On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>\n>   Yeah, I might try that, or I might try installing the downstream\n> packages that are causing problems from Rutter's repo.\n\nAFAICT from the build log, the packages that are causing problems are\nbeing installed precisely from Rutter's repo:\n\nGet:7 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main amd64\nr-cran-ps amd64 1.3.0-1cran1ppa0 [149 kB]\nGet:20 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\namd64 r-cran-fansi amd64 0.4.0-1cran1ppa0 [133 kB]\nGet:42 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\namd64 r-cran-scales amd64 1.0.0-1cran1ppa0 [422 kB]\n\nbut not from c2d4u3.5.\n\nIñaki",
       "body_snippet": "On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>\n>   Yeah, I might try that, or I might try installing the downstream\n> packages that are causing problems from Rutter's repo.\n",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 5,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004239.html"
     },
     {
       "id": "msg-b43863b0a487",
@@ -177,11 +185,12 @@
         "<0b217f5a-70a2-a957-fc50-5686d4d55680@gmail.com>",
         "<CALEXWq09N2cT+cvZAJiPAPj8y3vM2vZMnqhcryWLEftUNx2n9Q@mail.gmail.com>"
       ],
-      "body_plain": "On 5 August 2019 at 00:13, I?aki Ucar wrote:\n| On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n| >\n| >\n| >   Yeah, I might try that, or I might try installing the downstream\n| > packages that are causing problems from Rutter's repo.\n| \n| AFAICT from the build log, the packages that are causing problems are\n| being installed precisely from Rutter's repo:\n| \n| Get:7 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main amd64\n| r-cran-ps amd64 1.3.0-1cran1ppa0 [149 kB]\n| Get:20 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n| amd64 r-cran-fansi amd64 0.4.0-1cran1ppa0 [133 kB]\n| Get:42 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n| amd64 r-cran-scales amd64 1.0.0-1cran1ppa0 [422 kB]\n| \n| but not from c2d4u3.5.\n\nYes, and that is the problem just like Josh said. We want '3.5' (or greater),\nnot '3.4'.  Ie in r-travis (which is what use for my packages) I have\n\nBootstrapLinux() {\n    # Set up our CRAN mirror.\n    if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n        sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)-cran35/\"\n    elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n        sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)/\"\n    fi\n    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9\n\n    # Add marutter's c2d4u repository.\n    if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n        sudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\n        sudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n    elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n        sudo add-apt-repository -y \"ppa:marutter/rrutter\"\n        sudo add-apt-repository -y \"ppa:marutter/c2d4u\"\n    fi\n\n\nCf https://github.com/eddelbuettel/r-travis/blob/master/run.sh#L96-L112 \n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 5 August 2019 at 00:13, I?aki Ucar wrote:\n| On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n| >\n| >\n| >   Yeah, I might try that, or I might try installing the downstream\n| > ",
+      "body_plain": "On 5 August 2019 at 00:13, Iñaki Ucar wrote:\n| On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n| >\n| >\n| >   Yeah, I might try that, or I might try installing the downstream\n| > packages that are causing problems from Rutter's repo.\n| \n| AFAICT from the build log, the packages that are causing problems are\n| being installed precisely from Rutter's repo:\n| \n| Get:7 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main amd64\n| r-cran-ps amd64 1.3.0-1cran1ppa0 [149 kB]\n| Get:20 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n| amd64 r-cran-fansi amd64 0.4.0-1cran1ppa0 [133 kB]\n| Get:42 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n| amd64 r-cran-scales amd64 1.0.0-1cran1ppa0 [422 kB]\n| \n| but not from c2d4u3.5.\n\nYes, and that is the problem just like Josh said. We want '3.5' (or greater),\nnot '3.4'.  Ie in r-travis (which is what use for my packages) I have\n\nBootstrapLinux() {\n    # Set up our CRAN mirror.\n    if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n        sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)-cran35/\"\n    elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n        sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)/\"\n    fi\n    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9\n\n    # Add marutter's c2d4u repository.\n    if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n        sudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\n        sudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n    elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n        sudo add-apt-repository -y \"ppa:marutter/rrutter\"\n        sudo add-apt-repository -y \"ppa:marutter/c2d4u\"\n    fi\n\n\nCf https://github.com/eddelbuettel/r-travis/blob/master/run.sh#L96-L112 \n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 5 August 2019 at 00:13, Iñaki Ucar wrote:\n| On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n| >\n| >\n| >   Yeah, I might try that, or I might try installing the downstream\n| > ",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 6,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004240.html"
     },
     {
       "id": "msg-5fef2b43d4ed",
@@ -201,11 +210,12 @@
         "<CALEXWq09N2cT+cvZAJiPAPj8y3vM2vZMnqhcryWLEftUNx2n9Q@mail.gmail.com>",
         "<23879.25757.9311.287528@rob.eddelbuettel.com>"
       ],
-      "body_plain": "Thanks everyone!  Passes now.\n\nOn 2019-08-04 7:05 p.m., Dirk Eddelbuettel wrote:\n> \n> On 5 August 2019 at 00:13, I?aki Ucar wrote:\n> | On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n> | >\n> | >\n> | >   Yeah, I might try that, or I might try installing the downstream\n> | > packages that are causing problems from Rutter's repo.\n> | \n> | AFAICT from the build log, the packages that are causing problems are\n> | being installed precisely from Rutter's repo:\n> | \n> | Get:7 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main amd64\n> | r-cran-ps amd64 1.3.0-1cran1ppa0 [149 kB]\n> | Get:20 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n> | amd64 r-cran-fansi amd64 0.4.0-1cran1ppa0 [133 kB]\n> | Get:42 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n> | amd64 r-cran-scales amd64 1.0.0-1cran1ppa0 [422 kB]\n> | \n> | but not from c2d4u3.5.\n> \n> Yes, and that is the problem just like Josh said. We want '3.5' (or greater),\n> not '3.4'.  Ie in r-travis (which is what use for my packages) I have\n> \n> BootstrapLinux() {\n>     # Set up our CRAN mirror.\n>     if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n>         sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)-cran35/\"\n>     elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n>         sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)/\"\n>     fi\n>     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9\n> \n>     # Add marutter's c2d4u repository.\n>     if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n>         sudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\n>         sudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n>     elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n>         sudo add-apt-repository -y \"ppa:marutter/rrutter\"\n>         sudo add-apt-repository -y \"ppa:marutter/c2d4u\"\n>     fi\n> \n> \n> Cf https://github.com/eddelbuettel/r-travis/blob/master/run.sh#L96-L112 \n> \n> Dirk",
-      "body_snippet": "Thanks everyone!  Passes now.\n\nOn 2019-08-04 7:05 p.m., Dirk Eddelbuettel wrote:\n> \n> On 5 August 2019 at 00:13, I?aki Ucar wrote:\n> | On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wr",
+      "body_plain": "Thanks everyone!  Passes now.\n\nOn 2019-08-04 7:05 p.m., Dirk Eddelbuettel wrote:\n> \n> On 5 August 2019 at 00:13, Iñaki Ucar wrote:\n> | On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wrote:\n> | >\n> | >\n> | >   Yeah, I might try that, or I might try installing the downstream\n> | > packages that are causing problems from Rutter's repo.\n> | \n> | AFAICT from the build log, the packages that are causing problems are\n> | being installed precisely from Rutter's repo:\n> | \n> | Get:7 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main amd64\n> | r-cran-ps amd64 1.3.0-1cran1ppa0 [149 kB]\n> | Get:20 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n> | amd64 r-cran-fansi amd64 0.4.0-1cran1ppa0 [133 kB]\n> | Get:42 http://ppa.launchpad.net/marutter/c2d4u/ubuntu xenial/main\n> | amd64 r-cran-scales amd64 1.0.0-1cran1ppa0 [422 kB]\n> | \n> | but not from c2d4u3.5.\n> \n> Yes, and that is the problem just like Josh said. We want '3.5' (or greater),\n> not '3.4'.  Ie in r-travis (which is what use for my packages) I have\n> \n> BootstrapLinux() {\n>     # Set up our CRAN mirror.\n>     if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n>         sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)-cran35/\"\n>     elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n>         sudo add-apt-repository \"deb ${CRAN}/bin/linux/ubuntu $(lsb_release -cs)/\"\n>     fi\n>     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9\n> \n>     # Add marutter's c2d4u repository.\n>     if [[ \"${R_VERSION}\" == \"3.5\" ]]; then\n>         sudo add-apt-repository -y \"ppa:marutter/rrutter3.5\"\n>         sudo add-apt-repository -y \"ppa:marutter/c2d4u3.5\"\n>     elif [[ \"${R_VERSION}\" == \"3.4\" ]]; then\n>         sudo add-apt-repository -y \"ppa:marutter/rrutter\"\n>         sudo add-apt-repository -y \"ppa:marutter/c2d4u\"\n>     fi\n> \n> \n> Cf https://github.com/eddelbuettel/r-travis/blob/master/run.sh#L96-L112 \n> \n> Dirk",
+      "body_snippet": "Thanks everyone!  Passes now.\n\nOn 2019-08-04 7:05 p.m., Dirk Eddelbuettel wrote:\n> \n> On 5 August 2019 at 00:13, Iñaki Ucar wrote:\n> | On Mon, 5 Aug 2019 at 00:08, Ben Bolker <bbolker at gmail.com> wr",
       "thread_id": "thread-2e65eeebafee",
       "thread_depth": 7,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004241.html"
     },
     {
       "id": "msg-9552b7469ea2",
@@ -221,7 +231,8 @@
       "body_snippet": "Dear package developers,\n\nthe CRAN incoming queue will be closed from Aug 09, 2019 to Aug 18, \n2019. Hence package submissions are only possible before and after that\nperiod.\n\nCRAN maintainance work a",
       "thread_id": "thread-9552b7469ea2",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004242.html"
     },
     {
       "id": "msg-a9e19788cf16",
@@ -237,7 +248,8 @@
       "body_snippet": "Hi All:\n\nThe recent nighty CRAN checks on one of my packages reports:\n\nCheck: data for non-ASCII characters \nResult: NOTE \n     Note: found 1 marked UTF-8 string \n\nWhen  originally submitted this was ",
       "thread_id": "thread-a9e19788cf16",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004243.html"
     },
     {
       "id": "msg-06c8943f0a73",
@@ -255,7 +267,8 @@
       "body_snippet": "On 05/08/2019 10:51 a.m., Roy Mendelssohn - NOAA Federal via \nR-package-devel wrote:\n> Hi All:\n> \n> The recent nighty CRAN checks on one of my packages reports:\n> \n> Check: data for non-ASCII characte",
       "thread_id": "thread-a9e19788cf16",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004244.html"
     },
     {
       "id": "msg-2a637708e3f0",
@@ -274,7 +287,8 @@
       "body_snippet": "Thanks.  What is surprising me is I can't reproduce the error either directly on my Mac or on rhub::windows and I am waiting for the result of win-builder  (I can't check most rhub::linux  because it ",
       "thread_id": "thread-a9e19788cf16",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004245.html"
     },
     {
       "id": "msg-6983628473cf",
@@ -294,7 +308,8 @@
       "body_snippet": "Using tools:::.check_package_datasets() produces the error,  but doesn't give out any more information.  I don't know enough about some fo the write() function.  If I write to csv of some sort,  will ",
       "thread_id": "thread-a9e19788cf16",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004246.html"
     },
     {
       "id": "msg-412128237d00",
@@ -315,7 +330,8 @@
       "body_snippet": "Okay I found it.  I looked at the code for  tools:::.check_package_datasets(),  took out the core part,  ran every string  I had in every dataset,  it came out.  A degree symbol.\n\nThanks for telling m",
       "thread_id": "thread-a9e19788cf16",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004247.html"
     },
     {
       "id": "msg-6781f16dd1d3",
@@ -337,7 +353,8 @@
       "body_snippet": "On 05/08/2019 2:13 p.m., Roy Mendelssohn - NOAA Federal wrote:\n> Okay I found it.  I looked at the code for  tools:::.check_package_datasets(),  took out the core part,  ran every string  I had in eve",
       "thread_id": "thread-a9e19788cf16",
       "thread_depth": 5,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004248.html"
     },
     {
       "id": "msg-3c843881f7ff",
@@ -353,7 +370,8 @@
       "body_snippet": "Hi,\n\nI am submitting my first ever R package to CRAN!  It's almost ready, but I\nhave two notes below and I do not understand the best way to fix them and I\nwas looking to get some feedback if anyone h",
       "thread_id": "thread-3c843881f7ff",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004249.html"
     },
     {
       "id": "msg-508ad785616b",
@@ -367,11 +385,12 @@
       "references": [
         "<CAJcj_3U9n_Un8skHY_=dqyuKRAJ4XxV+O+es9C8voadkOYUwvQ@mail.gmail.com>"
       ],
-      "body_plain": "On Tue, 6 Aug 2019 at 14:40, Andy Stein <andy.stein at gmail.com> wrote:\n>\n> Hi,\n>\n> I am submitting my first ever R package to CRAN!  It's almost ready, but I\n> have two notes below and I do not understand the best way to fix them and I\n> was looking to get some feedback if anyone had time to help.  I paste the\n> notes at the end of this email.\n>\n>    1. The first note seems to be some problem with the description file.\n>    But I can't understand from the note what the problem even is, can you\n> help\n>    me?\n\nThe MIT license file should contain only the following:\n\nYEAR: <the year(s)>\nCOPYRIGHT HOLDER: <name(s) of the authors>\n\nas specified in https://www.r-project.org/Licenses/MIT.\n\n>    2. The second note at the end is about the existence of some files.\n>    These files are all created by the example code in the documentation.  I\n>    suppose I could just mark all these examples as \"do not run\" and this\n> will\n>    fix the note, but from a code development perspective, I thought it would\n>    be preferable to run these examples during package building as an\n>    additional test of the package.  Is there any other solution that is\n>    preferred?\n\nYour code is allowed to write files automatically only in the\ntemporary directory associated with the R session. To fix this, create\ntemporary files on top of your examples using tempfile() and write\nthere instead.\n\nI?aki",
+      "body_plain": "On Tue, 6 Aug 2019 at 14:40, Andy Stein <andy.stein at gmail.com> wrote:\n>\n> Hi,\n>\n> I am submitting my first ever R package to CRAN!  It's almost ready, but I\n> have two notes below and I do not understand the best way to fix them and I\n> was looking to get some feedback if anyone had time to help.  I paste the\n> notes at the end of this email.\n>\n>    1. The first note seems to be some problem with the description file.\n>    But I can't understand from the note what the problem even is, can you\n> help\n>    me?\n\nThe MIT license file should contain only the following:\n\nYEAR: <the year(s)>\nCOPYRIGHT HOLDER: <name(s) of the authors>\n\nas specified in https://www.r-project.org/Licenses/MIT.\n\n>    2. The second note at the end is about the existence of some files.\n>    These files are all created by the example code in the documentation.  I\n>    suppose I could just mark all these examples as \"do not run\" and this\n> will\n>    fix the note, but from a code development perspective, I thought it would\n>    be preferable to run these examples during package building as an\n>    additional test of the package.  Is there any other solution that is\n>    preferred?\n\nYour code is allowed to write files automatically only in the\ntemporary directory associated with the R session. To fix this, create\ntemporary files on top of your examples using tempfile() and write\nthere instead.\n\nIñaki",
       "body_snippet": "On Tue, 6 Aug 2019 at 14:40, Andy Stein <andy.stein at gmail.com> wrote:\n>\n> Hi,\n>\n> I am submitting my first ever R package to CRAN!  It's almost ready, but I\n> have two notes below and I do not unde",
       "thread_id": "thread-3c843881f7ff",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004250.html"
     },
     {
       "id": "msg-d8087c5662bf",
@@ -387,7 +406,8 @@
       "body_snippet": "Dear developers,\n\nI maintain a package, emmeans, that provides post-hoc analyses for a variety of models. These models are supported by writing S3 methods for recover_data and emm_grid. Quite a few mo",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004251.html"
     },
     {
       "id": "msg-6d29d77564bf",
@@ -401,11 +421,12 @@
       "references": [
         "<DM6PR04MB4380C0F1C69B4B99804A7341F1D10@DM6PR04MB4380.namprd04.prod.outlook.com>"
       ],
-      "body_plain": "On Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Dear developers,\n>\n> I maintain a package, emmeans, that provides post-hoc analyses for a variety of models. These models are supported by writing S3 methods for recover_data and emm_grid. Quite a few models are supported internally in emmeans, but it would really be better if the packages that create model objects would have their own implementations of these methods.\n>\n> For example, a hypothetical package, foopkg may be used to fit a model, thereby producing an object of class foo. Currently, emmeans has internal functions recover_data.foo and emm_basis.foo (typically not exported). It would be better if the developer of foopkg would incorporate and export her own recover_data.foo and emm_basis.foo methods, so that those methods can be modified as needed as foopkg is further developed. Once those methods are incorporated in foopkg, then I would remove them from my next update of emmeans. But while they are available in both places, the ones in foopkg should be used.\n>\n> The problem is that in the short term, recover_data.foo and emm_basis.foo are still present in the namespace of emmeans. And I have found in testing with a fake package that if the user codes, say, emmeans::emmeans(model.foo, \"treatment\"), the methods internal to emmeans's namespace are always used even when foopkg is attached and its recover_data and emm_basis methods are registered. So the developer of foopkg can't even test her own methods (except by changing the class name of the model object).\n>\n> What can be done to facilitate having another developer's methods to override your own?\n\nThe order of dispatch is meant to ensure that your package can't be\nbroken by a clash with another one. In other words, if recover_data is\ncalled inside emmeans, emmeans:::recover_data.foo is called, but then\nif it's called inside foopkg, then foopkg:::recover_data.foo is called\ninstead.\n\nThis feature, however, plays against your intended use case here, and\nI think that the best way to circumvent it is by 1) renaming those\nmethods (e.g., recover_data_foo, because as soon as there is a\nsomething.foo in your namespace, it will be dispatched regardless of\nwhether you register it or not), and 2) register them dynamically on\nload time if foopkg is not available. There is an implementation for\nthis available here:\nhttps://github.com/r-lib/vctrs/blob/master/R/register-s3.R\n\nI?aki",
+      "body_plain": "On Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Dear developers,\n>\n> I maintain a package, emmeans, that provides post-hoc analyses for a variety of models. These models are supported by writing S3 methods for recover_data and emm_grid. Quite a few models are supported internally in emmeans, but it would really be better if the packages that create model objects would have their own implementations of these methods.\n>\n> For example, a hypothetical package, foopkg may be used to fit a model, thereby producing an object of class foo. Currently, emmeans has internal functions recover_data.foo and emm_basis.foo (typically not exported). It would be better if the developer of foopkg would incorporate and export her own recover_data.foo and emm_basis.foo methods, so that those methods can be modified as needed as foopkg is further developed. Once those methods are incorporated in foopkg, then I would remove them from my next update of emmeans. But while they are available in both places, the ones in foopkg should be used.\n>\n> The problem is that in the short term, recover_data.foo and emm_basis.foo are still present in the namespace of emmeans. And I have found in testing with a fake package that if the user codes, say, emmeans::emmeans(model.foo, \"treatment\"), the methods internal to emmeans's namespace are always used even when foopkg is attached and its recover_data and emm_basis methods are registered. So the developer of foopkg can't even test her own methods (except by changing the class name of the model object).\n>\n> What can be done to facilitate having another developer's methods to override your own?\n\nThe order of dispatch is meant to ensure that your package can't be\nbroken by a clash with another one. In other words, if recover_data is\ncalled inside emmeans, emmeans:::recover_data.foo is called, but then\nif it's called inside foopkg, then foopkg:::recover_data.foo is called\ninstead.\n\nThis feature, however, plays against your intended use case here, and\nI think that the best way to circumvent it is by 1) renaming those\nmethods (e.g., recover_data_foo, because as soon as there is a\nsomething.foo in your namespace, it will be dispatched regardless of\nwhether you register it or not), and 2) register them dynamically on\nload time if foopkg is not available. There is an implementation for\nthis available here:\nhttps://github.com/r-lib/vctrs/blob/master/R/register-s3.R\n\nIñaki",
       "body_snippet": "On Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Dear developers,\n>\n> I maintain a package, emmeans, that provides post-hoc analyses for a variety of models. Thes",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004252.html"
     },
     {
       "id": "msg-a2ec4ae1e8b8",
@@ -420,11 +441,12 @@
         "<DM6PR04MB4380C0F1C69B4B99804A7341F1D10@DM6PR04MB4380.namprd04.prod.outlook.com>",
         "<CALEXWq0urMLWJc+tD9pp=wRPFF2GPphfXSOfTBRjo_dy7jsd9g@mail.gmail.com>"
       ],
-      "body_plain": "Thanks I?aki, \n\nHowever...\n\n    > 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo \n    > in your namespace, it will be dispatched regardless of whether you register it or not)\n\nIf I do that, then emmeans won't support foo objects until foopkg offers the methods. My goal is to encourage package developers to replace my existing methods but to support them until that is done.\n\n    > 2) register them dynamically on load time if foopkg is not available. \n\nNot necessary, as you already stated in (1). (But I do export a '.emm_register()' function that makes it really easy for other package developers to register their methods. It's based on similar code to what you point to.)\n\nRuss\n\n-----Original Message-----\nFrom: I?aki Ucar <iucar at fedoraproject.org> \nSent: Saturday, August 10, 2019 1:09 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: r-package-devel at r-project.org\nSubject: [External] Re: [R-pkg-devel] Farming out methods to other packages\n\nOn Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Dear developers,\n>\n> I maintain a package, emmeans, that provides post-hoc analyses for a variety of models. These models are supported by writing S3 methods for recover_data and emm_grid. Quite a few models are supported internally in emmeans, but it would really be better if the packages that create model objects would have their own implementations of these methods.\n>\n> For example, a hypothetical package, foopkg may be used to fit a model, thereby producing an object of class foo. Currently, emmeans has internal functions recover_data.foo and emm_basis.foo (typically not exported). It would be better if the developer of foopkg would incorporate and export her own recover_data.foo and emm_basis.foo methods, so that those methods can be modified as needed as foopkg is further developed. Once those methods are incorporated in foopkg, then I would remove them from my next update of emmeans. But while they are available in both places, the ones in foopkg should be used.\n>\n> The problem is that in the short term, recover_data.foo and emm_basis.foo are still present in the namespace of emmeans. And I have found in testing with a fake package that if the user codes, say, emmeans::emmeans(model.foo, \"treatment\"), the methods internal to emmeans's namespace are always used even when foopkg is attached and its recover_data and emm_basis methods are registered. So the developer of foopkg can't even test her own methods (except by changing the class name of the model object).\n>\n> What can be done to facilitate having another developer's methods to override your own?\n\nThe order of dispatch is meant to ensure that your package can't be broken by a clash with another one. In other words, if recover_data is called inside emmeans, emmeans:::recover_data.foo is called, but then if it's called inside foopkg, then foopkg:::recover_data.foo is called instead.\n\nThis feature, however, plays against your intended use case here, and I think that the best way to circumvent it is by 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo in your namespace, it will be dispatched regardless of whether you register it or not), and 2) register them dynamically on load time if foopkg is not available. There is an implementation for this available here:\nhttps://github.com/r-lib/vctrs/blob/master/R/register-s3.R\n\nI?aki",
-      "body_snippet": "Thanks I?aki, \n\nHowever...\n\n    > 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo \n    > in your namespace, it will be dispatched regardless of whether y",
+      "body_plain": "Thanks Iñaki, \n\nHowever...\n\n    > 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo \n    > in your namespace, it will be dispatched regardless of whether you register it or not)\n\nIf I do that, then emmeans won't support foo objects until foopkg offers the methods. My goal is to encourage package developers to replace my existing methods but to support them until that is done.\n\n    > 2) register them dynamically on load time if foopkg is not available. \n\nNot necessary, as you already stated in (1). (But I do export a '.emm_register()' function that makes it really easy for other package developers to register their methods. It's based on similar code to what you point to.)\n\nRuss\n\n-----Original Message-----\nFrom: Iñaki Ucar <iucar at fedoraproject.org> \nSent: Saturday, August 10, 2019 1:09 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: r-package-devel at r-project.org\nSubject: [External] Re: [R-pkg-devel] Farming out methods to other packages\n\nOn Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Dear developers,\n>\n> I maintain a package, emmeans, that provides post-hoc analyses for a variety of models. These models are supported by writing S3 methods for recover_data and emm_grid. Quite a few models are supported internally in emmeans, but it would really be better if the packages that create model objects would have their own implementations of these methods.\n>\n> For example, a hypothetical package, foopkg may be used to fit a model, thereby producing an object of class foo. Currently, emmeans has internal functions recover_data.foo and emm_basis.foo (typically not exported). It would be better if the developer of foopkg would incorporate and export her own recover_data.foo and emm_basis.foo methods, so that those methods can be modified as needed as foopkg is further developed. Once those methods are incorporated in foopkg, then I would remove them from my next update of emmeans. But while they are available in both places, the ones in foopkg should be used.\n>\n> The problem is that in the short term, recover_data.foo and emm_basis.foo are still present in the namespace of emmeans. And I have found in testing with a fake package that if the user codes, say, emmeans::emmeans(model.foo, \"treatment\"), the methods internal to emmeans's namespace are always used even when foopkg is attached and its recover_data and emm_basis methods are registered. So the developer of foopkg can't even test her own methods (except by changing the class name of the model object).\n>\n> What can be done to facilitate having another developer's methods to override your own?\n\nThe order of dispatch is meant to ensure that your package can't be broken by a clash with another one. In other words, if recover_data is called inside emmeans, emmeans:::recover_data.foo is called, but then if it's called inside foopkg, then foopkg:::recover_data.foo is called instead.\n\nThis feature, however, plays against your intended use case here, and I think that the best way to circumvent it is by 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo in your namespace, it will be dispatched regardless of whether you register it or not), and 2) register them dynamically on load time if foopkg is not available. There is an implementation for this available here:\nhttps://github.com/r-lib/vctrs/blob/master/R/register-s3.R\n\nIñaki",
+      "body_snippet": "Thanks Iñaki, \n\nHowever...\n\n    > 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo \n    > in your namespace, it will be dispatched regardless of whether y",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004253.html"
     },
     {
       "id": "msg-0d59259c3d32",
@@ -440,11 +462,12 @@
         "<CALEXWq0urMLWJc+tD9pp=wRPFF2GPphfXSOfTBRjo_dy7jsd9g@mail.gmail.com>",
         "<DM6PR04MB4380D9033D754173EF2E157EF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>"
       ],
-      "body_plain": "What about turning your S3 class into a R6 class. That way, the methods you\nprovide can be overridden easily by other developers by creating a class\nthat inherits from yours.\n\nThis is standard oop, as opposed to special R S3 oop.\nNeonira\n\n\nLe sam. 10 ao?t 2019 ? 21:11, Lenth, Russell V <russell-lenth at uiowa.edu> a\n?crit :\n\n> Thanks I?aki,\n>\n> However...\n>\n>     > 1) renaming those methods (e.g., recover_data_foo, because as soon\n> as there is a something.foo\n>     > in your namespace, it will be dispatched regardless of whether you\n> register it or not)\n>\n> If I do that, then emmeans won't support foo objects until foopkg offers\n> the methods. My goal is to encourage package developers to replace my\n> existing methods but to support them until that is done.\n>\n>     > 2) register them dynamically on load time if foopkg is not\n> available.\n>\n> Not necessary, as you already stated in (1). (But I do export a\n> '.emm_register()' function that makes it really easy for other package\n> developers to register their methods. It's based on similar code to what\n> you point to.)\n>\n> Russ\n>\n> -----Original Message-----\n> From: I?aki Ucar <iucar at fedoraproject.org>\n> Sent: Saturday, August 10, 2019 1:09 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>\n> Cc: r-package-devel at r-project.org\n> Subject: [External] Re: [R-pkg-devel] Farming out methods to other packages\n>\n> On Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu>\n> wrote:\n> >\n> > Dear developers,\n> >\n> > I maintain a package, emmeans, that provides post-hoc analyses for a\n> variety of models. These models are supported by writing S3 methods for\n> recover_data and emm_grid. Quite a few models are supported internally in\n> emmeans, but it would really be better if the packages that create model\n> objects would have their own implementations of these methods.\n> >\n> > For example, a hypothetical package, foopkg may be used to fit a model,\n> thereby producing an object of class foo. Currently, emmeans has internal\n> functions recover_data.foo and emm_basis.foo (typically not exported). It\n> would be better if the developer of foopkg would incorporate and export her\n> own recover_data.foo and emm_basis.foo methods, so that those methods can\n> be modified as needed as foopkg is further developed. Once those methods\n> are incorporated in foopkg, then I would remove them from my next update of\n> emmeans. But while they are available in both places, the ones in foopkg\n> should be used.\n> >\n> > The problem is that in the short term, recover_data.foo and\n> emm_basis.foo are still present in the namespace of emmeans. And I have\n> found in testing with a fake package that if the user codes, say,\n> emmeans::emmeans(model.foo, \"treatment\"), the methods internal to emmeans's\n> namespace are always used even when foopkg is attached and its recover_data\n> and emm_basis methods are registered. So the developer of foopkg can't even\n> test her own methods (except by changing the class name of the model\n> object).\n> >\n> > What can be done to facilitate having another developer's methods to\n> override your own?\n>\n> The order of dispatch is meant to ensure that your package can't be broken\n> by a clash with another one. In other words, if recover_data is called\n> inside emmeans, emmeans:::recover_data.foo is called, but then if it's\n> called inside foopkg, then foopkg:::recover_data.foo is called instead.\n>\n> This feature, however, plays against your intended use case here, and I\n> think that the best way to circumvent it is by 1) renaming those methods\n> (e.g., recover_data_foo, because as soon as there is a something.foo in\n> your namespace, it will be dispatched regardless of whether you register it\n> or not), and 2) register them dynamically on load time if foopkg is not\n> available. There is an implementation for this available here:\n> https://github.com/r-lib/vctrs/blob/master/R/register-s3.R\n>\n> I?aki\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "What about turning your S3 class into a R6 class. That way, the methods you\nprovide can be overridden easily by other developers by creating a class\nthat inherits from yours.\n\nThis is standard oop, as opposed to special R S3 oop.\nNeonira\n\n\nLe sam. 10 août 2019 à 21:11, Lenth, Russell V <russell-lenth at uiowa.edu> a\nécrit :\n\n> Thanks Iñaki,\n>\n> However...\n>\n>     > 1) renaming those methods (e.g., recover_data_foo, because as soon\n> as there is a something.foo\n>     > in your namespace, it will be dispatched regardless of whether you\n> register it or not)\n>\n> If I do that, then emmeans won't support foo objects until foopkg offers\n> the methods. My goal is to encourage package developers to replace my\n> existing methods but to support them until that is done.\n>\n>     > 2) register them dynamically on load time if foopkg is not\n> available.\n>\n> Not necessary, as you already stated in (1). (But I do export a\n> '.emm_register()' function that makes it really easy for other package\n> developers to register their methods. It's based on similar code to what\n> you point to.)\n>\n> Russ\n>\n> -----Original Message-----\n> From: Iñaki Ucar <iucar at fedoraproject.org>\n> Sent: Saturday, August 10, 2019 1:09 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>\n> Cc: r-package-devel at r-project.org\n> Subject: [External] Re: [R-pkg-devel] Farming out methods to other packages\n>\n> On Sat, 10 Aug 2019 at 19:21, Lenth, Russell V <russell-lenth at uiowa.edu>\n> wrote:\n> >\n> > Dear developers,\n> >\n> > I maintain a package, emmeans, that provides post-hoc analyses for a\n> variety of models. These models are supported by writing S3 methods for\n> recover_data and emm_grid. Quite a few models are supported internally in\n> emmeans, but it would really be better if the packages that create model\n> objects would have their own implementations of these methods.\n> >\n> > For example, a hypothetical package, foopkg may be used to fit a model,\n> thereby producing an object of class foo. Currently, emmeans has internal\n> functions recover_data.foo and emm_basis.foo (typically not exported). It\n> would be better if the developer of foopkg would incorporate and export her\n> own recover_data.foo and emm_basis.foo methods, so that those methods can\n> be modified as needed as foopkg is further developed. Once those methods\n> are incorporated in foopkg, then I would remove them from my next update of\n> emmeans. But while they are available in both places, the ones in foopkg\n> should be used.\n> >\n> > The problem is that in the short term, recover_data.foo and\n> emm_basis.foo are still present in the namespace of emmeans. And I have\n> found in testing with a fake package that if the user codes, say,\n> emmeans::emmeans(model.foo, \"treatment\"), the methods internal to emmeans's\n> namespace are always used even when foopkg is attached and its recover_data\n> and emm_basis methods are registered. So the developer of foopkg can't even\n> test her own methods (except by changing the class name of the model\n> object).\n> >\n> > What can be done to facilitate having another developer's methods to\n> override your own?\n>\n> The order of dispatch is meant to ensure that your package can't be broken\n> by a clash with another one. In other words, if recover_data is called\n> inside emmeans, emmeans:::recover_data.foo is called, but then if it's\n> called inside foopkg, then foopkg:::recover_data.foo is called instead.\n>\n> This feature, however, plays against your intended use case here, and I\n> think that the best way to circumvent it is by 1) renaming those methods\n> (e.g., recover_data_foo, because as soon as there is a something.foo in\n> your namespace, it will be dispatched regardless of whether you register it\n> or not), and 2) register them dynamically on load time if foopkg is not\n> available. There is an implementation for this available here:\n> https://github.com/r-lib/vctrs/blob/master/R/register-s3.R\n>\n> Iñaki\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "What about turning your S3 class into a R6 class. That way, the methods you\nprovide can be overridden easily by other developers by creating a class\nthat inherits from yours.\n\nThis is standard oop, as",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004263.html"
     },
     {
       "id": "msg-891afb02adf5",
@@ -463,7 +486,8 @@
       "body_snippet": "Hmmmm, I thought of an approach -- a kind of manual dispatch technique. My generic is\n\nrecover_data <- function(object, ...) {\n    rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .Glob",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004254.html"
     },
     {
       "id": "msg-d0c967bcf643",
@@ -480,11 +504,12 @@
         "<DM6PR04MB4380D9033D754173EF2E157EF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>",
         "<CAN--Dz13S0NOEqO_=2Lh2-qa6xsQ88qLrhZW=NprnvD=k2bMMg@mail.gmail.com>"
       ],
-      "body_plain": "Thanks, Neonira. Always something new to learn!\n\nRuss\n\nFrom: neonira Arinoem <neonira at gmail.com>\nSent: Saturday, August 10, 2019 2:22 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: I?aki Ucar <iucar at fedoraproject.org>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nWhat about turning your S3 class into a R6 class. That way, the methods you provide can be overridden easily by other developers by creating a class that inherits from yours.\n\nThis is standard oop, as opposed to special R S3 oop.\nNeonira\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks, Neonira. Always something new to learn!\n\nRuss\n\nFrom: neonira Arinoem <neonira at gmail.com>\nSent: Saturday, August 10, 2019 2:22 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: I?aki ",
+      "body_plain": "Thanks, Neonira. Always something new to learn!\n\nRuss\n\nFrom: neonira Arinoem <neonira at gmail.com>\nSent: Saturday, August 10, 2019 2:22 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: Iñaki Ucar <iucar at fedoraproject.org>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nWhat about turning your S3 class into a R6 class. That way, the methods you provide can be overridden easily by other developers by creating a class that inherits from yours.\n\nThis is standard oop, as opposed to special R S3 oop.\nNeonira\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks, Neonira. Always something new to learn!\n\nRuss\n\nFrom: neonira Arinoem <neonira at gmail.com>\nSent: Saturday, August 10, 2019 2:22 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: Iñaki ",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004255.html"
     },
     {
       "id": "msg-4624546a1fb1",
@@ -504,7 +529,8 @@
       "body_snippet": "On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n> Hmmmm, I thought of an approach -- a kind of manual dispatch technique. My generic is\n> \n> recover_data <- function(object, ...) {\n>      rd <- try(g",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004256.html"
     },
     {
       "id": "msg-7713d8f6ef78",
@@ -521,11 +547,12 @@
         "<DM6PR04MB438001A49FD769AAC54982A1F1D10@DM6PR04MB4380.namprd04.prod.outlook.com>",
         "<caf10487-1881-9a46-8492-6b27962f8bc3@gmail.com>"
       ],
-      "body_plain": "Thanks, Duncan. That's helpful.\n\nIn addition, I confess I had a closing parenthesis in the wrong place.\n    Should be:    . . .   .GlobalEnv), silent = TRUE)\n\nCheers,\n\nRuss\n\n-----Original Message-----\nFrom: Duncan Murdoch <murdoch.duncan at gmail.com> \nSent: Saturday, August 10, 2019 2:43 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>; I?aki Ucar <iucar at fedoraproject.org>\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nOn 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n> Hmmmm, I thought of an approach -- a kind of manual dispatch \n> technique. My generic is\n> \n> recover_data <- function(object, ...) {\n>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv, silent = TRUE))\n>      if (!inherits(rd, \"try-error\"))\n>          rd(object, ...)\n>      else\n>          UseMethod(\"recover_data\")\n> }\n> \n> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n\nThat's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n\nThe getS3method() function won't automatically iterate through the class, you'll need to do that yourself, for example\n\nS3methodOrDefault <- function(object, generic, default) {\n   for (c in class(object)) {\n     rd <- try(getS3method(generic, c, envir = .GlobalEnv, silent = TRUE))\n     if (!inherits(rd, \"try-error\"))\n       return(rd)\n   }\n   return(default)\n}\n\nused as\n\n   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n\nDuncan Murdoch",
+      "body_plain": "Thanks, Duncan. That's helpful.\n\nIn addition, I confess I had a closing parenthesis in the wrong place.\n    Should be:    . . .   .GlobalEnv), silent = TRUE)\n\nCheers,\n\nRuss\n\n-----Original Message-----\nFrom: Duncan Murdoch <murdoch.duncan at gmail.com> \nSent: Saturday, August 10, 2019 2:43 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>; Iñaki Ucar <iucar at fedoraproject.org>\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nOn 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n> Hmmmm, I thought of an approach -- a kind of manual dispatch \n> technique. My generic is\n> \n> recover_data <- function(object, ...) {\n>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv, silent = TRUE))\n>      if (!inherits(rd, \"try-error\"))\n>          rd(object, ...)\n>      else\n>          UseMethod(\"recover_data\")\n> }\n> \n> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n\nThat's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n\nThe getS3method() function won't automatically iterate through the class, you'll need to do that yourself, for example\n\nS3methodOrDefault <- function(object, generic, default) {\n   for (c in class(object)) {\n     rd <- try(getS3method(generic, c, envir = .GlobalEnv, silent = TRUE))\n     if (!inherits(rd, \"try-error\"))\n       return(rd)\n   }\n   return(default)\n}\n\nused as\n\n   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n\nDuncan Murdoch",
       "body_snippet": "Thanks, Duncan. That's helpful.\n\nIn addition, I confess I had a closing parenthesis in the wrong place.\n    Should be:    . . .   .GlobalEnv), silent = TRUE)\n\nCheers,\n\nRuss\n\n-----Original Message-----",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004257.html"
     },
     {
       "id": "msg-189277f355ac",
@@ -543,11 +570,12 @@
         "<caf10487-1881-9a46-8492-6b27962f8bc3@gmail.com>",
         "<DM6PR04MB43803C0A9E890DF00F464A3AF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>"
       ],
-      "body_plain": "You could have your default method handle the cases you can handle; if\nyou want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(object, ...)\ndefault_recover_data <- function(object, ...)\n     UseMethod(\"default_recover_data\")\n\nBest,\n\nluke\n\nOn Sat, 10 Aug 2019, Lenth, Russell V wrote:\n\n> Thanks, Duncan. That's helpful.\n>\n> In addition, I confess I had a closing parenthesis in the wrong place.\n>    Should be:    . . .   .GlobalEnv), silent = TRUE)\n>\n> Cheers,\n>\n> Russ\n>\n> -----Original Message-----\n> From: Duncan Murdoch <murdoch.duncan at gmail.com>\n> Sent: Saturday, August 10, 2019 2:43 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>; I?aki Ucar <iucar at fedoraproject.org>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n>\n> On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n>> Hmmmm, I thought of an approach -- a kind of manual dispatch\n>> technique. My generic is\n>>\n>> recover_data <- function(object, ...) {\n>>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv, silent = TRUE))\n>>      if (!inherits(rd, \"try-error\"))\n>>          rd(object, ...)\n>>      else\n>>          UseMethod(\"recover_data\")\n>> }\n>>\n>> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n>\n> That's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n>\n> The getS3method() function won't automatically iterate through the class, you'll need to do that yourself, for example\n>\n> S3methodOrDefault <- function(object, generic, default) {\n>   for (c in class(object)) {\n>     rd <- try(getS3method(generic, c, envir = .GlobalEnv, silent = TRUE))\n>     if (!inherits(rd, \"try-error\"))\n>       return(rd)\n>   }\n>   return(default)\n> }\n>\n> used as\n>\n>   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
+      "body_plain": "You could have your default method handle the cases you can handle; if\nyou want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(object, ...)\ndefault_recover_data <- function(object, ...)\n     UseMethod(\"default_recover_data\")\n\nBest,\n\nluke\n\nOn Sat, 10 Aug 2019, Lenth, Russell V wrote:\n\n> Thanks, Duncan. That's helpful.\n>\n> In addition, I confess I had a closing parenthesis in the wrong place.\n>    Should be:    . . .   .GlobalEnv), silent = TRUE)\n>\n> Cheers,\n>\n> Russ\n>\n> -----Original Message-----\n> From: Duncan Murdoch <murdoch.duncan at gmail.com>\n> Sent: Saturday, August 10, 2019 2:43 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>; Iñaki Ucar <iucar at fedoraproject.org>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n>\n> On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n>> Hmmmm, I thought of an approach -- a kind of manual dispatch\n>> technique. My generic is\n>>\n>> recover_data <- function(object, ...) {\n>>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv, silent = TRUE))\n>>      if (!inherits(rd, \"try-error\"))\n>>          rd(object, ...)\n>>      else\n>>          UseMethod(\"recover_data\")\n>> }\n>>\n>> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n>\n> That's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n>\n> The getS3method() function won't automatically iterate through the class, you'll need to do that yourself, for example\n>\n> S3methodOrDefault <- function(object, generic, default) {\n>   for (c in class(object)) {\n>     rd <- try(getS3method(generic, c, envir = .GlobalEnv, silent = TRUE))\n>     if (!inherits(rd, \"try-error\"))\n>       return(rd)\n>   }\n>   return(default)\n> }\n>\n> used as\n>\n>   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
       "body_snippet": "You could have your default method handle the cases you can handle; if\nyou want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(obj",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 5,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004258.html"
     },
     {
       "id": "msg-c40e75b237dd",
@@ -566,11 +594,12 @@
         "<DM6PR04MB43803C0A9E890DF00F464A3AF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>",
         "<alpine.DEB.2.21.1908101510140.4160@luke-Latitude-7480>"
       ],
-      "body_plain": "Thanks, Luke. \n\nThat's more efficient for sure. I'd just have to rename about a zillion existing internal methods -- but only once!\n\nAdditional advantage I see is ability to control WHICH methods I'd allow to be overridden.\n\nRuss\n\n-----Original Message-----\nFrom: Tierney, Luke <luke-tierney at uiowa.edu> \nSent: Saturday, August 10, 2019 3:15 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: Duncan Murdoch <murdoch.duncan at gmail.com>; I?aki Ucar <iucar at fedoraproject.org>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nYou could have your default method handle the cases you can handle; if you want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(object, ...)\ndefault_recover_data <- function(object, ...)\n     UseMethod(\"default_recover_data\")\n\nBest,\n\nluke\n\nOn Sat, 10 Aug 2019, Lenth, Russell V wrote:\n\n> Thanks, Duncan. That's helpful.\n>\n> In addition, I confess I had a closing parenthesis in the wrong place.\n>    Should be:    . . .   .GlobalEnv), silent = TRUE)\n>\n> Cheers,\n>\n> Russ\n>\n> -----Original Message-----\n> From: Duncan Murdoch <murdoch.duncan at gmail.com>\n> Sent: Saturday, August 10, 2019 2:43 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>; I?aki Ucar \n> <iucar at fedoraproject.org>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] [External] Re: Farming out methods to other \n> packages\n>\n> On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n>> Hmmmm, I thought of an approach -- a kind of manual dispatch \n>> technique. My generic is\n>>\n>> recover_data <- function(object, ...) {\n>>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv, silent = TRUE))\n>>      if (!inherits(rd, \"try-error\"))\n>>          rd(object, ...)\n>>      else\n>>          UseMethod(\"recover_data\")\n>> }\n>>\n>> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n>\n> That's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n>\n> The getS3method() function won't automatically iterate through the \n> class, you'll need to do that yourself, for example\n>\n> S3methodOrDefault <- function(object, generic, default) {\n>   for (c in class(object)) {\n>     rd <- try(getS3method(generic, c, envir = .GlobalEnv, silent = TRUE))\n>     if (!inherits(rd, \"try-error\"))\n>       return(rd)\n>   }\n>   return(default)\n> }\n>\n> used as\n>\n>   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n--\nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
+      "body_plain": "Thanks, Luke. \n\nThat's more efficient for sure. I'd just have to rename about a zillion existing internal methods -- but only once!\n\nAdditional advantage I see is ability to control WHICH methods I'd allow to be overridden.\n\nRuss\n\n-----Original Message-----\nFrom: Tierney, Luke <luke-tierney at uiowa.edu> \nSent: Saturday, August 10, 2019 3:15 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: Duncan Murdoch <murdoch.duncan at gmail.com>; Iñaki Ucar <iucar at fedoraproject.org>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nYou could have your default method handle the cases you can handle; if you want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(object, ...)\ndefault_recover_data <- function(object, ...)\n     UseMethod(\"default_recover_data\")\n\nBest,\n\nluke\n\nOn Sat, 10 Aug 2019, Lenth, Russell V wrote:\n\n> Thanks, Duncan. That's helpful.\n>\n> In addition, I confess I had a closing parenthesis in the wrong place.\n>    Should be:    . . .   .GlobalEnv), silent = TRUE)\n>\n> Cheers,\n>\n> Russ\n>\n> -----Original Message-----\n> From: Duncan Murdoch <murdoch.duncan at gmail.com>\n> Sent: Saturday, August 10, 2019 2:43 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>; Iñaki Ucar \n> <iucar at fedoraproject.org>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] [External] Re: Farming out methods to other \n> packages\n>\n> On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n>> Hmmmm, I thought of an approach -- a kind of manual dispatch \n>> technique. My generic is\n>>\n>> recover_data <- function(object, ...) {\n>>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv, silent = TRUE))\n>>      if (!inherits(rd, \"try-error\"))\n>>          rd(object, ...)\n>>      else\n>>          UseMethod(\"recover_data\")\n>> }\n>>\n>> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n>\n> That's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n>\n> The getS3method() function won't automatically iterate through the \n> class, you'll need to do that yourself, for example\n>\n> S3methodOrDefault <- function(object, generic, default) {\n>   for (c in class(object)) {\n>     rd <- try(getS3method(generic, c, envir = .GlobalEnv, silent = TRUE))\n>     if (!inherits(rd, \"try-error\"))\n>       return(rd)\n>   }\n>   return(default)\n> }\n>\n> used as\n>\n>   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n>\n> Duncan Murdoch\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n--\nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
       "body_snippet": "Thanks, Luke. \n\nThat's more efficient for sure. I'd just have to rename about a zillion existing internal methods -- but only once!\n\nAdditional advantage I see is ability to control WHICH methods I'd ",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 6,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004259.html"
     },
     {
       "id": "msg-24bbd78e922c",
@@ -586,11 +615,12 @@
         "<CALEXWq0urMLWJc+tD9pp=wRPFF2GPphfXSOfTBRjo_dy7jsd9g@mail.gmail.com>",
         "<DM6PR04MB4380D9033D754173EF2E157EF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>"
       ],
-      "body_plain": "On Sat, 10 Aug 2019 at 21:11, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Thanks I?aki,\n>\n> However...\n>\n>     > 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo\n>     > in your namespace, it will be dispatched regardless of whether you register it or not)\n>\n> If I do that, then emmeans won't support foo objects until foopkg offers the methods. My goal is to encourage package developers to replace my existing methods but to support them until that is done.\n\nA method doesn't need to be named something.foo to register it for foo\nobjects. You can register any function name as a method for any class\nand any generic, thus avoiding the automatic dispatch on these special\nnames *.foo.\n\nWhat I'm suggesting is that, in .onLoad, if getS3method returns\nsomething for recover_data and class foo, then that's fine. If not,\nyou can register you recover_data_foo.\n\nI?aki",
-      "body_snippet": "On Sat, 10 Aug 2019 at 21:11, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Thanks I?aki,\n>\n> However...\n>\n>     > 1) renaming those methods (e.g., recover_data_foo, because as soon as ther",
+      "body_plain": "On Sat, 10 Aug 2019 at 21:11, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Thanks Iñaki,\n>\n> However...\n>\n>     > 1) renaming those methods (e.g., recover_data_foo, because as soon as there is a something.foo\n>     > in your namespace, it will be dispatched regardless of whether you register it or not)\n>\n> If I do that, then emmeans won't support foo objects until foopkg offers the methods. My goal is to encourage package developers to replace my existing methods but to support them until that is done.\n\nA method doesn't need to be named something.foo to register it for foo\nobjects. You can register any function name as a method for any class\nand any generic, thus avoiding the automatic dispatch on these special\nnames *.foo.\n\nWhat I'm suggesting is that, in .onLoad, if getS3method returns\nsomething for recover_data and class foo, then that's fine. If not,\nyou can register you recover_data_foo.\n\nIñaki",
+      "body_snippet": "On Sat, 10 Aug 2019 at 21:11, Lenth, Russell V <russell-lenth at uiowa.edu> wrote:\n>\n> Thanks Iñaki,\n>\n> However...\n>\n>     > 1) renaming those methods (e.g., recover_data_foo, because as soon as ther",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004260.html"
     },
     {
       "id": "msg-9a1a8a8f4702",
@@ -609,11 +639,12 @@
         "<DM6PR04MB43803C0A9E890DF00F464A3AF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>",
         "<alpine.DEB.2.21.1908101510140.4160@luke-Latitude-7480>"
       ],
-      "body_plain": "On Sat, 10 Aug 2019 at 22:14, Tierney, Luke <luke-tierney at uiowa.edu> wrote:\n>\n> You could have your default method handle the cases you can handle; if\n> you want that to dispatch you can use something like\n>\n> recover_data.default <- function(object, ...)\n>      default_recover_data(object, ...)\n> default_recover_data <- function(object, ...)\n>      UseMethod(\"default_recover_data\")\n\nIndeed, this is probably the cleanest solution. And static. If you are\nalready using a default method, you can just rename it as\ndefault_recover_data.default.\n\nI?aki",
+      "body_plain": "On Sat, 10 Aug 2019 at 22:14, Tierney, Luke <luke-tierney at uiowa.edu> wrote:\n>\n> You could have your default method handle the cases you can handle; if\n> you want that to dispatch you can use something like\n>\n> recover_data.default <- function(object, ...)\n>      default_recover_data(object, ...)\n> default_recover_data <- function(object, ...)\n>      UseMethod(\"default_recover_data\")\n\nIndeed, this is probably the cleanest solution. And static. If you are\nalready using a default method, you can just rename it as\ndefault_recover_data.default.\n\nIñaki",
       "body_snippet": "On Sat, 10 Aug 2019 at 22:14, Tierney, Luke <luke-tierney at uiowa.edu> wrote:\n>\n> You could have your default method handle the cases you can handle; if\n> you want that to dispatch you can use someth",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 6,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004261.html"
     },
     {
       "id": "msg-1834f8488b27",
@@ -632,11 +663,12 @@
         "<DM6PR04MB43803C0A9E890DF00F464A3AF1D10@DM6PR04MB4380.namprd04.prod.outlook.com>",
         "<alpine.DEB.2.21.1908101510140.4160@luke-Latitude-7480>"
       ],
-      "body_plain": "All,\n\nI'm going with the previous approach, as modified by Duncan, primarily because I want to keep recover_data.lm and a few others. \nSo if I fit a model 'm3' using stanreg::rstanarm:\n \n    class(m3)\n    [1] \"stanreg\" \"glm\"     \"lm\"      \"lmerMod\"\n\nUsing the setup that Luke suggests, I have a default_recover_data.stanreg() method, but it is not used because it finds the lm method instead of going to recover_data.default. \n\nRuss\n\n-----Original Message-----\nFrom: Tierney, Luke <luke-tierney at uiowa.edu> \nSent: Saturday, August 10, 2019 3:15 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: Duncan Murdoch <murdoch.duncan at gmail.com>; I?aki Ucar <iucar at fedoraproject.org>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nYou could have your default method handle the cases you can handle; if you want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(object, ...)\ndefault_recover_data <- function(object, ...)\n     UseMethod(\"default_recover_data\")\n\nBest,\n\nluke\n\n    . . .\n\n> -----Original Message-----\n> From: Duncan Murdoch <murdoch.duncan at gmail.com>\n> Sent: Saturday, August 10, 2019 2:43 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>; I?aki Ucar \n> <iucar at fedoraproject.org>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] [External] Re: Farming out methods to other \n> packages\n>\n> On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n>> Hmmmm, I thought of an approach -- a kind of manual dispatch \n>> technique. My generic is\n>>\n>> recover_data <- function(object, ...) {\n>>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv), silent = TRUE)\n>>      if (!inherits(rd, \"try-error\"))\n>>          rd(object, ...)\n>>      else\n>>          UseMethod(\"recover_data\")\n>> }\n>>\n>> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n>\n> That's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n>\n> The getS3method() function won't automatically iterate through the \n> class, you'll need to do that yourself, for example\n>\n> S3methodOrDefault <- function(object, generic, default) {\n>   for (c in class(object)) {\n>     rd <- try(getS3method(generic, c, envir = .GlobalEnv), silent = TRUE)\n>     if (!inherits(rd, \"try-error\"))\n>       return(rd)\n>   }\n>   return(default)\n> }\n>\n> used as\n>\n>   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n>\n> Duncan Murdoch",
+      "body_plain": "All,\n\nI'm going with the previous approach, as modified by Duncan, primarily because I want to keep recover_data.lm and a few others. \nSo if I fit a model 'm3' using stanreg::rstanarm:\n \n    class(m3)\n    [1] \"stanreg\" \"glm\"     \"lm\"      \"lmerMod\"\n\nUsing the setup that Luke suggests, I have a default_recover_data.stanreg() method, but it is not used because it finds the lm method instead of going to recover_data.default. \n\nRuss\n\n-----Original Message-----\nFrom: Tierney, Luke <luke-tierney at uiowa.edu> \nSent: Saturday, August 10, 2019 3:15 PM\nTo: Lenth, Russell V <russell-lenth at uiowa.edu>\nCc: Duncan Murdoch <murdoch.duncan at gmail.com>; Iñaki Ucar <iucar at fedoraproject.org>; r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] [External] Re: Farming out methods to other packages\n\nYou could have your default method handle the cases you can handle; if you want that to dispatch you can use something like\n\nrecover_data.default <- function(object, ...)\n     default_recover_data(object, ...)\ndefault_recover_data <- function(object, ...)\n     UseMethod(\"default_recover_data\")\n\nBest,\n\nluke\n\n    . . .\n\n> -----Original Message-----\n> From: Duncan Murdoch <murdoch.duncan at gmail.com>\n> Sent: Saturday, August 10, 2019 2:43 PM\n> To: Lenth, Russell V <russell-lenth at uiowa.edu>; Iñaki Ucar \n> <iucar at fedoraproject.org>\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] [External] Re: Farming out methods to other \n> packages\n>\n> On 10/08/2019 3:27 p.m., Lenth, Russell V wrote:\n>> Hmmmm, I thought of an approach -- a kind of manual dispatch \n>> technique. My generic is\n>>\n>> recover_data <- function(object, ...) {\n>>      rd <- try(getS3method(\"recover_data\", class(object)[1], envir = .GlobalEnv), silent = TRUE)\n>>      if (!inherits(rd, \"try-error\"))\n>>          rd(object, ...)\n>>      else\n>>          UseMethod(\"recover_data\")\n>> }\n>>\n>> and similar for emm_basis. The idea is it tries to find the method among globally registered ones, and if so, it uses it; otherwise, the internal one is used.\n>\n> That's a bad test:  class(object) might be a vector c(\"nomethod\", \"hasmethod\").  You're only looking for recover_data.nomethod, and maybe only recover_data.hasmethod exists.\n>\n> The getS3method() function won't automatically iterate through the \n> class, you'll need to do that yourself, for example\n>\n> S3methodOrDefault <- function(object, generic, default) {\n>   for (c in class(object)) {\n>     rd <- try(getS3method(generic, c, envir = .GlobalEnv), silent = TRUE)\n>     if (!inherits(rd, \"try-error\"))\n>       return(rd)\n>   }\n>   return(default)\n> }\n>\n> used as\n>\n>   S3methodOrDefault(object, \"recover_data\", internal_recover_data)\n>\n> Duncan Murdoch",
       "body_snippet": "All,\n\nI'm going with the previous approach, as modified by Duncan, primarily because I want to keep recover_data.lm and a few others. \nSo if I fit a model 'm3' using stanreg::rstanarm:\n \n    class(m3)",
       "thread_id": "thread-d8087c5662bf",
       "thread_depth": 6,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004262.html"
     },
     {
       "id": "msg-b58c8f2f890b",
@@ -652,7 +684,8 @@
       "body_snippet": "I am encountering an error that I cannot understand in a package that I \nhave built (currently just for personal use; not uploaded to CRAN).\n\nIn this package (\"ldEst\") I have a function ldFit() which ",
       "thread_id": "thread-b58c8f2f890b",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004264.html"
     },
     {
       "id": "msg-800b62a776da",
@@ -670,7 +703,8 @@
       "body_snippet": "On 14 August 2019 at 17:44, Rolf Turner wrote:\n| > Error in cpp_object_initializer(.self, .refClassDef, ...) : \n| >   could not find function \"cpp_object_initializer\"\n\nThis can happen when a package u",
       "thread_id": "thread-b58c8f2f890b",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004265.html"
     },
     {
       "id": "msg-116f121ffc6e",
@@ -689,7 +723,8 @@
       "body_snippet": "On 14/08/19 8:30 PM, Dirk Eddelbuettel wrote:\n> \n> On 14 August 2019 at 17:44, Rolf Turner wrote:\n> | > Error in cpp_object_initializer(.self, .refClassDef, ...) :\n> | >   could not find function \"cpp",
       "thread_id": "thread-b58c8f2f890b",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004266.html"
     },
     {
       "id": "msg-b00d841361fd",
@@ -705,7 +740,8 @@
       "body_snippet": "Hello,\n\nI am attempting to submit my first package to CRAN. I believe I've\nsuccessfully gotten rid of all the notes, but there is one that I'm unable\nto eliminate. In the DESCRIPTION file in both the ",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004267.html"
     },
     {
       "id": "msg-ed8515ab4412",
@@ -723,7 +759,8 @@
       "body_snippet": "Simply submit as it is, false positives in spell checks will be \nconfirmed in the submission process by a CRAN team member when they \nappear the first time in the package.\n\nBest,\nUwe Ligges\n\n\n\nOn 20.0",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004268.html"
     },
     {
       "id": "msg-4188a9d8410e",
@@ -741,7 +778,8 @@
       "body_snippet": "I suspect the NOTE said something about \"*possibly* misspelled words\"\n(emphasis added). This should be OK; just put the explanation below in\nyour notes to CRAN about the submission, clarifying that th",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004269.html"
     },
     {
       "id": "msg-9da1569a796b",
@@ -760,7 +798,8 @@
       "body_snippet": "Yeah that's it. Thanks Uwe and Ben.\n\nOn Mon, Aug 19, 2019 at 3:21 PM Ben Bolker <bbolker at gmail.com> wrote:\n\n>\n>   I suspect the NOTE said something about \"*possibly* misspelled words\"\n> (emphasis a",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004270.html"
     },
     {
       "id": "msg-7e127a5a4a4c",
@@ -776,7 +815,8 @@
       "body_snippet": "Howdy Folks,\n\nI'm getting the following warning:\n\nFound the following significant warnings:\n  Warning: replacing previous import ?gdata::combine? by\n?gridExtra::combine? when loading\n\nIn the R scripts",
       "thread_id": "thread-7e127a5a4a4c",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004271.html"
     },
     {
       "id": "msg-aae18e9c5188",
@@ -790,11 +830,12 @@
       "references": [
         "<CANAiAiXvg-1XCtXKncBDAFtgHL9i66JcN3i_zgo3v5mJU9WoSA@mail.gmail.com>"
       ],
-      "body_plain": "Hi John,\n\nwe had the same issue with abbreviations BA (bioavailability), BE \n(bioequivalence), and NTID (narrow therapeutic index drug) in our \npackages (PowerTOST, replicateBE).\n\nDon?t worry.This note will appear only if you submit the package for the \nfirst time to CRAN.\n\nHelmut\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/",
-      "body_snippet": "Hi John,\n\nwe had the same issue with abbreviations BA (bioavailability), BE \n(bioequivalence), and NTID (narrow therapeutic index drug) in our \npackages (PowerTOST, replicateBE).\n\nDon?t worry.This not",
+      "body_plain": "Hi John,\n\nwe had the same issue with abbreviations BA (bioavailability), BE \n(bioequivalence), and NTID (narrow therapeutic index drug) in our \npackages (PowerTOST, replicateBE).\n\nDon’t worry.This note will appear only if you submit the package for the \nfirst time to CRAN.\n\nHelmut\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/",
+      "body_snippet": "Hi John,\n\nwe had the same issue with abbreviations BA (bioavailability), BE \n(bioequivalence), and NTID (narrow therapeutic index drug) in our \npackages (PowerTOST, replicateBE).\n\nDon’t worry.This not",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004272.html"
     },
     {
       "id": "msg-9e9d285a5f3a",
@@ -812,7 +853,8 @@
       "body_snippet": "On 19/08/2019 10:08 p.m., John Harrold wrote:\n> Howdy Folks,\n> \n> I'm getting the following warning:\n> \n> Found the following significant warnings:\n>    Warning: replacing previous import ?gdata::comb",
       "thread_id": "thread-7e127a5a4a4c",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004273.html"
     },
     {
       "id": "msg-027ece7173ee",
@@ -830,7 +872,8 @@
       "body_snippet": "On 19/08/2019 6:13 p.m., John Harrold wrote:\n> Hello,\n> \n> I am attempting to submit my first package to CRAN. I believe I've\n> successfully gotten rid of all the notes, but there is one that I'm unab",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004274.html"
     },
     {
       "id": "msg-babf0e0c72b3",
@@ -850,7 +893,8 @@
       "body_snippet": "I'd write \"PK/PD\" though. Or did the world change while I was looking the other way?\n\n-pd\n\n> On 20 Aug 2019, at 00:42 , John Harrold <john.m.harrold at gmail.com> wrote:\n> \n> Yeah that's it. Thanks Uw",
       "thread_id": "thread-b00d841361fd",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004275.html"
     },
     {
       "id": "msg-e30394e0874b",
@@ -866,7 +910,8 @@
       "body_snippet": "Hello,\n\n \n\nDoes anyone know how to include verbatim \\ldots (and maybe other LaTeX) in\nan .Rd file correctly? \n\n \n\nWhen LaTeX is in the default arguments for a function, the code is\ninterpreted which m",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004276.html"
     },
     {
       "id": "msg-a95c9b54077e",
@@ -878,11 +923,12 @@
       "subject_clean": "[R-pkg-devel] No protocol specified",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear All,\nI updated my package DataVisualizations and get a note, only for \"r-release-osx-x86_64? and ?r-oldrel-osx-x86_64?\n\nChecking dependencies in R code ... NOTE\nNo protocol specified\n\nCan anyone translate this note to me in a way that I know what the issue is?\n\nBest Regards\nMichael\n\n\nMichael Thrun\nPostdoctoral Scholar\nDatabionics AG,\nMathematics and Computer Science\n\nPhilipps-Universit?t Marburg\nHans-Meerwein-Stra?e 6, 04A28\nD-35032 Marburg\n\nPhone +49 6421/ 28 23922\nwww.uni-marburg.de/fb12/datenbionik/",
-      "body_snippet": "Dear All,\nI updated my package DataVisualizations and get a note, only for \"r-release-osx-x86_64? and ?r-oldrel-osx-x86_64?\n\nChecking dependencies in R code ... NOTE\nNo protocol specified\n\nCan anyone ",
+      "body_plain": "Dear All,\nI updated my package DataVisualizations and get a note, only for \"r-release-osx-x86_64” and “r-oldrel-osx-x86_64”\n\nChecking dependencies in R code ... NOTE\nNo protocol specified\n\nCan anyone translate this note to me in a way that I know what the issue is?\n\nBest Regards\nMichael\n\n\nMichael Thrun\nPostdoctoral Scholar\nDatabionics AG,\nMathematics and Computer Science\n\nPhilipps-Universität Marburg\nHans-Meerwein-Straße 6, 04A28\nD-35032 Marburg\n\nPhone +49 6421/ 28 23922\nwww.uni-marburg.de/fb12/datenbionik/",
+      "body_snippet": "Dear All,\nI updated my package DataVisualizations and get a note, only for \"r-release-osx-x86_64” and “r-oldrel-osx-x86_64”\n\nChecking dependencies in R code ... NOTE\nNo protocol specified\n\nCan anyone ",
       "thread_id": "thread-a95c9b54077e",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004277.html"
     },
     {
       "id": "msg-c6fa57377af2",
@@ -900,7 +946,8 @@
       "body_snippet": "Rd is not LaTeX, although it resembles it.  You should use only markup described in WRE.\nFor example, \\dots is for the use case you mention. \n\nGeorgi Boshnakov\n\n\n\n\n\n-----Original Message-----\nFrom: R-",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004278.html"
     },
     {
       "id": "msg-6465dabd5136",
@@ -919,7 +966,8 @@
       "body_snippet": "Hi Georgi,\n\nI'm not trying to use it as part of my documentation, it is one of my\nfunction arguments.  I want the function argument to be displayed correctly\nin the help, but it is not.  I'm curious h",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004279.html"
     },
     {
       "id": "msg-c4ab9e8de017",
@@ -937,7 +985,8 @@
       "body_snippet": "Hi,\n\nI receive the following warning when I check my package:\n\nchecking sizes of PDF files under ?inst/doc? ... WARNING\n? ?gs+qpdf? made some significant size reductions:\n?? ? compacted ?gwqs-vignette",
       "thread_id": "thread-c4ab9e8de017",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004280.html"
     },
     {
       "id": "msg-a4706257a784",
@@ -957,7 +1006,8 @@
       "body_snippet": "Hi Bill,\n\nSorry, I misunderstood the question.\n\nTo check if the problem is with R's tools, run 'utils::prompt(topic_long_table_header)\" and see the usage section of the generated file. Presumably, thi",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004281.html"
     },
     {
       "id": "msg-800f12c4fd27",
@@ -978,7 +1028,8 @@
       "body_snippet": "Hi Georgi,\n\nThanks for this pointer.  My guess at this point is that I've found a bug\n(or maybe a couple of bugs with 'utils::prompt()' and with the Rd to help\nconversion), but let me know if you thin",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004282.html"
     },
     {
       "id": "msg-8d85d2319109",
@@ -1000,7 +1051,8 @@
       "body_snippet": "HI Bill, \n\nI checked this as well, using the package you put on github for this purpose (note that the link you gave didn't work for me).\nI tried a few variants but the bottom line is that \"\\ldots\" an",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 5,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004283.html"
     },
     {
       "id": "msg-f5645687e096",
@@ -1022,7 +1074,8 @@
       "body_snippet": "On 23/08/2019 1:33 p.m., bill at denney.ws wrote:\n> Hi Georgi,\n> \n> Thanks for this pointer.  My guess at this point is that I've found a bug\n> (or maybe a couple of bugs with 'utils::prompt()' and wi",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 5,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004284.html"
     },
     {
       "id": "msg-bd72c3c40d16",
@@ -1045,7 +1098,8 @@
       "body_snippet": "On 24/08/2019 7:35 a.m., Duncan Murdoch wrote:\n> On 23/08/2019 1:33 p.m., bill at denney.ws wrote:\n>> Hi Georgi,\n>>\n>> Thanks for this pointer.  My guess at this point is that I've found a bug\n>> (or ",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 6,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004285.html"
     },
     {
       "id": "msg-f5866f1df0d5",
@@ -1069,7 +1123,8 @@
       "body_snippet": "Hi Duncan,\n\nThe original Rd generated by roxygen2 had 4 backslashes:\n\nhttps://github.com/billdenney/TopicLongTableR/blob/master/man/topic_long_table_header.Rd#L9\n\nThat generated a similar issue but ch",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 7,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004286.html"
     },
     {
       "id": "msg-c608cf1282b0",
@@ -1085,7 +1140,8 @@
       "body_snippet": "Hi,\n\nI've been building a package and hit a NAMESPACE issue that took a while \nto resolve.\n\nMy package implements a (new) generic function, and the method for a \npackage in the class calls the \"smooth",
       "thread_id": "thread-c608cf1282b0",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004287.html"
     },
     {
       "id": "msg-14e2097f1af6",
@@ -1110,7 +1166,8 @@
       "body_snippet": "It seems that expansion of \\ldots occurs in two different circumstances. \n\n1) The Rd2XXX converters treat specially \\ldots and \\dots but in different ways. tools::Rd2latex() defines in its body texify",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 8,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004288.html"
     },
     {
       "id": "msg-3aa293e80687",
@@ -1128,7 +1185,8 @@
       "body_snippet": "I think yes. If a direct user of graphics opted not to call smoothScatter then they would have no need to even install KernSmooth. However, since generics automatically trigger loading of class-specif",
       "thread_id": "thread-c608cf1282b0",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004289.html"
     },
     {
       "id": "msg-0d0ed5e1cab8",
@@ -1154,7 +1212,8 @@
       "body_snippet": "Hi Georgi,\n\nThank you for the detailed investigation!  It looks like you've found the\nissue with the psub() call below.\n\nIt looks like a more complex regexp, \"(?<!\\\\\\\\)(\\\\\\\\l?dots)\", could help the\npr",
       "thread_id": "thread-e30394e0874b",
       "thread_depth": 9,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004290.html"
     },
     {
       "id": "msg-8f7a828c689e",
@@ -1170,7 +1229,8 @@
       "body_snippet": "Hi,\n\nFirst, I am inviting all of you to try our recent package at https://github.com/ecrc/exageostatR. This package involves MLE estimation in large scale using leading-edge hardware architectures.\n\nI",
       "thread_id": "thread-8f7a828c689e",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004291.html"
     },
     {
       "id": "msg-f0950e9a991b",
@@ -1188,7 +1248,8 @@
       "body_snippet": "On 24 August 2019 at 18:16, Sameh M. Abdulah wrote:\n| (1) My package requires a pre-installation of Intel MKL. Is there any way to include the MKL installation with the package.\n\nThis (or a related) q",
       "thread_id": "thread-8f7a828c689e",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004292.html"
     },
     {
       "id": "msg-893d89873fca",
@@ -1206,7 +1267,8 @@
       "body_snippet": "On 24/08/2019 10:36 a.m., Kevin Coombes wrote:\n> Hi,\n> \n> I've been building a package and hit a NAMESPACE issue that took a while\n> to resolve.\n> \n> My package implements a (new) generic function, an",
       "thread_id": "thread-c608cf1282b0",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004293.html"
     },
     {
       "id": "msg-689ce09bed5d",
@@ -1225,7 +1287,8 @@
       "body_snippet": "Thanks Dirk for your answers. However, I am still confuse about the linking problem in question (2).  Is there anyway to set the pkg_config_path  instead of using the set_env function?\n\n?Sameh\n\n\nGet O",
       "thread_id": "thread-8f7a828c689e",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004294.html"
     },
     {
       "id": "msg-10d0cffa10e5",
@@ -1243,7 +1306,8 @@
       "body_snippet": "On Fri, 23 Aug 2019 09:18:07 +0200\n\"Dr. rer. nat. Michael Thrun\" <mthrun at Mathematik.Uni-Marburg.de> wrote:\n\n>> No protocol specified\n> \n> Can anyone translate this note to me in a way that I know w",
       "thread_id": "thread-a95c9b54077e",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004295.html"
     },
     {
       "id": "msg-5e5c8e3cdf29",
@@ -1259,7 +1323,8 @@
       "body_snippet": "Dear list members,\n\nMy name is Cristiane, I am mantainer of onemap package. The current version\nof the package in CRAN is having problems passing to cran check\n<https://cran.r-project.org/web/checks/c",
       "thread_id": "thread-5e5c8e3cdf29",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004296.html"
     },
     {
       "id": "msg-335d5e0f7b95",
@@ -1273,11 +1338,12 @@
       "references": [
         "<160CFC4A-8D08-4CC2-B025-0FD723A33EC6@statistik.uu.se>"
       ],
-      "body_plain": "Dear package developers,\n\nI have a package that is dependent upon Rcpp and RcppArmadillo and for this reason I use a configure file. On my local machine with:\nR version 3.6.0 (2019-04-26)\nPlatform: x86_64-apple-darwin15.6.0 (64-bit)\nRunning under: macOS Mojave 10.14.3\n\n?my package passes R CMD check. However, on Travis CI I get\n\n* installing *source* package ?mfbvar? ...\n** using staged installation\nERROR: 'configure' exists but is not executable -- see the 'R Installation and Administration Manual'\n\nThis despite the configure file being executable locally. Some of my attempts at fixing this include:\n- chmod +x configure\n- removing configure, committing/pushing, putting configure back and chmod +x configure before committing/pushing again to ensure the executable version is pushed\n- creating a new configure from configure.ac using autoconf\n\nAll of my attempts have been unsuccessful and I?m a little bit puzzled why it doesn?t work on Travis. Does anyone have any suggestions? The failure is present both on Linux and OS X. I am not sure whether the issue is specific to Travis, but I have no other ways of testing it before submitting to CRAN.\n\nTravis link: https://travis-ci.org/ankargren/mfbvar\nGithub link: https://github.com/ankargren/mfbvar\n\nAppreciate any input you might have!\n\nBest,\n\nSebastian\n\n\n\n\n\n\n\n\nN?r du har kontakt med oss p? Uppsala universitet med e-post s? inneb?r det att vi behandlar dina personuppgifter. F?r att l?sa mer om hur vi g?r det kan du l?sa h?r: http://www.uu.se/om-uu/dataskydd-personuppgifter/\n\nE-mailing Uppsala University means that we will process your personal data. For more information on how this is performed, please read here: http://www.uu.se/en/about-uu/data-protection-policy\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear package developers,\n\nI have a package that is dependent upon Rcpp and RcppArmadillo and for this reason I use a configure file. On my local machine with:\nR version 3.6.0 (2019-04-26)\nPlatform: x86_64-apple-darwin15.6.0 (64-bit)\nRunning under: macOS Mojave 10.14.3\n\n…my package passes R CMD check. However, on Travis CI I get\n\n* installing *source* package ‘mfbvar’ ...\n** using staged installation\nERROR: 'configure' exists but is not executable -- see the 'R Installation and Administration Manual'\n\nThis despite the configure file being executable locally. Some of my attempts at fixing this include:\n- chmod +x configure\n- removing configure, committing/pushing, putting configure back and chmod +x configure before committing/pushing again to ensure the executable version is pushed\n- creating a new configure from configure.ac using autoconf\n\nAll of my attempts have been unsuccessful and I’m a little bit puzzled why it doesn’t work on Travis. Does anyone have any suggestions? The failure is present both on Linux and OS X. I am not sure whether the issue is specific to Travis, but I have no other ways of testing it before submitting to CRAN.\n\nTravis link: https://travis-ci.org/ankargren/mfbvar\nGithub link: https://github.com/ankargren/mfbvar\n\nAppreciate any input you might have!\n\nBest,\n\nSebastian\n\n\n\n\n\n\n\n\nNär du har kontakt med oss på Uppsala universitet med e-post så innebär det att vi behandlar dina personuppgifter. För att läsa mer om hur vi gör det kan du läsa här: http://www.uu.se/om-uu/dataskydd-personuppgifter/\n\nE-mailing Uppsala University means that we will process your personal data. For more information on how this is performed, please read here: http://www.uu.se/en/about-uu/data-protection-policy\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear package developers,\n\nI have a package that is dependent upon Rcpp and RcppArmadillo and for this reason I use a configure file. On my local machine with:\nR version 3.6.0 (2019-04-26)\nPlatform: x8",
       "thread_id": "thread-335d5e0f7b95",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004297.html"
     },
     {
       "id": "msg-6351a547798b",
@@ -1296,7 +1362,8 @@
       "body_snippet": "Hi Sebastian,\n\n\nHave you tried adding a line in your `.travis.yml` file that changes the permissions for `configure`? Something like this:\n\n\nbefore_install:\n  - chmod +x configure\n\n\nMax Turgeon\nAssist",
       "thread_id": "thread-335d5e0f7b95",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004298.html"
     },
     {
       "id": "msg-ac71a97a3afa",
@@ -1314,7 +1381,8 @@
       "body_snippet": "Hi Christiane,\n\nOn 26 August 2019 at 09:32, Cristiane Hayumi Taniguti wrote:\n| My name is Cristiane, I am mantainer of onemap package. The current version\n| of the package in CRAN is having problems p",
       "thread_id": "thread-5e5c8e3cdf29",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004299.html"
     },
     {
       "id": "msg-cfcfb766bcf2",
@@ -1332,7 +1400,8 @@
       "body_snippet": "You should fix the problems in a new version and submit.\nDid you per accident submit the old version?\nOr did you get tricked by the part after \"Current CRAN status\"?\n\nRegards,\nBerry\n\nPS:You could easi",
       "thread_id": "thread-5e5c8e3cdf29",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004300.html"
     },
     {
       "id": "msg-1630f9786155",
@@ -1348,11 +1417,12 @@
         "<847836A7-2894-4B4B-B4E7-84589043D57A@statistik.uu.se>",
         "<5dedcded86a94c2ab6596be531df6c12@umanitoba.ca>"
       ],
-      "body_plain": "Dear Max,\n\nThat fixes the issue completely on Travis ? thanks. However, it worries me a little that I might need something similar for the build on CRAN? Or should I simply just assume that this is an issue specific to Travis?\n\n/Sebastian\n\nOn 26 Aug 2019, at 16:09, Max Turgeon <Max.Turgeon at umanitoba.ca<mailto:Max.Turgeon at umanitoba.ca>> wrote:\n\nHi Sebastian,\n\nHave you tried adding a line in your `.travis.yml` file that changes the permissions for `configure`? Something like this:\n\n\nbefore_install:\n  - chmod +x configure\n\n\nMax Turgeon\nAssistant Professor\nDepartment of Statistics\nDepartment of Computer Science\nUniversity of Manitoba\nmaxturgeon.ca<https://urlproxy.sunet.se/canit/urlproxy.php?_q=aHR0cDovL21heHR1cmdlb24uY2E%3D&_s=c2ViYXN0aWFuLmFua2FyZ3JlbkBzdGF0aXN0aWsudXUuc2U%3D&_c=2483e576&_r=dXUtc2U%3D>\n\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org<mailto:r-package-devel-bounces at r-project.org>> on behalf of Sebastian Ankargren <sebastian.ankargren at statistik.uu.se<mailto:sebastian.ankargren at statistik.uu.se>>\nSent: August 26, 2019 8:47:02 AM\nTo: r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>\nSubject: [R-pkg-devel] 'configure' exists but is not executable\n\nDear package developers,\n\nI have a package that is dependent upon Rcpp and RcppArmadillo and for this reason I use a configure file. On my local machine with:\nR version 3.6.0 (2019-04-26)\nPlatform: x86_64-apple-darwin15.6.0 (64-bit)\nRunning under: macOS Mojave 10.14.3\n\n?my package passes R CMD check. However, on Travis CI I get\n\n* installing *source* package ?mfbvar? ...\n** using staged installation\nERROR: 'configure' exists but is not executable -- see the 'R Installation and Administration Manual'\n\nThis despite the configure file being executable locally. Some of my attempts at fixing this include:\n- chmod +x configure\n- removing configure, committing/pushing, putting configure back and chmod +x configure before committing/pushing again to ensure the executable version is pushed\n- creating a new configure from configure.ac using autoconf\n\nAll of my attempts have been unsuccessful and I?m a little bit puzzled why it doesn?t work on Travis. Does anyone have any suggestions? The failure is present both on Linux and OS X. I am not sure whether the issue is specific to Travis, but I have no other ways of testing it before submitting to CRAN.\n\nTravis link: https://travis-ci.org/ankargren/mfbvar\nGithub link: https://github.com/ankargren/mfbvar\n\nAppreciate any input you might have!\n\nBest,\n\nSebastian\n\n\n\n\n\n\n\n\nN?r du har kontakt med oss p? Uppsala universitet med e-post s? inneb?r det att vi behandlar dina personuppgifter. F?r att l?sa mer om hur vi g?r det kan du l?sa h?r: http://www.uu.se/om-uu/dataskydd-personuppgifter/\n\nE-mailing Uppsala University means that we will process your personal data. For more information on how this is performed, please read here:http://www.uu.se/en/about-uu/data-protection-policy\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear Max,\n\nThat fixes the issue completely on Travis ? thanks. However, it worries me a little that I might need something similar for the build on CRAN? Or should I simply just assume that this is an",
+      "body_plain": "Dear Max,\n\nThat fixes the issue completely on Travis — thanks. However, it worries me a little that I might need something similar for the build on CRAN? Or should I simply just assume that this is an issue specific to Travis?\n\n/Sebastian\n\nOn 26 Aug 2019, at 16:09, Max Turgeon <Max.Turgeon at umanitoba.ca<mailto:Max.Turgeon at umanitoba.ca>> wrote:\n\nHi Sebastian,\n\nHave you tried adding a line in your `.travis.yml` file that changes the permissions for `configure`? Something like this:\n\n\nbefore_install:\n  - chmod +x configure\n\n\nMax Turgeon\nAssistant Professor\nDepartment of Statistics\nDepartment of Computer Science\nUniversity of Manitoba\nmaxturgeon.ca<https://urlproxy.sunet.se/canit/urlproxy.php?_q=aHR0cDovL21heHR1cmdlb24uY2E%3D&_s=c2ViYXN0aWFuLmFua2FyZ3JlbkBzdGF0aXN0aWsudXUuc2U%3D&_c=2483e576&_r=dXUtc2U%3D>\n\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org<mailto:r-package-devel-bounces at r-project.org>> on behalf of Sebastian Ankargren <sebastian.ankargren at statistik.uu.se<mailto:sebastian.ankargren at statistik.uu.se>>\nSent: August 26, 2019 8:47:02 AM\nTo: r-package-devel at r-project.org<mailto:r-package-devel at r-project.org>\nSubject: [R-pkg-devel] 'configure' exists but is not executable\n\nDear package developers,\n\nI have a package that is dependent upon Rcpp and RcppArmadillo and for this reason I use a configure file. On my local machine with:\nR version 3.6.0 (2019-04-26)\nPlatform: x86_64-apple-darwin15.6.0 (64-bit)\nRunning under: macOS Mojave 10.14.3\n\n…my package passes R CMD check. However, on Travis CI I get\n\n* installing *source* package ‘mfbvar’ ...\n** using staged installation\nERROR: 'configure' exists but is not executable -- see the 'R Installation and Administration Manual'\n\nThis despite the configure file being executable locally. Some of my attempts at fixing this include:\n- chmod +x configure\n- removing configure, committing/pushing, putting configure back and chmod +x configure before committing/pushing again to ensure the executable version is pushed\n- creating a new configure from configure.ac using autoconf\n\nAll of my attempts have been unsuccessful and I’m a little bit puzzled why it doesn’t work on Travis. Does anyone have any suggestions? The failure is present both on Linux and OS X. I am not sure whether the issue is specific to Travis, but I have no other ways of testing it before submitting to CRAN.\n\nTravis link: https://travis-ci.org/ankargren/mfbvar\nGithub link: https://github.com/ankargren/mfbvar\n\nAppreciate any input you might have!\n\nBest,\n\nSebastian\n\n\n\n\n\n\n\n\nNär du har kontakt med oss på Uppsala universitet med e-post så innebär det att vi behandlar dina personuppgifter. För att läsa mer om hur vi gör det kan du läsa här: http://www.uu.se/om-uu/dataskydd-personuppgifter/\n\nE-mailing Uppsala University means that we will process your personal data. For more information on how this is performed, please read here:http://www.uu.se/en/about-uu/data-protection-policy\n\n        [[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org<mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Max,\n\nThat fixes the issue completely on Travis — thanks. However, it worries me a little that I might need something similar for the build on CRAN? Or should I simply just assume that this is an",
       "thread_id": "thread-335d5e0f7b95",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004301.html"
     },
     {
       "id": "msg-700502227212",
@@ -1373,7 +1443,8 @@
       "body_snippet": "I'm glad to hear it worked. As for CRAN, I would assume they take care of permissions on their end somehow, I can't say for sure. But a certain number of packages use configure scripts (e.g. RcppArmad",
       "thread_id": "thread-335d5e0f7b95",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004302.html"
     },
     {
       "id": "msg-06ed628222ea",
@@ -1392,7 +1463,8 @@
       "body_snippet": "Thank you for the answers!\n\nYes, I got tricked by the \"Current CRAN status\" in the automatically answer\nof CRAN submission.\nAt the email body they pointed the FAIL in the current version and ask to\n\"P",
       "thread_id": "thread-5e5c8e3cdf29",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004303.html"
     },
     {
       "id": "msg-90f441b1323f",
@@ -1408,7 +1480,8 @@
       "body_snippet": "Hi,\n\nI am preparing a new package r2sundials for submission to cran. It \ndepends on third part software \n(https://computing.llnl.gov/projects/sundials). This will be my first \nsubmission of the kind s",
       "thread_id": "thread-90f441b1323f",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004304.html"
     },
     {
       "id": "msg-484bd35fa1f5",
@@ -1426,7 +1499,8 @@
       "body_snippet": "On 30 August 2019 at 11:10, Serguei Sokol wrote:\n| I am preparing a new package r2sundials for submission to cran. It \n| depends on third part software \n| (https://computing.llnl.gov/projects/sundials",
       "thread_id": "thread-90f441b1323f",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004305.html"
     },
     {
       "id": "msg-244e9faf8687",
@@ -1442,7 +1516,8 @@
       "body_snippet": "I'm seeking some general advice about including vignettes in my packages,\nwhich are largely for nonlinear estimation and function minimization (optimization).\nThis means that my packages offer alterna",
       "thread_id": "thread-244e9faf8687",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004306.html"
     },
     {
       "id": "msg-0ceae43a79ba",
@@ -1461,7 +1536,8 @@
       "body_snippet": "On 30 August 2019 at 07:24, Dirk Eddelbuettel wrote:\n| \n| On 30 August 2019 at 11:10, Serguei Sokol wrote:\n| | I am preparing a new package r2sundials for submission to cran. It \n| | depends on third ",
       "thread_id": "thread-90f441b1323f",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004307.html"
     },
     {
       "id": "msg-9121dc7d721d",
@@ -1475,11 +1551,12 @@
       "references": [
         "<644a2c54-017c-ca14-4d69-2ffb1c2948ba@gmail.com>"
       ],
-      "body_plain": "On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>\n> I'm seeking some general advice about including vignettes in my packages,\n> which are largely for nonlinear estimation and function minimization (optimization).\n> This means that my packages offer alternatives to many other tools, and the user\n> then has the chore of deciding which is appropriate. Bad choices can be very\n> costly in inappropriate results or computational efficiencies. Hence, I include\n> vignettes to offer comparisons and examples of use.\n>\n> Unfortunately, as in a case this week, changes in the comparison packages break\n> my package(s), and I get an email from CRAN telling me to fix it before some\n> date not far in the future. This means a) work for me, possibly at an inopportune\n> time; b) risk of loss of capability, in the present case in the nlsr package which\n> offers some unique capabilities, and c) extra work for CRAN for what is, arguably,\n> updating of peripheral documentation. Updating optimization packages on CRAN can be,\n> I have discovered, a very time-consuming task. Package optimx took over 3 months\n> to get updated.\n>\n> It should be noted in the present situation that just before I got the msg from\n> CRAN I got a msg from the maintainer of the package that has changed and breaks\n> the vignette with some suggestions on a fix. The issue is that his package has\n> changed function syntax -- a situation all of us know is fraught with troubles,\n> since improvements may cause breakage.\n>\n> I am NOT saying that my vignettes should not be updated. However, I'm wondering\n> if I should set up a repository for my vignettes on Github/Gitlab or similar, and\n> simply link to them. This would separate the updating of vignettes from the central\n> packages. Their updating could be less strictly tied to CRAN activities, and could\n> also be a task undertaken by others who are not listed as maintainer.\n>\n> I'd welcome some (hopefully constructive) comments. Would CRAN maintainers feel\n> this to be helpful, or does it lower the value of official R packages? Do\n> other maintainers experience the same requests, or do they just not include\n> vignettes (and many do not)?\n\nMy two cents:\n\nFor me, as a user, vignettes are the most valuable form of\ndocumentation in a package. Of course, this is personal opinion. But\nthese days with so many good packages out there, I don't have time to\ninstall all of them and dive into the manual and the examples just to\ndecide which one is better for my use case. A good written vignette\nmost of the time is my driving factor (sometimes, if it's a small\npackage with one particular functionality, a good README is enough,\nbut that's not the case here).\n\nThus, as a maintainer, I try to lead by example. It's time consuming,\nbut on the other hand, many times a help request by a user can be\nresolved with \"please, take a look at section x of vignette y\".\n\nOne thing I do to make them as maintainable as possible is to try to\navoid dependencies on third-party packages as much as possible. In\nyour case, comparing yourself with other alternatives may be\nimportant. I'd suggest to set eval=FALSE for chunks with expensive\ndemonstrations of other packages, and then show a static figure with\nthe comparison that you made once, but doesn't need to be recreated\neach time the vignette is built. In this way, issues like the one you\ndescribed won't affect your package, at least immediately. Until some\nuser reaches you to say, hey, I've tried the code in this vignette for\npackage x and it doesn't work for me. Then it's time to revisit that\ncode and rebuild the figure.\n\nYou could have vignettes that you don't rebuild constantly in a\nseparate repo and link them from a main vignette on CRAN, but that's\nno different from what I propose above, and it's one click away.\n\nHope it helps. Regards,\n-- \nI?aki ?car",
+      "body_plain": "On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>\n> I'm seeking some general advice about including vignettes in my packages,\n> which are largely for nonlinear estimation and function minimization (optimization).\n> This means that my packages offer alternatives to many other tools, and the user\n> then has the chore of deciding which is appropriate. Bad choices can be very\n> costly in inappropriate results or computational efficiencies. Hence, I include\n> vignettes to offer comparisons and examples of use.\n>\n> Unfortunately, as in a case this week, changes in the comparison packages break\n> my package(s), and I get an email from CRAN telling me to fix it before some\n> date not far in the future. This means a) work for me, possibly at an inopportune\n> time; b) risk of loss of capability, in the present case in the nlsr package which\n> offers some unique capabilities, and c) extra work for CRAN for what is, arguably,\n> updating of peripheral documentation. Updating optimization packages on CRAN can be,\n> I have discovered, a very time-consuming task. Package optimx took over 3 months\n> to get updated.\n>\n> It should be noted in the present situation that just before I got the msg from\n> CRAN I got a msg from the maintainer of the package that has changed and breaks\n> the vignette with some suggestions on a fix. The issue is that his package has\n> changed function syntax -- a situation all of us know is fraught with troubles,\n> since improvements may cause breakage.\n>\n> I am NOT saying that my vignettes should not be updated. However, I'm wondering\n> if I should set up a repository for my vignettes on Github/Gitlab or similar, and\n> simply link to them. This would separate the updating of vignettes from the central\n> packages. Their updating could be less strictly tied to CRAN activities, and could\n> also be a task undertaken by others who are not listed as maintainer.\n>\n> I'd welcome some (hopefully constructive) comments. Would CRAN maintainers feel\n> this to be helpful, or does it lower the value of official R packages? Do\n> other maintainers experience the same requests, or do they just not include\n> vignettes (and many do not)?\n\nMy two cents:\n\nFor me, as a user, vignettes are the most valuable form of\ndocumentation in a package. Of course, this is personal opinion. But\nthese days with so many good packages out there, I don't have time to\ninstall all of them and dive into the manual and the examples just to\ndecide which one is better for my use case. A good written vignette\nmost of the time is my driving factor (sometimes, if it's a small\npackage with one particular functionality, a good README is enough,\nbut that's not the case here).\n\nThus, as a maintainer, I try to lead by example. It's time consuming,\nbut on the other hand, many times a help request by a user can be\nresolved with \"please, take a look at section x of vignette y\".\n\nOne thing I do to make them as maintainable as possible is to try to\navoid dependencies on third-party packages as much as possible. In\nyour case, comparing yourself with other alternatives may be\nimportant. I'd suggest to set eval=FALSE for chunks with expensive\ndemonstrations of other packages, and then show a static figure with\nthe comparison that you made once, but doesn't need to be recreated\neach time the vignette is built. In this way, issues like the one you\ndescribed won't affect your package, at least immediately. Until some\nuser reaches you to say, hey, I've tried the code in this vignette for\npackage x and it doesn't work for me. Then it's time to revisit that\ncode and rebuild the figure.\n\nYou could have vignettes that you don't rebuild constantly in a\nseparate repo and link them from a main vignette on CRAN, but that's\nno different from what I propose above, and it's one click away.\n\nHope it helps. Regards,\n-- \nIñaki Úcar",
       "body_snippet": "On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>\n> I'm seeking some general advice about including vignettes in my packages,\n> which are largely for nonlinear estimation and f",
       "thread_id": "thread-244e9faf8687",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004308.html"
     },
     {
       "id": "msg-723988a11409",
@@ -1497,7 +1574,8 @@
       "body_snippet": "On Fri, Aug 30, 2019 at 11:10 AM Serguei Sokol <serguei.sokol at gmail.com> wrote:\n> I am preparing a new package r2sundials for submission to cran. It\n> depends on third part software\n> (https://comp",
       "thread_id": "thread-90f441b1323f",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004309.html"
     },
     {
       "id": "msg-ffca271fc133",
@@ -1516,7 +1594,8 @@
       "body_snippet": "Hi Ralf,\n\nOn 30/08/2019 16:04, Ralf Stubner wrote:\n> On Fri, Aug 30, 2019 at 11:10 AM Serguei Sokol <serguei.sokol at gmail.com> wrote:\n>> I am preparing a new package r2sundials for submission to cra",
       "thread_id": "thread-90f441b1323f",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004310.html"
     },
     {
       "id": "msg-24b303aa2255",
@@ -1531,11 +1610,12 @@
         "<644a2c54-017c-ca14-4d69-2ffb1c2948ba@gmail.com>",
         "<CALEXWq2QqHhOqTB9EejOopCH8t4HZA+=g6C2C6PLw8Yyeq3Rwg@mail.gmail.com>"
       ],
-      "body_plain": "Comments in-line\n\nOn 30/08/2019 14:59, I?aki Ucar wrote:\n> On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>>\n>> I'm seeking some general advice about including vignettes in my packages,\n>> which are largely for nonlinear estimation and function minimization (optimization).\n>> This means that my packages offer alternatives to many other tools, and the user\n>> then has the chore of deciding which is appropriate. Bad choices can be very\n>> costly in inappropriate results or computational efficiencies. Hence, I include\n>> vignettes to offer comparisons and examples of use.\n>>\n>> Unfortunately, as in a case this week, changes in the comparison packages break\n>> my package(s), and I get an email from CRAN telling me to fix it before some\n>> date not far in the future. This means a) work for me, possibly at an inopportune\n>> time; b) risk of loss of capability, in the present case in the nlsr package which\n>> offers some unique capabilities, and c) extra work for CRAN for what is, arguably,\n>> updating of peripheral documentation. Updating optimization packages on CRAN can be,\n>> I have discovered, a very time-consuming task. Package optimx took over 3 months\n>> to get updated.\n>>\n>> It should be noted in the present situation that just before I got the msg from\n>> CRAN I got a msg from the maintainer of the package that has changed and breaks\n>> the vignette with some suggestions on a fix. The issue is that his package has\n>> changed function syntax -- a situation all of us know is fraught with troubles,\n>> since improvements may cause breakage.\n>>\n>> I am NOT saying that my vignettes should not be updated. However, I'm wondering\n>> if I should set up a repository for my vignettes on Github/Gitlab or similar, and\n>> simply link to them. This would separate the updating of vignettes from the central\n>> packages. Their updating could be less strictly tied to CRAN activities, and could\n>> also be a task undertaken by others who are not listed as maintainer.\n>>\n>> I'd welcome some (hopefully constructive) comments. Would CRAN maintainers feel\n>> this to be helpful, or does it lower the value of official R packages? Do\n>> other maintainers experience the same requests, or do they just not include\n>> vignettes (and many do not)?\n> \n> My two cents:\n> \n> For me, as a user, vignettes are the most valuable form of\n> documentation in a package. Of course, this is personal opinion.\n\nYes, but it is widely shared (in the sense that I think it too).\n\nI think the issue here is whether the intention is to compare with a \nparticular implementation of a technique in which case you probably do \nneed to do what you are currently doing or to compare with the technique \nin general terms. If the latter then I?aki's solution seems perfect to \nme since even if the package interface changes it still implemented the \nsame technique (I assume).\n\nMichael\n\n  But\n> these days with so many good packages out there, I don't have time to\n> install all of them and dive into the manual and the examples just to\n> decide which one is better for my use case. A good written vignette\n> most of the time is my driving factor (sometimes, if it's a small\n> package with one particular functionality, a good README is enough,\n> but that's not the case here).\n> \n> Thus, as a maintainer, I try to lead by example. It's time consuming,\n> but on the other hand, many times a help request by a user can be\n> resolved with \"please, take a look at section x of vignette y\".\n> \n> One thing I do to make them as maintainable as possible is to try to\n> avoid dependencies on third-party packages as much as possible. In\n> your case, comparing yourself with other alternatives may be\n> important. I'd suggest to set eval=FALSE for chunks with expensive\n> demonstrations of other packages, and then show a static figure with\n> the comparison that you made once, but doesn't need to be recreated\n> each time the vignette is built. In this way, issues like the one you\n> described won't affect your package, at least immediately. Until some\n> user reaches you to say, hey, I've tried the code in this vignette for\n> package x and it doesn't work for me. Then it's time to revisit that\n> code and rebuild the figure.\n> \n> You could have vignettes that you don't rebuild constantly in a\n> separate repo and link them from a main vignette on CRAN, but that's\n> no different from what I propose above, and it's one click away.\n> \n> Hope it helps. Regards,\n> \n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
-      "body_snippet": "Comments in-line\n\nOn 30/08/2019 14:59, I?aki Ucar wrote:\n> On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>>\n>> I'm seeking some general advice about including vignettes in my",
+      "body_plain": "Comments in-line\n\nOn 30/08/2019 14:59, Iñaki Ucar wrote:\n> On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>>\n>> I'm seeking some general advice about including vignettes in my packages,\n>> which are largely for nonlinear estimation and function minimization (optimization).\n>> This means that my packages offer alternatives to many other tools, and the user\n>> then has the chore of deciding which is appropriate. Bad choices can be very\n>> costly in inappropriate results or computational efficiencies. Hence, I include\n>> vignettes to offer comparisons and examples of use.\n>>\n>> Unfortunately, as in a case this week, changes in the comparison packages break\n>> my package(s), and I get an email from CRAN telling me to fix it before some\n>> date not far in the future. This means a) work for me, possibly at an inopportune\n>> time; b) risk of loss of capability, in the present case in the nlsr package which\n>> offers some unique capabilities, and c) extra work for CRAN for what is, arguably,\n>> updating of peripheral documentation. Updating optimization packages on CRAN can be,\n>> I have discovered, a very time-consuming task. Package optimx took over 3 months\n>> to get updated.\n>>\n>> It should be noted in the present situation that just before I got the msg from\n>> CRAN I got a msg from the maintainer of the package that has changed and breaks\n>> the vignette with some suggestions on a fix. The issue is that his package has\n>> changed function syntax -- a situation all of us know is fraught with troubles,\n>> since improvements may cause breakage.\n>>\n>> I am NOT saying that my vignettes should not be updated. However, I'm wondering\n>> if I should set up a repository for my vignettes on Github/Gitlab or similar, and\n>> simply link to them. This would separate the updating of vignettes from the central\n>> packages. Their updating could be less strictly tied to CRAN activities, and could\n>> also be a task undertaken by others who are not listed as maintainer.\n>>\n>> I'd welcome some (hopefully constructive) comments. Would CRAN maintainers feel\n>> this to be helpful, or does it lower the value of official R packages? Do\n>> other maintainers experience the same requests, or do they just not include\n>> vignettes (and many do not)?\n> \n> My two cents:\n> \n> For me, as a user, vignettes are the most valuable form of\n> documentation in a package. Of course, this is personal opinion.\n\nYes, but it is widely shared (in the sense that I think it too).\n\nI think the issue here is whether the intention is to compare with a \nparticular implementation of a technique in which case you probably do \nneed to do what you are currently doing or to compare with the technique \nin general terms. If the latter then Iñaki's solution seems perfect to \nme since even if the package interface changes it still implemented the \nsame technique (I assume).\n\nMichael\n\n  But\n> these days with so many good packages out there, I don't have time to\n> install all of them and dive into the manual and the examples just to\n> decide which one is better for my use case. A good written vignette\n> most of the time is my driving factor (sometimes, if it's a small\n> package with one particular functionality, a good README is enough,\n> but that's not the case here).\n> \n> Thus, as a maintainer, I try to lead by example. It's time consuming,\n> but on the other hand, many times a help request by a user can be\n> resolved with \"please, take a look at section x of vignette y\".\n> \n> One thing I do to make them as maintainable as possible is to try to\n> avoid dependencies on third-party packages as much as possible. In\n> your case, comparing yourself with other alternatives may be\n> important. I'd suggest to set eval=FALSE for chunks with expensive\n> demonstrations of other packages, and then show a static figure with\n> the comparison that you made once, but doesn't need to be recreated\n> each time the vignette is built. In this way, issues like the one you\n> described won't affect your package, at least immediately. Until some\n> user reaches you to say, hey, I've tried the code in this vignette for\n> package x and it doesn't work for me. Then it's time to revisit that\n> code and rebuild the figure.\n> \n> You could have vignettes that you don't rebuild constantly in a\n> separate repo and link them from a main vignette on CRAN, but that's\n> no different from what I propose above, and it's one click away.\n> \n> Hope it helps. Regards,\n> \n\n-- \nMichael\nhttp://www.dewey.myzen.co.uk/home.html",
+      "body_snippet": "Comments in-line\n\nOn 30/08/2019 14:59, Iñaki Ucar wrote:\n> On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n>>\n>> I'm seeking some general advice about including vignettes in my",
       "thread_id": "thread-244e9faf8687",
       "thread_depth": 2,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004311.html"
     },
     {
       "id": "msg-9269906d6705",
@@ -1555,7 +1635,8 @@
       "body_snippet": "On 30/08/2019 15:58, Dirk Eddelbuettel wrote:\n> \n> On 30 August 2019 at 07:24, Dirk Eddelbuettel wrote:\n> |\n> | On 30 August 2019 at 11:10, Serguei Sokol wrote:\n> | | I am preparing a new package r2su",
       "thread_id": "thread-90f441b1323f",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004312.html"
     },
     {
       "id": "msg-0c2b692851b9",
@@ -1571,11 +1652,12 @@
         "<CALEXWq2QqHhOqTB9EejOopCH8t4HZA+=g6C2C6PLw8Yyeq3Rwg@mail.gmail.com>",
         "<3bcfcccc-0b66-ef38-1308-83bc16219a3d@dewey.myzen.co.uk>"
       ],
-      "body_plain": "At the cost of some level of reproducibility, you could use a static\nvignette and be very clear about the package versions used in the\ncomparisons:\nhttp://www.markvanderloo.eu/yaRb/2019/01/11/add-a-static-pdf-vignette-to-an-r-package/\n\nAs this does diminish the coherence of CRAN somewhat I'm not really\nfavoring it, but I can see cases where this may be useful (e.g. I use a\nstatic vignette in one pkg to include a published paper).\n\n-Mark\n\nOn Fri, Aug 30, 2019 at 5:00 PM Michael Dewey <lists at dewey.myzen.co.uk>\nwrote:\n\n> Comments in-line\n>\n> On 30/08/2019 14:59, I?aki Ucar wrote:\n> > On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n> >>\n> >> I'm seeking some general advice about including vignettes in my\n> packages,\n> >> which are largely for nonlinear estimation and function minimization\n> (optimization).\n> >> This means that my packages offer alternatives to many other tools, and\n> the user\n> >> then has the chore of deciding which is appropriate. Bad choices can be\n> very\n> >> costly in inappropriate results or computational efficiencies. Hence, I\n> include\n> >> vignettes to offer comparisons and examples of use.\n> >>\n> >> Unfortunately, as in a case this week, changes in the comparison\n> packages break\n> >> my package(s), and I get an email from CRAN telling me to fix it before\n> some\n> >> date not far in the future. This means a) work for me, possibly at an\n> inopportune\n> >> time; b) risk of loss of capability, in the present case in the nlsr\n> package which\n> >> offers some unique capabilities, and c) extra work for CRAN for what\n> is, arguably,\n> >> updating of peripheral documentation. Updating optimization packages on\n> CRAN can be,\n> >> I have discovered, a very time-consuming task. Package optimx took over\n> 3 months\n> >> to get updated.\n> >>\n> >> It should be noted in the present situation that just before I got the\n> msg from\n> >> CRAN I got a msg from the maintainer of the package that has changed\n> and breaks\n> >> the vignette with some suggestions on a fix. The issue is that his\n> package has\n> >> changed function syntax -- a situation all of us know is fraught with\n> troubles,\n> >> since improvements may cause breakage.\n> >>\n> >> I am NOT saying that my vignettes should not be updated. However, I'm\n> wondering\n> >> if I should set up a repository for my vignettes on Github/Gitlab or\n> similar, and\n> >> simply link to them. This would separate the updating of vignettes from\n> the central\n> >> packages. Their updating could be less strictly tied to CRAN\n> activities, and could\n> >> also be a task undertaken by others who are not listed as maintainer.\n> >>\n> >> I'd welcome some (hopefully constructive) comments. Would CRAN\n> maintainers feel\n> >> this to be helpful, or does it lower the value of official R packages?\n> Do\n> >> other maintainers experience the same requests, or do they just not\n> include\n> >> vignettes (and many do not)?\n> >\n> > My two cents:\n> >\n> > For me, as a user, vignettes are the most valuable form of\n> > documentation in a package. Of course, this is personal opinion.\n>\n> Yes, but it is widely shared (in the sense that I think it too).\n>\n> I think the issue here is whether the intention is to compare with a\n> particular implementation of a technique in which case you probably do\n> need to do what you are currently doing or to compare with the technique\n> in general terms. If the latter then I?aki's solution seems perfect to\n> me since even if the package interface changes it still implemented the\n> same technique (I assume).\n>\n> Michael\n>\n>   But\n> > these days with so many good packages out there, I don't have time to\n> > install all of them and dive into the manual and the examples just to\n> > decide which one is better for my use case. A good written vignette\n> > most of the time is my driving factor (sometimes, if it's a small\n> > package with one particular functionality, a good README is enough,\n> > but that's not the case here).\n> >\n> > Thus, as a maintainer, I try to lead by example. It's time consuming,\n> > but on the other hand, many times a help request by a user can be\n> > resolved with \"please, take a look at section x of vignette y\".\n> >\n> > One thing I do to make them as maintainable as possible is to try to\n> > avoid dependencies on third-party packages as much as possible. In\n> > your case, comparing yourself with other alternatives may be\n> > important. I'd suggest to set eval=FALSE for chunks with expensive\n> > demonstrations of other packages, and then show a static figure with\n> > the comparison that you made once, but doesn't need to be recreated\n> > each time the vignette is built. In this way, issues like the one you\n> > described won't affect your package, at least immediately. Until some\n> > user reaches you to say, hey, I've tried the code in this vignette for\n> > package x and it doesn't work for me. Then it's time to revisit that\n> > code and rebuild the figure.\n> >\n> > You could have vignettes that you don't rebuild constantly in a\n> > separate repo and link them from a main vignette on CRAN, but that's\n> > no different from what I propose above, and it's one click away.\n> >\n> > Hope it helps. Regards,\n> >\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "At the cost of some level of reproducibility, you could use a static\nvignette and be very clear about the package versions used in the\ncomparisons:\nhttp://www.markvanderloo.eu/yaRb/2019/01/11/add-a-static-pdf-vignette-to-an-r-package/\n\nAs this does diminish the coherence of CRAN somewhat I'm not really\nfavoring it, but I can see cases where this may be useful (e.g. I use a\nstatic vignette in one pkg to include a published paper).\n\n-Mark\n\nOn Fri, Aug 30, 2019 at 5:00 PM Michael Dewey <lists at dewey.myzen.co.uk>\nwrote:\n\n> Comments in-line\n>\n> On 30/08/2019 14:59, Iñaki Ucar wrote:\n> > On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n> >>\n> >> I'm seeking some general advice about including vignettes in my\n> packages,\n> >> which are largely for nonlinear estimation and function minimization\n> (optimization).\n> >> This means that my packages offer alternatives to many other tools, and\n> the user\n> >> then has the chore of deciding which is appropriate. Bad choices can be\n> very\n> >> costly in inappropriate results or computational efficiencies. Hence, I\n> include\n> >> vignettes to offer comparisons and examples of use.\n> >>\n> >> Unfortunately, as in a case this week, changes in the comparison\n> packages break\n> >> my package(s), and I get an email from CRAN telling me to fix it before\n> some\n> >> date not far in the future. This means a) work for me, possibly at an\n> inopportune\n> >> time; b) risk of loss of capability, in the present case in the nlsr\n> package which\n> >> offers some unique capabilities, and c) extra work for CRAN for what\n> is, arguably,\n> >> updating of peripheral documentation. Updating optimization packages on\n> CRAN can be,\n> >> I have discovered, a very time-consuming task. Package optimx took over\n> 3 months\n> >> to get updated.\n> >>\n> >> It should be noted in the present situation that just before I got the\n> msg from\n> >> CRAN I got a msg from the maintainer of the package that has changed\n> and breaks\n> >> the vignette with some suggestions on a fix. The issue is that his\n> package has\n> >> changed function syntax -- a situation all of us know is fraught with\n> troubles,\n> >> since improvements may cause breakage.\n> >>\n> >> I am NOT saying that my vignettes should not be updated. However, I'm\n> wondering\n> >> if I should set up a repository for my vignettes on Github/Gitlab or\n> similar, and\n> >> simply link to them. This would separate the updating of vignettes from\n> the central\n> >> packages. Their updating could be less strictly tied to CRAN\n> activities, and could\n> >> also be a task undertaken by others who are not listed as maintainer.\n> >>\n> >> I'd welcome some (hopefully constructive) comments. Would CRAN\n> maintainers feel\n> >> this to be helpful, or does it lower the value of official R packages?\n> Do\n> >> other maintainers experience the same requests, or do they just not\n> include\n> >> vignettes (and many do not)?\n> >\n> > My two cents:\n> >\n> > For me, as a user, vignettes are the most valuable form of\n> > documentation in a package. Of course, this is personal opinion.\n>\n> Yes, but it is widely shared (in the sense that I think it too).\n>\n> I think the issue here is whether the intention is to compare with a\n> particular implementation of a technique in which case you probably do\n> need to do what you are currently doing or to compare with the technique\n> in general terms. If the latter then Iñaki's solution seems perfect to\n> me since even if the package interface changes it still implemented the\n> same technique (I assume).\n>\n> Michael\n>\n>   But\n> > these days with so many good packages out there, I don't have time to\n> > install all of them and dive into the manual and the examples just to\n> > decide which one is better for my use case. A good written vignette\n> > most of the time is my driving factor (sometimes, if it's a small\n> > package with one particular functionality, a good README is enough,\n> > but that's not the case here).\n> >\n> > Thus, as a maintainer, I try to lead by example. It's time consuming,\n> > but on the other hand, many times a help request by a user can be\n> > resolved with \"please, take a look at section x of vignette y\".\n> >\n> > One thing I do to make them as maintainable as possible is to try to\n> > avoid dependencies on third-party packages as much as possible. In\n> > your case, comparing yourself with other alternatives may be\n> > important. I'd suggest to set eval=FALSE for chunks with expensive\n> > demonstrations of other packages, and then show a static figure with\n> > the comparison that you made once, but doesn't need to be recreated\n> > each time the vignette is built. In this way, issues like the one you\n> > described won't affect your package, at least immediately. Until some\n> > user reaches you to say, hey, I've tried the code in this vignette for\n> > package x and it doesn't work for me. Then it's time to revisit that\n> > code and rebuild the figure.\n> >\n> > You could have vignettes that you don't rebuild constantly in a\n> > separate repo and link them from a main vignette on CRAN, but that's\n> > no different from what I propose above, and it's one click away.\n> >\n> > Hope it helps. Regards,\n> >\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "At the cost of some level of reproducibility, you could use a static\nvignette and be very clear about the package versions used in the\ncomparisons:\nhttp://www.markvanderloo.eu/yaRb/2019/01/11/add-a-st",
       "thread_id": "thread-244e9faf8687",
       "thread_depth": 3,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004313.html"
     },
     {
       "id": "msg-2ababf603bc4",
@@ -1592,11 +1674,12 @@
         "<3bcfcccc-0b66-ef38-1308-83bc16219a3d@dewey.myzen.co.uk>",
         "<CAOKDuOgiVTFqRthiq7MbhtVZBaYu61BkzLg_9-VpfTcK2GkkHQ@mail.gmail.com>"
       ],
-      "body_plain": "When adding static vignettes, it is a good idea to put the 'real' ones somewhere under inst/doc. \nA manual index file under inst/doc/ will add the benefit that the help system will present to the user the real code and not the stub Rnw  in the approach suggested by Michael. Package Countr (https://cran.r-project.org/package=Countr) uses this approach for its vignettes (sorry for the self-reference). \n\nGeorgi Boshnakov\n\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Mark van der Loo\nSent: 30 August 2019 16:08\nTo: Michael Dewey\nCc: List r-package-devel\nSubject: Re: [R-pkg-devel] General considerations about vignettes\n\nAt the cost of some level of reproducibility, you could use a static\nvignette and be very clear about the package versions used in the\ncomparisons:\nhttp://www.markvanderloo.eu/yaRb/2019/01/11/add-a-static-pdf-vignette-to-an-r-package/\n\nAs this does diminish the coherence of CRAN somewhat I'm not really\nfavoring it, but I can see cases where this may be useful (e.g. I use a\nstatic vignette in one pkg to include a published paper).\n\n-Mark\n\nOn Fri, Aug 30, 2019 at 5:00 PM Michael Dewey <lists at dewey.myzen.co.uk>\nwrote:\n\n> Comments in-line\n>\n> On 30/08/2019 14:59, I?aki Ucar wrote:\n> > On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n> >>\n> >> I'm seeking some general advice about including vignettes in my\n> packages,\n> >> which are largely for nonlinear estimation and function minimization\n> (optimization).\n> >> This means that my packages offer alternatives to many other tools, and\n> the user\n> >> then has the chore of deciding which is appropriate. Bad choices can be\n> very\n> >> costly in inappropriate results or computational efficiencies. Hence, I\n> include\n> >> vignettes to offer comparisons and examples of use.\n> >>\n> >> Unfortunately, as in a case this week, changes in the comparison\n> packages break\n> >> my package(s), and I get an email from CRAN telling me to fix it before\n> some\n> >> date not far in the future. This means a) work for me, possibly at an\n> inopportune\n> >> time; b) risk of loss of capability, in the present case in the nlsr\n> package which\n> >> offers some unique capabilities, and c) extra work for CRAN for what\n> is, arguably,\n> >> updating of peripheral documentation. Updating optimization packages on\n> CRAN can be,\n> >> I have discovered, a very time-consuming task. Package optimx took over\n> 3 months\n> >> to get updated.\n> >>\n> >> It should be noted in the present situation that just before I got the\n> msg from\n> >> CRAN I got a msg from the maintainer of the package that has changed\n> and breaks\n> >> the vignette with some suggestions on a fix. The issue is that his\n> package has\n> >> changed function syntax -- a situation all of us know is fraught with\n> troubles,\n> >> since improvements may cause breakage.\n> >>\n> >> I am NOT saying that my vignettes should not be updated. However, I'm\n> wondering\n> >> if I should set up a repository for my vignettes on Github/Gitlab or\n> similar, and\n> >> simply link to them. This would separate the updating of vignettes from\n> the central\n> >> packages. Their updating could be less strictly tied to CRAN\n> activities, and could\n> >> also be a task undertaken by others who are not listed as maintainer.\n> >>\n> >> I'd welcome some (hopefully constructive) comments. Would CRAN\n> maintainers feel\n> >> this to be helpful, or does it lower the value of official R packages?\n> Do\n> >> other maintainers experience the same requests, or do they just not\n> include\n> >> vignettes (and many do not)?\n> >\n> > My two cents:\n> >\n> > For me, as a user, vignettes are the most valuable form of\n> > documentation in a package. Of course, this is personal opinion.\n>\n> Yes, but it is widely shared (in the sense that I think it too).\n>\n> I think the issue here is whether the intention is to compare with a\n> particular implementation of a technique in which case you probably do\n> need to do what you are currently doing or to compare with the technique\n> in general terms. If the latter then I?aki's solution seems perfect to\n> me since even if the package interface changes it still implemented the\n> same technique (I assume).\n>\n> Michael\n>\n>   But\n> > these days with so many good packages out there, I don't have time to\n> > install all of them and dive into the manual and the examples just to\n> > decide which one is better for my use case. A good written vignette\n> > most of the time is my driving factor (sometimes, if it's a small\n> > package with one particular functionality, a good README is enough,\n> > but that's not the case here).\n> >\n> > Thus, as a maintainer, I try to lead by example. It's time consuming,\n> > but on the other hand, many times a help request by a user can be\n> > resolved with \"please, take a look at section x of vignette y\".\n> >\n> > One thing I do to make them as maintainable as possible is to try to\n> > avoid dependencies on third-party packages as much as possible. In\n> > your case, comparing yourself with other alternatives may be\n> > important. I'd suggest to set eval=FALSE for chunks with expensive\n> > demonstrations of other packages, and then show a static figure with\n> > the comparison that you made once, but doesn't need to be recreated\n> > each time the vignette is built. In this way, issues like the one you\n> > described won't affect your package, at least immediately. Until some\n> > user reaches you to say, hey, I've tried the code in this vignette for\n> > package x and it doesn't work for me. Then it's time to revisit that\n> > code and rebuild the figure.\n> >\n> > You could have vignettes that you don't rebuild constantly in a\n> > separate repo and link them from a main vignette on CRAN, but that's\n> > no different from what I propose above, and it's one click away.\n> >\n> > Hope it helps. Regards,\n> >\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "When adding static vignettes, it is a good idea to put the 'real' ones somewhere under inst/doc. \nA manual index file under inst/doc/ will add the benefit that the help system will present to the user the real code and not the stub Rnw  in the approach suggested by Michael. Package Countr (https://cran.r-project.org/package=Countr) uses this approach for its vignettes (sorry for the self-reference). \n\nGeorgi Boshnakov\n\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Mark van der Loo\nSent: 30 August 2019 16:08\nTo: Michael Dewey\nCc: List r-package-devel\nSubject: Re: [R-pkg-devel] General considerations about vignettes\n\nAt the cost of some level of reproducibility, you could use a static\nvignette and be very clear about the package versions used in the\ncomparisons:\nhttp://www.markvanderloo.eu/yaRb/2019/01/11/add-a-static-pdf-vignette-to-an-r-package/\n\nAs this does diminish the coherence of CRAN somewhat I'm not really\nfavoring it, but I can see cases where this may be useful (e.g. I use a\nstatic vignette in one pkg to include a published paper).\n\n-Mark\n\nOn Fri, Aug 30, 2019 at 5:00 PM Michael Dewey <lists at dewey.myzen.co.uk>\nwrote:\n\n> Comments in-line\n>\n> On 30/08/2019 14:59, Iñaki Ucar wrote:\n> > On Fri, 30 Aug 2019 at 15:26, J C Nash <profjcnash at gmail.com> wrote:\n> >>\n> >> I'm seeking some general advice about including vignettes in my\n> packages,\n> >> which are largely for nonlinear estimation and function minimization\n> (optimization).\n> >> This means that my packages offer alternatives to many other tools, and\n> the user\n> >> then has the chore of deciding which is appropriate. Bad choices can be\n> very\n> >> costly in inappropriate results or computational efficiencies. Hence, I\n> include\n> >> vignettes to offer comparisons and examples of use.\n> >>\n> >> Unfortunately, as in a case this week, changes in the comparison\n> packages break\n> >> my package(s), and I get an email from CRAN telling me to fix it before\n> some\n> >> date not far in the future. This means a) work for me, possibly at an\n> inopportune\n> >> time; b) risk of loss of capability, in the present case in the nlsr\n> package which\n> >> offers some unique capabilities, and c) extra work for CRAN for what\n> is, arguably,\n> >> updating of peripheral documentation. Updating optimization packages on\n> CRAN can be,\n> >> I have discovered, a very time-consuming task. Package optimx took over\n> 3 months\n> >> to get updated.\n> >>\n> >> It should be noted in the present situation that just before I got the\n> msg from\n> >> CRAN I got a msg from the maintainer of the package that has changed\n> and breaks\n> >> the vignette with some suggestions on a fix. The issue is that his\n> package has\n> >> changed function syntax -- a situation all of us know is fraught with\n> troubles,\n> >> since improvements may cause breakage.\n> >>\n> >> I am NOT saying that my vignettes should not be updated. However, I'm\n> wondering\n> >> if I should set up a repository for my vignettes on Github/Gitlab or\n> similar, and\n> >> simply link to them. This would separate the updating of vignettes from\n> the central\n> >> packages. Their updating could be less strictly tied to CRAN\n> activities, and could\n> >> also be a task undertaken by others who are not listed as maintainer.\n> >>\n> >> I'd welcome some (hopefully constructive) comments. Would CRAN\n> maintainers feel\n> >> this to be helpful, or does it lower the value of official R packages?\n> Do\n> >> other maintainers experience the same requests, or do they just not\n> include\n> >> vignettes (and many do not)?\n> >\n> > My two cents:\n> >\n> > For me, as a user, vignettes are the most valuable form of\n> > documentation in a package. Of course, this is personal opinion.\n>\n> Yes, but it is widely shared (in the sense that I think it too).\n>\n> I think the issue here is whether the intention is to compare with a\n> particular implementation of a technique in which case you probably do\n> need to do what you are currently doing or to compare with the technique\n> in general terms. If the latter then Iñaki's solution seems perfect to\n> me since even if the package interface changes it still implemented the\n> same technique (I assume).\n>\n> Michael\n>\n>   But\n> > these days with so many good packages out there, I don't have time to\n> > install all of them and dive into the manual and the examples just to\n> > decide which one is better for my use case. A good written vignette\n> > most of the time is my driving factor (sometimes, if it's a small\n> > package with one particular functionality, a good README is enough,\n> > but that's not the case here).\n> >\n> > Thus, as a maintainer, I try to lead by example. It's time consuming,\n> > but on the other hand, many times a help request by a user can be\n> > resolved with \"please, take a look at section x of vignette y\".\n> >\n> > One thing I do to make them as maintainable as possible is to try to\n> > avoid dependencies on third-party packages as much as possible. In\n> > your case, comparing yourself with other alternatives may be\n> > important. I'd suggest to set eval=FALSE for chunks with expensive\n> > demonstrations of other packages, and then show a static figure with\n> > the comparison that you made once, but doesn't need to be recreated\n> > each time the vignette is built. In this way, issues like the one you\n> > described won't affect your package, at least immediately. Until some\n> > user reaches you to say, hey, I've tried the code in this vignette for\n> > package x and it doesn't work for me. Then it's time to revisit that\n> > code and rebuild the figure.\n> >\n> > You could have vignettes that you don't rebuild constantly in a\n> > separate repo and link them from a main vignette on CRAN, but that's\n> > no different from what I propose above, and it's one click away.\n> >\n> > Hope it helps. Regards,\n> >\n>\n> --\n> Michael\n> http://www.dewey.myzen.co.uk/home.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "When adding static vignettes, it is a good idea to put the 'real' ones somewhere under inst/doc. \nA manual index file under inst/doc/ will add the benefit that the help system will present to the user",
       "thread_id": "thread-244e9faf8687",
       "thread_depth": 4,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004314.html"
     },
     {
       "id": "msg-f69a9308c25d",
@@ -1612,7 +1695,8 @@
       "body_snippet": "Hi,\n\nI recently asked some questions about my R package which were well responded by Dirk.\n\nI have another question related to pkg_config path,\n\nI am using this command to add the installation path to",
       "thread_id": "thread-f69a9308c25d",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004315.html"
     },
     {
       "id": "msg-63834461076b",
@@ -1624,11 +1708,12 @@
       "subject_clean": "[R-pkg-devel] R, BLAS, and FCLEN",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "I'm having difficulties updating my package eha: When I run standard \nchecks 'at home' everything is fine, but 'CRAN-submissions' reports \n(among other things):\n\ngeomsup.f:324:9: warning: type of ?dgemv? does not match original \ndeclaration [-Wlto-type-mismatch]\n   324 |      &     one, score, ione)\n       |         ^\n/home/tmp/R-d-gcc-LTO/include/R_ext/BLAS.h:107:1: note: type mismatch in \nparameter 12\n   107 | F77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n       | ^\n\nThis is odd since the LAPACK subroutine dgemv takes only 11 parameters. \nHowever, in include/R_ext/BLAS.h we have\n\nF77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n\t\tconst double *alpha, const double *a, const int *lda,\n\t\tconst double *x, const int *incx, const double *beta,\n\t\tdouble *y, const int *incy FCLEN);\n\nwith a 12th parameter FCLEN?? How am I supposed to fix this, and what \nthe ... is FCLEN? googling leads to nothing useful (for me). It seems as \nif R is redefining some standard LAPACK routines.\n\nAlso a note I do not understand (in this context):\n\nnote: type ?void? should match type ?long int?\n\nAny help is much appreciated.\n\nBest, G?ran\n\nPS. How can I trigger these Warnings 'at home'?",
-      "body_snippet": "I'm having difficulties updating my package eha: When I run standard \nchecks 'at home' everything is fine, but 'CRAN-submissions' reports \n(among other things):\n\ngeomsup.f:324:9: warning: type of ?dge",
+      "body_plain": "I'm having difficulties updating my package eha: When I run standard \nchecks 'at home' everything is fine, but 'CRAN-submissions' reports \n(among other things):\n\ngeomsup.f:324:9: warning: type of ‘dgemv’ does not match original \ndeclaration [-Wlto-type-mismatch]\n   324 |      &     one, score, ione)\n       |         ^\n/home/tmp/R-d-gcc-LTO/include/R_ext/BLAS.h:107:1: note: type mismatch in \nparameter 12\n   107 | F77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n       | ^\n\nThis is odd since the LAPACK subroutine dgemv takes only 11 parameters. \nHowever, in include/R_ext/BLAS.h we have\n\nF77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n\t\tconst double *alpha, const double *a, const int *lda,\n\t\tconst double *x, const int *incx, const double *beta,\n\t\tdouble *y, const int *incy FCLEN);\n\nwith a 12th parameter FCLEN?? How am I supposed to fix this, and what \nthe ... is FCLEN? googling leads to nothing useful (for me). It seems as \nif R is redefining some standard LAPACK routines.\n\nAlso a note I do not understand (in this context):\n\nnote: type ‘void’ should match type ‘long int’\n\nAny help is much appreciated.\n\nBest, Göran\n\nPS. How can I trigger these Warnings 'at home'?",
+      "body_snippet": "I'm having difficulties updating my package eha: When I run standard \nchecks 'at home' everything is fine, but 'CRAN-submissions' reports \n(among other things):\n\ngeomsup.f:324:9: warning: type of ‘dge",
       "thread_id": "thread-63834461076b",
       "thread_depth": 0,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004316.html"
     },
     {
       "id": "msg-360ec3dfb068",
@@ -1642,11 +1727,12 @@
       "references": [
         "<aa335279-734d-6ac8-e957-5070768201c5@umu.se>"
       ],
-      "body_plain": "On 31/08/2019 12:47 p.m., G?ran Brostr?m wrote:\n> I'm having difficulties updating my package eha: When I run standard\n> checks 'at home' everything is fine, but 'CRAN-submissions' reports\n> (among other things):\n> \n> geomsup.f:324:9: warning: type of ?dgemv? does not match original\n> declaration [-Wlto-type-mismatch]\n>     324 |      &     one, score, ione)\n>         |         ^\n> /home/tmp/R-d-gcc-LTO/include/R_ext/BLAS.h:107:1: note: type mismatch in\n> parameter 12\n>     107 | F77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n>         | ^\n> \n> This is odd since the LAPACK subroutine dgemv takes only 11 parameters.\n> However, in include/R_ext/BLAS.h we have\n> \n> F77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n> \t\tconst double *alpha, const double *a, const int *lda,\n> \t\tconst double *x, const int *incx, const double *beta,\n> \t\tdouble *y, const int *incy FCLEN);\n> \n> with a 12th parameter FCLEN?? How am I supposed to fix this, and what\n> the ... is FCLEN? googling leads to nothing useful (for me). It seems as\n> if R is redefining some standard LAPACK routines.\n> \n> Also a note I do not understand (in this context):\n> \n> note: type ?void? should match type ?long int?\n> \n> Any help is much appreciated.\n> \n\nSounds likely to be related to this item from R-devel NEWS:\n\nhttp://developer.r-project.org/blosxom.cgi/R-devel/2019/08/29#n2019-08-29\n\n\"   Header ?Rconfig.h? contains the value of ?FC_LEN_T? deduced at \ninstallation which is used by the prototypes in headers ?R_ext/BLAS.h? \nand ?R_ext/Lapack.h? but to avoid extensive breakage this is only \nexposed when ?USE_FC_LEN_T? is defined.\n\n     If a package's C/C++ calls to BLAS/LAPACK allow for the ?hidden? \narguments used by most Fortran compilers to pass the lengths of Fortran \ncharacter arguments, define ?USE_FC_LEN_T? and include ?Rconfig.h? \n(possibly _via_ ?R.h?) before including ?R_ext/BLAS.h? or ?R_ext/Lapack.h?.\"\n\nDuncan Murdoch",
-      "body_snippet": "On 31/08/2019 12:47 p.m., G?ran Brostr?m wrote:\n> I'm having difficulties updating my package eha: When I run standard\n> checks 'at home' everything is fine, but 'CRAN-submissions' reports\n> (among ot",
+      "body_plain": "On 31/08/2019 12:47 p.m., Göran Broström wrote:\n> I'm having difficulties updating my package eha: When I run standard\n> checks 'at home' everything is fine, but 'CRAN-submissions' reports\n> (among other things):\n> \n> geomsup.f:324:9: warning: type of ‘dgemv’ does not match original\n> declaration [-Wlto-type-mismatch]\n>     324 |      &     one, score, ione)\n>         |         ^\n> /home/tmp/R-d-gcc-LTO/include/R_ext/BLAS.h:107:1: note: type mismatch in\n> parameter 12\n>     107 | F77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n>         | ^\n> \n> This is odd since the LAPACK subroutine dgemv takes only 11 parameters.\n> However, in include/R_ext/BLAS.h we have\n> \n> F77_NAME(dgemv)(const char *trans, const int *m, const int *n,\n> \t\tconst double *alpha, const double *a, const int *lda,\n> \t\tconst double *x, const int *incx, const double *beta,\n> \t\tdouble *y, const int *incy FCLEN);\n> \n> with a 12th parameter FCLEN?? How am I supposed to fix this, and what\n> the ... is FCLEN? googling leads to nothing useful (for me). It seems as\n> if R is redefining some standard LAPACK routines.\n> \n> Also a note I do not understand (in this context):\n> \n> note: type ‘void’ should match type ‘long int’\n> \n> Any help is much appreciated.\n> \n\nSounds likely to be related to this item from R-devel NEWS:\n\nhttp://developer.r-project.org/blosxom.cgi/R-devel/2019/08/29#n2019-08-29\n\n\"   Header ‘Rconfig.h’ contains the value of ‘FC_LEN_T’ deduced at \ninstallation which is used by the prototypes in headers ‘R_ext/BLAS.h’ \nand ‘R_ext/Lapack.h’ but to avoid extensive breakage this is only \nexposed when ‘USE_FC_LEN_T’ is defined.\n\n     If a package's C/C++ calls to BLAS/LAPACK allow for the ‘hidden’ \narguments used by most Fortran compilers to pass the lengths of Fortran \ncharacter arguments, define ‘USE_FC_LEN_T’ and include ‘Rconfig.h’ \n(possibly _via_ ‘R.h’) before including ‘R_ext/BLAS.h’ or ‘R_ext/Lapack.h’.\"\n\nDuncan Murdoch",
+      "body_snippet": "On 31/08/2019 12:47 p.m., Göran Broström wrote:\n> I'm having difficulties updating my package eha: When I run standard\n> checks 'at home' everything is fine, but 'CRAN-submissions' reports\n> (among ot",
       "thread_id": "thread-63834461076b",
       "thread_depth": 1,
-      "month": "2019-08"
+      "month": "2019-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004317.html"
     }
   ],
   "threads": [

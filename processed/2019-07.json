@@ -17,7 +17,8 @@
       "body_snippet": "I am currently working on a package such that when \"R CMD check\" is run \nthe procedure seems to disappear into a black hole when it gets to\nthe \"* checking examples ...\" stage.\n\nStrangely, when I run ",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004142.html"
     },
     {
       "id": "msg-ce205dfe89c1",
@@ -35,7 +36,8 @@
       "body_snippet": "FWIW, when running\n\nR CMD check mypkg_1.0.tar.gz\n\nthe example output is captured to the file\n'mypkg.Rcheck/mypkg-Ex.Rout', so you could monitor that one for what's\ngoing on.\n\n/Henrik\n\nOn Mon, Jul 1, 2",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004143.html"
     },
     {
       "id": "msg-c317e75661ef",
@@ -51,7 +53,8 @@
       "body_snippet": "Hi everyone,\n\nCurrently my package has a script downloading additional DLLs\ninto \"inst/libs\" and being called in \"Makevars.win\". In this way these\nDLLs get copied to libs when installing the package a",
       "thread_id": "thread-c317e75661ef",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004144.html"
     },
     {
       "id": "msg-6e37bda6c5f7",
@@ -69,7 +72,8 @@
       "body_snippet": "A) You cannot assume the package code will have write access to the library directories. The user/admin who installs the package may never load the package.\n\nB) Downloading binary files for execution ",
       "thread_id": "thread-c317e75661ef",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004145.html"
     },
     {
       "id": "msg-254529a7db2c",
@@ -88,7 +92,8 @@
       "body_snippet": ">>>>> Henrik Bengtsson \n>>>>>     on Mon, 1 Jul 2019 20:36:26 -0700 writes:\n\n    > FWIW, when running R CMD check mypkg_1.0.tar.gz\n\n    > the example output is captured to the file\n    > 'mypkg.Rcheck",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004146.html"
     },
     {
       "id": "msg-1620a73c8442",
@@ -109,7 +114,8 @@
       "body_snippet": "Sorry, it was a mistake. CC the list.\n\n? 2019?7?2? GMT-07:00 ??12:17:01, Jeff Newmiller <jdnewmil at dcn.davis.ca.us> ??:\n>I recommend that you \"reply-all\" to keep the mailing list included.\n>\n>\n>On J",
       "thread_id": "thread-1620a73c8442",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004147.html"
     },
     {
       "id": "msg-1845edb78b3a",
@@ -129,7 +135,8 @@
       "body_snippet": "Many thanks to Henrik Bengtsson and Martin Maechler for pointing out \nthat I can monitor progress by looking at the file\n\n     \"mypkg.Rcheck/mypkg-Ex.Rout\"\n\ne.g. by using \"tail -f\".  This strategy ind",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004148.html"
     },
     {
       "id": "msg-222d9253695e",
@@ -146,11 +153,12 @@
         "<23835.1399.955675.921469@stat.math.ethz.ch>",
         "<9ec6c6b7-8f84-0017-7e12-579729c97605@auckland.ac.nz>"
       ],
-      "body_plain": "Which line of code is it?\n\nI?aki\n\nOn Tue, 2 Jul 2019 at 11:32, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n>\n> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n> that I can monitor progress by looking at the file\n>\n>      \"mypkg.Rcheck/mypkg-Ex.Rout\"\n>\n> e.g. by using \"tail -f\".  This strategy indeed revealed where the hangup\n> was happening.  I wrapped a line of the examples in \\dontrun{} and\n> checked the package again.  Now the checking completes in finite time! :-)\n>\n> However I remain puzzled as to *why* the line in question induces a\n> hangup.  When I load the package and run that same  line from the\n> command line, a result is returned within about 5 seconds of \"wall time\"\n> (or less).\n>\n> Another strangeness:  The line prior to that which I wrapped in\n> \\dontrun{} took a very long time to return a result, although the\n> command did eventually complete (after which everything ran swiftly).\n> But when I run this same line from the command line it completes\n> *instantaneously*.\n>\n> Why on earth would commands be slow, or not execute at all, when run\n> under the aegis of \"R CMD check\", but execute swiftly from the command line?\n>\n> I think it would be unwise of me to ignore the fact that something\n> strange is going on here, but I'm damned if I can see how to go about\n> tracking the strangeness down so as to be able to remedy it.\n>\n> My usual practice when trying to get a handle on something that I don't\n> understand is to insert browsers() into the code at strategic points.\n> See fortunes::fortune(158).  That's of no help in the current context in\n> which the problem only arises when R CMD check is being run.\n>\n> Can anyone suggest a clever means by which I might determine the\n> \"magnitude and direction of my stupidity\"?\n>\n> cheers,\n>\n> Rolf\n>\n> --\n> Honorary Research Fellow\n> Department of Statistics\n> University of Auckland\n> Phone: +64-9-373-7599 ext. 88276\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nI?aki ?car",
-      "body_snippet": "Which line of code is it?\n\nI?aki\n\nOn Tue, 2 Jul 2019 at 11:32, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n>\n> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n> that I can m",
+      "body_plain": "Which line of code is it?\n\nIñaki\n\nOn Tue, 2 Jul 2019 at 11:32, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n>\n> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n> that I can monitor progress by looking at the file\n>\n>      \"mypkg.Rcheck/mypkg-Ex.Rout\"\n>\n> e.g. by using \"tail -f\".  This strategy indeed revealed where the hangup\n> was happening.  I wrapped a line of the examples in \\dontrun{} and\n> checked the package again.  Now the checking completes in finite time! :-)\n>\n> However I remain puzzled as to *why* the line in question induces a\n> hangup.  When I load the package and run that same  line from the\n> command line, a result is returned within about 5 seconds of \"wall time\"\n> (or less).\n>\n> Another strangeness:  The line prior to that which I wrapped in\n> \\dontrun{} took a very long time to return a result, although the\n> command did eventually complete (after which everything ran swiftly).\n> But when I run this same line from the command line it completes\n> *instantaneously*.\n>\n> Why on earth would commands be slow, or not execute at all, when run\n> under the aegis of \"R CMD check\", but execute swiftly from the command line?\n>\n> I think it would be unwise of me to ignore the fact that something\n> strange is going on here, but I'm damned if I can see how to go about\n> tracking the strangeness down so as to be able to remedy it.\n>\n> My usual practice when trying to get a handle on something that I don't\n> understand is to insert browsers() into the code at strategic points.\n> See fortunes::fortune(158).  That's of no help in the current context in\n> which the problem only arises when R CMD check is being run.\n>\n> Can anyone suggest a clever means by which I might determine the\n> \"magnitude and direction of my stupidity\"?\n>\n> cheers,\n>\n> Rolf\n>\n> --\n> Honorary Research Fellow\n> Department of Statistics\n> University of Auckland\n> Phone: +64-9-373-7599 ext. 88276\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nIñaki Úcar",
+      "body_snippet": "Which line of code is it?\n\nIñaki\n\nOn Tue, 2 Jul 2019 at 11:32, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n>\n> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n> that I can m",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 4,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004149.html"
     },
     {
       "id": "msg-880409071f9e",
@@ -171,7 +179,8 @@
       "body_snippet": "It's a pain in the neck, but even more basic than inserting browser()\ncalls all over the place (but possibly useful in this situation) would\nbe inserting appropriate cat() statements all over the plac",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 4,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004150.html"
     },
     {
       "id": "msg-a34f7c6f8dba",
@@ -189,11 +198,12 @@
         "<9ec6c6b7-8f84-0017-7e12-579729c97605@auckland.ac.nz>",
         "<CALEXWq0Xb95LgYAs+Mf9h8d_CTLE=SwQCVqGw8q=sCTwz6u3-g@mail.gmail.com>"
       ],
-      "body_plain": "On 2/07/19 9:45 PM, I?aki Ucar wrote:\n\n> Which line of code is it?\n\nDunno that it's very enlightening, without having access to the package, \nbut the two lines involved are:\n\n> fit <- ldFit(inLogs,predictor=\"logDose\",link=\"logit\")\n> x3  <- cvCompare(fit,nrep=5)\n\nThe first line runs instantaneously from the command line, but takes a \nvery long time under R CMD check.\n\nThe second causes R CMD check to disappear into a black hole, but runs \nin 5 seconds or less from the command line.\n\nI'm sorry that I can't make the package public at this time.  It \ncontains a number of data sets that my consulting client does not want \nreleased publicly.\n\nI guess I could create a slightly cut down version of the package with \nthe proprietary data sets removed ....  If anyone is actually interested.\n\ncheers,\n\nRolf\n\nP. S.  The package is about \"lethal dose\" estimation.  The ldFit() is \nfor fitting models from which to estimate lethal doses.  The cvCompare() \nfunction is for using cross validation of log likelihood to assess \ngoodness of fit and to compare models for goodness of fit.\n\nThe \"nrep=5\" is an unrealistically small value (small so as to reduce \nthe amount of time needed for checking).  The default value is nrep=100.\n\nR.\n\n> \n> I?aki\n> \n> On Tue, 2 Jul 2019 at 11:32, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>>\n>>\n>> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n>> that I can monitor progress by looking at the file\n>>\n>>       \"mypkg.Rcheck/mypkg-Ex.Rout\"\n>>\n>> e.g. by using \"tail -f\".  This strategy indeed revealed where the hangup\n>> was happening.  I wrapped a line of the examples in \\dontrun{} and\n>> checked the package again.  Now the checking completes in finite time! :-)\n>>\n>> However I remain puzzled as to *why* the line in question induces a\n>> hangup.  When I load the package and run that same  line from the\n>> command line, a result is returned within about 5 seconds of \"wall time\"\n>> (or less).\n>>\n>> Another strangeness:  The line prior to that which I wrapped in\n>> \\dontrun{} took a very long time to return a result, although the\n>> command did eventually complete (after which everything ran swiftly).\n>> But when I run this same line from the command line it completes\n>> *instantaneously*.\n>>\n>> Why on earth would commands be slow, or not execute at all, when run\n>> under the aegis of \"R CMD check\", but execute swiftly from the command line?\n>>\n>> I think it would be unwise of me to ignore the fact that something\n>> strange is going on here, but I'm damned if I can see how to go about\n>> tracking the strangeness down so as to be able to remedy it.\n>>\n>> My usual practice when trying to get a handle on something that I don't\n>> understand is to insert browsers() into the code at strategic points.\n>> See fortunes::fortune(158).  That's of no help in the current context in\n>> which the problem only arises when R CMD check is being run.\n>>\n>> Can anyone suggest a clever means by which I might determine the\n>> \"magnitude and direction of my stupidity\"?",
-      "body_snippet": "On 2/07/19 9:45 PM, I?aki Ucar wrote:\n\n> Which line of code is it?\n\nDunno that it's very enlightening, without having access to the package, \nbut the two lines involved are:\n\n> fit <- ldFit(inLogs,pre",
+      "body_plain": "On 2/07/19 9:45 PM, Iñaki Ucar wrote:\n\n> Which line of code is it?\n\nDunno that it's very enlightening, without having access to the package, \nbut the two lines involved are:\n\n> fit <- ldFit(inLogs,predictor=\"logDose\",link=\"logit\")\n> x3  <- cvCompare(fit,nrep=5)\n\nThe first line runs instantaneously from the command line, but takes a \nvery long time under R CMD check.\n\nThe second causes R CMD check to disappear into a black hole, but runs \nin 5 seconds or less from the command line.\n\nI'm sorry that I can't make the package public at this time.  It \ncontains a number of data sets that my consulting client does not want \nreleased publicly.\n\nI guess I could create a slightly cut down version of the package with \nthe proprietary data sets removed ....  If anyone is actually interested.\n\ncheers,\n\nRolf\n\nP. S.  The package is about \"lethal dose\" estimation.  The ldFit() is \nfor fitting models from which to estimate lethal doses.  The cvCompare() \nfunction is for using cross validation of log likelihood to assess \ngoodness of fit and to compare models for goodness of fit.\n\nThe \"nrep=5\" is an unrealistically small value (small so as to reduce \nthe amount of time needed for checking).  The default value is nrep=100.\n\nR.\n\n> \n> Iñaki\n> \n> On Tue, 2 Jul 2019 at 11:32, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>>\n>>\n>> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n>> that I can monitor progress by looking at the file\n>>\n>>       \"mypkg.Rcheck/mypkg-Ex.Rout\"\n>>\n>> e.g. by using \"tail -f\".  This strategy indeed revealed where the hangup\n>> was happening.  I wrapped a line of the examples in \\dontrun{} and\n>> checked the package again.  Now the checking completes in finite time! :-)\n>>\n>> However I remain puzzled as to *why* the line in question induces a\n>> hangup.  When I load the package and run that same  line from the\n>> command line, a result is returned within about 5 seconds of \"wall time\"\n>> (or less).\n>>\n>> Another strangeness:  The line prior to that which I wrapped in\n>> \\dontrun{} took a very long time to return a result, although the\n>> command did eventually complete (after which everything ran swiftly).\n>> But when I run this same line from the command line it completes\n>> *instantaneously*.\n>>\n>> Why on earth would commands be slow, or not execute at all, when run\n>> under the aegis of \"R CMD check\", but execute swiftly from the command line?\n>>\n>> I think it would be unwise of me to ignore the fact that something\n>> strange is going on here, but I'm damned if I can see how to go about\n>> tracking the strangeness down so as to be able to remedy it.\n>>\n>> My usual practice when trying to get a handle on something that I don't\n>> understand is to insert browsers() into the code at strategic points.\n>> See fortunes::fortune(158).  That's of no help in the current context in\n>> which the problem only arises when R CMD check is being run.\n>>\n>> Can anyone suggest a clever means by which I might determine the\n>> \"magnitude and direction of my stupidity\"?",
+      "body_snippet": "On 2/07/19 9:45 PM, Iñaki Ucar wrote:\n\n> Which line of code is it?\n\nDunno that it's very enlightening, without having access to the package, \nbut the two lines involved are:\n\n> fit <- ldFit(inLogs,pre",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 5,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004151.html"
     },
     {
       "id": "msg-50f146fb0fa5",
@@ -216,7 +226,8 @@
       "body_snippet": "Could R CMD check be using valgrind to run the examples? Valgrind has\nto interpret CPU instructions manually to be able to warn about\nresults of code execution depending on memory values it considers\n",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 6,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004152.html"
     },
     {
       "id": "msg-538575aa294e",
@@ -232,7 +243,8 @@
       "body_snippet": "Hi r-package-devel,\n\nI've submitted my first package but it failed the CRAN pre-tests on\nNOTES. I got:\n\n- my email\n\n- an extra non-standard file (which I have now added to .Rbuildignore)\n\n- NOTEs on \"",
       "thread_id": "thread-538575aa294e",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004153.html"
     },
     {
       "id": "msg-f35e82978a64",
@@ -246,11 +258,12 @@
       "references": [
         "<0dd1f26d-d54b-1017-c3b7-fc8760dba2ec@imperial.ac.uk>"
       ],
-      "body_plain": "ra?l\n\nOn Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n<a.berlanga at imperial.ac.uk> wrote:\n>\n> Hi r-package-devel,\n>\n> I've submitted my first package but it failed the CRAN pre-tests on\n> NOTES. I got:\n>\n> - my email\n>\n> - an extra non-standard file (which I have now added to .Rbuildignore)\n>\n> - NOTEs on \"no visible global function definition\"\n>\n> The first two I assume are harmless. The third I do not know how to fix\n> (possible solutions below). Can it be ignored and suggest the fail was a\n> false-positive?\n>\n> The third NOTE is:\n>\n> #######\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n> Check: R code for possible problems, Result: NOTE\n>   epi_clean_count_classes: no visible global function definition for\n>     '%>%'\n>   epi_clean_count_classes: no visible binding for global variable '.'\n>   epi_plot_heatmap: no visible binding for global variable 'Var1'\n>   epi_plot_heatmap: no visible binding for global variable 'Var2'\n>   epi_plot_heatmap: no visible binding for global variable 'value'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var1'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var2'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'value'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_text'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'coord_fixed'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_blank'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_rect'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'guide_colorbar'\n>   epi_stats_summary: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible binding for global variable '.'\n>   epi_stats_tidy: no visible binding for global variable 'x'\n>   epi_stats_tidy: no visible binding for global variable 'n'\n>   epi_stats_tidy: no visible binding for global variable 'id'\n>   Undefined global functions or variables:\n>     %>% . Var1 Var2 coord_fixed element_blank element_rect element_text\n>     guide_colorbar id n value x\n> #######\n>\n>\n> Solutions seem to cause errors elsewhere and there does not appear to be\n> an ideal one unfortunately. It seems to me that adding a file in the\n> directory 'R' containing eg:\n>\n> #######\n>\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n>\n> #######\n>\n> is one of the preferred ways. This seems far from ideal though.\n\nIf you use NSE in your package, this is the best solution. You may\nalso switch to SE.\n\nI?aki",
-      "body_snippet": "ra?l\n\nOn Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n<a.berlanga at imperial.ac.uk> wrote:\n>\n> Hi r-package-devel,\n>\n> I've submitted my first package but it failed the CRAN pre-tests on\n> NOTES. I ",
+      "body_plain": "raúl\n\nOn Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n<a.berlanga at imperial.ac.uk> wrote:\n>\n> Hi r-package-devel,\n>\n> I've submitted my first package but it failed the CRAN pre-tests on\n> NOTES. I got:\n>\n> - my email\n>\n> - an extra non-standard file (which I have now added to .Rbuildignore)\n>\n> - NOTEs on \"no visible global function definition\"\n>\n> The first two I assume are harmless. The third I do not know how to fix\n> (possible solutions below). Can it be ignored and suggest the fail was a\n> false-positive?\n>\n> The third NOTE is:\n>\n> #######\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n> Check: R code for possible problems, Result: NOTE\n>   epi_clean_count_classes: no visible global function definition for\n>     '%>%'\n>   epi_clean_count_classes: no visible binding for global variable '.'\n>   epi_plot_heatmap: no visible binding for global variable 'Var1'\n>   epi_plot_heatmap: no visible binding for global variable 'Var2'\n>   epi_plot_heatmap: no visible binding for global variable 'value'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var1'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var2'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'value'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_text'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'coord_fixed'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_blank'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_rect'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'guide_colorbar'\n>   epi_stats_summary: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible binding for global variable '.'\n>   epi_stats_tidy: no visible binding for global variable 'x'\n>   epi_stats_tidy: no visible binding for global variable 'n'\n>   epi_stats_tidy: no visible binding for global variable 'id'\n>   Undefined global functions or variables:\n>     %>% . Var1 Var2 coord_fixed element_blank element_rect element_text\n>     guide_colorbar id n value x\n> #######\n>\n>\n> Solutions seem to cause errors elsewhere and there does not appear to be\n> an ideal one unfortunately. It seems to me that adding a file in the\n> directory 'R' containing eg:\n>\n> #######\n>\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n>\n> #######\n>\n> is one of the preferred ways. This seems far from ideal though.\n\nIf you use NSE in your package, this is the best solution. You may\nalso switch to SE.\n\nIñaki",
+      "body_snippet": "raúl\n\nOn Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n<a.berlanga at imperial.ac.uk> wrote:\n>\n> Hi r-package-devel,\n>\n> I've submitted my first package but it failed the CRAN pre-tests on\n> NOTES. I ",
       "thread_id": "thread-538575aa294e",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004154.html"
     },
     {
       "id": "msg-611365a5b6ef",
@@ -265,11 +278,12 @@
         "<0dd1f26d-d54b-1017-c3b7-fc8760dba2ec@imperial.ac.uk>",
         "<CALEXWq3ivnrGMKig6hz3jPUY21j-uXwqqa-vYyh=j+LJrvCw0Q@mail.gmail.com>"
       ],
-      "body_plain": "> ...\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n\nUsing such a general pattern eventually and  inevitably will prevent the check from reporting legitimate bugs. \nOne alternative is to list explicitly the variables in question and make sure that they are not commonly used names like 'x'. \nIf that is not practical and you use non-standard evaluation a lot,  consider '.data' from package 'lang' , see its documentation and/or Google it \nto find out how to use it. \n\n#' @importFrom rlang .data\n\n\nGeorgi Boshnakov\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of I?aki Ucar\nSent: 02 July 2019 15:19\nTo: Berlanga, Antonio J\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] CRAN pre-test failed on NOTE \"no visible binding for global variable\"\n\nra?l\n\nOn Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n<a.berlanga at imperial.ac.uk> wrote:\n>\n> Hi r-package-devel,\n>\n> I've submitted my first package but it failed the CRAN pre-tests on\n> NOTES. I got:\n>\n> - my email\n>\n> - an extra non-standard file (which I have now added to .Rbuildignore)\n>\n> - NOTEs on \"no visible global function definition\"\n>\n> The first two I assume are harmless. The third I do not know how to fix\n> (possible solutions below). Can it be ignored and suggest the fail was a\n> false-positive?\n>\n> The third NOTE is:\n>\n> #######\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n> Check: R code for possible problems, Result: NOTE\n>   epi_clean_count_classes: no visible global function definition for\n>     '%>%'\n>   epi_clean_count_classes: no visible binding for global variable '.'\n>   epi_plot_heatmap: no visible binding for global variable 'Var1'\n>   epi_plot_heatmap: no visible binding for global variable 'Var2'\n>   epi_plot_heatmap: no visible binding for global variable 'value'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var1'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var2'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'value'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_text'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'coord_fixed'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_blank'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_rect'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'guide_colorbar'\n>   epi_stats_summary: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible binding for global variable '.'\n>   epi_stats_tidy: no visible binding for global variable 'x'\n>   epi_stats_tidy: no visible binding for global variable 'n'\n>   epi_stats_tidy: no visible binding for global variable 'id'\n>   Undefined global functions or variables:\n>     %>% . Var1 Var2 coord_fixed element_blank element_rect element_text\n>     guide_colorbar id n value x\n> #######\n>\n>\n> Solutions seem to cause errors elsewhere and there does not appear to be\n> an ideal one unfortunately. It seems to me that adding a file in the\n> directory 'R' containing eg:\n>\n> #######\n>\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n>\n> #######\n>\n> is one of the preferred ways. This seems far from ideal though.\n\nIf you use NSE in your package, this is the best solution. You may\nalso switch to SE.\n\nI?aki\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "> ...\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n\nUsing such a general pattern eventually and  inevitably will prevent the check from reporting legitimate bugs. \nOne alternative is to list explicitly the variables in question and make sure that they are not commonly used names like 'x'. \nIf that is not practical and you use non-standard evaluation a lot,  consider '.data' from package 'lang' , see its documentation and/or Google it \nto find out how to use it. \n\n#' @importFrom rlang .data\n\n\nGeorgi Boshnakov\n\n-----Original Message-----\nFrom: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Iñaki Ucar\nSent: 02 July 2019 15:19\nTo: Berlanga, Antonio J\nCc: r-package-devel at r-project.org\nSubject: Re: [R-pkg-devel] CRAN pre-test failed on NOTE \"no visible binding for global variable\"\n\nraúl\n\nOn Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n<a.berlanga at imperial.ac.uk> wrote:\n>\n> Hi r-package-devel,\n>\n> I've submitted my first package but it failed the CRAN pre-tests on\n> NOTES. I got:\n>\n> - my email\n>\n> - an extra non-standard file (which I have now added to .Rbuildignore)\n>\n> - NOTEs on \"no visible global function definition\"\n>\n> The first two I assume are harmless. The third I do not know how to fix\n> (possible solutions below). Can it be ignored and suggest the fail was a\n> false-positive?\n>\n> The third NOTE is:\n>\n> #######\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n> Check: R code for possible problems, Result: NOTE\n>   epi_clean_count_classes: no visible global function definition for\n>     '%>%'\n>   epi_clean_count_classes: no visible binding for global variable '.'\n>   epi_plot_heatmap: no visible binding for global variable 'Var1'\n>   epi_plot_heatmap: no visible binding for global variable 'Var2'\n>   epi_plot_heatmap: no visible binding for global variable 'value'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var1'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'Var2'\n>   epi_plot_heatmap_triangle: no visible binding for global variable\n>     'value'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_text'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'coord_fixed'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_blank'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'element_rect'\n>   epi_plot_heatmap_triangle: no visible global function definition for\n>     'guide_colorbar'\n>   epi_stats_summary: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible global function definition for '%>%'\n>   epi_stats_tidy: no visible binding for global variable '.'\n>   epi_stats_tidy: no visible binding for global variable 'x'\n>   epi_stats_tidy: no visible binding for global variable 'n'\n>   epi_stats_tidy: no visible binding for global variable 'id'\n>   Undefined global functions or variables:\n>     %>% . Var1 Var2 coord_fixed element_blank element_rect element_text\n>     guide_colorbar id n value x\n> #######\n>\n>\n> Solutions seem to cause errors elsewhere and there does not appear to be\n> an ideal one unfortunately. It seems to me that adding a file in the\n> directory 'R' containing eg:\n>\n> #######\n>\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n>\n> #######\n>\n> is one of the preferred ways. This seems far from ideal though.\n\nIf you use NSE in your package, this is the best solution. You may\nalso switch to SE.\n\nIñaki\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "> ...\n> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n\nUsing such a general pattern eventually and  inevitably will prevent the check from reporting legitimate bugs. \nOne alternative is",
       "thread_id": "thread-538575aa294e",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004155.html"
     },
     {
       "id": "msg-0cc48dcd350c",
@@ -290,7 +304,8 @@
       "body_snippet": "On 02/07/2019 5:31 a.m., Rolf Turner wrote:\n> \n> Many thanks to Henrik Bengtsson and Martin Maechler for pointing out\n> that I can monitor progress by looking at the file\n> \n>       \"mypkg.Rcheck/mypk",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 4,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004156.html"
     },
     {
       "id": "msg-01a902d80fac",
@@ -314,7 +329,8 @@
       "body_snippet": "On 2/07/19 11:13 PM, Ivan Krylov wrote:\n\n> Could R CMD check be using valgrind to run the examples? Valgrind has\n> to interpret CPU instructions manually to be able to warn about\n> results of code exe",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 7,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004157.html"
     },
     {
       "id": "msg-0d6b08a23d89",
@@ -330,11 +346,12 @@
         "<CALEXWq3ivnrGMKig6hz3jPUY21j-uXwqqa-vYyh=j+LJrvCw0Q@mail.gmail.com>",
         "<438D2EC9EAFE5946B2D5864670EA468E018F720868@MBXP02.ds.man.ac.uk>"
       ],
-      "body_plain": "On 02/07/2019 11:00 a.m., Georgi Boshnakov wrote:\n>> ...\n>> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n> \n> Using such a general pattern eventually and  inevitably will prevent the check from reporting legitimate bugs.\n\nI believe globalVariables() takes a vector of names, not a regular \nexpression for names.  So that's not so general, it's just the name \".\".\n\nDuncan Murdoch\n\n> One alternative is to list explicitly the variables in question and make sure that they are not commonly used names like 'x'.\n> If that is not practical and you use non-standard evaluation a lot,  consider '.data' from package 'lang' , see its documentation and/or Google it\n> to find out how to use it.\n> \n> #' @importFrom rlang .data\n> \n> \n> Georgi Boshnakov\n> \n> -----Original Message-----\n> From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of I?aki Ucar\n> Sent: 02 July 2019 15:19\n> To: Berlanga, Antonio J\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] CRAN pre-test failed on NOTE \"no visible binding for global variable\"\n> \n> ra?l\n> \n> On Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n> <a.berlanga at imperial.ac.uk> wrote:\n>>\n>> Hi r-package-devel,\n>>\n>> I've submitted my first package but it failed the CRAN pre-tests on\n>> NOTES. I got:\n>>\n>> - my email\n>>\n>> - an extra non-standard file (which I have now added to .Rbuildignore)\n>>\n>> - NOTEs on \"no visible global function definition\"\n>>\n>> The first two I assume are harmless. The third I do not know how to fix\n>> (possible solutions below). Can it be ignored and suggest the fail was a\n>> false-positive?\n>>\n>> The third NOTE is:\n>>\n>> #######\n>>\n>> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n>> Check: R code for possible problems, Result: NOTE\n>>    epi_clean_count_classes: no visible global function definition for\n>>      '%>%'\n>>    epi_clean_count_classes: no visible binding for global variable '.'\n>>    epi_plot_heatmap: no visible binding for global variable 'Var1'\n>>    epi_plot_heatmap: no visible binding for global variable 'Var2'\n>>    epi_plot_heatmap: no visible binding for global variable 'value'\n>>    epi_plot_heatmap_triangle: no visible binding for global variable\n>>      'Var1'\n>>    epi_plot_heatmap_triangle: no visible binding for global variable\n>>      'Var2'\n>>    epi_plot_heatmap_triangle: no visible binding for global variable\n>>      'value'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'element_text'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'coord_fixed'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'element_blank'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'element_rect'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'guide_colorbar'\n>>    epi_stats_summary: no visible global function definition for '%>%'\n>>    epi_stats_tidy: no visible global function definition for '%>%'\n>>    epi_stats_tidy: no visible binding for global variable '.'\n>>    epi_stats_tidy: no visible binding for global variable 'x'\n>>    epi_stats_tidy: no visible binding for global variable 'n'\n>>    epi_stats_tidy: no visible binding for global variable 'id'\n>>    Undefined global functions or variables:\n>>      %>% . Var1 Var2 coord_fixed element_blank element_rect element_text\n>>      guide_colorbar id n value x\n>> #######\n>>\n>>\n>> Solutions seem to cause errors elsewhere and there does not appear to be\n>> an ideal one unfortunately. It seems to me that adding a file in the\n>> directory 'R' containing eg:\n>>\n>> #######\n>>\n>> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n>>\n>> #######\n>>\n>> is one of the preferred ways. This seems far from ideal though.\n> \n> If you use NSE in your package, this is the best solution. You may\n> also switch to SE.\n> \n> I?aki\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "On 02/07/2019 11:00 a.m., Georgi Boshnakov wrote:\n>> ...\n>> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n> \n> Using such a general pattern eventually and  inevitably will prevent the check from reporting legitimate bugs.\n\nI believe globalVariables() takes a vector of names, not a regular \nexpression for names.  So that's not so general, it's just the name \".\".\n\nDuncan Murdoch\n\n> One alternative is to list explicitly the variables in question and make sure that they are not commonly used names like 'x'.\n> If that is not practical and you use non-standard evaluation a lot,  consider '.data' from package 'lang' , see its documentation and/or Google it\n> to find out how to use it.\n> \n> #' @importFrom rlang .data\n> \n> \n> Georgi Boshnakov\n> \n> -----Original Message-----\n> From: R-package-devel [mailto:r-package-devel-bounces at r-project.org] On Behalf Of Iñaki Ucar\n> Sent: 02 July 2019 15:19\n> To: Berlanga, Antonio J\n> Cc: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] CRAN pre-test failed on NOTE \"no visible binding for global variable\"\n> \n> raúl\n> \n> On Tue, 2 Jul 2019 at 14:18, Berlanga, Antonio J\n> <a.berlanga at imperial.ac.uk> wrote:\n>>\n>> Hi r-package-devel,\n>>\n>> I've submitted my first package but it failed the CRAN pre-tests on\n>> NOTES. I got:\n>>\n>> - my email\n>>\n>> - an extra non-standard file (which I have now added to .Rbuildignore)\n>>\n>> - NOTEs on \"no visible global function definition\"\n>>\n>> The first two I assume are harmless. The third I do not know how to fix\n>> (possible solutions below). Can it be ignored and suggest the fail was a\n>> false-positive?\n>>\n>> The third NOTE is:\n>>\n>> #######\n>>\n>> Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64\n>> Check: R code for possible problems, Result: NOTE\n>>    epi_clean_count_classes: no visible global function definition for\n>>      '%>%'\n>>    epi_clean_count_classes: no visible binding for global variable '.'\n>>    epi_plot_heatmap: no visible binding for global variable 'Var1'\n>>    epi_plot_heatmap: no visible binding for global variable 'Var2'\n>>    epi_plot_heatmap: no visible binding for global variable 'value'\n>>    epi_plot_heatmap_triangle: no visible binding for global variable\n>>      'Var1'\n>>    epi_plot_heatmap_triangle: no visible binding for global variable\n>>      'Var2'\n>>    epi_plot_heatmap_triangle: no visible binding for global variable\n>>      'value'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'element_text'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'coord_fixed'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'element_blank'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'element_rect'\n>>    epi_plot_heatmap_triangle: no visible global function definition for\n>>      'guide_colorbar'\n>>    epi_stats_summary: no visible global function definition for '%>%'\n>>    epi_stats_tidy: no visible global function definition for '%>%'\n>>    epi_stats_tidy: no visible binding for global variable '.'\n>>    epi_stats_tidy: no visible binding for global variable 'x'\n>>    epi_stats_tidy: no visible binding for global variable 'n'\n>>    epi_stats_tidy: no visible binding for global variable 'id'\n>>    Undefined global functions or variables:\n>>      %>% . Var1 Var2 coord_fixed element_blank element_rect element_text\n>>      guide_colorbar id n value x\n>> #######\n>>\n>>\n>> Solutions seem to cause errors elsewhere and there does not appear to be\n>> an ideal one unfortunately. It seems to me that adding a file in the\n>> directory 'R' containing eg:\n>>\n>> #######\n>>\n>> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n>>\n>> #######\n>>\n>> is one of the preferred ways. This seems far from ideal though.\n> \n> If you use NSE in your package, this is the best solution. You may\n> also switch to SE.\n> \n> Iñaki\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "On 02/07/2019 11:00 a.m., Georgi Boshnakov wrote:\n>> ...\n>> if(getRversion() >= \"2.15.1\") utils::globalVariables(c(\".\"))\n> \n> Using such a general pattern eventually and  inevitably will prevent the c",
       "thread_id": "thread-538575aa294e",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004158.html"
     },
     {
       "id": "msg-f0c96e468553",
@@ -352,7 +369,8 @@
       "body_snippet": "(Reposting..)\n\nHi everyone,\n\nI am getting following two warnings when I submit my R package (perfectphyloR) to CRAN.\n\nWarning 1: * checking files in 'vignettes' ... WARNING\n             Files in the '",
       "thread_id": "thread-f0c96e468553",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004159.html"
     },
     {
       "id": "msg-1be8909ce223",
@@ -371,7 +389,8 @@
       "body_snippet": "Hi, how to you build your package?\n\nI do:\nmkdir -p inst/doc\nmkdir vignettes\ncp sources_vignettes/*.pdf* vignettes ## for linux add -u after cp\ncp sources_vignettes/*.Rnw inst/doc ## for linux add -u a",
       "thread_id": "thread-f0c96e468553",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004160.html"
     },
     {
       "id": "msg-0229ef24a2cd",
@@ -387,7 +406,8 @@
       "body_snippet": "Assume an R package `myPackage` that contains the folder `vignettes`, in \nwhich the TEX-file `PACViR_Vignette.tex` and two image files \n(`image1.pdf` and `image2.pdf`) are located. The TEX-file compil",
       "thread_id": "thread-0229ef24a2cd",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004161.html"
     },
     {
       "id": "msg-ca96f8e8b5d0",
@@ -405,7 +425,8 @@
       "body_snippet": "On 3 July 2019 at 19:43, Michael Gruenstaeudl wrote:\n| Assume an R package `myPackage` that contains the folder `vignettes`, in \n| which the TEX-file `PACViR_Vignette.tex` and two image files \n| (`ima",
       "thread_id": "thread-0229ef24a2cd",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004162.html"
     },
     {
       "id": "msg-377e8e53571d",
@@ -421,7 +442,8 @@
       "body_snippet": "*I am building a package a package and one of its functions need parallel\nprocesing.*\n*Then I created the function because my final use are not technical:*\n\ncreate.cluster <-function()\n{\n  # Calculate",
       "thread_id": "thread-377e8e53571d",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004163.html"
     },
     {
       "id": "msg-1c5107588d61",
@@ -437,7 +459,8 @@
       "body_snippet": "Assume an R package that generates a figure ('output.pdf') as the result \nof executing the example code specified in one of the manual files (i.e. \nan .Rd file). The example code specifies the figure ",
       "thread_id": "thread-1c5107588d61",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004164.html"
     },
     {
       "id": "msg-e584a816295d",
@@ -455,7 +478,8 @@
       "body_snippet": "https://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html\n\n?tempdir\n\nOn July 4, 2019 3:25:25 PM PDT, Michael Gruenstaeudl <mi.gruenstaeudl at gmail.com> wrote:\n>Assume an R package that ge",
       "thread_id": "thread-1c5107588d61",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004165.html"
     },
     {
       "id": "msg-dc2b6b5d0a8b",
@@ -471,7 +495,8 @@
       "body_snippet": "Not seeing in \"Writing R Extensions\" a way to annotate a block quote in an Rd file. Any suggestions?\n-- \nSent from my phone. Please excuse my brevity.",
       "thread_id": "thread-dc2b6b5d0a8b",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004166.html"
     },
     {
       "id": "msg-62d7d629457c",
@@ -489,7 +514,8 @@
       "body_snippet": "On 04/07/2019 7:43 p.m., Jeff Newmiller wrote:\n> Not seeing in \"Writing R Extensions\" a way to annotate a block quote in an Rd file. Any suggestions?\n\nI don't think there is a built-in one.  If you ar",
       "thread_id": "thread-dc2b6b5d0a8b",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004167.html"
     },
     {
       "id": "msg-7beb12b437a6",
@@ -508,7 +534,8 @@
       "body_snippet": "Ehh... not that much. Will make do with a couple of quote marks. Thanks for the confirmation.\n\nOn July 4, 2019 5:48:56 PM PDT, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>On 04/07/2019 7:43 p",
       "thread_id": "thread-dc2b6b5d0a8b",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004168.html"
     },
     {
       "id": "msg-fa08af19f974",
@@ -524,7 +551,8 @@
       "body_snippet": "I have been working on making a data package. The goal is to one day push\nit to CRAN,\nbut I am having 2 problems (one warning and one note) from R CMD. I think\nthe problems\nare due to having large fil",
       "thread_id": "thread-fa08af19f974",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004169.html"
     },
     {
       "id": "msg-9da1fde8ef63",
@@ -542,7 +570,8 @@
       "body_snippet": "On 6 July 2019 at 09:27, Alex Hallam wrote:\n| I have been working on making a data package. The goal is to one day push\n| it to CRAN, but I am having 2 problems (one warning and one note) from R\n| CMD",
       "thread_id": "thread-fa08af19f974",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004170.html"
     },
     {
       "id": "msg-fe70acee18af",
@@ -561,7 +590,8 @@
       "body_snippet": "Thanks. This is exactly what I needed.\n\nThanks\n-Alex\n\nOn Sat, Jul 6, 2019 at 10:10 AM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 6 July 2019 at 09:27, Alex Hallam wrote:\n> | I have been work",
       "thread_id": "thread-fa08af19f974",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004171.html"
     },
     {
       "id": "msg-019670c79953",
@@ -577,7 +607,8 @@
       "body_snippet": "Dear List,\n\nI have been informed that the most recent upload of our swephR package\ntriggers stack-buffer-overflow. See for example\nhttps://www.stats.ox.ac.uk/pub/bdr/memtests/clang-ASAN/swephR. The\nre",
       "thread_id": "thread-019670c79953",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004172.html"
     },
     {
       "id": "msg-e8b9c97015e9",
@@ -599,7 +630,8 @@
       "body_snippet": "Just thought it might be of interest were I to give a progress report\n( :-) ) on this problem.\n\nI managed to track down and fix what was going wrong.  It turns out that \nthe issue was \"stringsAsFactor",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 5,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004173.html"
     },
     {
       "id": "msg-3a9aef45bba4",
@@ -622,7 +654,8 @@
       "body_snippet": "This is why I only put localization variables in .Rprofile and am always putting such options into my project-specific scripts.\n\nThis may sound like I am a masochist, but I hate sharing my scripts wit",
       "thread_id": "thread-e5c022ef8dd0",
       "thread_depth": 6,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004174.html"
     },
     {
       "id": "msg-f562d47825b1",
@@ -640,7 +673,8 @@
       "body_snippet": "On Sat, Jul 6, 2019 at 10:45 PM Ralf Stubner <ralf.stubner at gmail.com> wrote:\n> I have been informed that the most recent upload of our swephR package\n> triggers stack-buffer-overflow. See for examp",
       "thread_id": "thread-019670c79953",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004175.html"
     },
     {
       "id": "msg-3e3ab4b6c0db",
@@ -656,7 +690,8 @@
       "body_snippet": "I am working on a data package. Due to the size of the package I opted\nto store the package as a drat repo.\n\nI am able to install my package locally, but I can't seem to install the\npackage\nfrom the d",
       "thread_id": "thread-3e3ab4b6c0db",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004176.html"
     },
     {
       "id": "msg-61f12a675a74",
@@ -674,7 +709,8 @@
       "body_snippet": "On Wed, Jul 10, 2019 at 11:54 AM Alex Hallam <alexhallam6.28 at gmail.com> wrote:\n\n> My hunch is that this has to do with the tar ball being tracked with \"git\n> large file storage\". This is because th",
       "thread_id": "thread-3e3ab4b6c0db",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004177.html"
     },
     {
       "id": "msg-f02202db75c9",
@@ -692,7 +728,8 @@
       "body_snippet": "On 10 July 2019 at 05:53, Alex Hallam wrote:\n| I am working on a data package. Due to the size of the package I opted\n| to store the package as a drat repo.\n| \n| I am able to install my package locall",
       "thread_id": "thread-3e3ab4b6c0db",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004178.html"
     },
     {
       "id": "msg-bc516226a58a",
@@ -711,7 +748,8 @@
       "body_snippet": "On Wed, Jul 10, 2019 at 6:14 AM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 10 July 2019 at 05:53, Alex Hallam wrote:\n> | I am working on a data package. Due to the size of the package I opte",
       "thread_id": "thread-3e3ab4b6c0db",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004179.html"
     },
     {
       "id": "msg-92b0a381b9e9",
@@ -727,7 +765,8 @@
       "body_snippet": "I'm submitting a package that uses ffmpeg, which I found out the CRAN\nwindows build has available (after submitting to win-builder and CRAN).   I\nwas unaware this was available (or which version).  Pl",
       "thread_id": "thread-92b0a381b9e9",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004180.html"
     },
     {
       "id": "msg-447878603fe5",
@@ -743,7 +782,8 @@
       "body_snippet": "When I have submitted my package to CRAN the auto-check service is showing\na NOTE on the debian build during the \"Check: for non-standard things in\nthe check directory\":\n\nFound the following files/dir",
       "thread_id": "thread-447878603fe5",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004181.html"
     },
     {
       "id": "msg-3feca7478ad0",
@@ -761,7 +801,8 @@
       "body_snippet": "On 12/07/2019 2:27 p.m., Hugo Pedder wrote:\n> When I have submitted my package to CRAN the auto-check service is showing\n> a NOTE on the debian build during the \"Check: for non-standard things in\n> th",
       "thread_id": "thread-447878603fe5",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004182.html"
     },
     {
       "id": "msg-1e47ca7b5dbe",
@@ -777,7 +818,8 @@
       "body_snippet": "This is fussing over a very minor issue, but ... well, I have OCD, I guess.\n\nI've tried adding extra \"blank\" columns between my real columns (extra \n\\tab's with blank fields) but these have no effect.",
       "thread_id": "thread-1e47ca7b5dbe",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004183.html"
     },
     {
       "id": "msg-4a1bec370be8",
@@ -795,7 +837,8 @@
       "body_snippet": "On 12/07/2019 9:43 p.m., Rolf Turner wrote:\n> \n> This is fussing over a very minor issue, but ... well, I have OCD, I guess.\n> \n> I've tried adding extra \"blank\" columns between my real columns (extra",
       "thread_id": "thread-1e47ca7b5dbe",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004184.html"
     },
     {
       "id": "msg-3b944dbdcfbd",
@@ -811,7 +854,8 @@
       "body_snippet": "Hi,\n\nI recently included native code to my package rdwd and have since been getting messages of Windows users not being able to install the source version.\nAs far as I can tell, the problem is that th",
       "thread_id": "thread-3b944dbdcfbd",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004185.html"
     },
     {
       "id": "msg-91bf2cca7867",
@@ -825,11 +869,12 @@
       "references": [
         "<AM0PR06MB40685950C710B20C70FCEA09D5F30@AM0PR06MB4068.eurprd06.prod.outlook.com>"
       ],
-      "body_plain": "Hi,\nI think your diagnosis is correct.\n\nAs suggested in \nhttps://cran.r-project.org/bin/windows/Rtools/Rtools.txt, a convenient \nplace for R tools is\n\nc:\\Rtools\n\nRegards,\n\nMarcelino\n\n\n\n\nEl 13/07/2019 a las 19:03, Berry Boessenkool escribi?:\n> Hi,\n>\n> I recently included native code to my package rdwd and have since been getting messages of Windows users not being able to install the source version.\n> As far as I can tell, the problem is that their Rtools is installed in a path with a space. i.e C:/Program Files.\n>\n> * installing *source* package 'rdwd'\n> [...]\n> C:/Program Files/R/Rtools/mingw_32/bin/gfortran    -O3  -mtune=generic -c  binary_to_num.f90 -o binary_to_num.o\n> make: C:/Program: Command not found\n>\n> Is my diagnosis correct?\n> If yes:\n> Should I just continue to tell users to install Rtools directly at C:/Rtools?\n> Would it help for install to use shQuote on the Rtools paths?\n> Should Rtools warn when being installed in \"Program Files\"?\n> Rhetorical question @Microsoft: what were you thinking?\n>\n> Regards,\n> Berry\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> .\n>\n\n-- \nMarcelino de la Cruz Rot\nDepto. de Biolog?a y Geolog?a\nF?sica y Qu?mica Inorg?nica\nUniversidad Rey Juan Carlos\nM?stoles Espa?a",
+      "body_plain": "Hi,\nI think your diagnosis is correct.\n\nAs suggested in \nhttps://cran.r-project.org/bin/windows/Rtools/Rtools.txt, a convenient \nplace for R tools is\n\nc:\\Rtools\n\nRegards,\n\nMarcelino\n\n\n\n\nEl 13/07/2019 a las 19:03, Berry Boessenkool escribió:\n> Hi,\n>\n> I recently included native code to my package rdwd and have since been getting messages of Windows users not being able to install the source version.\n> As far as I can tell, the problem is that their Rtools is installed in a path with a space. i.e C:/Program Files.\n>\n> * installing *source* package 'rdwd'\n> [...]\n> C:/Program Files/R/Rtools/mingw_32/bin/gfortran    -O3  -mtune=generic -c  binary_to_num.f90 -o binary_to_num.o\n> make: C:/Program: Command not found\n>\n> Is my diagnosis correct?\n> If yes:\n> Should I just continue to tell users to install Rtools directly at C:/Rtools?\n> Would it help for install to use shQuote on the Rtools paths?\n> Should Rtools warn when being installed in \"Program Files\"?\n> Rhetorical question @Microsoft: what were you thinking?\n>\n> Regards,\n> Berry\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> .\n>\n\n-- \nMarcelino de la Cruz Rot\nDepto. de Biología y Geología\nFísica y Química Inorgánica\nUniversidad Rey Juan Carlos\nMóstoles España",
       "body_snippet": "Hi,\nI think your diagnosis is correct.\n\nAs suggested in \nhttps://cran.r-project.org/bin/windows/Rtools/Rtools.txt, a convenient \nplace for R tools is\n\nc:\\Rtools\n\nRegards,\n\nMarcelino\n\n\n\n\nEl 13/07/2019 ",
       "thread_id": "thread-3b944dbdcfbd",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004186.html"
     },
     {
       "id": "msg-b6d79dadbb4f",
@@ -848,7 +893,8 @@
       "body_snippet": "On 13/07/19 9:38 PM, Duncan Murdoch wrote:\n\n> On 12/07/2019 9:43 p.m., Rolf Turner wrote:\n>>\n>> This is fussing over a very minor issue, but ... well, I have OCD, I \n>> guess.\n>>\n>> I've tried adding ",
       "thread_id": "thread-1e47ca7b5dbe",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004187.html"
     },
     {
       "id": "msg-f1bef41ca826",
@@ -864,7 +910,8 @@
       "body_snippet": "In a package (say \"clyde\") that I am building I save a number of \ndatasets in clyde/data via something like:\n\nsave(melvin,file=\"~/<whatever>/clyde/data/melvin.rda\")\n\nWhen I build \"clyde\" I now get war",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004188.html"
     },
     {
       "id": "msg-4025e1acf472",
@@ -882,7 +929,8 @@
       "body_snippet": "I think the major change was saving of alt-rep objects efficiently.\nExample save(1:1e8, file=...) is very efficient.\n\nI'm not sure if that is all that changed it, but I couldn't find\ndocumentation on ",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004189.html"
     },
     {
       "id": "msg-e85ab171fa4b",
@@ -901,7 +949,8 @@
       "body_snippet": "On 15/07/19 12:06 PM, Travers Ching wrote:\n\n> I think the major change was saving of alt-rep objects efficiently.  \n> Example save(1:1e8, file=...) is very efficient.\n> \n> I'm not sure if that is all ",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004191.html"
     },
     {
       "id": "msg-cac6ca429544",
@@ -919,7 +968,8 @@
       "body_snippet": "On 14/07/2019 7:52 p.m., Rolf Turner wrote:\n> \n> In a package (say \"clyde\") that I am building I save a number of\n> datasets in clyde/data via something like:\n> \n> save(melvin,file=\"~/<whatever>/clyde",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004190.html"
     },
     {
       "id": "msg-6d29359b91cc",
@@ -938,7 +988,8 @@
       "body_snippet": "On 15/07/19 12:19 PM, Duncan Murdoch wrote:\n\n> On 14/07/2019 7:52 p.m., Rolf Turner wrote:\n>>\n>> In a package (say \"clyde\") that I am building I save a number of\n>> datasets in clyde/data via somethin",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004192.html"
     },
     {
       "id": "msg-a996a8d15c85",
@@ -957,7 +1008,8 @@
       "body_snippet": "On 14 July 2019 at 17:06, Travers Ching wrote:\n| For maximum compatibility in a package, personally I would use version 2.\n\nWhy are you against the futures and all the new shiny things?  ;-)\n\nDuncan p",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004193.html"
     },
     {
       "id": "msg-ed3fc6687bb1",
@@ -977,7 +1029,8 @@
       "body_snippet": ">  Why are you against the futures and all the new shiny things?  ;-)\n\nSometimes one does not have control over these things, still using R 3.2 on\nsome systems!  ;o\n\nOn Sun, Jul 14, 2019 at 5:43 PM Di",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004194.html"
     },
     {
       "id": "msg-fc578f9f3d9d",
@@ -996,7 +1049,8 @@
       "body_snippet": "On 7/15/19 2:06 AM, Travers Ching wrote:\n> I think the major change was saving of alt-rep objects efficiently.\n> Example save(1:1e8, file=...) is very efficient.\n>\n> I'm not sure if that is all that c",
       "thread_id": "thread-f1bef41ca826",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004195.html"
     },
     {
       "id": "msg-dde2b366c076",
@@ -1014,7 +1068,8 @@
       "body_snippet": "Dear R developpers,\nI submitted a package involving some parallel functions.\n\nI received this error message:\n\nError in .check_ncores(length(names)) : 30 simultaneous processes spawned\n\nI read that CRA",
       "thread_id": "thread-dde2b366c076",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004196.html"
     },
     {
       "id": "msg-85a3f06ff2e0",
@@ -1029,11 +1084,12 @@
         "<CAE1CRYJ3TG6eskKZND-w2Vc0UrF-8itf1JNt1sQeck5Z8N0JzQ@mail.gmail.com>",
         "<CAE1CRYJBB+5iMwmm91nMoQc7WiXzD_enttOHBG=5+2=M4YthvA@mail.gmail.com>"
       ],
-      "body_plain": "On Mon, 15 Jul 2019 at 12:24, Ronan GRIOT <ronan.griot at gmail.com> wrote:\n>\n> Dear R developpers,\n> I submitted a package involving some parallel functions.\n>\n> I received this error message:\n>\n> Error in .check_ncores(length(names)) : 30 simultaneous processes spawned\n>\n> I read that CRAN only pass the test if 2 cores are used.\n> However, in my function, I use this command line:\n>\n> parallel::makeCluster(parallel::detectCores() - 2)\n>\n> I try to fit the power of each computer by allowing all the cores except 2\n> (to keep other software running).\n>\n> My question is: What I have to do? Limiting the number of cores at 2 to\n> pass the CRAN requirements? Or let \"detectCores() - 2\" to allow for more\n> cores for multi-cores computer but add a restriction to pass the tests?\n\nBy *default*, the number of cores should be 2 at most, as you said.\nBut this doesn't mean that you cannot allow the user to change that\noption to increase them.\n\nSee, e.g., what parallel::makeForkCluster does:\n\nfunction (nnodes = getOption(\"mc.cores\", 2L), ...)\n\nI?aki",
+      "body_plain": "On Mon, 15 Jul 2019 at 12:24, Ronan GRIOT <ronan.griot at gmail.com> wrote:\n>\n> Dear R developpers,\n> I submitted a package involving some parallel functions.\n>\n> I received this error message:\n>\n> Error in .check_ncores(length(names)) : 30 simultaneous processes spawned\n>\n> I read that CRAN only pass the test if 2 cores are used.\n> However, in my function, I use this command line:\n>\n> parallel::makeCluster(parallel::detectCores() - 2)\n>\n> I try to fit the power of each computer by allowing all the cores except 2\n> (to keep other software running).\n>\n> My question is: What I have to do? Limiting the number of cores at 2 to\n> pass the CRAN requirements? Or let \"detectCores() - 2\" to allow for more\n> cores for multi-cores computer but add a restriction to pass the tests?\n\nBy *default*, the number of cores should be 2 at most, as you said.\nBut this doesn't mean that you cannot allow the user to change that\noption to increase them.\n\nSee, e.g., what parallel::makeForkCluster does:\n\nfunction (nnodes = getOption(\"mc.cores\", 2L), ...)\n\nIñaki",
       "body_snippet": "On Mon, 15 Jul 2019 at 12:24, Ronan GRIOT <ronan.griot at gmail.com> wrote:\n>\n> Dear R developpers,\n> I submitted a package involving some parallel functions.\n>\n> I received this error message:\n>\n> Er",
       "thread_id": "thread-dde2b366c076",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004197.html"
     },
     {
       "id": "msg-5ca08ae15aaf",
@@ -1049,7 +1105,8 @@
       "body_snippet": "Dear R-developpers,\n\nI submitted my package and received this NOTE :\n\n*Uses the superseded package: 'doSNOW'*\n\nI found that this package is now \"replaced\" by the doParallel package.\nHowever, I use the",
       "thread_id": "thread-5ca08ae15aaf",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004198.html"
     },
     {
       "id": "msg-9c7dcbda8b1d",
@@ -1065,7 +1122,8 @@
       "body_snippet": "Hi All:\n\nI am in the process of testing in order to submit a new version of a package to CRAN,  and I am getting clean results on everything but winbuilder_develop.  There I am getting 1 Note:\n\n> Foun",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004199.html"
     },
     {
       "id": "msg-a72ba7bc96a3",
@@ -1083,7 +1141,8 @@
       "body_snippet": "On 23/07/2019 8:26 p.m., Roy Mendelssohn - NOAA Federal via \nR-package-devel wrote:\n> Hi All:\n> \n> I am in the process of testing in order to submit a new version of a package to CRAN,  and I am getti",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004200.html"
     },
     {
       "id": "msg-5b937c5a4b73",
@@ -1102,7 +1161,8 @@
       "body_snippet": "Thanks,  I was looking at the raw files,  not the .Rd files.  There are \\keyword arguments in those file,  will have to search to see why they are getting generated.\n\n-Roy\n\n\n> On Jul 23, 2019, at 6:02",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004201.html"
     },
     {
       "id": "msg-470dd91c86da",
@@ -1122,7 +1182,8 @@
       "body_snippet": ">>>>> Roy Mendelssohn \n>>>>>     on Tue, 23 Jul 2019 18:44:24 -0700 writes:\n\n    > Thanks, I was looking at the raw files, not the .Rd files.\n    > There are \\keyword arguments in those file, will hav",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004202.html"
     },
     {
       "id": "msg-3eef44cc8081",
@@ -1138,7 +1199,8 @@
       "body_snippet": "Hi,\n\nwhen I called check() on my package I got a warning at the beginning\n\nUpdating plot.matrix documentation\nWarnung: roxygen2 requires Encoding: UTF-8\nWarnung: @examples \n[/home/sigbert/syncthing/pr",
       "thread_id": "thread-3eef44cc8081",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004205.html"
     },
     {
       "id": "msg-95afcfd1d416",
@@ -1159,7 +1221,8 @@
       "body_snippet": "On 24/07/2019 3:08 a.m., Martin Maechler wrote:\n>>>>>> Roy Mendelssohn\n>>>>>>      on Tue, 23 Jul 2019 18:44:24 -0700 writes:\n> \n>      > Thanks, I was looking at the raw files, not the .Rd files.\n>  ",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 4,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004203.html"
     },
     {
       "id": "msg-fd3292ad2512",
@@ -1181,7 +1244,8 @@
       "body_snippet": ">>>>> Duncan Murdoch \n>>>>>     on Wed, 24 Jul 2019 06:12:35 -0400 writes:\n\n    > On 24/07/2019 3:08 a.m., Martin Maechler wrote:\n    >>>>>>> Roy Mendelssohn\n    >>>>>>> on Tue, 23 Jul 2019 18:44:24 -",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 5,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004204.html"
     },
     {
       "id": "msg-019314ea010d",
@@ -1199,7 +1263,8 @@
       "body_snippet": "On 24/07/2019 5:30 a.m., Sigbert Klinke wrote:\n> Hi,\n> \n> when I called check() on my package I got a warning at the beginning\n> \n> Updating plot.matrix documentation\n> Warnung: roxygen2 requires Enco",
       "thread_id": "thread-3eef44cc8081",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004206.html"
     },
     {
       "id": "msg-874bc914fd49",
@@ -1218,7 +1283,8 @@
       "body_snippet": "Strictly speaking this is not a devtools bug, because the warning is\nnot coming from `R CMD check`, but from `devtools::document()`, which\nrebuilds the documentation via roxygen2, before actually runn",
       "thread_id": "thread-3eef44cc8081",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004207.html"
     },
     {
       "id": "msg-77ced49b5089",
@@ -1241,7 +1307,8 @@
       "body_snippet": "On 24/07/2019 6:54 a.m., Martin Maechler wrote:\n>>>>>> Duncan Murdoch\n>>>>>>      on Wed, 24 Jul 2019 06:12:35 -0400 writes:\n> \n>      > On 24/07/2019 3:08 a.m., Martin Maechler wrote:\n>      >>>>>>> ",
       "thread_id": "thread-9c7dcbda8b1d",
       "thread_depth": 6,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004208.html"
     },
     {
       "id": "msg-c7d4cad89e5c",
@@ -1257,11 +1324,12 @@
         "<2735a70d-461d-44dd-c597-a87f1eda924f@gmail.com>",
         "<CABtg=Kn9v-VxOC6Nq9AY9k27guWkA18tk-wjdjC7DtA6HgfLXg@mail.gmail.com>"
       ],
-      "body_plain": "On 24/07/2019 8:00 a.m., G?bor Cs?rdi wrote:\n> Strictly speaking this is not a devtools bug, because the warning is\n> not coming from `R CMD check`, but from `devtools::document()`, which\n> rebuilds the documentation via roxygen2, before actually running `R\n> CMD check`.\n> \n> Maybe `devtools::check()` should stop if `devtools::document()` throws\n> a warning.\n\nOr collect Roxygen issues and report on them at the end along with the R \nCMD check issues.\n\nDuncan Murdoch\n\n> \n> Gabor\n> \n> On Wed, Jul 24, 2019 at 12:56 PM Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>>\n>> On 24/07/2019 5:30 a.m., Sigbert Klinke wrote:\n>>> Hi,\n>>>\n>>> when I called check() on my package I got a warning at the beginning\n>>>\n>>> Updating plot.matrix documentation\n>>> Warnung: roxygen2 requires Encoding: UTF-8\n>>> Warnung: @examples\n>>> [/home/sigbert/syncthing/projekte/R/plot.matrix/R/as.cor.R#12]:\n>>> mismatched braces or quotes\n>>>\n>>> but at the end it says\n>>>\n>>> ?? R CMD check results ??? plot.matrix 1.3 ????\n>>> Duration: 10.8s\n>>>\n>>> 0 errors ? | 0 warnings ? | 0 notes ?\n>>>\n>>> Is that okay? The warning actually was correct.\n>>>\n>>\n>> Looks like a bug in devtools.  It's probably looking for \"Warning\", and\n>> not recognizing the German translation.\n>>\n>> Duncan Murdoch\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "On 24/07/2019 8:00 a.m., G?bor Cs?rdi wrote:\n> Strictly speaking this is not a devtools bug, because the warning is\n> not coming from `R CMD check`, but from `devtools::document()`, which\n> rebuilds t",
+      "body_plain": "On 24/07/2019 8:00 a.m., Gábor Csárdi wrote:\n> Strictly speaking this is not a devtools bug, because the warning is\n> not coming from `R CMD check`, but from `devtools::document()`, which\n> rebuilds the documentation via roxygen2, before actually running `R\n> CMD check`.\n> \n> Maybe `devtools::check()` should stop if `devtools::document()` throws\n> a warning.\n\nOr collect Roxygen issues and report on them at the end along with the R \nCMD check issues.\n\nDuncan Murdoch\n\n> \n> Gabor\n> \n> On Wed, Jul 24, 2019 at 12:56 PM Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>>\n>> On 24/07/2019 5:30 a.m., Sigbert Klinke wrote:\n>>> Hi,\n>>>\n>>> when I called check() on my package I got a warning at the beginning\n>>>\n>>> Updating plot.matrix documentation\n>>> Warnung: roxygen2 requires Encoding: UTF-8\n>>> Warnung: @examples\n>>> [/home/sigbert/syncthing/projekte/R/plot.matrix/R/as.cor.R#12]:\n>>> mismatched braces or quotes\n>>>\n>>> but at the end it says\n>>>\n>>> ── R CMD check results ─── plot.matrix 1.3 ────\n>>> Duration: 10.8s\n>>>\n>>> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔\n>>>\n>>> Is that okay? The warning actually was correct.\n>>>\n>>\n>> Looks like a bug in devtools.  It's probably looking for \"Warning\", and\n>> not recognizing the German translation.\n>>\n>> Duncan Murdoch\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 24/07/2019 8:00 a.m., Gábor Csárdi wrote:\n> Strictly speaking this is not a devtools bug, because the warning is\n> not coming from `R CMD check`, but from `devtools::document()`, which\n> rebuilds t",
       "thread_id": "thread-3eef44cc8081",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004209.html"
     },
     {
       "id": "msg-602cd978e0a5",
@@ -1279,7 +1347,8 @@
       "body_snippet": "The warning is from devtools::document()  rather than R CMD check itself.\nYou should still fix it though!\n\n\nOn Wed, 24 Jul 2019 at 12:05, Sigbert Klinke <sigbert at wiwi.hu-berlin.de>\nwrote:\n\n> Hi,\n>\n",
       "thread_id": "thread-3eef44cc8081",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004210.html"
     },
     {
       "id": "msg-df1b179975d7",
@@ -1298,7 +1367,8 @@
       "body_snippet": "Oops! Sorry for the spam.\n\nOn Wed, 24 Jul 2019 at 14:02, David Hugh-Jones <davidhughjones at gmail.com>\nwrote:\n\n> The warning is from devtools::document()  rather than R CMD check itself.\n> You should",
       "thread_id": "thread-3eef44cc8081",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004211.html"
     },
     {
       "id": "msg-f61c6eeda26e",
@@ -1310,11 +1380,12 @@
       "subject_clean": "[R-pkg-devel] Package manual built by CRAN (Xposted from R-help)",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear all,\n\nrecently I noticed an unexpected effect. The PDF-manual built from the \npackage?s .Rd-files looked different to what I was used to beforeand to \nthe one rendered locally. Specifically: If the reference-section looks \nlike this\n\n\\references{\n ? foo \\href{bar}{baz}\n ? ...\n}\n\npreviously \"foo\" was intended (like a normal paragraph), \"bar\" formatted \nin red and \"baz\" the URL.\n\nExample of what I got instead: \nhttps://cran.r-project.org/web/packages/replicateBE/replicateBE.pdf \n(first occurrence at page 5).\n\nIn the references there are no direct links but a numbered footnotes in \na mono-spaced font running beyond the right margin of the page. The two \nlinks of page 5:\n\nIn ABE.Rd\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_en.pdf \n\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_en.pdf \n\n\nABE.Rd is correctly rendered into ABE.html\n\nIn the two footnotes of the PDF links are truncated\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_ \n\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_ \n\nOf course, both are punished with a HTTP 404.\n\nCheers,\nHelmut\n\nPS: I?m aware that\n\\references{\n ? \\enumerate{\n ? ? \\item foo \\href{bar}{baz}\n ? }\n}\nproduces *exactly* this effect. Didn't use it.\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nT +43 1 2311746\nM +43 699 10792458\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/",
-      "body_snippet": "Dear all,\n\nrecently I noticed an unexpected effect. The PDF-manual built from the \npackage?s .Rd-files looked different to what I was used to beforeand to \nthe one rendered locally. Specifically: If t",
+      "body_plain": "Dear all,\n\nrecently I noticed an unexpected effect. The PDF-manual built from the \npackage’s .Rd-files looked different to what I was used to beforeand to \nthe one rendered locally. Specifically: If the reference-section looks \nlike this\n\n\\references{\n   foo \\href{bar}{baz}\n   ...\n}\n\npreviously \"foo\" was intended (like a normal paragraph), \"bar\" formatted \nin red and \"baz\" the URL.\n\nExample of what I got instead: \nhttps://cran.r-project.org/web/packages/replicateBE/replicateBE.pdf \n(first occurrence at page 5).\n\nIn the references there are no direct links but a numbered footnotes in \na mono-spaced font running beyond the right margin of the page. The two \nlinks of page 5:\n\nIn ABE.Rd\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_en.pdf \n\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_en.pdf \n\n\nABE.Rd is correctly rendered into ABE.html\n\nIn the two footnotes of the PDF links are truncated\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_ \n\nhttps://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_ \n\nOf course, both are punished with a HTTP 404.\n\nCheers,\nHelmut\n\nPS: I’m aware that\n\\references{\n   \\enumerate{\n     \\item foo \\href{bar}{baz}\n   }\n}\nproduces *exactly* this effect. Didn't use it.\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nT +43 1 2311746\nM +43 699 10792458\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/",
+      "body_snippet": "Dear all,\n\nrecently I noticed an unexpected effect. The PDF-manual built from the \npackage’s .Rd-files looked different to what I was used to beforeand to \nthe one rendered locally. Specifically: If t",
       "thread_id": "thread-f61c6eeda26e",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004212.html"
     },
     {
       "id": "msg-03569b1a800b",
@@ -1330,7 +1401,8 @@
       "body_snippet": "I have been testing a package for resubmission with bug fixes.  On the present CRAN builds I get:\n\n> Result: NOTE \n>     Namespaces in Imports field not imported from:\n>      ?mapdata? ?maptools? ?plo",
       "thread_id": "thread-03569b1a800b",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004213.html"
     },
     {
       "id": "msg-ffd017747065",
@@ -1344,11 +1416,12 @@
       "references": [
         "<3ef14e6d-3d4c-63f6-21cc-a6ed4bf057e0@bebac.at>"
       ],
-      "body_plain": "This sounds like a LaTeX bug in whatever system CRAN is using to produce \nthe PDF.  Like you, I don't see footnotes, I see the link inline with a \ncomplete URL.  I think you'd get the footnotes if the LaTeX hyperref.sty \nfile is not found, but there may be other ways to trigger that option.\n\nDuncan Murdoch\n\nOn 25/07/2019 1:45 p.m., Helmut Sch?tz wrote:\n> Dear all,\n> \n> recently I noticed an unexpected effect. The PDF-manual built from the\n> package?s .Rd-files looked different to what I was used to beforeand to\n> the one rendered locally. Specifically: If the reference-section looks\n> like this\n> \n> \\references{\n>   ? foo \\href{bar}{baz}\n>   ? ...\n> }\n> \n> previously \"foo\" was intended (like a normal paragraph), \"bar\" formatted\n> in red and \"baz\" the URL.\n> \n> Example of what I got instead:\n> https://cran.r-project.org/web/packages/replicateBE/replicateBE.pdf\n> (first occurrence at page 5).\n> \n> In the references there are no direct links but a numbered footnotes in\n> a mono-spaced font running beyond the right margin of the page. The two\n> links of page 5:\n> \n> In ABE.Rd\n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_en.pdf\n> \n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_en.pdf\n> \n> \n> ABE.Rd is correctly rendered into ABE.html\n> \n> In the two footnotes of the PDF links are truncated\n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_\n> \n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_\n> \n> Of course, both are punished with a HTTP 404.\n> \n> Cheers,\n> Helmut\n> \n> PS: I?m aware that\n> \\references{\n>   ? \\enumerate{\n>   ? ? \\item foo \\href{bar}{baz}\n>   ? }\n> }\n> produces *exactly* this effect. Didn't use it.\n>",
+      "body_plain": "This sounds like a LaTeX bug in whatever system CRAN is using to produce \nthe PDF.  Like you, I don't see footnotes, I see the link inline with a \ncomplete URL.  I think you'd get the footnotes if the LaTeX hyperref.sty \nfile is not found, but there may be other ways to trigger that option.\n\nDuncan Murdoch\n\nOn 25/07/2019 1:45 p.m., Helmut Schütz wrote:\n> Dear all,\n> \n> recently I noticed an unexpected effect. The PDF-manual built from the\n> package’s .Rd-files looked different to what I was used to beforeand to\n> the one rendered locally. Specifically: If the reference-section looks\n> like this\n> \n> \\references{\n>     foo \\href{bar}{baz}\n>     ...\n> }\n> \n> previously \"foo\" was intended (like a normal paragraph), \"bar\" formatted\n> in red and \"baz\" the URL.\n> \n> Example of what I got instead:\n> https://cran.r-project.org/web/packages/replicateBE/replicateBE.pdf\n> (first occurrence at page 5).\n> \n> In the references there are no direct links but a numbered footnotes in\n> a mono-spaced font running beyond the right margin of the page. The two\n> links of page 5:\n> \n> In ABE.Rd\n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_en.pdf\n> \n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_en.pdf\n> \n> \n> ABE.Rd is correctly rendered into ABE.html\n> \n> In the two footnotes of the PDF links are truncated\n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-investigation-bioequivalence-rev1_\n> \n> https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-pharmacokinetic-clinical-evaluation-modified-release-dosage-forms_\n> \n> Of course, both are punished with a HTTP 404.\n> \n> Cheers,\n> Helmut\n> \n> PS: I’m aware that\n> \\references{\n>     \\enumerate{\n>       \\item foo \\href{bar}{baz}\n>     }\n> }\n> produces *exactly* this effect. Didn't use it.\n>",
       "body_snippet": "This sounds like a LaTeX bug in whatever system CRAN is using to produce \nthe PDF.  Like you, I don't see footnotes, I see the link inline with a \ncomplete URL.  I think you'd get the footnotes if the",
       "thread_id": "thread-f61c6eeda26e",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004214.html"
     },
     {
       "id": "msg-9f2177f087f5",
@@ -1366,7 +1439,8 @@
       "body_snippet": "On 25/07/2019 3:21 p.m., Roy Mendelssohn - NOAA Federal via \nR-package-devel wrote:\n> I have been testing a package for resubmission with bug fixes.  On the present CRAN builds I get:\n> \n>> Result: NO",
       "thread_id": "thread-03569b1a800b",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004215.html"
     },
     {
       "id": "msg-fcb5d52b20a5",
@@ -1385,7 +1459,8 @@
       "body_snippet": "Okay I added rgeos but now it can't find rgdal.  as in:\n\n> Error: processing vignette 'using_plotdap.Rmd' failed with diagnostics:\n> package 'rgdal' is not available\n> --- failed re-building 'using_pl",
       "thread_id": "thread-03569b1a800b",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004216.html"
     },
     {
       "id": "msg-2fcc9ac08022",
@@ -1405,7 +1480,8 @@
       "body_snippet": "On 25/07/2019 3:47 p.m., Roy Mendelssohn - NOAA Federal wrote:\n> Okay I added rgeos but now it can't find rgdal.  as in:\n> \n>> Error: processing vignette 'using_plotdap.Rmd' failed with diagnostics:\n>",
       "thread_id": "thread-03569b1a800b",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004217.html"
     },
     {
       "id": "msg-b50aa6b3c9d7",
@@ -1426,7 +1502,8 @@
       "body_snippet": "Thanks,  actually have similar code for some other packages that must have been causing similar problems  (that part was from the original author,  I am now the maintainer).  Now I understand why he h",
       "thread_id": "thread-03569b1a800b",
       "thread_depth": 4,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004218.html"
     },
     {
       "id": "msg-bf28fbe26b30",
@@ -1448,7 +1525,8 @@
       "body_snippet": "A couple of ideas:\n\n1. Both `sf` and `sp` packages Suggest rgdal and rgeos. If your\npackage were to Suggest them, the dependencies will be available for\nCRAN checks, but they won't be available if the",
       "thread_id": "thread-03569b1a800b",
       "thread_depth": 5,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004219.html"
     },
     {
       "id": "msg-6afca9a5bb21",
@@ -1463,11 +1541,12 @@
         "<3ef14e6d-3d4c-63f6-21cc-a6ed4bf057e0@bebac.at>",
         "<94fe72e1-80ff-724b-7477-c10696e05b17@gmail.com>"
       ],
-      "body_plain": "Hi Duncan,\n\nDuncan Murdoch wrote on 2019-07-25 21:33:\n> This sounds like a LaTeX bug in whatever system CRAN is using to \n> produce the PDF.? Like you, I don't see footnotes, I see the link \n> inline with a complete URL.? I think you'd get the footnotes if the \n> LaTeX hyperref.sty file is not found, [?]\n\nPerfect guess! When I removed hyperref.sty from my installation I got \nalso the footnotes (without any errors or warnings).\nSo what is the best way to proceed? Ask Uwe Ligges?\n\nHelmut\n\n-- \nIng. Helmut Sch?tz\nBEBAC?? Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nT +43 1 2311746\nM +43 699 10792458\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/\nGIS 24799386, VAT?ATU61115625, DUNS?300370568, EORI?ATEOS1000096209\nGDPR https://bebac.at/Data-Protection.htm\nThis e-mail is confidential and may also be legally privileged. If you\nare not the intended recipient please reply to sender, do not disclose\nits contents to any person and delete the e-mail. Any unauthorized\nreview, use, disclosure, copying or distribution is strictly prohibited.",
-      "body_snippet": "Hi Duncan,\n\nDuncan Murdoch wrote on 2019-07-25 21:33:\n> This sounds like a LaTeX bug in whatever system CRAN is using to \n> produce the PDF.? Like you, I don't see footnotes, I see the link \n> inline ",
+      "body_plain": "Hi Duncan,\n\nDuncan Murdoch wrote on 2019-07-25 21:33:\n> This sounds like a LaTeX bug in whatever system CRAN is using to \n> produce the PDF.  Like you, I don't see footnotes, I see the link \n> inline with a complete URL.  I think you'd get the footnotes if the \n> LaTeX hyperref.sty file is not found, […]\n\nPerfect guess! When I removed hyperref.sty from my installation I got \nalso the footnotes (without any errors or warnings).\nSo what is the best way to proceed? Ask Uwe Ligges?\n\nHelmut\n\n-- \nIng. Helmut Schütz\nBEBAC – Consultancy Services for\nBioequivalence and Bioavailability Studies\nNeubaugasse 36/11\n1070 Vienna, Austria\nT +43 1 2311746\nM +43 699 10792458\nE helmut.schuetz at bebac.at\nW https://bebac.at/\nC https://bebac.at/Contact.htm\nF https://forum.bebac.at/\nGIS 24799386, VAT ATU61115625, DUNS 300370568, EORI ATEOS1000096209\nGDPR https://bebac.at/Data-Protection.htm\nThis e-mail is confidential and may also be legally privileged. If you\nare not the intended recipient please reply to sender, do not disclose\nits contents to any person and delete the e-mail. Any unauthorized\nreview, use, disclosure, copying or distribution is strictly prohibited.",
+      "body_snippet": "Hi Duncan,\n\nDuncan Murdoch wrote on 2019-07-25 21:33:\n> This sounds like a LaTeX bug in whatever system CRAN is using to \n> produce the PDF.  Like you, I don't see footnotes, I see the link \n> inline ",
       "thread_id": "thread-f61c6eeda26e",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004220.html"
     },
     {
       "id": "msg-0be704495e06",
@@ -1483,7 +1562,8 @@
       "body_snippet": "Hi,\n\nim my package development I get the following error when checking an \nexample:\n\n > m <- findMatch('test', x[[1]], FUN='leven(code)') %>% addWave(x[[2]])\n\n   Error in findMatch(\"test\", x[[1]], FUN",
       "thread_id": "thread-0be704495e06",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004221.html"
     },
     {
       "id": "msg-3fee82f4a117",
@@ -1499,7 +1579,8 @@
       "body_snippet": "Hi,\n\nRecently, my first r package offlineChange\n<https://cran.r-project.org/web/packages/offlineChange/index.html>\nwas uploaded to CRAN, and there are three errors. I already figured out\nthat two of t",
       "thread_id": "thread-3fee82f4a117",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004223.html"
     },
     {
       "id": "msg-937d8cf9c81a",
@@ -1517,7 +1598,8 @@
       "body_snippet": "I'd suggest not to use pipes in package code, as the parser does not \nknow about them and hence debugging, error messages .... are more \nobfuscated.\n\nWhy not use he functional way of R?\n\n\nFor the ques",
       "thread_id": "thread-0be704495e06",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004222.html"
     },
     {
       "id": "msg-4af81b9487ff",
@@ -1535,7 +1617,8 @@
       "body_snippet": "Checks with address sanitizers have to be done with instrumnted R \nversions and take a long time, hence we run these checks less frequently \nand only under one platform (here Linux for simplicity).\n\nB",
       "thread_id": "thread-3fee82f4a117",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004224.html"
     },
     {
       "id": "msg-7f94e7340c67",
@@ -1553,7 +1636,8 @@
       "body_snippet": "On Fri, 26 Jul 2019 01:50:36 -0500\nJiahuan ye <jiahuanye431 at gmail.com> wrote:\n\n> I am very confused what causes the ERROR.\n\nYour code on line 197 of src/min_wgss.cpp causes memory access outside\nth",
       "thread_id": "thread-3fee82f4a117",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004225.html"
     },
     {
       "id": "msg-9acb3fc75827",
@@ -1572,7 +1656,8 @@
       "body_snippet": "Pipes are very functional, unlike data.table. However, their extensive use of non-standard evaluation a la `subset` or `with` does complicate the package check process.\n\nAs to the actual question, Imp",
       "thread_id": "thread-0be704495e06",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004226.html"
     },
     {
       "id": "msg-a5626fa534ae",
@@ -1590,7 +1675,8 @@
       "body_snippet": "On 26/07/2019 2:37 a.m., Sigbert Klinke wrote:\n> Hi,\n> \n> im my package development I get the following error when checking an\n> example:\n> \n>   > m <- findMatch('test', x[[1]], FUN='leven(code)') %>%",
       "thread_id": "thread-0be704495e06",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004227.html"
     },
     {
       "id": "msg-2dfde7c461e3",
@@ -1602,11 +1688,12 @@
       "subject_clean": "[R-pkg-devel] (Not) Reporting minimum R version in DESCRIPTION Depends Field",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nNumerous CRAN packages report minimum R versions within the Depends field\nof the DESCRIPTION file.\n\nIs this reporting always necessary?\n\nHadley Wickham's book \"R Packages\" states:\n\n\"You can also use Depends to require a specific version of R, e.g. Depends: R\n(>= 3.0.1) . As with packages, it?s a good idea to play it safe and require\na version greater than or equal to the version you?re currently using.\ndevtools::create()  will do this for you.\"\n\ndevtools::check() doesn't warn about not specifying R version, so I am just\ncurious.\n\n\nThanks.\n\nCheers,\n\nJarrett\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hello,\n\nNumerous CRAN packages report minimum R versions within the Depends field\nof the DESCRIPTION file.\n\nIs this reporting always necessary?\n\nHadley Wickham's book \"R Packages\" states:\n\n\"You can also use Depends to require a specific version of R, e.g. Depends: R\n(>= 3.0.1) . As with packages, it’s a good idea to play it safe and require\na version greater than or equal to the version you’re currently using.\ndevtools::create()  will do this for you.\"\n\ndevtools::check() doesn't warn about not specifying R version, so I am just\ncurious.\n\n\nThanks.\n\nCheers,\n\nJarrett\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hello,\n\nNumerous CRAN packages report minimum R versions within the Depends field\nof the DESCRIPTION file.\n\nIs this reporting always necessary?\n\nHadley Wickham's book \"R Packages\" states:\n\n\"You can al",
       "thread_id": "thread-2dfde7c461e3",
       "thread_depth": 0,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004228.html"
     },
     {
       "id": "msg-6b089b5823ab",
@@ -1620,11 +1707,12 @@
       "references": [
         "<CAMVrHdA=2guY83SgiNSodxPQK6G6OkEnP8t0RANMng28Bn=vnw@mail.gmail.com>"
       ],
-      "body_plain": "I no longer believe this to be good advice - I think you should only\ndeclare a specific dependency if you want to strongly assert that your\npackage works with those versions. For example, all tidyverse versions\ndepend on R 3.2 and later, because we test on all those versions.\n\nHadley\n\nOn Friday, July 26, 2019, Jarrett Phillips <phillipsjarrett1 at gmail.com>\nwrote:\n\n> Hello,\n>\n> Numerous CRAN packages report minimum R versions within the Depends field\n> of the DESCRIPTION file.\n>\n> Is this reporting always necessary?\n>\n> Hadley Wickham's book \"R Packages\" states:\n>\n> \"You can also use Depends to require a specific version of R, e.g.\n> Depends: R\n> (>= 3.0.1) . As with packages, it?s a good idea to play it safe and require\n> a version greater than or equal to the version you?re currently using.\n> devtools::create()  will do this for you.\"\n>\n> devtools::check() doesn't warn about not specifying R version, so I am just\n> curious.\n>\n>\n> Thanks.\n>\n> Cheers,\n>\n> Jarrett\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nhttp://hadley.nz\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "I no longer believe this to be good advice - I think you should only\ndeclare a specific dependency if you want to strongly assert that your\npackage works with those versions. For example, all tidyverse versions\ndepend on R 3.2 and later, because we test on all those versions.\n\nHadley\n\nOn Friday, July 26, 2019, Jarrett Phillips <phillipsjarrett1 at gmail.com>\nwrote:\n\n> Hello,\n>\n> Numerous CRAN packages report minimum R versions within the Depends field\n> of the DESCRIPTION file.\n>\n> Is this reporting always necessary?\n>\n> Hadley Wickham's book \"R Packages\" states:\n>\n> \"You can also use Depends to require a specific version of R, e.g.\n> Depends: R\n> (>= 3.0.1) . As with packages, it’s a good idea to play it safe and require\n> a version greater than or equal to the version you’re currently using.\n> devtools::create()  will do this for you.\"\n>\n> devtools::check() doesn't warn about not specifying R version, so I am just\n> curious.\n>\n>\n> Thanks.\n>\n> Cheers,\n>\n> Jarrett\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nhttp://hadley.nz\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "I no longer believe this to be good advice - I think you should only\ndeclare a specific dependency if you want to strongly assert that your\npackage works with those versions. For example, all tidyvers",
       "thread_id": "thread-2dfde7c461e3",
       "thread_depth": 1,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004229.html"
     },
     {
       "id": "msg-c35ca46a2b29",
@@ -1639,11 +1727,12 @@
         "<CAMVrHdA=2guY83SgiNSodxPQK6G6OkEnP8t0RANMng28Bn=vnw@mail.gmail.com>",
         "<CABdHhvHuRbSOg4MquQaBGK1E4xwVy2PYuqm2ggEusLheQSwBUQ@mail.gmail.com>"
       ],
-      "body_plain": "I'd add: as far as I know CRAN policy would only require you to\nreport the minimum version if your package would fail on one of the\nolder R versions that CRAN still tests (at present I think this goes\nback to 3.5.2).  For regular package developers (i.e.  without the\nresources of RStudio) it's a nuisance to install lots of old versions of\nR just to find out how far back your package actually works.  IMO it's a\nlittle bit obnoxious (albeit maybe unintentionally so) to prevent users\nwho are stuck with earlier versions from using your package without a\ngood reason.\n  (For this reason I try to save RData files that are included in my\npackages with version=2 so that users with R <3.5.0 aren't left out ...)\n\n  Unless you know that your package depends on features introduced in a\nparticular version of R, I'd leave it out.  If you find out later from\nusers that it breaks on earlier versions, and you can't find a way to\nenable its use on earlier versions, you can add the dependency in a\nlater release.\n\n Ben Bolker\n\nOn 2019-07-26 10:20 a.m., Hadley Wickham wrote:\n> I no longer believe this to be good advice - I think you should only\n> declare a specific dependency if you want to strongly assert that your\n> package works with those versions. For example, all tidyverse versions\n> depend on R 3.2 and later, because we test on all those versions.\n> \n> Hadley\n> \n> On Friday, July 26, 2019, Jarrett Phillips <phillipsjarrett1 at gmail.com>\n> wrote:\n> \n>> Hello,\n>>\n>> Numerous CRAN packages report minimum R versions within the Depends field\n>> of the DESCRIPTION file.\n>>\n>> Is this reporting always necessary?\n>>\n>> Hadley Wickham's book \"R Packages\" states:\n>>\n>> \"You can also use Depends to require a specific version of R, e.g.\n>> Depends: R\n>> (>= 3.0.1) . As with packages, it?s a good idea to play it safe and require\n>> a version greater than or equal to the version you?re currently using.\n>> devtools::create()  will do this for you.\"\n>>\n>> devtools::check() doesn't warn about not specifying R version, so I am just\n>> curious.\n>>\n>>\n>> Thanks.\n>>\n>> Cheers,\n>>\n>> Jarrett\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n>",
+      "body_plain": "I'd add: as far as I know CRAN policy would only require you to\nreport the minimum version if your package would fail on one of the\nolder R versions that CRAN still tests (at present I think this goes\nback to 3.5.2).  For regular package developers (i.e.  without the\nresources of RStudio) it's a nuisance to install lots of old versions of\nR just to find out how far back your package actually works.  IMO it's a\nlittle bit obnoxious (albeit maybe unintentionally so) to prevent users\nwho are stuck with earlier versions from using your package without a\ngood reason.\n  (For this reason I try to save RData files that are included in my\npackages with version=2 so that users with R <3.5.0 aren't left out ...)\n\n  Unless you know that your package depends on features introduced in a\nparticular version of R, I'd leave it out.  If you find out later from\nusers that it breaks on earlier versions, and you can't find a way to\nenable its use on earlier versions, you can add the dependency in a\nlater release.\n\n Ben Bolker\n\nOn 2019-07-26 10:20 a.m., Hadley Wickham wrote:\n> I no longer believe this to be good advice - I think you should only\n> declare a specific dependency if you want to strongly assert that your\n> package works with those versions. For example, all tidyverse versions\n> depend on R 3.2 and later, because we test on all those versions.\n> \n> Hadley\n> \n> On Friday, July 26, 2019, Jarrett Phillips <phillipsjarrett1 at gmail.com>\n> wrote:\n> \n>> Hello,\n>>\n>> Numerous CRAN packages report minimum R versions within the Depends field\n>> of the DESCRIPTION file.\n>>\n>> Is this reporting always necessary?\n>>\n>> Hadley Wickham's book \"R Packages\" states:\n>>\n>> \"You can also use Depends to require a specific version of R, e.g.\n>> Depends: R\n>> (>= 3.0.1) . As with packages, it’s a good idea to play it safe and require\n>> a version greater than or equal to the version you’re currently using.\n>> devtools::create()  will do this for you.\"\n>>\n>> devtools::check() doesn't warn about not specifying R version, so I am just\n>> curious.\n>>\n>>\n>> Thanks.\n>>\n>> Cheers,\n>>\n>> Jarrett\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n>",
       "body_snippet": "I'd add: as far as I know CRAN policy would only require you to\nreport the minimum version if your package would fail on one of the\nolder R versions that CRAN still tests (at present I think this goes",
       "thread_id": "thread-2dfde7c461e3",
       "thread_depth": 2,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004230.html"
     },
     {
       "id": "msg-b40659863960",
@@ -1659,11 +1748,12 @@
         "<CABdHhvHuRbSOg4MquQaBGK1E4xwVy2PYuqm2ggEusLheQSwBUQ@mail.gmail.com>",
         "<3d114888-f00f-cb20-53b5-31eeced495ac@gmail.com>"
       ],
-      "body_plain": "On Fri, Jul 26, 2019 at 8:46 AM Ben Bolker <bbolker at gmail.com> wrote:\n>\n>    I'd add: as far as I know CRAN policy would only require you to\n> report the minimum version if your package would fail on one of the\n> older R versions that CRAN still tests (at present I think this goes\n> back to 3.5.2).  For regular package developers (i.e.  without the\n> resources of RStudio) it's a nuisance to install lots of old versions of\n> R just to find out how far back your package actually works.\n\nIf you already use travis, this is pretty easy. All you need is something like:\n\nmatrix:\n  include:\n  - r: release\n  - r: devel\n  - r: oldrel\n  - r: 3.4\n  - r: 3.3\n  - r: 3.2\n  - r: 3.1\n\nObviously the challenge is making things work on older versions of R ?\nin our experience this is either really easy (i.e. you just\naccidentally used a function that was added to R recently) or really\nrather hard (your code on works in recent R because of bug that R core\nfixed)\n\nHadley\n\n> IMO it's a\n> little bit obnoxious (albeit maybe unintentionally so) to prevent users\n> who are stuck with earlier versions from using your package without a\n> good reason.\n>   (For this reason I try to save RData files that are included in my\n> packages with version=2 so that users with R <3.5.0 aren't left out ...)\n>\n>   Unless you know that your package depends on features introduced in a\n> particular version of R, I'd leave it out.  If you find out later from\n> users that it breaks on earlier versions, and you can't find a way to\n> enable its use on earlier versions, you can add the dependency in a\n> later release.\n>\n>  Ben Bolker\n>\n> On 2019-07-26 10:20 a.m., Hadley Wickham wrote:\n> > I no longer believe this to be good advice - I think you should only\n> > declare a specific dependency if you want to strongly assert that your\n> > package works with those versions. For example, all tidyverse versions\n> > depend on R 3.2 and later, because we test on all those versions.\n> >\n> > Hadley\n> >\n> > On Friday, July 26, 2019, Jarrett Phillips <phillipsjarrett1 at gmail.com>\n> > wrote:\n> >\n> >> Hello,\n> >>\n> >> Numerous CRAN packages report minimum R versions within the Depends field\n> >> of the DESCRIPTION file.\n> >>\n> >> Is this reporting always necessary?\n> >>\n> >> Hadley Wickham's book \"R Packages\" states:\n> >>\n> >> \"You can also use Depends to require a specific version of R, e.g.\n> >> Depends: R\n> >> (>= 3.0.1) . As with packages, it?s a good idea to play it safe and require\n> >> a version greater than or equal to the version you?re currently using.\n> >> devtools::create()  will do this for you.\"\n> >>\n> >> devtools::check() doesn't warn about not specifying R version, so I am just\n> >> curious.\n> >>\n> >>\n> >> Thanks.\n> >>\n> >> Cheers,\n> >>\n> >> Jarrett\n> >>\n> >>         [[alternative HTML version deleted]]\n> >>\n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://hadley.nz",
+      "body_plain": "On Fri, Jul 26, 2019 at 8:46 AM Ben Bolker <bbolker at gmail.com> wrote:\n>\n>    I'd add: as far as I know CRAN policy would only require you to\n> report the minimum version if your package would fail on one of the\n> older R versions that CRAN still tests (at present I think this goes\n> back to 3.5.2).  For regular package developers (i.e.  without the\n> resources of RStudio) it's a nuisance to install lots of old versions of\n> R just to find out how far back your package actually works.\n\nIf you already use travis, this is pretty easy. All you need is something like:\n\nmatrix:\n  include:\n  - r: release\n  - r: devel\n  - r: oldrel\n  - r: 3.4\n  - r: 3.3\n  - r: 3.2\n  - r: 3.1\n\nObviously the challenge is making things work on older versions of R —\nin our experience this is either really easy (i.e. you just\naccidentally used a function that was added to R recently) or really\nrather hard (your code on works in recent R because of bug that R core\nfixed)\n\nHadley\n\n> IMO it's a\n> little bit obnoxious (albeit maybe unintentionally so) to prevent users\n> who are stuck with earlier versions from using your package without a\n> good reason.\n>   (For this reason I try to save RData files that are included in my\n> packages with version=2 so that users with R <3.5.0 aren't left out ...)\n>\n>   Unless you know that your package depends on features introduced in a\n> particular version of R, I'd leave it out.  If you find out later from\n> users that it breaks on earlier versions, and you can't find a way to\n> enable its use on earlier versions, you can add the dependency in a\n> later release.\n>\n>  Ben Bolker\n>\n> On 2019-07-26 10:20 a.m., Hadley Wickham wrote:\n> > I no longer believe this to be good advice - I think you should only\n> > declare a specific dependency if you want to strongly assert that your\n> > package works with those versions. For example, all tidyverse versions\n> > depend on R 3.2 and later, because we test on all those versions.\n> >\n> > Hadley\n> >\n> > On Friday, July 26, 2019, Jarrett Phillips <phillipsjarrett1 at gmail.com>\n> > wrote:\n> >\n> >> Hello,\n> >>\n> >> Numerous CRAN packages report minimum R versions within the Depends field\n> >> of the DESCRIPTION file.\n> >>\n> >> Is this reporting always necessary?\n> >>\n> >> Hadley Wickham's book \"R Packages\" states:\n> >>\n> >> \"You can also use Depends to require a specific version of R, e.g.\n> >> Depends: R\n> >> (>= 3.0.1) . As with packages, it’s a good idea to play it safe and require\n> >> a version greater than or equal to the version you’re currently using.\n> >> devtools::create()  will do this for you.\"\n> >>\n> >> devtools::check() doesn't warn about not specifying R version, so I am just\n> >> curious.\n> >>\n> >>\n> >> Thanks.\n> >>\n> >> Cheers,\n> >>\n> >> Jarrett\n> >>\n> >>         [[alternative HTML version deleted]]\n> >>\n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://hadley.nz",
       "body_snippet": "On Fri, Jul 26, 2019 at 8:46 AM Ben Bolker <bbolker at gmail.com> wrote:\n>\n>    I'd add: as far as I know CRAN policy would only require you to\n> report the minimum version if your package would fail ",
       "thread_id": "thread-2dfde7c461e3",
       "thread_depth": 3,
-      "month": "2019-07"
+      "month": "2019-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2019q3/004231.html"
     }
   ],
   "threads": [
