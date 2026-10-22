@@ -18,11 +18,12 @@
         "<726995EA-F66D-4D9A-A699-A045AA87D607@usc.edu.au>",
         "<CALEXWq1Tsip+NLic8Wn6sh42VZMgpLuP1_k4msOHkDPXH2yN-Q@mail.gmail.com>"
       ],
-      "body_plain": "Wow: Thanks again.  You are going above and beyond I?aki which I appreciate greatly.\n\nBut same error message appears, even after fixing (both the relerr, which I had already attended to, and the lambda issue).\n\nI have since initialised *every* variable in the subroutine  smallp  (even the *input* variables to some arbitrary value to try to work out what is causing the issue) yet the error persists. There surely cannot be any uninitialized variables now *every* var in the subroutine is explicitly initialised.\n\nThat tells me that there is nothing I can do to remove the error. If everything is initialised?\n\nFrustrated? And wasting so much time!\n\nThanks for any help from anyone.\n\nP.\n\nOn 30/Oct/17, 9:06 pm, \"I?aki ?car\" <i.ucar86 at gmail.com> wrote:\n\n    2017-10-30 0:54 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n    > Thanks for this direction.\n    >\n    > But I am still confused, as the problem persists after attending to any\n    > possible issue: That piece of identified code only has four variables, and I\n    > can account for them all.\n    >\n    > The two variables its and aimrerr are now explicitly initialised. So they\n    > cannot be the problem.\n    >\n    > The variables maxit and relerr are inputs to the subroutine... and both are\n    > explicitly initialised in the only subroutine which calls smallp. So I can?t\n    > see how that can be a problem. (Clearly they cannot be initialised in the\n    > subroutine smallp or their input values are overwritten.)\n\n    Found it. \"relerr\" may be uninitialised because \"w\" is uninitialised\n    in smallp (tweedie 2.2.5, line 2169).\n\n    When you try to debug this kind of things, you must track not only\n    explicit initialisations, but also all the assignments with possibly\n    uninitialised variables.\n\n    BTW, I also see:\n\n    tweedie.f:335:0:\n\n                 if ( funvalue .LT. exp(-lambda) ) then\n\n    Warning: 'lambda' may be used uninitialized in this function\n    [-Wmaybe-uninitialized]\n\n    Regards,\n    I?aki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Wow: Thanks again.  You are going above and beyond I?aki which I appreciate greatly.\n\nBut same error message appears, even after fixing (both the relerr, which I had already attended to, and the lambd",
+      "body_plain": "Wow: Thanks again.  You are going above and beyond Iñaki which I appreciate greatly.\n\nBut same error message appears, even after fixing (both the relerr, which I had already attended to, and the lambda issue).\n\nI have since initialised *every* variable in the subroutine  smallp  (even the *input* variables to some arbitrary value to try to work out what is causing the issue) yet the error persists. There surely cannot be any uninitialized variables now *every* var in the subroutine is explicitly initialised.\n\nThat tells me that there is nothing I can do to remove the error. If everything is initialised…\n\nFrustrated… And wasting so much time!\n\nThanks for any help from anyone.\n\nP.\n\nOn 30/Oct/17, 9:06 pm, \"Iñaki Úcar\" <i.ucar86 at gmail.com> wrote:\n\n    2017-10-30 0:54 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n    > Thanks for this direction.\n    >\n    > But I am still confused, as the problem persists after attending to any\n    > possible issue: That piece of identified code only has four variables, and I\n    > can account for them all.\n    >\n    > The two variables its and aimrerr are now explicitly initialised. So they\n    > cannot be the problem.\n    >\n    > The variables maxit and relerr are inputs to the subroutine... and both are\n    > explicitly initialised in the only subroutine which calls smallp. So I can’t\n    > see how that can be a problem. (Clearly they cannot be initialised in the\n    > subroutine smallp or their input values are overwritten.)\n\n    Found it. \"relerr\" may be uninitialised because \"w\" is uninitialised\n    in smallp (tweedie 2.2.5, line 2169).\n\n    When you try to debug this kind of things, you must track not only\n    explicit initialisations, but also all the assignments with possibly\n    uninitialised variables.\n\n    BTW, I also see:\n\n    tweedie.f:335:0:\n\n                 if ( funvalue .LT. exp(-lambda) ) then\n\n    Warning: 'lambda' may be used uninitialized in this function\n    [-Wmaybe-uninitialized]\n\n    Regards,\n    Iñaki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Wow: Thanks again.  You are going above and beyond Iñaki which I appreciate greatly.\n\nBut same error message appears, even after fixing (both the relerr, which I had already attended to, and the lambd",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002025.html"
     },
     {
       "id": "msg-4dbc10b23f23",
@@ -40,11 +41,12 @@
         "<CALEXWq1Tsip+NLic8Wn6sh42VZMgpLuP1_k4msOHkDPXH2yN-Q@mail.gmail.com>",
         "<6BF62CF9-C617-48A3-BED1-04F3A8484F01@usc.edu.au>"
       ],
-      "body_plain": "2017-11-01 5:56 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Wow: Thanks again. You are going above and beyond I?aki which I appreciate\n> greatly.\n>\n> But same error message appears, even after fixing (both the relerr, which I\n> had already attended to, and the lambda issue).\n\nAll I can say is that initialising both lambda and w (from CRAN\nversion) solved the issue for me. As a matter of fact, I did see\nanother message about uninitialised values, but the back trace was\nempty (no function names, I mean), which means that the problem is\nsomewhere else.\n\n> I have since initialised *every* variable in the subroutine smallp (even the\n> *input* variables to some arbitrary value to try to work out what is causing\n> the issue) yet the error persists. There surely cannot be any uninitialized\n> variables now *every* var in the subroutine is explicitly initialised.\n>\n> That tells me that there is nothing I can do to remove the error. If\n> everything is initialised?\n>\n> Frustrated? And wasting so much time!\n\nIf you set up a public repo (GitHub or similar) where everyone can see\nyour current code base and changes made, it would be easier to help.\nIt would be even easier if you check your changes using a public build\nsystem and share the results here. I don't know whether win-builder\nuses valgrind, but you can use r-hub (https://github.com/r-hub/rhub)\nby G?bor Cs?rdi. There is a function rhub::check_with_valgrind which\nrequires no further explanation.\n\nI?aki",
-      "body_snippet": "2017-11-01 5:56 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Wow: Thanks again. You are going above and beyond I?aki which I appreciate\n> greatly.\n>\n> But same error message appears, even after fixi",
+      "body_plain": "2017-11-01 5:56 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Wow: Thanks again. You are going above and beyond Iñaki which I appreciate\n> greatly.\n>\n> But same error message appears, even after fixing (both the relerr, which I\n> had already attended to, and the lambda issue).\n\nAll I can say is that initialising both lambda and w (from CRAN\nversion) solved the issue for me. As a matter of fact, I did see\nanother message about uninitialised values, but the back trace was\nempty (no function names, I mean), which means that the problem is\nsomewhere else.\n\n> I have since initialised *every* variable in the subroutine smallp (even the\n> *input* variables to some arbitrary value to try to work out what is causing\n> the issue) yet the error persists. There surely cannot be any uninitialized\n> variables now *every* var in the subroutine is explicitly initialised.\n>\n> That tells me that there is nothing I can do to remove the error. If\n> everything is initialised…\n>\n> Frustrated… And wasting so much time!\n\nIf you set up a public repo (GitHub or similar) where everyone can see\nyour current code base and changes made, it would be easier to help.\nIt would be even easier if you check your changes using a public build\nsystem and share the results here. I don't know whether win-builder\nuses valgrind, but you can use r-hub (https://github.com/r-hub/rhub)\nby Gábor Csárdi. There is a function rhub::check_with_valgrind which\nrequires no further explanation.\n\nIñaki",
+      "body_snippet": "2017-11-01 5:56 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Wow: Thanks again. You are going above and beyond Iñaki which I appreciate\n> greatly.\n>\n> But same error message appears, even after fixi",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002026.html"
     },
     {
       "id": "msg-28ee10be1046",
@@ -63,11 +65,12 @@
         "<6BF62CF9-C617-48A3-BED1-04F3A8484F01@usc.edu.au>",
         "<CALEXWq07Z8BNCrtUJOReEYeesJx9zXc5xgLuYAeGAdLbUtwkEQ@mail.gmail.com>"
       ],
-      "body_plain": "I?aki  and all\n\nWell, thanks for pointers to rhub.  Wonderful.  Moving things to github, but have to go home now?\n\nSo, when I download CRAN code, initialise w and lambda (which workled for I?aki), and run\n\nrhub::check_with_valgrind()\n\non the code, I get no errors (https://builder.r-hub.io/status/tweedie_2.2.5.tar.gz-c8873979fcf84b4f8a0a4d5a47175f63).\n\n\nBut running\n\nR -d \"valgrind  --tool=memcheck --leak-check=full --track-origins=yes\" --vanilla  < tweedie-Ex.R\n\nfrom the command line *still* gives me errors about ?Conditional jump or move depends on uninitialised value(s)? in the subroutine smallp?.\n\nI?aki found no errors when w and lambda were initialised.  I find similar using rhub (no errors)? but running valgrind from the command line still throws the same errors.\n\nWhat does one make of that?\n\nThanks for any more help.\n\n\nP.\n\nPS: Really appreciate the help. This is driving me crazy.\n\n\nFrom: I?aki ?car <i.ucar86 at gmail.com>\nDate: Wednesday, 1 November 2017 at 10:28 pm\nTo: Peter Dunn <PDunn2 at usc.edu.au>\nCc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Package valgrind problem I can't solve: Direction?\n\n2017-11-01 5:56 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Wow: Thanks again. You are going above and beyond I?aki which I appreciate\n> greatly.\n>\n> But same error message appears, even after fixing (both the relerr, which I\n> had already attended to, and the lambda issue).\n\nAll I can say is that initialising both lambda and w (from CRAN\nversion) solved the issue for me. As a matter of fact, I did see\nanother message about uninitialised values, but the back trace was\nempty (no function names, I mean), which means that the problem is\nsomewhere else.\n\n> I have since initialised *every* variable in the subroutine smallp (even the\n> *input* variables to some arbitrary value to try to work out what is causing\n> the issue) yet the error persists. There surely cannot be any uninitialized\n> variables now *every* var in the subroutine is explicitly initialised.\n>\n> That tells me that there is nothing I can do to remove the error. If\n> everything is initialised?\n>\n> Frustrated? And wasting so much time!\n\nIf you set up a public repo (GitHub or similar) where everyone can see\nyour current code base and changes made, it would be easier to help.\nIt would be even easier if you check your changes using a public build\nsystem and share the results here. I don't know whether win-builder\nuses valgrind, but you can use r-hub (https://github.com/r-hub/rhub)\nby G?bor Cs?rdi. There is a function rhub::check_with_valgrind which\nrequires no further explanation.\n\nI?aki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I?aki  and all\n\nWell, thanks for pointers to rhub.  Wonderful.  Moving things to github, but have to go home now?\n\nSo, when I download CRAN code, initialise w and lambda (which workled for I?aki), and",
+      "body_plain": "Iñaki  and all\n\nWell, thanks for pointers to rhub.  Wonderful.  Moving things to github, but have to go home now…\n\nSo, when I download CRAN code, initialise w and lambda (which workled for Iñaki), and run\n\nrhub::check_with_valgrind()\n\non the code, I get no errors (https://builder.r-hub.io/status/tweedie_2.2.5.tar.gz-c8873979fcf84b4f8a0a4d5a47175f63).\n\n\nBut running\n\nR -d \"valgrind  --tool=memcheck --leak-check=full --track-origins=yes\" --vanilla  < tweedie-Ex.R\n\nfrom the command line *still* gives me errors about “Conditional jump or move depends on uninitialised value(s)” in the subroutine smallp”.\n\nIñaki found no errors when w and lambda were initialised.  I find similar using rhub (no errors)… but running valgrind from the command line still throws the same errors.\n\nWhat does one make of that?\n\nThanks for any more help.\n\n\nP.\n\nPS: Really appreciate the help. This is driving me crazy.\n\n\nFrom: Iñaki Úcar <i.ucar86 at gmail.com>\nDate: Wednesday, 1 November 2017 at 10:28 pm\nTo: Peter Dunn <PDunn2 at usc.edu.au>\nCc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Package valgrind problem I can't solve: Direction?\n\n2017-11-01 5:56 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Wow: Thanks again. You are going above and beyond Iñaki which I appreciate\n> greatly.\n>\n> But same error message appears, even after fixing (both the relerr, which I\n> had already attended to, and the lambda issue).\n\nAll I can say is that initialising both lambda and w (from CRAN\nversion) solved the issue for me. As a matter of fact, I did see\nanother message about uninitialised values, but the back trace was\nempty (no function names, I mean), which means that the problem is\nsomewhere else.\n\n> I have since initialised *every* variable in the subroutine smallp (even the\n> *input* variables to some arbitrary value to try to work out what is causing\n> the issue) yet the error persists. There surely cannot be any uninitialized\n> variables now *every* var in the subroutine is explicitly initialised.\n>\n> That tells me that there is nothing I can do to remove the error. If\n> everything is initialised…\n>\n> Frustrated… And wasting so much time!\n\nIf you set up a public repo (GitHub or similar) where everyone can see\nyour current code base and changes made, it would be easier to help.\nIt would be even easier if you check your changes using a public build\nsystem and share the results here. I don't know whether win-builder\nuses valgrind, but you can use r-hub (https://github.com/r-hub/rhub)\nby Gábor Csárdi. There is a function rhub::check_with_valgrind which\nrequires no further explanation.\n\nIñaki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Iñaki  and all\n\nWell, thanks for pointers to rhub.  Wonderful.  Moving things to github, but have to go home now…\n\nSo, when I download CRAN code, initialise w and lambda (which workled for Iñaki), and",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002027.html"
     },
     {
       "id": "msg-8ddf931a53a9",
@@ -87,11 +90,12 @@
         "<CALEXWq07Z8BNCrtUJOReEYeesJx9zXc5xgLuYAeGAdLbUtwkEQ@mail.gmail.com>",
         "<6A2AEDB4-127F-47F3-94A8-8C9C500A4E05@usc.edu.au>"
       ],
-      "body_plain": "2017-11-03 6:01 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> I?aki and all\n>\n> Well, thanks for pointers to rhub. Wonderful. Moving things to github, but\n> have to go home now?\n>\n> So, when I download CRAN code, initialise w and lambda (which workled for\n> I?aki), and run\n>\n> rhub::check_with_valgrind()\n>\n> on the code, I get no errors\n> (https://builder.r-hub.io/status/tweedie_2.2.5.tar.gz-c8873979fcf84b4f8a0a4d5a47175f63).\n>\n>\n> But running\n>\n> R -d \"valgrind --tool=memcheck --leak-check=full --track-origins=yes\"\n> --vanilla < tweedie-Ex.R\n>\n> from the command line *still* gives me errors about ?Conditional jump or\n> move depends on uninitialised value(s)? in the subroutine smallp?.\n\nThat's impossible. Did you rebuild and reinstall the package after\nmaking those changes?\n\nI?aki",
-      "body_snippet": "2017-11-03 6:01 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> I?aki and all\n>\n> Well, thanks for pointers to rhub. Wonderful. Moving things to github, but\n> have to go home now?\n>\n> So, when I downlo",
+      "body_plain": "2017-11-03 6:01 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Iñaki and all\n>\n> Well, thanks for pointers to rhub. Wonderful. Moving things to github, but\n> have to go home now…\n>\n> So, when I download CRAN code, initialise w and lambda (which workled for\n> Iñaki), and run\n>\n> rhub::check_with_valgrind()\n>\n> on the code, I get no errors\n> (https://builder.r-hub.io/status/tweedie_2.2.5.tar.gz-c8873979fcf84b4f8a0a4d5a47175f63).\n>\n>\n> But running\n>\n> R -d \"valgrind --tool=memcheck --leak-check=full --track-origins=yes\"\n> --vanilla < tweedie-Ex.R\n>\n> from the command line *still* gives me errors about “Conditional jump or\n> move depends on uninitialised value(s)” in the subroutine smallp”.\n\nThat's impossible. Did you rebuild and reinstall the package after\nmaking those changes?\n\nIñaki",
+      "body_snippet": "2017-11-03 6:01 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Iñaki and all\n>\n> Well, thanks for pointers to rhub. Wonderful. Moving things to github, but\n> have to go home now…\n>\n> So, when I downlo",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002028.html"
     },
     {
       "id": "msg-9c8ad21567a6",
@@ -112,11 +116,12 @@
         "<6A2AEDB4-127F-47F3-94A8-8C9C500A4E05@usc.edu.au>",
         "<CALEXWq20Jc47+GDwKdisxgJGUWSdsadp01F_rrhoV9dPjDUUpw@mail.gmail.com>"
       ],
-      "body_plain": "Impossible or not? it just happened (unless I am being really stupid, which is entirely possible, indeed probable).  I confirmed again this morning: After rebuilding (R CMD build) and checking (R CMD check) without any errors, I used rhub and the command line again:\n\n\nRunning valgrind at the command line, I get this error:\n\n==5097== Conditional jump or move depends on uninitialised value(s)\n==5097==    at 0x1118F61FB: smallp_ (in /Users/pdunn2/Library/R/3.4/library/tweedie/libs/tweedie.so)\n\n?when I am here:\n\n$ pwd\n/Users/pdunn2/Documents/Research/Rpackages/tweedie/tweedie-debug/CRAN-update/tweedie.Rcheck\n\n\n\nIn rhub:\n\ncheck_with_valgrind(\"tweedie\")\n\ngives:\n\n?? 0 errors ? | 0 warnings ? | 0 notes ?\n?  Done with R CMD check\n?  Saving artifacts\n\n?when I am here:\n\n> getwd()\n[1] \"/Users/pdunn2/Documents/Research/Rpackages/tweedie/tweedie-debug/CRAN-update\"\n\n\n\n\nI will take this to mean that there really is no problem? and put this down to things I don?t understand and ?experience?.\n\nThanks for everyone?s help.\n\nP.\n\nFrom: I?aki ?car <i.ucar86 at gmail.com>\nDate: Friday, 3 November 2017 at 7:45 pm\nTo: Peter Dunn <PDunn2 at usc.edu.au>\nCc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Package valgrind problem I can't solve: Direction?\n\n2017-11-03 6:01 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> I?aki and all\n>\n> Well, thanks for pointers to rhub. Wonderful. Moving things to github, but\n> have to go home now?\n>\n> So, when I download CRAN code, initialise w and lambda (which workled for\n> I?aki), and run\n>\n> rhub::check_with_valgrind()\n>\n> on the code, I get no errors\n> (https://builder.r-hub.io/status/tweedie_2.2.5.tar.gz-c8873979fcf84b4f8a0a4d5a47175f63).\n>\n>\n> But running\n>\n> R -d \"valgrind --tool=memcheck --leak-check=full --track-origins=yes\"\n> --vanilla < tweedie-Ex.R\n>\n> from the command line *still* gives me errors about ?Conditional jump or\n> move depends on uninitialised value(s)? in the subroutine smallp?.\n\nThat's impossible. Did you rebuild and reinstall the package after\nmaking those changes?\n\nI?aki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Impossible or not? it just happened (unless I am being really stupid, which is entirely possible, indeed probable).  I confirmed again this morning: After rebuilding (R CMD build) and checking (R CMD ",
+      "body_plain": "Impossible or not… it just happened (unless I am being really stupid, which is entirely possible, indeed probable).  I confirmed again this morning: After rebuilding (R CMD build) and checking (R CMD check) without any errors, I used rhub and the command line again:\n\n\nRunning valgrind at the command line, I get this error:\n\n==5097== Conditional jump or move depends on uninitialised value(s)\n==5097==    at 0x1118F61FB: smallp_ (in /Users/pdunn2/Library/R/3.4/library/tweedie/libs/tweedie.so)\n\n…when I am here:\n\n$ pwd\n/Users/pdunn2/Documents/Research/Rpackages/tweedie/tweedie-debug/CRAN-update/tweedie.Rcheck\n\n\n\nIn rhub:\n\ncheck_with_valgrind(\"tweedie\")\n\ngives:\n\n── 0 errors ✔ | 0 warnings ✔ | 0 notes ✔\n─  Done with R CMD check\n─  Saving artifacts\n\n…when I am here:\n\n> getwd()\n[1] \"/Users/pdunn2/Documents/Research/Rpackages/tweedie/tweedie-debug/CRAN-update\"\n\n\n\n\nI will take this to mean that there really is no problem… and put this down to things I don’t understand and “experience”.\n\nThanks for everyone’s help.\n\nP.\n\nFrom: Iñaki Úcar <i.ucar86 at gmail.com>\nDate: Friday, 3 November 2017 at 7:45 pm\nTo: Peter Dunn <PDunn2 at usc.edu.au>\nCc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] Package valgrind problem I can't solve: Direction?\n\n2017-11-03 6:01 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Iñaki and all\n>\n> Well, thanks for pointers to rhub. Wonderful. Moving things to github, but\n> have to go home now…\n>\n> So, when I download CRAN code, initialise w and lambda (which workled for\n> Iñaki), and run\n>\n> rhub::check_with_valgrind()\n>\n> on the code, I get no errors\n> (https://builder.r-hub.io/status/tweedie_2.2.5.tar.gz-c8873979fcf84b4f8a0a4d5a47175f63).\n>\n>\n> But running\n>\n> R -d \"valgrind --tool=memcheck --leak-check=full --track-origins=yes\"\n> --vanilla < tweedie-Ex.R\n>\n> from the command line *still* gives me errors about “Conditional jump or\n> move depends on uninitialised value(s)” in the subroutine smallp”.\n\nThat's impossible. Did you rebuild and reinstall the package after\nmaking those changes?\n\nIñaki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Impossible or not… it just happened (unless I am being really stupid, which is entirely possible, indeed probable).  I confirmed again this morning: After rebuilding (R CMD build) and checking (R CMD ",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002029.html"
     },
     {
       "id": "msg-228603bccf4a",
@@ -138,11 +143,12 @@
         "<CALEXWq20Jc47+GDwKdisxgJGUWSdsadp01F_rrhoV9dPjDUUpw@mail.gmail.com>",
         "<982F2D94-A1C5-4E0B-B4DF-16B99AA9228E@usc.edu.au>"
       ],
-      "body_plain": "2017-11-06 0:09 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Impossible or not? it just happened (unless I am being really stupid, which\n> is entirely possible, indeed probable). I confirmed again this morning:\n> After rebuilding (R CMD build) and checking (R CMD check) without any\n> errors, I used rhub and the command line again:\n>\n>\n> Running valgrind at the command line, I get this error:\n>\n> ==5097== Conditional jump or move depends on uninitialised value(s)\n> ==5097== at 0x1118F61FB: smallp_ (in\n> /Users/pdunn2/Library/R/3.4/library/tweedie/libs/tweedie.so)\n\nWhat I meant is that, if you run the script in tweedie.Rcheck from the\ncommand line, Rscript uses your *installed* version of tweedie, not\nthe tarball you built with R CMD build. So if you didn't run R CMD\nINSTALL, Rscript is running an old version without any fix, hence the\ndisagreement with R CMD check.\n\nI?aki",
-      "body_snippet": "2017-11-06 0:09 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Impossible or not? it just happened (unless I am being really stupid, which\n> is entirely possible, indeed probable). I confirmed again t",
+      "body_plain": "2017-11-06 0:09 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Impossible or not… it just happened (unless I am being really stupid, which\n> is entirely possible, indeed probable). I confirmed again this morning:\n> After rebuilding (R CMD build) and checking (R CMD check) without any\n> errors, I used rhub and the command line again:\n>\n>\n> Running valgrind at the command line, I get this error:\n>\n> ==5097== Conditional jump or move depends on uninitialised value(s)\n> ==5097== at 0x1118F61FB: smallp_ (in\n> /Users/pdunn2/Library/R/3.4/library/tweedie/libs/tweedie.so)\n\nWhat I meant is that, if you run the script in tweedie.Rcheck from the\ncommand line, Rscript uses your *installed* version of tweedie, not\nthe tarball you built with R CMD build. So if you didn't run R CMD\nINSTALL, Rscript is running an old version without any fix, hence the\ndisagreement with R CMD check.\n\nIñaki",
+      "body_snippet": "2017-11-06 0:09 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n> Impossible or not… it just happened (unless I am being really stupid, which\n> is entirely possible, indeed probable). I confirmed again t",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002030.html"
     },
     {
       "id": "msg-9ceeade7e142",
@@ -165,11 +171,12 @@
         "<982F2D94-A1C5-4E0B-B4DF-16B99AA9228E@usc.edu.au>",
         "<CALEXWq2i9B_z4njw_p2h9bso+bFdWbWd=2sbP3gwPWVDPDkwsg@mail.gmail.com>"
       ],
-      "body_plain": "?unless I am being really stupid?\n\nLucky for that caveat. Feeling rather stupid for this late effort.\n\nThanks so much.  Help greatly appreciated.\n\nP.\n\n\n\nOn 6/Nov/17, 9:51 am, \"I?aki ?car\" <i.ucar86 at gmail.com> wrote:\n\n    2017-11-06 0:09 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n    > Impossible or not? it just happened (unless I am being really stupid, which\n    > is entirely possible, indeed probable). I confirmed again this morning:\n    > After rebuilding (R CMD build) and checking (R CMD check) without any\n    > errors, I used rhub and the command line again:\n    >\n    >\n    > Running valgrind at the command line, I get this error:\n    >\n    > ==5097== Conditional jump or move depends on uninitialised value(s)\n    > ==5097== at 0x1118F61FB: smallp_ (in\n    > /Users/pdunn2/Library/R/3.4/library/tweedie/libs/tweedie.so)\n\n    What I meant is that, if you run the script in tweedie.Rcheck from the\n    command line, Rscript uses your *installed* version of tweedie, not\n    the tarball you built with R CMD build. So if you didn't run R CMD\n    INSTALL, Rscript is running an old version without any fix, hence the\n    disagreement with R CMD check.\n\n    I?aki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "?unless I am being really stupid?\n\nLucky for that caveat. Feeling rather stupid for this late effort.\n\nThanks so much.  Help greatly appreciated.\n\nP.\n\n\n\nOn 6/Nov/17, 9:51 am, \"I?aki ?car\" <i.ucar86 at",
+      "body_plain": "“unless I am being really stupid”\n\nLucky for that caveat. Feeling rather stupid for this late effort.\n\nThanks so much.  Help greatly appreciated.\n\nP.\n\n\n\nOn 6/Nov/17, 9:51 am, \"Iñaki Úcar\" <i.ucar86 at gmail.com> wrote:\n\n    2017-11-06 0:09 GMT+01:00 Peter Dunn <PDunn2 at usc.edu.au>:\n    > Impossible or not… it just happened (unless I am being really stupid, which\n    > is entirely possible, indeed probable). I confirmed again this morning:\n    > After rebuilding (R CMD build) and checking (R CMD check) without any\n    > errors, I used rhub and the command line again:\n    >\n    >\n    > Running valgrind at the command line, I get this error:\n    >\n    > ==5097== Conditional jump or move depends on uninitialised value(s)\n    > ==5097== at 0x1118F61FB: smallp_ (in\n    > /Users/pdunn2/Library/R/3.4/library/tweedie/libs/tweedie.so)\n\n    What I meant is that, if you run the script in tweedie.Rcheck from the\n    command line, Rscript uses your *installed* version of tweedie, not\n    the tarball you built with R CMD build. So if you didn't run R CMD\n    INSTALL, Rscript is running an old version without any fix, hence the\n    disagreement with R CMD check.\n\n    Iñaki\n\n\n\nUSC, Locked Bag 4, Maroochydore DC, Queensland, 4558 Australia.\nCRICOS Provider No: 01595D\nPlease consider the environment before printing this email.\nThis email is confidential. If received in error, please delete it from your system.\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "“unless I am being really stupid”\n\nLucky for that caveat. Feeling rather stupid for this late effort.\n\nThanks so much.  Help greatly appreciated.\n\nP.\n\n\n\nOn 6/Nov/17, 9:51 am, \"Iñaki Úcar\" <i.ucar86 at",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 6,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002031.html"
     },
     {
       "id": "msg-674631be5cb2",
@@ -197,7 +204,8 @@
       "body_snippet": "Peter,\n\nI ran into similar problems with using valgrind to check  my package  BAS",
       "thread_id": "thread-4ba5876f609b",
       "thread_depth": 7,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002032.html"
     },
     {
       "id": "msg-ff63b73793cd",
@@ -213,7 +221,8 @@
       "body_snippet": "Hello r-package-devel,\n\nI have updated my R package queuecomputer from 0.8.1 to 0.8.2. The\nsource code is here https://github.com/AnthonyEbert/queuecomputer .\n\nI have checked queuecomputer-0.8.2 with ",
       "thread_id": "thread-ff63b73793cd",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002033.html"
     },
     {
       "id": "msg-bb1a3faf808b",
@@ -229,7 +238,8 @@
       "body_snippet": "Hi,\n\nI'm in the process of submitting a package to CRAN and I've run into an\nissue with the examples of some functions. The purpose of nearly all\nfunctions of the package is to download data from a we",
       "thread_id": "thread-bb1a3faf808b",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002034.html"
     },
     {
       "id": "msg-9e965e5815cb",
@@ -247,7 +257,8 @@
       "body_snippet": "On 06.11.2017 07:51, Anthony Ebert wrote:\n> Hello r-package-devel,\n> \n> I have updated my R package queuecomputer from 0.8.1 to 0.8.2. The\n> source code is here https://github.com/AnthonyEbert/queueco",
       "thread_id": "thread-ff63b73793cd",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002035.html"
     },
     {
       "id": "msg-28cdfedbf8b0",
@@ -265,7 +276,8 @@
       "body_snippet": "Then simply explain this situation to the CRAN team and \"they\" will \nprobably let the package pass.\n\nBest,\nUwe Ligges\n\n\nOn 06.11.2017 14:25, Jorge Cimentada wrote:\n> Hi,\n> \n> I'm in the process of sub",
       "thread_id": "thread-bb1a3faf808b",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002036.html"
     },
     {
       "id": "msg-bf218f172a21",
@@ -283,7 +295,8 @@
       "body_snippet": "Hi Jorge,\n\n\nAll the Rd files are available to users if they download the source code. They are also available through the CRAN mirror on Github (github.com/cran). In other words, you shouldn't put per",
       "thread_id": "thread-bb1a3faf808b",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002037.html"
     },
     {
       "id": "msg-56763d97024a",
@@ -302,7 +315,8 @@
       "body_snippet": "Thank you Uwe Ligges!\n\nI did a grep (including all sub-directories) for globalVariables in my\ncode. It is not in the code at all.\n\nCould it be the generate_input function with it's \"<<-\" ?\nhttps://git",
       "thread_id": "thread-ff63b73793cd",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002038.html"
     },
     {
       "id": "msg-19831208d727",
@@ -321,7 +335,8 @@
       "body_snippet": "There are also lots of ways to \"mock\" examples / tests. You might give\nexamples that are \"not run\" in your code, and then if you want to \"test\"\nthe functionality, use \"testthat\" with mocked tests, tha",
       "thread_id": "thread-bb1a3faf808b",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002039.html"
     },
     {
       "id": "msg-f724c139dcf8",
@@ -337,7 +352,8 @@
       "body_snippet": "Hi:\n\nA user of a binary package I provided reported that he could not load it\nfrom R on Mac OSX version 10.11 (El Capitan).  The result of running\n\"require(<package name>)\" is:\n\nError in dyn.load(file",
       "thread_id": "thread-f724c139dcf8",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002040.html"
     },
     {
       "id": "msg-5c1c7dc8ea47",
@@ -353,7 +369,8 @@
       "body_snippet": "Hi everyone,\n\nI am trying to submit a package to CRAN that depends on INLA, which itself\nis not on CRAN. However, INLA is installed on the winbuilder machine but\nthe version is 0.0-1440400394 and extr",
       "thread_id": "thread-5c1c7dc8ea47",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002041.html"
     },
     {
       "id": "msg-69c5eb159c84",
@@ -369,7 +386,8 @@
       "body_snippet": "Good evening,\n\nI am trying to upload my package, called PdPDB 2.0.\nWhen building and checking the package with R-studio with --as-cran option\nselected, everything looks ok but, once I tried to upload ",
       "thread_id": "thread-69c5eb159c84",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002043.html"
     },
     {
       "id": "msg-c7b085eb2695",
@@ -387,7 +405,8 @@
       "body_snippet": "On 08.11.2017 14:25, Fabian Bachl wrote:\n> Hi everyone,\n> \n> I am trying to submit a package to CRAN that depends on INLA, which itself\n> is not on CRAN. However, INLA is installed on the winbuilder m",
       "thread_id": "thread-5c1c7dc8ea47",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002042.html"
     },
     {
       "id": "msg-bdf94090e3f3",
@@ -405,7 +424,8 @@
       "body_snippet": "I think you should be using:\n\nAdditional_repositories: https://github.com/mrdwab/SOfun\n\nsince that is the actual repository.\n\nRegards,\n\nBrian\n\nOn Wed, 2017-11-08 at 17:01 +0100, LUCA BELMONTE wrote:\n>",
       "thread_id": "thread-69c5eb159c84",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002044.html"
     },
     {
       "id": "msg-3a39aceedbec",
@@ -424,7 +444,8 @@
       "body_snippet": "And even this cannot work for strong dependencies, as sztrong \ndeendencies must be available from mainstream repositoreis.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 08.11.2017 17:59, Brian G. Peterson wrote:\n> I think",
       "thread_id": "thread-69c5eb159c84",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002045.html"
     },
     {
       "id": "msg-46891f7fd714",
@@ -443,7 +464,8 @@
       "body_snippet": "Now insalled, please resub,it the package now.\nBest,\nUwe Ligges\n\n\n\nOn 08.11.2017 17:21, Uwe Ligges wrote:\n> \n> \n> On 08.11.2017 14:25, Fabian Bachl wrote:\n>> Hi everyone,\n>>\n>> I am trying to submit a",
       "thread_id": "thread-5c1c7dc8ea47",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002046.html"
     },
     {
       "id": "msg-a7e337ac0df2",
@@ -462,7 +484,8 @@
       "body_snippet": "Great, thank you so much!\n\nOn Wed, Nov 8, 2017 at 5:21 PM Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n>\n>\n> On 08.11.2017 14:25, Fabian Bachl wrote:\n> > Hi everyone,\n> >\n> > I am trying to",
       "thread_id": "thread-5c1c7dc8ea47",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002047.html"
     },
     {
       "id": "msg-c233af594aa8",
@@ -478,7 +501,8 @@
       "body_snippet": "I tried to define a macro to produce today's date (like unto the \n\"\\today\" command in LaTeX):\n\n\\newcommand{\\today}{format(Sys.date(),\"%d/%m/%Y\")}\n\nI put this into my *.Rd file just before invoking it.",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002048.html"
     },
     {
       "id": "msg-848a79cfafc2",
@@ -498,7 +522,8 @@
       "body_snippet": "Dear Brian,\nDear Uwe,\n\nThank you for your replies.\n\nI wrote a function that does the same stuff that the suggested package\ndoes.\nNow there are no reference to suggested packages.\n\nBest,\nLuca\n\n2017-11-",
       "thread_id": "thread-69c5eb159c84",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002049.html"
     },
     {
       "id": "msg-bb08dfe5deaa",
@@ -516,7 +541,8 @@
       "body_snippet": "Note the % may be a comment?\n\nUwe\n\n\nOn 09.11.2017 06:05, Rolf Turner wrote:\n> \n> I tried to define a macro to produce today's date (like unto the \n> \"\\today\" command in LaTeX):\n> \n> \\newcommand{\\today",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002050.html"
     },
     {
       "id": "msg-c0c9681a1404",
@@ -535,7 +561,8 @@
       "body_snippet": "On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n> Note the % may be a comment?\n> \n\nYes, and the body should be written in Rd markup, not R.  Working out \nthe appropriate number of escapes is painful; I recom",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002051.html"
     },
     {
       "id": "msg-53db3c39cbe0",
@@ -551,7 +578,8 @@
       "body_snippet": "Dear list members,\n\nI have three packages on CRAN (asremlPlus, dae and imageData). \n\nThe current versions of all three packages can be built and installed using build of 2017-06-27 r72859 development ",
       "thread_id": "thread-53db3c39cbe0",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002053.html"
     },
     {
       "id": "msg-de2c4937c0ee",
@@ -572,7 +600,8 @@
       "body_snippet": "Did you write it from scratch or modify the function from the package\nyou were referencing?  There may be some licensing issues you need to\nconsider either way.\n\n-Dason\n\nOn Thu, Nov 9, 2017 at 3:53 AM",
       "thread_id": "thread-69c5eb159c84",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002052.html"
     },
     {
       "id": "msg-d2866acae1ae",
@@ -591,7 +620,8 @@
       "body_snippet": "On 09/11/17 23:06, Uwe Ligges wrote:\n> Note the % may be a comment?\n\nAh, yes.  Of course!  Duh! (Slaps forehead vigorously!)\n\nThanks.\n\ncheers,\n\nRolf\n\n\n-- \nTechnical Editor ANZJS\nDepartment of Statisti",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002054.html"
     },
     {
       "id": "msg-b34c6e2df9db",
@@ -611,7 +641,8 @@
       "body_snippet": "On 09/11/17 23:40, Duncan Murdoch wrote:\n> On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n>> Note the % may be a comment?\n>>\n> \n> Yes, and the body should be written in Rd markup, not R.? Working out \n> the",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002055.html"
     },
     {
       "id": "msg-5833ce9d0237",
@@ -631,7 +662,8 @@
       "body_snippet": "... Mr. Speaker.\n\nOn 09/11/17 23:40, Duncan Murdoch wrote:\n> On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n>> Note the % may be a comment?\n>>\n> \n> Yes, and the body should be written in Rd markup, not R.? ",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002056.html"
     },
     {
       "id": "msg-d51e76858c26",
@@ -652,7 +684,8 @@
       "body_snippet": "On 09/11/2017 3:29 PM, Rolf Turner wrote:\n> \n> ... Mr. Speaker.\n> \n> On 09/11/17 23:40, Duncan Murdoch wrote:\n>> On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n>>> Note the % may be a comment?\n>>>\n>>\n>> Yes",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002057.html"
     },
     {
       "id": "msg-ce3b4a1bb583",
@@ -673,7 +706,8 @@
       "body_snippet": "On 09/11/2017 3:05 PM, Rolf Turner wrote:\n> On 09/11/17 23:40, Duncan Murdoch wrote:\n>> On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n>>> Note the % may be a comment?\n>>>\n>>\n>> Yes, and the body should be ",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002059.html"
     },
     {
       "id": "msg-ef8c662aaf52",
@@ -694,7 +728,8 @@
       "body_snippet": "On 09/11/2017 3:05 PM, Rolf Turner wrote:\n> On 09/11/17 23:40, Duncan Murdoch wrote:\n>> On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n>>> Note the % may be a comment?\n>>>\n>>\n>> Yes, and the body should be ",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002058.html"
     },
     {
       "id": "msg-1fc93c612f9c",
@@ -716,7 +751,8 @@
       "body_snippet": "On 10/11/17 12:00, Duncan Murdoch wrote:\n\n[Rolf Turner wrote:]\n>  ...  when I do the \"R CMD\n>> build\" thing, when it comes to the \"* building the PDF package manual\"\n>> step it says \"Hmm ... looks lik",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002060.html"
     },
     {
       "id": "msg-176295de0f91",
@@ -739,7 +775,8 @@
       "body_snippet": "A github search might be helpful to identify packages that define macros in\ntheir Rd files:\nhttps://github.com/search?utf8=%E2%9C%93&q=user%3Acran+extension%3Ard+newcommand&type=Code\n\nOn Thu, Nov 9, 2",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 6,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002061.html"
     },
     {
       "id": "msg-811b393a47b7",
@@ -759,11 +796,12 @@
         "<c2126c77-9910-a788-6034-06b53d52af37@auckland.ac.nz>",
         "<CAKL30wWmK+_d0a=cyZgmYpOL5kVGCo90iFCrbGbzjK_vByhogQ@mail.gmail.com>"
       ],
-      "body_plain": "On 10/11/17 13:10, Fran?ois Michonneau wrote:\n> A github search might be helpful to identify packages that define macros \n> in their Rd files:\n> https://github.com/search?utf8=%E2%9C%93&q=user%3Acran+extension%3Ard+newcommand&type=Code\n\nThanks.  Looking into it.\n\ncheers,\n\nRolf\n\n-- \nTechnical Editor ANZJS\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276",
-      "body_snippet": "On 10/11/17 13:10, Fran?ois Michonneau wrote:\n> A github search might be helpful to identify packages that define macros \n> in their Rd files:\n> https://github.com/search?utf8=%E2%9C%93&q=user%3Acran+",
+      "body_plain": "On 10/11/17 13:10, François Michonneau wrote:\n> A github search might be helpful to identify packages that define macros \n> in their Rd files:\n> https://github.com/search?utf8=%E2%9C%93&q=user%3Acran+extension%3Ard+newcommand&type=Code\n\nThanks.  Looking into it.\n\ncheers,\n\nRolf\n\n-- \nTechnical Editor ANZJS\nDepartment of Statistics\nUniversity of Auckland\nPhone: +64-9-373-7599 ext. 88276",
+      "body_snippet": "On 10/11/17 13:10, François Michonneau wrote:\n> A github search might be helpful to identify packages that define macros \n> in their Rd files:\n> https://github.com/search?utf8=%E2%9C%93&q=user%3Acran+",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 7,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002062.html"
     },
     {
       "id": "msg-72e0381f407a",
@@ -784,11 +822,12 @@
         "<CAKL30wWmK+_d0a=cyZgmYpOL5kVGCo90iFCrbGbzjK_vByhogQ@mail.gmail.com>",
         "<c70e70f8-dfc6-9fd8-45bb-2763fcb8e3df@auckland.ac.nz>"
       ],
-      "body_plain": "Hi Rolf,\nAnother place to look for macros in Rd files would be in the spatstat \npackage which I know you are quite familiary with ;-)\nHowever, I think our macros are plain LaTeX without calls to \\Sexpr so \nit may behave differently than the case at hand.\nCheers,\nEge\n\nOn 11/10/2017 02:00 AM, Rolf Turner wrote:\n> On 10/11/17 13:10, Fran?ois Michonneau wrote:\n>> A github search might be helpful to identify packages that define \n>> macros in their Rd files:\n>> https://github.com/search?utf8=%E2%9C%93&q=user%3Acran+extension%3Ard+newcommand&type=Code \n>>\n> \n> Thanks.? Looking into it.\n> \n> cheers,\n> \n> Rolf\n>",
+      "body_plain": "Hi Rolf,\nAnother place to look for macros in Rd files would be in the spatstat \npackage which I know you are quite familiary with ;-)\nHowever, I think our macros are plain LaTeX without calls to \\Sexpr so \nit may behave differently than the case at hand.\nCheers,\nEge\n\nOn 11/10/2017 02:00 AM, Rolf Turner wrote:\n> On 10/11/17 13:10, François Michonneau wrote:\n>> A github search might be helpful to identify packages that define \n>> macros in their Rd files:\n>> https://github.com/search?utf8=%E2%9C%93&q=user%3Acran+extension%3Ard+newcommand&type=Code \n>>\n> \n> Thanks.  Looking into it.\n> \n> cheers,\n> \n> Rolf\n>",
       "body_snippet": "Hi Rolf,\nAnother place to look for macros in Rd files would be in the spatstat \npackage which I know you are quite familiary with ;-)\nHowever, I think our macros are plain LaTeX without calls to \\Sexp",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 8,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002063.html"
     },
     {
       "id": "msg-d2798d29509d",
@@ -804,7 +843,8 @@
       "body_snippet": "Hi,\n\nYesterday I released the initial submission of my package 'epitab' to \nCRAN https://cran.r-project.org/web/packages/epitab/index.html. On my PC \nand on win_builder it passed CMD CHECK without any",
       "thread_id": "thread-d2798d29509d",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002065.html"
     },
     {
       "id": "msg-7fd4ec1f7e05",
@@ -826,7 +866,8 @@
       "body_snippet": ">http://developer.r-project.org/parseRd.pdf\n\nI would add that it is best to think of \"Rd markup\" as a subset of TeX/LaTeX markup (with some extentions) defined in \n\"Writing R Extensions\" and Duncan's ",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002064.html"
     },
     {
       "id": "msg-2fb131004815",
@@ -844,7 +885,8 @@
       "body_snippet": "Hi,\n\nPresumably, you have imported 'confint' from 'stats'.\nJust import something from MASS, e.g 'ginv':\n\nimportFrom(MASS,ginv)\n\nor choose something else by studying the output of  ls(asNamespace(\"MASS",
       "thread_id": "thread-d2798d29509d",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002066.html"
     },
     {
       "id": "msg-26b8d77a9909",
@@ -866,7 +908,8 @@
       "body_snippet": "Hi Dason,\n\nI wrote it from scratch.\n\nThank you for the suggestion though,\n\nLuca\n\n2017-11-09 17:17 GMT+01:00 Dason Kurkiewicz <dasonk at gmail.com>:\n\n> Did you write it from scratch or modify the funct",
       "thread_id": "thread-69c5eb159c84",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002067.html"
     },
     {
       "id": "msg-0fc6aa2dc5cf",
@@ -882,7 +925,8 @@
       "body_snippet": "Dear R developers:\n\nMy group are facing a problem while using an R package of extream random trees. \n\nUsing a slightly large data set (13000 rows?27 columns), the R package, specifically at the predic",
       "thread_id": "thread-0fc6aa2dc5cf",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002068.html"
     },
     {
       "id": "msg-31ac52d07b5a",
@@ -900,7 +944,8 @@
       "body_snippet": "Hello,\n\nThis sounds like a problem you should discuss with/report to the \nmaintainer of the particular package you are using, and you can get \ntheir email address from the DESCRIPTION file.\n\nCheers,\n\n",
       "thread_id": "thread-0fc6aa2dc5cf",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002069.html"
     },
     {
       "id": "msg-bf53d73069ee",
@@ -921,7 +966,8 @@
       "body_snippet": "On 10/11/17 09:29, Rolf Turner wrote:\n\n> On 09/11/17 23:40, Duncan Murdoch wrote:\n>> On 09/11/2017 5:06 AM, Uwe Ligges wrote:\n>>> Note the % may be a comment?\n>>>\n>>\n>> Yes, and the body should be wri",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002070.html"
     },
     {
       "id": "msg-edd8dec31d3d",
@@ -943,7 +989,8 @@
       "body_snippet": "It is more subtle than that. \n\\Sexpr triggers the creation of \"partial Rd database\" which becomes part of the built package (the tar.gz file), although what exactly happens may also depend on 'stage' ",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002071.html"
     },
     {
       "id": "msg-dec8de98e591",
@@ -966,7 +1013,8 @@
       "body_snippet": "On 12/11/17 08:08, Georgi Boshnakov wrote:\n> It is more subtle than that.\n> \\Sexpr triggers the creation of \"partial Rd database\" which becomes part of the built package (the tar.gz file), although wh",
       "thread_id": "thread-c233af594aa8",
       "thread_depth": 6,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002072.html"
     },
     {
       "id": "msg-2f72e3bae509",
@@ -982,7 +1030,8 @@
       "body_snippet": "Hi All:\n\nI wasn't quite certain the appropriate list for this,  but hopefully this will be found as needed. I know I have seen for several packages where building from source has failed on the Mac bec",
       "thread_id": "thread-2f72e3bae509",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002073.html"
     },
     {
       "id": "msg-460453328773",
@@ -998,7 +1047,8 @@
       "body_snippet": "Hi,\n\nI submitted a package to CRAN, and it failed the automatic build on\nwin-builder.  But it passed when I uploaded it directly to\nwin-builder.\n\nHere is the relevant part of each build.  First, the b",
       "thread_id": "thread-460453328773",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002074.html"
     },
     {
       "id": "msg-9b55ec5852fd",
@@ -1014,7 +1064,8 @@
       "body_snippet": "Hi,\n\nI have a vignette (URL below) with\n\nleaflet(geoIndex) %>% addTiles() %>%\n        addCircles(~lon, ~lat) [...]\n\nthat produces the following warning on solaris and osx:\n\n\nError in re-building vigne",
       "thread_id": "thread-9b55ec5852fd",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002075.html"
     },
     {
       "id": "msg-86a2ae22d850",
@@ -1032,7 +1083,8 @@
       "body_snippet": "On 14/11/2017 10:44 AM, Berry Boessenkool wrote:\n> \n> Hi,\n> \n> I have a vignette (URL below) with\n> \n> leaflet(geoIndex) %>% addTiles() %>%\n>          addCircles(~lon, ~lat) [...]\n> \n> that produces t",
       "thread_id": "thread-9b55ec5852fd",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002076.html"
     },
     {
       "id": "msg-7b6dcb98f2ea",
@@ -1048,7 +1100,8 @@
       "body_snippet": "Dear all,\nI have used devtools with success and pleasure to build packages in the\npast, but everything has changed recently. No success using build(binary =\nT) in Windows 7 (with rtools34 and R-3.4.2)",
       "thread_id": "thread-7b6dcb98f2ea",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002077.html"
     },
     {
       "id": "msg-360c72dea4d5",
@@ -1066,7 +1119,8 @@
       "body_snippet": "On 17/11/2017 5:19 PM, Dalthorp, Daniel wrote:\n> Dear all,\n> I have used devtools with success and pleasure to build packages in the\n> past, but everything has changed recently. No success using build",
       "thread_id": "thread-7b6dcb98f2ea",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002078.html"
     },
     {
       "id": "msg-69bdc363c049",
@@ -1082,7 +1136,8 @@
       "body_snippet": "when I use R CMD check my R packages,there is no error\nwhen I\nWarning: Failed to load RGtk2 dynamic library, attempting to install it.Please install GTK+ from http://ftp.gnome.org/pub/gnome/binaries/w",
       "thread_id": "thread-69bdc363c049",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002079.html"
     },
     {
       "id": "msg-b13a50e4f9ae",
@@ -1098,7 +1153,8 @@
       "body_snippet": "One of my packages has what I believe to be spurious rchk warnings:\n\n From \nhttps://raw.githubusercontent.com/kalibera/cran-checks/master/rchk/results/utf8.out\n\nPackage utf8 version 1.1.0\nPackage buil",
       "thread_id": "thread-b13a50e4f9ae",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002080.html"
     },
     {
       "id": "msg-ca3fa96d5e5c",
@@ -1116,7 +1172,8 @@
       "body_snippet": ">>>>> Paul Johnson <pauljohn32 at gmail.com>\n>>>>>     on Mon, 20 Nov 2017 14:59:26 -0600 writes:\n\n    > I mistakenly left a write in \"/tmp\" in the rockchalk package (version\n    > 1.8.109) that I upl",
       "thread_id": "thread-ca3fa96d5e5c",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002081.html"
     },
     {
       "id": "msg-07a757bf56a9",
@@ -1131,11 +1188,12 @@
         "<CAErODj_g2m95Nx1WD=YsApCrzEo_Q1cHxQSOuKYhO9-DAFFOfg@mail.gmail.com>",
         "<23059.61115.505878.79893@stat.math.ethz.ch>"
       ],
-      "body_plain": "Hi,\n\nJust in case it makes some sense, the same Matrix-related error occurs \nat least for these other packages:\n\nmatchMulti ??? 1.1.6\ncompound.Cox ??? 3.6\nmpmcorrelogram ??? 0.1-4\nepr ??? 3.0\nicensBKL ??? 1.1\n\n\nMarcelino\n\n\n\nEl 21/11/2017 a las 10:15, Martin Maechler escribi?:\n>>>>>> Paul Johnson <pauljohn32 at gmail.com>\n>>>>>>      on Mon, 20 Nov 2017 14:59:26 -0600 writes:\n>      > I mistakenly left a write in \"/tmp\" in the rockchalk package (version\n>      > 1.8.109) that I uploaded last Friday. Kurt H wrote and asked me to fix\n>      > today.\n>\n>      > While uploading a new one, I became aware of a problem I had not seen.\n>      > The version I uploaded last Friday, 1.8.109, has OK status on all\n>      > platforms except r-release-windows-ix86+x86_64. I get OK on\n>      > oldrel-windows and also on devel-windows.\n>\n>      > https://cran.r-project.org/web/checks/check_results_rockchalk.html\n>\n>      > Can you please advise me on what to do? I don't understand, well,\n>      > anything about this :(\n>\n> Dear Paul,\n>\n> something like this really should have been posted to the R-package-devel\n> list, not to R-devel; as it is here now, I'm crossposting to there for one msg\n> Please remove R-devel at .. from CC  if/when replying and keep it there.\n>\n>      > The error says:\n>\n>      > * installing *source* package 'rockchalk' ...\n>      > ** package 'rockchalk' successfully unpacked and MD5 sums checked\n>      > ** R\n>      > ** data\n>      > ** inst\n>      > ** preparing package for lazy loading\n>      > Warning: S3 methods 'print.sparseSummary', 'print.diagSummary',\n>      > 'c.abIndex', 'c.sparseVector', 'as.array.Matrix',\n>      > 'as.array.sparseVector', 'as.matrix.Matrix', 'as.matrix.sparseVector',\n>      > 'as.vector.Matrix', 'as.vector.sparseVector' were declared in\n>      > NAMESPACE but not found\n>      > Error in namespaceExport(ns, exports) :\n>      > undefined exports: %&%, Cholesky, .SuiteSparse_version, Diagonal,\n>      > .symDiagonal, .sparseDiagonal, .trDiagonal, Hilbert, KhatriRao,\n>      > Matrix, MatrixClass, spMatrix, sparseMatrix, rsparsematrix, Schur,\n>      > abIseq, abIseq1, rep2abI, band, bandSparse, bdiag, .bdiag,\n>      > c.sparseVector, condest, onenormest, .asmatrix, .dsy2mat, .dsy2dsp,\n>      > .dxC2mat, .T2Cmat, ..2dge, .dense2sy, .C2nC, .nC2d, .nC2l, .diag.dsC,\n>      > .solve.dgC.chol, .solve.dgC.qr, .solve.dgC.lu, diagN2U, diagU2N,\n>      > .diagU2N, .diag2tT, .diag2sT, .diag2mat, drop0, expand, expm, facmul,\n>      > fac2sparse, fac2Sparse, forceSymmetric, T2graph, graph2T,\n>      > anyDuplicatedT, uniqTsparse, isTriangular, isDiagonal, isLDL,\n>      > is.null.DN, invPerm, lu, nearPD, nnzero, formatSpMatrix,\n>      > formatSparseM, .formatSparseSimple, printSpMatrix, printSpMatrix2,\n>      > qrR, rankMatrix, readHB, readMM, sparse.model.matrix, sparseVector,\n>      > symmpart, skewpart, tril, triu, updown, pack, unpack,\n>      > .updateCHMfactor, .validateCsparse, writeMM, cBind, rBind\n>      > ERROR: lazy loading failed for package 'rockchalk'\n>      > * removing 'd:/Rcompile/CRANpkg/lib/3.4/rockchalk'\n>      > * restoring previous 'd:/Rcompile/CRANpkg/lib/3.4/rockchalk'\n>\n> all of these these are names of  Matrix-package objects..\n> and I know that yesterday Matrix package version changes (1.1-11\n> --> 1.1-12) happened on CRAN and hence in servers which update..\n>\n> So it *could* be this is all just a temporary problem aka \"race\n> situation\" , where the check of your package very unhappily\n> happened exactly at a moment where the new Matrix package was\n> already there, but not quite ....\n> seems quite improbable, but then your problem seems \"rare\"..\n>\n> Martin\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> .\n>\n\n-- \nMarcelino de la Cruz Rot\nDepto. de Biolog?a Y Geolog?a\nUniversidad Rey Juan Carlos\nM?stoles Espa?a",
-      "body_snippet": "Hi,\n\nJust in case it makes some sense, the same Matrix-related error occurs \nat least for these other packages:\n\nmatchMulti ??? 1.1.6\ncompound.Cox ??? 3.6\nmpmcorrelogram ??? 0.1-4\nepr ??? 3.0\nicensBKL",
+      "body_plain": "Hi,\n\nJust in case it makes some sense, the same Matrix-related error occurs \nat least for these other packages:\n\nmatchMulti     1.1.6\ncompound.Cox     3.6\nmpmcorrelogram     0.1-4\nepr     3.0\nicensBKL     1.1\n\n\nMarcelino\n\n\n\nEl 21/11/2017 a las 10:15, Martin Maechler escribió:\n>>>>>> Paul Johnson <pauljohn32 at gmail.com>\n>>>>>>      on Mon, 20 Nov 2017 14:59:26 -0600 writes:\n>      > I mistakenly left a write in \"/tmp\" in the rockchalk package (version\n>      > 1.8.109) that I uploaded last Friday. Kurt H wrote and asked me to fix\n>      > today.\n>\n>      > While uploading a new one, I became aware of a problem I had not seen.\n>      > The version I uploaded last Friday, 1.8.109, has OK status on all\n>      > platforms except r-release-windows-ix86+x86_64. I get OK on\n>      > oldrel-windows and also on devel-windows.\n>\n>      > https://cran.r-project.org/web/checks/check_results_rockchalk.html\n>\n>      > Can you please advise me on what to do? I don't understand, well,\n>      > anything about this :(\n>\n> Dear Paul,\n>\n> something like this really should have been posted to the R-package-devel\n> list, not to R-devel; as it is here now, I'm crossposting to there for one msg\n> Please remove R-devel at .. from CC  if/when replying and keep it there.\n>\n>      > The error says:\n>\n>      > * installing *source* package 'rockchalk' ...\n>      > ** package 'rockchalk' successfully unpacked and MD5 sums checked\n>      > ** R\n>      > ** data\n>      > ** inst\n>      > ** preparing package for lazy loading\n>      > Warning: S3 methods 'print.sparseSummary', 'print.diagSummary',\n>      > 'c.abIndex', 'c.sparseVector', 'as.array.Matrix',\n>      > 'as.array.sparseVector', 'as.matrix.Matrix', 'as.matrix.sparseVector',\n>      > 'as.vector.Matrix', 'as.vector.sparseVector' were declared in\n>      > NAMESPACE but not found\n>      > Error in namespaceExport(ns, exports) :\n>      > undefined exports: %&%, Cholesky, .SuiteSparse_version, Diagonal,\n>      > .symDiagonal, .sparseDiagonal, .trDiagonal, Hilbert, KhatriRao,\n>      > Matrix, MatrixClass, spMatrix, sparseMatrix, rsparsematrix, Schur,\n>      > abIseq, abIseq1, rep2abI, band, bandSparse, bdiag, .bdiag,\n>      > c.sparseVector, condest, onenormest, .asmatrix, .dsy2mat, .dsy2dsp,\n>      > .dxC2mat, .T2Cmat, ..2dge, .dense2sy, .C2nC, .nC2d, .nC2l, .diag.dsC,\n>      > .solve.dgC.chol, .solve.dgC.qr, .solve.dgC.lu, diagN2U, diagU2N,\n>      > .diagU2N, .diag2tT, .diag2sT, .diag2mat, drop0, expand, expm, facmul,\n>      > fac2sparse, fac2Sparse, forceSymmetric, T2graph, graph2T,\n>      > anyDuplicatedT, uniqTsparse, isTriangular, isDiagonal, isLDL,\n>      > is.null.DN, invPerm, lu, nearPD, nnzero, formatSpMatrix,\n>      > formatSparseM, .formatSparseSimple, printSpMatrix, printSpMatrix2,\n>      > qrR, rankMatrix, readHB, readMM, sparse.model.matrix, sparseVector,\n>      > symmpart, skewpart, tril, triu, updown, pack, unpack,\n>      > .updateCHMfactor, .validateCsparse, writeMM, cBind, rBind\n>      > ERROR: lazy loading failed for package 'rockchalk'\n>      > * removing 'd:/Rcompile/CRANpkg/lib/3.4/rockchalk'\n>      > * restoring previous 'd:/Rcompile/CRANpkg/lib/3.4/rockchalk'\n>\n> all of these these are names of  Matrix-package objects..\n> and I know that yesterday Matrix package version changes (1.1-11\n> --> 1.1-12) happened on CRAN and hence in servers which update..\n>\n> So it *could* be this is all just a temporary problem aka \"race\n> situation\" , where the check of your package very unhappily\n> happened exactly at a moment where the new Matrix package was\n> already there, but not quite ....\n> seems quite improbable, but then your problem seems \"rare\"..\n>\n> Martin\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> .\n>\n\n-- \nMarcelino de la Cruz Rot\nDepto. de Biología Y Geología\nUniversidad Rey Juan Carlos\nMóstoles España",
+      "body_snippet": "Hi,\n\nJust in case it makes some sense, the same Matrix-related error occurs \nat least for these other packages:\n\nmatchMulti     1.1.6\ncompound.Cox     3.6\nmpmcorrelogram     0.1-4\nepr     3.0\nicensBKL",
       "thread_id": "thread-ca3fa96d5e5c",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002083.html"
     },
     {
       "id": "msg-50f271f34e42",
@@ -1153,7 +1211,8 @@
       "body_snippet": "On Mon, Nov 20, 2017 at 8:34 PM, Patrick Perry <pperry at stern.nyu.edu> wrote:\n> One of my packages has what I believe to be spurious rchk warnings:\n>\n> From\n> https://raw.githubusercontent.com/kalib",
       "thread_id": "thread-b13a50e4f9ae",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002082.html"
     },
     {
       "id": "msg-a89253fda68f",
@@ -1172,7 +1231,8 @@
       "body_snippet": "On 21.11.2017 10:15, Martin Maechler wrote:\n>>>>>> Paul Johnson <pauljohn32 at gmail.com>\n>>>>>>      on Mon, 20 Nov 2017 14:59:26 -0600 writes:\n> \n>      > I mistakenly left a write in \"/tmp\" in the ",
       "thread_id": "thread-ca3fa96d5e5c",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002084.html"
     },
     {
       "id": "msg-737e8d92b251",
@@ -1191,7 +1251,8 @@
       "body_snippet": "I think you're right, and I think I've found the offending code \n(https://github.com/patperry/r-utf8/blob/master/src/as_utf8.c#L111):\n\n     if (!raw || ce == CE_BYTES || ce == CE_NATIVE) {\n         if",
       "thread_id": "thread-b13a50e4f9ae",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002085.html"
     },
     {
       "id": "msg-b41ca4708623",
@@ -1207,7 +1268,8 @@
       "body_snippet": "Having a bit of a puzzle with a package at work (which I can't share).\n\nIn src/Makevars I override CC, CXX, CXX11, CXX14 to point to a specific\n(version) of g++ on my system, say g++-x.y.  I also set ",
       "thread_id": "thread-b41ca4708623",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002086.html"
     },
     {
       "id": "msg-08d6d1a145d9",
@@ -1225,7 +1287,8 @@
       "body_snippet": "On 21/11/2017 3:37 PM, Dirk Eddelbuettel wrote:\n> \n> Having a bit of a puzzle with a package at work (which I can't share).\n> \n> In src/Makevars I override CC, CXX, CXX11, CXX14 to point to a specific",
       "thread_id": "thread-b41ca4708623",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002087.html"
     },
     {
       "id": "msg-824d26cae13d",
@@ -1244,7 +1307,8 @@
       "body_snippet": "On 21 November 2017 at 16:51, Duncan Murdoch wrote:\n| According to section 1.2.1 \"Using Makevars\" in Writing R Extensions, \n| R_HOME/etcR_ARCH/Makeconf is included after Makevars, so what you're \n| se",
       "thread_id": "thread-b41ca4708623",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002088.html"
     },
     {
       "id": "msg-ab1fa5f16491",
@@ -1260,7 +1324,8 @@
       "body_snippet": "Hi, I'm stuck.  I am using a function called col_concat from the package\n{assertr}.  But when I list it as a dependency, either by\n\nimport(assertr)\n\nor\n\nimportFrom(\"assertr\", \"col_concat\")\n\n----------",
       "thread_id": "thread-ab1fa5f16491",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002089.html"
     },
     {
       "id": "msg-9a8d015a1f0b",
@@ -1274,11 +1339,12 @@
       "references": [
         "<CAOeg=_9oDFefcqcPS4CJW17Wt=zzef+Ei12JfnD6uHB7txOqrw@mail.gmail.com>"
       ],
-      "body_plain": "Edit your DESCRIPTION file to include\n\nimports: assertr\n\nThat?s why you get the \"not required\" message.\n\nBryan\n\n> On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> \n> Hi, I'm stuck.  I am using a function called col_concat from the package\n> {assertr}.  But when I list it as a dependency, either by\n> \n> import(assertr)\n> \n> or\n> \n> importFrom(\"assertr\", \"col_concat\")\n> \n> -----------\n> \n> I get this error message:\n> \n> * checking package dependencies ... ERROR\n> \n> Namespace dependency not required: ?assertr?\n> \n> See section ?The DESCRIPTION file? in the ?Writing R Extensions?\n> \n> manual.\n> \n> * DONE\n> \n> Status: 1 ERROR\n> ?------------\n> And when I take it out, I get a complaint that col_concat has no global\n> definition.\n> \n> What???\n> \n> Thanks,\n> ?\n> Cathy Lee Gierke\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Edit your DESCRIPTION file to include\n\nimports: assertr\n\nThat?s why you get the \"not required\" message.\n\nBryan\n\n> On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> \n> Hi, I'",
+      "body_plain": "Edit your DESCRIPTION file to include\n\nimports: assertr\n\nThat’s why you get the \"not required\" message.\n\nBryan\n\n> On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> \n> Hi, I'm stuck.  I am using a function called col_concat from the package\n> {assertr}.  But when I list it as a dependency, either by\n> \n> import(assertr)\n> \n> or\n> \n> importFrom(\"assertr\", \"col_concat\")\n> \n> -----------\n> \n> I get this error message:\n> \n> * checking package dependencies ... ERROR\n> \n> Namespace dependency not required: ‘assertr’\n> \n> See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’\n> \n> manual.\n> \n> * DONE\n> \n> Status: 1 ERROR\n> ​------------\n> And when I take it out, I get a complaint that col_concat has no global\n> definition.\n> \n> What???\n> \n> Thanks,\n> ​\n> Cathy Lee Gierke\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Edit your DESCRIPTION file to include\n\nimports: assertr\n\nThat’s why you get the \"not required\" message.\n\nBryan\n\n> On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> \n> Hi, I'",
       "thread_id": "thread-ab1fa5f16491",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002090.html"
     },
     {
       "id": "msg-0bee9469f05c",
@@ -1293,11 +1359,12 @@
         "<CAOeg=_9oDFefcqcPS4CJW17Wt=zzef+Ei12JfnD6uHB7txOqrw@mail.gmail.com>",
         "<696D48BA-548F-4135-9F6A-DD64E44E3DE3@depauw.edu>"
       ],
-      "body_plain": "Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why\nthis one should be in the description file?\n\nCathy Lee Gierke\n\n\n*?Darkness cannot drive out darkness: only light can do that. Hate cannot\ndrive out hate: only love can do that.? *\n*?The arc of the moral universe is long, but it bends towards justice.?*\n*?Nothing in the world is more dangerous than sincere ignorance and\nconscientious stupidity.? *\n*?Never forget that everything Hitler did in Germany was legal.?   *\n*?Forgiveness is not an occasional act, it is a constant attitude.? *\n*?Injustice anywhere is a threat to justice everywhere.?  *\n\n? Martin Luther King Jr.\n\n<http://www.goodreads.com/author/show/23924.Martin_Luther_King_Jr_>\n\nOn Tue, Nov 21, 2017 at 7:19 PM, Bryan Hanson <hanson at depauw.edu> wrote:\n\n> Edit your DESCRIPTION file to include\n>\n> imports: assertr\n>\n> That?s why you get the \"not required\" message.\n>\n> Bryan\n>\n> > On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> >\n> > Hi, I'm stuck.  I am using a function called col_concat from the package\n> > {assertr}.  But when I list it as a dependency, either by\n> >\n> > import(assertr)\n> >\n> > or\n> >\n> > importFrom(\"assertr\", \"col_concat\")\n> >\n> > -----------\n> >\n> > I get this error message:\n> >\n> > * checking package dependencies ... ERROR\n> >\n> > Namespace dependency not required: ?assertr?\n> >\n> > See section ?The DESCRIPTION file? in the ?Writing R Extensions?\n> >\n> > manual.\n> >\n> > * DONE\n> >\n> > Status: 1 ERROR\n> > ?------------\n> > And when I take it out, I get a complaint that col_concat has no global\n> > definition.\n> >\n> > What???\n> >\n> > Thanks,\n> > ?\n> > Cathy Lee Gierke\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why\nthis one should be in the description file?\n\nCathy Lee Gierke\n\n\n*?Darkness cannot drive out darkness: only light can do that",
+      "body_plain": "Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why\nthis one should be in the description file?\n\nCathy Lee Gierke\n\n\n*“Darkness cannot drive out darkness: only light can do that. Hate cannot\ndrive out hate: only love can do that.” *\n*“The arc of the moral universe is long, but it bends towards justice.”*\n*“Nothing in the world is more dangerous than sincere ignorance and\nconscientious stupidity.” *\n*“Never forget that everything Hitler did in Germany was legal.”   *\n*“Forgiveness is not an occasional act, it is a constant attitude.” *\n*“Injustice anywhere is a threat to justice everywhere.”  *\n\n― Martin Luther King Jr.\n\n<http://www.goodreads.com/author/show/23924.Martin_Luther_King_Jr_>\n\nOn Tue, Nov 21, 2017 at 7:19 PM, Bryan Hanson <hanson at depauw.edu> wrote:\n\n> Edit your DESCRIPTION file to include\n>\n> imports: assertr\n>\n> That’s why you get the \"not required\" message.\n>\n> Bryan\n>\n> > On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> >\n> > Hi, I'm stuck.  I am using a function called col_concat from the package\n> > {assertr}.  But when I list it as a dependency, either by\n> >\n> > import(assertr)\n> >\n> > or\n> >\n> > importFrom(\"assertr\", \"col_concat\")\n> >\n> > -----------\n> >\n> > I get this error message:\n> >\n> > * checking package dependencies ... ERROR\n> >\n> > Namespace dependency not required: ‘assertr’\n> >\n> > See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’\n> >\n> > manual.\n> >\n> > * DONE\n> >\n> > Status: 1 ERROR\n> > ​------------\n> > And when I take it out, I get a complaint that col_concat has no global\n> > definition.\n> >\n> > What???\n> >\n> > Thanks,\n> > ​\n> > Cathy Lee Gierke\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why\nthis one should be in the description file?\n\nCathy Lee Gierke\n\n\n*“Darkness cannot drive out darkness: only light can do that",
       "thread_id": "thread-ab1fa5f16491",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002091.html"
     },
     {
       "id": "msg-92e2df32cb4d",
@@ -1317,7 +1384,8 @@
       "body_snippet": "On 21 November 2017 at 19:20, Cathy Lee Gierke wrote:\n| Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why\n| this one should be in the description file?\n\nBecause you need an e",
       "thread_id": "thread-ab1fa5f16491",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002092.html"
     },
     {
       "id": "msg-070b0031a173",
@@ -1335,11 +1403,12 @@
         "<07B6C328-5710-4C5B-84FE-08C6336D8E4E@depauw.edu>",
         "<CAOeg=_-Tr-aPmP849HkAZfEM4rB7dm3a2W3Ne4Dsy0XChjaQ2w@mail.gmail.com>"
       ],
-      "body_plain": "Cathy?\n\nRegarding changes from last year, I wouldn?t worry too much about that.  The CRAN checking system is always moving toward greater stringency as the ecosystem evolves.  Requirements and messages change steadily.\n\nI have ?chased my tail? along the lines of your original description before as well.  There are ways to import the entire namespace of a package which allows one to get a working package but there the current standard is to import only the particular functions you need, not the entire namespace.  And there are differences between writing\n\nassertr::col_concat()\n\nand \n\ncol_concat()\n\nin your functions too, depending upon what you import (I may be remembering a detail incorrectly here).\n\nBryan\n\n> On Nov 21, 2017, at 8:42 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> \n> I have read that over and over......it doesn't seem to say when a package or function, that is already in the Namespace file will also need to be in the Description file.  It says usually if an import is in Description it also needs to be in Namespace.....but the reverse is never mentioned....\n> \n> A bit more info:  A year or more ago I had all of my imports in Description.  But then it started complaining and told me to move them all t Namespace.  So there are now no imports in Description.  They are all in Namespace.  But col_concat from the package {assertr} seems to be an exception?\n> \n> Cathy Lee Gierke\n>       \n> ?Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.? \n> ?The arc of the moral universe is long, but it bends towards justice.?\n> ?Nothing in the world is more dangerous than sincere ignorance and conscientious stupidity.? \n> ?Never forget that everything Hitler did in Germany was legal.?   \n> ?Forgiveness is not an occasional act, it is a constant attitude.? \n> ?Injustice anywhere is a threat to justice everywhere.?  \n> \n> ? Martin Luther King Jr.\n> \n>  <http://www.goodreads.com/author/show/23924.Martin_Luther_King_Jr_>\n> On Tue, Nov 21, 2017 at 7:25 PM, Bryan Hanson <hanson at depauw.edu <mailto:hanson at depauw.edu>> wrote:\n> Check out \n> \n> https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies <https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies> \n> \n> and see about the nuances of  Depends, Suggests and Imports\n> \n> It is not sufficient for them to be listed in the NAMESPACE file only\n> \n> Bryan\n> \n> \n> \n>> On Nov 21, 2017, at 8:20 PM, Cathy Lee Gierke <leegi001 at umn.edu <mailto:leegi001 at umn.edu>> wrote:\n>> \n>> Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why this one should be in the description file?\n>> \n>> Cathy Lee Gierke\n>>       \n>> ?Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.? \n>> ?The arc of the moral universe is long, but it bends towards justice.?\n>> ?Nothing in the world is more dangerous than sincere ignorance and conscientious stupidity.? \n>> ?Never forget that everything Hitler did in Germany was legal.?   \n>> ?Forgiveness is not an occasional act, it is a constant attitude.? \n>> ?Injustice anywhere is a threat to justice everywhere.?  \n>> \n>> ? Martin Luther King Jr.\n>> \n>>  <http://www.goodreads.com/author/show/23924.Martin_Luther_King_Jr_>\n>> On Tue, Nov 21, 2017 at 7:19 PM, Bryan Hanson <hanson at depauw.edu <mailto:hanson at depauw.edu>> wrote:\n>> Edit your DESCRIPTION file to include\n>> \n>> imports: assertr\n>> \n>> That?s why you get the \"not required\" message.\n>> \n>> Bryan\n>> \n>> > On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu <mailto:leegi001 at umn.edu>> wrote:\n>> >\n>> > Hi, I'm stuck.  I am using a function called col_concat from the package\n>> > {assertr}.  But when I list it as a dependency, either by\n>> >\n>> > import(assertr)\n>> >\n>> > or\n>> >\n>> > importFrom(\"assertr\", \"col_concat\")\n>> >\n>> > -----------\n>> >\n>> > I get this error message:\n>> >\n>> > * checking package dependencies ... ERROR\n>> >\n>> > Namespace dependency not required: ?assertr?\n>> >\n>> > See section ?The DESCRIPTION file? in the ?Writing R Extensions?\n>> >\n>> > manual.\n>> >\n>> > * DONE\n>> >\n>> > Status: 1 ERROR\n>> > ?------------\n>> > And when I take it out, I get a complaint that col_concat has no global\n>> > definition.\n>> >\n>> > What???\n>> >\n>> > Thanks,\n>> > ?\n>> > Cathy Lee Gierke\n>> >\n>> >       [[alternative HTML version deleted]]\n>> >\n>> > ______________________________________________\n>> > R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n>> > https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>> \n>> \n> \n> \n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Cathy?\n\nRegarding changes from last year, I wouldn?t worry too much about that.  The CRAN checking system is always moving toward greater stringency as the ecosystem evolves.  Requirements and message",
+      "body_plain": "Cathy…\n\nRegarding changes from last year, I wouldn’t worry too much about that.  The CRAN checking system is always moving toward greater stringency as the ecosystem evolves.  Requirements and messages change steadily.\n\nI have “chased my tail” along the lines of your original description before as well.  There are ways to import the entire namespace of a package which allows one to get a working package but there the current standard is to import only the particular functions you need, not the entire namespace.  And there are differences between writing\n\nassertr::col_concat()\n\nand \n\ncol_concat()\n\nin your functions too, depending upon what you import (I may be remembering a detail incorrectly here).\n\nBryan\n\n> On Nov 21, 2017, at 8:42 PM, Cathy Lee Gierke <leegi001 at umn.edu> wrote:\n> \n> I have read that over and over......it doesn't seem to say when a package or function, that is already in the Namespace file will also need to be in the Description file.  It says usually if an import is in Description it also needs to be in Namespace.....but the reverse is never mentioned....\n> \n> A bit more info:  A year or more ago I had all of my imports in Description.  But then it started complaining and told me to move them all t Namespace.  So there are now no imports in Description.  They are all in Namespace.  But col_concat from the package {assertr} seems to be an exception?\n> \n> Cathy Lee Gierke\n>       \n> “Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.” \n> “The arc of the moral universe is long, but it bends towards justice.”\n> “Nothing in the world is more dangerous than sincere ignorance and conscientious stupidity.” \n> “Never forget that everything Hitler did in Germany was legal.”   \n> “Forgiveness is not an occasional act, it is a constant attitude.” \n> “Injustice anywhere is a threat to justice everywhere.”  \n> \n> ― Martin Luther King Jr.\n> \n>  <http://www.goodreads.com/author/show/23924.Martin_Luther_King_Jr_>\n> On Tue, Nov 21, 2017 at 7:25 PM, Bryan Hanson <hanson at depauw.edu <mailto:hanson at depauw.edu>> wrote:\n> Check out \n> \n> https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies <https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies> \n> \n> and see about the nuances of  Depends, Suggests and Imports\n> \n> It is not sufficient for them to be listed in the NAMESPACE file only\n> \n> Bryan\n> \n> \n> \n>> On Nov 21, 2017, at 8:20 PM, Cathy Lee Gierke <leegi001 at umn.edu <mailto:leegi001 at umn.edu>> wrote:\n>> \n>> Thanks Bryan.  All of my imports are in the namespace.  Can you tell me why this one should be in the description file?\n>> \n>> Cathy Lee Gierke\n>>       \n>> “Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.” \n>> “The arc of the moral universe is long, but it bends towards justice.”\n>> “Nothing in the world is more dangerous than sincere ignorance and conscientious stupidity.” \n>> “Never forget that everything Hitler did in Germany was legal.”   \n>> “Forgiveness is not an occasional act, it is a constant attitude.” \n>> “Injustice anywhere is a threat to justice everywhere.”  \n>> \n>> ― Martin Luther King Jr.\n>> \n>>  <http://www.goodreads.com/author/show/23924.Martin_Luther_King_Jr_>\n>> On Tue, Nov 21, 2017 at 7:19 PM, Bryan Hanson <hanson at depauw.edu <mailto:hanson at depauw.edu>> wrote:\n>> Edit your DESCRIPTION file to include\n>> \n>> imports: assertr\n>> \n>> That’s why you get the \"not required\" message.\n>> \n>> Bryan\n>> \n>> > On Nov 21, 2017, at 7:54 PM, Cathy Lee Gierke <leegi001 at umn.edu <mailto:leegi001 at umn.edu>> wrote:\n>> >\n>> > Hi, I'm stuck.  I am using a function called col_concat from the package\n>> > {assertr}.  But when I list it as a dependency, either by\n>> >\n>> > import(assertr)\n>> >\n>> > or\n>> >\n>> > importFrom(\"assertr\", \"col_concat\")\n>> >\n>> > -----------\n>> >\n>> > I get this error message:\n>> >\n>> > * checking package dependencies ... ERROR\n>> >\n>> > Namespace dependency not required: ‘assertr’\n>> >\n>> > See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’\n>> >\n>> > manual.\n>> >\n>> > * DONE\n>> >\n>> > Status: 1 ERROR\n>> > ​------------\n>> > And when I take it out, I get a complaint that col_concat has no global\n>> > definition.\n>> >\n>> > What???\n>> >\n>> > Thanks,\n>> > ​\n>> > Cathy Lee Gierke\n>> >\n>> >       [[alternative HTML version deleted]]\n>> >\n>> > ______________________________________________\n>> > R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n>> > https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>> \n>> \n> \n> \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Cathy…\n\nRegarding changes from last year, I wouldn’t worry too much about that.  The CRAN checking system is always moving toward greater stringency as the ecosystem evolves.  Requirements and message",
       "thread_id": "thread-070b0031a173",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002093.html"
     },
     {
       "id": "msg-0b30d6b32637",
@@ -1355,7 +1424,8 @@
       "body_snippet": "Good day,\n\nI often notice that some lines of code in many PDF manuals generated for CRAN packages run off the page. Perhaps the maximum number of characters per line should be stated in section 2.16 o",
       "thread_id": "thread-0b30d6b32637",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002094.html"
     },
     {
       "id": "msg-40a71c5d20ed",
@@ -1373,7 +1443,8 @@
       "body_snippet": "Dear Dario,\n\nThere is a note in the Guidelines for Rd files\n(https://developer.r-project.org/Rds.html) which is linked to in Sec 2.1\nof R-ext.\n\nIt could be useful for these guidelines could be incorpo",
       "thread_id": "thread-0b30d6b32637",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002095.html"
     },
     {
       "id": "msg-246f31cb83b8",
@@ -1391,7 +1462,8 @@
       "body_snippet": "On 22/11/2017 1:00 AM, Dario Strbenac wrote:\n> Good day,\n> \n> I often notice that some lines of code in many PDF manuals generated for CRAN packages run off the page. Perhaps the maximum number of cha",
       "thread_id": "thread-0b30d6b32637",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002096.html"
     },
     {
       "id": "msg-2e0119780a1e",
@@ -1407,7 +1479,8 @@
       "body_snippet": "Hi,\n\nI have successfully run R CMD check for my package hesim (source\n<https://github.com/InnovationValueInitiative/hesim>) on OSX sierra,\nCentOS, Ubuntu 14.04 (on travis-ci), and win-builder (devel a",
       "thread_id": "thread-2e0119780a1e",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002097.html"
     },
     {
       "id": "msg-c4c1d9e6ea16",
@@ -1423,7 +1496,8 @@
       "body_snippet": "Hi,\n\nI have a package that I'm trying to make a validation vignette for.  The validation vignette is intended to assist users with documentation that the tests work.\n\nWhen running R BUILD now (via Tra",
       "thread_id": "thread-c4c1d9e6ea16",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002098.html"
     },
     {
       "id": "msg-8adb4282e4ce",
@@ -1441,7 +1515,8 @@
       "body_snippet": "On Wed, Nov 22, 2017 at 4:21 PM, Bill Denney <bill at denney.ws> wrote:\n> Hi,\n>\n> I have a package that I'm trying to make a validation vignette for.  The validation vignette is intended to assist use",
       "thread_id": "thread-c4c1d9e6ea16",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002099.html"
     },
     {
       "id": "msg-9c44f7b1a805",
@@ -1460,7 +1535,8 @@
       "body_snippet": "On 23 November 2017 at 08:07, Joshua Ulrich wrote:\n| On Wed, Nov 22, 2017 at 4:21 PM, Bill Denney <bill at denney.ws> wrote:\n| > I have a package that I'm trying to make a validation vignette for.  Th",
       "thread_id": "thread-c4c1d9e6ea16",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002100.html"
     },
     {
       "id": "msg-be77e2ecfe46",
@@ -1480,7 +1556,8 @@
       "body_snippet": "Hi Joshua and Dirk,\n\n> On Nov 23, 2017, at 10:17, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 23 November 2017 at 08:07, Joshua Ulrich wrote:\n> | On Wed, Nov 22, 2017 at 4:21 PM, Bill Denn",
       "thread_id": "thread-c4c1d9e6ea16",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002101.html"
     },
     {
       "id": "msg-e2bf6c765cc0",
@@ -1496,7 +1573,8 @@
       "body_snippet": "I am using Sweave to create a vignette for a package,\nbut when it appears in a code chunk of the .Rnw file\nthe following line causes an execution halt of Sweave:-\n\ndata(\"WingPoints\",envir = environmen",
       "thread_id": "thread-e2bf6c765cc0",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002102.html"
     },
     {
       "id": "msg-7b825de89fe6",
@@ -1514,7 +1592,8 @@
       "body_snippet": "On 24/11/2017 12:34 PM, Magnus Peterson wrote:\n> I am using Sweave to create a vignette for a package,\n> but when it appears in a code chunk of the .Rnw file\n> the following line causes an execution h",
       "thread_id": "thread-e2bf6c765cc0",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002103.html"
     },
     {
       "id": "msg-a01261775450",
@@ -1535,7 +1614,8 @@
       "body_snippet": "On Thu, Nov 23, 2017 at 10:05 AM, Bill Denney <bill at denney.ws> wrote:\n> Hi Joshua and Dirk,\n>\n>> On Nov 23, 2017, at 10:17, Dirk Eddelbuettel <edd at debian.org> wrote:\n>>\n>>\n>> On 23 November 2017",
       "thread_id": "thread-c4c1d9e6ea16",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002104.html"
     },
     {
       "id": "msg-d3b469424d28",
@@ -1557,7 +1637,8 @@
       "body_snippet": "Hi Joshua,\n\nThe TravisCI link to the first failed build is: https://travis-ci.org/billdenney/pknca/builds/305997673\nAlong with the GitHub commit: https://github.com/billdenney/pknca/commit/97495044cb9",
       "thread_id": "thread-c4c1d9e6ea16",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002105.html"
     },
     {
       "id": "msg-d4e6f9514fd1",
@@ -1575,7 +1656,8 @@
       "body_snippet": "This is probbaly a race condition, please resubmit.\n\nBest,\nUwe Ligges\n\nOn 22.11.2017 16:49, Devin Incerti wrote:\n> Hi,\n> \n> I have successfully run R CMD check for my package hesim (source\n> <https://",
       "thread_id": "thread-2e0119780a1e",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002106.html"
     },
     {
       "id": "msg-dc1372f8f98c",
@@ -1591,7 +1673,8 @@
       "body_snippet": "Dear all,\n\n\n\nI have been developing an R package using Rcpp to call C++ functions that use the C subroutine library 'fftw3' that implements fast Fourier transform algorithm. Since I have the C library",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002107.html"
     },
     {
       "id": "msg-d3b5a108d1dc",
@@ -1609,7 +1692,8 @@
       "body_snippet": "On 27 November 2017 at 21:24, Tan, Senren wrote:\n| I have been developing an R package using Rcpp to call C++ functions that use the C subroutine library 'fftw3' that implements fast Fourier transform",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002108.html"
     },
     {
       "id": "msg-2e76eaf35b8a",
@@ -1628,7 +1712,8 @@
       "body_snippet": "The obvious place to look for pointers of how to detect and link \ncorrectly to fftw would be in the current CRAN package `fftwtools` that \ndoes it without any Rcpp:\nhttps://github.com/krahim/fftwtools",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002109.html"
     },
     {
       "id": "msg-4f4c4ad55d2a",
@@ -1648,7 +1733,8 @@
       "body_snippet": "On 28 November 2017 at 11:01, Ege Rubak wrote:\n| The obvious place to look for pointers of how to detect and link \n| correctly to fftw would be in the current CRAN package `fftwtools` that \n| does it ",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002110.html"
     },
     {
       "id": "msg-aad81e74a801",
@@ -1664,7 +1750,8 @@
       "body_snippet": "Dear all,\n\nI updated RStudio, Rtools and R-devel, and then I tried to build a \npackage in RStudio that I had been able to build before without any \nproblems. But now I got the following error:\n\nUpdati",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002111.html"
     },
     {
       "id": "msg-aa80840ee7f6",
@@ -1682,7 +1769,8 @@
       "body_snippet": "Do you get the same error if you try to build on the command line outside\nof RStudio?\n\nOn Nov 28, 2017 3:51 PM, \"Rampal Etienne\" <rampaletienne at gmail.com> wrote:\n\n> Dear all,\n>\n> I updated RStudio,",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002112.html"
     },
     {
       "id": "msg-5c54acfaa284",
@@ -1701,7 +1789,8 @@
       "body_snippet": "Dear Dason,\n\nI don't get this error, but it crashes anyway. I've that if I use the\nstable version of R (3.4.2) I do NOT get the error anymore, so I assume\nthere is something wrong with the current R-d",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002113.html"
     },
     {
       "id": "msg-9784ece13d7b",
@@ -1721,7 +1810,8 @@
       "body_snippet": ">>>>> Rampal S Etienne <rampaletienne at gmail.com>\n>>>>>     on Wed, 29 Nov 2017 09:19:29 +0100 writes:\n\n    > Dear Dason,\n    > I don't get this error, but it crashes anyway. \n\nand you don't show wh",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002114.html"
     },
     {
       "id": "msg-86809a79766e",
@@ -1742,7 +1832,8 @@
       "body_snippet": "Dear Marc, Martin, Dason,\n\nI agree that the status number is not very informative, but neither is:\n\"Package does not build\". The point is that I have no clue what is going\non, and was just hoping that",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002115.html"
     },
     {
       "id": "msg-013820f7f305",
@@ -1764,7 +1855,8 @@
       "body_snippet": "Rampal,\n\nOne additional thought here.\n\nSince you reference RTools in your initial post, I presume that this is occurring on Windows, though not sure which version.\n\nHave you tried to build the package",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002118.html"
     },
     {
       "id": "msg-78bdf1206ad2",
@@ -1786,7 +1878,8 @@
       "body_snippet": ">>>>> Rampal S Etienne <rampaletienne at gmail.com>\n>>>>>     on Wed, 29 Nov 2017 14:22:54 +0100 writes:\n\n    > Dear Marc, Martin, Dason,\n    > I agree that the status number is not very informative, ",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002116.html"
     },
     {
       "id": "msg-602c4b16e899",
@@ -1804,7 +1897,8 @@
       "body_snippet": "You wrote\n    Exited with status -1073741819.\n\nThe low byte of that status code is 5, which I think means a segmentation\nfault - reading\nor writing an address that you do not have permission of use.\n ",
       "thread_id": "thread-aad81e74a801",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002117.html"
     },
     {
       "id": "msg-5b69362a4282",
@@ -1820,7 +1914,8 @@
       "body_snippet": "Hi all,\n\nI tried to upload my package to CRAN and did not pass the the incoming checks. This was because the use of ieee_arithmetic module in a fortran subroutine in the src folder. I built and checke",
       "thread_id": "thread-5b69362a4282",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002122.html"
     },
     {
       "id": "msg-7afd1328f16f",
@@ -1836,7 +1931,8 @@
       "body_snippet": "Hello,\n\nDoes anyone know of an example of a R package that contains Swift code (https://swift.org), like many packages use C code?\n\nThanks\n\nGuillaume",
       "thread_id": "thread-7afd1328f16f",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002119.html"
     },
     {
       "id": "msg-f1b8b9e13c1a",
@@ -1848,11 +1944,12 @@
       "subject_clean": "[R-pkg-devel] CRAN Package error",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi all,\n\nI?m trying to upload a new version of my package and it was automatically\nbounced because of the following warnings:\n\nWarning: namespace 'BiocFileCache' is not available and has been replaced\n\nWarning: namespace 'AnnotationFilter' is not available and has been replaced\n\nWarning: namespace 'Organism.dplyr' is not available and has been replaced\n\n\nTheses all seem to be related to the bioconductor annotation in one of the\nloaded packages. I know the new Bioconductor on devel is unstable but I\nthought I should check before suggesting the pretest rejection was a false\npositive to see if there was a resolution.\n\nCheers,\n\nAndy\n-- \nDr Andrew Holding\nFellow of Biochemistry / Senior Research Associate\nDowning College / Cancer Research UK Cambridge Institute\nCRUK CI: 01223 769696\nMobile: 07595 666459\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi all,\n\nI?m trying to upload a new version of my package and it was automatically\nbounced because of the following warnings:\n\nWarning: namespace 'BiocFileCache' is not available and has been replaced",
+      "body_plain": "Hi all,\n\nI’m trying to upload a new version of my package and it was automatically\nbounced because of the following warnings:\n\nWarning: namespace 'BiocFileCache' is not available and has been replaced\n\nWarning: namespace 'AnnotationFilter' is not available and has been replaced\n\nWarning: namespace 'Organism.dplyr' is not available and has been replaced\n\n\nTheses all seem to be related to the bioconductor annotation in one of the\nloaded packages. I know the new Bioconductor on devel is unstable but I\nthought I should check before suggesting the pretest rejection was a false\npositive to see if there was a resolution.\n\nCheers,\n\nAndy\n-- \nDr Andrew Holding\nFellow of Biochemistry / Senior Research Associate\nDowning College / Cancer Research UK Cambridge Institute\nCRUK CI: 01223 769696\nMobile: 07595 666459\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi all,\n\nI’m trying to upload a new version of my package and it was automatically\nbounced because of the following warnings:\n\nWarning: namespace 'BiocFileCache' is not available and has been replaced",
       "thread_id": "thread-f1b8b9e13c1a",
       "thread_depth": 0,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002120.html"
     },
     {
       "id": "msg-0ee5788c10f2",
@@ -1871,7 +1968,8 @@
       "body_snippet": "Dear Dirk,\n\n\nThank you very much for your reply.\n\n\nI have been trying to look at the R package fftw developed by Olaf and Uwe over the last few days. And I have tried to make use of the configure.ac. ",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002121.html"
     },
     {
       "id": "msg-3194f9226dbb",
@@ -1889,7 +1987,8 @@
       "body_snippet": "On Wed, Nov 29, 2017 at 4:37 PM, Waleed Almutiry <walmutir at uoguelph.ca> wrote:\n> I tried to upload my package to CRAN and did not pass the the incoming checks. This was because the use of ieee_arit",
       "thread_id": "thread-5b69362a4282",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002123.html"
     },
     {
       "id": "msg-57257d40c66b",
@@ -1907,7 +2006,8 @@
       "body_snippet": "On Wed, Nov 29, 2017 at 4:37 PM, Waleed Almutiry <walmutir at uoguelph.ca> wrote:\n> Hi all,\n>\n> I tried to upload my package to CRAN and did not pass the the incoming checks. This was because the use ",
       "thread_id": "thread-5b69362a4282",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002124.html"
     },
     {
       "id": "msg-5824a4e53f3e",
@@ -1927,7 +2027,8 @@
       "body_snippet": "Hi Senren,\n\nOn 30 November 2017 at 16:49, Tan, Senren wrote:\n| Thank you very much for your reply.\n\nMy pleasure. You did well here.\n \n| I have been trying to look at the R package fftw developed by Ol",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002125.html"
     },
     {
       "id": "msg-a2ad3390fd24",
@@ -1948,7 +2049,8 @@
       "body_snippet": "On 30.11.2017 19:57, Dirk Eddelbuettel wrote:\n> \n> Hi Senren,\n> \n> On 30 November 2017 at 16:49, Tan, Senren wrote:\n> | Thank you very much for your reply.\n> \n> My pleasure. You did well here.\n>   \n> ",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002126.html"
     },
     {
       "id": "msg-e1ceff0efa2e",
@@ -1969,7 +2071,8 @@
       "body_snippet": "Dear Dirk,\n\n\nThank you very much for your reply.\n\n\n|That looks like it expanded right.\n\n|What I would do now is take one of the working packages, create a local\n|tarball _and put my name and email int",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 4,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002127.html"
     },
     {
       "id": "msg-50ebc9a5efe7",
@@ -1991,7 +2094,8 @@
       "body_snippet": "Dear Uwe,\n\n\n|One more question: Which version of fftw do you need for these symbols?\n\n\nThe system requirement for fftw is fftw-3.3.4 or above. I have tried to build that on fftw-3.3.4, as well as on f",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 5,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002128.html"
     },
     {
       "id": "msg-a55240762ec9",
@@ -2014,7 +2118,8 @@
       "body_snippet": "On 30.11.2017 22:46, Tan, Senren wrote:\n> Dear Uwe,\n> \n> \n> |One more question: Which version of fftw do you need for these symbols?\n> \n> \n> The system requirement for fftw is fftw-3.3.4 or above. I h",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 6,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002129.html"
     },
     {
       "id": "msg-b8a744572583",
@@ -2038,7 +2143,8 @@
       "body_snippet": "Dear Uwe,\n\n\nThank you very much for your help.\n\n\nSorry that I misread your email about the maintainer. @Dirk<mailto:edd at debian.org>\n\nThank you for pointing this out. at Ege<mailto:rubak at math.aau",
       "thread_id": "thread-dc1372f8f98c",
       "thread_depth": 7,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002130.html"
     },
     {
       "id": "msg-fc750dfc8960",
@@ -2052,11 +2158,12 @@
       "references": [
         "<CAMkS--ZxkGWdZC_6Y32Se0_D6Zkh2iwkRv7iEpwhYSvHXFZqJQ@mail.gmail.com>"
       ],
-      "body_plain": "Have you submitted a second time? Sounds like BioC wasa uodated on the \nbuild machine when you submitted.\n\nBest,\nUwe Ligges\n\n\n\nOn 30.11.2017 12:52, Andrew Holding wrote:\n> Hi all,\n> \n> I?m trying to upload a new version of my package and it was automatically\n> bounced because of the following warnings:\n> \n> Warning: namespace 'BiocFileCache' is not available and has been replaced\n> \n> Warning: namespace 'AnnotationFilter' is not available and has been replaced\n> \n> Warning: namespace 'Organism.dplyr' is not available and has been replaced\n> \n> \n> Theses all seem to be related to the bioconductor annotation in one of the\n> loaded packages. I know the new Bioconductor on devel is unstable but I\n> thought I should check before suggesting the pretest rejection was a false\n> positive to see if there was a resolution.\n> \n> Cheers,\n> \n> Andy\n>",
-      "body_snippet": "Have you submitted a second time? Sounds like BioC wasa uodated on the \nbuild machine when you submitted.\n\nBest,\nUwe Ligges\n\n\n\nOn 30.11.2017 12:52, Andrew Holding wrote:\n> Hi all,\n> \n> I?m trying to u",
+      "body_plain": "Have you submitted a second time? Sounds like BioC wasa uodated on the \nbuild machine when you submitted.\n\nBest,\nUwe Ligges\n\n\n\nOn 30.11.2017 12:52, Andrew Holding wrote:\n> Hi all,\n> \n> I’m trying to upload a new version of my package and it was automatically\n> bounced because of the following warnings:\n> \n> Warning: namespace 'BiocFileCache' is not available and has been replaced\n> \n> Warning: namespace 'AnnotationFilter' is not available and has been replaced\n> \n> Warning: namespace 'Organism.dplyr' is not available and has been replaced\n> \n> \n> Theses all seem to be related to the bioconductor annotation in one of the\n> loaded packages. I know the new Bioconductor on devel is unstable but I\n> thought I should check before suggesting the pretest rejection was a false\n> positive to see if there was a resolution.\n> \n> Cheers,\n> \n> Andy\n>",
+      "body_snippet": "Have you submitted a second time? Sounds like BioC wasa uodated on the \nbuild machine when you submitted.\n\nBest,\nUwe Ligges\n\n\n\nOn 30.11.2017 12:52, Andrew Holding wrote:\n> Hi all,\n> \n> I’m trying to u",
       "thread_id": "thread-f1b8b9e13c1a",
       "thread_depth": 1,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002131.html"
     },
     {
       "id": "msg-e5e5b31dc12d",
@@ -2071,11 +2178,12 @@
         "<CAMkS--ZxkGWdZC_6Y32Se0_D6Zkh2iwkRv7iEpwhYSvHXFZqJQ@mail.gmail.com>",
         "<09de0971-32a8-51c4-8f06-4616e51abd16@statistik.tu-dortmund.de>"
       ],
-      "body_plain": "Dear Uwe,\n\nJust submitted the package again and got the same error. I?ve copied it\nbelow for reference.\n\nAndy\n\n Found the following significant warnings:\n\n  Warning: namespace 'BiocFileCache' is not available and has been replaced\n  Warning: namespace 'AnnotationFilter' is not available and has been replaced\n  Warning: namespace 'Organism.dplyr' is not available and has been replaced\nSee 'd:/RCompile/CRANincoming/R-devel/Brundle.Rcheck/00install.out' for details.\n\n\nOn Thu, 30 Nov 2017 at 22:18 Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n> Have you submitted a second time? Sounds like BioC wasa uodated on the\n> build machine when you submitted.\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n> On 30.11.2017 12:52, Andrew Holding wrote:\n> > Hi all,\n> >\n> > I?m trying to upload a new version of my package and it was automatically\n> > bounced because of the following warnings:\n> >\n> > Warning: namespace 'BiocFileCache' is not available and has been replaced\n> >\n> > Warning: namespace 'AnnotationFilter' is not available and has been\n> replaced\n> >\n> > Warning: namespace 'Organism.dplyr' is not available and has been\n> replaced\n> >\n> >\n> > Theses all seem to be related to the bioconductor annotation in one of\n> the\n> > loaded packages. I know the new Bioconductor on devel is unstable but I\n> > thought I should check before suggesting the pretest rejection was a\n> false\n> > positive to see if there was a resolution.\n> >\n> > Cheers,\n> >\n> > Andy\n> >\n>\n-- \nDr Andrew Holding\nFellow of Biochemistry / Senior Research Associate\nDowning College / Cancer Research UK Cambridge Institute\nCRUK CI: 01223 769696\nMobile: 07595 666459\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear Uwe,\n\nJust submitted the package again and got the same error. I?ve copied it\nbelow for reference.\n\nAndy\n\n Found the following significant warnings:\n\n  Warning: namespace 'BiocFileCache' is not a",
+      "body_plain": "Dear Uwe,\n\nJust submitted the package again and got the same error. I’ve copied it\nbelow for reference.\n\nAndy\n\n Found the following significant warnings:\n\n  Warning: namespace 'BiocFileCache' is not available and has been replaced\n  Warning: namespace 'AnnotationFilter' is not available and has been replaced\n  Warning: namespace 'Organism.dplyr' is not available and has been replaced\nSee 'd:/RCompile/CRANincoming/R-devel/Brundle.Rcheck/00install.out' for details.\n\n\nOn Thu, 30 Nov 2017 at 22:18 Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n> Have you submitted a second time? Sounds like BioC wasa uodated on the\n> build machine when you submitted.\n>\n> Best,\n> Uwe Ligges\n>\n>\n>\n> On 30.11.2017 12:52, Andrew Holding wrote:\n> > Hi all,\n> >\n> > I’m trying to upload a new version of my package and it was automatically\n> > bounced because of the following warnings:\n> >\n> > Warning: namespace 'BiocFileCache' is not available and has been replaced\n> >\n> > Warning: namespace 'AnnotationFilter' is not available and has been\n> replaced\n> >\n> > Warning: namespace 'Organism.dplyr' is not available and has been\n> replaced\n> >\n> >\n> > Theses all seem to be related to the bioconductor annotation in one of\n> the\n> > loaded packages. I know the new Bioconductor on devel is unstable but I\n> > thought I should check before suggesting the pretest rejection was a\n> false\n> > positive to see if there was a resolution.\n> >\n> > Cheers,\n> >\n> > Andy\n> >\n>\n-- \nDr Andrew Holding\nFellow of Biochemistry / Senior Research Associate\nDowning College / Cancer Research UK Cambridge Institute\nCRUK CI: 01223 769696\nMobile: 07595 666459\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear Uwe,\n\nJust submitted the package again and got the same error. I’ve copied it\nbelow for reference.\n\nAndy\n\n Found the following significant warnings:\n\n  Warning: namespace 'BiocFileCache' is not a",
       "thread_id": "thread-f1b8b9e13c1a",
       "thread_depth": 2,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002132.html"
     },
     {
       "id": "msg-32c6d6c94684",
@@ -2091,11 +2199,12 @@
         "<09de0971-32a8-51c4-8f06-4616e51abd16@statistik.tu-dortmund.de>",
         "<CAMkS--ZynE=RM9sDT0JaqUfEP8nwyxT2U+aOL601sB4PDp7n5A@mail.gmail.com>"
       ],
-      "body_plain": ">> On 30.11.2017 12:52, Andrew Holding wrote:\n>> [...] I know the new Bioconductor on devel is unstable [...]\n\nDoes CRAN support packages in the Bioconductor *devel* repository?\n\n/Henrik\n\nOn Thu, Nov 30, 2017 at 2:54 PM, Andrew Holding <anh25 at cam.ac.uk> wrote:\n> Dear Uwe,\n>\n> Just submitted the package again and got the same error. I?ve copied it\n> below for reference.\n>\n> Andy\n>\n>  Found the following significant warnings:\n>\n>   Warning: namespace 'BiocFileCache' is not available and has been replaced\n>   Warning: namespace 'AnnotationFilter' is not available and has been replaced\n>   Warning: namespace 'Organism.dplyr' is not available and has been replaced\n> See 'd:/RCompile/CRANincoming/R-devel/Brundle.Rcheck/00install.out' for details.\n>\n>\n> On Thu, 30 Nov 2017 at 22:18 Uwe Ligges <ligges at statistik.tu-dortmund.de>\n> wrote:\n>\n>> Have you submitted a second time? Sounds like BioC wasa uodated on the\n>> build machine when you submitted.\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>>\n>>\n>> On 30.11.2017 12:52, Andrew Holding wrote:\n>> > Hi all,\n>> >\n>> > I?m trying to upload a new version of my package and it was automatically\n>> > bounced because of the following warnings:\n>> >\n>> > Warning: namespace 'BiocFileCache' is not available and has been replaced\n>> >\n>> > Warning: namespace 'AnnotationFilter' is not available and has been\n>> replaced\n>> >\n>> > Warning: namespace 'Organism.dplyr' is not available and has been\n>> replaced\n>> >\n>> >\n>> > Theses all seem to be related to the bioconductor annotation in one of\n>> the\n>> > loaded packages. I know the new Bioconductor on devel is unstable but I\n>> > thought I should check before suggesting the pretest rejection was a\n>> false\n>> > positive to see if there was a resolution.\n>> >\n>> > Cheers,\n>> >\n>> > Andy\n>> >\n>>\n> --\n> Dr Andrew Holding\n> Fellow of Biochemistry / Senior Research Associate\n> Downing College / Cancer Research UK Cambridge Institute\n> CRUK CI: 01223 769696\n> Mobile: 07595 666459\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": ">> On 30.11.2017 12:52, Andrew Holding wrote:\n>> [...] I know the new Bioconductor on devel is unstable [...]\n\nDoes CRAN support packages in the Bioconductor *devel* repository?\n\n/Henrik\n\nOn Thu, Nov 30, 2017 at 2:54 PM, Andrew Holding <anh25 at cam.ac.uk> wrote:\n> Dear Uwe,\n>\n> Just submitted the package again and got the same error. I’ve copied it\n> below for reference.\n>\n> Andy\n>\n>  Found the following significant warnings:\n>\n>   Warning: namespace 'BiocFileCache' is not available and has been replaced\n>   Warning: namespace 'AnnotationFilter' is not available and has been replaced\n>   Warning: namespace 'Organism.dplyr' is not available and has been replaced\n> See 'd:/RCompile/CRANincoming/R-devel/Brundle.Rcheck/00install.out' for details.\n>\n>\n> On Thu, 30 Nov 2017 at 22:18 Uwe Ligges <ligges at statistik.tu-dortmund.de>\n> wrote:\n>\n>> Have you submitted a second time? Sounds like BioC wasa uodated on the\n>> build machine when you submitted.\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>>\n>>\n>> On 30.11.2017 12:52, Andrew Holding wrote:\n>> > Hi all,\n>> >\n>> > I’m trying to upload a new version of my package and it was automatically\n>> > bounced because of the following warnings:\n>> >\n>> > Warning: namespace 'BiocFileCache' is not available and has been replaced\n>> >\n>> > Warning: namespace 'AnnotationFilter' is not available and has been\n>> replaced\n>> >\n>> > Warning: namespace 'Organism.dplyr' is not available and has been\n>> replaced\n>> >\n>> >\n>> > Theses all seem to be related to the bioconductor annotation in one of\n>> the\n>> > loaded packages. I know the new Bioconductor on devel is unstable but I\n>> > thought I should check before suggesting the pretest rejection was a\n>> false\n>> > positive to see if there was a resolution.\n>> >\n>> > Cheers,\n>> >\n>> > Andy\n>> >\n>>\n> --\n> Dr Andrew Holding\n> Fellow of Biochemistry / Senior Research Associate\n> Downing College / Cancer Research UK Cambridge Institute\n> CRUK CI: 01223 769696\n> Mobile: 07595 666459\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": ">> On 30.11.2017 12:52, Andrew Holding wrote:\n>> [...] I know the new Bioconductor on devel is unstable [...]\n\nDoes CRAN support packages in the Bioconductor *devel* repository?\n\n/Henrik\n\nOn Thu, Nov ",
       "thread_id": "thread-f1b8b9e13c1a",
       "thread_depth": 3,
-      "month": "2017-11"
+      "month": "2017-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q4/002133.html"
     }
   ],
   "threads": [

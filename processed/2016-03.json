@@ -19,7 +19,8 @@
       "body_snippet": "Bruce,\n\nmaybe you want to also have a look at PythonInR, which solves a similar, if \nnot the same, problem\n\nhttps://bitbucket.org/Floooo/pythoninr/\n\nJohannes\n\nAm Montag, 29. Februar 2016, 13:01:06 sch",
       "thread_id": "thread-175219f14ba0",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000712.html"
     },
     {
       "id": "msg-31d0c60a85d4",
@@ -38,7 +39,8 @@
       "body_snippet": "Dear Johannes:\nThank you for sending the link to \"pythoninr\".  Looking at the page, under\n\"Windows\" there is the statement  \"One obviously needs to have R and Python\ninstalled.\"  Our goal is to create",
       "thread_id": "thread-175219f14ba0",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000713.html"
     },
     {
       "id": "msg-bb6d334d046f",
@@ -54,7 +56,8 @@
       "body_snippet": "The spell checker is correct they are not correctly spelled English \nwords but names. I searched the Writing R Extensions manual but did not \nfind any solution. I know it is only a NOTE not more serio",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000714.html"
     },
     {
       "id": "msg-a549581c15a7",
@@ -72,7 +75,8 @@
       "body_snippet": "On 01/03/2016 11:47 AM, Michael Dewey wrote:\n> The spell checker is correct they are not correctly spelled English\n> words but names. I searched the Writing R Extensions manual but did not\n> find any ",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000715.html"
     },
     {
       "id": "msg-d5b9723142f4",
@@ -90,7 +94,8 @@
       "body_snippet": "If it's in the DESCRIPTION file put the word into quotes.\nHana\n\nOn 01/03/2016 08:47, Michael Dewey wrote:\n> The spell checker is correct they are not correctly spelled English\n> words but names. I sea",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000716.html"
     },
     {
       "id": "msg-5de54acd93ed",
@@ -109,7 +114,8 @@
       "body_snippet": ">>>>> Hana Sevcikova <hanas at uw.edu>\n>>>>>     on Tue, 1 Mar 2016 11:45:34 -0800 writes:\n\n    > If it's in the DESCRIPTION file put the word into quotes.\n    > Hana\n\nIndeed, thank you Hana!\n\nTo add ",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000717.html"
     },
     {
       "id": "msg-8bec66fdf729",
@@ -129,7 +135,8 @@
       "body_snippet": "Indeed, from Writing R Extensions:\n\n\"double quotes should be used for quotations (including titles of books \nand articles), and single quotes for non-English usage, including names \nof other packages ",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000718.html"
     },
     {
       "id": "msg-d48b58224f0d",
@@ -141,11 +148,12 @@
       "subject_clean": "[R-pkg-devel] Namespace problem with pre-R 3.0.0 package",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi\n\nI have issues with an R package developed in 2004.\nIt works perfectly in R < 3.\nIt can be installed in R > 3 but functions are not available.\n\nDocumentation I found is not really helpful for me who are not an R master.\nI have already fixed some problems with R CMD check but remaining ones \nare less trivial.\n\n\nFor what I understand - with R < 3 - everything is loaded with this \ncommand in an R file in the R/ directory:\n.First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib); \nrequire(\"cluster\")\n\nNow I replaced that with\n.onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib); \nrequire(\"cluster\")}\nbut functions are not found when called.\n\nNAMESPACE exists but is empty.\n\n\nAny idea how to solve that?\n\n\nRegards\n\n--\nS?bastien Moretti",
+      "body_plain": "Hi\n\nI have issues with an R package developed in 2004.\nIt works perfectly in R < 3.\nIt can be installed in R > 3 but functions are not available.\n\nDocumentation I found is not really helpful for me who are not an R master.\nI have already fixed some problems with R CMD check but remaining ones \nare less trivial.\n\n\nFor what I understand - with R < 3 - everything is loaded with this \ncommand in an R file in the R/ directory:\n.First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib); \nrequire(\"cluster\")\n\nNow I replaced that with\n.onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib); \nrequire(\"cluster\")}\nbut functions are not found when called.\n\nNAMESPACE exists but is empty.\n\n\nAny idea how to solve that?\n\n\nRegards\n\n--\nSébastien Moretti",
       "body_snippet": "Hi\n\nI have issues with an R package developed in 2004.\nIt works perfectly in R < 3.\nIt can be installed in R > 3 but functions are not available.\n\nDocumentation I found is not really helpful for me wh",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000719.html"
     },
     {
       "id": "msg-8487f875ef52",
@@ -159,11 +167,12 @@
       "references": [
         "<56D849B3.8040909@unil.ch>"
       ],
-      "body_plain": "I have just found that R 2 filled by itself the NAMESPACE file with\n# Export all names\nexportPattern(\".\")\n\n# Import all packages listed as Imports or Depends\nimport(\n   cluster\n)\n\n\nSo I filled the NAMESPACE file with that and gave it to R 3\nNow functions are found!\n\n\nIs it enough to do that?\nIs it good practice to do that?\nis .onLoad ... still required?\n\nRegards\n\n> Hi\n>\n> I have issues with an R package developed in 2004.\n> It works perfectly in R < 3.\n> It can be installed in R > 3 but functions are not available.\n>\n> Documentation I found is not really helpful for me who are not an R master.\n> I have already fixed some problems with R CMD check but remaining ones\n> are less trivial.\n>\n>\n> For what I understand - with R < 3 - everything is loaded with this\n> command in an R file in the R/ directory:\n> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n> require(\"cluster\")\n>\n> Now I replaced that with\n> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n> require(\"cluster\")}\n> but functions are not found when called.\n>\n> NAMESPACE exists but is empty.\n>\n>\n> Any idea how to solve that?\n>\n>\n> Regards\n>\n> --\n> S?bastien Moretti",
+      "body_plain": "I have just found that R 2 filled by itself the NAMESPACE file with\n# Export all names\nexportPattern(\".\")\n\n# Import all packages listed as Imports or Depends\nimport(\n   cluster\n)\n\n\nSo I filled the NAMESPACE file with that and gave it to R 3\nNow functions are found!\n\n\nIs it enough to do that?\nIs it good practice to do that?\nis .onLoad ... still required?\n\nRegards\n\n> Hi\n>\n> I have issues with an R package developed in 2004.\n> It works perfectly in R < 3.\n> It can be installed in R > 3 but functions are not available.\n>\n> Documentation I found is not really helpful for me who are not an R master.\n> I have already fixed some problems with R CMD check but remaining ones\n> are less trivial.\n>\n>\n> For what I understand - with R < 3 - everything is loaded with this\n> command in an R file in the R/ directory:\n> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n> require(\"cluster\")\n>\n> Now I replaced that with\n> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n> require(\"cluster\")}\n> but functions are not found when called.\n>\n> NAMESPACE exists but is empty.\n>\n>\n> Any idea how to solve that?\n>\n>\n> Regards\n>\n> --\n> Sébastien Moretti",
       "body_snippet": "I have just found that R 2 filled by itself the NAMESPACE file with\n# Export all names\nexportPattern(\".\")\n\n# Import all packages listed as Imports or Depends\nimport(\n   cluster\n)\n\n\nSo I filled the NAM",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000720.html"
     },
     {
       "id": "msg-296f6d000087",
@@ -178,11 +187,12 @@
         "<56D849B3.8040909@unil.ch>",
         "<56D84E11.5090406@unil.ch>"
       ],
-      "body_plain": "On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> I have just found that R 2 filled by itself the NAMESPACE file with\n> # Export all names\n> exportPattern(\".\")\n> \n> # Import all packages listed as Imports or Depends\n> import(\n> ???cluster\n> )\n> \n> \n> So I filled the NAMESPACE file with that and gave it to R 3\n> Now functions are found!\n> \n> \n> Is it enough to do that?\n\nYes. Even in the latest version of R, \"R CMD build\" will create a\ndefault NAMESPACE file like that for you if one does not exist.\n?\n> Is it good practice to do that?\n\nNo. The Writing R Extensions manual says \"such broad patterns are not\nrecommended for production code: it is better to list all exports or\nuse narrowly-defined groups\"\n\n> is .onLoad ... still required?\n\nYes, if your package has compiled code (e.g. C, C++, Fortran) then the\n.onLoad function is required to load it into R.\n\nMartyn\n?\n> Regards\n> \n> > Hi\n> > \n> > I have issues with an R package developed in 2004.\n> > It works perfectly in R < 3.\n> > It can be installed in R > 3 but functions are not available.\n> > \n> > Documentation I found is not really helpful for me who are not an R\n> > master.\n> > I have already fixed some problems with R CMD check but remaining\n> > ones\n> > are less trivial.\n> > \n> > \n> > For what I understand - with R < 3 - everything is loaded with this\n> > command in an R file in the R/ directory:\n> > .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n> > require(\"cluster\")\n> > \n> > Now I replaced that with\n> > .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n> > require(\"cluster\")}\n> > but functions are not found when called.\n> > \n> > NAMESPACE exists but is empty.\n> > \n> > \n> > Any idea how to solve that?\n> > \n> > \n> > Regards\n> > \n> > --\n> > S?bastien Moretti\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
+      "body_plain": "On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> I have just found that R 2 filled by itself the NAMESPACE file with\n> # Export all names\n> exportPattern(\".\")\n> \n> # Import all packages listed as Imports or Depends\n> import(\n>    cluster\n> )\n> \n> \n> So I filled the NAMESPACE file with that and gave it to R 3\n> Now functions are found!\n> \n> \n> Is it enough to do that?\n\nYes. Even in the latest version of R, \"R CMD build\" will create a\ndefault NAMESPACE file like that for you if one does not exist.\n \n> Is it good practice to do that?\n\nNo. The Writing R Extensions manual says \"such broad patterns are not\nrecommended for production code: it is better to list all exports or\nuse narrowly-defined groups\"\n\n> is .onLoad ... still required?\n\nYes, if your package has compiled code (e.g. C, C++, Fortran) then the\n.onLoad function is required to load it into R.\n\nMartyn\n \n> Regards\n> \n> > Hi\n> > \n> > I have issues with an R package developed in 2004.\n> > It works perfectly in R < 3.\n> > It can be installed in R > 3 but functions are not available.\n> > \n> > Documentation I found is not really helpful for me who are not an R\n> > master.\n> > I have already fixed some problems with R CMD check but remaining\n> > ones\n> > are less trivial.\n> > \n> > \n> > For what I understand - with R < 3 - everything is loaded with this\n> > command in an R file in the R/ directory:\n> > .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n> > require(\"cluster\")\n> > \n> > Now I replaced that with\n> > .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n> > require(\"cluster\")}\n> > but functions are not found when called.\n> > \n> > NAMESPACE exists but is empty.\n> > \n> > \n> > Any idea how to solve that?\n> > \n> > \n> > Regards\n> > \n> > --\n> > Sébastien Moretti\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
       "body_snippet": "On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> I have just found that R 2 filled by itself the NAMESPACE file with\n> # Export all names\n> exportPattern(\".\")\n> \n> # Import all packages l",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000721.html"
     },
     {
       "id": "msg-d46012640bab",
@@ -198,11 +208,12 @@
         "<56D84E11.5090406@unil.ch>",
         "<1457017690.3141.18.camel@iarc.fr>"
       ],
-      "body_plain": "On Thu, 3 Mar 2016, Martyn Plummer wrote:\n\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>> ???cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n> ?\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n>\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n\nActually you do not need .onLoad if you use the useDynLib directive in the \nNAMESPACE file; details are in teh extensions manual at\n\nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#useDynLib\n\nBest,\n\nluke\n\n\n>\n> Martyn\n> ?\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n>>>\n>>> --\n>>> S?bastien Moretti\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
+      "body_plain": "On Thu, 3 Mar 2016, Martyn Plummer wrote:\n\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>    cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n>  \n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n>\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n\nActually you do not need .onLoad if you use the useDynLib directive in the \nNAMESPACE file; details are in teh extensions manual at\n\nhttps://cran.r-project.org/doc/manuals/r-release/R-exts.html#useDynLib\n\nBest,\n\nluke\n\n\n>\n> Martyn\n>  \n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n>>>\n>>> --\n>>> Sébastien Moretti\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
       "body_snippet": "On Thu, 3 Mar 2016, Martyn Plummer wrote:\n\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>>",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000722.html"
     },
     {
       "id": "msg-c65ef2fa1406",
@@ -218,11 +229,12 @@
         "<56D84E11.5090406@unil.ch>",
         "<1457017690.3141.18.camel@iarc.fr>"
       ],
-      "body_plain": "On 03.03.2016 16:08, Martyn Plummer wrote:\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n>\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n>\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n\nWell, I do not use .onLoad but just the\n\nuseDynLib(packagename)\n\ndirective in the NAESPACE file.\n\n\n\nBest,\nUwe Ligges\n\n\n\n\n\n>\n> Martyn\n>\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n>>>\n>>> --\n>>> S?bastien Moretti\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "On 03.03.2016 16:08, Martyn Plummer wrote:\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n>\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n>\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n\nWell, I do not use .onLoad but just the\n\nuseDynLib(packagename)\n\ndirective in the NAESPACE file.\n\n\n\nBest,\nUwe Ligges\n\n\n\n\n\n>\n> Martyn\n>\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n>>>\n>>> --\n>>> Sébastien Moretti\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel-----------------------------------------------------------------------\n> This message and its attachments are strictly confidenti...{{dropped:8}}\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "On 03.03.2016 16:08, Martyn Plummer wrote:\n> On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n>> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>>",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000723.html"
     },
     {
       "id": "msg-72ef22c90d9f",
@@ -239,11 +251,12 @@
         "<1457017690.3141.18.camel@iarc.fr>",
         "<56D85B68.6020504@statistik.tu-dortmund.de>"
       ],
-      "body_plain": "On Thu, 2016-03-03 at 16:42 +0100, Uwe Ligges wrote:\n> \n> On 03.03.2016 16:08, Martyn Plummer wrote:\n> > On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> > > I have just found that R 2 filled by itself the NAMESPACE file\n> > > with\n> > > # Export all names\n> > > exportPattern(\".\")\n> > > \n> > > # Import all packages listed as Imports or Depends\n> > > import(\n> > > ????cluster\n> > > )\n> > > \n> > > \n> > > So I filled the NAMESPACE file with that and gave it to R 3\n> > > Now functions are found!\n> > > \n> > > \n> > > Is it enough to do that?\n> > \n> > Yes. Even in the latest version of R, \"R CMD build\" will create a\n> > default NAMESPACE file like that for you if one does not exist.\n> > \n> > > Is it good practice to do that?\n> > \n> > No. The Writing R Extensions manual says \"such broad patterns are\n> > not\n> > recommended for production code: it is better to list all exports\n> > or\n> > use narrowly-defined groups\"\n> > \n> > > is .onLoad ... still required?\n> > \n> > Yes, if your package has compiled code (e.g. C, C++, Fortran) then\n> > the\n> > .onLoad function is required to load it into R.\n> \n> Well, I do not use .onLoad but just the\n> \n> useDynLib(packagename)\n> \n> directive in the NAESPACE file.\n\nI stand corrected. Twice.\n\nMartyn\n\n> Best,\n> Uwe Ligges\n> \n> \n> \n> \n> \n> > \n> > Martyn\n> > \n> > > Regards\n> > > \n> > > > Hi\n> > > > \n> > > > I have issues with an R package developed in 2004.\n> > > > It works perfectly in R < 3.\n> > > > It can be installed in R > 3 but functions are not available.\n> > > > \n> > > > Documentation I found is not really helpful for me who are not\n> > > > an R\n> > > > master.\n> > > > I have already fixed some problems with R CMD check but\n> > > > remaining\n> > > > ones\n> > > > are less trivial.\n> > > > \n> > > > \n> > > > For what I understand - with R < 3 - everything is loaded with\n> > > > this\n> > > > command in an R file in the R/ directory:\n> > > > .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg,\n> > > > lib);\n> > > > require(\"cluster\")\n> > > > \n> > > > Now I replaced that with\n> > > > .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg,\n> > > > lib);\n> > > > require(\"cluster\")}\n> > > > but functions are not found when called.\n> > > > \n> > > > NAMESPACE exists but is empty.\n> > > > \n> > > > \n> > > > Any idea how to solve that?\n> > > > \n> > > > \n> > > > Regards\n> > > > \n> > > > --\n> > > > S?bastien Moretti\n> > > \n> > > ______________________________________________\n> > > R-package-devel at r-project.org mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-package-devel------------\n> > > -----------------------------------------------------------\n> > This message and its attachments are strictly\n> > confidenti...{{dropped:8}}\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > -----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
+      "body_plain": "On Thu, 2016-03-03 at 16:42 +0100, Uwe Ligges wrote:\n> \n> On 03.03.2016 16:08, Martyn Plummer wrote:\n> > On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> > > I have just found that R 2 filled by itself the NAMESPACE file\n> > > with\n> > > # Export all names\n> > > exportPattern(\".\")\n> > > \n> > > # Import all packages listed as Imports or Depends\n> > > import(\n> > >     cluster\n> > > )\n> > > \n> > > \n> > > So I filled the NAMESPACE file with that and gave it to R 3\n> > > Now functions are found!\n> > > \n> > > \n> > > Is it enough to do that?\n> > \n> > Yes. Even in the latest version of R, \"R CMD build\" will create a\n> > default NAMESPACE file like that for you if one does not exist.\n> > \n> > > Is it good practice to do that?\n> > \n> > No. The Writing R Extensions manual says \"such broad patterns are\n> > not\n> > recommended for production code: it is better to list all exports\n> > or\n> > use narrowly-defined groups\"\n> > \n> > > is .onLoad ... still required?\n> > \n> > Yes, if your package has compiled code (e.g. C, C++, Fortran) then\n> > the\n> > .onLoad function is required to load it into R.\n> \n> Well, I do not use .onLoad but just the\n> \n> useDynLib(packagename)\n> \n> directive in the NAESPACE file.\n\nI stand corrected. Twice.\n\nMartyn\n\n> Best,\n> Uwe Ligges\n> \n> \n> \n> \n> \n> > \n> > Martyn\n> > \n> > > Regards\n> > > \n> > > > Hi\n> > > > \n> > > > I have issues with an R package developed in 2004.\n> > > > It works perfectly in R < 3.\n> > > > It can be installed in R > 3 but functions are not available.\n> > > > \n> > > > Documentation I found is not really helpful for me who are not\n> > > > an R\n> > > > master.\n> > > > I have already fixed some problems with R CMD check but\n> > > > remaining\n> > > > ones\n> > > > are less trivial.\n> > > > \n> > > > \n> > > > For what I understand - with R < 3 - everything is loaded with\n> > > > this\n> > > > command in an R file in the R/ directory:\n> > > > .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg,\n> > > > lib);\n> > > > require(\"cluster\")\n> > > > \n> > > > Now I replaced that with\n> > > > .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg,\n> > > > lib);\n> > > > require(\"cluster\")}\n> > > > but functions are not found when called.\n> > > > \n> > > > NAMESPACE exists but is empty.\n> > > > \n> > > > \n> > > > Any idea how to solve that?\n> > > > \n> > > > \n> > > > Regards\n> > > > \n> > > > --\n> > > > Sébastien Moretti\n> > > \n> > > ______________________________________________\n> > > R-package-devel at r-project.org mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-package-devel------------\n> > > -----------------------------------------------------------\n> > This message and its attachments are strictly\n> > confidenti...{{dropped:8}}\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > -----------------------------------------------------------------------\nThis message and its attachments are strictly confidenti...{{dropped:8}}",
       "body_snippet": "On Thu, 2016-03-03 at 16:42 +0100, Uwe Ligges wrote:\n> \n> On 03.03.2016 16:08, Martyn Plummer wrote:\n> > On Thu, 2016-03-03 at 15:45 +0100, Sebastien Moretti wrote:\n> > > I have just found that R 2 fi",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 4,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000724.html"
     },
     {
       "id": "msg-c3cdfa98c990",
@@ -259,11 +272,12 @@
         "<56D84E11.5090406@unil.ch>",
         "<1457017690.3141.18.camel@iarc.fr>"
       ],
-      "body_plain": ">> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n\nThe package contained an empty NAMESPACE file.\nThat's maybe why it failed.\n\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n\nWill export only required functions once identified.\n\n\nFunctions are available now!\nThanks\n\nWill compare results with R 2 and 3 to see if I did not break something.\n\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n>\n> Martyn\n>\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n\n--\nS?bastien Moretti",
+      "body_plain": ">> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>> )\n>>\n>>\n>> So I filled the NAMESPACE file with that and gave it to R 3\n>> Now functions are found!\n>>\n>>\n>> Is it enough to do that?\n>\n> Yes. Even in the latest version of R, \"R CMD build\" will create a\n> default NAMESPACE file like that for you if one does not exist.\n\nThe package contained an empty NAMESPACE file.\nThat's maybe why it failed.\n\n>> Is it good practice to do that?\n>\n> No. The Writing R Extensions manual says \"such broad patterns are not\n> recommended for production code: it is better to list all exports or\n> use narrowly-defined groups\"\n\nWill export only required functions once identified.\n\n\nFunctions are available now!\nThanks\n\nWill compare results with R 2 and 3 to see if I did not break something.\n\n>> is .onLoad ... still required?\n>\n> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n> .onLoad function is required to load it into R.\n>\n> Martyn\n>\n>> Regards\n>>\n>>> Hi\n>>>\n>>> I have issues with an R package developed in 2004.\n>>> It works perfectly in R < 3.\n>>> It can be installed in R > 3 but functions are not available.\n>>>\n>>> Documentation I found is not really helpful for me who are not an R\n>>> master.\n>>> I have already fixed some problems with R CMD check but remaining\n>>> ones\n>>> are less trivial.\n>>>\n>>>\n>>> For what I understand - with R < 3 - everything is loaded with this\n>>> command in an R file in the R/ directory:\n>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")\n>>>\n>>> Now I replaced that with\n>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>> require(\"cluster\")}\n>>> but functions are not found when called.\n>>>\n>>> NAMESPACE exists but is empty.\n>>>\n>>>\n>>> Any idea how to solve that?\n>>>\n>>>\n>>> Regards\n\n--\nSébastien Moretti",
       "body_snippet": ">> I have just found that R 2 filled by itself the NAMESPACE file with\n>> # Export all names\n>> exportPattern(\".\")\n>>\n>> # Import all packages listed as Imports or Depends\n>> import(\n>>     cluster\n>>",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000725.html"
     },
     {
       "id": "msg-815c3af18724",
@@ -280,11 +294,12 @@
         "<1457017690.3141.18.camel@iarc.fr>",
         "<56D85B68.6020504@statistik.tu-dortmund.de>"
       ],
-      "body_plain": ">>> I have just found that R 2 filled by itself the NAMESPACE file with\n>>> # Export all names\n>>> exportPattern(\".\")\n>>>\n>>> # Import all packages listed as Imports or Depends\n>>> import(\n>>>     cluster\n>>> )\n>>>\n>>>\n>>> So I filled the NAMESPACE file with that and gave it to R 3\n>>> Now functions are found!\n>>>\n>>>\n>>> Is it enough to do that?\n>>\n>> Yes. Even in the latest version of R, \"R CMD build\" will create a\n>> default NAMESPACE file like that for you if one does not exist.\n>>\n>>> Is it good practice to do that?\n>>\n>> No. The Writing R Extensions manual says \"such broad patterns are not\n>> recommended for production code: it is better to list all exports or\n>> use narrowly-defined groups\"\n>>\n>>> is .onLoad ... still required?\n>>\n>> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n>> .onLoad function is required to load it into R.\n>\n> Well, I do not use .onLoad but just the\n>\n> useDynLib(packagename)\n>\n> directive in the NAESPACE file.\n\nMuch simpler like that and I can remove the zzz.R file with .onLoad ...\n\nThanks again\n\n\nIs useDynLib enough for package with compiled code?\n\n> Best,\n> Uwe Ligges\n>\n>\n>\n>\n>\n>>\n>> Martyn\n>>\n>>> Regards\n>>>\n>>>> Hi\n>>>>\n>>>> I have issues with an R package developed in 2004.\n>>>> It works perfectly in R < 3.\n>>>> It can be installed in R > 3 but functions are not available.\n>>>>\n>>>> Documentation I found is not really helpful for me who are not an R\n>>>> master.\n>>>> I have already fixed some problems with R CMD check but remaining\n>>>> ones\n>>>> are less trivial.\n>>>>\n>>>>\n>>>> For what I understand - with R < 3 - everything is loaded with this\n>>>> command in an R file in the R/ directory:\n>>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>>> require(\"cluster\")\n>>>>\n>>>> Now I replaced that with\n>>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>>> require(\"cluster\")}\n>>>> but functions are not found when called.\n>>>>\n>>>> NAMESPACE exists but is empty.\n>>>>\n>>>>\n>>>> Any idea how to solve that?\n>>>>\n>>>>\n>>>> Regards\n\n--\nS?bastien Moretti",
+      "body_plain": ">>> I have just found that R 2 filled by itself the NAMESPACE file with\n>>> # Export all names\n>>> exportPattern(\".\")\n>>>\n>>> # Import all packages listed as Imports or Depends\n>>> import(\n>>>     cluster\n>>> )\n>>>\n>>>\n>>> So I filled the NAMESPACE file with that and gave it to R 3\n>>> Now functions are found!\n>>>\n>>>\n>>> Is it enough to do that?\n>>\n>> Yes. Even in the latest version of R, \"R CMD build\" will create a\n>> default NAMESPACE file like that for you if one does not exist.\n>>\n>>> Is it good practice to do that?\n>>\n>> No. The Writing R Extensions manual says \"such broad patterns are not\n>> recommended for production code: it is better to list all exports or\n>> use narrowly-defined groups\"\n>>\n>>> is .onLoad ... still required?\n>>\n>> Yes, if your package has compiled code (e.g. C, C++, Fortran) then the\n>> .onLoad function is required to load it into R.\n>\n> Well, I do not use .onLoad but just the\n>\n> useDynLib(packagename)\n>\n> directive in the NAESPACE file.\n\nMuch simpler like that and I can remove the zzz.R file with .onLoad ...\n\nThanks again\n\n\nIs useDynLib enough for package with compiled code?\n\n> Best,\n> Uwe Ligges\n>\n>\n>\n>\n>\n>>\n>> Martyn\n>>\n>>> Regards\n>>>\n>>>> Hi\n>>>>\n>>>> I have issues with an R package developed in 2004.\n>>>> It works perfectly in R < 3.\n>>>> It can be installed in R > 3 but functions are not available.\n>>>>\n>>>> Documentation I found is not really helpful for me who are not an R\n>>>> master.\n>>>> I have already fixed some problems with R CMD check but remaining\n>>>> ones\n>>>> are less trivial.\n>>>>\n>>>>\n>>>> For what I understand - with R < 3 - everything is loaded with this\n>>>> command in an R file in the R/ directory:\n>>>> .First.lib <- function(lib, pkg) library.dynam(\"jacop\", pkg, lib);\n>>>> require(\"cluster\")\n>>>>\n>>>> Now I replaced that with\n>>>> .onLoad <- function(lib, pkg) {library.dynam(\"jacop\", pkg, lib);\n>>>> require(\"cluster\")}\n>>>> but functions are not found when called.\n>>>>\n>>>> NAMESPACE exists but is empty.\n>>>>\n>>>>\n>>>> Any idea how to solve that?\n>>>>\n>>>>\n>>>> Regards\n\n--\nSébastien Moretti",
       "body_snippet": ">>> I have just found that R 2 filled by itself the NAMESPACE file with\n>>> # Export all names\n>>> exportPattern(\".\")\n>>>\n>>> # Import all packages listed as Imports or Depends\n>>> import(\n>>>     clu",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 4,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000726.html"
     },
     {
       "id": "msg-fbefd720f269",
@@ -306,7 +321,8 @@
       "body_snippet": "On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n| Is useDynLib enough for package with compiled code?\n\nFor the loading of the shared library, yes.\n\nYour other importing and exporting of R functions",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 5,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000727.html"
     },
     {
       "id": "msg-b0982cbafc80",
@@ -325,11 +341,12 @@
         "<56D93E89.1010901@unil.ch>",
         "<22233.48637.272900.256603@max.nulle.part>"
       ],
-      "body_plain": "Great!\n\nThanks for your explanation\n\nLe 04/03/2016 17:55, Dirk Eddelbuettel a ?crit :\n>\n> On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n> | Is useDynLib enough for package with compiled code?\n>\n> For the loading of the shared library, yes.\n>\n> Your other importing and exporting of R functions is orthogonal to this.\n>\n> Dirk\n\n--\nS?bastien Moretti",
-      "body_snippet": "Great!\n\nThanks for your explanation\n\nLe 04/03/2016 17:55, Dirk Eddelbuettel a ?crit :\n>\n> On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n> | Is useDynLib enough for package with compiled code?\n>\n>",
+      "body_plain": "Great!\n\nThanks for your explanation\n\nLe 04/03/2016 17:55, Dirk Eddelbuettel a écrit :\n>\n> On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n> | Is useDynLib enough for package with compiled code?\n>\n> For the loading of the shared library, yes.\n>\n> Your other importing and exporting of R functions is orthogonal to this.\n>\n> Dirk\n\n--\nSébastien Moretti",
+      "body_snippet": "Great!\n\nThanks for your explanation\n\nLe 04/03/2016 17:55, Dirk Eddelbuettel a écrit :\n>\n> On 4 March 2016 at 08:51, Sebastien Moretti wrote:\n> | Is useDynLib enough for package with compiled code?\n>\n>",
       "thread_id": "thread-d48b58224f0d",
       "thread_depth": 6,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000728.html"
     },
     {
       "id": "msg-d1099d1147b6",
@@ -350,7 +367,8 @@
       "body_snippet": "Thanks to all. I find it quite reassuring that even someone so steeped \nin R is still finding new things to learn, it gives me hope.\n\nOn 02/03/2016 11:40, Uwe Ligges wrote:\n> Indeed, from Writing R Ex",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 4,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000729.html"
     },
     {
       "id": "msg-a69f87cc0bf9",
@@ -372,7 +390,8 @@
       "body_snippet": "Is there a minimum length req for the single quote spell checker\nfirewall? I've been putting 'API' in proper single quotes and it\nalways gets flagged.\n\nOn Sun, Mar 6, 2016 at 11:08 AM, Michael Dewey <",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 5,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000730.html"
     },
     {
       "id": "msg-ff050009c0de",
@@ -395,7 +414,8 @@
       "body_snippet": "On 07.03.2016 03:14, boB Rudis wrote:\n> Is there a minimum length req for the single quote spell checker\n> firewall? I've been putting 'API' in proper single quotes and it\n> always gets flagged.\n\nYou ",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 6,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000731.html"
     },
     {
       "id": "msg-a423f32cc915",
@@ -414,7 +434,8 @@
       "body_snippet": "I have a fair number of medical words and acronyms in my icd9 package\nand found aspell to be very useful. For an example, look in the icd10\nbranch in github at https://github.com/jackwasey/icd9/tree/i",
       "thread_id": "thread-bb6d334d046f",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000732.html"
     },
     {
       "id": "msg-d6b16a3dad88",
@@ -430,7 +451,8 @@
       "body_snippet": "Hi. \n\nI am having problems with R CMD check around documentation of method \"[\". I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have tried many things, but I am not sure how to fix ",
       "thread_id": "thread-d6b16a3dad88",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000733.html"
     },
     {
       "id": "msg-d706ca1e66e3",
@@ -448,7 +470,8 @@
       "body_snippet": "On 09/03/2016 7:10 AM, Berri, Stefano wrote:\n> Hi.\n>\n> I am having problems with R CMD check around documentation of method \"[\". I am pretty sure I didn't have this WARNING when I used R-3.0.2. I have",
       "thread_id": "thread-d6b16a3dad88",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000734.html"
     },
     {
       "id": "msg-b62412a8eda4",
@@ -466,7 +489,8 @@
       "body_snippet": "Hi Stefano,\n\ndid you try moving the method to a separate file already? I've noticed that\ndocumentation of classes and methods in the same .Rd file isn't very\nstraightforward. You need a \\usage{} secti",
       "thread_id": "thread-d6b16a3dad88",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000735.html"
     },
     {
       "id": "msg-522ac70a573c",
@@ -485,7 +509,8 @@
       "body_snippet": "Thank you Joris and Duncan!\n\n\\alias{[, encore,ANY,ANY-method}\n\nis all it is needed to fix the WARNING.\n\nNow that it is fixed, I will try to follow your other suggestions and move the documentation out",
       "thread_id": "thread-d6b16a3dad88",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000736.html"
     },
     {
       "id": "msg-44bfa13e41b9",
@@ -501,7 +526,8 @@
       "body_snippet": "All,\n\nI have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple sign",
       "thread_id": "thread-44bfa13e41b9",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000737.html"
     },
     {
       "id": "msg-8640fbc71f10",
@@ -519,7 +545,8 @@
       "body_snippet": "Hi Glenn,\n\nthat is actually as easy as defining a generic and defining a method for\neach class to extract the slot. I do this literally in every package I\nwrite.\n\nsetGeneric('duration', function(x, ..",
       "thread_id": "thread-44bfa13e41b9",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000738.html"
     },
     {
       "id": "msg-1ac5277a926c",
@@ -533,11 +560,12 @@
       "references": [
         "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>"
       ],
-      "body_plain": "Hi Glenn!\n\nOn 10/03/16 15:05, Glenn Schultz wrote:\n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple signatures.  Is this possible?  I have checked my books, help, BioConductor tutorials and it appears that this is not possible.  Has anyone ever run into this situation?\n\nI actually use a similar mechanism to extract values from different S4 \nclasses in my package, and it works quite well. So if I understand you \nright, the following code might help you to get closer to want you want:\n\nhttps://github.com/52North/sos4R/blob/master/R/SOS-methods-accessor.R\n\nI created methods for different signatures, see for example \n\"sosObservedProperties\".\n\n\nHope this helps,\nDaniel\n\n-- \nDaniel N?st\nInstitute for Geoinformatics (ifgi),   University of M?nster\nHeisenbergstra?e 2, 48149 M?nster, Germany; +49 251 83 31962\nhttp://ifgi.uni-muenster.de/~d_nues01        http://o2r.info",
+      "body_plain": "Hi Glenn!\n\nOn 10/03/16 15:05, Glenn Schultz wrote:\n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an accessor Duration that would work on multiple signatures.  Is this possible?  I have checked my books, help, BioConductor tutorials and it appears that this is not possible.  Has anyone ever run into this situation?\n\nI actually use a similar mechanism to extract values from different S4 \nclasses in my package, and it works quite well. So if I understand you \nright, the following code might help you to get closer to want you want:\n\nhttps://github.com/52North/sos4R/blob/master/R/SOS-methods-accessor.R\n\nI created methods for different signatures, see for example \n\"sosObservedProperties\".\n\n\nHope this helps,\nDaniel\n\n-- \nDaniel Nüst\nInstitute for Geoinformatics (ifgi),   University of Münster\nHeisenbergstraße 2, 48149 Münster, Germany; +49 251 83 31962\nhttp://ifgi.uni-muenster.de/~d_nues01        http://o2r.info",
       "body_snippet": "Hi Glenn!\n\nOn 10/03/16 15:05, Glenn Schultz wrote:\n> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and BondCashFlow) all of which contain the slot Duration.  I would like have an acc",
       "thread_id": "thread-44bfa13e41b9",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000739.html"
     },
     {
       "id": "msg-bc89d4261af2",
@@ -552,11 +580,12 @@
         "<046ED2F0-31DF-4464-BBF0-45B3C43454EA@me.com>",
         "<56E19734.7080605@uni-muenster.de>"
       ],
-      "body_plain": "On 10.03.2016 16:48, Daniel N?st wrote:\n> Hi Glenn!\n>\n> On 10/03/16 15:05, Glenn Schultz wrote:\n>> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n>> BondCashFlow) all of which contain the slot Duration.  I would like\n>> have an accessor Duration that would work on multiple signatures.  Is\n>> this possible?  I have checked my books, help, BioConductor tutorials\n>> and it appears that this is not possible.  Has anyone ever run into\n>> this situation?\n>\n> I actually use a similar mechanism to extract values from different S4\n> classes in my package, and it works quite well. So if I understand you\n> right, the following code might help you to get closer to want you want:\n>\n> https://github.com/52North/sos4R/blob/master/R/SOS-methods-accessor.R\n>\n> I created methods for different signatures, see for example\n> \"sosObservedProperties\".\n\nYes, that's straightforward. But I still wonder if it is at all possible \nto use not only different *signatures*, but also different argument \n*names* in S4, e.g.:\n\nfoo(formula, data, ...)\n\nfoo(data, grouping, ...)\n\n\nNow I'm using a combination of S3 and S4 in my package for this purpose, \nand for some other quirks.\n\nThomas\n\n\n-- \nDr. Thomas Petzoldt\nTechnische Universitaet Dresden\nFaculty of Environmental Sciences\nInstitute of Hydrobiology\n01062 Dresden, Germany\n\nE-Mail: thomas.petzoldt at tu-dresden.de\nhttp://tu-dresden.de/Members/thomas.petzoldt",
-      "body_snippet": "On 10.03.2016 16:48, Daniel N?st wrote:\n> Hi Glenn!\n>\n> On 10/03/16 15:05, Glenn Schultz wrote:\n>> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n>> BondCashFlow) all of which con",
+      "body_plain": "On 10.03.2016 16:48, Daniel Nüst wrote:\n> Hi Glenn!\n>\n> On 10/03/16 15:05, Glenn Schultz wrote:\n>> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n>> BondCashFlow) all of which contain the slot Duration.  I would like\n>> have an accessor Duration that would work on multiple signatures.  Is\n>> this possible?  I have checked my books, help, BioConductor tutorials\n>> and it appears that this is not possible.  Has anyone ever run into\n>> this situation?\n>\n> I actually use a similar mechanism to extract values from different S4\n> classes in my package, and it works quite well. So if I understand you\n> right, the following code might help you to get closer to want you want:\n>\n> https://github.com/52North/sos4R/blob/master/R/SOS-methods-accessor.R\n>\n> I created methods for different signatures, see for example\n> \"sosObservedProperties\".\n\nYes, that's straightforward. But I still wonder if it is at all possible \nto use not only different *signatures*, but also different argument \n*names* in S4, e.g.:\n\nfoo(formula, data, ...)\n\nfoo(data, grouping, ...)\n\n\nNow I'm using a combination of S3 and S4 in my package for this purpose, \nand for some other quirks.\n\nThomas\n\n\n-- \nDr. Thomas Petzoldt\nTechnische Universitaet Dresden\nFaculty of Environmental Sciences\nInstitute of Hydrobiology\n01062 Dresden, Germany\n\nE-Mail: thomas.petzoldt at tu-dresden.de\nhttp://tu-dresden.de/Members/thomas.petzoldt",
+      "body_snippet": "On 10.03.2016 16:48, Daniel Nüst wrote:\n> Hi Glenn!\n>\n> On 10/03/16 15:05, Glenn Schultz wrote:\n>> I have a package with to S4 classes (MBSCashFlow, REMICCashFlow and\n>> BondCashFlow) all of which con",
       "thread_id": "thread-44bfa13e41b9",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000740.html"
     },
     {
       "id": "msg-b802dfcc34f8",
@@ -575,7 +604,8 @@
       "body_snippet": "Hello Joris,\n\nThank worked perfectly.  My main concern was that I was creating multiple methods which may have the same name but different signature. Just over thinking things I guess but I appreciate",
       "thread_id": "thread-44bfa13e41b9",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000741.html"
     },
     {
       "id": "msg-bf1f1e86fd7f",
@@ -595,7 +625,8 @@
       "body_snippet": "Creating functions that looks like they have the same name, but have\ndifferent internals is exactly (one of) the purposes of having methods.\n\nBest,\nKasper\n\nOn Thu, Mar 10, 2016 at 4:04 PM, Glenn Schul",
       "thread_id": "thread-44bfa13e41b9",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000742.html"
     },
     {
       "id": "msg-09a68996934d",
@@ -611,7 +642,8 @@
       "body_snippet": "Hi,\n\nAfter having converted a couple of package vignettes from Sweave to \nknitr, I discovered that the reference output generated by R CMD check, \ni.e., <vignette>.Rnw.log in the check directory, is n",
       "thread_id": "thread-09a68996934d",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000743.html"
     },
     {
       "id": "msg-40554154f18e",
@@ -627,7 +659,8 @@
       "body_snippet": "Good day to everyone,\nI have an issue when documenting an S4 generic. I have the following in my\nfile generics.R:\n\n#' @rdname myfunction-methods#' @name myfunction <- without this,\nroxygen2 complaints",
       "thread_id": "thread-40554154f18e",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000744.html"
     },
     {
       "id": "msg-2185ff6a27e5",
@@ -645,7 +678,8 @@
       "body_snippet": "The problem seems to be your use of methods::setMethod instead of\nsetMethod (etc). Roxygen2 doesn't seem to be quite smart enough to\nrealise that these aren't equivalent. You might want to file an iss",
       "thread_id": "thread-40554154f18e",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000745.html"
     },
     {
       "id": "msg-6ac867332148",
@@ -661,7 +695,8 @@
       "body_snippet": "Thank you so much, it works like a charm :-)\n\nI would appreciate if you could please answer (very briefly) questions 1 to\n3, so I can learn how to correctly document S4 generics properly in the\nfuture",
       "thread_id": "thread-6ac867332148",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000746.html"
     },
     {
       "id": "msg-2c2b245e9e96",
@@ -679,7 +714,8 @@
       "body_snippet": "1. Depends on whether you're documenting the method or the generic.\n2. You don't\n3. I can never remember. I think if it's your generic, you only need\nit in one place.\n\nHadley\n\nOn Mon, Mar 21, 2016 at ",
       "thread_id": "thread-6ac867332148",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000747.html"
     },
     {
       "id": "msg-b97bb315c642",
@@ -695,7 +731,8 @@
       "body_snippet": "Hi,\n\nI'm currently developing an R package that includes a small data set \nalong with the functions that I want to export. I have an R script that \ngenerates the data set; the computation time is long",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000748.html"
     },
     {
       "id": "msg-0c04b206ca4c",
@@ -713,7 +750,8 @@
       "body_snippet": "On Tue, 2016-03-22 at 08:52 -0400, Kevin Coombes wrote:\n> I'm currently developing an R package that includes a small data set \n> along with the functions that I want to export. I have an R script tha",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000749.html"
     },
     {
       "id": "msg-b7a000441740",
@@ -732,7 +770,8 @@
       "body_snippet": "You can leave them in R/ (and write them as functions) but use\n.Rbuildignore to exclude them from the distributed package. People can use\nthe source, eg github, to regenerate the package and all its d",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000750.html"
     },
     {
       "id": "msg-689875b28d1e",
@@ -750,7 +789,8 @@
       "body_snippet": "Kevin,\n\nThe inst/ directory gives a good handle to pass arbitrary directory layouts\nof your choosing through.  You just need to avoid inst/data as it would clash\nwith an existing data/ directory.\n\nI t",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000751.html"
     },
     {
       "id": "msg-967e6d748fb8",
@@ -769,7 +809,8 @@
       "body_snippet": "On 23/03/16 10:08, Dirk Eddelbuettel wrote:\n\n<SNIP>\n\n> Note that there is a reasonable discussion in Writing R Extensions, but as\n> always, you have to find it first.\n\nFortune nomination!\n\ncheers,\n\nRo",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000752.html"
     },
     {
       "id": "msg-5f37044b4b9a",
@@ -787,7 +828,8 @@
       "body_snippet": "On Tue, 22 Mar 2016, Kevin Coombes <kevin.r.coombes at gmail.com> writes:\n\n> Hi,\n>\n> I'm currently developing an R package that includes a small data set\n> along with the functions that I want to expo",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000753.html"
     },
     {
       "id": "msg-aaeb6b3a9120",
@@ -806,7 +848,8 @@
       "body_snippet": "Dear Kevin,\n\nI would convert the script into a function and add it to the R folder. This\nmakes it easy to document the script using the standard R help files. Then\nadd the function to the examples in ",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000754.html"
     },
     {
       "id": "msg-3a9955758cb0",
@@ -825,7 +868,8 @@
       "body_snippet": "Hi,\n\nI'm going to start by summarizing the suggestions (for where to put the \nscript) that have been presented so far:\n\n[1] in the /demo directory\n[2] in /inst/SOMETHING, where Dirk lists four possibl",
       "thread_id": "thread-b97bb315c642",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000755.html"
     },
     {
       "id": "msg-8c2497f4ce19",
@@ -841,7 +885,8 @@
       "body_snippet": "Several years ago I assembled some of my own most used code into a package,\nand had that installed on my machine.  Since then I have lost the source\nfiles, but still have the package installed in an o",
       "thread_id": "thread-8c2497f4ce19",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000756.html"
     },
     {
       "id": "msg-236e5fa89ebd",
@@ -859,7 +904,8 @@
       "body_snippet": "You could take your old install and do this:\n\n   library(\"your_package\")\n   funs <- ls(pos=\"package:your_package\")\n   dump(funs,\"your_package.R\")\n\n   that wouldn't recreate documentation, NAMESPACE fi",
       "thread_id": "thread-8c2497f4ce19",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000757.html"
     },
     {
       "id": "msg-ca7cf87035e8",
@@ -878,7 +924,8 @@
       "body_snippet": "On Wed, Mar 23, 2016 at 9:25 PM, Ben Bolker <bbolker at gmail.com> wrote:\n>\n>  You could take your old install and do this:\n>\n>   library(\"your_package\")\n>   funs <- ls(pos=\"package:your_package\")\n>  ",
       "thread_id": "thread-8c2497f4ce19",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000758.html"
     },
     {
       "id": "msg-48b496b1b5d4",
@@ -898,7 +945,8 @@
       "body_snippet": "Further to Joshua's comment, \npackage \"Rdpack\" has a function reprompt(), which when called with one argument \ncreates an Rd documentation file. It can do this for methods (S3/S4), classes and package",
       "thread_id": "thread-8c2497f4ce19",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000759.html"
     },
     {
       "id": "msg-1425c7b6a310",
@@ -914,7 +962,8 @@
       "body_snippet": "Recently the functionality in the choroplethr\n<https://cran.r-project.org/web/packages/choroplethr/index.html> package\nthat depends on the acs\n<https://cran.r-project.org/web/packages/acs/index.html> ",
       "thread_id": "thread-1425c7b6a310",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000760.html"
     },
     {
       "id": "msg-7a84afea3871",
@@ -932,7 +981,8 @@
       "body_snippet": "Has this been resolved now?\n\nI cannot reproduce the problem as I get:\n\n > library(choroplethr)\n >\n > ?get_state_demographics\nstarting httpd help server ... done\n >\n > get_state_demographics()\nError in",
       "thread_id": "thread-1425c7b6a310",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000761.html"
     },
     {
       "id": "msg-8c48b56cbea5",
@@ -948,7 +998,8 @@
       "body_snippet": "All,\nI am creating a mortgage prepayment model package.  The idea is to create a class FRMModelFunction and each slot in the class is a function that may be use in the prepayment. So I would like to c",
       "thread_id": "thread-8c48b56cbea5",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000762.html"
     },
     {
       "id": "msg-ece79f222e80",
@@ -966,7 +1017,8 @@
       "body_snippet": "This syntax\n  Omega(x = 1)\nseems weird.  How do you know that this call should refer back to the Model\nobject and not some other hypothetical Model2 object?  The code you're\ndefining should make somet",
       "thread_id": "thread-8c48b56cbea5",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000763.html"
     },
     {
       "id": "msg-d78a71dc6c53",
@@ -985,7 +1037,8 @@
       "body_snippet": "Unfortunately I am still getting the same error:\n\ninstall.packages(c(\"choroplethr\", \"acs\"))\nlibrary(acs)\napi.key.install(\"f8b2a6df01479981aef39577b3c4466f5a4c8274\")\ndetach(\"package:acs\", unload=TRUE)\n",
       "thread_id": "thread-1425c7b6a310",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000764.html"
     },
     {
       "id": "msg-644555972c87",
@@ -1005,7 +1058,8 @@
       "body_snippet": "I just tried your code with acs 2.0 and choroplethr 3.5.1 under R-3.3.0 \nalpha and got a result rather than an error...\n\nAre you using a different version of anything?\n\nBest,\nUwe Ligges\n\n\n\nOn 28.03.20",
       "thread_id": "thread-1425c7b6a310",
       "thread_depth": 3,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000765.html"
     },
     {
       "id": "msg-13dd5b0c4cab",
@@ -1026,7 +1080,8 @@
       "body_snippet": "I am using R 3.2.4 for mac. Here is my sessionInfo():\n\n> sessionInfo()\nR version 3.2.4 (2016-03-10)\nPlatform: x86_64-apple-darwin13.4.0 (64-bit)\nRunning under: OS X 10.10.5 (Yosemite)\n\nlocale:\n[1] en_",
       "thread_id": "thread-1425c7b6a310",
       "thread_depth": 4,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000766.html"
     },
     {
       "id": "msg-7248dd9ae3fa",
@@ -1045,7 +1100,8 @@
       "body_snippet": "Kasper,\n\nThanks! I that was the clue I was looking for.  Simple change to the code makes it work perfectly as you describe.  I also have constructor function for Model beyond the minimal example.  I a",
       "thread_id": "thread-8c48b56cbea5",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000767.html"
     },
     {
       "id": "msg-66344e2c7d58",
@@ -1061,7 +1117,8 @@
       "body_snippet": "Hello,\n\nWhat is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the user, but I would like to keep them in the pa",
       "thread_id": "thread-66344e2c7d58",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000768.html"
     },
     {
       "id": "msg-69aeb9519c9c",
@@ -1079,7 +1136,8 @@
       "body_snippet": "On 30 March 2016 at 14:03, Iago Mosqueira wrote:\n| What is the best way of keeping R scripts that are used to generate the data files in the data/ folder? These are not meant to be available to the us",
       "thread_id": "thread-66344e2c7d58",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000769.html"
     },
     {
       "id": "msg-aa08360f685f",
@@ -1101,7 +1159,8 @@
       "body_snippet": "Uwe,\n\nBased on what you report, it seems at least possible that the bug is\nrelated to some changes in R between versions.\n\nI just submitted an updated version of the package to CRAN that moves the\nacs",
       "thread_id": "thread-1425c7b6a310",
       "thread_depth": 5,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000770.html"
     },
     {
       "id": "msg-2022348ea3bc",
@@ -1119,7 +1178,8 @@
       "body_snippet": "The devtools::use_data_raw() function creates a \"data-raw\" directory for \nthis purpose, and adds it to .Rbuildignore so that it's not included in \nthe built package. Your scripts can then write the da",
       "thread_id": "thread-66344e2c7d58",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000771.html"
     },
     {
       "id": "msg-f005863b7e74",
@@ -1134,11 +1194,12 @@
         "<153c7684651.c9ba4e4c105108.251294087408673004@mosqueira.eu>",
         "<56FD149B.7080106@ivt.baug.ethz.ch>"
       ],
-      "body_plain": "On 31 March 2016 at 14:14, Kirill M?ller wrote:\n| The devtools::use_data_raw() function\n\nBut the question was about the best way ;-)   <ducks>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 31 March 2016 at 14:14, Kirill M?ller wrote:\n| The devtools::use_data_raw() function\n\nBut the question was about the best way ;-)   <ducks>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel |",
+      "body_plain": "On 31 March 2016 at 14:14, Kirill Müller wrote:\n| The devtools::use_data_raw() function\n\nBut the question was about the best way ;-)   <ducks>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 31 March 2016 at 14:14, Kirill Müller wrote:\n| The devtools::use_data_raw() function\n\nBut the question was about the best way ;-)   <ducks>\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel |",
       "thread_id": "thread-66344e2c7d58",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000772.html"
     }
   ],
   "threads": [

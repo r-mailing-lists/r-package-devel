@@ -17,7 +17,8 @@
       "body_snippet": "Just a quick note to say that we intend to have a patch release, probably on June 30, mainly to pick up a few balls that were dropped on the 3.4.0 release. Full schedule to appear later (just need a l",
       "thread_id": "thread-4a459cd259e1",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001640.html"
     },
     {
       "id": "msg-08457fbf95ab",
@@ -40,7 +41,8 @@
       "body_snippet": "On 27 May 2017 at 22:18, Emmanuel Blondel wrote:\n| Dear Uwe, i clearly understand the CRAN team needs time on this. I have \n| no problem in postponing on my side, and resubmit later next month. \n\nAs t",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001641.html"
     },
     {
       "id": "msg-3a9b81d9b986",
@@ -64,7 +66,8 @@
       "body_snippet": "On 3 June 2017 at 08:30, Dirk Eddelbuettel wrote:\n| \n| On 27 May 2017 at 22:18, Emmanuel Blondel wrote:\n| | Dear Uwe, i clearly understand the CRAN team needs time on this. I have \n| | no problem in p",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001642.html"
     },
     {
       "id": "msg-a21fba52ff29",
@@ -76,11 +79,12 @@
       "subject_clean": "[R-pkg-devel] Logging data to disk from C++ using a DBMS",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi all,\n\nWe have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\nThis simulator generates a bunch of data, and there are some functions\ndefined to bring this data to R space as data frames. The memory usage can\nbe a problem depending on the simulation model, so we would like to add\nsupport for logging data directly to disk while being as transparent as\npossible from the user perspective.\n\nOur idea is to define a reusable chunk size and periodically append the\nchunk to a DBIConnection by calling DBI::dbWriteTable from C++. In this\nway, the subsequent analysis may be performed with dplyr no matter which\nstorage method is selected, memory or database.\n\nThe question is whether there is a better, more efficient, way of achieving\nthis goal. Is there any package already doing something similar? Ideas and\nalternatives welcome. Thanks in advance.\n\nRegards,\n-- \nI?aki ?car\nhttp://www.enchufa2.es\n@Enchufa2\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi all,\n\nWe have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\nThis simulator generates a bunch of data, and there are some functions\ndefined to bring this data to R space as data frames. The memory usage can\nbe a problem depending on the simulation model, so we would like to add\nsupport for logging data directly to disk while being as transparent as\npossible from the user perspective.\n\nOur idea is to define a reusable chunk size and periodically append the\nchunk to a DBIConnection by calling DBI::dbWriteTable from C++. In this\nway, the subsequent analysis may be performed with dplyr no matter which\nstorage method is selected, memory or database.\n\nThe question is whether there is a better, more efficient, way of achieving\nthis goal. Is there any package already doing something similar? Ideas and\nalternatives welcome. Thanks in advance.\n\nRegards,\n-- \nIñaki Úcar\nhttp://www.enchufa2.es\n@Enchufa2\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi all,\n\nWe have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\nThis simulator generates a bunch of data, and there are some functions\ndefined to bring this data to R space as data fr",
       "thread_id": "thread-a21fba52ff29",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001643.html"
     },
     {
       "id": "msg-d20b13bf52cb",
@@ -94,11 +98,12 @@
       "references": [
         "<CALEXWq0Mk1uAPoAf7J_tGZe3jTkhc0japJDhYWjD8_aRUoxpVg@mail.gmail.com>"
       ],
-      "body_plain": "On 3 June 2017 at 17:45, I?aki ?car wrote:\n| We have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\n| This simulator generates a bunch of data, and there are some functions\n| defined to bring this data to R space as data frames. The memory usage can\n| be a problem depending on the simulation model, so we would like to add\n| support for logging data directly to disk while being as transparent as\n| possible from the user perspective.\n| \n| Our idea is to define a reusable chunk size and periodically append the\n| chunk to a DBIConnection by calling DBI::dbWriteTable from C++. In this\n| way, the subsequent analysis may be performed with dplyr no matter which\n| storage method is selected, memory or database.\n| \n| The question is whether there is a better, more efficient, way of achieving\n| this goal. Is there any package already doing something similar? Ideas and\n| alternatives welcome. Thanks in advance.\n\nI would do it differently, at least to start. Define a structure, either\nplain in C/C++ or, preferably, with something portable like MgsPack (see\nRcppMsgPack, which is header only; MsgPack can be deserialized easily by just\nabout every language on the planet) and have your C++ layer write it.  Then\nwhen you're done, convert once, into DB or whatever else you want.\n\nYou can do it all at once and have your simulation hand off data to a logger\nin a separate thread. But its more work, harder to debug and probably not\nreally needed.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 3 June 2017 at 17:45, I?aki ?car wrote:\n| We have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\n| This simulator generates a bunch of data, and there are some functions\n| defined ",
+      "body_plain": "On 3 June 2017 at 17:45, Iñaki Úcar wrote:\n| We have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\n| This simulator generates a bunch of data, and there are some functions\n| defined to bring this data to R space as data frames. The memory usage can\n| be a problem depending on the simulation model, so we would like to add\n| support for logging data directly to disk while being as transparent as\n| possible from the user perspective.\n| \n| Our idea is to define a reusable chunk size and periodically append the\n| chunk to a DBIConnection by calling DBI::dbWriteTable from C++. In this\n| way, the subsequent analysis may be performed with dplyr no matter which\n| storage method is selected, memory or database.\n| \n| The question is whether there is a better, more efficient, way of achieving\n| this goal. Is there any package already doing something similar? Ideas and\n| alternatives welcome. Thanks in advance.\n\nI would do it differently, at least to start. Define a structure, either\nplain in C/C++ or, preferably, with something portable like MgsPack (see\nRcppMsgPack, which is header only; MsgPack can be deserialized easily by just\nabout every language on the planet) and have your C++ layer write it.  Then\nwhen you're done, convert once, into DB or whatever else you want.\n\nYou can do it all at once and have your simulation hand off data to a logger\nin a separate thread. But its more work, harder to debug and probably not\nreally needed.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 3 June 2017 at 17:45, Iñaki Úcar wrote:\n| We have a simulator, 'simmer', implemented as a C++ object (with Rcpp).\n| This simulator generates a bunch of data, and there are some functions\n| defined ",
       "thread_id": "thread-a21fba52ff29",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001644.html"
     },
     {
       "id": "msg-74af2423646f",
@@ -114,7 +119,8 @@
       "body_snippet": "Hello!\n\nI've recently submitted my first package on CRAN and now need to make\nsome improvements\non feedback received from CRAN maintainers.\n\nhttps://github.com/thekvs/zstdr\nhttps://cran.r-project.org/",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001645.html"
     },
     {
       "id": "msg-b3751804de97",
@@ -128,11 +134,12 @@
       "references": [
         "<CAFjK30sXon4LAinwtJaajmag-yS_NS6HturWNm5TARVve35fUQ@mail.gmail.com>"
       ],
-      "body_plain": "On Sun, 2017-06-04 at 22:56 +0300, Konstantin Sorokin wrote:\n> I've recently submitted my first package on CRAN and now need to make\n> some improvements on feedback received from CRAN maintainers.\n> \n> https://github.com/thekvs/zstdr\n> https://cran.r-project.org/web/packages/zstdr/index.html\n> \n> My question are:\n> \n> ???1. In the process of building package I also need to build some\n> ???third party components, now I use mktemp utility to create\n> temporary subdirectory in /tmp/ directory where I build this third\n> party part. I was?told that according to CRAN packaging policy I\n> should not leave any?artifacts in /tmp/ after package build. My\n> question is: Is it enough to?delete this temporary directory in the\n> \"cleanup\" script?\n> ???2. Is it possible to install cmake on OSX and Solaris build hosts?\n\nWhy not just use .Rbuildignore so that the generated tarball doesn't\nhave any of the extra files?  Or do I misunderstand your question?",
+      "body_plain": "On Sun, 2017-06-04 at 22:56 +0300, Konstantin Sorokin wrote:\n> I've recently submitted my first package on CRAN and now need to make\n> some improvements on feedback received from CRAN maintainers.\n> \n> https://github.com/thekvs/zstdr\n> https://cran.r-project.org/web/packages/zstdr/index.html\n> \n> My question are:\n> \n>    1. In the process of building package I also need to build some\n>    third party components, now I use mktemp utility to create\n> temporary subdirectory in /tmp/ directory where I build this third\n> party part. I was told that according to CRAN packaging policy I\n> should not leave any artifacts in /tmp/ after package build. My\n> question is: Is it enough to delete this temporary directory in the\n> \"cleanup\" script?\n>    2. Is it possible to install cmake on OSX and Solaris build hosts?\n\nWhy not just use .Rbuildignore so that the generated tarball doesn't\nhave any of the extra files?  Or do I misunderstand your question?",
       "body_snippet": "On Sun, 2017-06-04 at 22:56 +0300, Konstantin Sorokin wrote:\n> I've recently submitted my first package on CRAN and now need to make\n> some improvements on feedback received from CRAN maintainers.\n> \n",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001646.html"
     },
     {
       "id": "msg-6842ba648230",
@@ -151,7 +158,8 @@
       "body_snippet": "This third party component is a compression library for which my package\nprovides bindings and I need to build this library first. Look at the lines\nstarting from\nhttps://github.com/thekvs/zstdr/blob/",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001647.html"
     },
     {
       "id": "msg-1ad65c4c91d8",
@@ -171,7 +179,8 @@
       "body_snippet": "On 5 June 2017 at 00:51, Konstantin Sorokin wrote:\n| This third party component is a compression library for which my package\n| provides bindings and I need to build this library first. Look at the li",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001648.html"
     },
     {
       "id": "msg-f07e4a469681",
@@ -192,7 +201,8 @@
       "body_snippet": "On Mon, Jun 5, 2017 at 1:13 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 5 June 2017 at 00:51, Konstantin Sorokin wrote:\n> | This third party component is a compression library for which m",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 4,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001649.html"
     },
     {
       "id": "msg-76e2b27bce52",
@@ -214,7 +224,8 @@
       "body_snippet": "Hi Konstantin,\n\nConcerning CMake, I asked a similar question here:\n\nhttps://stat.ethz.ch/pipermail/r-package-devel/2017q2/001600.html\n\nEssentially, I wondered if there was a way to have CMake within a",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 5,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001650.html"
     },
     {
       "id": "msg-61c5dd3517e6",
@@ -230,7 +241,8 @@
       "body_snippet": "hi,\n\ni've uploaded a version of my package to the win-builder service, but it \nis reporting that one of my tests takes > 10 seconds to run. examining \nthe log here:\n\nhttps://win-builder.r-project.org/",
       "thread_id": "thread-61c5dd3517e6",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001651.html"
     },
     {
       "id": "msg-c34995f75797",
@@ -248,7 +260,8 @@
       "body_snippet": "The relevant output is below:\n\n* checking examples ...\n** running examples for arch 'i386' ... [24s] NOTE\nExamples with CPU or elapsed time > 10s\n    user system elapsed\ncfa 8.05   0.36   10.08\n** run",
       "thread_id": "thread-61c5dd3517e6",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001652.html"
     },
     {
       "id": "msg-4410096fe4f4",
@@ -267,7 +280,8 @@
       "body_snippet": "hi dason,\n\nyes, it looks like it's taking 10 seconds.\n\n10 seconds still seems unusually long, and a lot longer than 600ms.\n\nany other suggestions as to what might be going on here?\n\nwith thanks\n\njonat",
       "thread_id": "thread-61c5dd3517e6",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001653.html"
     },
     {
       "id": "msg-35dc425d5728",
@@ -285,11 +299,12 @@
         "<22836.34316.308125.336852@max.eddelbuettel.com>",
         "<CAFjK30usUyF5qGPpM=Tt7DYmex0AzjRwYawmPni3m9tACG+EXg@mail.gmail.com>"
       ],
-      "body_plain": "On 5 June 2017 at 12:29, Konstantin Sorokin wrote:\n| zstandard is a young?project and I think it is a bit to early to assume that\n| zstandard library be present in the system. For example on my Ubuntu 16.04\n| (LTS) I have?libzstd0/xenial 0.5.1-1 but the latest stable release has version\n| 1.2.\n\nI use the PPA service on launchpad.net to great effect for that. Take most\nrecent (packaged !!) version from Debian, adjust debian/control and\ndebian/changelog ever so slightly, upload to launchpad and use the thusly\ngenerated version on older Ubuntu and e.g. Travis.   I need to blog about that...\n \n| Btw, what about installing cmake on OSX and Solaris in CRAN build farm? Now ?it\n| is such a ubiquitous and widely used program!\n\nAs far as I know, some packages already use cmake. See e.g. this query among\nthe GitHub-mirrored CRAN packages:\n\n    https://github.com/search?q=user%3Acran+CMakeLists.txt&type=Code\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 5 June 2017 at 12:29, Konstantin Sorokin wrote:\n| zstandard is a young?project and I think it is a bit to early to assume that\n| zstandard library be present in the system. For example on my Ubuntu",
+      "body_plain": "On 5 June 2017 at 12:29, Konstantin Sorokin wrote:\n| zstandard is a young project and I think it is a bit to early to assume that\n| zstandard library be present in the system. For example on my Ubuntu 16.04\n| (LTS) I have libzstd0/xenial 0.5.1-1 but the latest stable release has version\n| 1.2.\n\nI use the PPA service on launchpad.net to great effect for that. Take most\nrecent (packaged !!) version from Debian, adjust debian/control and\ndebian/changelog ever so slightly, upload to launchpad and use the thusly\ngenerated version on older Ubuntu and e.g. Travis.   I need to blog about that...\n \n| Btw, what about installing cmake on OSX and Solaris in CRAN build farm? Now  it\n| is such a ubiquitous and widely used program!\n\nAs far as I know, some packages already use cmake. See e.g. this query among\nthe GitHub-mirrored CRAN packages:\n\n    https://github.com/search?q=user%3Acran+CMakeLists.txt&type=Code\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 5 June 2017 at 12:29, Konstantin Sorokin wrote:\n| zstandard is a young project and I think it is a bit to early to assume that\n| zstandard library be present in the system. For example on my Ubuntu",
       "thread_id": "thread-74af2423646f",
       "thread_depth": 5,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001654.html"
     },
     {
       "id": "msg-66714f117dab",
@@ -309,7 +324,8 @@
       "body_snippet": "On 05.06.2017 14:48, Jonathon Love wrote:\n> hi dason,\n> \n> yes, it looks like it's taking 10 seconds.\n> \n> 10 seconds still seems unusually long, and a lot longer than 600ms.\n\nSo your windows installa",
       "thread_id": "thread-61c5dd3517e6",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001655.html"
     },
     {
       "id": "msg-4a0f96c1a330",
@@ -330,7 +346,8 @@
       "body_snippet": "> So your windows installation of R-3.4.0 can solve this in 600ms? Or is \n> yoiur another OS?\n\nah, yes, another OS. it turns out on windows this takes 6 seconds. the \nissue is that we only load import",
       "thread_id": "thread-61c5dd3517e6",
       "thread_depth": 4,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001656.html"
     },
     {
       "id": "msg-5401f12dbf8a",
@@ -346,7 +363,8 @@
       "body_snippet": "I am unable to provide a whole bunch of reproducible example at this point of time and I apologize for that. But I am very much hoping someone can throw some light by seeing the following error messag",
       "thread_id": "thread-5401f12dbf8a",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001657.html"
     },
     {
       "id": "msg-50b539ad6ccc",
@@ -364,7 +382,8 @@
       "body_snippet": "On 8 June 2017 at 16:53, Maity, Arnab K wrote:\n| Some background information: I am trying to develop a package \"afths\" with\n| some R and C++ functions. I developed the package skeleton using\n| RcppArm",
       "thread_id": "thread-5401f12dbf8a",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001658.html"
     },
     {
       "id": "msg-3b654b80bd71",
@@ -380,7 +399,8 @@
       "body_snippet": "Dear sirs\n\nI am writing regarding a question for the package dynamichazard which\nI am the author of and the -fbounds-check flag used in R develop in\nWin-Builder.\n\nR develop version has following flags",
       "thread_id": "thread-3b654b80bd71",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001659.html"
     },
     {
       "id": "msg-50568152580c",
@@ -398,7 +418,8 @@
       "body_snippet": "Hi Beanie,\n\nHmm, a bit of googling (on the error message) suggests that you are not alone... Several other CRAN package have recent ERRORs on Windows. I would suspect that gfortran 4.9.x is the culpri",
       "thread_id": "thread-3b654b80bd71",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001660.html"
     },
     {
       "id": "msg-8970ec27ada0",
@@ -414,7 +435,8 @@
       "body_snippet": "Hello!\n\nWhen checking one of my packages I have following message:\n\nchecking for portable file names ... NOTE\nFound the following non-portable file paths:\n  tarantoolr/src/third_party/msgpack-1.4.1/in",
       "thread_id": "thread-8970ec27ada0",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001661.html"
     },
     {
       "id": "msg-02112bb5f574",
@@ -432,7 +454,8 @@
       "body_snippet": "On 11/06/2017 8:18 AM, Konstantin Sorokin wrote:\n> Hello!\n>\n> When checking one of my packages I have following message:\n>\n> checking for portable file names ... NOTE\n> Found the following non-portabl",
       "thread_id": "thread-8970ec27ada0",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001662.html"
     },
     {
       "id": "msg-b263253ae3b2",
@@ -450,7 +473,8 @@
       "body_snippet": "On 11 June 2017 at 15:18, Konstantin Sorokin wrote:\n| Hello!\n| \n| When checking one of my packages I have following message:\n| \n| checking for portable file names ... NOTE\n| Found the following non-po",
       "thread_id": "thread-8970ec27ada0",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001663.html"
     },
     {
       "id": "msg-f34ad7831a0b",
@@ -469,7 +493,8 @@
       "body_snippet": "On Sun, Jun 11, 2017 at 4:15 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 11 June 2017 at 15:18, Konstantin Sorokin wrote:\n> | Hello!\n> |\n> | When checking one of my packages I have follow",
       "thread_id": "thread-8970ec27ada0",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001664.html"
     },
     {
       "id": "msg-b106f27ee6fe",
@@ -485,7 +510,8 @@
       "body_snippet": "Hello all,\n\nA short while ago I released the \"huxtable\" package for writing HTML and\nLaTeX tables:\nhttps://www.github.com/hughjonesd/huxtable\n\nThe name seemed cute to me, but I later found out that to",
       "thread_id": "thread-b106f27ee6fe",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001665.html"
     },
     {
       "id": "msg-a052c9681a81",
@@ -505,7 +531,8 @@
       "body_snippet": "On 11 June 2017 at 16:46, Konstantin Sorokin wrote:\n| On Sun, Jun 11, 2017 at 4:15 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n| \n|    \n|     On 11 June 2017 at 15:18, Konstantin Sorokin wrote:\n|",
       "thread_id": "thread-8970ec27ada0",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001666.html"
     },
     {
       "id": "msg-39b6b942a573",
@@ -523,7 +550,8 @@
       "body_snippet": "Dear David,\n\nNo one at CRAN has responded yet, so I'll take a stab at it.\n\nFirst, you're right about the resonance of \"huxtable\" for North Americans, and if the package were mine, I'd be slightly emba",
       "thread_id": "thread-39b6b942a573",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001667.html"
     },
     {
       "id": "msg-0560b7f7219a",
@@ -535,11 +563,12 @@
       "subject_clean": "[R-pkg-devel] Using plyr::mutate and dplyr::mutate in one package",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi guys,\n\nI?m using both ?plyr? and ?dplyr? in my package, specifically the ?mutate? function of each. I use ?plyr::mutate? ?and ?dplyr::mutate? in two different functions and import both using roxygen2 notation 'importFrom plyr mutate? (the same for dplyr). However, I cannot get rid of the warning message\n\nWarning: replacing previous import ?dplyr::mutate? by ?plyr::mutate? when loading\n\nHow is this done correctly?\n\nCheers, Pat\n\nPhD Student at Department of Geography - GIScience group\nFriedrich-Schiller-University Jena, Germany\nTel.: +49-3641-9-48973\nWeb: https://pat-s.github.io\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi guys,\n\nI?m using both ?plyr? and ?dplyr? in my package, specifically the ?mutate? function of each. I use ?plyr::mutate? ?and ?dplyr::mutate? in two different functions and import both using roxyge",
+      "body_plain": "Hi guys,\n\nI’m using both ‘plyr’ and ‘dplyr’ in my package, specifically the ‘mutate’ function of each. I use ‘plyr::mutate’  and ‘dplyr::mutate’ in two different functions and import both using roxygen2 notation 'importFrom plyr mutate’ (the same for dplyr). However, I cannot get rid of the warning message\n\nWarning: replacing previous import ‘dplyr::mutate’ by ‘plyr::mutate’ when loading\n\nHow is this done correctly?\n\nCheers, Pat\n\nPhD Student at Department of Geography - GIScience group\nFriedrich-Schiller-University Jena, Germany\nTel.: +49-3641-9-48973\nWeb: https://pat-s.github.io\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi guys,\n\nI’m using both ‘plyr’ and ‘dplyr’ in my package, specifically the ‘mutate’ function of each. I use ‘plyr::mutate’  and ‘dplyr::mutate’ in two different functions and import both using roxyge",
       "thread_id": "thread-0560b7f7219a",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001668.html"
     },
     {
       "id": "msg-53037171dd12",
@@ -553,11 +582,12 @@
       "references": [
         "<c12c6b8a-0035-4a75-a52a-8f5ae905f107@Spark>"
       ],
-      "body_plain": "Do not import the functions explicitly, just refer to them as\nplyr::mutate and dplyr::mutate.\n\nFor the :: references, you do not need to use @importFrom.\n\nGabor\n\nOn Mon, Jun 12, 2017 at 10:44 AM, Patrick Schratz\n<patrick.schratz at gmail.com> wrote:\n> Hi guys,\n>\n> I?m using both ?plyr? and ?dplyr? in my package, specifically the ?mutate? function of each. I use ?plyr::mutate?  and ?dplyr::mutate? in two different functions and import both using roxygen2 notation 'importFrom plyr mutate? (the same for dplyr). However, I cannot get rid of the warning message\n>\n> Warning: replacing previous import ?dplyr::mutate? by ?plyr::mutate? when loading\n>\n> How is this done correctly?\n>\n> Cheers, Pat\n>\n> PhD Student at Department of Geography - GIScience group\n> Friedrich-Schiller-University Jena, Germany\n> Tel.: +49-3641-9-48973\n> Web: https://pat-s.github.io\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Do not import the functions explicitly, just refer to them as\nplyr::mutate and dplyr::mutate.\n\nFor the :: references, you do not need to use @importFrom.\n\nGabor\n\nOn Mon, Jun 12, 2017 at 10:44 AM, Patrick Schratz\n<patrick.schratz at gmail.com> wrote:\n> Hi guys,\n>\n> I’m using both ‘plyr’ and ‘dplyr’ in my package, specifically the ‘mutate’ function of each. I use ‘plyr::mutate’  and ‘dplyr::mutate’ in two different functions and import both using roxygen2 notation 'importFrom plyr mutate’ (the same for dplyr). However, I cannot get rid of the warning message\n>\n> Warning: replacing previous import ‘dplyr::mutate’ by ‘plyr::mutate’ when loading\n>\n> How is this done correctly?\n>\n> Cheers, Pat\n>\n> PhD Student at Department of Geography - GIScience group\n> Friedrich-Schiller-University Jena, Germany\n> Tel.: +49-3641-9-48973\n> Web: https://pat-s.github.io\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Do not import the functions explicitly, just refer to them as\nplyr::mutate and dplyr::mutate.\n\nFor the :: references, you do not need to use @importFrom.\n\nGabor\n\nOn Mon, Jun 12, 2017 at 10:44 AM, Patr",
       "thread_id": "thread-0560b7f7219a",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001669.html"
     },
     {
       "id": "msg-80b081be3e7f",
@@ -576,7 +606,8 @@
       "body_snippet": "Hi David,\n\nHonestly I'm from the US and know about the scandal with Cosby but\ndon't think that it would be an issue for your package.  First off\nit's the name of the fictional family - not Bill Cosby'",
       "thread_id": "thread-39b6b942a573",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001670.html"
     },
     {
       "id": "msg-42e60ed8304e",
@@ -597,7 +628,8 @@
       "body_snippet": "Konstantin,\n\nRcppMsgPack 0.1.1, containing MsgPack headers from msgpack-c 1.4.2, is now on\nCRAN. It should work for your purposes with a simple LinkingTo: RcppMsgPack.\n\nI turned of Windows builds; the",
       "thread_id": "thread-8970ec27ada0",
       "thread_depth": 4,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001671.html"
     },
     {
       "id": "msg-5ea249335d54",
@@ -617,7 +649,8 @@
       "body_snippet": "I'll chime in from the other side of the ocean: I didn't even know that the\nHuxtables was their family name, and I've watched the Cosby show often as a\nkid. I did a quick check in the office and of th",
       "thread_id": "thread-39b6b942a573",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001672.html"
     },
     {
       "id": "msg-6b4cc45289f5",
@@ -635,7 +668,8 @@
       "body_snippet": "Dear David\n\nIt is your package and you can choose the name you prefer. If you feel \nuncomfortable with the current one then change it. I do not think anyone \nelse's opinion is relevant unless a packag",
       "thread_id": "thread-b106f27ee6fe",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001673.html"
     },
     {
       "id": "msg-c4ee14528a71",
@@ -654,7 +688,8 @@
       "body_snippet": "Apropos of nothing, I just came across this line at\nhttps://github.com/trestletech/plumber:\n\nplumber was originally released as the rapier package and has since been\nrenamed (7/13/2015)\n\nHeh.\n\nDavid\n\n",
       "thread_id": "thread-b106f27ee6fe",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001674.html"
     },
     {
       "id": "msg-9d619414c563",
@@ -670,7 +705,8 @@
       "body_snippet": "Hi,\n\nI have a package A. Some of its functions are used in package B.\n\nB imports A in the DESCRIPTION, both are on CRAN.\n\nA has a function fff where I want to add some optional functionality.\n\nThe pro",
       "thread_id": "thread-9d619414c563",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001675.html"
     },
     {
       "id": "msg-facc07d15e77",
@@ -689,7 +725,8 @@
       "body_snippet": "On 13/06/2017 7:29 AM, Michael Dewey wrote:\n> Dear David\n>\n> It is your package and you can choose the name you prefer. If you feel\n> uncomfortable with the current one then change it. I do not think ",
       "thread_id": "thread-b106f27ee6fe",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001676.html"
     },
     {
       "id": "msg-ee9416b4d59a",
@@ -707,7 +744,8 @@
       "body_snippet": "On 13 June 2017 at 13:01, Berry Boessenkool wrote:\n| \n| Hi,\n| \n| I have a package A. Some of its functions are used in package B.\n| \n| B imports A in the DESCRIPTION, both are on CRAN.\n| \n| A has a fu",
       "thread_id": "thread-9d619414c563",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001677.html"
     },
     {
       "id": "msg-03014e12e9ba",
@@ -727,7 +765,8 @@
       "body_snippet": "On 13.06.2017 15:40, Duncan Murdoch wrote:\n> On 13/06/2017 7:29 AM, Michael Dewey wrote:\n>> Dear David\n>>\n>> It is your package and you can choose the name you prefer. If you feel\n>> uncomfortable wit",
       "thread_id": "thread-b106f27ee6fe",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001678.html"
     },
     {
       "id": "msg-b3dde07a7b86",
@@ -739,11 +778,12 @@
       "subject_clean": "[R-pkg-devel] Linking external libraries in non-standard locations",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi all,\n\nAfter googling around for a while, I found that this is a common\nproblem, but still it is not clear to me how I should handle this.\n\nI have a package A, with C++ code via Rcpp, that needs an external C++\nlibrary libB. I have a configure script that sets\n\nPKG_CPPFLAGS=-I/path/to/B/include\nPKG_LIBS=-L/path/to/B/lib -lB\n\nin src/Makevars. Compilation and linking seem to go just fine. But then,\n\n** testing if installed package can be loaded\nError in dyn.load(file, DLLpath = DLLpath, ...) :\n  unable to load shared object\n'/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n  libB.so: cannot open shared object file: No such file or directory\n\nIf I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\nthe package is installed. But then I try to load the package with\nlibrary(A), with LD_LIBRARY_PATH still set, and the same error\nreappears.\n\nSo what is the proper and more portable way of linking a external\nlibrary in a non-standard location?\n\nRegards,\nI?aki",
+      "body_plain": "Hi all,\n\nAfter googling around for a while, I found that this is a common\nproblem, but still it is not clear to me how I should handle this.\n\nI have a package A, with C++ code via Rcpp, that needs an external C++\nlibrary libB. I have a configure script that sets\n\nPKG_CPPFLAGS=-I/path/to/B/include\nPKG_LIBS=-L/path/to/B/lib -lB\n\nin src/Makevars. Compilation and linking seem to go just fine. But then,\n\n** testing if installed package can be loaded\nError in dyn.load(file, DLLpath = DLLpath, ...) :\n  unable to load shared object\n'/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n  libB.so: cannot open shared object file: No such file or directory\n\nIf I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\nthe package is installed. But then I try to load the package with\nlibrary(A), with LD_LIBRARY_PATH still set, and the same error\nreappears.\n\nSo what is the proper and more portable way of linking a external\nlibrary in a non-standard location?\n\nRegards,\nIñaki",
       "body_snippet": "Hi all,\n\nAfter googling around for a while, I found that this is a common\nproblem, but still it is not clear to me how I should handle this.\n\nI have a package A, with C++ code via Rcpp, that needs an ",
       "thread_id": "thread-b3dde07a7b86",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001679.html"
     },
     {
       "id": "msg-14f289e81f13",
@@ -757,11 +797,12 @@
       "references": [
         "<CALEXWq0AMzhrQkD5zAKobFOfiW9JGyHLX8p87iGtgg6S6TpDWA@mail.gmail.com>"
       ],
-      "body_plain": "On 17 June 2017 at 17:30, I?aki ?car wrote:\n| Hi all,\n| \n| After googling around for a while, I found that this is a common\n| problem, but still it is not clear to me how I should handle this.\n| \n| I have a package A, with C++ code via Rcpp, that needs an external C++\n| library libB. I have a configure script that sets\n| \n| PKG_CPPFLAGS=-I/path/to/B/include\n| PKG_LIBS=-L/path/to/B/lib -lB\n| \n| in src/Makevars. Compilation and linking seem to go just fine. But then,\n| \n| ** testing if installed package can be loaded\n| Error in dyn.load(file, DLLpath = DLLpath, ...) :\n|   unable to load shared object\n| '/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n|   libB.so: cannot open shared object file: No such file or directory\n| \n| If I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\n| the package is installed. But then I try to load the package with\n| library(A), with LD_LIBRARY_PATH still set, and the same error\n| reappears.\n| \n| So what is the proper and more portable way of linking a external\n| library in a non-standard location?\n\nIn short, I fear there is none.\n\nThe _dynamic_ linker needs to know where the library is. There are defaults,\nand there are ways to extend this (i.e. /etc/ld.so.conf.d/*conf on the OS I\nuse, or LD_LIBRARY_PATH as you used) but _none of those means are accessible\nto an R package_. This is system dependent.\n\nA static library you can control for yourself in your package.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 17 June 2017 at 17:30, I?aki ?car wrote:\n| Hi all,\n| \n| After googling around for a while, I found that this is a common\n| problem, but still it is not clear to me how I should handle this.\n| \n| I ",
+      "body_plain": "On 17 June 2017 at 17:30, Iñaki Úcar wrote:\n| Hi all,\n| \n| After googling around for a while, I found that this is a common\n| problem, but still it is not clear to me how I should handle this.\n| \n| I have a package A, with C++ code via Rcpp, that needs an external C++\n| library libB. I have a configure script that sets\n| \n| PKG_CPPFLAGS=-I/path/to/B/include\n| PKG_LIBS=-L/path/to/B/lib -lB\n| \n| in src/Makevars. Compilation and linking seem to go just fine. But then,\n| \n| ** testing if installed package can be loaded\n| Error in dyn.load(file, DLLpath = DLLpath, ...) :\n|   unable to load shared object\n| '/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n|   libB.so: cannot open shared object file: No such file or directory\n| \n| If I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\n| the package is installed. But then I try to load the package with\n| library(A), with LD_LIBRARY_PATH still set, and the same error\n| reappears.\n| \n| So what is the proper and more portable way of linking a external\n| library in a non-standard location?\n\nIn short, I fear there is none.\n\nThe _dynamic_ linker needs to know where the library is. There are defaults,\nand there are ways to extend this (i.e. /etc/ld.so.conf.d/*conf on the OS I\nuse, or LD_LIBRARY_PATH as you used) but _none of those means are accessible\nto an R package_. This is system dependent.\n\nA static library you can control for yourself in your package.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 17 June 2017 at 17:30, Iñaki Úcar wrote:\n| Hi all,\n| \n| After googling around for a while, I found that this is a common\n| problem, but still it is not clear to me how I should handle this.\n| \n| I ",
       "thread_id": "thread-b3dde07a7b86",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001680.html"
     },
     {
       "id": "msg-a93c2d1281a3",
@@ -777,7 +818,8 @@
       "body_snippet": "Hello,\n\nI am trying to debug some C code that is run only through a R package. I debug with lldb but I always get a message telling that the package \"was compiled with optimization - stepping may beha",
       "thread_id": "thread-a93c2d1281a3",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001681.html"
     },
     {
       "id": "msg-e616edd48219",
@@ -795,7 +837,8 @@
       "body_snippet": "On 17 June 2017 at 21:32, Guillaume Chapron wrote:\n| I am trying to debug some C code that is run only through a R package. I debug with lldb but I always get a message telling that the package \"was c",
       "thread_id": "thread-a93c2d1281a3",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001682.html"
     },
     {
       "id": "msg-1877dd608c70",
@@ -814,7 +857,8 @@
       "body_snippet": "Thanks!\n\nIn that file, I see:\n\nCC = clang\nCFLAGS = -Wall -mtune=core2 -g -O2 $(LTO)\n\nwill having -O0 instead give me all the variables or is there a flag for better debugging (I guess -g does it a lit",
       "thread_id": "thread-a93c2d1281a3",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001683.html"
     },
     {
       "id": "msg-f8c1fbde98b3",
@@ -829,11 +873,12 @@
         "<CALEXWq0AMzhrQkD5zAKobFOfiW9JGyHLX8p87iGtgg6S6TpDWA@mail.gmail.com>",
         "<22853.21013.802975.579165@max.eddelbuettel.com>"
       ],
-      "body_plain": "2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 17 June 2017 at 17:30, I?aki ?car wrote:\n> | Hi all,\n> |\n> | After googling around for a while, I found that this is a common\n> | problem, but still it is not clear to me how I should handle this.\n> |\n> | I have a package A, with C++ code via Rcpp, that needs an external C++\n> | library libB. I have a configure script that sets\n> |\n> | PKG_CPPFLAGS=-I/path/to/B/include\n> | PKG_LIBS=-L/path/to/B/lib -lB\n> |\n> | in src/Makevars. Compilation and linking seem to go just fine. But then,\n> |\n> | ** testing if installed package can be loaded\n> | Error in dyn.load(file, DLLpath = DLLpath, ...) :\n> |   unable to load shared object\n> | '/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n> |   libB.so: cannot open shared object file: No such file or directory\n> |\n> | If I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\n> | the package is installed. But then I try to load the package with\n> | library(A), with LD_LIBRARY_PATH still set, and the same error\n> | reappears.\n> |\n> | So what is the proper and more portable way of linking a external\n> | library in a non-standard location?\n>\n> In short, I fear there is none.\n>\n> The _dynamic_ linker needs to know where the library is. There are defaults,\n> and there are ways to extend this (i.e. /etc/ld.so.conf.d/*conf on the OS I\n> use, or LD_LIBRARY_PATH as you used) but _none of those means are accessible\n> to an R package_. This is system dependent.\n>\n> A static library you can control for yourself in your package.\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\nThanks, Dirk, as I had feared. However, I was wondering whether,\ninstead of relying on the OS, it would be possible to save this\nnon-standard location of the library at installation time and then to\ncall dyn.load() before loading the package.\n\nI?aki",
-      "body_snippet": "2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 17 June 2017 at 17:30, I?aki ?car wrote:\n> | Hi all,\n> |\n> | After googling around for a while, I found that this is a common\n>",
+      "body_plain": "2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 17 June 2017 at 17:30, Iñaki Úcar wrote:\n> | Hi all,\n> |\n> | After googling around for a while, I found that this is a common\n> | problem, but still it is not clear to me how I should handle this.\n> |\n> | I have a package A, with C++ code via Rcpp, that needs an external C++\n> | library libB. I have a configure script that sets\n> |\n> | PKG_CPPFLAGS=-I/path/to/B/include\n> | PKG_LIBS=-L/path/to/B/lib -lB\n> |\n> | in src/Makevars. Compilation and linking seem to go just fine. But then,\n> |\n> | ** testing if installed package can be loaded\n> | Error in dyn.load(file, DLLpath = DLLpath, ...) :\n> |   unable to load shared object\n> | '/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n> |   libB.so: cannot open shared object file: No such file or directory\n> |\n> | If I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\n> | the package is installed. But then I try to load the package with\n> | library(A), with LD_LIBRARY_PATH still set, and the same error\n> | reappears.\n> |\n> | So what is the proper and more portable way of linking a external\n> | library in a non-standard location?\n>\n> In short, I fear there is none.\n>\n> The _dynamic_ linker needs to know where the library is. There are defaults,\n> and there are ways to extend this (i.e. /etc/ld.so.conf.d/*conf on the OS I\n> use, or LD_LIBRARY_PATH as you used) but _none of those means are accessible\n> to an R package_. This is system dependent.\n>\n> A static library you can control for yourself in your package.\n>\n> Dirk\n>\n> --\n> http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\nThanks, Dirk, as I had feared. However, I was wondering whether,\ninstead of relying on the OS, it would be possible to save this\nnon-standard location of the library at installation time and then to\ncall dyn.load() before loading the package.\n\nIñaki",
+      "body_snippet": "2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n>\n> On 17 June 2017 at 17:30, Iñaki Úcar wrote:\n> | Hi all,\n> |\n> | After googling around for a while, I found that this is a common\n>",
       "thread_id": "thread-b3dde07a7b86",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001684.html"
     },
     {
       "id": "msg-d2d306467393",
@@ -853,7 +898,8 @@
       "body_snippet": "On 18 June 2017 at 09:22, Guillaume Chapron wrote:\n| Thanks!\n| \n| In that file, I see:\n| \n| CC = clang\n| CFLAGS = -Wall -mtune=core2 -g -O2 $(LTO)\n| \n| will having -O0 instead give me all the variable",
       "thread_id": "thread-a93c2d1281a3",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001685.html"
     },
     {
       "id": "msg-5e23b0f386f1",
@@ -869,11 +915,12 @@
         "<22853.21013.802975.579165@max.eddelbuettel.com>",
         "<CALEXWq3YOcNL6EDn82ayPzohivGcRAr0oZnK4qWhg3QRpHoeTg@mail.gmail.com>"
       ],
-      "body_plain": "On 18 June 2017 at 10:40, I?aki ?car wrote:\n| 2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n| >\n| > On 17 June 2017 at 17:30, I?aki ?car wrote:\n| > | Hi all,\n| > |\n| > | After googling around for a while, I found that this is a common\n| > | problem, but still it is not clear to me how I should handle this.\n| > |\n| > | I have a package A, with C++ code via Rcpp, that needs an external C++\n| > | library libB. I have a configure script that sets\n| > |\n| > | PKG_CPPFLAGS=-I/path/to/B/include\n| > | PKG_LIBS=-L/path/to/B/lib -lB\n| > |\n| > | in src/Makevars. Compilation and linking seem to go just fine. But then,\n| > |\n| > | ** testing if installed package can be loaded\n| > | Error in dyn.load(file, DLLpath = DLLpath, ...) :\n| > |   unable to load shared object\n| > | '/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n| > |   libB.so: cannot open shared object file: No such file or directory\n| > |\n| > | If I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\n| > | the package is installed. But then I try to load the package with\n| > | library(A), with LD_LIBRARY_PATH still set, and the same error\n| > | reappears.\n| > |\n| > | So what is the proper and more portable way of linking a external\n| > | library in a non-standard location?\n| >\n| > In short, I fear there is none.\n| >\n| > The _dynamic_ linker needs to know where the library is. There are defaults,\n| > and there are ways to extend this (i.e. /etc/ld.so.conf.d/*conf on the OS I\n| > use, or LD_LIBRARY_PATH as you used) but _none of those means are accessible\n| > to an R package_. This is system dependent.\n| >\n| > A static library you can control for yourself in your package.\n| >\n| > Dirk\n| >\n| > --\n| > http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n| \n| Thanks, Dirk, as I had feared. However, I was wondering whether,\n| instead of relying on the OS, it would be possible to save this\n| non-standard location of the library at installation time and then to\n| call dyn.load() before loading the package.\n\nIn theory, yes. In practice, no. You would haev to suspend the calling R\nprocess and restart it for this to have effect.  The only other alternative\nis \"to become like R\" and control your dlopen() but you probably don't want\nto go there...\n\nIt's simply a difficult problem. \"Just\" become a FC/RH contributor and make\nthe library a system library :)\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 18 June 2017 at 10:40, I?aki ?car wrote:\n| 2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n| >\n| > On 17 June 2017 at 17:30, I?aki ?car wrote:\n| > | Hi all,\n| > |\n| > | After goog",
+      "body_plain": "On 18 June 2017 at 10:40, Iñaki Úcar wrote:\n| 2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n| >\n| > On 17 June 2017 at 17:30, Iñaki Úcar wrote:\n| > | Hi all,\n| > |\n| > | After googling around for a while, I found that this is a common\n| > | problem, but still it is not clear to me how I should handle this.\n| > |\n| > | I have a package A, with C++ code via Rcpp, that needs an external C++\n| > | library libB. I have a configure script that sets\n| > |\n| > | PKG_CPPFLAGS=-I/path/to/B/include\n| > | PKG_LIBS=-L/path/to/B/lib -lB\n| > |\n| > | in src/Makevars. Compilation and linking seem to go just fine. But then,\n| > |\n| > | ** testing if installed package can be loaded\n| > | Error in dyn.load(file, DLLpath = DLLpath, ...) :\n| > |   unable to load shared object\n| > | '/home/xxx/R/x86_64-redhat-linux-gnu-library/3.3/A/libs/A.so':\n| > |   libB.so: cannot open shared object file: No such file or directory\n| > |\n| > | If I set LD_LIBRARY_PATH=/path/to/B/lib, the error above is solved and\n| > | the package is installed. But then I try to load the package with\n| > | library(A), with LD_LIBRARY_PATH still set, and the same error\n| > | reappears.\n| > |\n| > | So what is the proper and more portable way of linking a external\n| > | library in a non-standard location?\n| >\n| > In short, I fear there is none.\n| >\n| > The _dynamic_ linker needs to know where the library is. There are defaults,\n| > and there are ways to extend this (i.e. /etc/ld.so.conf.d/*conf on the OS I\n| > use, or LD_LIBRARY_PATH as you used) but _none of those means are accessible\n| > to an R package_. This is system dependent.\n| >\n| > A static library you can control for yourself in your package.\n| >\n| > Dirk\n| >\n| > --\n| > http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n| \n| Thanks, Dirk, as I had feared. However, I was wondering whether,\n| instead of relying on the OS, it would be possible to save this\n| non-standard location of the library at installation time and then to\n| call dyn.load() before loading the package.\n\nIn theory, yes. In practice, no. You would haev to suspend the calling R\nprocess and restart it for this to have effect.  The only other alternative\nis \"to become like R\" and control your dlopen() but you probably don't want\nto go there...\n\nIt's simply a difficult problem. \"Just\" become a FC/RH contributor and make\nthe library a system library :)\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 18 June 2017 at 10:40, Iñaki Úcar wrote:\n| 2017-06-17 18:00 GMT+02:00 Dirk Eddelbuettel <edd at debian.org>:\n| >\n| > On 17 June 2017 at 17:30, Iñaki Úcar wrote:\n| > | Hi all,\n| > |\n| > | After goog",
       "thread_id": "thread-b3dde07a7b86",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001686.html"
     },
     {
       "id": "msg-9e5f61730390",
@@ -889,7 +936,8 @@
       "body_snippet": "Hello,\n\nI was surprised first by the behaviour of lubridate::today(), and when I \ninvestigated further, by the behaviour of as.Date.POSIXlt(). Some \nexamples follow:\n\nlibrary(lubridate)\n# today() does",
       "thread_id": "thread-9e5f61730390",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001687.html"
     },
     {
       "id": "msg-0749a0cc380b",
@@ -907,7 +955,8 @@
       "body_snippet": "On 19/06/2017 5:44 PM, Pedro J. Aphalo wrote:\n> Hello,\n>\n> I was surprised first by the behaviour of lubridate::today(), and when I\n> investigated further, by the behaviour of as.Date.POSIXlt(). Some\n",
       "thread_id": "thread-9e5f61730390",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001688.html"
     },
     {
       "id": "msg-d929d66f49c8",
@@ -923,7 +972,8 @@
       "body_snippet": "Dear list,\n\nIs anybody else having problems with \ntools::package_native_routine_registration_skeleton?\n\n > tools::package_native_routine_registration_skeleton(\"~/Repos/imager\")\n\nError in native_routin",
       "thread_id": "thread-d929d66f49c8",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001693.html"
     },
     {
       "id": "msg-e9764b5c631c",
@@ -939,7 +989,8 @@
       "body_snippet": "I've now had two packages recently that had uncaught spelling errors\n(i.e., nothing on my local R CMD check --as-cran) that emerged only\nduring CRAN submission. Is there a platform-specific component ",
       "thread_id": "thread-e9764b5c631c",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001689.html"
     },
     {
       "id": "msg-8d9fa9a6bbb1",
@@ -957,7 +1008,8 @@
       "body_snippet": "I had the same experience. Also recently I uploaded a pkg without a\nvignette but with a vignette engine specified in the  DESCRIPTION. This\ngave no error with R CMD check --as-cran (r-dev) but I did r",
       "thread_id": "thread-e9764b5c631c",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001690.html"
     },
     {
       "id": "msg-db9e114c13df",
@@ -975,7 +1027,8 @@
       "body_snippet": "On 20/06/2017 11:49 AM, Thomas J. Leeper wrote:\n> I've now had two packages recently that had uncaught spelling errors\n> (i.e., nothing on my local R CMD check --as-cran) that emerged only\n> during CR",
       "thread_id": "thread-e9764b5c631c",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001691.html"
     },
     {
       "id": "msg-357a52b6df41",
@@ -994,7 +1047,8 @@
       "body_snippet": "On Tue, Jun 20, 2017 at 5:42 PM, Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n> On 20/06/2017 11:49 AM, Thomas J. Leeper wrote:\n>>\n>> I've now had two packages recently that had uncaught spelli",
       "thread_id": "thread-e9764b5c631c",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001692.html"
     },
     {
       "id": "msg-981c9b15a4c4",
@@ -1012,7 +1066,8 @@
       "body_snippet": "I have had no problems recently (having updated a pkg or two with this over\nthe last couple of weeks). Your question is not reproducible so its hard to\nhelp...\n\nbest,\nMark\n\nOp wo 21 jun. 2017 om 23:46",
       "thread_id": "thread-d929d66f49c8",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001694.html"
     },
     {
       "id": "msg-5ccf6177924e",
@@ -1031,7 +1086,8 @@
       "body_snippet": ">>>>> Mark van der Loo <mark.vanderloo at gmail.com>\n>>>>>     on Thu, 22 Jun 2017 07:33:49 +0000 writes:\n\n    > I have had no problems recently (having updated a pkg or two with this over\n    > the l",
       "thread_id": "thread-d929d66f49c8",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001695.html"
     },
     {
       "id": "msg-8e059d64285c",
@@ -1051,7 +1107,8 @@
       "body_snippet": ">>>>> Martin Maechler <maechler at stat.math.ethz.ch>\n>>>>>     on Thu, 22 Jun 2017 09:57:41 +0200 writes:\n\n>>>>> Mark van der Loo <mark.vanderloo at gmail.com>\n>>>>>     on Thu, 22 Jun 2017 07:33:49 ",
       "thread_id": "thread-d929d66f49c8",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001696.html"
     },
     {
       "id": "msg-d3eed50ab267",
@@ -1070,7 +1127,8 @@
       "body_snippet": "Hello,\n\nI would like to ask for your help. I want to contribute a package and fail\nbecause of two Notes. Here is the temporary directory:\nhttps://win-builder.r-project.org/incoming_pretest/170621_1732",
       "thread_id": "thread-d3eed50ab267",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001697.html"
     },
     {
       "id": "msg-008f0d7bd167",
@@ -1090,7 +1148,8 @@
       "body_snippet": "On 22.06.2017 10:47, Maximilian Leodolter wrote:\n> Hello,\n> \n> I would like to ask for your help. I want to contribute a package and fail\n> because of two Notes. Here is the temporary directory:\n> htt",
       "thread_id": "thread-d3eed50ab267",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001698.html"
     },
     {
       "id": "msg-ec079dc818c9",
@@ -1111,7 +1170,8 @@
       "body_snippet": "Dear Martin\n\nOK, thanks, I see now. Yes, a warning saying that all symbols have been \nproperly registered already would be easier to understand, I think. You \nmight want to generate the output anyway,",
       "thread_id": "thread-d929d66f49c8",
       "thread_depth": 4,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001699.html"
     },
     {
       "id": "msg-f4449b20490e",
@@ -1136,7 +1196,8 @@
       "body_snippet": "This should be resolved in general now.\n\nBest,\nUwe Ligges\n\n\n\nOn 03.06.2017 15:51, Dirk Eddelbuettel wrote:\n> \n> On 3 June 2017 at 08:30, Dirk Eddelbuettel wrote:\n> |\n> | On 27 May 2017 at 22:18, Emman",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001700.html"
     },
     {
       "id": "msg-de378d15782a",
@@ -1162,7 +1223,8 @@
       "body_snippet": "On 22 June 2017 at 16:36, Uwe Ligges wrote:\n| This should be resolved in general now.\n\nI appreciate your work on this, as well Gabor's help in providing new binaries.\n\nBut correct me here if I wrong: ",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001701.html"
     },
     {
       "id": "msg-c7e609e681dd",
@@ -1189,7 +1251,8 @@
       "body_snippet": "So, along these lines, I was thinking if we could / should build a\npandoc R package, that could just pull the right binary at install\ntime. Would that make sense? It is a bit unusual, but I think a lo",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 4,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001702.html"
     },
     {
       "id": "msg-dfc61b8ae326",
@@ -1213,11 +1276,12 @@
         "<22859.56331.656347.678483@max.eddelbuettel.com>",
         "<CABtg=KnL9_yjv42od-YnHZNDBV-feto+m66+7_dfSx9vbFLqRA@mail.gmail.com>"
       ],
-      "body_plain": "On 22 June 2017 at 16:23, G?bor Cs?rdi wrote:\n| So, along these lines, I was thinking if we could / should build a\n| pandoc R package, that could just pull the right binary at install\n| time. Would that make sense? It is a bit unusual, but I think a lot of\n| users would like it, and it would help standardizing pandoc versions\n| and usage.\n\nExactly.  That is pretty much what Christoph and I do for x13binary to\nprovide the (also free but nuisance to build) x13ashtml binaries.\n\nHere x13binary is a CRAN package utilizing a GitHub repo x13prebuilt\ncontaining those builds, and \"shielding\" the binary.\n\nOther CRAN packages such as seasonal then just depend on x13binary and only\nsee automagic provision of binaries --- replacing and old scheme of manual\ndownload and environment variable settings.  Much better now.\n \n| The static binary is good for 64 bit Linux, and we also have\n| self-contained binaries for Windows and MacOS.\n| \n| (The relevant links to the Docker containers and the binaries, in case\n| you are interested:\n| https://github.com/r-hub/pandoc-builders#readme\n| https://files.r-hub.io/pandoc/\n\nYes, I saw those when you tweeted about it.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 22 June 2017 at 16:23, G?bor Cs?rdi wrote:\n| So, along these lines, I was thinking if we could / should build a\n| pandoc R package, that could just pull the right binary at install\n| time. Would th",
+      "body_plain": "On 22 June 2017 at 16:23, Gábor Csárdi wrote:\n| So, along these lines, I was thinking if we could / should build a\n| pandoc R package, that could just pull the right binary at install\n| time. Would that make sense? It is a bit unusual, but I think a lot of\n| users would like it, and it would help standardizing pandoc versions\n| and usage.\n\nExactly.  That is pretty much what Christoph and I do for x13binary to\nprovide the (also free but nuisance to build) x13ashtml binaries.\n\nHere x13binary is a CRAN package utilizing a GitHub repo x13prebuilt\ncontaining those builds, and \"shielding\" the binary.\n\nOther CRAN packages such as seasonal then just depend on x13binary and only\nsee automagic provision of binaries --- replacing and old scheme of manual\ndownload and environment variable settings.  Much better now.\n \n| The static binary is good for 64 bit Linux, and we also have\n| self-contained binaries for Windows and MacOS.\n| \n| (The relevant links to the Docker containers and the binaries, in case\n| you are interested:\n| https://github.com/r-hub/pandoc-builders#readme\n| https://files.r-hub.io/pandoc/\n\nYes, I saw those when you tweeted about it.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 22 June 2017 at 16:23, Gábor Csárdi wrote:\n| So, along these lines, I was thinking if we could / should build a\n| pandoc R package, that could just pull the right binary at install\n| time. Would th",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 5,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001703.html"
     },
     {
       "id": "msg-d3837aa6ae07",
@@ -1242,11 +1306,12 @@
         "<CABtg=KnL9_yjv42od-YnHZNDBV-feto+m66+7_dfSx9vbFLqRA@mail.gmail.com>",
         "<22859.58302.612047.587801@max.eddelbuettel.com>"
       ],
-      "body_plain": "On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n> \n> On 22 June 2017 at 16:23, G?bor Cs?rdi wrote:\n> | So, along these lines, I was thinking if we could / should build a\n> | pandoc R package, that could just pull the right binary at install\n> | time. \n\nAnd drops it in the package? Then we cannot provide binaries for these \npackage on CRAN unless we also copy the pandoc sources to CRAN, or do I \nget this wrong?\n\nBest,\nUwe\n\n\n> Would that make sense? It is a bit unusual, but I think a lot of\n> | users would like it, and it would help standardizing pandoc versions\n> | and usage.\n> \n> Exactly.  That is pretty much what Christoph and I do for x13binary to\n> provide the (also free but nuisance to build) x13ashtml binaries.\n> \n> Here x13binary is a CRAN package utilizing a GitHub repo x13prebuilt\n> containing those builds, and \"shielding\" the binary.\n> \n> Other CRAN packages such as seasonal then just depend on x13binary and only\n> see automagic provision of binaries --- replacing and old scheme of manual\n> download and environment variable settings.  Much better now.\n>   \n> | The static binary is good for 64 bit Linux, and we also have\n> | self-contained binaries for Windows and MacOS.\n> |\n> | (The relevant links to the Docker containers and the binaries, in case\n> | you are interested:\n> | https://github.com/r-hub/pandoc-builders#readme\n> | https://files.r-hub.io/pandoc/\n> \n> Yes, I saw those when you tweeted about it.\n> \n> Dirk\n>",
-      "body_snippet": "On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n> \n> On 22 June 2017 at 16:23, G?bor Cs?rdi wrote:\n> | So, along these lines, I was thinking if we could / should build a\n> | pandoc R package, that could",
+      "body_plain": "On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n> \n> On 22 June 2017 at 16:23, Gábor Csárdi wrote:\n> | So, along these lines, I was thinking if we could / should build a\n> | pandoc R package, that could just pull the right binary at install\n> | time. \n\nAnd drops it in the package? Then we cannot provide binaries for these \npackage on CRAN unless we also copy the pandoc sources to CRAN, or do I \nget this wrong?\n\nBest,\nUwe\n\n\n> Would that make sense? It is a bit unusual, but I think a lot of\n> | users would like it, and it would help standardizing pandoc versions\n> | and usage.\n> \n> Exactly.  That is pretty much what Christoph and I do for x13binary to\n> provide the (also free but nuisance to build) x13ashtml binaries.\n> \n> Here x13binary is a CRAN package utilizing a GitHub repo x13prebuilt\n> containing those builds, and \"shielding\" the binary.\n> \n> Other CRAN packages such as seasonal then just depend on x13binary and only\n> see automagic provision of binaries --- replacing and old scheme of manual\n> download and environment variable settings.  Much better now.\n>   \n> | The static binary is good for 64 bit Linux, and we also have\n> | self-contained binaries for Windows and MacOS.\n> |\n> | (The relevant links to the Docker containers and the binaries, in case\n> | you are interested:\n> | https://github.com/r-hub/pandoc-builders#readme\n> | https://files.r-hub.io/pandoc/\n> \n> Yes, I saw those when you tweeted about it.\n> \n> Dirk\n>",
+      "body_snippet": "On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n> \n> On 22 June 2017 at 16:23, Gábor Csárdi wrote:\n> | So, along these lines, I was thinking if we could / should build a\n> | pandoc R package, that could",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 6,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001704.html"
     },
     {
       "id": "msg-e5b16f4539fb",
@@ -1272,11 +1337,12 @@
         "<22859.58302.612047.587801@max.eddelbuettel.com>",
         "<238c1474-fd3c-1d32-eacc-08d832a9812f@statistik.tu-dortmund.de>"
       ],
-      "body_plain": "On Thu, Jun 22, 2017 at 5:35 PM, Uwe Ligges\n<ligges at statistik.tu-dortmund.de> wrote:\n> On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n>>\n>>\n>> On 22 June 2017 at 16:23, G?bor Cs?rdi wrote:\n>> | So, along these lines, I was thinking if we could / should build a\n>> | pandoc R package, that could just pull the right binary at install\n>> | time.\n>\n>\n> And drops it in the package? Then we cannot provide binaries for these\n> package on CRAN unless we also copy the pandoc sources to CRAN, or do I get\n> this wrong?\n\nIs this a CRAN issue or a GPL issue? Several packages are actually\ndoing this already. E.g. all the windows binary packages that link to\nstatic library, like the XML package to libxml2.\nAFAIK the windows binary for XML contains a binary build of libxml2,\nand I don't think the libxml2 sources are included anywhere in the XML\npackage.\n\nI can't say anything for CRAN, but for the GPL, I think we are fine.\n\nBut if you think we are not, then yes, we can just put the pandoc\nsources in the source package.\n\nGabor\n\n> Best,\n> Uwe\n>\n>\n>\n>> Would that make sense? It is a bit unusual, but I think a lot of\n>> | users would like it, and it would help standardizing pandoc versions\n>> | and usage.\n>>\n>> Exactly.  That is pretty much what Christoph and I do for x13binary to\n>> provide the (also free but nuisance to build) x13ashtml binaries.\n>>\n>> Here x13binary is a CRAN package utilizing a GitHub repo x13prebuilt\n>> containing those builds, and \"shielding\" the binary.\n>>\n>> Other CRAN packages such as seasonal then just depend on x13binary and\n>> only\n>> see automagic provision of binaries --- replacing and old scheme of manual\n>> download and environment variable settings.  Much better now.\n>>   | The static binary is good for 64 bit Linux, and we also have\n>> | self-contained binaries for Windows and MacOS.\n>> |\n>> | (The relevant links to the Docker containers and the binaries, in case\n>> | you are interested:\n>> | https://github.com/r-hub/pandoc-builders#readme\n>> | https://files.r-hub.io/pandoc/\n>>\n>> Yes, I saw those when you tweeted about it.\n>>\n>> Dirk\n>>\n>\n>",
-      "body_snippet": "On Thu, Jun 22, 2017 at 5:35 PM, Uwe Ligges\n<ligges at statistik.tu-dortmund.de> wrote:\n> On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n>>\n>>\n>> On 22 June 2017 at 16:23, G?bor Cs?rdi wrote:\n>> | So, ",
+      "body_plain": "On Thu, Jun 22, 2017 at 5:35 PM, Uwe Ligges\n<ligges at statistik.tu-dortmund.de> wrote:\n> On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n>>\n>>\n>> On 22 June 2017 at 16:23, Gábor Csárdi wrote:\n>> | So, along these lines, I was thinking if we could / should build a\n>> | pandoc R package, that could just pull the right binary at install\n>> | time.\n>\n>\n> And drops it in the package? Then we cannot provide binaries for these\n> package on CRAN unless we also copy the pandoc sources to CRAN, or do I get\n> this wrong?\n\nIs this a CRAN issue or a GPL issue? Several packages are actually\ndoing this already. E.g. all the windows binary packages that link to\nstatic library, like the XML package to libxml2.\nAFAIK the windows binary for XML contains a binary build of libxml2,\nand I don't think the libxml2 sources are included anywhere in the XML\npackage.\n\nI can't say anything for CRAN, but for the GPL, I think we are fine.\n\nBut if you think we are not, then yes, we can just put the pandoc\nsources in the source package.\n\nGabor\n\n> Best,\n> Uwe\n>\n>\n>\n>> Would that make sense? It is a bit unusual, but I think a lot of\n>> | users would like it, and it would help standardizing pandoc versions\n>> | and usage.\n>>\n>> Exactly.  That is pretty much what Christoph and I do for x13binary to\n>> provide the (also free but nuisance to build) x13ashtml binaries.\n>>\n>> Here x13binary is a CRAN package utilizing a GitHub repo x13prebuilt\n>> containing those builds, and \"shielding\" the binary.\n>>\n>> Other CRAN packages such as seasonal then just depend on x13binary and\n>> only\n>> see automagic provision of binaries --- replacing and old scheme of manual\n>> download and environment variable settings.  Much better now.\n>>   | The static binary is good for 64 bit Linux, and we also have\n>> | self-contained binaries for Windows and MacOS.\n>> |\n>> | (The relevant links to the Docker containers and the binaries, in case\n>> | you are interested:\n>> | https://github.com/r-hub/pandoc-builders#readme\n>> | https://files.r-hub.io/pandoc/\n>>\n>> Yes, I saw those when you tweeted about it.\n>>\n>> Dirk\n>>\n>\n>",
+      "body_snippet": "On Thu, Jun 22, 2017 at 5:35 PM, Uwe Ligges\n<ligges at statistik.tu-dortmund.de> wrote:\n> On 22.06.2017 17:35, Dirk Eddelbuettel wrote:\n>>\n>>\n>> On 22 June 2017 at 16:23, Gábor Csárdi wrote:\n>> | So, ",
       "thread_id": "thread-08457fbf95ab",
       "thread_depth": 7,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001705.html"
     },
     {
       "id": "msg-5d2cb427ea0b",
@@ -1292,7 +1358,8 @@
       "body_snippet": "I modified a toy package I use for teaching to do the registration right\n(to serve as an example). See\nhttps://github.com/cjgeyer/foo/tree/master/package where packages foo and\nfooRegister do the same",
       "thread_id": "thread-5d2cb427ea0b",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001706.html"
     },
     {
       "id": "msg-28d704b9eb75",
@@ -1308,7 +1375,8 @@
       "body_snippet": "Greetings R users,\n\nI was wondering how others are exporting S3 methods in their packages when\nthe generic is in 'base'.  For example, let's say I want to export a new\npmax method.  The only way I hav",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001707.html"
     },
     {
       "id": "msg-499c015880d7",
@@ -1326,7 +1394,8 @@
       "body_snippet": "Hi Charles,\n\nif a generic exists already in the base, you only have to export the actual\nS3 method. Your problem is that base::pmax() is not a generic S3 function.\nSo R gives you the correct warning: ",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001708.html"
     },
     {
       "id": "msg-d9b15e64eeac",
@@ -1345,7 +1414,8 @@
       "body_snippet": "Thanks for the reply Joris, although I am not sure what I could be doing\nwrong.  I implement exactly the lines you show and yet I just get the\nfollowing error when I call 'pmax' on the class.\n\n> pmax(",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001709.html"
     },
     {
       "id": "msg-ba5898100c27",
@@ -1365,7 +1435,8 @@
       "body_snippet": "Hi Charles,\n\nmy mistake. I forgot that pmax has an extra argument na.rm. I'm surprised\nyou could define the method, as this normally should return an error from\nconformMethod().\n\nSo:\n#' @rdname pmax\ns",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001710.html"
     },
     {
       "id": "msg-d6c1319defb3",
@@ -1386,7 +1457,8 @@
       "body_snippet": "Could you point to one of these packages you refer to?  I'm still having\nproblems and not sure why at the moment.\n\nThanks\n\nOn Mon, Jun 26, 2017 at 12:32 PM, Joris Meys <Joris.Meys at ugent.be> wrote:\n",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 4,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001711.html"
     },
     {
       "id": "msg-3e226b799607",
@@ -1408,7 +1480,8 @@
       "body_snippet": "Ah, I see now.  I came across this previous post (\nhttp://r.789695.n4.nabble.com/override-pmin-pmax-for-my-own-matrix-td4715903.html)\nwhich mentioned the caveat that all the elements passed to ... mus",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 5,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001712.html"
     },
     {
       "id": "msg-79aa64bf1fb9",
@@ -1430,7 +1503,8 @@
       "body_snippet": "Hi Charles,\n\nthat particular construct (with the dots) I only have in proprietary\npackages, so I can't share the code for those. If you have the package on a\nrepo on github, you can give me a link and",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 5,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001713.html"
     },
     {
       "id": "msg-9ea8cfdd21c0",
@@ -1453,7 +1527,8 @@
       "body_snippet": "Ah, good point :-)  You can avoid that by using inheritance, but now you're\non a route to refactoring your entire package actually. See also this\nquestion on stackoverflow for a nice example of how th",
       "thread_id": "thread-28d704b9eb75",
       "thread_depth": 6,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001714.html"
     },
     {
       "id": "msg-2ad367c729fe",
@@ -1469,7 +1544,8 @@
       "body_snippet": "Good day,\n\nI have a problem I will like to ask for some help,\n\nMy package needs some .csv files to run, but when i attached them to the\n.tar file to submit to the CRAN and after the test it marks an e",
       "thread_id": "thread-2ad367c729fe",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001715.html"
     },
     {
       "id": "msg-1860e10b662b",
@@ -1483,11 +1559,12 @@
       "references": [
         "<CAHz4VQsdW_a688c74fCgvri9q1KovOHgAKVaX_ofUjtCyCjCKQ@mail.gmail.com>"
       ],
-      "body_plain": "Dear Dario,\n\nThe attachments got stripped from the mail by the server. Can you provide a\nlink to the results of R CMD check and the source code of the package?\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature and\nForest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n\n2017-06-26 20:20 GMT+02:00 Dar?o Torres S?nchez <dariotorressan at gmail.com>:\n\n> Good day,\n>\n> I have a problem I will like to ask for some help,\n>\n> My package needs some .csv files to run, but when i attached them to the\n> .tar file to submit to the CRAN and after the test it marks an error so my\n> doubt is how can I attached this files and when i submit it they not mark\n> error?.\n>\n>\n> Thanks a lot for your help, I hope hear from you soon\n>\n> My regards\n> Dario\n>\n> <http://www.avg.com/email-signature?utm_medium=email&\n> utm_source=link&utm_campaign=sig-email&utm_content=webmail>\n> Libre\n> de virus. www.avg.com\n> <http://www.avg.com/email-signature?utm_medium=email&\n> utm_source=link&utm_campaign=sig-email&utm_content=webmail>\n> <#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear Dario,\n\nThe attachments got stripped from the mail by the server. Can you provide a\nlink to the results of R CMD check and the source code of the package?\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bosonderzoek / Research Institute for Nature and\nForest\nteam Biometrie & Kwaliteitszorg / team Biometrics & Quality Assurance\nKliniekstraat 25\n1070 Anderlecht\nBelgium\n\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n\n2017-06-26 20:20 GMT+02:00 Darío Torres Sánchez <dariotorressan at gmail.com>:\n\n> Good day,\n>\n> I have a problem I will like to ask for some help,\n>\n> My package needs some .csv files to run, but when i attached them to the\n> .tar file to submit to the CRAN and after the test it marks an error so my\n> doubt is how can I attached this files and when i submit it they not mark\n> error?.\n>\n>\n> Thanks a lot for your help, I hope hear from you soon\n>\n> My regards\n> Dario\n>\n> <http://www.avg.com/email-signature?utm_medium=email&\n> utm_source=link&utm_campaign=sig-email&utm_content=webmail>\n> Libre\n> de virus. www.avg.com\n> <http://www.avg.com/email-signature?utm_medium=email&\n> utm_source=link&utm_campaign=sig-email&utm_content=webmail>\n> <#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear Dario,\n\nThe attachments got stripped from the mail by the server. Can you provide a\nlink to the results of R CMD check and the source code of the package?\n\nBest regards,\n\nir. Thierry Onkelinx\nIns",
       "thread_id": "thread-2ad367c729fe",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001716.html"
     },
     {
       "id": "msg-c399b8bf044d",
@@ -1501,11 +1578,12 @@
       "references": [
         "<CAHz4VQsdW_a688c74fCgvri9q1KovOHgAKVaX_ofUjtCyCjCKQ@mail.gmail.com>"
       ],
-      "body_plain": "On 26/06/2017 2:20 PM, Dar?o Torres S?nchez wrote:\n> Good day,\n>\n> I have a problem I will like to ask for some help,\n>\n> My package needs some .csv files to run, but when i attached them to the\n> .tar file to submit to the CRAN and after the test it marks an error so my\n> doubt is how can I attached this files and when i submit it they not mark\n> error?.\n>\n>\n> Thanks a lot for your help, I hope hear from you soon\n>\n\nIn general, you can put files into your own directories below the \"inst\" \ndirectory.  (\"inst/doc\" is special; only put things there if you want \nthem displayed to users.)\n\nYou can also use the \"data\" directory if you want to make them available \nto users using the data() function.\n\nDuncan Murdoch",
-      "body_snippet": "On 26/06/2017 2:20 PM, Dar?o Torres S?nchez wrote:\n> Good day,\n>\n> I have a problem I will like to ask for some help,\n>\n> My package needs some .csv files to run, but when i attached them to the\n> .ta",
+      "body_plain": "On 26/06/2017 2:20 PM, Darío Torres Sánchez wrote:\n> Good day,\n>\n> I have a problem I will like to ask for some help,\n>\n> My package needs some .csv files to run, but when i attached them to the\n> .tar file to submit to the CRAN and after the test it marks an error so my\n> doubt is how can I attached this files and when i submit it they not mark\n> error?.\n>\n>\n> Thanks a lot for your help, I hope hear from you soon\n>\n\nIn general, you can put files into your own directories below the \"inst\" \ndirectory.  (\"inst/doc\" is special; only put things there if you want \nthem displayed to users.)\n\nYou can also use the \"data\" directory if you want to make them available \nto users using the data() function.\n\nDuncan Murdoch",
+      "body_snippet": "On 26/06/2017 2:20 PM, Darío Torres Sánchez wrote:\n> Good day,\n>\n> I have a problem I will like to ask for some help,\n>\n> My package needs some .csv files to run, but when i attached them to the\n> .ta",
       "thread_id": "thread-2ad367c729fe",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001717.html"
     },
     {
       "id": "msg-563c31a1ff82",
@@ -1521,7 +1599,8 @@
       "body_snippet": "Dear list,\n\nI'm trying to wrap an external C++ library that has the bad habit of \nprinting errors to std::cerr, a behaviour which will lead to CRAN \nissuing warnings. I was wondering if people had com",
       "thread_id": "thread-563c31a1ff82",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001718.html"
     },
     {
       "id": "msg-deaf50bd88bf",
@@ -1535,11 +1614,12 @@
       "references": [
         "<5953BD67.9010106@gipsa-lab.fr>"
       ],
-      "body_plain": "2017-06-28 16:29 GMT+02:00 Simon Barthelm? <simon.barthelme at gipsa-lab.fr>:\n> Dear list,\n>\n> I'm trying to wrap an external C++ library that has the bad habit of\n> printing errors to std::cerr, a behaviour which will lead to CRAN issuing\n> warnings. I was wondering if people had come up with a solution to this\n> problem that's better than patching everything by hand?\n>\n> Thanks\n>\n> Simon\n\nHi, take a look at freopen: http://www.cplusplus.com/reference/cstdio/freopen/\n\nI?aki",
-      "body_snippet": "2017-06-28 16:29 GMT+02:00 Simon Barthelm? <simon.barthelme at gipsa-lab.fr>:\n> Dear list,\n>\n> I'm trying to wrap an external C++ library that has the bad habit of\n> printing errors to std::cerr, a be",
+      "body_plain": "2017-06-28 16:29 GMT+02:00 Simon Barthelmé <simon.barthelme at gipsa-lab.fr>:\n> Dear list,\n>\n> I'm trying to wrap an external C++ library that has the bad habit of\n> printing errors to std::cerr, a behaviour which will lead to CRAN issuing\n> warnings. I was wondering if people had come up with a solution to this\n> problem that's better than patching everything by hand?\n>\n> Thanks\n>\n> Simon\n\nHi, take a look at freopen: http://www.cplusplus.com/reference/cstdio/freopen/\n\nIñaki",
+      "body_snippet": "2017-06-28 16:29 GMT+02:00 Simon Barthelmé <simon.barthelme at gipsa-lab.fr>:\n> Dear list,\n>\n> I'm trying to wrap an external C++ library that has the bad habit of\n> printing errors to std::cerr, a be",
       "thread_id": "thread-563c31a1ff82",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001719.html"
     },
     {
       "id": "msg-40e341fa01c3",
@@ -1554,11 +1634,12 @@
         "<5953BD67.9010106@gipsa-lab.fr>",
         "<CALEXWq1HfMJEKKDBmhu8pkWzN4Tzfi9sS=5EnWZfWpYNp+V+YA@mail.gmail.com>"
       ],
-      "body_plain": "Hi I?aki\n\nThanks for the suggestion. I'm not sure how to make it work, though, if \nyou call freopen on stderr, R CMD check will still detect a call to \nstderr and trigger a warning. Have you yourself used it?\n\nBest\n\nSimon\n\nOn 28/06/2017 17:13, I?aki ?car wrote:\n> 2017-06-28 16:29 GMT+02:00 Simon Barthelm? <simon.barthelme at gipsa-lab.fr>:\n>> Dear list,\n>>\n>> I'm trying to wrap an external C++ library that has the bad habit of\n>> printing errors to std::cerr, a behaviour which will lead to CRAN issuing\n>> warnings. I was wondering if people had come up with a solution to this\n>> problem that's better than patching everything by hand?\n>>\n>> Thanks\n>>\n>> Simon\n> Hi, take a look at freopen: http://www.cplusplus.com/reference/cstdio/freopen/\n>\n> I?aki",
-      "body_snippet": "Hi I?aki\n\nThanks for the suggestion. I'm not sure how to make it work, though, if \nyou call freopen on stderr, R CMD check will still detect a call to \nstderr and trigger a warning. Have you yourself ",
+      "body_plain": "Hi Iñaki\n\nThanks for the suggestion. I'm not sure how to make it work, though, if \nyou call freopen on stderr, R CMD check will still detect a call to \nstderr and trigger a warning. Have you yourself used it?\n\nBest\n\nSimon\n\nOn 28/06/2017 17:13, Iñaki Úcar wrote:\n> 2017-06-28 16:29 GMT+02:00 Simon Barthelmé <simon.barthelme at gipsa-lab.fr>:\n>> Dear list,\n>>\n>> I'm trying to wrap an external C++ library that has the bad habit of\n>> printing errors to std::cerr, a behaviour which will lead to CRAN issuing\n>> warnings. I was wondering if people had come up with a solution to this\n>> problem that's better than patching everything by hand?\n>>\n>> Thanks\n>>\n>> Simon\n> Hi, take a look at freopen: http://www.cplusplus.com/reference/cstdio/freopen/\n>\n> Iñaki",
+      "body_snippet": "Hi Iñaki\n\nThanks for the suggestion. I'm not sure how to make it work, though, if \nyou call freopen on stderr, R CMD check will still detect a call to \nstderr and trigger a warning. Have you yourself ",
       "thread_id": "thread-563c31a1ff82",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001720.html"
     },
     {
       "id": "msg-f262a86dc930",
@@ -1574,11 +1655,12 @@
         "<CALEXWq1HfMJEKKDBmhu8pkWzN4Tzfi9sS=5EnWZfWpYNp+V+YA@mail.gmail.com>",
         "<5953DAAE.9070107@gipsa-lab.fr>"
       ],
-      "body_plain": "2017-06-28 18:34 GMT+02:00 Simon Barthelm? <simon.barthelme at gipsa-lab.fr>:\n> Hi I?aki\n>\n> Thanks for the suggestion. I'm not sure how to make it work, though, if you\n> call freopen on stderr, R CMD check will still detect a call to stderr and\n> trigger a warning. Have you yourself used it?\n\nNot in an R package. Anyways, you can redirect stdout and stderr to\nnull or even to Rcpp::cout and Rcpp::cerr, but I fear this probably\nwon't help with the CRAN checks, since the library will still have\nsymbols writing to stdout and stderr. :-\\\n\n>\n> Best\n>\n> Simon\n>\n> On 28/06/2017 17:13, I?aki ?car wrote:\n>>\n>> 2017-06-28 16:29 GMT+02:00 Simon Barthelm? <simon.barthelme at gipsa-lab.fr>:\n>>>\n>>> Dear list,\n>>>\n>>> I'm trying to wrap an external C++ library that has the bad habit of\n>>> printing errors to std::cerr, a behaviour which will lead to CRAN issuing\n>>> warnings. I was wondering if people had come up with a solution to this\n>>> problem that's better than patching everything by hand?\n>>>\n>>> Thanks\n>>>\n>>> Simon\n>>\n>> Hi, take a look at freopen:\n>> http://www.cplusplus.com/reference/cstdio/freopen/\n>>\n>> I?aki\n>\n>\n\n\n\n-- \nI?aki ?car\nhttp://www.enchufa2.es\n@Enchufa2",
-      "body_snippet": "2017-06-28 18:34 GMT+02:00 Simon Barthelm? <simon.barthelme at gipsa-lab.fr>:\n> Hi I?aki\n>\n> Thanks for the suggestion. I'm not sure how to make it work, though, if you\n> call freopen on stderr, R CMD",
+      "body_plain": "2017-06-28 18:34 GMT+02:00 Simon Barthelmé <simon.barthelme at gipsa-lab.fr>:\n> Hi Iñaki\n>\n> Thanks for the suggestion. I'm not sure how to make it work, though, if you\n> call freopen on stderr, R CMD check will still detect a call to stderr and\n> trigger a warning. Have you yourself used it?\n\nNot in an R package. Anyways, you can redirect stdout and stderr to\nnull or even to Rcpp::cout and Rcpp::cerr, but I fear this probably\nwon't help with the CRAN checks, since the library will still have\nsymbols writing to stdout and stderr. :-\\\n\n>\n> Best\n>\n> Simon\n>\n> On 28/06/2017 17:13, Iñaki Úcar wrote:\n>>\n>> 2017-06-28 16:29 GMT+02:00 Simon Barthelmé <simon.barthelme at gipsa-lab.fr>:\n>>>\n>>> Dear list,\n>>>\n>>> I'm trying to wrap an external C++ library that has the bad habit of\n>>> printing errors to std::cerr, a behaviour which will lead to CRAN issuing\n>>> warnings. I was wondering if people had come up with a solution to this\n>>> problem that's better than patching everything by hand?\n>>>\n>>> Thanks\n>>>\n>>> Simon\n>>\n>> Hi, take a look at freopen:\n>> http://www.cplusplus.com/reference/cstdio/freopen/\n>>\n>> Iñaki\n>\n>\n\n\n\n-- \nIñaki Úcar\nhttp://www.enchufa2.es\n@Enchufa2",
+      "body_snippet": "2017-06-28 18:34 GMT+02:00 Simon Barthelmé <simon.barthelme at gipsa-lab.fr>:\n> Hi Iñaki\n>\n> Thanks for the suggestion. I'm not sure how to make it work, though, if you\n> call freopen on stderr, R CMD",
       "thread_id": "thread-563c31a1ff82",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001721.html"
     },
     {
       "id": "msg-2cd7731b3bdd",
@@ -1594,7 +1676,8 @@
       "body_snippet": "Hi,\n\nI'm working on a script to test my library (PKNCA) for what the minimum \nrequired version of its dependencies are.  Specifically, I've received \nbug reports when people are using versions of dply",
       "thread_id": "thread-2cd7731b3bdd",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001722.html"
     },
     {
       "id": "msg-8a0a303318a8",
@@ -1612,7 +1695,8 @@
       "body_snippet": "Just set\n.libPaths(\"/tmp/current\")\nand then\nlibrary(devtools)\nshoudl do the trick.\nBest,\nUwe Ligges\n\n\n\n\nOn 28.06.2017 22:23, Bill Denney wrote:\n> Hi,\n> \n> I'm working on a script to test my library (P",
       "thread_id": "thread-2cd7731b3bdd",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001723.html"
     },
     {
       "id": "msg-d9871ef9065c",
@@ -1628,7 +1712,8 @@
       "body_snippet": "Hello,\n\nI'm the developer of a package for R, it's work fine on my computer  \nbut when I publish it the installation failed due to the external  \nlibrary. My C code needs GSL (GNU Scientific Library),",
       "thread_id": "thread-d9871ef9065c",
       "thread_depth": 0,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001724.html"
     },
     {
       "id": "msg-f6366a21229c",
@@ -1646,7 +1731,8 @@
       "body_snippet": "1. perhaps the gsl package or some other package already making use of \ngsl can be used? So please make use of available infrastructure.\n\n2. For Windows, the directories with GSL are defined in env va",
       "thread_id": "thread-d9871ef9065c",
       "thread_depth": 1,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001725.html"
     },
     {
       "id": "msg-d65e6a811c26",
@@ -1665,7 +1751,8 @@
       "body_snippet": "Thanks for your reply.\n\n1. I don't want to depend on other packages that implement GSL. (Too  \nheavy for my purpose)\n\n2. I used \"LIB_GSL\" environment variable in my Makevars.win  \n(https://github.com/",
       "thread_id": "thread-d9871ef9065c",
       "thread_depth": 2,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001726.html"
     },
     {
       "id": "msg-c4e73775f101",
@@ -1685,7 +1772,8 @@
       "body_snippet": "On 30 June 2017 at 16:13, Nicolas Hiot wrote:\n| Thanks for your reply.\n| \n| 1. I don't want to depend on other packages that implement GSL. (Too  \n| heavy for my purpose)\n\nThat is *not* what Uwe sugge",
       "thread_id": "thread-d9871ef9065c",
       "thread_depth": 3,
-      "month": "2017-06"
+      "month": "2017-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001727.html"
     }
   ],
   "threads": [

@@ -17,7 +17,8 @@
       "body_snippet": "Dear list members,\n\nI've noticed that citation(package=\"pkg\") generates both a text citation and a BiBTeX entry when the CITATION file contains a single call to bibentry() or citEntry(), but that only",
       "thread_id": "thread-9eb3764d5635",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001077.html"
     },
     {
       "id": "msg-026c791b5f6a",
@@ -29,11 +30,12 @@
       "subject_clean": "[R-pkg-devel] Some windows binaries missing from PACKAGES, 3.3 & 3.4",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear all,\n\nI accidentally noticed that some windows binary packages are missing\nfrom PACKAGES and PACKAGES.gz. I have seen it for 3.3 and 3.4, but not\nfor 3.2, although I haven't systematically checked it.\n\nThis includes packages that haven't been updated for a while, e.g. my\npkgconfig package seems to have a binary build for 3.3:\nhttps://cran.r-project.org/web/packages/pkgconfig/\n\nBut it is missing from the PACKAGES file:\nhttps://cran.r-project.org/bin/windows/contrib/3.3/PACKAGES\n\nIt looks like the PACKAGES files were simply truncated, and much of it\nis missing.\n\nFYI.\nG?bor",
+      "body_plain": "Dear all,\n\nI accidentally noticed that some windows binary packages are missing\nfrom PACKAGES and PACKAGES.gz. I have seen it for 3.3 and 3.4, but not\nfor 3.2, although I haven't systematically checked it.\n\nThis includes packages that haven't been updated for a while, e.g. my\npkgconfig package seems to have a binary build for 3.3:\nhttps://cran.r-project.org/web/packages/pkgconfig/\n\nBut it is missing from the PACKAGES file:\nhttps://cran.r-project.org/bin/windows/contrib/3.3/PACKAGES\n\nIt looks like the PACKAGES files were simply truncated, and much of it\nis missing.\n\nFYI.\nGábor",
       "body_snippet": "Dear all,\n\nI accidentally noticed that some windows binary packages are missing\nfrom PACKAGES and PACKAGES.gz. I have seen it for 3.3 and 3.4, but not\nfor 3.2, although I haven't systematically checke",
       "thread_id": "thread-026c791b5f6a",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001078.html"
     },
     {
       "id": "msg-fb33bc333fc8",
@@ -47,11 +49,12 @@
       "references": [
         "<CABtg=K=BhJhaS2sHq0wK8dsfc3TEcTdHFy4VbiS_KyLwRY-tDg@mail.gmail.com>"
       ],
-      "body_plain": "I guess they got corrupted during some system problems on winbuilder \nlast night, new (complete) versions are already waiting to be synced by \nthe CRAN master server (without manual interaction).\n\nBest,\nUwe\n\n\n\nOn 12.09.2016 12:00, G?bor Cs?rdi wrote:\n> Dear all,\n>\n> I accidentally noticed that some windows binary packages are missing\n> from PACKAGES and PACKAGES.gz. I have seen it for 3.3 and 3.4, but not\n> for 3.2, although I haven't systematically checked it.\n>\n> This includes packages that haven't been updated for a while, e.g. my\n> pkgconfig package seems to have a binary build for 3.3:\n> https://cran.r-project.org/web/packages/pkgconfig/\n>\n> But it is missing from the PACKAGES file:\n> https://cran.r-project.org/bin/windows/contrib/3.3/PACKAGES\n>\n> It looks like the PACKAGES files were simply truncated, and much of it\n> is missing.\n>\n> FYI.\n> G?bor\n>",
+      "body_plain": "I guess they got corrupted during some system problems on winbuilder \nlast night, new (complete) versions are already waiting to be synced by \nthe CRAN master server (without manual interaction).\n\nBest,\nUwe\n\n\n\nOn 12.09.2016 12:00, Gábor Csárdi wrote:\n> Dear all,\n>\n> I accidentally noticed that some windows binary packages are missing\n> from PACKAGES and PACKAGES.gz. I have seen it for 3.3 and 3.4, but not\n> for 3.2, although I haven't systematically checked it.\n>\n> This includes packages that haven't been updated for a while, e.g. my\n> pkgconfig package seems to have a binary build for 3.3:\n> https://cran.r-project.org/web/packages/pkgconfig/\n>\n> But it is missing from the PACKAGES file:\n> https://cran.r-project.org/bin/windows/contrib/3.3/PACKAGES\n>\n> It looks like the PACKAGES files were simply truncated, and much of it\n> is missing.\n>\n> FYI.\n> Gábor\n>",
       "body_snippet": "I guess they got corrupted during some system problems on winbuilder \nlast night, new (complete) versions are already waiting to be synced by \nthe CRAN master server (without manual interaction).\n\nBes",
       "thread_id": "thread-026c791b5f6a",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001079.html"
     },
     {
       "id": "msg-4bb4b9522ed4",
@@ -63,11 +66,12 @@
       "subject_clean": "[R-pkg-devel] vignette issues",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Folks:\n\nMy stripless package passed all cran checks and built without issues.\n\nBut I received the following message from the Windows build:\n\n---------\nError in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : \nthere is no package called ?lme4'\n\nQuitting from lines 108-111 (stripless_vignette.Rmd) \nError: processing vignette 'stripless_vignette.Rmd' failed with diagnostics:\nobject 'hsb' not found\nExecution halted\n-------------\n\nI do not have any reference to lme4 in my package or vignette. So is this the dependency from the faraway package, which my vignette uses (a couple of its datasets) and which does depend on lme4? If so, do I have to move faraway from my ?suggests? to ?imports? or ?depends, which I read as contrary to what the R extensions manual says. If so, this sounds like a bug to me ? why should I be responsible for such dependencies, which could be endless?\n\n2nd: ?hsb? is in the faraway package.  I state specifically in the vignette that the package needs to be installed, and I have the following code in the vignette (using rmarkdown  and knitr):\n\n```{r, echo = FALSE,message= FALSE }\nif(!require(faraway, quietly = TRUE)){\n cat(\"\\n, The **faraway** package must be installed to run\",\n \"subsequent examples in this vignette.\\n\",sep = \"\")\n}\n```\nI don?t think I should install the package automatically, as this seems an inappropriate intrusion on the user.  I do make the compiled pdf version available in /docs. What is ?appropropriate behavior? for me to avoid these warnings?\n\nBest,\nBert\n\nBert Gunter",
+      "body_plain": "Folks:\n\nMy stripless package passed all cran checks and built without issues.\n\nBut I received the following message from the Windows build:\n\n---------\nError in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : \nthere is no package called ‘lme4'\n\nQuitting from lines 108-111 (stripless_vignette.Rmd) \nError: processing vignette 'stripless_vignette.Rmd' failed with diagnostics:\nobject 'hsb' not found\nExecution halted\n-------------\n\nI do not have any reference to lme4 in my package or vignette. So is this the dependency from the faraway package, which my vignette uses (a couple of its datasets) and which does depend on lme4? If so, do I have to move faraway from my “suggests” to “imports” or “depends, which I read as contrary to what the R extensions manual says. If so, this sounds like a bug to me — why should I be responsible for such dependencies, which could be endless?\n\n2nd: “hsb” is in the faraway package.  I state specifically in the vignette that the package needs to be installed, and I have the following code in the vignette (using rmarkdown  and knitr):\n\n```{r, echo = FALSE,message= FALSE }\nif(!require(faraway, quietly = TRUE)){\n cat(\"\\n, The **faraway** package must be installed to run\",\n \"subsequent examples in this vignette.\\n\",sep = \"\")\n}\n```\nI don’t think I should install the package automatically, as this seems an inappropriate intrusion on the user.  I do make the compiled pdf version available in /docs. What is “appropropriate behavior” for me to avoid these warnings?\n\nBest,\nBert\n\nBert Gunter",
       "body_snippet": "Folks:\n\nMy stripless package passed all cran checks and built without issues.\n\nBut I received the following message from the Windows build:\n\n---------\nError in loadNamespace(j <- i[[1L]], c(lib.loc, .",
       "thread_id": "thread-4bb4b9522ed4",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001080.html"
     },
     {
       "id": "msg-2a9036ba1733",
@@ -81,11 +85,12 @@
       "references": [
         "<54F75889-4D75-42A7-A583-539B843CD367@comcast.net>"
       ],
-      "body_plain": "On 12/09/2016 2:01 PM, Bert Gunter wrote:\n> Folks:\n>\n> My stripless package passed all cran checks and built without issues.\n>\n> But I received the following message from the Windows build:\n>\n> ---------\n> Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) :\n> there is no package called ?lme4'\n>\n> Quitting from lines 108-111 (stripless_vignette.Rmd)\n> Error: processing vignette 'stripless_vignette.Rmd' failed with diagnostics:\n> object 'hsb' not found\n> Execution halted\n> -------------\n>\n> I do not have any reference to lme4 in my package or vignette. So is this the dependency from the faraway package, which my vignette uses (a couple of its datasets) and which does depend on lme4? If so, do I have to move faraway from my ?suggests? to ?imports? or ?depends, which I read as contrary to what the R extensions manual says. If so, this sounds like a bug to me ? why should I be responsible for such dependencies, which could be endless?\n>\n> 2nd: ?hsb? is in the faraway package.  I state specifically in the vignette that the package needs to be installed, and I have the following code in the vignette (using rmarkdown  and knitr):\n>\n> ```{r, echo = FALSE,message= FALSE }\n> if(!require(faraway, quietly = TRUE)){\n>   cat(\"\\n, The **faraway** package must be installed to run\",\n>   \"subsequent examples in this vignette.\\n\",sep = \"\")\n> }\n> ```\n> I don?t think I should install the package automatically, as this seems an inappropriate intrusion on the user.  I do make the compiled pdf version available in /docs. What is ?appropropriate behavior? for me to avoid these warnings?\n\nI agree you shouldn't install anything automatically.  If your vignette \ndepends on faraway and it isn't present, I think it's reasonable to fail \nat that point:  use \"stop()\" rather than just \"cat()\" for the message.  \nNormally Win-builder should have all the mainstream packages installed, \nso this won't be a problem for them, though it might be one for some of \nyour users:  but your message should make clear to them what to do to \nfix it.\n\nThe message \"there is no package called ?lme4'\"suggests things are not \n\"normal\" on Win-builder.  If this is running under R-devel, that happens \nfrom time to time.  For example, yesterday I introduced a change that \ncontained some errors; it may have caused lme4 to fail (though I hadn't \nnoticed that on my system, I wasn't looking for it).  This kind of \nproblem is generally inconvenient but at least it is transient.\n\nIf you got that error on a version earlier than R-devel, then it's \nprobably worth asking about it, perhaps first looking at the CRAN page \nfor lme4 to see if there's information there about what might have gone \nwrong.\n\nDuncan Murdoch",
+      "body_plain": "On 12/09/2016 2:01 PM, Bert Gunter wrote:\n> Folks:\n>\n> My stripless package passed all cran checks and built without issues.\n>\n> But I received the following message from the Windows build:\n>\n> ---------\n> Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) :\n> there is no package called ‘lme4'\n>\n> Quitting from lines 108-111 (stripless_vignette.Rmd)\n> Error: processing vignette 'stripless_vignette.Rmd' failed with diagnostics:\n> object 'hsb' not found\n> Execution halted\n> -------------\n>\n> I do not have any reference to lme4 in my package or vignette. So is this the dependency from the faraway package, which my vignette uses (a couple of its datasets) and which does depend on lme4? If so, do I have to move faraway from my “suggests” to “imports” or “depends, which I read as contrary to what the R extensions manual says. If so, this sounds like a bug to me — why should I be responsible for such dependencies, which could be endless?\n>\n> 2nd: “hsb” is in the faraway package.  I state specifically in the vignette that the package needs to be installed, and I have the following code in the vignette (using rmarkdown  and knitr):\n>\n> ```{r, echo = FALSE,message= FALSE }\n> if(!require(faraway, quietly = TRUE)){\n>   cat(\"\\n, The **faraway** package must be installed to run\",\n>   \"subsequent examples in this vignette.\\n\",sep = \"\")\n> }\n> ```\n> I don’t think I should install the package automatically, as this seems an inappropriate intrusion on the user.  I do make the compiled pdf version available in /docs. What is “appropropriate behavior” for me to avoid these warnings?\n\nI agree you shouldn't install anything automatically.  If your vignette \ndepends on faraway and it isn't present, I think it's reasonable to fail \nat that point:  use \"stop()\" rather than just \"cat()\" for the message.  \nNormally Win-builder should have all the mainstream packages installed, \nso this won't be a problem for them, though it might be one for some of \nyour users:  but your message should make clear to them what to do to \nfix it.\n\nThe message \"there is no package called ‘lme4'\"suggests things are not \n\"normal\" on Win-builder.  If this is running under R-devel, that happens \nfrom time to time.  For example, yesterday I introduced a change that \ncontained some errors; it may have caused lme4 to fail (though I hadn't \nnoticed that on my system, I wasn't looking for it).  This kind of \nproblem is generally inconvenient but at least it is transient.\n\nIf you got that error on a version earlier than R-devel, then it's \nprobably worth asking about it, perhaps first looking at the CRAN page \nfor lme4 to see if there's information there about what might have gone \nwrong.\n\nDuncan Murdoch",
       "body_snippet": "On 12/09/2016 2:01 PM, Bert Gunter wrote:\n> Folks:\n>\n> My stripless package passed all cran checks and built without issues.\n>\n> But I received the following message from the Windows build:\n>\n> ------",
       "thread_id": "thread-4bb4b9522ed4",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001081.html"
     },
     {
       "id": "msg-526481063d39",
@@ -101,7 +106,8 @@
       "body_snippet": "Hi,\n\nI developed a package using the symbolic calculus C library ginac (http://www.ginac.de/<https://email.charite.de/owa/redir.aspx?REF=fSvQ3yE_XkDlPenE4F0MzYwBnO23griAuHvI5OZfSugms-XfndzTCAFodHRwOi8",
       "thread_id": "thread-526481063d39",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001082.html"
     },
     {
       "id": "msg-fa89ac8a8432",
@@ -119,7 +125,8 @@
       "body_snippet": "Are you aware of Ryacas or rSymPy ??  If not, does it really add anything to these? If so, feel free to ignore.\n\nCheers,\nBert\n\n\nBert Gunter\n\n\"The trouble with having an open mind is that people keep c",
       "thread_id": "thread-526481063d39",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001083.html"
     },
     {
       "id": "msg-5ff8b1c92229",
@@ -137,7 +144,8 @@
       "body_snippet": "On 14 September 2016 at 12:52, Dorel, Mathurin wrote:\n| I developed a package using the symbolic calculus C library ginac (http://www.ginac.de/<https://email.charite.de/owa/redir.aspx?REF=fSvQ3yE_XkDl",
       "thread_id": "thread-526481063d39",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001084.html"
     },
     {
       "id": "msg-137580754d05",
@@ -156,7 +164,8 @@
       "body_snippet": "Most people who want to interface to an external library embed the source code of the library in their R package. I see that ginac is a C++ library which creates additional problems. Only a few R pack",
       "thread_id": "thread-526481063d39",
       "thread_depth": 2,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001085.html"
     },
     {
       "id": "msg-33388ee73e01",
@@ -176,7 +185,8 @@
       "body_snippet": "On 14 September 2016 at 20:38, Martyn Plummer wrote:\n| Most people who want to interface to an external library embed the source code of the library in their R package. I see that ginac is a C++ libra",
       "thread_id": "thread-526481063d39",
       "thread_depth": 3,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001086.html"
     },
     {
       "id": "msg-1b4e9d068c82",
@@ -192,7 +202,8 @@
       "body_snippet": "Dear list,\n\nI recently submitted a new version of my package (brms) to CRAN. It was\naccepted by the CRAN team, but multiple operating systems (mainly unix) now\ncomplain about\n\n\"Files in the 'vignettes",
       "thread_id": "thread-1b4e9d068c82",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001087.html"
     },
     {
       "id": "msg-3f1cd784607a",
@@ -213,7 +224,8 @@
       "body_snippet": "Thanks for your replies,\n\nI was not aware that LinkingTo was only a static linking. So no BH-like solution.\nBut how does the DLL pulling work then (I won't use it, it does not sound like a good practi",
       "thread_id": "thread-526481063d39",
       "thread_depth": 4,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001088.html"
     },
     {
       "id": "msg-714dcfafb3e9",
@@ -231,7 +243,8 @@
       "body_snippet": "On 15/09/2016 6:29 AM, Paul Buerkner wrote:\n> Dear list,\n>\n> I recently submitted a new version of my package (brms) to CRAN. It was\n> accepted by the CRAN team, but multiple operating systems (mainly",
       "thread_id": "thread-1b4e9d068c82",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001089.html"
     },
     {
       "id": "msg-45724af5a37c",
@@ -247,7 +260,8 @@
       "body_snippet": "I wrote an SSH tunneling package (it's on Github here<https://github.com/wmay/tunnelr>). It runs on Mac, Linux, and Windows, at least in the environments I've been able to test. I would like to get it",
       "thread_id": "thread-45724af5a37c",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001090.html"
     },
     {
       "id": "msg-e686c7ac2c5b",
@@ -265,7 +279,8 @@
       "body_snippet": "I'm not sure where Jeroen is on this - https://github.com/jeroenooms/ssh -\nbut it might make more sense to dovetail off of it than rely on binaries\nbeing available on systems. That's doable, but (IMO)",
       "thread_id": "thread-45724af5a37c",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001091.html"
     },
     {
       "id": "msg-e4c0727d938d",
@@ -280,11 +295,12 @@
         "<BY2PR13MB0823E756DE088847830CDA89CEF30@BY2PR13MB0823.namprd13.prod.outlook.com>",
         "<CAA-FpKXPZfiUpwfdgbYJ-KMo2f2hnUC7X-muGefuLKpoWFMPeA@mail.gmail.com>"
       ],
-      "body_plain": "I don?t think there is any specific requirement for automated tests on CRAN; there \nis also no requirement on CRAN to have a windows version.  The current \nhttps://cran.r-project.org/web/packages/ssh.utils/index.html\npackage certainly does not.  That being said, I?m always a fan of inclusion, and \nwould love to see some R utilities on windows for ssh.\n\nThe official CRAN policy is:\n\nPackage authors should make all reasonable efforts to provide cross-platform portable \ncode. Packages will not normally be accepted that do not run on at least two of the major \nR platforms. Cases for Windows-only packages will be considered, but CRAN may not be \nthe most appropriate place to host them.\n\n\nI would also agree that getting Jeroen?s package up and running would be great, \nbut is admittedly a much steeper hill to climb. \n\nCheers,\n\nJonathan \n\n\n> On Sep 16, 2016, at 6:25 PM, Bob Rudis <bob at rud.is> wrote:\n> \n> I'm not sure where Jeroen is on this - https://github.com/jeroenooms/ssh -\n> but it might make more sense to dovetail off of it than rely on binaries\n> being available on systems. That's doable, but (IMO) fraught with peril.\n> \n> On Fri, Sep 16, 2016 at 4:53 PM, William May <williamcmay at live.com> wrote:\n> \n>> I wrote an SSH tunneling package (it's on Github here<\n>> https://github.com/wmay/tunnelr>). It runs on Mac, Linux, and Windows, at\n>> least in the environments I've been able to test. I would like to get it on\n>> CRAN if it's possible, but writing automated tests for this package is\n>> nightmarish.\n>> \n>> Typically, connecting to a server through the package requires manually\n>> entering a password, which I don't think I can automate. (I don't want to\n>> allow the package to enter passwords itself for security reasons.) An\n>> alternative is to set up public and private rsa keys so that no password is\n>> required. That option also gets complicated.\n>> \n>> I could imagine setting up a server solely for testing this, with a user\n>> that has no password, though that sounds scary. But then what happens if\n>> the server goes down?\n>> \n>> A second challenge applies specifically to Windows, which is the platform\n>> I'm most concerned about. I'm relying on PuTTY for SSH in Windows. Is there\n>> a way for that to be tested on CRAN?\n>> \n>> Should I even worry about CRAN testing for this? Will CRAN accept this\n>> package without tests?\n>> \n>> And I was surprised that an SSH tunneling package didn't already exist (I\n>> found it really convenient to control SSH tunneling from within R). Is\n>> there another reason it doesn't exist yet, or is it just the testing\n>> challenges?\n>> \n>> - Will\n>> \n>>        [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "I don?t think there is any specific requirement for automated tests on CRAN; there \nis also no requirement on CRAN to have a windows version.  The current \nhttps://cran.r-project.org/web/packages/ssh.",
+      "body_plain": "I don’t think there is any specific requirement for automated tests on CRAN; there \nis also no requirement on CRAN to have a windows version.  The current \nhttps://cran.r-project.org/web/packages/ssh.utils/index.html\npackage certainly does not.  That being said, I’m always a fan of inclusion, and \nwould love to see some R utilities on windows for ssh.\n\nThe official CRAN policy is:\n\nPackage authors should make all reasonable efforts to provide cross-platform portable \ncode. Packages will not normally be accepted that do not run on at least two of the major \nR platforms. Cases for Windows-only packages will be considered, but CRAN may not be \nthe most appropriate place to host them.\n\n\nI would also agree that getting Jeroen’s package up and running would be great, \nbut is admittedly a much steeper hill to climb. \n\nCheers,\n\nJonathan \n\n\n> On Sep 16, 2016, at 6:25 PM, Bob Rudis <bob at rud.is> wrote:\n> \n> I'm not sure where Jeroen is on this - https://github.com/jeroenooms/ssh -\n> but it might make more sense to dovetail off of it than rely on binaries\n> being available on systems. That's doable, but (IMO) fraught with peril.\n> \n> On Fri, Sep 16, 2016 at 4:53 PM, William May <williamcmay at live.com> wrote:\n> \n>> I wrote an SSH tunneling package (it's on Github here<\n>> https://github.com/wmay/tunnelr>). It runs on Mac, Linux, and Windows, at\n>> least in the environments I've been able to test. I would like to get it on\n>> CRAN if it's possible, but writing automated tests for this package is\n>> nightmarish.\n>> \n>> Typically, connecting to a server through the package requires manually\n>> entering a password, which I don't think I can automate. (I don't want to\n>> allow the package to enter passwords itself for security reasons.) An\n>> alternative is to set up public and private rsa keys so that no password is\n>> required. That option also gets complicated.\n>> \n>> I could imagine setting up a server solely for testing this, with a user\n>> that has no password, though that sounds scary. But then what happens if\n>> the server goes down?\n>> \n>> A second challenge applies specifically to Windows, which is the platform\n>> I'm most concerned about. I'm relying on PuTTY for SSH in Windows. Is there\n>> a way for that to be tested on CRAN?\n>> \n>> Should I even worry about CRAN testing for this? Will CRAN accept this\n>> package without tests?\n>> \n>> And I was surprised that an SSH tunneling package didn't already exist (I\n>> found it really convenient to control SSH tunneling from within R). Is\n>> there another reason it doesn't exist yet, or is it just the testing\n>> challenges?\n>> \n>> - Will\n>> \n>>        [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>> \n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "I don’t think there is any specific requirement for automated tests on CRAN; there \nis also no requirement on CRAN to have a windows version.  The current \nhttps://cran.r-project.org/web/packages/ssh.",
       "thread_id": "thread-45724af5a37c",
       "thread_depth": 2,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001092.html"
     },
     {
       "id": "msg-44ddf7b092ba",
@@ -300,7 +316,8 @@
       "body_snippet": "How can I link to a certain page on CRAN without getting flagged for non-canonical CRAN URL forms?\n\nI currently use \\url{https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html}\n\n\n\nFound th",
       "thread_id": "thread-44ddf7b092ba",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001093.html"
     },
     {
       "id": "msg-d4cb26e0bac3",
@@ -318,7 +335,8 @@
       "body_snippet": "On 20.09.2016 16:22, Berry Boessenkool wrote:\n>\n> How can I link to a certain page on CRAN without getting flagged for non-canonical CRAN URL forms?\n>\n> I currently use \\url{https://cran.r-project.org",
       "thread_id": "thread-44ddf7b092ba",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001094.html"
     },
     {
       "id": "msg-da237ac41703",
@@ -330,11 +348,12 @@
       "subject_clean": "[R-pkg-devel] Mis-spelled word with winbuilder",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "I'm checking my package with winbuilder and get one NOTE:\n\n* checking CRAN incoming feasibility ... NOTE\nMaintainer: 'G?ran Brostr?m <goran.brostrom at umu.se>'\n\nPossibly mis-spelled words in DESCRIPTION:\n   piecewise (9:43)\n\nHow should it be spelled? I have googled 'piecewise' and it seems to be \nwidely used with that spelling.\n\nThanks, G?ran",
-      "body_snippet": "I'm checking my package with winbuilder and get one NOTE:\n\n* checking CRAN incoming feasibility ... NOTE\nMaintainer: 'G?ran Brostr?m <goran.brostrom at umu.se>'\n\nPossibly mis-spelled words in DESCRIPT",
+      "body_plain": "I'm checking my package with winbuilder and get one NOTE:\n\n* checking CRAN incoming feasibility ... NOTE\nMaintainer: 'Göran Broström <goran.brostrom at umu.se>'\n\nPossibly mis-spelled words in DESCRIPTION:\n   piecewise (9:43)\n\nHow should it be spelled? I have googled 'piecewise' and it seems to be \nwidely used with that spelling.\n\nThanks, Göran",
+      "body_snippet": "I'm checking my package with winbuilder and get one NOTE:\n\n* checking CRAN incoming feasibility ... NOTE\nMaintainer: 'Göran Broström <goran.brostrom at umu.se>'\n\nPossibly mis-spelled words in DESCRIPT",
       "thread_id": "thread-da237ac41703",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001095.html"
     },
     {
       "id": "msg-9822358c4a6b",
@@ -348,11 +367,12 @@
       "references": [
         "<3ff34898-6bd2-162e-1052-638c65f763df@umu.se>"
       ],
-      "body_plain": "On 21/09/2016 7:17 AM, G?ran Brostr?m wrote:\n> I'm checking my package with winbuilder and get one NOTE:\n>\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'G?ran Brostr?m <goran.brostrom at umu.se>'\n>\n> Possibly mis-spelled words in DESCRIPTION:\n>    piecewise (9:43)\n>\n> How should it be spelled? I have googled 'piecewise' and it seems to be\n> widely used with that spelling.\n\nThat's fine, it's just that it's not in Win-builder's reference \ndictionary.  There are quite a few technical words missing there, so we \nget a number of false positives. You'll also see reports about proper names.\n\nCRAN asks that software names be quoted (in single quotes).  In \nparticular, R package names should be quoted.\n\nProper names of people and things other than software do not need to be \nquoted.\n\nDuncan Murdoch",
-      "body_snippet": "On 21/09/2016 7:17 AM, G?ran Brostr?m wrote:\n> I'm checking my package with winbuilder and get one NOTE:\n>\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'G?ran Brostr?m <goran.brostrom",
+      "body_plain": "On 21/09/2016 7:17 AM, Göran Broström wrote:\n> I'm checking my package with winbuilder and get one NOTE:\n>\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'Göran Broström <goran.brostrom at umu.se>'\n>\n> Possibly mis-spelled words in DESCRIPTION:\n>    piecewise (9:43)\n>\n> How should it be spelled? I have googled 'piecewise' and it seems to be\n> widely used with that spelling.\n\nThat's fine, it's just that it's not in Win-builder's reference \ndictionary.  There are quite a few technical words missing there, so we \nget a number of false positives. You'll also see reports about proper names.\n\nCRAN asks that software names be quoted (in single quotes).  In \nparticular, R package names should be quoted.\n\nProper names of people and things other than software do not need to be \nquoted.\n\nDuncan Murdoch",
+      "body_snippet": "On 21/09/2016 7:17 AM, Göran Broström wrote:\n> I'm checking my package with winbuilder and get one NOTE:\n>\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'Göran Broström <goran.brostrom",
       "thread_id": "thread-da237ac41703",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001096.html"
     },
     {
       "id": "msg-721ebf9e5624",
@@ -370,7 +390,8 @@
       "body_snippet": "> How can I link to a certain page on CRAN without getting flagged for non-\n> canonical CRAN URL forms?\n\nIn the interests of avoiding something that may change in future if CRAN is restructured, would",
       "thread_id": "thread-44ddf7b092ba",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001097.html"
     },
     {
       "id": "msg-435413504832",
@@ -389,7 +410,8 @@
       "body_snippet": "On 21/09/2016 7:57 AM, S Ellison wrote:\n> > How can I link to a certain page on CRAN without getting flagged for non-\n> > canonical CRAN URL forms?\n>\n> In the interests of avoiding something that may ",
       "thread_id": "thread-44ddf7b092ba",
       "thread_depth": 2,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001098.html"
     },
     {
       "id": "msg-2efaa4a5f3e0",
@@ -409,7 +431,8 @@
       "body_snippet": "Update:\n\nThe https://cran.r-project.org/package=NAME/.... syntax works now and is \naccepted.\n\nBest,\nUwe Ligges\n\n\n\nOn 21.09.2016 14:20, Duncan Murdoch wrote:\n> On 21/09/2016 7:57 AM, S Ellison wrote:\n>",
       "thread_id": "thread-44ddf7b092ba",
       "thread_depth": 3,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001099.html"
     },
     {
       "id": "msg-93a3cad1a56a",
@@ -430,7 +453,8 @@
       "body_snippet": "Thanks to all writers.\n\nI'll sum up so people reading this later (e.g. me) find everything quickly.\n\nTOPIC:\n\nLink from Rd manuals to other vignettes and documentation via URL.\n\n\n\nYou can now reference",
       "thread_id": "thread-44ddf7b092ba",
       "thread_depth": 4,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001100.html"
     },
     {
       "id": "msg-333c1e89d347",
@@ -448,7 +472,8 @@
       "body_snippet": "> I have googled 'piecewise' and it seems to be\n> widely used with that spelling.\n\n... because that is the only correct spelling of 'piecewise' in English...\n\nButu I see Duncan Murdoch has explained w",
       "thread_id": "thread-da237ac41703",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001101.html"
     },
     {
       "id": "msg-d04dd3360d1c",
@@ -464,7 +489,8 @@
       "body_snippet": "Greetings,\n\nI am developing a package that uses C++ code, and I want to use some\nclasses from the C++11 standard. In fact I just want to use std::thread\nwhich is supported even by the old weird -std=c",
       "thread_id": "thread-d04dd3360d1c",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001102.html"
     },
     {
       "id": "msg-98d44ee5be07",
@@ -482,7 +508,8 @@
       "body_snippet": "Hi Constantinos,\n\nI believe you could just put the following in your DESCRIPTION file so the\nR version takes care of the C++11 flag.\n\nSystemRequirements: C++11\n\nRegards,\nCharles\n\n\nOn Fri, Sep 30, 2016",
       "thread_id": "thread-d04dd3360d1c",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001103.html"
     },
     {
       "id": "msg-df92edd6c5b5",
@@ -501,7 +528,8 @@
       "body_snippet": "On 30 September 2016 at 09:16, Charles Determan wrote:\n| I believe you could just put the following in your DESCRIPTION file so the\n| R version takes care of the C++11 flag.\n| \n| SystemRequirements: C",
       "thread_id": "thread-d04dd3360d1c",
       "thread_depth": 2,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001104.html"
     },
     {
       "id": "msg-dd280a9dfe1e",
@@ -517,7 +545,8 @@
       "body_snippet": "Hi,\n\nWhen I attempt to run Check on any package, the \"checking installed package size...\" Check never finishes. This is across multiple versions of R and RStudio, with every package I have attempted t",
       "thread_id": "thread-dd280a9dfe1e",
       "thread_depth": 0,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001105.html"
     },
     {
       "id": "msg-5b5dc49508fa",
@@ -535,7 +564,8 @@
       "body_snippet": "On 30/09/2016 12:24 PM, Ortega, Cameron wrote:\n> Hi,\n>\n> When I attempt to run Check on any package, the \"checking installed package size...\" Check never finishes. This is across multiple versions of ",
       "thread_id": "thread-dd280a9dfe1e",
       "thread_depth": 1,
-      "month": "2016-09"
+      "month": "2016-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q3/001106.html"
     }
   ],
   "threads": [

@@ -13,11 +13,12 @@
       "subject_clean": "[R-pkg-devel] how to call PROJ.4 C code in a package?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "The ?oce? package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a separate PROJ.4 library be used instead, and that a version of that library is available on the CRAN build machines.\n\nI am wondering whether anyone can advise on how ?oce? should hook up with this external PROJ.4 library. As explained at [3], I would prefer not to require users to download and install PROJ.4 themselves. (By the way, a strict download of the official PROJ.4 is not helpful, because it is peppered with fprintf() calls that should be Rprintf() calls, and also with exit() calls that should be error() calls.)\n\nI have noticed that on my OSX machine, R has proj4 stored within itself, e.g.\n\n\t$ nm -g /Library/Frameworks/R.framework/Versions/3.2/Resources/library/proj4/libs/proj4.so | grep pj_init\n\t00000000000254d0 T _pj_init \t\n\t00000000000247c0 T _pj_init_ctx \n\t0000000000025680 T _pj_init_plus \n\t0000000000025510 T _pj_init_plus_ctx\n\nand I am wondering whether I can make ?oce? hook up with this. However, I don?t know if that is there just on my machine because I have the R ?proj4? package installed (or perhaps ?rgdal?, which also uses PROJ.4), etc.\n\nSo, the simple question is: what do you do if a CRAN team member suggests that you remove PROJ.4 source code from your package and instead use the version that is on CRAN build computers?\n\nI hope this is fairly clear, although I realize I am being probably too wordy.  Let me add to the words by thanking those who have set up this email group. It is a wonderful addition to the R world. At the moment, the CRAN team probably uses up a great deal of time dealing with people like me who are stumbling a bit, to try to find the best way to do things.  Members of the CRAN team have been wonderfully generous to me, in pointing out things I?ve done wrong in package development, but this seems to me to be an undue burden on them. Let?s hope that package developers can help each other!\n\nDan Kelley / Department of Oceanography / Dalhousie University / Nova Scotia / Canada\n\n\n[1] ? The oce package cannot pass the map-projection work to the ?proj4? package, because the proj4::project() produces an error when any point in a vector of geographical locations is ?off scale? for the map projection at hand. A solution is to call proj4::project() for each point in turn, using try() to find out which results should be c(NA,NA). This is slow for datasets with many points, e.g. world coastlines\n\n[2] ? ?oce? needs inverse projections, so the ?mapproj? package is insufficient.\n\n[3] ? Quite a few users are at government or other sites where building packages is possible, but where they do not have permission to install new libraries (such as PROJ.4) in e.g. /usr. I don?t want such users to be cut out from using the development version of ?oce?, because that makes it hard for me to fix problems that they may encounter or to add new capabilities to the development version of ?oce? to allow them to do their work.",
-      "body_snippet": "The ?oce? package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a sepa",
+      "body_plain": "The “oce” package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a separate PROJ.4 library be used instead, and that a version of that library is available on the CRAN build machines.\n\nI am wondering whether anyone can advise on how “oce” should hook up with this external PROJ.4 library. As explained at [3], I would prefer not to require users to download and install PROJ.4 themselves. (By the way, a strict download of the official PROJ.4 is not helpful, because it is peppered with fprintf() calls that should be Rprintf() calls, and also with exit() calls that should be error() calls.)\n\nI have noticed that on my OSX machine, R has proj4 stored within itself, e.g.\n\n\t$ nm -g /Library/Frameworks/R.framework/Versions/3.2/Resources/library/proj4/libs/proj4.so | grep pj_init\n\t00000000000254d0 T _pj_init \t\n\t00000000000247c0 T _pj_init_ctx \n\t0000000000025680 T _pj_init_plus \n\t0000000000025510 T _pj_init_plus_ctx\n\nand I am wondering whether I can make “oce” hook up with this. However, I don’t know if that is there just on my machine because I have the R “proj4” package installed (or perhaps “rgdal”, which also uses PROJ.4), etc.\n\nSo, the simple question is: what do you do if a CRAN team member suggests that you remove PROJ.4 source code from your package and instead use the version that is on CRAN build computers?\n\nI hope this is fairly clear, although I realize I am being probably too wordy.  Let me add to the words by thanking those who have set up this email group. It is a wonderful addition to the R world. At the moment, the CRAN team probably uses up a great deal of time dealing with people like me who are stumbling a bit, to try to find the best way to do things.  Members of the CRAN team have been wonderfully generous to me, in pointing out things I’ve done wrong in package development, but this seems to me to be an undue burden on them. Let’s hope that package developers can help each other!\n\nDan Kelley / Department of Oceanography / Dalhousie University / Nova Scotia / Canada\n\n\n[1] — The oce package cannot pass the map-projection work to the “proj4” package, because the proj4::project() produces an error when any point in a vector of geographical locations is “off scale” for the map projection at hand. A solution is to call proj4::project() for each point in turn, using try() to find out which results should be c(NA,NA). This is slow for datasets with many points, e.g. world coastlines\n\n[2] — “oce” needs inverse projections, so the “mapproj” package is insufficient.\n\n[3] — Quite a few users are at government or other sites where building packages is possible, but where they do not have permission to install new libraries (such as PROJ.4) in e.g. /usr. I don’t want such users to be cut out from using the development version of “oce”, because that makes it hard for me to fix problems that they may encounter or to add new capabilities to the development version of “oce” to allow them to do their work.",
+      "body_snippet": "The “oce” package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a sepa",
       "thread_id": "thread-6ee39e24aacf",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000001.html"
     },
     {
       "id": "msg-d86827d23ce6",
@@ -33,7 +34,8 @@
       "body_snippet": "Dear Listeners,\n\nI would like to submit a package to CRAN but I also want to use two  \nnon-mainstream packages in my vignette. Currently I have them stated in my  \nSuggests field but that leads to CRA",
       "thread_id": "thread-d86827d23ce6",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000002.html"
     },
     {
       "id": "msg-93da678b3d04",
@@ -49,7 +51,8 @@
       "body_snippet": "Thanks to all (176 as of now) of you for subscribing.  We hope this will turn\ninto a useful forum.\n\nI would also like to thank you for your patience. We are having some somewhat\nunusual birthing probl",
       "thread_id": "thread-93da678b3d04",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000000.html"
     },
     {
       "id": "msg-9c36b765168f",
@@ -67,7 +70,8 @@
       "body_snippet": "On 22 May 2015 at 13:20, Peter Meissner via R-package-devel wrote:\n| I would like to submit a package to CRAN but I also want to use two  \n| non-mainstream packages in my vignette. Currently I have th",
       "thread_id": "thread-d86827d23ce6",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000003.html"
     },
     {
       "id": "msg-b24e0a5219dc",
@@ -83,7 +87,8 @@
       "body_snippet": "I am trying to compile a package through winbuilder. The winbuilder website says that every CRAN package is installed. Does this mean that absolutely every package is installed or just packages that h",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000004.html"
     },
     {
       "id": "msg-3262b25e70a9",
@@ -101,7 +106,8 @@
       "body_snippet": "Which package are you receiving this error?  Winbuilder should have all\ncurrent CRAN and Bioconductor packages available for your package\ndependencies.\n\nCharles\n\nOn Fri, May 22, 2015 at 7:46 AM, Stach",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000005.html"
     },
     {
       "id": "msg-5c3ee44b05c1",
@@ -119,7 +125,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel via R-package-devel <r-package-devel at r-project.org>\n>>>>>     on Fri, 22 May 2015 06:38:22 -0500 writes:\n\n    > Thanks to all (176 as of now) of you for subscribing.  We hop",
       "thread_id": "thread-93da678b3d04",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000006.html"
     },
     {
       "id": "msg-d72cbc9f5b63",
@@ -133,11 +140,12 @@
       "references": [
         "<D51374C4B889BC47B3C5286047C86DA196C1C8FA@whqembx03p.ad.sfwmd.gov>"
       ],
-      "body_plain": ">>>>> Stachelek, Joseph <jstachel at sfwmd.gov>\n>>>>>     on Fri, 22 May 2015 12:46:49 +0000 writes:\n\n    > I am trying to compile a package through winbuilder. The winbuilder website says that every CRAN package is installed. Does this mean that absolutely every package is installed or just packages that have binary distributions? I am getting a \"package required but not available\" message.\n\nThe Winbuilder service is basically provided by Uwe Ligges volunteering\n(and infrastructure of the department of statistics of\n Universit?t Dortmund, AFAIK, with a some hardware costs covered\n by the R Foundation).\n\nI'm pretty sure Uwe's intent is to have  every  CRAN package\ninstalled .. which is installable on Windows.\nSome packages do explicitly require a non-Windows OS \n(similarly as a few other packages explicitly only work on Windows)\nand hence would be excluded. \n\nFor other packages, considerable manual work might be\nrequired such that the package is easily installed/installable\non Winbuilder.  For instance, for my 'Rmpfr' package, a few\nyears ago, Uwe had to make sure that the underlying MPFR C\nlibrary was available on the winbuilder as well.\n\nSo lets thank Uwe for all he has volunteered doing about this,\nand in your place, I'd ask him politely also for your specific\nsituation.\n\nMartin\n\n    > [[alternative HTML version deleted]]\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^\nWe do much prefer  'plain text' e-mails on our lists, for\nseveral reasons,  see also\nhttp://www.r-project.org/posting-guide.html",
+      "body_plain": ">>>>> Stachelek, Joseph <jstachel at sfwmd.gov>\n>>>>>     on Fri, 22 May 2015 12:46:49 +0000 writes:\n\n    > I am trying to compile a package through winbuilder. The winbuilder website says that every CRAN package is installed. Does this mean that absolutely every package is installed or just packages that have binary distributions? I am getting a \"package required but not available\" message.\n\nThe Winbuilder service is basically provided by Uwe Ligges volunteering\n(and infrastructure of the department of statistics of\n Universität Dortmund, AFAIK, with a some hardware costs covered\n by the R Foundation).\n\nI'm pretty sure Uwe's intent is to have  every  CRAN package\ninstalled .. which is installable on Windows.\nSome packages do explicitly require a non-Windows OS \n(similarly as a few other packages explicitly only work on Windows)\nand hence would be excluded. \n\nFor other packages, considerable manual work might be\nrequired such that the package is easily installed/installable\non Winbuilder.  For instance, for my 'Rmpfr' package, a few\nyears ago, Uwe had to make sure that the underlying MPFR C\nlibrary was available on the winbuilder as well.\n\nSo lets thank Uwe for all he has volunteered doing about this,\nand in your place, I'd ask him politely also for your specific\nsituation.\n\nMartin\n\n    > [[alternative HTML version deleted]]\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^\nWe do much prefer  'plain text' e-mails on our lists, for\nseveral reasons,  see also\nhttp://www.r-project.org/posting-guide.html",
       "body_snippet": ">>>>> Stachelek, Joseph <jstachel at sfwmd.gov>\n>>>>>     on Fri, 22 May 2015 12:46:49 +0000 writes:\n\n    > I am trying to compile a package through winbuilder. The winbuilder website says that every ",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000007.html"
     },
     {
       "id": "msg-5a531258ddeb",
@@ -156,7 +164,8 @@
       "body_snippet": "I am receiving this error about RcppOctave. I see that it does not have a binary on CRAN because of compiled code issues. My package does not have compiled code itself and it passes CRAN check. I set ",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000008.html"
     },
     {
       "id": "msg-3873044777de",
@@ -170,11 +179,12 @@
       "references": [
         "<FE25CD25-2F25-4F25-8FFB-4A841E5BCFBB@dal.ca>"
       ],
-      "body_plain": ">>>>> Daniel Kelley <Dan.Kelley at Dal.Ca>\n>>>>>     on Fri, 22 May 2015 10:56:21 +0000 writes:\n\n    > The ?oce? package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a separate PROJ.4 library be used instead, and that a version of that library is available on the CRAN build machines.\n    > I am wondering whether anyone can advise on how ?oce? should hook up with this external PROJ.4 library. As explained at [3], I would prefer not to require users to download and install PROJ.4 themselves. (By the way, a strict download of the official PROJ.4 is not helpful, because it is peppered with fprintf() calls that should be Rprintf() calls, and also with exit() calls that should be error() calls.)\n\n    > I have noticed that on my OSX machine, R has proj4 stored within itself, e.g.\n\n    > $ nm -g /Library/Frameworks/R.framework/Versions/3.2/Resources/library/proj4/libs/proj4.so | grep pj_init\n    > 00000000000254d0 T _pj_init \t\n    > 00000000000247c0 T _pj_init_ctx \n    > 0000000000025680 T _pj_init_plus \n    > 0000000000025510 T _pj_init_plus_ctx\n\n... Well, not quite: That's not R, that was you, when you\ninstalled the CRAN package called  'proj4'.\n\nExcursion about  libraries of packages, .libPaths() etc:\n\n  Note that many R installations, notably on the Mac (your case) and on\n  Windows are setup to install all packages into R's main package\n  library. Under such circumstance, within R, your\n     .libPaths()\n  only contains one library location ('lib.loc') path with all packages in it,\n  (possibly augmented with an extra one in your personal / \"home\" directory.)\n\n  Other OSes, e.g. Debian or Ubuntu Linux would use separate\n  libraries to install packages in,  and I have personally  never\n  installed packages into R's own library, but rather separately.\n\n    > and I am wondering whether I can make ?oce? hook up with this. However, I don?t know if that is there just on my machine because I have the R ?proj4? package installed (or perhaps ?rgdal?, which also uses PROJ.4), etc.\n\nIndeed, you guessed correctly, this is just because you've\ninstalled proj4 into R's own library.\n\n    > So, the simple question is: what do you do if a CRAN team member suggests that you remove PROJ.4 source code from your package and instead use the version that is on CRAN build computers?\n\nI think it would be a very good idea if you'd use the  PROJ.4\nC library that is provided already by the proj4 CRAN package\ninstead of shipping your own (typically slightly differing!) version.\n\nYou possibly should collaborate with the proj4 maintainer,\nbecause he would have to make part of the C API available to\nother packages, and your 'oce' could then add a\n--------------------\nLinkingTo: proj4\n--------------------\nline to   oce/DESCRIPTION\n\nI hope this gets you started in the right direction.\n\nMartin Maechler, ETH Zurich\n\n\n    > I hope this is fairly clear, although I realize I am being probably too wordy.  Let me add to the words by thanking those who have set up this email group. It is a wonderful addition to the R world. At the moment, the CRAN team probably uses up a great deal of time dealing with people like me who are stumbling a bit, to try to find the best way to do things.  Members of the CRAN team have been wonderfully generous to me, in pointing out things I?ve done wrong in package development, but this seems to me to be an undue burden on them. Let?s hope that package developers can help each other!\n\n    > Dan Kelley / Department of Oceanography / Dalhousie University / Nova Scotia / Canada\n\n\n    > [1] ? The oce package cannot pass the map-projection work to the ?proj4? package, because the proj4::project() produces an error when any point in a vector of geographical locations is ?off scale? for the map projection at hand. A solution is to call proj4::project() for each point in turn, using try() to find out which results should be c(NA,NA). This is slow for datasets with many points, e.g. world coastlines\n\n    > [2] ? ?oce? needs inverse projections, so the ?mapproj? package is insufficient.\n\n    > [3] ? Quite a few users are at government or other sites where building packages is possible, but where they do not have permission to install new libraries (such as PROJ.4) in e.g. /usr. I don?t want such users to be cut out from using the development version of ?oce?, because that makes it hard for me to fix problems that they may encounter or to add new capabilities to the development version of ?oce? to allow them to do their work.\n    > ______________________________________________\n    > R-package-devel at r-project.org mailing list\n    > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": ">>>>> Daniel Kelley <Dan.Kelley at Dal.Ca>\n>>>>>     on Fri, 22 May 2015 10:56:21 +0000 writes:\n\n    > The ?oce? package (for oceanographic analysis) presently includes PROJ.4 C-language source code, ",
+      "body_plain": ">>>>> Daniel Kelley <Dan.Kelley at Dal.Ca>\n>>>>>     on Fri, 22 May 2015 10:56:21 +0000 writes:\n\n    > The “oce” package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a separate PROJ.4 library be used instead, and that a version of that library is available on the CRAN build machines.\n    > I am wondering whether anyone can advise on how “oce” should hook up with this external PROJ.4 library. As explained at [3], I would prefer not to require users to download and install PROJ.4 themselves. (By the way, a strict download of the official PROJ.4 is not helpful, because it is peppered with fprintf() calls that should be Rprintf() calls, and also with exit() calls that should be error() calls.)\n\n    > I have noticed that on my OSX machine, R has proj4 stored within itself, e.g.\n\n    > $ nm -g /Library/Frameworks/R.framework/Versions/3.2/Resources/library/proj4/libs/proj4.so | grep pj_init\n    > 00000000000254d0 T _pj_init \t\n    > 00000000000247c0 T _pj_init_ctx \n    > 0000000000025680 T _pj_init_plus \n    > 0000000000025510 T _pj_init_plus_ctx\n\n... Well, not quite: That's not R, that was you, when you\ninstalled the CRAN package called  'proj4'.\n\nExcursion about  libraries of packages, .libPaths() etc:\n\n  Note that many R installations, notably on the Mac (your case) and on\n  Windows are setup to install all packages into R's main package\n  library. Under such circumstance, within R, your\n     .libPaths()\n  only contains one library location ('lib.loc') path with all packages in it,\n  (possibly augmented with an extra one in your personal / \"home\" directory.)\n\n  Other OSes, e.g. Debian or Ubuntu Linux would use separate\n  libraries to install packages in,  and I have personally  never\n  installed packages into R's own library, but rather separately.\n\n    > and I am wondering whether I can make “oce” hook up with this. However, I don’t know if that is there just on my machine because I have the R “proj4” package installed (or perhaps “rgdal”, which also uses PROJ.4), etc.\n\nIndeed, you guessed correctly, this is just because you've\ninstalled proj4 into R's own library.\n\n    > So, the simple question is: what do you do if a CRAN team member suggests that you remove PROJ.4 source code from your package and instead use the version that is on CRAN build computers?\n\nI think it would be a very good idea if you'd use the  PROJ.4\nC library that is provided already by the proj4 CRAN package\ninstead of shipping your own (typically slightly differing!) version.\n\nYou possibly should collaborate with the proj4 maintainer,\nbecause he would have to make part of the C API available to\nother packages, and your 'oce' could then add a\n--------------------\nLinkingTo: proj4\n--------------------\nline to   oce/DESCRIPTION\n\nI hope this gets you started in the right direction.\n\nMartin Maechler, ETH Zurich\n\n\n    > I hope this is fairly clear, although I realize I am being probably too wordy.  Let me add to the words by thanking those who have set up this email group. It is a wonderful addition to the R world. At the moment, the CRAN team probably uses up a great deal of time dealing with people like me who are stumbling a bit, to try to find the best way to do things.  Members of the CRAN team have been wonderfully generous to me, in pointing out things I’ve done wrong in package development, but this seems to me to be an undue burden on them. Let’s hope that package developers can help each other!\n\n    > Dan Kelley / Department of Oceanography / Dalhousie University / Nova Scotia / Canada\n\n\n    > [1] — The oce package cannot pass the map-projection work to the “proj4” package, because the proj4::project() produces an error when any point in a vector of geographical locations is “off scale” for the map projection at hand. A solution is to call proj4::project() for each point in turn, using try() to find out which results should be c(NA,NA). This is slow for datasets with many points, e.g. world coastlines\n\n    > [2] — “oce” needs inverse projections, so the “mapproj” package is insufficient.\n\n    > [3] — Quite a few users are at government or other sites where building packages is possible, but where they do not have permission to install new libraries (such as PROJ.4) in e.g. /usr. I don’t want such users to be cut out from using the development version of “oce”, because that makes it hard for me to fix problems that they may encounter or to add new capabilities to the development version of “oce” to allow them to do their work.\n    > ______________________________________________\n    > R-package-devel at r-project.org mailing list\n    > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": ">>>>> Daniel Kelley <Dan.Kelley at Dal.Ca>\n>>>>>     on Fri, 22 May 2015 10:56:21 +0000 writes:\n\n    > The “oce” package (for oceanographic analysis) presently includes PROJ.4 C-language source code, ",
       "thread_id": "thread-6ee39e24aacf",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000009.html"
     },
     {
       "id": "msg-0efc601260be",
@@ -194,7 +204,8 @@
       "body_snippet": "Can you please include the exact error message that you are seeing?\nThat will help diagnose the problem.\n\nHadley\n\nOn Fri, May 22, 2015 at 9:35 AM, Stachelek, Joseph <jstachel at sfwmd.gov> wrote:\n> I ",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000010.html"
     },
     {
       "id": "msg-538023d71400",
@@ -214,7 +225,8 @@
       "body_snippet": "On 22 May 2015 at 14:35, Stachelek, Joseph wrote:\n| I am receiving this error about RcppOctave. I see that it does not have a binary on CRAN because of compiled code issues. My package does not have c",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000011.html"
     },
     {
       "id": "msg-b1ac434b122b",
@@ -229,11 +241,12 @@
         "<op.xy1a35qb3euttn@peter-think.fritz.box>",
         "<21855.7447.555380.525225@max.nulle.part>"
       ],
-      "body_plain": "Am .05.2015, 14:12 Uhr, schrieb Dirk Eddelbuettel <edd at debian.org>:\n\n>\n> On 22 May 2015 at 13:20, Peter Meissner via R-package-devel wrote:\n> | I would like to submit a package to CRAN but I also want to use two\n> | non-mainstream packages in my vignette. Currently I have them stated  \n> in my\n> | Suggests field but that leads to CRAN/Check complaints -understandably\n> | since they cannot be obtained by install.packages().\n> |\n> | I know, that there is the 'Additional_repositories' field for the\n> | DESCRIPTION file but as the name (and the CRAN policies) say this is  \n> for\n> | CRAN-like repositories and those two packages (AnomalyDetection,\n> | BreakoutDetection) are on GitHub (e.g.\n> | https://github.com/twitter/AnomalyDetection).\n> |\n> | Should I simply leave them out of the Suggests - that will lead to\n> | complaints about non-stated dependencies in vignette.\n> |\n> | Should I fake my vignette code so that the troubling part is actually  \n> not\n> | run when building the vignette - that gives me headaches.\n> |\n> | Is there some other, clean way ?\n>\n> That is an excellent question that I have no answer to.\n>\n> It so happens that I did put both of these packages (AnomalyDetection,\n> BreakoutDetection) into the 'ghrr' repository created by my drat package  \n> [1].\n>\n> So I can install these packages fine as there is now a repo.  What I  \n> have not\n> done is tried to convince CRAN that such a non-CRAN, non-BioC,  \n> non-Omegahat\n> repo passes the implicit test set up by 'Additional_repositories'.\n>\n> And to the best of my knowledge, nobody else has.  So that is really a  \n> CRAN\n> question.  [2]\n>\n> Dirk\n>\n>\n> [1] I have posted / blogged a few times about drat. It basically sits on  \n> top\n> of install.packages() / update.packages() by providing repositories --  \n> which\n> are super-easy to setup and host at GitHub via their built-in gh-pages\n> webserver.  See http://dirk.eddelbuettel.com/code/drat.html as well as  \n> the\n> http://ghrr.github.io/drat pages for starting points, or ask me off-list.\n>\n> [2] So the list is zero days old and already stalled. Wow.  ;-)\n>\n\n\nHey,\n\nmany thanks for the hint to your drat framework. Since it seems, that\nadding 'http://ghrr.github.io/drat/' as 'Additional_repositories' in\nthe package DESCRIPTION file, does fulfill  the !formal! requirements,\nI think I will try if I can get through with it and will report the\nresults to the list.\n\n\nInstallation works out of the box with...\n\ninstall.packages(\n\t\"AnomalyDetection\",\n\trepos = \"http://ghrr.github.io/drat\",\n\ttype=\"source\"\n)\n\n\n... and first hurdle Winbuilder (devtools::build_win()) accepts the\nDESCRIPTION field ...\n\nAdditional_repositories: http://ghrr.github.io/drat\n\n\n... and notes the following without raising a complaint:\n\nSuggests or Enhances not in mainstream repositories:\n   AnomalyDetection, BreakoutDetection\n\nAvailability using Additional_repositories specification:\n   AnomalyDetection    yes   http://ghrr.github.io/drat\n   BreakoutDetection   yes   http://ghrr.github.io/drat\n\n\nNow my question is what status 'http://ghrr.github.io/drat/' has. Is it a\nrepo bundling Github published packages open for public and going to stay\nthere for good? Or is it more a private thing? To put it another way.\nShould I use my 'own' fork of your efforts\n(http://petermeissner.github.io/drat/) or is it ok that I use ghrr and\nI can assume that AnomalyDetection and BreakoutDetection stay there - I\nwould prefer using ghrr.\n\n\nBest, Peter\n\n\n\n-- \nPeter Mei?ner\nWorkgroup 'Comparative Parliamentary Politics'\nDepartment of Politics and Administration\nUniversity of Konstanz\nBox 216\n78457 Konstanz\nGermany\n\n+49 7531 88 5665\nhttp://www.polver.uni-konstanz.de/sieberer/home/\nhttps://github.com/petermeissner\nhttp://pmeissner.com",
+      "body_plain": "Am .05.2015, 14:12 Uhr, schrieb Dirk Eddelbuettel <edd at debian.org>:\n\n>\n> On 22 May 2015 at 13:20, Peter Meissner via R-package-devel wrote:\n> | I would like to submit a package to CRAN but I also want to use two\n> | non-mainstream packages in my vignette. Currently I have them stated  \n> in my\n> | Suggests field but that leads to CRAN/Check complaints -understandably\n> | since they cannot be obtained by install.packages().\n> |\n> | I know, that there is the 'Additional_repositories' field for the\n> | DESCRIPTION file but as the name (and the CRAN policies) say this is  \n> for\n> | CRAN-like repositories and those two packages (AnomalyDetection,\n> | BreakoutDetection) are on GitHub (e.g.\n> | https://github.com/twitter/AnomalyDetection).\n> |\n> | Should I simply leave them out of the Suggests - that will lead to\n> | complaints about non-stated dependencies in vignette.\n> |\n> | Should I fake my vignette code so that the troubling part is actually  \n> not\n> | run when building the vignette - that gives me headaches.\n> |\n> | Is there some other, clean way ?\n>\n> That is an excellent question that I have no answer to.\n>\n> It so happens that I did put both of these packages (AnomalyDetection,\n> BreakoutDetection) into the 'ghrr' repository created by my drat package  \n> [1].\n>\n> So I can install these packages fine as there is now a repo.  What I  \n> have not\n> done is tried to convince CRAN that such a non-CRAN, non-BioC,  \n> non-Omegahat\n> repo passes the implicit test set up by 'Additional_repositories'.\n>\n> And to the best of my knowledge, nobody else has.  So that is really a  \n> CRAN\n> question.  [2]\n>\n> Dirk\n>\n>\n> [1] I have posted / blogged a few times about drat. It basically sits on  \n> top\n> of install.packages() / update.packages() by providing repositories --  \n> which\n> are super-easy to setup and host at GitHub via their built-in gh-pages\n> webserver.  See http://dirk.eddelbuettel.com/code/drat.html as well as  \n> the\n> http://ghrr.github.io/drat pages for starting points, or ask me off-list.\n>\n> [2] So the list is zero days old and already stalled. Wow.  ;-)\n>\n\n\nHey,\n\nmany thanks for the hint to your drat framework. Since it seems, that\nadding 'http://ghrr.github.io/drat/' as 'Additional_repositories' in\nthe package DESCRIPTION file, does fulfill  the !formal! requirements,\nI think I will try if I can get through with it and will report the\nresults to the list.\n\n\nInstallation works out of the box with...\n\ninstall.packages(\n\t\"AnomalyDetection\",\n\trepos = \"http://ghrr.github.io/drat\",\n\ttype=\"source\"\n)\n\n\n... and first hurdle Winbuilder (devtools::build_win()) accepts the\nDESCRIPTION field ...\n\nAdditional_repositories: http://ghrr.github.io/drat\n\n\n... and notes the following without raising a complaint:\n\nSuggests or Enhances not in mainstream repositories:\n   AnomalyDetection, BreakoutDetection\n\nAvailability using Additional_repositories specification:\n   AnomalyDetection    yes   http://ghrr.github.io/drat\n   BreakoutDetection   yes   http://ghrr.github.io/drat\n\n\nNow my question is what status 'http://ghrr.github.io/drat/' has. Is it a\nrepo bundling Github published packages open for public and going to stay\nthere for good? Or is it more a private thing? To put it another way.\nShould I use my 'own' fork of your efforts\n(http://petermeissner.github.io/drat/) or is it ok that I use ghrr and\nI can assume that AnomalyDetection and BreakoutDetection stay there - I\nwould prefer using ghrr.\n\n\nBest, Peter\n\n\n\n-- \nPeter Meißner\nWorkgroup 'Comparative Parliamentary Politics'\nDepartment of Politics and Administration\nUniversity of Konstanz\nBox 216\n78457 Konstanz\nGermany\n\n+49 7531 88 5665\nhttp://www.polver.uni-konstanz.de/sieberer/home/\nhttps://github.com/petermeissner\nhttp://pmeissner.com",
       "body_snippet": "Am .05.2015, 14:12 Uhr, schrieb Dirk Eddelbuettel <edd at debian.org>:\n\n>\n> On 22 May 2015 at 13:20, Peter Meissner via R-package-devel wrote:\n> | I would like to submit a package to CRAN but I also w",
       "thread_id": "thread-d86827d23ce6",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000012.html"
     },
     {
       "id": "msg-a0b80c05a050",
@@ -253,7 +266,8 @@
       "body_snippet": "On 22 May 2015 at 17:31, Peter Meissner wrote:\n| many thanks for the hint to your drat framework. Since it seems, that\n| adding 'http://ghrr.github.io/drat/' as 'Additional_repositories' in\n| the pack",
       "thread_id": "thread-d86827d23ce6",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000013.html"
     },
     {
       "id": "msg-948d1c9a1d00",
@@ -268,11 +282,12 @@
         "<D51374C4B889BC47B3C5286047C86DA196C1C8FA@whqembx03p.ad.sfwmd.gov>",
         "<21855.15396.317664.217749@stat.math.ethz.ch>"
       ],
-      "body_plain": "On 22.05.2015 16:24, Martin Maechler wrote:\n>>>>>> Stachelek, Joseph <jstachel at sfwmd.gov>\n>>>>>>      on Fri, 22 May 2015 12:46:49 +0000 writes:\n>\n>      > I am trying to compile a package through winbuilder. The winbuilder website says that every CRAN package is installed. Does this mean that absolutely every package is installed or just packages that have binary distributions? I am getting a \"package required but not available\" message.\n>\n> The Winbuilder service is basically provided by Uwe Ligges volunteering\n> (and infrastructure of the department of statistics of\n>   Universit?t Dortmund, AFAIK, with a some hardware costs covered\n>   by the R Foundation).\n\nCurrently all hardware costs covered by Dortmund university, actually.\n\n\n> I'm pretty sure Uwe's intent is to have  every  CRAN package\n> installed .. which is installable on Windows.\n> Some packages do explicitly require a non-Windows OS\n> (similarly as a few other packages explicitly only work on Windows)\n> and hence would be excluded.\n>\n> For other packages, considerable manual work might be\n> required such that the package is easily installed/installable\n> on Winbuilder.  For instance, for my 'Rmpfr' package, a few\n> years ago, Uwe had to make sure that the underlying MPFR C\n> library was available on the winbuilder as well.\n>\n> So lets thank Uwe for all he has volunteered doing about this,\n> and in your place, I'd ask him politely also for your specific\n> situation.\n\nPlease see\n\nhttp://cran.r-project.org/web/checks/check_results_RcppOctave.html\n\n\nWindows error logs are are those from winbuilder. If a package cannot be \ninstalled, it won't be there of course.\n\nHence please follow the advise to make it a suggested package \"only\".\n\nBest,\nUwe Ligges\n\n\n>\n> Martin\n>\n>      > [[alternative HTML version deleted]]\n>        ^^^^^^^^^^^^^^^^^^^^^^^^^^\n> We do much prefer  'plain text' e-mails on our lists, for\n> several reasons,  see also\n> http://www.r-project.org/posting-guide.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "On 22.05.2015 16:24, Martin Maechler wrote:\n>>>>>> Stachelek, Joseph <jstachel at sfwmd.gov>\n>>>>>>      on Fri, 22 May 2015 12:46:49 +0000 writes:\n>\n>      > I am trying to compile a package through winbuilder. The winbuilder website says that every CRAN package is installed. Does this mean that absolutely every package is installed or just packages that have binary distributions? I am getting a \"package required but not available\" message.\n>\n> The Winbuilder service is basically provided by Uwe Ligges volunteering\n> (and infrastructure of the department of statistics of\n>   Universität Dortmund, AFAIK, with a some hardware costs covered\n>   by the R Foundation).\n\nCurrently all hardware costs covered by Dortmund university, actually.\n\n\n> I'm pretty sure Uwe's intent is to have  every  CRAN package\n> installed .. which is installable on Windows.\n> Some packages do explicitly require a non-Windows OS\n> (similarly as a few other packages explicitly only work on Windows)\n> and hence would be excluded.\n>\n> For other packages, considerable manual work might be\n> required such that the package is easily installed/installable\n> on Winbuilder.  For instance, for my 'Rmpfr' package, a few\n> years ago, Uwe had to make sure that the underlying MPFR C\n> library was available on the winbuilder as well.\n>\n> So lets thank Uwe for all he has volunteered doing about this,\n> and in your place, I'd ask him politely also for your specific\n> situation.\n\nPlease see\n\nhttp://cran.r-project.org/web/checks/check_results_RcppOctave.html\n\n\nWindows error logs are are those from winbuilder. If a package cannot be \ninstalled, it won't be there of course.\n\nHence please follow the advise to make it a suggested package \"only\".\n\nBest,\nUwe Ligges\n\n\n>\n> Martin\n>\n>      > [[alternative HTML version deleted]]\n>        ^^^^^^^^^^^^^^^^^^^^^^^^^^\n> We do much prefer  'plain text' e-mails on our lists, for\n> several reasons,  see also\n> http://www.r-project.org/posting-guide.html\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "On 22.05.2015 16:24, Martin Maechler wrote:\n>>>>>> Stachelek, Joseph <jstachel at sfwmd.gov>\n>>>>>>      on Fri, 22 May 2015 12:46:49 +0000 writes:\n>\n>      > I am trying to compile a package through ",
       "thread_id": "thread-b24e0a5219dc",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000014.html"
     },
     {
       "id": "msg-04587f9e8f41",
@@ -287,11 +302,12 @@
         "<FE25CD25-2F25-4F25-8FFB-4A841E5BCFBB@dal.ca>",
         "<21855.16301.495360.380241@stat.math.ethz.ch>"
       ],
-      "body_plain": "Yes, and a CRAN team member already suggested:\n\n\"All CRAN build/test systems have proj4 installed (packages rgdal and \nproj need it) and it would have been better to link to libproj as those \npackages do.\"\n\nBest,\nUwe Ligges\n\n\n\n\n\n\nOn 22.05.2015 16:39, Martin Maechler wrote:\n>>>>>> Daniel Kelley <Dan.Kelley at Dal.Ca>\n>>>>>>      on Fri, 22 May 2015 10:56:21 +0000 writes:\n>\n>      > The ?oce? package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a separate PROJ.4 library be used instead, and that a version of that library is available on the CRAN build machines.\n>      > I am wondering whether anyone can advise on how ?oce? should hook up with this external PROJ.4 library. As explained at [3], I would prefer not to require users to download and install PROJ.4 themselves. (By the way, a strict download of the official PROJ.4 is not helpful, because it is peppered with fprintf() calls that should be Rprintf() calls, and also with exit() calls that should be error() calls.)\n>\n>      > I have noticed that on my OSX machine, R has proj4 stored within itself, e.g.\n>\n>      > $ nm -g /Library/Frameworks/R.framework/Versions/3.2/Resources/library/proj4/libs/proj4.so | grep pj_init\n>      > 00000000000254d0 T _pj_init \t\n>      > 00000000000247c0 T _pj_init_ctx\n>      > 0000000000025680 T _pj_init_plus\n>      > 0000000000025510 T _pj_init_plus_ctx\n>\n> ... Well, not quite: That's not R, that was you, when you\n> installed the CRAN package called  'proj4'.\n>\n> Excursion about  libraries of packages, .libPaths() etc:\n>\n>    Note that many R installations, notably on the Mac (your case) and on\n>    Windows are setup to install all packages into R's main package\n>    library. Under such circumstance, within R, your\n>       .libPaths()\n>    only contains one library location ('lib.loc') path with all packages in it,\n>    (possibly augmented with an extra one in your personal / \"home\" directory.)\n>\n>    Other OSes, e.g. Debian or Ubuntu Linux would use separate\n>    libraries to install packages in,  and I have personally  never\n>    installed packages into R's own library, but rather separately.\n>\n>      > and I am wondering whether I can make ?oce? hook up with this. However, I don?t know if that is there just on my machine because I have the R ?proj4? package installed (or perhaps ?rgdal?, which also uses PROJ.4), etc.\n>\n> Indeed, you guessed correctly, this is just because you've\n> installed proj4 into R's own library.\n>\n>      > So, the simple question is: what do you do if a CRAN team member suggests that you remove PROJ.4 source code from your package and instead use the version that is on CRAN build computers?\n>\n> I think it would be a very good idea if you'd use the  PROJ.4\n> C library that is provided already by the proj4 CRAN package\n> instead of shipping your own (typically slightly differing!) version.\n>\n> You possibly should collaborate with the proj4 maintainer,\n> because he would have to make part of the C API available to\n> other packages, and your 'oce' could then add a\n> --------------------\n> LinkingTo: proj4\n> --------------------\n> line to   oce/DESCRIPTION\n>\n> I hope this gets you started in the right direction.\n>\n> Martin Maechler, ETH Zurich\n>\n>\n>      > I hope this is fairly clear, although I realize I am being probably too wordy.  Let me add to the words by thanking those who have set up this email group. It is a wonderful addition to the R world. At the moment, the CRAN team probably uses up a great deal of time dealing with people like me who are stumbling a bit, to try to find the best way to do things.  Members of the CRAN team have been wonderfully generous to me, in pointing out things I?ve done wrong in package development, but this seems to me to be an undue burden on them. Let?s hope that package developers can help each other!\n>\n>      > Dan Kelley / Department of Oceanography / Dalhousie University / Nova Scotia / Canada\n>\n>\n>      > [1] ? The oce package cannot pass the map-projection work to the ?proj4? package, because the proj4::project() produces an error when any point in a vector of geographical locations is ?off scale? for the map projection at hand. A solution is to call proj4::project() for each point in turn, using try() to find out which results should be c(NA,NA). This is slow for datasets with many points, e.g. world coastlines\n>\n>      > [2] ? ?oce? needs inverse projections, so the ?mapproj? package is insufficient.\n>\n>      > [3] ? Quite a few users are at government or other sites where building packages is possible, but where they do not have permission to install new libraries (such as PROJ.4) in e.g. /usr. I don?t want such users to be cut out from using the development version of ?oce?, because that makes it hard for me to fix problems that they may encounter or to add new capabilities to the development version of ?oce? to allow them to do their work.\n>      > ______________________________________________\n>      > R-package-devel at r-project.org mailing list\n>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "Yes, and a CRAN team member already suggested:\n\n\"All CRAN build/test systems have proj4 installed (packages rgdal and \nproj need it) and it would have been better to link to libproj as those \npackages do.\"\n\nBest,\nUwe Ligges\n\n\n\n\n\n\nOn 22.05.2015 16:39, Martin Maechler wrote:\n>>>>>> Daniel Kelley <Dan.Kelley at Dal.Ca>\n>>>>>>      on Fri, 22 May 2015 10:56:21 +0000 writes:\n>\n>      > The “oce” package (for oceanographic analysis) presently includes PROJ.4 C-language source code, as a way to work with map projections (see [1,2] for why I do this).  It has been suggested that a separate PROJ.4 library be used instead, and that a version of that library is available on the CRAN build machines.\n>      > I am wondering whether anyone can advise on how “oce” should hook up with this external PROJ.4 library. As explained at [3], I would prefer not to require users to download and install PROJ.4 themselves. (By the way, a strict download of the official PROJ.4 is not helpful, because it is peppered with fprintf() calls that should be Rprintf() calls, and also with exit() calls that should be error() calls.)\n>\n>      > I have noticed that on my OSX machine, R has proj4 stored within itself, e.g.\n>\n>      > $ nm -g /Library/Frameworks/R.framework/Versions/3.2/Resources/library/proj4/libs/proj4.so | grep pj_init\n>      > 00000000000254d0 T _pj_init \t\n>      > 00000000000247c0 T _pj_init_ctx\n>      > 0000000000025680 T _pj_init_plus\n>      > 0000000000025510 T _pj_init_plus_ctx\n>\n> ... Well, not quite: That's not R, that was you, when you\n> installed the CRAN package called  'proj4'.\n>\n> Excursion about  libraries of packages, .libPaths() etc:\n>\n>    Note that many R installations, notably on the Mac (your case) and on\n>    Windows are setup to install all packages into R's main package\n>    library. Under such circumstance, within R, your\n>       .libPaths()\n>    only contains one library location ('lib.loc') path with all packages in it,\n>    (possibly augmented with an extra one in your personal / \"home\" directory.)\n>\n>    Other OSes, e.g. Debian or Ubuntu Linux would use separate\n>    libraries to install packages in,  and I have personally  never\n>    installed packages into R's own library, but rather separately.\n>\n>      > and I am wondering whether I can make “oce” hook up with this. However, I don’t know if that is there just on my machine because I have the R “proj4” package installed (or perhaps “rgdal”, which also uses PROJ.4), etc.\n>\n> Indeed, you guessed correctly, this is just because you've\n> installed proj4 into R's own library.\n>\n>      > So, the simple question is: what do you do if a CRAN team member suggests that you remove PROJ.4 source code from your package and instead use the version that is on CRAN build computers?\n>\n> I think it would be a very good idea if you'd use the  PROJ.4\n> C library that is provided already by the proj4 CRAN package\n> instead of shipping your own (typically slightly differing!) version.\n>\n> You possibly should collaborate with the proj4 maintainer,\n> because he would have to make part of the C API available to\n> other packages, and your 'oce' could then add a\n> --------------------\n> LinkingTo: proj4\n> --------------------\n> line to   oce/DESCRIPTION\n>\n> I hope this gets you started in the right direction.\n>\n> Martin Maechler, ETH Zurich\n>\n>\n>      > I hope this is fairly clear, although I realize I am being probably too wordy.  Let me add to the words by thanking those who have set up this email group. It is a wonderful addition to the R world. At the moment, the CRAN team probably uses up a great deal of time dealing with people like me who are stumbling a bit, to try to find the best way to do things.  Members of the CRAN team have been wonderfully generous to me, in pointing out things I’ve done wrong in package development, but this seems to me to be an undue burden on them. Let’s hope that package developers can help each other!\n>\n>      > Dan Kelley / Department of Oceanography / Dalhousie University / Nova Scotia / Canada\n>\n>\n>      > [1] — The oce package cannot pass the map-projection work to the “proj4” package, because the proj4::project() produces an error when any point in a vector of geographical locations is “off scale” for the map projection at hand. A solution is to call proj4::project() for each point in turn, using try() to find out which results should be c(NA,NA). This is slow for datasets with many points, e.g. world coastlines\n>\n>      > [2] — “oce” needs inverse projections, so the “mapproj” package is insufficient.\n>\n>      > [3] — Quite a few users are at government or other sites where building packages is possible, but where they do not have permission to install new libraries (such as PROJ.4) in e.g. /usr. I don’t want such users to be cut out from using the development version of “oce”, because that makes it hard for me to fix problems that they may encounter or to add new capabilities to the development version of “oce” to allow them to do their work.\n>      > ______________________________________________\n>      > R-package-devel at r-project.org mailing list\n>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "Yes, and a CRAN team member already suggested:\n\n\"All CRAN build/test systems have proj4 installed (packages rgdal and \nproj need it) and it would have been better to link to libproj as those \npackages",
       "thread_id": "thread-6ee39e24aacf",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000015.html"
     },
     {
       "id": "msg-34a23b9a8532",
@@ -311,7 +327,8 @@
       "body_snippet": "> Yes, and a CRAN team member already suggested:\n>\n> \"All CRAN build/test systems have proj4 installed (packages rgdal and proj\n> need it) and it would have been better to link to libproj as those pac",
       "thread_id": "thread-6ee39e24aacf",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000016.html"
     },
     {
       "id": "msg-a5c87cc261cb",
@@ -327,7 +344,8 @@
       "body_snippet": "Hello everyone-\n\nI've been updating a package (https://github.com/PheWAS/PheWAS/tree/0.10) to comply with R 3.2.0 depends, suggests, and imports standards.\n\nPheWAS suggests snowfall as it uses snowfal",
       "thread_id": "thread-a5c87cc261cb",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000017.html"
     },
     {
       "id": "msg-3f0de5ff93a4",
@@ -345,7 +363,8 @@
       "body_snippet": "It makes more sense to rely on something that uses package parallel \nthese days (rather than snowfall/snow).\n\nMost snow functionality has been ported to parallel and partly improved \nthere and snowfal",
       "thread_id": "thread-a5c87cc261cb",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000018.html"
     },
     {
       "id": "msg-d12875abcbd7",
@@ -361,7 +380,8 @@
       "body_snippet": "I am updating the HH package and have series of messages that I don't recognize.\n\nbash-3.2$ R CMD check HH2\n* using log directory '/Users/rmh/WindowsC/HOME/rmh/HH-R.package/HH2.Rcheck'\n* using R Under",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000020.html"
     },
     {
       "id": "msg-8b74542c2494",
@@ -379,7 +399,8 @@
       "body_snippet": "followup.\n\nI backed up to R-3.1.2 and fixed the problems it found.\nThen I tried again with R-3.2.0 and I am still getting these messages\n\nError in validObject(.Object) :\n  invalid class \"ObjectsWithPa",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000021.html"
     },
     {
       "id": "msg-5b90b1f4ae30",
@@ -400,7 +421,8 @@
       "body_snippet": "So I pat and hope for the best ...\n\nand am happy to have used ghrr as additional repo for my CRAN submission.  \nCRAN agrees and has accepted wikipediatrend with ghrr as an additional  \nnon-mainstream ",
       "thread_id": "thread-d86827d23ce6",
       "thread_depth": 4,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000019.html"
     },
     {
       "id": "msg-53cbf9ca5f35",
@@ -422,7 +444,8 @@
       "body_snippet": "On 23 May 2015 at 10:57, Peter Meissner wrote:\n| So I pat and hope for the best ...\n| \n| and am happy to have used ghrr as additional repo for my CRAN submission.  \n| CRAN agrees and has accepted wiki",
       "thread_id": "thread-d86827d23ce6",
       "thread_depth": 5,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000022.html"
     },
     {
       "id": "msg-5abcc26ac827",
@@ -441,7 +464,8 @@
       "body_snippet": "Can you try a more recent version of R-devel with all relevant packages \nyou depend on re-installed?\n\nLooks like either a bug in that months old version of R-devel or an \ninconsistancy of installed pa",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000023.html"
     },
     {
       "id": "msg-c25cceec987c",
@@ -461,7 +485,8 @@
       "body_snippet": "The problem is still there.  I am working on both Windows and Macintosh.\n\nThe packages I have check clean using R-3.1.2 on Windows.\nThey \"INSTALL --build\" and \"build\" using 3.3.0-devl on Windows and 3",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000024.html"
     },
     {
       "id": "msg-3695052acc48",
@@ -482,7 +507,8 @@
       "body_snippet": "Two ideas:\n\n1. Solve the first error at first:\n\nError in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), \nversionCheck = vI[[j]]) :\n   there is no package called 'abind'\nError: package or namespa",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 4,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000025.html"
     },
     {
       "id": "msg-d477d1fc92bb",
@@ -504,7 +530,8 @@
       "body_snippet": "I am still working on your suggestions.  While doing so I found a more\ngeneral concern.\n\nI am now trapped in incompatible circular dependencies.  I don't know\nhow to resolve them.\n\nThe immediate speci",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 5,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000026.html"
     },
     {
       "id": "msg-1975ef84949c",
@@ -527,7 +554,8 @@
       "body_snippet": "On 25.05.2015 18:59, Richard M. Heiberger wrote:\n> I am still working on your suggestions.  While doing so I found a more\n> general concern.\n>\n> I am now trapped in incompatible circular dependencies.",
       "thread_id": "thread-d12875abcbd7",
       "thread_depth": 6,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000027.html"
     },
     {
       "id": "msg-8d9f895e9ba0",
@@ -553,7 +581,8 @@
       "body_snippet": "I posted three files to\nhttp://astro.temple.edu/~rmh/HH-test/\n\nHH_3.1-17.tar.gz  ## my development version of HH.\n\n00check-HH-R-3.1.2.log ## it passes R-3.1.2 cleanly\n\n00check-HH-r68399.log ## many me",
       "thread_id": "thread-8d9f895e9ba0",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000028.html"
     },
     {
       "id": "msg-d075372b6acd",
@@ -569,7 +598,8 @@
       "body_snippet": "Hello All,\n\nFirst of all, thanks to Martin, Hadley, and Dirk (and everybody else involved) for setting up this new mailing list. I am sure this will become a tremendous resource for package developers",
       "thread_id": "thread-d075372b6acd",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000029.html"
     },
     {
       "id": "msg-624c2eabf7e4",
@@ -587,7 +617,8 @@
       "body_snippet": "For what it's worth I did install a Solaris VM on one of my machines\nso I could run tests.  This does seem a little over the top as a\nrequirement for all package developers though ... I have easy acce",
       "thread_id": "thread-d075372b6acd",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000031.html"
     },
     {
       "id": "msg-a80305901e6b",
@@ -606,7 +637,8 @@
       "body_snippet": "Just went back and re-read the mailing list thread -- I think my VM is\nSolaris x86, so doesn't address the Sparc Solaris question anyway ...\n\nOn Mon, May 25, 2015 at 6:24 PM, Ben Bolker <bbolker at gm",
       "thread_id": "thread-d075372b6acd",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000032.html"
     },
     {
       "id": "msg-5af26b459b7c",
@@ -624,7 +656,8 @@
       "body_snippet": "On 26 May 2015 at 00:13, Viechtbauer Wolfgang (STAT) wrote:\n| Is there any possibility of checking packages on various architectures, and\n| especially Sparc Solaris, before submitting?\n\nNot that I kno",
       "thread_id": "thread-d075372b6acd",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000030.html"
     },
     {
       "id": "msg-55f4bcb83016",
@@ -642,7 +675,8 @@
       "body_snippet": "Hi There,\n\nCan you please help me with this query please?\nThanks in advance,\nChaitanya\n\nDr. Chaitanya Joshi\n\nSenior Lecturer,\nDepartment of Statistics,\nUniversity of Waikato,\nHamilton, New Zealand.\n\nW",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000033.html"
     },
     {
       "id": "msg-3e1999c52597",
@@ -661,7 +695,8 @@
       "body_snippet": "Thanks for the reply, Ben.\n\nExcluding Solaris from (some of the) tests is of course one (rather brute-force) way of circumventing the issue. And in fact, if I hadn't been able to resolve the errors, I",
       "thread_id": "thread-d075372b6acd",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000034.html"
     },
     {
       "id": "msg-c2a055a3aa67",
@@ -677,7 +712,8 @@
       "body_snippet": "I was afraid so. In some of the previous exchanges, Martyn Plummer apparently offered help, but this was for solaris-x86, not sparc.\n\nHeck, many years ago, I used to own a SPARCstation 20 -- not that ",
       "thread_id": "thread-c2a055a3aa67",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000035.html"
     },
     {
       "id": "msg-1f56164305db",
@@ -696,7 +732,8 @@
       "body_snippet": "Hi Chaitanya,\n\nThat is strange the R CMD check is stalling but there didn't appear to be\nany attached screenshot.  I would be also beneficial if we could see/access\nyour source code.  Is your package ",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000036.html"
     },
     {
       "id": "msg-0f25e8e04184",
@@ -712,7 +749,8 @@
       "body_snippet": "Dear developers,\n\nFor an R package I am including some code I have written previously which\nuses stdout, stderr and printf. The command R CMD check [packagename] gives\nme warnings about these items. W",
       "thread_id": "thread-0f25e8e04184",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000037.html"
     },
     {
       "id": "msg-dc2c882369f5",
@@ -730,7 +768,8 @@
       "body_snippet": "Hi Pieter,\n\nsearch for 'Rprintf' in the 'Writing R extensions' manual:\nhttp://cran.r-project.org/doc/manuals/r-release/R-exts.html\n\nGabor\n\nOn Tue, May 26, 2015 at 9:55 AM, Pieter Eendebak <pieter.eend",
       "thread_id": "thread-0f25e8e04184",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000038.html"
     },
     {
       "id": "msg-501977e786c1",
@@ -750,7 +789,8 @@
       "body_snippet": "On 26 May 2015 at 07:04, Charles Determan wrote:\n| That is strange the R CMD check is stalling but there didn't appear to be\n| any attached screenshot.  I would be also beneficial if we could see/acce",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000039.html"
     },
     {
       "id": "msg-c6bf2b8b5be8",
@@ -771,7 +811,8 @@
       "body_snippet": "On 26.05.2015 17:33, Dirk Eddelbuettel wrote:\n>\n> On 26 May 2015 at 07:04, Charles Determan wrote:\n> | That is strange the R CMD check is stalling but there didn't appear to be\n> | any attached screen",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000040.html"
     },
     {
       "id": "msg-4eae4cf62b43",
@@ -787,7 +828,8 @@
       "body_snippet": "Dan,\n\nI'm sorry to be late to the party (one is offline occasionally), but all \nthe advice given so far is at best only partially correct.\n\nUse of PROJ.4 is crucially conditional on access to PROJ_LIB",
       "thread_id": "thread-4eae4cf62b43",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000041.html"
     },
     {
       "id": "msg-959b52194997",
@@ -801,11 +843,12 @@
       "references": [
         "<alpine.LFD.2.11.1505262051240.29332@reclus.nhh.no>"
       ],
-      "body_plain": "Roger,\n\nI plan to make the next version of oce use rgdal::project() to do its work. The idea of using an external PROJ.4 is fine in my own work, but oce has a lot of users who are unaccustomed to building and installing external libraries. Also, many work at institutes that do not permit this kind of system modification. So, for oce I had to make a choice of including the C sources or using another package.\n\nAt first I felt the proj4 R package to be a natural candidate. However, it produces an error when any point in a lon-lat vector is ?offscale?, instead of inserting NA for the projected value. Indexing over a world coastline is too slow for practical work.\n\nOver the weekend I set up a test version of oce to use rgdal::project(), and it?s early days but things seem to be working well.\n\nI need to study the ?sp? package in more detail.  Maybe I?ll find the solution to a problem ?oce? has when lines in a coastal polygon ?cross over? the edge of the earth. This produces spurious domain-crossing lines when e.g. lon_0 is set to put the Pacific at the centre (a common choice of oceanographers).\n\nThanks VERY much for your detailed and helpful answer.  And thanks for your work on ?rgdal? and ?sp?, two very fine packages.\n\n? Dan.\n\nPS. glad to see more software going to github.\n\nDan Kelley\nOceanography Department\nDalhousie University\nHalifax, NS, Canada\n\n> On May 26, 2015, at 4:14 PM, Roger Bivand <Roger.Bivand at nhh.no> wrote:\n> \n> Dan,\n> \n> I'm sorry to be late to the party (one is offline occasionally), but all the advice given so far is at best only partially correct.\n> \n> Use of PROJ.4 is crucially conditional on access to PROJ_LIB a shell variable setting the address of metadata files not included in the C source. PROJ.4 without this access is very limited, not least because the EPSG listing of projections is not available, not to mention a small file of default values that recently floored rgdal and other packages using its PROJ.4 facilities (PROJ.4 4.9.1 omitted the file by mistake).\n> \n> At present, oce does not ship with PROJ_LIB at all. I agree that it does not need to ship with the PROJ.4 C source, and should, like rgdal and proj4, use the system PROJ.4 (or the CRAN PROJ.4). Only rgdal checks in ./configure for settings related to PROJ_LIB. Using PROJ.4 externally makes sense because of version shifting and missed bug fixes (there were some bad bugs before the aborted 4.9.0 release), and crucially updated metadata files. Using a single PROJ.4 on a platform avoids different applications seeing possibly different metadata.\n> \n> My guess would be that anything you might need to do can be done using function stubs exported by rgdal for use in raster (the package). You are free to choose not to use sp objects, but you'll find that the high-level support for these in rgdal is robust and well-motivated.\n> \n> If you go for the proj4 rather than rgdal solution, do make sure that the CRAN Windows and OSX binaries are built with the metadata PROJ_LIB copied to the binary packages.\n> \n> Again, apologies for not jumping in at the right time.\n> \n> Roger\n> \n> PS. Please also note that PROJ.4 is moving to\n> \n> https://github.com/OSGeo/proj.4\n> \n> -- \n> Roger Bivand\n> Department of Economics, Norwegian School of Economics,\n> Helleveien 30, N-5045 Bergen, Norway.\n> voice: +47 55 95 93 55; fax +47 55 95 91 00\n> e-mail: Roger.Bivand at nhh.no\n>",
+      "body_plain": "Roger,\n\nI plan to make the next version of oce use rgdal::project() to do its work. The idea of using an external PROJ.4 is fine in my own work, but oce has a lot of users who are unaccustomed to building and installing external libraries. Also, many work at institutes that do not permit this kind of system modification. So, for oce I had to make a choice of including the C sources or using another package.\n\nAt first I felt the proj4 R package to be a natural candidate. However, it produces an error when any point in a lon-lat vector is “offscale”, instead of inserting NA for the projected value. Indexing over a world coastline is too slow for practical work.\n\nOver the weekend I set up a test version of oce to use rgdal::project(), and it’s early days but things seem to be working well.\n\nI need to study the “sp” package in more detail.  Maybe I’ll find the solution to a problem “oce” has when lines in a coastal polygon “cross over” the edge of the earth. This produces spurious domain-crossing lines when e.g. lon_0 is set to put the Pacific at the centre (a common choice of oceanographers).\n\nThanks VERY much for your detailed and helpful answer.  And thanks for your work on “rgdal” and “sp”, two very fine packages.\n\n— Dan.\n\nPS. glad to see more software going to github.\n\nDan Kelley\nOceanography Department\nDalhousie University\nHalifax, NS, Canada\n\n> On May 26, 2015, at 4:14 PM, Roger Bivand <Roger.Bivand at nhh.no> wrote:\n> \n> Dan,\n> \n> I'm sorry to be late to the party (one is offline occasionally), but all the advice given so far is at best only partially correct.\n> \n> Use of PROJ.4 is crucially conditional on access to PROJ_LIB a shell variable setting the address of metadata files not included in the C source. PROJ.4 without this access is very limited, not least because the EPSG listing of projections is not available, not to mention a small file of default values that recently floored rgdal and other packages using its PROJ.4 facilities (PROJ.4 4.9.1 omitted the file by mistake).\n> \n> At present, oce does not ship with PROJ_LIB at all. I agree that it does not need to ship with the PROJ.4 C source, and should, like rgdal and proj4, use the system PROJ.4 (or the CRAN PROJ.4). Only rgdal checks in ./configure for settings related to PROJ_LIB. Using PROJ.4 externally makes sense because of version shifting and missed bug fixes (there were some bad bugs before the aborted 4.9.0 release), and crucially updated metadata files. Using a single PROJ.4 on a platform avoids different applications seeing possibly different metadata.\n> \n> My guess would be that anything you might need to do can be done using function stubs exported by rgdal for use in raster (the package). You are free to choose not to use sp objects, but you'll find that the high-level support for these in rgdal is robust and well-motivated.\n> \n> If you go for the proj4 rather than rgdal solution, do make sure that the CRAN Windows and OSX binaries are built with the metadata PROJ_LIB copied to the binary packages.\n> \n> Again, apologies for not jumping in at the right time.\n> \n> Roger\n> \n> PS. Please also note that PROJ.4 is moving to\n> \n> https://github.com/OSGeo/proj.4\n> \n> -- \n> Roger Bivand\n> Department of Economics, Norwegian School of Economics,\n> Helleveien 30, N-5045 Bergen, Norway.\n> voice: +47 55 95 93 55; fax +47 55 95 91 00\n> e-mail: Roger.Bivand at nhh.no\n>",
       "body_snippet": "Roger,\n\nI plan to make the next version of oce use rgdal::project() to do its work. The idea of using an external PROJ.4 is fine in my own work, but oce has a lot of users who are unaccustomed to buil",
       "thread_id": "thread-4eae4cf62b43",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000042.html"
     },
     {
       "id": "msg-f15acdb1fe12",
@@ -827,7 +870,8 @@
       "body_snippet": "Hi all,\n\nThanks for your suggestions.\n\n1. As I said, the the same package code was running was R.3.1.2 earlier \nand giving no errors... so not sure if it has to do with the package code\n2. We checked ",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 4,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000043.html"
     },
     {
       "id": "msg-9e908666e7d7",
@@ -842,11 +886,12 @@
         "<alpine.LFD.2.11.1505262051240.29332@reclus.nhh.no>",
         "<85186A70-282D-49A2-8C3A-188C84A7CAD1@dal.ca>"
       ],
-      "body_plain": "On Tue, 26 May 2015, Daniel Kelley wrote:\n\n> Roger,\n>\n> I plan to make the next version of oce use rgdal::project() to do its \n> work. The idea of using an external PROJ.4 is fine in my own work, but \n> oce has a lot of users who are unaccustomed to building and installing \n> external libraries. Also, many work at institutes that do not permit \n> this kind of system modification. So, for oce I had to make a choice of \n> including the C sources or using another package.\n\nDan,\n\n(while this might seem very specialised, it's actually an example of a \ntypical package development problem, that of accessing facilities in one \npackage from another).\n\nI suggest using rgdal::rawTransform() instead of rgdal::project(), because \nit calls the PROJ.4 pj_transform, rather than pj_fwd or pj_inv, and so \npermitting datum transformation. rgdal::rawTransform() was contributed to \nrgdal by Robert Hijmans to make it easier to write code in the raster \npackage using rgdal facilities; it is in rgdal/R/wrappers.R. Look at how \nRobert handles the import from the rgdal NAMESPACE into raster.\n\nRoger\n\nPS. I'm afraid that there isn't an easy solution to the wrap-around on the \nback of the globe - most of the fixes involve breaking geometries on the \n\"other\" side to work around the problem.\n\n>\n> At first I felt the proj4 R package to be a natural candidate. However, \n> it produces an error when any point in a lon-lat vector is ?offscale?, \n> instead of inserting NA for the projected value. Indexing over a world \n> coastline is too slow for practical work.\n>\n> Over the weekend I set up a test version of oce to use rgdal::project(), \n> and it?s early days but things seem to be working well.\n>\n> I need to study the ?sp? package in more detail.  Maybe I?ll find the \n> solution to a problem ?oce? has when lines in a coastal polygon ?cross \n> over? the edge of the earth. This produces spurious domain-crossing \n> lines when e.g. lon_0 is set to put the Pacific at the centre (a common \n> choice of oceanographers).\n>\n> Thanks VERY much for your detailed and helpful answer.  And thanks for \n> your work on ?rgdal? and ?sp?, two very fine packages.\n>\n> ? Dan.\n>\n> PS. glad to see more software going to github.\n>\n> Dan Kelley\n> Oceanography Department\n> Dalhousie University\n> Halifax, NS, Canada\n>\n>> On May 26, 2015, at 4:14 PM, Roger Bivand <Roger.Bivand at nhh.no> wrote:\n>>\n>> Dan,\n>>\n>> I'm sorry to be late to the party (one is offline occasionally), but all the advice given so far is at best only partially correct.\n>>\n>> Use of PROJ.4 is crucially conditional on access to PROJ_LIB a shell variable setting the address of metadata files not included in the C source. PROJ.4 without this access is very limited, not least because the EPSG listing of projections is not available, not to mention a small file of default values that recently floored rgdal and other packages using its PROJ.4 facilities (PROJ.4 4.9.1 omitted the file by mistake).\n>>\n>> At present, oce does not ship with PROJ_LIB at all. I agree that it does not need to ship with the PROJ.4 C source, and should, like rgdal and proj4, use the system PROJ.4 (or the CRAN PROJ.4). Only rgdal checks in ./configure for settings related to PROJ_LIB. Using PROJ.4 externally makes sense because of version shifting and missed bug fixes (there were some bad bugs before the aborted 4.9.0 release), and crucially updated metadata files. Using a single PROJ.4 on a platform avoids different applications seeing possibly different metadata.\n>>\n>> My guess would be that anything you might need to do can be done using function stubs exported by rgdal for use in raster (the package). You are free to choose not to use sp objects, but you'll find that the high-level support for these in rgdal is robust and well-motivated.\n>>\n>> If you go for the proj4 rather than rgdal solution, do make sure that the CRAN Windows and OSX binaries are built with the metadata PROJ_LIB copied to the binary packages.\n>>\n>> Again, apologies for not jumping in at the right time.\n>>\n>> Roger\n>>\n>> PS. Please also note that PROJ.4 is moving to\n>>\n>> https://github.com/OSGeo/proj.4\n>>\n>> --\n>> Roger Bivand\n>> Department of Economics, Norwegian School of Economics,\n>> Helleveien 30, N-5045 Bergen, Norway.\n>> voice: +47 55 95 93 55; fax +47 55 95 91 00\n>> e-mail: Roger.Bivand at nhh.no\n>>\n>\n>\n>\n>\n>\n>\n>\n\n-- \nRoger Bivand\nDepartment of Economics, Norwegian School of Economics,\nHelleveien 30, N-5045 Bergen, Norway.\nvoice: +47 55 95 93 55; fax +47 55 95 91 00\ne-mail: Roger.Bivand at nhh.no",
+      "body_plain": "On Tue, 26 May 2015, Daniel Kelley wrote:\n\n> Roger,\n>\n> I plan to make the next version of oce use rgdal::project() to do its \n> work. The idea of using an external PROJ.4 is fine in my own work, but \n> oce has a lot of users who are unaccustomed to building and installing \n> external libraries. Also, many work at institutes that do not permit \n> this kind of system modification. So, for oce I had to make a choice of \n> including the C sources or using another package.\n\nDan,\n\n(while this might seem very specialised, it's actually an example of a \ntypical package development problem, that of accessing facilities in one \npackage from another).\n\nI suggest using rgdal::rawTransform() instead of rgdal::project(), because \nit calls the PROJ.4 pj_transform, rather than pj_fwd or pj_inv, and so \npermitting datum transformation. rgdal::rawTransform() was contributed to \nrgdal by Robert Hijmans to make it easier to write code in the raster \npackage using rgdal facilities; it is in rgdal/R/wrappers.R. Look at how \nRobert handles the import from the rgdal NAMESPACE into raster.\n\nRoger\n\nPS. I'm afraid that there isn't an easy solution to the wrap-around on the \nback of the globe - most of the fixes involve breaking geometries on the \n\"other\" side to work around the problem.\n\n>\n> At first I felt the proj4 R package to be a natural candidate. However, \n> it produces an error when any point in a lon-lat vector is “offscale”, \n> instead of inserting NA for the projected value. Indexing over a world \n> coastline is too slow for practical work.\n>\n> Over the weekend I set up a test version of oce to use rgdal::project(), \n> and it’s early days but things seem to be working well.\n>\n> I need to study the “sp” package in more detail.  Maybe I’ll find the \n> solution to a problem “oce” has when lines in a coastal polygon “cross \n> over” the edge of the earth. This produces spurious domain-crossing \n> lines when e.g. lon_0 is set to put the Pacific at the centre (a common \n> choice of oceanographers).\n>\n> Thanks VERY much for your detailed and helpful answer.  And thanks for \n> your work on “rgdal” and “sp”, two very fine packages.\n>\n> — Dan.\n>\n> PS. glad to see more software going to github.\n>\n> Dan Kelley\n> Oceanography Department\n> Dalhousie University\n> Halifax, NS, Canada\n>\n>> On May 26, 2015, at 4:14 PM, Roger Bivand <Roger.Bivand at nhh.no> wrote:\n>>\n>> Dan,\n>>\n>> I'm sorry to be late to the party (one is offline occasionally), but all the advice given so far is at best only partially correct.\n>>\n>> Use of PROJ.4 is crucially conditional on access to PROJ_LIB a shell variable setting the address of metadata files not included in the C source. PROJ.4 without this access is very limited, not least because the EPSG listing of projections is not available, not to mention a small file of default values that recently floored rgdal and other packages using its PROJ.4 facilities (PROJ.4 4.9.1 omitted the file by mistake).\n>>\n>> At present, oce does not ship with PROJ_LIB at all. I agree that it does not need to ship with the PROJ.4 C source, and should, like rgdal and proj4, use the system PROJ.4 (or the CRAN PROJ.4). Only rgdal checks in ./configure for settings related to PROJ_LIB. Using PROJ.4 externally makes sense because of version shifting and missed bug fixes (there were some bad bugs before the aborted 4.9.0 release), and crucially updated metadata files. Using a single PROJ.4 on a platform avoids different applications seeing possibly different metadata.\n>>\n>> My guess would be that anything you might need to do can be done using function stubs exported by rgdal for use in raster (the package). You are free to choose not to use sp objects, but you'll find that the high-level support for these in rgdal is robust and well-motivated.\n>>\n>> If you go for the proj4 rather than rgdal solution, do make sure that the CRAN Windows and OSX binaries are built with the metadata PROJ_LIB copied to the binary packages.\n>>\n>> Again, apologies for not jumping in at the right time.\n>>\n>> Roger\n>>\n>> PS. Please also note that PROJ.4 is moving to\n>>\n>> https://github.com/OSGeo/proj.4\n>>\n>> --\n>> Roger Bivand\n>> Department of Economics, Norwegian School of Economics,\n>> Helleveien 30, N-5045 Bergen, Norway.\n>> voice: +47 55 95 93 55; fax +47 55 95 91 00\n>> e-mail: Roger.Bivand at nhh.no\n>>\n>\n>\n>\n>\n>\n>\n>\n\n-- \nRoger Bivand\nDepartment of Economics, Norwegian School of Economics,\nHelleveien 30, N-5045 Bergen, Norway.\nvoice: +47 55 95 93 55; fax +47 55 95 91 00\ne-mail: Roger.Bivand at nhh.no",
       "body_snippet": "On Tue, 26 May 2015, Daniel Kelley wrote:\n\n> Roger,\n>\n> I plan to make the next version of oce use rgdal::project() to do its \n> work. The idea of using an external PROJ.4 is fine in my own work, but ",
       "thread_id": "thread-4eae4cf62b43",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000044.html"
     },
     {
       "id": "msg-9d5f292aa3a4",
@@ -862,7 +907,8 @@
       "body_snippet": "I posted a package\n    trivial_3.1-18.tar.gz\nand the\n    00check-trivial.log\nfrom R-devel at\n\n     http://astro.temple.edu/~rmh/HH-test/\n\nThe package contains one function\ntrivial <- function(...) {}\n",
       "thread_id": "thread-9d5f292aa3a4",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000045.html"
     },
     {
       "id": "msg-da62a97a077d",
@@ -880,7 +926,8 @@
       "body_snippet": "On 28/05/2015 9:19 AM, Richard M. Heiberger wrote:\n> I posted a package\n>      trivial_3.1-18.tar.gz\n> and the\n>      00check-trivial.log\n> from R-devel at\n>\n>       http://astro.temple.edu/~rmh/HH-te",
       "thread_id": "thread-9d5f292aa3a4",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000046.html"
     },
     {
       "id": "msg-a10873e9d61e",
@@ -899,7 +946,8 @@
       "body_snippet": "These \"Error in validObject(.Object) : messages started appearing with\n* using R Under development (unstable) (2015-02-12 r67812)\nand are in the released R-3.2.0\n\nI am seeing it now because I last pos",
       "thread_id": "thread-9d5f292aa3a4",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000047.html"
     },
     {
       "id": "msg-8c01f5732ea8",
@@ -915,7 +963,8 @@
       "body_snippet": "When developing a new package we want to have a license attributed to that\npackage.  That said, I am a little confused how one would approach the MIT\nlicense.  I am working on a package that extends u",
       "thread_id": "thread-8c01f5732ea8",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000048.html"
     },
     {
       "id": "msg-a8f1865f4f8c",
@@ -933,7 +982,8 @@
       "body_snippet": "Hi,\n\nI am not a lawyer, but as far as I know, the MIT license allows \nre-licensing of derived work under the GPL.\n\nSee: http://en.wikipedia.org/wiki/License_compatibility\n\nhttp://en.wikipedia.org/wiki",
       "thread_id": "thread-8c01f5732ea8",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000055.html"
     },
     {
       "id": "msg-d1c16f62546e",
@@ -951,7 +1001,8 @@
       "body_snippet": "IANAL, but if you are just importing or depending on another package, you\nshouldn't need to worry about this. If you\ncopied their code into your own package, you should probably rethink your\napproach.",
       "thread_id": "thread-8c01f5732ea8",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000049.html"
     },
     {
       "id": "msg-0c162444730b",
@@ -969,7 +1020,8 @@
       "body_snippet": "IANAL, too, but if you are indeed extending (i.e. embedding or\ncopying) another package, then you need to put all copyright holders\ninto the LICENSE file.\n\nIn the individual files, you can explain who",
       "thread_id": "thread-8c01f5732ea8",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000050.html"
     },
     {
       "id": "msg-0116ecdbae70",
@@ -991,7 +1043,8 @@
       "body_snippet": "> Wild guess: It's not the package but the file system or file permissions so\n> that you cannot determine the size.\n\nDo you have any thoughts on where specifically to look? Permissions of\nthe library ",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 4,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000051.html"
     },
     {
       "id": "msg-2178ba93069f",
@@ -1014,7 +1067,8 @@
       "body_snippet": "I guess a package that was installed by root and later on checked by a \nregular user or some such, so that permissions do not match.\n\nI think I'd try to remove the package from all libraries and try a",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 5,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000052.html"
     },
     {
       "id": "msg-7c5f8394a4c3",
@@ -1038,7 +1092,8 @@
       "body_snippet": "Ok, it looks like it's actually quite a subtle problem. (Thanks to\nWinston Chang for tracking it down). The root of the problem appears\nto be the call to du at\nhttps://github.com/wch/r-source/blob/9ff",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 6,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000053.html"
     },
     {
       "id": "msg-4c7719b6849b",
@@ -1063,7 +1118,8 @@
       "body_snippet": "I should also mention that on the machine that had this problem, the user\nhad installed some software that provided the du program in\nc:/windows/system32.\n\nOn that machine, with 64-bit R:\n\n> > system2",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 7,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000056.html"
     },
     {
       "id": "msg-e0ddb8088ec0",
@@ -1088,7 +1144,8 @@
       "body_snippet": "[re-sending using from email address for this list]\n\nOn Thu, May 28, 2015 at 7:53 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> Ok, it looks like it's actually quite a subtle problem. (Thanks t",
       "thread_id": "thread-55f4bcb83016",
       "thread_depth": 7,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000054.html"
     },
     {
       "id": "msg-e2d272a060bc",
@@ -1104,7 +1161,8 @@
       "body_snippet": "Dear developers,\n\nHow can I specify the license for my package when my package includes some\ncode with other licenses (and different copyright holders). In particular:\n\n- my package is BSD 2-clause\n- ",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000057.html"
     },
     {
       "id": "msg-7ef4273a0b5f",
@@ -1122,7 +1180,8 @@
       "body_snippet": "Dear Pieter,\n\nthere was recently a related discussion in the JSS editorial board. Some \npeople took the position that there should be maximum possible freedom \nfor software developers in choosing an a",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000058.html"
     },
     {
       "id": "msg-d40109f6c93d",
@@ -1140,7 +1199,8 @@
       "body_snippet": "On 29 May 2015 at 11:44, Pieter Eendebak wrote:\n| Dear developers,\n| \n| How can I specify the license for my package when my package includes some\n| code with other licenses (and different copyright h",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000059.html"
     },
     {
       "id": "msg-2f951fa02b71",
@@ -1159,7 +1219,8 @@
       "body_snippet": "Thank you Thomas, I guess there is nothing, that I am aware of, that\nprevents me from releasing with GPL >= 2 but I wanted to get some insights\nas to what would be a best practice.  I prefer to give a",
       "thread_id": "thread-8c01f5732ea8",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000060.html"
     },
     {
       "id": "msg-69f3487cb47d",
@@ -1178,7 +1239,8 @@
       "body_snippet": "On 05/29/2015 07:56 AM, Dirk Eddelbuettel wrote:\n> Lastly, in many cases [eg when you link against libR], the \"aggregate work\"\n> will be under GPL (>= 2) anyway.  But within the \"aggregate work\" the c",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000061.html"
     },
     {
       "id": "msg-8be37dbca6dc",
@@ -1197,7 +1259,8 @@
       "body_snippet": "On Fri, 29 May 2015, Dirk Eddelbuettel wrote:\n\n>\n> On 29 May 2015 at 11:44, Pieter Eendebak wrote:\n> | Dear developers,\n> |\n> | How can I specify the license for my package when my package includes so",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000062.html"
     },
     {
       "id": "msg-c281b43ae41c",
@@ -1213,7 +1276,8 @@
       "body_snippet": "I am actively working on an R package that will incorporate some CUDA code\nfor using NVIDIA GPU devices.  I am quite familiar with Rcpp for C++ code\nand accustomed to using a Makevars file for specify",
       "thread_id": "thread-c281b43ae41c",
       "thread_depth": 0,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000063.html"
     },
     {
       "id": "msg-b1ec88980ad6",
@@ -1231,7 +1295,8 @@
       "body_snippet": "On 29/05/2015 9:52 AM, Charles Determan wrote:\n> I am actively working on an R package that will incorporate some CUDA code\n> for using NVIDIA GPU devices.  I am quite familiar with Rcpp for C++ code\n",
       "thread_id": "thread-c281b43ae41c",
       "thread_depth": 1,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000064.html"
     },
     {
       "id": "msg-217d81f8b001",
@@ -1250,7 +1315,8 @@
       "body_snippet": "The GitHub search feature is also quite useful for seeing how other package\nauthors have constructed Makevars (or Makevars.win) when compiling with\ncustom targets. For example, a quick search of how s",
       "thread_id": "thread-c281b43ae41c",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000065.html"
     },
     {
       "id": "msg-f6e8bb6eec10",
@@ -1270,7 +1336,8 @@
       "body_snippet": "On 29 May 2015 at 08:23, Drew Schmidt wrote:\n| \n| On 05/29/2015 07:56 AM, Dirk Eddelbuettel wrote:\n| > Lastly, in many cases [eg when you link against libR], the \"aggregate work\"\n| > will be under GPL",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000066.html"
     },
     {
       "id": "msg-1509d7b5a7aa",
@@ -1291,7 +1358,8 @@
       "body_snippet": "On 05/29/2015 03:31 PM, Dirk Eddelbuettel wrote:\n> Well neither you nor I are lawyers but folks at eg\n>\n>    Software Freedom Conservancy (https://sfconservancy.org/) and\n>\n>    Software Freedom Law C",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 4,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000067.html"
     },
     {
       "id": "msg-4babfa47d857",
@@ -1310,7 +1378,8 @@
       "body_snippet": "On Fri, May 29, 2015 at 1:56 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 29 May 2015 at 11:44, Pieter Eendebak wrote:\n> | Dear developers,\n> |\n> | How can I specify the license for my pac",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 2,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000068.html"
     },
     {
       "id": "msg-21b1d4c56132",
@@ -1330,7 +1399,8 @@
       "body_snippet": "On 31 May 2015 at 22:42, Pieter Eendebak wrote:\n| \n| On Fri, May 29, 2015 at 1:56 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n| \n|    \n|     On 29 May 2015 at 11:44, Pieter Eendebak wrote:\n|     ",
       "thread_id": "thread-e2d272a060bc",
       "thread_depth": 3,
-      "month": "2015-05"
+      "month": "2015-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q2/000069.html"
     }
   ],
   "threads": [

@@ -17,11 +17,12 @@
         "<56AA15B0.7070000@gmail.com>",
         "<56AA44E4.3060205@ivt.baug.ethz.ch>"
       ],
-      "body_plain": ">>>>> Kirill M?ller <kirill.mueller at ivt.baug.ethz.ch>\n>>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n\n    > On 28.01.2016 14:20, Duncan Murdoch wrote:\n    >> If the class is just \"mytable\", then you'll have to\n    >> change it to \"ftable\" before calling stats::format().\n    > Side note: The following will fail, because format.ftable\n    > double-checks the class of its argument:\n\n    > format_ftable <- utils::getS3method(\"format\", \"ftable\")\n    > format_ftable(mytable)\n\n    > -Kirill\n\nWell, I don't think it would fail as that does\n\n    if (!inherits(x, \"ftable\")) \n        stop(\"'x' must be an \\\"ftable\\\" object\")\n\nand the OP did mention that his objects were flat tables.\n\nNote that the above is *good style* as opposed to the  \"bad\"\ncode I've seen so often in packages (and otherwise) which would\nuse something like\n\n   if(class(x) == \"ftable\")  ## really really bad\n\nbecause that code will work incorrectly for objects with S3\nclass attribute, say   c(\"myFtable\", \"ftable\")\n\nMartin",
-      "body_snippet": ">>>>> Kirill M?ller <kirill.mueller at ivt.baug.ethz.ch>\n>>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n\n    > On 28.01.2016 14:20, Duncan Murdoch wrote:\n    >> If the class is just \"mytable\", t",
+      "body_plain": ">>>>> Kirill Müller <kirill.mueller at ivt.baug.ethz.ch>\n>>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n\n    > On 28.01.2016 14:20, Duncan Murdoch wrote:\n    >> If the class is just \"mytable\", then you'll have to\n    >> change it to \"ftable\" before calling stats::format().\n    > Side note: The following will fail, because format.ftable\n    > double-checks the class of its argument:\n\n    > format_ftable <- utils::getS3method(\"format\", \"ftable\")\n    > format_ftable(mytable)\n\n    > -Kirill\n\nWell, I don't think it would fail as that does\n\n    if (!inherits(x, \"ftable\")) \n        stop(\"'x' must be an \\\"ftable\\\" object\")\n\nand the OP did mention that his objects were flat tables.\n\nNote that the above is *good style* as opposed to the  \"bad\"\ncode I've seen so often in packages (and otherwise) which would\nuse something like\n\n   if(class(x) == \"ftable\")  ## really really bad\n\nbecause that code will work incorrectly for objects with S3\nclass attribute, say   c(\"myFtable\", \"ftable\")\n\nMartin",
+      "body_snippet": ">>>>> Kirill Müller <kirill.mueller at ivt.baug.ethz.ch>\n>>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n\n    > On 28.01.2016 14:20, Duncan Murdoch wrote:\n    >> If the class is just \"mytable\", t",
       "thread_id": "thread-8142d74850a7",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000679.html"
     },
     {
       "id": "msg-d3d3315f7139",
@@ -38,11 +39,12 @@
         "<56AA44E4.3060205@ivt.baug.ethz.ch>",
         "<22191.7190.852199.122299@stat.math.ethz.ch>"
       ],
-      "body_plain": ">     if (!inherits(x, \"ftable\")) \n>    if(class(x) == \"ftable\")  ## really really bad\n\n\nThank you Martin, for pointing that out!\nI was not aware of it yet and changed all occurences in my package and added in note in my R course material.\n\n(This message is mainly an encouragement that some people actually read the mails and act on it, even if not usually replying).\n\nRegards,\nBerry\n\n\n> From: maechler at stat.math.ethz.ch\n> Date: Mon, 1 Feb 2016 09:49:26 +0100\n> To: kirill.mueller at ivt.baug.ethz.ch\n> CC: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] Problems with :::\n> \n> >>>>> Kirill M?ller <kirill.mueller at ivt.baug.ethz.ch>\n> >>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n> \n>     > On 28.01.2016 14:20, Duncan Murdoch wrote:\n>     >> If the class is just \"mytable\", then you'll have to\n>     >> change it to \"ftable\" before calling stats::format().\n>     > Side note: The following will fail, because format.ftable\n>     > double-checks the class of its argument:\n> \n>     > format_ftable <- utils::getS3method(\"format\", \"ftable\")\n>     > format_ftable(mytable)\n> \n>     > -Kirill\n> \n> Well, I don't think it would fail as that does\n> \n>     if (!inherits(x, \"ftable\")) \n>         stop(\"'x' must be an \\\"ftable\\\" object\")\n> \n> and the OP did mention that his objects were flat tables.\n> \n> Note that the above is *good style* as opposed to the  \"bad\"\n> code I've seen so often in packages (and otherwise) which would\n> use something like\n> \n>    if(class(x) == \"ftable\")  ## really really bad\n> \n> because that code will work incorrectly for objects with S3\n> class attribute, say   c(\"myFtable\", \"ftable\")\n> \n> Martin\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
+      "body_plain": ">     if (!inherits(x, \"ftable\")) \n>    if(class(x) == \"ftable\")  ## really really bad\n\n\nThank you Martin, for pointing that out!\nI was not aware of it yet and changed all occurences in my package and added in note in my R course material.\n\n(This message is mainly an encouragement that some people actually read the mails and act on it, even if not usually replying).\n\nRegards,\nBerry\n\n\n> From: maechler at stat.math.ethz.ch\n> Date: Mon, 1 Feb 2016 09:49:26 +0100\n> To: kirill.mueller at ivt.baug.ethz.ch\n> CC: r-package-devel at r-project.org\n> Subject: Re: [R-pkg-devel] Problems with :::\n> \n> >>>>> Kirill Müller <kirill.mueller at ivt.baug.ethz.ch>\n> >>>>>     on Thu, 28 Jan 2016 17:42:12 +0100 writes:\n> \n>     > On 28.01.2016 14:20, Duncan Murdoch wrote:\n>     >> If the class is just \"mytable\", then you'll have to\n>     >> change it to \"ftable\" before calling stats::format().\n>     > Side note: The following will fail, because format.ftable\n>     > double-checks the class of its argument:\n> \n>     > format_ftable <- utils::getS3method(\"format\", \"ftable\")\n>     > format_ftable(mytable)\n> \n>     > -Kirill\n> \n> Well, I don't think it would fail as that does\n> \n>     if (!inherits(x, \"ftable\")) \n>         stop(\"'x' must be an \\\"ftable\\\" object\")\n> \n> and the OP did mention that his objects were flat tables.\n> \n> Note that the above is *good style* as opposed to the  \"bad\"\n> code I've seen so often in packages (and otherwise) which would\n> use something like\n> \n>    if(class(x) == \"ftable\")  ## really really bad\n> \n> because that code will work incorrectly for objects with S3\n> class attribute, say   c(\"myFtable\", \"ftable\")\n> \n> Martin\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n \t\t \t   \t\t  \n\t[[alternative HTML version deleted]]",
       "body_snippet": ">     if (!inherits(x, \"ftable\")) \n>    if(class(x) == \"ftable\")  ## really really bad\n\n\nThank you Martin, for pointing that out!\nI was not aware of it yet and changed all occurences in my package and",
       "thread_id": "thread-8142d74850a7",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000680.html"
     },
     {
       "id": "msg-16cf28d0b736",
@@ -60,7 +62,8 @@
       "body_snippet": "Hi,\n\n>I have run into an issue while developing an R package. Specifically, my issue relates to what happens when I define an S3 length \n>method for my class. Here is my basic setup:\n\n># Here is the s",
       "thread_id": "thread-16cf28d0b736",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000682.html"
     },
     {
       "id": "msg-d37c013189f3",
@@ -79,7 +82,8 @@
       "body_snippet": "Hi Nathan,\nPerhaps if you defined your \"length\" object as \"nbm\" (number of binary\nmessages), it would not interfere with the default \"length\".\n\nJim\n\n\nOn Tue, Feb 2, 2016 at 12:46 AM, Georgi Boshnakov ",
       "thread_id": "thread-16cf28d0b736",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000683.html"
     },
     {
       "id": "msg-0ac4d34864fe",
@@ -97,7 +101,8 @@
       "body_snippet": "I've found that it's a very bad idea to provide length or names\nmethods for just this reason.\nHadley\n\nOn Sat, Jan 30, 2016 at 1:25 PM, Nathan Wendt <nawendt84 at gmail.com> wrote:\n> Hello,\n>\n> I have ",
       "thread_id": "thread-0ac4d34864fe",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000684.html"
     },
     {
       "id": "msg-ca6c8edbb13c",
@@ -116,7 +121,8 @@
       "body_snippet": "On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n> I've found that it's a very bad idea to provide length or names\n> methods for just this reason.\n\n\n>> After looking\n>> f",
       "thread_id": "thread-0ac4d34864fe",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000685.html"
     },
     {
       "id": "msg-680fc6df7aef",
@@ -136,7 +142,8 @@
       "body_snippet": "After toying around with trying some of the suggested fixes, I have to\nagree that it's more trouble than it is worth to add my own primitive\nmethods. It'll work just fine to move on and write my own m",
       "thread_id": "thread-0ac4d34864fe",
       "thread_depth": 2,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000686.html"
     },
     {
       "id": "msg-2e9a65bd9687",
@@ -152,7 +159,8 @@
       "body_snippet": "https://gitlab.com/iembry/install.load/raw/master/R/install_load.R is\nthe link to raw R code for my package. I have been successful at\nbuilding the package on GNU/Linux, but building on Windows fails.",
       "thread_id": "thread-2e9a65bd9687",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000689.html"
     },
     {
       "id": "msg-1858a9647c48",
@@ -172,7 +180,8 @@
       "body_snippet": ">>>>> Barry Rowlingson <b.rowlingson at lancaster.ac.uk>\n>>>>>     on Tue, 2 Feb 2016 17:23:46 +0000 writes:\n\n    > On Tue, Feb 2, 2016 at 3:28 PM, Hadley Wickham <h.wickham at gmail.com> wrote:\n    >",
       "thread_id": "thread-0ac4d34864fe",
       "thread_depth": 2,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000687.html"
     },
     {
       "id": "msg-c90dd924e2d4",
@@ -188,7 +197,8 @@
       "body_snippet": "hi, i am sorry if this has been asked already,\nbut i could not find an answer.\n\nin short: am i allowed to download, compile and\nexecute (github) packages while testing?\n\nreason for this: the package i",
       "thread_id": "thread-c90dd924e2d4",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000688.html"
     },
     {
       "id": "msg-c199da7f838e",
@@ -206,7 +216,8 @@
       "body_snippet": "On 02/02/2016 2:23 PM, Irucka Embry wrote:\n> https://gitlab.com/iembry/install.load/raw/master/R/install_load.R is\n> the link to raw R code for my package. I have been successful at\n> building the pac",
       "thread_id": "thread-2e9a65bd9687",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000690.html"
     },
     {
       "id": "msg-8ec6ba61c792",
@@ -222,7 +233,8 @@
       "body_snippet": "Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n\n> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n> > https://gitlab.com/iembry/install.load/raw/master/R/install_load.R\n> is\n> > the link to raw R cod",
       "thread_id": "thread-8ec6ba61c792",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000691.html"
     },
     {
       "id": "msg-1494a9607ad6",
@@ -240,7 +252,8 @@
       "body_snippet": "On 03.02.2016 14:31, Michael Dewey wrote:\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote :\n>\n>> On 02/02/2016 2:23 PM, Irucka Embry wrote:\n>>> https://gitlab.com/iembry/install.load/raw/master/R",
       "thread_id": "thread-8ec6ba61c792",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000692.html"
     },
     {
       "id": "msg-f4151939ddf8",
@@ -258,7 +271,8 @@
       "body_snippet": "Dear 'code M',\n\nWe all participate here with 'vizors up' and clear view of each other's\nidentities. Please consider doing the same.\n\nOn 3 February 2016 at 09:37, code M wrote:\n| hi, i am sorry if this",
       "thread_id": "thread-c90dd924e2d4",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000693.html"
     },
     {
       "id": "msg-10261da35a7c",
@@ -274,7 +288,8 @@
       "body_snippet": "Hi everyone, thank you for the responses.\n\nI did some more searching after I had posted my question. It was a BOM\n(Byte Order Mark) issue. I removed the BOM from all of my files and I\nhave been succes",
       "thread_id": "thread-10261da35a7c",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000694.html"
     },
     {
       "id": "msg-10d1ba53ddcb",
@@ -290,7 +305,8 @@
       "body_snippet": "I'm not sure if this question is appropriate for the R mailing lists but\nI'm not sure where else to ask.\n\nI am wondering if there is any means by which package authors can solicit\ntesters for a packag",
       "thread_id": "thread-10d1ba53ddcb",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000695.html"
     },
     {
       "id": "msg-58221cc76062",
@@ -308,7 +324,8 @@
       "body_snippet": "Of course I can speak only for myself, but I'd help out if asked and I think in general you'll find people here to be a pretty helpful bunch.\n\nCheers,\nBoris\n\n\nOn Feb 5, 2016, at 8:30 AM, Charles Deter",
       "thread_id": "thread-10d1ba53ddcb",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000697.html"
     },
     {
       "id": "msg-70ec6f962ab7",
@@ -328,7 +345,8 @@
       "body_snippet": "On Fri, 29 Jan 2016 17:41:40 +0100 Berry Boessenkool\n<berryboessenkool at hotmail.com> wrote\n\n> Thanks for your reply, Uwe.\n> The guy yesterday very strongly suggested it for user readability, but I\n>",
       "thread_id": "thread-70ec6f962ab7",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000698.html"
     },
     {
       "id": "msg-c275681e952e",
@@ -347,7 +365,8 @@
       "body_snippet": "Thanks Boris,\n\nMy main concern I suppose is if this mailing list is appropriate to\noccasionally solicit additional testers.  Just curious what people (i.e.\nAdmins) would think about using the list for",
       "thread_id": "thread-10d1ba53ddcb",
       "thread_depth": 2,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000696.html"
     },
     {
       "id": "msg-585deaec4904",
@@ -367,7 +386,8 @@
       "body_snippet": ">>>>> Charles Determan <cdetermanjr at gmail.com>\n>>>>>     on Sat, 6 Feb 2016 10:33:03 -0600 writes:\n\n    > Thanks Boris, My main concern I suppose is if this mailing\n    > list is appropriate to occ",
       "thread_id": "thread-10d1ba53ddcb",
       "thread_depth": 3,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000699.html"
     },
     {
       "id": "msg-07fc222f2104",
@@ -383,7 +403,8 @@
       "body_snippet": "Dear all,\n\nI have a package with a Rnw vignette. The vignette builds without a\nproblem. R CMD build and R CMD check run without problem on Ubuntu but fail\non Windows.\n\nThe problem starts at the point ",
       "thread_id": "thread-07fc222f2104",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000700.html"
     },
     {
       "id": "msg-b4482766077f",
@@ -401,7 +422,8 @@
       "body_snippet": "On 09/02/2016 9:33 AM, Thierry Onkelinx wrote:\n> Dear all,\n>\n> I have a package with a Rnw vignette. The vignette builds without a\n> problem. R CMD build and R CMD check run without problem on Ubuntu ",
       "thread_id": "thread-07fc222f2104",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000701.html"
     },
     {
       "id": "msg-a4baaeb77707",
@@ -417,7 +439,8 @@
       "body_snippet": "Hello,\n\nI have a R package with a compiled C executable to run simulations. Simulations can be very long so I use mclapply to launch several instances (each with a different R seed). I would need to f",
       "thread_id": "thread-a4baaeb77707",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000702.html"
     },
     {
       "id": "msg-f8bbb47ae63b",
@@ -433,7 +456,8 @@
       "body_snippet": "All\n\nI am not sure why I am getting this error and I cannot find anything on the net other than try to restart R. I am\nusing Roxygen2 and it clearly says don't edit by hand at the top of the namespace",
       "thread_id": "thread-f8bbb47ae63b",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000703.html"
     },
     {
       "id": "msg-63ef3d502d31",
@@ -451,7 +475,8 @@
       "body_snippet": "On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n> All\n>\n> I am not sure why I am getting this error and I cannot find anything on the net other than try to restart R. I am\n> using Roxygen2 and it clearly",
       "thread_id": "thread-f8bbb47ae63b",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000704.html"
     },
     {
       "id": "msg-d34ca44ff2e4",
@@ -470,7 +495,8 @@
       "body_snippet": "On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n> On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n>>\n>> All\n>>\n>> I am not sure why I am getting this error and I cann",
       "thread_id": "thread-f8bbb47ae63b",
       "thread_depth": 2,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000705.html"
     },
     {
       "id": "msg-f2d57f31f4f2",
@@ -486,11 +512,12 @@
         "<56C3C732.9030702@gmail.com>",
         "<CABtg=KnimXCZswsQoU+7hhUCeb0V_cpVBw6W4QDNLmDp=3rxhg@mail.gmail.com>"
       ],
-      "body_plain": "On 17 Feb 2016, at 10:25 , G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>> On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n>>> \n>>> All\n>>> \n>>> I am not sure why I am getting this error and I cannot find anything on\n>>> the net other than try to restart R. I am\n>>> using Roxygen2 and it clearly says don't edit by hand at the top of the\n>>> namespace so I am stuck as what to do or look for.\n>> \n>> \n>> You will need to contact the Roxygen2 maintainers about this.  We don't\n>> support it.\n> \n> So, this mailing list is about developing packages using base R\n> packages only and exclusively?\n> \n> I suggest that the owners clarify this on the \"about\" page, because I\n> totally missed it, and almost answered this question. :)\n\n\nWell, by all means, then....\n\nIt's like r-help. Sometimes a question seems better directed at RStudio support or the platform specific mailing lists, and people get redirected, but hey, we're supposed to be friendly in here, so if you happen to know the answer, just tell. \n\n(The list was mainly set up to facilitate issues between CRAN and package maintainers, so the expertise that you can assume to be present is that of people who know why CRAN is being picky, etc. There's little point in keeping the expertise of others out, but there's a blurry line towards doing 3rd party maintainers' work for them.)\n\n-pd\n\n> \n> Gabor\n> \n>> Duncan Murdoch\n> [...]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
-      "body_snippet": "On 17 Feb 2016, at 10:25 , G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>> On 16/02/2016 12:14 PM, Glenn Sc",
+      "body_plain": "On 17 Feb 2016, at 10:25 , Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n\n> On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>> On 16/02/2016 12:14 PM, Glenn Schultz wrote:\n>>> \n>>> All\n>>> \n>>> I am not sure why I am getting this error and I cannot find anything on\n>>> the net other than try to restart R. I am\n>>> using Roxygen2 and it clearly says don't edit by hand at the top of the\n>>> namespace so I am stuck as what to do or look for.\n>> \n>> \n>> You will need to contact the Roxygen2 maintainers about this.  We don't\n>> support it.\n> \n> So, this mailing list is about developing packages using base R\n> packages only and exclusively?\n> \n> I suggest that the owners clarify this on the \"about\" page, because I\n> totally missed it, and almost answered this question. :)\n\n\nWell, by all means, then....\n\nIt's like r-help. Sometimes a question seems better directed at RStudio support or the platform specific mailing lists, and people get redirected, but hey, we're supposed to be friendly in here, so if you happen to know the answer, just tell. \n\n(The list was mainly set up to facilitate issues between CRAN and package maintainers, so the expertise that you can assume to be present is that of people who know why CRAN is being picky, etc. There's little point in keeping the expertise of others out, but there's a blurry line towards doing 3rd party maintainers' work for them.)\n\n-pd\n\n> \n> Gabor\n> \n>> Duncan Murdoch\n> [...]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "On 17 Feb 2016, at 10:25 , Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n\n> On Wed, Feb 17, 2016 at 1:04 AM, Duncan Murdoch\n> <murdoch.duncan at gmail.com> wrote:\n>> On 16/02/2016 12:14 PM, Glenn Sc",
       "thread_id": "thread-f8bbb47ae63b",
       "thread_depth": 3,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000706.html"
     },
     {
       "id": "msg-b8009ee84ed5",
@@ -508,7 +535,8 @@
       "body_snippet": "It's difficult to tell without seeing the source code, but the NAMESPACE \nyou posted doesn't seem to contain \"View\". This file usually gets \nupdated when you call devtools::document() or roxygen2::rox",
       "thread_id": "thread-f8bbb47ae63b",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000707.html"
     },
     {
       "id": "msg-2f0ed4384f26",
@@ -520,11 +548,12 @@
       "subject_clean": "[R-pkg-devel] Issue with nlme-package on Windows",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while the nlme-package version that come along with the R installation is still in my Program Files directory. So I have two nlme-versions: 3.1-122 in my R-installation folder, and 3.1-124 in my Documents folder.\n\nI recognized this because my package does not install when running R CMD check. The log states that ?nlme 3.1-122 is being loaded, but nlme 3.1-124 is required?. I then saw that both nlme-versions are installed.\n\nIs this a Windows-, R- or nlme-issue? When installing R on Windows, I?m being asked to choose a library-folder because ?Program Files? is write protected?\n\nBest\nDaniel\n\n--\n\n_____________________________________________________________________\n\nUniversit?tsklinikum Hamburg-Eppendorf; K?rperschaft des ?ffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard G?ke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Pr?l?, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
+      "body_plain": "I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while the nlme-package version that come along with the R installation is still in my Program Files directory. So I have two nlme-versions: 3.1-122 in my R-installation folder, and 3.1-124 in my Documents folder.\n\nI recognized this because my package does not install when running R CMD check. The log states that „nlme 3.1-122 is being loaded, but nlme 3.1-124 is required“. I then saw that both nlme-versions are installed.\n\nIs this a Windows-, R- or nlme-issue? When installing R on Windows, I’m being asked to choose a library-folder because „Program Files“ is write protected…\n\nBest\nDaniel\n\n--\n\n_____________________________________________________________________\n\nUniversitätsklinikum Hamburg-Eppendorf; Körperschaft des öffentlichen Rechts; Gerichtsstand: Hamburg | www.uke.de\nVorstandsmitglieder: Prof. Dr. Burkhard Göke (Vorsitzender), Prof. Dr. Dr. Uwe Koch-Gromus, Joachim Prölß, Rainer Schoppik\n_____________________________________________________________________\n\nSAVE PAPER - THINK BEFORE PRINTING",
       "body_snippet": "I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while th",
       "thread_id": "thread-2f0ed4384f26",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000708.html"
     },
     {
       "id": "msg-6f398f03b49d",
@@ -538,11 +567,12 @@
       "references": [
         "<688B0979-C9D3-4699-BF97-2B29F333FA96@uke.de>"
       ],
-      "body_plain": "On 26/02/2016 4:32 AM, Daniel L?decke wrote:\n> I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while the nlme-package version that come along with the R installation is still in my Program Files directory. So I have two nlme-versions: 3.1-122 in my R-installation folder, and 3.1-124 in my Documents folder.\n>\n> I recognized this because my package does not install when running R CMD check. The log states that ?nlme 3.1-122 is being loaded, but nlme 3.1-124 is required?. I then saw that both nlme-versions are installed.\n>\n> Is this a Windows-, R- or nlme-issue? When installing R on Windows, I?m being asked to choose a library-folder because ?Program Files? is write protected?\n\nIt's a user-issue.  You need to tell R to use your user folder as a \nlibrary upon startup.  Since installing and checking of packages is done \nin a separate R process, you would do this by setting an environment \nvariable.\n\nQuoting Brian Ripley recently in R-devel:\n\n> Set R_LIBS to change the library path for new sessions: see ?.libPath .\n\nDuncan Murdoch",
-      "body_snippet": "On 26/02/2016 4:32 AM, Daniel L?decke wrote:\n> I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write pr",
+      "body_plain": "On 26/02/2016 4:32 AM, Daniel Lüdecke wrote:\n> I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write protected resp. access only for admins), while the nlme-package version that come along with the R installation is still in my Program Files directory. So I have two nlme-versions: 3.1-122 in my R-installation folder, and 3.1-124 in my Documents folder.\n>\n> I recognized this because my package does not install when running R CMD check. The log states that „nlme 3.1-122 is being loaded, but nlme 3.1-124 is required“. I then saw that both nlme-versions are installed.\n>\n> Is this a Windows-, R- or nlme-issue? When installing R on Windows, I’m being asked to choose a library-folder because „Program Files“ is write protected…\n\nIt's a user-issue.  You need to tell R to use your user folder as a \nlibrary upon startup.  Since installing and checking of packages is done \nin a separate R process, you would do this by setting an environment \nvariable.\n\nQuoting Brian Ripley recently in R-devel:\n\n> Set R_LIBS to change the library path for new sessions: see ?.libPath .\n\nDuncan Murdoch",
+      "body_snippet": "On 26/02/2016 4:32 AM, Daniel Lüdecke wrote:\n> I have an issue with the nlme-package on Windows, where the package update is installed into my user folder (because the Program Files folder is write pr",
       "thread_id": "thread-2f0ed4384f26",
       "thread_depth": 1,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000709.html"
     },
     {
       "id": "msg-75334ab229c4",
@@ -558,7 +588,8 @@
       "body_snippet": "Dear colleagues,\n\nafter testing one of my packages with students, I'm trying to improve\nthe user interface, to make it even simpler and more robust. The package\nuses S4 classes and I was very happy wi",
       "thread_id": "thread-75334ab229c4",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000710.html"
     },
     {
       "id": "msg-9bfd8f845e74",
@@ -574,7 +605,8 @@
       "body_snippet": "I am trying to create a self-contained R package wrapping Python that works\ncross platform and have not been able to do this on Windows.  There is\nalready an R package which calls Python, requiring Py",
       "thread_id": "thread-9bfd8f845e74",
       "thread_depth": 0,
-      "month": "2016-02"
+      "month": "2016-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2016q1/000711.html"
     }
   ],
   "threads": [

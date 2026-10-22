@@ -13,11 +13,12 @@
       "subject_clean": "[R-pkg-devel] Help with Windows build failure",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi, everyone.\n\nI have done some work this weekend to allow the SnakeCharmR package (\nhttps://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\nreference, this is an Rcpp-based packages that links to the system's\nlibpython.\n\nI have been able to test it on my box using Windows 10 and several Python\nversions:\n\n* Rtools mingw_64/opt Python 2.7.9;\n* python.org 2.7.13 64-bit;\n* python.org 3.6.1 64-bit;\n* python.org 2.7.x 32-bit on Appveyor (\nhttps://ci.appveyor.com/project/asieira/SnakeCharmR).\n\nStill, when I submit my source package to win-builder I get an error:\nhttps://win-builder.r-project.org/9aqdlW0D6e3m/\n\nhttps://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\nwarnings on header files that are outside of my control, but ends with a\nsuccessful compilation. However, it compiles only the 64-bit version of the\nDLL and gives me this warning:\n\nWarning: this package has a non-empty 'configure.win' file,\nso building only the main architecture\n\n\nFinally, when we look at\nhttps://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an error\ndue to the fact that the package can?t be tested on i386:\n\n** checking whether the package can be loaded ... ERROR\nLoading this package had a fatal error status code 1\nLoading log:\nError: package 'SnakeCharmR' is not installed for 'arch = i386'\nExecution halted\n** DONE\nStatus: 1 ERROR, 1 NOTE\n\n\nI apologize if this is a beginner?s problem, but this is my first R package\never and I?m not really used to working with R on Windows. Would appreciate\nany guidance and pointers on how to address this and get the package to\npass the necessary CRAN automated tests.\n\nThanks in advance for your help.\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi, everyone.\n\nI have done some work this weekend to allow the SnakeCharmR package (\nhttps://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\nreference, this is an Rcpp-based packages that links to the system's\nlibpython.\n\nI have been able to test it on my box using Windows 10 and several Python\nversions:\n\n* Rtools mingw_64/opt Python 2.7.9;\n* python.org 2.7.13 64-bit;\n* python.org 3.6.1 64-bit;\n* python.org 2.7.x 32-bit on Appveyor (\nhttps://ci.appveyor.com/project/asieira/SnakeCharmR).\n\nStill, when I submit my source package to win-builder I get an error:\nhttps://win-builder.r-project.org/9aqdlW0D6e3m/\n\nhttps://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\nwarnings on header files that are outside of my control, but ends with a\nsuccessful compilation. However, it compiles only the 64-bit version of the\nDLL and gives me this warning:\n\nWarning: this package has a non-empty 'configure.win' file,\nso building only the main architecture\n\n\nFinally, when we look at\nhttps://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an error\ndue to the fact that the package can’t be tested on i386:\n\n** checking whether the package can be loaded ... ERROR\nLoading this package had a fatal error status code 1\nLoading log:\nError: package 'SnakeCharmR' is not installed for 'arch = i386'\nExecution halted\n** DONE\nStatus: 1 ERROR, 1 NOTE\n\n\nI apologize if this is a beginner’s problem, but this is my first R package\never and I’m not really used to working with R on Windows. Would appreciate\nany guidance and pointers on how to address this and get the package to\npass the necessary CRAN automated tests.\n\nThanks in advance for your help.\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi, everyone.\n\nI have done some work this weekend to allow the SnakeCharmR package (\nhttps://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\nreference, this is an Rcpp-based packages",
       "thread_id": "thread-2a21682dfe0f",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001413.html"
     },
     {
       "id": "msg-a277a375d5f5",
@@ -33,7 +34,8 @@
       "body_snippet": "Before building my package, I manually place both pdf and html versions of\nmy vignettes into inst/doc. I then build the package with `devtools::check`.\n\nListing of the resulting tarball:\n\n-rw-r--r--  ",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001414.html"
     },
     {
       "id": "msg-0acbfbd78dce",
@@ -45,11 +47,12 @@
       "subject_clean": "[R-pkg-devel] maintainer built vignette",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nFirst post to r-package-devel, thanks for your help.\n\nHow do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don?t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I?m doing something wrong regardless.\n\nSo, what?s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n\nThanks,\nIan",
+      "body_plain": "Hello,\n\nFirst post to r-package-devel, thanks for your help.\n\nHow do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don’t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I’m doing something wrong regardless.\n\nSo, what’s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n\nThanks,\nIan",
       "body_snippet": "Hello,\n\nFirst post to r-package-devel, thanks for your help.\n\nHow do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM",
       "thread_id": "thread-0acbfbd78dce",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001415.html"
     },
     {
       "id": "msg-d5c055b0cb32",
@@ -63,11 +66,12 @@
       "references": [
         "<CAL_X2361B8W3B0EPh-NuAJjJE8rFcDLwv+ZZSh5pZ5=4tYzG=Q@mail.gmail.com>"
       ],
-      "body_plain": "On 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n| \n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\n| reference, this is an Rcpp-based packages that links to the system's\n| libpython.\n| \n| I have been able to test it on my box using Windows 10 and several Python\n| versions:\n| \n| * Rtools mingw_64/opt Python 2.7.9;\n| * python.org 2.7.13 64-bit;\n| * python.org 3.6.1 64-bit;\n| * python.org 2.7.x 32-bit on Appveyor (\n| https://ci.appveyor.com/project/asieira/SnakeCharmR).\n| \n| Still, when I submit my source package to win-builder I get an error:\n| https://win-builder.r-project.org/9aqdlW0D6e3m/\n| \n| https://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\n| warnings on header files that are outside of my control, but ends with a\n| successful compilation. However, it compiles only the 64-bit version of the\n| DLL and gives me this warning:\n| \n| Warning: this package has a non-empty 'configure.win' file,\n| so building only the main architecture\n| \n| \n| Finally, when we look at\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an error\n| due to the fact that the package can?t be tested on i386:\n| \n| ** checking whether the package can be loaded ... ERROR\n| Loading this package had a fatal error status code 1\n| Loading log:\n| Error: package 'SnakeCharmR' is not installed for 'arch = i386'\n| Execution halted\n| ** DONE\n| Status: 1 ERROR, 1 NOTE\n| \n| \n| I apologize if this is a beginner?s problem, but this is my first R package\n| ever and I?m not really used to working with R on Windows. Would appreciate\n| any guidance and pointers on how to address this and get the package to\n| pass the necessary CRAN automated tests.\n\nI tried to make Python and R co-exist at some point; my conclusion was there\naren't enough days in the week to figure out how to do it on Windows.  It's\neasy to do on Linux, and I don't personally have OS X / macOS use cases but\nhere it's feasible if you're careful about your toolchain.\n\nI think you should just consider 'OS_type: unix' in your DESCRIPTION.  A\nworking and uploaded package on two OSs beats an \"almost there but never\nfinished\" package on three in my book.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_plain": "On 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n| \n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\n| reference, this is an Rcpp-based packages that links to the system's\n| libpython.\n| \n| I have been able to test it on my box using Windows 10 and several Python\n| versions:\n| \n| * Rtools mingw_64/opt Python 2.7.9;\n| * python.org 2.7.13 64-bit;\n| * python.org 3.6.1 64-bit;\n| * python.org 2.7.x 32-bit on Appveyor (\n| https://ci.appveyor.com/project/asieira/SnakeCharmR).\n| \n| Still, when I submit my source package to win-builder I get an error:\n| https://win-builder.r-project.org/9aqdlW0D6e3m/\n| \n| https://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\n| warnings on header files that are outside of my control, but ends with a\n| successful compilation. However, it compiles only the 64-bit version of the\n| DLL and gives me this warning:\n| \n| Warning: this package has a non-empty 'configure.win' file,\n| so building only the main architecture\n| \n| \n| Finally, when we look at\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an error\n| due to the fact that the package can’t be tested on i386:\n| \n| ** checking whether the package can be loaded ... ERROR\n| Loading this package had a fatal error status code 1\n| Loading log:\n| Error: package 'SnakeCharmR' is not installed for 'arch = i386'\n| Execution halted\n| ** DONE\n| Status: 1 ERROR, 1 NOTE\n| \n| \n| I apologize if this is a beginner’s problem, but this is my first R package\n| ever and I’m not really used to working with R on Windows. Would appreciate\n| any guidance and pointers on how to address this and get the package to\n| pass the necessary CRAN automated tests.\n\nI tried to make Python and R co-exist at some point; my conclusion was there\naren't enough days in the week to figure out how to do it on Windows.  It's\neasy to do on Linux, and I don't personally have OS X / macOS use cases but\nhere it's feasible if you're careful about your toolchain.\n\nI think you should just consider 'OS_type: unix' in your DESCRIPTION.  A\nworking and uploaded package on two OSs beats an \"almost there but never\nfinished\" package on three in my book.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
       "body_snippet": "On 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n| \n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled un",
       "thread_id": "thread-2a21682dfe0f",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001416.html"
     },
     {
       "id": "msg-a74c97e9eb5d",
@@ -81,11 +85,12 @@
       "references": [
         "<4755173A-97B7-4CE3-8AC5-05F7BF8458C5@sesync.org>"
       ],
-      "body_plain": "On 6 April 2017 at 20:17, Ian Carroll wrote:\n| How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don?t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I?m doing something wrong regardless.\n| \n| So, what?s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n\nI think if you adjust .Rbuildignore to NOT include the source but just the\npdf then you will have documentation present -- without the risk of 'cannot\nbe computed here' on some platforms.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_plain": "On 6 April 2017 at 20:17, Ian Carroll wrote:\n| How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don’t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I’m doing something wrong regardless.\n| \n| So, what’s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n\nI think if you adjust .Rbuildignore to NOT include the source but just the\npdf then you will have documentation present -- without the risk of 'cannot\nbe computed here' on some platforms.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
       "body_snippet": "On 6 April 2017 at 20:17, Ian Carroll wrote:\n| How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which",
       "thread_id": "thread-0acbfbd78dce",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001417.html"
     },
     {
       "id": "msg-e10620cb793b",
@@ -100,11 +105,12 @@
         "<4755173A-97B7-4CE3-8AC5-05F7BF8458C5@sesync.org>",
         "<22758.59936.352521.757842@max.eddelbuettel.com>"
       ],
-      "body_plain": "With `BuildVignettes: no` in my DESCRIPTION and `^vignettes` in my .Rbuildignore, I can squeak through a normal build (no `r_build_args` or `r_check_args`) on travis with just this note:\n\n    * checking for old-style vignette sources ... NOTE\n    Vignette sources only in ?inst/doc?:\n      ?rslurm.Rmd?\n    A ?vignettes? directory is required as from R 3.1.0\n    and these will not be indexed nor checked\n\nI?ll take a NOTE over an ERROR, so I?ll try to submit like this with an explanation. It seems to me like `BuildVignettes: no` should also disable re-building them under R CMD check, but I think R CMD check --as-cran clobbers it.\n\n-----Original Message-----\nFrom: Dirk Eddelbuettel <dirk.eddelbuettel at gmail.com> on behalf of Dirk Eddelbuettel <edd at debian.org>\nDate: Thursday, April 6, 2017 at 9:23 PM\nTo: Ian Carroll <icarroll at sesync.org>\nCc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] maintainer built vignette\n\n    \n    On 6 April 2017 at 20:17, Ian Carroll wrote:\n    | How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don?t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I?m doing something wrong regardless.\n    | \n    | So, what?s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n    \n    I think if you adjust .Rbuildignore to NOT include the source but just the\n    pdf then you will have documentation present -- without the risk of 'cannot\n    be computed here' on some platforms.\n    \n    Dirk\n    \n    -- \n    http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_plain": "With `BuildVignettes: no` in my DESCRIPTION and `^vignettes` in my .Rbuildignore, I can squeak through a normal build (no `r_build_args` or `r_check_args`) on travis with just this note:\n\n    * checking for old-style vignette sources ... NOTE\n    Vignette sources only in ‘inst/doc’:\n      ‘rslurm.Rmd’\n    A ‘vignettes’ directory is required as from R 3.1.0\n    and these will not be indexed nor checked\n\nI’ll take a NOTE over an ERROR, so I’ll try to submit like this with an explanation. It seems to me like `BuildVignettes: no` should also disable re-building them under R CMD check, but I think R CMD check --as-cran clobbers it.\n\n-----Original Message-----\nFrom: Dirk Eddelbuettel <dirk.eddelbuettel at gmail.com> on behalf of Dirk Eddelbuettel <edd at debian.org>\nDate: Thursday, April 6, 2017 at 9:23 PM\nTo: Ian Carroll <icarroll at sesync.org>\nCc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] maintainer built vignette\n\n    \n    On 6 April 2017 at 20:17, Ian Carroll wrote:\n    | How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don’t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I’m doing something wrong regardless.\n    | \n    | So, what’s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n    \n    I think if you adjust .Rbuildignore to NOT include the source but just the\n    pdf then you will have documentation present -- without the risk of 'cannot\n    be computed here' on some platforms.\n    \n    Dirk\n    \n    -- \n    http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
       "body_snippet": "With `BuildVignettes: no` in my DESCRIPTION and `^vignettes` in my .Rbuildignore, I can squeak through a normal build (no `r_build_args` or `r_check_args`) on travis with just this note:\n\n    * checki",
       "thread_id": "thread-0acbfbd78dce",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001418.html"
     },
     {
       "id": "msg-73c3cc3b5e74",
@@ -122,7 +128,8 @@
       "body_snippet": "Okay, so this got tumbleweeded... so should I file a bug?\n\nD\n\nOn Thu, 6 Apr 2017 at 15:37, David Hugh-Jones <davidhughjones at gmail.com>\nwrote:\n\n>\n> Before building my package, I manually place both ",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001419.html"
     },
     {
       "id": "msg-fdea1a21efce",
@@ -141,7 +148,8 @@
       "body_snippet": "I do not know devtools, but the vignette sources should be placed in \n./vignettes and then R CMD build will put the files into the relevant \nplaces automatically.\n\nBest,\nUwe Ligges\n\n\n\n\n\nOn 07.04.2017 ",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001420.html"
     },
     {
       "id": "msg-dd28e910af75",
@@ -157,11 +165,12 @@
         "<22758.59936.352521.757842@max.eddelbuettel.com>",
         "<615CC105-C730-41C6-BCA8-B1B694555BE2@sesync.org>"
       ],
-      "body_plain": "Please note that packages with a FOSS licences cannot have\nBuildVignettes: no\n\nSuch FOSS Packages with a vignette (typically as pdf) need the sources \nthat produced the vignette.\nHence, if you really want to ship a vignette including code that is \nhardly executable on CRAN systems, reply to the auto-rejection message \nand explain the situation.\n\nThe CRAN team probably will decide to special case the package then so \nthat the vignettes are not checked.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 07.04.2017 06:15, Ian Carroll wrote:\n> With `BuildVignettes: no` in my DESCRIPTION and `^vignettes` in my .Rbuildignore, I can squeak through a normal build (no `r_build_args` or `r_check_args`) on travis with just this note:\n>\n>     * checking for old-style vignette sources ... NOTE\n>     Vignette sources only in ?inst/doc?:\n>       ?rslurm.Rmd?\n>     A ?vignettes? directory is required as from R 3.1.0\n>     and these will not be indexed nor checked\n>\n> I?ll take a NOTE over an ERROR, so I?ll try to submit like this with an explanation. It seems to me like `BuildVignettes: no` should also disable re-building them under R CMD check, but I think R CMD check --as-cran clobbers it.\n>\n> -----Original Message-----\n> From: Dirk Eddelbuettel <dirk.eddelbuettel at gmail.com> on behalf of Dirk Eddelbuettel <edd at debian.org>\n> Date: Thursday, April 6, 2017 at 9:23 PM\n> To: Ian Carroll <icarroll at sesync.org>\n> Cc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] maintainer built vignette\n>\n>\n>     On 6 April 2017 at 20:17, Ian Carroll wrote:\n>     | How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don?t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I?m doing something wrong regardless.\n>     |\n>     | So, what?s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n>\n>     I think if you adjust .Rbuildignore to NOT include the source but just the\n>     pdf then you will have documentation present -- without the risk of 'cannot\n>     be computed here' on some platforms.\n>\n>     Dirk\n>\n>     --\n>     http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "Please note that packages with a FOSS licences cannot have\nBuildVignettes: no\n\nSuch FOSS Packages with a vignette (typically as pdf) need the sources \nthat produced the vignette.\nHence, if you really want to ship a vignette including code that is \nhardly executable on CRAN systems, reply to the auto-rejection message \nand explain the situation.\n\nThe CRAN team probably will decide to special case the package then so \nthat the vignettes are not checked.\n\nBest,\nUwe Ligges\n\n\n\n\nOn 07.04.2017 06:15, Ian Carroll wrote:\n> With `BuildVignettes: no` in my DESCRIPTION and `^vignettes` in my .Rbuildignore, I can squeak through a normal build (no `r_build_args` or `r_check_args`) on travis with just this note:\n>\n>     * checking for old-style vignette sources ... NOTE\n>     Vignette sources only in ‘inst/doc’:\n>       ‘rslurm.Rmd’\n>     A ‘vignettes’ directory is required as from R 3.1.0\n>     and these will not be indexed nor checked\n>\n> I’ll take a NOTE over an ERROR, so I’ll try to submit like this with an explanation. It seems to me like `BuildVignettes: no` should also disable re-building them under R CMD check, but I think R CMD check --as-cran clobbers it.\n>\n> -----Original Message-----\n> From: Dirk Eddelbuettel <dirk.eddelbuettel at gmail.com> on behalf of Dirk Eddelbuettel <edd at debian.org>\n> Date: Thursday, April 6, 2017 at 9:23 PM\n> To: Ian Carroll <icarroll at sesync.org>\n> Cc: \"r-package-devel at r-project.org\" <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] maintainer built vignette\n>\n>\n>     On 6 April 2017 at 20:17, Ian Carroll wrote:\n>     | How do I package an rmarkdown vignette that cannot be built on win-builder? The vignette in question demonstrates interaction with a SLURM cluster, which is not available to win-builder or travis. In my `.travis.yml` I can include `r_build_args: \"--no-build-vignettes\"` and `r_check_args: \"--no-vignettes\"` to skip the build and re-build steps respectively. I don’t know how to do that with win-builder, so I cannot pass the incoming pretest on package submission. The extra steps make me feel like I’m doing something wrong regardless.\n>     |\n>     | So, what’s the appropriate way to include vignettes that should not be hammered with attempts to build at every turn? Some old advice seemed to suggest going straight to inst/docs, but newer rules are that inclusion in vignettes/ is mandatory.\n>\n>     I think if you adjust .Rbuildignore to NOT include the source but just the\n>     pdf then you will have documentation present -- without the risk of 'cannot\n>     be computed here' on some platforms.\n>\n>     Dirk\n>\n>     --\n>     http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "Please note that packages with a FOSS licences cannot have\nBuildVignettes: no\n\nSuch FOSS Packages with a vignette (typically as pdf) need the sources \nthat produced the vignette.\nHence, if you really ",
       "thread_id": "thread-0acbfbd78dce",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001421.html"
     },
     {
       "id": "msg-92d1ae6bb653",
@@ -181,7 +190,8 @@
       "body_snippet": "Hi Uwe,\n\nIndeed yes, but my built tarball has got the files in inst/doc as shown. If\nI then run 'R CMD check' on that tarball, I get the error quoted. Is there\nsomething happening that I don't underst",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001422.html"
     },
     {
       "id": "msg-0543a9038f93",
@@ -202,7 +212,8 @@
       "body_snippet": "Can you send the tarball please, I can take a look,\nUwe\n\n\nOn 07.04.2017 12:09, David Hugh-Jones wrote:\n> Hi Uwe,\n>\n> Indeed yes, but my built tarball has got the files in inst/doc as shown.\n> If I the",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 4,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001423.html"
     },
     {
       "id": "msg-b4a5aaf65fea",
@@ -217,11 +228,12 @@
         "<CAL_X2361B8W3B0EPh-NuAJjJE8rFcDLwv+ZZSh5pZ5=4tYzG=Q@mail.gmail.com>",
         "<22758.59797.40233.725087@max.eddelbuettel.com>"
       ],
-      "body_plain": "Hi, Dirk.\n\nThank you for responding.\n\nI do sympathize with your frustrations, due to the exact complexity you are\nmentioning and also my ignorance on how R packages compile on Windows, I\nhad SnakeCharmR signal ?OS_type: Unix? for the longest time.\n\nThe thing is that AFAIK this works on Windows now, both with the python.org and\nRtools mingw Python distributions. The challenge now is figuring out the\nbest to get this into CRAN as a Windows package as well. Challenge #1:\ngetting past the win builder pre-check. :)\n\nI was reading some other posts on this list and maybe setting ?Biarch:\nfalse? could help? I?ll try that next.\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\nOn 6 April 2017 at 22:21:27, Dirk Eddelbuettel (edd at debian.org) wrote:\n\n\nOn 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n|\n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\n| reference, this is an Rcpp-based packages that links to the system's\n| libpython.\n|\n| I have been able to test it on my box using Windows 10 and several Python\n| versions:\n|\n| * Rtools mingw_64/opt Python 2.7.9;\n| * python.org 2.7.13 64-bit;\n| * python.org 3.6.1 64-bit;\n| * python.org 2.7.x 32-bit on Appveyor (\n| https://ci.appveyor.com/project/asieira/SnakeCharmR).\n|\n| Still, when I submit my source package to win-builder I get an error:\n| https://win-builder.r-project.org/9aqdlW0D6e3m/\n|\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\n| warnings on header files that are outside of my control, but ends with a\n| successful compilation. However, it compiles only the 64-bit version of\nthe\n| DLL and gives me this warning:\n|\n| Warning: this package has a non-empty 'configure.win' file,\n| so building only the main architecture\n|\n|\n| Finally, when we look at\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an\nerror\n| due to the fact that the package can?t be tested on i386:\n|\n| ** checking whether the package can be loaded ... ERROR\n| Loading this package had a fatal error status code 1\n| Loading log:\n| Error: package 'SnakeCharmR' is not installed for 'arch = i386'\n| Execution halted\n| ** DONE\n| Status: 1 ERROR, 1 NOTE\n|\n|\n| I apologize if this is a beginner?s problem, but this is my first R\npackage\n| ever and I?m not really used to working with R on Windows. Would\nappreciate\n| any guidance and pointers on how to address this and get the package to\n| pass the necessary CRAN automated tests.\n\nI tried to make Python and R co-exist at some point; my conclusion was\nthere\naren't enough days in the week to figure out how to do it on Windows. It's\neasy to do on Linux, and I don't personally have OS X / macOS use cases but\nhere it's feasible if you're careful about your toolchain.\n\nI think you should just consider 'OS_type: unix' in your DESCRIPTION. A\nworking and uploaded package on two OSs beats an \"almost there but never\nfinished\" package on three in my book.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi, Dirk.\n\nThank you for responding.\n\nI do sympathize with your frustrations, due to the exact complexity you are\nmentioning and also my ignorance on how R packages compile on Windows, I\nhad SnakeCharmR signal ‘OS_type: Unix’ for the longest time.\n\nThe thing is that AFAIK this works on Windows now, both with the python.org and\nRtools mingw Python distributions. The challenge now is figuring out the\nbest to get this into CRAN as a Windows package as well. Challenge #1:\ngetting past the win builder pre-check. :)\n\nI was reading some other posts on this list and maybe setting “Biarch:\nfalse” could help? I’ll try that next.\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\nOn 6 April 2017 at 22:21:27, Dirk Eddelbuettel (edd at debian.org) wrote:\n\n\nOn 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n|\n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\n| reference, this is an Rcpp-based packages that links to the system's\n| libpython.\n|\n| I have been able to test it on my box using Windows 10 and several Python\n| versions:\n|\n| * Rtools mingw_64/opt Python 2.7.9;\n| * python.org 2.7.13 64-bit;\n| * python.org 3.6.1 64-bit;\n| * python.org 2.7.x 32-bit on Appveyor (\n| https://ci.appveyor.com/project/asieira/SnakeCharmR).\n|\n| Still, when I submit my source package to win-builder I get an error:\n| https://win-builder.r-project.org/9aqdlW0D6e3m/\n|\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\n| warnings on header files that are outside of my control, but ends with a\n| successful compilation. However, it compiles only the 64-bit version of\nthe\n| DLL and gives me this warning:\n|\n| Warning: this package has a non-empty 'configure.win' file,\n| so building only the main architecture\n|\n|\n| Finally, when we look at\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an\nerror\n| due to the fact that the package can’t be tested on i386:\n|\n| ** checking whether the package can be loaded ... ERROR\n| Loading this package had a fatal error status code 1\n| Loading log:\n| Error: package 'SnakeCharmR' is not installed for 'arch = i386'\n| Execution halted\n| ** DONE\n| Status: 1 ERROR, 1 NOTE\n|\n|\n| I apologize if this is a beginner’s problem, but this is my first R\npackage\n| ever and I’m not really used to working with R on Windows. Would\nappreciate\n| any guidance and pointers on how to address this and get the package to\n| pass the necessary CRAN automated tests.\n\nI tried to make Python and R co-exist at some point; my conclusion was\nthere\naren't enough days in the week to figure out how to do it on Windows. It's\neasy to do on Linux, and I don't personally have OS X / macOS use cases but\nhere it's feasible if you're careful about your toolchain.\n\nI think you should just consider 'OS_type: unix' in your DESCRIPTION. A\nworking and uploaded package on two OSs beats an \"almost there but never\nfinished\" package on three in my book.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi, Dirk.\n\nThank you for responding.\n\nI do sympathize with your frustrations, due to the exact complexity you are\nmentioning and also my ignorance on how R packages compile on Windows, I\nhad SnakeChar",
       "thread_id": "thread-2a21682dfe0f",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001424.html"
     },
     {
       "id": "msg-f0416cb542a6",
@@ -237,11 +249,12 @@
         "<22758.59797.40233.725087@max.eddelbuettel.com>",
         "<CAL_X237KR3RpCaeP-+Dobzy0OjT3NigcOgUykffQTJt=hRFUfw@mail.gmail.com>"
       ],
-      "body_plain": "So actually 'Biarch: false? didn?t help at all, same problem:\nhttps://win-builder.r-project.org/KhXyGby5Yhjm/\n\nDoes anyone know if the win builder machines have both 32-bit and 64-bit\nPython installed and in the PATH?\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\nOn 7 April 2017 at 09:28:19, Alexandre Sieira (alexandre.sieira at gmail.com)\nwrote:\n\nHi, Dirk.\n\nThank you for responding.\n\nI do sympathize with your frustrations, due to the exact complexity you are\nmentioning and also my ignorance on how R packages compile on Windows, I\nhad SnakeCharmR signal ?OS_type: Unix? for the longest time.\n\nThe thing is that AFAIK this works on Windows now, both with the python.org and\nRtools mingw Python distributions. The challenge now is figuring out the\nbest to get this into CRAN as a Windows package as well. Challenge #1:\ngetting past the win builder pre-check. :)\n\nI was reading some other posts on this list and maybe setting ?Biarch:\nfalse? could help? I?ll try that next.\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\nOn 6 April 2017 at 22:21:27, Dirk Eddelbuettel (edd at debian.org) wrote:\n\n\nOn 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n|\n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\n| reference, this is an Rcpp-based packages that links to the system's\n| libpython.\n|\n| I have been able to test it on my box using Windows 10 and several Python\n| versions:\n|\n| * Rtools mingw_64/opt Python 2.7.9;\n| * python.org 2.7.13 64-bit;\n| * python.org 3.6.1 64-bit;\n| * python.org 2.7.x 32-bit on Appveyor (\n| https://ci.appveyor.com/project/asieira/SnakeCharmR).\n|\n| Still, when I submit my source package to win-builder I get an error:\n| https://win-builder.r-project.org/9aqdlW0D6e3m/\n|\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\n| warnings on header files that are outside of my control, but ends with a\n| successful compilation. However, it compiles only the 64-bit version of\nthe\n| DLL and gives me this warning:\n|\n| Warning: this package has a non-empty 'configure.win' file,\n| so building only the main architecture\n|\n|\n| Finally, when we look at\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an error\n| due to the fact that the package can?t be tested on i386:\n|\n| ** checking whether the package can be loaded ... ERROR\n| Loading this package had a fatal error status code 1\n| Loading log:\n| Error: package 'SnakeCharmR' is not installed for 'arch = i386'\n| Execution halted\n| ** DONE\n| Status: 1 ERROR, 1 NOTE\n|\n|\n| I apologize if this is a beginner?s problem, but this is my first R\npackage\n| ever and I?m not really used to working with R on Windows. Would\nappreciate\n| any guidance and pointers on how to address this and get the package to\n| pass the necessary CRAN automated tests.\n\nI tried to make Python and R co-exist at some point; my conclusion was there\naren't enough days in the week to figure out how to do it on Windows. It's\neasy to do on Linux, and I don't personally have OS X / macOS use cases but\nhere it's feasible if you're careful about your toolchain.\n\nI think you should just consider 'OS_type: unix' in your DESCRIPTION. A\nworking and uploaded package on two OSs beats an \"almost there but never\nfinished\" package on three in my book.\n\nDirk\n\n--\nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "So actually 'Biarch: false? didn?t help at all, same problem:\nhttps://win-builder.r-project.org/KhXyGby5Yhjm/\n\nDoes anyone know if the win builder machines have both 32-bit and 64-bit\nPython installed",
+      "body_plain": "So actually 'Biarch: false’ didn’t help at all, same problem:\nhttps://win-builder.r-project.org/KhXyGby5Yhjm/\n\nDoes anyone know if the win builder machines have both 32-bit and 64-bit\nPython installed and in the PATH?\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\nOn 7 April 2017 at 09:28:19, Alexandre Sieira (alexandre.sieira at gmail.com)\nwrote:\n\nHi, Dirk.\n\nThank you for responding.\n\nI do sympathize with your frustrations, due to the exact complexity you are\nmentioning and also my ignorance on how R packages compile on Windows, I\nhad SnakeCharmR signal ‘OS_type: Unix’ for the longest time.\n\nThe thing is that AFAIK this works on Windows now, both with the python.org and\nRtools mingw Python distributions. The challenge now is figuring out the\nbest to get this into CRAN as a Windows package as well. Challenge #1:\ngetting past the win builder pre-check. :)\n\nI was reading some other posts on this list and maybe setting “Biarch:\nfalse” could help? I’ll try that next.\n\n-- \nAlexandre Sieira\nCISA, CISSP, ISO 27001 Lead Auditor\n\n\"The truth is rarely pure and never simple.\"\nOscar Wilde, The Importance of Being Earnest, 1895, Act I\n\nOn 6 April 2017 at 22:21:27, Dirk Eddelbuettel (edd at debian.org) wrote:\n\n\nOn 2 April 2017 at 17:21, Alexandre Sieira wrote:\n| Hi, everyone.\n|\n| I have done some work this weekend to allow the SnakeCharmR package (\n| https://github.com/asieira/SnakeCharmR) to be compiled under Windows. For\n| reference, this is an Rcpp-based packages that links to the system's\n| libpython.\n|\n| I have been able to test it on my box using Windows 10 and several Python\n| versions:\n|\n| * Rtools mingw_64/opt Python 2.7.9;\n| * python.org 2.7.13 64-bit;\n| * python.org 3.6.1 64-bit;\n| * python.org 2.7.x 32-bit on Appveyor (\n| https://ci.appveyor.com/project/asieira/SnakeCharmR).\n|\n| Still, when I submit my source package to win-builder I get an error:\n| https://win-builder.r-project.org/9aqdlW0D6e3m/\n|\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00install.out shows some\n| warnings on header files that are outside of my control, but ends with a\n| successful compilation. However, it compiles only the 64-bit version of\nthe\n| DLL and gives me this warning:\n|\n| Warning: this package has a non-empty 'configure.win' file,\n| so building only the main architecture\n|\n|\n| Finally, when we look at\n| https://win-builder.r-project.org/9aqdlW0D6e3m/00check.log we see an error\n| due to the fact that the package can’t be tested on i386:\n|\n| ** checking whether the package can be loaded ... ERROR\n| Loading this package had a fatal error status code 1\n| Loading log:\n| Error: package 'SnakeCharmR' is not installed for 'arch = i386'\n| Execution halted\n| ** DONE\n| Status: 1 ERROR, 1 NOTE\n|\n|\n| I apologize if this is a beginner’s problem, but this is my first R\npackage\n| ever and I’m not really used to working with R on Windows. Would\nappreciate\n| any guidance and pointers on how to address this and get the package to\n| pass the necessary CRAN automated tests.\n\nI tried to make Python and R co-exist at some point; my conclusion was there\naren't enough days in the week to figure out how to do it on Windows. It's\neasy to do on Linux, and I don't personally have OS X / macOS use cases but\nhere it's feasible if you're careful about your toolchain.\n\nI think you should just consider 'OS_type: unix' in your DESCRIPTION. A\nworking and uploaded package on two OSs beats an \"almost there but never\nfinished\" package on three in my book.\n\nDirk\n\n--\nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "So actually 'Biarch: false’ didn’t help at all, same problem:\nhttps://win-builder.r-project.org/KhXyGby5Yhjm/\n\nDoes anyone know if the win builder machines have both 32-bit and 64-bit\nPython installed",
       "thread_id": "thread-2a21682dfe0f",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001425.html"
     },
     {
       "id": "msg-6dcce9d92e75",
@@ -263,7 +276,8 @@
       "body_snippet": "The \"missing\" files or their directory are not by accident listed in Rbuildignore, right?\n\n\n\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 5,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001426.html"
     },
     {
       "id": "msg-6e4944347419",
@@ -286,7 +300,8 @@
       "body_snippet": "Hi Berry,\n\nGood call, and I would have been very embarrassed if so, but no. Actually,\nif they had been, I guess they would not have appeared in the tarball.\n\nCheers,\nDavid\n\nOn 10 April 2017 at 14:57, ",
       "thread_id": "thread-a277a375d5f5",
       "thread_depth": 6,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001427.html"
     },
     {
       "id": "msg-094b91efd93f",
@@ -302,7 +317,8 @@
       "body_snippet": "Hi,\n\nI'm looking for any guidance/best-practices about how to deal with an\nissue a quantmod user ran into an issue when calling\ngetSymbols.google():\nhttps://github.com/joshuaulrich/quantmod/issues/140",
       "thread_id": "thread-094b91efd93f",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001428.html"
     },
     {
       "id": "msg-47bb342c295c",
@@ -318,7 +334,8 @@
       "body_snippet": "Hi,\n\n\nWhen I submitted my R package to CRAN, it didn't go through the automatic incoming check, resulting the following NOTE.  I tested on my macOS with R CMD CHECK and R CMD --as-cran, both went thro",
       "thread_id": "thread-47bb342c295c",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001429.html"
     },
     {
       "id": "msg-32950179c730",
@@ -336,7 +353,8 @@
       "body_snippet": "Hi,\n\nThis is something that has gotten quite a bit of attention recently due \nto the coming R 3.4 giving a NOTE when routines aren't declared. You \nshould be able to find info on this list or elsewher",
       "thread_id": "thread-47bb342c295c",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001430.html"
     },
     {
       "id": "msg-b9a97dd42e27",
@@ -355,7 +373,8 @@
       "body_snippet": "Hi Ege,\n\n\nThank you!\n\nIn the init.c file,  do I have to change 'void' to corresponding declaration?\n\nE.g:\n\nextern void F77_NAME(datacon)(void *, void *, void *, void *, void *, void *, void *, void *,",
       "thread_id": "thread-47bb342c295c",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001431.html"
     },
     {
       "id": "msg-7d8738112496",
@@ -376,7 +395,8 @@
       "body_snippet": "Hi,\n\nA few extra comments are below.\n\nOn 04/14/2017 12:46 AM, Zhian Kamvar wrote:\n> Hi,\n>\n>> On Apr 13, 2017, at 11:41 , Vineetha Warriyar Kodalore Vijayan\n>> <vineethawarriyar.kod at ucalgary.ca\n>> <",
       "thread_id": "thread-7d8738112496",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001432.html"
     },
     {
       "id": "msg-a86dd4218daf",
@@ -398,7 +418,8 @@
       "body_snippet": "Thanks everyone!\n\n\n-Vineetha\n\n________________________________\nFrom: Ege Rubak <rubak at math.aau.dk>\nSent: Thursday, April 13, 2017 11:04:20 AM\nTo: Zhian Kamvar; Vineetha Warriyar Kodalore Vijayan\nCc",
       "thread_id": "thread-7d8738112496",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001433.html"
     },
     {
       "id": "msg-5261aa1d81f3",
@@ -416,7 +437,8 @@
       "body_snippet": "On Thu, Apr 13, 2017 at 10:14 AM, Vineetha Warriyar Kodalore Vijayan <\nvineethawarriyar.kod at ucalgary.ca> wrote:\n\n> Can someone help to resolve this issue?\n\n\nI wrote a short R script that will read ",
       "thread_id": "thread-47bb342c295c",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001434.html"
     },
     {
       "id": "msg-c8883c16a110",
@@ -432,7 +454,8 @@
       "body_snippet": "We are planning to update the DDRTree package but found the following\nwarnings:\n\n  d:/RCompile/CRANpkg/lib/3.4/BH/include/boost/unordered/detail/buckets.hpp:586:29:\nwarning: ISO C++ 1998 does not supp",
       "thread_id": "thread-c8883c16a110",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001435.html"
     },
     {
       "id": "msg-871e1f79f06d",
@@ -450,7 +473,8 @@
       "body_snippet": "You can try placing this in your src/Makevars[.win] file:\n\n    CXXFLAGS = -DBOOST_NO_LONG_LONG\n\nThe dplyr package does this (and more) to avoid 'long long' leaking in\nfrom Boost headers. See e.g.\n\nhtt",
       "thread_id": "thread-c8883c16a110",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001436.html"
     },
     {
       "id": "msg-71a07db17232",
@@ -468,7 +492,8 @@
       "body_snippet": "On 14 April 2017 at 01:49, Xiaojie Qiu wrote:\n| We are planning to update the DDRTree package but found the following\n| warnings:\n| \n|   d:/RCompile/CRANpkg/lib/3.4/BH/include/boost/unordered/detail/b",
       "thread_id": "thread-c8883c16a110",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001437.html"
     },
     {
       "id": "msg-703b895529c2",
@@ -482,11 +507,12 @@
       "references": [
         "<22740.258.225633.517269@hornik.net>"
       ],
-      "body_plain": "Hi, I was asked by CRAN-maintainers to provide two versions of \nmedian.integer64, one with and one without a dots-argument.\n\nHowever, doing so results in a code-documentation mismatch, because I have\n\n\\method{median}{integer64}(x, na.rm = FALSE)\n\nand now also need\n\n\\method{median}{integer64}(x, na.rm = FALSE, \\dots)\n\nbut selecting between both using \\Sexpr{} seems not to be allowed in a \nRd-usage-section.\n\nAnyone knows the proper way to do this?\n\n\nJens Oehlschl?gel\n\n\n\n-------- Forwarded Message --------\nSubject: \tCRAN packages maintained by you\nDate: \tThu, 23 Mar 2017 18:08:18 +0100\nFrom: \tKurt Hornik <Kurt.Hornik at wu.ac.at>\nReply-To: \tCRAN at R-project.org\nTo: \tachim.zeileis at r-project.org, andri at signorell.net, claudio at unive.it, \nedzer.pebesma at uni-muenster.de, j.curran at auckland.ac.nz, \njens.oehlschlaegel at truecluster.com, jouni at kerman.com, mx.herve at gmail.com\nCC: \tCRAN at R-project.org\n\n\n\nDear maintainers,\n\nThis concerns the CRAN packages\n\n   Bolstad DescTools RVAideMemoire bit64 circular rv units zoo\n\nmaintained by one of you:\n\n   Achim Zeileis <Achim.Zeileis at R-project.org>: zoo\n   Andri Signorell <andri at signorell.net>: DescTools\n   Claudio Agostinelli <claudio at unive.it>: circular\n   Edzer Pebesma <edzer.pebesma at uni-muenster.de>: units\n   James Curran <j.curran at auckland.ac.nz>: Bolstad\n   Jens Oehlschl?gel <Jens.Oehlschlaegel at truecluster.com>: bit64\n   Jouni Kerman <jouni at kerman.com>: rv\n   Maxime Herv? <mx.herve at gmail.com>: RVAideMemoire\n\nYou may already have noticed that under r-devel these have given\nwarnings like\n\n* checking S3 generic/method consistency ... WARNING\nmedian:\n   function(x, na.rm, ...)\nmedian.Bolstad:\n   function(x, na.rm)\n\nfor some time now, following\n\n      \\item \\code{median()} gains a formal \\code{\\dots} argument, so\n       methods with extra arguments can be provided.\n\nCould you please update your package code to eliminate these warnings,\nideally as quickly as possible?\n\nIn one package co-developed by me, I went for\n\nif(is.na(match(\"...\", names(formals(median))))) {\n     median.tuple <- function(x, na.rm = FALSE) {\n         x <- as.numeric(x)\n         NextMethod()\n     }\n} else {\n     median.tuple <- function(x, na.rm = FALSE, ...) {\n         x <- as.numeric(x)\n         NextMethod()\n     }\n}\n\nwhich may be the \"simplest\" way forward ...\n\nBest\n-k\n\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi, I was asked by CRAN-maintainers to provide two versions of \nmedian.integer64, one with and one without a dots-argument.\n\nHowever, doing so results in a code-documentation mismatch, because I have\n\n\\method{median}{integer64}(x, na.rm = FALSE)\n\nand now also need\n\n\\method{median}{integer64}(x, na.rm = FALSE, \\dots)\n\nbut selecting between both using \\Sexpr{} seems not to be allowed in a \nRd-usage-section.\n\nAnyone knows the proper way to do this?\n\n\nJens Oehlschlägel\n\n\n\n-------- Forwarded Message --------\nSubject: \tCRAN packages maintained by you\nDate: \tThu, 23 Mar 2017 18:08:18 +0100\nFrom: \tKurt Hornik <Kurt.Hornik at wu.ac.at>\nReply-To: \tCRAN at R-project.org\nTo: \tachim.zeileis at r-project.org, andri at signorell.net, claudio at unive.it, \nedzer.pebesma at uni-muenster.de, j.curran at auckland.ac.nz, \njens.oehlschlaegel at truecluster.com, jouni at kerman.com, mx.herve at gmail.com\nCC: \tCRAN at R-project.org\n\n\n\nDear maintainers,\n\nThis concerns the CRAN packages\n\n   Bolstad DescTools RVAideMemoire bit64 circular rv units zoo\n\nmaintained by one of you:\n\n   Achim Zeileis <Achim.Zeileis at R-project.org>: zoo\n   Andri Signorell <andri at signorell.net>: DescTools\n   Claudio Agostinelli <claudio at unive.it>: circular\n   Edzer Pebesma <edzer.pebesma at uni-muenster.de>: units\n   James Curran <j.curran at auckland.ac.nz>: Bolstad\n   Jens Oehlschlägel <Jens.Oehlschlaegel at truecluster.com>: bit64\n   Jouni Kerman <jouni at kerman.com>: rv\n   Maxime Hervé <mx.herve at gmail.com>: RVAideMemoire\n\nYou may already have noticed that under r-devel these have given\nwarnings like\n\n* checking S3 generic/method consistency ... WARNING\nmedian:\n   function(x, na.rm, ...)\nmedian.Bolstad:\n   function(x, na.rm)\n\nfor some time now, following\n\n      \\item \\code{median()} gains a formal \\code{\\dots} argument, so\n       methods with extra arguments can be provided.\n\nCould you please update your package code to eliminate these warnings,\nideally as quickly as possible?\n\nIn one package co-developed by me, I went for\n\nif(is.na(match(\"...\", names(formals(median))))) {\n     median.tuple <- function(x, na.rm = FALSE) {\n         x <- as.numeric(x)\n         NextMethod()\n     }\n} else {\n     median.tuple <- function(x, na.rm = FALSE, ...) {\n         x <- as.numeric(x)\n         NextMethod()\n     }\n}\n\nwhich may be the \"simplest\" way forward ...\n\nBest\n-k\n\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi, I was asked by CRAN-maintainers to provide two versions of \nmedian.integer64, one with and one without a dots-argument.\n\nHowever, doing so results in a code-documentation mismatch, because I have\n",
       "thread_id": "thread-703b895529c2",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001438.html"
     },
     {
       "id": "msg-2bd6006ab464",
@@ -501,11 +527,12 @@
         "<22740.258.225633.517269@hornik.net>",
         "<7f6b0909-28c6-abf0-e819-ffc072c46d2b@truecluster.com>"
       ],
-      "body_plain": "Hi,\nWe had this issue with `median.im` in spatstat. I wasn't involved in \nfixing it, but maintainer Adrian Baddeley changed the documentation \naccording to CRAN instructions. You can see it here:\nhttps://github.com/spatstat/spatstat/blob/master/man/mean.im.Rd\nMaybe you can use that for inspiration...\nCheers,\nEge\n\nOn 04/15/2017 12:02 AM, Jens Oehlschl?gel wrote:\n> Hi, I was asked by CRAN-maintainers to provide two versions of\n> median.integer64, one with and one without a dots-argument.\n>\n> However, doing so results in a code-documentation mismatch, because I have\n>\n> \\method{median}{integer64}(x, na.rm = FALSE)\n>\n> and now also need\n>\n> \\method{median}{integer64}(x, na.rm = FALSE, \\dots)\n>\n> but selecting between both using \\Sexpr{} seems not to be allowed in a\n> Rd-usage-section.\n>\n> Anyone knows the proper way to do this?\n>\n>\n> Jens Oehlschl?gel\n>\n>\n>\n> -------- Forwarded Message --------\n> Subject: \tCRAN packages maintained by you\n> Date: \tThu, 23 Mar 2017 18:08:18 +0100\n> From: \tKurt Hornik <Kurt.Hornik at wu.ac.at>\n> Reply-To: \tCRAN at R-project.org\n> To: \tachim.zeileis at r-project.org, andri at signorell.net, claudio at unive.it,\n> edzer.pebesma at uni-muenster.de, j.curran at auckland.ac.nz,\n> jens.oehlschlaegel at truecluster.com, jouni at kerman.com, mx.herve at gmail.com\n> CC: \tCRAN at R-project.org\n>\n>\n>\n> Dear maintainers,\n>\n> This concerns the CRAN packages\n>\n>    Bolstad DescTools RVAideMemoire bit64 circular rv units zoo\n>\n> maintained by one of you:\n>\n>    Achim Zeileis <Achim.Zeileis at R-project.org>: zoo\n>    Andri Signorell <andri at signorell.net>: DescTools\n>    Claudio Agostinelli <claudio at unive.it>: circular\n>    Edzer Pebesma <edzer.pebesma at uni-muenster.de>: units\n>    James Curran <j.curran at auckland.ac.nz>: Bolstad\n>    Jens Oehlschl?gel <Jens.Oehlschlaegel at truecluster.com>: bit64\n>    Jouni Kerman <jouni at kerman.com>: rv\n>    Maxime Herv? <mx.herve at gmail.com>: RVAideMemoire\n>\n> You may already have noticed that under r-devel these have given\n> warnings like\n>\n> * checking S3 generic/method consistency ... WARNING\n> median:\n>    function(x, na.rm, ...)\n> median.Bolstad:\n>    function(x, na.rm)\n>\n> for some time now, following\n>\n>       \\item \\code{median()} gains a formal \\code{\\dots} argument, so\n>        methods with extra arguments can be provided.\n>\n> Could you please update your package code to eliminate these warnings,\n> ideally as quickly as possible?\n>\n> In one package co-developed by me, I went for\n>\n> if(is.na(match(\"...\", names(formals(median))))) {\n>      median.tuple <- function(x, na.rm = FALSE) {\n>          x <- as.numeric(x)\n>          NextMethod()\n>      }\n> } else {\n>      median.tuple <- function(x, na.rm = FALSE, ...) {\n>          x <- as.numeric(x)\n>          NextMethod()\n>      }\n> }\n>\n> which may be the \"simplest\" way forward ...\n>\n> Best\n> -k\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "Hi,\nWe had this issue with `median.im` in spatstat. I wasn't involved in \nfixing it, but maintainer Adrian Baddeley changed the documentation \naccording to CRAN instructions. You can see it here:\nhttps://github.com/spatstat/spatstat/blob/master/man/mean.im.Rd\nMaybe you can use that for inspiration...\nCheers,\nEge\n\nOn 04/15/2017 12:02 AM, Jens Oehlschlägel wrote:\n> Hi, I was asked by CRAN-maintainers to provide two versions of\n> median.integer64, one with and one without a dots-argument.\n>\n> However, doing so results in a code-documentation mismatch, because I have\n>\n> \\method{median}{integer64}(x, na.rm = FALSE)\n>\n> and now also need\n>\n> \\method{median}{integer64}(x, na.rm = FALSE, \\dots)\n>\n> but selecting between both using \\Sexpr{} seems not to be allowed in a\n> Rd-usage-section.\n>\n> Anyone knows the proper way to do this?\n>\n>\n> Jens Oehlschl?gel\n>\n>\n>\n> -------- Forwarded Message --------\n> Subject: \tCRAN packages maintained by you\n> Date: \tThu, 23 Mar 2017 18:08:18 +0100\n> From: \tKurt Hornik <Kurt.Hornik at wu.ac.at>\n> Reply-To: \tCRAN at R-project.org\n> To: \tachim.zeileis at r-project.org, andri at signorell.net, claudio at unive.it,\n> edzer.pebesma at uni-muenster.de, j.curran at auckland.ac.nz,\n> jens.oehlschlaegel at truecluster.com, jouni at kerman.com, mx.herve at gmail.com\n> CC: \tCRAN at R-project.org\n>\n>\n>\n> Dear maintainers,\n>\n> This concerns the CRAN packages\n>\n>    Bolstad DescTools RVAideMemoire bit64 circular rv units zoo\n>\n> maintained by one of you:\n>\n>    Achim Zeileis <Achim.Zeileis at R-project.org>: zoo\n>    Andri Signorell <andri at signorell.net>: DescTools\n>    Claudio Agostinelli <claudio at unive.it>: circular\n>    Edzer Pebesma <edzer.pebesma at uni-muenster.de>: units\n>    James Curran <j.curran at auckland.ac.nz>: Bolstad\n>    Jens Oehlschl?gel <Jens.Oehlschlaegel at truecluster.com>: bit64\n>    Jouni Kerman <jouni at kerman.com>: rv\n>    Maxime Herv? <mx.herve at gmail.com>: RVAideMemoire\n>\n> You may already have noticed that under r-devel these have given\n> warnings like\n>\n> * checking S3 generic/method consistency ... WARNING\n> median:\n>    function(x, na.rm, ...)\n> median.Bolstad:\n>    function(x, na.rm)\n>\n> for some time now, following\n>\n>       \\item \\code{median()} gains a formal \\code{\\dots} argument, so\n>        methods with extra arguments can be provided.\n>\n> Could you please update your package code to eliminate these warnings,\n> ideally as quickly as possible?\n>\n> In one package co-developed by me, I went for\n>\n> if(is.na(match(\"...\", names(formals(median))))) {\n>      median.tuple <- function(x, na.rm = FALSE) {\n>          x <- as.numeric(x)\n>          NextMethod()\n>      }\n> } else {\n>      median.tuple <- function(x, na.rm = FALSE, ...) {\n>          x <- as.numeric(x)\n>          NextMethod()\n>      }\n> }\n>\n> which may be the \"simplest\" way forward ...\n>\n> Best\n> -k\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "Hi,\nWe had this issue with `median.im` in spatstat. I wasn't involved in \nfixing it, but maintainer Adrian Baddeley changed the documentation \naccording to CRAN instructions. You can see it here:\nhttp",
       "thread_id": "thread-703b895529c2",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001439.html"
     },
     {
       "id": "msg-67372d5d7ac5",
@@ -521,7 +548,8 @@
       "body_snippet": "In my package I have a dataframe that I use but want to hide from the user.  In Hadley's book on R Packages,  he says:\n\n> \t? If you want to store parsed data, but not make it available to the user, pu",
       "thread_id": "thread-67372d5d7ac5",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001440.html"
     },
     {
       "id": "msg-c83b2b682007",
@@ -540,7 +568,8 @@
       "body_snippet": "thanks a lot. I used the option on SystemRequirements: C++11 which works\npretty good\n\nOn Thu, Apr 13, 2017 at 7:40 PM Dirk Eddelbuettel <edd at debian.org> wrote:\n\n>\n> On 14 April 2017 at 01:49, Xiaoj",
       "thread_id": "thread-c8883c16a110",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001441.html"
     },
     {
       "id": "msg-05e0d658e957",
@@ -558,7 +587,8 @@
       "body_snippet": "Just ignore it.\nHadley\n\nOn Friday, April 14, 2017, Roy Mendelssohn - NOAA Federal <\nroy.mendelssohn at noaa.gov> wrote:\n\n> In my package I have a dataframe that I use but want to hide from the\n> user.",
       "thread_id": "thread-67372d5d7ac5",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001442.html"
     },
     {
       "id": "msg-2408f9684d93",
@@ -577,7 +607,8 @@
       "body_snippet": "On 2017-04-15 11:24 AM, Hadley Wickham wrote:\n> Just ignore it.\n> Hadley\n>\n> On Friday, April 14, 2017, Roy Mendelssohn - NOAA Federal <\n> roy.mendelssohn at noaa.gov> wrote:\n>\n>> In my package I have",
       "thread_id": "thread-67372d5d7ac5",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001443.html"
     },
     {
       "id": "msg-cc45c38806c1",
@@ -595,7 +626,8 @@
       "body_snippet": "I have a question why in the CRAN submission system, the page after email\nconfirmation, the third check \"I have fixed all problems shown on the\npackage check page\". Why doesn' t the \"package check pag",
       "thread_id": "thread-cc45c38806c1",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001444.html"
     },
     {
       "id": "msg-7a25d01c990f",
@@ -611,7 +643,8 @@
       "body_snippet": "I have no idea how I could fix these compiling errors in R headers. Testing\nmy package locally on archlinux is fine. The link to build log is:\nhttps://win-builder.r-project.org/08H2Ne0lShbY/ . Please ",
       "thread_id": "thread-7a25d01c990f",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001445.html"
     },
     {
       "id": "msg-2f61f15829b0",
@@ -630,7 +663,8 @@
       "body_snippet": "On 17.04.2017 16:42, GSC wrote:\n> I have a question why in the CRAN submission system, the page after email\n> confirmation, the third check \"I have fixed all problems shown on the\n> package check page",
       "thread_id": "thread-cc45c38806c1",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001446.html"
     },
     {
       "id": "msg-8fc1d301ddbc",
@@ -650,7 +684,8 @@
       "body_snippet": "Thank you for the clarification.\n\nUwe Ligges <ligges at statistik.tu-dortmund.de>?2017?4?17??? ??11:00???\n\n>\n>\n> On 17.04.2017 16:42, GSC wrote:\n> > I have a question why in the CRAN submission system",
       "thread_id": "thread-cc45c38806c1",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001447.html"
     },
     {
       "id": "msg-a6c599f2caa4",
@@ -668,7 +703,8 @@
       "body_snippet": "That link is deprecated, new link to log:\nhttps://win-builder.r-project.org/I3u4Z9BbLHsC/ .\n\nGSC <xgdgsc at gmail.com>?2017?4?17??? ??10:47???\n\n> I have no idea how I could fix these compiling errors ",
       "thread_id": "thread-7a25d01c990f",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001448.html"
     },
     {
       "id": "msg-67f54c359158",
@@ -684,7 +720,8 @@
       "body_snippet": "In submitting my package yarrr v0.1.5 to CRAN (https://github.com/\nndphillips/yarrr), I received the following error:\n\n* installing *source* package 'yarrr' ...\n** R\n** data\n*** moving datasets to laz",
       "thread_id": "thread-67f54c359158",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001449.html"
     },
     {
       "id": "msg-d130005dccfc",
@@ -696,11 +733,12 @@
       "subject_clean": "[R-pkg-devel] (no subject)",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello all,\n\n  With R-devel, I see the following for one of my packages\n(https://github.com/fmichonneau/phylobase), and I would appreciate any\ninsights on what needs to be adjusted to fix it:\n\nFunctions or methods with usage in documentation object\n'subset-methods' but not in code:\n  [\n\nThanks!\n  -- Fran?ois",
+      "body_plain": "Hello all,\n\n  With R-devel, I see the following for one of my packages\n(https://github.com/fmichonneau/phylobase), and I would appreciate any\ninsights on what needs to be adjusted to fix it:\n\nFunctions or methods with usage in documentation object\n'subset-methods' but not in code:\n  [\n\nThanks!\n  -- François",
       "body_snippet": "Hello all,\n\n  With R-devel, I see the following for one of my packages\n(https://github.com/fmichonneau/phylobase), and I would appreciate any\ninsights on what needs to be adjusted to fix it:\n\nFunction",
       "thread_id": "thread-d130005dccfc",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001450.html"
     },
     {
       "id": "msg-eceb1b21f60e",
@@ -714,11 +752,12 @@
       "references": [
         "<CAKL30wUMnAyH1MVXmZxBzB=2KaPiA1qr2eShi_2+cS=s8C3MaQ@mail.gmail.com>"
       ],
-      "body_plain": "To follow up, I managed to remove the warning by exporting the\nfunction directly. In other words, my NAMESPACE now contains both:\n\nexport(\"[\")\nexportMethods(\"[\")\n\ncould someone please confirm it's really the best approach?\n\n  thanks!\n  -- Fran?ois\n\nOn Tue, Apr 18, 2017 at 10:57 AM, Fran?ois Michonneau\n<francois.michonneau at gmail.com> wrote:\n> Hello all,\n>\n>   With R-devel, I see the following for one of my packages\n> (https://github.com/fmichonneau/phylobase), and I would appreciate any\n> insights on what needs to be adjusted to fix it:\n>\n> Functions or methods with usage in documentation object\n> 'subset-methods' but not in code:\n>   [\n>\n> Thanks!\n>   -- Fran?ois\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "To follow up, I managed to remove the warning by exporting the\nfunction directly. In other words, my NAMESPACE now contains both:\n\nexport(\"[\")\nexportMethods(\"[\")\n\ncould someone please confirm it's really the best approach?\n\n  thanks!\n  -- François\n\nOn Tue, Apr 18, 2017 at 10:57 AM, François Michonneau\n<francois.michonneau at gmail.com> wrote:\n> Hello all,\n>\n>   With R-devel, I see the following for one of my packages\n> (https://github.com/fmichonneau/phylobase), and I would appreciate any\n> insights on what needs to be adjusted to fix it:\n>\n> Functions or methods with usage in documentation object\n> 'subset-methods' but not in code:\n>   [\n>\n> Thanks!\n>   -- François\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "To follow up, I managed to remove the warning by exporting the\nfunction directly. In other words, my NAMESPACE now contains both:\n\nexport(\"[\")\nexportMethods(\"[\")\n\ncould someone please confirm it's rea",
       "thread_id": "thread-d130005dccfc",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001451.html"
     },
     {
       "id": "msg-44610bef72bf",
@@ -736,7 +775,8 @@
       "body_snippet": "A race condition on the check system.\n\nBest,\nUwe Ligges\n\n\n\nOn 18.04.2017 13:22, Nathaniel Phillips wrote:\n> In submitting my package yarrr v0.1.5 to CRAN (https://github.com/\n> ndphillips/yarrr), I re",
       "thread_id": "thread-67f54c359158",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001452.html"
     },
     {
       "id": "msg-c79313e200b6",
@@ -759,7 +799,8 @@
       "body_snippet": "Hi Uwe,\n\nI'm not sure if you ever got my off-list message with my tarball or\nsubsequent messages. I can't send a tarball on-list - it gets rejected as\ntoo large - but here is a dropbox link. If you co",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001453.html"
     },
     {
       "id": "msg-cfa3615d1a03",
@@ -775,7 +816,8 @@
       "body_snippet": "Hi All:\n\nMy package allows the user to search for information about the data available, and the information is returned in a dataframe. I had long been looking for a nice way to display the results  (",
       "thread_id": "thread-cfa3615d1a03",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001454.html"
     },
     {
       "id": "msg-b0001b3edb31",
@@ -799,7 +841,8 @@
       "body_snippet": "On 19/04/2017 1:00 PM, David Hugh-Jones wrote:\n> Hi Uwe,\n>\n> I'm not sure if you ever got my off-list message with my tarball or\n> subsequent messages. I can't send a tarball on-list - it gets rejecte",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001455.html"
     },
     {
       "id": "msg-32c859dd1910",
@@ -817,7 +860,8 @@
       "body_snippet": "I think that exactly what View() shows will depend on your operating\nsystem. On my Linux box, I get a very plain spreadsheet with\neverything in fixed-width font, thin black boxes, and a highlighted\ncu",
       "thread_id": "thread-cfa3615d1a03",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001456.html"
     },
     {
       "id": "msg-74ce76cbb564",
@@ -835,7 +879,8 @@
       "body_snippet": "Dear Roy,\n\nIn case you create a HTML vignette you can use datatable() from the DT\npackage. That creates a dynamic table in the output.\n\nBest regards,\n\nir. Thierry Onkelinx\nInstituut voor natuur- en bo",
       "thread_id": "thread-cfa3615d1a03",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001457.html"
     },
     {
       "id": "msg-d085c24f0ed8",
@@ -854,7 +899,8 @@
       "body_snippet": "Two questions:\n\n1. If your package definitely needs to call View(), and you want to explain\nhow that will look, then why not show one or more screenshots in your\ndocumentation?\n\n2. Why does your packa",
       "thread_id": "thread-cfa3615d1a03",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001458.html"
     },
     {
       "id": "msg-c854e08085ca",
@@ -879,7 +925,8 @@
       "body_snippet": "Hi Duncan,\n\nThank you very much for taking the time to look at this.\n\nI tried rebuilding the tar file so as to include only the .Rmd files, not\nthe HTML files, in 'vignettes':\n\ndrwxr-xr-x  0 david  st",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001459.html"
     },
     {
       "id": "msg-b33984a17c36",
@@ -905,7 +952,8 @@
       "body_snippet": "David,\n\nI'd suggest creating a vignette for each of HTML and PDF, and including \na source file that contains the common code.  e.g. have a pdf header and \nan html header file, and then include the 'ma",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001460.html"
     },
     {
       "id": "msg-631aafb98980",
@@ -924,7 +972,8 @@
       "body_snippet": "I figured it out as header clash. Putting #include R headers after Windows\nheaders works for me.\n\nGSC <xgdgsc at gmail.com>?2017?4?18??? ??9:54???\n\n> That link is deprecated, new link to log:\n> https:",
       "thread_id": "thread-7a25d01c990f",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001461.html"
     },
     {
       "id": "msg-16b76cfb7cda",
@@ -940,7 +989,8 @@
       "body_snippet": "Dear all,\n\nI am using a package for teaching:\nmy slides are html vignettes, and it is convenient for students to control\nwhich packages they must install, provide code and datasets.\n\nAs I am often edi",
       "thread_id": "thread-16b76cfb7cda",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001462.html"
     },
     {
       "id": "msg-8c1f435d3b2b",
@@ -966,7 +1016,8 @@
       "body_snippet": "On 20/04/2017 4:38 AM, David Hugh-Jones wrote:\n>\n> Hi Duncan,\n>\n> Thank you very much for taking the time to look at this.\n>\n> I tried rebuilding the tar file so as to include only the .Rmd files,\n> n",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001463.html"
     },
     {
       "id": "msg-1cba24ad639b",
@@ -993,7 +1044,8 @@
       "body_snippet": "On 20/04/2017 4:57 AM, Brian G. Peterson wrote:\n> David,\n>\n> I'd suggest creating a vignette for each of HTML and PDF, and including\n> a source file that contains the common code.  e.g. have a pdf hea",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 4,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001464.html"
     },
     {
       "id": "msg-ca3b31763bc4",
@@ -1021,7 +1073,8 @@
       "body_snippet": "Hi guys,\n\nThanks very much for all of your comments. I now have a good sense of what\nthe possibilities are, and I will think about what works best for my\npackage.\n\nCheers,\nDavid\n\n\nOn 20 April 2017 at ",
       "thread_id": "thread-c79313e200b6",
       "thread_depth": 5,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001465.html"
     },
     {
       "id": "msg-956a1bda0aaa",
@@ -1041,7 +1094,8 @@
       "body_snippet": "Thanks all for the suggestions.\n\nIf I have screenshots in the Vignette, where should I put the picture files - in the vignette folder (this is so it will work when submitted to CRAN)?\n\nAs for why disp",
       "thread_id": "thread-cfa3615d1a03",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001466.html"
     },
     {
       "id": "msg-1e40ca999f97",
@@ -1059,7 +1113,8 @@
       "body_snippet": "Hi Alex,\n\n\nwhat if you run\n\ndevtools::install_github(build_vignettes = TRUE)\n\non your students computer?\n\nSee ?devtools::install\n\n\nBest,\n\nSven\n\n\n> On 20. Apr 2017, at 15:09, Alexandre Courtiol <alexan",
       "thread_id": "thread-16b76cfb7cda",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001467.html"
     },
     {
       "id": "msg-110e71b0a8b2",
@@ -1078,7 +1133,8 @@
       "body_snippet": "Thanks but I don't think so, that would imply them to rebuild the\nvignettes, which is exactly what I want to avoid.\nWithout knitr cached chunk it would take forever on their laptops and they\nwould als",
       "thread_id": "thread-16b76cfb7cda",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001468.html"
     },
     {
       "id": "msg-80c8ef41f474",
@@ -1098,7 +1154,8 @@
       "body_snippet": "To rephrase my needs, I need to find a way to create the file\n/Meta/vignette.rds at install, not build, as all other files for the\nvignettes to run are being installed properly.\nHas anyone managed to ",
       "thread_id": "thread-16b76cfb7cda",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001469.html"
     },
     {
       "id": "msg-809dd99e5706",
@@ -1118,7 +1175,8 @@
       "body_snippet": "Perhaps you could add a Makefile with a rule that compiles the vignettes into the inst/doc directory? This might avoid the build process.\n\n-----\nZhian N. Kamvar, Ph. D.\nPostdoctoral Researcher (Everha",
       "thread_id": "thread-16b76cfb7cda",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001470.html"
     },
     {
       "id": "msg-bd92e3f6899c",
@@ -1136,7 +1194,8 @@
       "body_snippet": "Hi all,\n\nPlease consider completing this survey GitHub is running to study \"open source software, the people that create it, their experience, and their relationship to the industry that depends on it",
       "thread_id": "thread-bd92e3f6899c",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001471.html"
     },
     {
       "id": "msg-e0a9348f87fe",
@@ -1157,7 +1216,8 @@
       "body_snippet": "On Thu, Apr 20, 2017 at 3:41 PM, Roy Mendelssohn - NOAA Federal\n<roy.mendelssohn at noaa.gov> wrote:\n\n> What I liked about View() is often the table is quite big, and View() provides scroll bars and n",
       "thread_id": "thread-cfa3615d1a03",
       "thread_depth": 4,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001472.html"
     },
     {
       "id": "msg-7b89a9e29fc9",
@@ -1173,7 +1233,8 @@
       "body_snippet": "I have, like many others it would appear, been struggling with\nthe new-ish convention of requiring --- or quasi-requiring --- that \n\"routines\" be \"registered\" and the warning generated by R CMD check ",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001473.html"
     },
     {
       "id": "msg-6ba8866b046a",
@@ -1191,7 +1252,8 @@
       "body_snippet": "On 23 April 2017 at 09:25, Rolf Turner wrote:\n| I have, like many others it would appear, been struggling with\n| the new-ish convention of requiring --- or quasi-requiring --- that \n| \"routines\" be \"r",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001474.html"
     },
     {
       "id": "msg-89c2a6605b05",
@@ -1205,11 +1267,12 @@
       "references": [
         "<mailman.18.1492855202.53047.r-package-devel@r-project.org>"
       ],
-      "body_plain": "Thanks Jenny. I?m looking forward to seeing the results and the inevitable R package wrapper.\n\nImanuel",
-      "body_snippet": "Thanks Jenny. I?m looking forward to seeing the results and the inevitable R package wrapper.\n\nImanuel",
+      "body_plain": "Thanks Jenny. I’m looking forward to seeing the results and the inevitable R package wrapper.\n\nImanuel",
+      "body_snippet": "Thanks Jenny. I’m looking forward to seeing the results and the inevitable R package wrapper.\n\nImanuel",
       "thread_id": "thread-89c2a6605b05",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001475.html"
     },
     {
       "id": "msg-a8ce3177b54f",
@@ -1228,7 +1291,8 @@
       "body_snippet": "On 23/04/17 09:44, Dirk Eddelbuettel wrote:\n>\n> On 23 April 2017 at 09:25, Rolf Turner wrote:\n\n<SNIP>\n\n> | However I found a posting by Ege Rubak on this topic which sent me by a\n> | slightly roundabo",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001476.html"
     },
     {
       "id": "msg-ccd990144c03",
@@ -1244,11 +1308,12 @@
         "<22779.52948.718380.323895@max.eddelbuettel.com>",
         "<8a6f0615-10e1-2c49-583f-491d655ef23f@auckland.ac.nz>"
       ],
-      "body_plain": "On Sat, Apr 22, 2017 at 6:13 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n> The foregoing \"official\" way would seem to apply to functions called by\n> \".Call\" (which I never use; it is way over my head).  What about functions\n> called by \".Fortran()\" or \".C()\"?\n>\n>> |     (b) For the sake of completeness, how *does* one replace the \"void\n>> *\"\n>> |         constructions with \"actual types\" in a correct manner?\n>> |\n>> |          Example:  In my init.c file I currently have (as produced by\n>> |          package_native_routine_registration_skeleton()) :\n>> |\n>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>> |\n>> |          The code in mnnd.f reads:\n>> |\n>> | > subroutine mnnd(x,y,n,dminbig,dminav)\n>> | > implicit double precision(a-h,o-z)\n>> | > .....\n>> |\n>> |          I.e. the \"actual types are \"double precision\",\n>> |          \"double precision\", \"integer\", \"double precision\",\n>> |          \"double precision\".\n>> |\n>> |          So in this case I should (?) replace\n>> |\n>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>> |\n>> |          by .... what?  Can anyone tell me?\n>>\n>> No idea. I don't deal in Fortran. C++ is more than enough fun for me ;-)\n>\n>\n> Well, C++ is too much for me.  I find Fortran generally very easy.  Be that\n> as it were, are there any Fortran users out there who can answer my\n> question, above?\n>\n\nI cannot answer your question completely, as I use .Call() to call\nFortran from R via C instead of using .Fortran?from what I have read\nand researched, it is faster.\n\nThat being said, maybe this will help. Given a subroutine in Fortran\nwhich starts like:\n\n    subroutine ddelap_f(x, nx, a, na, b, nb, l, nl, lg, pmfv) bind(C,\nname=\"ddelap_f\")\n\n    integer(kind = c_int), intent(in), value         :: nx, na, nb, nl\n    ! Sizes\n    real(kind = c_double), intent(in), dimension(nx) :: x\n    ! Observations\n    real(kind = c_double), intent(out), dimension(nx):: pmfv\n    ! Result\n    real(kind = c_double), intent(in)                :: a(na), b(nb),\nl(nl)! Parameters\n    integer(kind = c_int), intent(in)                :: lg\n    ! Log flag\n    integer                                          :: i\n    ! Integer\n\nThe corresponding C code which calls it is\n\n    void ddelap_f(double *x, int nx, double *a, int na, double *b, int\nnb, double *l, int nl,\n                  int *lg, double *ret);\n\nand the actual code called by R is:\n\n    extern SEXP ddelap_C(SEXP x, SEXP alpha, SEXP beta, SEXP lambda, SEXP lg){\n      const int nx = LENGTH(x);\n      const int na = LENGTH(alpha);\n      const int nb = LENGTH(beta);\n      const int nl = LENGTH(lambda);\n      SEXP ret;\n      PROTECT(ret = allocVector(REALSXP, nx));\n      ddelap_f(REAL(x), nx, REAL(alpha), na, REAL(beta), nb,\nREAL(lambda), nl, INTEGER(lg), REAL(ret));\n      UNPROTECT(1);\n      return(ret);\n    }\n\nAlso, I don't use the \"automatic\" concatenation of the \"c_\" to my\nFortran functions, but name them individually and use Fortran 2003 ISO\nC bindings (except for booleans).\n\nIf it helps, take a look at the source code at\n<https://bitbucket.org/aadler/delaporte>. As of now, it passes all R\nchecks and so must have appeased the registration requirements 8-)\n\nThank you,\n\nAvi",
+      "body_plain": "On Sat, Apr 22, 2017 at 6:13 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n> The foregoing \"official\" way would seem to apply to functions called by\n> \".Call\" (which I never use; it is way over my head).  What about functions\n> called by \".Fortran()\" or \".C()\"?\n>\n>> |     (b) For the sake of completeness, how *does* one replace the \"void\n>> *\"\n>> |         constructions with \"actual types\" in a correct manner?\n>> |\n>> |          Example:  In my init.c file I currently have (as produced by\n>> |          package_native_routine_registration_skeleton()) :\n>> |\n>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>> |\n>> |          The code in mnnd.f reads:\n>> |\n>> | > subroutine mnnd(x,y,n,dminbig,dminav)\n>> | > implicit double precision(a-h,o-z)\n>> | > .....\n>> |\n>> |          I.e. the \"actual types are \"double precision\",\n>> |          \"double precision\", \"integer\", \"double precision\",\n>> |          \"double precision\".\n>> |\n>> |          So in this case I should (?) replace\n>> |\n>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>> |\n>> |          by .... what?  Can anyone tell me?\n>>\n>> No idea. I don't deal in Fortran. C++ is more than enough fun for me ;-)\n>\n>\n> Well, C++ is too much for me.  I find Fortran generally very easy.  Be that\n> as it were, are there any Fortran users out there who can answer my\n> question, above?\n>\n\nI cannot answer your question completely, as I use .Call() to call\nFortran from R via C instead of using .Fortran—from what I have read\nand researched, it is faster.\n\nThat being said, maybe this will help. Given a subroutine in Fortran\nwhich starts like:\n\n    subroutine ddelap_f(x, nx, a, na, b, nb, l, nl, lg, pmfv) bind(C,\nname=\"ddelap_f\")\n\n    integer(kind = c_int), intent(in), value         :: nx, na, nb, nl\n    ! Sizes\n    real(kind = c_double), intent(in), dimension(nx) :: x\n    ! Observations\n    real(kind = c_double), intent(out), dimension(nx):: pmfv\n    ! Result\n    real(kind = c_double), intent(in)                :: a(na), b(nb),\nl(nl)! Parameters\n    integer(kind = c_int), intent(in)                :: lg\n    ! Log flag\n    integer                                          :: i\n    ! Integer\n\nThe corresponding C code which calls it is\n\n    void ddelap_f(double *x, int nx, double *a, int na, double *b, int\nnb, double *l, int nl,\n                  int *lg, double *ret);\n\nand the actual code called by R is:\n\n    extern SEXP ddelap_C(SEXP x, SEXP alpha, SEXP beta, SEXP lambda, SEXP lg){\n      const int nx = LENGTH(x);\n      const int na = LENGTH(alpha);\n      const int nb = LENGTH(beta);\n      const int nl = LENGTH(lambda);\n      SEXP ret;\n      PROTECT(ret = allocVector(REALSXP, nx));\n      ddelap_f(REAL(x), nx, REAL(alpha), na, REAL(beta), nb,\nREAL(lambda), nl, INTEGER(lg), REAL(ret));\n      UNPROTECT(1);\n      return(ret);\n    }\n\nAlso, I don't use the \"automatic\" concatenation of the \"c_\" to my\nFortran functions, but name them individually and use Fortran 2003 ISO\nC bindings (except for booleans).\n\nIf it helps, take a look at the source code at\n<https://bitbucket.org/aadler/delaporte>. As of now, it passes all R\nchecks and so must have appeased the registration requirements 8-)\n\nThank you,\n\nAvi",
       "body_snippet": "On Sat, Apr 22, 2017 at 6:13 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>\n> The foregoing \"official\" way would seem to apply to functions called by\n> \".Call\" (which I never use; it is way ove",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001477.html"
     },
     {
       "id": "msg-d0abd86f07df",
@@ -1264,7 +1329,8 @@
       "body_snippet": "Hello,\n\nI am trying to submit a package to CRAN for the first time. I have gone \nthrough testing on my own machines (Linux, Windows x64, Windows i386), \non Travis CI and using win-builder. All tests a",
       "thread_id": "thread-d0abd86f07df",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001479.html"
     },
     {
       "id": "msg-d11aa31a0b32",
@@ -1281,11 +1347,12 @@
         "<8a6f0615-10e1-2c49-583f-491d655ef23f@auckland.ac.nz>",
         "<CAL6gwnJxiz4mhqzKKm6re8mrVJy3SaZ4A0MX=7qm2x-_Kx8Nug@mail.gmail.com>"
       ],
-      "body_plain": "Thanks for trying, but your example blows me away completely.\n\ncheers,\n\nRolf\n\nOn 23/04/17 14:47, Avraham Adler wrote:\n> On Sat, Apr 22, 2017 at 6:13 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>>\n>> The foregoing \"official\" way would seem to apply to functions called by\n>> \".Call\" (which I never use; it is way over my head).  What about functions\n>> called by \".Fortran()\" or \".C()\"?\n>>\n>>> |     (b) For the sake of completeness, how *does* one replace the \"void\n>>> *\"\n>>> |         constructions with \"actual types\" in a correct manner?\n>>> |\n>>> |          Example:  In my init.c file I currently have (as produced by\n>>> |          package_native_routine_registration_skeleton()) :\n>>> |\n>>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>>> |\n>>> |          The code in mnnd.f reads:\n>>> |\n>>> | > subroutine mnnd(x,y,n,dminbig,dminav)\n>>> | > implicit double precision(a-h,o-z)\n>>> | > .....\n>>> |\n>>> |          I.e. the \"actual types are \"double precision\",\n>>> |          \"double precision\", \"integer\", \"double precision\",\n>>> |          \"double precision\".\n>>> |\n>>> |          So in this case I should (?) replace\n>>> |\n>>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>>> |\n>>> |          by .... what?  Can anyone tell me?\n>>>\n>>> No idea. I don't deal in Fortran. C++ is more than enough fun for me ;-)\n>>\n>>\n>> Well, C++ is too much for me.  I find Fortran generally very easy.  Be that\n>> as it were, are there any Fortran users out there who can answer my\n>> question, above?\n>>\n>\n> I cannot answer your question completely, as I use .Call() to call\n> Fortran from R via C instead of using .Fortran?from what I have read\n> and researched, it is faster.\n>\n> That being said, maybe this will help. Given a subroutine in Fortran\n> which starts like:\n>\n>     subroutine ddelap_f(x, nx, a, na, b, nb, l, nl, lg, pmfv) bind(C,\n> name=\"ddelap_f\")\n>\n>     integer(kind = c_int), intent(in), value         :: nx, na, nb, nl\n>     ! Sizes\n>     real(kind = c_double), intent(in), dimension(nx) :: x\n>     ! Observations\n>     real(kind = c_double), intent(out), dimension(nx):: pmfv\n>     ! Result\n>     real(kind = c_double), intent(in)                :: a(na), b(nb),\n> l(nl)! Parameters\n>     integer(kind = c_int), intent(in)                :: lg\n>     ! Log flag\n>     integer                                          :: i\n>     ! Integer\n>\n> The corresponding C code which calls it is\n>\n>     void ddelap_f(double *x, int nx, double *a, int na, double *b, int\n> nb, double *l, int nl,\n>                   int *lg, double *ret);\n>\n> and the actual code called by R is:\n>\n>     extern SEXP ddelap_C(SEXP x, SEXP alpha, SEXP beta, SEXP lambda, SEXP lg){\n>       const int nx = LENGTH(x);\n>       const int na = LENGTH(alpha);\n>       const int nb = LENGTH(beta);\n>       const int nl = LENGTH(lambda);\n>       SEXP ret;\n>       PROTECT(ret = allocVector(REALSXP, nx));\n>       ddelap_f(REAL(x), nx, REAL(alpha), na, REAL(beta), nb,\n> REAL(lambda), nl, INTEGER(lg), REAL(ret));\n>       UNPROTECT(1);\n>       return(ret);\n>     }\n>\n> Also, I don't use the \"automatic\" concatenation of the \"c_\" to my\n> Fortran functions, but name them individually and use Fortran 2003 ISO\n> C bindings (except for booleans).\n>\n> If it helps, take a look at the source code at\n> <https://bitbucket.org/aadler/delaporte>. As of now, it passes all R\n> checks and so must have appeased the registration requirements 8-)\n>\n> Thank you,\n>\n> Avi\n>",
+      "body_plain": "Thanks for trying, but your example blows me away completely.\n\ncheers,\n\nRolf\n\nOn 23/04/17 14:47, Avraham Adler wrote:\n> On Sat, Apr 22, 2017 at 6:13 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:\n>>\n>> The foregoing \"official\" way would seem to apply to functions called by\n>> \".Call\" (which I never use; it is way over my head).  What about functions\n>> called by \".Fortran()\" or \".C()\"?\n>>\n>>> |     (b) For the sake of completeness, how *does* one replace the \"void\n>>> *\"\n>>> |         constructions with \"actual types\" in a correct manner?\n>>> |\n>>> |          Example:  In my init.c file I currently have (as produced by\n>>> |          package_native_routine_registration_skeleton()) :\n>>> |\n>>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>>> |\n>>> |          The code in mnnd.f reads:\n>>> |\n>>> | > subroutine mnnd(x,y,n,dminbig,dminav)\n>>> | > implicit double precision(a-h,o-z)\n>>> | > .....\n>>> |\n>>> |          I.e. the \"actual types are \"double precision\",\n>>> |          \"double precision\", \"integer\", \"double precision\",\n>>> |          \"double precision\".\n>>> |\n>>> |          So in this case I should (?) replace\n>>> |\n>>> | > extern void F77_NAME(mnnd)(void *, void *, void *, void *, void *);\n>>> |\n>>> |          by .... what?  Can anyone tell me?\n>>>\n>>> No idea. I don't deal in Fortran. C++ is more than enough fun for me ;-)\n>>\n>>\n>> Well, C++ is too much for me.  I find Fortran generally very easy.  Be that\n>> as it were, are there any Fortran users out there who can answer my\n>> question, above?\n>>\n>\n> I cannot answer your question completely, as I use .Call() to call\n> Fortran from R via C instead of using .Fortran—from what I have read\n> and researched, it is faster.\n>\n> That being said, maybe this will help. Given a subroutine in Fortran\n> which starts like:\n>\n>     subroutine ddelap_f(x, nx, a, na, b, nb, l, nl, lg, pmfv) bind(C,\n> name=\"ddelap_f\")\n>\n>     integer(kind = c_int), intent(in), value         :: nx, na, nb, nl\n>     ! Sizes\n>     real(kind = c_double), intent(in), dimension(nx) :: x\n>     ! Observations\n>     real(kind = c_double), intent(out), dimension(nx):: pmfv\n>     ! Result\n>     real(kind = c_double), intent(in)                :: a(na), b(nb),\n> l(nl)! Parameters\n>     integer(kind = c_int), intent(in)                :: lg\n>     ! Log flag\n>     integer                                          :: i\n>     ! Integer\n>\n> The corresponding C code which calls it is\n>\n>     void ddelap_f(double *x, int nx, double *a, int na, double *b, int\n> nb, double *l, int nl,\n>                   int *lg, double *ret);\n>\n> and the actual code called by R is:\n>\n>     extern SEXP ddelap_C(SEXP x, SEXP alpha, SEXP beta, SEXP lambda, SEXP lg){\n>       const int nx = LENGTH(x);\n>       const int na = LENGTH(alpha);\n>       const int nb = LENGTH(beta);\n>       const int nl = LENGTH(lambda);\n>       SEXP ret;\n>       PROTECT(ret = allocVector(REALSXP, nx));\n>       ddelap_f(REAL(x), nx, REAL(alpha), na, REAL(beta), nb,\n> REAL(lambda), nl, INTEGER(lg), REAL(ret));\n>       UNPROTECT(1);\n>       return(ret);\n>     }\n>\n> Also, I don't use the \"automatic\" concatenation of the \"c_\" to my\n> Fortran functions, but name them individually and use Fortran 2003 ISO\n> C bindings (except for booleans).\n>\n> If it helps, take a look at the source code at\n> <https://bitbucket.org/aadler/delaporte>. As of now, it passes all R\n> checks and so must have appeased the registration requirements 8-)\n>\n> Thank you,\n>\n> Avi\n>",
       "body_snippet": "Thanks for trying, but your example blows me away completely.\n\ncheers,\n\nRolf\n\nOn 23/04/17 14:47, Avraham Adler wrote:\n> On Sat, Apr 22, 2017 at 6:13 PM, Rolf Turner <r.turner at auckland.ac.nz> wrote:",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 4,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001478.html"
     },
     {
       "id": "msg-dd5e94b0fc88",
@@ -1303,7 +1370,8 @@
       "body_snippet": "On 22/04/2017 5:25 PM, Rolf Turner wrote:\n>\n> I have, like many others it would appear, been struggling with\n> the new-ish convention of requiring --- or quasi-requiring --- that\n> \"routines\" be \"regi",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001480.html"
     },
     {
       "id": "msg-6a35b8fc6194",
@@ -1322,7 +1390,8 @@
       "body_snippet": "On 23/04/17 21:57, Duncan Murdoch wrote:\n> On 22/04/2017 5:25 PM, Rolf Turner wrote:\n\n<SNIP>\n>>\n>> (1) I found that having an R function with the same name as that of a\n>> routine (Fortran subroutine ",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001481.html"
     },
     {
       "id": "msg-35f58bcb66f1",
@@ -1342,7 +1411,8 @@
       "body_snippet": "On 23/04/2017 6:38 AM, Rolf Turner wrote:\n> On 23/04/17 21:57, Duncan Murdoch wrote:\n>> On 22/04/2017 5:25 PM, Rolf Turner wrote:\n>\n> <SNIP>\n>>>\n>>> (1) I found that having an R function with the same",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001482.html"
     },
     {
       "id": "msg-d222946dff59",
@@ -1361,7 +1431,8 @@
       "body_snippet": "On Sun, Apr 23, 2017 at 10:17:01AM +0200, Alexandre Courtiol wrote:\n>Could it be that one your computer you can build vignettes quickly thanks\n>to some caching of the knitr chunk output but that it ta",
       "thread_id": "thread-d222946dff59",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001483.html"
     },
     {
       "id": "msg-f697a5b6470c",
@@ -1382,7 +1453,8 @@
       "body_snippet": "On 23/04/17 23:05, Duncan Murdoch wrote:\n\n>>>\n>>> Looks like\n>>>\n>>> extern void F77_NAME(mnnd)(double *, double *, int *, double *,\n>>> double *);\n>>>\n>>> to me.\n\nOne more (I hope it's the last!) que",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 4,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001484.html"
     },
     {
       "id": "msg-d027cfa33927",
@@ -1404,7 +1476,8 @@
       "body_snippet": "On 24 April 2017 at 10:18, Rolf Turner wrote:\n| One more (I hope it's the last!) question:\n| \n| One of my subroutines has an argument of type *logical*.  There is no \n| logical type in C.  So, since I",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 5,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001485.html"
     },
     {
       "id": "msg-b08695640c23",
@@ -1427,7 +1500,8 @@
       "body_snippet": "On 24/04/17 10:31, Dirk Eddelbuettel wrote:\n\n>\n> On 24 April 2017 at 10:18, Rolf Turner wrote:\n> | One more (I hope it's the last!) question:\n> |\n> | One of my subroutines has an argument of type *log",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 6,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001486.html"
     },
     {
       "id": "msg-373256d5a140",
@@ -1451,7 +1525,8 @@
       "body_snippet": "On 24 April 2017 at 10:45, Rolf Turner wrote:\n| On 24/04/17 10:31, Dirk Eddelbuettel wrote:\n| > On 24 April 2017 at 10:18, Rolf Turner wrote:\n| > | One more (I hope it's the last!) question:\n| > |\n| >",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 7,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001487.html"
     },
     {
       "id": "msg-b2099cee7b4c",
@@ -1473,7 +1548,8 @@
       "body_snippet": "On 23/04/2017 6:18 PM, Rolf Turner wrote:\n> On 23/04/17 23:05, Duncan Murdoch wrote:\n>\n>>>>\n>>>> Looks like\n>>>>\n>>>> extern void F77_NAME(mnnd)(double *, double *, int *, double *,\n>>>> double *);\n>>",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 5,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001488.html"
     },
     {
       "id": "msg-c8005fc26735",
@@ -1498,7 +1574,8 @@
       "body_snippet": "On 24/04/17 11:22, Dirk Eddelbuettel wrote:\n\n> I would be surpised if init.c was Fortran. Anyway...\n\n\nIt isn't of course.  But it is the device used for \"registering \nroutines\" of all both flavours (i",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 8,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001489.html"
     },
     {
       "id": "msg-f1f1473cdb31",
@@ -1521,7 +1598,8 @@
       "body_snippet": "On Sun, Apr 23, 2017 at 7:36 PM, Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n> On 23/04/2017 6:18 PM, Rolf Turner wrote:\n[SNIP]\n> This is important:  *there is no way to pass a Fortran \"LOGICA",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 6,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001490.html"
     },
     {
       "id": "msg-cb88420a3274",
@@ -1547,7 +1625,8 @@
       "body_snippet": "On 24 April 2017 at 11:47, Rolf Turner wrote:\n| \n| On 24/04/17 11:22, Dirk Eddelbuettel wrote:\n| \n| > I would be surpised if init.c was Fortran. Anyway...\n| \n| It isn't of course.  But it is the devic",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 9,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001491.html"
     },
     {
       "id": "msg-21901333d3bc",
@@ -1570,7 +1649,8 @@
       "body_snippet": "On 24/04/17 11:36, Duncan Murdoch wrote:\n> On 23/04/2017 6:18 PM, Rolf Turner wrote:\n>> On 23/04/17 23:05, Duncan Murdoch wrote:\n>>\n>>>>>\n>>>>> Looks like\n>>>>>\n>>>>> extern void F77_NAME(mnnd)(double",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 6,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001492.html"
     },
     {
       "id": "msg-8901070a1f37",
@@ -1597,7 +1677,8 @@
       "body_snippet": "On Sun, Apr 23, 2017 at 7:51 PM, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n> On 24 April 2017 at 11:47, Rolf Turner wrote:\n>\n> And per Duncan's last (and his earlier emails) maybe you need to cal",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 10,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001493.html"
     },
     {
       "id": "msg-33b45fdebc78",
@@ -1621,7 +1702,8 @@
       "body_snippet": "On 23/04/2017 7:53 PM, Rolf Turner wrote:\n> On 24/04/17 11:36, Duncan Murdoch wrote:\n>> On 23/04/2017 6:18 PM, Rolf Turner wrote:\n>>> On 23/04/17 23:05, Duncan Murdoch wrote:\n>>>\n>>>>>>\n>>>>>> Looks l",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 7,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001494.html"
     },
     {
       "id": "msg-fa7460ed07a1",
@@ -1646,7 +1728,8 @@
       "body_snippet": "On 24/04/17 12:39, Duncan Murdoch wrote:\n> On 23/04/2017 7:53 PM, Rolf Turner wrote:\n>> On 24/04/17 11:36, Duncan Murdoch wrote:\n>>> On 23/04/2017 6:18 PM, Rolf Turner wrote:\n>>>> On 23/04/17 23:05, D",
       "thread_id": "thread-7b89a9e29fc9",
       "thread_depth": 8,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001495.html"
     },
     {
       "id": "msg-8a4de82e0c9c",
@@ -1666,7 +1749,8 @@
       "body_snippet": "Your package uses parallel processing (foreach w/ doParallel).\nPeeking at the code, it looks like the vignette is using single-core\nprocessing via doParallel::registerDoParallel(np) where np = 1.  On\n",
       "thread_id": "thread-d222946dff59",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001496.html"
     },
     {
       "id": "msg-76ba6b058bfb",
@@ -1687,7 +1771,8 @@
       "body_snippet": "Henrik,\n\n>A completely different alternative, is to have a way to disable\n>parallel processing in your examples / tests / vignettes, e.g. if (np\n>== 1) registerDoSEQ() else registerDoParallel(np).  Pe",
       "thread_id": "thread-d222946dff59",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001497.html"
     },
     {
       "id": "msg-44a1b01985b5",
@@ -1703,7 +1788,8 @@
       "body_snippet": "I'm trying to submit a package and I get an odd error when I run R CMD check --as-cran on R-devel and I only bring this up because I don't get with 3.4.0.\n\n* checking package subdirectories ... WARNIN",
       "thread_id": "thread-44a1b01985b5",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001498.html"
     },
     {
       "id": "msg-27fddd495498",
@@ -1721,7 +1807,8 @@
       "body_snippet": "This was a bug in R-devel for few days that has been fixed this morning.\n\n\nBest,\nUwe Ligges\n\n\n\nOn 24.04.2017 17:58, Bailey, Paul wrote:\n> I'm trying to submit a package and I get an odd error when I r",
       "thread_id": "thread-44a1b01985b5",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001499.html"
     },
     {
       "id": "msg-f1322253ed5f",
@@ -1743,7 +1830,8 @@
       "body_snippet": "I ahven't looked at you package, but can you please verify:\n\n\n1. If you open some (socket) cluster, make sure you close it afterwards!\nThis is a very frequent source of problems.\n\n2. Do not use more t",
       "thread_id": "thread-d222946dff59",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001500.html"
     },
     {
       "id": "msg-ee6e018d7eff",
@@ -1755,11 +1843,12 @@
       "subject_clean": "[R-pkg-devel] PDF manual check giving FAIL status",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nThis is my first post here, so thank you in advance for any help you can provide.\n\nMy package joineRML is showing a status of FAIL on CRAN for Mac OSX (release) whilst checking the PDF version of the manual: https://cran.r-project.org/web/checks/check_results_joineRML.html <https://cran.r-project.org/web/checks/check_results_joineRML.html>. I built the package on Mac OSX using R v3.4.0 with no errors, warnings, or notes during package checks / builds using devtools. All help documentation was built with roxygen2, and I?ve not used any advanced LaTeX commands (just things like \\eqn{}, etc.). \n\nI cannot reproduce this FAIL locally, which seems isolated to OSX (release) flavour only on CRAN. The package passes on win-builder, appveyor, and Travis CI. Also, I have successfully built the PDF manual on my Mac OSX (version 10.12.4, Sierra) locally using\n\npath <- find.package(\"joineRML\")\nsystem(paste(shQuote(file.path(R.home(\"bin\"), \"R\")), \"CMD\", \"Rd2pdf\", shQuote(path)))\n\nand the output looks as I would expect.\n\nI?ve also filed an issue with the roxygen GitHub authors (https://github.com/klutometis/roxygen/issues/626) in case this is something to with the roxygen generated Rd files. I apologise if this is cross-posting.\n\nAs I cannot reproduce this FAIL, I?m very baffled. Also, I?m not really sure what the difference is between a FAIL and a WANING/ERROR. Hoping someone here can advise me on what the source of the issue could be.\n\nThanks,\n\nGraeme\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hello,\n\nThis is my first post here, so thank you in advance for any help you can provide.\n\nMy package joineRML is showing a status of FAIL on CRAN for Mac OSX (release) whilst checking the PDF version of the manual: https://cran.r-project.org/web/checks/check_results_joineRML.html <https://cran.r-project.org/web/checks/check_results_joineRML.html>. I built the package on Mac OSX using R v3.4.0 with no errors, warnings, or notes during package checks / builds using devtools. All help documentation was built with roxygen2, and I’ve not used any advanced LaTeX commands (just things like \\eqn{}, etc.). \n\nI cannot reproduce this FAIL locally, which seems isolated to OSX (release) flavour only on CRAN. The package passes on win-builder, appveyor, and Travis CI. Also, I have successfully built the PDF manual on my Mac OSX (version 10.12.4, Sierra) locally using\n\npath <- find.package(\"joineRML\")\nsystem(paste(shQuote(file.path(R.home(\"bin\"), \"R\")), \"CMD\", \"Rd2pdf\", shQuote(path)))\n\nand the output looks as I would expect.\n\nI’ve also filed an issue with the roxygen GitHub authors (https://github.com/klutometis/roxygen/issues/626) in case this is something to with the roxygen generated Rd files. I apologise if this is cross-posting.\n\nAs I cannot reproduce this FAIL, I’m very baffled. Also, I’m not really sure what the difference is between a FAIL and a WANING/ERROR. Hoping someone here can advise me on what the source of the issue could be.\n\nThanks,\n\nGraeme\n\n\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hello,\n\nThis is my first post here, so thank you in advance for any help you can provide.\n\nMy package joineRML is showing a status of FAIL on CRAN for Mac OSX (release) whilst checking the PDF version",
       "thread_id": "thread-ee6e018d7eff",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001501.html"
     },
     {
       "id": "msg-00baea9c1ac8",
@@ -1771,11 +1860,12 @@
       "subject_clean": "[R-pkg-devel] Help",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear sir. \n\nI intended to upload a R package to the CRAN, but I received an e-mail with an attached file ?00check.log?. The text of this file ends with two notes, I made modifications to resolve the last note: \n\n-------------- \n\n\n* checking Rd line widths ... NOTE \nRd file 'ExpRep-package.Rd': \n\\examples lines wider than 100 characters: \nS_Integral_Theorem(n=100, p=0.5, linf = 0, lsup = 50, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\nRd file 'S_Integral_Theorem.Rd': \n\\usage lines wider than 90 characters: \nS_Integral_Theorem(n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\\examples lines wider than 100 characters: \nS_Integral_Theorem (n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\nRd file 'S_Local_Limit_Theorem.Rd': \n\\usage lines wider than 90 characters: \nS_Local_Limit_Theorem(n = 170, p = 0.5, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\nRd file 'S_Poisson_Theorem.Rd': \n\\usage lines wider than 90 characters: \nS_Poisson_Theorem(n = 2000, p = 0.002, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = FALSE) \nThese lines will be truncated in the PDF manual. \n\n------ \n\n\n\n\n\nBut I don?t know how to resolve the first note. I am sending the first 9 lines of the 00check.log file, where this note appears: \n\n\n\n\n* using log directory 'd:/RCompile/CRANincoming/R-devel/ExpRep.Rcheck' \n\n* using R version 3.4.0 beta (2017-04-10 r72503) \n\n* using platform: x86_64-w64-mingw32 (64-bit) \n\n* using session charset: ISO8859-1 \n\n* checking for file 'ExpRep/DESCRIPTION' ... OK \n\n* checking extension type ... Package \n\n* this is package 'ExpRep' version '1.0' \n\n* checking CRAN incoming feasibility ... NOTE \n\nMaintainer: 'Larisa Zamora-Matamoros <larisa at uo.edu.cu>' \n\n\n\n\nTherefore I am asking for help to resolve the note \"* checking CRAN incoming feasibility...\" \n\nI thank very much for the help. \n\n\n\n\nSincerely yours. \n\nLarisa Zamora \n\n--\n\nEn su setenta cumplea?os la Universidad de Oriente festeja el saber.\n\nDel 16 al 19 mayo, II Convenci?n Internacional de Ciencias Sociales y Ambientales.\n\n(http://www.convenciones.uo.edu.cu/index.php/2CICSA)\n\nDel 1 al 3 junio, IV Convenci?n Internacional de Educaci?n F?sica y Alto Rendimiento Deportivo.\n\n(http://www.convenciones.uo.edu.cu/index.php/4CIEF)\n\nDel 29 de nov al 1ro de diciembre de este a?o.\n\n(http://www.convenciones.uo.edu.cu/index.php/22CQ/22CQ2017)\n\n--\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear sir. \n\nI intended to upload a R package to the CRAN, but I received an e-mail with an attached file ?00check.log?. The text of this file ends with two notes, I made modifications to resolve the l",
+      "body_plain": "Dear sir. \n\nI intended to upload a R package to the CRAN, but I received an e-mail with an attached file “00check.log”. The text of this file ends with two notes, I made modifications to resolve the last note: \n\n-------------- \n\n\n* checking Rd line widths ... NOTE \nRd file 'ExpRep-package.Rd': \n\\examples lines wider than 100 characters: \nS_Integral_Theorem(n=100, p=0.5, linf = 0, lsup = 50, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\nRd file 'S_Integral_Theorem.Rd': \n\\usage lines wider than 90 characters: \nS_Integral_Theorem(n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\\examples lines wider than 100 characters: \nS_Integral_Theorem (n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\nRd file 'S_Local_Limit_Theorem.Rd': \n\\usage lines wider than 90 characters: \nS_Local_Limit_Theorem(n = 170, p = 0.5, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE) \n\nRd file 'S_Poisson_Theorem.Rd': \n\\usage lines wider than 90 characters: \nS_Poisson_Theorem(n = 2000, p = 0.002, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = FALSE) \nThese lines will be truncated in the PDF manual. \n\n------ \n\n\n\n\n\nBut I don’t know how to resolve the first note. I am sending the first 9 lines of the 00check.log file, where this note appears: \n\n\n\n\n* using log directory 'd:/RCompile/CRANincoming/R-devel/ExpRep.Rcheck' \n\n* using R version 3.4.0 beta (2017-04-10 r72503) \n\n* using platform: x86_64-w64-mingw32 (64-bit) \n\n* using session charset: ISO8859-1 \n\n* checking for file 'ExpRep/DESCRIPTION' ... OK \n\n* checking extension type ... Package \n\n* this is package 'ExpRep' version '1.0' \n\n* checking CRAN incoming feasibility ... NOTE \n\nMaintainer: 'Larisa Zamora-Matamoros <larisa at uo.edu.cu>' \n\n\n\n\nTherefore I am asking for help to resolve the note \"* checking CRAN incoming feasibility...\" \n\nI thank very much for the help. \n\n\n\n\nSincerely yours. \n\nLarisa Zamora \n\n--\n\nEn su setenta cumpleaños la Universidad de Oriente festeja el saber.\n\nDel 16 al 19 mayo, II Convención Internacional de Ciencias Sociales y Ambientales.\n\n(http://www.convenciones.uo.edu.cu/index.php/2CICSA)\n\nDel 1 al 3 junio, IV Convención Internacional de Educación Física y Alto Rendimiento Deportivo.\n\n(http://www.convenciones.uo.edu.cu/index.php/4CIEF)\n\nDel 29 de nov al 1ro de diciembre de este año.\n\n(http://www.convenciones.uo.edu.cu/index.php/22CQ/22CQ2017)\n\n--\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear sir. \n\nI intended to upload a R package to the CRAN, but I received an e-mail with an attached file “00check.log”. The text of this file ends with two notes, I made modifications to resolve the l",
       "thread_id": "thread-00baea9c1ac8",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001503.html"
     },
     {
       "id": "msg-5dfe70e4b23b",
@@ -1787,11 +1877,12 @@
       "subject_clean": "[R-pkg-devel] Library not loaded =?utf-8?Q?=E2=80=98libgdal.dylib=E2=80=99_?=when building package on travis (osx)",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi everyone,\n\nthe following error gives me headaches. When building my package on Travis CI (OS X build), I get the following error:\n\nBuilding with: R CMD build\n4.64s$ R CMD build ?.\n* checking for file ?./DESCRIPTION? ... OK\n* preparing ?RQGIS?:\n* checking DESCRIPTION meta-information ... OK\n* installing the package to build vignettes\n? ? ? -----------------------------------\n* installing *source* package ?RQGIS? ...\n** R\n** data\n*** moving datasets to lazyload DB\n** inst\n** byte-compile and prepare package for lazy loading\nError in dyn.load(file, DLLpath = DLLpath, ...) :\n? unable to load shared object '/Users/travis/R/Library/rgdal/libs/rgdal.so':\n? dlopen(/Users/travis/R/Library/rgdal/libs/rgdal.so, 6): Library not loaded: /Builds/unix/recipes/build/gdal-2.1.3-obj/libgdal.dylib\n? Referenced from: /Users/travis/R/Library/rgdal/libs/rgdal.so\n? Reason: image not found\n\n? rgdal 1.2-7 is installed successfully\n? GDAL 1.11.5 and GDAL 2.1.3 installed via?homebrew\n? Package builds correctly locally (osx) and on my linux travis build\n\nBuild log:?https://travis-ci.org/jannes-m/RQGIS/jobs/226822143\n\n\nPhD Student at Department of Geography - GIScience group\nFriedrich-Schiller-University Jena, Germany\nTel.: +49-3641-9-48973\nWeb: https://pat-s.github.io\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi everyone,\n\nthe following error gives me headaches. When building my package on Travis CI (OS X build), I get the following error:\n\nBuilding with: R CMD build\n4.64s$ R CMD build ?.\n* checking for fi",
+      "body_plain": "Hi everyone,\n\nthe following error gives me headaches. When building my package on Travis CI (OS X build), I get the following error:\n\nBuilding with: R CMD build\n4.64s$ R CMD build  .\n* checking for file ‘./DESCRIPTION’ ... OK\n* preparing ‘RQGIS’:\n* checking DESCRIPTION meta-information ... OK\n* installing the package to build vignettes\n      -----------------------------------\n* installing *source* package ‘RQGIS’ ...\n** R\n** data\n*** moving datasets to lazyload DB\n** inst\n** byte-compile and prepare package for lazy loading\nError in dyn.load(file, DLLpath = DLLpath, ...) :\n  unable to load shared object '/Users/travis/R/Library/rgdal/libs/rgdal.so':\n  dlopen(/Users/travis/R/Library/rgdal/libs/rgdal.so, 6): Library not loaded: /Builds/unix/recipes/build/gdal-2.1.3-obj/libgdal.dylib\n  Referenced from: /Users/travis/R/Library/rgdal/libs/rgdal.so\n  Reason: image not found\n\n• rgdal 1.2-7 is installed successfully\n• GDAL 1.11.5 and GDAL 2.1.3 installed via homebrew\n• Package builds correctly locally (osx) and on my linux travis build\n\nBuild log: https://travis-ci.org/jannes-m/RQGIS/jobs/226822143\n\n\nPhD Student at Department of Geography - GIScience group\nFriedrich-Schiller-University Jena, Germany\nTel.: +49-3641-9-48973\nWeb: https://pat-s.github.io\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi everyone,\n\nthe following error gives me headaches. When building my package on Travis CI (OS X build), I get the following error:\n\nBuilding with: R CMD build\n4.64s$ R CMD build  .\n* checking for fi",
       "thread_id": "thread-5dfe70e4b23b",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001502.html"
     },
     {
       "id": "msg-a2047ec1c02c",
@@ -1805,11 +1896,12 @@
       "references": [
         "<2035378456.78768.1493392521287.JavaMail.zimbra@uo.edu.cu>"
       ],
-      "body_plain": "Hi Larisa,\n\nThis has been covered before; see \nhttps://mailman.stat.ethz.ch/pipermail/r-devel/2014-March/068497.html\n\nEssentially, it is reminder to check that this information is correct. \nAs such, you can ignore it if it is indeed correct.\n\nMax\n\nOn 2017-04-28 09:15 AM, LARISA ZAMORA MATAMOROS wrote:\n>\n> Dear sir.\n>\n> I intended to upload a R package to the CRAN, but I received an e-mail with an attached file ?00check.log?. The text of this file ends with two notes, I made modifications to resolve the last note:\n>\n> --------------\n>\n>\n> * checking Rd line widths ... NOTE\n> Rd file 'ExpRep-package.Rd':\n> \\examples lines wider than 100 characters:\n> S_Integral_Theorem(n=100, p=0.5, linf = 0, lsup = 50, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>\n> Rd file 'S_Integral_Theorem.Rd':\n> \\usage lines wider than 90 characters:\n> S_Integral_Theorem(n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n> \\examples lines wider than 100 characters:\n> S_Integral_Theorem (n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>\n> Rd file 'S_Local_Limit_Theorem.Rd':\n> \\usage lines wider than 90 characters:\n> S_Local_Limit_Theorem(n = 170, p = 0.5, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>\n> Rd file 'S_Poisson_Theorem.Rd':\n> \\usage lines wider than 90 characters:\n> S_Poisson_Theorem(n = 2000, p = 0.002, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = FALSE)\n> These lines will be truncated in the PDF manual.\n>\n> ------\n>\n>\n>\n>\n>\n> But I don?t know how to resolve the first note. I am sending the first 9 lines of the 00check.log file, where this note appears:\n>\n>\n>\n>\n> * using log directory 'd:/RCompile/CRANincoming/R-devel/ExpRep.Rcheck'\n>\n> * using R version 3.4.0 beta (2017-04-10 r72503)\n>\n> * using platform: x86_64-w64-mingw32 (64-bit)\n>\n> * using session charset: ISO8859-1\n>\n> * checking for file 'ExpRep/DESCRIPTION' ... OK\n>\n> * checking extension type ... Package\n>\n> * this is package 'ExpRep' version '1.0'\n>\n> * checking CRAN incoming feasibility ... NOTE\n>\n> Maintainer: 'Larisa Zamora-Matamoros <larisa at uo.edu.cu>'\n>\n>\n>\n>\n> Therefore I am asking for help to resolve the note \"* checking CRAN incoming feasibility...\"\n>\n> I thank very much for the help.\n>\n>\n>\n>\n> Sincerely yours.\n>\n> Larisa Zamora\n>\n> --\n>\n> En su setenta cumplea?os la Universidad de Oriente festeja el saber.\n>\n> Del 16 al 19 mayo, II Convenci?n Internacional de Ciencias Sociales y Ambientales.\n>\n> (http://www.convenciones.uo.edu.cu/index.php/2CICSA)\n>\n> Del 1 al 3 junio, IV Convenci?n Internacional de Educaci?n F?sica y Alto Rendimiento Deportivo.\n>\n> (http://www.convenciones.uo.edu.cu/index.php/4CIEF)\n>\n> Del 29 de nov al 1ro de diciembre de este a?o.\n>\n> (http://www.convenciones.uo.edu.cu/index.php/22CQ/22CQ2017)\n>\n> --\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \n-----------------------------------------------------------------\n\nMaxime Turgeon, PhD candidate\n\nDepartment of Epidemiology, Biostatistics and Occupational Health\nMcGill University",
+      "body_plain": "Hi Larisa,\n\nThis has been covered before; see \nhttps://mailman.stat.ethz.ch/pipermail/r-devel/2014-March/068497.html\n\nEssentially, it is reminder to check that this information is correct. \nAs such, you can ignore it if it is indeed correct.\n\nMax\n\nOn 2017-04-28 09:15 AM, LARISA ZAMORA MATAMOROS wrote:\n>\n> Dear sir.\n>\n> I intended to upload a R package to the CRAN, but I received an e-mail with an attached file “00check.log”. The text of this file ends with two notes, I made modifications to resolve the last note:\n>\n> --------------\n>\n>\n> * checking Rd line widths ... NOTE\n> Rd file 'ExpRep-package.Rd':\n> \\examples lines wider than 100 characters:\n> S_Integral_Theorem(n=100, p=0.5, linf = 0, lsup = 50, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>\n> Rd file 'S_Integral_Theorem.Rd':\n> \\usage lines wider than 90 characters:\n> S_Integral_Theorem(n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n> \\examples lines wider than 100 characters:\n> S_Integral_Theorem (n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>\n> Rd file 'S_Local_Limit_Theorem.Rd':\n> \\usage lines wider than 90 characters:\n> S_Local_Limit_Theorem(n = 170, p = 0.5, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>\n> Rd file 'S_Poisson_Theorem.Rd':\n> \\usage lines wider than 90 characters:\n> S_Poisson_Theorem(n = 2000, p = 0.002, Compare = TRUE, Table = TRUE, Graph = TRUE, GraphE = FALSE)\n> These lines will be truncated in the PDF manual.\n>\n> ------\n>\n>\n>\n>\n>\n> But I don’t know how to resolve the first note. I am sending the first 9 lines of the 00check.log file, where this note appears:\n>\n>\n>\n>\n> * using log directory 'd:/RCompile/CRANincoming/R-devel/ExpRep.Rcheck'\n>\n> * using R version 3.4.0 beta (2017-04-10 r72503)\n>\n> * using platform: x86_64-w64-mingw32 (64-bit)\n>\n> * using session charset: ISO8859-1\n>\n> * checking for file 'ExpRep/DESCRIPTION' ... OK\n>\n> * checking extension type ... Package\n>\n> * this is package 'ExpRep' version '1.0'\n>\n> * checking CRAN incoming feasibility ... NOTE\n>\n> Maintainer: 'Larisa Zamora-Matamoros <larisa at uo.edu.cu>'\n>\n>\n>\n>\n> Therefore I am asking for help to resolve the note \"* checking CRAN incoming feasibility...\"\n>\n> I thank very much for the help.\n>\n>\n>\n>\n> Sincerely yours.\n>\n> Larisa Zamora\n>\n> --\n>\n> En su setenta cumpleaños la Universidad de Oriente festeja el saber.\n>\n> Del 16 al 19 mayo, II Convención Internacional de Ciencias Sociales y Ambientales.\n>\n> (http://www.convenciones.uo.edu.cu/index.php/2CICSA)\n>\n> Del 1 al 3 junio, IV Convención Internacional de Educación Física y Alto Rendimiento Deportivo.\n>\n> (http://www.convenciones.uo.edu.cu/index.php/4CIEF)\n>\n> Del 29 de nov al 1ro de diciembre de este año.\n>\n> (http://www.convenciones.uo.edu.cu/index.php/22CQ/22CQ2017)\n>\n> --\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \n-----------------------------------------------------------------\n\nMaxime Turgeon, PhD candidate\n\nDepartment of Epidemiology, Biostatistics and Occupational Health\nMcGill University",
       "body_snippet": "Hi Larisa,\n\nThis has been covered before; see \nhttps://mailman.stat.ethz.ch/pipermail/r-devel/2014-March/068497.html\n\nEssentially, it is reminder to check that this information is correct. \nAs such, y",
       "thread_id": "thread-00baea9c1ac8",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001504.html"
     },
     {
       "id": "msg-40b0262939c7",
@@ -1825,7 +1917,8 @@
       "body_snippet": "Hi,\n\n#include <ddk/ntddk.h>\n\nThis finds ddk/ntddk.h ok but then fails with :\n\nC:/Rtools/mingw_64/x86_64-w64-mingw32/include/ddk/ntddk.h:38:17: fatal\nerror: wdm.h: No such file or directory\n\nIt can't f",
       "thread_id": "thread-40b0262939c7",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001505.html"
     },
     {
       "id": "msg-6f2064f98247",
@@ -1840,11 +1933,12 @@
         "<2035378456.78768.1493392521287.JavaMail.zimbra@uo.edu.cu>",
         "<d148d991-240b-82a3-eb27-3e64c3751b5d@mail.mcgill.ca>"
       ],
-      "body_plain": "Hi Larisa,\nI guess that you are using an editor with \"soft\" line breaks to edit\nyour .Rd files. This will look like the lines in question are broken,\nbut when the file is saved, the lines will be joined together unless\nyou have ended each section with a return character. If you turn off\n\"word wrap\" or whatever it is called in your editor you will see this.\n\nJIm\n\n\nOn Sat, Apr 29, 2017 at 1:43 AM, MTurgeon <maxime.turgeon at mail.mcgill.ca> wrote:\n> Hi Larisa,\n>\n> This has been covered before; see\n> https://mailman.stat.ethz.ch/pipermail/r-devel/2014-March/068497.html\n>\n> Essentially, it is reminder to check that this information is correct. As\n> such, you can ignore it if it is indeed correct.\n>\n> Max\n>\n>\n> On 2017-04-28 09:15 AM, LARISA ZAMORA MATAMOROS wrote:\n>>\n>>\n>> Dear sir.\n>>\n>> I intended to upload a R package to the CRAN, but I received an e-mail\n>> with an attached file ?00check.log?. The text of this file ends with two\n>> notes, I made modifications to resolve the last note:\n>>\n>> --------------\n>>\n>>\n>> * checking Rd line widths ... NOTE\n>> Rd file 'ExpRep-package.Rd':\n>> \\examples lines wider than 100 characters:\n>> S_Integral_Theorem(n=100, p=0.5, linf = 0, lsup = 50, Compare = TRUE,\n>> Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>>\n>> Rd file 'S_Integral_Theorem.Rd':\n>> \\usage lines wider than 90 characters:\n>> S_Integral_Theorem(n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE,\n>> Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>> \\examples lines wider than 100 characters:\n>> S_Integral_Theorem (n = 200, p = 0.5, linf = 0, lsup = 100, Compare =\n>> TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>>\n>> Rd file 'S_Local_Limit_Theorem.Rd':\n>> \\usage lines wider than 90 characters:\n>> S_Local_Limit_Theorem(n = 170, p = 0.5, Compare = TRUE, Table = TRUE,\n>> Graph = TRUE, GraphE = TRUE)\n>>\n>> Rd file 'S_Poisson_Theorem.Rd':\n>> \\usage lines wider than 90 characters:\n>> S_Poisson_Theorem(n = 2000, p = 0.002, Compare = TRUE, Table = TRUE, Graph\n>> = TRUE, GraphE = FALSE)\n>> These lines will be truncated in the PDF manual.\n>>\n>> ------\n>>\n>>\n>>\n>>\n>>\n>> But I don?t know how to resolve the first note. I am sending the first 9\n>> lines of the 00check.log file, where this note appears:\n>>\n>>\n>>\n>>\n>> * using log directory 'd:/RCompile/CRANincoming/R-devel/ExpRep.Rcheck'\n>>\n>> * using R version 3.4.0 beta (2017-04-10 r72503)\n>>\n>> * using platform: x86_64-w64-mingw32 (64-bit)\n>>\n>> * using session charset: ISO8859-1\n>>\n>> * checking for file 'ExpRep/DESCRIPTION' ... OK\n>>\n>> * checking extension type ... Package\n>>\n>> * this is package 'ExpRep' version '1.0'\n>>\n>> * checking CRAN incoming feasibility ... NOTE\n>>\n>> Maintainer: 'Larisa Zamora-Matamoros <larisa at uo.edu.cu>'\n>>\n>>\n>>\n>>\n>> Therefore I am asking for help to resolve the note \"* checking CRAN\n>> incoming feasibility...\"\n>>\n>> I thank very much for the help.\n>>\n>>\n>>\n>>\n>> Sincerely yours.\n>>\n>> Larisa Zamora\n>>\n>> --\n>>\n>> En su setenta cumplea?os la Universidad de Oriente festeja el saber.\n>>\n>> Del 16 al 19 mayo, II Convenci?n Internacional de Ciencias Sociales y\n>> Ambientales.\n>>\n>> (http://www.convenciones.uo.edu.cu/index.php/2CICSA)\n>>\n>> Del 1 al 3 junio, IV Convenci?n Internacional de Educaci?n F?sica y Alto\n>> Rendimiento Deportivo.\n>>\n>> (http://www.convenciones.uo.edu.cu/index.php/4CIEF)\n>>\n>> Del 29 de nov al 1ro de diciembre de este a?o.\n>>\n>> (http://www.convenciones.uo.edu.cu/index.php/22CQ/22CQ2017)\n>>\n>> --\n>>\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n> --\n> -----------------------------------------------------------------\n>\n> Maxime Turgeon, PhD candidate\n>\n> Department of Epidemiology, Biostatistics and Occupational Health\n> McGill University\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Hi Larisa,\nI guess that you are using an editor with \"soft\" line breaks to edit\nyour .Rd files. This will look like the lines in question are broken,\nbut when the file is saved, the lines will be joined together unless\nyou have ended each section with a return character. If you turn off\n\"word wrap\" or whatever it is called in your editor you will see this.\n\nJIm\n\n\nOn Sat, Apr 29, 2017 at 1:43 AM, MTurgeon <maxime.turgeon at mail.mcgill.ca> wrote:\n> Hi Larisa,\n>\n> This has been covered before; see\n> https://mailman.stat.ethz.ch/pipermail/r-devel/2014-March/068497.html\n>\n> Essentially, it is reminder to check that this information is correct. As\n> such, you can ignore it if it is indeed correct.\n>\n> Max\n>\n>\n> On 2017-04-28 09:15 AM, LARISA ZAMORA MATAMOROS wrote:\n>>\n>>\n>> Dear sir.\n>>\n>> I intended to upload a R package to the CRAN, but I received an e-mail\n>> with an attached file “00check.log”. The text of this file ends with two\n>> notes, I made modifications to resolve the last note:\n>>\n>> --------------\n>>\n>>\n>> * checking Rd line widths ... NOTE\n>> Rd file 'ExpRep-package.Rd':\n>> \\examples lines wider than 100 characters:\n>> S_Integral_Theorem(n=100, p=0.5, linf = 0, lsup = 50, Compare = TRUE,\n>> Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>>\n>> Rd file 'S_Integral_Theorem.Rd':\n>> \\usage lines wider than 90 characters:\n>> S_Integral_Theorem(n = 200, p = 0.5, linf = 0, lsup = 100, Compare = TRUE,\n>> Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>> \\examples lines wider than 100 characters:\n>> S_Integral_Theorem (n = 200, p = 0.5, linf = 0, lsup = 100, Compare =\n>> TRUE, Table = TRUE, Graph = TRUE, GraphE = TRUE)\n>>\n>> Rd file 'S_Local_Limit_Theorem.Rd':\n>> \\usage lines wider than 90 characters:\n>> S_Local_Limit_Theorem(n = 170, p = 0.5, Compare = TRUE, Table = TRUE,\n>> Graph = TRUE, GraphE = TRUE)\n>>\n>> Rd file 'S_Poisson_Theorem.Rd':\n>> \\usage lines wider than 90 characters:\n>> S_Poisson_Theorem(n = 2000, p = 0.002, Compare = TRUE, Table = TRUE, Graph\n>> = TRUE, GraphE = FALSE)\n>> These lines will be truncated in the PDF manual.\n>>\n>> ------\n>>\n>>\n>>\n>>\n>>\n>> But I don’t know how to resolve the first note. I am sending the first 9\n>> lines of the 00check.log file, where this note appears:\n>>\n>>\n>>\n>>\n>> * using log directory 'd:/RCompile/CRANincoming/R-devel/ExpRep.Rcheck'\n>>\n>> * using R version 3.4.0 beta (2017-04-10 r72503)\n>>\n>> * using platform: x86_64-w64-mingw32 (64-bit)\n>>\n>> * using session charset: ISO8859-1\n>>\n>> * checking for file 'ExpRep/DESCRIPTION' ... OK\n>>\n>> * checking extension type ... Package\n>>\n>> * this is package 'ExpRep' version '1.0'\n>>\n>> * checking CRAN incoming feasibility ... NOTE\n>>\n>> Maintainer: 'Larisa Zamora-Matamoros <larisa at uo.edu.cu>'\n>>\n>>\n>>\n>>\n>> Therefore I am asking for help to resolve the note \"* checking CRAN\n>> incoming feasibility...\"\n>>\n>> I thank very much for the help.\n>>\n>>\n>>\n>>\n>> Sincerely yours.\n>>\n>> Larisa Zamora\n>>\n>> --\n>>\n>> En su setenta cumpleaños la Universidad de Oriente festeja el saber.\n>>\n>> Del 16 al 19 mayo, II Convención Internacional de Ciencias Sociales y\n>> Ambientales.\n>>\n>> (http://www.convenciones.uo.edu.cu/index.php/2CICSA)\n>>\n>> Del 1 al 3 junio, IV Convención Internacional de Educación Física y Alto\n>> Rendimiento Deportivo.\n>>\n>> (http://www.convenciones.uo.edu.cu/index.php/4CIEF)\n>>\n>> Del 29 de nov al 1ro de diciembre de este año.\n>>\n>> (http://www.convenciones.uo.edu.cu/index.php/22CQ/22CQ2017)\n>>\n>> --\n>>\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n> --\n> -----------------------------------------------------------------\n>\n> Maxime Turgeon, PhD candidate\n>\n> Department of Epidemiology, Biostatistics and Occupational Health\n> McGill University\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Hi Larisa,\nI guess that you are using an editor with \"soft\" line breaks to edit\nyour .Rd files. This will look like the lines in question are broken,\nbut when the file is saved, the lines will be join",
       "thread_id": "thread-00baea9c1ac8",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001506.html"
     },
     {
       "id": "msg-044cc7138c10",
@@ -1863,7 +1957,8 @@
       "body_snippet": "Nope, still an open issue. I also do not have any ideas left what I could try next.\n\nTried the export hints (e.g. bash profile) given in 'brew info gdal2' and checked with my local configuration but I",
       "thread_id": "thread-044cc7138c10",
       "thread_depth": 0,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001507.html"
     },
     {
       "id": "msg-eb2b36602886",
@@ -1883,7 +1978,8 @@
       "body_snippet": "hi,\n\nOn 29/4/17 21:29, Patrick Schratz wrote:\n> Nope, still an open issue. I also do not have any ideas left what I could try next.\n>\n> Tried the export hints (e.g. bash profile) given in 'brew info g",
       "thread_id": "thread-044cc7138c10",
       "thread_depth": 1,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001508.html"
     },
     {
       "id": "msg-6d8d6d9bc406",
@@ -1904,7 +2000,8 @@
       "body_snippet": "Hi guys,\n\n@ Alexandre\nThanks for suggesting to compile from source. I normally try to use this as the last option because this will usually take a while for gdal. However, it may install to other loca",
       "thread_id": "thread-044cc7138c10",
       "thread_depth": 2,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001509.html"
     },
     {
       "id": "msg-99ab94b80c28",
@@ -1926,7 +2023,8 @@
       "body_snippet": "Hi guys,\n\nthe problem was that `rgdal` was installed using its binary - which causes problems due to a wrong link to `libgdal.dylib`. When testing on OSX on travis and using `sudo: required`, all depe",
       "thread_id": "thread-044cc7138c10",
       "thread_depth": 3,
-      "month": "2017-04"
+      "month": "2017-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2017q2/001510.html"
     }
   ],
   "threads": [

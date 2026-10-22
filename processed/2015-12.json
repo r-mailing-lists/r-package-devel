@@ -13,11 +13,12 @@
       "subject_clean": "[R-pkg-devel] First response time of the function is worse than following ones",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\nI am trying to create my first package that should be used with an OpenCPU\nserver.\n\nThis package requires 2 things:\n     -    to load multiple multiple objects to RAM/ Done by onLoad function.\n\n   - It depends on 3  libraries that are loaded by \"Imports: data.table,\n   gbm, stringdist\" in DESCRIPTION file. ( and lazyload is False)\n\nMy package and its dependencies are listed in preload section  in the\n/etc/opencpu/server.conf\n\n\nTechnically, everything works as expected, but:\nWhen I load package first time system.time(myfunc(input)) is substantially\nhigher then all following timings.  I don?t understand why it happens.  All\ndependencies are preloaded, all objects are loaded in to RAM.\n\nOn the higher scale - same (unknown to me) reason prevents package achieve\ndesired response delay while being used through an OpenCPU.\n\nI can't understand why it is happening. Which way should I elaborate on the\npackage?\n\n\n-- \n????? ???????, PhD\n???????: 093.713.55.25\nhttp://www.linkedin.com/in/storchak\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hello,\nI am trying to create my first package that should be used with an OpenCPU\nserver.\n\nThis package requires 2 things:\n     -    to load multiple multiple objects to RAM/ Done by onLoad function.\n\n   - It depends on 3  libraries that are loaded by \"Imports: data.table,\n   gbm, stringdist\" in DESCRIPTION file. ( and lazyload is False)\n\nMy package and its dependencies are listed in preload section  in the\n/etc/opencpu/server.conf\n\n\nTechnically, everything works as expected, but:\nWhen I load package first time system.time(myfunc(input)) is substantially\nhigher then all following timings.  I don’t understand why it happens.  All\ndependencies are preloaded, all objects are loaded in to RAM.\n\nOn the higher scale - same (unknown to me) reason prevents package achieve\ndesired response delay while being used through an OpenCPU.\n\nI can't understand why it is happening. Which way should I elaborate on the\npackage?\n\n\n-- \n????? ?????ак, PhD\nТелефон: 093.713.55.25\nhttp://www.linkedin.com/in/storchak\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hello,\nI am trying to create my first package that should be used with an OpenCPU\nserver.\n\nThis package requires 2 things:\n     -    to load multiple multiple objects to RAM/ Done by onLoad function.\n",
       "thread_id": "thread-e86cc836669d",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000574.html"
     },
     {
       "id": "msg-01e00e86af0c",
@@ -33,7 +34,8 @@
       "body_snippet": "I have been struggling all day with this issue, which was terribly\ndifficult to identify.\n\nIn the end, if I have a test in my package such as:\n\ntest_that(\"coercions works... depending the check\", {\n  ",
       "thread_id": "thread-01e00e86af0c",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000575.html"
     },
     {
       "id": "msg-66920bda9b19",
@@ -47,11 +49,12 @@
       "references": [
         "<565F7DA6.5060905@gmail.com>"
       ],
-      "body_plain": "On 3 December 2015 at 00:24, Facundo Mu?oz wrote:\n| I have been struggling all day with this issue, which was terribly\n| difficult to identify.\n| \n| In the end, if I have a test in my package such as:\n| \n| test_that(\"coercions works... depending the check\", {\n|   s = \"/A/string/starting/with/a/slash\"\n|   expect_true(s > 0)\n| })\n| \n| \n| then if I test() it, it goes fine.\n| But if I R CMD check the packaged source, it fails.\n| \n| I don't understand the difference between the testing performed by R CMD\n| check, and the testing performed by myself. It is not related with\n| --as-cran.\n\nDo have testthat loaded?  Can you analyse a minimal working package and see\nwhat is different?  We don't have your package so ...   Start from one of the\nhundreds of testthat using packages on CRAN and see what they do.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 3 December 2015 at 00:24, Facundo Mu?oz wrote:\n| I have been struggling all day with this issue, which was terribly\n| difficult to identify.\n| \n| In the end, if I have a test in my package such as:",
+      "body_plain": "On 3 December 2015 at 00:24, Facundo Muñoz wrote:\n| I have been struggling all day with this issue, which was terribly\n| difficult to identify.\n| \n| In the end, if I have a test in my package such as:\n| \n| test_that(\"coercions works... depending the check\", {\n|   s = \"/A/string/starting/with/a/slash\"\n|   expect_true(s > 0)\n| })\n| \n| \n| then if I test() it, it goes fine.\n| But if I R CMD check the packaged source, it fails.\n| \n| I don't understand the difference between the testing performed by R CMD\n| check, and the testing performed by myself. It is not related with\n| --as-cran.\n\nDo have testthat loaded?  Can you analyse a minimal working package and see\nwhat is different?  We don't have your package so ...   Start from one of the\nhundreds of testthat using packages on CRAN and see what they do.\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 3 December 2015 at 00:24, Facundo Muñoz wrote:\n| I have been struggling all day with this issue, which was terribly\n| difficult to identify.\n| \n| In the end, if I have a test in my package such as:",
       "thread_id": "thread-01e00e86af0c",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000576.html"
     },
     {
       "id": "msg-5767147350bc",
@@ -65,11 +68,12 @@
       "references": [
         "<565F7DA6.5060905@gmail.com>"
       ],
-      "body_plain": "On 03.12.2015 00:24, Facundo Mu?oz wrote:\n> I have been struggling all day with this issue, which was terribly\n> difficult to identify.\n>\n> In the end, if I have a test in my package such as:\n>\n> test_that(\"coercions works... depending the check\", {\n>    s = \"/A/string/starting/with/a/slash\"\n>    expect_true(s > 0)\n\n\nThis depends on the locale you are in.\n\ns > 0 is FALSE for me in all locales I just tried ...\n\n\n\nBest,\nUwe Ligges\n\n\n\n\n\n> })\n>\n>\n> then if I test() it, it goes fine.\n> But if I R CMD check the packaged source, it fails.\n>\n> I don't understand the difference between the testing performed by R CMD\n> check, and the testing performed by myself. It is not related with\n> --as-cran.\n>\n>\n> Cheers\n>          ?acu.-\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "On 03.12.2015 00:24, Facundo Mu?oz wrote:\n> I have been struggling all day with this issue, which was terribly\n> difficult to identify.\n>\n> In the end, if I have a test in my package such as:\n>\n> test",
+      "body_plain": "On 03.12.2015 00:24, Facundo Muñoz wrote:\n> I have been struggling all day with this issue, which was terribly\n> difficult to identify.\n>\n> In the end, if I have a test in my package such as:\n>\n> test_that(\"coercions works... depending the check\", {\n>    s = \"/A/string/starting/with/a/slash\"\n>    expect_true(s > 0)\n\n\nThis depends on the locale you are in.\n\ns > 0 is FALSE for me in all locales I just tried ...\n\n\n\nBest,\nUwe Ligges\n\n\n\n\n\n> })\n>\n>\n> then if I test() it, it goes fine.\n> But if I R CMD check the packaged source, it fails.\n>\n> I don't understand the difference between the testing performed by R CMD\n> check, and the testing performed by myself. It is not related with\n> --as-cran.\n>\n>\n> Cheers\n>          ƒacu.-\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On 03.12.2015 00:24, Facundo Muñoz wrote:\n> I have been struggling all day with this issue, which was terribly\n> difficult to identify.\n>\n> In the end, if I have a test in my package such as:\n>\n> test",
       "thread_id": "thread-01e00e86af0c",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000577.html"
     },
     {
       "id": "msg-8fb2dc7d73e6",
@@ -83,11 +87,12 @@
       "references": [
         "<565F7DA6.5060905@gmail.com>"
       ],
-      "body_plain": "It may depend on your locale setting (see Sys.getlocale() and Sys.setlocale()).\nIn what locale is \"/A/string\" > \"0\"?\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\n\nOn Wed, Dec 2, 2015 at 3:24 PM, Facundo Mu?oz <famuvie at gmail.com> wrote:\n> I have been struggling all day with this issue, which was terribly\n> difficult to identify.\n>\n> In the end, if I have a test in my package such as:\n>\n> test_that(\"coercions works... depending the check\", {\n>   s = \"/A/string/starting/with/a/slash\"\n>   expect_true(s > 0)\n> })\n>\n>\n> then if I test() it, it goes fine.\n> But if I R CMD check the packaged source, it fails.\n>\n> I don't understand the difference between the testing performed by R CMD\n> check, and the testing performed by myself. It is not related with\n> --as-cran.\n>\n>\n> Cheers\n>         ?acu.-\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "It may depend on your locale setting (see Sys.getlocale() and Sys.setlocale()).\nIn what locale is \"/A/string\" > \"0\"?\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\n\nOn Wed, Dec 2, 2015 at 3:24 PM, Facundo Muñoz <famuvie at gmail.com> wrote:\n> I have been struggling all day with this issue, which was terribly\n> difficult to identify.\n>\n> In the end, if I have a test in my package such as:\n>\n> test_that(\"coercions works... depending the check\", {\n>   s = \"/A/string/starting/with/a/slash\"\n>   expect_true(s > 0)\n> })\n>\n>\n> then if I test() it, it goes fine.\n> But if I R CMD check the packaged source, it fails.\n>\n> I don't understand the difference between the testing performed by R CMD\n> check, and the testing performed by myself. It is not related with\n> --as-cran.\n>\n>\n> Cheers\n>         ƒacu.-\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "It may depend on your locale setting (see Sys.getlocale() and Sys.setlocale()).\nIn what locale is \"/A/string\" > \"0\"?\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\n\nOn Wed, Dec 2, 2015 at 3:24 PM, Facu",
       "thread_id": "thread-01e00e86af0c",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000578.html"
     },
     {
       "id": "msg-2e8a03150618",
@@ -103,7 +108,8 @@
       "body_snippet": "Hi,\n\nis someone aware of a way to easily install a package hosted on github without using devtools::install_github?\nDoes anyone else ever need to avoid devtools?\nWould something doing that be worth a ",
       "thread_id": "thread-2e8a03150618",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000579.html"
     },
     {
       "id": "msg-53e5e09f6e1c",
@@ -121,7 +127,8 @@
       "body_snippet": "Berry Boessenkool <berryboessenkool at hotmail.com> writes:\n\n> Hi,\n>\n> is someone aware of a way to easily install a package hosted on github without using devtools::install_github?\n> Does anyone else",
       "thread_id": "thread-2e8a03150618",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000580.html"
     },
     {
       "id": "msg-8861c0ad3b54",
@@ -140,7 +147,8 @@
       "body_snippet": ">> is someone aware of a way to easily install a package hosted on github\nwithout using devtools::install_github?\n\nPersonally, I love Dirk's[1] drat package. It allows authors to set up a\npersonal CRA",
       "thread_id": "thread-2e8a03150618",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000581.html"
     },
     {
       "id": "msg-1963ac142a1a",
@@ -158,7 +166,8 @@
       "body_snippet": "Berry,\n\nMissed this this morning ...\n\nOn 3 December 2015 at 09:40, Berry Boessenkool wrote:\n| is someone aware of a way to easily install a package hosted on github without using devtools::install_git",
       "thread_id": "thread-2e8a03150618",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000582.html"
     },
     {
       "id": "msg-7a354e30e974",
@@ -178,7 +187,8 @@
       "body_snippet": "Hello everyone!\nReally sorry for the late reply. So I read and read up as all the answers\nsuggested and here is my response to all  of them but before that, I want\nto establish what I am trying to ach",
       "thread_id": "thread-7a354e30e974",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000583.html"
     },
     {
       "id": "msg-5b02e5a183b1",
@@ -199,7 +209,8 @@
       "body_snippet": "PS : The Screenshots are in the attachments\n\nOn Mon, Dec 7, 2015 at 1:14 AM, Tushar Sadhu <tushar.sadhu08 at gmail.com>\nwrote:\n\n> Hello everyone!\n> Really sorry for the late reply. So I read and read ",
       "thread_id": "thread-7a354e30e974",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000584.html"
     },
     {
       "id": "msg-73cbf9df81d3",
@@ -221,7 +232,8 @@
       "body_snippet": "On 7 December 2015 at 01:18, Tushar Sadhu wrote:\n| PS : The Screenshots are in the attachments\n\nPlease don't do that. Place it somewhere on the intertubes and link to\nit. Thin of the email list as asc",
       "thread_id": "thread-7a354e30e974",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000585.html"
     },
     {
       "id": "msg-a048371d9cb6",
@@ -237,7 +249,8 @@
       "body_snippet": "My recent revision of the package 'secr' has been accepted by CRAN, but I\nsee from the Check Results that installation fails (see link below) on\nr-oldrel-windows-ix86+x86_64 (alone) because it cannot ",
       "thread_id": "thread-a048371d9cb6",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000586.html"
     },
     {
       "id": "msg-e183ffddc63c",
@@ -249,11 +262,12 @@
       "subject_clean": "[R-pkg-devel] How to make S3-method for the \"format\" generic for class inheriting from \"AsIs\"",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear list!\n\nI am one of two authors to the package \"sweidnumbr\"\n(https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\npackage introduce an S3-class called \"pin\" and methods etc for handling\npersonal identification numbers.\n\nAn object might look like:\nx <- structure(\"1912121212\", class = c(\"AsIs\", \"pin\", \"character\"))\n\nWe want the \"AsIs\" class to allow for example recycling when the object is\nput into a data.frame. Problem is that we would also like to have our own\nformat.pin-method. This is problematic since base::format.AsIs does not\nuse \"NextMethod\" (which all other xxx.AsIs methods do).\n\nWe can think of two possible solutions:\n\n1. We can redefine the format-function to handle this but will then get a\ncheck note for masking base::format.\n2. We could skip the format.pin method and introduce a stand alone\nfunction called \"pin_format\" or similair (but our method is very similair\nto base::format.Date and we would like to benefit from that).\n\nWe can not skip the \"AsIs\" class inheritence. If we do, we need to rewrite\n\"data.frame\" (which is a function and not an S3 generic in opposite to\nas.data.frame for which we could just add as.data.frame.pin). If we do, we\nstill get the same check note as above but for masking base::data.frame\ninstead.\n\nIs it possible to use both the benefits of the AsIs-class but to also\ndefine our own format-method without masking anything from other packages?\n\nBest regards\nErik B?low",
+      "body_plain": "Dear list!\n\nI am one of two authors to the package \"sweidnumbr\"\n(https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\npackage introduce an S3-class called \"pin\" and methods etc for handling\npersonal identification numbers.\n\nAn object might look like:\nx <- structure(\"1912121212\", class = c(\"AsIs\", \"pin\", \"character\"))\n\nWe want the \"AsIs\" class to allow for example recycling when the object is\nput into a data.frame. Problem is that we would also like to have our own\nformat.pin-method. This is problematic since base::format.AsIs does not\nuse \"NextMethod\" (which all other xxx.AsIs methods do).\n\nWe can think of two possible solutions:\n\n1. We can redefine the format-function to handle this but will then get a\ncheck note for masking base::format.\n2. We could skip the format.pin method and introduce a stand alone\nfunction called \"pin_format\" or similair (but our method is very similair\nto base::format.Date and we would like to benefit from that).\n\nWe can not skip the \"AsIs\" class inheritence. If we do, we need to rewrite\n\"data.frame\" (which is a function and not an S3 generic in opposite to\nas.data.frame for which we could just add as.data.frame.pin). If we do, we\nstill get the same check note as above but for masking base::data.frame\ninstead.\n\nIs it possible to use both the benefits of the AsIs-class but to also\ndefine our own format-method without masking anything from other packages?\n\nBest regards\nErik Bülow",
       "body_snippet": "Dear list!\n\nI am one of two authors to the package \"sweidnumbr\"\n(https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\npackage introduce an S3-class called \"pin\" and methods etc for han",
       "thread_id": "thread-e183ffddc63c",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000587.html"
     },
     {
       "id": "msg-30991e6192bd",
@@ -267,11 +281,12 @@
       "references": [
         "<D28C79EA.104FB%erik.bulow@rccvast.se>"
       ],
-      "body_plain": "Why not just make your own as.data.frame method? e.g.\n\nas.data.frame.pin <- function(x, ...) {\n  structure(\n    list(x),\n    class = \"data.frame\",\n    row.names = .set_row_names(length(x))\n  )\n}\n\ndata.frame() calls as.data.frame() on all of its arguments.\n\nHadley\n\nOn Tue, Dec 8, 2015 at 5:13 AM, Erik Bulow <erik.bulow at rccvast.se> wrote:\n> Dear list!\n>\n> I am one of two authors to the package \"sweidnumbr\"\n> (https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\n> package introduce an S3-class called \"pin\" and methods etc for handling\n> personal identification numbers.\n>\n> An object might look like:\n> x <- structure(\"1912121212\", class = c(\"AsIs\", \"pin\", \"character\"))\n>\n> We want the \"AsIs\" class to allow for example recycling when the object is\n> put into a data.frame. Problem is that we would also like to have our own\n> format.pin-method. This is problematic since base::format.AsIs does not\n> use \"NextMethod\" (which all other xxx.AsIs methods do).\n>\n> We can think of two possible solutions:\n>\n> 1. We can redefine the format-function to handle this but will then get a\n> check note for masking base::format.\n> 2. We could skip the format.pin method and introduce a stand alone\n> function called \"pin_format\" or similair (but our method is very similair\n> to base::format.Date and we would like to benefit from that).\n>\n> We can not skip the \"AsIs\" class inheritence. If we do, we need to rewrite\n> \"data.frame\" (which is a function and not an S3 generic in opposite to\n> as.data.frame for which we could just add as.data.frame.pin). If we do, we\n> still get the same check note as above but for masking base::data.frame\n> instead.\n>\n> Is it possible to use both the benefits of the AsIs-class but to also\n> define our own format-method without masking anything from other packages?\n>\n> Best regards\n> Erik B?low\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
+      "body_plain": "Why not just make your own as.data.frame method? e.g.\n\nas.data.frame.pin <- function(x, ...) {\n  structure(\n    list(x),\n    class = \"data.frame\",\n    row.names = .set_row_names(length(x))\n  )\n}\n\ndata.frame() calls as.data.frame() on all of its arguments.\n\nHadley\n\nOn Tue, Dec 8, 2015 at 5:13 AM, Erik Bulow <erik.bulow at rccvast.se> wrote:\n> Dear list!\n>\n> I am one of two authors to the package \"sweidnumbr\"\n> (https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\n> package introduce an S3-class called \"pin\" and methods etc for handling\n> personal identification numbers.\n>\n> An object might look like:\n> x <- structure(\"1912121212\", class = c(\"AsIs\", \"pin\", \"character\"))\n>\n> We want the \"AsIs\" class to allow for example recycling when the object is\n> put into a data.frame. Problem is that we would also like to have our own\n> format.pin-method. This is problematic since base::format.AsIs does not\n> use \"NextMethod\" (which all other xxx.AsIs methods do).\n>\n> We can think of two possible solutions:\n>\n> 1. We can redefine the format-function to handle this but will then get a\n> check note for masking base::format.\n> 2. We could skip the format.pin method and introduce a stand alone\n> function called \"pin_format\" or similair (but our method is very similair\n> to base::format.Date and we would like to benefit from that).\n>\n> We can not skip the \"AsIs\" class inheritence. If we do, we need to rewrite\n> \"data.frame\" (which is a function and not an S3 generic in opposite to\n> as.data.frame for which we could just add as.data.frame.pin). If we do, we\n> still get the same check note as above but for masking base::data.frame\n> instead.\n>\n> Is it possible to use both the benefits of the AsIs-class but to also\n> define our own format-method without masking anything from other packages?\n>\n> Best regards\n> Erik Bülow\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nhttp://had.co.nz/",
       "body_snippet": "Why not just make your own as.data.frame method? e.g.\n\nas.data.frame.pin <- function(x, ...) {\n  structure(\n    list(x),\n    class = \"data.frame\",\n    row.names = .set_row_names(length(x))\n  )\n}\n\ndata",
       "thread_id": "thread-e183ffddc63c",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000588.html"
     },
     {
       "id": "msg-bb5ee5725038",
@@ -287,7 +302,8 @@
       "body_snippet": "Hi,\n\nWith a collaborator we are working on a package which uses Rcpp and RcppArmadillo.   Our *.cpp files  start with something like\n\n// [[Rcpp::depends(RcppArmadillo)]]\n\n#include <iostream>\n#include ",
       "thread_id": "thread-bb5ee5725038",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000589.html"
     },
     {
       "id": "msg-44b7f656a141",
@@ -302,11 +318,12 @@
         "<D28C79EA.104FB%erik.bulow@rccvast.se>",
         "<CABdHhvFQKx4Fq397JtkpwAu9bbvDhQH+Qe0O0GdvPg11hiQy_Q@mail.gmail.com>"
       ],
-      "body_plain": "Thank you very much Hadley for your fast response!\n\n\nI do however find the following lines (102-113) from \"data.frame\" a little\nproblematic here:\n\n  [...]\n  if (is.vector(xi1) || is.factor(xi1))\n    xi[[j]] <- rep(xi1, length.out = nr)\n  else if (is.character(xi1) && inherits(xi1, \"AsIs\"))\n    xi[[j]] <- structure(rep(xi1, length.out = nr),\n      class = class(xi1))\n  else if (inherits(xi1, \"Date\") || inherits(xi1,\n    \"POSIXct\")) \n    xi[[j]] <- rep(xi1, length.out = nr)\n  else {\n    fixed <- FALSE\n    break\n  }\n  [...]\n\n\nWith the \"as.data.frame.pin\" as suggested, I will here get \"fixed <-\nFALSE\" which will result in:\n\n  > data.frame(1:2, structure(\"191212121212\", class = c(\"pin\",\n\"character\")))\n  Error in data.frame(1:2, structure(\"191212121212\", class = c(\"pin\",\n\"character\"))) : \n  arguments imply differing number of rows: 2, 1\n\n\n\nAs a big fan of your work, I know your arguments against R?s recycling\nrules (and I do agree) but I would like to allow recycling at least when\n(as above) the length of my pin vector is only 1 (I do know of course that\ndplyr::data_frame does just that :-).\n\nBest Regards!\nErik B\n\n\n\n\n\n\nOn 2015-12-08 14:09, \"Hadley Wickham\" <h.wickham at gmail.com> wrote:\n\n>Why not just make your own as.data.frame method? e.g.\n>\n>as.data.frame.pin <- function(x, ...) {\n>  structure(\n>    list(x),\n>    class = \"data.frame\",\n>    row.names = .set_row_names(length(x))\n>  )\n>}\n>\n>data.frame() calls as.data.frame() on all of its arguments.\n>\n>Hadley\n>\n>On Tue, Dec 8, 2015 at 5:13 AM, Erik Bulow <erik.bulow at rccvast.se> wrote:\n>> Dear list!\n>>\n>> I am one of two authors to the package \"sweidnumbr\"\n>> (https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\n>> package introduce an S3-class called \"pin\" and methods etc for handling\n>> personal identification numbers.\n>>\n>> An object might look like:\n>> x <- structure(\"1912121212\", class = c(\"AsIs\", \"pin\", \"character\"))\n>>\n>> We want the \"AsIs\" class to allow for example recycling when the object\n>>is\n>> put into a data.frame. Problem is that we would also like to have our\n>>own\n>> format.pin-method. This is problematic since base::format.AsIs does not\n>> use \"NextMethod\" (which all other xxx.AsIs methods do).\n>>\n>> We can think of two possible solutions:\n>>\n>> 1. We can redefine the format-function to handle this but will then get\n>>a\n>> check note for masking base::format.\n>> 2. We could skip the format.pin method and introduce a stand alone\n>> function called \"pin_format\" or similair (but our method is very\n>>similair\n>> to base::format.Date and we would like to benefit from that).\n>>\n>> We can not skip the \"AsIs\" class inheritence. If we do, we need to\n>>rewrite\n>> \"data.frame\" (which is a function and not an S3 generic in opposite to\n>> as.data.frame for which we could just add as.data.frame.pin). If we do,\n>>we\n>> still get the same check note as above but for masking base::data.frame\n>> instead.\n>>\n>> Is it possible to use both the benefits of the AsIs-class but to also\n>> define our own format-method without masking anything from other\n>>packages?\n>>\n>> Best regards\n>> Erik B?low\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n>-- \n>http://had.co.nz/",
+      "body_plain": "Thank you very much Hadley for your fast response!\n\n\nI do however find the following lines (102-113) from \"data.frame\" a little\nproblematic here:\n\n  [...]\n  if (is.vector(xi1) || is.factor(xi1))\n    xi[[j]] <- rep(xi1, length.out = nr)\n  else if (is.character(xi1) && inherits(xi1, \"AsIs\"))\n    xi[[j]] <- structure(rep(xi1, length.out = nr),\n      class = class(xi1))\n  else if (inherits(xi1, \"Date\") || inherits(xi1,\n    \"POSIXct\")) \n    xi[[j]] <- rep(xi1, length.out = nr)\n  else {\n    fixed <- FALSE\n    break\n  }\n  [...]\n\n\nWith the \"as.data.frame.pin\" as suggested, I will here get \"fixed <-\nFALSE\" which will result in:\n\n  > data.frame(1:2, structure(\"191212121212\", class = c(\"pin\",\n\"character\")))\n  Error in data.frame(1:2, structure(\"191212121212\", class = c(\"pin\",\n\"character\"))) : \n  arguments imply differing number of rows: 2, 1\n\n\n\nAs a big fan of your work, I know your arguments against R¹s recycling\nrules (and I do agree) but I would like to allow recycling at least when\n(as above) the length of my pin vector is only 1 (I do know of course that\ndplyr::data_frame does just that :-).\n\nBest Regards!\nErik B\n\n\n\n\n\n\nOn 2015-12-08 14:09, \"Hadley Wickham\" <h.wickham at gmail.com> wrote:\n\n>Why not just make your own as.data.frame method? e.g.\n>\n>as.data.frame.pin <- function(x, ...) {\n>  structure(\n>    list(x),\n>    class = \"data.frame\",\n>    row.names = .set_row_names(length(x))\n>  )\n>}\n>\n>data.frame() calls as.data.frame() on all of its arguments.\n>\n>Hadley\n>\n>On Tue, Dec 8, 2015 at 5:13 AM, Erik Bulow <erik.bulow at rccvast.se> wrote:\n>> Dear list!\n>>\n>> I am one of two authors to the package \"sweidnumbr\"\n>> (https://cran.r-project.org/web/packages/sweidnumbr/index.html). This\n>> package introduce an S3-class called \"pin\" and methods etc for handling\n>> personal identification numbers.\n>>\n>> An object might look like:\n>> x <- structure(\"1912121212\", class = c(\"AsIs\", \"pin\", \"character\"))\n>>\n>> We want the \"AsIs\" class to allow for example recycling when the object\n>>is\n>> put into a data.frame. Problem is that we would also like to have our\n>>own\n>> format.pin-method. This is problematic since base::format.AsIs does not\n>> use \"NextMethod\" (which all other xxx.AsIs methods do).\n>>\n>> We can think of two possible solutions:\n>>\n>> 1. We can redefine the format-function to handle this but will then get\n>>a\n>> check note for masking base::format.\n>> 2. We could skip the format.pin method and introduce a stand alone\n>> function called \"pin_format\" or similair (but our method is very\n>>similair\n>> to base::format.Date and we would like to benefit from that).\n>>\n>> We can not skip the \"AsIs\" class inheritence. If we do, we need to\n>>rewrite\n>> \"data.frame\" (which is a function and not an S3 generic in opposite to\n>> as.data.frame for which we could just add as.data.frame.pin). If we do,\n>>we\n>> still get the same check note as above but for masking base::data.frame\n>> instead.\n>>\n>> Is it possible to use both the benefits of the AsIs-class but to also\n>> define our own format-method without masking anything from other\n>>packages?\n>>\n>> Best regards\n>> Erik Bülow\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n>\n>-- \n>http://had.co.nz/",
       "body_snippet": "Thank you very much Hadley for your fast response!\n\n\nI do however find the following lines (102-113) from \"data.frame\" a little\nproblematic here:\n\n  [...]\n  if (is.vector(xi1) || is.factor(xi1))\n    x",
       "thread_id": "thread-e183ffddc63c",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000590.html"
     },
     {
       "id": "msg-55183cb0abf4",
@@ -324,7 +341,8 @@
       "body_snippet": "Georgi,\n\nWrong list?  Try rcpp-devel for Rcpp question.\n\nOn 8 December 2015 at 14:37, Georgi Boshnakov wrote:\n| Hi,\n| \n| With a collaborator we are working on a package which uses Rcpp and RcppArmadil",
       "thread_id": "thread-bb5ee5725038",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000591.html"
     },
     {
       "id": "msg-e8688a7ffbe4",
@@ -342,7 +360,8 @@
       "body_snippet": "On Tue, 2015-12-08 at 04:54 +0000, Murray Efford wrote:\n> My recent revision of the package 'secr' has been accepted by CRAN, but I\n> see from the Check Results that installation fails (see link below",
       "thread_id": "thread-a048371d9cb6",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000592.html"
     },
     {
       "id": "msg-9e8ca5f326a8",
@@ -358,7 +377,8 @@
       "body_snippet": "For Rcpp and friends, I frequently run 'R CMD check' in \"batch mode\" over a\nlarge set of packages.  That works fine, apart from taking long :)\n\nI am using the exact same script (which is home-grown an",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000593.html"
     },
     {
       "id": "msg-3f58ccf9cdf5",
@@ -376,7 +396,8 @@
       "body_snippet": "On 12/12/2015 9:30 AM, Dirk Eddelbuettel wrote:\n>\n> For Rcpp and friends, I frequently run 'R CMD check' in \"batch mode\" over a\n> large set of packages.  That works fine, apart from taking long :)\n>\n>",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000594.html"
     },
     {
       "id": "msg-602b9a034a2a",
@@ -395,7 +416,8 @@
       "body_snippet": "On 12 December 2015 at 11:00, Duncan Murdoch wrote:\n| On 12/12/2015 9:30 AM, Dirk Eddelbuettel wrote:\n| >\n| > For Rcpp and friends, I frequently run 'R CMD check' in \"batch mode\" over a\n| > large set ",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000595.html"
     },
     {
       "id": "msg-2fd6d8472d65",
@@ -414,7 +436,8 @@
       "body_snippet": "On 12/12/2015 11:00 AM, Duncan Murdoch wrote:\n> On 12/12/2015 9:30 AM, Dirk Eddelbuettel wrote:\n>>\n>> For Rcpp and friends, I frequently run 'R CMD check' in \"batch mode\"\n>> over a\n>> large set of pac",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000596.html"
     },
     {
       "id": "msg-061329c7833c",
@@ -434,7 +457,8 @@
       "body_snippet": "On 12 December 2015 at 11:36, Paul Gilbert wrote:\n| \n| \n| On 12/12/2015 11:00 AM, Duncan Murdoch wrote:\n| > On 12/12/2015 9:30 AM, Dirk Eddelbuettel wrote:\n| >>\n| >> For Rcpp and friends, I frequently",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 3,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000597.html"
     },
     {
       "id": "msg-fc904a6eb1f5",
@@ -454,7 +478,8 @@
       "body_snippet": "On 12.12.2015 17:34, Dirk Eddelbuettel wrote:\n>\n> On 12 December 2015 at 11:00, Duncan Murdoch wrote:\n> | On 12/12/2015 9:30 AM, Dirk Eddelbuettel wrote:\n> | >\n> | > For Rcpp and friends, I frequently",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 3,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000598.html"
     },
     {
       "id": "msg-f1faa409c907",
@@ -475,7 +500,8 @@
       "body_snippet": "On 12 December 2015 at 18:57, Uwe Ligges wrote:\n| CRAN has different approaches.\n| \n| Under Windows, I typically have an R process that controls the check \n| process and writes out the process id and ",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 4,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000599.html"
     },
     {
       "id": "msg-1c8bfcd24620",
@@ -491,7 +517,8 @@
       "body_snippet": "Hello,\n\nI wish to offer users of my BrailleR package the ability to save their preferences, which may change by the workspace.\n\nI've toyed with the ideas:\n\n1.        saving a file in the corresponding",
       "thread_id": "thread-1c8bfcd24620",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000600.html"
     },
     {
       "id": "msg-758cb4526aa3",
@@ -509,7 +536,8 @@
       "body_snippet": "Hey,\n\nas far as I understand it, it is not ok to do any writing to the filesystem\n(except tempfiles) behind the back of the user - never ever (except on\ninstallation).\n\nBut what you can do is implemen",
       "thread_id": "thread-1c8bfcd24620",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000601.html"
     },
     {
       "id": "msg-4f125025d137",
@@ -531,7 +559,8 @@
       "body_snippet": "On 12 December 2015 at 12:10, Dirk Eddelbuettel wrote:\n| \n| On 12 December 2015 at 18:57, Uwe Ligges wrote:\n| | CRAN has different approaches.\n| | \n| | Under Windows, I typically have an R process tha",
       "thread_id": "thread-9e8ca5f326a8",
       "thread_depth": 5,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000602.html"
     },
     {
       "id": "msg-957ada9e37f6",
@@ -550,7 +579,8 @@
       "body_snippet": "Maybe you'll also find the 'rappdirs' package useful.\n\nGabor\n\nOn Sun, Dec 13, 2015 at 8:34 AM, Peter Meissner\n<retep.meissner at gmail.com> wrote:\n> Hey,\n>\n> as far as I understand it, it is not ok to",
       "thread_id": "thread-1c8bfcd24620",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000603.html"
     },
     {
       "id": "msg-e617790261be",
@@ -566,7 +596,8 @@
       "body_snippet": "I am having some trouble with a NOTE produced by an R-devel check of URL \nreferences. The reference was\n\n  \\url{http://som.eldoc.ub.rug.nl/reports/themeF/2005/05F10/}\n\nwhich the --as-cran check finds ",
       "thread_id": "thread-e617790261be",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000604.html"
     },
     {
       "id": "msg-1826fc234233",
@@ -584,7 +615,8 @@
       "body_snippet": "On 14 December 2015 at 19:46, Paul Gilbert wrote:\n| I am having some trouble with a NOTE produced by an R-devel check of URL \n| references. The reference was\n| \n|   \\url{http://som.eldoc.ub.rug.nl/rep",
       "thread_id": "thread-e617790261be",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000605.html"
     },
     {
       "id": "msg-691294cc3754",
@@ -602,7 +634,8 @@
       "body_snippet": "Put backslashes in front of the percent signs in the Rd file's URL:\n  \\url{http://www.rug.nl/research/portal/publications/pub\\%28d7d4ea3d-af1d-487a-b9b6-c0816994ef5a\\%29.html}\nBill Dunlap\nTIBCO Softwa",
       "thread_id": "thread-e617790261be",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000606.html"
     },
     {
       "id": "msg-6d49b0284999",
@@ -621,7 +654,8 @@
       "body_snippet": "No, that what I meant by \"percent signs escaped\". It just gets me back \nto the status 500 error. I think Dirk may be correct that it is a bug in \nthe --as-can URL check.\n\nPaul\n\nOn 12/14/2015 09:10 PM,",
       "thread_id": "thread-e617790261be",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000607.html"
     },
     {
       "id": "msg-da5e8b665dcc",
@@ -641,7 +675,8 @@
       "body_snippet": "I'm sorry, I hadn't noticed that the URL checks were not done because\nof the note\n   Checking URLs requires 'libcurl' support in the R build\nBill Dunlap\nTIBCO Software\nwdunlap tibco.com\n\n\nOn Mon, Dec ",
       "thread_id": "thread-e617790261be",
       "thread_depth": 3,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000608.html"
     },
     {
       "id": "msg-dcabddfc2e32",
@@ -662,7 +697,8 @@
       "body_snippet": "Kurt,\n\nI am emailing you directly in extension of a thread from r-package-devel for\nwhich you can see the full (short, five posts) history at\n  http://thread.gmane.org/gmane.comp.lang.r.packages.devel",
       "thread_id": "thread-e617790261be",
       "thread_depth": 4,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000609.html"
     },
     {
       "id": "msg-28d32a8bf272",
@@ -684,7 +720,8 @@
       "body_snippet": "On 18 December 2015 at 07:14, Dirk Eddelbuettel wrote:\n| \n| Kurt,\n| \n| I am emailing you directly in extension of a thread from r-package-devel for\n| which you can see the full (short, five posts) his",
       "thread_id": "thread-e617790261be",
       "thread_depth": 5,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000610.html"
     },
     {
       "id": "msg-64524051a3bf",
@@ -699,11 +736,12 @@
         "<D59DA89C3CD73C44A799E7087F8E6A9E1BDCF898@tur-exch-node1.massey.ac.nz>",
         "<CAB-BFRommacz0Hz9gR4N4JXRjda1_36pnk-LQiWYFRoa7iJw9w@mail.gmail.com>"
       ],
-      "body_plain": "The CRAN Policies [https://cran.r-project.org/web/packages/policies.html] say:\n\n\"- Packages should not write in the users? home filespace, nor\nanywhere else on the file system apart from the R session?s temporary\ndirectory (or during installation in the location pointed to by\nTMPDIR: and such usage should be cleaned up). Installing into the\nsystem?s R installation (e.g., scripts to its bin directory) is not\nallowed.\n\nLimited exceptions may be allowed in interactive sessions if the\npackage obtains confirmation from the user.\"\n\nCRAN package R.cache saves to file after getting user's approval.\nFirst time the package is loaded it asks the user for permission to\ncreate \"root\" directory to store cached data.   If the directory\nalready exists, then it won't ask (again).  If it does not exist and\nuser disapproves to create it or R is running in an interactive, then\nit falls back to using a temporary directory (which is still useful\nfor caching/memoization).\n\n/Henrik\n(author of R.cache)\n\nOn Sun, Dec 13, 2015 at 12:34 AM, Peter Meissner\n<retep.meissner at gmail.com> wrote:\n> Hey,\n>\n> as far as I understand it, it is not ok to do any writing to the filesystem\n> (except tempfiles) behind the back of the user - never ever (except on\n> installation).\n>\n> But what you can do is implement explicit functions to explicitly save and\n> load options.\n>\n> Furthermore, you can tell the user, that the load function will always look\n> for:\n>\n> 1. brailer_options_file.opt in the current working directory\n> 2. for an brailer_options_file entry in the .Renviron file to determine if\n> there might be a file to load options from (e.g. brailer_options_file\n> entry=~/brailer_options_file.opt)\n> 3. else the function does not laod any options\n>\n> Depending on what is appropriate for your package you might than run the\n> options load function on package startup via putting an .onLoad function\n> into your R/zzz.R file.\n>\n> I am not sure if that's the most elegant or efficient way to implement such\n> a thing but it served me well for the wikipediatrend package where I needed\n> a way for caching downloads and I am convinced that it is CRAN policies\n> compliant.\n>\n> If there are better ideas or room for discussion I am eager to here it.\n>\n>\n> Best, Peter\n>\n> 2015-12-12 21:52 GMT+01:00 Godfrey, Jonathan <A.J.Godfrey at massey.ac.nz>:\n>\n>> Hello,\n>>\n>> I wish to offer users of my BrailleR package the ability to save their\n>> preferences, which may change by the workspace.\n>>\n>> I've toyed with the ideas:\n>>\n>> 1.        saving a file in the corresponding folder;  or,\n>>\n>> 2.       creating an object containing all the settings in the workspace\n>>\n>>\n>> In either scenario, the settings get picked up next time the user loads\n>> the package in the right workspace. Both have worked.\n>>\n>> My problem is that I think my functions to create or modify the file or\n>> object breach CRAN policies. I am certainly getting a NOTE for using\n>> assign(..., pos=1)\n>>\n>> I had thought to try using the parent environment instead of explicitly\n>> using 'pos=1' but sometimes my functions are operating at the grandchild\n>> level with respect to pos=1 and therefore fail.\n>>\n>> I think my previous solution of writing a file in the current folder was\n>> only getting past the CRAN checks because I was doing it with a condition\n>> of running R in interactive mode. if(interactive()){...}\n>> But I think it is a breach of the policies to write a file to the user's\n>> hard drive, and sneaking around with a solution that CRAN checks can't cope\n>> with (yet) really doesn't work for me.\n>>\n>> Any ideas, especially pointers to other packages that do manage this task\n>> would help me greatly.\n>>\n>> Thanks for any help/advice,\n>> Jonathan\n>>\n>>\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "The CRAN Policies [https://cran.r-project.org/web/packages/policies.html] say:\n\n\"- Packages should not write in the users? home filespace, nor\nanywhere else on the file system apart from the R session",
+      "body_plain": "The CRAN Policies [https://cran.r-project.org/web/packages/policies.html] say:\n\n\"- Packages should not write in the users’ home filespace, nor\nanywhere else on the file system apart from the R session’s temporary\ndirectory (or during installation in the location pointed to by\nTMPDIR: and such usage should be cleaned up). Installing into the\nsystem’s R installation (e.g., scripts to its bin directory) is not\nallowed.\n\nLimited exceptions may be allowed in interactive sessions if the\npackage obtains confirmation from the user.\"\n\nCRAN package R.cache saves to file after getting user's approval.\nFirst time the package is loaded it asks the user for permission to\ncreate \"root\" directory to store cached data.   If the directory\nalready exists, then it won't ask (again).  If it does not exist and\nuser disapproves to create it or R is running in an interactive, then\nit falls back to using a temporary directory (which is still useful\nfor caching/memoization).\n\n/Henrik\n(author of R.cache)\n\nOn Sun, Dec 13, 2015 at 12:34 AM, Peter Meissner\n<retep.meissner at gmail.com> wrote:\n> Hey,\n>\n> as far as I understand it, it is not ok to do any writing to the filesystem\n> (except tempfiles) behind the back of the user - never ever (except on\n> installation).\n>\n> But what you can do is implement explicit functions to explicitly save and\n> load options.\n>\n> Furthermore, you can tell the user, that the load function will always look\n> for:\n>\n> 1. brailer_options_file.opt in the current working directory\n> 2. for an brailer_options_file entry in the .Renviron file to determine if\n> there might be a file to load options from (e.g. brailer_options_file\n> entry=~/brailer_options_file.opt)\n> 3. else the function does not laod any options\n>\n> Depending on what is appropriate for your package you might than run the\n> options load function on package startup via putting an .onLoad function\n> into your R/zzz.R file.\n>\n> I am not sure if that's the most elegant or efficient way to implement such\n> a thing but it served me well for the wikipediatrend package where I needed\n> a way for caching downloads and I am convinced that it is CRAN policies\n> compliant.\n>\n> If there are better ideas or room for discussion I am eager to here it.\n>\n>\n> Best, Peter\n>\n> 2015-12-12 21:52 GMT+01:00 Godfrey, Jonathan <A.J.Godfrey at massey.ac.nz>:\n>\n>> Hello,\n>>\n>> I wish to offer users of my BrailleR package the ability to save their\n>> preferences, which may change by the workspace.\n>>\n>> I've toyed with the ideas:\n>>\n>> 1.        saving a file in the corresponding folder;  or,\n>>\n>> 2.       creating an object containing all the settings in the workspace\n>>\n>>\n>> In either scenario, the settings get picked up next time the user loads\n>> the package in the right workspace. Both have worked.\n>>\n>> My problem is that I think my functions to create or modify the file or\n>> object breach CRAN policies. I am certainly getting a NOTE for using\n>> assign(..., pos=1)\n>>\n>> I had thought to try using the parent environment instead of explicitly\n>> using 'pos=1' but sometimes my functions are operating at the grandchild\n>> level with respect to pos=1 and therefore fail.\n>>\n>> I think my previous solution of writing a file in the current folder was\n>> only getting past the CRAN checks because I was doing it with a condition\n>> of running R in interactive mode. if(interactive()){...}\n>> But I think it is a breach of the policies to write a file to the user's\n>> hard drive, and sneaking around with a solution that CRAN checks can't cope\n>> with (yet) really doesn't work for me.\n>>\n>> Any ideas, especially pointers to other packages that do manage this task\n>> would help me greatly.\n>>\n>> Thanks for any help/advice,\n>> Jonathan\n>>\n>>\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "The CRAN Policies [https://cran.r-project.org/web/packages/policies.html] say:\n\n\"- Packages should not write in the users’ home filespace, nor\nanywhere else on the file system apart from the R session",
       "thread_id": "thread-1c8bfcd24620",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000611.html"
     },
     {
       "id": "msg-df19a4566d27",
@@ -719,7 +757,8 @@
       "body_snippet": "Hello all,\n\nI need some help understanding namespace and methods.\n\nI received a note from RCMD imports methods fields...\n\nI changed my file from\n#' @import methods\nNULL\n?to include the following:\n\n#' ",
       "thread_id": "thread-df19a4566d27",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000612.html"
     },
     {
       "id": "msg-f183f330e97e",
@@ -737,7 +776,8 @@
       "body_snippet": "You didn't include the NOTE you saw, and this isn't valid roxygen:\n\n#' @imports methods::fields\n\nSo it's a bit hard to tell what the problem is.\n\nHadley\n\n\nOn Sun, Dec 20, 2015 at 12:02 PM, Glenn Schul",
       "thread_id": "thread-df19a4566d27",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000613.html"
     },
     {
       "id": "msg-6dd1c46506d7",
@@ -753,7 +793,8 @@
       "body_snippet": "Hi Hadley,\n\nYou are correct -?\n#' @import method\nNULL\n\nremoves the Note - This is a mental semantic error on my part. ?Whenever I think import my brain says this \"imports foo\" and I type #' @imports f",
       "thread_id": "thread-6dd1c46506d7",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000614.html"
     },
     {
       "id": "msg-41f736b9e424",
@@ -771,7 +812,8 @@
       "body_snippet": "Dear listers,\n\nKurt (subject \"CRAN packages maintained by you\" sent on 02/07/2015) was \nmentionning to package maintainers that \"with current versions of \nr-devel, one can get a convenient summary of ",
       "thread_id": "thread-41f736b9e424",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000615.html"
     },
     {
       "id": "msg-368040d3415d",
@@ -790,7 +832,8 @@
       "body_snippet": "The \"release branch\", currently 3.2.x, by principle contains patch releases of 3.2.0 (i.e. bug fix releases; we do occasionally let new features slip in, but only if they are truly orthogonal to exist",
       "thread_id": "thread-41f736b9e424",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000616.html"
     },
     {
       "id": "msg-4f78e182e57d",
@@ -810,7 +853,8 @@
       "body_snippet": "If you don't want to build r-devel yourself, you can just use\nhttp://win-builder.r-project.org/\n\nOr, if your project is on GitHub you can also use\nhttps://github.com/metacran/r-builder to check on mul",
       "thread_id": "thread-41f736b9e424",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000617.html"
     },
     {
       "id": "msg-4b0ac255f83d",
@@ -830,7 +874,8 @@
       "body_snippet": "Le 22/12/2015 12:58, peter dalgaard a ?crit :\n> The \"release branch\", currently 3.2.x, by principle contains patch releases of 3.2.0 (i.e. bug fix releases; we do occasionally let new features slip in",
       "thread_id": "thread-41f736b9e424",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000618.html"
     },
     {
       "id": "msg-88da2423ff8e",
@@ -854,7 +899,8 @@
       "body_snippet": "Dear Duncan,\n\nOn 8 Oct 2015, at 22:10, Duncan Murdoch wrote:\n\n> On 08/10/2015 4:41 PM, Dr Gregory Jefferis wrote:\n\n[snip]\n\n>> I have a package which imports rgl i.e. rgl is loaded on package\n>> startu",
       "thread_id": "thread-88da2423ff8e",
       "thread_depth": 0,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000619.html"
     },
     {
       "id": "msg-4ab34b92e76e",
@@ -879,7 +925,8 @@
       "body_snippet": "On 30/12/2015 3:54 PM, Dr Gregory Jefferis wrote:\n> Dear Duncan,\n>\n> On 8 Oct 2015, at 22:10, Duncan Murdoch wrote:\n>\n>> On 08/10/2015 4:41 PM, Dr Gregory Jefferis wrote:\n>\n> [snip]\n>\n>>> I have a pac",
       "thread_id": "thread-88da2423ff8e",
       "thread_depth": 1,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000620.html"
     },
     {
       "id": "msg-e6e33107d9d2",
@@ -905,7 +952,8 @@
       "body_snippet": "On 30 Dec 2015, at 21:11, Duncan Murdoch wrote:\n\n\n>> Is there a workaround to get snapshots out of a RGL null display?\n>\n> No.\n\nOK. Thanks for confirming.\n\n> Theoretically it's possible to use a virtu",
       "thread_id": "thread-88da2423ff8e",
       "thread_depth": 2,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000621.html"
     },
     {
       "id": "msg-6aeb6569ee81",
@@ -932,7 +980,8 @@
       "body_snippet": "On 30/12/2015 4:42 PM, Dr Gregory Jefferis wrote:\n> On 30 Dec 2015, at 21:11, Duncan Murdoch wrote:\n>\n>\n>>> Is there a workaround to get snapshots out of a RGL null display?\n>>\n>> No.\n>\n> OK. Thanks f",
       "thread_id": "thread-88da2423ff8e",
       "thread_depth": 3,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000622.html"
     },
     {
       "id": "msg-d8e6acb66d45",
@@ -960,7 +1009,8 @@
       "body_snippet": "Dear Duncan,\n\nOn 31 Dec 2015, at 0:28, Duncan Murdoch wrote:\n\n> On 30/12/2015 4:42 PM, Dr Gregory Jefferis wrote:\n>> On 30 Dec 2015, at 21:11, Duncan Murdoch wrote:\n\n>> I wasn't being clear there. I w",
       "thread_id": "thread-88da2423ff8e",
       "thread_depth": 4,
-      "month": "2015-12"
+      "month": "2015-12",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2015q4/000623.html"
     }
   ],
   "threads": [
