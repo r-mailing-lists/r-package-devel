@@ -17,7 +17,8 @@
       "body_snippet": "I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n\n\n* checking compiled code ... NOTE\nError in ccE(lines, flags = new",
       "thread_id": "thread-371dc74f86dd",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012498.html"
     },
     {
       "id": "msg-23846056c25e",
@@ -35,7 +36,8 @@
       "body_snippet": "I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\nMurray\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of ",
       "thread_id": "thread-371dc74f86dd",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012499.html"
     },
     {
       "id": "msg-3f1a66afa61e",
@@ -51,7 +53,8 @@
       "body_snippet": "Hi all,\n\nJut recently, I got a CRAN NOTE on all of my packages (<https://cran.rstudio.com/web/checks/check_results_pepijn.devries_at_outlook.com.html>):\n\n>? Found the following files/directories: ?~/t",
       "thread_id": "thread-3f1a66afa61e",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012500.html"
     },
     {
       "id": "msg-e3c6a5b1edcf",
@@ -70,7 +73,8 @@
       "body_snippet": "On Wed, 29 Jul 2026 15:37:52 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> Would it be possible to set up forwarding of messages with \"Reply-to: \n> CRAN at r-project.org\" to your truste",
       "thread_id": "thread-e3c6a5b1edcf",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012501.html"
     },
     {
       "id": "msg-8534ae3c0c8d",
@@ -88,7 +92,8 @@
       "body_snippet": "Dear Kurt,\n\nThe temporary files created for Xvfb seem to interfere with the check\nfor new files on the r-devel-linux-x86_64-debian-gcc machine. Almost\nall packages got a NOTE. Apologies if you've alre",
       "thread_id": "thread-3f1a66afa61e",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012502.html"
     },
     {
       "id": "msg-968a869dd885",
@@ -107,7 +112,8 @@
       "body_snippet": "On 2 August 2026 at 13:09, Ivan Krylov via R-package-devel wrote:\n| Must be a quirk: it affects almost all packages on one of the machines.\n\nYep.\n\nI happen to regularly look at 'my' per-maintainer pag",
       "thread_id": "thread-3f1a66afa61e",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012503.html"
     },
     {
       "id": "msg-d4b884e08dcc",
@@ -122,11 +128,12 @@
         "<EB5C1D7D-9C72-41C6-8194-3D569AC39EEB@stanford.edu>",
         "<SY9PR01MB9897F78B56714CC4332A02F5ACD62@SY9PR01MB9897.ausprd01.prod.outlook.com>"
       ],
-      "body_plain": "Hi,\n\nI am having the same issue, and my submission gets refused by CRAN \nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs?there a way to make the new submission pass CRAN checks?\n\nThx,\nNicolas.\n\nLe 02/08/2026 ? 06:45, Murray Efford via R-package-devel a ?crit?:\n> I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\n> Murray\n> ________________________________\n> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>\n> Sent: Sunday, 2 August 2026 03:29\n> To: R-pkg-devel <r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] Winbuilder issue on R API checks\n>\n> I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n>\n>\n> * checking compiled code ... NOTE\n> Error in ccE(lines, flags = new_flags, include = include) :\n>    'cc' is not on the path\n> Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE\n> Execution halted\n>\n>\n> See 'Writing portable packages' in the 'Writing R Extensions' manual.\n> * checking installed files from 'inst/doc' ? OK\n>\n> That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which(\"cc?))\n>\n> Environment variable not being set?\n>\n> As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.\n>\n> -Naras\n>\n>\n>\n>          [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>\n> \t[[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Hi,\n\nI am having the same issue, and my submission gets refused by CRAN \nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs?there a way to make the new submission pass CRAN c",
+      "body_plain": "Hi,\n\nI am having the same issue, and my submission gets refused by CRAN \nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs there a way to make the new submission pass CRAN checks?\n\nThx,\nNicolas.\n\nLe 02/08/2026 à 06:45, Murray Efford via R-package-devel a écrit :\n> I am getting the same issue with R-devel on Winbuilder (and in a CRAN submission)\n> Murray\n> ________________________________\n> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Balasubramanian Narasimhan <naras at stanford.edu>\n> Sent: Sunday, 2 August 2026 03:29\n> To: R-pkg-devel <r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] Winbuilder issue on R API checks\n>\n> I believe that there is an issue with Winbuilder failing the R API checks for compiled code.  I got a NOTE for a package submission:\n>\n>\n> * checking compiled code ... NOTE\n> Error in ccE(lines, flags = new_flags, include = include) :\n>    'cc' is not on the path\n> Calls: <Anonymous> ... lapply -> FUN -> lapply -> FUN -> getFunsHdr -> ccE\n> Execution halted\n>\n>\n> See 'Writing portable packages' in the 'Writing R Extensions' manual.\n> * checking installed files from 'inst/doc' ? OK\n>\n> That seems to be coming from `cc` not being found in tools:::ccE() (src/library/tools/R/apitools.R) which invokes the C preprocessor as the literal command cc (via Sys.which(\"cc?))\n>\n> Environment variable not being set?\n>\n> As a check I uploaded an existing package on CRAN to Winbuilder and it ran into the same issue.\n>\n> -Naras\n>\n>\n>\n>          [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel<https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>\n> \t[[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi,\n\nI am having the same issue, and my submission gets refused by CRAN \nteams' auto-check service, even if I stated this in the cran-comments.md\n\nIs there a way to make the new submission pass CRAN c",
       "thread_id": "thread-371dc74f86dd",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012504.html"
     },
     {
       "id": "msg-976106f9742c",
@@ -146,7 +153,8 @@
       "body_snippet": "This appears to have been fixed at the CRAN end - my package has now been accepted.\nMurray\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf o",
       "thread_id": "thread-371dc74f86dd",
       "thread_depth": 3,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012505.html"
     },
     {
       "id": "msg-0a9a03877413",
@@ -162,7 +170,8 @@
       "body_snippet": "I've noticed this in several of my R packages (see e.g. https://cran.r-project.org/web/checks/check_results_oce.html) and also in other packages on CRAN.\n\nIs this something that authors are meant to a",
       "thread_id": "thread-0a9a03877413",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012506.html"
     },
     {
       "id": "msg-40a2a8e92554",
@@ -180,7 +189,8 @@
       "body_snippet": "If it is true that you generate files elsewhere without cleaning up: Yes!\n\nBest,\nUwe Ligges\n\n\n\n\nOn 04.08.2026 15:32, Daniel Kelley wrote:\n> I've noticed this in several of my R packages (see e.g. http",
       "thread_id": "thread-0a9a03877413",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012507.html"
     },
     {
       "id": "msg-5543c2f0158f",
@@ -198,7 +208,8 @@
       "body_snippet": "? Tue, 4 Aug 2026 13:32:28 +0000\nDaniel Kelley <kelley at dal.ca> ?????:\n\n> Is this something that authors are meant to address, or is it a\n> temporary thing that we can ignore?\n\nThis was due to a tem",
       "thread_id": "thread-0a9a03877413",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012508.html"
     },
     {
       "id": "msg-03d5563c58ec",
@@ -217,7 +228,8 @@
       "body_snippet": "On 4 August 2026 at 16:43, Ivan Krylov via R-package-devel wrote:\n| ? Tue, 4 Aug 2026 13:32:28 +0000\n| Daniel Kelley <kelley at dal.ca> ?????:\n| \n| > Is this something that authors are meant to addres",
       "thread_id": "thread-0a9a03877413",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012509.html"
     },
     {
       "id": "msg-a109d679308f",
@@ -233,7 +245,8 @@
       "body_snippet": "Hi all,\n\n\nIs the windows R-devel builder (at win-builder.r-project.org) down?\n\nI've uploaded the newest version of the 'broadcast' package to the windows R-devel for testing yesterday and the day befo",
       "thread_id": "thread-a109d679308f",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012510.html"
     },
     {
       "id": "msg-82c19f40fef8",
@@ -251,7 +264,8 @@
       "body_snippet": "Dear Tony\n\nPerhaps explained by them going on their annual holiday? It lasts from \nthe 5th to the 19th.\n\nMichael\n\nOn 08/08/2026 09:49, Tony Wilkes wrote:\n> Hi all,\n> \n> \n> Is the windows R-devel build",
       "thread_id": "thread-a109d679308f",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012511.html"
     },
     {
       "id": "msg-d4af0853e939",
@@ -270,7 +284,8 @@
       "body_snippet": "On 08.08.2026 14:25, Michael Dewey wrote:\n> Dear Tony\n> \n> Perhaps explained by them going on their annual holiday? It lasts from \n> the 5th to the 19th.\n\nWell, as far as I can see all queues are clea",
       "thread_id": "thread-a109d679308f",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012512.html"
     },
     {
       "id": "msg-66754a4cc245",
@@ -289,7 +304,8 @@
       "body_snippet": "Ah, of course. I missed that part. Thanks for the reply!\n\nVerzonden vanaf Outlook voor Android<https://aka.ms/AAb9ysg>\n________________________________\nFrom: Michael Dewey <lists at dewey.myzen.co.uk>",
       "thread_id": "thread-a109d679308f",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012513.html"
     },
     {
       "id": "msg-e69027bdef04",
@@ -308,7 +324,8 @@
       "body_snippet": "Thanks for the info Ivan!\n\nVerzonden vanaf Outlook voor Android<https://aka.ms/AAb9ysg>\n\n________________________________\nVan: Ivan Krylov <ikrylov at disroot.org>\nVerstuurd: zondag, augustus 9, 2026 ",
       "thread_id": "thread-e69027bdef04",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012514.html"
     },
     {
       "id": "msg-35161e83255d",
@@ -324,7 +341,8 @@
       "body_snippet": "Hi folks,\n\nI've got a package that is slated for archival tomorrow. However, I've not\nbeen able to submit a patched update since CRAN has been down.\n\nI'm going out of town this evening for the next fe",
       "thread_id": "thread-35161e83255d",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012515.html"
     },
     {
       "id": "msg-ec5cb6e97609",
@@ -342,7 +360,8 @@
       "body_snippet": "I think an extension would be reasonable, but I'm not CRAN. I believe\nsubmissions are back open today, for what it's worth: the original message\nwas\n\nCRAN submissions will be offline from *Aug 5, 2026",
       "thread_id": "thread-35161e83255d",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012516.html"
     },
     {
       "id": "msg-7fc2ef200d45",
@@ -360,7 +379,8 @@
       "body_snippet": "On 20 August 2026 at 09:17, Josiah Parry wrote:\n| Given that CRAN is not accepting new submissions can packages slated for\n| archival have an extension? \n\nCRAN has been open since yesterday morning an",
       "thread_id": "thread-35161e83255d",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012517.html"
     },
     {
       "id": "msg-7c1943499a74",
@@ -379,7 +399,8 @@
       "body_snippet": "Perhaps I got a stale cache when I checked yesterday morning?\n\nNonetheless, I tried submitting on the 12th and reached out on the 18th to\nno avail.\n\nIt's been submitted again and hopefully doesn't lea",
       "thread_id": "thread-35161e83255d",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012518.html"
     },
     {
       "id": "msg-2daa82755703",
@@ -397,7 +418,8 @@
       "body_snippet": "Such requests should be sent to CRAN at R-project.org\n\nBest,\nUwe Ligges\n\n\nOn 20.08.2026 18:17, Josiah Parry wrote:\n> Hi folks,\n> \n> I've got a package that is slated for archival tomorrow. However, I'",
       "thread_id": "thread-35161e83255d",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012519.html"
     },
     {
       "id": "msg-d2e19a5db500",
@@ -415,7 +437,8 @@
       "body_snippet": "Hopefully you are successful in your request but if not note that\narchived packages are still\navailable at r-universe for 35 days:\n\nhttps://cranhaven.r-universe.dev\n\nhttps://www.cranhaven.org/dashboar",
       "thread_id": "thread-35161e83255d",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012520.html"
     },
     {
       "id": "msg-f32962089e80",
@@ -431,7 +454,8 @@
       "body_snippet": "Because my CRAN package DPQ\n\thttps://cran.r-project.org/package=DPQ\nfails some of its checks on  \"linux/arm64\",\n      https://cran.r-project.org/web/checks/check_results_DPQ.html\n      --> https://git",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012521.html"
     },
     {
       "id": "msg-e3b4ec3c5e87",
@@ -449,7 +473,8 @@
       "body_snippet": "On Mon, 24 Aug 2026 12:21:53 +0200\nMartin Maechler <maechler at stat.math.ethz.ch> wrote:\n\n> However, running or pulling the rcheckserver image\n> \n> \t podman pull ghcr.io/r-devel/rcheckserver/ubuntu\n>",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 1,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012522.html"
     },
     {
       "id": "msg-efb0946e994d",
@@ -468,7 +493,8 @@
       "body_snippet": "rocker/r2u exists for the two newer Ubuntu releases 24.04 and 26.04 in both\nthe common 'amd64' and the newer 'arm64' variant.  (r-universe also has it.)\n\nSo besides working with the qemu emulator you ",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 2,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012523.html"
     },
     {
       "id": "msg-92dccfaf1605",
@@ -488,7 +514,8 @@
       "body_snippet": "PS On the narrow question in the Subject, there are of course also rocker/r2u\ncontainers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan explained\nyou actually either real or emulated arm64 har",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 3,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012524.html"
     },
     {
       "id": "msg-8df14636f67d",
@@ -509,7 +536,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel \n>>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:\n\n    > PS On the narrow question in the Subject, there are of course also rocker/r2u\n    > containers for arm64 for both U",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 4,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012525.html"
     },
     {
       "id": "msg-3cd1a809802a",
@@ -531,7 +559,8 @@
       "body_snippet": "On 24 August 2026 at 16:13, Martin Maechler wrote:\n| Dirk answered a question I did not ask, but could have well\n| asked given the \"CRAN package checking problem\", and one that\n| may be useful also to",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 5,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012526.html"
     },
     {
       "id": "msg-4507bf489cca",
@@ -554,7 +583,8 @@
       "body_snippet": "For what it's worth -- if this is for Matrix (hosted on Codeberg now), it\ndoes look like Codeberg offers (limited) support for CI runs on ARM64:\nhttps://forgejo.org/docs/latest/user/actions/reference/",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 6,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012527.html"
     },
     {
       "id": "msg-7a42608eb335",
@@ -577,7 +607,8 @@
       "body_snippet": "On Mon, Aug 24, 2026 at 4:14?PM Martin Maechler <maechler at stat.math.ethz.ch>\nwrote:\n\n> >>>>> Dirk Eddelbuettel\n> >>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:\n>\n>     > PS On the narrow ques",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 5,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012528.html"
     },
     {
       "id": "msg-da9d183a783f",
@@ -597,11 +628,12 @@
         "<27276.20895.252302.913255@stat.math.ethz.ch>",
         "<CABFfbXv5iv4JjGKC=p9XorDAbEtYP+cJExk0hbghmq2VPayZfg@mail.gmail.com>"
       ],
-      "body_plain": ">>>>> Jeroen Ooms \n>>>>>     on Wed, 26 Aug 2026 11:42:32 +0200 writes:\n\n    > On Mon, Aug 24, 2026 at 4:14?PM Martin Maechler <maechler at stat.math.ethz.ch>\n    > wrote:\n\n    >> >>>>> Dirk Eddelbuettel\n    >> >>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:\n    >> \n    >> > PS On the narrow question in the Subject, there are of course also\n    >> rocker/r2u\n    >> > containers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan\n    >> explained\n    >> > you actually either real or emulated arm64 hardware for this. GitHub\n    >> Actions\n    >> > is one fairly simple way to get cpu cycles on such hardware.\n    >> \n    >> > Dirk\n    >> \n    >> Thank you, both Ivan and Dirk  for your help.\n    >> \n    >> Dirk answered a question I did not ask, but could have well\n    >> asked given the \"CRAN package checking problem\", and one that\n    >> may be useful also to others in any case.\n    >> \n    >> I really did want an interactive R session inside a\n    >> docker/podman image where I can  install.package() {also a from\n    >> source in my case} and try things interactively.\n    >> \n    >> Hence, I will try the QEMU route first\n    >> \n\n    > Sebastian reproduced an ARM bug for 'nlme' on his Raspberry PI hardware, so\n    > that is also a way.\n\n    > Interestingly R-universe showed that the problem only occurred on arm64 on\n    > Linux, and not on arm64 on windows/mac.  Attached the AI diagnosis/fix.\n\nWow!\n\nThe following  AI diagnosis/fix  is definitely awesome to me\n(where I'm typicall quite AI allergic ..).\n\nThanks a lot, Jerooen, for producing it for me (and the\nR-package-devel audience)!\n\n    > ----------------------------------------------------------------------\n\n    > It's a long double subnormal-underflow edge case in ppoisD() that only triggers on platforms where long double is IEEE quad (binary128) ? which, among the three ARM64 targets, is only Linux/glibc.\n\n    > What actually fails\n\n    > In the log, at Lam = 11400, pp. <- ppoisD(M, lambda=Lam) comes back as all Inf, so stopifnot(all.equal(pp, pp., tol=1e-12)) at tests/ppois-ex.R:140 aborts with \"Mean relative difference: Inf\".\n\n    > Why only Linux ARM64\n\n    > The three ARM64 platforms have three different long double types:\n\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > ?               Platform                ?        long double        ? smallest subnormal ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > ? Linux aarch64 (glibc)                 ? IEEE binary128 (software) ? ? 6.5e-4966        ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > ? macOS arm64, Windows arm64            ? same as double            ? ? 4.9e-324         ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > ? x86_64 (where the code was developed) ? 80-bit extended           ? ? 3.65e-4951       ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n\n    > For ? = 11400, f0 = expl(-ldlam) = e?????? ? 1.1e-4951.\n\n    > - On x86-64 (80-bit): that's just below the smallest subnormal, so f0 == 0.0L exactly. The code at src/ppois-direct.c:108 then correctly seeds exp_arg = -ldlam and the log-scale fallback works (this is the path the debug comments in the test describe).\n    > - On Linux aarch64 (binary128): 1.1e-4951 is representable as a subnormal, so f0 > 0 and exp_arg stays at its -Wall initializer 0. Then in the summation loop, f fails the f > 4*LDBL_MIN test (binary128 LDBL_MIN ? 3.4e-4932, far above the subnormal f0), so it drops into the else branch at src/ppois-direct.c:137-142 ? which assumes exp_arg was seeded with -ldlam. It computes exp_arg += llam - logl(i)        starting from 0 instead of -11400, i.e. it effectively computes exp(i?log ? ? log i!) witdy at i=1 that's expl(9.34) ? 11400, and the cumulative sum blows up to Inf.\n    > - On macOS/Windows arm64 (long double == double): the test never even runs the assertion, because okLD <- okLongDouble(999) at tests/ppois-ex.R:88 is FALSE there (e???? underflows in plain double, so chk_LDouble reports the long-double range as unusable), and the check is guarded by if(okLD). Linux aarch64's binary128 passes okLongDouble(999) easily, so it's the one platform that both runs the check and hits the subnormal gap in the C code.\n\n    > So it's not an ARM64 miscompilation ? it's a genuine bug in ppoisD()'s underflow handlinglong double has a deeper subnormal range than 80-bit x87, i.e. binary128. The same latentissue exists in the !from_0 branch (src/ppois-direct.c:164-173).\n\n    > Fix: Treat \"subnormal\" like \"zero\" when deciding whether to switch to log-scale, e.g. at line\n\n    > f0 = expl(-ldlam);\n    > if (f0 < 4*LDBL_MIN) {   // == 0 *or* subnormal (binary128 on aarch64 glibc!)\n    >    f0 = 0.L;\n    >    exp_arg = -ldlam;\n    >    ...\n\n    > and the analogous change at line 164. Alternatively,\n    > always compute exp_arg = -ldlam uncoly read in the fallback branch.\n\nwhere the \"uncoly read\" is a hard for me to decipher.\nEven when expanding \"uncoly\" to \"unconditionally\", there seems\nto be an extra word \"read\".\nBut all that (including the missing newlines, e.g. in\n'handlinglong') are not preventing the main messages to be\nconveyed.\n\nWith repeated thanks,\nMartin",
-      "body_snippet": ">>>>> Jeroen Ooms \n>>>>>     on Wed, 26 Aug 2026 11:42:32 +0200 writes:\n\n    > On Mon, Aug 24, 2026 at 4:14?PM Martin Maechler <maechler at stat.math.ethz.ch>\n    > wrote:\n\n    >> >>>>> Dirk Eddelbuet",
+      "body_plain": ">>>>> Jeroen Ooms \n>>>>>     on Wed, 26 Aug 2026 11:42:32 +0200 writes:\n\n    > On Mon, Aug 24, 2026 at 4:14 PM Martin Maechler <maechler at stat.math.ethz.ch>\n    > wrote:\n\n    >> >>>>> Dirk Eddelbuettel\n    >> >>>>>     on Mon, 24 Aug 2026 07:15:19 -0500 writes:\n    >> \n    >> > PS On the narrow question in the Subject, there are of course also\n    >> rocker/r2u\n    >> > containers for arm64 for both Ubuntu 24.04 and 26.04, but as Ivan\n    >> explained\n    >> > you actually either real or emulated arm64 hardware for this. GitHub\n    >> Actions\n    >> > is one fairly simple way to get cpu cycles on such hardware.\n    >> \n    >> > Dirk\n    >> \n    >> Thank you, both Ivan and Dirk  for your help.\n    >> \n    >> Dirk answered a question I did not ask, but could have well\n    >> asked given the \"CRAN package checking problem\", and one that\n    >> may be useful also to others in any case.\n    >> \n    >> I really did want an interactive R session inside a\n    >> docker/podman image where I can  install.package() {also a from\n    >> source in my case} and try things interactively.\n    >> \n    >> Hence, I will try the QEMU route first\n    >> \n\n    > Sebastian reproduced an ARM bug for 'nlme' on his Raspberry PI hardware, so\n    > that is also a way.\n\n    > Interestingly R-universe showed that the problem only occurred on arm64 on\n    > Linux, and not on arm64 on windows/mac.  Attached the AI diagnosis/fix.\n\nWow!\n\nThe following  AI diagnosis/fix  is definitely awesome to me\n(where I'm typicall quite AI allergic ..).\n\nThanks a lot, Jerooen, for producing it for me (and the\nR-package-devel audience)!\n\n    > ----------------------------------------------------------------------\n\n    > It's a long double subnormal-underflow edge case in ppoisD() that only triggers on platforms where long double is IEEE quad (binary128) — which, among the three ARM64 targets, is only Linux/glibc.\n\n    > What actually fails\n\n    > In the log, at Lam = 11400, pp. <- ppoisD(M, lambda=Lam) comes back as all Inf, so stopifnot(all.equal(pp, pp., tol=1e-12)) at tests/ppois-ex.R:140 aborts with \"Mean relative difference: Inf\".\n\n    > Why only Linux ARM64\n\n    > The three ARM64 platforms have three different long double types:\n\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > ?               Platform                ?        long double        │ smallest subnormal │\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > │ Linux aarch64 (glibc)                 │ IEEE binary128 (software) │ ≈ 6.5e-4966        ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > │ macOS arm64, Windows arm64            │ same as double            ? ≈ 4.9e-324         ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n    > │ x86_64 (where the code was developed) │ 80-bit extended           ? ≈ 3.65e-4951       ?\n    > ??????????????????????????????????????????????????????????????????????????????????????????\n\n    > For λ = 11400, f0 = expl(-ldlam) = e⁻????⁰ ≈ 1.1e-4951.\n\n    > - On x86-64 (80-bit): that's just below the smallest subnormal, so f0 == 0.0L exactly. The code at src/ppois-direct.c:108 then correctly seeds exp_arg = -ldlam and the log-scale fallback works (this is the path the debug comments in the test describe).\n    > - On Linux aarch64 (binary128): 1.1e-4951 is representable as a subnormal, so f0 > 0 and exp_arg stays at its -Wall initializer 0. Then in the summation loop, f fails the f > 4*LDBL_MIN test (binary128 LDBL_MIN ≈ 3.4e-4932, far above the subnormal f0), so it drops into the else branch at src/ppois-direct.c:137-142 — which assumes exp_arg was seeded with -ldlam. It computes exp_arg += llam - logl(i)        starting from 0 instead of -11400, i.e. it effectively computes exp(i·log λ − log i!) witdy at i=1 that's expl(9.34) ≈ 11400, and the cumulative sum blows up to Inf.\n    > - On macOS/Windows arm64 (long double == double): the test never even runs the assertion, because okLD <- okLongDouble(999) at tests/ppois-ex.R:88 is FALSE there (e⁻⁹⁹⁹ underflows in plain double, so chk_LDouble reports the long-double range as unusable), and the check is guarded by if(okLD). Linux aarch64's binary128 passes okLongDouble(999) easily, so it's the one platform that both runs the check and hits the subnormal gap in the C code.\n\n    > So it's not an ARM64 miscompilation — it's a genuine bug in ppoisD()'s underflow handlinglong double has a deeper subnormal range than 80-bit x87, i.e. binary128. The same latentissue exists in the !from_0 branch (src/ppois-direct.c:164-173).\n\n    > Fix: Treat \"subnormal\" like \"zero\" when deciding whether to switch to log-scale, e.g. at line\n\n    > f0 = expl(-ldlam);\n    > if (f0 < 4*LDBL_MIN) {   // == 0 *or* subnormal (binary128 on aarch64 glibc!)\n    >    f0 = 0.L;\n    >    exp_arg = -ldlam;\n    >    ...\n\n    > and the analogous change at line 164. Alternatively,\n    > always compute exp_arg = -ldlam uncoly read in the fallback branch.\n\nwhere the \"uncoly read\" is a hard for me to decipher.\nEven when expanding \"uncoly\" to \"unconditionally\", there seems\nto be an extra word \"read\".\nBut all that (including the missing newlines, e.g. in\n'handlinglong') are not preventing the main messages to be\nconveyed.\n\nWith repeated thanks,\nMartin",
+      "body_snippet": ">>>>> Jeroen Ooms \n>>>>>     on Wed, 26 Aug 2026 11:42:32 +0200 writes:\n\n    > On Mon, Aug 24, 2026 at 4:14 PM Martin Maechler <maechler at stat.math.ethz.ch>\n    > wrote:\n\n    >> >>>>> Dirk Eddelbuet",
       "thread_id": "thread-f32962089e80",
       "thread_depth": 6,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q3/012529.html"
     }
   ],
   "threads": [
