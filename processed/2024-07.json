@@ -17,7 +17,8 @@
       "body_snippet": "Hi,\n\nI have been maintaining packages in R-Forge for many tears. Last week I \nsent an email to r-forge at r-project.org to report problems with the build \nprocess. It appears that any changes I have p",
       "thread_id": "thread-a577d7aed16b",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010932.html"
     },
     {
       "id": "msg-2bf97fb7c74f",
@@ -31,11 +32,12 @@
       "references": [
         "<88ae6edf-13ca-42d8-80fa-fc729124682e@gmail.com>"
       ],
-      "body_plain": "Kevin,\n\nI can't speak to whether R-Forge is dead, we migrated our projects to\ngithub a long time ago.\n\nThe most straightforward answer for R packages in git repositories is\nto use separate git projects.  we were even able to import the entire\nSVN history and r-forge issue history to github for each of our r-forge\nprojects when we migrated. The only major complexity that I recall was\ncreating a table mapping svn contributors to github users (where\navailable).\n\nIf you want to do it all in one git repository, I strongly suggest that\nyou *still* import all the svn history, but that you do it in one\ndirectory per project, since this is required by `R CMD build`.  We\nsometimes use this 'one package per directory' approach in some of our\nprivate repositories at work.  In this case, if you use an IDE like\nRStudio, you'll still create separate *RStudio* projects in each\ndirectory, so that you can build, install, test, etc each package from\nthe IDE, but you can use a single repository for all of it.\n\nYour future self will thank you for having full version control history\nof all the \"Olde\" (tm) versions.\n\nBest of luck.  - Brian\n\nsee reference below about importing an svn repo to git:\n\n\nRef:\nhttps://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/importing-a-subversion-repository\n\n-- \nBrian G. Peterson\nph: +1.773.459.4973\nim: bgpbraverock\n\nOn Mon, 2024-07-01 at 18:04 -0400, Kevin R. Coombes wrote:\n> Hi,\n> \n> I have been maintaining packages in R-Forge for many tears. Last week\n> I \n> sent an email to r-forge at r-project.org?to report problems with the\n> build \n> process. It appears that any changes I have pushed to R-Forge over \n> approximately the last two months have resulted in the package\n> remaining \n> in the \"Building\" state, even though the logs suggest that the\n> package \n> built successfully on both LINUX and Windows. (Also, four of the six \n> affected packages only included changes to the man pages to clean up \n> NOTEs from the R cmd checks on old versions at CRAN, where the new \n> versions now happily reside.) I have received no response nor \n> acknowledgement to my email to R-Forge.\n> \n> Assuming that R-Forge has finally succumbed to the ravages of\n> entropy, \n> does anyone have advice on creating a git project that contains\n> multiple \n> R packages? (I really don't want to have to create 20+ new git\n> projects, \n> one per package).\n> \n> Best,\n> ??? Kevin\n> \n> ______________________________________________\n> R-package-devel at r-project.org?mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Kevin,\n\nI can't speak to whether R-Forge is dead, we migrated our projects to\ngithub a long time ago.\n\nThe most straightforward answer for R packages in git repositories is\nto use separate git projects.  we were even able to import the entire\nSVN history and r-forge issue history to github for each of our r-forge\nprojects when we migrated. The only major complexity that I recall was\ncreating a table mapping svn contributors to github users (where\navailable).\n\nIf you want to do it all in one git repository, I strongly suggest that\nyou *still* import all the svn history, but that you do it in one\ndirectory per project, since this is required by `R CMD build`.  We\nsometimes use this 'one package per directory' approach in some of our\nprivate repositories at work.  In this case, if you use an IDE like\nRStudio, you'll still create separate *RStudio* projects in each\ndirectory, so that you can build, install, test, etc each package from\nthe IDE, but you can use a single repository for all of it.\n\nYour future self will thank you for having full version control history\nof all the \"Olde\" (tm) versions.\n\nBest of luck.  - Brian\n\nsee reference below about importing an svn repo to git:\n\n\nRef:\nhttps://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/importing-a-subversion-repository\n\n-- \nBrian G. Peterson\nph: +1.773.459.4973\nim: bgpbraverock\n\nOn Mon, 2024-07-01 at 18:04 -0400, Kevin R. Coombes wrote:\n> Hi,\n> \n> I have been maintaining packages in R-Forge for many tears. Last week\n> I \n> sent an email to r-forge at r-project.org to report problems with the\n> build \n> process. It appears that any changes I have pushed to R-Forge over \n> approximately the last two months have resulted in the package\n> remaining \n> in the \"Building\" state, even though the logs suggest that the\n> package \n> built successfully on both LINUX and Windows. (Also, four of the six \n> affected packages only included changes to the man pages to clean up \n> NOTEs from the R cmd checks on old versions at CRAN, where the new \n> versions now happily reside.) I have received no response nor \n> acknowledgement to my email to R-Forge.\n> \n> Assuming that R-Forge has finally succumbed to the ravages of\n> entropy, \n> does anyone have advice on creating a git project that contains\n> multiple \n> R packages? (I really don't want to have to create 20+ new git\n> projects, \n> one per package).\n> \n> Best,\n>     Kevin\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Kevin,\n\nI can't speak to whether R-Forge is dead, we migrated our projects to\ngithub a long time ago.\n\nThe most straightforward answer for R packages in git repositories is\nto use separate git project",
       "thread_id": "thread-a577d7aed16b",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010933.html"
     },
     {
       "id": "msg-0df383fa5eb5",
@@ -53,7 +55,8 @@
       "body_snippet": "I don't know about R-forge, but it's perfectly workable to put \nmultiple packages within a single repo, with each package in its own \nsubdirectory.  You'll run into some headaches occasionally with (e",
       "thread_id": "thread-a577d7aed16b",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010934.html"
     },
     {
       "id": "msg-967bc4dc316f",
@@ -71,7 +74,8 @@
       "body_snippet": "While you can put multiple packages in one Git repository, I'd suggest \nthat you don't do that.  Most packages are in their own repository, and \nthat means that users who want to contribute to your pa",
       "thread_id": "thread-a577d7aed16b",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010935.html"
     },
     {
       "id": "msg-1848ef166efa",
@@ -87,7 +91,8 @@
       "body_snippet": "Kevin,\n\nR-Forge is still alive but there are problems with the build queue as you \nnoticed. The problems occurred after R-Forge upgraded to R 4.4.0 - just as \nthere was a switch in the maintenance tea",
       "thread_id": "thread-1848ef166efa",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010936.html"
     },
     {
       "id": "msg-b5a0e539c2e3",
@@ -105,7 +110,8 @@
       "body_snippet": "I cannot/will not to help you do this, but there are people out there who disagree with me who put considerable effort into doing this... the search term you would need in order to find them is \"monor",
       "thread_id": "thread-a577d7aed16b",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010937.html"
     },
     {
       "id": "msg-ab2e68367c30",
@@ -123,7 +129,8 @@
       "body_snippet": ">>>>> Achim Zeileis \n>>>>>     on Tue, 2 Jul 2024 01:05:07 +0200 (CEST) writes:\n\n    > Kevin, R-Forge is still alive but there are problems with\n    > the build queue as you noticed. The problems occu",
       "thread_id": "thread-1848ef166efa",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010938.html"
     },
     {
       "id": "msg-3cd7edc8a78d",
@@ -142,7 +149,8 @@
       "body_snippet": "On Tue, 2 Jul 2024, Martin Maechler wrote:\n\n>>>>>> Achim Zeileis\n>>>>>>     on Tue, 2 Jul 2024 01:05:07 +0200 (CEST) writes:\n>\n>    > Kevin, R-Forge is still alive but there are problems with\n>    > t",
       "thread_id": "thread-1848ef166efa",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010939.html"
     },
     {
       "id": "msg-d7568045399d",
@@ -158,7 +166,8 @@
       "body_snippet": "Hello everyone\nI need your attention. I have developed a new R package and submitted it to\nCRAN. In return main i got two notes they are:\n\n* using log directory 'd:/RCompile/CRANincoming/R-devel/drglm",
       "thread_id": "thread-d7568045399d",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010948.html"
     },
     {
       "id": "msg-585f531cf75d",
@@ -174,7 +183,8 @@
       "body_snippet": "Short version\n\nI have recently tried to update two of my CRAN packages and I am getting \nthe NOTE from R CMD check --as-cran\n\nPackage has help file(s) containing install/render-stage \\Sexpr{} \nexpress",
       "thread_id": "thread-585f531cf75d",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010940.html"
     },
     {
       "id": "msg-12fdea9a72b0",
@@ -192,7 +202,8 @@
       "body_snippet": "This is something I'd run into recently as well.\n\nThe R devs changed the default from building the manual to not building the\nmanual. Now if you want (or need) to build the manual, you should add\n\nBui",
       "thread_id": "thread-585f531cf75d",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010941.html"
     },
     {
       "id": "msg-99cc4b7bd71c",
@@ -208,7 +219,8 @@
       "body_snippet": "Dear R-pkg-dev folk,\n\nThe cpp11 package, which was developed yet is no longer maintained by\nJim Hester, now triggers warnings on some CRAN pre-submit checks for\n\"non-API calls to R\" via \"SETLENGTH\", \"",
       "thread_id": "thread-99cc4b7bd71c",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010942.html"
     },
     {
       "id": "msg-01e1eba8f493",
@@ -226,7 +238,8 @@
       "body_snippet": "Have you contacted the maintainer directly (i.e. by e-mail)?  (Yes, \nthey should be paying attention to Github, but trying another channel \nnever hurts.)\n\n   My personal experience is that I was succe",
       "thread_id": "thread-99cc4b7bd71c",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010943.html"
     },
     {
       "id": "msg-936feb14b1db",
@@ -240,11 +253,12 @@
       "references": [
         "<b73ddb20-bc88-48aa-97a1-266e9db4d4da@email.com>"
       ],
-      "body_plain": "Hi Mark,\n\nAs someone else affected by this issue, it is actually quite tough to\nresolve. This is because quite literally every other day, the list of what\nis and is not non-API is changing. It is particularly challenging since\nthis is in R-devel and not any stable R release.\n\nIf there were a stable list of non-API and a stable release of R that this\nis associated with it is my guess that the PR would?ve been merged by now.\n\nOn Mon, Jul 8, 2024 at 10:25 Mark Padgham <mark.padgham at email.com> wrote:\n\n> Dear R-pkg-dev folk,\n>\n> The cpp11 package, which was developed yet is no longer maintained by\n> Jim Hester, now triggers warnings on some CRAN pre-submit checks for\n> \"non-API calls to R\" via \"SETLENGTH\", \"SET_TRUELENGTH\", and others. The\n> relevant issue is https://github.com/r-lib/cpp11/issues/355, with a pull\n> request to resolve at https://github.com/r-lib/cpp11/pull/358. Problem\n> is the package is now largely inactive, with the PR hanging there for a\n> month or so unattended. I presume this warning means I can not resubmit\n> any package depending on cpp11 until this is resolved. But then there\n> are currently 75 packages potentially affected by this which would then\n> also be unable to be resubmitted. (Follow the links from the main GitHub\n> issue for a glimpse of the scale of this problem.)\n>\n> Any suggestions? In particular, it would be helpful, in this arguably\n> unusual and quite prominent case, to hear any views from CRAN folk as to\n> whether everybody dependent on cpp11 will have to wait for resolution\n> before they'll be able to resubmit? Alternatively, any indication from\n> anybody in a position to opine on cpp11 status and future maintenance\n> plans would be great!\n>\n> Thanks,\n>\n> Mark\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi Mark,\n\nAs someone else affected by this issue, it is actually quite tough to\nresolve. This is because quite literally every other day, the list of what\nis and is not non-API is changing. It is particularly challenging since\nthis is in R-devel and not any stable R release.\n\nIf there were a stable list of non-API and a stable release of R that this\nis associated with it is my guess that the PR would’ve been merged by now.\n\nOn Mon, Jul 8, 2024 at 10:25 Mark Padgham <mark.padgham at email.com> wrote:\n\n> Dear R-pkg-dev folk,\n>\n> The cpp11 package, which was developed yet is no longer maintained by\n> Jim Hester, now triggers warnings on some CRAN pre-submit checks for\n> \"non-API calls to R\" via \"SETLENGTH\", \"SET_TRUELENGTH\", and others. The\n> relevant issue is https://github.com/r-lib/cpp11/issues/355, with a pull\n> request to resolve at https://github.com/r-lib/cpp11/pull/358. Problem\n> is the package is now largely inactive, with the PR hanging there for a\n> month or so unattended. I presume this warning means I can not resubmit\n> any package depending on cpp11 until this is resolved. But then there\n> are currently 75 packages potentially affected by this which would then\n> also be unable to be resubmitted. (Follow the links from the main GitHub\n> issue for a glimpse of the scale of this problem.)\n>\n> Any suggestions? In particular, it would be helpful, in this arguably\n> unusual and quite prominent case, to hear any views from CRAN folk as to\n> whether everybody dependent on cpp11 will have to wait for resolution\n> before they'll be able to resubmit? Alternatively, any indication from\n> anybody in a position to opine on cpp11 status and future maintenance\n> plans would be great!\n>\n> Thanks,\n>\n> Mark\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi Mark,\n\nAs someone else affected by this issue, it is actually quite tough to\nresolve. This is because quite literally every other day, the list of what\nis and is not non-API is changing. It is part",
       "thread_id": "thread-99cc4b7bd71c",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010944.html"
     },
     {
       "id": "msg-b68d3db16f98",
@@ -263,7 +277,8 @@
       "body_snippet": "On 08.07.2024 16:08, Iris Simmons wrote:\n> This is something I'd run into recently as well.\n> \n> The R devs changed the default from building the manual to not building the\n> manual. Now if you want (",
       "thread_id": "thread-585f531cf75d",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010945.html"
     },
     {
       "id": "msg-666a99deec86",
@@ -277,11 +292,12 @@
       "references": [
         "<9DE1C4C5-3A88-4F75-87CD-7A5CE0F7EAA7@unil.ch>"
       ],
-      "body_plain": "Hello everyone,\n\nI hope this email finds you well.\n\nI?m sorry to bother you, it?s the very first time I?m submitting a package to CRAN.\n\nRecently my submission got rejected with the following feedback:\nNon-FOSS package license (file LICENSE)\n\n   Suggests or Enhances not in mainstream repositories:\n     velocyto.R\n\n   Found the following (possibly) invalid URLs:\n     URL: https://cran.r-project.org/web/packages/Seurat/index.html\n       From: inst/doc/a_SuperCell.html\n       Status: 200\n       Message: OK\n       CRAN URL not in canonical form\n\n   The canonical URL of the CRAN page for a package is\n     https://CRAN.R-project.org/package=pkgname<https://cran.r-project.org/package=pkgname>\n\n\n   Size of tarball: 9076436 bytes\n\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: package dependencies, Result: NOTE\n   Package suggested but not available for checking: ?velocyto.R'\n\n\nThe license we?re using is the standard CC BY-NC-ND 4.0 and is listed among the accepted licenses for CRAN.\n\nI fixed the URL issue but how can I make CRAN accept the package ?\n\nThank you advance for your time and your help !\n\nHave a nice day.\n\nBest Regards,\n\nMatei Teleman\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hello everyone,\n\nI hope this email finds you well.\n\nI?m sorry to bother you, it?s the very first time I?m submitting a package to CRAN.\n\nRecently my submission got rejected with the following feedback",
+      "body_plain": "Hello everyone,\n\nI hope this email finds you well.\n\nI’m sorry to bother you, it’s the very first time I’m submitting a package to CRAN.\n\nRecently my submission got rejected with the following feedback:\nNon-FOSS package license (file LICENSE)\n\n   Suggests or Enhances not in mainstream repositories:\n     velocyto.R\n\n   Found the following (possibly) invalid URLs:\n     URL: https://cran.r-project.org/web/packages/Seurat/index.html\n       From: inst/doc/a_SuperCell.html\n       Status: 200\n       Message: OK\n       CRAN URL not in canonical form\n\n   The canonical URL of the CRAN page for a package is\n     https://CRAN.R-project.org/package=pkgname<https://cran.r-project.org/package=pkgname>\n\n\n   Size of tarball: 9076436 bytes\n\n\nFlavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-x86_64\nCheck: package dependencies, Result: NOTE\n   Package suggested but not available for checking: ‘velocyto.R'\n\n\nThe license we’re using is the standard CC BY-NC-ND 4.0 and is listed among the accepted licenses for CRAN.\n\nI fixed the URL issue but how can I make CRAN accept the package ?\n\nThank you advance for your time and your help !\n\nHave a nice day.\n\nBest Regards,\n\nMatei Teleman\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello everyone,\n\nI hope this email finds you well.\n\nI’m sorry to bother you, it’s the very first time I’m submitting a package to CRAN.\n\nRecently my submission got rejected with the following feedback",
       "thread_id": "thread-666a99deec86",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010949.html"
     },
     {
       "id": "msg-2fc60fdf017f",
@@ -297,7 +313,8 @@
       "body_snippet": "Seemingly starting with the most recent builds of R-devel, I?ve been getting segfaults related to a piece of cpp code that indexes a zero-size NumericVector.  Essentially the same as this dummy exampl",
       "thread_id": "thread-2fc60fdf017f",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010946.html"
     },
     {
       "id": "msg-2eb6c0484521",
@@ -315,7 +332,8 @@
       "body_snippet": "I'm pretty sure this is from this R-devel commit:\n\nhttps://github.com/r-devel/r-svn/commit/92c1d5de23c93576f55062e26d446feface07250\n\n  This turns on stricter boundary checking, specifically see \nhttps",
       "thread_id": "thread-2fc60fdf017f",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010947.html"
     },
     {
       "id": "msg-0d36fb26f83b",
@@ -333,7 +351,8 @@
       "body_snippet": "The first NOTE is irrelevant.  The second NOTE says that you must \nreduce the running time of your examples (so that the longest of them \ntakes <10 seconds on the *slowest* CRAN testing platform). Thi",
       "thread_id": "thread-d7568045399d",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010950.html"
     },
     {
       "id": "msg-6eeb5b1a6222",
@@ -348,11 +367,12 @@
         "<9DE1C4C5-3A88-4F75-87CD-7A5CE0F7EAA7@unil.ch>",
         "<D21E7C8B-9BA7-4F31-8F43-9E9F654E5118@unil.ch>"
       ],
-      "body_plain": "? Mon, 8 Jul 2024 15:12:24 +0000\nMatei Teleman <matei.teleman at unil.ch> ?????:\n\n> Non-FOSS package license (file LICENSE)\n\n> The license we?re using is the standard CC BY-NC-ND 4.0 and is listed\n> among the accepted licenses for CRAN\n\nInstead of putting the license text in a file inside the package (that\nwould have to match byte by byte in order to be recognised\nautomatically, or may be subtly different from the original with\npotentially drastic legal consequences), use the name of the license\nlisted at [1]:\n\nLicense: CC BY-NC-ND 4.0\n\nIf you want to keep the full text of the license in your source code\nrepository, put it in a file that you exclude from the source package\nusing .Rbuildignore.\n\nI'm assuming you've already seen the CC FAQ [2] that recommends against\nusing CC licenses for software and chose it because it offers\nrestrictions for commercial use and distribution of derivatives. Too\nbad none of the other licenses at [1] offer the same kind of\nrestrictions.\n\n>    Suggests or Enhances not in mainstream repositories:\n>      velocyto.R\n\nJust making sure: have you provided the instructions for obtaining\nvelocyto.R in the 'Description' field of the DESCRIPTION file?\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://svn.r-project.org/R/trunk/share/licenses/license.db\n\n[2]\nhttps://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software",
-      "body_snippet": "? Mon, 8 Jul 2024 15:12:24 +0000\nMatei Teleman <matei.teleman at unil.ch> ?????:\n\n> Non-FOSS package license (file LICENSE)\n\n> The license we?re using is the standard CC BY-NC-ND 4.0 and is listed\n> a",
+      "body_plain": "В Mon, 8 Jul 2024 15:12:24 +0000\nMatei Teleman <matei.teleman at unil.ch> пишет:\n\n> Non-FOSS package license (file LICENSE)\n\n> The license we’re using is the standard CC BY-NC-ND 4.0 and is listed\n> among the accepted licenses for CRAN\n\nInstead of putting the license text in a file inside the package (that\nwould have to match byte by byte in order to be recognised\nautomatically, or may be subtly different from the original with\npotentially drastic legal consequences), use the name of the license\nlisted at [1]:\n\nLicense: CC BY-NC-ND 4.0\n\nIf you want to keep the full text of the license in your source code\nrepository, put it in a file that you exclude from the source package\nusing .Rbuildignore.\n\nI'm assuming you've already seen the CC FAQ [2] that recommends against\nusing CC licenses for software and chose it because it offers\nrestrictions for commercial use and distribution of derivatives. Too\nbad none of the other licenses at [1] offer the same kind of\nrestrictions.\n\n>    Suggests or Enhances not in mainstream repositories:\n>      velocyto.R\n\nJust making sure: have you provided the instructions for obtaining\nvelocyto.R in the 'Description' field of the DESCRIPTION file?\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://svn.r-project.org/R/trunk/share/licenses/license.db\n\n[2]\nhttps://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software",
+      "body_snippet": "В Mon, 8 Jul 2024 15:12:24 +0000\nMatei Teleman <matei.teleman at unil.ch> пишет:\n\n> Non-FOSS package license (file LICENSE)\n\n> The license we’re using is the standard CC BY-NC-ND 4.0 and is listed\n> a",
       "thread_id": "thread-666a99deec86",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010951.html"
     },
     {
       "id": "msg-08679326a3e6",
@@ -368,11 +388,12 @@
         "<CADNULg-t_C0F_MVSNJR0=R3qRZgPVenMo2s5-GACtmUA05cyng@mail.gmail.com>",
         "<d1edd1b3-4c28-492d-bf30-877f5d024b8d@statistik.tu-dortmund.de>"
       ],
-      "body_plain": "Hi Michael,\n\nI assume you are getting this note because you are using mathjaxr. I am also getting this and others have reported the same:\n\nhttps://github.com/wviechtb/mathjaxr/issues/15\n\n(my response on the forum was a bit premature, since this note eventually did show up for me as well).\n\nThis appears to be related to this change (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html):\n\n- tools::checkRd() (used by R CMD check) detects more problems with ?\\Sexpr?-based dynamic content, including bad nesting of ?\\Sexpr?s and invalid arguments.\n\nwhich was made in R version 4.4.0. I have submitted an updated metafor version in the meantime despite this note and it was accepted without any problems. Also, while I am getting this note locally, this note does not show up on the CRAN check results:\n\nhttps://cran.r-project.org/web/checks/check_results_metafor.html\n\nThe manual is also available on the CRAN website:\n\nhttps://cran.r-project.org/package=metafor\n\nand also in the build directory of the tarball (https://cran.r-project.org/src/contrib/metafor_4.6-0.tar.gz).\n\nSo, unless CRAN states otherwise, I would suggest to submit the updated versions, burn some incense, pray twenty vectorized hail Rs, and hope for the best.\n\nBest,\nWolfgang\n\n> -----Original Message-----\n> From: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Uwe\n> Ligges\n> Sent: Monday, July 8, 2024 16:40\n> To: Iris Simmons <ikwsimmo at gmail.com>; Michael Dewey <lists at dewey.myzen.co.uk>\n> Cc: List r-package-devel <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] NOTE about lack of prebuilt manual\n>\n> On 08.07.2024 16:08, Iris Simmons wrote:\n> > This is something I'd run into recently as well.\n> >\n> > The R devs changed the default from building the manual to not building the\n> > manual. Now if you want (or need) to build the manual, you should add\n>\n> Well, not really, we still build manuals unless file(s) containing\n> install/render-stage \\Sexpr{}  are present (as in this case).\n>\n> Best,\n> Uwe Ligges\n>\n> > BuildManual: TRUE\n> >\n> > to your DESCRIPTION.\n> >\n> > On Mon, Jul 8, 2024, 10:05 Michael Dewey <lists at dewey.myzen.co.uk> wrote:\n> >\n> >> Short version\n> >>\n> >> I have recently tried to update two of my CRAN packages and I am getting\n> >> the NOTE from R CMD check --as-cran\n> >>\n> >> Package has help file(s) containing install/render-stage \\Sexpr{}\n> >> expressions but no prebuilt PDF manual.\n> >>\n> >> (It comes on one line in the check.log)\n> >>\n> >> What am I doing wrong?\n> >>\n> >> ===================\n> >>\n> >> More details\n> >>\n> >> Both packages have lived successfuly on CRAN for some time but my recent\n> >> attempts to update lead to the NOTE shown above. I notice that the\n> >> version currently on CRAN do have in the tarball a directory called\n> >> build which amongst other thing does contain the package manual. However\n> >> when I build the updated versions the tarball still contains a build\n> >> directory but without the manual.\n> >>\n> >> I am using 4.4.1 under Windows 10. I open a command line and do\n> >> everything from there with R CMD, I do not use any helper package. The\n> >> help files do not explicitly contain any instance of \\Sexpr{} but they\n> >> do contain macros. Both of them use mathjaxr and Rdpack and one also has\n> >> some macros written by me. They have been like that for some while. The\n> >> Rd files are hand-written, I do not use any package to generate\n> >> documentation.\n> >>\n> >> I notice that R CMD build has an option to turn off the manual but I do\n> >> not set that and there does not seem to be a turn on option. I have\n> >> looked at the NEWS for R4.4.0 and 4.4.1 but withou enlightenment. The\n> >> versions on CRAN were probably generated with R 4.3.3 judgin by the date\n> >> when I made them.\n> >>\n> >> I know it is only a NOTE but I would like to know why it is happening.\n> >>\n> >> I hope that is enough detail to be helpful but I can expand on any\n> >> unclear areas.\n> >>\n> >> --\n> >> Michael",
+      "body_plain": "Hi Michael,\n\nI assume you are getting this note because you are using mathjaxr. I am also getting this and others have reported the same:\n\nhttps://github.com/wviechtb/mathjaxr/issues/15\n\n(my response on the forum was a bit premature, since this note eventually did show up for me as well).\n\nThis appears to be related to this change (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html):\n\n- tools::checkRd() (used by R CMD check) detects more problems with ⁠\\Sexpr⁠-based dynamic content, including bad nesting of ⁠\\Sexpr⁠s and invalid arguments.\n\nwhich was made in R version 4.4.0. I have submitted an updated metafor version in the meantime despite this note and it was accepted without any problems. Also, while I am getting this note locally, this note does not show up on the CRAN check results:\n\nhttps://cran.r-project.org/web/checks/check_results_metafor.html\n\nThe manual is also available on the CRAN website:\n\nhttps://cran.r-project.org/package=metafor\n\nand also in the build directory of the tarball (https://cran.r-project.org/src/contrib/metafor_4.6-0.tar.gz).\n\nSo, unless CRAN states otherwise, I would suggest to submit the updated versions, burn some incense, pray twenty vectorized hail Rs, and hope for the best.\n\nBest,\nWolfgang\n\n> -----Original Message-----\n> From: R-package-devel <r-package-devel-bounces at r-project.org> On Behalf Of Uwe\n> Ligges\n> Sent: Monday, July 8, 2024 16:40\n> To: Iris Simmons <ikwsimmo at gmail.com>; Michael Dewey <lists at dewey.myzen.co.uk>\n> Cc: List r-package-devel <r-package-devel at r-project.org>\n> Subject: Re: [R-pkg-devel] NOTE about lack of prebuilt manual\n>\n> On 08.07.2024 16:08, Iris Simmons wrote:\n> > This is something I'd run into recently as well.\n> >\n> > The R devs changed the default from building the manual to not building the\n> > manual. Now if you want (or need) to build the manual, you should add\n>\n> Well, not really, we still build manuals unless file(s) containing\n> install/render-stage \\Sexpr{}  are present (as in this case).\n>\n> Best,\n> Uwe Ligges\n>\n> > BuildManual: TRUE\n> >\n> > to your DESCRIPTION.\n> >\n> > On Mon, Jul 8, 2024, 10:05 Michael Dewey <lists at dewey.myzen.co.uk> wrote:\n> >\n> >> Short version\n> >>\n> >> I have recently tried to update two of my CRAN packages and I am getting\n> >> the NOTE from R CMD check --as-cran\n> >>\n> >> Package has help file(s) containing install/render-stage \\Sexpr{}\n> >> expressions but no prebuilt PDF manual.\n> >>\n> >> (It comes on one line in the check.log)\n> >>\n> >> What am I doing wrong?\n> >>\n> >> ===================\n> >>\n> >> More details\n> >>\n> >> Both packages have lived successfuly on CRAN for some time but my recent\n> >> attempts to update lead to the NOTE shown above. I notice that the\n> >> version currently on CRAN do have in the tarball a directory called\n> >> build which amongst other thing does contain the package manual. However\n> >> when I build the updated versions the tarball still contains a build\n> >> directory but without the manual.\n> >>\n> >> I am using 4.4.1 under Windows 10. I open a command line and do\n> >> everything from there with R CMD, I do not use any helper package. The\n> >> help files do not explicitly contain any instance of \\Sexpr{} but they\n> >> do contain macros. Both of them use mathjaxr and Rdpack and one also has\n> >> some macros written by me. They have been like that for some while. The\n> >> Rd files are hand-written, I do not use any package to generate\n> >> documentation.\n> >>\n> >> I notice that R CMD build has an option to turn off the manual but I do\n> >> not set that and there does not seem to be a turn on option. I have\n> >> looked at the NEWS for R4.4.0 and 4.4.1 but withou enlightenment. The\n> >> versions on CRAN were probably generated with R 4.3.3 judgin by the date\n> >> when I made them.\n> >>\n> >> I know it is only a NOTE but I would like to know why it is happening.\n> >>\n> >> I hope that is enough detail to be helpful but I can expand on any\n> >> unclear areas.\n> >>\n> >> --\n> >> Michael",
       "body_snippet": "Hi Michael,\n\nI assume you are getting this note because you are using mathjaxr. I am also getting this and others have reported the same:\n\nhttps://github.com/wviechtb/mathjaxr/issues/15\n\n(my response ",
       "thread_id": "thread-585f531cf75d",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010952.html"
     },
     {
       "id": "msg-4907e3a3b22c",
@@ -390,7 +411,8 @@
       "body_snippet": "Hi Mark,\n\nThe cpp11 package is now maintained by Davis Vaughan and we will release a\nnew version once the C API status is a little cleaner. This warnings\ngenerated from cpp11 will not interfere with y",
       "thread_id": "thread-99cc4b7bd71c",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010953.html"
     },
     {
       "id": "msg-008299e000c0",
@@ -407,11 +429,12 @@
         "<d1edd1b3-4c28-492d-bf30-877f5d024b8d@statistik.tu-dortmund.de>",
         "<AS8PR08MB9193350221722AE50DCA005B8BDB2@AS8PR08MB9193.eurprd08.prod.outlook.com>"
       ],
-      "body_plain": "? Tue, 9 Jul 2024 08:54:22 +0000\n\"Viechtbauer, Wolfgang (NP)\"\n<wolfgang.viechtbauer at maastrichtuniversity.nl> ?????:\n\n> This appears to be related to this change\n> (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html):\n> \n> - tools::checkRd() (used by R CMD check) detects more problems with\n> ?\\Sexpr?-based dynamic content, including bad nesting of ?\\Sexpr?s\n> and invalid arguments.\n\nThe exact change was:\n\nr85348 | hornik | 2023-10-18 08:13:46 +0000 (Wed, 18 Oct 2023) | 1 line\nBuild PDF refman only when explicitly asked for.\n\n--- src/library/tools/R/build.R (revision 85347)\n+++ src/library/tools/R/build.R (revision 85348)\n@@ -633,7 +633,7 @@\n         }\n\n        needRefman <- manual &&\n-            parse_description_field(desc, \"BuildManual\", TRUE) &&\n+            parse_description_field(desc, \"BuildManual\", FALSE) &&\n             any(btinfo[, \"later\"])\n        if (needRefman) {\n            messageLog(Log, \"building the PDF package manual\")\n\nSo now R CMD build only builds the manual when both BuildManual is set\nto yes _and_ there are \\Sexpr{}s with [stage=install or render].\n(Previously BuildManual: yes was assumed by default.)\n\nWas the motivation for this change to make R CMD build faster for\neveryone, with the expectation that the relatively rare package\nmaintainers with non-[stage=build] \\Sexpr{}s will set BuildManual: yes\nto adapt?\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Tue, 9 Jul 2024 08:54:22 +0000\n\"Viechtbauer, Wolfgang (NP)\"\n<wolfgang.viechtbauer at maastrichtuniversity.nl> ?????:\n\n> This appears to be related to this change\n> (https://cran.r-project.org/doc/ma",
+      "body_plain": "В Tue, 9 Jul 2024 08:54:22 +0000\n\"Viechtbauer, Wolfgang (NP)\"\n<wolfgang.viechtbauer at maastrichtuniversity.nl> пишет:\n\n> This appears to be related to this change\n> (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html):\n> \n> - tools::checkRd() (used by R CMD check) detects more problems with\n> ⁠\\Sexpr⁠-based dynamic content, including bad nesting of ⁠\\Sexpr⁠s\n> and invalid arguments.\n\nThe exact change was:\n\nr85348 | hornik | 2023-10-18 08:13:46 +0000 (Wed, 18 Oct 2023) | 1 line\nBuild PDF refman only when explicitly asked for.\n\n--- src/library/tools/R/build.R (revision 85347)\n+++ src/library/tools/R/build.R (revision 85348)\n@@ -633,7 +633,7 @@\n         }\n\n        needRefman <- manual &&\n-            parse_description_field(desc, \"BuildManual\", TRUE) &&\n+            parse_description_field(desc, \"BuildManual\", FALSE) &&\n             any(btinfo[, \"later\"])\n        if (needRefman) {\n            messageLog(Log, \"building the PDF package manual\")\n\nSo now R CMD build only builds the manual when both BuildManual is set\nto yes _and_ there are \\Sexpr{}s with [stage=install or render].\n(Previously BuildManual: yes was assumed by default.)\n\nWas the motivation for this change to make R CMD build faster for\neveryone, with the expectation that the relatively rare package\nmaintainers with non-[stage=build] \\Sexpr{}s will set BuildManual: yes\nto adapt?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Tue, 9 Jul 2024 08:54:22 +0000\n\"Viechtbauer, Wolfgang (NP)\"\n<wolfgang.viechtbauer at maastrichtuniversity.nl> пишет:\n\n> This appears to be related to this change\n> (https://cran.r-project.org/doc/ma",
       "thread_id": "thread-585f531cf75d",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010954.html"
     },
     {
       "id": "msg-82b80c4d62f7",
@@ -429,11 +452,12 @@
         "<AS8PR08MB9193350221722AE50DCA005B8BDB2@AS8PR08MB9193.eurprd08.prod.outlook.com>",
         "<20240709120611.6e01c078@Tarkus>"
       ],
-      "body_plain": "Thank you to, in alphabetical order of given names, Iris, Ivan, Uwe and \nWolfgang for your responses. I implemented Iris' suggestion and have \nsuccessfully uploaded one of the packages to CRAN.\n\nMichael\n\nOn 09/07/2024 10:06, Ivan Krylov wrote:\n> ? Tue, 9 Jul 2024 08:54:22 +0000\n> \"Viechtbauer, Wolfgang (NP)\"\n> <wolfgang.viechtbauer at maastrichtuniversity.nl> ?????:\n> \n>> This appears to be related to this change\n>> (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html):\n>>\n>> - tools::checkRd() (used by R CMD check) detects more problems with\n>> ?\\Sexpr?-based dynamic content, including bad nesting of ?\\Sexpr?s\n>> and invalid arguments.\n> \n> The exact change was:\n> \n> r85348 | hornik | 2023-10-18 08:13:46 +0000 (Wed, 18 Oct 2023) | 1 line\n> Build PDF refman only when explicitly asked for.\n> \n> --- src/library/tools/R/build.R (revision 85347)\n> +++ src/library/tools/R/build.R (revision 85348)\n> @@ -633,7 +633,7 @@\n>           }\n> \n>          needRefman <- manual &&\n> -            parse_description_field(desc, \"BuildManual\", TRUE) &&\n> +            parse_description_field(desc, \"BuildManual\", FALSE) &&\n>               any(btinfo[, \"later\"])\n>          if (needRefman) {\n>              messageLog(Log, \"building the PDF package manual\")\n> \n> So now R CMD build only builds the manual when both BuildManual is set\n> to yes _and_ there are \\Sexpr{}s with [stage=install or render].\n> (Previously BuildManual: yes was assumed by default.)\n> \n> Was the motivation for this change to make R CMD build faster for\n> everyone, with the expectation that the relatively rare package\n> maintainers with non-[stage=build] \\Sexpr{}s will set BuildManual: yes\n> to adapt?\n> \n\n-- \nMichael",
+      "body_plain": "Thank you to, in alphabetical order of given names, Iris, Ivan, Uwe and \nWolfgang for your responses. I implemented Iris' suggestion and have \nsuccessfully uploaded one of the packages to CRAN.\n\nMichael\n\nOn 09/07/2024 10:06, Ivan Krylov wrote:\n> В Tue, 9 Jul 2024 08:54:22 +0000\n> \"Viechtbauer, Wolfgang (NP)\"\n> <wolfgang.viechtbauer at maastrichtuniversity.nl> пишет:\n> \n>> This appears to be related to this change\n>> (https://cran.r-project.org/doc/manuals/r-devel/NEWS.html):\n>>\n>> - tools::checkRd() (used by R CMD check) detects more problems with\n>> ⁠\\Sexpr⁠-based dynamic content, including bad nesting of ⁠\\Sexpr⁠s\n>> and invalid arguments.\n> \n> The exact change was:\n> \n> r85348 | hornik | 2023-10-18 08:13:46 +0000 (Wed, 18 Oct 2023) | 1 line\n> Build PDF refman only when explicitly asked for.\n> \n> --- src/library/tools/R/build.R (revision 85347)\n> +++ src/library/tools/R/build.R (revision 85348)\n> @@ -633,7 +633,7 @@\n>           }\n> \n>          needRefman <- manual &&\n> -            parse_description_field(desc, \"BuildManual\", TRUE) &&\n> +            parse_description_field(desc, \"BuildManual\", FALSE) &&\n>               any(btinfo[, \"later\"])\n>          if (needRefman) {\n>              messageLog(Log, \"building the PDF package manual\")\n> \n> So now R CMD build only builds the manual when both BuildManual is set\n> to yes _and_ there are \\Sexpr{}s with [stage=install or render].\n> (Previously BuildManual: yes was assumed by default.)\n> \n> Was the motivation for this change to make R CMD build faster for\n> everyone, with the expectation that the relatively rare package\n> maintainers with non-[stage=build] \\Sexpr{}s will set BuildManual: yes\n> to adapt?\n> \n\n-- \nMichael",
       "body_snippet": "Thank you to, in alphabetical order of given names, Iris, Ivan, Uwe and \nWolfgang for your responses. I implemented Iris' suggestion and have \nsuccessfully uploaded one of the packages to CRAN.\n\nMicha",
       "thread_id": "thread-585f531cf75d",
       "thread_depth": 5,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010955.html"
     },
     {
       "id": "msg-d377118ed2fe",
@@ -450,11 +474,12 @@
         "<20240709101133.395178d6@Tarkus>",
         "<27503A31-8521-4872-8AF7-C1C9AD548AF2@unil.ch>"
       ],
-      "body_plain": "(I am adding the mailing list back in Cc: because package licensing is\na complicated topic.)\n\n? Tue, 9 Jul 2024 09:25:14 +0000\nMatei Teleman <matei.teleman at unil.ch> ?????:\n\n> I?ve added ? ? SuperCell uses\n> [velocyto.R](https://github.com/velocyto-team/velocyto.R) for RNA\n> velocity. ? in the Description field. Is that enough or I need also\n> to directly give the command line to install the package from GitHub ?\n\nIt looks like a link should be fine. Here are a few examples of CRAN\npackages that have a non-CRAN/Bioconductor package in Suggests: without\nsetting up Additional_repositories:\n\nhttps://CRAN.R-project.org/package=babelmixr2\nhttps://CRAN.R-project.org/package=bandsfdp\nhttps://cran.r-project.org/package=GCD\n\nI'm sorry that I didn't note any of the following in my initial reply,\nbut what worries me about CC BY-NC-ND specifically is that out of 117\nCRAN packages with a Creative Commons license and 18 of those that use\nthe non-FOSS \"NonCommercial\" clause, none use the \"NoDerivatives\"\nclause. Your users would probably appreciate being able to install\nbinary builds of your package from CRAN. Does `R CMD INSTALL --build`\ncount as creating a derivative work, or is it \"merely changing the\nformat\"? Then again, CC BY-NC-ND _is_ mentioned in the list of CRAN\nlicenses, so it could work.\n\nI found a rejected copy of your package in the archive subdirectory on\nthe CRAN FTP server and a GitHub repository [*] that seems to be\nslightly outdated compared to the archived package. (It's best to link\nto up-to-date package sources when seeking help with code.) I'm getting\nan additional NOTE:\n\n>> Imports includes 21 non-default packages.\n>> Importing from so many packages makes the package vulnerable to any\n>> of them becoming unavailable.  Move as many as possible to Suggests\n>> and use conditionally.\n\nIs there a way to make some of the currently required dependencies into\nconditional dependencies? R CMD check --as-cran sets the limit to 20,\nso moving just one package from Imports to Suggests will silence this\nparticular NOTE.\n\nI see that most of your package size comes from the data subdirectory.\nCRAN policy says: \"Packages should be of the minimum necessary size.\n<...> Neither data nor documentation should exceed 5MB. <...> Where a\nlarge amount of data is required (even after compression),\nconsideration should be given to a separate data-only package which can\nbe updated only rarely (since older versions of packages are archived\nin perpetuity).\"\nIs there a way to reduce the size of the data? It's ideal if there's\nonly enough data to demonstrate how an algorithm works in the\n\\examples{} section of your documentation and to exercise as much of\nyour code as feasible in your tests.\n\nFinally, were there any recommendations in the rejection e-mail from\nCRAN? Sometimes NOTEs are unavoidable, but we should strive to minimise\nthem anyway.\n\n-- \nBest regards,\nIvan\n\n[*] https://github.com/GfellerLab/SuperCell",
-      "body_snippet": "(I am adding the mailing list back in Cc: because package licensing is\na complicated topic.)\n\n? Tue, 9 Jul 2024 09:25:14 +0000\nMatei Teleman <matei.teleman at unil.ch> ?????:\n\n> I?ve added ? ? SuperCe",
+      "body_plain": "(I am adding the mailing list back in Cc: because package licensing is\na complicated topic.)\n\nВ Tue, 9 Jul 2024 09:25:14 +0000\nMatei Teleman <matei.teleman at unil.ch> пишет:\n\n> I’ve added “ … SuperCell uses\n> [velocyto.R](https://github.com/velocyto-team/velocyto.R) for RNA\n> velocity. ” in the Description field. Is that enough or I need also\n> to directly give the command line to install the package from GitHub ?\n\nIt looks like a link should be fine. Here are a few examples of CRAN\npackages that have a non-CRAN/Bioconductor package in Suggests: without\nsetting up Additional_repositories:\n\nhttps://CRAN.R-project.org/package=babelmixr2\nhttps://CRAN.R-project.org/package=bandsfdp\nhttps://cran.r-project.org/package=GCD\n\nI'm sorry that I didn't note any of the following in my initial reply,\nbut what worries me about CC BY-NC-ND specifically is that out of 117\nCRAN packages with a Creative Commons license and 18 of those that use\nthe non-FOSS \"NonCommercial\" clause, none use the \"NoDerivatives\"\nclause. Your users would probably appreciate being able to install\nbinary builds of your package from CRAN. Does `R CMD INSTALL --build`\ncount as creating a derivative work, or is it \"merely changing the\nformat\"? Then again, CC BY-NC-ND _is_ mentioned in the list of CRAN\nlicenses, so it could work.\n\nI found a rejected copy of your package in the archive subdirectory on\nthe CRAN FTP server and a GitHub repository [*] that seems to be\nslightly outdated compared to the archived package. (It's best to link\nto up-to-date package sources when seeking help with code.) I'm getting\nan additional NOTE:\n\n>> Imports includes 21 non-default packages.\n>> Importing from so many packages makes the package vulnerable to any\n>> of them becoming unavailable.  Move as many as possible to Suggests\n>> and use conditionally.\n\nIs there a way to make some of the currently required dependencies into\nconditional dependencies? R CMD check --as-cran sets the limit to 20,\nso moving just one package from Imports to Suggests will silence this\nparticular NOTE.\n\nI see that most of your package size comes from the data subdirectory.\nCRAN policy says: \"Packages should be of the minimum necessary size.\n<...> Neither data nor documentation should exceed 5MB. <...> Where a\nlarge amount of data is required (even after compression),\nconsideration should be given to a separate data-only package which can\nbe updated only rarely (since older versions of packages are archived\nin perpetuity).\"\nIs there a way to reduce the size of the data? It's ideal if there's\nonly enough data to demonstrate how an algorithm works in the\n\\examples{} section of your documentation and to exercise as much of\nyour code as feasible in your tests.\n\nFinally, were there any recommendations in the rejection e-mail from\nCRAN? Sometimes NOTEs are unavoidable, but we should strive to minimise\nthem anyway.\n\n-- \nBest regards,\nIvan\n\n[*] https://github.com/GfellerLab/SuperCell",
+      "body_snippet": "(I am adding the mailing list back in Cc: because package licensing is\na complicated topic.)\n\nВ Tue, 9 Jul 2024 09:25:14 +0000\nMatei Teleman <matei.teleman at unil.ch> пишет:\n\n> I’ve added “ … SuperCe",
       "thread_id": "thread-d377118ed2fe",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010956.html"
     },
     {
       "id": "msg-baa78a360333",
@@ -470,7 +495,8 @@
       "body_snippet": "An update to the rgl package was rejected with this note:\n\n> * checking compiled code ... NOTE\n> File ?rgl/libs/rgl.so?:\n>   Found non-API call to R: ?R_InputHandlers?\n> \n> Compiled code should not ca",
       "thread_id": "thread-baa78a360333",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010957.html"
     },
     {
       "id": "msg-1f0d64693bb5",
@@ -486,7 +512,8 @@
       "body_snippet": "When setting options in a function, I have always used the following:\n  opts <- options()\n  on.exit(options(opts), add = TRUE)\nand assumed it \"reset\" options to what they were prior to running the\nfun",
       "thread_id": "thread-1f0d64693bb5",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010958.html"
     },
     {
       "id": "msg-f134e0be442b",
@@ -504,7 +531,8 @@
       "body_snippet": "On Wed, 10 Jul 2024, Duncan Murdoch wrote:\n\n> An update to the rgl package was rejected with this note:\n>\n>> * checking compiled code ... NOTE\n>> File ?rgl/libs/rgl.so?:\n>>   Found non-API call to R: ",
       "thread_id": "thread-baa78a360333",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010959.html"
     },
     {
       "id": "msg-04896b6fe057",
@@ -522,7 +550,8 @@
       "body_snippet": "Dear John,\n\nYou need to collect the return value when setting options. This will include an explicit NULL value for an option that was previously NULL. \n\nBest,\n\nGreg Jefferis.\n\noptions(digits.secs = N",
       "thread_id": "thread-1f0d64693bb5",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010960.html"
     },
     {
       "id": "msg-006c4c38e7f1",
@@ -537,11 +566,12 @@
         "<CAFsq6G_hyMMdTUJdrgmwRm8HuH_WdsQ7y_nrYLTKUmDsRsMqig@mail.gmail.com>",
         "<46F58CE1-56A2-4540-AEBE-E297B2BF80DA@gmail.com>"
       ],
-      "body_plain": "This surprised me, even though it shouldn?t have done. (My false internal\nmodel of the world was that oo <- options(); ? options(oo) would overwrite\nthe entire options list with the old values.) I wonder if it would be worth\npointing out explicitly in ?options.\n\nWriting: wyclif.substack.com\nBook: www.wyclifsdust.com\n\n\nOn Thu, 11 Jul 2024 at 08:03, Greg Jefferis <jefferis at gmail.com> wrote:\n\n> Dear John,\n>\n> You need to collect the return value when setting options. This will\n> include an explicit NULL value for an option that was previously NULL.\n>\n> Best,\n>\n> Greg Jefferis.\n>\n> options(digits.secs = NULL)\n>\n> noset2 = function() {\n>   opts <- options(digits.secs = 3)\n>   on.exit(options(opts))\n>   print(opts)\n> }\n>\n> > getOption(\"digits.secs\")\n> NULL\n>\n> > noset2()\n> $digits.secs\n> NULL\n>\n> > getOption(\"digits.secs\")\n> NULL\n>\n> Gregory Jefferis\n> Division of Neurobiology\n> MRC Laboratory of Molecular Biology\n> Francis Crick Avenue\n> Cambridge Biomedical Campus\n> Cambridge, CB2 OQH, UK\n>\n> http://www2.mrc-lmb.cam.ac.uk/group-leaders/h-to-m/g-jefferis\n> http://jefferislab.org\n> https://www.zoo.cam.ac.uk/research/groups/connectomics\n>\n>\n> > On 11 Jul 2024, at 06:08, John Muschelli <muschellij2 at gmail.com> wrote:\n> >\n> > When setting options in a function, I have always used the following:\n> >  opts <- options()\n> >  on.exit(options(opts), add = TRUE)\n> > and assumed it \"reset\" options to what they were prior to running the\n> > function.  But for some options that are set to NULL, it does not seem to\n> > reset them.  Specifically, I have found digits.secs to be set after this\n> > simple example below.  Is this expected behavior/documented?  Overall,\n> this\n> > specific example (the one I encountered in the wild) is not that harmful,\n> > but I wanted to ask before I set a fix for this in our work\n> >\n> > noset = function() {\n> >  opts = options()\n> >  print(opts$digits.secs)\n> >  on.exit(options(opts))\n> >  options(digits.secs = 3)\n> > }\n> > getOption(\"digits.secs\")\n> > #> NULL\n> > noset()\n> > #> NULL\n> > getOption(\"digits.secs\")\n> > #> [1] 3\n> >\n> >\n> > John Muschelli, PhD\n> > Associate Research Professor\n> > Department of Biostatistics\n> > Johns Hopkins Bloomberg School of Public Health\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "This surprised me, even though it shouldn?t have done. (My false internal\nmodel of the world was that oo <- options(); ? options(oo) would overwrite\nthe entire options list with the old values.) I won",
+      "body_plain": "This surprised me, even though it shouldn’t have done. (My false internal\nmodel of the world was that oo <- options(); … options(oo) would overwrite\nthe entire options list with the old values.) I wonder if it would be worth\npointing out explicitly in ?options.\n\nWriting: wyclif.substack.com\nBook: www.wyclifsdust.com\n\n\nOn Thu, 11 Jul 2024 at 08:03, Greg Jefferis <jefferis at gmail.com> wrote:\n\n> Dear John,\n>\n> You need to collect the return value when setting options. This will\n> include an explicit NULL value for an option that was previously NULL.\n>\n> Best,\n>\n> Greg Jefferis.\n>\n> options(digits.secs = NULL)\n>\n> noset2 = function() {\n>   opts <- options(digits.secs = 3)\n>   on.exit(options(opts))\n>   print(opts)\n> }\n>\n> > getOption(\"digits.secs\")\n> NULL\n>\n> > noset2()\n> $digits.secs\n> NULL\n>\n> > getOption(\"digits.secs\")\n> NULL\n>\n> Gregory Jefferis\n> Division of Neurobiology\n> MRC Laboratory of Molecular Biology\n> Francis Crick Avenue\n> Cambridge Biomedical Campus\n> Cambridge, CB2 OQH, UK\n>\n> http://www2.mrc-lmb.cam.ac.uk/group-leaders/h-to-m/g-jefferis\n> http://jefferislab.org\n> https://www.zoo.cam.ac.uk/research/groups/connectomics\n>\n>\n> > On 11 Jul 2024, at 06:08, John Muschelli <muschellij2 at gmail.com> wrote:\n> >\n> > When setting options in a function, I have always used the following:\n> >  opts <- options()\n> >  on.exit(options(opts), add = TRUE)\n> > and assumed it \"reset\" options to what they were prior to running the\n> > function.  But for some options that are set to NULL, it does not seem to\n> > reset them.  Specifically, I have found digits.secs to be set after this\n> > simple example below.  Is this expected behavior/documented?  Overall,\n> this\n> > specific example (the one I encountered in the wild) is not that harmful,\n> > but I wanted to ask before I set a fix for this in our work\n> >\n> > noset = function() {\n> >  opts = options()\n> >  print(opts$digits.secs)\n> >  on.exit(options(opts))\n> >  options(digits.secs = 3)\n> > }\n> > getOption(\"digits.secs\")\n> > #> NULL\n> > noset()\n> > #> NULL\n> > getOption(\"digits.secs\")\n> > #> [1] 3\n> >\n> >\n> > John Muschelli, PhD\n> > Associate Research Professor\n> > Department of Biostatistics\n> > Johns Hopkins Bloomberg School of Public Health\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "This surprised me, even though it shouldn’t have done. (My false internal\nmodel of the world was that oo <- options(); … options(oo) would overwrite\nthe entire options list with the old values.) I won",
       "thread_id": "thread-1f0d64693bb5",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010961.html"
     },
     {
       "id": "msg-191667efffe4",
@@ -559,7 +589,8 @@
       "body_snippet": "Not from CRAN, also not in a position to opine on cpp11 status, but I\nwrote about it recently. My solution for readODS back then was to\nvendor cpp11 and remove the SET_LENGTH call manually, like . But",
       "thread_id": "thread-99cc4b7bd71c",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010962.html"
     },
     {
       "id": "msg-2620acbd9977",
@@ -577,11 +608,12 @@
         "<27503A31-8521-4872-8AF7-C1C9AD548AF2@unil.ch>",
         "<20240709134505.2cd7a4f4@arachnoid>"
       ],
-      "body_plain": "Dear Ivan,\n\nThank you so much for your help.\n\nI followed your advices and I reduced the size of the example data, move one package from Import to Suggest.\n\nThe type of the license is unfortunately not depending on me so I?ll try one last time with the CC license and the new improvements.\n\nThank your again for your time.\n\nHave a nice day!\n\nBest regards,\n\nMatei\n\n\n> Le 9 juil. 2024 ? 12:45, Ivan Krylov <ikrylov at disroot.org> a ?crit :\n> \n> (I am adding the mailing list back in Cc: because package licensing is\n> a complicated topic.)\n> \n> ? Tue, 9 Jul 2024 09:25:14 +0000\n> Matei Teleman <matei.teleman at unil.ch> ?????:\n> \n>> I?ve added ? ? SuperCell uses\n>> [velocyto.R](https://github.com/velocyto-team/velocyto.R) for RNA\n>> velocity. ? in the Description field. Is that enough or I need also\n>> to directly give the command line to install the package from GitHub ?\n> \n> It looks like a link should be fine. Here are a few examples of CRAN\n> packages that have a non-CRAN/Bioconductor package in Suggests: without\n> setting up Additional_repositories:\n> \n> https://CRAN.R-project.org/package=babelmixr2\n> https://CRAN.R-project.org/package=bandsfdp\n> https://cran.r-project.org/package=GCD\n> \n> I'm sorry that I didn't note any of the following in my initial reply,\n> but what worries me about CC BY-NC-ND specifically is that out of 117\n> CRAN packages with a Creative Commons license and 18 of those that use\n> the non-FOSS \"NonCommercial\" clause, none use the \"NoDerivatives\"\n> clause. Your users would probably appreciate being able to install\n> binary builds of your package from CRAN. Does `R CMD INSTALL --build`\n> count as creating a derivative work, or is it \"merely changing the\n> format\"? Then again, CC BY-NC-ND _is_ mentioned in the list of CRAN\n> licenses, so it could work.\n> \n> I found a rejected copy of your package in the archive subdirectory on\n> the CRAN FTP server and a GitHub repository [*] that seems to be\n> slightly outdated compared to the archived package. (It's best to link\n> to up-to-date package sources when seeking help with code.) I'm getting\n> an additional NOTE:\n> \n>>> Imports includes 21 non-default packages.\n>>> Importing from so many packages makes the package vulnerable to any\n>>> of them becoming unavailable.  Move as many as possible to Suggests\n>>> and use conditionally.\n> \n> Is there a way to make some of the currently required dependencies into\n> conditional dependencies? R CMD check --as-cran sets the limit to 20,\n> so moving just one package from Imports to Suggests will silence this\n> particular NOTE.\n> \n> I see that most of your package size comes from the data subdirectory.\n> CRAN policy says: \"Packages should be of the minimum necessary size.\n> <...> Neither data nor documentation should exceed 5MB. <...> Where a\n> large amount of data is required (even after compression),\n> consideration should be given to a separate data-only package which can\n> be updated only rarely (since older versions of packages are archived\n> in perpetuity).\"\n> Is there a way to reduce the size of the data? It's ideal if there's\n> only enough data to demonstrate how an algorithm works in the\n> \\examples{} section of your documentation and to exercise as much of\n> your code as feasible in your tests.\n> \n> Finally, were there any recommendations in the rejection e-mail from\n> CRAN? Sometimes NOTEs are unavoidable, but we should strive to minimise\n> them anyway.\n> \n> -- \n> Best regards,\n> Ivan\n> \n> [*] https://github.com/GfellerLab/SuperCell",
+      "body_plain": "Dear Ivan,\n\nThank you so much for your help.\n\nI followed your advices and I reduced the size of the example data, move one package from Import to Suggest.\n\nThe type of the license is unfortunately not depending on me so I’ll try one last time with the CC license and the new improvements.\n\nThank your again for your time.\n\nHave a nice day!\n\nBest regards,\n\nMatei\n\n\n> Le 9 juil. 2024 à 12:45, Ivan Krylov <ikrylov at disroot.org> a écrit :\n> \n> (I am adding the mailing list back in Cc: because package licensing is\n> a complicated topic.)\n> \n> В Tue, 9 Jul 2024 09:25:14 +0000\n> Matei Teleman <matei.teleman at unil.ch> пишет:\n> \n>> I’ve added “ … SuperCell uses\n>> [velocyto.R](https://github.com/velocyto-team/velocyto.R) for RNA\n>> velocity. ” in the Description field. Is that enough or I need also\n>> to directly give the command line to install the package from GitHub ?\n> \n> It looks like a link should be fine. Here are a few examples of CRAN\n> packages that have a non-CRAN/Bioconductor package in Suggests: without\n> setting up Additional_repositories:\n> \n> https://CRAN.R-project.org/package=babelmixr2\n> https://CRAN.R-project.org/package=bandsfdp\n> https://cran.r-project.org/package=GCD\n> \n> I'm sorry that I didn't note any of the following in my initial reply,\n> but what worries me about CC BY-NC-ND specifically is that out of 117\n> CRAN packages with a Creative Commons license and 18 of those that use\n> the non-FOSS \"NonCommercial\" clause, none use the \"NoDerivatives\"\n> clause. Your users would probably appreciate being able to install\n> binary builds of your package from CRAN. Does `R CMD INSTALL --build`\n> count as creating a derivative work, or is it \"merely changing the\n> format\"? Then again, CC BY-NC-ND _is_ mentioned in the list of CRAN\n> licenses, so it could work.\n> \n> I found a rejected copy of your package in the archive subdirectory on\n> the CRAN FTP server and a GitHub repository [*] that seems to be\n> slightly outdated compared to the archived package. (It's best to link\n> to up-to-date package sources when seeking help with code.) I'm getting\n> an additional NOTE:\n> \n>>> Imports includes 21 non-default packages.\n>>> Importing from so many packages makes the package vulnerable to any\n>>> of them becoming unavailable.  Move as many as possible to Suggests\n>>> and use conditionally.\n> \n> Is there a way to make some of the currently required dependencies into\n> conditional dependencies? R CMD check --as-cran sets the limit to 20,\n> so moving just one package from Imports to Suggests will silence this\n> particular NOTE.\n> \n> I see that most of your package size comes from the data subdirectory.\n> CRAN policy says: \"Packages should be of the minimum necessary size.\n> <...> Neither data nor documentation should exceed 5MB. <...> Where a\n> large amount of data is required (even after compression),\n> consideration should be given to a separate data-only package which can\n> be updated only rarely (since older versions of packages are archived\n> in perpetuity).\"\n> Is there a way to reduce the size of the data? It's ideal if there's\n> only enough data to demonstrate how an algorithm works in the\n> \\examples{} section of your documentation and to exercise as much of\n> your code as feasible in your tests.\n> \n> Finally, were there any recommendations in the rejection e-mail from\n> CRAN? Sometimes NOTEs are unavoidable, but we should strive to minimise\n> them anyway.\n> \n> -- \n> Best regards,\n> Ivan\n> \n> [*] https://github.com/GfellerLab/SuperCell",
       "body_snippet": "Dear Ivan,\n\nThank you so much for your help.\n\nI followed your advices and I reduced the size of the example data, move one package from Import to Suggest.\n\nThe type of the license is unfortunately not",
       "thread_id": "thread-d377118ed2fe",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010963.html"
     },
     {
       "id": "msg-6f53564690e3",
@@ -597,11 +629,12 @@
         "<46F58CE1-56A2-4540-AEBE-E297B2BF80DA@gmail.com>",
         "<CAARY7kgG8H+nmDDCHfvqPUZyt=MANWQ4VXtcjAGojZZi=UkdSQ@mail.gmail.com>"
       ],
-      "body_plain": "On Thu, 11 Jul 2024, David Hugh-Jones wrote:\n\n> This surprised me, even though it shouldn?t have done. (My false internal\n> model of the world was that oo <- options(); ? options(oo) would overwrite\n> the entire options list with the old values.) I wonder if it would be worth\n> pointing out explicitly in ?options.\n\nArguably, it would be nice to have a parameter like \"reset\", so \nthat one can call\n\noptions(oo, reset=TRUE)\n\nand any options not explicitly passed by oo are set to NULL.\n\nThis way there are two modes of operation - bulk setting of subset of \noptions with reset=FALSE, and restoring full options set with reset=TRUE.\n\nbest\n\nVladimir Dergachev\n\n>\n> Writing: wyclif.substack.com\n> Book: www.wyclifsdust.com\n>\n>\n> On Thu, 11 Jul 2024 at 08:03, Greg Jefferis <jefferis at gmail.com> wrote:\n>\n>> Dear John,\n>>\n>> You need to collect the return value when setting options. This will\n>> include an explicit NULL value for an option that was previously NULL.\n>>\n>> Best,\n>>\n>> Greg Jefferis.\n>>\n>> options(digits.secs = NULL)\n>>\n>> noset2 = function() {\n>>   opts <- options(digits.secs = 3)\n>>   on.exit(options(opts))\n>>   print(opts)\n>> }\n>>\n>>> getOption(\"digits.secs\")\n>> NULL\n>>\n>>> noset2()\n>> $digits.secs\n>> NULL\n>>\n>>> getOption(\"digits.secs\")\n>> NULL\n>>\n>> Gregory Jefferis\n>> Division of Neurobiology\n>> MRC Laboratory of Molecular Biology\n>> Francis Crick Avenue\n>> Cambridge Biomedical Campus\n>> Cambridge, CB2 OQH, UK\n>>\n>> http://www2.mrc-lmb.cam.ac.uk/group-leaders/h-to-m/g-jefferis\n>> http://jefferislab.org\n>> https://www.zoo.cam.ac.uk/research/groups/connectomics\n>>\n>>\n>>> On 11 Jul 2024, at 06:08, John Muschelli <muschellij2 at gmail.com> wrote:\n>>>\n>>> When setting options in a function, I have always used the following:\n>>>  opts <- options()\n>>>  on.exit(options(opts), add = TRUE)\n>>> and assumed it \"reset\" options to what they were prior to running the\n>>> function.  But for some options that are set to NULL, it does not seem to\n>>> reset them.  Specifically, I have found digits.secs to be set after this\n>>> simple example below.  Is this expected behavior/documented?  Overall,\n>> this\n>>> specific example (the one I encountered in the wild) is not that harmful,\n>>> but I wanted to ask before I set a fix for this in our work\n>>>\n>>> noset = function() {\n>>>  opts = options()\n>>>  print(opts$digits.secs)\n>>>  on.exit(options(opts))\n>>>  options(digits.secs = 3)\n>>> }\n>>> getOption(\"digits.secs\")\n>>> #> NULL\n>>> noset()\n>>> #> NULL\n>>> getOption(\"digits.secs\")\n>>> #> [1] 3\n>>>\n>>>\n>>> John Muschelli, PhD\n>>> Associate Research Professor\n>>> Department of Biostatistics\n>>> Johns Hopkins Bloomberg School of Public Health\n>>>\n>>> [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "On Thu, 11 Jul 2024, David Hugh-Jones wrote:\n\n> This surprised me, even though it shouldn?t have done. (My false internal\n> model of the world was that oo <- options(); ? options(oo) would overwrite\n>",
+      "body_plain": "On Thu, 11 Jul 2024, David Hugh-Jones wrote:\n\n> This surprised me, even though it shouldn’t have done. (My false internal\n> model of the world was that oo <- options(); … options(oo) would overwrite\n> the entire options list with the old values.) I wonder if it would be worth\n> pointing out explicitly in ?options.\n\nArguably, it would be nice to have a parameter like \"reset\", so \nthat one can call\n\noptions(oo, reset=TRUE)\n\nand any options not explicitly passed by oo are set to NULL.\n\nThis way there are two modes of operation - bulk setting of subset of \noptions with reset=FALSE, and restoring full options set with reset=TRUE.\n\nbest\n\nVladimir Dergachev\n\n>\n> Writing: wyclif.substack.com\n> Book: www.wyclifsdust.com\n>\n>\n> On Thu, 11 Jul 2024 at 08:03, Greg Jefferis <jefferis at gmail.com> wrote:\n>\n>> Dear John,\n>>\n>> You need to collect the return value when setting options. This will\n>> include an explicit NULL value for an option that was previously NULL.\n>>\n>> Best,\n>>\n>> Greg Jefferis.\n>>\n>> options(digits.secs = NULL)\n>>\n>> noset2 = function() {\n>>   opts <- options(digits.secs = 3)\n>>   on.exit(options(opts))\n>>   print(opts)\n>> }\n>>\n>>> getOption(\"digits.secs\")\n>> NULL\n>>\n>>> noset2()\n>> $digits.secs\n>> NULL\n>>\n>>> getOption(\"digits.secs\")\n>> NULL\n>>\n>> Gregory Jefferis\n>> Division of Neurobiology\n>> MRC Laboratory of Molecular Biology\n>> Francis Crick Avenue\n>> Cambridge Biomedical Campus\n>> Cambridge, CB2 OQH, UK\n>>\n>> http://www2.mrc-lmb.cam.ac.uk/group-leaders/h-to-m/g-jefferis\n>> http://jefferislab.org\n>> https://www.zoo.cam.ac.uk/research/groups/connectomics\n>>\n>>\n>>> On 11 Jul 2024, at 06:08, John Muschelli <muschellij2 at gmail.com> wrote:\n>>>\n>>> When setting options in a function, I have always used the following:\n>>>  opts <- options()\n>>>  on.exit(options(opts), add = TRUE)\n>>> and assumed it \"reset\" options to what they were prior to running the\n>>> function.  But for some options that are set to NULL, it does not seem to\n>>> reset them.  Specifically, I have found digits.secs to be set after this\n>>> simple example below.  Is this expected behavior/documented?  Overall,\n>> this\n>>> specific example (the one I encountered in the wild) is not that harmful,\n>>> but I wanted to ask before I set a fix for this in our work\n>>>\n>>> noset = function() {\n>>>  opts = options()\n>>>  print(opts$digits.secs)\n>>>  on.exit(options(opts))\n>>>  options(digits.secs = 3)\n>>> }\n>>> getOption(\"digits.secs\")\n>>> #> NULL\n>>> noset()\n>>> #> NULL\n>>> getOption(\"digits.secs\")\n>>> #> [1] 3\n>>>\n>>>\n>>> John Muschelli, PhD\n>>> Associate Research Professor\n>>> Department of Biostatistics\n>>> Johns Hopkins Bloomberg School of Public Health\n>>>\n>>> [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "On Thu, 11 Jul 2024, David Hugh-Jones wrote:\n\n> This surprised me, even though it shouldn’t have done. (My false internal\n> model of the world was that oo <- options(); … options(oo) would overwrite\n>",
       "thread_id": "thread-1f0d64693bb5",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010964.html"
     },
     {
       "id": "msg-5f87b90d4216",
@@ -617,7 +650,8 @@
       "body_snippet": "I'm trying to submit a package to CRAN that uses external C libs but properly crediting copyright holders and authors is the main issue holding up the submission and I've repeatedly failed to satisfy ",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010965.html"
     },
     {
       "id": "msg-07551dd31595",
@@ -635,7 +669,8 @@
       "body_snippet": "? Thu, 11 Jul 2024 20:58:53 +0000\nDRC via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> 1. How does linking to external libs differ from providing the source\n> of a library and linking ",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010966.html"
     },
     {
       "id": "msg-0f79b7c1c2e3",
@@ -651,7 +686,8 @@
       "body_snippet": "Hi,\n\nDo the r-oldrel-macos-* CRAN check servers use a different setting that affects how vignette paths work? These two flavors seem less robust to relative vignette paths than other flavors, and I ha",
       "thread_id": "thread-0f79b7c1c2e3",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010967.html"
     },
     {
       "id": "msg-9f1744fd19a1",
@@ -670,7 +706,8 @@
       "body_snippet": "Thanks that helps. Are there any thoughts on the feedback I was given? I'm still a bit confused on the note:\n\n> Has copyright holders of included software in a [ctb] role only\n\nI think I'm being asked",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010968.html"
     },
     {
       "id": "msg-0a3ba31870f6",
@@ -689,7 +726,8 @@
       "body_snippet": "> On 12 Jul 2024, at 10:07, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> ? Thu, 11 Jul 2024 20:58:53 +0000\n> DRC via R-package-devel <r-package-devel at r-project.org",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010969.html"
     },
     {
       "id": "msg-7c546b1540ac",
@@ -709,7 +747,8 @@
       "body_snippet": "On 7/13/24 12:24, Simon Urbanek wrote:\n>\n>> On 12 Jul 2024, at 10:07, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n>>\n>> ? Thu, 11 Jul 2024 20:58:53 +0000\n>> DRC via R-pac",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010970.html"
     },
     {
       "id": "msg-783b47d919c8",
@@ -729,7 +768,8 @@
       "body_snippet": "? Fri, 12 Jul 2024 20:17:22 +0000\nDRC via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> > Has copyright holders of included software in a [ctb] role only  \n> \n> I think I'm being asked ",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010971.html"
     },
     {
       "id": "msg-7aebbec5043e",
@@ -750,7 +790,8 @@
       "body_snippet": "Thank you everyone, I think this gives me everything I need to know and I have no problem spreading the copyright around.\n\nI'm not sure adding my dependencies to MXE is going to make sense here but op",
       "thread_id": "thread-5f87b90d4216",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010972.html"
     },
     {
       "id": "msg-962e2f8b93a7",
@@ -766,7 +807,8 @@
       "body_snippet": "Dear listeners,\n\nI'm having a hard time trying to figure out the following NOTE:\n\n|* checking whether package 'fio' can be installed... [202s/46s] NOTE \nInstallation took CPU time 4.4 times elapsed ti",
       "thread_id": "thread-962e2f8b93a7",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010973.html"
     },
     {
       "id": "msg-a1f76e4dff3c",
@@ -784,7 +826,8 @@
       "body_snippet": "? Tue, 16 Jul 2024 21:18:17 -0300\nAlberson Miranda <albersonmiranda at hotmail.com> ?????:\n\n> besides examples, tests, vignettes and readme, what parts of code\n> runs during installation of a R packag",
       "thread_id": "thread-962e2f8b93a7",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010974.html"
     },
     {
       "id": "msg-5b125eadad85",
@@ -805,7 +848,8 @@
       "body_snippet": "Hi, Team.\n\nI am working on a package that uses RcppEigen. The package can be installed\nsuccessfully locally and passed CRAN auto-check. However, it cannot pass\nthe gcc-UBSAN test with the following er",
       "thread_id": "thread-5b125eadad85",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010976.html"
     },
     {
       "id": "msg-8bedec03a08c",
@@ -824,7 +868,8 @@
       "body_snippet": "To add to this, I would like to point out that extendr actually has a\nguide on how to make an R package with Rust code CRAN compliance.\n\nhttps://github.com/extendr/rextendr/blob/main/vignettes/article",
       "thread_id": "thread-962e2f8b93a7",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010975.html"
     },
     {
       "id": "msg-719fdd50ceea",
@@ -840,11 +885,12 @@
         "<20240717112127.56f3b80a@Tarkus>",
         "<CAHfK2MtoioDud_T_MK6-kjcybkvJ+1V7EaEf=61_1OxQnTt1VQ@mail.gmail.com>"
       ],
-      "body_plain": "On the subject of extendr ... the recently published JOSS paper (which also mentions CRAN compliance under the \"Creating Rust-powered R packages section\") provides a good entry point for those interested in using extendr for their R/Rust packages:  https://joss.theoj.org/papers/10.21105/joss.06394\n\nBest,\n\nMatt\n\n\n?On 17/07/2024, 22.30, \"R-package-devel on behalf of Chung-hong Chan\" <r-package-devel-bounces at r-project.org <mailto:r-package-devel-bounces at r-project.org> on behalf of chainsawtiney at gmail.com <mailto:chainsawtiney at gmail.com>> wrote:\n\n\n[Du f?r ikke ofte mails fra chainsawtiney at gmail.com <mailto:chainsawtiney at gmail.com>. F? mere at vide om, hvorfor dette er vigtigt, p? https://aka.ms/LearnAboutSenderIdentification <https://aka.ms/LearnAboutSenderIdentification> ]\n\n\nTo add to this, I would like to point out that extendr actually has a\nguide on how to make an R package with Rust code CRAN compliance.\n\n\nhttps://github.com/extendr/rextendr/blob/main/vignettes/articles/cran-compliance.Rmd <https://github.com/extendr/rextendr/blob/main/vignettes/articles/cran-compliance.Rmd>\n\n\n\n\nOn Wed, Jul 17, 2024 at 10:21 AM Ivan Krylov via R-package-devel\n<r-package-devel at r-project.org <mailto:r-package-devel at r-project.org>> wrote:\n>\n> ? Tue, 16 Jul 2024 21:18:17 -0300\n> Alberson Miranda <albersonmiranda at hotmail.com <mailto:albersonmiranda at hotmail.com>> ?????:\n>\n> > besides examples, tests, vignettes and readme, what parts of code\n> > runs during installation of a R package\n>\n> Neither. This is about `cargo build` compiling in parallel, not your\n> package code computing in parallel. Giving the -j 2 flag to cargo\n> should solve the problem:\n> https://github.com/R-ArcGIS/arcgisgeocode/blob/8fbd93c3607363a9fef2d445711de647e5127566/src/Makevars#L5 <https://github.com/R-ArcGIS/arcgisgeocode/blob/8fbd93c3607363a9fef2d445711de647e5127566/src/Makevars#L5>\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n\n\n______________________________________________\nR-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>",
+      "body_plain": "On the subject of extendr ... the recently published JOSS paper (which also mentions CRAN compliance under the \"Creating Rust-powered R packages section\") provides a good entry point for those interested in using extendr for their R/Rust packages:  https://joss.theoj.org/papers/10.21105/joss.06394\n\nBest,\n\nMatt\n\n\n﻿On 17/07/2024, 22.30, \"R-package-devel on behalf of Chung-hong Chan\" <r-package-devel-bounces at r-project.org <mailto:r-package-devel-bounces at r-project.org> on behalf of chainsawtiney at gmail.com <mailto:chainsawtiney at gmail.com>> wrote:\n\n\n[Du får ikke ofte mails fra chainsawtiney at gmail.com <mailto:chainsawtiney at gmail.com>. Få mere at vide om, hvorfor dette er vigtigt, på https://aka.ms/LearnAboutSenderIdentification <https://aka.ms/LearnAboutSenderIdentification> ]\n\n\nTo add to this, I would like to point out that extendr actually has a\nguide on how to make an R package with Rust code CRAN compliance.\n\n\nhttps://github.com/extendr/rextendr/blob/main/vignettes/articles/cran-compliance.Rmd <https://github.com/extendr/rextendr/blob/main/vignettes/articles/cran-compliance.Rmd>\n\n\n\n\nOn Wed, Jul 17, 2024 at 10:21 AM Ivan Krylov via R-package-devel\n<r-package-devel at r-project.org <mailto:r-package-devel at r-project.org>> wrote:\n>\n> В Tue, 16 Jul 2024 21:18:17 -0300\n> Alberson Miranda <albersonmiranda at hotmail.com <mailto:albersonmiranda at hotmail.com>> пишет:\n>\n> > besides examples, tests, vignettes and readme, what parts of code\n> > runs during installation of a R package\n>\n> Neither. This is about `cargo build` compiling in parallel, not your\n> package code computing in parallel. Giving the -j 2 flag to cargo\n> should solve the problem:\n> https://github.com/R-ArcGIS/arcgisgeocode/blob/8fbd93c3607363a9fef2d445711de647e5127566/src/Makevars#L5 <https://github.com/R-ArcGIS/arcgisgeocode/blob/8fbd93c3607363a9fef2d445711de647e5127566/src/Makevars#L5>\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n\n\n______________________________________________\nR-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel <https://stat.ethz.ch/mailman/listinfo/r-package-devel>",
       "body_snippet": "On the subject of extendr ... the recently published JOSS paper (which also mentions CRAN compliance under the \"Creating Rust-powered R packages section\") provides a good entry point for those interes",
       "thread_id": "thread-962e2f8b93a7",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010977.html"
     },
     {
       "id": "msg-6a61dcb7c4c8",
@@ -866,7 +912,8 @@
       "body_snippet": "Hi Chaofan and welcome to R-package-devel!\n\n? Wed, 17 Jul 2024 11:52:53 -0700\nBill Huang <10billhuang01 at gmail.com> ?????:\n\n> The package can be installed successfully locally and passed CRAN\n> auto",
       "thread_id": "thread-5b125eadad85",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010978.html"
     },
     {
       "id": "msg-c122535880a5",
@@ -882,7 +929,8 @@
       "body_snippet": "Hi,\n\nI am trying to create an Rcpp package that involves arbitrary precise\ncalculations. The function to calculate e^x below with 100 digits precision\nworks well with integers, but for decimals, since",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010979.html"
     },
     {
       "id": "msg-ee0cfb6dfc65",
@@ -900,7 +948,8 @@
       "body_snippet": "Hi Khue,\n\nHave you already checked the Rmpfr package?: \nhttps://cran.r-project.org/package=Rmpfr\n\nBest,\nDenes\n\n\nOn 7/18/24 22:29, Khue Tran wrote:\n> Hi,\n> \n> I am trying to create an Rcpp package that",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010980.html"
     },
     {
       "id": "msg-fa0b67d94707",
@@ -918,7 +967,8 @@
       "body_snippet": "I see there are existing extended precision packages: Ryacas and Rmpfr, \nyou might want to take a look at them and their representation of numbers \nwith higher precision than a double.\n\nbest\n\nVladimir",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010981.html"
     },
     {
       "id": "msg-8c6d6dd12145",
@@ -936,7 +986,8 @@
       "body_snippet": "Hi Khue,\n\nOn 19 July 2024 at 06:29, Khue Tran wrote:\n| I am currently trying to get precise inputs by taking strings instead of\n| numbers then writing a function to decompose the string into a rationa",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010982.html"
     },
     {
       "id": "msg-d9a8c16c7412",
@@ -952,7 +1003,8 @@
       "body_snippet": "I submitted a package to winbuilder, yesterday.  Twice.  No response of\nany sort.  Is the system down, for some reason?  Anyone know?  Ta.\n\ncheers,\n\nRolf Turner\n\n-- \nHonorary Research Fellow\nDepartmen",
       "thread_id": "thread-d9a8c16c7412",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010983.html"
     },
     {
       "id": "msg-60ea50fbddba",
@@ -971,7 +1023,8 @@
       "body_snippet": "Thank you for the suggestion, Denes, Vladimir, and Dirk. I have indeed\nlooked into Rmpfr and while the package can interface GNU MPFR with R\nsmoothly, as of right now, it doesn't have all the function",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010984.html"
     },
     {
       "id": "msg-c7b60bd26b5f",
@@ -991,7 +1044,8 @@
       "body_snippet": "Khue,\n\n\n> On 19/07/2024, at 11:32 AM, Khue Tran <tran3 at kenyon.edu> wrote:\n> \n> Thank you for the suggestion, Denes, Vladimir, and Dirk. I have indeed\n> looked into Rmpfr and while the package can i",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010985.html"
     },
     {
       "id": "msg-22c961dc1bf0",
@@ -1012,7 +1066,8 @@
       "body_snippet": "On the other hand, Rmpfr did allow me to write an mpfr rootfinder for Martin M. in 2011\n(he modified and streamlined it for use) since one can run R codes on mpfr objects\nas long as one is careful whi",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010986.html"
     },
     {
       "id": "msg-2b6c3d1e0ab6",
@@ -1033,7 +1088,8 @@
       "body_snippet": "Thank you Simon! This is very helpful! Regarding eigen, I found in the\nBoost library the following example for arbitrary precision matrix solver:\nhttps://github.com/boostorg/multiprecision/blob/develo",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010987.html"
     },
     {
       "id": "msg-c38c3fc94307",
@@ -1055,7 +1111,8 @@
       "body_snippet": "Do you need to run eigen() on an arbitrary matrix or symmetric one ?\n\nbest\n\nVladimir Dergachev\n\nOn Fri, 19 Jul 2024, Khue Tran wrote:\n\n> Thank you Simon! This is very helpful! Regarding eigen, I found",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 5,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010988.html"
     },
     {
       "id": "msg-57bf46db7403",
@@ -1078,7 +1135,8 @@
       "body_snippet": "I will need to run eigen() on a symmetric matrix, but I want to get\narbitrary precise eigenvalues since we will need those eigenvalues for our\nfurther calculations. Does that make sense?\n\nBest,\nKhue T",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 6,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010989.html"
     },
     {
       "id": "msg-841ee4f9585f",
@@ -1102,7 +1160,8 @@
       "body_snippet": "On Fri, 19 Jul 2024, Khue Tran wrote:\n\n> I will need to run eigen() on a symmetric matrix, but I want to get arbitrary precise eigenvalues since we will need those eigenvalues for our further calculat",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 7,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010990.html"
     },
     {
       "id": "msg-6b5ce4f66549",
@@ -1120,7 +1179,8 @@
       "body_snippet": "Not that I know, which queue do you mean?\n\nBest,\nUwe\n\nOn 19.07.2024 00:45, Rolf Turner wrote:\n> \n> I submitted a package to winbuilder, yesterday.  Twice.  No response of\n> any sort.  Is the system do",
       "thread_id": "thread-d9a8c16c7412",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010991.html"
     },
     {
       "id": "msg-84214795c3b7",
@@ -1136,7 +1196,8 @@
       "body_snippet": "Hi All,\n\nI recently became aware of what appears to be some kind of incompatibility between the Perl distribution that is included in the RTools 4.4 distribution and my WriteXLS package on CRAN, runni",
       "thread_id": "thread-84214795c3b7",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010992.html"
     },
     {
       "id": "msg-4a46f60852ee",
@@ -1154,7 +1215,8 @@
       "body_snippet": "Dear Marc Schwartz,\n\n? Fri, 19 Jul 2024 10:49:31 -0400\nMarc Schwartz <marc_schwartz at me.com> ?????:\n\n> . No such file or\n> directory\\Kleinbub\\AppData\\Local\\Temp\\RtmpuO4911/WriteXLS/1.csv\n\nThis looks",
       "thread_id": "thread-84214795c3b7",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010993.html"
     },
     {
       "id": "msg-4b8df8aac888",
@@ -1173,7 +1235,8 @@
       "body_snippet": "Hi Ivan,\n\nThanks kindly for your expedient reply and pointer to the LF/CRLF issue. Not sure that I would have found that issue so quickly, so was hoping for some intuition here, as you have provided.\n",
       "thread_id": "thread-84214795c3b7",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010994.html"
     },
     {
       "id": "msg-43bafab532ed",
@@ -1193,7 +1256,8 @@
       "body_snippet": ">>>>> Khue Tran \n>>>>>     on Fri, 19 Jul 2024 09:32:14 +1000 writes:\n\n    > Thank you for the suggestion, Denes, Vladimir, and Dirk. I have indeed\n    > looked into Rmpfr and while the package can in",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010995.html"
     },
     {
       "id": "msg-89c6f31f298b",
@@ -1214,7 +1278,8 @@
       "body_snippet": "On 2024-07-19 12:37 p.m., Martin Maechler wrote:\n>>>>>> Khue Tran\n>>>>>>      on Fri, 19 Jul 2024 09:32:14 +1000 writes:\n> \n>      > Thank you for the suggestion, Denes, Vladimir, and Dirk. I have ind",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010996.html"
     },
     {
       "id": "msg-fcf832fe79e6",
@@ -1232,7 +1297,8 @@
       "body_snippet": "Just for your info:\n\n > exp(mpfr(\"0.1\", 152))\n1 'mpfr' number of precision  152   bits\n[1] 1.1051709180756476248117078264902466682245471948\n\nSo it looks like your approach of parsing the numbers yours",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010997.html"
     },
     {
       "id": "msg-e963a7296b5e",
@@ -1251,7 +1317,8 @@
       "body_snippet": "On Fri, 19 Jul 2024 10:18:27 +0200\nUwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> Not that I know, which queue do you mean?\n\nApologies for my ignorance but I don't understand the question. ",
       "thread_id": "thread-d9a8c16c7412",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010998.html"
     },
     {
       "id": "msg-7d3721b9bb6c",
@@ -1271,7 +1338,8 @@
       "body_snippet": "On 20.07.2024 01:52, Rolf Turner wrote:\n> \n> On Fri, 19 Jul 2024 10:18:27 +0200\n> Uwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n> \n>> Not that I know, which queue do you mean?\n> \n> Apologies ",
       "thread_id": "thread-d9a8c16c7412",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/010999.html"
     },
     {
       "id": "msg-a9c3919a7586",
@@ -1287,7 +1355,8 @@
       "body_snippet": "Dear Khue,\n\nAs mentioned before, you can use Rmpfr to read in strings or compute higher precision values, like\n\nx = mpfr(1, 192) /10;\n# 0.1 with 192 bits precision\n# or x = mpfr(\"0.1\", 192);\n\nmpfr(1, ",
       "thread_id": "thread-a9c3919a7586",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011000.html"
     },
     {
       "id": "msg-acc58a5e4b5d",
@@ -1308,7 +1377,8 @@
       "body_snippet": "On Sat, 20 Jul 2024 06:20:00 +0200\nUwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> \n> Strange. Your package has been processed. Have you tried again?\n> Are you sure the maintainer address is",
       "thread_id": "thread-d9a8c16c7412",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011001.html"
     },
     {
       "id": "msg-c9cb28235251",
@@ -1326,7 +1396,8 @@
       "body_snippet": "Dear Leonard,\n\nThank you so much for the detailed response! Indeed, it would be nice to\nhave it included in the BH header. Thank you for sharing your codes with\nme, I will definitely take a look at th",
       "thread_id": "thread-a9c3919a7586",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011002.html"
     },
     {
       "id": "msg-b7c89ccf498e",
@@ -1345,7 +1416,8 @@
       "body_snippet": "Thank you Prof. Maechler! Indeed 0.1 is not the same as 1/10 and there are\nmany ways to get more precise versions of it. I will look into how to take\ninputs as strings. Thank you!\n\nBest,\nKhue Tran\n\nOn",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011003.html"
     },
     {
       "id": "msg-a9e57680661f",
@@ -1364,7 +1436,8 @@
       "body_snippet": "Thank you Duncan for providing detailed information on parsing in R. I will\ncheck it out and utilize the string inputs for my functions.\n\nBest regards,\nKhue Tran\n\nOn Sat, Jul 20, 2024 at 4:40?AM Dunca",
       "thread_id": "thread-c122535880a5",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011004.html"
     },
     {
       "id": "msg-05fcc722b67b",
@@ -1380,7 +1453,8 @@
       "body_snippet": "Hi all!\n\nI have 2 errors related to minimum supported rust version (MSRV) on fedora\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/rsgeo-00install.html\nthat I do not know ho",
       "thread_id": "thread-05fcc722b67b",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011005.html"
     },
     {
       "id": "msg-ec12e4db1909",
@@ -1398,7 +1472,8 @@
       "body_snippet": "I think saying that Fedora is not supported is the wrong solution, \nunless you know that Rust version 1.70 will never be supported on \nFedora.  Isn't the appropriate solution to document the MSRV in t",
       "thread_id": "thread-05fcc722b67b",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011006.html"
     },
     {
       "id": "msg-ab70084b0dec",
@@ -1416,7 +1491,8 @@
       "body_snippet": "> As such, I cannot manage the MSRV of the package's dependencies.\n\nIt seems the reason for geographiclib-rs's MSRV is just that it uses\nstd::sync::OnceLock. Maybe a possible workaround is to fork the",
       "thread_id": "thread-05fcc722b67b",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011007.html"
     },
     {
       "id": "msg-bebef7fec0e9",
@@ -1432,7 +1508,8 @@
       "body_snippet": "Hey folks! I am working with R CMD BATCH and providing a providing a\nlogfile output e.g.\n\nR CMD BATCH main.R 2024-07-28.log\n\nThis creates the desired log file with the contents of stdout and stderr.\n\n",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 0,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011008.html"
     },
     {
       "id": "msg-5ed2532d238c",
@@ -1450,7 +1527,8 @@
       "body_snippet": "On 2024-07-28 1:48 p.m., Josiah Parry wrote:\n> Hey folks! I am working with R CMD BATCH and providing a providing a\n> logfile output e.g.\n> \n> R CMD BATCH main.R 2024-07-28.log\n> \n> This creates the d",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 1,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011009.html"
     },
     {
       "id": "msg-48439e74be71",
@@ -1469,7 +1547,8 @@
       "body_snippet": "Thanks, Duncan!\n\nIs there a way to override this using the command line arguments?\n\nI'd like to be able to have a generalizable way to address this without\nhaving to modify R source code.\n\nMy understa",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011010.html"
     },
     {
       "id": "msg-47c18916ac92",
@@ -1489,7 +1568,8 @@
       "body_snippet": "Dirk Eddelbuettel would tell you to use his 'little r' script instead,\nthough not sure if it has this particular flexibility. You could wrap R CMD\nBATCH in your own script that moved Rplots.pdf where ",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011011.html"
     },
     {
       "id": "msg-03a0f0006856",
@@ -1509,7 +1589,8 @@
       "body_snippet": "On 2024-07-28 4:05 p.m., Josiah Parry wrote:\n> Thanks, Duncan!\n> \n> Is there a way to override this using the command line arguments?\n\nI assume you could do that using commandArgs() in the dev.new() c",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011012.html"
     },
     {
       "id": "msg-bee91350ea53",
@@ -1528,7 +1609,8 @@
       "body_snippet": "On 28 July 2024 at 15:44, Duncan Murdoch wrote:\n| On 2024-07-28 1:48 p.m., Josiah Parry wrote:\n| > However, if plots are generated in the process, the plots are stored in\n| > Rplots.pdf.\n| > \n| > Is t",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 2,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011013.html"
     },
     {
       "id": "msg-98b87b19c3b8",
@@ -1548,7 +1630,8 @@
       "body_snippet": "On Sun, 28 Jul 2024 15:27:33 -0500\nDirk Eddelbuettel <edd at debian.org> wrote:\n\n> If we cannot (or do not want to) modify the given main.R, I would\n> suggest something along the lines of\n> \n>   Rscri",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 3,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011014.html"
     },
     {
       "id": "msg-d433bd27e81d",
@@ -1569,7 +1652,8 @@
       "body_snippet": "On 29 July 2024 at 13:02, Ivan Krylov wrote:\n| On Sun, 28 Jul 2024 15:27:33 -0500\n| Dirk Eddelbuettel <edd at debian.org> wrote:\n| \n| > If we cannot (or do not want to) modify the given main.R, I woul",
       "thread_id": "thread-bebef7fec0e9",
       "thread_depth": 4,
-      "month": "2024-07"
+      "month": "2024-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011015.html"
     }
   ],
   "threads": [

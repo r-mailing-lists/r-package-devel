@@ -17,7 +17,8 @@
       "body_snippet": "Hello,\n\nI am writing an R package that depends on a very uncommonly used Python module named \"ctef\" and I have several questions about it:\n\na. How shall I write examples for the functions that depend ",
       "thread_id": "thread-265697eb0088",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009533.html"
     },
     {
       "id": "msg-b145f9e717b3",
@@ -29,11 +30,12 @@
       "subject_clean": "[R-pkg-devel] CRAN Detected Using More Than 2 Cores By Default",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nFirst time caller. Long time listener. I have an issue identified in my\nModeltime R package version 1.2.8 CRAN submission.\n\n*CRAN Issue*\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: tests, Result: NOTE\n     Running 'testthat.R' [20s/7s]\n   Running R code in 'testthat.R' had CPU time 2.7 times elapsed time\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: re-building of vignette outputs, Result: NOTE\n   Re-building vignettes had CPU time 2.7 times elapsed time\n\nboth ratios indicate you are using more than 2 cores by default. Please\nsee the CRAN policies.\n\n\n*Problem:*\nWhen preparing relatively minor updates, I have submitted modeltime version\n1.2.8 (\nhttps://github.com/business-science/modeltime\n) to CRAN but did not pass the incoming checks.\n\nThe error occurs on Debian indicating more than 2 cores are being used by\ndefault.\n\nI?m not sure how to detect where this is happening. Not how to fix it.\n\nI do permit parallel processing in some modeltime functions but everything\nis set to 1 core by default. The vignette and tests should be processed\n\n\nPlease let me know if you see something in my code that I could be missing\ncausing this issue.\n\nThanks, Matt\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hello,\n\nFirst time caller. Long time listener. I have an issue identified in my\nModeltime R package version 1.2.8 CRAN submission.\n\n*CRAN Issue*\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: tests, Result: NOTE\n     Running 'testthat.R' [20s/7s]\n   Running R code in 'testthat.R' had CPU time 2.7 times elapsed time\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: re-building of vignette outputs, Result: NOTE\n   Re-building vignettes had CPU time 2.7 times elapsed time\n\nboth ratios indicate you are using more than 2 cores by default. Please\nsee the CRAN policies.\n\n\n*Problem:*\nWhen preparing relatively minor updates, I have submitted modeltime version\n1.2.8 (\nhttps://github.com/business-science/modeltime\n) to CRAN but did not pass the incoming checks.\n\nThe error occurs on Debian indicating more than 2 cores are being used by\ndefault.\n\nI’m not sure how to detect where this is happening. Not how to fix it.\n\nI do permit parallel processing in some modeltime functions but everything\nis set to 1 core by default. The vignette and tests should be processed\n\n\nPlease let me know if you see something in my code that I could be missing\ncausing this issue.\n\nThanks, Matt\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hello,\n\nFirst time caller. Long time listener. I have an issue identified in my\nModeltime R package version 1.2.8 CRAN submission.\n\n*CRAN Issue*\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: tests, R",
       "thread_id": "thread-b145f9e717b3",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009531.html"
     },
     {
       "id": "msg-76e3d448eba2",
@@ -51,7 +53,8 @@
       "body_snippet": "? Fri, 1 Sep 2023 08:26:32 -0400\nMatt Dancho <mdancho at business-science.io> ?????:\n\n> Check: tests, Result: NOTE\n>      Running 'testthat.R' [20s/7s]\n>    Running R code in 'testthat.R' had CPU time",
       "thread_id": "thread-b145f9e717b3",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009532.html"
     },
     {
       "id": "msg-4e21951a8fa7",
@@ -69,7 +72,8 @@
       "body_snippet": "Have you consider translating ctef into R ?\n\nThis would remove the dependencies and make your package much more robust.\nAnd would make it much easier to pass CRAN checks.\n\nLooking at ctef code it is p",
       "thread_id": "thread-265697eb0088",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009534.html"
     },
     {
       "id": "msg-d75b881c1a21",
@@ -87,7 +91,8 @@
       "body_snippet": "On Fri, 1 Sep 2023 08:14:12 +0000\nHanyu Song <hanyu.song at duke.edu> wrote:\n\n> b. I read from the documentation of the R package \"reticulate\" that\n> we should delay load the Python modules, but it is",
       "thread_id": "thread-265697eb0088",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009535.html"
     },
     {
       "id": "msg-0f9dfc2c3017",
@@ -102,11 +107,12 @@
         "<CAN9wbhwOTwRiK4cvEEC92ukVqgiYPaQXRgcay7gd+3gjJgk1MQ@mail.gmail.com>",
         "<20230901170453.3ce4f542@arachnoid>"
       ],
-      "body_plain": "Thank you very much. I?ll try this and let you know.\n\nOn Fri, Sep 1, 2023 at 10:04 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n\n> ? Fri, 1 Sep 2023 08:26:32 -0400\n> Matt Dancho <mdancho at business-science.io> ?????:\n>\n> > Check: tests, Result: NOTE\n> >      Running 'testthat.R' [20s/7s]\n> >    Running R code in 'testthat.R' had CPU time 2.7 times elapsed time\n> >\n> > Flavor: r-devel-linux-x86_64-debian-gcc\n> > Check: re-building of vignette outputs, Result: NOTE\n> >    Re-building vignettes had CPU time 2.7 times elapsed time\n>\n> Here's the conclusion of a recent R-pkg-devel thread:\n> https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009513.html\n>\n> It might help to set the environment variable OMP_THREAD_LIMIT to 2 in\n> your tests and vignettes, but with examples (and, generally, with\n> defaults in your functions) it will be harder to achieve compliance:\n>\n> https://github.com/Rdatatable/data.table/issues/5658#issuecomment-1700972630\n>\n> I don't see an immediate dependency of your package that could be doing\n> something in parallel, but maybe you'll be able to find it after\n> reading the R-package-devel thread.\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thank you very much. I?ll try this and let you know.\n\nOn Fri, Sep 1, 2023 at 10:04 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n\n> ? Fri, 1 Sep 2023 08:26:32 -0400\n> Matt Dancho <mdancho at busine",
+      "body_plain": "Thank you very much. I’ll try this and let you know.\n\nOn Fri, Sep 1, 2023 at 10:04 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n\n> В Fri, 1 Sep 2023 08:26:32 -0400\n> Matt Dancho <mdancho at business-science.io> пишет:\n>\n> > Check: tests, Result: NOTE\n> >      Running 'testthat.R' [20s/7s]\n> >    Running R code in 'testthat.R' had CPU time 2.7 times elapsed time\n> >\n> > Flavor: r-devel-linux-x86_64-debian-gcc\n> > Check: re-building of vignette outputs, Result: NOTE\n> >    Re-building vignettes had CPU time 2.7 times elapsed time\n>\n> Here's the conclusion of a recent R-pkg-devel thread:\n> https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009513.html\n>\n> It might help to set the environment variable OMP_THREAD_LIMIT to 2 in\n> your tests and vignettes, but with examples (and, generally, with\n> defaults in your functions) it will be harder to achieve compliance:\n>\n> https://github.com/Rdatatable/data.table/issues/5658#issuecomment-1700972630\n>\n> I don't see an immediate dependency of your package that could be doing\n> something in parallel, but maybe you'll be able to find it after\n> reading the R-package-devel thread.\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thank you very much. I’ll try this and let you know.\n\nOn Fri, Sep 1, 2023 at 10:04 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n\n> В Fri, 1 Sep 2023 08:26:32 -0400\n> Matt Dancho <mdancho at busine",
       "thread_id": "thread-b145f9e717b3",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009536.html"
     },
     {
       "id": "msg-9d9718e712ee",
@@ -127,11 +133,12 @@
         "<25840.36229.529582.693181@rob.eddelbuettel.com>",
         "<CAN+W6_s=xWcqok1Ahy-UaJ6TiJYWLiohLSPUHwptirr7uAratw@mail.gmail.com>"
       ],
-      "body_plain": "Thanks Llu?s, I did not know I could find it there.\n\nFor this archive, CRAN sent me an e-mail urging me to stop downloading \nfrom crates.io and vendoring all Rust source code, even if it exceeds 5MB.\n\nOn 2023/08/31 23:24, Llu?s Revilla wrote:\n> The reasons that CRAN has for this (from: \n> https://cran.r-project.org/src/contrib/PACKAGES.in) are:\n> X-CRAN-History: Archived on 2023-08-19 for policy violation.\n>    Downloading on installation from github.\n>    Unarchived on 2023-08-30.\n> X-CRAN-Comment: Archived on 2023-08-31 for policy violation.\n>    .\n>    Downloading on installation from github.\n>\n> I see your file src/rust/Cargo.lock has some references to github.com \n> <http://github.com> which is probably what has triggered this. I'm \n> sorry I cannot help further.\n> Good luck!\n>\n> On Thu, 31 Aug 2023 at 14:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>\n>     On 31 August 2023 at 07:32, SHIMA Tatsuya wrote:\n>     | I submitted prqlr 0.5.1 yesterday, which is almost identical to\n>     prqlr\n>     | 0.5.0, and prqlr is now available again on CRAN.\n>     | Thanks to the CRAN reviewers for their quick reaction.\n>\n>     And it is gone again (per CRANberries). Never a dull moment with\n>     CRAN.\n>\n>     Dirk\n>\n>     -- \n>     dirk.eddelbuettel.com <http://dirk.eddelbuettel.com> |\n>     @eddelbuettel | edd at debian.org\n>\n>     ______________________________________________\n>     R-package-devel at r-project.org mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks Llu?s, I did not know I could find it there.\n\nFor this archive, CRAN sent me an e-mail urging me to stop downloading \nfrom crates.io and vendoring all Rust source code, even if it exceeds 5MB.\n",
+      "body_plain": "Thanks Lluís, I did not know I could find it there.\n\nFor this archive, CRAN sent me an e-mail urging me to stop downloading \nfrom crates.io and vendoring all Rust source code, even if it exceeds 5MB.\n\nOn 2023/08/31 23:24, Lluís Revilla wrote:\n> The reasons that CRAN has for this (from: \n> https://cran.r-project.org/src/contrib/PACKAGES.in) are:\n> X-CRAN-History: Archived on 2023-08-19 for policy violation.\n>    Downloading on installation from github.\n>    Unarchived on 2023-08-30.\n> X-CRAN-Comment: Archived on 2023-08-31 for policy violation.\n>    .\n>    Downloading on installation from github.\n>\n> I see your file src/rust/Cargo.lock has some references to github.com \n> <http://github.com> which is probably what has triggered this. I'm \n> sorry I cannot help further.\n> Good luck!\n>\n> On Thu, 31 Aug 2023 at 14:54, Dirk Eddelbuettel <edd at debian.org> wrote:\n>\n>\n>     On 31 August 2023 at 07:32, SHIMA Tatsuya wrote:\n>     | I submitted prqlr 0.5.1 yesterday, which is almost identical to\n>     prqlr\n>     | 0.5.0, and prqlr is now available again on CRAN.\n>     | Thanks to the CRAN reviewers for their quick reaction.\n>\n>     And it is gone again (per CRANberries). Never a dull moment with\n>     CRAN.\n>\n>     Dirk\n>\n>     -- \n>     dirk.eddelbuettel.com <http://dirk.eddelbuettel.com> |\n>     @eddelbuettel | edd at debian.org\n>\n>     ______________________________________________\n>     R-package-devel at r-project.org mailing list\n>     https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Lluís, I did not know I could find it there.\n\nFor this archive, CRAN sent me an e-mail urging me to stop downloading \nfrom crates.io and vendoring all Rust source code, even if it exceeds 5MB.\n",
       "thread_id": "thread-9d9718e712ee",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009537.html"
     },
     {
       "id": "msg-1460b8ec696e",
@@ -147,11 +154,12 @@
         "<20230901170453.3ce4f542@arachnoid>",
         "<CAN9wbhxDy9vzgzj-XTT5jsMLJMJXWuQ+Z6k1v-N_WMmL-qJNFw@mail.gmail.com>"
       ],
-      "body_plain": "I was able to get it to work with your solution. Thanks a lot.\n\nSolution was to set Sys.setenv(?OMP_THREAD_LIMIT?, ?1?) on load. I may\nadjust this down the road but modeltime 1.2.8 is now on CRAN.\n\nThanks, Matt\n\nOn Sat, Sep 2, 2023 at 7:29 AM Matt Dancho <mdancho at business-science.io>\nwrote:\n\n> Thank you very much. I?ll try this and let you know.\n>\n> On Fri, Sep 1, 2023 at 10:04 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n>\n>> ? Fri, 1 Sep 2023 08:26:32 -0400\n>> Matt Dancho <mdancho at business-science.io> ?????:\n>>\n>> > Check: tests, Result: NOTE\n>> >      Running 'testthat.R' [20s/7s]\n>> >    Running R code in 'testthat.R' had CPU time 2.7 times elapsed time\n>> >\n>> > Flavor: r-devel-linux-x86_64-debian-gcc\n>> > Check: re-building of vignette outputs, Result: NOTE\n>> >    Re-building vignettes had CPU time 2.7 times elapsed time\n>>\n>> Here's the conclusion of a recent R-pkg-devel thread:\n>> https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009513.html\n>>\n>> It might help to set the environment variable\n>> OMP_THREAD_LIMIT to 2 in\n>> your tests and vignettes, but with examples (and, generally, with\n>> defaults in your functions) it will be harder to achieve compliance:\n>>\n>> https://github.com/Rdatatable/data.table/issues/5658#issuecomment-1700972630\n>>\n>> I don't see an immediate dependency of your package that could be doing\n>> something in parallel, but maybe you'll be able to find it after\n>> reading the R-package-devel thread.\n>>\n>> --\n>> Best regards,\n>> Ivan\n>>\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I was able to get it to work with your solution. Thanks a lot.\n\nSolution was to set Sys.setenv(?OMP_THREAD_LIMIT?, ?1?) on load. I may\nadjust this down the road but modeltime 1.2.8 is now on CRAN.\n\nTh",
+      "body_plain": "I was able to get it to work with your solution. Thanks a lot.\n\nSolution was to set Sys.setenv(“OMP_THREAD_LIMIT”, “1”) on load. I may\nadjust this down the road but modeltime 1.2.8 is now on CRAN.\n\nThanks, Matt\n\nOn Sat, Sep 2, 2023 at 7:29 AM Matt Dancho <mdancho at business-science.io>\nwrote:\n\n> Thank you very much. I’ll try this and let you know.\n>\n> On Fri, Sep 1, 2023 at 10:04 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n>\n>> В Fri, 1 Sep 2023 08:26:32 -0400\n>> Matt Dancho <mdancho at business-science.io> пишет:\n>>\n>> > Check: tests, Result: NOTE\n>> >      Running 'testthat.R' [20s/7s]\n>> >    Running R code in 'testthat.R' had CPU time 2.7 times elapsed time\n>> >\n>> > Flavor: r-devel-linux-x86_64-debian-gcc\n>> > Check: re-building of vignette outputs, Result: NOTE\n>> >    Re-building vignettes had CPU time 2.7 times elapsed time\n>>\n>> Here's the conclusion of a recent R-pkg-devel thread:\n>> https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009513.html\n>>\n>> It might help to set the environment variable\n>> OMP_THREAD_LIMIT to 2 in\n>> your tests and vignettes, but with examples (and, generally, with\n>> defaults in your functions) it will be harder to achieve compliance:\n>>\n>> https://github.com/Rdatatable/data.table/issues/5658#issuecomment-1700972630\n>>\n>> I don't see an immediate dependency of your package that could be doing\n>> something in parallel, but maybe you'll be able to find it after\n>> reading the R-package-devel thread.\n>>\n>> --\n>> Best regards,\n>> Ivan\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I was able to get it to work with your solution. Thanks a lot.\n\nSolution was to set Sys.setenv(“OMP_THREAD_LIMIT”, “1”) on load. I may\nadjust this down the road but modeltime 1.2.8 is now on CRAN.\n\nTh",
       "thread_id": "thread-b145f9e717b3",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009538.html"
     },
     {
       "id": "msg-c6ee69bc18b7",
@@ -167,7 +175,8 @@
       "body_snippet": "I'm posting this in case it helps some other developers getting build failure.\n\nRecently package nlsr that I maintain got a message that it failed to build on\nsome platforms. The exact source of the p",
       "thread_id": "thread-c6ee69bc18b7",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009539.html"
     },
     {
       "id": "msg-bd80b121be46",
@@ -183,7 +192,8 @@
       "body_snippet": "Hello R-Package-Devel Mailing List,\n\nI am new to R package development, and am having to limp a project across the line after my organization has gone through significant changes in recent weeks.\nAs s",
       "thread_id": "thread-bd80b121be46",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009540.html"
     },
     {
       "id": "msg-3177eb74533c",
@@ -201,7 +211,8 @@
       "body_snippet": "On 02/09/2023 2:50 p.m., John Carter Hall wrote:\n> Hello R-Package-Devel Mailing List,\n> \n> I am new to R package development, and am having to limp a project across the line after my organization has",
       "thread_id": "thread-bd80b121be46",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009541.html"
     },
     {
       "id": "msg-66de1ca5bfac",
@@ -219,7 +230,8 @@
       "body_snippet": "CRAN doesn't care about whether devtools is happy. R CMD check --as-cran needs to work, e.g. as in [1].\n\nDevtools is a convenience tool to help put all of the necessary bits in the right places in you",
       "thread_id": "thread-bd80b121be46",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009542.html"
     },
     {
       "id": "msg-eb0a5d9ca3e7",
@@ -237,7 +249,8 @@
       "body_snippet": "The percent encoded characters appear to be valid in that URL, suggesting\nthat rejecting them is an error. That kind of error could occur when the\nsoftware processing them converts them back to a non-",
       "thread_id": "thread-c6ee69bc18b7",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009543.html"
     },
     {
       "id": "msg-f7fd9e7f251e",
@@ -256,7 +269,8 @@
       "body_snippet": "I've encountered similar issues. However, it has been long enough ago \nthat I don't remember enough details to say more without trying to \nupdate my CRAN packages to see what messages I get and maybe ",
       "thread_id": "thread-c6ee69bc18b7",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009544.html"
     },
     {
       "id": "msg-e2bf6b923276",
@@ -276,7 +290,8 @@
       "body_snippet": "John can you point us to an example?\nWhere is it in your package and what is the R CMD check output?\n\nGuess: Within an Rd file you have to escape the %  characters otherwise \nthey start a comment.\n\nBe",
       "thread_id": "thread-c6ee69bc18b7",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009545.html"
     },
     {
       "id": "msg-6104b23df77f",
@@ -297,7 +312,8 @@
       "body_snippet": "Thanks Uwe. I think you may have the reason, esp. if the url is output as LaTex\nformatted text to the intermediate files.\n\n > Where is it in your package and what is the R CMD check output?\n\nThe issue",
       "thread_id": "thread-c6ee69bc18b7",
       "thread_depth": 4,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009546.html"
     },
     {
       "id": "msg-92a99b778671",
@@ -316,7 +332,8 @@
       "body_snippet": "Hi,\n\nI am trying to upload a package to CRAN but keep getting the error message below. The issue seems to be the use of attach in one of my routines. As I explain in the cran-comments.md this use of a",
       "thread_id": "thread-92a99b778671",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009547.html"
     },
     {
       "id": "msg-52c6567acd73",
@@ -336,7 +353,8 @@
       "body_snippet": "I don't know how you can negotiate with CRAN regarding attach, but one approach is to return the data frame and instruct your students to write\n\n  moodledata <- paste.data()\n\ninstead of\n\n  paste.data(",
       "thread_id": "thread-92a99b778671",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009548.html"
     },
     {
       "id": "msg-6b0deabd3473",
@@ -352,7 +370,8 @@
       "body_snippet": "Dear Members,\n\nI would like to reanimate the archived package Rpdb:\nhttps://cran.r-project.org/web/packages/Rpdb/index.html\n\n1.) I have tried to contact the original author by email, but got no \nrespo",
       "thread_id": "thread-6b0deabd3473",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009549.html"
     },
     {
       "id": "msg-685371dd518a",
@@ -370,7 +389,8 @@
       "body_snippet": "On Fri, Sep 8, 2023 at 6:02?AM Leonard Mada via R-package-devel\n<r-package-devel at r-project.org> wrote:\n>\n> Dear Members,\n>\n> I would like to reanimate the archived package Rpdb:\n> https://cran.r-pr",
       "thread_id": "thread-6b0deabd3473",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009550.html"
     },
     {
       "id": "msg-0e0f1623955b",
@@ -386,7 +406,8 @@
       "body_snippet": "Hello,\n\nI encountered a problem when running ?R CMD check ?as-cran? at the step ?checking CRAN incoming feasibility?.\n\nThe error message is as follows:\n\n* checking CRAN incoming feasibility ...Warning",
       "thread_id": "thread-0e0f1623955b",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009551.html"
     },
     {
       "id": "msg-0c362552105d",
@@ -400,11 +421,12 @@
       "references": [
         "<CH3PR10MB7932B2EB70AA47C93874CEC1FEECA@CH3PR10MB7932.namprd10.prod.outlook.com>"
       ],
-      "body_plain": "Hi,\nI had a similar issue while submitting a bug fix of my package {pliman}\nusing devtools::release()\n\n----------------\nHave you checked on win-builder (with `check_win_devel()`)?\n\n1: Absolutely\n2: I forget\n3: Not yet\n\nSele??o: 1\nError in utils::download.file(\"\nhttps://cran.R-project.org/web/packages/packages.rds\",  :\n  download from 'https://cran.R-project.org/web/packages/packages.rds'\nfailed\nIn addition: Warning messages:\n1: In utils::download.file(\"\nhttps://cran.R-project.org/web/packages/packages.rds\",  :\n  downloaded length 0 != reported length 0\n2: In utils::download.file(\"\nhttps://cran.R-project.org/web/packages/packages.rds\",  :\n  URL 'https://cran.R-project.org/web/packages/packages.rds': Timeout of 60\nseconds was reached\n-------------------\n\nThanks\nOlivoto\n\nEm s?b., 9 de set. de 2023 ?s 14:45, Hu Yue <yyyuehhu at gmail.com> escreveu:\n\n> Hello,\n>\n> I encountered a problem when running ?R CMD check ?as-cran? at the step\n> ?checking CRAN incoming feasibility?.\n>\n> The error message is as follows:\n>\n> * checking CRAN incoming feasibility ...Warning in read.dcf(con,\n> c(.get_standard_repository_db_fields(), \"Path\")) :\n>\n>   URL 'https://CRAN.R-project.org/src/contrib/PACKAGES.gz': Timeout of 60\n> seconds was reached\n>\n>\n>\n> Does anyone know how to deal with this issue?\n>\n>\n>\n> Thanks,\n>\n> Yue\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi,\nI had a similar issue while submitting a bug fix of my package {pliman}\nusing devtools::release()\n\n----------------\nHave you checked on win-builder (with `check_win_devel()`)?\n\n1: Absolutely\n2: I forget\n3: Not yet\n\nSeleção: 1\nError in utils::download.file(\"\nhttps://cran.R-project.org/web/packages/packages.rds\",  :\n  download from 'https://cran.R-project.org/web/packages/packages.rds'\nfailed\nIn addition: Warning messages:\n1: In utils::download.file(\"\nhttps://cran.R-project.org/web/packages/packages.rds\",  :\n  downloaded length 0 != reported length 0\n2: In utils::download.file(\"\nhttps://cran.R-project.org/web/packages/packages.rds\",  :\n  URL 'https://cran.R-project.org/web/packages/packages.rds': Timeout of 60\nseconds was reached\n-------------------\n\nThanks\nOlivoto\n\nEm sáb., 9 de set. de 2023 às 14:45, Hu Yue <yyyuehhu at gmail.com> escreveu:\n\n> Hello,\n>\n> I encountered a problem when running ‘R CMD check –as-cran’ at the step\n> ‘checking CRAN incoming feasibility’.\n>\n> The error message is as follows:\n>\n> * checking CRAN incoming feasibility ...Warning in read.dcf(con,\n> c(.get_standard_repository_db_fields(), \"Path\")) :\n>\n>   URL 'https://CRAN.R-project.org/src/contrib/PACKAGES.gz': Timeout of 60\n> seconds was reached\n>\n>\n>\n> Does anyone know how to deal with this issue?\n>\n>\n>\n> Thanks,\n>\n> Yue\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi,\nI had a similar issue while submitting a bug fix of my package {pliman}\nusing devtools::release()\n\n----------------\nHave you checked on win-builder (with `check_win_devel()`)?\n\n1: Absolutely\n2: I ",
       "thread_id": "thread-0e0f1623955b",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009552.html"
     },
     {
       "id": "msg-23b0fc67f09e",
@@ -423,7 +445,8 @@
       "body_snippet": "Thank you very much for this help.\n\n\n1.) I am a little bit unsure about the LICENSE file - see below (in-text).\n\n\n2.) There is a new error in the meantime:\n\n- the check works on Windows, but fails eve",
       "thread_id": "thread-6b0deabd3473",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009554.html"
     },
     {
       "id": "msg-365a8a13ea9d",
@@ -441,7 +464,8 @@
       "body_snippet": "9 ???????? 2023 ?. 11:19:04 UTC, Hu Yue <yyyuehhu at gmail.com> ?????:\n\n>* checking CRAN incoming feasibility ...Warning in read.dcf(con, c(.get_standard_repository_db_fields(), \"Path\")) :\n>\n>  URL 'h",
       "thread_id": "thread-0e0f1623955b",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009553.html"
     },
     {
       "id": "msg-8b2a27719490",
@@ -460,7 +484,8 @@
       "body_snippet": "Got it, thank you so much for the explanation.\n\nBest,\nYue\n\nFrom: Ivan Krylov <krylov.r00t at gmail.com>\nDate: Sunday, September 10, 2023 at 4:12 AM\nTo: Hu Yue <yyyuehhu at gmail.com>, r-package-devel ",
       "thread_id": "thread-0e0f1623955b",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009555.html"
     },
     {
       "id": "msg-7792dc702862",
@@ -480,7 +505,8 @@
       "body_snippet": "On 09.09.2023 20:15, Leonard Mada via R-package-devel wrote:\n> Thank you very much for this help.\n> \n> \n> 1.) I am a little bit unsure about the LICENSE file - see below (in-text).\n> \n> \n> 2.) There i",
       "thread_id": "thread-6b0deabd3473",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009556.html"
     },
     {
       "id": "msg-24848dcf6228",
@@ -496,7 +522,8 @@
       "body_snippet": "Hi.\n\nIt looks like macOS package publishing may have stalled. One of my\npackages, rsconnect 1.1.0, arrived on CRAN about a week ago. It is built\nalmost everywhere, but r-release-macos* and r-release-m",
       "thread_id": "thread-24848dcf6228",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009557.html"
     },
     {
       "id": "msg-e0624ab6b64a",
@@ -517,7 +544,8 @@
       "body_snippet": "Thank you very much for your response.\n\nI actually tried yesterday to publish the package to CRAN. \nUnfortunately, my computer seems to behave funny; and I did not receive \na confirmatory e-mail eithe",
       "thread_id": "thread-6b0deabd3473",
       "thread_depth": 4,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009558.html"
     },
     {
       "id": "msg-ba08b6e18b06",
@@ -539,7 +567,8 @@
       "body_snippet": "13 ???????? 2023 ?. 18:01:56 UTC, Leonard Mada via R-package-devel <r-package-devel at r-project.org> ?????:\n\n>Error in (function (..., row.names = NULL, check.rows = FALSE, check.names = TRUE,? :\n>? ",
       "thread_id": "thread-6b0deabd3473",
       "thread_depth": 5,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009559.html"
     },
     {
       "id": "msg-ff3b63cd85f3",
@@ -555,7 +584,8 @@
       "body_snippet": "I have a demo file that uses a function defined in the package.\nwhen I force the demo to be run with\nR CMD check --test-dir=demo findme_1.0.tar.gz\nthen the function defined in the package is not recog",
       "thread_id": "thread-ff3b63cd85f3",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009560.html"
     },
     {
       "id": "msg-ed8ad30b8e72",
@@ -573,7 +603,8 @@
       "body_snippet": "Yes.\n\nDemo/test files need to use the library function to attach the package like any other user.\n\nOn September 13, 2023 5:24:52 PM PDT, \"Richard M. Heiberger\" <rmh at temple.edu> wrote:\n>I have a dem",
       "thread_id": "thread-ff3b63cd85f3",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009561.html"
     },
     {
       "id": "msg-2d7af9f885bf",
@@ -591,7 +622,8 @@
       "body_snippet": "Aron,\n\none package managed to spawn a separate process that was blocking the build process (long story) and I was on the other side of the world. It should be fixed now, but it may take up to a day be",
       "thread_id": "thread-24848dcf6228",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009562.html"
     },
     {
       "id": "msg-59dc57fa61e8",
@@ -607,7 +639,8 @@
       "body_snippet": "Simon,\n\nA new package of mine [1] appeared on CRAN on Sep 5. Respecting the one week gap,\nI made a small update on Sep 12.\n\nToday is Sep 14. There are still no builds for\n  macOS r-release (arm64)\n  m",
       "thread_id": "thread-59dc57fa61e8",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009563.html"
     },
     {
       "id": "msg-78305f7a7c53",
@@ -625,7 +658,8 @@
       "body_snippet": "Dirk,\n\nProviding a partial answer: Simon replied earlier today to my related\nquestion; macOS builds had been blocked, but are starting to flow again.\n\n> one package managed to spawn a separate process",
       "thread_id": "thread-59dc57fa61e8",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009564.html"
     },
     {
       "id": "msg-f11030c1e1de",
@@ -641,7 +675,8 @@
       "body_snippet": "Dear List Members,\n\nAfter resubmitting the updated version of the Rpdb package (2.3.1), the \nfollowing Notes were generated:\n\n1.) Spelling PDB\nhttps://win-builder.r-project.org/incoming_pretest/Rpdb_2",
       "thread_id": "thread-f11030c1e1de",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009565.html"
     },
     {
       "id": "msg-733038014966",
@@ -655,11 +690,12 @@
       "references": [
         "<fccf4595-d4a7-4d38-9d93-5cbb7a8fd8f9@syonic.eu>"
       ],
-      "body_plain": "Regarding PDB, in Rd format it?s best to wrap that in an \\acronym{} tag. See section 2.3 of https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n\nAvi\n\nSent from my iPhone\n\n> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> ?Dear List Members,\n> \n> After resubmitting the updated version of the Rpdb package (2.3.1), the following Notes were generated:\n> \n> 1.) Spelling PDB\n> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log\n> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log\n> \n> The PDB stands for Protein Data Bank:\n> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html\n> \n> It should be the correct spelling (and was the same in the previous versions of the package).\n> \n> 2.)  Small Sample PDB Files\n> * checking for non-standard things in the check directory ...\n> NOTE Found the following files/directories: ?Rpdb.pdb?\n> \n> There is a directory with 3 very small sample pdb-files. The directory was also present in the previous version.\n> \n> How should I proceed? Or did I miss something?\n> \n> \n> Sincerely,\n> \n> \n> Leonard\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Regarding PDB, in Rd format it?s best to wrap that in an \\acronym{} tag. See section 2.3 of https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n\nAvi\n\nSent from my iPhone\n\n> On Sep 14, 2023",
+      "body_plain": "Regarding PDB, in Rd format it’s best to wrap that in an \\acronym{} tag. See section 2.3 of https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n\nAvi\n\nSent from my iPhone\n\n> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> ﻿Dear List Members,\n> \n> After resubmitting the updated version of the Rpdb package (2.3.1), the following Notes were generated:\n> \n> 1.) Spelling PDB\n> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log\n> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log\n> \n> The PDB stands for Protein Data Bank:\n> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html\n> \n> It should be the correct spelling (and was the same in the previous versions of the package).\n> \n> 2.)  Small Sample PDB Files\n> * checking for non-standard things in the check directory ...\n> NOTE Found the following files/directories: ‘Rpdb.pdb’\n> \n> There is a directory with 3 very small sample pdb-files. The directory was also present in the previous version.\n> \n> How should I proceed? Or did I miss something?\n> \n> \n> Sincerely,\n> \n> \n> Leonard\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Regarding PDB, in Rd format it’s best to wrap that in an \\acronym{} tag. See section 2.3 of https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n\nAvi\n\nSent from my iPhone\n\n> On Sep 14, 2023",
       "thread_id": "thread-f11030c1e1de",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009566.html"
     },
     {
       "id": "msg-355589d321d8",
@@ -674,11 +710,12 @@
         "<fccf4595-d4a7-4d38-9d93-5cbb7a8fd8f9@syonic.eu>",
         "<68D8A343-08FE-4019-8CED-D9C79D2AD836@gmail.com>"
       ],
-      "body_plain": "The spellng is fine and not a problem.\n\nFor\n* checking for non-standard things in the check directory ... NOTE\nFound the following files/directories:\n   ?Rpdb.pdb?\nYou need to move this to ./inst or a subdirectory or, if data, consider \n./extdata See Writing R Extensions.\n\nBest,\nUwe Ligges\n\n\nOn 14.09.2023 22:06, Avraham Adler wrote:\n> Regarding PDB, in Rd format it?s best to wrap that in an \\acronym{} tag. See section 2.3 of https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n> \n> Avi\n> \n> Sent from my iPhone\n> \n>> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel <r-package-devel at r-project.org> wrote:\n>>\n>> ?Dear List Members,\n>>\n>> After resubmitting the updated version of the Rpdb package (2.3.1), the following Notes were generated:\n>>\n>> 1.) Spelling PDB\n>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log\n>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log\n>>\n>> The PDB stands for Protein Data Bank:\n>> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html\n>>\n>> It should be the correct spelling (and was the same in the previous versions of the package).\n>>\n>> 2.)  Small Sample PDB Files\n>> * checking for non-standard things in the check directory ...\n>> NOTE Found the following files/directories: ?Rpdb.pdb?\n>>\n>> There is a directory with 3 very small sample pdb-files. The directory was also present in the previous version.\n>>\n>> How should I proceed? Or did I miss something?\n>>\n>>\n>> Sincerely,\n>>\n>>\n>> Leonard\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "The spellng is fine and not a problem.\n\nFor\n* checking for non-standard things in the check directory ... NOTE\nFound the following files/directories:\n   ?Rpdb.pdb?\nYou need to move this to ./inst or a",
+      "body_plain": "The spellng is fine and not a problem.\n\nFor\n* checking for non-standard things in the check directory ... NOTE\nFound the following files/directories:\n   ‘Rpdb.pdb’\nYou need to move this to ./inst or a subdirectory or, if data, consider \n./extdata See Writing R Extensions.\n\nBest,\nUwe Ligges\n\n\nOn 14.09.2023 22:06, Avraham Adler wrote:\n> Regarding PDB, in Rd format it’s best to wrap that in an \\acronym{} tag. See section 2.3 of https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n> \n> Avi\n> \n> Sent from my iPhone\n> \n>> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel <r-package-devel at r-project.org> wrote:\n>>\n>> ﻿Dear List Members,\n>>\n>> After resubmitting the updated version of the Rpdb package (2.3.1), the following Notes were generated:\n>>\n>> 1.) Spelling PDB\n>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log\n>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log\n>>\n>> The PDB stands for Protein Data Bank:\n>> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html\n>>\n>> It should be the correct spelling (and was the same in the previous versions of the package).\n>>\n>> 2.)  Small Sample PDB Files\n>> * checking for non-standard things in the check directory ...\n>> NOTE Found the following files/directories: ‘Rpdb.pdb’\n>>\n>> There is a directory with 3 very small sample pdb-files. The directory was also present in the previous version.\n>>\n>> How should I proceed? Or did I miss something?\n>>\n>>\n>> Sincerely,\n>>\n>>\n>> Leonard\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "The spellng is fine and not a problem.\n\nFor\n* checking for non-standard things in the check directory ... NOTE\nFound the following files/directories:\n   ‘Rpdb.pdb’\nYou need to move this to ./inst or a",
       "thread_id": "thread-f11030c1e1de",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009567.html"
     },
     {
       "id": "msg-acee974aa3de",
@@ -694,11 +731,12 @@
         "<68D8A343-08FE-4019-8CED-D9C79D2AD836@gmail.com>",
         "<83a02ef1-a982-a4b5-2e17-7ed918d1f768@statistik.tu-dortmund.de>"
       ],
-      "body_plain": "Dear Uwe,\n\n\nI found out what is going on. There is an example:\n\n## Write the pdb object in file \"Rpdb.pdb\" into the current directory\nwrite.pdb(pdb, file = \"Rpdb.pdb\")\n\n\nThe example was present in the previous version as well. So I did not \nthought about it. I do not know how to handle this: although the example \nshould probably remain.\n\n\nSincerely,\n\n\nLeonard\n\n\nOn 9/15/2023 12:27 AM, Uwe Ligges wrote:\n> The spellng is fine and not a problem.\n>\n> For\n> * checking for non-standard things in the check directory ... NOTE\n> Found the following files/directories:\n> ? ?Rpdb.pdb?\n> You need to move this to ./inst or a subdirectory or, if data, \n> consider ./extdata See Writing R Extensions.\n>\n> Best,\n> Uwe Ligges\n>\n>\n> On 14.09.2023 22:06, Avraham Adler wrote:\n>> Regarding PDB, in Rd format it?s best to wrap that in an \\acronym{} \n>> tag. See section 2.3 of \n>> https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n>>\n>> Avi\n>>\n>> Sent from my iPhone\n>>\n>>> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel \n>>> <r-package-devel at r-project.org> wrote:\n>>>\n>>> ?Dear List Members,\n>>>\n>>> After resubmitting the updated version of the Rpdb package (2.3.1), \n>>> the following Notes were generated:\n>>>\n>>> 1.) Spelling PDB\n>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log \n>>>\n>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log \n>>>\n>>>\n>>> The PDB stands for Protein Data Bank:\n>>> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html \n>>>\n>>>\n>>> It should be the correct spelling (and was the same in the previous \n>>> versions of the package).\n>>>\n>>> 2.)? Small Sample PDB Files\n>>> * checking for non-standard things in the check directory ...\n>>> NOTE Found the following files/directories: ?Rpdb.pdb?\n>>>\n>>> There is a directory with 3 very small sample pdb-files. The \n>>> directory was also present in the previous version.\n>>>\n>>> How should I proceed? Or did I miss something?\n>>>\n>>>\n>>> Sincerely,\n>>>\n>>>\n>>> Leonard\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ????[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Dear Uwe,\n\n\nI found out what is going on. There is an example:\n\n## Write the pdb object in file \"Rpdb.pdb\" into the current directory\nwrite.pdb(pdb, file = \"Rpdb.pdb\")\n\n\nThe example was present in the previous version as well. So I did not \nthought about it. I do not know how to handle this: although the example \nshould probably remain.\n\n\nSincerely,\n\n\nLeonard\n\n\nOn 9/15/2023 12:27 AM, Uwe Ligges wrote:\n> The spellng is fine and not a problem.\n>\n> For\n> * checking for non-standard things in the check directory ... NOTE\n> Found the following files/directories:\n>   ‘Rpdb.pdb’\n> You need to move this to ./inst or a subdirectory or, if data, \n> consider ./extdata See Writing R Extensions.\n>\n> Best,\n> Uwe Ligges\n>\n>\n> On 14.09.2023 22:06, Avraham Adler wrote:\n>> Regarding PDB, in Rd format it’s best to wrap that in an \\acronym{} \n>> tag. See section 2.3 of \n>> https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n>>\n>> Avi\n>>\n>> Sent from my iPhone\n>>\n>>> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel \n>>> <r-package-devel at r-project.org> wrote:\n>>>\n>>> ﻿Dear List Members,\n>>>\n>>> After resubmitting the updated version of the Rpdb package (2.3.1), \n>>> the following Notes were generated:\n>>>\n>>> 1.) Spelling PDB\n>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log \n>>>\n>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log \n>>>\n>>>\n>>> The PDB stands for Protein Data Bank:\n>>> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html \n>>>\n>>>\n>>> It should be the correct spelling (and was the same in the previous \n>>> versions of the package).\n>>>\n>>> 2.)  Small Sample PDB Files\n>>> * checking for non-standard things in the check directory ...\n>>> NOTE Found the following files/directories: ‘Rpdb.pdb’\n>>>\n>>> There is a directory with 3 very small sample pdb-files. The \n>>> directory was also present in the previous version.\n>>>\n>>> How should I proceed? Or did I miss something?\n>>>\n>>>\n>>> Sincerely,\n>>>\n>>>\n>>> Leonard\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>     [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Dear Uwe,\n\n\nI found out what is going on. There is an example:\n\n## Write the pdb object in file \"Rpdb.pdb\" into the current directory\nwrite.pdb(pdb, file = \"Rpdb.pdb\")\n\n\nThe example was present in the",
       "thread_id": "thread-f11030c1e1de",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009568.html"
     },
     {
       "id": "msg-fe2dd15fb09d",
@@ -715,11 +753,12 @@
         "<83a02ef1-a982-a4b5-2e17-7ed918d1f768@statistik.tu-dortmund.de>",
         "<41c007e3-6f38-4d02-aa8f-a0e651c0f2f0@syonic.eu>"
       ],
-      "body_plain": "On 14.09.2023 23:35, Leonard Mada wrote:\n> Dear Uwe,\n> \n> \n> I found out what is going on. There is an example:\n> \n> ## Write the pdb object in file \"Rpdb.pdb\" into the current directory\n> write.pdb(pdb, file = \"Rpdb.pdb\")\n> \n\nIn examples, you should write to tempdir(), if at all.\n\nBest,\nUwe Ligges\n\n\n\n\n> \n> The example was present in the previous version as well. So I did not \n> thought about it. I do not know how to handle this: although the example \n> should probably remain.\n> \n> \n> Sincerely,\n> \n> \n> Leonard\n> \n> \n> On 9/15/2023 12:27 AM, Uwe Ligges wrote:\n>> The spellng is fine and not a problem.\n>>\n>> For\n>> * checking for non-standard things in the check directory ... NOTE\n>> Found the following files/directories:\n>> ? ?Rpdb.pdb?\n>> You need to move this to ./inst or a subdirectory or, if data, \n>> consider ./extdata See Writing R Extensions.\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>>\n>> On 14.09.2023 22:06, Avraham Adler wrote:\n>>> Regarding PDB, in Rd format it?s best to wrap that in an \\acronym{} \n>>> tag. See section 2.3 of \n>>> https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n>>>\n>>> Avi\n>>>\n>>> Sent from my iPhone\n>>>\n>>>> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel \n>>>> <r-package-devel at r-project.org> wrote:\n>>>>\n>>>> ?Dear List Members,\n>>>>\n>>>> After resubmitting the updated version of the Rpdb package (2.3.1), \n>>>> the following Notes were generated:\n>>>>\n>>>> 1.) Spelling PDB\n>>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log\n>>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log\n>>>>\n>>>> The PDB stands for Protein Data Bank:\n>>>> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html\n>>>>\n>>>> It should be the correct spelling (and was the same in the previous \n>>>> versions of the package).\n>>>>\n>>>> 2.)? Small Sample PDB Files\n>>>> * checking for non-standard things in the check directory ...\n>>>> NOTE Found the following files/directories: ?Rpdb.pdb?\n>>>>\n>>>> There is a directory with 3 very small sample pdb-files. The \n>>>> directory was also present in the previous version.\n>>>>\n>>>> How should I proceed? Or did I miss something?\n>>>>\n>>>>\n>>>> Sincerely,\n>>>>\n>>>>\n>>>> Leonard\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>> ????[[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "On 14.09.2023 23:35, Leonard Mada wrote:\n> Dear Uwe,\n> \n> \n> I found out what is going on. There is an example:\n> \n> ## Write the pdb object in file \"Rpdb.pdb\" into the current directory\n> write.pdb(pdb, file = \"Rpdb.pdb\")\n> \n\nIn examples, you should write to tempdir(), if at all.\n\nBest,\nUwe Ligges\n\n\n\n\n> \n> The example was present in the previous version as well. So I did not \n> thought about it. I do not know how to handle this: although the example \n> should probably remain.\n> \n> \n> Sincerely,\n> \n> \n> Leonard\n> \n> \n> On 9/15/2023 12:27 AM, Uwe Ligges wrote:\n>> The spellng is fine and not a problem.\n>>\n>> For\n>> * checking for non-standard things in the check directory ... NOTE\n>> Found the following files/directories:\n>>   ‘Rpdb.pdb’\n>> You need to move this to ./inst or a subdirectory or, if data, \n>> consider ./extdata See Writing R Extensions.\n>>\n>> Best,\n>> Uwe Ligges\n>>\n>>\n>> On 14.09.2023 22:06, Avraham Adler wrote:\n>>> Regarding PDB, in Rd format it’s best to wrap that in an \\acronym{} \n>>> tag. See section 2.3 of \n>>> https://cran.r-project.org/doc/manuals/R-exts.html#Marking-text\n>>>\n>>> Avi\n>>>\n>>> Sent from my iPhone\n>>>\n>>>> On Sep 14, 2023, at 3:40 PM, Leonard Mada via R-package-devel \n>>>> <r-package-devel at r-project.org> wrote:\n>>>>\n>>>> ﻿Dear List Members,\n>>>>\n>>>> After resubmitting the updated version of the Rpdb package (2.3.1), \n>>>> the following Notes were generated:\n>>>>\n>>>> 1.) Spelling PDB\n>>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Windows/00check.log\n>>>> https://win-builder.r-project.org/incoming_pretest/Rpdb_2.3.1_20230914_173458/Debian/00check.log\n>>>>\n>>>> The PDB stands for Protein Data Bank:\n>>>> http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html\n>>>>\n>>>> It should be the correct spelling (and was the same in the previous \n>>>> versions of the package).\n>>>>\n>>>> 2.)  Small Sample PDB Files\n>>>> * checking for non-standard things in the check directory ...\n>>>> NOTE Found the following files/directories: ‘Rpdb.pdb’\n>>>>\n>>>> There is a directory with 3 very small sample pdb-files. The \n>>>> directory was also present in the previous version.\n>>>>\n>>>> How should I proceed? Or did I miss something?\n>>>>\n>>>>\n>>>> Sincerely,\n>>>>\n>>>>\n>>>> Leonard\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>>     [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "On 14.09.2023 23:35, Leonard Mada wrote:\n> Dear Uwe,\n> \n> \n> I found out what is going on. There is an example:\n> \n> ## Write the pdb object in file \"Rpdb.pdb\" into the current directory\n> write.pdb(p",
       "thread_id": "thread-f11030c1e1de",
       "thread_depth": 4,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009569.html"
     },
     {
       "id": "msg-3cc71058ccc5",
@@ -735,7 +774,8 @@
       "body_snippet": "Hi All,\n\nI know we should not use more than 2 cores in tests, vignettes, etc. I\nencountered and solved this issue before. However, I still committed\nthis mistake in a new package and would like find o",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009570.html"
     },
     {
       "id": "msg-0aa3e91d2c96",
@@ -753,7 +793,8 @@
       "body_snippet": "On 18.09.2023 16:10, Shu Fai Cheung wrote:\n> Hi All,\n> \n> I know we should not use more than 2 cores in tests, vignettes, etc. I\n> encountered and solved this issue before. However, I still committed\n",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009571.html"
     },
     {
       "id": "msg-7fb5e5cc609c",
@@ -771,7 +812,8 @@
       "body_snippet": "On 18/09/2023 10:10 a.m., Shu Fai Cheung wrote:\n> Hi All,\n> \n> I know we should not use more than 2 cores in tests, vignettes, etc. I\n> encountered and solved this issue before. However, I still commi",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009572.html"
     },
     {
       "id": "msg-62561f631710",
@@ -790,7 +832,8 @@
       "body_snippet": "Sorry, I missed the --as-cran option:  you run\n\n  R CMD check --as-cran <pkg>\n\nDuncan Murdoch\n\nOn 19/09/2023 5:59 a.m., Duncan Murdoch wrote:\n> On 18/09/2023 10:10 a.m., Shu Fai Cheung wrote:\n>> Hi Al",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009573.html"
     },
     {
       "id": "msg-fadec5649f5f",
@@ -809,7 +852,8 @@
       "body_snippet": "Thanks a lot. I don't have a physical linux box and so I need to use\nrhub. But I don't know why there are no \"-Ex.timings\" files in the\ncheck. E.g,\n\ncheck(platform = \"debian-gcc-release\", show_status ",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009574.html"
     },
     {
       "id": "msg-af72d1ecac4f",
@@ -828,7 +872,8 @@
       "body_snippet": "Thanks for the suggestion. I will use rhub and a virtual machine to check again.\n\nI read some previous posts and I thought I need to check the times to\nsee if there is any unintended usage of parallel",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009575.html"
     },
     {
       "id": "msg-6c4eea4de32d",
@@ -848,7 +893,8 @@
       "body_snippet": "20 ???????? 2023 ?. 8:27:31 UTC, Shu Fai Cheung <shufai.cheung at gmail.com> ?????:\n\n>Third, the \"testthat.Rout\" file only shows the total time:\n>\n>> proc.time()\n>   user  system elapsed\n> 13.530   0.",
       "thread_id": "thread-3cc71058ccc5",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009576.html"
     },
     {
       "id": "msg-aab4964def3e",
@@ -866,7 +912,8 @@
       "body_snippet": "https://tinyfiledialogs.sourceforge.net\n\nHi,\n\nI am the author of tinyfiledialogs a cross-platform C C++ library \n(windows, Mac, Unix) which offers many modal dialogs and popup \nnotifications (both for",
       "thread_id": "thread-aab4964def3e",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009581.html"
     },
     {
       "id": "msg-a5f87e53b3ce",
@@ -882,7 +929,8 @@
       "body_snippet": "Hello,\n\nI have a simple question about including examples. My code depends on a rarely used Python module, so I am using the @examplesIf tag per Hadley Wickham's advice as follows:\n\n#' @examplesIf ret",
       "thread_id": "thread-a5f87e53b3ce",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009577.html"
     },
     {
       "id": "msg-8df6988e7a98",
@@ -900,7 +948,8 @@
       "body_snippet": "On Thu, 21 Sep 2023 00:03:11 +0000\nHanyu Song <hanyu.song at duke.edu> wrote:\n\n> Unfortunately, my_func runs overtime during the CRAN check. To\n> resolve this, do I simply use the less elegant approac",
       "thread_id": "thread-a5f87e53b3ce",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009578.html"
     },
     {
       "id": "msg-3cf07d1e9d8c",
@@ -916,7 +965,8 @@
       "body_snippet": "Dear pkg developers\n\nI would like to safely allocate R object from C. By safely I mean\nthat, I can test if allocation succeeded or failed, and then raise\nexception myself.\nR_alloc and allocVector both",
       "thread_id": "thread-3cf07d1e9d8c",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009579.html"
     },
     {
       "id": "msg-28a181d9f511",
@@ -934,7 +984,8 @@
       "body_snippet": "On Thu, 21 Sep 2023 09:46:26 +0200\nJan Gorecki <j.gorecki at wit.edu.pl> wrote:\n\n> I would like to safely allocate R object from C. By safely I mean\n> that, I can test if allocation succeeded or faile",
       "thread_id": "thread-3cf07d1e9d8c",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009580.html"
     },
     {
       "id": "msg-f0bf7eb121ca",
@@ -953,7 +1004,8 @@
       "body_snippet": "Dear Guillaume Vareille,\n\n? Wed, 20 Sep 2023 12:30:53 +0200\ntinyfiledialogs at ysengrin.com ?????:\n\n> I've been pointed to the documentation link on how to write a package,\n> but it would really help ",
       "thread_id": "thread-aab4964def3e",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009582.html"
     },
     {
       "id": "msg-384f9a3f2012",
@@ -971,7 +1023,8 @@
       "body_snippet": "On 20/09/2023 8:03 p.m., Hanyu Song wrote:\n> Hello,\n> \n> I have a simple question about including examples. My code depends on a rarely used Python module, so I am using the @examplesIf tag per Hadley",
       "thread_id": "thread-a5f87e53b3ce",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009583.html"
     },
     {
       "id": "msg-c3545d1a96ed",
@@ -992,7 +1045,8 @@
       "body_snippet": "? Thu, 21 Sep 2023 15:02:12 +0200\nGuillaume Vareille <guillaume at ysengrin.com> ?????:\n\n> There are no dependencies\n\nI see now, you're using dialog-style programs on Unix-like operating\nsystems. That",
       "thread_id": "thread-c3545d1a96ed",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009584.html"
     },
     {
       "id": "msg-9a5886d49fce",
@@ -1012,7 +1066,8 @@
       "body_snippet": "? Thu, 21 Sep 2023 15:10:56 +0200\nJan Gorecki <j.gorecki at wit.edu.pl> ?????:\n\n> Do you by any chance know any examples of using\n> R_withCallingErrorHandler? Or could you modify your example to use\n>",
       "thread_id": "thread-9a5886d49fce",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009585.html"
     },
     {
       "id": "msg-bf13b51cb5c8",
@@ -1028,7 +1083,8 @@
       "body_snippet": "I have many datasets in a some of my packages, and always used `utils::promptData()` to generate the skeleton of a man/data.Rd file.\nNow that I've switched to roxygen style, I have found no simple equ",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009586.html"
     },
     {
       "id": "msg-0d3fdea51ad6",
@@ -1046,7 +1102,8 @@
       "body_snippet": "? Thu, 21 Sep 2023 16:33:35 +0000\nMichael L Friendly <friendly at yorku.ca> ?????:\n\n> I called this function `use_data_doc()`, because I thought it would\n> be a welcome addition to the usethis package",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009587.html"
     },
     {
       "id": "msg-7436f69e93bf",
@@ -1065,7 +1122,8 @@
       "body_snippet": "Yes, if usethis is the most useful place for this to be, I suppose I should first flag this as an issue, and then issue a PR for my code.\n\nI don't understand the fine distinctions between GPL-2 and MI",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009588.html"
     },
     {
       "id": "msg-a2cfddab158c",
@@ -1085,7 +1143,8 @@
       "body_snippet": "None of us here are lawyers, but a simple google search should take you to discussions such as [1]. There is a long history of debates about the upsides and downsides of restricting how people can use",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009589.html"
     },
     {
       "id": "msg-31bd06a16f5b",
@@ -1103,7 +1162,8 @@
       "body_snippet": "Hi Michael.\n\nI don't know if you're an RStudio user, but this seems ideal as the \nbasis for an RStudio plug-in.  Just install it, then when you want to \ngenerate docs for some dataset defined in R cod",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009590.html"
     },
     {
       "id": "msg-35b0745ecbfb",
@@ -1121,7 +1181,8 @@
       "body_snippet": "Hi Michael,\n\nI'm no license expert either, but I too believe that while a \nGPL-licensed package can incorporate MIT-licensed code, an MIT-licensed \npackage can't incorporate GPL-licensed code.\n\nOne so",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009591.html"
     },
     {
       "id": "msg-a7cf1c08ce97",
@@ -1140,7 +1201,8 @@
       "body_snippet": "I am an RStudio user, and I could see this as a plugin somewhere, but I don't want to create a package just for this.\n\nI'd rather that my code could be adopted somewhere in the framework of devtools/u",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009592.html"
     },
     {
       "id": "msg-a15f39a607c1",
@@ -1160,7 +1222,8 @@
       "body_snippet": "I thought roxygen supported documenting NULL constants for data.\n\nI do think roxygen ought to be able to co-exist with Rd files... but the claim that documenting data requires Rd files smells fishy to",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009593.html"
     },
     {
       "id": "msg-5c3701320aa0",
@@ -1180,7 +1243,8 @@
       "body_snippet": "I just found a couple of packages with add-ins that do something like \nthis:  sinew (on CRAN) and docthis on Github at\n\n  https://github.com/mdlincoln/docthis\n\nI think neither of them is quite as smoo",
       "thread_id": "thread-bf13b51cb5c8",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009594.html"
     },
     {
       "id": "msg-72ba41ac2383",
@@ -1199,7 +1263,8 @@
       "body_snippet": "Hello Duncan and Ivan,\n\nThank you for your prompt response! Perhaps I should add that:\n\nI don't think the Python module \"ctef\" exists on CRAN. Therefore, I am very surprised that the example below run",
       "thread_id": "thread-a5f87e53b3ce",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009595.html"
     },
     {
       "id": "msg-9fe865965b06",
@@ -1219,7 +1284,8 @@
       "body_snippet": "Hi,\n\nThere are no dependencies and everything is considered/treated as UTF-8.\nOn windows, I internally do all the conversions between UTF-8 and UTF-16.\nI also offer functions to convert between UTF-8 ",
       "thread_id": "thread-aab4964def3e",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009596.html"
     },
     {
       "id": "msg-c4b17a632a1a",
@@ -1240,7 +1306,8 @@
       "body_snippet": "Dear Guillaume -\n\nHere is a minimal example of an R package that uses C source:\nhttps://github.com/bradleyjeck/fancyRpkg\n\nAs the timestamps show, I made this a few years ago, so some things might\nnot ",
       "thread_id": "thread-aab4964def3e",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009597.html"
     },
     {
       "id": "msg-491b062c9492",
@@ -1258,7 +1325,8 @@
       "body_snippet": "I did my bindings using the easy .C interface\ndid you use the morecomplete .CALL ?\n\nOn 9/22/23 00:08, Paul Smith wrote:\n> Hi,\n>\n> Following your email to the r-package-dev list I tidied up some \n> pre",
       "thread_id": "thread-491b062c9492",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009598.html"
     },
     {
       "id": "msg-b0d8e1b08d0d",
@@ -1274,7 +1342,8 @@
       "body_snippet": "Hi Guillaume\n\nAs Ivan says there is a fair bit to packaging but not to much when you \nget used to it.\n\nSince your email I've put a mostly untested package wrapping \ntingfiledialogs via Rcpp on github\n",
       "thread_id": "thread-b0d8e1b08d0d",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009599.html"
     },
     {
       "id": "msg-4e74fd31c324",
@@ -1290,7 +1359,8 @@
       "body_snippet": "Hello all,\n\nAn issue has been raised for my BrailleR package.   https://github.com/ajrgodfrey/BrailleR/issues/97#issuecomment-1732136521\n\nI do make use of an .OnLoad() function for various tasks, incl",
       "thread_id": "thread-4e74fd31c324",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009600.html"
     },
     {
       "id": "msg-a70b174f626c",
@@ -1308,7 +1378,8 @@
       "body_snippet": "Thanks to everybody for the help and input.\nI happens that Paul was already working on preparing a tinyfiledialogs \npackage for R !\nAs he seems to know what is doing much more than I do,\nI will let hi",
       "thread_id": "thread-b0d8e1b08d0d",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009601.html"
     },
     {
       "id": "msg-8195b378b751",
@@ -1324,7 +1395,8 @@
       "body_snippet": "Hi everybody,\n\nSection 5.4 of WRE suggests to use `R_useDynamicSymbols(dll, FALSE);`\nwhen registering C/C++ routines in R packages, and Rcpp does so\nautomatically. ?Random.user describes a way to hook",
       "thread_id": "thread-8195b378b751",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009602.html"
     },
     {
       "id": "msg-6f4d72ef9b60",
@@ -1342,7 +1414,8 @@
       "body_snippet": "On 22/09/2023 8:35 p.m., Jonathan Godfrey wrote:\n> Hello all,\n> \n> An issue has been raised for my BrailleR package.   https://github.com/ajrgodfrey/BrailleR/issues/97#issuecomment-1732136521\n> \n> I d",
       "thread_id": "thread-4e74fd31c324",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009603.html"
     },
     {
       "id": "msg-b4e188509ff2",
@@ -1360,7 +1433,8 @@
       "body_snippet": "On 23/09/2023 4:42 a.m., Ralf Stubner wrote:\n> Hi everybody,\n> \n> Section 5.4 of WRE suggests to use `R_useDynamicSymbols(dll, FALSE);`\n> when registering C/C++ routines in R packages, and Rcpp does s",
       "thread_id": "thread-8195b378b751",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009604.html"
     },
     {
       "id": "msg-66b9db52eb4b",
@@ -1378,7 +1452,8 @@
       "body_snippet": "? Sat, 23 Sep 2023 08:42:25 +0000\nRalf Stubner <ralf.stubner at gmail.com> ?????:\n\n> ?Random.user describes a way to hook a user- defined\n> RNG into R. However, it looks like these two things are not\n",
       "thread_id": "thread-8195b378b751",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009605.html"
     },
     {
       "id": "msg-e8b338bacfa9",
@@ -1398,7 +1473,8 @@
       "body_snippet": "? Thu, 21 Sep 2023 22:11:37 +0000\nHanyu Song <hanyu.song at duke.edu> ?????:\n\n> Therefore, I am very surprised that the example below runs overtime,\n> since all it has to do is to run\n> reticulate::py",
       "thread_id": "thread-a5f87e53b3ce",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009606.html"
     },
     {
       "id": "msg-e3c6ac7469bd",
@@ -1417,7 +1493,8 @@
       "body_snippet": "On Sat, Sep 23, 2023 at 10:00?AM Duncan Murdoch\n<murdoch.duncan at gmail.com> wrote:\n\n> I don't know the answer here, but section 6.16 of WRE suggests that you\n> could explicitly make your functions v",
       "thread_id": "thread-8195b378b751",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009607.html"
     },
     {
       "id": "msg-c5bbbb727ba5",
@@ -1436,7 +1513,8 @@
       "body_snippet": "On Sat, Sep 23, 2023 at 7:30?PM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n> You're right! Looking at the code, if R_useDynamicSymbols(dll, FALSE)\n> has been called for a DLL, the branch that calls",
       "thread_id": "thread-8195b378b751",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009608.html"
     },
     {
       "id": "msg-3b68f2540439",
@@ -1452,7 +1530,8 @@
       "body_snippet": "Dear pkg developers,\n\nAre there any ways to check which sorting algorithm is being used when\ncalling `order` function? Documentation at\nhttps://stat.ethz.ch/R-manual/R-devel/library/base/html/sort.htm",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009609.html"
     },
     {
       "id": "msg-58ba7d09dfcd",
@@ -1470,7 +1549,8 @@
       "body_snippet": "Have you read the output of\n\norder\n\nentered at the R console?\n\n\nOn September 24, 2023 1:38:41 AM PDT, Jan Gorecki <j.gorecki at wit.edu.pl> wrote:\n>Dear pkg developers,\n>\n>Are there any ways to check ",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009610.html"
     },
     {
       "id": "msg-7022e791471b",
@@ -1489,7 +1569,8 @@
       "body_snippet": "Hi Jeff,\n\nYes I did. My question is about R_orderVector1 which is part of public R C\napi.\nShould I notice something relevant in the source of R's order?\n\nBest\nJan\n\nOn Sun, Sep 24, 2023, 17:27 Jeff New",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009611.html"
     },
     {
       "id": "msg-71d7e7e1ad6c",
@@ -1509,7 +1590,8 @@
       "body_snippet": "You asked how order works. From the R source you can follow which C functions are executed, and since you seem familiar with C you can answer your own question.\n\nOn September 24, 2023 11:10:53 AM PDT,",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009612.html"
     },
     {
       "id": "msg-34ae26c4d207",
@@ -1529,7 +1611,8 @@
       "body_snippet": "I think the logic Jeff had in mind is that R order() uses C do_order() for method=\"shell\" and since do_order() uses orderVector1() by induction it is the shell-sort implementation.\n\norder() itself use",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009613.html"
     },
     {
       "id": "msg-4126207dc26a",
@@ -1547,7 +1630,8 @@
       "body_snippet": "? Sun, 24 Sep 2023 10:38:41 +0200\nJan Gorecki <j.gorecki at wit.edu.pl> ?????:\n\n> https://github.com/wch/r-source/blob/ed51d34ec195b89462a8531b9ef30b7b72e47204/src/main/sort.c#L1133\n\n> could anyone de",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009614.html"
     },
     {
       "id": "msg-aa85b347aa59",
@@ -1616,7 +1700,8 @@
       "body_snippet": "Dear List-Members,\n\nThere are no errors/warnings/notes when I run the check:\n\n?? R CMD check results \n???????????????????????????????????????????????????????? Rpdb 2.3.3 ????\nDuration: 2m 50.1s\n\n0 err",
       "thread_id": "thread-98b010528d85",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009619.html"
     },
     {
       "id": "msg-65eaf01731cb",
@@ -1634,7 +1719,8 @@
       "body_snippet": "? Tue, 26 Sep 2023 10:01:21 +0300\nLeonard Mada via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> ?? R CMD check results \n\nIs it R CMD check or R CMD check --as-cran? You will most likel",
       "thread_id": "thread-98b010528d85",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009620.html"
     },
     {
       "id": "msg-0c303a176d01",
@@ -1650,7 +1736,8 @@
       "body_snippet": "Dear Colleagues,\n\n\nI've encountered a warning in my package that states:\n\n'warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes].'\n\nThis warning ",
       "thread_id": "thread-0c303a176d01",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009621.html"
     },
     {
       "id": "msg-1dc100fd6ce2",
@@ -1669,7 +1756,8 @@
       "body_snippet": "Thank you Ivan for all detail.\n\nI was looking for particular algo for benchmarking purpose.\n\nOn Mon, Sep 25, 2023 at 9:26?AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n\n> ? Sun, 24 Sep 2023 10:38:4",
       "thread_id": "thread-3b68f2540439",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009622.html"
     },
     {
       "id": "msg-d3da169715f5",
@@ -1687,7 +1775,8 @@
       "body_snippet": "This error arises because you are not declaring the function properly before you call it... likely because you have not included the appropriate header file or because you have typoed the function cal",
       "thread_id": "thread-0c303a176d01",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009623.html"
     },
     {
       "id": "msg-32ef4550cc82",
@@ -1706,7 +1795,8 @@
       "body_snippet": "Thanks for replying!\n\nThe main problem that this warning from a C library that I am relying on, I have no control to fix the warning there. So, I am still getting this warning from R, when building my",
       "thread_id": "thread-0c303a176d01",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009624.html"
     },
     {
       "id": "msg-e0bb3f92025a",
@@ -1722,11 +1812,12 @@
         "<0F25FF6A-5B31-40A1-81E1-05A62F60C9B9@dcn.davis.ca.us>",
         "<VI1P192MB02854A5AFE68B5CC4BA1F8FDFBC3A@VI1P192MB0285.EURP192.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>\n> Thanks for replying!\n>\n> The main problem that this warning from a C library that I am relying on, I have no control to fix the warning there. So, I am still getting this warning from R, when building my package.\n\nWe don't have a way of knowing for sure, because you didn't provide a\nlink to the package in question, so I'm just guessing here. From your\ndescription, it seems that you vendor OpenBLAS in your package, and\nthat's why you get a warning. Then you *do* have control to fix that:\njust patch your copy appropriately. This is what e.g. the BH package\n(and others) do. And in this case it would be nice to send the fix\nupstream too.\n\nI?aki\n\n>\n> Best,\n> --Sameh\n>\n> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Jeff Newmiller via R-package-devel <r-package-devel at r-project.org>\n> Date: Tuesday, September 26, 2023 at 11:19 AM\n> To: r-package-devel at r-project.org <r-package-devel at r-project.org>\n> Subject: [EXTERNAL] Re: [R-pkg-devel] Warning: a function declaration without a prototype is deprecated in all versions of C\n> This error arises because you are not declaring the function properly before you call it... likely because you have not included the appropriate header file or because you have typoed the function call.\n>\n> If you provide a link to your package someone may point you more precisely to your error, but this is a pretty basic C language question rather than an R package question so it isn't technically on topic here.\n>\n> On September 26, 2023 12:58:25 AM PDT, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n> >Dear Colleagues,\n> >\n> >\n> >I've encountered a warning in my package that states:\n> >\n> >'warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes].'\n> >\n> >This warning originates from one of the libraries I depend on, specifically OpenBLAS. So, I have no control to fix it inside OpenBLAS.\n> >\n> >I'm not sure how to resolve this issue.\n> >\n> >\n> >Best regards,\n> >--Sameh\"\n> >\n> >\n>\n> --\n> Sent from my phone. Please excuse my brevity.\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$<https://urldefense.com/v3/__https:/stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$>\n>\n> --\n>\n> This message and its contents, including attachments are intended solely\n> for the original recipient. If you are not the intended recipient or have\n> received this message in error, please notify me immediately and delete\n> this message from your computer system. Any unauthorized use or\n> distribution is prohibited. Please consider the environment before printing\n> this email.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nI?aki ?car",
+      "body_plain": "On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>\n> Thanks for replying!\n>\n> The main problem that this warning from a C library that I am relying on, I have no control to fix the warning there. So, I am still getting this warning from R, when building my package.\n\nWe don't have a way of knowing for sure, because you didn't provide a\nlink to the package in question, so I'm just guessing here. From your\ndescription, it seems that you vendor OpenBLAS in your package, and\nthat's why you get a warning. Then you *do* have control to fix that:\njust patch your copy appropriately. This is what e.g. the BH package\n(and others) do. And in this case it would be nice to send the fix\nupstream too.\n\nIñaki\n\n>\n> Best,\n> --Sameh\n>\n> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Jeff Newmiller via R-package-devel <r-package-devel at r-project.org>\n> Date: Tuesday, September 26, 2023 at 11:19 AM\n> To: r-package-devel at r-project.org <r-package-devel at r-project.org>\n> Subject: [EXTERNAL] Re: [R-pkg-devel] Warning: a function declaration without a prototype is deprecated in all versions of C\n> This error arises because you are not declaring the function properly before you call it... likely because you have not included the appropriate header file or because you have typoed the function call.\n>\n> If you provide a link to your package someone may point you more precisely to your error, but this is a pretty basic C language question rather than an R package question so it isn't technically on topic here.\n>\n> On September 26, 2023 12:58:25 AM PDT, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n> >Dear Colleagues,\n> >\n> >\n> >I've encountered a warning in my package that states:\n> >\n> >'warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes].'\n> >\n> >This warning originates from one of the libraries I depend on, specifically OpenBLAS. So, I have no control to fix it inside OpenBLAS.\n> >\n> >I'm not sure how to resolve this issue.\n> >\n> >\n> >Best regards,\n> >--Sameh\"\n> >\n> >\n>\n> --\n> Sent from my phone. Please excuse my brevity.\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$<https://urldefense.com/v3/__https:/stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$>\n>\n> --\n>\n> This message and its contents, including attachments are intended solely\n> for the original recipient. If you are not the intended recipient or have\n> received this message in error, please notify me immediately and delete\n> this message from your computer system. Any unauthorized use or\n> distribution is prohibited. Please consider the environment before printing\n> this email.\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nIñaki Úcar",
       "body_snippet": "On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>\n> Thanks for replying!\n>\n> The main problem that this warning from a C library that I am relying on, I have no con",
       "thread_id": "thread-0c303a176d01",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009625.html"
     },
     {
       "id": "msg-891166edb6ff",
@@ -1743,11 +1834,12 @@
         "<VI1P192MB02854A5AFE68B5CC4BA1F8FDFBC3A@VI1P192MB0285.EURP192.PROD.OUTLOOK.COM>",
         "<CALEXWq2dguJJ351HeYqHii=aNtaDG8B8XfQFeh1sBiGKf9S09g@mail.gmail.com>"
       ],
-      "body_plain": "Le 26/09/2023 ? 10:50, I?aki Ucar a ?crit?:\n> On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>>\n>> Thanks for replying!\n>>\n>> The main problem that this warning from a C library that I am relying on, I have no control to fix the warning there. So, I am still getting this warning from R, when building my package.\n> \n> We don't have a way of knowing for sure, because you didn't provide a\n> link to the package in question, so I'm just guessing here. From your\n> description, it seems that you vendor OpenBLAS in your package,\nAnd if you do, it's probably not the best way to proceed. R relies \nalready heavily on BLAS. So it is already available and may be it is \nsufficient in your case to add the following lines to Makevars to link \nto the local BLAS and leave the choice of the vendor to a final user \n(OpenBLAS, Atlas, MKL, ...):\n\nPKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)\n\nYou can see a demo package of using BLAS/LAPACK in R e.g. at \nhttps://github.com/cjgeyer/mat\n\nBest,\nSerguei.\n\n> and\n> that's why you get a warning. Then you *do* have control to fix that:\n> just patch your copy appropriately. This is what e.g. the BH package\n> (and others) do. And in this case it would be nice to send the fix\n> upstream too.\n> \n> I?aki\n> \n>>\n>> Best,\n>> --Sameh\n>>\n>> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Jeff Newmiller via R-package-devel <r-package-devel at r-project.org>\n>> Date: Tuesday, September 26, 2023 at 11:19 AM\n>> To: r-package-devel at r-project.org <r-package-devel at r-project.org>\n>> Subject: [EXTERNAL] Re: [R-pkg-devel] Warning: a function declaration without a prototype is deprecated in all versions of C\n>> This error arises because you are not declaring the function properly before you call it... likely because you have not included the appropriate header file or because you have typoed the function call.\n>>\n>> If you provide a link to your package someone may point you more precisely to your error, but this is a pretty basic C language question rather than an R package question so it isn't technically on topic here.\n>>\n>> On September 26, 2023 12:58:25 AM PDT, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>>> Dear Colleagues,\n>>>\n>>>\n>>> I've encountered a warning in my package that states:\n>>>\n>>> 'warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes].'\n>>>\n>>> This warning originates from one of the libraries I depend on, specifically OpenBLAS. So, I have no control to fix it inside OpenBLAS.\n>>>\n>>> I'm not sure how to resolve this issue.\n>>>\n>>>\n>>> Best regards,\n>>> --Sameh\"\n>>>\n>>>\n>>\n>> --\n>> Sent from my phone. Please excuse my brevity.\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$<https://urldefense.com/v3/__https:/stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$>\n>>\n>> --\n>>\n>> This message and its contents, including attachments are intended solely\n>> for the original recipient. If you are not the intended recipient or have\n>> received this message in error, please notify me immediately and delete\n>> this message from your computer system. Any unauthorized use or\n>> distribution is prohibited. Please consider the environment before printing\n>> this email.\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n>",
-      "body_snippet": "Le 26/09/2023 ? 10:50, I?aki Ucar a ?crit?:\n> On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>>\n>> Thanks for replying!\n>>\n>> The main problem that this warning fr",
+      "body_plain": "Le 26/09/2023 à 10:50, Iñaki Ucar a écrit :\n> On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>>\n>> Thanks for replying!\n>>\n>> The main problem that this warning from a C library that I am relying on, I have no control to fix the warning there. So, I am still getting this warning from R, when building my package.\n> \n> We don't have a way of knowing for sure, because you didn't provide a\n> link to the package in question, so I'm just guessing here. From your\n> description, it seems that you vendor OpenBLAS in your package,\nAnd if you do, it's probably not the best way to proceed. R relies \nalready heavily on BLAS. So it is already available and may be it is \nsufficient in your case to add the following lines to Makevars to link \nto the local BLAS and leave the choice of the vendor to a final user \n(OpenBLAS, Atlas, MKL, ...):\n\nPKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)\n\nYou can see a demo package of using BLAS/LAPACK in R e.g. at \nhttps://github.com/cjgeyer/mat\n\nBest,\nSerguei.\n\n> and\n> that's why you get a warning. Then you *do* have control to fix that:\n> just patch your copy appropriately. This is what e.g. the BH package\n> (and others) do. And in this case it would be nice to send the fix\n> upstream too.\n> \n> Iñaki\n> \n>>\n>> Best,\n>> --Sameh\n>>\n>> From: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Jeff Newmiller via R-package-devel <r-package-devel at r-project.org>\n>> Date: Tuesday, September 26, 2023 at 11:19 AM\n>> To: r-package-devel at r-project.org <r-package-devel at r-project.org>\n>> Subject: [EXTERNAL] Re: [R-pkg-devel] Warning: a function declaration without a prototype is deprecated in all versions of C\n>> This error arises because you are not declaring the function properly before you call it... likely because you have not included the appropriate header file or because you have typoed the function call.\n>>\n>> If you provide a link to your package someone may point you more precisely to your error, but this is a pretty basic C language question rather than an R package question so it isn't technically on topic here.\n>>\n>> On September 26, 2023 12:58:25 AM PDT, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>>> Dear Colleagues,\n>>>\n>>>\n>>> I've encountered a warning in my package that states:\n>>>\n>>> 'warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes].'\n>>>\n>>> This warning originates from one of the libraries I depend on, specifically OpenBLAS. So, I have no control to fix it inside OpenBLAS.\n>>>\n>>> I'm not sure how to resolve this issue.\n>>>\n>>>\n>>> Best regards,\n>>> --Sameh\"\n>>>\n>>>\n>>\n>> --\n>> Sent from my phone. Please excuse my brevity.\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$<https://urldefense.com/v3/__https:/stat.ethz.ch/mailman/listinfo/r-package-devel__;!!Nmw4Hv0!yyvWt-qHY4RQENDvneARJTJbYchLTruMwyEmREYaEtV52oUiLbgVqWM1wxJW-ijKGJeNgHq1HWtnHCQ1_CqTIRN9gfJfWX3c1A7nVQ$>\n>>\n>> --\n>>\n>> This message and its contents, including attachments are intended solely\n>> for the original recipient. If you are not the intended recipient or have\n>> received this message in error, please notify me immediately and delete\n>> this message from your computer system. Any unauthorized use or\n>> distribution is prohibited. Please consider the environment before printing\n>> this email.\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> \n>",
+      "body_snippet": "Le 26/09/2023 à 10:50, Iñaki Ucar a écrit :\n> On Tue, 26 Sept 2023 at 10:29, Sameh Abdulah <sameh.abdulah at kaust.edu.sa> wrote:\n>>\n>> Thanks for replying!\n>>\n>> The main problem that this warning fr",
       "thread_id": "thread-0c303a176d01",
       "thread_depth": 4,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009626.html"
     },
     {
       "id": "msg-664875295f3a",
@@ -1763,7 +1855,8 @@
       "body_snippet": "Dear Members,\n\n\nHow should the return values be documented, when the help page covers 2 \nrelated functions:\n\n\n1.) Variant 1: fails the checks\n\n\\value{\n\\code{cryst1} returns a list of class \\sQuote{cry",
       "thread_id": "thread-664875295f3a",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009627.html"
     },
     {
       "id": "msg-37bbeb00f3a0",
@@ -1781,7 +1874,8 @@
       "body_snippet": "On Tue, 26 Sep 2023, Leonard Mada via R-package-devel writes:\n\n> Dear Members,\n>\n>\n> How should the return values be documented, when the\n> help page covers 2 related functions:\n>\n>\n> 1.) Variant 1: f",
       "thread_id": "thread-664875295f3a",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009628.html"
     },
     {
       "id": "msg-76e7c00552b4",
@@ -1799,7 +1893,8 @@
       "body_snippet": "On Tue, Sep 26, 2023 at 2:01?AM Leonard Mada via R-package-devel\n<r-package-devel at r-project.org> wrote:\n>\n> Dear List-Members,\n>\n> There are no errors/warnings/notes when I run the check:\n>\n> ?? R ",
       "thread_id": "thread-98b010528d85",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009629.html"
     },
     {
       "id": "msg-3a36ecc181c4",
@@ -1817,7 +1912,8 @@
       "body_snippet": "I've sent a longish post to the R-devel mailing list with this\ntopic here:\n    https://stat.ethz.ch/pipermail/r-devel/2023-September/082892.html\n\nIn the mean time, the plan is to effectuate the change",
       "thread_id": "thread-3a36ecc181c4",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009630.html"
     },
     {
       "id": "msg-9e58369fcf5c",
@@ -1833,7 +1929,8 @@
       "body_snippet": "Good day,\n\nIs it possible to somehow specify more complex return types, such as a data.frame with specific columns?\n\n--------------------------------------\nDario Strbenac\nUniversity of Sydney\nCamperdo",
       "thread_id": "thread-9e58369fcf5c",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009631.html"
     },
     {
       "id": "msg-6d30f86289be",
@@ -1851,7 +1948,8 @@
       "body_snippet": "On Tue, 26 Sep 2023 20:00:03 +0000\nDario Strbenac <dstr7320 at uni.sydney.edu.au> wrote:\n\n> Is it possible to somehow specify more complex return types, such as\n> a data.frame with specific columns?\n\n",
       "thread_id": "thread-9e58369fcf5c",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009632.html"
     },
     {
       "id": "msg-7a61978a5419",
@@ -1870,7 +1968,8 @@
       "body_snippet": "On 27.09.2023 09:35, Ivan Krylov wrote:\n> On Tue, 26 Sep 2023 20:00:03 +0000\n> Dario Strbenac <dstr7320 at uni.sydney.edu.au> wrote:\n> \n>> Is it possible to somehow specify more complex return types, ",
       "thread_id": "thread-9e58369fcf5c",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009633.html"
     },
     {
       "id": "msg-2b180bf45f0e",
@@ -1886,7 +1985,8 @@
       "body_snippet": "Hi,\n\nIs it possible to link with MKL instead of RBLAS when submitting my package to CRAN? Do CRAN support other BLAS libraries?\n\nBest,\n--Sameh\n\n-- \n\nThis message and its contents, including attachment",
       "thread_id": "thread-2b180bf45f0e",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009634.html"
     },
     {
       "id": "msg-f1c080115231",
@@ -1904,7 +2004,8 @@
       "body_snippet": "On 27.09.2023 14:11, Sameh Abdulah wrote:\n> Hi,\n> \n> Is it possible to link with MKL instead of RBLAS when submitting my package to CRAN? Do CRAN support other BLAS libraries?\n\nNot quite sure what you",
       "thread_id": "thread-2b180bf45f0e",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009635.html"
     },
     {
       "id": "msg-a1af0eab0437",
@@ -1922,7 +2023,8 @@
       "body_snippet": "Le 27/09/2023 ? 14:11, Sameh Abdulah a ?crit?:\n> Hi,\n> \n> Is it possible to link with MKL instead of RBLAS when submitting my package to CRAN?\nUsually, it's not the business of a package to choose a B",
       "thread_id": "thread-2b180bf45f0e",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009636.html"
     },
     {
       "id": "msg-2e17a6bb1f0a",
@@ -1938,7 +2040,8 @@
       "body_snippet": "My package, RBedrock, is now throwing an error when compiled against\nClang17. The error log is here:\n\nhttps://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log\n\nThe important part is\n\"\"\"\nError: package ",
       "thread_id": "thread-2e17a6bb1f0a",
       "thread_depth": 0,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009637.html"
     },
     {
       "id": "msg-178d9b04ccf1",
@@ -1956,7 +2059,8 @@
       "body_snippet": "You might be able to reproduce it with the clang17 container here:\nhttps://r-hub.github.io/containers/\nYou can either run it directly or with the rhub2 package:\nhttps://github.com/r-hub/rhub2#readme\n\n",
       "thread_id": "thread-2e17a6bb1f0a",
       "thread_depth": 1,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009638.html"
     },
     {
       "id": "msg-0df6bc2d7c92",
@@ -1971,11 +2075,12 @@
         "<CALOkxuymN-XZV_G0bx6bLh8RL-pRgWCet8b4hC3NnMfu-ofJNg@mail.gmail.com>",
         "<CABtg=KnzPYYyLmyJ2yOwVY5jvOORxU7V9s1T=94pyUD5rSg2UA@mail.gmail.com>"
       ],
-      "body_plain": "I was unable to reproduce the error on the rhub's clang17 docker image.\n\nI notice that the linking command is slightly different between systems.\nAnd this suggests that I need to find some way to get CRAN to pass -stdlib\nflag at the linking stage.\n\nCRAN:\n/usr/local/clang17/bin/clang++ -std=gnu++17 -shared\n-L/usr/local/clang/lib64 -L/usr/local/clang17/lib -L/usr/local/gcc13/lib64\n-L/usr/local/lib64 -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\nkey_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n-pthread -lleveldb -lz\n\nRHUB:\nclang++-17 -stdlib=libc++ -std=gnu++14 -shared -L/opt/R/devel/lib/R/lib\n-L/usr/local/lib -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\nkey_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n-pthread -lleveldb -lz -L/opt/R/devel/lib/R/lib -lR\n\nOn Wed, Sep 27, 2023 at 11:36?AM G?bor Cs?rdi <csardi.gabor at gmail.com>\nwrote:\n\n> You might be able to reproduce it with the clang17 container here:\n>\n> https://urldefense.com/v3/__https://r-hub.github.io/containers/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoLqhhk9c$\n> You can either run it directly or with the rhub2 package:\n>\n> https://urldefense.com/v3/__https://github.com/r-hub/rhub2*readme__;Iw!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoxPbUQlE$\n>\n> Gabor\n>\n> On Wed, Sep 27, 2023 at 8:29?PM Reed A. Cartwright\n> <racartwright at gmail.com> wrote:\n> >\n> > My package, RBedrock, is now throwing an error when compiled against\n> > Clang17. The error log is here:\n> >\n> >\n> https://urldefense.com/v3/__https://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoNhThuZA$\n> >\n> > The important part is\n> > \"\"\"\n> > Error: package or namespace load failed for ?rbedrock? in dyn.load(file,\n> > DLLpath = DLLpath, ...):\n> >  unable to load shared object\n> >\n> '/data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so':\n> >\n> >\n> /data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so:\n> > undefined symbol: _ZNSt3__122__libcpp_verbose_abortEPKcz\n> > Error: loading failed\n> > \"\"\"\n> >\n> > From what I can gather through googling, this error can be caused by\n> using\n> > the C linker when one of the dependent libraries is a C++ library.\n> >\n> > I cannot tell if this is an issue with my package (likely) or CRAN's\n> > clang17 setup (less likely).\n> >\n> > Background about the package: rbedrock is written in C but links against\n> a\n> > C++ library (Mojang's leveldb fork)  via the library's C-API functions. I\n> > use a dummy .cpp file in the source directory to trigger R into using the\n> > C++ linker. That does still seem to be happening according to the log.\n> >\n> > Has anyone seen this before and know where I should start looking to fix\n> it?\n> >\n> > Thanks.\n> >\n> > --\n> > Reed A. Cartwright, PhD\n> > Associate Professor of Genomics, Evolution, and Bioinformatics\n> > School of Life Sciences and The Biodesign Institute\n> > Arizona State University\n> > ==================\n> > Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA\n> > Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n> > 85287-6401 USA\n> > Office: Biodesign B-220C, 1-480-965-9949\n> > Website:\n> https://urldefense.com/v3/__http://cartwrig.ht/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-Fo7waq1VI$\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> >\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FocAOfF7A$\n>",
+      "body_plain": "I was unable to reproduce the error on the rhub's clang17 docker image.\n\nI notice that the linking command is slightly different between systems.\nAnd this suggests that I need to find some way to get CRAN to pass -stdlib\nflag at the linking stage.\n\nCRAN:\n/usr/local/clang17/bin/clang++ -std=gnu++17 -shared\n-L/usr/local/clang/lib64 -L/usr/local/clang17/lib -L/usr/local/gcc13/lib64\n-L/usr/local/lib64 -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\nkey_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n-pthread -lleveldb -lz\n\nRHUB:\nclang++-17 -stdlib=libc++ -std=gnu++14 -shared -L/opt/R/devel/lib/R/lib\n-L/usr/local/lib -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\nkey_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n-pthread -lleveldb -lz -L/opt/R/devel/lib/R/lib -lR\n\nOn Wed, Sep 27, 2023 at 11:36 AM Gábor Csárdi <csardi.gabor at gmail.com>\nwrote:\n\n> You might be able to reproduce it with the clang17 container here:\n>\n> https://urldefense.com/v3/__https://r-hub.github.io/containers/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoLqhhk9c$\n> You can either run it directly or with the rhub2 package:\n>\n> https://urldefense.com/v3/__https://github.com/r-hub/rhub2*readme__;Iw!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoxPbUQlE$\n>\n> Gabor\n>\n> On Wed, Sep 27, 2023 at 8:29 PM Reed A. Cartwright\n> <racartwright at gmail.com> wrote:\n> >\n> > My package, RBedrock, is now throwing an error when compiled against\n> > Clang17. The error log is here:\n> >\n> >\n> https://urldefense.com/v3/__https://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoNhThuZA$\n> >\n> > The important part is\n> > \"\"\"\n> > Error: package or namespace load failed for ‘rbedrock’ in dyn.load(file,\n> > DLLpath = DLLpath, ...):\n> >  unable to load shared object\n> >\n> '/data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so':\n> >\n> >\n> /data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so:\n> > undefined symbol: _ZNSt3__122__libcpp_verbose_abortEPKcz\n> > Error: loading failed\n> > \"\"\"\n> >\n> > From what I can gather through googling, this error can be caused by\n> using\n> > the C linker when one of the dependent libraries is a C++ library.\n> >\n> > I cannot tell if this is an issue with my package (likely) or CRAN's\n> > clang17 setup (less likely).\n> >\n> > Background about the package: rbedrock is written in C but links against\n> a\n> > C++ library (Mojang's leveldb fork)  via the library's C-API functions. I\n> > use a dummy .cpp file in the source directory to trigger R into using the\n> > C++ linker. That does still seem to be happening according to the log.\n> >\n> > Has anyone seen this before and know where I should start looking to fix\n> it?\n> >\n> > Thanks.\n> >\n> > --\n> > Reed A. Cartwright, PhD\n> > Associate Professor of Genomics, Evolution, and Bioinformatics\n> > School of Life Sciences and The Biodesign Institute\n> > Arizona State University\n> > ==================\n> > Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA\n> > Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n> > 85287-6401 USA\n> > Office: Biodesign B-220C, 1-480-965-9949\n> > Website:\n> https://urldefense.com/v3/__http://cartwrig.ht/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-Fo7waq1VI$\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> >\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FocAOfF7A$\n>",
       "body_snippet": "I was unable to reproduce the error on the rhub's clang17 docker image.\n\nI notice that the linking command is slightly different between systems.\nAnd this suggests that I need to find some way to get ",
       "thread_id": "thread-2e17a6bb1f0a",
       "thread_depth": 2,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009639.html"
     },
     {
       "id": "msg-b407a50b2510",
@@ -1991,11 +2096,12 @@
         "<CABtg=KnzPYYyLmyJ2yOwVY5jvOORxU7V9s1T=94pyUD5rSg2UA@mail.gmail.com>",
         "<CALOkxuzGgwGk28zRH13YF+5WQr6iXs-5vDFUHbTr7vp8uOW7ig@mail.gmail.com>"
       ],
-      "body_plain": "It looks like a C++ run-time mismatch between what cmake is using to build the static library and what is used by R. Unfortunately, cmake hides the actual compiler calls so it's hard to tell the difference, but that setup relies on the correct sequence of library paths.\n\nThe rhub manually forces -stdlib=libc++ to all its CXX flags\nhttps://github.com/r-hub/rhub-linux-builders/blob/master/fedora-clang-devel/Makevars\nso it is quite different from the gannet tests-clang-trunk setup (also note the different library paths), but that's not something you can do universally in the package, because it strongly depends on the toolchain setup.\n\nCheers,\nSimon\n\n\n> On 28/09/2023, at 9:37 AM, Reed A. Cartwright <racartwright at gmail.com> wrote:\n> \n> I was unable to reproduce the error on the rhub's clang17 docker image.\n> \n> I notice that the linking command is slightly different between systems.\n> And this suggests that I need to find some way to get CRAN to pass -stdlib\n> flag at the linking stage.\n> \n> CRAN:\n> /usr/local/clang17/bin/clang++ -std=gnu++17 -shared\n> -L/usr/local/clang/lib64 -L/usr/local/clang17/lib -L/usr/local/gcc13/lib64\n> -L/usr/local/lib64 -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\n> key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> -pthread -lleveldb -lz\n> \n> RHUB:\n> clang++-17 -stdlib=libc++ -std=gnu++14 -shared -L/opt/R/devel/lib/R/lib\n> -L/usr/local/lib -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\n> key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> -pthread -lleveldb -lz -L/opt/R/devel/lib/R/lib -lR\n> \n> On Wed, Sep 27, 2023 at 11:36?AM G?bor Cs?rdi <csardi.gabor at gmail.com>\n> wrote:\n> \n>> You might be able to reproduce it with the clang17 container here:\n>> \n>> https://urldefense.com/v3/__https://r-hub.github.io/containers/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoLqhhk9c$\n>> You can either run it directly or with the rhub2 package:\n>> \n>> https://urldefense.com/v3/__https://github.com/r-hub/rhub2*readme__;Iw!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoxPbUQlE$\n>> \n>> Gabor\n>> \n>> On Wed, Sep 27, 2023 at 8:29?PM Reed A. Cartwright\n>> <racartwright at gmail.com> wrote:\n>>> \n>>> My package, RBedrock, is now throwing an error when compiled against\n>>> Clang17. The error log is here:\n>>> \n>>> \n>> https://urldefense.com/v3/__https://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoNhThuZA$\n>>> \n>>> The important part is\n>>> \"\"\"\n>>> Error: package or namespace load failed for ?rbedrock? in dyn.load(file,\n>>> DLLpath = DLLpath, ...):\n>>> unable to load shared object\n>>> \n>> '/data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so':\n>>> \n>>> \n>> /data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so:\n>>> undefined symbol: _ZNSt3__122__libcpp_verbose_abortEPKcz\n>>> Error: loading failed\n>>> \"\"\"\n>>> \n>>> From what I can gather through googling, this error can be caused by\n>> using\n>>> the C linker when one of the dependent libraries is a C++ library.\n>>> \n>>> I cannot tell if this is an issue with my package (likely) or CRAN's\n>>> clang17 setup (less likely).\n>>> \n>>> Background about the package: rbedrock is written in C but links against\n>> a\n>>> C++ library (Mojang's leveldb fork)  via the library's C-API functions. I\n>>> use a dummy .cpp file in the source directory to trigger R into using the\n>>> C++ linker. That does still seem to be happening according to the log.\n>>> \n>>> Has anyone seen this before and know where I should start looking to fix\n>> it?\n>>> \n>>> Thanks.\n>>> \n>>> --\n>>> Reed A. Cartwright, PhD\n>>> Associate Professor of Genomics, Evolution, and Bioinformatics\n>>> School of Life Sciences and The Biodesign Institute\n>>> Arizona State University\n>>> ==================\n>>> Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA\n>>> Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n>>> 85287-6401 USA\n>>> Office: Biodesign B-220C, 1-480-965-9949\n>>> Website:\n>> https://urldefense.com/v3/__http://cartwrig.ht/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-Fo7waq1VI$\n>>> \n>>>        [[alternative HTML version deleted]]\n>>> \n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> \n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FocAOfF7A$\n>> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "It looks like a C++ run-time mismatch between what cmake is using to build the static library and what is used by R. Unfortunately, cmake hides the actual compiler calls so it's hard to tell the difference, but that setup relies on the correct sequence of library paths.\n\nThe rhub manually forces -stdlib=libc++ to all its CXX flags\nhttps://github.com/r-hub/rhub-linux-builders/blob/master/fedora-clang-devel/Makevars\nso it is quite different from the gannet tests-clang-trunk setup (also note the different library paths), but that's not something you can do universally in the package, because it strongly depends on the toolchain setup.\n\nCheers,\nSimon\n\n\n> On 28/09/2023, at 9:37 AM, Reed A. Cartwright <racartwright at gmail.com> wrote:\n> \n> I was unable to reproduce the error on the rhub's clang17 docker image.\n> \n> I notice that the linking command is slightly different between systems.\n> And this suggests that I need to find some way to get CRAN to pass -stdlib\n> flag at the linking stage.\n> \n> CRAN:\n> /usr/local/clang17/bin/clang++ -std=gnu++17 -shared\n> -L/usr/local/clang/lib64 -L/usr/local/clang17/lib -L/usr/local/gcc13/lib64\n> -L/usr/local/lib64 -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\n> key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> -pthread -lleveldb -lz\n> \n> RHUB:\n> clang++-17 -stdlib=libc++ -std=gnu++14 -shared -L/opt/R/devel/lib/R/lib\n> -L/usr/local/lib -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\n> key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> -pthread -lleveldb -lz -L/opt/R/devel/lib/R/lib -lR\n> \n> On Wed, Sep 27, 2023 at 11:36 AM Gábor Csárdi <csardi.gabor at gmail.com>\n> wrote:\n> \n>> You might be able to reproduce it with the clang17 container here:\n>> \n>> https://urldefense.com/v3/__https://r-hub.github.io/containers/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoLqhhk9c$\n>> You can either run it directly or with the rhub2 package:\n>> \n>> https://urldefense.com/v3/__https://github.com/r-hub/rhub2*readme__;Iw!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoxPbUQlE$\n>> \n>> Gabor\n>> \n>> On Wed, Sep 27, 2023 at 8:29 PM Reed A. Cartwright\n>> <racartwright at gmail.com> wrote:\n>>> \n>>> My package, RBedrock, is now throwing an error when compiled against\n>>> Clang17. The error log is here:\n>>> \n>>> \n>> https://urldefense.com/v3/__https://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoNhThuZA$\n>>> \n>>> The important part is\n>>> \"\"\"\n>>> Error: package or namespace load failed for ‘rbedrock’ in dyn.load(file,\n>>> DLLpath = DLLpath, ...):\n>>> unable to load shared object\n>>> \n>> '/data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so':\n>>> \n>>> \n>> /data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so:\n>>> undefined symbol: _ZNSt3__122__libcpp_verbose_abortEPKcz\n>>> Error: loading failed\n>>> \"\"\"\n>>> \n>>> From what I can gather through googling, this error can be caused by\n>> using\n>>> the C linker when one of the dependent libraries is a C++ library.\n>>> \n>>> I cannot tell if this is an issue with my package (likely) or CRAN's\n>>> clang17 setup (less likely).\n>>> \n>>> Background about the package: rbedrock is written in C but links against\n>> a\n>>> C++ library (Mojang's leveldb fork)  via the library's C-API functions. I\n>>> use a dummy .cpp file in the source directory to trigger R into using the\n>>> C++ linker. That does still seem to be happening according to the log.\n>>> \n>>> Has anyone seen this before and know where I should start looking to fix\n>> it?\n>>> \n>>> Thanks.\n>>> \n>>> --\n>>> Reed A. Cartwright, PhD\n>>> Associate Professor of Genomics, Evolution, and Bioinformatics\n>>> School of Life Sciences and The Biodesign Institute\n>>> Arizona State University\n>>> ==================\n>>> Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401 USA\n>>> Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n>>> 85287-6401 USA\n>>> Office: Biodesign B-220C, 1-480-965-9949\n>>> Website:\n>> https://urldefense.com/v3/__http://cartwrig.ht/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-Fo7waq1VI$\n>>> \n>>>        [[alternative HTML version deleted]]\n>>> \n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> \n>> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FocAOfF7A$\n>> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "It looks like a C++ run-time mismatch between what cmake is using to build the static library and what is used by R. Unfortunately, cmake hides the actual compiler calls so it's hard to tell the diffe",
       "thread_id": "thread-2e17a6bb1f0a",
       "thread_depth": 3,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009640.html"
     },
     {
       "id": "msg-9d55b3776ad7",
@@ -2012,11 +2118,12 @@
         "<CALOkxuzGgwGk28zRH13YF+5WQr6iXs-5vDFUHbTr7vp8uOW7ig@mail.gmail.com>",
         "<A872FAA4-7826-4CE3-ACB9-C15DE56B32F9@R-project.org>"
       ],
-      "body_plain": "Is there any way to submit packages directly to the CRAN's clang17 setup? I\ncan enable verbose output for CMake and compare the output, but I'd rather\nnot clog up the CRAN incoming queue just to debug a linker error?\n\nOn Wed, Sep 27, 2023 at 2:43?PM Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> It looks like a C++ run-time mismatch between what cmake is using to build\n> the static library and what is used by R. Unfortunately, cmake hides the\n> actual compiler calls so it's hard to tell the difference, but that setup\n> relies on the correct sequence of library paths.\n>\n> The rhub manually forces -stdlib=libc++ to all its CXX flags\n>\n> https://urldefense.com/v3/__https://github.com/r-hub/rhub-linux-builders/blob/master/fedora-clang-devel/Makevars__;!!IKRxdwAv5BmarQ!bAZgiOQaK4hd5BTk_Ldx9IEHgzHKVbC-uMkvYv5GOVkZDvbedcGwS8dQ4MWXRjukFfds7UpiR9NDZfEoUCWeoVnCfrDa$\n> so it is quite different from the gannet tests-clang-trunk setup (also\n> note the different library paths), but that's not something you can do\n> universally in the package, because it strongly depends on the toolchain\n> setup.\n>\n> Cheers,\n> Simon\n>\n>\n> > On 28/09/2023, at 9:37 AM, Reed A. Cartwright <racartwright at gmail.com>\n> wrote:\n> >\n> > I was unable to reproduce the error on the rhub's clang17 docker image.\n> >\n> > I notice that the linking command is slightly different between systems.\n> > And this suggests that I need to find some way to get CRAN to pass\n> -stdlib\n> > flag at the linking stage.\n> >\n> > CRAN:\n> > /usr/local/clang17/bin/clang++ -std=gnu++17 -shared\n> > -L/usr/local/clang/lib64 -L/usr/local/clang17/lib\n> -L/usr/local/gcc13/lib64\n> > -L/usr/local/lib64 -o rbedrock.so actors.o bedrock_leveldb.o dummy.o\n> init.o\n> > key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> > -pthread -lleveldb -lz\n> >\n> > RHUB:\n> > clang++-17 -stdlib=libc++ -std=gnu++14 -shared -L/opt/R/devel/lib/R/lib\n> > -L/usr/local/lib -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\n> > key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> > -pthread -lleveldb -lz -L/opt/R/devel/lib/R/lib -lR\n> >\n> > On Wed, Sep 27, 2023 at 11:36?AM G?bor Cs?rdi <csardi.gabor at gmail.com>\n> > wrote:\n> >\n> >> You might be able to reproduce it with the clang17 container here:\n> >>\n> >>\n> https://urldefense.com/v3/__https://r-hub.github.io/containers/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoLqhhk9c$\n> >> You can either run it directly or with the rhub2 package:\n> >>\n> >>\n> https://urldefense.com/v3/__https://github.com/r-hub/rhub2*readme__;Iw!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoxPbUQlE$\n> >>\n> >> Gabor\n> >>\n> >> On Wed, Sep 27, 2023 at 8:29?PM Reed A. Cartwright\n> >> <racartwright at gmail.com> wrote:\n> >>>\n> >>> My package, RBedrock, is now throwing an error when compiled against\n> >>> Clang17. The error log is here:\n> >>>\n> >>>\n> >>\n> https://urldefense.com/v3/__https://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoNhThuZA$\n> >>>\n> >>> The important part is\n> >>> \"\"\"\n> >>> Error: package or namespace load failed for ?rbedrock? in\n> dyn.load(file,\n> >>> DLLpath = DLLpath, ...):\n> >>> unable to load shared object\n> >>>\n> >>\n> '/data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so':\n> >>>\n> >>>\n> >>\n> /data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so:\n> >>> undefined symbol: _ZNSt3__122__libcpp_verbose_abortEPKcz\n> >>> Error: loading failed\n> >>> \"\"\"\n> >>>\n> >>> From what I can gather through googling, this error can be caused by\n> >> using\n> >>> the C linker when one of the dependent libraries is a C++ library.\n> >>>\n> >>> I cannot tell if this is an issue with my package (likely) or CRAN's\n> >>> clang17 setup (less likely).\n> >>>\n> >>> Background about the package: rbedrock is written in C but links\n> against\n> >> a\n> >>> C++ library (Mojang's leveldb fork)  via the library's C-API\n> functions. I\n> >>> use a dummy .cpp file in the source directory to trigger R into using\n> the\n> >>> C++ linker. That does still seem to be happening according to the log.\n> >>>\n> >>> Has anyone seen this before and know where I should start looking to\n> fix\n> >> it?\n> >>>\n> >>> Thanks.\n> >>>\n> >>> --\n> >>> Reed A. Cartwright, PhD\n> >>> Associate Professor of Genomics, Evolution, and Bioinformatics\n> >>> School of Life Sciences and The Biodesign Institute\n> >>> Arizona State University\n> >>> ==================\n> >>> Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401\n> USA\n> >>> Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n> >>> 85287-6401 USA\n> >>> Office: Biodesign B-220C, 1-480-965-9949\n> >>> Website:\n> >>\n> https://urldefense.com/v3/__http://cartwrig.ht/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-Fo7waq1VI$\n> >>>\n> >>>        [[alternative HTML version deleted]]\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>>\n> >>\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FocAOfF7A$\n> >>\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> >\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!bAZgiOQaK4hd5BTk_Ldx9IEHgzHKVbC-uMkvYv5GOVkZDvbedcGwS8dQ4MWXRjukFfds7UpiR9NDZfEoUCWeoZEUmVSQ$\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Is there any way to submit packages directly to the CRAN's clang17 setup? I\ncan enable verbose output for CMake and compare the output, but I'd rather\nnot clog up the CRAN incoming queue just to debug a linker error?\n\nOn Wed, Sep 27, 2023 at 2:43 PM Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> It looks like a C++ run-time mismatch between what cmake is using to build\n> the static library and what is used by R. Unfortunately, cmake hides the\n> actual compiler calls so it's hard to tell the difference, but that setup\n> relies on the correct sequence of library paths.\n>\n> The rhub manually forces -stdlib=libc++ to all its CXX flags\n>\n> https://urldefense.com/v3/__https://github.com/r-hub/rhub-linux-builders/blob/master/fedora-clang-devel/Makevars__;!!IKRxdwAv5BmarQ!bAZgiOQaK4hd5BTk_Ldx9IEHgzHKVbC-uMkvYv5GOVkZDvbedcGwS8dQ4MWXRjukFfds7UpiR9NDZfEoUCWeoVnCfrDa$\n> so it is quite different from the gannet tests-clang-trunk setup (also\n> note the different library paths), but that's not something you can do\n> universally in the package, because it strongly depends on the toolchain\n> setup.\n>\n> Cheers,\n> Simon\n>\n>\n> > On 28/09/2023, at 9:37 AM, Reed A. Cartwright <racartwright at gmail.com>\n> wrote:\n> >\n> > I was unable to reproduce the error on the rhub's clang17 docker image.\n> >\n> > I notice that the linking command is slightly different between systems.\n> > And this suggests that I need to find some way to get CRAN to pass\n> -stdlib\n> > flag at the linking stage.\n> >\n> > CRAN:\n> > /usr/local/clang17/bin/clang++ -std=gnu++17 -shared\n> > -L/usr/local/clang/lib64 -L/usr/local/clang17/lib\n> -L/usr/local/gcc13/lib64\n> > -L/usr/local/lib64 -o rbedrock.so actors.o bedrock_leveldb.o dummy.o\n> init.o\n> > key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> > -pthread -lleveldb -lz\n> >\n> > RHUB:\n> > clang++-17 -stdlib=libc++ -std=gnu++14 -shared -L/opt/R/devel/lib/R/lib\n> > -L/usr/local/lib -o rbedrock.so actors.o bedrock_leveldb.o dummy.o init.o\n> > key_conv.o nbt.o random.o subchunk.o support.o -L./leveldb-mcpe/build\n> > -pthread -lleveldb -lz -L/opt/R/devel/lib/R/lib -lR\n> >\n> > On Wed, Sep 27, 2023 at 11:36 AM Gábor Csárdi <csardi.gabor at gmail.com>\n> > wrote:\n> >\n> >> You might be able to reproduce it with the clang17 container here:\n> >>\n> >>\n> https://urldefense.com/v3/__https://r-hub.github.io/containers/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoLqhhk9c$\n> >> You can either run it directly or with the rhub2 package:\n> >>\n> >>\n> https://urldefense.com/v3/__https://github.com/r-hub/rhub2*readme__;Iw!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoxPbUQlE$\n> >>\n> >> Gabor\n> >>\n> >> On Wed, Sep 27, 2023 at 8:29 PM Reed A. Cartwright\n> >> <racartwright at gmail.com> wrote:\n> >>>\n> >>> My package, RBedrock, is now throwing an error when compiled against\n> >>> Clang17. The error log is here:\n> >>>\n> >>>\n> >>\n> https://urldefense.com/v3/__https://www.stats.ox.ac.uk/pub/bdr/clang17/rbedrock.log__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FoNhThuZA$\n> >>>\n> >>> The important part is\n> >>> \"\"\"\n> >>> Error: package or namespace load failed for ‘rbedrock’ in\n> dyn.load(file,\n> >>> DLLpath = DLLpath, ...):\n> >>> unable to load shared object\n> >>>\n> >>\n> '/data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so':\n> >>>\n> >>>\n> >>\n> /data/gannet/ripley/R/packages/tests-clang-trunk/rbedrock.Rcheck/00LOCK-rbedrock/00new/rbedrock/libs/rbedrock.so:\n> >>> undefined symbol: _ZNSt3__122__libcpp_verbose_abortEPKcz\n> >>> Error: loading failed\n> >>> \"\"\"\n> >>>\n> >>> From what I can gather through googling, this error can be caused by\n> >> using\n> >>> the C linker when one of the dependent libraries is a C++ library.\n> >>>\n> >>> I cannot tell if this is an issue with my package (likely) or CRAN's\n> >>> clang17 setup (less likely).\n> >>>\n> >>> Background about the package: rbedrock is written in C but links\n> against\n> >> a\n> >>> C++ library (Mojang's leveldb fork)  via the library's C-API\n> functions. I\n> >>> use a dummy .cpp file in the source directory to trigger R into using\n> the\n> >>> C++ linker. That does still seem to be happening according to the log.\n> >>>\n> >>> Has anyone seen this before and know where I should start looking to\n> fix\n> >> it?\n> >>>\n> >>> Thanks.\n> >>>\n> >>> --\n> >>> Reed A. Cartwright, PhD\n> >>> Associate Professor of Genomics, Evolution, and Bioinformatics\n> >>> School of Life Sciences and The Biodesign Institute\n> >>> Arizona State University\n> >>> ==================\n> >>> Address: The Biodesign Institute, PO Box 876401, Tempe, AZ 85287-6401\n> USA\n> >>> Packages: The Biodesign Institute, 1001 S. McAllister Ave, Tempe, AZ\n> >>> 85287-6401 USA\n> >>> Office: Biodesign B-220C, 1-480-965-9949\n> >>> Website:\n> >>\n> https://urldefense.com/v3/__http://cartwrig.ht/__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-Fo7waq1VI$\n> >>>\n> >>>        [[alternative HTML version deleted]]\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>>\n> >>\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!a5vkX68B5unua6_Zsh92b99AXfbJiewU7Mp0nqAKE0JDT8v3g2d08JZ8Yq_0ubp0j4GeTWWLjLVAN-FocAOfF7A$\n> >>\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> >\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!IKRxdwAv5BmarQ!bAZgiOQaK4hd5BTk_Ldx9IEHgzHKVbC-uMkvYv5GOVkZDvbedcGwS8dQ4MWXRjukFfds7UpiR9NDZfEoUCWeoZEUmVSQ$\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Is there any way to submit packages directly to the CRAN's clang17 setup? I\ncan enable verbose output for CMake and compare the output, but I'd rather\nnot clog up the CRAN incoming queue just to debug",
       "thread_id": "thread-2e17a6bb1f0a",
       "thread_depth": 4,
-      "month": "2023-09"
+      "month": "2023-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2023q3/009641.html"
     }
   ],
   "threads": [

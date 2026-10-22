@@ -19,7 +19,8 @@
       "body_snippet": "Please use .onAttach:\nUsers who directly use yourt package will see it as they will attach \nyour package.\nUsers who use your package via another one (which may load yours) cannot \ndo much, as the corr",
       "thread_id": "thread-ab00b0ecfdd8",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008121.html"
     },
     {
       "id": "msg-d36fe6ad44fa",
@@ -45,7 +46,8 @@
       "body_snippet": ">>>>> Jeff Newmiller \n>>>>>     on Tue, 31 May 2022 16:09:16 -0700 writes:\n\n    > FWIW the RStudio build is often not complete... it intentionally takes shortcuts that make test/run iteration faster..",
       "thread_id": "thread-d36fe6ad44fa",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008122.html"
     },
     {
       "id": "msg-665b62c91940",
@@ -61,7 +63,8 @@
       "body_snippet": "Hello\n\nI need some help to add C++ functions using Rcpp to the ade4 package.\n\nThe ade4 package (on CRAN) already contains many C functions, mainly to perform randomization tests, and we would like to ",
       "thread_id": "thread-665b62c91940",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008123.html"
     },
     {
       "id": "msg-86d28fc59347",
@@ -79,7 +82,8 @@
       "body_snippet": "On Wed, 1 Jun 2022 11:03:48 +0200\nTHIOULOUSE JEAN <Jean.Thioulouse at univ-lyon1.fr> wrote:\n\n> Do I have to modify the init.c file in the src directory ? It\n> contains the reference to all the C funct",
       "thread_id": "thread-665b62c91940",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008124.html"
     },
     {
       "id": "msg-9c65e6fd1b6e",
@@ -97,7 +101,8 @@
       "body_snippet": "On 1 June 2022 at 11:03, THIOULOUSE JEAN wrote:\n| Hello\n| \n| I need some help to add C++ functions using Rcpp to the ade4 package.\n| \n| The ade4 package (on CRAN) already contains many C functions, ma",
       "thread_id": "thread-665b62c91940",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008125.html"
     },
     {
       "id": "msg-c515f9d248cd",
@@ -120,11 +125,12 @@
         "<D29F12E5-B3EB-440F-92D8-F1C8D88020D1@dcn.davis.ca.us>",
         "<25239.7579.515401.430977@stat.math.ethz.ch>"
       ],
-      "body_plain": "Here is some suggested text to be added to the Writing R Extensions manual.\nAny suggestions for changes?\n\n1.4.3. Customizing the vignette help index\n\nR provides two indices to the vignettes in a package  (a) the\nbrowseVignettes() function and (b) the html index of vignettes and other\nuser documentation available when you use help(package=xxx). The latter is\nbuilt when the package is installed.\n\n\n\nIn some cases, customization of the html index is desirable. For example,\ncurrently the entries in the index  are sorted by the vignette engine used\nto build the vignette and then by the file name of the vignette and a\ndifferent sort order may be desired. Or additional documents may wish to be\nincluded, e.g., the purl()?d code from an ?asis? vignette.\n\n\n\nPrevious sections of this guide indicate that if an ?index.html? file is\npresent in the inst/doc directory at the time of the build, then a new\n?index.html? file will not be built. Previous sections also indicate how to\nadd additional files to the inst/doc directory. The following is then a\nsummary of the steps needed to customize the html index to the vignettes in\na package.\n\n\n\n1. Create a revised ?index.html? file in the vignettes directory. It may be\neasiest to copy an existing ?doc/index.html? file from an installed\npackage. The vignettes/index.html file should be in plain html and can be\nmodified to change the sort order or to add links to additional files to be\navailable to users. Note that files are referred to using relative path\nnames ? follow the pattern in the copied file.\n\n\n\n2. Add any other additional files to the vignettes directory that are to be\navailable to the user via the vignette help index.\n\n\n\n3. Add an ?.install_extras? file to the vignettes directory (don?t forget\nthe leading period in this file?s name). This is a text file with the names\nof the files in the vignettes directory to be added to the inst/doc\ndirectory. Each line can be coded as a regular expression. At a minimum,\ninclude ?index.html? to copy the vignettes/index.html file to the inst/doc\ndirectory.\n\n\n\n4. Check/build the package in the regular way.\n\n\n\nThere is no evident way to modify the output of the browseVignettes()\nfunction; however, this function currently sorts by the vignette file name\nregardless of the vignette engine used.\n\nOn Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <maechler at stat.math.ethz.ch>\nwrote:\n\n> >>>>> Jeff Newmiller\n> >>>>>     on Tue, 31 May 2022 16:09:16 -0700 writes:\n>\n>     > FWIW the RStudio build is often not complete... it intentionally\n> takes shortcuts that make test/run iteration faster... but you should make\n> a habit of using the command line to build artifacts for sharing... it will\n> help avoid gotchas.\n>\n> Yes, definitely.\n>\n> Notably, e.g., reloading the package sources (often via\n> devtools) into a running R process instead of restarting R and\n> loading/attaching the newly built and installed package (that\n> you are developing) is much faster, but *NOT* equivalent and\n> sometimes misleading -- because it's not easily possible to\n> \"revert\" everything you did in your running R session {caches,\n> method tables, DLLs, internal pointers, ...}.\n>\n> (read on, further down)\n>\n>     > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n> cschwarzstatsfuca at gmail.com> wrote:\n>     >> Success!\n>     >>\n>     >> Building on MT's note that if the inst/doc has an index.html file,\n> R does\n>     >> NOT build a new index.\n>     >> At the end of Writing R Extensions Section 1.4, it states\n>     >> \"  When R CMD build builds the vignettes, it copies these and the\n> vignette\n>     >> sources from directory vignettes to inst/doc. To install any other\n> files\n>     >> from the vignettes directory, include a file\n> vignettes/.install_extras which\n>     >> specifies these as Perl-like regular expressions on one or more\n> lines..\"\n>     >>\n>     >> So I copied the existing inst/doc/index.html file from the installed\n>     >> SighatbilityModel with the wrong sort order to my\n> vignettes/index.html,\n>     >> edited this index.html file to get the right sort order. The\n> index.html is\n>     >> just vanilla html so it is easy to modify \"manually\".\n>     >> Then I created a vignettes/.install_extras with a single entry\n> \"index.html\"\n>     >> and now vignettes/index.html appears to be copied to inst/doc and\n> so stops\n>     >> the building of the wrongly sorted index.\n>     >>\n>     >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n> tar.gz\n>     >> file; installed from the tar.gz file, and now my vignette index is\n> sorted\n>     >> properly on my Mac machine.\n>     >> Also tried using devtools::check_win_release() to generate a\n> windoze zip\n>     >> file; installed that; and the vignette index is again sorted\n> properly on\n>     >> Windows machines.\n>     >>\n>     >> I'm hoping I can use this for (b) from my original query as well.\n>     >>\n>     >> This will mean that I have to \"manually'\" maintain the\n> vignettes/index.html\n>     >> file, but that is straightforward.\n>     >>\n>     >> I hope this works when I submit to CRAN.\n>     >>\n>     >> How do I suggest to the R maintainers that an explicit section be\n> added to\n>     >> the Writing R Extensions manual with the above steps so that future\n> package\n>     >> writers don't repeat history? I'm willing to write the paragraph\n> explaining\n>     >> the steps, but don't know who/how to proceed to get it added to\n> Writing R\n>     >> Extensions.\n>     >>\n>     >> Carl Schwarz\n>\n> The WRE manual is part of the R sources, so formally you are\n> proposing to improve (the documentation part of) R.\n>\n> You can propose a patch against the \"R-devel\" sources.\n> If the changes are quite small and compact (as here), even on by e-mail.\n> The source file  is  doc/manual/R-exts.texi\n> in R's SVN (source server)\n>   https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n> or one of its mirrors (notably on github)\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Here is some suggested text to be added to the Writing R Extensions manual.\nAny suggestions for changes?\n\n1.4.3. Customizing the vignette help index\n\nR provides two indices to the vignettes in a package  (a) the\nbrowseVignettes() function and (b) the html index of vignettes and other\nuser documentation available when you use help(package=xxx). The latter is\nbuilt when the package is installed.\n\n\n\nIn some cases, customization of the html index is desirable. For example,\ncurrently the entries in the index  are sorted by the vignette engine used\nto build the vignette and then by the file name of the vignette and a\ndifferent sort order may be desired. Or additional documents may wish to be\nincluded, e.g., the purl()’d code from an “asis” vignette.\n\n\n\nPrevious sections of this guide indicate that if an “index.html” file is\npresent in the inst/doc directory at the time of the build, then a new\n“index.html” file will not be built. Previous sections also indicate how to\nadd additional files to the inst/doc directory. The following is then a\nsummary of the steps needed to customize the html index to the vignettes in\na package.\n\n\n\n1. Create a revised ‘index.html’ file in the vignettes directory. It may be\neasiest to copy an existing ‘doc/index.html’ file from an installed\npackage. The vignettes/index.html file should be in plain html and can be\nmodified to change the sort order or to add links to additional files to be\navailable to users. Note that files are referred to using relative path\nnames – follow the pattern in the copied file.\n\n\n\n2. Add any other additional files to the vignettes directory that are to be\navailable to the user via the vignette help index.\n\n\n\n3. Add an ‘.install_extras’ file to the vignettes directory (don’t forget\nthe leading period in this file’s name). This is a text file with the names\nof the files in the vignettes directory to be added to the inst/doc\ndirectory. Each line can be coded as a regular expression. At a minimum,\ninclude ‘index.html’ to copy the vignettes/index.html file to the inst/doc\ndirectory.\n\n\n\n4. Check/build the package in the regular way.\n\n\n\nThere is no evident way to modify the output of the browseVignettes()\nfunction; however, this function currently sorts by the vignette file name\nregardless of the vignette engine used.\n\nOn Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <maechler at stat.math.ethz.ch>\nwrote:\n\n> >>>>> Jeff Newmiller\n> >>>>>     on Tue, 31 May 2022 16:09:16 -0700 writes:\n>\n>     > FWIW the RStudio build is often not complete... it intentionally\n> takes shortcuts that make test/run iteration faster... but you should make\n> a habit of using the command line to build artifacts for sharing... it will\n> help avoid gotchas.\n>\n> Yes, definitely.\n>\n> Notably, e.g., reloading the package sources (often via\n> devtools) into a running R process instead of restarting R and\n> loading/attaching the newly built and installed package (that\n> you are developing) is much faster, but *NOT* equivalent and\n> sometimes misleading -- because it's not easily possible to\n> \"revert\" everything you did in your running R session {caches,\n> method tables, DLLs, internal pointers, ...}.\n>\n> (read on, further down)\n>\n>     > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n> cschwarzstatsfuca at gmail.com> wrote:\n>     >> Success!\n>     >>\n>     >> Building on MT's note that if the inst/doc has an index.html file,\n> R does\n>     >> NOT build a new index.\n>     >> At the end of Writing R Extensions Section 1.4, it states\n>     >> \"  When R CMD build builds the vignettes, it copies these and the\n> vignette\n>     >> sources from directory vignettes to inst/doc. To install any other\n> files\n>     >> from the vignettes directory, include a file\n> vignettes/.install_extras which\n>     >> specifies these as Perl-like regular expressions on one or more\n> lines..\"\n>     >>\n>     >> So I copied the existing inst/doc/index.html file from the installed\n>     >> SighatbilityModel with the wrong sort order to my\n> vignettes/index.html,\n>     >> edited this index.html file to get the right sort order. The\n> index.html is\n>     >> just vanilla html so it is easy to modify \"manually\".\n>     >> Then I created a vignettes/.install_extras with a single entry\n> \"index.html\"\n>     >> and now vignettes/index.html appears to be copied to inst/doc and\n> so stops\n>     >> the building of the wrongly sorted index.\n>     >>\n>     >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n> tar.gz\n>     >> file; installed from the tar.gz file, and now my vignette index is\n> sorted\n>     >> properly on my Mac machine.\n>     >> Also tried using devtools::check_win_release() to generate a\n> windoze zip\n>     >> file; installed that; and the vignette index is again sorted\n> properly on\n>     >> Windows machines.\n>     >>\n>     >> I'm hoping I can use this for (b) from my original query as well.\n>     >>\n>     >> This will mean that I have to \"manually'\" maintain the\n> vignettes/index.html\n>     >> file, but that is straightforward.\n>     >>\n>     >> I hope this works when I submit to CRAN.\n>     >>\n>     >> How do I suggest to the R maintainers that an explicit section be\n> added to\n>     >> the Writing R Extensions manual with the above steps so that future\n> package\n>     >> writers don't repeat history? I'm willing to write the paragraph\n> explaining\n>     >> the steps, but don't know who/how to proceed to get it added to\n> Writing R\n>     >> Extensions.\n>     >>\n>     >> Carl Schwarz\n>\n> The WRE manual is part of the R sources, so formally you are\n> proposing to improve (the documentation part of) R.\n>\n> You can propose a patch against the \"R-devel\" sources.\n> If the changes are quite small and compact (as here), even on by e-mail.\n> The source file  is  doc/manual/R-exts.texi\n> in R's SVN (source server)\n>   https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n> or one of its mirrors (notably on github)\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Here is some suggested text to be added to the Writing R Extensions manual.\nAny suggestions for changes?\n\n1.4.3. Customizing the vignette help index\n\nR provides two indices to the vignettes in a packa",
       "thread_id": "thread-d36fe6ad44fa",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008126.html"
     },
     {
       "id": "msg-b09975253ac9",
@@ -148,11 +154,12 @@
         "<25239.7579.515401.430977@stat.math.ethz.ch>",
         "<CADtpigYFiR=W_VDeDFmo=r95f-FfF4GGV=gDZCorL_020BQVKQ@mail.gmail.com>"
       ],
-      "body_plain": "Some quick comments:\n\n- You could place the index.html directly in the inst/doc folder of your \npackage sources, avoiding the need for .install_extras from the \nvignettes folder. This approach is useful if there is additional \nnon-vignette material in inst/doc.\n\n- As you say, links in index.html need to be relative to the installed \n*doc* dir, where the index file is located. For example, the simple links\n     <a href=\"template.R\">template script</a>,\n     <a href=\"vignetteA.Rnw\">source of vignette A</a>\nshould work to reference a static Rscript inst/doc/template.R and a \nvignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD \nbuild), respectively.\n\n- It seems you could even generate the index.html via a vignette, \nindex.Rmd, say. The downside is that this index vignette will be listed \nas a vignette (by browseVignettes(), for example) although it isn't \nreally a vignette.\n\n- browseVignettes() sorts by vignette title, not by file name. \nFurthermore, its purpose is to browse *vignettes* also across packages, \nso is unrelated to the *doc* index for a given package, which may \ncontain more than vignettes.\n\nBest regards,\n\n\tSebastian Meyer\n\n\nAm 01.06.22 um 23:47 schrieb Carl Schwarz:\n> Here is some suggested text to be added to the Writing R Extensions manual.\n> Any suggestions for changes?\n> \n> 1.4.3. Customizing the vignette help index\n> \n> R provides two indices to the vignettes in a package  (a) the\n> browseVignettes() function and (b) the html index of vignettes and other\n> user documentation available when you use help(package=xxx). The latter is\n> built when the package is installed.\n> \n> \n> \n> In some cases, customization of the html index is desirable. For example,\n> currently the entries in the index  are sorted by the vignette engine used\n> to build the vignette and then by the file name of the vignette and a\n> different sort order may be desired. Or additional documents may wish to be\n> included, e.g., the purl()?d code from an ?asis? vignette.\n> \n> \n> \n> Previous sections of this guide indicate that if an ?index.html? file is\n> present in the inst/doc directory at the time of the build, then a new\n> ?index.html? file will not be built. Previous sections also indicate how to\n> add additional files to the inst/doc directory. The following is then a\n> summary of the steps needed to customize the html index to the vignettes in\n> a package.\n> \n> \n> \n> 1. Create a revised ?index.html? file in the vignettes directory. It may be\n> easiest to copy an existing ?doc/index.html? file from an installed\n> package. The vignettes/index.html file should be in plain html and can be\n> modified to change the sort order or to add links to additional files to be\n> available to users. Note that files are referred to using relative path\n> names ? follow the pattern in the copied file.\n> \n> \n> \n> 2. Add any other additional files to the vignettes directory that are to be\n> available to the user via the vignette help index.\n> \n> \n> \n> 3. Add an ?.install_extras? file to the vignettes directory (don?t forget\n> the leading period in this file?s name). This is a text file with the names\n> of the files in the vignettes directory to be added to the inst/doc\n> directory. Each line can be coded as a regular expression. At a minimum,\n> include ?index.html? to copy the vignettes/index.html file to the inst/doc\n> directory.\n> \n> \n> \n> 4. Check/build the package in the regular way.\n> \n> \n> \n> There is no evident way to modify the output of the browseVignettes()\n> function; however, this function currently sorts by the vignette file name\n> regardless of the vignette engine used.\n> \n> On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <maechler at stat.math.ethz.ch>\n> wrote:\n> \n>>>>>>> Jeff Newmiller\n>>>>>>>      on Tue, 31 May 2022 16:09:16 -0700 writes:\n>>\n>>      > FWIW the RStudio build is often not complete... it intentionally\n>> takes shortcuts that make test/run iteration faster... but you should make\n>> a habit of using the command line to build artifacts for sharing... it will\n>> help avoid gotchas.\n>>\n>> Yes, definitely.\n>>\n>> Notably, e.g., reloading the package sources (often via\n>> devtools) into a running R process instead of restarting R and\n>> loading/attaching the newly built and installed package (that\n>> you are developing) is much faster, but *NOT* equivalent and\n>> sometimes misleading -- because it's not easily possible to\n>> \"revert\" everything you did in your running R session {caches,\n>> method tables, DLLs, internal pointers, ...}.\n>>\n>> (read on, further down)\n>>\n>>      > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n>> cschwarzstatsfuca at gmail.com> wrote:\n>>      >> Success!\n>>      >>\n>>      >> Building on MT's note that if the inst/doc has an index.html file,\n>> R does\n>>      >> NOT build a new index.\n>>      >> At the end of Writing R Extensions Section 1.4, it states\n>>      >> \"  When R CMD build builds the vignettes, it copies these and the\n>> vignette\n>>      >> sources from directory vignettes to inst/doc. To install any other\n>> files\n>>      >> from the vignettes directory, include a file\n>> vignettes/.install_extras which\n>>      >> specifies these as Perl-like regular expressions on one or more\n>> lines..\"\n>>      >>\n>>      >> So I copied the existing inst/doc/index.html file from the installed\n>>      >> SighatbilityModel with the wrong sort order to my\n>> vignettes/index.html,\n>>      >> edited this index.html file to get the right sort order. The\n>> index.html is\n>>      >> just vanilla html so it is easy to modify \"manually\".\n>>      >> Then I created a vignettes/.install_extras with a single entry\n>> \"index.html\"\n>>      >> and now vignettes/index.html appears to be copied to inst/doc and\n>> so stops\n>>      >> the building of the wrongly sorted index.\n>>      >>\n>>      >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n>> tar.gz\n>>      >> file; installed from the tar.gz file, and now my vignette index is\n>> sorted\n>>      >> properly on my Mac machine.\n>>      >> Also tried using devtools::check_win_release() to generate a\n>> windoze zip\n>>      >> file; installed that; and the vignette index is again sorted\n>> properly on\n>>      >> Windows machines.\n>>      >>\n>>      >> I'm hoping I can use this for (b) from my original query as well.\n>>      >>\n>>      >> This will mean that I have to \"manually'\" maintain the\n>> vignettes/index.html\n>>      >> file, but that is straightforward.\n>>      >>\n>>      >> I hope this works when I submit to CRAN.\n>>      >>\n>>      >> How do I suggest to the R maintainers that an explicit section be\n>> added to\n>>      >> the Writing R Extensions manual with the above steps so that future\n>> package\n>>      >> writers don't repeat history? I'm willing to write the paragraph\n>> explaining\n>>      >> the steps, but don't know who/how to proceed to get it added to\n>> Writing R\n>>      >> Extensions.\n>>      >>\n>>      >> Carl Schwarz\n>>\n>> The WRE manual is part of the R sources, so formally you are\n>> proposing to improve (the documentation part of) R.\n>>\n>> You can propose a patch against the \"R-devel\" sources.\n>> If the changes are quite small and compact (as here), even on by e-mail.\n>> The source file  is  doc/manual/R-exts.texi\n>> in R's SVN (source server)\n>>    https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n>> or one of its mirrors (notably on github)\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Some quick comments:\n\n- You could place the index.html directly in the inst/doc folder of your \npackage sources, avoiding the need for .install_extras from the \nvignettes folder. This approach is useful if there is additional \nnon-vignette material in inst/doc.\n\n- As you say, links in index.html need to be relative to the installed \n*doc* dir, where the index file is located. For example, the simple links\n     <a href=\"template.R\">template script</a>,\n     <a href=\"vignetteA.Rnw\">source of vignette A</a>\nshould work to reference a static Rscript inst/doc/template.R and a \nvignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD \nbuild), respectively.\n\n- It seems you could even generate the index.html via a vignette, \nindex.Rmd, say. The downside is that this index vignette will be listed \nas a vignette (by browseVignettes(), for example) although it isn't \nreally a vignette.\n\n- browseVignettes() sorts by vignette title, not by file name. \nFurthermore, its purpose is to browse *vignettes* also across packages, \nso is unrelated to the *doc* index for a given package, which may \ncontain more than vignettes.\n\nBest regards,\n\n\tSebastian Meyer\n\n\nAm 01.06.22 um 23:47 schrieb Carl Schwarz:\n> Here is some suggested text to be added to the Writing R Extensions manual.\n> Any suggestions for changes?\n> \n> 1.4.3. Customizing the vignette help index\n> \n> R provides two indices to the vignettes in a package  (a) the\n> browseVignettes() function and (b) the html index of vignettes and other\n> user documentation available when you use help(package=xxx). The latter is\n> built when the package is installed.\n> \n> \n> \n> In some cases, customization of the html index is desirable. For example,\n> currently the entries in the index  are sorted by the vignette engine used\n> to build the vignette and then by the file name of the vignette and a\n> different sort order may be desired. Or additional documents may wish to be\n> included, e.g., the purl()’d code from an “asis” vignette.\n> \n> \n> \n> Previous sections of this guide indicate that if an “index.html” file is\n> present in the inst/doc directory at the time of the build, then a new\n> “index.html” file will not be built. Previous sections also indicate how to\n> add additional files to the inst/doc directory. The following is then a\n> summary of the steps needed to customize the html index to the vignettes in\n> a package.\n> \n> \n> \n> 1. Create a revised ‘index.html’ file in the vignettes directory. It may be\n> easiest to copy an existing ‘doc/index.html’ file from an installed\n> package. The vignettes/index.html file should be in plain html and can be\n> modified to change the sort order or to add links to additional files to be\n> available to users. Note that files are referred to using relative path\n> names – follow the pattern in the copied file.\n> \n> \n> \n> 2. Add any other additional files to the vignettes directory that are to be\n> available to the user via the vignette help index.\n> \n> \n> \n> 3. Add an ‘.install_extras’ file to the vignettes directory (don’t forget\n> the leading period in this file’s name). This is a text file with the names\n> of the files in the vignettes directory to be added to the inst/doc\n> directory. Each line can be coded as a regular expression. At a minimum,\n> include ‘index.html’ to copy the vignettes/index.html file to the inst/doc\n> directory.\n> \n> \n> \n> 4. Check/build the package in the regular way.\n> \n> \n> \n> There is no evident way to modify the output of the browseVignettes()\n> function; however, this function currently sorts by the vignette file name\n> regardless of the vignette engine used.\n> \n> On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <maechler at stat.math.ethz.ch>\n> wrote:\n> \n>>>>>>> Jeff Newmiller\n>>>>>>>      on Tue, 31 May 2022 16:09:16 -0700 writes:\n>>\n>>      > FWIW the RStudio build is often not complete... it intentionally\n>> takes shortcuts that make test/run iteration faster... but you should make\n>> a habit of using the command line to build artifacts for sharing... it will\n>> help avoid gotchas.\n>>\n>> Yes, definitely.\n>>\n>> Notably, e.g., reloading the package sources (often via\n>> devtools) into a running R process instead of restarting R and\n>> loading/attaching the newly built and installed package (that\n>> you are developing) is much faster, but *NOT* equivalent and\n>> sometimes misleading -- because it's not easily possible to\n>> \"revert\" everything you did in your running R session {caches,\n>> method tables, DLLs, internal pointers, ...}.\n>>\n>> (read on, further down)\n>>\n>>      > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n>> cschwarzstatsfuca at gmail.com> wrote:\n>>      >> Success!\n>>      >>\n>>      >> Building on MT's note that if the inst/doc has an index.html file,\n>> R does\n>>      >> NOT build a new index.\n>>      >> At the end of Writing R Extensions Section 1.4, it states\n>>      >> \"  When R CMD build builds the vignettes, it copies these and the\n>> vignette\n>>      >> sources from directory vignettes to inst/doc. To install any other\n>> files\n>>      >> from the vignettes directory, include a file\n>> vignettes/.install_extras which\n>>      >> specifies these as Perl-like regular expressions on one or more\n>> lines..\"\n>>      >>\n>>      >> So I copied the existing inst/doc/index.html file from the installed\n>>      >> SighatbilityModel with the wrong sort order to my\n>> vignettes/index.html,\n>>      >> edited this index.html file to get the right sort order. The\n>> index.html is\n>>      >> just vanilla html so it is easy to modify \"manually\".\n>>      >> Then I created a vignettes/.install_extras with a single entry\n>> \"index.html\"\n>>      >> and now vignettes/index.html appears to be copied to inst/doc and\n>> so stops\n>>      >> the building of the wrongly sorted index.\n>>      >>\n>>      >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n>> tar.gz\n>>      >> file; installed from the tar.gz file, and now my vignette index is\n>> sorted\n>>      >> properly on my Mac machine.\n>>      >> Also tried using devtools::check_win_release() to generate a\n>> windoze zip\n>>      >> file; installed that; and the vignette index is again sorted\n>> properly on\n>>      >> Windows machines.\n>>      >>\n>>      >> I'm hoping I can use this for (b) from my original query as well.\n>>      >>\n>>      >> This will mean that I have to \"manually'\" maintain the\n>> vignettes/index.html\n>>      >> file, but that is straightforward.\n>>      >>\n>>      >> I hope this works when I submit to CRAN.\n>>      >>\n>>      >> How do I suggest to the R maintainers that an explicit section be\n>> added to\n>>      >> the Writing R Extensions manual with the above steps so that future\n>> package\n>>      >> writers don't repeat history? I'm willing to write the paragraph\n>> explaining\n>>      >> the steps, but don't know who/how to proceed to get it added to\n>> Writing R\n>>      >> Extensions.\n>>      >>\n>>      >> Carl Schwarz\n>>\n>> The WRE manual is part of the R sources, so formally you are\n>> proposing to improve (the documentation part of) R.\n>>\n>> You can propose a patch against the \"R-devel\" sources.\n>> If the changes are quite small and compact (as here), even on by e-mail.\n>> The source file  is  doc/manual/R-exts.texi\n>> in R's SVN (source server)\n>>    https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n>> or one of its mirrors (notably on github)\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Some quick comments:\n\n- You could place the index.html directly in the inst/doc folder of your \npackage sources, avoiding the need for .install_extras from the \nvignettes folder. This approach is usef",
       "thread_id": "thread-d36fe6ad44fa",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008127.html"
     },
     {
       "id": "msg-410deb1aaa43",
@@ -171,7 +178,8 @@
       "body_snippet": "Thank you Ivan and Dirk for your messages. I tried to follow your advice (modifying the src/init.c file by hand to add the things from the C++ function), but the function R_init_ade4 cannot be defined",
       "thread_id": "thread-665b62c91940",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008128.html"
     },
     {
       "id": "msg-d932a6bef4aa",
@@ -191,7 +199,8 @@
       "body_snippet": "? Thu, 2 Jun 2022 15:06:44 +0200\nTHIOULOUSE JEAN <Jean.Thioulouse at univ-lyon1.fr> ?????:\n\n> \"object '_ade4_RVrandtestCpp' not found\").\n\n> static const R_CallMethodDef CallEntries[] = {\n>     {\"_ade4",
       "thread_id": "thread-665b62c91940",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008129.html"
     },
     {
       "id": "msg-7a92e290de33",
@@ -212,7 +221,8 @@
       "body_snippet": "Thanks a lot ! Package compiles and runs fine now. I must keep the  .fixes = \"C_\" argument in the useDynLib function of the NAMESPACE file because there are still many C functions in the package. So a",
       "thread_id": "thread-665b62c91940",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008130.html"
     },
     {
       "id": "msg-81f470c9fd40",
@@ -237,11 +247,12 @@
         "<CADtpigYFiR=W_VDeDFmo=r95f-FfF4GGV=gDZCorL_020BQVKQ@mail.gmail.com>",
         "<424d9afa-0e31-9254-e1e8-b3b3f570b87a@fau.de>"
       ],
-      "body_plain": "Thanks for the suggestions.\n\n(a) Unfortunately, if you place the index.html directly into the inst/doc\ndirectory, it is overwritten when the package source file (*tar.gz) is\ncreated and then installed.\nThis is using RStudio on a Mac.... I did not try this on a Windows machine.\n\nBut other files that you place in the inst/doc file are left alone and are\nlisted under the vignette index when you follow the \"User guides, package\nvignettes and other documentation\" link.\n\nSo strange that the index is overwritten but other files are left alone.\n\n(b) The relative links that are generated are quite long, e.g. <a\nhref=\"../../../library/SightabilityModel/doc/c-MoosePopR-SightabilityPopR-Demo.html\">HTML</a>\nand I don't fully understand where the \"current\" directory is when you\nfollow the \"User guides, package vignettes and other\ndocumentation\" requiring you to go back up the directory tree and then go\nback down.\nI copied and modified these odd links for my other files and it worked fine.\n\n(c) I have not tried the index.Rmd approach...\n\nCarl.\n\nOn Thu, Jun 2, 2022 at 1:22 AM Sebastian Meyer <seb.meyer at fau.de> wrote:\n\n> Some quick comments:\n>\n> - You could place the index.html directly in the inst/doc folder of your\n> package sources, avoiding the need for .install_extras from the\n> vignettes folder. This approach is useful if there is additional\n> non-vignette material in inst/doc.\n>\n> - As you say, links in index.html need to be relative to the installed\n> *doc* dir, where the index file is located. For example, the simple links\n>      <a href=\"template.R\">template script</a>,\n>      <a href=\"vignetteA.Rnw\">source of vignette A</a>\n> should work to reference a static Rscript inst/doc/template.R and a\n> vignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD\n> build), respectively.\n>\n> - It seems you could even generate the index.html via a vignette,\n> index.Rmd, say. The downside is that this index vignette will be listed\n> as a vignette (by browseVignettes(), for example) although it isn't\n> really a vignette.\n>\n> - browseVignettes() sorts by vignette title, not by file name.\n> Furthermore, its purpose is to browse *vignettes* also across packages,\n> so is unrelated to the *doc* index for a given package, which may\n> contain more than vignettes.\n>\n> Best regards,\n>\n>         Sebastian Meyer\n>\n>\n> Am 01.06.22 um 23:47 schrieb Carl Schwarz:\n> > Here is some suggested text to be added to the Writing R Extensions\n> manual.\n> > Any suggestions for changes?\n> >\n> > 1.4.3. Customizing the vignette help index\n> >\n> > R provides two indices to the vignettes in a package  (a) the\n> > browseVignettes() function and (b) the html index of vignettes and other\n> > user documentation available when you use help(package=xxx). The latter\n> is\n> > built when the package is installed.\n> >\n> >\n> >\n> > In some cases, customization of the html index is desirable. For example,\n> > currently the entries in the index  are sorted by the vignette engine\n> used\n> > to build the vignette and then by the file name of the vignette and a\n> > different sort order may be desired. Or additional documents may wish to\n> be\n> > included, e.g., the purl()?d code from an ?asis? vignette.\n> >\n> >\n> >\n> > Previous sections of this guide indicate that if an ?index.html? file is\n> > present in the inst/doc directory at the time of the build, then a new\n> > ?index.html? file will not be built. Previous sections also indicate how\n> to\n> > add additional files to the inst/doc directory. The following is then a\n> > summary of the steps needed to customize the html index to the vignettes\n> in\n> > a package.\n> >\n> >\n> >\n> > 1. Create a revised ?index.html? file in the vignettes directory. It may\n> be\n> > easiest to copy an existing ?doc/index.html? file from an installed\n> > package. The vignettes/index.html file should be in plain html and can be\n> > modified to change the sort order or to add links to additional files to\n> be\n> > available to users. Note that files are referred to using relative path\n> > names ? follow the pattern in the copied file.\n> >\n> >\n> >\n> > 2. Add any other additional files to the vignettes directory that are to\n> be\n> > available to the user via the vignette help index.\n> >\n> >\n> >\n> > 3. Add an ?.install_extras? file to the vignettes directory (don?t forget\n> > the leading period in this file?s name). This is a text file with the\n> names\n> > of the files in the vignettes directory to be added to the inst/doc\n> > directory. Each line can be coded as a regular expression. At a minimum,\n> > include ?index.html? to copy the vignettes/index.html file to the\n> inst/doc\n> > directory.\n> >\n> >\n> >\n> > 4. Check/build the package in the regular way.\n> >\n> >\n> >\n> > There is no evident way to modify the output of the browseVignettes()\n> > function; however, this function currently sorts by the vignette file\n> name\n> > regardless of the vignette engine used.\n> >\n> > On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <\n> maechler at stat.math.ethz.ch>\n> > wrote:\n> >\n> >>>>>>> Jeff Newmiller\n> >>>>>>>      on Tue, 31 May 2022 16:09:16 -0700 writes:\n> >>\n> >>      > FWIW the RStudio build is often not complete... it intentionally\n> >> takes shortcuts that make test/run iteration faster... but you should\n> make\n> >> a habit of using the command line to build artifacts for sharing... it\n> will\n> >> help avoid gotchas.\n> >>\n> >> Yes, definitely.\n> >>\n> >> Notably, e.g., reloading the package sources (often via\n> >> devtools) into a running R process instead of restarting R and\n> >> loading/attaching the newly built and installed package (that\n> >> you are developing) is much faster, but *NOT* equivalent and\n> >> sometimes misleading -- because it's not easily possible to\n> >> \"revert\" everything you did in your running R session {caches,\n> >> method tables, DLLs, internal pointers, ...}.\n> >>\n> >> (read on, further down)\n> >>\n> >>      > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n> >> cschwarzstatsfuca at gmail.com> wrote:\n> >>      >> Success!\n> >>      >>\n> >>      >> Building on MT's note that if the inst/doc has an index.html\n> file,\n> >> R does\n> >>      >> NOT build a new index.\n> >>      >> At the end of Writing R Extensions Section 1.4, it states\n> >>      >> \"  When R CMD build builds the vignettes, it copies these and\n> the\n> >> vignette\n> >>      >> sources from directory vignettes to inst/doc. To install any\n> other\n> >> files\n> >>      >> from the vignettes directory, include a file\n> >> vignettes/.install_extras which\n> >>      >> specifies these as Perl-like regular expressions on one or more\n> >> lines..\"\n> >>      >>\n> >>      >> So I copied the existing inst/doc/index.html file from the\n> installed\n> >>      >> SighatbilityModel with the wrong sort order to my\n> >> vignettes/index.html,\n> >>      >> edited this index.html file to get the right sort order. The\n> >> index.html is\n> >>      >> just vanilla html so it is easy to modify \"manually\".\n> >>      >> Then I created a vignettes/.install_extras with a single entry\n> >> \"index.html\"\n> >>      >> and now vignettes/index.html appears to be copied to inst/doc\n> and\n> >> so stops\n> >>      >> the building of the wrongly sorted index.\n> >>      >>\n> >>      >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n> >> tar.gz\n> >>      >> file; installed from the tar.gz file, and now my vignette index\n> is\n> >> sorted\n> >>      >> properly on my Mac machine.\n> >>      >> Also tried using devtools::check_win_release() to generate a\n> >> windoze zip\n> >>      >> file; installed that; and the vignette index is again sorted\n> >> properly on\n> >>      >> Windows machines.\n> >>      >>\n> >>      >> I'm hoping I can use this for (b) from my original query as\n> well.\n> >>      >>\n> >>      >> This will mean that I have to \"manually'\" maintain the\n> >> vignettes/index.html\n> >>      >> file, but that is straightforward.\n> >>      >>\n> >>      >> I hope this works when I submit to CRAN.\n> >>      >>\n> >>      >> How do I suggest to the R maintainers that an explicit section\n> be\n> >> added to\n> >>      >> the Writing R Extensions manual with the above steps so that\n> future\n> >> package\n> >>      >> writers don't repeat history? I'm willing to write the paragraph\n> >> explaining\n> >>      >> the steps, but don't know who/how to proceed to get it added to\n> >> Writing R\n> >>      >> Extensions.\n> >>      >>\n> >>      >> Carl Schwarz\n> >>\n> >> The WRE manual is part of the R sources, so formally you are\n> >> proposing to improve (the documentation part of) R.\n> >>\n> >> You can propose a patch against the \"R-devel\" sources.\n> >> If the changes are quite small and compact (as here), even on by e-mail.\n> >> The source file  is  doc/manual/R-exts.texi\n> >> in R's SVN (source server)\n> >>    https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n> >> or one of its mirrors (notably on github)\n> >>\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks for the suggestions.\n\n(a) Unfortunately, if you place the index.html directly into the inst/doc\ndirectory, it is overwritten when the package source file (*tar.gz) is\ncreated and then installed.\nThis is using RStudio on a Mac.... I did not try this on a Windows machine.\n\nBut other files that you place in the inst/doc file are left alone and are\nlisted under the vignette index when you follow the \"User guides, package\nvignettes and other documentation\" link.\n\nSo strange that the index is overwritten but other files are left alone.\n\n(b) The relative links that are generated are quite long, e.g. <a\nhref=\"../../../library/SightabilityModel/doc/c-MoosePopR-SightabilityPopR-Demo.html\">HTML</a>\nand I don't fully understand where the \"current\" directory is when you\nfollow the \"User guides, package vignettes and other\ndocumentation\" requiring you to go back up the directory tree and then go\nback down.\nI copied and modified these odd links for my other files and it worked fine.\n\n(c) I have not tried the index.Rmd approach...\n\nCarl.\n\nOn Thu, Jun 2, 2022 at 1:22 AM Sebastian Meyer <seb.meyer at fau.de> wrote:\n\n> Some quick comments:\n>\n> - You could place the index.html directly in the inst/doc folder of your\n> package sources, avoiding the need for .install_extras from the\n> vignettes folder. This approach is useful if there is additional\n> non-vignette material in inst/doc.\n>\n> - As you say, links in index.html need to be relative to the installed\n> *doc* dir, where the index file is located. For example, the simple links\n>      <a href=\"template.R\">template script</a>,\n>      <a href=\"vignetteA.Rnw\">source of vignette A</a>\n> should work to reference a static Rscript inst/doc/template.R and a\n> vignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD\n> build), respectively.\n>\n> - It seems you could even generate the index.html via a vignette,\n> index.Rmd, say. The downside is that this index vignette will be listed\n> as a vignette (by browseVignettes(), for example) although it isn't\n> really a vignette.\n>\n> - browseVignettes() sorts by vignette title, not by file name.\n> Furthermore, its purpose is to browse *vignettes* also across packages,\n> so is unrelated to the *doc* index for a given package, which may\n> contain more than vignettes.\n>\n> Best regards,\n>\n>         Sebastian Meyer\n>\n>\n> Am 01.06.22 um 23:47 schrieb Carl Schwarz:\n> > Here is some suggested text to be added to the Writing R Extensions\n> manual.\n> > Any suggestions for changes?\n> >\n> > 1.4.3. Customizing the vignette help index\n> >\n> > R provides two indices to the vignettes in a package  (a) the\n> > browseVignettes() function and (b) the html index of vignettes and other\n> > user documentation available when you use help(package=xxx). The latter\n> is\n> > built when the package is installed.\n> >\n> >\n> >\n> > In some cases, customization of the html index is desirable. For example,\n> > currently the entries in the index  are sorted by the vignette engine\n> used\n> > to build the vignette and then by the file name of the vignette and a\n> > different sort order may be desired. Or additional documents may wish to\n> be\n> > included, e.g., the purl()’d code from an “asis” vignette.\n> >\n> >\n> >\n> > Previous sections of this guide indicate that if an “index.html” file is\n> > present in the inst/doc directory at the time of the build, then a new\n> > “index.html” file will not be built. Previous sections also indicate how\n> to\n> > add additional files to the inst/doc directory. The following is then a\n> > summary of the steps needed to customize the html index to the vignettes\n> in\n> > a package.\n> >\n> >\n> >\n> > 1. Create a revised ‘index.html’ file in the vignettes directory. It may\n> be\n> > easiest to copy an existing ‘doc/index.html’ file from an installed\n> > package. The vignettes/index.html file should be in plain html and can be\n> > modified to change the sort order or to add links to additional files to\n> be\n> > available to users. Note that files are referred to using relative path\n> > names – follow the pattern in the copied file.\n> >\n> >\n> >\n> > 2. Add any other additional files to the vignettes directory that are to\n> be\n> > available to the user via the vignette help index.\n> >\n> >\n> >\n> > 3. Add an ‘.install_extras’ file to the vignettes directory (don’t forget\n> > the leading period in this file’s name). This is a text file with the\n> names\n> > of the files in the vignettes directory to be added to the inst/doc\n> > directory. Each line can be coded as a regular expression. At a minimum,\n> > include ‘index.html’ to copy the vignettes/index.html file to the\n> inst/doc\n> > directory.\n> >\n> >\n> >\n> > 4. Check/build the package in the regular way.\n> >\n> >\n> >\n> > There is no evident way to modify the output of the browseVignettes()\n> > function; however, this function currently sorts by the vignette file\n> name\n> > regardless of the vignette engine used.\n> >\n> > On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <\n> maechler at stat.math.ethz.ch>\n> > wrote:\n> >\n> >>>>>>> Jeff Newmiller\n> >>>>>>>      on Tue, 31 May 2022 16:09:16 -0700 writes:\n> >>\n> >>      > FWIW the RStudio build is often not complete... it intentionally\n> >> takes shortcuts that make test/run iteration faster... but you should\n> make\n> >> a habit of using the command line to build artifacts for sharing... it\n> will\n> >> help avoid gotchas.\n> >>\n> >> Yes, definitely.\n> >>\n> >> Notably, e.g., reloading the package sources (often via\n> >> devtools) into a running R process instead of restarting R and\n> >> loading/attaching the newly built and installed package (that\n> >> you are developing) is much faster, but *NOT* equivalent and\n> >> sometimes misleading -- because it's not easily possible to\n> >> \"revert\" everything you did in your running R session {caches,\n> >> method tables, DLLs, internal pointers, ...}.\n> >>\n> >> (read on, further down)\n> >>\n> >>      > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n> >> cschwarzstatsfuca at gmail.com> wrote:\n> >>      >> Success!\n> >>      >>\n> >>      >> Building on MT's note that if the inst/doc has an index.html\n> file,\n> >> R does\n> >>      >> NOT build a new index.\n> >>      >> At the end of Writing R Extensions Section 1.4, it states\n> >>      >> \"  When R CMD build builds the vignettes, it copies these and\n> the\n> >> vignette\n> >>      >> sources from directory vignettes to inst/doc. To install any\n> other\n> >> files\n> >>      >> from the vignettes directory, include a file\n> >> vignettes/.install_extras which\n> >>      >> specifies these as Perl-like regular expressions on one or more\n> >> lines..\"\n> >>      >>\n> >>      >> So I copied the existing inst/doc/index.html file from the\n> installed\n> >>      >> SighatbilityModel with the wrong sort order to my\n> >> vignettes/index.html,\n> >>      >> edited this index.html file to get the right sort order. The\n> >> index.html is\n> >>      >> just vanilla html so it is easy to modify \"manually\".\n> >>      >> Then I created a vignettes/.install_extras with a single entry\n> >> \"index.html\"\n> >>      >> and now vignettes/index.html appears to be copied to inst/doc\n> and\n> >> so stops\n> >>      >> the building of the wrongly sorted index.\n> >>      >>\n> >>      >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n> >> tar.gz\n> >>      >> file; installed from the tar.gz file, and now my vignette index\n> is\n> >> sorted\n> >>      >> properly on my Mac machine.\n> >>      >> Also tried using devtools::check_win_release() to generate a\n> >> windoze zip\n> >>      >> file; installed that; and the vignette index is again sorted\n> >> properly on\n> >>      >> Windows machines.\n> >>      >>\n> >>      >> I'm hoping I can use this for (b) from my original query as\n> well.\n> >>      >>\n> >>      >> This will mean that I have to \"manually'\" maintain the\n> >> vignettes/index.html\n> >>      >> file, but that is straightforward.\n> >>      >>\n> >>      >> I hope this works when I submit to CRAN.\n> >>      >>\n> >>      >> How do I suggest to the R maintainers that an explicit section\n> be\n> >> added to\n> >>      >> the Writing R Extensions manual with the above steps so that\n> future\n> >> package\n> >>      >> writers don't repeat history? I'm willing to write the paragraph\n> >> explaining\n> >>      >> the steps, but don't know who/how to proceed to get it added to\n> >> Writing R\n> >>      >> Extensions.\n> >>      >>\n> >>      >> Carl Schwarz\n> >>\n> >> The WRE manual is part of the R sources, so formally you are\n> >> proposing to improve (the documentation part of) R.\n> >>\n> >> You can propose a patch against the \"R-devel\" sources.\n> >> If the changes are quite small and compact (as here), even on by e-mail.\n> >> The source file  is  doc/manual/R-exts.texi\n> >> in R's SVN (source server)\n> >>    https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n> >> or one of its mirrors (notably on github)\n> >>\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks for the suggestions.\n\n(a) Unfortunately, if you place the index.html directly into the inst/doc\ndirectory, it is overwritten when the package source file (*tar.gz) is\ncreated and then installed",
       "thread_id": "thread-d36fe6ad44fa",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008131.html"
     },
     {
       "id": "msg-607d3d54fb84",
@@ -267,11 +278,12 @@
         "<424d9afa-0e31-9254-e1e8-b3b3f570b87a@fau.de>",
         "<CADtpigaSyS_kZ-Sr3evT=6jaybsGiNGfxQVoVTLPZzE+zLPdHg@mail.gmail.com>"
       ],
-      "body_plain": "On 02/06/2022 1:39 p.m., Carl Schwarz wrote:\n> Thanks for the suggestions.\n> \n> (a) Unfortunately, if you place the index.html directly into the inst/doc\n> directory, it is overwritten when the package source file (*tar.gz) is\n> created and then installed.\n> This is using RStudio on a Mac.... I did not try this on a Windows machine.\n> \n> But other files that you place in the inst/doc file are left alone and are\n> listed under the vignette index when you follow the \"User guides, package\n> vignettes and other documentation\" link.\n> \n> So strange that the index is overwritten but other files are left alone.\n\nThat does sound like a bug...\n\n> (b) The relative links that are generated are quite long, e.g. <a\n> href=\"../../../library/SightabilityModel/doc/c-MoosePopR-SightabilityPopR-Demo.html\">HTML</a>\n> and I don't fully understand where the \"current\" directory is when you\n> follow the \"User guides, package vignettes and other\n> documentation\" requiring you to go back up the directory tree and then go\n> back down.\n> I copied and modified these odd links for my other files and it worked fine.\n\nTo see the links the help system is using, you can run it in an external \nbrowser using \"help.start()\".  When I do that for rgl I see this link on \nthe vignettes page:\n\n   http://127.0.0.1:17854/library/rgl/doc/index.html\n\nand the first vignette is at\n\n   http://127.0.0.1:17854/library/rgl/doc/WebGL.html\n\ngenerated from <a href=\"../../../library/rgl/doc/WebGL.html\">.\n\nI forget why the index doesn't just use <a href=\"WebGL.html\"> which \nwould appear to be equivalent in this case, but I vaguely recall that \nthere's a good reason for that.  It might be because the links generated \nfor static documentation are different.\n\nDuncan Murdoch\n\n> \n> (c) I have not tried the index.Rmd approach...\n> \n> Carl.\n> \n> On Thu, Jun 2, 2022 at 1:22 AM Sebastian Meyer <seb.meyer at fau.de> wrote:\n> \n>> Some quick comments:\n>>\n>> - You could place the index.html directly in the inst/doc folder of your\n>> package sources, avoiding the need for .install_extras from the\n>> vignettes folder. This approach is useful if there is additional\n>> non-vignette material in inst/doc.\n>>\n>> - As you say, links in index.html need to be relative to the installed\n>> *doc* dir, where the index file is located. For example, the simple links\n>>       <a href=\"template.R\">template script</a>,\n>>       <a href=\"vignetteA.Rnw\">source of vignette A</a>\n>> should work to reference a static Rscript inst/doc/template.R and a\n>> vignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD\n>> build), respectively.\n>>\n>> - It seems you could even generate the index.html via a vignette,\n>> index.Rmd, say. The downside is that this index vignette will be listed\n>> as a vignette (by browseVignettes(), for example) although it isn't\n>> really a vignette.\n>>\n>> - browseVignettes() sorts by vignette title, not by file name.\n>> Furthermore, its purpose is to browse *vignettes* also across packages,\n>> so is unrelated to the *doc* index for a given package, which may\n>> contain more than vignettes.\n>>\n>> Best regards,\n>>\n>>          Sebastian Meyer\n>>\n>>\n>> Am 01.06.22 um 23:47 schrieb Carl Schwarz:\n>>> Here is some suggested text to be added to the Writing R Extensions\n>> manual.\n>>> Any suggestions for changes?\n>>>\n>>> 1.4.3. Customizing the vignette help index\n>>>\n>>> R provides two indices to the vignettes in a package  (a) the\n>>> browseVignettes() function and (b) the html index of vignettes and other\n>>> user documentation available when you use help(package=xxx). The latter\n>> is\n>>> built when the package is installed.\n>>>\n>>>\n>>>\n>>> In some cases, customization of the html index is desirable. For example,\n>>> currently the entries in the index  are sorted by the vignette engine\n>> used\n>>> to build the vignette and then by the file name of the vignette and a\n>>> different sort order may be desired. Or additional documents may wish to\n>> be\n>>> included, e.g., the purl()?d code from an ?asis? vignette.\n>>>\n>>>\n>>>\n>>> Previous sections of this guide indicate that if an ?index.html? file is\n>>> present in the inst/doc directory at the time of the build, then a new\n>>> ?index.html? file will not be built. Previous sections also indicate how\n>> to\n>>> add additional files to the inst/doc directory. The following is then a\n>>> summary of the steps needed to customize the html index to the vignettes\n>> in\n>>> a package.\n>>>\n>>>\n>>>\n>>> 1. Create a revised ?index.html? file in the vignettes directory. It may\n>> be\n>>> easiest to copy an existing ?doc/index.html? file from an installed\n>>> package. The vignettes/index.html file should be in plain html and can be\n>>> modified to change the sort order or to add links to additional files to\n>> be\n>>> available to users. Note that files are referred to using relative path\n>>> names ? follow the pattern in the copied file.\n>>>\n>>>\n>>>\n>>> 2. Add any other additional files to the vignettes directory that are to\n>> be\n>>> available to the user via the vignette help index.\n>>>\n>>>\n>>>\n>>> 3. Add an ?.install_extras? file to the vignettes directory (don?t forget\n>>> the leading period in this file?s name). This is a text file with the\n>> names\n>>> of the files in the vignettes directory to be added to the inst/doc\n>>> directory. Each line can be coded as a regular expression. At a minimum,\n>>> include ?index.html? to copy the vignettes/index.html file to the\n>> inst/doc\n>>> directory.\n>>>\n>>>\n>>>\n>>> 4. Check/build the package in the regular way.\n>>>\n>>>\n>>>\n>>> There is no evident way to modify the output of the browseVignettes()\n>>> function; however, this function currently sorts by the vignette file\n>> name\n>>> regardless of the vignette engine used.\n>>>\n>>> On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <\n>> maechler at stat.math.ethz.ch>\n>>> wrote:\n>>>\n>>>>>>>>> Jeff Newmiller\n>>>>>>>>>       on Tue, 31 May 2022 16:09:16 -0700 writes:\n>>>>\n>>>>       > FWIW the RStudio build is often not complete... it intentionally\n>>>> takes shortcuts that make test/run iteration faster... but you should\n>> make\n>>>> a habit of using the command line to build artifacts for sharing... it\n>> will\n>>>> help avoid gotchas.\n>>>>\n>>>> Yes, definitely.\n>>>>\n>>>> Notably, e.g., reloading the package sources (often via\n>>>> devtools) into a running R process instead of restarting R and\n>>>> loading/attaching the newly built and installed package (that\n>>>> you are developing) is much faster, but *NOT* equivalent and\n>>>> sometimes misleading -- because it's not easily possible to\n>>>> \"revert\" everything you did in your running R session {caches,\n>>>> method tables, DLLs, internal pointers, ...}.\n>>>>\n>>>> (read on, further down)\n>>>>\n>>>>       > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n>>>> cschwarzstatsfuca at gmail.com> wrote:\n>>>>       >> Success!\n>>>>       >>\n>>>>       >> Building on MT's note that if the inst/doc has an index.html\n>> file,\n>>>> R does\n>>>>       >> NOT build a new index.\n>>>>       >> At the end of Writing R Extensions Section 1.4, it states\n>>>>       >> \"  When R CMD build builds the vignettes, it copies these and\n>> the\n>>>> vignette\n>>>>       >> sources from directory vignettes to inst/doc. To install any\n>> other\n>>>> files\n>>>>       >> from the vignettes directory, include a file\n>>>> vignettes/.install_extras which\n>>>>       >> specifies these as Perl-like regular expressions on one or more\n>>>> lines..\"\n>>>>       >>\n>>>>       >> So I copied the existing inst/doc/index.html file from the\n>> installed\n>>>>       >> SighatbilityModel with the wrong sort order to my\n>>>> vignettes/index.html,\n>>>>       >> edited this index.html file to get the right sort order. The\n>>>> index.html is\n>>>>       >> just vanilla html so it is easy to modify \"manually\".\n>>>>       >> Then I created a vignettes/.install_extras with a single entry\n>>>> \"index.html\"\n>>>>       >> and now vignettes/index.html appears to be copied to inst/doc\n>> and\n>>>> so stops\n>>>>       >> the building of the wrongly sorted index.\n>>>>       >>\n>>>>       >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n>>>> tar.gz\n>>>>       >> file; installed from the tar.gz file, and now my vignette index\n>> is\n>>>> sorted\n>>>>       >> properly on my Mac machine.\n>>>>       >> Also tried using devtools::check_win_release() to generate a\n>>>> windoze zip\n>>>>       >> file; installed that; and the vignette index is again sorted\n>>>> properly on\n>>>>       >> Windows machines.\n>>>>       >>\n>>>>       >> I'm hoping I can use this for (b) from my original query as\n>> well.\n>>>>       >>\n>>>>       >> This will mean that I have to \"manually'\" maintain the\n>>>> vignettes/index.html\n>>>>       >> file, but that is straightforward.\n>>>>       >>\n>>>>       >> I hope this works when I submit to CRAN.\n>>>>       >>\n>>>>       >> How do I suggest to the R maintainers that an explicit section\n>> be\n>>>> added to\n>>>>       >> the Writing R Extensions manual with the above steps so that\n>> future\n>>>> package\n>>>>       >> writers don't repeat history? I'm willing to write the paragraph\n>>>> explaining\n>>>>       >> the steps, but don't know who/how to proceed to get it added to\n>>>> Writing R\n>>>>       >> Extensions.\n>>>>       >>\n>>>>       >> Carl Schwarz\n>>>>\n>>>> The WRE manual is part of the R sources, so formally you are\n>>>> proposing to improve (the documentation part of) R.\n>>>>\n>>>> You can propose a patch against the \"R-devel\" sources.\n>>>> If the changes are quite small and compact (as here), even on by e-mail.\n>>>> The source file  is  doc/manual/R-exts.texi\n>>>> in R's SVN (source server)\n>>>>     https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n>>>> or one of its mirrors (notably on github)\n>>>>\n>>>\n>>>        [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "On 02/06/2022 1:39 p.m., Carl Schwarz wrote:\n> Thanks for the suggestions.\n> \n> (a) Unfortunately, if you place the index.html directly into the inst/doc\n> directory, it is overwritten when the package source file (*tar.gz) is\n> created and then installed.\n> This is using RStudio on a Mac.... I did not try this on a Windows machine.\n> \n> But other files that you place in the inst/doc file are left alone and are\n> listed under the vignette index when you follow the \"User guides, package\n> vignettes and other documentation\" link.\n> \n> So strange that the index is overwritten but other files are left alone.\n\nThat does sound like a bug...\n\n> (b) The relative links that are generated are quite long, e.g. <a\n> href=\"../../../library/SightabilityModel/doc/c-MoosePopR-SightabilityPopR-Demo.html\">HTML</a>\n> and I don't fully understand where the \"current\" directory is when you\n> follow the \"User guides, package vignettes and other\n> documentation\" requiring you to go back up the directory tree and then go\n> back down.\n> I copied and modified these odd links for my other files and it worked fine.\n\nTo see the links the help system is using, you can run it in an external \nbrowser using \"help.start()\".  When I do that for rgl I see this link on \nthe vignettes page:\n\n   http://127.0.0.1:17854/library/rgl/doc/index.html\n\nand the first vignette is at\n\n   http://127.0.0.1:17854/library/rgl/doc/WebGL.html\n\ngenerated from <a href=\"../../../library/rgl/doc/WebGL.html\">.\n\nI forget why the index doesn't just use <a href=\"WebGL.html\"> which \nwould appear to be equivalent in this case, but I vaguely recall that \nthere's a good reason for that.  It might be because the links generated \nfor static documentation are different.\n\nDuncan Murdoch\n\n> \n> (c) I have not tried the index.Rmd approach...\n> \n> Carl.\n> \n> On Thu, Jun 2, 2022 at 1:22 AM Sebastian Meyer <seb.meyer at fau.de> wrote:\n> \n>> Some quick comments:\n>>\n>> - You could place the index.html directly in the inst/doc folder of your\n>> package sources, avoiding the need for .install_extras from the\n>> vignettes folder. This approach is useful if there is additional\n>> non-vignette material in inst/doc.\n>>\n>> - As you say, links in index.html need to be relative to the installed\n>> *doc* dir, where the index file is located. For example, the simple links\n>>       <a href=\"template.R\">template script</a>,\n>>       <a href=\"vignetteA.Rnw\">source of vignette A</a>\n>> should work to reference a static Rscript inst/doc/template.R and a\n>> vignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD\n>> build), respectively.\n>>\n>> - It seems you could even generate the index.html via a vignette,\n>> index.Rmd, say. The downside is that this index vignette will be listed\n>> as a vignette (by browseVignettes(), for example) although it isn't\n>> really a vignette.\n>>\n>> - browseVignettes() sorts by vignette title, not by file name.\n>> Furthermore, its purpose is to browse *vignettes* also across packages,\n>> so is unrelated to the *doc* index for a given package, which may\n>> contain more than vignettes.\n>>\n>> Best regards,\n>>\n>>          Sebastian Meyer\n>>\n>>\n>> Am 01.06.22 um 23:47 schrieb Carl Schwarz:\n>>> Here is some suggested text to be added to the Writing R Extensions\n>> manual.\n>>> Any suggestions for changes?\n>>>\n>>> 1.4.3. Customizing the vignette help index\n>>>\n>>> R provides two indices to the vignettes in a package  (a) the\n>>> browseVignettes() function and (b) the html index of vignettes and other\n>>> user documentation available when you use help(package=xxx). The latter\n>> is\n>>> built when the package is installed.\n>>>\n>>>\n>>>\n>>> In some cases, customization of the html index is desirable. For example,\n>>> currently the entries in the index  are sorted by the vignette engine\n>> used\n>>> to build the vignette and then by the file name of the vignette and a\n>>> different sort order may be desired. Or additional documents may wish to\n>> be\n>>> included, e.g., the purl()’d code from an “asis” vignette.\n>>>\n>>>\n>>>\n>>> Previous sections of this guide indicate that if an “index.html” file is\n>>> present in the inst/doc directory at the time of the build, then a new\n>>> “index.html” file will not be built. Previous sections also indicate how\n>> to\n>>> add additional files to the inst/doc directory. The following is then a\n>>> summary of the steps needed to customize the html index to the vignettes\n>> in\n>>> a package.\n>>>\n>>>\n>>>\n>>> 1. Create a revised ‘index.html’ file in the vignettes directory. It may\n>> be\n>>> easiest to copy an existing ‘doc/index.html’ file from an installed\n>>> package. The vignettes/index.html file should be in plain html and can be\n>>> modified to change the sort order or to add links to additional files to\n>> be\n>>> available to users. Note that files are referred to using relative path\n>>> names – follow the pattern in the copied file.\n>>>\n>>>\n>>>\n>>> 2. Add any other additional files to the vignettes directory that are to\n>> be\n>>> available to the user via the vignette help index.\n>>>\n>>>\n>>>\n>>> 3. Add an ‘.install_extras’ file to the vignettes directory (don’t forget\n>>> the leading period in this file’s name). This is a text file with the\n>> names\n>>> of the files in the vignettes directory to be added to the inst/doc\n>>> directory. Each line can be coded as a regular expression. At a minimum,\n>>> include ‘index.html’ to copy the vignettes/index.html file to the\n>> inst/doc\n>>> directory.\n>>>\n>>>\n>>>\n>>> 4. Check/build the package in the regular way.\n>>>\n>>>\n>>>\n>>> There is no evident way to modify the output of the browseVignettes()\n>>> function; however, this function currently sorts by the vignette file\n>> name\n>>> regardless of the vignette engine used.\n>>>\n>>> On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <\n>> maechler at stat.math.ethz.ch>\n>>> wrote:\n>>>\n>>>>>>>>> Jeff Newmiller\n>>>>>>>>>       on Tue, 31 May 2022 16:09:16 -0700 writes:\n>>>>\n>>>>       > FWIW the RStudio build is often not complete... it intentionally\n>>>> takes shortcuts that make test/run iteration faster... but you should\n>> make\n>>>> a habit of using the command line to build artifacts for sharing... it\n>> will\n>>>> help avoid gotchas.\n>>>>\n>>>> Yes, definitely.\n>>>>\n>>>> Notably, e.g., reloading the package sources (often via\n>>>> devtools) into a running R process instead of restarting R and\n>>>> loading/attaching the newly built and installed package (that\n>>>> you are developing) is much faster, but *NOT* equivalent and\n>>>> sometimes misleading -- because it's not easily possible to\n>>>> \"revert\" everything you did in your running R session {caches,\n>>>> method tables, DLLs, internal pointers, ...}.\n>>>>\n>>>> (read on, further down)\n>>>>\n>>>>       > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n>>>> cschwarzstatsfuca at gmail.com> wrote:\n>>>>       >> Success!\n>>>>       >>\n>>>>       >> Building on MT's note that if the inst/doc has an index.html\n>> file,\n>>>> R does\n>>>>       >> NOT build a new index.\n>>>>       >> At the end of Writing R Extensions Section 1.4, it states\n>>>>       >> \"  When R CMD build builds the vignettes, it copies these and\n>> the\n>>>> vignette\n>>>>       >> sources from directory vignettes to inst/doc. To install any\n>> other\n>>>> files\n>>>>       >> from the vignettes directory, include a file\n>>>> vignettes/.install_extras which\n>>>>       >> specifies these as Perl-like regular expressions on one or more\n>>>> lines..\"\n>>>>       >>\n>>>>       >> So I copied the existing inst/doc/index.html file from the\n>> installed\n>>>>       >> SighatbilityModel with the wrong sort order to my\n>>>> vignettes/index.html,\n>>>>       >> edited this index.html file to get the right sort order. The\n>>>> index.html is\n>>>>       >> just vanilla html so it is easy to modify \"manually\".\n>>>>       >> Then I created a vignettes/.install_extras with a single entry\n>>>> \"index.html\"\n>>>>       >> and now vignettes/index.html appears to be copied to inst/doc\n>> and\n>>>> so stops\n>>>>       >> the building of the wrongly sorted index.\n>>>>       >>\n>>>>       >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n>>>> tar.gz\n>>>>       >> file; installed from the tar.gz file, and now my vignette index\n>> is\n>>>> sorted\n>>>>       >> properly on my Mac machine.\n>>>>       >> Also tried using devtools::check_win_release() to generate a\n>>>> windoze zip\n>>>>       >> file; installed that; and the vignette index is again sorted\n>>>> properly on\n>>>>       >> Windows machines.\n>>>>       >>\n>>>>       >> I'm hoping I can use this for (b) from my original query as\n>> well.\n>>>>       >>\n>>>>       >> This will mean that I have to \"manually'\" maintain the\n>>>> vignettes/index.html\n>>>>       >> file, but that is straightforward.\n>>>>       >>\n>>>>       >> I hope this works when I submit to CRAN.\n>>>>       >>\n>>>>       >> How do I suggest to the R maintainers that an explicit section\n>> be\n>>>> added to\n>>>>       >> the Writing R Extensions manual with the above steps so that\n>> future\n>>>> package\n>>>>       >> writers don't repeat history? I'm willing to write the paragraph\n>>>> explaining\n>>>>       >> the steps, but don't know who/how to proceed to get it added to\n>>>> Writing R\n>>>>       >> Extensions.\n>>>>       >>\n>>>>       >> Carl Schwarz\n>>>>\n>>>> The WRE manual is part of the R sources, so formally you are\n>>>> proposing to improve (the documentation part of) R.\n>>>>\n>>>> You can propose a patch against the \"R-devel\" sources.\n>>>> If the changes are quite small and compact (as here), even on by e-mail.\n>>>> The source file  is  doc/manual/R-exts.texi\n>>>> in R's SVN (source server)\n>>>>     https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n>>>> or one of its mirrors (notably on github)\n>>>>\n>>>\n>>>        [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "On 02/06/2022 1:39 p.m., Carl Schwarz wrote:\n> Thanks for the suggestions.\n> \n> (a) Unfortunately, if you place the index.html directly into the inst/doc\n> directory, it is overwritten when the packag",
       "thread_id": "thread-d36fe6ad44fa",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008132.html"
     },
     {
       "id": "msg-f1de7cae305d",
@@ -287,7 +299,8 @@
       "body_snippet": "When releasing a package, API Keys are not supposed to be available for\nthose who download it. However, the package I am building requires the API\nkey to be able to pull the data for the examples. Sho",
       "thread_id": "thread-f1de7cae305d",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008133.html"
     },
     {
       "id": "msg-971b6388811c",
@@ -305,7 +318,8 @@
       "body_snippet": "On 2022-06-03 4:00 p.m., Edward Wei wrote:\n> When releasing a package, API Keys are not supposed to be available for\n> those who download it. However, the package I am building requires the API\n> key ",
       "thread_id": "thread-f1de7cae305d",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008134.html"
     },
     {
       "id": "msg-7449d94f3a8f",
@@ -332,11 +346,12 @@
         "<CADtpigaSyS_kZ-Sr3evT=6jaybsGiNGfxQVoVTLPZzE+zLPdHg@mail.gmail.com>",
         "<b80f569e-5edc-3352-d603-6e42cf15042e@gmail.com>"
       ],
-      "body_plain": ">>>>> Duncan Murdoch \n>>>>>     on Thu, 2 Jun 2022 15:53:58 -0400 writes:\n\n    > On 02/06/2022 1:39 p.m., Carl Schwarz wrote:\n    >> Thanks for the suggestions.\n    >> \n    >> (a) Unfortunately, if you place the index.html directly into the inst/doc\n    >> directory, it is overwritten when the package source file (*tar.gz) is\n    >> created and then installed.\n    >> This is using RStudio on a Mac.... I did not try this on a Windows machine.\n    >> \n    >> But other files that you place in the inst/doc file are left alone and are\n    >> listed under the vignette index when you follow the \"User guides, package\n    >> vignettes and other documentation\" link.\n    >> \n    >> So strange that the index is overwritten but other files are left alone.\n\n    > That does sound like a bug...\n\n    >> (b) The relative links that are generated are quite long, e.g. <a\n    >> href=\"../../../library/SightabilityModel/doc/c-MoosePopR-SightabilityPopR-Demo.html\">HTML</a>\n    >> and I don't fully understand where the \"current\" directory is when you\n    >> follow the \"User guides, package vignettes and other\n    >> documentation\" requiring you to go back up the directory tree and then go\n    >> back down.\n    >> I copied and modified these odd links for my other files and it worked fine.\n\n    > To see the links the help system is using, you can run it in an external \n    > browser using \"help.start()\".  When I do that for rgl I see this link on \n    > the vignettes page:\n\n    > http://127.0.0.1:17854/library/rgl/doc/index.html\n\n    > and the first vignette is at\n\n    > http://127.0.0.1:17854/library/rgl/doc/WebGL.html\n\n    > generated from <a href=\"../../../library/rgl/doc/WebGL.html\">.\n\n    > I forget why the index doesn't just use <a href=\"WebGL.html\"> which \n    > would appear to be equivalent in this case, but I vaguely recall that \n    > there's a good reason for that.  It might be because the links generated \n    > for static documentation are different.\n\n    > Duncan Murdoch\n\nApropos  static documentation :\n\nSome of you may remember that I (my institution's server) have been\nproviding static HTML help pages for 20 years or so at\n\n https://stat.ethz.ch/R-manual\n\n(linked from  https://stat.ethz.ch/R/  or more importantly, the R-project.org\n  sidebar [Documentation] -> [Other], i.e.,\n  https://www.r-project.org/other-docs.html )\n\nand there, e.g.,  \n      https://stat.ethz.ch/R-manual/R-devel/library/grid/html/grid-package.html\nor then\n      https://stat.ethz.ch/R-manual/R-devel/library/grid/doc/index.html\n\nyou can see (via \"view source\" [right click] in your browser)\nthe links some of which possibly could be made much shorter indeed,\nbut then the current code does not have to distinguish links\nwithin the same package and those to another package (still\nassumed to be in the same library though..).\n\nNotably on the 2nd page ( = ...../index.html ),\nI see that we still seem to have a buglet in our  static html\nconstruction, (and I see this also in R-patched), the first 28 lines being \n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~snip~~~~~~~~snip~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n<!DOCTYPE html>\n<html>\n<head><title>R: Vignettes and other documentation</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=yes\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/doc/html/R.css\" />\n</head><body><div class=\"container\">\n<h1> Vignettes and other documentation\n<img class=\"toplogo\" src=\"/doc/html/Rlogo.svg\" alt=\"[R logo]\" />\n</h1>\n<hr/>\n<div style=\"text-align: center;\">\n<a href=\"/doc/html/index.html\"><img class=\"arrow\" src=\"/doc/html/up.jpg\" alt=\"[Top]\" /></a>\n</div>\n<h2>Vignettes from package 'grid'</h2>\n<table style=\"width: 100%;\">\n<col style=\"width: 22%;\" />\n<col style=\"width:  2%;\" />\n<col style=\"width: 50%;\" />\n<col style=\"width:  8%;\" />\n<col style=\"width:  8%;\" />\n<col style=\"width:  8%;\" />\n<tr><td style=\"text-align: right; vertical-align: top;\"><a href=\"../../../library/grid/doc/displaylist.pdf\">grid::displaylist</a></td>\n<td></td><td style=\"vertical-align: top;\">Display Lists in grid</td>\n<td style=\"vertical-align: top;\"><a href=\"../../../library/grid/doc/displaylist.pdf\">PDF</a></td>\n<td style=\"vertical-align: top;\"><a href=\"../../../library/grid/doc/displaylist.Rnw\">source</a></td>\n<td style=\"vertical-align: top; white-space: nowrap\"><a href=\"../../../library/grid/doc/displaylist.R\">R code</a></td></tr>\n<tr><td style=\"text-align: right; vertical-align: top;\"><a href=\"../../../library/grid/doc/frame.pdf\">grid::frame</a></td>\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~snip~~~~~~~~snip~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nand in the first few lines  *invalid* urls, already for the CSS (!) such as\n  <img class=\"toplogo\" src=\"/doc/html/Rlogo.svg\" alt=\"[R logo]\" />\nand a bit later, (the same mistake), invalid \n  <a href=\"/doc/html/index.html\"><img class=\"arrow\" src=\"/doc/html/up.jpg\" alt=\"[Top]\" /></a>\n\n.... I won't time to find and fix the cause of the bug, at the moment,\nso I'm happy if any of you readers does so, or even just opens\nan R bugzilla report about it.\n\nMartin\n\n\n    >> \n    >> (c) I have not tried the index.Rmd approach...\n    >> \n    >> Carl.\n    >> \n    >> On Thu, Jun 2, 2022 at 1:22 AM Sebastian Meyer <seb.meyer at fau.de> wrote:\n    >> \n    >>> Some quick comments:\n    >>> \n    >>> - You could place the index.html directly in the inst/doc folder of your\n    >>> package sources, avoiding the need for .install_extras from the\n    >>> vignettes folder. This approach is useful if there is additional\n    >>> non-vignette material in inst/doc.\n    >>> \n    >>> - As you say, links in index.html need to be relative to the installed\n    >>> *doc* dir, where the index file is located. For example, the simple links\n    >>> <a href=\"template.R\">template script</a>,\n    >>> <a href=\"vignetteA.Rnw\">source of vignette A</a>\n    >>> should work to reference a static Rscript inst/doc/template.R and a\n    >>> vignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD\n    >>> build), respectively.\n    >>> \n    >>> - It seems you could even generate the index.html via a vignette,\n    >>> index.Rmd, say. The downside is that this index vignette will be listed\n    >>> as a vignette (by browseVignettes(), for example) although it isn't\n    >>> really a vignette.\n    >>> \n    >>> - browseVignettes() sorts by vignette title, not by file name.\n    >>> Furthermore, its purpose is to browse *vignettes* also across packages,\n    >>> so is unrelated to the *doc* index for a given package, which may\n    >>> contain more than vignettes.\n    >>> \n    >>> Best regards,\n    >>> \n    >>> Sebastian Meyer\n    >>> \n    >>> \n    >>> Am 01.06.22 um 23:47 schrieb Carl Schwarz:\n    >>>> Here is some suggested text to be added to the Writing R Extensions\n    >>> manual.\n    >>>> Any suggestions for changes?\n    >>>> \n    >>>> 1.4.3. Customizing the vignette help index\n    >>>> \n    >>>> R provides two indices to the vignettes in a package  (a) the\n    >>>> browseVignettes() function and (b) the html index of vignettes and other\n    >>>> user documentation available when you use help(package=xxx). The latter\n    >>> is\n    >>>> built when the package is installed.\n    >>>> \n    >>>> \n    >>>> \n    >>>> In some cases, customization of the html index is desirable. For example,\n    >>>> currently the entries in the index  are sorted by the vignette engine\n    >>> used\n    >>>> to build the vignette and then by the file name of the vignette and a\n    >>>> different sort order may be desired. Or additional documents may wish to\n    >>> be\n    >>>> included, e.g., the purl()?d code from an ?asis? vignette.\n    >>>> \n    >>>> \n    >>>> \n    >>>> Previous sections of this guide indicate that if an ?index.html? file is\n    >>>> present in the inst/doc directory at the time of the build, then a new\n    >>>> ?index.html? file will not be built. Previous sections also indicate how\n    >>> to\n    >>>> add additional files to the inst/doc directory. The following is then a\n    >>>> summary of the steps needed to customize the html index to the vignettes\n    >>> in\n    >>>> a package.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 1. Create a revised ?index.html? file in the vignettes directory. It may\n    >>> be\n    >>>> easiest to copy an existing ?doc/index.html? file from an installed\n    >>>> package. The vignettes/index.html file should be in plain html and can be\n    >>>> modified to change the sort order or to add links to additional files to\n    >>> be\n    >>>> available to users. Note that files are referred to using relative path\n    >>>> names ? follow the pattern in the copied file.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 2. Add any other additional files to the vignettes directory that are to\n    >>> be\n    >>>> available to the user via the vignette help index.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 3. Add an ?.install_extras? file to the vignettes directory (don?t forget\n    >>>> the leading period in this file?s name). This is a text file with the\n    >>> names\n    >>>> of the files in the vignettes directory to be added to the inst/doc\n    >>>> directory. Each line can be coded as a regular expression. At a minimum,\n    >>>> include ?index.html? to copy the vignettes/index.html file to the\n    >>> inst/doc\n    >>>> directory.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 4. Check/build the package in the regular way.\n    >>>> \n    >>>> \n    >>>> \n    >>>> There is no evident way to modify the output of the browseVignettes()\n    >>>> function; however, this function currently sorts by the vignette file\n    >>> name\n    >>>> regardless of the vignette engine used.\n    >>>> \n    >>>> On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <\n    >>> maechler at stat.math.ethz.ch>\n    >>>> wrote:\n    >>>> \n    >>>>>>>>>> Jeff Newmiller\n    >>>>>>>>>> on Tue, 31 May 2022 16:09:16 -0700 writes:\n    >>>>> \n    >>>>> > FWIW the RStudio build is often not complete... it intentionally\n    >>>>> takes shortcuts that make test/run iteration faster... but you should\n    >>> make\n    >>>>> a habit of using the command line to build artifacts for sharing... it\n    >>> will\n    >>>>> help avoid gotchas.\n    >>>>> \n    >>>>> Yes, definitely.\n    >>>>> \n    >>>>> Notably, e.g., reloading the package sources (often via\n    >>>>> devtools) into a running R process instead of restarting R and\n    >>>>> loading/attaching the newly built and installed package (that\n    >>>>> you are developing) is much faster, but *NOT* equivalent and\n    >>>>> sometimes misleading -- because it's not easily possible to\n    >>>>> \"revert\" everything you did in your running R session {caches,\n    >>>>> method tables, DLLs, internal pointers, ...}.\n    >>>>> \n    >>>>> (read on, further down)\n    >>>>> \n    >>>>> > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n    >>>>> cschwarzstatsfuca at gmail.com> wrote:\n    >>>>> >> Success!\n    >>>>> >>\n    >>>>> >> Building on MT's note that if the inst/doc has an index.html\n    >>> file,\n    >>>>> R does\n    >>>>> >> NOT build a new index.\n    >>>>> >> At the end of Writing R Extensions Section 1.4, it states\n    >>>>> >> \"  When R CMD build builds the vignettes, it copies these and\n    >>> the\n    >>>>> vignette\n    >>>>> >> sources from directory vignettes to inst/doc. To install any\n    >>> other\n    >>>>> files\n    >>>>> >> from the vignettes directory, include a file\n    >>>>> vignettes/.install_extras which\n    >>>>> >> specifies these as Perl-like regular expressions on one or more\n    >>>>> lines..\"\n    >>>>> >>\n    >>>>> >> So I copied the existing inst/doc/index.html file from the\n    >>> installed\n    >>>>> >> SighatbilityModel with the wrong sort order to my\n    >>>>> vignettes/index.html,\n    >>>>> >> edited this index.html file to get the right sort order. The\n    >>>>> index.html is\n    >>>>> >> just vanilla html so it is easy to modify \"manually\".\n    >>>>> >> Then I created a vignettes/.install_extras with a single entry\n    >>>>> \"index.html\"\n    >>>>> >> and now vignettes/index.html appears to be copied to inst/doc\n    >>> and\n    >>>>> so stops\n    >>>>> >> the building of the wrongly sorted index.\n    >>>>> >>\n    >>>>> >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n    >>>>> tar.gz\n    >>>>> >> file; installed from the tar.gz file, and now my vignette index\n    >>> is\n    >>>>> sorted\n    >>>>> >> properly on my Mac machine.\n    >>>>> >> Also tried using devtools::check_win_release() to generate a\n    >>>>> windoze zip\n    >>>>> >> file; installed that; and the vignette index is again sorted\n    >>>>> properly on\n    >>>>> >> Windows machines.\n    >>>>> >>\n    >>>>> >> I'm hoping I can use this for (b) from my original query as\n    >>> well.\n    >>>>> >>\n    >>>>> >> This will mean that I have to \"manually'\" maintain the\n    >>>>> vignettes/index.html\n    >>>>> >> file, but that is straightforward.\n    >>>>> >>\n    >>>>> >> I hope this works when I submit to CRAN.\n    >>>>> >>\n    >>>>> >> How do I suggest to the R maintainers that an explicit section\n    >>> be\n    >>>>> added to\n    >>>>> >> the Writing R Extensions manual with the above steps so that\n    >>> future\n    >>>>> package\n    >>>>> >> writers don't repeat history? I'm willing to write the paragraph\n    >>>>> explaining\n    >>>>> >> the steps, but don't know who/how to proceed to get it added to\n    >>>>> Writing R\n    >>>>> >> Extensions.\n    >>>>> >>\n    >>>>> >> Carl Schwarz\n    >>>>> \n    >>>>> The WRE manual is part of the R sources, so formally you are\n    >>>>> proposing to improve (the documentation part of) R.\n    >>>>> \n    >>>>> You can propose a patch against the \"R-devel\" sources.\n    >>>>> If the changes are quite small and compact (as here), even on by e-mail.\n    >>>>> The source file  is  doc/manual/R-exts.texi\n    >>>>> in R's SVN (source server)\n    >>>>> https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n    >>>>> or one of its mirrors (notably on github)",
+      "body_plain": ">>>>> Duncan Murdoch \n>>>>>     on Thu, 2 Jun 2022 15:53:58 -0400 writes:\n\n    > On 02/06/2022 1:39 p.m., Carl Schwarz wrote:\n    >> Thanks for the suggestions.\n    >> \n    >> (a) Unfortunately, if you place the index.html directly into the inst/doc\n    >> directory, it is overwritten when the package source file (*tar.gz) is\n    >> created and then installed.\n    >> This is using RStudio on a Mac.... I did not try this on a Windows machine.\n    >> \n    >> But other files that you place in the inst/doc file are left alone and are\n    >> listed under the vignette index when you follow the \"User guides, package\n    >> vignettes and other documentation\" link.\n    >> \n    >> So strange that the index is overwritten but other files are left alone.\n\n    > That does sound like a bug...\n\n    >> (b) The relative links that are generated are quite long, e.g. <a\n    >> href=\"../../../library/SightabilityModel/doc/c-MoosePopR-SightabilityPopR-Demo.html\">HTML</a>\n    >> and I don't fully understand where the \"current\" directory is when you\n    >> follow the \"User guides, package vignettes and other\n    >> documentation\" requiring you to go back up the directory tree and then go\n    >> back down.\n    >> I copied and modified these odd links for my other files and it worked fine.\n\n    > To see the links the help system is using, you can run it in an external \n    > browser using \"help.start()\".  When I do that for rgl I see this link on \n    > the vignettes page:\n\n    > http://127.0.0.1:17854/library/rgl/doc/index.html\n\n    > and the first vignette is at\n\n    > http://127.0.0.1:17854/library/rgl/doc/WebGL.html\n\n    > generated from <a href=\"../../../library/rgl/doc/WebGL.html\">.\n\n    > I forget why the index doesn't just use <a href=\"WebGL.html\"> which \n    > would appear to be equivalent in this case, but I vaguely recall that \n    > there's a good reason for that.  It might be because the links generated \n    > for static documentation are different.\n\n    > Duncan Murdoch\n\nApropos  static documentation :\n\nSome of you may remember that I (my institution's server) have been\nproviding static HTML help pages for 20 years or so at\n\n https://stat.ethz.ch/R-manual\n\n(linked from  https://stat.ethz.ch/R/  or more importantly, the R-project.org\n  sidebar [Documentation] -> [Other], i.e.,\n  https://www.r-project.org/other-docs.html )\n\nand there, e.g.,  \n      https://stat.ethz.ch/R-manual/R-devel/library/grid/html/grid-package.html\nor then\n      https://stat.ethz.ch/R-manual/R-devel/library/grid/doc/index.html\n\nyou can see (via \"view source\" [right click] in your browser)\nthe links some of which possibly could be made much shorter indeed,\nbut then the current code does not have to distinguish links\nwithin the same package and those to another package (still\nassumed to be in the same library though..).\n\nNotably on the 2nd page ( = ...../index.html ),\nI see that we still seem to have a buglet in our  static html\nconstruction, (and I see this also in R-patched), the first 28 lines being \n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~snip~~~~~~~~snip~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n<!DOCTYPE html>\n<html>\n<head><title>R: Vignettes and other documentation</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=yes\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/doc/html/R.css\" />\n</head><body><div class=\"container\">\n<h1> Vignettes and other documentation\n<img class=\"toplogo\" src=\"/doc/html/Rlogo.svg\" alt=\"[R logo]\" />\n</h1>\n<hr/>\n<div style=\"text-align: center;\">\n<a href=\"/doc/html/index.html\"><img class=\"arrow\" src=\"/doc/html/up.jpg\" alt=\"[Top]\" /></a>\n</div>\n<h2>Vignettes from package 'grid'</h2>\n<table style=\"width: 100%;\">\n<col style=\"width: 22%;\" />\n<col style=\"width:  2%;\" />\n<col style=\"width: 50%;\" />\n<col style=\"width:  8%;\" />\n<col style=\"width:  8%;\" />\n<col style=\"width:  8%;\" />\n<tr><td style=\"text-align: right; vertical-align: top;\"><a href=\"../../../library/grid/doc/displaylist.pdf\">grid::displaylist</a></td>\n<td></td><td style=\"vertical-align: top;\">Display Lists in grid</td>\n<td style=\"vertical-align: top;\"><a href=\"../../../library/grid/doc/displaylist.pdf\">PDF</a></td>\n<td style=\"vertical-align: top;\"><a href=\"../../../library/grid/doc/displaylist.Rnw\">source</a></td>\n<td style=\"vertical-align: top; white-space: nowrap\"><a href=\"../../../library/grid/doc/displaylist.R\">R code</a></td></tr>\n<tr><td style=\"text-align: right; vertical-align: top;\"><a href=\"../../../library/grid/doc/frame.pdf\">grid::frame</a></td>\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~snip~~~~~~~~snip~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nand in the first few lines  *invalid* urls, already for the CSS (!) such as\n  <img class=\"toplogo\" src=\"/doc/html/Rlogo.svg\" alt=\"[R logo]\" />\nand a bit later, (the same mistake), invalid \n  <a href=\"/doc/html/index.html\"><img class=\"arrow\" src=\"/doc/html/up.jpg\" alt=\"[Top]\" /></a>\n\n.... I won't time to find and fix the cause of the bug, at the moment,\nso I'm happy if any of you readers does so, or even just opens\nan R bugzilla report about it.\n\nMartin\n\n\n    >> \n    >> (c) I have not tried the index.Rmd approach...\n    >> \n    >> Carl.\n    >> \n    >> On Thu, Jun 2, 2022 at 1:22 AM Sebastian Meyer <seb.meyer at fau.de> wrote:\n    >> \n    >>> Some quick comments:\n    >>> \n    >>> - You could place the index.html directly in the inst/doc folder of your\n    >>> package sources, avoiding the need for .install_extras from the\n    >>> vignettes folder. This approach is useful if there is additional\n    >>> non-vignette material in inst/doc.\n    >>> \n    >>> - As you say, links in index.html need to be relative to the installed\n    >>> *doc* dir, where the index file is located. For example, the simple links\n    >>> <a href=\"template.R\">template script</a>,\n    >>> <a href=\"vignetteA.Rnw\">source of vignette A</a>\n    >>> should work to reference a static Rscript inst/doc/template.R and a\n    >>> vignette built from vignettes/vignetteA.Rnw (copied to inst/doc by R CMD\n    >>> build), respectively.\n    >>> \n    >>> - It seems you could even generate the index.html via a vignette,\n    >>> index.Rmd, say. The downside is that this index vignette will be listed\n    >>> as a vignette (by browseVignettes(), for example) although it isn't\n    >>> really a vignette.\n    >>> \n    >>> - browseVignettes() sorts by vignette title, not by file name.\n    >>> Furthermore, its purpose is to browse *vignettes* also across packages,\n    >>> so is unrelated to the *doc* index for a given package, which may\n    >>> contain more than vignettes.\n    >>> \n    >>> Best regards,\n    >>> \n    >>> Sebastian Meyer\n    >>> \n    >>> \n    >>> Am 01.06.22 um 23:47 schrieb Carl Schwarz:\n    >>>> Here is some suggested text to be added to the Writing R Extensions\n    >>> manual.\n    >>>> Any suggestions for changes?\n    >>>> \n    >>>> 1.4.3. Customizing the vignette help index\n    >>>> \n    >>>> R provides two indices to the vignettes in a package  (a) the\n    >>>> browseVignettes() function and (b) the html index of vignettes and other\n    >>>> user documentation available when you use help(package=xxx). The latter\n    >>> is\n    >>>> built when the package is installed.\n    >>>> \n    >>>> \n    >>>> \n    >>>> In some cases, customization of the html index is desirable. For example,\n    >>>> currently the entries in the index  are sorted by the vignette engine\n    >>> used\n    >>>> to build the vignette and then by the file name of the vignette and a\n    >>>> different sort order may be desired. Or additional documents may wish to\n    >>> be\n    >>>> included, e.g., the purl()’d code from an “asis” vignette.\n    >>>> \n    >>>> \n    >>>> \n    >>>> Previous sections of this guide indicate that if an “index.html” file is\n    >>>> present in the inst/doc directory at the time of the build, then a new\n    >>>> “index.html” file will not be built. Previous sections also indicate how\n    >>> to\n    >>>> add additional files to the inst/doc directory. The following is then a\n    >>>> summary of the steps needed to customize the html index to the vignettes\n    >>> in\n    >>>> a package.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 1. Create a revised ‘index.html’ file in the vignettes directory. It may\n    >>> be\n    >>>> easiest to copy an existing ‘doc/index.html’ file from an installed\n    >>>> package. The vignettes/index.html file should be in plain html and can be\n    >>>> modified to change the sort order or to add links to additional files to\n    >>> be\n    >>>> available to users. Note that files are referred to using relative path\n    >>>> names – follow the pattern in the copied file.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 2. Add any other additional files to the vignettes directory that are to\n    >>> be\n    >>>> available to the user via the vignette help index.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 3. Add an ‘.install_extras’ file to the vignettes directory (don’t forget\n    >>>> the leading period in this file’s name). This is a text file with the\n    >>> names\n    >>>> of the files in the vignettes directory to be added to the inst/doc\n    >>>> directory. Each line can be coded as a regular expression. At a minimum,\n    >>>> include ‘index.html’ to copy the vignettes/index.html file to the\n    >>> inst/doc\n    >>>> directory.\n    >>>> \n    >>>> \n    >>>> \n    >>>> 4. Check/build the package in the regular way.\n    >>>> \n    >>>> \n    >>>> \n    >>>> There is no evident way to modify the output of the browseVignettes()\n    >>>> function; however, this function currently sorts by the vignette file\n    >>> name\n    >>>> regardless of the vignette engine used.\n    >>>> \n    >>>> On Wed, Jun 1, 2022 at 1:04 AM Martin Maechler <\n    >>> maechler at stat.math.ethz.ch>\n    >>>> wrote:\n    >>>> \n    >>>>>>>>>> Jeff Newmiller\n    >>>>>>>>>> on Tue, 31 May 2022 16:09:16 -0700 writes:\n    >>>>> \n    >>>>> > FWIW the RStudio build is often not complete... it intentionally\n    >>>>> takes shortcuts that make test/run iteration faster... but you should\n    >>> make\n    >>>>> a habit of using the command line to build artifacts for sharing... it\n    >>> will\n    >>>>> help avoid gotchas.\n    >>>>> \n    >>>>> Yes, definitely.\n    >>>>> \n    >>>>> Notably, e.g., reloading the package sources (often via\n    >>>>> devtools) into a running R process instead of restarting R and\n    >>>>> loading/attaching the newly built and installed package (that\n    >>>>> you are developing) is much faster, but *NOT* equivalent and\n    >>>>> sometimes misleading -- because it's not easily possible to\n    >>>>> \"revert\" everything you did in your running R session {caches,\n    >>>>> method tables, DLLs, internal pointers, ...}.\n    >>>>> \n    >>>>> (read on, further down)\n    >>>>> \n    >>>>> > On May 31, 2022 3:53:57 PM PDT, Carl Schwarz <\n    >>>>> cschwarzstatsfuca at gmail.com> wrote:\n    >>>>> >> Success!\n    >>>>> >>\n    >>>>> >> Building on MT's note that if the inst/doc has an index.html\n    >>> file,\n    >>>>> R does\n    >>>>> >> NOT build a new index.\n    >>>>> >> At the end of Writing R Extensions Section 1.4, it states\n    >>>>> >> \"  When R CMD build builds the vignettes, it copies these and\n    >>> the\n    >>>>> vignette\n    >>>>> >> sources from directory vignettes to inst/doc. To install any\n    >>> other\n    >>>>> files\n    >>>>> >> from the vignettes directory, include a file\n    >>>>> vignettes/.install_extras which\n    >>>>> >> specifies these as Perl-like regular expressions on one or more\n    >>>>> lines..\"\n    >>>>> >>\n    >>>>> >> So I copied the existing inst/doc/index.html file from the\n    >>> installed\n    >>>>> >> SighatbilityModel with the wrong sort order to my\n    >>>>> vignettes/index.html,\n    >>>>> >> edited this index.html file to get the right sort order. The\n    >>>>> index.html is\n    >>>>> >> just vanilla html so it is easy to modify \"manually\".\n    >>>>> >> Then I created a vignettes/.install_extras with a single entry\n    >>>>> \"index.html\"\n    >>>>> >> and now vignettes/index.html appears to be copied to inst/doc\n    >>> and\n    >>>>> so stops\n    >>>>> >> the building of the wrongly sorted index.\n    >>>>> >>\n    >>>>> >> Then I did a Rstudio -> Build -> BuildSourcePackage to create a\n    >>>>> tar.gz\n    >>>>> >> file; installed from the tar.gz file, and now my vignette index\n    >>> is\n    >>>>> sorted\n    >>>>> >> properly on my Mac machine.\n    >>>>> >> Also tried using devtools::check_win_release() to generate a\n    >>>>> windoze zip\n    >>>>> >> file; installed that; and the vignette index is again sorted\n    >>>>> properly on\n    >>>>> >> Windows machines.\n    >>>>> >>\n    >>>>> >> I'm hoping I can use this for (b) from my original query as\n    >>> well.\n    >>>>> >>\n    >>>>> >> This will mean that I have to \"manually'\" maintain the\n    >>>>> vignettes/index.html\n    >>>>> >> file, but that is straightforward.\n    >>>>> >>\n    >>>>> >> I hope this works when I submit to CRAN.\n    >>>>> >>\n    >>>>> >> How do I suggest to the R maintainers that an explicit section\n    >>> be\n    >>>>> added to\n    >>>>> >> the Writing R Extensions manual with the above steps so that\n    >>> future\n    >>>>> package\n    >>>>> >> writers don't repeat history? I'm willing to write the paragraph\n    >>>>> explaining\n    >>>>> >> the steps, but don't know who/how to proceed to get it added to\n    >>>>> Writing R\n    >>>>> >> Extensions.\n    >>>>> >>\n    >>>>> >> Carl Schwarz\n    >>>>> \n    >>>>> The WRE manual is part of the R sources, so formally you are\n    >>>>> proposing to improve (the documentation part of) R.\n    >>>>> \n    >>>>> You can propose a patch against the \"R-devel\" sources.\n    >>>>> If the changes are quite small and compact (as here), even on by e-mail.\n    >>>>> The source file  is  doc/manual/R-exts.texi\n    >>>>> in R's SVN (source server)\n    >>>>> https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi\n    >>>>> or one of its mirrors (notably on github)",
       "body_snippet": ">>>>> Duncan Murdoch \n>>>>>     on Thu, 2 Jun 2022 15:53:58 -0400 writes:\n\n    > On 02/06/2022 1:39 p.m., Carl Schwarz wrote:\n    >> Thanks for the suggestions.\n    >> \n    >> (a) Unfortunately, if yo",
       "thread_id": "thread-d36fe6ad44fa",
       "thread_depth": 5,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008135.html"
     },
     {
       "id": "msg-612b2717d09b",
@@ -348,11 +363,12 @@
       "subject_clean": "[R-pkg-devel] Linking to a large external library",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear package developers,I think I found a good solution to this problem which may be relevant for some of you.?I have written an package (\"rolog\") that embeds Swi-Prolog so that R can send queries to a prolog interpreter. The thing is working, but very large, I think 15 MB, and CRAN \"noted\" it. Whenever I add a little feature I have to update the entire package, and so have its users (currently: 0, but that might change). Moreover, people who use the package would normally also have Swi-Prolog on their computer.Therefore, I have now written a second package (\"rologlite\") that just links to the Swi-Prolog dll, which is much smaller in size than embedding it). It searches for Swi-Prolog in the path, in the registry, in the environment, and if all this fails, it checks if rolog is installed and looks for the swipl dll in the rolog package. If all the above fails, a warning is printed, telling the user to install Swi-Prolog or the rolog package. In its DESCRIPTION it \"suggests\" rolog so that the latter is available on e.g. CRAN winbuilder when building the vignette or running the unit tests.I prefer this option over downloading and compiling an external library, e.g. in nloptr. Everything is done from within R, self-contained.In case I overlooked something, any hint to an even better way is appreciated.Best wishes?Matthias?\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear package developers,I think I found a good solution to this problem which may be relevant for some of you.?I have written an package (\"rolog\") that embeds Swi-Prolog so that R can send queries to ",
+      "body_plain": "Dear package developers,I think I found a good solution to this problem which may be relevant for some of you. I have written an package (\"rolog\") that embeds Swi-Prolog so that R can send queries to a prolog interpreter. The thing is working, but very large, I think 15 MB, and CRAN \"noted\" it. Whenever I add a little feature I have to update the entire package, and so have its users (currently: 0, but that might change). Moreover, people who use the package would normally also have Swi-Prolog on their computer.Therefore, I have now written a second package (\"rologlite\") that just links to the Swi-Prolog dll, which is much smaller in size than embedding it). It searches for Swi-Prolog in the path, in the registry, in the environment, and if all this fails, it checks if rolog is installed and looks for the swipl dll in the rolog package. If all the above fails, a warning is printed, telling the user to install Swi-Prolog or the rolog package. In its DESCRIPTION it \"suggests\" rolog so that the latter is available on e.g. CRAN winbuilder when building the vignette or running the unit tests.I prefer this option over downloading and compiling an external library, e.g. in nloptr. Everything is done from within R, self-contained.In case I overlooked something, any hint to an even better way is appreciated.Best wishes Matthias \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear package developers,I think I found a good solution to this problem which may be relevant for some of you. I have written an package (\"rolog\") that embeds Swi-Prolog so that R can send queries to ",
       "thread_id": "thread-612b2717d09b",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008136.html"
     },
     {
       "id": "msg-cfd0df7604b6",
@@ -364,11 +380,12 @@
       "subject_clean": "[R-pkg-devel] How to rename a package",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear package developers,\n\nI have a package published on CRAN and I want to rename it, something like\nfrom \"AtmChile\" to \"AtmoChile\". I have read the CRAN policy, but did not\nfind any topic regarding this. So does anybody know whether there is any\nCRAN policy for this?\n\n Thanks!\n\n\n-- \nFrancisco Antonio Catal?n Meyer\nQu?mico Ambiental de la Universidad de Chile\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear package developers,\n\nI have a package published on CRAN and I want to rename it, something like\nfrom \"AtmChile\" to \"AtmoChile\". I have read the CRAN policy, but did not\nfind any topic regarding this. So does anybody know whether there is any\nCRAN policy for this?\n\n Thanks!\n\n\n-- \nFrancisco Antonio Catalán Meyer\nQuímico Ambiental de la Universidad de Chile\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear package developers,\n\nI have a package published on CRAN and I want to rename it, something like\nfrom \"AtmChile\" to \"AtmoChile\". I have read the CRAN policy, but did not\nfind any topic regarding t",
       "thread_id": "thread-cfd0df7604b6",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008139.html"
     },
     {
       "id": "msg-38f3af04d874",
@@ -384,7 +401,8 @@
       "body_snippet": "Dear all\n\nMy R package \"systemfit\" has a 'vignette' that uses the R packages\n\"plm\" and \"sem\", while the actual code of the \"systemfit\" package does\nnot depend on these two packages. Currently, the \"sy",
       "thread_id": "thread-38f3af04d874",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008137.html"
     },
     {
       "id": "msg-5fec07c52f32",
@@ -402,7 +420,8 @@
       "body_snippet": "On Thu, Jun 9, 2022 at 8:53 AM Arne Henningsen\n<arne.henningsen at gmail.com> wrote:\n>\n> Dear all\n>\n> My R package \"systemfit\" has a 'vignette' that uses the R packages\n> \"plm\" and \"sem\", while the ac",
       "thread_id": "thread-38f3af04d874",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008138.html"
     },
     {
       "id": "msg-d92f81883fd6",
@@ -420,7 +439,8 @@
       "body_snippet": "CRAN package names are persistent. Please do not rename a package unless \nthere is a very good reasons such as trademark issues.\n\nBest,\nUwe Ligges\n\n\nOn 09.06.2022 15:05, Francisco Antonio Catalan Meye",
       "thread_id": "thread-cfd0df7604b6",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008140.html"
     },
     {
       "id": "msg-8635dd32c78c",
@@ -439,7 +459,8 @@
       "body_snippet": "On 09/06/2022 12:23 p.m., Henrik Bengtsson wrote:\n> On Thu, Jun 9, 2022 at 8:53 AM Arne Henningsen\n> <arne.henningsen at gmail.com> wrote:\n>>\n>> Dear all\n>>\n>> My R package \"systemfit\" has a 'vignette",
       "thread_id": "thread-38f3af04d874",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008141.html"
     },
     {
       "id": "msg-e0a97d2d2abf",
@@ -457,7 +478,8 @@
       "body_snippet": "\"rologlite\" verwijst naar een .dll file. Ik neem dus aan dat deze \npackage bedoeld is voor Windows.\nMijn vraag is of \"rologlite\" ook gebruikt kan worden op Linux? Zo ja, \ndan ben ik zeer benieuwd en g",
       "thread_id": "thread-612b2717d09b",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008142.html"
     },
     {
       "id": "msg-66bffacef5c6",
@@ -475,7 +497,8 @@
       "body_snippet": "Hi,\n\n\"rologlite\" refers to a .dll file. So I assume that this package is \nintended for Windows.\nMy question is can \"rologlite\" also be used on Linux? If so, I am very \ncurious and will I see how I can",
       "thread_id": "thread-612b2717d09b",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008143.html"
     },
     {
       "id": "msg-f9095f69f5d1",
@@ -493,7 +516,8 @@
       "body_snippet": "Hi,\n\nThe official Fedora 36 repository still offers R 4.1.3. Since \"rolog\" \nrequires at least R (? 4.2), this package cannot be installed yet.\nI have no experience with removing the 'default' version ",
       "thread_id": "thread-f9095f69f5d1",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008144.html"
     },
     {
       "id": "msg-d812f48ed0b8",
@@ -511,7 +535,8 @@
       "body_snippet": "Hi,\n\nThe official Fedora 36 repository still offers R 4.1.3. Since \"rolog\" \nrequires at least R (? 4.2), this package cannot be installed yet.\nI have no experience with removing the 'default' version ",
       "thread_id": "thread-d812f48ed0b8",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008145.html"
     },
     {
       "id": "msg-a4660fff5cdc",
@@ -530,7 +555,8 @@
       "body_snippet": "On 10 June 2022 at 14:24, Ben Engbers wrote:\n| The official Fedora 36 repository still offers R 4.1.3. Since \"rolog\" \n| requires at least R (? 4.2), this package cannot be installed yet.\n| I have no e",
       "thread_id": "thread-f9095f69f5d1",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008146.html"
     },
     {
       "id": "msg-7768ed1f1307",
@@ -549,7 +575,8 @@
       "body_snippet": "Ah, yes, very annoying (because R 4.2 is only needed for the Windows version of the package). Assuming that you have swi-prolog installed, you might wish to try this (< 5 minutes)\n\n(Linux bash)$ R\n\nR>",
       "thread_id": "thread-7768ed1f1307",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008147.html"
     },
     {
       "id": "msg-8adf2e5caa50",
@@ -569,7 +596,8 @@
       "body_snippet": "\\Hi,\n\nIt's been several Fedora versions since I installed R with the command \n'sudo dnf install R'. And with every update of Fedora, R was \nautomatically updated to the recent version. Fedora 36 was o",
       "thread_id": "thread-f9095f69f5d1",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008148.html"
     },
     {
       "id": "msg-1e01ed9d3cd8",
@@ -584,11 +612,12 @@
         "<53ec5351-919b-436f-842f-565aa0cfa281@email.android.com>",
         "<f7bd2d03-15d4-a68c-7fa3-8307951539d6@Be-Logical.nl>"
       ],
-      "body_plain": "On Fri, 10 Jun 2022 at 14:25, Ben Engbers <ben.engbers at gmail.com> wrote:\n>\n> Hi,\n>\n> The official Fedora 36 repository still offers R 4.1.3. Since \"rolog\"\n> requires at least R (? 4.2), this package cannot be installed yet.\n\nNot sure why this version is declared. It seems that, if you download\nthe package and relax the condition to >= 4.1, it works successfully.\n\n> I have no experience with removing the 'default' version and then\n> manually replacing it with R version 4.2. For now I'm waiting for R 4.2\n> to be released in Fedora 36 ;-(\n\ncc'ing spot.\n\nI?aki\n\n>\n> Ben\n>\n> P.S. I already send an update request to the Fedora team\n>\n> Op 10-06-2022 om 13:15 schreef Matthias Gondan:\n> > Dear Ben,\n> >\n> > Not restricted to Windows. rolog is on CRAN, you can install it\n> > normally, there's also a nice Vignette with use cases.\n> >\n> > rologlite is under development, but the API will be similar.\n> >\n> > Best wishes\n> >\n> > Matthias\n> >\n> > Am 10.06.2022 12:30 schrieb Ben Engbers <ben.engbers at gmail.com>:\n> >\n> >     \"rologlite\" verwijst naar een .dll file. Ik neem dus aan dat deze\n> >     package bedoeld is voor Windows.\n> >     Mijn vraag is of \"rologlite\" ook gebruikt kan worden op Linux? Zo ja,\n> >     dan ben ik zeer benieuwd en ga ik kijken hoe ik dat voor mijn\n> >     ontwikkelwerkzaamheden kan gebruiken?\n> >\n> >     Ben Engbers\n> >\n> >     Op 08-06-2022 om 22:24 schreef matthias-gondan:\n> >      > Whenever I add a little feature I have to update the entire\n> >     package, and so have its users (currently: 0, but that might change).\n> >     Maybe I'll be the first ;-)\n> >\n> >      > Therefore, I have now written a second package (\"rologlite\") that\n> >     just links to the Swi-Prolog dll, which is much smaller in size than\n> >     embedding it). It searches for Swi-Prolog in the path, in the\n> >     registry, in the environment, and if all this fails, it checks if\n> >     rolog is installed and looks for the swipl dll in the rolog package.\n> >      >\n> >      > ______________________________________________\n> >      > R-package-devel at r-project.org mailing list\n> >      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n> >\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nI?aki ?car",
-      "body_snippet": "On Fri, 10 Jun 2022 at 14:25, Ben Engbers <ben.engbers at gmail.com> wrote:\n>\n> Hi,\n>\n> The official Fedora 36 repository still offers R 4.1.3. Since \"rolog\"\n> requires at least R (? 4.2), this packag",
+      "body_plain": "On Fri, 10 Jun 2022 at 14:25, Ben Engbers <ben.engbers at gmail.com> wrote:\n>\n> Hi,\n>\n> The official Fedora 36 repository still offers R 4.1.3. Since \"rolog\"\n> requires at least R (≥ 4.2), this package cannot be installed yet.\n\nNot sure why this version is declared. It seems that, if you download\nthe package and relax the condition to >= 4.1, it works successfully.\n\n> I have no experience with removing the 'default' version and then\n> manually replacing it with R version 4.2. For now I'm waiting for R 4.2\n> to be released in Fedora 36 ;-(\n\ncc'ing spot.\n\nIñaki\n\n>\n> Ben\n>\n> P.S. I already send an update request to the Fedora team\n>\n> Op 10-06-2022 om 13:15 schreef Matthias Gondan:\n> > Dear Ben,\n> >\n> > Not restricted to Windows. rolog is on CRAN, you can install it\n> > normally, there's also a nice Vignette with use cases.\n> >\n> > rologlite is under development, but the API will be similar.\n> >\n> > Best wishes\n> >\n> > Matthias\n> >\n> > Am 10.06.2022 12:30 schrieb Ben Engbers <ben.engbers at gmail.com>:\n> >\n> >     \"rologlite\" verwijst naar een .dll file. Ik neem dus aan dat deze\n> >     package bedoeld is voor Windows.\n> >     Mijn vraag is of \"rologlite\" ook gebruikt kan worden op Linux? Zo ja,\n> >     dan ben ik zeer benieuwd en ga ik kijken hoe ik dat voor mijn\n> >     ontwikkelwerkzaamheden kan gebruiken?\n> >\n> >     Ben Engbers\n> >\n> >     Op 08-06-2022 om 22:24 schreef matthias-gondan:\n> >      > Whenever I add a little feature I have to update the entire\n> >     package, and so have its users (currently: 0, but that might change).\n> >     Maybe I'll be the first ;-)\n> >\n> >      > Therefore, I have now written a second package (\"rologlite\") that\n> >     just links to the Swi-Prolog dll, which is much smaller in size than\n> >     embedding it). It searches for Swi-Prolog in the path, in the\n> >     registry, in the environment, and if all this fails, it checks if\n> >     rolog is installed and looks for the swipl dll in the rolog package.\n> >      >\n> >      > ______________________________________________\n> >      > R-package-devel at r-project.org mailing list\n> >      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n> >\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nIñaki Úcar",
+      "body_snippet": "On Fri, 10 Jun 2022 at 14:25, Ben Engbers <ben.engbers at gmail.com> wrote:\n>\n> Hi,\n>\n> The official Fedora 36 repository still offers R 4.1.3. Since \"rolog\"\n> requires at least R (≥ 4.2), this packag",
       "thread_id": "thread-f9095f69f5d1",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008149.html"
     },
     {
       "id": "msg-432e711e0134",
@@ -605,11 +634,12 @@
         "<25251.14726.220801.330693@rob.eddelbuettel.com>",
         "<756f7e09-1f2d-cad8-69ca-5c2e53aee8cd@Be-Logical.nl>"
       ],
-      "body_plain": "On Fri, 10 Jun 2022 at 14:54, Ben Engbers <Ben.Engbers at be-logical.nl> wrote:\n>\n> \\Hi,\n>\n> It's been several Fedora versions since I installed R with the command\n> 'sudo dnf install R'. And with every update of Fedora, R was\n> automatically updated to the recent version. Fedora 36 was only recently\n> released. So I would expect that for Fedora 4.1.3 would be the most\n> recent. 'sudo dnf update R' confirms this.\n> The page in the link does not provide instructions for updates. Or am I\n> missing something?\n\nThere are instructions specifically in [1] to run a recent version of\nR (or any other software) that is available in rawhide but not in the\ncurrent release. The problem is that R 4.2 is not available in rawhide\neither yet, so it won't work. Probably spot (I've cc'ed him in my last\nemail) has been too busy these weeks.\n\n[1] https://cloud.r-project.org/bin/linux/fedora/#toolbox-container-based-development\n\nI?aki\n\n> Op 10-06-2022 om 14:31 schreef Dirk Eddelbuettel:\n> >\n> > See eg   https://cloud.r-project.org/bin/linux/fedora/   to learn how to\n> > easily get R 4.2.* onto a (current) Fedora system.\n> >\n> > Dirk\n>\n> --\n> Ben Engbers\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nI?aki ?car",
+      "body_plain": "On Fri, 10 Jun 2022 at 14:54, Ben Engbers <Ben.Engbers at be-logical.nl> wrote:\n>\n> \\Hi,\n>\n> It's been several Fedora versions since I installed R with the command\n> 'sudo dnf install R'. And with every update of Fedora, R was\n> automatically updated to the recent version. Fedora 36 was only recently\n> released. So I would expect that for Fedora 4.1.3 would be the most\n> recent. 'sudo dnf update R' confirms this.\n> The page in the link does not provide instructions for updates. Or am I\n> missing something?\n\nThere are instructions specifically in [1] to run a recent version of\nR (or any other software) that is available in rawhide but not in the\ncurrent release. The problem is that R 4.2 is not available in rawhide\neither yet, so it won't work. Probably spot (I've cc'ed him in my last\nemail) has been too busy these weeks.\n\n[1] https://cloud.r-project.org/bin/linux/fedora/#toolbox-container-based-development\n\nIñaki\n\n> Op 10-06-2022 om 14:31 schreef Dirk Eddelbuettel:\n> >\n> > See eg   https://cloud.r-project.org/bin/linux/fedora/   to learn how to\n> > easily get R 4.2.* onto a (current) Fedora system.\n> >\n> > Dirk\n>\n> --\n> Ben Engbers\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\n-- \nIñaki Úcar",
       "body_snippet": "On Fri, 10 Jun 2022 at 14:54, Ben Engbers <Ben.Engbers at be-logical.nl> wrote:\n>\n> \\Hi,\n>\n> It's been several Fedora versions since I installed R with the command\n> 'sudo dnf install R'. And with eve",
       "thread_id": "thread-f9095f69f5d1",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008150.html"
     },
     {
       "id": "msg-a174c31aa0c0",
@@ -625,7 +655,8 @@
       "body_snippet": "Dear R package developers,\n\nStarting with R 4.2.0 package rEDM (https://cran.r-project.org/package=rEDM)\nwill not load [library( rEDM )] on Windows with the default UTF-8 encoding.\n\nWhen the locale is",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008151.html"
     },
     {
       "id": "msg-51cf543b76a2",
@@ -643,7 +674,8 @@
       "body_snippet": "On 11/06/2022 5:02 a.m., Joseph Park wrote:\n> Dear R package developers,\n> \n> Starting with R 4.2.0 package rEDM (https://cran.r-project.org/package=rEDM)\n> will not load [library( rEDM )] on Windows ",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008152.html"
     },
     {
       "id": "msg-77dbb364e2cc",
@@ -661,7 +693,8 @@
       "body_snippet": "On Sat, 11 Jun 2022 05:02:23 -0400\nJoseph Park <josephpark at ieee.org> wrote:\n\n> Starting with R 4.2.0 package rEDM\n> (https://cran.r-project.org/package=rEDM) will not load [library(\n> rEDM )] on Wi",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008153.html"
     },
     {
       "id": "msg-63ee0dbcb7b2",
@@ -680,7 +713,8 @@
       "body_snippet": "Apologies for the pages of minutia.  I endeavored to post reproduceable\nexample. I'm unable to show the failure since it simply hangs at the prompt\nwith CPU spinning and memory cyclically ramping and ",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008154.html"
     },
     {
       "id": "msg-dce788fa385a",
@@ -700,7 +734,8 @@
       "body_snippet": "Thank you for the check of the CRAN builds.  I also checked that as a first\nstep.  Perhaps there is some difference between the CRAN setups, as I have\nreproduced this on 3 Windows 10 machines with cle",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008155.html"
     },
     {
       "id": "msg-a98942d5d515",
@@ -721,7 +756,8 @@
       "body_snippet": "Hi,\n\nAs your package seems to use std::regex [1], you might hit this bug in GCC.\n\nhttps://gcc.gnu.org/bugzilla/show_bug.cgi?id=98723\n\nThis thread might also help:\n\nhttps://github.com/tesseract-ocr/tes",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008156.html"
     },
     {
       "id": "msg-2afc15313446",
@@ -737,7 +773,8 @@
       "body_snippet": "Hello,\n\nI just got a problem in a function document in a package I developed.The\nfile containing the document is generatingCDSaaFile.Rd. The problem is\nrelated to the underscore I used in the followin",
       "thread_id": "thread-2afc15313446",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008157.html"
     },
     {
       "id": "msg-707e4ab054bb",
@@ -755,7 +792,8 @@
       "body_snippet": ">>>>> Yaoyong Li \n>>>>>     on Sat, 11 Jun 2022 12:29:25 +0100 writes:\n\n    > Hello,\n\n    > I just got a problem in a function document in a package I developed.The\n    > file containing the document ",
       "thread_id": "thread-2afc15313446",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008158.html"
     },
     {
       "id": "msg-e0b2b0684577",
@@ -774,7 +812,8 @@
       "body_snippet": "As Martin said, just remove the \\.\n\nThe other thing I'd do is use \\sQuote{_AAseq.txt.gz} instead of entering \nthe quotes yourself.  Then you don't need to worry about the difference \nbetween plain quo",
       "thread_id": "thread-2afc15313446",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008159.html"
     },
     {
       "id": "msg-92f482634c6b",
@@ -795,7 +834,8 @@
       "body_snippet": "On 11/06/2022 6:43 a.m., Joseph Park wrote:\n> Thank you for the check of the CRAN builds.  I also checked that as a first\n> step.  Perhaps there is some difference between the CRAN setups, as I have\n>",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008160.html"
     },
     {
       "id": "msg-561902208ca1",
@@ -811,7 +851,8 @@
       "body_snippet": "Dear package developers,\n\nI have a package (clubSandwich) that provides methods for a range of\ndifferent models implemented in other packages (nlme::lme, lme4::lmer,\nmetafor::rma.mv, etc.). These othe",
       "thread_id": "thread-561902208ca1",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008161.html"
     },
     {
       "id": "msg-2af0fb7b7600",
@@ -829,7 +870,8 @@
       "body_snippet": "On 11/06/2022 11:10 a.m., James Pustejovsky wrote:\n> Dear package developers,\n> \n> I have a package (clubSandwich) that provides methods for a range of\n> different models implemented in other packages",
       "thread_id": "thread-561902208ca1",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008162.html"
     },
     {
       "id": "msg-407af73e6a12",
@@ -851,7 +893,8 @@
       "body_snippet": "It looks like Hiroaki identified the issue.\n\nWhen the C++ std::regex code is removed from the underlying API, the\nproblem seems solved. Thank you!\n\nThe symptoms observed match those described in the t",
       "thread_id": "thread-a174c31aa0c0",
       "thread_depth": 5,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008163.html"
     },
     {
       "id": "msg-0f2505274856",
@@ -871,7 +914,8 @@
       "body_snippet": "Dear Martin and Duncan,\n\nThank you very much indeed for the help. I have adopted both your\nsuggestions. Using Martin's suggestion has made the Notes concerning the\nunderscores disappear, and hopefully",
       "thread_id": "thread-2afc15313446",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008164.html"
     },
     {
       "id": "msg-3c4469dc2a65",
@@ -885,11 +929,12 @@
       "references": [
         "<CAMb-knn+o+sDtLsLGX9Q7xQN6LjvEVf90DAWo_n8kgereiMbPA@mail.gmail.com>"
       ],
-      "body_plain": "I had a similar issue when submitting metan 1.17.0 to CRAN. (Escaped LaTeX\nspecials: \\&)\nI simply removed '\\' and it got passed in the tests.\nBest\nOlivoto\n\nEm s?b., 11 de jun. de 2022 ?s 09:23, Yaoyong Li <liyaoyong85 at gmail.com>\nescreveu:\n\n> Hello,\n>\n> I just got a problem in a function document in a package I developed.The\n> file containing the document is generatingCDSaaFile.Rd. The problem is\n> related to the underscore I used in the following sentence\n>\n>       and the last part is ?\\_AAseq.txt.gz?\n>\n> I got a 'note' message when the package was checked in the CRAN:\n>\n> checkRd: (-1) generatingCDSaaFile.Rd:72: Escaped LaTeX specials: \\_\n>\n> I don't think I saw this kind of message in the past (say six months\n> ago). A copy of the check result in CRAN is appended below. As you can\n> see, I also got the same problem in other places in the document. I\n> have been trying to fix the problem via searching Google. I have tried\n> to replace \"\\_\" with \"\\textunderscore \" as some internet post\n> suggested, but this did not solve the problem.\n>\n> So I just wonder if anyone can help me with the problem. Please let me\n> know if any more information is needed.\n>\n>\n> Best regards,\n>\n> Yaoyong\n>\n> #####################################################\n>\n> CRAN Package Check Results for Package geno2proteo\n> <https://cran.r-project.org/web/packages/geno2proteo/index.html>\n>\n> Last updated on 2022-06-11 11:52:26 CEST.\n> FlavorVersionTinstallTcheckTtotalStatusFlags\n> r-devel-linux-x86_64-debian-clang\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-debian-clang\n> >\n> 0.0.5 17.31 170.54 187.85 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/geno2proteo-00check.html\n> >\n> r-devel-linux-x86_64-debian-gcc\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-debian-gcc\n> >\n> 0.0.5 12.00 130.58 142.58 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/geno2proteo-00check.html\n> >\n> r-devel-linux-x86_64-fedora-clang\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-fedora-clang\n> >\n> 0.0.5 220.04 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/geno2proteo-00check.html\n> >\n> r-devel-linux-x86_64-fedora-gcc\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-fedora-gcc\n> >\n> 0.0.5 229.54 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/geno2proteo-00check.html\n> >\n> r-devel-windows-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-windows-x86_64\n> >\n> 0.0.5 242.00 470.00 712.00 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-windows-x86_64/geno2proteo-00check.html\n> >\n> r-patched-linux-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-patched-linux-x86_64\n> >\n> 0.0.5 12.58 164.99 177.57 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/geno2proteo-00check.html\n> >\n> r-release-linux-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-linux-x86_64\n> >\n> 0.0.5 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/geno2proteo-00check.html\n> >\n> r-release-macos-arm64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-macos-arm64\n> >\n> 0.0.5 65.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-macos-arm64/geno2proteo-00check.html\n> >\n> r-release-macos-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-macos-x86_64\n> >\n> 0.0.5 89.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-macos-x86_64/geno2proteo-00check.html\n> >\n> r-release-windows-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-windows-x86_64\n> >\n> 0.0.5 195.00 363.00 558.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-windows-x86_64/geno2proteo-00check.html\n> >\n> r-oldrel-macos-arm64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64\n> >\n> 0.0.5 57.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-oldrel-macos-arm64/geno2proteo-00check.html\n> >\n> r-oldrel-macos-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-x86_64\n> >\n> 0.0.5 84.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-oldrel-macos-x86_64/geno2proteo-00check.html\n> >\n> r-oldrel-windows-ix86+x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-windows-ix86_x86_64\n> >\n> 0.0.5 32.00 145.00 177.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/geno2proteo-00check.html\n> >\n> Check\n> Details\n>\n> Version: 0.0.5\n> Check: Rd files\n> Result: NOTE\n>     checkRd: (-1) generatingCDSaaFile.Rd:23: Escaped LaTeX specials: \\_ \\_\n>     checkRd: (-1) generatingCDSaaFile.Rd:72: Escaped LaTeX specials: \\_\n>\n> Flavors: r-devel-linux-x86_64-debian-clang\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/geno2proteo-00check.html\n> >,\n> r-devel-linux-x86_64-debian-gcc\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/geno2proteo-00check.html\n> >,\n> r-devel-linux-x86_64-fedora-clang\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/geno2proteo-00check.html\n> >,\n> r-devel-linux-x86_64-fedora-gcc\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/geno2proteo-00check.html\n> >,\n> r-devel-windows-x86_64\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-windows-x86_64/geno2proteo-00check.html\n> >\n>\n> ##########################################################################\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I had a similar issue when submitting metan 1.17.0 to CRAN. (Escaped LaTeX\nspecials: \\&)\nI simply removed '\\' and it got passed in the tests.\nBest\nOlivoto\n\nEm s?b., 11 de jun. de 2022 ?s 09:23, Yaoyon",
+      "body_plain": "I had a similar issue when submitting metan 1.17.0 to CRAN. (Escaped LaTeX\nspecials: \\&)\nI simply removed '\\' and it got passed in the tests.\nBest\nOlivoto\n\nEm sáb., 11 de jun. de 2022 às 09:23, Yaoyong Li <liyaoyong85 at gmail.com>\nescreveu:\n\n> Hello,\n>\n> I just got a problem in a function document in a package I developed.The\n> file containing the document is generatingCDSaaFile.Rd. The problem is\n> related to the underscore I used in the following sentence\n>\n>       and the last part is ‘\\_AAseq.txt.gz’\n>\n> I got a 'note' message when the package was checked in the CRAN:\n>\n> checkRd: (-1) generatingCDSaaFile.Rd:72: Escaped LaTeX specials: \\_\n>\n> I don't think I saw this kind of message in the past (say six months\n> ago). A copy of the check result in CRAN is appended below. As you can\n> see, I also got the same problem in other places in the document. I\n> have been trying to fix the problem via searching Google. I have tried\n> to replace \"\\_\" with \"\\textunderscore \" as some internet post\n> suggested, but this did not solve the problem.\n>\n> So I just wonder if anyone can help me with the problem. Please let me\n> know if any more information is needed.\n>\n>\n> Best regards,\n>\n> Yaoyong\n>\n> #####################################################\n>\n> CRAN Package Check Results for Package geno2proteo\n> <https://cran.r-project.org/web/packages/geno2proteo/index.html>\n>\n> Last updated on 2022-06-11 11:52:26 CEST.\n> FlavorVersionTinstallTcheckTtotalStatusFlags\n> r-devel-linux-x86_64-debian-clang\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-debian-clang\n> >\n> 0.0.5 17.31 170.54 187.85 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/geno2proteo-00check.html\n> >\n> r-devel-linux-x86_64-debian-gcc\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-debian-gcc\n> >\n> 0.0.5 12.00 130.58 142.58 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/geno2proteo-00check.html\n> >\n> r-devel-linux-x86_64-fedora-clang\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-fedora-clang\n> >\n> 0.0.5 220.04 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/geno2proteo-00check.html\n> >\n> r-devel-linux-x86_64-fedora-gcc\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-linux-x86_64-fedora-gcc\n> >\n> 0.0.5 229.54 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/geno2proteo-00check.html\n> >\n> r-devel-windows-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-devel-windows-x86_64\n> >\n> 0.0.5 242.00 470.00 712.00 NOTE\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-windows-x86_64/geno2proteo-00check.html\n> >\n> r-patched-linux-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-patched-linux-x86_64\n> >\n> 0.0.5 12.58 164.99 177.57 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/geno2proteo-00check.html\n> >\n> r-release-linux-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-linux-x86_64\n> >\n> 0.0.5 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/geno2proteo-00check.html\n> >\n> r-release-macos-arm64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-macos-arm64\n> >\n> 0.0.5 65.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-macos-arm64/geno2proteo-00check.html\n> >\n> r-release-macos-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-macos-x86_64\n> >\n> 0.0.5 89.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-macos-x86_64/geno2proteo-00check.html\n> >\n> r-release-windows-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-release-windows-x86_64\n> >\n> 0.0.5 195.00 363.00 558.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-release-windows-x86_64/geno2proteo-00check.html\n> >\n> r-oldrel-macos-arm64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64\n> >\n> 0.0.5 57.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-oldrel-macos-arm64/geno2proteo-00check.html\n> >\n> r-oldrel-macos-x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-x86_64\n> >\n> 0.0.5 84.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-oldrel-macos-x86_64/geno2proteo-00check.html\n> >\n> r-oldrel-windows-ix86+x86_64\n> <\n> https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-windows-ix86_x86_64\n> >\n> 0.0.5 32.00 145.00 177.00 OK\n> <\n> https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/geno2proteo-00check.html\n> >\n> Check\n> Details\n>\n> Version: 0.0.5\n> Check: Rd files\n> Result: NOTE\n>     checkRd: (-1) generatingCDSaaFile.Rd:23: Escaped LaTeX specials: \\_ \\_\n>     checkRd: (-1) generatingCDSaaFile.Rd:72: Escaped LaTeX specials: \\_\n>\n> Flavors: r-devel-linux-x86_64-debian-clang\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/geno2proteo-00check.html\n> >,\n> r-devel-linux-x86_64-debian-gcc\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/geno2proteo-00check.html\n> >,\n> r-devel-linux-x86_64-fedora-clang\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/geno2proteo-00check.html\n> >,\n> r-devel-linux-x86_64-fedora-gcc\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/geno2proteo-00check.html\n> >,\n> r-devel-windows-x86_64\n> <\n> https://www.r-project.org/nosvn/R.check/r-devel-windows-x86_64/geno2proteo-00check.html\n> >\n>\n> ##########################################################################\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I had a similar issue when submitting metan 1.17.0 to CRAN. (Escaped LaTeX\nspecials: \\&)\nI simply removed '\\' and it got passed in the tests.\nBest\nOlivoto\n\nEm sáb., 11 de jun. de 2022 às 09:23, Yaoyon",
       "thread_id": "thread-2afc15313446",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008165.html"
     },
     {
       "id": "msg-6989e52bd8d7",
@@ -905,7 +950,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  How do I fix \"Rd cross-references ... NOTE\nUndeclared packages ?EnvStats?, ?drc?, ?zoo?, ?prodlim?, ?plyr?, \n?TRAMPR?, ?raster? in Rd xrefs\"?\n\n\n\t  This occurs with \n\"https://www.r-pro",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008166.html"
     },
     {
       "id": "msg-6db514393b8d",
@@ -923,7 +969,8 @@
       "body_snippet": "On 13/06/2022 12:12 p.m., Spencer Graves wrote:\n> Hello, All:\n> \n> \n> \t  How do I fix \"Rd cross-references ... NOTE\n> Undeclared packages ?EnvStats?, ?drc?, ?zoo?, ?prodlim?, ?plyr?,\n> ?TRAMPR?, ?rast",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008167.html"
     },
     {
       "id": "msg-d91ba34285c7",
@@ -942,7 +989,8 @@
       "body_snippet": "On 6/13/22 1:26 PM, Duncan Murdoch wrote:\n> On 13/06/2022 12:12 p.m., Spencer Graves wrote:\n>> Hello, All:\n>>\n>>\n>> ????? How do I fix \"Rd cross-references ... NOTE\n>> Undeclared packages ?EnvStats?, ",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008168.html"
     },
     {
       "id": "msg-0ed3fc20a9b4",
@@ -962,7 +1010,8 @@
       "body_snippet": "On Mon, 13 Jun 2022 13:59:24 -0500\nSpencer Graves <spencer.graves at effectivedefense.org> wrote:\n\n> I probably should have just used \"Suggests\" and not \n> bothered this list with this issue.\n\nWhy not",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008169.html"
     },
     {
       "id": "msg-6cbe8e9591dc",
@@ -983,7 +1032,8 @@
       "body_snippet": "I think the issue with dependencies arises because if this very usage.\n\nGiven how weak the relationship is with these packages, why not just omit links at all and just mention the packages by name?\n\nO",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008170.html"
     },
     {
       "id": "msg-51da92b7877f",
@@ -1004,7 +1054,8 @@
       "body_snippet": "On 6/13/22 2:22 PM, Ivan Krylov wrote:\n> On Mon, 13 Jun 2022 13:59:24 -0500\n> Spencer Graves <spencer.graves at effectivedefense.org> wrote:\n> \n>> I probably should have just used \"Suggests\" and not\n>",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008171.html"
     },
     {
       "id": "msg-e8907c70a140",
@@ -1025,7 +1076,8 @@
       "body_snippet": "On 13/06/2022 3:22 p.m., Ivan Krylov wrote:\n> On Mon, 13 Jun 2022 13:59:24 -0500\n> Spencer Graves <spencer.graves at effectivedefense.org> wrote:\n> \n>> I probably should have just used \"Suggests\" and ",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008172.html"
     },
     {
       "id": "msg-7b31394eaace",
@@ -1041,7 +1093,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  CRAN checks of \"Ecdat\" on several platforms includes multiple \"NOTEs\" \ncomplaining \"Escaped LaTeX specials\" highlighting use of \"\\$\", \"\\_\", and \n\"\\&\".[1]\n\n\n\t  What do you suggest I do",
       "thread_id": "thread-7b31394eaace",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008173.html"
     },
     {
       "id": "msg-a8cc03f7dcb2",
@@ -1060,7 +1113,8 @@
       "body_snippet": "On 6/13/22 1:26 PM, Duncan Murdoch wrote:\n> On 13/06/2022 12:12 p.m., Spencer Graves wrote:\n>> Hello, All:\n>>\n>>\n>> ????? How do I fix \"Rd cross-references ... NOTE\n>> Undeclared packages ?EnvStats?, ",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008174.html"
     },
     {
       "id": "msg-f249528ef366",
@@ -1078,7 +1132,8 @@
       "body_snippet": "Have you tried removing the backslash, i.e. \\$ -> $ ?  I think that\nworks now, but didn't in the (far?) past.  You can use win-builder\ndevel to check it.\n\n/Henrik\n\nOn Mon, Jun 13, 2022 at 1:55 PM Spen",
       "thread_id": "thread-7b31394eaace",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008175.html"
     },
     {
       "id": "msg-485c895149d5",
@@ -1098,7 +1153,8 @@
       "body_snippet": "On 13/06/2022 5:11 p.m., Spencer Graves wrote:\n> \n> \n> On 6/13/22 1:26 PM, Duncan Murdoch wrote:\n>> On 13/06/2022 12:12 p.m., Spencer Graves wrote:\n>>> Hello, All:\n>>>\n>>>\n>>>  ????? How do I fix \"Rd ",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008176.html"
     },
     {
       "id": "msg-e798e8013e3d",
@@ -1119,7 +1175,8 @@
       "body_snippet": "On 6/13/22 5:05 PM, Duncan Murdoch wrote:\n> On 13/06/2022 5:11 p.m., Spencer Graves wrote:\n>>\n>>\n>> On 6/13/22 1:26 PM, Duncan Murdoch wrote:\n>>> On 13/06/2022 12:12 p.m., Spencer Graves wrote:\n>>>> H",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008177.html"
     },
     {
       "id": "msg-440def33b4db",
@@ -1141,7 +1198,8 @@
       "body_snippet": "On 13/06/2022 7:01 p.m., Spencer Graves wrote:\n> \n> \n> On 6/13/22 5:05 PM, Duncan Murdoch wrote:\n>> On 13/06/2022 5:11 p.m., Spencer Graves wrote:\n>>>\n>>>\n>>> On 6/13/22 1:26 PM, Duncan Murdoch wrote:",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 5,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008178.html"
     },
     {
       "id": "msg-48e47404a52c",
@@ -1163,7 +1221,8 @@
       "body_snippet": "On 13/06/2022 7:01 p.m., Spencer Graves wrote:\n[ lots deleted ]\n> \n> \t  Is there a way in GitHub Action to NOT fail when a package is not\n> available -- or at least to give a more useful diagnostic?\n>",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 5,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008179.html"
     },
     {
       "id": "msg-8d71ebdf4536",
@@ -1186,7 +1245,8 @@
       "body_snippet": "On 14/06/2022 01:01, Spencer Graves wrote:\n >\n >\n > On 6/13/22 5:05 PM, Duncan Murdoch wrote:\n >> On 13/06/2022 5:11 p.m., Spencer Graves wrote:\n >>>\n >>>\n >>> On 6/13/22 1:26 PM, Duncan Murdoch wrote",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 6,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008180.html"
     },
     {
       "id": "msg-b70477d4c10b",
@@ -1204,7 +1264,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  Winbuilder (Release) repeatedly claims, \"Warning: <table> attribute \n\"width\" not allowed for HTML5\" with my current Ecdat package;  see\n\n\nhttps://win-builder.r-project.org/9xSN32zs5S2",
       "thread_id": "thread-b70477d4c10b",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008181.html"
     },
     {
       "id": "msg-a3683b4d9ab0",
@@ -1223,7 +1284,8 @@
       "body_snippet": "I'm pretty sure it's a false positive. It's HTML code generated by R itself\nfor you help pages that has these problems. There's nothing you can do\nabout it in your package.\n\nOn Tue, Jun 14, 2022, 10:5",
       "thread_id": "thread-b70477d4c10b",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008182.html"
     },
     {
       "id": "msg-7b241c0c83c1",
@@ -1242,7 +1304,8 @@
       "body_snippet": "?This has come up at least once before:\n\nhttps://stat.ethz.ch/pipermail/r-package-devel/2022q2/008025.html\n\n ? Hopefully this will be fixed in R 4.2.1 (scheduled for June 23) ... ? \nThe closest thing ",
       "thread_id": "thread-b70477d4c10b",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008183.html"
     },
     {
       "id": "msg-723e0fbe5790",
@@ -1261,7 +1324,8 @@
       "body_snippet": "On Tue, 14 Jun 2022 12:56:27 -0500\nSpencer Graves <spencer.graves at effectivedefense.org> wrote:\n\n> Warning: <a> escaping malformed URI reference\n\nThis part is actually important. If you look at the ",
       "thread_id": "thread-b70477d4c10b",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008184.html"
     },
     {
       "id": "msg-08e6887a30d1",
@@ -1281,7 +1345,8 @@
       "body_snippet": "Am 14.06.22 um 20:08 schrieb Ben Bolker:\n>   ?This has come up at least once before:\n> \n> https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008025.html\n> \n>   ? Hopefully this will be fixed in R 4",
       "thread_id": "thread-b70477d4c10b",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008185.html"
     },
     {
       "id": "msg-1d6c7c555e0d",
@@ -1301,7 +1366,8 @@
       "body_snippet": "Thanks to Ivan Krylov, Ben Bolker, and Henrik Bengtsson.  I've \nsuccessfully survived these challenges with your help.  The new versions \nof Ecdat and Ecfun are have been officially \"built for Windows",
       "thread_id": "thread-b70477d4c10b",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008186.html"
     },
     {
       "id": "msg-08ded1f827c5",
@@ -1325,7 +1391,8 @@
       "body_snippet": "Hi, Hugo, et al.:\n\n\n\t  How can I \"set the environment variable _R_CHECK_FORCE_SUGGESTS_\" on \nGitHub Actions, as Hugo suggests below?\n\n\n\t  Secondly, I have another cryptic failure on macOS-latest (rele",
       "thread_id": "thread-6989e52bd8d7",
       "thread_depth": 7,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008187.html"
     },
     {
       "id": "msg-5d922540276d",
@@ -1343,7 +1410,8 @@
       "body_snippet": "I received these as reasons why my R package is rejected each time I submit it and have tried to resolve it but cannot. the first one is invalid URLs one of which is \"https://www.jstor.org/stable/2241",
       "thread_id": "thread-5d922540276d",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008188.html"
     },
     {
       "id": "msg-81a6126d7436",
@@ -1362,7 +1430,8 @@
       "body_snippet": "Hello,\n\n\nI wouldn't worry about the message for invalid URLs, I've been seeing that\nmessage too on my computer but it doesn't appear when I submit to CRAN.\n\n\nThe second message looks like one of your ",
       "thread_id": "thread-5d922540276d",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008189.html"
     },
     {
       "id": "msg-fa1f40468ee7",
@@ -1382,7 +1451,8 @@
       "body_snippet": "On 18.06.2022 22:11, Andrew Simmons wrote:\n> Hello,\n> \n> \n> I wouldn't worry about the message for invalid URLs, I've been seeing that\n> message too on my computer but it doesn't appear when I submit ",
       "thread_id": "thread-5d922540276d",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008190.html"
     },
     {
       "id": "msg-bf5c496e5cb1",
@@ -1398,7 +1468,8 @@
       "body_snippet": "I am the author of package nleqslv.\n\nRunning R CMD check --as-cran on the package gives warning messages that I have never seen before.\nThe messages are similar to the following\n\nnleqslv-package.Rd:4:",
       "thread_id": "thread-bf5c496e5cb1",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008191.html"
     },
     {
       "id": "msg-189cc0a85812",
@@ -1416,7 +1487,8 @@
       "body_snippet": "Am 19.06.22 um 11:53 schrieb Berend Hasselman:\n> \n> I am the author of package nleqslv.\n> \n> Running R CMD check --as-cran on the package gives warning messages that I have never seen before.\n> The me",
       "thread_id": "thread-bf5c496e5cb1",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008192.html"
     },
     {
       "id": "msg-96fcd762fa87",
@@ -1436,7 +1508,8 @@
       "body_snippet": "Thanks a lot, Henrik and Duncan! Your responses are really helpful :-)\n I have revised the 'systemfit' package based on your suggestions and\nuploaded a new version to CRAN.\n\n/Arne\n\nOn Fri, 10 Jun 2022",
       "thread_id": "thread-38f3af04d874",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008193.html"
     },
     {
       "id": "msg-c7f68c0fc2d2",
@@ -1452,7 +1525,8 @@
       "body_snippet": "I've gotten a response from the build team that I have a type mis-match between my fortran code and it was discovered using the -enable-lto option for compilation.  I'm trying to even be able to repro",
       "thread_id": "thread-c7f68c0fc2d2",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008194.html"
     },
     {
       "id": "msg-65ab534463be",
@@ -1470,7 +1544,8 @@
       "body_snippet": "On 6/21/22 20:38, Shawn Way wrote:\n> I've gotten a response from the build team that I have a type mis-match between my fortran code and it was discovered using the -enable-lto option for compilation.",
       "thread_id": "thread-c7f68c0fc2d2",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008195.html"
     },
     {
       "id": "msg-45106b97ad2b",
@@ -1489,7 +1564,8 @@
       "body_snippet": "Thanks!  The package I'm trying to get working is IAPWS95.  It can compile and work just fine, however, CRAN moderators are reporting the following:\n\nThanks, with  LTO checks enabled we still see\n\n\n\nI",
       "thread_id": "thread-c7f68c0fc2d2",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008196.html"
     },
     {
       "id": "msg-6933d1922967",
@@ -1509,7 +1585,8 @@
       "body_snippet": "On 6/21/22 22:12, Shawn Way wrote:\n> Thanks!  The package I'm trying to get working is IAPWS95.  It can compile and work just fine, however, CRAN moderators are reporting the following:\n>\n> Thanks, wi",
       "thread_id": "thread-c7f68c0fc2d2",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008197.html"
     },
     {
       "id": "msg-673e068a1268",
@@ -1530,7 +1607,8 @@
       "body_snippet": "I had to make the modifications you suggested to the .C file and it worked like a charm.  I also had to make the following changes to my ~/.R/Makevar file:\n\nLTO_OPT=-flto -ffat-lto-objects\n\nDoing this",
       "thread_id": "thread-c7f68c0fc2d2",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008198.html"
     },
     {
       "id": "msg-3b969260e68e",
@@ -1546,7 +1624,8 @@
       "body_snippet": "I have a package that I want to submit an updated version for but the \nexamples run too slowly on win-builder since 4.2 came out.? I just \nsubmitted the exact same tar.gz file to all 3 versions of R a",
       "thread_id": "thread-3b969260e68e",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008199.html"
     },
     {
       "id": "msg-e04db5f9c9da",
@@ -1562,7 +1641,8 @@
       "body_snippet": "Dear All,\n \nI am running into some notes when running the CMD checks on R-hub. They concern some problems with URLs I have referenced in vignettes and documentation - see notes below.\n \nI've searched ",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008200.html"
     },
     {
       "id": "msg-fdde58d5217b",
@@ -1580,7 +1660,8 @@
       "body_snippet": "On Wed, 29 Jun 2022 22:51:23 +0200 (CEST)\nWilliam Becker <william.becker at bluefoxdata.eu> wrote:\n\n> if someone can point me to a reference where I can work out how to\n> solve the problem, that would",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008201.html"
     },
     {
       "id": "msg-deb0f3ea96b0",
@@ -1598,7 +1679,8 @@
       "body_snippet": "Performance changes on that scale really ought to be either documented as\nexpected behaviour, or treated as a bug (either in WinBuilder's job\nscheduling or R 4.2).  I noticed some large variability in",
       "thread_id": "thread-3b969260e68e",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008202.html"
     },
     {
       "id": "msg-23fc0c7a5002",
@@ -1617,7 +1699,8 @@
       "body_snippet": "With a little experimentation, the problem seems to be the -I switch in\ncurl, with which the request uses the HTTP HEAD method instead of GET.\nWithout -I, the requests from curl work for me; with -I, ",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008203.html"
     },
     {
       "id": "msg-8fd420ca09ae",
@@ -1637,7 +1720,8 @@
       "body_snippet": "I seem to recall that someone else suggested a related solution to me \n(using something from \nhttps://www.doi.org/doi_handbook/3_Resolution.html#3.8.1 to get \ninformation about validity without actual",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008204.html"
     },
     {
       "id": "msg-afdf35e8fa8f",
@@ -1658,7 +1742,8 @@
       "body_snippet": "Ben,\nIt looks like, from the link you supplied, for doi.org URLs that if you\nalso remove the -L from the curl invocation and check the HTTP response\n(302) then you know that the target ID is valid bec",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008205.html"
     },
     {
       "id": "msg-d07a88b6796f",
@@ -1678,7 +1763,8 @@
       "body_snippet": "With a little more experimenting, the 503 response from the wiley DOI\nlookup does seem to come from CloudFlare, there is a \"server: cloudflare\"\nheader.  Whether thats reliably present I have no idea, ",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 3,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008206.html"
     },
     {
       "id": "msg-e76b44a70236",
@@ -1699,7 +1785,8 @@
       "body_snippet": "On Thu, 30 Jun 2022 10:00:53 +1000\nGreg Hunt <greg at firmansyah.com> wrote:\n\n> With a little more experimenting, the 503 response from the wiley DOI\n> lookup does seem to come from CloudFlare, there ",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 4,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008207.html"
     },
     {
       "id": "msg-eacafcc70086",
@@ -1721,7 +1808,8 @@
       "body_snippet": "Ivan,\nThe question is whether the problem is that Cloudflare or other CDN vendors\nare blocking the CRAN checks out or whether the problem is the use of\nHEAD.  Clearly the use of HEAD causes failures w",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 5,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008208.html"
     },
     {
       "id": "msg-f1795dace8f8",
@@ -1744,7 +1832,8 @@
       "body_snippet": "Greg,\n\nI realise you are trying to solve the problem and I thank you for\ntrying to make the URL checks better for everyone. I probably sound\ndefeatist in my e-mails; sorry about that.\n\nOn Thu, 30 Jun ",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 6,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008209.html"
     },
     {
       "id": "msg-5e8b2ae811b7",
@@ -1768,7 +1857,8 @@
       "body_snippet": "Ivan,\nI am sure that we can make this work a bit better, and do I agree that it\nworking perfectly isn't going to happen.  I don't think that the behaviour\nyou're seeing is likely to be stateful: recor",
       "thread_id": "thread-e04db5f9c9da",
       "thread_depth": 7,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008210.html"
     },
     {
       "id": "msg-96c95a5291c2",
@@ -1786,7 +1876,8 @@
       "body_snippet": "On 6/29/22 22:25, Barbara Lerner wrote:\n> I have a package that I want to submit an updated version for but the\n> examples run too slowly on win-builder since 4.2 came out.? I just\n> submitted the exa",
       "thread_id": "thread-3b969260e68e",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008211.html"
     },
     {
       "id": "msg-92d6b43bc3e1",
@@ -1805,7 +1896,8 @@
       "body_snippet": "Thanks for these suggestions.? I attempted to submit a slightly earlier \nversion of my package a few weeks ago and saw the slowdown on winbuilder \nthen, too.? I did not look into any further at that p",
       "thread_id": "thread-3b969260e68e",
       "thread_depth": 2,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q2/008212.html"
     }
   ],
   "threads": [

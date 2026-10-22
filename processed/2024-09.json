@@ -17,7 +17,8 @@
       "body_snippet": "Dear R-package-devel list members,\n\nI want to introduce several unregistered S3 methods into the cv package \n(code at <https://github.com/gmonette/cv>). These methods have the form\n\n\tcoef.merMod <- fu",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011068.html"
     },
     {
       "id": "msg-74fcaa1d01aa",
@@ -35,7 +36,8 @@
       "body_snippet": "As it turned out, I was able to avoid redefining coef.merMod(), etc., by \nmaking a simple modification to the cv package.\n\nI'm still curious about whether it's OK to have unregistered S3 methods \nfor ",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011069.html"
     },
     {
       "id": "msg-45aba17051d1",
@@ -54,7 +56,8 @@
       "body_snippet": "I got this warning too, so I filed an issue to ask\nhttps://github.com/r-lib/roxygen2/issues/1654\n\nOn Mon, Sep 2, 2024 at 2:58?PM John Fox <jfox at mcmaster.ca> wrote:\n>\n> As it turned out, I was able ",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011070.html"
     },
     {
       "id": "msg-58faec3b9947",
@@ -74,7 +77,8 @@
       "body_snippet": "I have been reluctant to pipe up on this because I am no expert on the dark corners of the S3 dispatch mechanism, but I think unregistered S3 methods in packages are verboten. Perhaps [1] will shed so",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 3,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011071.html"
     },
     {
       "id": "msg-a0937ecaa69f",
@@ -95,7 +99,8 @@
       "body_snippet": "Thanks Toby and Jeff for chiming in on this.\n\nJeff: I already read Kurt Hornik's post on \"S3 Method Lookup\" and quite \na few other sources.\n\nThe main point is that failing to register the methods work",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 4,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011072.html"
     },
     {
       "id": "msg-92fc7c89353c",
@@ -117,7 +122,8 @@
       "body_snippet": "Dear John,\n\nthe question is not really easy to answer, but there is a nice summary \nKurt pointed me to: The code of checkS3methods() includes the following \ncomments with the last paragraph containing",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 5,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011073.html"
     },
     {
       "id": "msg-819029f2d3cf",
@@ -140,7 +146,8 @@
       "body_snippet": ">>>>> Uwe Ligges \n>>>>>     on Thu, 5 Sep 2024 08:47:06 +0200 writes:\n\n    > Dear John,\n    > the question is not really easy to answer, but there is a nice summary \n    > Kurt pointed me to: The code",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 6,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011074.html"
     },
     {
       "id": "msg-d1504c161c66",
@@ -156,7 +163,8 @@
       "body_snippet": "Hello,\n\nI am trying to create a virtual environment in the zzz.r file of my\npackage, and my package is currently passing on Windows and failing on\nDebian with 1 ERROR.\n\n\nThis is the ERROR:\n\n* installi",
       "thread_id": "thread-d1504c161c66",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011075.html"
     },
     {
       "id": "msg-85d35ffef78b",
@@ -170,11 +178,12 @@
       "references": [
         "<CA+xzKwwxqL=cazuECCaiWBsdRNire2k+WJ9_BsgweRSez3idwQ@mail.gmail.com>"
       ],
-      "body_plain": "Hello Taeyong and welcome to R-package-devel!\n\n? Thu, 5 Sep 2024 23:40:00 +0300\nTaeyong Park <taeyongp at andrew.cmu.edu> ?????:\n\n>   # Define paths\n>   venv_path <- file.path(Sys.getenv(\"HOME\"), \".virtualenvs\",\n> \"pytrends-in-r-new\")\n>   python_path <- file.path(venv_path, \"bin\", \"python\")\n\nPlease don't require placing the virtual environments under\n~/.virtualenvs. 'reticulate' will use this path as a default if you only\nprovide the name of the virtual environment, but will also let the user\nconfigure virtualenv_root() using environment variables.\n\n>   TrendReq <<- reticulate::import(\"pytrends.request\", delay_load =\n> TRUE)$TrendReq\n>   ResponseError <<- reticulate::import(\"pytrends.exceptions\",\n> delay_load = TRUE)$ResponseError\n\nI'm afraid this defeats the purpose of 'delay_load' by immediately\naccessing the module object and forcing 'reticulate' to load it.\n\nI understand the desire to get everything working automatically right\nwhen the package is loaded, but Python dependency management is a\ncomplex topic and not all of it is safe to perform from .onLoad. In\nparticular, if .onLoad fails, you don't get to let the user call\nPytrendsLongitudinalR::install_pytrends() because the namespace will\nnot be available. Try following the guidance in the 'reticulate'\nvignettes [1]:\n\n1. In .onLoad, only express a soft preference for a named virtual\nenvironment and create but do not access lazy-load Python module\nobjects:\n\n.onLoad <- function(libname, pkgname) {\n use_virtualenv(\"pytrends-in-r-new\", required = FALSE)\n pytrends.request <<- reticulate::import(\"pytrends.request\", delay_load\n= TRUE)\n pd <<- reticulate::import(\"pandas\", delay_load = TRUE)\n # and so on\n}\n\n2. Move all the installation work into a separate function:\n\ninstall_pytrends <- function(envname = \"pytrends-in-r-new\", ...)\n # the vignette suggests wiping the \"pytrends-in-r-new\" venv here,\n # just in case\n py_install(\n  c(\"pandas\", \"requests\", \"pytrends\", \"rich\"),\n  envname = envname, ...\n )\n\n3. In tests and examples, wrap all uses of Python in checks for\npy_module_available(...). In regular code, you can suggest running\ninstall_pytrends(), but don't run it for the user. _Automatically_\ninstalling additional software, whether Python modules or Python\nitself, is prohibited by the CRAN policy [2]:\n\n>> Packages should not write in the user?s home filespace <...> nor\n>> anywhere else on the file system apart from the R session?s\n>> temporary directory (or during installation in the location pointed\n>> to by TMPDIR: and such usage should be cleaned up). <...>\n>> Limited exceptions may be allowed in interactive sessions if the\n>> package obtains confirmation from the user.\n\nAdmittedly, this complicates the tests and the examples for your\npackage with boilerplate. I see that 'tensorflow', for example, wraps\nall its examples in \\dontrun{}, but it's an exceptional package. A few\nother packages that depend on 'reticulate' that I've just taken a look\nat do wrap their examples in checks for the Python packages being\navailable.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://cran.r-project.org/package=reticulate/vignettes/package.html\nhttps://cran.r-project.org/package=reticulate/vignettes/python_dependencies.html\n\n[2]\nhttps://cran.r-project.org/web/packages/policies.html",
-      "body_snippet": "Hello Taeyong and welcome to R-package-devel!\n\n? Thu, 5 Sep 2024 23:40:00 +0300\nTaeyong Park <taeyongp at andrew.cmu.edu> ?????:\n\n>   # Define paths\n>   venv_path <- file.path(Sys.getenv(\"HOME\"), \".vi",
+      "body_plain": "Hello Taeyong and welcome to R-package-devel!\n\nВ Thu, 5 Sep 2024 23:40:00 +0300\nTaeyong Park <taeyongp at andrew.cmu.edu> пише?:\n\n>   # Define paths\n>   venv_path <- file.path(Sys.getenv(\"HOME\"), \".virtualenvs\",\n> \"pytrends-in-r-new\")\n>   python_path <- file.path(venv_path, \"bin\", \"python\")\n\nPlease don't require placing the virtual environments under\n~/.virtualenvs. 'reticulate' will use this path as a default if you only\nprovide the name of the virtual environment, but will also let the user\nconfigure virtualenv_root() using environment variables.\n\n>   TrendReq <<- reticulate::import(\"pytrends.request\", delay_load =\n> TRUE)$TrendReq\n>   ResponseError <<- reticulate::import(\"pytrends.exceptions\",\n> delay_load = TRUE)$ResponseError\n\nI'm afraid this defeats the purpose of 'delay_load' by immediately\naccessing the module object and forcing 'reticulate' to load it.\n\nI understand the desire to get everything working automatically right\nwhen the package is loaded, but Python dependency management is a\ncomplex topic and not all of it is safe to perform from .onLoad. In\nparticular, if .onLoad fails, you don't get to let the user call\nPytrendsLongitudinalR::install_pytrends() because the namespace will\nnot be available. Try following the guidance in the 'reticulate'\nvignettes [1]:\n\n1. In .onLoad, only express a soft preference for a named virtual\nenvironment and create but do not access lazy-load Python module\nobjects:\n\n.onLoad <- function(libname, pkgname) {\n use_virtualenv(\"pytrends-in-r-new\", required = FALSE)\n pytrends.request <<- reticulate::import(\"pytrends.request\", delay_load\n= TRUE)\n pd <<- reticulate::import(\"pandas\", delay_load = TRUE)\n # and so on\n}\n\n2. Move all the installation work into a separate function:\n\ninstall_pytrends <- function(envname = \"pytrends-in-r-new\", ...)\n # the vignette suggests wiping the \"pytrends-in-r-new\" venv here,\n # just in case\n py_install(\n  c(\"pandas\", \"requests\", \"pytrends\", \"rich\"),\n  envname = envname, ...\n )\n\n3. In tests and examples, wrap all uses of Python in checks for\npy_module_available(...). In regular code, you can suggest running\ninstall_pytrends(), but don't run it for the user. _Automatically_\ninstalling additional software, whether Python modules or Python\nitself, is prohibited by the CRAN policy [2]:\n\n>> Packages should not write in the user’s home filespace <...> nor\n>> anywhere else on the file system apart from the R session’s\n>> temporary directory (or during installation in the location pointed\n>> to by TMPDIR: and such usage should be cleaned up). <...>\n>> Limited exceptions may be allowed in interactive sessions if the\n>> package obtains confirmation from the user.\n\nAdmittedly, this complicates the tests and the examples for your\npackage with boilerplate. I see that 'tensorflow', for example, wraps\nall its examples in \\dontrun{}, but it's an exceptional package. A few\nother packages that depend on 'reticulate' that I've just taken a look\nat do wrap their examples in checks for the Python packages being\navailable.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://cran.r-project.org/package=reticulate/vignettes/package.html\nhttps://cran.r-project.org/package=reticulate/vignettes/python_dependencies.html\n\n[2]\nhttps://cran.r-project.org/web/packages/policies.html",
+      "body_snippet": "Hello Taeyong and welcome to R-package-devel!\n\nВ Thu, 5 Sep 2024 23:40:00 +0300\nTaeyong Park <taeyongp at andrew.cmu.edu> пише?:\n\n>   # Define paths\n>   venv_path <- file.path(Sys.getenv(\"HOME\"), \".vi",
       "thread_id": "thread-d1504c161c66",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011076.html"
     },
     {
       "id": "msg-43539722a68e",
@@ -250,7 +259,8 @@
       "body_snippet": "Thank you Uwe and Martin for clarifying this issue.\n\nThe last paragraph of the comments that Kurt pointed out refers to a \ngeneric function defined in a package; in my case, the generic is \ncoef(), wh",
       "thread_id": "thread-5ee18456af29",
       "thread_depth": 7,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011080.html"
     },
     {
       "id": "msg-db00bebb3df0",
@@ -266,7 +276,8 @@
       "body_snippet": "Hello @r-package-devel,\n\n ??? Reading from the following guide, I understand that file paths in \nmy R package should remain under 100 bytes long:\n\nhttps://cran.r-project.org/doc/manuals/R-exts.html#Pa",
       "thread_id": "thread-db00bebb3df0",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011081.html"
     },
     {
       "id": "msg-7fdafed8cf14",
@@ -284,7 +295,8 @@
       "body_snippet": "? Fri, 13 Sep 2024 15:00:06 +0200\nIago Bonnici <iago.bonnici at umontpellier.fr> ?????:\n\n>  ??? - Is the 100-bytes paths limitation only supposed to ensure \n> compatilbility with pre-POSIX.1-1998 `tar",
       "thread_id": "thread-db00bebb3df0",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011082.html"
     },
     {
       "id": "msg-701a706feb3b",
@@ -300,7 +312,8 @@
       "body_snippet": "Hi All,\n\n\nI encountered an issue when submitting my R package: the incoming checks did not report any errors, warnings, or notes, but the submission still did not pass the incoming checks. Here is the",
       "thread_id": "thread-701a706feb3b",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011086.html"
     },
     {
       "id": "msg-b1d1ab6a4c06",
@@ -312,11 +325,12 @@
       "subject_clean": "[R-pkg-devel] flang-new-18 complains: incompatiple object shapes",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "More specifically: I submitted a new version of eha to CRAN, but:\n\"... does not pass the incoming checks automatically,...\"\n\nI found warnings in\n\nhttps://win-builder.r-project.org/incoming_pretest/eha_2.11.5_20240919_123016/Debian/00install.out\n-----\n/getsums.f:65:16: warning: Reference to the procedure 'daxpy' has an \nimplicit interface that is distinct from another reference: incompatible \ndummy argument #5: incompatible dummy data object shapes\n                  call daxpy(j2, tmp2, zma, 1, szz(index), 1)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n./getsums.f:51:10: previous reference to 'daxpy'\n            call daxpy(k, epy, zma, 1, sz, 1)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n--------\nThe arguments 'szz(index)' and 'sz' are compared and found to be \n'incompatible'. szz and sz are both double vectors, szz is the upper \ntriangle of a symmetric covariance matrix, stored as a vector of length \nn * (n + 1) / 2 (space saving, this is F77 code written some 40 years ago).\n\nThis is the point of view of a compiler called 'flang-new-18' (Debian). \nHowever, gfortran and myself disagree, and I am interested in hearing a \nsuggestion of what measures I should take.\n\nIt is of course easy (but tedious) to cut the Gordian knot by explicitly \nwriting out the loops that defines 'daxpy', but is it necessary?\n\nThanks, G?ran",
+      "body_plain": "More specifically: I submitted a new version of eha to CRAN, but:\n\"... does not pass the incoming checks automatically,...\"\n\nI found warnings in\n\nhttps://win-builder.r-project.org/incoming_pretest/eha_2.11.5_20240919_123016/Debian/00install.out\n-----\n/getsums.f:65:16: warning: Reference to the procedure 'daxpy' has an \nimplicit interface that is distinct from another reference: incompatible \ndummy argument #5: incompatible dummy data object shapes\n                  call daxpy(j2, tmp2, zma, 1, szz(index), 1)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n./getsums.f:51:10: previous reference to 'daxpy'\n            call daxpy(k, epy, zma, 1, sz, 1)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n--------\nThe arguments 'szz(index)' and 'sz' are compared and found to be \n'incompatible'. szz and sz are both double vectors, szz is the upper \ntriangle of a symmetric covariance matrix, stored as a vector of length \nn * (n + 1) / 2 (space saving, this is F77 code written some 40 years ago).\n\nThis is the point of view of a compiler called 'flang-new-18' (Debian). \nHowever, gfortran and myself disagree, and I am interested in hearing a \nsuggestion of what measures I should take.\n\nIt is of course easy (but tedious) to cut the Gordian knot by explicitly \nwriting out the loops that defines 'daxpy', but is it necessary?\n\nThanks, Göran",
       "body_snippet": "More specifically: I submitted a new version of eha to CRAN, but:\n\"... does not pass the incoming checks automatically,...\"\n\nI found warnings in\n\nhttps://win-builder.r-project.org/incoming_pretest/eha",
       "thread_id": "thread-b1d1ab6a4c06",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011083.html"
     },
     {
       "id": "msg-240dff808689",
@@ -330,11 +344,12 @@
       "references": [
         "<0dbc84e3-47c9-46da-85b0-425203e2d213@ehar.se>"
       ],
-      "body_plain": "? Fri, 20 Sep 2024 13:44:44 +0200\nG?ran Brostr?m <gb at ehar.se> ?????:\n\n> It is of course easy (but tedious) to cut the Gordian knot by\n> explicitly writing out the loops that defines 'daxpy', but is it\n> necessary?\n\nDefinitely not. I think that flang will be satisfied if you provide an\nexplicit interface for DAXPY. Do you need help testing your code with\nthis compiler?\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Fri, 20 Sep 2024 13:44:44 +0200\nG?ran Brostr?m <gb at ehar.se> ?????:\n\n> It is of course easy (but tedious) to cut the Gordian knot by\n> explicitly writing out the loops that defines 'daxpy', but is",
+      "body_plain": "В Fri, 20 Sep 2024 13:44:44 +0200\nGöran Broström <gb at ehar.se> пишет:\n\n> It is of course easy (but tedious) to cut the Gordian knot by\n> explicitly writing out the loops that defines 'daxpy', but is it\n> necessary?\n\nDefinitely not. I think that flang will be satisfied if you provide an\nexplicit interface for DAXPY. Do you need help testing your code with\nthis compiler?\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Fri, 20 Sep 2024 13:44:44 +0200\nGöran Broström <gb at ehar.se> пишет:\n\n> It is of course easy (but tedious) to cut the Gordian knot by\n> explicitly writing out the loops that defines 'daxpy', but is",
       "thread_id": "thread-b1d1ab6a4c06",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011084.html"
     },
     {
       "id": "msg-7f3dd98e53e5",
@@ -349,11 +364,12 @@
         "<0dbc84e3-47c9-46da-85b0-425203e2d213@ehar.se>",
         "<20240920150710.0ef39219@arachnoid>"
       ],
-      "body_plain": "Thanks for the reply, Ivan. I think that 'problem solved': I just \nreceived a message from Uwe saying that the rejection was a mistake.\n\nBest, G?ran\n\nDen 2024-09-20 kl. 14:07, skrev Ivan Krylov:\n> ? Fri, 20 Sep 2024 13:44:44 +0200\n> G?ran Brostr?m <gb at ehar.se> ?????:\n> \n>> It is of course easy (but tedious) to cut the Gordian knot by\n>> explicitly writing out the loops that defines 'daxpy', but is it\n>> necessary?\n> \n> Definitely not. I think that flang will be satisfied if you provide an\n> explicit interface for DAXPY. Do you need help testing your code with\n> this compiler?\n>",
-      "body_snippet": "Thanks for the reply, Ivan. I think that 'problem solved': I just \nreceived a message from Uwe saying that the rejection was a mistake.\n\nBest, G?ran\n\nDen 2024-09-20 kl. 14:07, skrev Ivan Krylov:\n> ? F",
+      "body_plain": "Thanks for the reply, Ivan. I think that 'problem solved': I just \nreceived a message from Uwe saying that the rejection was a mistake.\n\nBest, Göran\n\nDen 2024-09-20 kl. 14:07, skrev Ivan Krylov:\n> В Fri, 20 Sep 2024 13:44:44 +0200\n> Göran Broström <gb at ehar.se> пишет:\n> \n>> It is of course easy (but tedious) to cut the Gordian knot by\n>> explicitly writing out the loops that defines 'daxpy', but is it\n>> necessary?\n> \n> Definitely not. I think that flang will be satisfied if you provide an\n> explicit interface for DAXPY. Do you need help testing your code with\n> this compiler?\n>",
+      "body_snippet": "Thanks for the reply, Ivan. I think that 'problem solved': I just \nreceived a message from Uwe saying that the rejection was a mistake.\n\nBest, Göran\n\nDen 2024-09-20 kl. 14:07, skrev Ivan Krylov:\n> В F",
       "thread_id": "thread-b1d1ab6a4c06",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011085.html"
     },
     {
       "id": "msg-b35c331fae7b",
@@ -371,7 +387,8 @@
       "body_snippet": "A recent issue on CRAN, we are working on fixing it.\n\nBest,\nUwe Ligges\n\n\n\nOn 20.09.2024 10:46, ? ?? wrote:\n> Hi All,\n> \n> \n> I encountered an issue when submitting my R package: the incoming checks di",
       "thread_id": "thread-701a706feb3b",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011087.html"
     },
     {
       "id": "msg-7af887d7d05d",
@@ -390,7 +407,8 @@
       "body_snippet": "Okay, I understand now. Thank you very much for response!\n\nBest,\nHaijiang Qin\n\n________________________________\n??????: Uwe Ligges\n?????: 2024 ?? 9 ?? 20 ?? ?????? 21:58\n?????: ?? ????; r-package-deve",
       "thread_id": "thread-701a706feb3b",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011088.html"
     },
     {
       "id": "msg-5e931cf3b7e7",
@@ -406,7 +424,8 @@
       "body_snippet": "Hello all,\n\nRecently I submitted a large update to the package I maintain and was unable to resolve the testing errors prior to it being archived. I've been unable to reproduce the errors, so I expect",
       "thread_id": "thread-5e931cf3b7e7",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011089.html"
     },
     {
       "id": "msg-9a4eb1ffd8de",
@@ -424,7 +443,8 @@
       "body_snippet": "Hmmm. Assuming the previous version of the package (without the\nextensions/updates) avoids all of the testing errors, I would say that\nRAW (\"rules as written\") the only constraint I can see on submitt",
       "thread_id": "thread-5e931cf3b7e7",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011090.html"
     },
     {
       "id": "msg-8a96a27ac0a3",
@@ -443,7 +463,8 @@
       "body_snippet": "On 2024-09-23 4:13 p.m., Ben Bolker wrote:\n> Hmmm. Assuming the previous version of the package (without the\n> extensions/updates) avoids all of the testing errors, I would say that\n> RAW (\"rules as w",
       "thread_id": "thread-5e931cf3b7e7",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011091.html"
     },
     {
       "id": "msg-9803363dd9a4",
@@ -463,7 +484,8 @@
       "body_snippet": "I can imagine a (perhaps overly complicated) scenario:\n\n* version 1 passes tests OK when it is submitted to CRAN\n* version 2 passes tests OK when it is submitted to CRAN\n* CRAN introduces new tests (c",
       "thread_id": "thread-5e931cf3b7e7",
       "thread_depth": 3,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011092.html"
     },
     {
       "id": "msg-885fc98db161",
@@ -475,11 +497,12 @@
       "subject_clean": "[R-pkg-devel] bit, bit64, ff and greeNsort",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear package maintainers,\n\nDear users of packages `bit`, `bit64`, `ff`,\n\nEveryone interested in sustainable sorting algorithms,\n\nI submitted updated versions for the upcoming R 4.5.0. The are only \nminor changes (see the NEWS files) but there is one important change in \nbit64:\n\n ??? o setting options(integer64_semantics=\"new\")\n ????? gives the better semantics suggested by Ofek Shilon.\n ????? Downstream package authors: please test and adjust to the new \nsemantics,\n ????? we plan to make that the default.\n\nAfter 25 years volunteer work for the R community, that was my last \ncombined submission for packages `bit`, `bit64` and `ff`.\n\nI learned S+ in 1996 and supported R's 1.0 release in 2000 with bug \ntesting, a small code contribution to `pairs` and motivating the \ncore-team to replace 'NA' with NA_character_.\n\nIn 2007 Daniel Adler and I published `ff`: the first R package allowing \nbig out of memory data.frames was a nail in the coffin of SAS dominance \nand helped R into the big data era.\n\n2009 and 2012 followed `bit`, `bit64` to enhance R's data types somewhat \nwith `bit` vectors and signed `integer64`. Package `bit` supported \nefficient selection in `ff`. Package `bit64` was an emergency \ndevelopment in order to establish rather `integer64' than another \n`int64` package that had too expensive performance.\n\nSince 2011 I work for an employer that does not use R, and maintenance \nof R packages is a little rewarded burden.\n\nSince 2010 my priorities shifted to fighting global heating by \ndeveloping more sustainable sorting algorithms that provide better \ntrade-offs between memory investments, compute costs and adaptivity to \neasier input patterns. My R&D project was successfully completed 2024 \nwith theory and design of new symmetric sorting algorithms that can \nreplace Quicksort, Mergesort and Timsort. Lots of info at greeNsort.org. \nI have an R package `greeNsort` on github with a research testbed that \ncan measure RAM, CPU and RAPL energy for ?150 equally tuned sorting \nalgorithms on multiple test patterns.\n\nSince 24.2.2022 my priorities are on strengthening resilience of \nEuropean civil society.\n\nHence I happily accept the generous offer of Michael Chirico to carry \nforward the maintenance of packages `bit` and `bit64`. Please support \nhim in the difficult task of developing very close to the core as a \nnormal package author.\n\nI will continue bug-fixing `ff` as time permits, although a modern C++ \nrewrite would be preferable, which\n\n1) supports long vectors\n\n2) avoids copying between Mapped Memory and R's memory\n\n3) simplifies the package, particularly removes the \"virtual window\" \ncomplexity\n\nAll the best\n\n\nJens Oehlschl?gel",
+      "body_plain": "Dear package maintainers,\n\nDear users of packages `bit`, `bit64`, `ff`,\n\nEveryone interested in sustainable sorting algorithms,\n\nI submitted updated versions for the upcoming R 4.5.0. The are only \nminor changes (see the NEWS files) but there is one important change in \nbit64:\n\n     o setting options(integer64_semantics=\"new\")\n       gives the better semantics suggested by Ofek Shilon.\n       Downstream package authors: please test and adjust to the new \nsemantics,\n       we plan to make that the default.\n\nAfter 25 years volunteer work for the R community, that was my last \ncombined submission for packages `bit`, `bit64` and `ff`.\n\nI learned S+ in 1996 and supported R's 1.0 release in 2000 with bug \ntesting, a small code contribution to `pairs` and motivating the \ncore-team to replace 'NA' with NA_character_.\n\nIn 2007 Daniel Adler and I published `ff`: the first R package allowing \nbig out of memory data.frames was a nail in the coffin of SAS dominance \nand helped R into the big data era.\n\n2009 and 2012 followed `bit`, `bit64` to enhance R's data types somewhat \nwith `bit` vectors and signed `integer64`. Package `bit` supported \nefficient selection in `ff`. Package `bit64` was an emergency \ndevelopment in order to establish rather `integer64' than another \n`int64` package that had too expensive performance.\n\nSince 2011 I work for an employer that does not use R, and maintenance \nof R packages is a little rewarded burden.\n\nSince 2010 my priorities shifted to fighting global heating by \ndeveloping more sustainable sorting algorithms that provide better \ntrade-offs between memory investments, compute costs and adaptivity to \neasier input patterns. My R&D project was successfully completed 2024 \nwith theory and design of new symmetric sorting algorithms that can \nreplace Quicksort, Mergesort and Timsort. Lots of info at greeNsort.org. \nI have an R package `greeNsort` on github with a research testbed that \ncan measure RAM, CPU and RAPL energy for ≈150 equally tuned sorting \nalgorithms on multiple test patterns.\n\nSince 24.2.2022 my priorities are on strengthening resilience of \nEuropean civil society.\n\nHence I happily accept the generous offer of Michael Chirico to carry \nforward the maintenance of packages `bit` and `bit64`. Please support \nhim in the difficult task of developing very close to the core as a \nnormal package author.\n\nI will continue bug-fixing `ff` as time permits, although a modern C++ \nrewrite would be preferable, which\n\n1) supports long vectors\n\n2) avoids copying between Mapped Memory and R's memory\n\n3) simplifies the package, particularly removes the \"virtual window\" \ncomplexity\n\nAll the best\n\n\nJens Oehlschlägel",
       "body_snippet": "Dear package maintainers,\n\nDear users of packages `bit`, `bit64`, `ff`,\n\nEveryone interested in sustainable sorting algorithms,\n\nI submitted updated versions for the upcoming R 4.5.0. The are only \nmi",
       "thread_id": "thread-885fc98db161",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011093.html"
     },
     {
       "id": "msg-f87ec91af70a",
@@ -496,11 +519,12 @@
         "<1f85d9f0-77c1-49fe-b516-7f36039b7faa@gmail.com>",
         "<CABghstTyeesn4PPcbRAsYRfd1u+45n88Hn-nVz5T7LOd9SDhFw@mail.gmail.com>"
       ],
-      "body_plain": "Dear Eric,\n\nWhile changing the version number of an old package could solve this, it is\na work-around that won't help much:\nUsers will be able to install the binaries of an old package without the\nnew fixes and improvements of the later at the cost of another submission,\nwhich might delay the submission which fixes the current issues.\n\nRecently with Henrik Bengtsson we prepared a fallback for these cases:\nPackages archived from CRAN are built for 35 days more to be able to\nprovide binaries to users: https://www.cranhaven.org/dashboard-live.html\nThis time is what it takes for half the archived packages to be back to\nCRAN.\nYou could point/use that repository while you fix your package up to CRAN\nchecks.\n\nIs the package archived Colossus?\nMaybe some users might be able to help, as this looks like a compiler\nspecific issue on Fedora.\nI am not sure if rhub can help you check your package in this environment,\nbut that is something you could explore too.\n\nBest wishes,\n\nLlu?s\n\n\nOn Mon, 23 Sept 2024 at 22:53, Ben Bolker <bbolker at gmail.com> wrote:\n\n>  I can imagine a (perhaps overly complicated) scenario:\n>\n> * version 1 passes tests OK when it is submitted to CRAN\n> * version 2 passes tests OK when it is submitted to CRAN\n> * CRAN introduces new tests (compiler versions, etc. etc.) that break\n> version 2 but not version 1.\n>\n> Now version 1 would still pass but version 2 would fail, so bumping\n> the version number of version 1 to 3 and resubmitting could (??) work.\n>\n> On Mon, Sep 23, 2024 at 4:24?PM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> >\n> > On 2024-09-23 4:13 p.m., Ben Bolker wrote:\n> > > Hmmm. Assuming the previous version of the package (without the\n> > > extensions/updates) avoids all of the testing errors, I would say that\n> > > RAW (\"rules as written\") the only constraint I can see on submitting a\n> > > \"rollback\" version of the package would be the CRAN request for\n> > > updates ?no more than every 1?2 months\".\n> >\n> > I think the original package wouldn't have been archived unless it was\n> > failing tests and the author didn't address the failures.\n> >\n> > Duncan Murdoch\n> >\n> > > https://cran.r-project.org/web/packages/policies.html   But an e-mail\n> > > to the CRAN maintainers (if none reply on-list) seems appropriate.\n> > >\n> > > On Mon, Sep 23, 2024 at 3:49?PM Eric Giunta <egiunta at ksu.edu> wrote:\n> > >>\n> > >> Hello all,\n> > >>\n> > >> Recently I submitted a large update to the package I maintain and was\n> unable to resolve the testing errors prior to it being archived. I've been\n> unable to reproduce the errors, so I expect to have to setup my own\n> fedora_clang virtual machine to debug my package. Ideally I'd want a\n> previous version to be more easily available while I figure out my issues.\n> Is it against CRAN policy to resubmit an earlier version of an archived\n> package, assuming I fully explain what led to the archival and\n> re-submission in the submission comment? I'm sorry if this has already been\n> asked, I couldn't find an answer online and wanted to check before\n> resubmitting anything.\n> > >>\n> > >> Thank you for your time,\n> > >> Eric\n> > >> ______________________________________________\n> > >> R-package-devel at r-project.org mailing list\n> > >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > >\n> > > ______________________________________________\n> > > R-package-devel at r-project.org mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear Eric,\n\nWhile changing the version number of an old package could solve this, it is\na work-around that won't help much:\nUsers will be able to install the binaries of an old package without the\nnew fixes and improvements of the later at the cost of another submission,\nwhich might delay the submission which fixes the current issues.\n\nRecently with Henrik Bengtsson we prepared a fallback for these cases:\nPackages archived from CRAN are built for 35 days more to be able to\nprovide binaries to users: https://www.cranhaven.org/dashboard-live.html\nThis time is what it takes for half the archived packages to be back to\nCRAN.\nYou could point/use that repository while you fix your package up to CRAN\nchecks.\n\nIs the package archived Colossus?\nMaybe some users might be able to help, as this looks like a compiler\nspecific issue on Fedora.\nI am not sure if rhub can help you check your package in this environment,\nbut that is something you could explore too.\n\nBest wishes,\n\nLluís\n\n\nOn Mon, 23 Sept 2024 at 22:53, Ben Bolker <bbolker at gmail.com> wrote:\n\n>  I can imagine a (perhaps overly complicated) scenario:\n>\n> * version 1 passes tests OK when it is submitted to CRAN\n> * version 2 passes tests OK when it is submitted to CRAN\n> * CRAN introduces new tests (compiler versions, etc. etc.) that break\n> version 2 but not version 1.\n>\n> Now version 1 would still pass but version 2 would fail, so bumping\n> the version number of version 1 to 3 and resubmitting could (??) work.\n>\n> On Mon, Sep 23, 2024 at 4:24 PM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> >\n> > On 2024-09-23 4:13 p.m., Ben Bolker wrote:\n> > > Hmmm. Assuming the previous version of the package (without the\n> > > extensions/updates) avoids all of the testing errors, I would say that\n> > > RAW (\"rules as written\") the only constraint I can see on submitting a\n> > > \"rollback\" version of the package would be the CRAN request for\n> > > updates “no more than every 1–2 months\".\n> >\n> > I think the original package wouldn't have been archived unless it was\n> > failing tests and the author didn't address the failures.\n> >\n> > Duncan Murdoch\n> >\n> > > https://cran.r-project.org/web/packages/policies.html   But an e-mail\n> > > to the CRAN maintainers (if none reply on-list) seems appropriate.\n> > >\n> > > On Mon, Sep 23, 2024 at 3:49 PM Eric Giunta <egiunta at ksu.edu> wrote:\n> > >>\n> > >> Hello all,\n> > >>\n> > >> Recently I submitted a large update to the package I maintain and was\n> unable to resolve the testing errors prior to it being archived. I've been\n> unable to reproduce the errors, so I expect to have to setup my own\n> fedora_clang virtual machine to debug my package. Ideally I'd want a\n> previous version to be more easily available while I figure out my issues.\n> Is it against CRAN policy to resubmit an earlier version of an archived\n> package, assuming I fully explain what led to the archival and\n> re-submission in the submission comment? I'm sorry if this has already been\n> asked, I couldn't find an answer online and wanted to check before\n> resubmitting anything.\n> > >>\n> > >> Thank you for your time,\n> > >> Eric\n> > >> ______________________________________________\n> > >> R-package-devel at r-project.org mailing list\n> > >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > >\n> > > ______________________________________________\n> > > R-package-devel at r-project.org mailing list\n> > > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear Eric,\n\nWhile changing the version number of an old package could solve this, it is\na work-around that won't help much:\nUsers will be able to install the binaries of an old package without the\nnew",
       "thread_id": "thread-5e931cf3b7e7",
       "thread_depth": 4,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011094.html"
     },
     {
       "id": "msg-bb87ada6992f",
@@ -514,11 +538,12 @@
       "references": [
         "<SN6PR05MB4783410E924760E8EF6B1082A86F2@SN6PR05MB4783.namprd05.prod.outlook.com>"
       ],
-      "body_plain": "? Mon, 23 Sep 2024 16:15:28 +0000\nEric Giunta <egiunta at ksu.edu> ?????:\n\n> Recently I submitted a large update to the package I maintain and was\n> unable to resolve the testing errors prior to it being archived. I've\n> been unable to reproduce the errors, so I expect to have to setup my\n> own fedora_clang virtual machine to debug my package. \n\n> Is it against CRAN policy to resubmit an earlier version of an\n> archived package, assuming I fully explain what led to the archival\n> and re-submission in the submission comment?\n\nIf this is Colossus [1], as suggested by Llu?s, I would recommend\nmaking sure that you can reproduce the problem with the latest version\nof the package and then verifying that the previous version of the\npackage doesn't exhibit that problem.\n\nUnfortunately, starting with `podman run fedora:36` and following [2]\nto compile clang-18 and R was not enough to reproduce the problem for\nme: the tests in Colossus_1.1.4.1.tar.gz don't fail. I even tried with\n19.1.0 by accident.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://cran-archive.r-project.org/web/checks/2024/2024-09-23_check_results_Colossus.html\n\n[2]\nhttps://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-clang\n\nIt's important to install llvm-18.1.8, not 19.1.0 from the example URL.",
-      "body_snippet": "? Mon, 23 Sep 2024 16:15:28 +0000\nEric Giunta <egiunta at ksu.edu> ?????:\n\n> Recently I submitted a large update to the package I maintain and was\n> unable to resolve the testing errors prior to it be",
+      "body_plain": "В Mon, 23 Sep 2024 16:15:28 +0000\nEric Giunta <egiunta at ksu.edu> пишет:\n\n> Recently I submitted a large update to the package I maintain and was\n> unable to resolve the testing errors prior to it being archived. I've\n> been unable to reproduce the errors, so I expect to have to setup my\n> own fedora_clang virtual machine to debug my package. \n\n> Is it against CRAN policy to resubmit an earlier version of an\n> archived package, assuming I fully explain what led to the archival\n> and re-submission in the submission comment?\n\nIf this is Colossus [1], as suggested by Lluís, I would recommend\nmaking sure that you can reproduce the problem with the latest version\nof the package and then verifying that the previous version of the\npackage doesn't exhibit that problem.\n\nUnfortunately, starting with `podman run fedora:36` and following [2]\nto compile clang-18 and R was not enough to reproduce the problem for\nme: the tests in Colossus_1.1.4.1.tar.gz don't fail. I even tried with\n19.1.0 by accident.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://cran-archive.r-project.org/web/checks/2024/2024-09-23_check_results_Colossus.html\n\n[2]\nhttps://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-clang\n\nIt's important to install llvm-18.1.8, not 19.1.0 from the example URL.",
+      "body_snippet": "В Mon, 23 Sep 2024 16:15:28 +0000\nEric Giunta <egiunta at ksu.edu> пишет:\n\n> Recently I submitted a large update to the package I maintain and was\n> unable to resolve the testing errors prior to it be",
       "thread_id": "thread-5e931cf3b7e7",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011095.html"
     },
     {
       "id": "msg-9e91071aa31f",
@@ -534,7 +559,8 @@
       "body_snippet": "Hi,\n\nI run an updated Fedora platform, and can build R under clang 18.1.8. If the affected package is Colossus, and https://github.com/ericgiunta/Colossus is the appropriate repo, could you indicate w",
       "thread_id": "thread-9e91071aa31f",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011096.html"
     },
     {
       "id": "msg-173c59e118b0",
@@ -550,7 +576,8 @@
       "body_snippet": "broom.mixed is failing tests on Fedora.\n\nWith apologies for the mangled formatting, here is the test failure \n(full properly formatted details at \nhttps://www.r-project.org/nosvn/R.check/r-devel-linux",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011097.html"
     },
     {
       "id": "msg-827560663cd9",
@@ -568,7 +595,8 @@
       "body_snippet": "Ben, the issue is that {rstan} is not available. Since it is a suggested\npackage it is not expected to always be there.\n\nThis is referred to is the \"hard\" check.\n\nHere is a  GitHub CI workflow I use t",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011098.html"
     },
     {
       "id": "msg-1124bbf7a5e2",
@@ -586,7 +614,8 @@
       "body_snippet": "? Tue, 24 Sep 2024 10:27:34 -0400\nBen Bolker <bbolker at gmail.com> ?????:\n\n>    Weirdly, I can't get this to fail on my local system even if I\n> remove rstan -- maybe rstan needs to be present for br",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011099.html"
     },
     {
       "id": "msg-4d19c400e1ae",
@@ -604,7 +633,8 @@
       "body_snippet": "All,\n\nThank you for your feedback and suggestions. Yes, the package is Colossus (https://github.com/ericgiunta/Colossus). From April to September of this year version 1.1.1 was available on CRAN while",
       "thread_id": "thread-9e91071aa31f",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011100.html"
     },
     {
       "id": "msg-e01b44ab4d68",
@@ -623,7 +653,8 @@
       "body_snippet": "Thanks both.\n\nJosiah Parry says:\n\n > Ben, the issue is that {rstan} is not available. Since it is a \nsuggested package it is not expected to always be there.\n\n   The thing is that the checks for rstan",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011101.html"
     },
     {
       "id": "msg-7a3ee143ac95",
@@ -639,7 +670,8 @@
       "body_snippet": "A package of mine on CRAN has some old function names (not S3 methods) that include \".\" (e.g., \"esa.plot\"). In a new version I want to simultaneously\n1. rename these functions to e.g. \"esaPlot\"\n2. exp",
       "thread_id": "thread-7a3ee143ac95",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011102.html"
     },
     {
       "id": "msg-b8d7ea9347ad",
@@ -659,7 +691,8 @@
       "body_snippet": "Hmm, so it's *not* a machine-specific problem after all [1,2] and can\nnow be reproduced on a regular R-devel build on Debian Sid. I'm sorry\nfor jumping to conclusions.\n\nWhy would Rcpp::loadModule() (c",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 3,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011103.html"
     },
     {
       "id": "msg-265e93c4b80b",
@@ -680,7 +713,8 @@
       "body_snippet": "On 9/25/24 12:21, Ivan Krylov wrote:\n> Hmm, so it's *not* a machine-specific problem after all [1,2] and can\n> now be reproduced on a regular R-devel build on Debian Sid. I'm sorry\n> for jumping to co",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 4,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011104.html"
     },
     {
       "id": "msg-ba7988ce4270",
@@ -702,7 +736,8 @@
       "body_snippet": "? Wed, 25 Sep 2024 12:28:25 -0400\nBen Bolker <bbolker at gmail.com> ?????:\n\n>    What is your current estimate of the probability that this is \n> something that I've done wrong vs. exposing something ",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 5,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011105.html"
     },
     {
       "id": "msg-e6777181bfa7",
@@ -725,7 +760,8 @@
       "body_snippet": "Yikes.  Next question, is this (in your opinion) worth escalating to \nr-devel ?\n\n   I can definitely implement something where I require() rstan up \nfront, (which should be harmless if it's really not",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 6,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011106.html"
     },
     {
       "id": "msg-a768babb8230",
@@ -749,7 +785,8 @@
       "body_snippet": "Please let me know if I can be of any help. I kind of \"caused\" this issue\nby submitting the new version of brms to CRAN.\nOf course, the issue is not really in brms but somehow deeper as your\ninvestiga",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 7,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011107.html"
     },
     {
       "id": "msg-7b7ca9fab959",
@@ -765,7 +802,8 @@
       "body_snippet": "Hi folks,\n\nReference from the manual:\n\n   -\n\n   Nor should the C++11 random number library be used nor any other\n   third-party random number generators such as those in GSL.?\n\n\nI am working at wrappi",
       "thread_id": "thread-7b7ca9fab959",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011112.html"
     },
     {
       "id": "msg-5fdaabbdea8e",
@@ -789,7 +827,8 @@
       "body_snippet": "? Wed, 25 Sep 2024 16:57:55 -0400\nBen Bolker <bbolker at gmail.com> ?????:\n\n> Next question, is this (in your opinion) worth escalating to \n> r-devel ?\n\nI think so, yes. Hopefully there will be a way ",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 7,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011108.html"
     },
     {
       "id": "msg-82f5c8a00aff",
@@ -812,7 +851,8 @@
       "body_snippet": "May be a completely red herring, but I've recently had what might be a similar issue with reference classes, which kept me pulling my hair for a few hours (when method calls that used to work suddenly",
       "thread_id": "thread-173c59e118b0",
       "thread_depth": 6,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011109.html"
     },
     {
       "id": "msg-add3d83b17aa",
@@ -830,7 +870,8 @@
       "body_snippet": "? Wed, 25 Sep 2024 05:13:31 +0000\nMurray Efford via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> When I deprecate the old functions (by exporting a shell function\n> that calls .Depreca",
       "thread_id": "thread-7a3ee143ac95",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011110.html"
     },
     {
       "id": "msg-d2446215c722",
@@ -849,7 +890,8 @@
       "body_snippet": "Thanks for your excellent exposition of the problem, Ivan. The set-aside option would be attractive in the long term and make it easier to fix historical errors like mine. Presumably there is also a d",
       "thread_id": "thread-7a3ee143ac95",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011111.html"
     },
     {
       "id": "msg-31bb813cf2db",
@@ -867,7 +909,8 @@
       "body_snippet": "Hi John,\n\nI think you are reading the text too literally. The intent of WRE is to\nensure that standard use of a RNG in an extension package uses the RNGs that\ncome with R (which includes an updated me",
       "thread_id": "thread-7b7ca9fab959",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011113.html"
     },
     {
       "id": "msg-625a69e6ce40",
@@ -886,7 +929,8 @@
       "body_snippet": "Hi Dirk,\n\nThanks very much for your thoughtful reply. This is a relief for me as my\n'solution' for replacing the existing RNG in my C++ was convoluted and I\ncouldn't see the advantage in doing so. Tha",
       "thread_id": "thread-7b7ca9fab959",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011114.html"
     },
     {
       "id": "msg-cb971c424f26",
@@ -902,11 +946,12 @@
         "<26358.48876.191859.675293@rob.eddelbuettel.com>",
         "<CAE6tiryYesRoiEB6fccPjjhS5JhWtL=AVdbgFLokLO6WOY1-0A@mail.gmail.com>"
       ],
-      "body_plain": "On 27 September 2024 at 16:58, John Clarke wrote:\n| [...] -- the RNG state management strategy appears almost 'magical' to me\n| especially inside?RCPP. It is possible, I just don't understand how to use it.\n\nSee Section 6.3 of WRE: The pair of GetRNGstate() and PutRNGstate() is all\nthere is in terms of an interface, and all we call (and old-school macros\nensure it ends in the generated glue code Rcpp produces for you). Pretty much\neverything else around RNGSs is (quite) opaque (as Section 6.3 states) and\nRcpp does not go there.\n\nCheers,  Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 27 September 2024 at 16:58, John Clarke wrote:\n| [...] -- the RNG state management strategy appears almost 'magical' to me\n| especially inside?RCPP. It is possible, I just don't understand how to u",
+      "body_plain": "On 27 September 2024 at 16:58, John Clarke wrote:\n| [...] -- the RNG state management strategy appears almost 'magical' to me\n| especially inside RCPP. It is possible, I just don't understand how to use it.\n\nSee Section 6.3 of WRE: The pair of GetRNGstate() and PutRNGstate() is all\nthere is in terms of an interface, and all we call (and old-school macros\nensure it ends in the generated glue code Rcpp produces for you). Pretty much\neverything else around RNGSs is (quite) opaque (as Section 6.3 states) and\nRcpp does not go there.\n\nCheers,  Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 27 September 2024 at 16:58, John Clarke wrote:\n| [...] -- the RNG state management strategy appears almost 'magical' to me\n| especially inside RCPP. It is possible, I just don't understand how to u",
       "thread_id": "thread-7b7ca9fab959",
       "thread_depth": 3,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011115.html"
     },
     {
       "id": "msg-bcbf21798cf6",
@@ -927,7 +972,8 @@
       "body_snippet": "John,\n\nYour post does not have many details but why do you think that\ninstantiating 4 instances of the Mersenne Twister will keep the streams\nindependent? It is possible to get independent streams, bu",
       "thread_id": "thread-7b7ca9fab959",
       "thread_depth": 4,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011116.html"
     },
     {
       "id": "msg-a386e277c6b0",
@@ -947,7 +993,8 @@
       "body_snippet": "You mention that you did not like putting the rstream in the user API but there is nothing forcing you to have the user call your cpp function directly... there are lots of packages that use R glue fu",
       "thread_id": "thread-7b7ca9fab959",
       "thread_depth": 3,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011117.html"
     },
     {
       "id": "msg-2aca84ec5a3a",
@@ -965,7 +1012,8 @@
       "body_snippet": "Hmm, the following doesn't seem to trigger warnings or notes in `R CMD \ncheck --as-cran` (R 4.4.1; linux)\n\nesa <- function(x) { \n  \n\n   UseMethod(\"esa\") \n  \n\n} \n  \n\n  \n  \n\nesa.plot <- function(y) { \n ",
       "thread_id": "thread-7a3ee143ac95",
       "thread_depth": 1,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011118.html"
     },
     {
       "id": "msg-b69c5bffb285",
@@ -984,7 +1032,8 @@
       "body_snippet": "Check results vary. With win-builder both R-release (R 4.4.1) and R-devel I get\n\n* checking S3 generic/method consistency ... NOTE\nApparent methods for exported generics not registered:\n  esa.plot\nSee",
       "thread_id": "thread-7a3ee143ac95",
       "thread_depth": 2,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011119.html"
     },
     {
       "id": "msg-059c6a87382c",
@@ -1000,7 +1049,8 @@
       "body_snippet": "Hi R-package-devel team, \n\n  I have a question about installation error on Debian. \n\n  I recently updated my package ?glmtlp? to meet the ?_PACKAGE? requirement and to deal with the ?noRemap\" requirem",
       "thread_id": "thread-059c6a87382c",
       "thread_depth": 0,
-      "month": "2024-09"
+      "month": "2024-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011121.html"
     }
   ],
   "threads": [

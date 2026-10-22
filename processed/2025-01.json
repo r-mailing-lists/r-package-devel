@@ -13,11 +13,12 @@
       "subject_clean": "[R-pkg-devel] Removing packages files",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi list,\n\nI am developing a package that will download some data, and I'd like\nto store it locally to not recalculate it often.\nThe CRAN policy requires tools::R_user_dir to be used and \"the\ncontents are actively managed (including removing outdated material)\"\nor using TMPDIR but \"such usage should be cleaned up\".\n\nWhen loading a package there is .onLoad or .onAttach to fill or check\nthose files and other settings required for a package. Is there\nsomething for when a package is removed?\n\nI found some related functions like .Last or reg.fnalizer and setHook\nor packageEvent but they are about closing a session or don't have a\nspecific event for when uninstalling packages via (remove.packages). I\nappreciate any feedback, thanks in advance.\n\nBest wishes and a happy new year,\n\nLlu?s",
+      "body_plain": "Hi list,\n\nI am developing a package that will download some data, and I'd like\nto store it locally to not recalculate it often.\nThe CRAN policy requires tools::R_user_dir to be used and \"the\ncontents are actively managed (including removing outdated material)\"\nor using TMPDIR but \"such usage should be cleaned up\".\n\nWhen loading a package there is .onLoad or .onAttach to fill or check\nthose files and other settings required for a package. Is there\nsomething for when a package is removed?\n\nI found some related functions like .Last or reg.fnalizer and setHook\nor packageEvent but they are about closing a session or don't have a\nspecific event for when uninstalling packages via (remove.packages). I\nappreciate any feedback, thanks in advance.\n\nBest wishes and a happy new year,\n\nLluís",
       "body_snippet": "Hi list,\n\nI am developing a package that will download some data, and I'd like\nto store it locally to not recalculate it often.\nThe CRAN policy requires tools::R_user_dir to be used and \"the\ncontents ",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011339.html"
     },
     {
       "id": "msg-449e06b49043",
@@ -31,11 +32,12 @@
       "references": [
         "<CAN+W6_sjx59W6hGGMyj565smnazws=uasSWbwEHEe7kXT+YLAQ@mail.gmail.com>"
       ],
-      "body_plain": "On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n> Hi list,\n> \n> I am developing a package that will download some data, and I'd like\n> to store it locally to not recalculate it often.\n> The CRAN policy requires tools::R_user_dir to be used and \"the\n> contents are actively managed (including removing outdated material)\"\n> or using TMPDIR but \"such usage should be cleaned up\".\n> \n> When loading a package there is .onLoad or .onAttach to fill or check\n> those files and other settings required for a package. Is there\n> something for when a package is removed?\n> \n> I found some related functions like .Last or reg.fnalizer and setHook\n> or packageEvent but they are about closing a session or don't have a\n> specific event for when uninstalling packages via (remove.packages). I\n> appreciate any feedback, thanks in advance.\n> \n\nYes, those are described in section \"1.5.3 Load hooks\" of writing R \nextensions:\n\n\"Packages can use a .onDetach or .Last.lib function (provided the latter \nis exported from the namespace) when detach is called on the package. It \nis called with a single argument, the full path to the installed \npackage. There is also a hook .onUnload which is called when the \nnamespace is unloaded (via a call to unloadNamespace, perhaps called by \ndetach(unload = TRUE)) with argument the full path to the installed \npackage?s directory. Functions .onUnload and .onDetach should be defined \nin the namespace and not exported, but .Last.lib does need to be exported.\"\n\nDuncan Murdoch",
-      "body_snippet": "On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n> Hi list,\n> \n> I am developing a package that will download some data, and I'd like\n> to store it locally to not recalculate it often.\n> The CRAN policy ",
+      "body_plain": "On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n> Hi list,\n> \n> I am developing a package that will download some data, and I'd like\n> to store it locally to not recalculate it often.\n> The CRAN policy requires tools::R_user_dir to be used and \"the\n> contents are actively managed (including removing outdated material)\"\n> or using TMPDIR but \"such usage should be cleaned up\".\n> \n> When loading a package there is .onLoad or .onAttach to fill or check\n> those files and other settings required for a package. Is there\n> something for when a package is removed?\n> \n> I found some related functions like .Last or reg.fnalizer and setHook\n> or packageEvent but they are about closing a session or don't have a\n> specific event for when uninstalling packages via (remove.packages). I\n> appreciate any feedback, thanks in advance.\n> \n\nYes, those are described in section \"1.5.3 Load hooks\" of writing R \nextensions:\n\n\"Packages can use a .onDetach or .Last.lib function (provided the latter \nis exported from the namespace) when detach is called on the package. It \nis called with a single argument, the full path to the installed \npackage. There is also a hook .onUnload which is called when the \nnamespace is unloaded (via a call to unloadNamespace, perhaps called by \ndetach(unload = TRUE)) with argument the full path to the installed \npackage’s directory. Functions .onUnload and .onDetach should be defined \nin the namespace and not exported, but .Last.lib does need to be exported.\"\n\nDuncan Murdoch",
+      "body_snippet": "On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n> Hi list,\n> \n> I am developing a package that will download some data, and I'd like\n> to store it locally to not recalculate it often.\n> The CRAN policy ",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011340.html"
     },
     {
       "id": "msg-4d82d4d66cb2",
@@ -50,11 +52,12 @@
         "<CAN+W6_sjx59W6hGGMyj565smnazws=uasSWbwEHEe7kXT+YLAQ@mail.gmail.com>",
         "<fa376599-ff9f-4509-bc41-c5f8c0f8e9c9@gmail.com>"
       ],
-      "body_plain": "Dear Duncan,\n\nThank you for your answer. I checked again and made a mock package\nthat removes a file with .onDetach.\nThe file was not removed upon uninstalling the package.\n\nLlu?s\n\nOn Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n> > Hi list,\n> >\n> > I am developing a package that will download some data, and I'd like\n> > to store it locally to not recalculate it often.\n> > The CRAN policy requires tools::R_user_dir to be used and \"the\n> > contents are actively managed (including removing outdated material)\"\n> > or using TMPDIR but \"such usage should be cleaned up\".\n> >\n> > When loading a package there is .onLoad or .onAttach to fill or check\n> > those files and other settings required for a package. Is there\n> > something for when a package is removed?\n> >\n> > I found some related functions like .Last or reg.fnalizer and setHook\n> > or packageEvent but they are about closing a session or don't have a\n> > specific event for when uninstalling packages via (remove.packages). I\n> > appreciate any feedback, thanks in advance.\n> >\n>\n> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> extensions:\n>\n> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> is exported from the namespace) when detach is called on the package. It\n> is called with a single argument, the full path to the installed\n> package. There is also a hook .onUnload which is called when the\n> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> detach(unload = TRUE)) with argument the full path to the installed\n> package?s directory. Functions .onUnload and .onDetach should be defined\n> in the namespace and not exported, but .Last.lib does need to be exported.\"\n>\n> Duncan Murdoch\n>",
-      "body_snippet": "Dear Duncan,\n\nThank you for your answer. I checked again and made a mock package\nthat removes a file with .onDetach.\nThe file was not removed upon uninstalling the package.\n\nLlu?s\n\nOn Thu, 2 Jan 2025 ",
+      "body_plain": "Dear Duncan,\n\nThank you for your answer. I checked again and made a mock package\nthat removes a file with .onDetach.\nThe file was not removed upon uninstalling the package.\n\nLluís\n\nOn Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n> > Hi list,\n> >\n> > I am developing a package that will download some data, and I'd like\n> > to store it locally to not recalculate it often.\n> > The CRAN policy requires tools::R_user_dir to be used and \"the\n> > contents are actively managed (including removing outdated material)\"\n> > or using TMPDIR but \"such usage should be cleaned up\".\n> >\n> > When loading a package there is .onLoad or .onAttach to fill or check\n> > those files and other settings required for a package. Is there\n> > something for when a package is removed?\n> >\n> > I found some related functions like .Last or reg.fnalizer and setHook\n> > or packageEvent but they are about closing a session or don't have a\n> > specific event for when uninstalling packages via (remove.packages). I\n> > appreciate any feedback, thanks in advance.\n> >\n>\n> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> extensions:\n>\n> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> is exported from the namespace) when detach is called on the package. It\n> is called with a single argument, the full path to the installed\n> package. There is also a hook .onUnload which is called when the\n> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> detach(unload = TRUE)) with argument the full path to the installed\n> package’s directory. Functions .onUnload and .onDetach should be defined\n> in the namespace and not exported, but .Last.lib does need to be exported.\"\n>\n> Duncan Murdoch\n>",
+      "body_snippet": "Dear Duncan,\n\nThank you for your answer. I checked again and made a mock package\nthat removes a file with .onDetach.\nThe file was not removed upon uninstalling the package.\n\nLluís\n\nOn Thu, 2 Jan 2025 ",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011341.html"
     },
     {
       "id": "msg-07c0dce96811",
@@ -70,11 +73,12 @@
         "<fa376599-ff9f-4509-bc41-c5f8c0f8e9c9@gmail.com>",
         "<CAN+W6_v3opSqb54GP=uo5O_MpA5Do+m3cR_1GyPdUCxJWRqV3Q@mail.gmail.com>"
       ],
-      "body_plain": "As a first step, this sounds like something for the 'tools' package,\ne.g. tools::cleanup_R_user_dir() that wipes package subfolders of\npackages no longer installed, or the specified package, iff given.\nWith that in place, one could argue for adding a 'cleanup' argument to\nremove.packages() that use the former.\n\nAgree, it would be neat if a package could clean up after itself when\nuninstalled.\n\n/Henrik\n\nOn Thu, Jan 2, 2025 at 1:37?PM Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n>\n> Dear Duncan,\n>\n> Thank you for your answer. I checked again and made a mock package\n> that removes a file with .onDetach.\n> The file was not removed upon uninstalling the package.\n>\n> Llu?s\n>\n> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> >\n> > On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n> > > Hi list,\n> > >\n> > > I am developing a package that will download some data, and I'd like\n> > > to store it locally to not recalculate it often.\n> > > The CRAN policy requires tools::R_user_dir to be used and \"the\n> > > contents are actively managed (including removing outdated material)\"\n> > > or using TMPDIR but \"such usage should be cleaned up\".\n> > >\n> > > When loading a package there is .onLoad or .onAttach to fill or check\n> > > those files and other settings required for a package. Is there\n> > > something for when a package is removed?\n> > >\n> > > I found some related functions like .Last or reg.fnalizer and setHook\n> > > or packageEvent but they are about closing a session or don't have a\n> > > specific event for when uninstalling packages via (remove.packages). I\n> > > appreciate any feedback, thanks in advance.\n> > >\n> >\n> > Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> > extensions:\n> >\n> > \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> > is exported from the namespace) when detach is called on the package. It\n> > is called with a single argument, the full path to the installed\n> > package. There is also a hook .onUnload which is called when the\n> > namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> > detach(unload = TRUE)) with argument the full path to the installed\n> > package?s directory. Functions .onUnload and .onDetach should be defined\n> > in the namespace and not exported, but .Last.lib does need to be exported.\"\n> >\n> > Duncan Murdoch\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "As a first step, this sounds like something for the 'tools' package,\ne.g. tools::cleanup_R_user_dir() that wipes package subfolders of\npackages no longer installed, or the specified package, iff given.\nWith that in place, one could argue for adding a 'cleanup' argument to\nremove.packages() that use the former.\n\nAgree, it would be neat if a package could clean up after itself when\nuninstalled.\n\n/Henrik\n\nOn Thu, Jan 2, 2025 at 1:37 PM Lluís Revilla <lluis.revilla at gmail.com> wrote:\n>\n> Dear Duncan,\n>\n> Thank you for your answer. I checked again and made a mock package\n> that removes a file with .onDetach.\n> The file was not removed upon uninstalling the package.\n>\n> Lluís\n>\n> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> >\n> > On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n> > > Hi list,\n> > >\n> > > I am developing a package that will download some data, and I'd like\n> > > to store it locally to not recalculate it often.\n> > > The CRAN policy requires tools::R_user_dir to be used and \"the\n> > > contents are actively managed (including removing outdated material)\"\n> > > or using TMPDIR but \"such usage should be cleaned up\".\n> > >\n> > > When loading a package there is .onLoad or .onAttach to fill or check\n> > > those files and other settings required for a package. Is there\n> > > something for when a package is removed?\n> > >\n> > > I found some related functions like .Last or reg.fnalizer and setHook\n> > > or packageEvent but they are about closing a session or don't have a\n> > > specific event for when uninstalling packages via (remove.packages). I\n> > > appreciate any feedback, thanks in advance.\n> > >\n> >\n> > Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> > extensions:\n> >\n> > \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> > is exported from the namespace) when detach is called on the package. It\n> > is called with a single argument, the full path to the installed\n> > package. There is also a hook .onUnload which is called when the\n> > namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> > detach(unload = TRUE)) with argument the full path to the installed\n> > package’s directory. Functions .onUnload and .onDetach should be defined\n> > in the namespace and not exported, but .Last.lib does need to be exported.\"\n> >\n> > Duncan Murdoch\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "As a first step, this sounds like something for the 'tools' package,\ne.g. tools::cleanup_R_user_dir() that wipes package subfolders of\npackages no longer installed, or the specified package, iff given",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011342.html"
     },
     {
       "id": "msg-037cdb2c8c92",
@@ -90,11 +94,12 @@
         "<fa376599-ff9f-4509-bc41-c5f8c0f8e9c9@gmail.com>",
         "<CAN+W6_v3opSqb54GP=uo5O_MpA5Do+m3cR_1GyPdUCxJWRqV3Q@mail.gmail.com>"
       ],
-      "body_plain": "Sorry, I misunderstood what you are after.  I thought you only wanted to \nkeep it for the duration of a session.  I don't think there's a way to \nkeep a file beyond the current session, but uninstall it later when the \npackage is uninstalled.\n\nI think the way you should handle this is to offer a function to the \nuser to download the data to the user directory, not to ever do that \nautomatically.  If the data hasn't been downloaded, then give the user a \nmessage that it needs to be downloaded for things to work.  (Or maybe \ndownload it to the temp directory, and delete it when your package is \nunloaded.)\n\nDuncan Murdoch\n\n\nOn 2025-01-02 4:29 p.m., Llu?s Revilla wrote:\n> Dear Duncan,\n> \n> Thank you for your answer. I checked again and made a mock package\n> that removes a file with .onDetach.\n> The file was not removed upon uninstalling the package.\n> \n> Llu?s\n> \n> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>> On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n>>> Hi list,\n>>>\n>>> I am developing a package that will download some data, and I'd like\n>>> to store it locally to not recalculate it often.\n>>> The CRAN policy requires tools::R_user_dir to be used and \"the\n>>> contents are actively managed (including removing outdated material)\"\n>>> or using TMPDIR but \"such usage should be cleaned up\".\n>>>\n>>> When loading a package there is .onLoad or .onAttach to fill or check\n>>> those files and other settings required for a package. Is there\n>>> something for when a package is removed?\n>>>\n>>> I found some related functions like .Last or reg.fnalizer and setHook\n>>> or packageEvent but they are about closing a session or don't have a\n>>> specific event for when uninstalling packages via (remove.packages). I\n>>> appreciate any feedback, thanks in advance.\n>>>\n>>\n>> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n>> extensions:\n>>\n>> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n>> is exported from the namespace) when detach is called on the package. It\n>> is called with a single argument, the full path to the installed\n>> package. There is also a hook .onUnload which is called when the\n>> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n>> detach(unload = TRUE)) with argument the full path to the installed\n>> package?s directory. Functions .onUnload and .onDetach should be defined\n>> in the namespace and not exported, but .Last.lib does need to be exported.\"\n>>\n>> Duncan Murdoch\n>>",
+      "body_plain": "Sorry, I misunderstood what you are after.  I thought you only wanted to \nkeep it for the duration of a session.  I don't think there's a way to \nkeep a file beyond the current session, but uninstall it later when the \npackage is uninstalled.\n\nI think the way you should handle this is to offer a function to the \nuser to download the data to the user directory, not to ever do that \nautomatically.  If the data hasn't been downloaded, then give the user a \nmessage that it needs to be downloaded for things to work.  (Or maybe \ndownload it to the temp directory, and delete it when your package is \nunloaded.)\n\nDuncan Murdoch\n\n\nOn 2025-01-02 4:29 p.m., Lluís Revilla wrote:\n> Dear Duncan,\n> \n> Thank you for your answer. I checked again and made a mock package\n> that removes a file with .onDetach.\n> The file was not removed upon uninstalling the package.\n> \n> Lluís\n> \n> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>> On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n>>> Hi list,\n>>>\n>>> I am developing a package that will download some data, and I'd like\n>>> to store it locally to not recalculate it often.\n>>> The CRAN policy requires tools::R_user_dir to be used and \"the\n>>> contents are actively managed (including removing outdated material)\"\n>>> or using TMPDIR but \"such usage should be cleaned up\".\n>>>\n>>> When loading a package there is .onLoad or .onAttach to fill or check\n>>> those files and other settings required for a package. Is there\n>>> something for when a package is removed?\n>>>\n>>> I found some related functions like .Last or reg.fnalizer and setHook\n>>> or packageEvent but they are about closing a session or don't have a\n>>> specific event for when uninstalling packages via (remove.packages). I\n>>> appreciate any feedback, thanks in advance.\n>>>\n>>\n>> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n>> extensions:\n>>\n>> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n>> is exported from the namespace) when detach is called on the package. It\n>> is called with a single argument, the full path to the installed\n>> package. There is also a hook .onUnload which is called when the\n>> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n>> detach(unload = TRUE)) with argument the full path to the installed\n>> package’s directory. Functions .onUnload and .onDetach should be defined\n>> in the namespace and not exported, but .Last.lib does need to be exported.\"\n>>\n>> Duncan Murdoch\n>>",
       "body_snippet": "Sorry, I misunderstood what you are after.  I thought you only wanted to \nkeep it for the duration of a session.  I don't think there's a way to \nkeep a file beyond the current session, but uninstall ",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011343.html"
     },
     {
       "id": "msg-44c32f39c1b8",
@@ -111,11 +116,12 @@
         "<CAN+W6_v3opSqb54GP=uo5O_MpA5Do+m3cR_1GyPdUCxJWRqV3Q@mail.gmail.com>",
         "<CAFDcVCQxDLka17fGx4XzdLUOCV4aV2B8GHRaqzhCvgzsxMHtjg@mail.gmail.com>"
       ],
-      "body_plain": "Thanks Henrik for confirming there is nothing similar currently.\n\nDuncan: Letting the user choose when to remove the folder/data at will is easy.\nI was trying to ensure that the system is clean after removing the package.\nThanks.\n\nOn Thu, 2 Jan 2025 at 22:42, Henrik Bengtsson\n<henrik.bengtsson at gmail.com> wrote:\n>\n> As a first step, this sounds like something for the 'tools' package,\n> e.g. tools::cleanup_R_user_dir() that wipes package subfolders of\n> packages no longer installed, or the specified package, iff given.\n> With that in place, one could argue for adding a 'cleanup' argument to\n> remove.packages() that use the former.\n>\n> Agree, it would be neat if a package could clean up after itself when\n> uninstalled.\n>\n> /Henrik\n>\n> On Thu, Jan 2, 2025 at 1:37?PM Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n> >\n> > Dear Duncan,\n> >\n> > Thank you for your answer. I checked again and made a mock package\n> > that removes a file with .onDetach.\n> > The file was not removed upon uninstalling the package.\n> >\n> > Llu?s\n> >\n> > On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> > >\n> > > On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n> > > > Hi list,\n> > > >\n> > > > I am developing a package that will download some data, and I'd like\n> > > > to store it locally to not recalculate it often.\n> > > > The CRAN policy requires tools::R_user_dir to be used and \"the\n> > > > contents are actively managed (including removing outdated material)\"\n> > > > or using TMPDIR but \"such usage should be cleaned up\".\n> > > >\n> > > > When loading a package there is .onLoad or .onAttach to fill or check\n> > > > those files and other settings required for a package. Is there\n> > > > something for when a package is removed?\n> > > >\n> > > > I found some related functions like .Last or reg.fnalizer and setHook\n> > > > or packageEvent but they are about closing a session or don't have a\n> > > > specific event for when uninstalling packages via (remove.packages). I\n> > > > appreciate any feedback, thanks in advance.\n> > > >\n> > >\n> > > Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> > > extensions:\n> > >\n> > > \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> > > is exported from the namespace) when detach is called on the package. It\n> > > is called with a single argument, the full path to the installed\n> > > package. There is also a hook .onUnload which is called when the\n> > > namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> > > detach(unload = TRUE)) with argument the full path to the installed\n> > > package?s directory. Functions .onUnload and .onDetach should be defined\n> > > in the namespace and not exported, but .Last.lib does need to be exported.\"\n> > >\n> > > Duncan Murdoch\n> > >\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Thanks Henrik for confirming there is nothing similar currently.\n\nDuncan: Letting the user choose when to remove the folder/data at will is easy.\nI was trying to ensure that the system is clean after removing the package.\nThanks.\n\nOn Thu, 2 Jan 2025 at 22:42, Henrik Bengtsson\n<henrik.bengtsson at gmail.com> wrote:\n>\n> As a first step, this sounds like something for the 'tools' package,\n> e.g. tools::cleanup_R_user_dir() that wipes package subfolders of\n> packages no longer installed, or the specified package, iff given.\n> With that in place, one could argue for adding a 'cleanup' argument to\n> remove.packages() that use the former.\n>\n> Agree, it would be neat if a package could clean up after itself when\n> uninstalled.\n>\n> /Henrik\n>\n> On Thu, Jan 2, 2025 at 1:37 PM Lluís Revilla <lluis.revilla at gmail.com> wrote:\n> >\n> > Dear Duncan,\n> >\n> > Thank you for your answer. I checked again and made a mock package\n> > that removes a file with .onDetach.\n> > The file was not removed upon uninstalling the package.\n> >\n> > Lluís\n> >\n> > On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> > >\n> > > On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n> > > > Hi list,\n> > > >\n> > > > I am developing a package that will download some data, and I'd like\n> > > > to store it locally to not recalculate it often.\n> > > > The CRAN policy requires tools::R_user_dir to be used and \"the\n> > > > contents are actively managed (including removing outdated material)\"\n> > > > or using TMPDIR but \"such usage should be cleaned up\".\n> > > >\n> > > > When loading a package there is .onLoad or .onAttach to fill or check\n> > > > those files and other settings required for a package. Is there\n> > > > something for when a package is removed?\n> > > >\n> > > > I found some related functions like .Last or reg.fnalizer and setHook\n> > > > or packageEvent but they are about closing a session or don't have a\n> > > > specific event for when uninstalling packages via (remove.packages). I\n> > > > appreciate any feedback, thanks in advance.\n> > > >\n> > >\n> > > Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> > > extensions:\n> > >\n> > > \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> > > is exported from the namespace) when detach is called on the package. It\n> > > is called with a single argument, the full path to the installed\n> > > package. There is also a hook .onUnload which is called when the\n> > > namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> > > detach(unload = TRUE)) with argument the full path to the installed\n> > > package’s directory. Functions .onUnload and .onDetach should be defined\n> > > in the namespace and not exported, but .Last.lib does need to be exported.\"\n> > >\n> > > Duncan Murdoch\n> > >\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Thanks Henrik for confirming there is nothing similar currently.\n\nDuncan: Letting the user choose when to remove the folder/data at will is easy.\nI was trying to ensure that the system is clean after ",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 4,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011344.html"
     },
     {
       "id": "msg-39b42838d832",
@@ -133,11 +139,12 @@
         "<CAFDcVCQxDLka17fGx4XzdLUOCV4aV2B8GHRaqzhCvgzsxMHtjg@mail.gmail.com>",
         "<CAN+W6_uipwj9WopA1Dk5VA9aY1=7HM=XoixWUMXrYPtHj9id_Q@mail.gmail.com>"
       ],
-      "body_plain": "On 2025-01-03 10:04 a.m., Llu?s Revilla wrote:\n> Thanks Henrik for confirming there is nothing similar currently.\n> \n> Duncan: Letting the user choose when to remove the folder/data at will is easy.\n> I was trying to ensure that the system is clean after removing the package.\n> Thanks.\n\nNo, I was suggesting that you require the user to explicitly ask for the \ndata.  You don't want CRAN to install the data during testing and then \nhave it left behind at the end.\n\nDuncan Murdoch\n\n> \n> On Thu, 2 Jan 2025 at 22:42, Henrik Bengtsson\n> <henrik.bengtsson at gmail.com> wrote:\n>>\n>> As a first step, this sounds like something for the 'tools' package,\n>> e.g. tools::cleanup_R_user_dir() that wipes package subfolders of\n>> packages no longer installed, or the specified package, iff given.\n>> With that in place, one could argue for adding a 'cleanup' argument to\n>> remove.packages() that use the former.\n>>\n>> Agree, it would be neat if a package could clean up after itself when\n>> uninstalled.\n>>\n>> /Henrik\n>>\n>> On Thu, Jan 2, 2025 at 1:37?PM Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n>>>\n>>> Dear Duncan,\n>>>\n>>> Thank you for your answer. I checked again and made a mock package\n>>> that removes a file with .onDetach.\n>>> The file was not removed upon uninstalling the package.\n>>>\n>>> Llu?s\n>>>\n>>> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>>>\n>>>> On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n>>>>> Hi list,\n>>>>>\n>>>>> I am developing a package that will download some data, and I'd like\n>>>>> to store it locally to not recalculate it often.\n>>>>> The CRAN policy requires tools::R_user_dir to be used and \"the\n>>>>> contents are actively managed (including removing outdated material)\"\n>>>>> or using TMPDIR but \"such usage should be cleaned up\".\n>>>>>\n>>>>> When loading a package there is .onLoad or .onAttach to fill or check\n>>>>> those files and other settings required for a package. Is there\n>>>>> something for when a package is removed?\n>>>>>\n>>>>> I found some related functions like .Last or reg.fnalizer and setHook\n>>>>> or packageEvent but they are about closing a session or don't have a\n>>>>> specific event for when uninstalling packages via (remove.packages). I\n>>>>> appreciate any feedback, thanks in advance.\n>>>>>\n>>>>\n>>>> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n>>>> extensions:\n>>>>\n>>>> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n>>>> is exported from the namespace) when detach is called on the package. It\n>>>> is called with a single argument, the full path to the installed\n>>>> package. There is also a hook .onUnload which is called when the\n>>>> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n>>>> detach(unload = TRUE)) with argument the full path to the installed\n>>>> package?s directory. Functions .onUnload and .onDetach should be defined\n>>>> in the namespace and not exported, but .Last.lib does need to be exported.\"\n>>>>\n>>>> Duncan Murdoch\n>>>>\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "On 2025-01-03 10:04 a.m., Llu?s Revilla wrote:\n> Thanks Henrik for confirming there is nothing similar currently.\n> \n> Duncan: Letting the user choose when to remove the folder/data at will is easy.\n>",
+      "body_plain": "On 2025-01-03 10:04 a.m., Lluís Revilla wrote:\n> Thanks Henrik for confirming there is nothing similar currently.\n> \n> Duncan: Letting the user choose when to remove the folder/data at will is easy.\n> I was trying to ensure that the system is clean after removing the package.\n> Thanks.\n\nNo, I was suggesting that you require the user to explicitly ask for the \ndata.  You don't want CRAN to install the data during testing and then \nhave it left behind at the end.\n\nDuncan Murdoch\n\n> \n> On Thu, 2 Jan 2025 at 22:42, Henrik Bengtsson\n> <henrik.bengtsson at gmail.com> wrote:\n>>\n>> As a first step, this sounds like something for the 'tools' package,\n>> e.g. tools::cleanup_R_user_dir() that wipes package subfolders of\n>> packages no longer installed, or the specified package, iff given.\n>> With that in place, one could argue for adding a 'cleanup' argument to\n>> remove.packages() that use the former.\n>>\n>> Agree, it would be neat if a package could clean up after itself when\n>> uninstalled.\n>>\n>> /Henrik\n>>\n>> On Thu, Jan 2, 2025 at 1:37 PM Lluís Revilla <lluis.revilla at gmail.com> wrote:\n>>>\n>>> Dear Duncan,\n>>>\n>>> Thank you for your answer. I checked again and made a mock package\n>>> that removes a file with .onDetach.\n>>> The file was not removed upon uninstalling the package.\n>>>\n>>> Lluís\n>>>\n>>> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>>>\n>>>> On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n>>>>> Hi list,\n>>>>>\n>>>>> I am developing a package that will download some data, and I'd like\n>>>>> to store it locally to not recalculate it often.\n>>>>> The CRAN policy requires tools::R_user_dir to be used and \"the\n>>>>> contents are actively managed (including removing outdated material)\"\n>>>>> or using TMPDIR but \"such usage should be cleaned up\".\n>>>>>\n>>>>> When loading a package there is .onLoad or .onAttach to fill or check\n>>>>> those files and other settings required for a package. Is there\n>>>>> something for when a package is removed?\n>>>>>\n>>>>> I found some related functions like .Last or reg.fnalizer and setHook\n>>>>> or packageEvent but they are about closing a session or don't have a\n>>>>> specific event for when uninstalling packages via (remove.packages). I\n>>>>> appreciate any feedback, thanks in advance.\n>>>>>\n>>>>\n>>>> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n>>>> extensions:\n>>>>\n>>>> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n>>>> is exported from the namespace) when detach is called on the package. It\n>>>> is called with a single argument, the full path to the installed\n>>>> package. There is also a hook .onUnload which is called when the\n>>>> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n>>>> detach(unload = TRUE)) with argument the full path to the installed\n>>>> package’s directory. Functions .onUnload and .onDetach should be defined\n>>>> in the namespace and not exported, but .Last.lib does need to be exported.\"\n>>>>\n>>>> Duncan Murdoch\n>>>>\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 2025-01-03 10:04 a.m., Lluís Revilla wrote:\n> Thanks Henrik for confirming there is nothing similar currently.\n> \n> Duncan: Letting the user choose when to remove the folder/data at will is easy.\n>",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 5,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011345.html"
     },
     {
       "id": "msg-ef2d7287d381",
@@ -158,7 +165,8 @@
       "body_snippet": "On 2 January 2025 at 13:41, Henrik Bengtsson wrote:\n| Agree, it would be neat if a package could clean up after itself when\n| uninstalled.\n\nIndeed many things could be nicer if we had more package man",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 4,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011346.html"
     },
     {
       "id": "msg-0a776ff56f45",
@@ -177,11 +185,12 @@
         "<CAN+W6_uipwj9WopA1Dk5VA9aY1=7HM=XoixWUMXrYPtHj9id_Q@mail.gmail.com>",
         "<7cca8298-6e75-429f-ac89-dba8a7a79929@gmail.com>"
       ],
-      "body_plain": "The data is mostly CRAN's own files transformed, I don't expect the\ndownload to be problematic on CRAN's checks.\nThe R core members made the functionality inside tools to use a local\nvariable to search for the requested file locally.\nOnly if the file is not found they are downloaded from the internet.\n\nRegarding tests, I could disable saving the content to a file (Thanks\nfor mentioning, I hadn't thought about it).\nBut the functionality/utility of the package is to transform CRAN's data.\nIf it is failing to do so, I would like to know.\n\nLlu?s\n\nOn Fri, 3 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> On 2025-01-03 10:04 a.m., Llu?s Revilla wrote:\n> > Thanks Henrik for confirming there is nothing similar currently.\n> >\n> > Duncan: Letting the user choose when to remove the folder/data at will is easy.\n> > I was trying to ensure that the system is clean after removing the package.\n> > Thanks.\n>\n> No, I was suggesting that you require the user to explicitly ask for the\n> data.  You don't want CRAN to install the data during testing and then\n> have it left behind at the end.\n>\n> Duncan Murdoch\n>\n> >\n> > On Thu, 2 Jan 2025 at 22:42, Henrik Bengtsson\n> > <henrik.bengtsson at gmail.com> wrote:\n> >>\n> >> As a first step, this sounds like something for the 'tools' package,\n> >> e.g. tools::cleanup_R_user_dir() that wipes package subfolders of\n> >> packages no longer installed, or the specified package, iff given.\n> >> With that in place, one could argue for adding a 'cleanup' argument to\n> >> remove.packages() that use the former.\n> >>\n> >> Agree, it would be neat if a package could clean up after itself when\n> >> uninstalled.\n> >>\n> >> /Henrik\n> >>\n> >> On Thu, Jan 2, 2025 at 1:37?PM Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n> >>>\n> >>> Dear Duncan,\n> >>>\n> >>> Thank you for your answer. I checked again and made a mock package\n> >>> that removes a file with .onDetach.\n> >>> The file was not removed upon uninstalling the package.\n> >>>\n> >>> Llu?s\n> >>>\n> >>> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> >>>>\n> >>>> On 2025-01-02 9:55 a.m., Llu?s Revilla wrote:\n> >>>>> Hi list,\n> >>>>>\n> >>>>> I am developing a package that will download some data, and I'd like\n> >>>>> to store it locally to not recalculate it often.\n> >>>>> The CRAN policy requires tools::R_user_dir to be used and \"the\n> >>>>> contents are actively managed (including removing outdated material)\"\n> >>>>> or using TMPDIR but \"such usage should be cleaned up\".\n> >>>>>\n> >>>>> When loading a package there is .onLoad or .onAttach to fill or check\n> >>>>> those files and other settings required for a package. Is there\n> >>>>> something for when a package is removed?\n> >>>>>\n> >>>>> I found some related functions like .Last or reg.fnalizer and setHook\n> >>>>> or packageEvent but they are about closing a session or don't have a\n> >>>>> specific event for when uninstalling packages via (remove.packages). I\n> >>>>> appreciate any feedback, thanks in advance.\n> >>>>>\n> >>>>\n> >>>> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> >>>> extensions:\n> >>>>\n> >>>> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> >>>> is exported from the namespace) when detach is called on the package. It\n> >>>> is called with a single argument, the full path to the installed\n> >>>> package. There is also a hook .onUnload which is called when the\n> >>>> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> >>>> detach(unload = TRUE)) with argument the full path to the installed\n> >>>> package?s directory. Functions .onUnload and .onDetach should be defined\n> >>>> in the namespace and not exported, but .Last.lib does need to be exported.\"\n> >>>>\n> >>>> Duncan Murdoch\n> >>>>\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "The data is mostly CRAN's own files transformed, I don't expect the\ndownload to be problematic on CRAN's checks.\nThe R core members made the functionality inside tools to use a local\nvariable to search for the requested file locally.\nOnly if the file is not found they are downloaded from the internet.\n\nRegarding tests, I could disable saving the content to a file (Thanks\nfor mentioning, I hadn't thought about it).\nBut the functionality/utility of the package is to transform CRAN's data.\nIf it is failing to do so, I would like to know.\n\nLluís\n\nOn Fri, 3 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> On 2025-01-03 10:04 a.m., Lluís Revilla wrote:\n> > Thanks Henrik for confirming there is nothing similar currently.\n> >\n> > Duncan: Letting the user choose when to remove the folder/data at will is easy.\n> > I was trying to ensure that the system is clean after removing the package.\n> > Thanks.\n>\n> No, I was suggesting that you require the user to explicitly ask for the\n> data.  You don't want CRAN to install the data during testing and then\n> have it left behind at the end.\n>\n> Duncan Murdoch\n>\n> >\n> > On Thu, 2 Jan 2025 at 22:42, Henrik Bengtsson\n> > <henrik.bengtsson at gmail.com> wrote:\n> >>\n> >> As a first step, this sounds like something for the 'tools' package,\n> >> e.g. tools::cleanup_R_user_dir() that wipes package subfolders of\n> >> packages no longer installed, or the specified package, iff given.\n> >> With that in place, one could argue for adding a 'cleanup' argument to\n> >> remove.packages() that use the former.\n> >>\n> >> Agree, it would be neat if a package could clean up after itself when\n> >> uninstalled.\n> >>\n> >> /Henrik\n> >>\n> >> On Thu, Jan 2, 2025 at 1:37 PM Lluís Revilla <lluis.revilla at gmail.com> wrote:\n> >>>\n> >>> Dear Duncan,\n> >>>\n> >>> Thank you for your answer. I checked again and made a mock package\n> >>> that removes a file with .onDetach.\n> >>> The file was not removed upon uninstalling the package.\n> >>>\n> >>> Lluís\n> >>>\n> >>> On Thu, 2 Jan 2025 at 17:23, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> >>>>\n> >>>> On 2025-01-02 9:55 a.m., Lluís Revilla wrote:\n> >>>>> Hi list,\n> >>>>>\n> >>>>> I am developing a package that will download some data, and I'd like\n> >>>>> to store it locally to not recalculate it often.\n> >>>>> The CRAN policy requires tools::R_user_dir to be used and \"the\n> >>>>> contents are actively managed (including removing outdated material)\"\n> >>>>> or using TMPDIR but \"such usage should be cleaned up\".\n> >>>>>\n> >>>>> When loading a package there is .onLoad or .onAttach to fill or check\n> >>>>> those files and other settings required for a package. Is there\n> >>>>> something for when a package is removed?\n> >>>>>\n> >>>>> I found some related functions like .Last or reg.fnalizer and setHook\n> >>>>> or packageEvent but they are about closing a session or don't have a\n> >>>>> specific event for when uninstalling packages via (remove.packages). I\n> >>>>> appreciate any feedback, thanks in advance.\n> >>>>>\n> >>>>\n> >>>> Yes, those are described in section \"1.5.3 Load hooks\" of writing R\n> >>>> extensions:\n> >>>>\n> >>>> \"Packages can use a .onDetach or .Last.lib function (provided the latter\n> >>>> is exported from the namespace) when detach is called on the package. It\n> >>>> is called with a single argument, the full path to the installed\n> >>>> package. There is also a hook .onUnload which is called when the\n> >>>> namespace is unloaded (via a call to unloadNamespace, perhaps called by\n> >>>> detach(unload = TRUE)) with argument the full path to the installed\n> >>>> package’s directory. Functions .onUnload and .onDetach should be defined\n> >>>> in the namespace and not exported, but .Last.lib does need to be exported.\"\n> >>>>\n> >>>> Duncan Murdoch\n> >>>>\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "The data is mostly CRAN's own files transformed, I don't expect the\ndownload to be problematic on CRAN's checks.\nThe R core members made the functionality inside tools to use a local\nvariable to searc",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 6,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011347.html"
     },
     {
       "id": "msg-c20bb2bd3815",
@@ -197,7 +206,8 @@
       "body_snippet": "Dear fellow package developers,\n\nA while back I have submitted a package to CRAN and is now listed under waiting <https://cran.r-project.org/incoming/waiting/openmpt_0.1.1.tar.gz>\n\nAs I understand it,",
       "thread_id": "thread-c20bb2bd3815",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011348.html"
     },
     {
       "id": "msg-75be9b2f835f",
@@ -211,11 +221,12 @@
       "references": [
         "<AM8PR10MB466065432B7F9DA11EA0D279A7122@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "Dear Pepijn,\n\nThank you for the very detailed email.\nPart of these 22 days might be explained by CRAN volunteers being on\nvacations a couple of weeks, until yesterday.\n\nI would submit the latest version of the package with the improvements you made.\nOther options require more manual work from CRAN volunteers and/or more delays.\nI'm sure they will appreciate you double checking CRAN policy to make\nsure you comply with all the requirements.\n\nTo solve some common issues, there is a new resource co-authored by a\nCRAN reviewer: the CRAN cookbook:\nhttps://contributor.r-project.org/cran-cookbook/\nI hope it helps.\n\nGood luck!\nBest,\n\nLlu?s Revilla\n\nPS: There are some issues on AmigaFFH package, you might receive a\nmessage to update it.\n\nOn Wed, 8 Jan 2025 at 13:51, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>\n> Dear fellow package developers,\n>\n> A while back I have submitted a package to CRAN and is now listed under waiting <https://cran.r-project.org/incoming/waiting/openmpt_0.1.1.tar.gz>\n>\n> As I understand it, incoming packages are listed there if CRAN needs more information from the maintainer. However, I have received no requests from CRAN. In the meantime it has been stagnant in the waiting area for about 22 days.\n>\n> After some more testing I discovered that the submitted package violates CRAN policy (it does not exit gracefully when online resources are not available). Maybe this is why it is on hold. This has been fixed in <https://github.com/pepijn-devries/openmpt>, but has not been submitted yet. How do I proceed? I think I have the following options:\n>\n>  - wait even longer for feedback from CRAN;\n>  - contact CRAN about the status of this package;\n>  - submit the latest version of the package in which policy violations have been addressed.\n>\n> Any thoughts are welcome.\n>\n> Pepijn\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Dear Pepijn,\n\nThank you for the very detailed email.\nPart of these 22 days might be explained by CRAN volunteers being on\nvacations a couple of weeks, until yesterday.\n\nI would submit the latest version of the package with the improvements you made.\nOther options require more manual work from CRAN volunteers and/or more delays.\nI'm sure they will appreciate you double checking CRAN policy to make\nsure you comply with all the requirements.\n\nTo solve some common issues, there is a new resource co-authored by a\nCRAN reviewer: the CRAN cookbook:\nhttps://contributor.r-project.org/cran-cookbook/\nI hope it helps.\n\nGood luck!\nBest,\n\nLluís Revilla\n\nPS: There are some issues on AmigaFFH package, you might receive a\nmessage to update it.\n\nOn Wed, 8 Jan 2025 at 13:51, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>\n> Dear fellow package developers,\n>\n> A while back I have submitted a package to CRAN and is now listed under waiting <https://cran.r-project.org/incoming/waiting/openmpt_0.1.1.tar.gz>\n>\n> As I understand it, incoming packages are listed there if CRAN needs more information from the maintainer. However, I have received no requests from CRAN. In the meantime it has been stagnant in the waiting area for about 22 days.\n>\n> After some more testing I discovered that the submitted package violates CRAN policy (it does not exit gracefully when online resources are not available). Maybe this is why it is on hold. This has been fixed in <https://github.com/pepijn-devries/openmpt>, but has not been submitted yet. How do I proceed? I think I have the following options:\n>\n>  - wait even longer for feedback from CRAN;\n>  - contact CRAN about the status of this package;\n>  - submit the latest version of the package in which policy violations have been addressed.\n>\n> Any thoughts are welcome.\n>\n> Pepijn\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Dear Pepijn,\n\nThank you for the very detailed email.\nPart of these 22 days might be explained by CRAN volunteers being on\nvacations a couple of weeks, until yesterday.\n\nI would submit the latest versi",
       "thread_id": "thread-c20bb2bd3815",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011349.html"
     },
     {
       "id": "msg-a3ee501a720a",
@@ -230,11 +241,12 @@
         "<AM8PR10MB466065432B7F9DA11EA0D279A7122@AM8PR10MB4660.EURPRD10.PROD.OUTLOOK.COM>",
         "<CAN+W6_u9v-XftUpdt0Fu9QZ+2u+Eh7RmxyFOqX+rV0entox0Mg@mail.gmail.com>"
       ],
-      "body_plain": "Hi Llu?s,\n\nThank you for you thoughts on this matter and recommendations. I will go ahead to submit the revised version as soon as possible.\n\nCheers,\n\nPepijn\n\n________________________________________\nVan:?Llu?s Revilla <lluis.revilla at gmail.com>\nVerzonden:?woensdag 8 januari 2025 22:17\nAan:?Pepijn de Vries <pepijn.devries at outlook.com>\nCC:?Ivan Krylov via R-package-devel <r-package-devel at r-project.org>\nOnderwerp:?Re: [R-pkg-devel] (no subject)\n?\nDear Pepijn,\n\nThank you for the very detailed email.\nPart of these 22 days might be explained by CRAN volunteers being on\nvacations a couple of weeks, until yesterday.\n\nI would submit the latest version of the package with the improvements you made.\nOther options require more manual work from CRAN volunteers and/or more delays.\nI'm sure they will appreciate you double checking CRAN policy to make\nsure you comply with all the requirements.\n\nTo solve some common issues, there is a new resource co-authored by a\nCRAN reviewer: the CRAN cookbook:\nhttps://contributor.r-project.org/cran-cookbook/\nI hope it helps.\n\nGood luck!\nBest,\n\nLlu?s Revilla\n\nPS: There are some issues on AmigaFFH package, you might receive a\nmessage to update it.\n\nOn Wed, 8 Jan 2025 at 13:51, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>\n> Dear fellow package developers,\n>\n> A while back I have submitted a package to CRAN and is now listed under waiting <https://cran.r-project.org/incoming/waiting/openmpt_0.1.1.tar.gz>\n>\n> As I understand it, incoming packages are listed there if CRAN needs more information from the maintainer. However, I have received no requests from CRAN. In the meantime it has been stagnant in the waiting area for about 22 days.\n>\n> After some more testing I discovered that the submitted package violates CRAN policy (it does not exit gracefully when online resources are not available). Maybe this is why it is on hold. This has been fixed in <https://github.com/pepijn-devries/openmpt>, but has not been submitted yet. How do I proceed? I think I have the following options:\n>\n>? - wait even longer for feedback from CRAN;\n>? - contact CRAN about the status of this package;\n>? - submit the latest version of the package in which policy violations have been addressed.\n>\n> Any thoughts are welcome.\n>\n> Pepijn\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Hi Llu?s,\n\nThank you for you thoughts on this matter and recommendations. I will go ahead to submit the revised version as soon as possible.\n\nCheers,\n\nPepijn\n\n________________________________________\n",
+      "body_plain": "Hi Lluís,\n\nThank you for you thoughts on this matter and recommendations. I will go ahead to submit the revised version as soon as possible.\n\nCheers,\n\nPepijn\n\n________________________________________\nVan: Lluís Revilla <lluis.revilla at gmail.com>\nVerzonden: woensdag 8 januari 2025 22:17\nAan: Pepijn de Vries <pepijn.devries at outlook.com>\nCC: Ivan Krylov via R-package-devel <r-package-devel at r-project.org>\nOnderwerp: Re: [R-pkg-devel] (no subject)\n \nDear Pepijn,\n\nThank you for the very detailed email.\nPart of these 22 days might be explained by CRAN volunteers being on\nvacations a couple of weeks, until yesterday.\n\nI would submit the latest version of the package with the improvements you made.\nOther options require more manual work from CRAN volunteers and/or more delays.\nI'm sure they will appreciate you double checking CRAN policy to make\nsure you comply with all the requirements.\n\nTo solve some common issues, there is a new resource co-authored by a\nCRAN reviewer: the CRAN cookbook:\nhttps://contributor.r-project.org/cran-cookbook/\nI hope it helps.\n\nGood luck!\nBest,\n\nLluís Revilla\n\nPS: There are some issues on AmigaFFH package, you might receive a\nmessage to update it.\n\nOn Wed, 8 Jan 2025 at 13:51, Pepijn de Vries <pepijn.devries at outlook.com> wrote:\n>\n> Dear fellow package developers,\n>\n> A while back I have submitted a package to CRAN and is now listed under waiting <https://cran.r-project.org/incoming/waiting/openmpt_0.1.1.tar.gz>\n>\n> As I understand it, incoming packages are listed there if CRAN needs more information from the maintainer. However, I have received no requests from CRAN. In the meantime it has been stagnant in the waiting area for about 22 days.\n>\n> After some more testing I discovered that the submitted package violates CRAN policy (it does not exit gracefully when online resources are not available). Maybe this is why it is on hold. This has been fixed in <https://github.com/pepijn-devries/openmpt>, but has not been submitted yet. How do I proceed? I think I have the following options:\n>\n>  - wait even longer for feedback from CRAN;\n>  - contact CRAN about the status of this package;\n>  - submit the latest version of the package in which policy violations have been addressed.\n>\n> Any thoughts are welcome.\n>\n> Pepijn\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Hi Lluís,\n\nThank you for you thoughts on this matter and recommendations. I will go ahead to submit the revised version as soon as possible.\n\nCheers,\n\nPepijn\n\n________________________________________\n",
       "thread_id": "thread-c20bb2bd3815",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011350.html"
     },
     {
       "id": "msg-0e2100c7b4c9",
@@ -248,11 +260,12 @@
       "references": [
         "<CAN+W6_sjx59W6hGGMyj565smnazws=uasSWbwEHEe7kXT+YLAQ@mail.gmail.com>"
       ],
-      "body_plain": "Hi Llu?s,\n\n   Just wanted to add to the discussion that it would be good to consider \nusers that are disconnected or behind a firewall and are installing the \npackage from file.\n\n   An option to point the package to a separately downloaded file would be\nuseful.\n\nbest\n\nVladimir Dergachev\n\nOn Thu, 2 Jan 2025, Llu?s Revilla wrote:\n\n> Hi list,\n>\n> I am developing a package that will download some data, and I'd like\n> to store it locally to not recalculate it often.\n> The CRAN policy requires tools::R_user_dir to be used and \"the\n> contents are actively managed (including removing outdated material)\"\n> or using TMPDIR but \"such usage should be cleaned up\".\n>\n> When loading a package there is .onLoad or .onAttach to fill or check\n> those files and other settings required for a package. Is there\n> something for when a package is removed?\n>\n> I found some related functions like .Last or reg.fnalizer and setHook\n> or packageEvent but they are about closing a session or don't have a\n> specific event for when uninstalling packages via (remove.packages). I\n> appreciate any feedback, thanks in advance.\n>\n> Best wishes and a happy new year,\n>\n> Llu?s\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "Hi Llu?s,\n\n   Just wanted to add to the discussion that it would be good to consider \nusers that are disconnected or behind a firewall and are installing the \npackage from file.\n\n   An option to point",
+      "body_plain": "Hi Lluís,\n\n   Just wanted to add to the discussion that it would be good to consider \nusers that are disconnected or behind a firewall and are installing the \npackage from file.\n\n   An option to point the package to a separately downloaded file would be\nuseful.\n\nbest\n\nVladimir Dergachev\n\nOn Thu, 2 Jan 2025, Lluís Revilla wrote:\n\n> Hi list,\n>\n> I am developing a package that will download some data, and I'd like\n> to store it locally to not recalculate it often.\n> The CRAN policy requires tools::R_user_dir to be used and \"the\n> contents are actively managed (including removing outdated material)\"\n> or using TMPDIR but \"such usage should be cleaned up\".\n>\n> When loading a package there is .onLoad or .onAttach to fill or check\n> those files and other settings required for a package. Is there\n> something for when a package is removed?\n>\n> I found some related functions like .Last or reg.fnalizer and setHook\n> or packageEvent but they are about closing a session or don't have a\n> specific event for when uninstalling packages via (remove.packages). I\n> appreciate any feedback, thanks in advance.\n>\n> Best wishes and a happy new year,\n>\n> Lluís\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Hi Lluís,\n\n   Just wanted to add to the discussion that it would be good to consider \nusers that are disconnected or behind a firewall and are installing the \npackage from file.\n\n   An option to point",
       "thread_id": "thread-91104ac1de81",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011351.html"
     },
     {
       "id": "msg-1603c581a299",
@@ -268,7 +281,8 @@
       "body_snippet": "Hi,\n  I maintain a package on CRAN (valr) and recently submitted a new version.\nThe package is failing CRAN pre-test checks due to the warning below from\nthe clang-san test. The cleancall.c file refer",
       "thread_id": "thread-1603c581a299",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011352.html"
     },
     {
       "id": "msg-bf61d00645c1",
@@ -286,7 +300,8 @@
       "body_snippet": "? Fri, 10 Jan 2025 07:45:00 -0700\nKent Riemondy <kent.riemondy at gmail.com> ?????:\n\n>   cleancall.c:110:46: runtime error: call to function cb_progress_done\n> through pointer to incorrect function ty",
       "thread_id": "thread-1603c581a299",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011353.html"
     },
     {
       "id": "msg-1ec213e3fb34",
@@ -305,7 +320,8 @@
       "body_snippet": "Ivan,\n  Many thanks for the prompt and helpful response. I hadn't seen the\nprevious r-package-devel message with the same error. I will explain this\nsituation to CRAN which hopefully will allow valr t",
       "thread_id": "thread-1603c581a299",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011354.html"
     },
     {
       "id": "msg-8799c1dba7e0",
@@ -321,7 +337,8 @@
       "body_snippet": "Dear fellow package developers,\n\nThere were multiple issues with a package I maintain: @CRAN: <https://cran.r-project.org/package=adfExplorer> @source: <https://github.com/pepijn-devries/adfExplorer/>",
       "thread_id": "thread-8799c1dba7e0",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011355.html"
     },
     {
       "id": "msg-05f37f7987bd",
@@ -339,7 +356,8 @@
       "body_snippet": "I had the same this week.\n\nYes, you should answer these are false negative results.\n\nKR,\nDavid\n\nDe : R-package-devel <r-package-devel-bounces at r-project.org> de la part de Pepijn de Vries <pepijn.de",
       "thread_id": "thread-8799c1dba7e0",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011356.html"
     },
     {
       "id": "msg-c9c87d98a9d4",
@@ -358,7 +376,8 @@
       "body_snippet": "Hi David,\n\nThanks for the quick response. I will report it.\n\nPepijn\n\n________________________________________\nVan:?R-package-devel <r-package-devel-bounces at r-project.org> namens David Gohel <david.",
       "thread_id": "thread-8799c1dba7e0",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011357.html"
     },
     {
       "id": "msg-72f29ed229e7",
@@ -374,7 +393,8 @@
       "body_snippet": "Hi list,\n\nI am working on getting a package <https://github.com/lschneiderbauer/fCWTr> to\nCRAN. It depends on the FFTW library <https://www.fftw.org/> that is built\nwith single precision support. I am",
       "thread_id": "thread-72f29ed229e7",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011358.html"
     },
     {
       "id": "msg-1932c6ebcb4d",
@@ -392,7 +412,8 @@
       "body_snippet": "Lukas,\n\nIt is, as you noticed, complicated.\n\nOne way forward might be to rely on what you can rely on (i.e. a suitable\nsystem fftw on two of the three platforms) and to embed and locally build\nwhere n",
       "thread_id": "thread-72f29ed229e7",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011359.html"
     },
     {
       "id": "msg-e918a6042de8",
@@ -410,7 +431,8 @@
       "body_snippet": "? Sat, 11 Jan 2025 10:37:20 +0100\nLukas Schneiderbauer <lukas.schneiderbauer at gmail.com> ?????:\n\n> I was told to add \"fftw-s\" since I require the fftw-s package on\n> MacOS.\n\n> * Can someone explain ",
       "thread_id": "thread-72f29ed229e7",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011360.html"
     },
     {
       "id": "msg-e0d0a25f7830",
@@ -426,7 +448,8 @@
       "body_snippet": "Dear all,\n\n\nI recently made some minor updates to the joineRML R package to squash some\nCRAN CMD check NOTEs that have emerged over the past couple of years.  After\nresubmitting to CRAN, a new NOTE ap",
       "thread_id": "thread-e0d0a25f7830",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011361.html"
     },
     {
       "id": "msg-b6e875342d2b",
@@ -444,7 +467,8 @@
       "body_snippet": "Hi Graeme,\n\n> There is only one function in my package that uses multiple cores:\n> bootSE(). However, this function is not called in any of my vignettes\n> because it is computationally expensive. The ",
       "thread_id": "thread-e0d0a25f7830",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011362.html"
     },
     {
       "id": "msg-3eb04c59348d",
@@ -462,7 +486,8 @@
       "body_snippet": "Lukas,\n\nI have not seen the communication so I'm not commenting on that specifically, I only looked at the GitHub link.\n\nAlthough your configure could be improved (more below), it works well enough to",
       "thread_id": "thread-72f29ed229e7",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011363.html"
     },
     {
       "id": "msg-2dc8f97b1906",
@@ -478,7 +503,8 @@
       "body_snippet": "I am trying to determine the best way to eliminate the use of SETLENGTH to truncate over allocated vectors in my package BAS to eliminate the NOTES about non-API calls in anticipation of R 4.5.0.\n\n>Fr",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011364.html"
     },
     {
       "id": "msg-ff60c921a033",
@@ -496,7 +522,8 @@
       "body_snippet": "Hi Merlise!\n\n\nReferring to here:\n\nhttps://github.com/wch/r-source/blob/8ca367db0c94194f07ee7bcf4b883e9c5dc11e02/src/main/builtin.c#L832\n\nIt seems as though the object is only re-used if the new length",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011365.html"
     },
     {
       "id": "msg-9e04851353de",
@@ -514,7 +541,8 @@
       "body_snippet": "On 1/15/25 05:26, Merlise Clyde, Ph.D. wrote:\n> I am trying to determine the best way to eliminate the use of SETLENGTH to truncate over allocated vectors in my package BAS to eliminate the NOTES abou",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011366.html"
     },
     {
       "id": "msg-83262ad637c1",
@@ -533,7 +561,8 @@
       "body_snippet": "Thanks for the added explanation Iris and Tomas!\n\nSo looking at the code for xlengthgets, it does appear that I may take a memory hit for multiple large objects due to the second allocation before the",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011367.html"
     },
     {
       "id": "msg-fb3d00f2da06",
@@ -553,7 +582,8 @@
       "body_snippet": "I don't think memcpy works well for VECSXP. The elements being overwritten\nneed to have their reference counts decreased and the new elements need to\nhave theirs increased.\n\nAlso, I don't entirely kno",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011368.html"
     },
     {
       "id": "msg-b96932155c26",
@@ -574,7 +604,8 @@
       "body_snippet": "On Wed, 15 Jan 2025, Iris Simmons wrote:\n\n> I don't think memcpy works well for VECSXP. The elements being overwritten\n> need to have their reference counts decreased and the new elements need to\n> ha",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 4,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011369.html"
     },
     {
       "id": "msg-eb43677a346b",
@@ -594,7 +625,8 @@
       "body_snippet": "On Wed, 15 Jan 2025 15:30:36 +0000\n\"Merlise Clyde, Ph.D.\" <clyde at duke.edu> wrote:\n\n> For memory limited machines, the alloc/copy was a problem for memory\n> usage - and if I recall was one of the re",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011370.html"
     },
     {
       "id": "msg-8f7c120de86a",
@@ -616,7 +648,8 @@
       "body_snippet": "Thanks Luke !   I had seen the usage and discussion of growable vectors, as well as using SET_TRUELENGTH with SETLENGTH and didn't necessarily want to get even more out of API compliance :-). but if t",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 5,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011371.html"
     },
     {
       "id": "msg-e818db30d56f",
@@ -634,7 +667,8 @@
       "body_snippet": "Dear community,\n\nmy R package \"tidyfit\" is failing CRAN submission checks with the \nfollowing warning (see email below for complete results):\n\nFlavor: r-devel-linux-x86_64-debian-special-clang-san\nChe",
       "thread_id": "thread-e818db30d56f",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011372.html"
     },
     {
       "id": "msg-332d57b33c01",
@@ -653,7 +687,8 @@
       "body_snippet": "? Wed, 15 Jan 2025 22:13:36 +0100\nJohann Pfitzinger <johannpfitzinger at googlemail.com> ?????:\n\n> I have, so far, failed to reproduce this or to find any useful \n> information on how to fix it. My be",
       "thread_id": "thread-e818db30d56f",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011373.html"
     },
     {
       "id": "msg-bc1c3776b231",
@@ -676,7 +711,8 @@
       "body_snippet": "You may be over-complicating this. Taking mcmc_new in src/lm_lcmc.c\nfrom https://github.com/merliseclyde/BAS, to minimize code changes I\nwould arrange the memory management along these lines:\n\nSEXP mc",
       "thread_id": "thread-2dc8f97b1906",
       "thread_depth": 6,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011374.html"
     },
     {
       "id": "msg-c5e67864bafb",
@@ -696,7 +732,8 @@
       "body_snippet": "Hi Ivan,\n\nthanks for your helpful response and for the background info! Much \nappreciated!\n\nI'll reply-all as you suggested.\n\nBest regards,\nJohann\n\nOn 16.01.25 21:30, Ivan Krylov wrote:\n> ? Wed, 15 Ja",
       "thread_id": "thread-e818db30d56f",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011375.html"
     },
     {
       "id": "msg-3f0c83be1c7b",
@@ -712,7 +749,8 @@
       "body_snippet": "Dear All,\n\nI maintain a package ('ergm') that exports a C API via /inst/include/\nthat includes header files with data structures, macros, and inline\nfunctions, as well as a number of functions exporte",
       "thread_id": "thread-3f0c83be1c7b",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011376.html"
     },
     {
       "id": "msg-21a2e8213174",
@@ -730,7 +768,8 @@
       "body_snippet": "? Fri, 17 Jan 2025 10:21:27 +0000\nPavel Krivitsky via R-package-devel <r-package-devel at r-project.org>\n?????:\n\n>    1. What is the best way to save this information? I have a\n>       rudimentary imp",
       "thread_id": "thread-3f0c83be1c7b",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011377.html"
     },
     {
       "id": "msg-2a716fbe364d",
@@ -749,7 +788,8 @@
       "body_snippet": "I wouldn't guarantee that it's best practices, but for reference this \nis what glmmTMB does about checking the Matrix and TMB versions (Matrix \nhas a formal ABI version distinct from its package versi",
       "thread_id": "thread-3f0c83be1c7b",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011378.html"
     },
     {
       "id": "msg-3a3c60a54cb1",
@@ -768,7 +808,8 @@
       "body_snippet": "Thanks for the feedback and advice!\nI removed the omp.h test, I guess using AC_OPENMP should do the trick\nanyways.\n\nI will also try your suggestion regarding the SystemRequirements. Let's see\nif it wi",
       "thread_id": "thread-72f29ed229e7",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011379.html"
     },
     {
       "id": "msg-994ac0c57d5e",
@@ -787,7 +828,8 @@
       "body_snippet": "Hi Simon,\n\nThank you for your detailed feedback!\nI rebuilt the configure script to use pkg-config, removed the extra\nbrew-check, fixed the CPPFLAGS issue you mentioned, and included \"fftw-s\"\nin System",
       "thread_id": "thread-72f29ed229e7",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011380.html"
     },
     {
       "id": "msg-03c2da43ad27",
@@ -799,11 +841,12 @@
       "subject_clean": "[R-pkg-devel] LaTeX Error: Unicode character not set up for use with LaTeX",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Longtime R user, first-time packager. Devtools are great; it?s pretty easy.\n\nI?m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for assembly trees. Very standard mechanical engineering stuff. The data are represented in a data frame and a tree.\n\nIt is customary in this and other fields to name an uncertainty parameter with ??? subscripted by the symbol of the parameter it characterizes. My code assumes a data frame with column names including ?_mass, ?_Cx, ?_Cy, ?_Ixx, etc. (If you can?t see it in your locale, it?s GREEK SMALL LETTER SIGMA, U+03C3.)\n\nAt least in my locale, these are valid names in R, so I used expressions like result$?_mass and input[row, ??_mass?] liberally. Everything works.\n\nUnfortunately, CRAN doesn?t like that. check() complains about Unicode characters. Easy enough to fix. Putting escapes in the R names made the computation code ugly, so I replaced all the internals as, e.g., result$sigma_mass. Read and update operations on the data frame are isolated, so it was fairly straightforward to fix those as input[row, \"\\u03c3_mass?].\n\nAgain, all good. All unit tests pass, check() produces no errors, no warnings, no notes. Doxygen contents documenting the columns (which retain the Unicode character) render perfectly.\n\nThen I get to check(manual = TRUE). LaTeX issues many complaints:\n\n  ! LaTeX Error: Unicode character ? (U+03C3)\n                 not set up for use with LaTeX.\n\nAfter a good bit of searching, I can't find a fix. Bookdown suggests setting the LaTeX engine to ?xelatex?, but I don?t know whether that?s applicable (or possible) here.\n\nSo, two questions: (1) Is it bad practice to name columns like this in external serialization? Obviously, I can just use ?sigma_? everywhere, but I prefer it the way it is. (2) Is there some way to change either the Doxygen input or the LaTeX configuration to correct the problem? (Escaping the Doxygen input doesn?t work.)\n\nThanks in advance for your guidance.\n\nSteve\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Longtime R user, first-time packager. Devtools are great; it?s pretty easy.\n\nI?m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for ",
+      "body_plain": "Longtime R user, first-time packager. Devtools are great; it’s pretty easy.\n\nI’m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for assembly trees. Very standard mechanical engineering stuff. The data are represented in a data frame and a tree.\n\nIt is customary in this and other fields to name an uncertainty parameter with “σ” subscripted by the symbol of the parameter it characterizes. My code assumes a data frame with column names including σ_mass, σ_Cx, σ_Cy, σ_Ixx, etc. (If you can’t see it in your locale, it’s GREEK SMALL LETTER SIGMA, U+03C3.)\n\nAt least in my locale, these are valid names in R, so I used expressions like result$σ_mass and input[row, “σ_mass”] liberally. Everything works.\n\nUnfortunately, CRAN doesn’t like that. check() complains about Unicode characters. Easy enough to fix. Putting escapes in the R names made the computation code ugly, so I replaced all the internals as, e.g., result$sigma_mass. Read and update operations on the data frame are isolated, so it was fairly straightforward to fix those as input[row, \"\\u03c3_mass”].\n\nAgain, all good. All unit tests pass, check() produces no errors, no warnings, no notes. Doxygen contents documenting the columns (which retain the Unicode character) render perfectly.\n\nThen I get to check(manual = TRUE). LaTeX issues many complaints:\n\n  ! LaTeX Error: Unicode character σ (U+03C3)\n                 not set up for use with LaTeX.\n\nAfter a good bit of searching, I can't find a fix. Bookdown suggests setting the LaTeX engine to “xelatex”, but I don’t know whether that’s applicable (or possible) here.\n\nSo, two questions: (1) Is it bad practice to name columns like this in external serialization? Obviously, I can just use “sigma_” everywhere, but I prefer it the way it is. (2) Is there some way to change either the Doxygen input or the LaTeX configuration to correct the problem? (Escaping the Doxygen input doesn’t work.)\n\nThanks in advance for your guidance.\n\nSteve\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Longtime R user, first-time packager. Devtools are great; it’s pretty easy.\n\nI’m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for ",
       "thread_id": "thread-03c2da43ad27",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011384.html"
     },
     {
       "id": "msg-38151d96a18a",
@@ -822,7 +865,8 @@
       "body_snippet": "Thanks, Ivan! Replies below.\n\nOn Fri, 2025-01-17 at 16:50 +0300, Ivan Krylov wrote:\n> ? Fri, 17 Jan 2025 10:21:27 +0000\n> Pavel Krivitsky via R-package-devel <r-package-devel at r-project.org>\n> ?????",
       "thread_id": "thread-3f0c83be1c7b",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011381.html"
     },
     {
       "id": "msg-4cd3b3f1cd13",
@@ -838,7 +882,8 @@
       "body_snippet": "Dear fellow developers,\n\nRecently I've submitted a package to CRAN which builds without problems on most systems:\n\nhttps://cran.r-project.org/web/checks/check_results_openmpt.html\n\nExcept for Fedora w",
       "thread_id": "thread-4cd3b3f1cd13",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011382.html"
     },
     {
       "id": "msg-db1d6ed4c485",
@@ -856,7 +901,8 @@
       "body_snippet": "? Sun, 19 Jan 2025 17:07:51 +0000\nPepijn de Vries <pepijn.devries at outlook.com> ?????:\n\n> He also mentioned that I \"need to check in your configure script that\n> the external library you need is ava",
       "thread_id": "thread-4cd3b3f1cd13",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011383.html"
     },
     {
       "id": "msg-ee1a394afd95",
@@ -875,7 +921,8 @@
       "body_snippet": "Hi Ivan,\n\nThank you for the quick response. The linked discussion thread was also helpful.\n\nI think I could write a similar test as used by `cpp11tesseract`:\n\nhttps://github.com/pachadotdev/cpp11tesse",
       "thread_id": "thread-4cd3b3f1cd13",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011385.html"
     },
     {
       "id": "msg-e78eebb82855",
@@ -895,7 +942,8 @@
       "body_snippet": "? Sun, 19 Jan 2025 20:42:17 +0000\nPepijn de Vries <pepijn.devries at outlook.com> ?????:\n\n> I think I could write a similar test as used by `cpp11tesseract`:\n> \n> https://github.com/pachadotdev/cpp11t",
       "thread_id": "thread-4cd3b3f1cd13",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011386.html"
     },
     {
       "id": "msg-2b7668431432",
@@ -909,11 +957,12 @@
       "references": [
         "<8E4AEA76-0732-4D74-95DC-C11C702857CC@studioj.us>"
       ],
-      "body_plain": "Steven,\n\n\n> On 19 Jan 2025, at 05:37, Steven Jenkins <sjenkins at studioj.us> wrote:\n> \n> Longtime R user, first-time packager. Devtools are great; it?s pretty easy.\n> \n> I?m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for assembly trees. Very standard mechanical engineering stuff. The data are represented in a data frame and a tree.\n> \n> It is customary in this and other fields to name an uncertainty parameter with ??? subscripted by the symbol of the parameter it characterizes. My code assumes a data frame with column names including ?_mass, ?_Cx, ?_Cy, ?_Ixx, etc. (If you can?t see it in your locale, it?s GREEK SMALL LETTER SIGMA, U+03C3.)\n> \n> At least in my locale, these are valid names in R, so I used expressions like result$?_mass and input[row, ??_mass?] liberally. Everything works.\n> \n> Unfortunately, CRAN doesn?t like that. check() complains about Unicode characters. Easy enough to fix. Putting escapes in the R names made the computation code ugly, so I replaced all the internals as, e.g., result$sigma_mass. Read and update operations on the data frame are isolated, so it was fairly straightforward to fix those as input[row, \"\\u03c3_mass?].\n> \n> Again, all good. All unit tests pass, check() produces no errors, no warnings, no notes. Doxygen contents documenting the columns (which retain the Unicode character) render perfectly.\n> \n> Then I get to check(manual = TRUE). LaTeX issues many complaints:\n> \n>  ! LaTeX Error: Unicode character ? (U+03C3)\n>                 not set up for use with LaTeX.\n> \n> After a good bit of searching, I can't find a fix. Bookdown suggests setting the LaTeX engine to ?xelatex?, but I don?t know whether that?s applicable (or possible) here.\n> \n\n\nNo, it is not, it has to work with pdflatex.\n\n\n> So, two questions: (1) Is it bad practice to name columns like this in external serialization?\n\n\nYes. See R-exts 1.6.3:\n\"First, consider carefully if you really need non-ASCII text. Some users of R will only be able to view correctly text in their native language group (e.g. Western European, Eastern European, Simplified Chinese) and ASCII. Other characters may not be rendered at all, rendered incorrectly, or cause your R code to give an error. \"\n\n> m\n     sigma_mass\n[1,]  -2.173881\n[2,]   1.184118\n[3,]  -1.295566\n\nis a lot more readable and usable than \n\n> m\n            <U+03C3>_mass\n[1,]     -2.173881\n[2,]      1.184118\n[3,]     -1.295566\n\n\n> Obviously, I can just use ?sigma_? everywhere, but I prefer it the way it is.\n\n\nI suspect you may be the a very small minority as non-ASCII characters are really problematic in code as they require special input methods, making your symbols mostly unusable. Unicode has its place in data as text, e.g. when rendering names or words in other languages, but even there they require careful handling (e.g., still won't work in LaTeX output). Row names are fine as long as they reflect real data (e.g. names/words), but in your case it?s just an unnecessarily awkward use of a symbol so it does not fall into that category.\n\nCheers,\nSimon\n\n\n\n> (2) Is there some way to change either the Doxygen input or the LaTeX configuration to correct the problem? (Escaping the Doxygen input doesn?t work.)\n> \n> Thanks in advance for your guidance.\n> \n> Steve\n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "Steven,\n\n\n> On 19 Jan 2025, at 05:37, Steven Jenkins <sjenkins at studioj.us> wrote:\n> \n> Longtime R user, first-time packager. Devtools are great; it?s pretty easy.\n> \n> I?m trying to submit a packag",
+      "body_plain": "Steven,\n\n\n> On 19 Jan 2025, at 05:37, Steven Jenkins <sjenkins at studioj.us> wrote:\n> \n> Longtime R user, first-time packager. Devtools are great; it’s pretty easy.\n> \n> I’m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for assembly trees. Very standard mechanical engineering stuff. The data are represented in a data frame and a tree.\n> \n> It is customary in this and other fields to name an uncertainty parameter with “σ” subscripted by the symbol of the parameter it characterizes. My code assumes a data frame with column names including σ_mass, σ_Cx, σ_Cy, σ_Ixx, etc. (If you can’t see it in your locale, it’s GREEK SMALL LETTER SIGMA, U+03C3.)\n> \n> At least in my locale, these are valid names in R, so I used expressions like result$σ_mass and input[row, “σ_mass”] liberally. Everything works.\n> \n> Unfortunately, CRAN doesn’t like that. check() complains about Unicode characters. Easy enough to fix. Putting escapes in the R names made the computation code ugly, so I replaced all the internals as, e.g., result$sigma_mass. Read and update operations on the data frame are isolated, so it was fairly straightforward to fix those as input[row, \"\\u03c3_mass”].\n> \n> Again, all good. All unit tests pass, check() produces no errors, no warnings, no notes. Doxygen contents documenting the columns (which retain the Unicode character) render perfectly.\n> \n> Then I get to check(manual = TRUE). LaTeX issues many complaints:\n> \n>  ! LaTeX Error: Unicode character σ (U+03C3)\n>                 not set up for use with LaTeX.\n> \n> After a good bit of searching, I can't find a fix. Bookdown suggests setting the LaTeX engine to “xelatex”, but I don’t know whether that’s applicable (or possible) here.\n> \n\n\nNo, it is not, it has to work with pdflatex.\n\n\n> So, two questions: (1) Is it bad practice to name columns like this in external serialization?\n\n\nYes. See R-exts 1.6.3:\n\"First, consider carefully if you really need non-ASCII text. Some users of R will only be able to view correctly text in their native language group (e.g. Western European, Eastern European, Simplified Chinese) and ASCII. Other characters may not be rendered at all, rendered incorrectly, or cause your R code to give an error. \"\n\n> m\n     sigma_mass\n[1,]  -2.173881\n[2,]   1.184118\n[3,]  -1.295566\n\nis a lot more readable and usable than \n\n> m\n            <U+03C3>_mass\n[1,]     -2.173881\n[2,]      1.184118\n[3,]     -1.295566\n\n\n> Obviously, I can just use “sigma_” everywhere, but I prefer it the way it is.\n\n\nI suspect you may be the a very small minority as non-ASCII characters are really problematic in code as they require special input methods, making your symbols mostly unusable. Unicode has its place in data as text, e.g. when rendering names or words in other languages, but even there they require careful handling (e.g., still won't work in LaTeX output). Row names are fine as long as they reflect real data (e.g. names/words), but in your case it’s just an unnecessarily awkward use of a symbol so it does not fall into that category.\n\nCheers,\nSimon\n\n\n\n> (2) Is there some way to change either the Doxygen input or the LaTeX configuration to correct the problem? (Escaping the Doxygen input doesn’t work.)\n> \n> Thanks in advance for your guidance.\n> \n> Steve\n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Steven,\n\n\n> On 19 Jan 2025, at 05:37, Steven Jenkins <sjenkins at studioj.us> wrote:\n> \n> Longtime R user, first-time packager. Devtools are great; it’s pretty easy.\n> \n> I’m trying to submit a packag",
       "thread_id": "thread-03c2da43ad27",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011387.html"
     },
     {
       "id": "msg-b4312ee1a55c",
@@ -928,11 +977,12 @@
         "<8E4AEA76-0732-4D74-95DC-C11C702857CC@studioj.us>",
         "<8B0AEBA4-24D0-40C0-BBD6-850D9C116342@R-project.org>"
       ],
-      "body_plain": "Simon,\n\nThanks for the clear and direct answer. I was prepared for that to be the case :-).\n\nSteve\n\n> On Jan 19, 2025, at 7:48?PM, Simon Urbanek <simon.urbanek at R-project.org> wrote:\n> \n> Steven,\n> \n> \n>> On 19 Jan 2025, at 05:37, Steven Jenkins <sjenkins at studioj.us> wrote:\n>> \n>> Longtime R user, first-time packager. Devtools are great; it?s pretty easy.\n>> \n>> I?m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for assembly trees. Very standard mechanical engineering stuff. The data are represented in a data frame and a tree.\n>> \n>> It is customary in this and other fields to name an uncertainty parameter with ??? subscripted by the symbol of the parameter it characterizes. My code assumes a data frame with column names including ?_mass, ?_Cx, ?_Cy, ?_Ixx, etc. (If you can?t see it in your locale, it?s GREEK SMALL LETTER SIGMA, U+03C3.)\n>> \n>> At least in my locale, these are valid names in R, so I used expressions like result$?_mass and input[row, ??_mass?] liberally. Everything works.\n>> \n>> Unfortunately, CRAN doesn?t like that. check() complains about Unicode characters. Easy enough to fix. Putting escapes in the R names made the computation code ugly, so I replaced all the internals as, e.g., result$sigma_mass. Read and update operations on the data frame are isolated, so it was fairly straightforward to fix those as input[row, \"\\u03c3_mass?].\n>> \n>> Again, all good. All unit tests pass, check() produces no errors, no warnings, no notes. Doxygen contents documenting the columns (which retain the Unicode character) render perfectly.\n>> \n>> Then I get to check(manual = TRUE). LaTeX issues many complaints:\n>> \n>> ! LaTeX Error: Unicode character ? (U+03C3)\n>>                not set up for use with LaTeX.\n>> \n>> After a good bit of searching, I can't find a fix. Bookdown suggests setting the LaTeX engine to ?xelatex?, but I don?t know whether that?s applicable (or possible) here.\n>> \n> \n> \n> No, it is not, it has to work with pdflatex.\n> \n> \n>> So, two questions: (1) Is it bad practice to name columns like this in external serialization?\n> \n> \n> Yes. See R-exts 1.6.3:\n> \"First, consider carefully if you really need non-ASCII text. Some users of R will only be able to view correctly text in their native language group (e.g. Western European, Eastern European, Simplified Chinese) and ASCII. Other characters may not be rendered at all, rendered incorrectly, or cause your R code to give an error. \"\n> \n>> m\n>     sigma_mass\n> [1,]  -2.173881\n> [2,]   1.184118\n> [3,]  -1.295566\n> \n> is a lot more readable and usable than \n> \n>> m\n>            <U+03C3>_mass\n> [1,]     -2.173881\n> [2,]      1.184118\n> [3,]     -1.295566\n> \n> \n>> Obviously, I can just use ?sigma_? everywhere, but I prefer it the way it is.\n> \n> \n> I suspect you may be the a very small minority as non-ASCII characters are really problematic in code as they require special input methods, making your symbols mostly unusable. Unicode has its place in data as text, e.g. when rendering names or words in other languages, but even there they require careful handling (e.g., still won't work in LaTeX output). Row names are fine as long as they reflect real data (e.g. names/words), but in your case it?s just an unnecessarily awkward use of a symbol so it does not fall into that category.\n> \n> Cheers,\n> Simon\n> \n> \n> \n>> (2) Is there some way to change either the Doxygen input or the LaTeX configuration to correct the problem? (Escaping the Doxygen input doesn?t work.)\n>> \n>> Thanks in advance for your guidance.\n>> \n>> Steve\n>> [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Simon,\n\nThanks for the clear and direct answer. I was prepared for that to be the case :-).\n\nSteve\n\n> On Jan 19, 2025, at 7:48?PM, Simon Urbanek <simon.urbanek at R-project.org> wrote:\n> \n> Steven,\n> ",
+      "body_plain": "Simon,\n\nThanks for the clear and direct answer. I was prepared for that to be the case :-).\n\nSteve\n\n> On Jan 19, 2025, at 7:48 PM, Simon Urbanek <simon.urbanek at R-project.org> wrote:\n> \n> Steven,\n> \n> \n>> On 19 Jan 2025, at 05:37, Steven Jenkins <sjenkins at studioj.us> wrote:\n>> \n>> Longtime R user, first-time packager. Devtools are great; it’s pretty easy.\n>> \n>> I’m trying to submit a package (https://github.com/jsjuni/massProps) that calculates mass properties and uncertainties for assembly trees. Very standard mechanical engineering stuff. The data are represented in a data frame and a tree.\n>> \n>> It is customary in this and other fields to name an uncertainty parameter with “σ” subscripted by the symbol of the parameter it characterizes. My code assumes a data frame with column names including σ_mass, σ_Cx, σ_Cy, σ_Ixx, etc. (If you can’t see it in your locale, it’s GREEK SMALL LETTER SIGMA, U+03C3.)\n>> \n>> At least in my locale, these are valid names in R, so I used expressions like result$σ_mass and input[row, “σ_mass”] liberally. Everything works.\n>> \n>> Unfortunately, CRAN doesn’t like that. check() complains about Unicode characters. Easy enough to fix. Putting escapes in the R names made the computation code ugly, so I replaced all the internals as, e.g., result$sigma_mass. Read and update operations on the data frame are isolated, so it was fairly straightforward to fix those as input[row, \"\\u03c3_mass”].\n>> \n>> Again, all good. All unit tests pass, check() produces no errors, no warnings, no notes. Doxygen contents documenting the columns (which retain the Unicode character) render perfectly.\n>> \n>> Then I get to check(manual = TRUE). LaTeX issues many complaints:\n>> \n>> ! LaTeX Error: Unicode character σ (U+03C3)\n>>                not set up for use with LaTeX.\n>> \n>> After a good bit of searching, I can't find a fix. Bookdown suggests setting the LaTeX engine to “xelatex”, but I don’t know whether that’s applicable (or possible) here.\n>> \n> \n> \n> No, it is not, it has to work with pdflatex.\n> \n> \n>> So, two questions: (1) Is it bad practice to name columns like this in external serialization?\n> \n> \n> Yes. See R-exts 1.6.3:\n> \"First, consider carefully if you really need non-ASCII text. Some users of R will only be able to view correctly text in their native language group (e.g. Western European, Eastern European, Simplified Chinese) and ASCII. Other characters may not be rendered at all, rendered incorrectly, or cause your R code to give an error. \"\n> \n>> m\n>     sigma_mass\n> [1,]  -2.173881\n> [2,]   1.184118\n> [3,]  -1.295566\n> \n> is a lot more readable and usable than \n> \n>> m\n>            <U+03C3>_mass\n> [1,]     -2.173881\n> [2,]      1.184118\n> [3,]     -1.295566\n> \n> \n>> Obviously, I can just use “sigma_” everywhere, but I prefer it the way it is.\n> \n> \n> I suspect you may be the a very small minority as non-ASCII characters are really problematic in code as they require special input methods, making your symbols mostly unusable. Unicode has its place in data as text, e.g. when rendering names or words in other languages, but even there they require careful handling (e.g., still won't work in LaTeX output). Row names are fine as long as they reflect real data (e.g. names/words), but in your case it’s just an unnecessarily awkward use of a symbol so it does not fall into that category.\n> \n> Cheers,\n> Simon\n> \n> \n> \n>> (2) Is there some way to change either the Doxygen input or the LaTeX configuration to correct the problem? (Escaping the Doxygen input doesn’t work.)\n>> \n>> Thanks in advance for your guidance.\n>> \n>> Steve\n>> [[alternative HTML version deleted]]\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Simon,\n\nThanks for the clear and direct answer. I was prepared for that to be the case :-).\n\nSteve\n\n> On Jan 19, 2025, at 7:48 PM, Simon Urbanek <simon.urbanek at R-project.org> wrote:\n> \n> Steven,\n> ",
       "thread_id": "thread-03c2da43ad27",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011388.html"
     },
     {
       "id": "msg-74104fd04bf8",
@@ -952,7 +1002,8 @@
       "body_snippet": "On 19 January 2025 at 20:42, Pepijn de Vries wrote:\n| I think I could write a similar test as used by `cpp11tesseract`:\n| \n| https://github.com/pachadotdev/cpp11tesseract/blob/2ea8287ef2c27901446bafa4",
       "thread_id": "thread-4cd3b3f1cd13",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011389.html"
     },
     {
       "id": "msg-419ac467d6ad",
@@ -968,7 +1019,8 @@
       "body_snippet": "Hi folks,\n\nI have an Rcpp package I'm developing. All but one of the cpp source code\nfiles are pulled from the original/authoritative (CLI) version of the\napplication. The only unique cpp source code ",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011390.html"
     },
     {
       "id": "msg-ec0144aed984",
@@ -986,7 +1038,8 @@
       "body_snippet": "Hi John,\n\nfirst of all: I'm not an expert on this and don't really know if there \nis a recommended way.\n\nHowever, you may look at my 'rcpptimer' package and how it includes \n'cpptimer' as a submodule.",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011396.html"
     },
     {
       "id": "msg-96aa01146721",
@@ -1004,7 +1057,8 @@
       "body_snippet": "? Tue, 21 Jan 2025 11:57:46 +0100\nJohn Clarke <john.clarke at cornerstonenw.com> ?????:\n\n> Ideally, it would be nice to be able to pull the files from the\n> source repo using a tag/hash so that the on",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011391.html"
     },
     {
       "id": "msg-5f4459d16213",
@@ -1020,11 +1074,12 @@
         "<20250117165057.7d994670@arachnoid>",
         "<8d9b8f509ae8ea4dc65928d0285e939ef9272442.camel@unsw.edu.au>"
       ],
-      "body_plain": "Dear All,\n\nI think I have something that works and may even work as a more general\nAPI for checking for LinkingTo ABI compatibility.\n\nIt's in 'ergm' 4.8.1 on CRAN, but would it be useful to anyone else if\nI posted an explanation of how it works somewhere? Would a package that\nprovides this API for saving and checking ABI versions be useful to\nanyone?\n\n\t\t\t\tBest,\n\t\t\t\tPavel\n\nOn Sun, 2025-01-19 at 05:31 +0000, Pavel Krivitsky via R-package-devel\nwrote:\n> Thanks, Ivan! Replies below.\n> \n> On Fri, 2025-01-17 at 16:50 +0300, Ivan Krylov wrote:\n> > ? Fri, 17 Jan 2025 10:21:27 +0000\n> > Pavel Krivitsky via R-package-devel <r-package-devel at r-project.org>\n> > ?????:\n> > \n> > > ?? 1. What is the best way to save this information? I have a\n> > > ????? rudimentary implementation [1]\n> > \n> > For now, this is the best way we have. Export the ABI version as an\n> > include-time constant and as a registered callable. The LinkingTo\n> > reverse dependencies can give the include-time constant to the\n> > registered callable to compare the two versions.\n> \n> Ben Bolker pointed out that since the code in R/ is executed at\n> build-\n> time, it is also possible to store the build-time ABI information\n> entirely in R; the downside of this approach is that it requires\n> instrumenting every client package rather than just the library\n> package.\n> \n> > I agree that we could do better and introduce an ABIversion: field\n> > to\n> > the DESCRIPTION file. R CMD INSTALL would write down the current\n> > ABIversion of every package that the current package is LinkingTo\n> > (into the installed package's DESCRIPTION or Meta/features.rds).\n> > Later, the namespace loader would check the ABI versions and\n> > provide\n> > an informative message in case a LinkingTo dependency is updated\n> > with\n> > an incremented ABI version. A machine-readable list of ABI-level\n> > dependencies should simplify the lives of the binary package\n> > maintainers as well.\n> \n> Yes, that would be great to have. (One nitpick: not just incremented,\n> but different in either direction.)\n> \n> AFAIK, for those platforms that use binaries, there is already a\n> mechanism for downloading a different ZIP for a different version of\n> R,\n> but I believe it's accomplished simply by having a directory for\n> every\n> version of R with a potentially different ABI.\n> \n> I suppose this could be generalised along the lines of a directory\n> hierarchy of the form\n> \n> /bin/windows/contrib/RVERSION/PKG_ABIVERSION/.../PKG_ABIVERSION/PKG_P\n> KGVERSION.zip\n> \n> with a nesting level for every LinkingTo package, in lexicographic\n> order. Then, given the installed R version and the installed versions\n> of each package in the LinkingTo list, a unique URL can be\n> constructed.\n> However, I don't know how practical this is and how likely to be\n> implemented in the foreseeable future.\n> \n> > > ?? 2. How to best test the C API without making updates\n> > > impossible?\n> > \n> > Would abi-compliance-checker [2] have helped there?\n> \n> I meant specifically in the context of R CMD check; the only want to\n> fully test the C API and associated facilities is to actually install\n> the client package and see if it works.\n> \n> That having been said, 'ergm' may be unusual in this, since the API\n> is\n> mostly used as a way for others to implement calculation of graph\n> statistics that are then operated on by functions in 'ergm'. That is,\n> rather than simply offering C functions for the client packages to\n> use,\n> 'ergm' calls C functions from those packages that it locates via\n> R_FindSymbol(). Thus, it is helpful to test it as a part of 'ergm'\n> itself rather than just reverse-dependency checks.\n> \n> > > ?? 3. What should be done in case of a mismatch?\n> > \n> > It's hard to guarantee anything when the ABI is broken. Maybe it's\n> > completely harmless because your code will know that the new\n> > structure member is not initialised. Maybe the wrong stack layout\n> > will crash the process due to a return address mismatch, dooming\n> > the\n> > process from the first function call.k\n> > \n> > > ???????? 1. Is there a way for 'ergm' to detect when a package\n> > > LinkingTo it is being loaded?\n> > \n> > With inline functions, you could make your every API call perform\n> > ABI\n> > version checking, but that obviously comes with potential\n> > performance\n> > problems:\n> \n> The reason I ask is that the best time to inform the user of an ABI\n> change is when the client package is loaded, and it would be helpful\n> if\n> this could be done without modifying the client package.\n> \n> Is there a mechanism for the library package to monitor packages\n> being\n> loaded, and for each one check if it's LinkingTo it to do the version\n> check?\n> \n> > > ???????? 2. What should happen if a mismatch is detected? Should\n> > > the\n> > > loading be blocked (e.g., by having .onLoad() throw an error), or\n> > > should it lead to a \"use at your own risk\" type warning?\n> > \n> > The safest option would be to signal an error before any of the\n> > potentially incompatible functions are called. It's probably\n> > pragmatic to provide an \"I know what I'm doing, void my warranty\"\n> > emergency override.\n> \n> Probably an options() setting.\n> \n> \t\t\t\tBest,\n> \t\t\t\tPavel\n> \n> ______________________________________________\n> R-package-devel at r-project.org?mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Dear All,\n\nI think I have something that works and may even work as a more general\nAPI for checking for LinkingTo ABI compatibility.\n\nIt's in 'ergm' 4.8.1 on CRAN, but would it be useful to anyone else if\nI posted an explanation of how it works somewhere? Would a package that\nprovides this API for saving and checking ABI versions be useful to\nanyone?\n\n\t\t\t\tBest,\n\t\t\t\tPavel\n\nOn Sun, 2025-01-19 at 05:31 +0000, Pavel Krivitsky via R-package-devel\nwrote:\n> Thanks, Ivan! Replies below.\n> \n> On Fri, 2025-01-17 at 16:50 +0300, Ivan Krylov wrote:\n> > В Fri, 17 Jan 2025 10:21:27 +0000\n> > Pavel Krivitsky via R-package-devel <r-package-devel at r-project.org>\n> > пишет:\n> > \n> > >    1. What is the best way to save this information? I have a\n> > >       rudimentary implementation [1]\n> > \n> > For now, this is the best way we have. Export the ABI version as an\n> > include-time constant and as a registered callable. The LinkingTo\n> > reverse dependencies can give the include-time constant to the\n> > registered callable to compare the two versions.\n> \n> Ben Bolker pointed out that since the code in R/ is executed at\n> build-\n> time, it is also possible to store the build-time ABI information\n> entirely in R; the downside of this approach is that it requires\n> instrumenting every client package rather than just the library\n> package.\n> \n> > I agree that we could do better and introduce an ABIversion: field\n> > to\n> > the DESCRIPTION file. R CMD INSTALL would write down the current\n> > ABIversion of every package that the current package is LinkingTo\n> > (into the installed package's DESCRIPTION or Meta/features.rds).\n> > Later, the namespace loader would check the ABI versions and\n> > provide\n> > an informative message in case a LinkingTo dependency is updated\n> > with\n> > an incremented ABI version. A machine-readable list of ABI-level\n> > dependencies should simplify the lives of the binary package\n> > maintainers as well.\n> \n> Yes, that would be great to have. (One nitpick: not just incremented,\n> but different in either direction.)\n> \n> AFAIK, for those platforms that use binaries, there is already a\n> mechanism for downloading a different ZIP for a different version of\n> R,\n> but I believe it's accomplished simply by having a directory for\n> every\n> version of R with a potentially different ABI.\n> \n> I suppose this could be generalised along the lines of a directory\n> hierarchy of the form\n> \n> /bin/windows/contrib/RVERSION/PKG_ABIVERSION/.../PKG_ABIVERSION/PKG_P\n> KGVERSION.zip\n> \n> with a nesting level for every LinkingTo package, in lexicographic\n> order. Then, given the installed R version and the installed versions\n> of each package in the LinkingTo list, a unique URL can be\n> constructed.\n> However, I don't know how practical this is and how likely to be\n> implemented in the foreseeable future.\n> \n> > >    2. How to best test the C API without making updates\n> > > impossible?\n> > \n> > Would abi-compliance-checker [2] have helped there?\n> \n> I meant specifically in the context of R CMD check; the only want to\n> fully test the C API and associated facilities is to actually install\n> the client package and see if it works.\n> \n> That having been said, 'ergm' may be unusual in this, since the API\n> is\n> mostly used as a way for others to implement calculation of graph\n> statistics that are then operated on by functions in 'ergm'. That is,\n> rather than simply offering C functions for the client packages to\n> use,\n> 'ergm' calls C functions from those packages that it locates via\n> R_FindSymbol(). Thus, it is helpful to test it as a part of 'ergm'\n> itself rather than just reverse-dependency checks.\n> \n> > >    3. What should be done in case of a mismatch?\n> > \n> > It's hard to guarantee anything when the ABI is broken. Maybe it's\n> > completely harmless because your code will know that the new\n> > structure member is not initialised. Maybe the wrong stack layout\n> > will crash the process due to a return address mismatch, dooming\n> > the\n> > process from the first function call.k\n> > \n> > > ???????  1. Is there a way for 'ergm' to detect when a package\n> > > LinkingTo it is being loaded?\n> > \n> > With inline functions, you could make your every API call perform\n> > ABI\n> > version checking, but that obviously comes with potential\n> > performance\n> > problems:\n> \n> The reason I ask is that the best time to inform the user of an ABI\n> change is when the client package is loaded, and it would be helpful\n> if\n> this could be done without modifying the client package.\n> \n> Is there a mechanism for the library package to monitor packages\n> being\n> loaded, and for each one check if it's LinkingTo it to do the version\n> check?\n> \n> > > ???????  2. What should happen if a mismatch is detected? Should\n> > > the\n> > > loading be blocked (e.g., by having .onLoad() throw an error), or\n> > > should it lead to a \"use at your own risk\" type warning?\n> > \n> > The safest option would be to signal an error before any of the\n> > potentially incompatible functions are called. It's probably\n> > pragmatic to provide an \"I know what I'm doing, void my warranty\"\n> > emergency override.\n> \n> Probably an options() setting.\n> \n> \t\t\t\tBest,\n> \t\t\t\tPavel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Dear All,\n\nI think I have something that works and may even work as a more general\nAPI for checking for LinkingTo ABI compatibility.\n\nIt's in 'ergm' 4.8.1 on CRAN, but would it be useful to anyone els",
       "thread_id": "thread-3f0c83be1c7b",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011392.html"
     },
     {
       "id": "msg-1935b065f613",
@@ -1043,7 +1098,8 @@
       "body_snippet": "Thanks Ivan, this is helpful. I'll do some more research. It would be nice\nto have an Rcpp standard/recommended way to do this. I don't want to have a\nnon-standard ./src or ./data folder structure for",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011393.html"
     },
     {
       "id": "msg-b3c10fa814a6",
@@ -1063,7 +1119,8 @@
       "body_snippet": "There is balance between DRY, safety, and customization needs. The\nsymlinkish approach would be \"dangerous\" imo, because you can't guarantee\nthe wrapper.cpp will stay compatible with changes in the un",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011394.html"
     },
     {
       "id": "msg-a016aeb7e01d",
@@ -1084,7 +1141,8 @@
       "body_snippet": "Thank you Dirk and Thibault for your additional tips and ideas.\n\nI took a look at the vignette for *rcppcorels* and noted that this is\nexactly the model/pattern I used to create my package. And it app",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 4,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011395.html"
     },
     {
       "id": "msg-585ef230bb4c",
@@ -1103,7 +1161,8 @@
       "body_snippet": "Thanks Jonathan, this is helpful. I'm just a bit concerned based on other\ncomments that submodules might not be compatible with CRAN and/or other CI\nrunners. Plus, I only want a few cpp files copied o",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011397.html"
     },
     {
       "id": "msg-d206a8c6f902",
@@ -1122,7 +1181,8 @@
       "body_snippet": "On 21 January 2025 at 12:04, Jonathan Berrisch wrote:\n| first of all: I'm not an expert on this and don't really know if there \n| is a recommended way.\n| \n| However, you may look at my 'rcpptimer' pac",
       "thread_id": "thread-419ac467d6ad",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011398.html"
     },
     {
       "id": "msg-cdef8011dfac",
@@ -1138,7 +1198,8 @@
       "body_snippet": "Submitting secr 5.2.0 I get this pre-test installation ERROR which is opaque to me. I haven't changed the relevant code, and the package passes checks on Winbuilder (below) and other systems (with a f",
       "thread_id": "thread-cdef8011dfac",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011399.html"
     },
     {
       "id": "msg-28cf9b6e6271",
@@ -1156,7 +1217,8 @@
       "body_snippet": "Hi Murray,\n\n(repeating some of the conversation we had off-list)\n\nSorry for the trouble -- I was just in the process of submitting\nRcppParallel to CRAN, and the first submission I made had this same\ni",
       "thread_id": "thread-cdef8011dfac",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011400.html"
     },
     {
       "id": "msg-405fa2d35aaf",
@@ -1209,7 +1271,8 @@
       "body_snippet": "Yes, that fixed it. My package was quickly re-tested and is now on CRAN. Thanks to all.\nMurray\n________________________________\nFrom: Kevin Ushey <kevinushey at gmail.com>\nSent: Friday, 24 January 202",
       "thread_id": "thread-cdef8011dfac",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011403.html"
     },
     {
       "id": "msg-17f79deab45b",
@@ -1225,7 +1288,8 @@
       "body_snippet": "I got the note below from Prof. Ripley on my package 'clarabel' failing \nM1mac checks.\n\nThis puzzles me because I am using FLIBS determined via`R CMD config \nFLIBS` using the crate I wrote for this ve",
       "thread_id": "thread-17f79deab45b",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011404.html"
     },
     {
       "id": "msg-e1c3fe42f73c",
@@ -1243,7 +1307,8 @@
       "body_snippet": "Naras,\n\nsorry, but since this involves some Rust code, I fear that you'll have to discuss it with Brian directly. FWIW on the CRAN M1 build machine it seems to use the correct flags:\n\n$ grep fortran/l",
       "thread_id": "thread-17f79deab45b",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011405.html"
     },
     {
       "id": "msg-cc3bb8b93369",
@@ -1261,7 +1326,8 @@
       "body_snippet": "? Sat, 25 Jan 2025 08:54:45 -0800\nBalasubramanian Narasimhan <naras at stanford.edu> ?????:\n\n> (https://github.com/blas-lapack-rs/r-src/blob/966266425b1a21a1e979f767c6023e6bf00616fc/build.rs#L160). \n\n",
       "thread_id": "thread-17f79deab45b",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011406.html"
     },
     {
       "id": "msg-6e840aabdc3b",
@@ -1280,7 +1346,8 @@
       "body_snippet": "Thank you, Simon and Ivan.? And further thanks to Ivan for R sleuthing \nof the first order!\n\nThat I'm picking up the wrong R makes sense.? I will incorporate your \nsuggestions\n\nBest wishes,\n\n-Naras\n\nO",
       "thread_id": "thread-17f79deab45b",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011407.html"
     },
     {
       "id": "msg-747887c43e39",
@@ -1300,7 +1367,8 @@
       "body_snippet": "Also, to further clarify, yes I need Rust to determine the linker flags \nsince the underlying Clarabel.rs links against BLAS.\n\n-N\n\nOn 1/26/25 8:22 AM, Balasubramanian Narasimhan wrote:\n> Thank you, Si",
       "thread_id": "thread-17f79deab45b",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011408.html"
     },
     {
       "id": "msg-f984f8fbbbb5",
@@ -1316,7 +1384,8 @@
       "body_snippet": "Dear All,\n\nI am writing to you because I am getting this NOTE from the CRAN Debian\nmachine that is not allowing CRAN acceptance: \"Installation took CPU time\n2.9 times elapsed time\". Uwe Ligges told me",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011409.html"
     },
     {
       "id": "msg-a6b8a1c0961b",
@@ -1334,7 +1403,8 @@
       "body_snippet": "May have been mentioned up-thread, but perhaps you also need to \ncontrol BLAS parallelization? \nhttps://stackoverflow.com/questions/72669579/c-how-to-set-environment-variable-so-openblas-runs-multithr",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011410.html"
     },
     {
       "id": "msg-9112c5d7a32b",
@@ -1352,7 +1422,8 @@
       "body_snippet": "Dear Guillermo,\n\nWelcome to R-package-devel!\n\n? Mon, 27 Jan 2025 19:26:10 +0100\nGuillermo Vinue <guillermovinue at gmail.com> ?????:\n\n> I am writing to you because I am getting this NOTE from the CRAN",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011411.html"
     },
     {
       "id": "msg-8925c4a700ec",
@@ -1368,7 +1439,8 @@
       "body_snippet": "Dear All,\nWhen I run check_win_devel() on my package, I encounter the following error:\n\n-------------------------\nError: objects 'Surv', 'is.Surv' are not exported by 'namespace:survival'\nExecution ha",
       "thread_id": "thread-8925c4a700ec",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011412.html"
     },
     {
       "id": "msg-70fbbaa91d18",
@@ -1384,7 +1456,8 @@
       "body_snippet": "Hi all,\n\nI'm wondering if there is a way to point an R package installer to a\npre-compiled release on Github rather than rely on CRAN. I will likely use\nCRAN, but I'm curious if installing via pre-com",
       "thread_id": "thread-70fbbaa91d18",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011413.html"
     },
     {
       "id": "msg-abbb53b903ac",
@@ -1398,11 +1471,12 @@
       "references": [
         "<CAF0e1n_dvt6igMxDWqh7bjMyBra_4ceLQThRiS3bPa0RCuzLWw@mail.gmail.com>"
       ],
-      "body_plain": "El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\nescribi?:\n\n> Hi all,\n>\n> I'm wondering if there is a way to point an R package installer to a\n> pre-compiled release on Github rather than rely on CRAN.\n\n\nYes, see https://r-universe.dev/\n\nI?aki\n\n\nI will likely use\n> CRAN, but I'm curious if installing via pre-compiled versions is limited to\n> CRAN or whether there is another way. This is related to a Rcpp project I'm\n> working on (so compiling C++), but I think the question is general enough\n> that it can be asked on this list.\n>\n> Thank you,\n>\n> -John\n>\n> John Clarke | Senior Technical Advisor |\n> Cornerstone Systems Northwest | john.clarke at cornerstonenw.com\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\nescribi?:\n\n> Hi all,\n>\n> I'm wondering if there is a way to point an R package installer to a\n> pre-compiled release on Gith",
+      "body_plain": "El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\nescribió:\n\n> Hi all,\n>\n> I'm wondering if there is a way to point an R package installer to a\n> pre-compiled release on Github rather than rely on CRAN.\n\n\nYes, see https://r-universe.dev/\n\nIñaki\n\n\nI will likely use\n> CRAN, but I'm curious if installing via pre-compiled versions is limited to\n> CRAN or whether there is another way. This is related to a Rcpp project I'm\n> working on (so compiling C++), but I think the question is general enough\n> that it can be asked on this list.\n>\n> Thank you,\n>\n> -John\n>\n> John Clarke | Senior Technical Advisor |\n> Cornerstone Systems Northwest | john.clarke at cornerstonenw.com\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\nescribió:\n\n> Hi all,\n>\n> I'm wondering if there is a way to point an R package installer to a\n> pre-compiled release on Gith",
       "thread_id": "thread-70fbbaa91d18",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011414.html"
     },
     {
       "id": "msg-599b3854f0b6",
@@ -1417,11 +1491,12 @@
         "<CAF0e1n_dvt6igMxDWqh7bjMyBra_4ceLQThRiS3bPa0RCuzLWw@mail.gmail.com>",
         "<CALEXWq307uPA6TLk4jUxghCdR30ky5yW67POz-YdXkveTmf_rQ@mail.gmail.com>"
       ],
-      "body_plain": "On 28 January 2025 at 14:27, I?aki Ucar wrote:\n| El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\n| escribi?:\n| \n| > Hi all,\n| >\n| > I'm wondering if there is a way to point an R package installer to a\n| > pre-compiled release on Github rather than rely on CRAN.\n| \n| \n| Yes, see https://r-universe.dev/\n\nIn particular, you can get a binary for Ubuntu 24.04 and either R 4.4.* or R\n4.5.* via the step described at [1] as seen in [2] below. Here we use the\n'rcppcore' universe as the home for Rcpp:\n\n > install.packages(\"Rcpp\",\n                    repos = c(linux = 'https://rcppcore.r-universe.dev/bin/linux/noble/4.4/',\n                              sources = 'https://rcppcore.r-universe.dev', \n                              cran = 'https://cloud.r-project.org'))\n\n[1] https://docs.r-universe.dev/install/binaries.html#does-r-universe-have-linux-binaries\n\n[2] Full log using rocker/r-ubuntu container\n\nedd at rob:~$ docker run --rm -ti rocker/r-ubuntu:24.04 R\n\nR version 4.4.0 (2024-04-24) -- \"Puppy Cup\"\nCopyright (C) 2024 The R Foundation for Statistical Computing\nPlatform: x86_64-pc-linux-gnu\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType 'license()' or 'licence()' for distribution details.\n\n  Natural language support but running in an English locale\n\nR is a collaborative project with many contributors.\nType 'contributors()' for more information and\n'citation()' on how to cite R or R packages in publications.\n\nType 'demo()' for some demos, 'help()' for on-line help, or\n'help.start()' for an HTML browser interface to help.\nType 'q()' to quit R.\n\n> install.packages(\"Rcpp\", repos = c(linux = 'https://rcppcore.r-universe.dev/bin/linux/noble/4.4/', sources = 'https://rcppcore.r-universe.dev', cran = 'https://cloud.r-project.org'))\nInstalling package into ?/usr/local/lib/R/site-library?\n(as ?lib? is unspecified)\ntrying URL 'https://rcppcore.r-universe.dev/bin/linux/noble/4.4/src/contrib/Rcpp_1.0.14.1.tar.gz'\nContent type 'application/gzip' length 2210475 bytes (2.1 MB)\n==================================================\ndownloaded 2.1 MB\n\n* installing *binary* package ?Rcpp? ...\n* DONE (Rcpp)\n\nThe downloaded source packages are in\n        ?/tmp/Rtmpwhfif9/downloaded_packages?\n> library(Rcpp)\nWarning message:\npackage ?Rcpp? was built under R version 4.4.2         # running apt update; apt upgrade fixes this\n> packageVersion(\"Rcpp\")\n[1] ?1.0.14.1?\n> \n\n\n\n| \n| I?aki\n| \n| \n| I will likely use\n| > CRAN, but I'm curious if installing via pre-compiled versions is limited to\n| > CRAN or whether there is another way. This is related to a Rcpp project I'm\n| > working on (so compiling C++), but I think the question is general enough\n| > that it can be asked on this list.\n| >\n| > Thank you,\n| >\n| > -John\n| >\n| > John Clarke | Senior Technical Advisor |\n| > Cornerstone Systems Northwest | john.clarke at cornerstonenw.com\n| >\n| >         [[alternative HTML version deleted]]\n| >\n| > ______________________________________________\n| > R-package-devel at r-project.org mailing list\n| > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| >\n| >\n| \n| \t[[alternative HTML version deleted]]\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 28 January 2025 at 14:27, I?aki Ucar wrote:\n| El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\n| escribi?:\n| \n| > Hi all,\n| >\n| > I'm wondering if there is a way to point",
+      "body_plain": "On 28 January 2025 at 14:27, Iñaki Ucar wrote:\n| El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\n| escribió:\n| \n| > Hi all,\n| >\n| > I'm wondering if there is a way to point an R package installer to a\n| > pre-compiled release on Github rather than rely on CRAN.\n| \n| \n| Yes, see https://r-universe.dev/\n\nIn particular, you can get a binary for Ubuntu 24.04 and either R 4.4.* or R\n4.5.* via the step described at [1] as seen in [2] below. Here we use the\n'rcppcore' universe as the home for Rcpp:\n\n > install.packages(\"Rcpp\",\n                    repos = c(linux = 'https://rcppcore.r-universe.dev/bin/linux/noble/4.4/',\n                              sources = 'https://rcppcore.r-universe.dev', \n                              cran = 'https://cloud.r-project.org'))\n\n[1] https://docs.r-universe.dev/install/binaries.html#does-r-universe-have-linux-binaries\n\n[2] Full log using rocker/r-ubuntu container\n\nedd at rob:~$ docker run --rm -ti rocker/r-ubuntu:24.04 R\n\nR version 4.4.0 (2024-04-24) -- \"Puppy Cup\"\nCopyright (C) 2024 The R Foundation for Statistical Computing\nPlatform: x86_64-pc-linux-gnu\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType 'license()' or 'licence()' for distribution details.\n\n  Natural language support but running in an English locale\n\nR is a collaborative project with many contributors.\nType 'contributors()' for more information and\n'citation()' on how to cite R or R packages in publications.\n\nType 'demo()' for some demos, 'help()' for on-line help, or\n'help.start()' for an HTML browser interface to help.\nType 'q()' to quit R.\n\n> install.packages(\"Rcpp\", repos = c(linux = 'https://rcppcore.r-universe.dev/bin/linux/noble/4.4/', sources = 'https://rcppcore.r-universe.dev', cran = 'https://cloud.r-project.org'))\nInstalling package into ‘/usr/local/lib/R/site-library’\n(as ‘lib’ is unspecified)\ntrying URL 'https://rcppcore.r-universe.dev/bin/linux/noble/4.4/src/contrib/Rcpp_1.0.14.1.tar.gz'\nContent type 'application/gzip' length 2210475 bytes (2.1 MB)\n==================================================\ndownloaded 2.1 MB\n\n* installing *binary* package ‘Rcpp’ ...\n* DONE (Rcpp)\n\nThe downloaded source packages are in\n        ‘/tmp/Rtmpwhfif9/downloaded_packages’\n> library(Rcpp)\nWarning message:\npackage ‘Rcpp’ was built under R version 4.4.2         # running apt update; apt upgrade fixes this\n> packageVersion(\"Rcpp\")\n[1] ‘1.0.14.1’\n> \n\n\n\n| \n| Iñaki\n| \n| \n| I will likely use\n| > CRAN, but I'm curious if installing via pre-compiled versions is limited to\n| > CRAN or whether there is another way. This is related to a Rcpp project I'm\n| > working on (so compiling C++), but I think the question is general enough\n| > that it can be asked on this list.\n| >\n| > Thank you,\n| >\n| > -John\n| >\n| > John Clarke | Senior Technical Advisor |\n| > Cornerstone Systems Northwest | john.clarke at cornerstonenw.com\n| >\n| >         [[alternative HTML version deleted]]\n| >\n| > ______________________________________________\n| > R-package-devel at r-project.org mailing list\n| > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n| >\n| >\n| \n| \t[[alternative HTML version deleted]]\n| \n| ______________________________________________\n| R-package-devel at r-project.org mailing list\n| https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 28 January 2025 at 14:27, Iñaki Ucar wrote:\n| El mar., 28 ene. 2025 14:25, John Clarke <john.clarke at cornerstonenw.com>\n| escribió:\n| \n| > Hi all,\n| >\n| > I'm wondering if there is a way to point",
       "thread_id": "thread-70fbbaa91d18",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011415.html"
     },
     {
       "id": "msg-ee5eede65bdb",
@@ -1439,7 +1514,8 @@
       "body_snippet": "? Tue, 28 Jan 2025 14:25:23 +0100\nJohn Clarke <john.clarke at cornerstonenw.com> ?????:\n\n> I'm wondering if there is a way to point an R package installer to a\n> pre-compiled release on Github rather ",
       "thread_id": "thread-70fbbaa91d18",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011416.html"
     },
     {
       "id": "msg-904ab38956e2",
@@ -1455,7 +1531,8 @@
       "body_snippet": "Dear R Package Development Team,\n\nI am writing to report an issue I encountered during the R CMD check\nprocess for my R package, RHC. A non-standard file named 'vert.txt' is\nbeing generated in the che",
       "thread_id": "thread-904ab38956e2",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011420.html"
     },
     {
       "id": "msg-521dbbb91b3d",
@@ -1473,7 +1550,8 @@
       "body_snippet": "? Tue, 28 Jan 2025 10:01:00 +0000\nGabriel Constantino Blain <gabriel.blain at sp.gov.br> ?????:\n\n> When I run check_win_devel() on my package, I encounter the following\n> error:\n> \n> -----------------",
       "thread_id": "thread-8925c4a700ec",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011417.html"
     },
     {
       "id": "msg-a94c8f4164da",
@@ -1492,7 +1570,8 @@
       "body_snippet": "Thank you for your help, Ben and Ivan. Unfortunately, the note persists:\nhttps://win-builder.r-project.org/incoming_pretest/fawir_1.0_20250128_113725/Debian/00check.log\n\nThe public source repository f",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011418.html"
     },
     {
       "id": "msg-692f8749d33c",
@@ -1511,7 +1590,8 @@
       "body_snippet": "Dear Ivan,\nThank you for your response.\nI will wait for one or two days to see if the problem resolves itself. If it persists, I will reach out to Dr. Uwe Ligges for further advice.\nBest regards,\nGabr",
       "thread_id": "thread-8925c4a700ec",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011419.html"
     },
     {
       "id": "msg-7380cd11875c",
@@ -1531,7 +1611,8 @@
       "body_snippet": "Thank you for actually posting a reference to your package and its source\ncode. That allows us to take a closer look.\n\nOn 28 January 2025 at 16:07, Guillermo Vinue wrote:\n| Thank you for your help, Be",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011421.html"
     },
     {
       "id": "msg-e60964374977",
@@ -1551,7 +1632,8 @@
       "body_snippet": "? Tue, 28 Jan 2025 16:07:38 +0100\nGuillermo Vinue <guillermovinue at gmail.com> ?????:\n\n> Thank you for your help, Ben and Ivan. Unfortunately, the note\n> persists:\n> https://win-builder.r-project.org",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011422.html"
     },
     {
       "id": "msg-fa6373d4f13e",
@@ -1569,7 +1651,8 @@
       "body_snippet": "Without seeing your package, I don't think anyone could help you, other \nthan very generic help:  \"Find what is creating that file, and figure \nout how to stop it.\"\n\nIf you submit your package to one ",
       "thread_id": "thread-904ab38956e2",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011423.html"
     },
     {
       "id": "msg-2b8b5db98eb6",
@@ -1590,7 +1673,8 @@
       "body_snippet": "Excellent (as usual) sleuthing by Ivan -- colour me impressed (again).\n\nAs an aside, your package makes wide use of the excellent resources provided\nby other CRAN packages.  But with this comes added ",
       "thread_id": "thread-f984f8fbbbb5",
       "thread_depth": 4,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011424.html"
     },
     {
       "id": "msg-ea543a962332",
@@ -1608,7 +1692,8 @@
       "body_snippet": "Dear Zahra Heidari Ghahfarrokhi,\n\nWelcome to R-package-devel!\n\n? Tue, 28 Jan 2025 18:17:06 +0330\nzahra heidari gh <z.heidari.gh at gmail.com> ?????:\n\n>    - Additional details:\n>       - The package F",
       "thread_id": "thread-904ab38956e2",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011425.html"
     },
     {
       "id": "msg-c1f556698bb2",
@@ -1627,7 +1712,8 @@
       "body_snippet": "Have you tried at least twice? If it persists, please let me know and \nforward the message you got from winbuilder.\n\nBest,\nUwe Ligges\n\n\nOn 28.01.2025 15:47, Ivan Krylov via R-package-devel wrote:\n> ? ",
       "thread_id": "thread-8925c4a700ec",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011426.html"
     },
     {
       "id": "msg-03a3c0d98475",
@@ -1647,7 +1733,8 @@
       "body_snippet": "Dear Dr. Uwe Ligges,\nI tried at least 5 times.\nPlease se below the message I just got from winbuilder.\nBest\nGabriel Blain\n------------------------\nDear package maintainer,\n\nthis notification has been ",
       "thread_id": "thread-8925c4a700ec",
       "thread_depth": 3,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011427.html"
     },
     {
       "id": "msg-4bd3ecc9ff07",
@@ -1668,7 +1755,8 @@
       "body_snippet": "Issue found and fixed: someone else submitted some broken survival for \nthe on demand checks which was stuck in the on demand library.\nYou should be able to resubmit without issues now.\n\nBest,\nUwe\n\n\n\n",
       "thread_id": "thread-8925c4a700ec",
       "thread_depth": 4,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011428.html"
     },
     {
       "id": "msg-b6a168f11a18",
@@ -1684,7 +1772,8 @@
       "body_snippet": "Hello,\nI am trying to make the as.POSIXct() calls in my R package (GGIR) backward\ncompatible with R 4.2.0 (from 2022) by always adding the origin =\n\"1970-01-01\" argument to the as.POSIXct() calls. How",
       "thread_id": "thread-b6a168f11a18",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011429.html"
     },
     {
       "id": "msg-9e0ea805cbe7",
@@ -1696,11 +1785,12 @@
       "subject_clean": "[R-pkg-devel] Date of CRAN checks",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear list,\n\nRecently after a package update I noticed an ERROR on one flavor.\nI believe this is some problem with the r-release-macos-x86_64 flavor.\nBut I'm not sure if this is fixed on the system or not.\nI was waiting to see if this got fixed with time (and thanks to the CRAN\nvolunteers).\n\nA check landing page on CRAN had a date \"Last updated on 2025-01-29\n08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because there\nare some checks that are still from the old version of the package and the\nfailing check is still failing, I'm not sure which checks were updated. Is\nthis the date of the landing page of all the checks, or all the checks are\nupdated up to that date?\n\nBioconductor provides the time with two fields: StartedAt and EndedAt for\neach flavor (and step).\nI hoped to find a date on the check logs. It would make it easier to know\nwhen it is updated and it has the same result as previously.\nIs there a way to know when a given check was run on CRAN?\n\nBest regards,\n\nLlu?s\n\nPS:  The problem is shared by many packages (>50), the vignette can be\nbuilt but not rebuilt and it raises an error message about not finding\npandoc.\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear list,\n\nRecently after a package update I noticed an ERROR on one flavor.\nI believe this is some problem with the r-release-macos-x86_64 flavor.\nBut I'm not sure if this is fixed on the system or not.\nI was waiting to see if this got fixed with time (and thanks to the CRAN\nvolunteers).\n\nA check landing page on CRAN had a date \"Last updated on 2025-01-29\n08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because there\nare some checks that are still from the old version of the package and the\nfailing check is still failing, I'm not sure which checks were updated. Is\nthis the date of the landing page of all the checks, or all the checks are\nupdated up to that date?\n\nBioconductor provides the time with two fields: StartedAt and EndedAt for\neach flavor (and step).\nI hoped to find a date on the check logs. It would make it easier to know\nwhen it is updated and it has the same result as previously.\nIs there a way to know when a given check was run on CRAN?\n\nBest regards,\n\nLluís\n\nPS:  The problem is shared by many packages (>50), the vignette can be\nbuilt but not rebuilt and it raises an error message about not finding\npandoc.\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear list,\n\nRecently after a package update I noticed an ERROR on one flavor.\nI believe this is some problem with the r-release-macos-x86_64 flavor.\nBut I'm not sure if this is fixed on the system or ",
       "thread_id": "thread-9e0ea805cbe7",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011430.html"
     },
     {
       "id": "msg-993f99ff9dfb",
@@ -1716,7 +1806,8 @@
       "body_snippet": "Hi,\n\nA package of ours had its test code throw an error during its R CMD\nCHECK on CRAN due to it attempting to write files to the installation\ndirectory. We were wondering how best to replicate this t",
       "thread_id": "thread-993f99ff9dfb",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011433.html"
     },
     {
       "id": "msg-4b621f2ceac7",
@@ -1730,11 +1821,12 @@
       "references": [
         "<CAN+W6_uBLsOtqf43FoTTJPhEFMp4GviCXwNXJskmqKep8KkRbA@mail.gmail.com>"
       ],
-      "body_plain": "Llu?s,\n\nthe timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of the check itself (neither does the timestamp of the URL as it is often re-generated). So in short, no, there is no way to know the timestamp of the check. I think it may be useful, so I'll see if we can add it.\n\nThat said, checks are not re-run unless you update the version of your package (or there is an error caused by another package whose update will fix it), so in most cases waiting won't fix anything. If there is a problem you have to report it to the corresponding CRAN maintainer so for macOS that would be me.\n\nCheers,\nSimon\n\n\n> On Jan 30, 2025, at 5:10 AM, Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n> \n> Dear list,\n> \n> Recently after a package update I noticed an ERROR on one flavor.\n> I believe this is some problem with the r-release-macos-x86_64 flavor.\n> But I'm not sure if this is fixed on the system or not.\n> I was waiting to see if this got fixed with time (and thanks to the CRAN\n> volunteers).\n> \n> A check landing page on CRAN had a date \"Last updated on 2025-01-29\n> 08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because there\n> are some checks that are still from the old version of the package and the\n> failing check is still failing, I'm not sure which checks were updated. Is\n> this the date of the landing page of all the checks, or all the checks are\n> updated up to that date?\n> \n> Bioconductor provides the time with two fields: StartedAt and EndedAt for\n> each flavor (and step).\n> I hoped to find a date on the check logs. It would make it easier to know\n> when it is updated and it has the same result as previously.\n> Is there a way to know when a given check was run on CRAN?\n> \n> Best regards,\n> \n> Llu?s\n> \n> PS:  The problem is shared by many packages (>50), the vignette can be\n> built but not rebuilt and it raises an error message about not finding\n> pandoc.\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "Llu?s,\n\nthe timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of the check itself (neither does the timestamp of th",
+      "body_plain": "Lluís,\n\nthe timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of the check itself (neither does the timestamp of the URL as it is often re-generated). So in short, no, there is no way to know the timestamp of the check. I think it may be useful, so I'll see if we can add it.\n\nThat said, checks are not re-run unless you update the version of your package (or there is an error caused by another package whose update will fix it), so in most cases waiting won't fix anything. If there is a problem you have to report it to the corresponding CRAN maintainer so for macOS that would be me.\n\nCheers,\nSimon\n\n\n> On Jan 30, 2025, at 5:10 AM, Lluís Revilla <lluis.revilla at gmail.com> wrote:\n> \n> Dear list,\n> \n> Recently after a package update I noticed an ERROR on one flavor.\n> I believe this is some problem with the r-release-macos-x86_64 flavor.\n> But I'm not sure if this is fixed on the system or not.\n> I was waiting to see if this got fixed with time (and thanks to the CRAN\n> volunteers).\n> \n> A check landing page on CRAN had a date \"Last updated on 2025-01-29\n> 08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because there\n> are some checks that are still from the old version of the package and the\n> failing check is still failing, I'm not sure which checks were updated. Is\n> this the date of the landing page of all the checks, or all the checks are\n> updated up to that date?\n> \n> Bioconductor provides the time with two fields: StartedAt and EndedAt for\n> each flavor (and step).\n> I hoped to find a date on the check logs. It would make it easier to know\n> when it is updated and it has the same result as previously.\n> Is there a way to know when a given check was run on CRAN?\n> \n> Best regards,\n> \n> Lluís\n> \n> PS:  The problem is shared by many packages (>50), the vignette can be\n> built but not rebuilt and it raises an error message about not finding\n> pandoc.\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Lluís,\n\nthe timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of the check itself (neither does the timestamp of th",
       "thread_id": "thread-9e0ea805cbe7",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011431.html"
     },
     {
       "id": "msg-98c56b3a0786",
@@ -1752,7 +1844,8 @@
       "body_snippet": "On Wed, 29 Jan 2025, Vincent van Hees writes:\n\n> Hello,\n> I am trying to make the as.POSIXct() calls in my R package (GGIR) backward\n> compatible with R 4.2.0 (from 2022) by always adding the origin =",
       "thread_id": "thread-b6a168f11a18",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011432.html"
     },
     {
       "id": "msg-737a3b2324b5",
@@ -1767,11 +1860,12 @@
         "<CAN+W6_uBLsOtqf43FoTTJPhEFMp4GviCXwNXJskmqKep8KkRbA@mail.gmail.com>",
         "<D5364A6D-A336-4AA9-BED6-3EDED61AE9D9@R-project.org>"
       ],
-      "body_plain": "Dear Simon,\n\nThank you for clearing my misunderstanding about CRAN's checks.\nLooking forward to seeing logs with a date (if possible).\n\nThis case  was initiated by teal.reporter, the error is related to pandoc\naccording to the logs:\nError: pandoc version 1.12.3 or higher is required and was not found (see\nthe help page ?rmarkdown::pandoc_available). Execution halted\nThe package imports rmarkdown (? 2.23) that requires pandoc.\nIn teal.reporter there isn't a specific requirement for pandoc version\n1.12.3 (but it doesn't check the version available).\n\nOther packages on that same flavor fail with problems related to pandoc,\nfor example datacutr, oldr or linevis, have similar errors.\nThey depend on packages that use pandoc and are also recently published.\n\nMany thanks for your help,\n\nLlu?s\n\nOn Wed, 29 Jan 2025 at 20:08, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> Llu?s,\n>\n> the timestamps are generated by the CRAN server when it updates webpage\n> from the actual check reports so it does not reflect the date/time of the\n> check itself (neither does the timestamp of the URL as it is often\n> re-generated). So in short, no, there is no way to know the timestamp of\n> the check. I think it may be useful, so I'll see if we can add it.\n>\n> That said, checks are not re-run unless you update the version of your\n> package (or there is an error caused by another package whose update will\n> fix it), so in most cases waiting won't fix anything. If there is a problem\n> you have to report it to the corresponding CRAN maintainer so for macOS\n> that would be me.\n>\n> Cheers,\n> Simon\n>\n>\n> > On Jan 30, 2025, at 5:10 AM, Llu?s Revilla <lluis.revilla at gmail.com>\n> wrote:\n> >\n> > Dear list,\n> >\n> > Recently after a package update I noticed an ERROR on one flavor.\n> > I believe this is some problem with the r-release-macos-x86_64 flavor.\n> > But I'm not sure if this is fixed on the system or not.\n> > I was waiting to see if this got fixed with time (and thanks to the CRAN\n> > volunteers).\n> >\n> > A check landing page on CRAN had a date \"Last updated on 2025-01-29\n> > 08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because\n> there\n> > are some checks that are still from the old version of the package and\n> the\n> > failing check is still failing, I'm not sure which checks were updated.\n> Is\n> > this the date of the landing page of all the checks, or all the checks\n> are\n> > updated up to that date?\n> >\n> > Bioconductor provides the time with two fields: StartedAt and EndedAt for\n> > each flavor (and step).\n> > I hoped to find a date on the check logs. It would make it easier to know\n> > when it is updated and it has the same result as previously.\n> > Is there a way to know when a given check was run on CRAN?\n> >\n> > Best regards,\n> >\n> > Llu?s\n> >\n> > PS:  The problem is shared by many packages (>50), the vignette can be\n> > built but not rebuilt and it raises an error message about not finding\n> > pandoc.\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear Simon,\n\nThank you for clearing my misunderstanding about CRAN's checks.\nLooking forward to seeing logs with a date (if possible).\n\nThis case  was initiated by teal.reporter, the error is related to pandoc\naccording to the logs:\nError: pandoc version 1.12.3 or higher is required and was not found (see\nthe help page ?rmarkdown::pandoc_available). Execution halted\nThe package imports rmarkdown (≥ 2.23) that requires pandoc.\nIn teal.reporter there isn't a specific requirement for pandoc version\n1.12.3 (but it doesn't check the version available).\n\nOther packages on that same flavor fail with problems related to pandoc,\nfor example datacutr, oldr or linevis, have similar errors.\nThey depend on packages that use pandoc and are also recently published.\n\nMany thanks for your help,\n\nLluís\n\nOn Wed, 29 Jan 2025 at 20:08, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> Lluís,\n>\n> the timestamps are generated by the CRAN server when it updates webpage\n> from the actual check reports so it does not reflect the date/time of the\n> check itself (neither does the timestamp of the URL as it is often\n> re-generated). So in short, no, there is no way to know the timestamp of\n> the check. I think it may be useful, so I'll see if we can add it.\n>\n> That said, checks are not re-run unless you update the version of your\n> package (or there is an error caused by another package whose update will\n> fix it), so in most cases waiting won't fix anything. If there is a problem\n> you have to report it to the corresponding CRAN maintainer so for macOS\n> that would be me.\n>\n> Cheers,\n> Simon\n>\n>\n> > On Jan 30, 2025, at 5:10 AM, Lluís Revilla <lluis.revilla at gmail.com>\n> wrote:\n> >\n> > Dear list,\n> >\n> > Recently after a package update I noticed an ERROR on one flavor.\n> > I believe this is some problem with the r-release-macos-x86_64 flavor.\n> > But I'm not sure if this is fixed on the system or not.\n> > I was waiting to see if this got fixed with time (and thanks to the CRAN\n> > volunteers).\n> >\n> > A check landing page on CRAN had a date \"Last updated on 2025-01-29\n> > 08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because\n> there\n> > are some checks that are still from the old version of the package and\n> the\n> > failing check is still failing, I'm not sure which checks were updated.\n> Is\n> > this the date of the landing page of all the checks, or all the checks\n> are\n> > updated up to that date?\n> >\n> > Bioconductor provides the time with two fields: StartedAt and EndedAt for\n> > each flavor (and step).\n> > I hoped to find a date on the check logs. It would make it easier to know\n> > when it is updated and it has the same result as previously.\n> > Is there a way to know when a given check was run on CRAN?\n> >\n> > Best regards,\n> >\n> > Lluís\n> >\n> > PS:  The problem is shared by many packages (>50), the vignette can be\n> > built but not rebuilt and it raises an error message about not finding\n> > pandoc.\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear Simon,\n\nThank you for clearing my misunderstanding about CRAN's checks.\nLooking forward to seeing logs with a date (if possible).\n\nThis case  was initiated by teal.reporter, the error is related ",
       "thread_id": "thread-9e0ea805cbe7",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011434.html"
     },
     {
       "id": "msg-960e2632ef96",
@@ -1789,7 +1883,8 @@
       "body_snippet": "On 29.01.2025 18:13, Craig Gower-Page wrote:\n> Hi,\n> \n> A package of ours had its test code throw an error during its R CMD\n> CHECK on CRAN due to it attempting to write files to the installation\n> di",
       "thread_id": "thread-993f99ff9dfb",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011435.html"
     },
     {
       "id": "msg-59ea742192d8",
@@ -1805,7 +1900,8 @@
       "body_snippet": "In the vignette of my package Rgof I create a function written in Rcpp, which is then passed and executed in some of the routines included in Rgof. The package passes all the checks on the various pla",
       "thread_id": "thread-59ea742192d8",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011436.html"
     },
     {
       "id": "msg-db49b6aa6fa9",
@@ -1823,7 +1919,8 @@
       "body_snippet": "Hi Wolfgang,\n\nOn 31 January 2025 at 15:02, Wolfgang Rolke via R-package-devel wrote:\n| In the vignette of my package Rgof I create a function written in Rcpp, which is then passed and executed in some",
       "thread_id": "thread-59ea742192d8",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011437.html"
     },
     {
       "id": "msg-35a5466e7005",
@@ -1838,11 +1935,12 @@
         "<CAN+W6_uBLsOtqf43FoTTJPhEFMp4GviCXwNXJskmqKep8KkRbA@mail.gmail.com>",
         "<D5364A6D-A336-4AA9-BED6-3EDED61AE9D9@R-project.org>"
       ],
-      "body_plain": "On 29.01.2025 20:08, Simon Urbanek wrote:\n> Llu?s,\n> \n> the timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of the check itself (neither does the timestamp of the URL as it is often re-generated). So in short, no, there is no way to know the timestamp of the check. I think it may be useful, so I'll see if we can add it.\n> \n> That said, checks are not re-run \n\nThat is true for Mac flavours. All others get regularly updated \n(R-devel), or at least if any dependency in the hierarchy is updated \n(Windows R-release/oldrelease).\n\nBest,\nUwe Ligges\n\n\n > unless you update the version of your package (or there is an error \ncaused by another package whose update will fix it), so in most cases \nwaiting won't fix anything. If there is a problem you have to report it \nto the corresponding CRAN maintainer so for macOS that would be me.>\n> Cheers,\n> Simon\n> \n> \n>> On Jan 30, 2025, at 5:10 AM, Llu?s Revilla <lluis.revilla at gmail.com> wrote:\n>>\n>> Dear list,\n>>\n>> Recently after a package update I noticed an ERROR on one flavor.\n>> I believe this is some problem with the r-release-macos-x86_64 flavor.\n>> But I'm not sure if this is fixed on the system or not.\n>> I was waiting to see if this got fixed with time (and thanks to the CRAN\n>> volunteers).\n>>\n>> A check landing page on CRAN had a date \"Last updated on 2025-01-29\n>> 08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because there\n>> are some checks that are still from the old version of the package and the\n>> failing check is still failing, I'm not sure which checks were updated. Is\n>> this the date of the landing page of all the checks, or all the checks are\n>> updated up to that date?\n>>\n>> Bioconductor provides the time with two fields: StartedAt and EndedAt for\n>> each flavor (and step).\n>> I hoped to find a date on the check logs. It would make it easier to know\n>> when it is updated and it has the same result as previously.\n>> Is there a way to know when a given check was run on CRAN?\n>>\n>> Best regards,\n>>\n>> Llu?s\n>>\n>> PS:  The problem is shared by many packages (>50), the vignette can be\n>> built but not rebuilt and it raises an error message about not finding\n>> pandoc.\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "On 29.01.2025 20:08, Simon Urbanek wrote:\n> Llu?s,\n> \n> the timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of th",
+      "body_plain": "On 29.01.2025 20:08, Simon Urbanek wrote:\n> Lluís,\n> \n> the timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of the check itself (neither does the timestamp of the URL as it is often re-generated). So in short, no, there is no way to know the timestamp of the check. I think it may be useful, so I'll see if we can add it.\n> \n> That said, checks are not re-run \n\nThat is true for Mac flavours. All others get regularly updated \n(R-devel), or at least if any dependency in the hierarchy is updated \n(Windows R-release/oldrelease).\n\nBest,\nUwe Ligges\n\n\n > unless you update the version of your package (or there is an error \ncaused by another package whose update will fix it), so in most cases \nwaiting won't fix anything. If there is a problem you have to report it \nto the corresponding CRAN maintainer so for macOS that would be me.>\n> Cheers,\n> Simon\n> \n> \n>> On Jan 30, 2025, at 5:10 AM, Lluís Revilla <lluis.revilla at gmail.com> wrote:\n>>\n>> Dear list,\n>>\n>> Recently after a package update I noticed an ERROR on one flavor.\n>> I believe this is some problem with the r-release-macos-x86_64 flavor.\n>> But I'm not sure if this is fixed on the system or not.\n>> I was waiting to see if this got fixed with time (and thanks to the CRAN\n>> volunteers).\n>>\n>> A check landing page on CRAN had a date \"Last updated on 2025-01-29\n>> 08:49:42 CET.\" then it changed to \"2025-01-29 15:49:25 CET.\". Because there\n>> are some checks that are still from the old version of the package and the\n>> failing check is still failing, I'm not sure which checks were updated. Is\n>> this the date of the landing page of all the checks, or all the checks are\n>> updated up to that date?\n>>\n>> Bioconductor provides the time with two fields: StartedAt and EndedAt for\n>> each flavor (and step).\n>> I hoped to find a date on the check logs. It would make it easier to know\n>> when it is updated and it has the same result as previously.\n>> Is there a way to know when a given check was run on CRAN?\n>>\n>> Best regards,\n>>\n>> Lluís\n>>\n>> PS:  The problem is shared by many packages (>50), the vignette can be\n>> built but not rebuilt and it raises an error message about not finding\n>> pandoc.\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 29.01.2025 20:08, Simon Urbanek wrote:\n> Lluís,\n> \n> the timestamps are generated by the CRAN server when it updates webpage from the actual check reports so it does not reflect the date/time of th",
       "thread_id": "thread-9e0ea805cbe7",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011438.html"
     },
     {
       "id": "msg-21a81464739d",
@@ -1858,7 +1956,8 @@
       "body_snippet": "Hi,h\n\nI have a package that has been in CRAN for years and is now failing \nchecks because some of the output of a test script is differing on some \nmachines in the fifth or sixth decimal place. I have",
       "thread_id": "thread-21a81464739d",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011439.html"
     },
     {
       "id": "msg-361953a0d6c8",
@@ -1876,7 +1975,8 @@
       "body_snippet": ">>>>> Kevin R Coombes \n>>>>>     on Fri, 31 Jan 2025 11:48:33 -0500 writes:\n\n    > Hi,\n\n    > I have a package that has been in CRAN for years and is now failing \n    > checks because some of the outp",
       "thread_id": "thread-21a81464739d",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011440.html"
     },
     {
       "id": "msg-7c543f78fd26",
@@ -1895,7 +1995,8 @@
       "body_snippet": "Thanks for the quick (detailed) response.\n\nOn 1/31/2025 12:23 PM, Martin Maechler wrote:\n>>>>>> Kevin R Coombes\n>>>>>>      on Fri, 31 Jan 2025 11:48:33 -0500 writes:\n>      > Hi,\n>\n>      > I have a ",
       "thread_id": "thread-21a81464739d",
       "thread_depth": 2,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q1/011441.html"
     }
   ],
   "threads": [

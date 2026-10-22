@@ -19,7 +19,8 @@
       "body_snippet": "Kevin,\n\nwelcome to the S4 world! ;) There is really no good solution since S4 only works at all if you attach the package since it relies on replacing the base S3 generic with its own - so the questio",
       "thread_id": "thread-0903bf8fb59e",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010683.html"
     },
     {
       "id": "msg-68aa273df501",
@@ -31,11 +32,12 @@
       "subject_clean": "[R-pkg-devel] May .External2() be used in packages?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nIs the `.External2()` function part of the public API, and can it be used\nin R packages submitted to CRAN? I would like to start using it in a\npackage, and there *are* packages on CRAN which use it. But its man page\n[1] calls it ?internal?, R-exts doesn?t mention it at all (unlike `.C()`,\n`.Call()` and `.External()`), and it doesn?t have any actual documentation.\nIn the context of the recent tightening of the C API CRAN rules, this makes\nme concerned that `.External2()` might be next on the chopping block.\n\n[1]\nhttps://stat.ethz.ch/R-manual/R-devel/library/base/html/Foreign-internal.html\n\nCheers,\n\n-- \nKonrad Rudolph // @klmr\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hello,\n\nIs the `.External2()` function part of the public API, and can it be used\nin R packages submitted to CRAN? I would like to start using it in a\npackage, and there *are* packages on CRAN which use it. But its man page\n[1] calls it “internal”, R-exts doesn’t mention it at all (unlike `.C()`,\n`.Call()` and `.External()`), and it doesn’t have any actual documentation.\nIn the context of the recent tightening of the C API CRAN rules, this makes\nme concerned that `.External2()` might be next on the chopping block.\n\n[1]\nhttps://stat.ethz.ch/R-manual/R-devel/library/base/html/Foreign-internal.html\n\nCheers,\n\n-- \nKonrad Rudolph // @klmr\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hello,\n\nIs the `.External2()` function part of the public API, and can it be used\nin R packages submitted to CRAN? I would like to start using it in a\npackage, and there *are* packages on CRAN which u",
       "thread_id": "thread-68aa273df501",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010684.html"
     },
     {
       "id": "msg-9e6e54563aef",
@@ -49,11 +51,12 @@
       "references": [
         "<CAM2gKPbHwVi4PiDOYK=r5NCVozN-4sJonp5FqeL0Jy5Xpm6N8g@mail.gmail.com>"
       ],
-      "body_plain": ".External2() is not in the API and is not intended to be used in\npackages.  Packages that for whatever reason have chosen to use it\ncould instead use .External(), and that is what yo should use. I don't\nexpect that to be enforced by the check code soon, but it might be.\n\n[.External2() exists for historical reason to ease moving things that\nused to be primitives in base out into packages where they fit more\nnaturally. It could be removed now, but I don't think that is high on\nanyone's priority list.]\n\nBest,\n\nluke\n\nOn Wed, 1 May 2024, Konrad Rudolph wrote:\n\n> Hello,\n>\n> Is the `.External2()` function part of the public API, and can it be used\n> in R packages submitted to CRAN? I would like to start using it in a\n> package, and there *are* packages on CRAN which use it. But its man page\n> [1] calls it ?internal?, R-exts doesn?t mention it at all (unlike `.C()`,\n> `.Call()` and `.External()`), and it doesn?t have any actual documentation.\n> In the context of the recent tightening of the C API CRAN rules, this makes\n> me concerned that `.External2()` might be next on the chopping block.\n>\n> [1]\n> https://stat.ethz.ch/R-manual/R-devel/library/base/html/Foreign-internal.html\n>\n> Cheers,\n>\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/",
+      "body_plain": ".External2() is not in the API and is not intended to be used in\npackages.  Packages that for whatever reason have chosen to use it\ncould instead use .External(), and that is what yo should use. I don't\nexpect that to be enforced by the check code soon, but it might be.\n\n[.External2() exists for historical reason to ease moving things that\nused to be primitives in base out into packages where they fit more\nnaturally. It could be removed now, but I don't think that is high on\nanyone's priority list.]\n\nBest,\n\nluke\n\nOn Wed, 1 May 2024, Konrad Rudolph wrote:\n\n> Hello,\n>\n> Is the `.External2()` function part of the public API, and can it be used\n> in R packages submitted to CRAN? I would like to start using it in a\n> package, and there *are* packages on CRAN which use it. But its man page\n> [1] calls it “internal”, R-exts doesn’t mention it at all (unlike `.C()`,\n> `.Call()` and `.External()`), and it doesn’t have any actual documentation.\n> In the context of the recent tightening of the C API CRAN rules, this makes\n> me concerned that `.External2()` might be next on the chopping block.\n>\n> [1]\n> https://stat.ethz.ch/R-manual/R-devel/library/base/html/Foreign-internal.html\n>\n> Cheers,\n>\n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu/",
       "body_snippet": ".External2() is not in the API and is not intended to be used in\npackages.  Packages that for whatever reason have chosen to use it\ncould instead use .External(), and that is what yo should use. I don",
       "thread_id": "thread-68aa273df501",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010685.html"
     },
     {
       "id": "msg-5b5cb11b3c43",
@@ -68,11 +71,12 @@
         "<CAM2gKPbHwVi4PiDOYK=r5NCVozN-4sJonp5FqeL0Jy5Xpm6N8g@mail.gmail.com>",
         "<421bdf2-aa7c-983d-2687-1e83dc20bfcd@uiowa.edu>"
       ],
-      "body_plain": "Thanks,\n\nThat?s a shame but good to know.\n\nPackages that for whatever reason have chosen to use it\n> could instead use .External(), and that is what yo should use.\n\n\nUnfortunately .External() is not a replacement (in general, or for my\npurpose) since it?s missing the `call` and `rho` arguments, and computing\nthe same information without these arguments in C code is far from trivial.\n\n-- \nKonrad Rudolph // @klmr\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks,\n\nThat?s a shame but good to know.\n\nPackages that for whatever reason have chosen to use it\n> could instead use .External(), and that is what yo should use.\n\n\nUnfortunately .External() is not a",
+      "body_plain": "Thanks,\n\nThat’s a shame but good to know.\n\nPackages that for whatever reason have chosen to use it\n> could instead use .External(), and that is what yo should use.\n\n\nUnfortunately .External() is not a replacement (in general, or for my\npurpose) since it’s missing the `call` and `rho` arguments, and computing\nthe same information without these arguments in C code is far from trivial.\n\n-- \nKonrad Rudolph // @klmr\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks,\n\nThat’s a shame but good to know.\n\nPackages that for whatever reason have chosen to use it\n> could instead use .External(), and that is what yo should use.\n\n\nUnfortunately .External() is not a",
       "thread_id": "thread-68aa273df501",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010686.html"
     },
     {
       "id": "msg-167e1ed6d170",
@@ -88,11 +92,12 @@
         "<421bdf2-aa7c-983d-2687-1e83dc20bfcd@uiowa.edu>",
         "<CAM2gKPaYYcaqLGyL7RQueB-YsL4VVbAZKtXf0Z-9aiDeJrF8LA@mail.gmail.com>"
       ],
-      "body_plain": "yOn Wed, 1 May 2024, Konrad Rudolph wrote:\n\n> Thanks,\n> \n> That?s a shame but good to know.\n>\n>       Packages that for whatever reason have chosen to use it\n>       could instead use .External(), and that is what yo should use.\n> \n> \n> Unfortunately .External() is not a replacement (in general, or for my\n> purpose) since it?s missing the `call` and `rho` arguments, and computing\n> the same information without these arguments in C code is far from trivial.\n\nThe call you would get is not likely to be all that useful, but it is\nthe one you wrote. The environment is the one you get from environment()\nat the point where you would call .External2. So instead of\n\n.External2(\"foo\", x, y)\n\ndo\n\n.External(\"foo\", quote(.External2(\"foo\", x, y)), environment(), x, y)\n\nand adjust your C function accordingly.\n\nBest,\n\nluke\n\n> --\n> Konrad Rudolph // @klmr\n> \n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
-      "body_snippet": "yOn Wed, 1 May 2024, Konrad Rudolph wrote:\n\n> Thanks,\n> \n> That?s a shame but good to know.\n>\n>       Packages that for whatever reason have chosen to use it\n>       could instead use .External(), and",
+      "body_plain": "yOn Wed, 1 May 2024, Konrad Rudolph wrote:\n\n> Thanks,\n> \n> That’s a shame but good to know.\n>\n>       Packages that for whatever reason have chosen to use it\n>       could instead use .External(), and that is what yo should use.\n> \n> \n> Unfortunately .External() is not a replacement (in general, or for my\n> purpose) since it’s missing the `call` and `rho` arguments, and computing\n> the same information without these arguments in C code is far from trivial.\n\nThe call you would get is not likely to be all that useful, but it is\nthe one you wrote. The environment is the one you get from environment()\nat the point where you would call .External2. So instead of\n\n.External2(\"foo\", x, y)\n\ndo\n\n.External(\"foo\", quote(.External2(\"foo\", x, y)), environment(), x, y)\n\nand adjust your C function accordingly.\n\nBest,\n\nluke\n\n> --\n> Konrad Rudolph // @klmr\n> \n>\n\n-- \nLuke Tierney\nRalph E. Wareham Professor of Mathematical Sciences\nUniversity of Iowa                  Phone:             319-335-3386\nDepartment of Statistics and        Fax:               319-335-3017\n    Actuarial Science\n241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\nIowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu",
+      "body_snippet": "yOn Wed, 1 May 2024, Konrad Rudolph wrote:\n\n> Thanks,\n> \n> That’s a shame but good to know.\n>\n>       Packages that for whatever reason have chosen to use it\n>       could instead use .External(), and",
       "thread_id": "thread-68aa273df501",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010687.html"
     },
     {
       "id": "msg-f3acc0b97dcd",
@@ -109,11 +114,12 @@
         "<CAM2gKPaYYcaqLGyL7RQueB-YsL4VVbAZKtXf0Z-9aiDeJrF8LA@mail.gmail.com>",
         "<d4ca5af-8c2e-ebc3-de78-2cccea4e72b@uiowa.edu>"
       ],
-      "body_plain": "Hi Luke,\n\nThanks, obviously that will work and I didn?t think of it.\n\nIn my defence I had previously used match.call() to capture the call on the\nR side, and representative microbenchmarks show that it adds a prohibitive\noverhead for my use-case. On the C side I only need the caller information\nin the non-performance sensitive path (for error message formatting) so I\ncan compute it on demand. And I hadn?t included .External2() in that\nbenchmark yet. I assume that it?ll be no faster than the way you proposed,\nso it isn?t actually needed in my case ? just as you said.\n\n\nOn Wed, 1 May 2024 at 21:32, <luke-tierney at uiowa.edu> wrote:\n\n> yOn Wed, 1 May 2024, Konrad Rudolph wrote:\n>\n> > Thanks,\n> >\n> > That?s a shame but good to know.\n> >\n> >       Packages that for whatever reason have chosen to use it\n> >       could instead use .External(), and that is what yo should use.\n> >\n> >\n> > Unfortunately .External() is not a replacement (in general, or for my\n> > purpose) since it?s missing the `call` and `rho` arguments, and computing\n> > the same information without these arguments in C code is far from\n> trivial.\n>\n> The call you would get is not likely to be all that useful, but it is\n> the one you wrote. The environment is the one you get from environment()\n> at the point where you would call .External2. So instead of\n>\n> .External2(\"foo\", x, y)\n>\n> do\n>\n> .External(\"foo\", quote(.External2(\"foo\", x, y)), environment(), x, y)\n>\n> and adjust your C function accordingly.\n>\n> Best,\n>\n> luke\n>\n> > --\n> > Konrad Rudolph // @klmr\n> >\n> >\n>\n> --\n> Luke Tierney\n> Ralph E. Wareham Professor of Mathematical Sciences\n> University of Iowa                  Phone:             319-335-3386\n> Department of Statistics and        Fax:               319-335-3017\n>     Actuarial Science\n> 241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\n> Iowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu\n\n\n\n-- \nKonrad Rudolph // @klmr\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi Luke,\n\nThanks, obviously that will work and I didn?t think of it.\n\nIn my defence I had previously used match.call() to capture the call on the\nR side, and representative microbenchmarks show that i",
+      "body_plain": "Hi Luke,\n\nThanks, obviously that will work and I didn’t think of it.\n\nIn my defence I had previously used match.call() to capture the call on the\nR side, and representative microbenchmarks show that it adds a prohibitive\noverhead for my use-case. On the C side I only need the caller information\nin the non-performance sensitive path (for error message formatting) so I\ncan compute it on demand. And I hadn’t included .External2() in that\nbenchmark yet. I assume that it’ll be no faster than the way you proposed,\nso it isn’t actually needed in my case — just as you said.\n\n\nOn Wed, 1 May 2024 at 21:32, <luke-tierney at uiowa.edu> wrote:\n\n> yOn Wed, 1 May 2024, Konrad Rudolph wrote:\n>\n> > Thanks,\n> >\n> > That’s a shame but good to know.\n> >\n> >       Packages that for whatever reason have chosen to use it\n> >       could instead use .External(), and that is what yo should use.\n> >\n> >\n> > Unfortunately .External() is not a replacement (in general, or for my\n> > purpose) since it’s missing the `call` and `rho` arguments, and computing\n> > the same information without these arguments in C code is far from\n> trivial.\n>\n> The call you would get is not likely to be all that useful, but it is\n> the one you wrote. The environment is the one you get from environment()\n> at the point where you would call .External2. So instead of\n>\n> .External2(\"foo\", x, y)\n>\n> do\n>\n> .External(\"foo\", quote(.External2(\"foo\", x, y)), environment(), x, y)\n>\n> and adjust your C function accordingly.\n>\n> Best,\n>\n> luke\n>\n> > --\n> > Konrad Rudolph // @klmr\n> >\n> >\n>\n> --\n> Luke Tierney\n> Ralph E. Wareham Professor of Mathematical Sciences\n> University of Iowa                  Phone:             319-335-3386\n> Department of Statistics and        Fax:               319-335-3017\n>     Actuarial Science\n> 241 Schaeffer Hall                  email:   luke-tierney at uiowa.edu\n> Iowa City, IA 52242                 WWW:  http://www.stat.uiowa.edu\n\n\n\n-- \nKonrad Rudolph // @klmr\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Luke,\n\nThanks, obviously that will work and I didn’t think of it.\n\nIn my defence I had previously used match.call() to capture the call on the\nR side, and representative microbenchmarks show that i",
       "thread_id": "thread-68aa273df501",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010688.html"
     },
     {
       "id": "msg-8188b4dc7489",
@@ -132,7 +138,8 @@
       "body_snippet": "Hi Simon,\n\nThanks for the detailed answer. I had considered all those \npossibilities, and was hoping that I had just missed something obvious.\n\nI have been using S4 classes in my own packages for quit",
       "thread_id": "thread-0903bf8fb59e",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010689.html"
     },
     {
       "id": "msg-c8be07dfb6d8",
@@ -148,7 +155,8 @@
       "body_snippet": "I hope this message finds you well.\n\nFollowing the recent announcement of a vulnerability related to the\nRDS exploit in R\n(https://hiddenlayer.com/research/r-bitrary-code-execution/).\nRecent discussio",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010690.html"
     },
     {
       "id": "msg-74553205136e",
@@ -166,7 +174,8 @@
       "body_snippet": "Dear Maciej Nasinski,\n\nOn Fri, 3 May 2024 11:37:57 +0200\nMaciej Nasinski <nasinski.maciej at gmail.com> wrote:\n\n> I believe we must conduct a comprehensive review of all existing CRAN\n> packages.\n\nWhy",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010691.html"
     },
     {
       "id": "msg-eaea10a14e85",
@@ -184,7 +193,8 @@
       "body_snippet": "Dear Ivan,\n\nThank you for such a quick response.\n?It may be worth teaching people that, in general, R data files should be\nas trusted as R code.? I totally agree and that why I wrote that any code can",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010692.html"
     },
     {
       "id": "msg-412daf48a492",
@@ -202,7 +212,8 @@
       "body_snippet": "Dear Ivan,\n\nYour blog post is fantastic and I already start to promote it on LinkedIn with full credit to you.\n\nKR\nMaciej Nasinski\nUniversity of Warsaw\n\n> On 3 May 2024, at 12:04, Maciej Nasinski <nas",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010693.html"
     },
     {
       "id": "msg-75189c7237b4",
@@ -218,7 +229,8 @@
       "body_snippet": "Hi,\n\nI have an R library with C code in it. It has failed the CRAN checks for Debian.  The problem is with the error function being undefined. Section 6.2 of the Writing R extensions (see below) sugge",
       "thread_id": "thread-75189c7237b4",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010695.html"
     },
     {
       "id": "msg-658d376542a2",
@@ -237,7 +249,8 @@
       "body_snippet": "Hey All,\n\nOnce more, Ivan, thank you for your great blog post.\nI found the https://github.com/hrbrmstr/rdaradar solution and ran it on the\n100 most downloaded R packages.\nHappily, all data/inst rda fi",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010694.html"
     },
     {
       "id": "msg-6914ca65d697",
@@ -255,7 +268,8 @@
       "body_snippet": "Most functions in R have a prefix on their name, with aliases defined so \nyou can use the function without the prefix.  But you can turn off the \naliasing, in which case you need the true name.  I thi",
       "thread_id": "thread-75189c7237b4",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010696.html"
     },
     {
       "id": "msg-22b020e74819",
@@ -275,7 +289,8 @@
       "body_snippet": "On Fri, 3 May 2024 18:17:52 +0200\nMaciej Nasinski <nasinski.maciej at gmail.com> wrote:\n\n> I found the https://github.com/hrbrmstr/rdaradar solution and ran it\n> on the 100 most downloaded R packages.",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010697.html"
     },
     {
       "id": "msg-065b8c64b81d",
@@ -296,7 +311,8 @@
       "body_snippet": "I agree with Ivan here. And more generally, R is a fully featured\nprogramming language. You don't need just this one \"exploit\" (though, it\nreally does feel like a feature to some degree lol!) to be a ",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 6,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010698.html"
     },
     {
       "id": "msg-79d4f075fc94",
@@ -318,7 +334,8 @@
       "body_snippet": "Yes, this may have hit the news as a problem but any code anywhere can be a security issue.\n\nIf you want to read lots of R code and also the code for add-ins from libraries and compile everything from",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 7,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010699.html"
     },
     {
       "id": "msg-dc70a93f9d5a",
@@ -337,7 +354,8 @@
       "body_snippet": "On Fri, 3 May 2024, Ivan Krylov via R-package-devel wrote:\n\n> Dear Maciej Nasinski,\n>\n> On Fri, 3 May 2024 11:37:57 +0200\n> Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n>\n>> I believe we must",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010700.html"
     },
     {
       "id": "msg-645da3c8b219",
@@ -357,7 +375,8 @@
       "body_snippet": "Thank you all for the discussion.\nThen, we should promote \"code awareness\" and count on the CRAN Team to\ncontinue their great work:)\n\nWhat do you think about promoting containers?\nNowadays, containers",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010701.html"
     },
     {
       "id": "msg-0e9b5754e9e7",
@@ -378,7 +397,8 @@
       "body_snippet": "On Sat, 4 May 2024 08:09:28 +0200\nMaciej Nasinski <nasinski.maciej at gmail.com> wrote:\n\n> What do you think about promoting containers?\n\nContainers have an attack surface too, have user experience pr",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010702.html"
     },
     {
       "id": "msg-9bbdc886f4d8",
@@ -390,11 +410,12 @@
       "subject_clean": "[R-pkg-devel] Trouble with dependencies on phyloseq and microViz",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "I?m having trouble with:\nr-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\nand\nr-oldrel-macos-x86_64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-x86_64>\n\nflagging an error because I have a dependency on phyloseq, which is available through GitHub but not on the CRAN site. I have a similar problem with microViz, however I?ve managed to make it suggested, rather than required. There is no way to get around the phyloseq requirement. How do I fix this problem so that I can upload my package to the CRAN website? I feel like I had this problem with microViz in the past, but now it?s coming up with phylseq too, and I can?t remove that dependency.\n\nThanks!\nSharon",
-      "body_snippet": "I?m having trouble with:\nr-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\nand\nr-oldrel-macos-x86_64 <https://cran.r-project.org/web/checks/check_fla",
+      "body_plain": "I’m having trouble with:\nr-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\nand\nr-oldrel-macos-x86_64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-x86_64>\n\nflagging an error because I have a dependency on phyloseq, which is available through GitHub but not on the CRAN site. I have a similar problem with microViz, however I’ve managed to make it suggested, rather than required. There is no way to get around the phyloseq requirement. How do I fix this problem so that I can upload my package to the CRAN website? I feel like I had this problem with microViz in the past, but now it’s coming up with phylseq too, and I can’t remove that dependency.\n\nThanks!\nSharon",
+      "body_snippet": "I’m having trouble with:\nr-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\nand\nr-oldrel-macos-x86_64 <https://cran.r-project.org/web/checks/check_fla",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010703.html"
     },
     {
       "id": "msg-bb961c6acc8e",
@@ -408,11 +429,12 @@
       "references": [
         "<1FB885FF-2DA6-4CB6-A987-38858C3AF7FA@clemson.edu>"
       ],
-      "body_plain": "On 04/05/2024 11:53 a.m., Sharon Bewick wrote:\n> I?m having trouble with:\n> r-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\n> and\n> r-oldrel-macos-x86_64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-x86_64>\n> \n> flagging an error because I have a dependency on phyloseq, which is available through GitHub but not on the CRAN site. I have a similar problem with microViz, however I?ve managed to make it suggested, rather than required. There is no way to get around the phyloseq requirement. How do I fix this problem so that I can upload my package to the CRAN website? I feel like I had this problem with microViz in the past, but now it?s coming up with phylseq too, and I can?t remove that dependency.\n> \n\nphyloseq is a Bioconductor package. It appears to be available from \nBioConductor, so it doesn't matter that it's not on CRAN.\n\nHave you tried submitting your package to CRAN?  If so, could you show \nus the error you received?\n\nDuncan Murdoch",
-      "body_snippet": "On 04/05/2024 11:53 a.m., Sharon Bewick wrote:\n> I?m having trouble with:\n> r-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\n> and\n> r-oldrel-macos-",
+      "body_plain": "On 04/05/2024 11:53 a.m., Sharon Bewick wrote:\n> I’m having trouble with:\n> r-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\n> and\n> r-oldrel-macos-x86_64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-x86_64>\n> \n> flagging an error because I have a dependency on phyloseq, which is available through GitHub but not on the CRAN site. I have a similar problem with microViz, however I’ve managed to make it suggested, rather than required. There is no way to get around the phyloseq requirement. How do I fix this problem so that I can upload my package to the CRAN website? I feel like I had this problem with microViz in the past, but now it’s coming up with phylseq too, and I can’t remove that dependency.\n> \n\nphyloseq is a Bioconductor package. It appears to be available from \nBioConductor, so it doesn't matter that it's not on CRAN.\n\nHave you tried submitting your package to CRAN?  If so, could you show \nus the error you received?\n\nDuncan Murdoch",
+      "body_snippet": "On 04/05/2024 11:53 a.m., Sharon Bewick wrote:\n> I’m having trouble with:\n> r-oldrel-macos-arm64 <https://cran.r-project.org/web/checks/check_flavors.html#r-oldrel-macos-arm64>\n> and\n> r-oldrel-macos-",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010704.html"
     },
     {
       "id": "msg-0dd011b55718",
@@ -426,11 +448,12 @@
       "references": [
         "<1FB885FF-2DA6-4CB6-A987-38858C3AF7FA@clemson.edu>"
       ],
-      "body_plain": "? Sat, 4 May 2024 15:53:25 +0000\nSharon Bewick <sbewick at clemson.edu> ?????:\n\n> I have a dependency on phyloseq, which is available through GitHub\n> but not on the CRAN site. I have a similar problem with microViz,\n> however I?ve managed to make it suggested, rather than required.\n> There is no way to get around the phyloseq requirement. How do I fix\n> this problem so that I can upload my package to the CRAN website?\n\nDid a human reviewer tell you to get rid of the dependencies? There is\nat least 444 packages on CRAN with strong dependencies on Bioconductor\npackages, so your phyloseq dependency should work. In fact, 14 of them\ndepend on phyloseq.\n\nWhat you need is an Additional_repositories field in your DESCRIPTION\nspecifying the source package repository where microViz could be\ninstalled from. I think that\n\nAdditional_repositories: https://david-barnett.r-universe.dev\n\n...should work.\n\nBesides that, you'll need to increment the version and list the *.Rproj\nfile in .Rbuildignore:\nhttps://win-builder.r-project.org/incoming_pretest/HybridMicrobiomes_0.1.1_20240504_173331/Debian/00check.log\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Sat, 4 May 2024 15:53:25 +0000\nSharon Bewick <sbewick at clemson.edu> ?????:\n\n> I have a dependency on phyloseq, which is available through GitHub\n> but not on the CRAN site. I have a similar proble",
+      "body_plain": "В Sat, 4 May 2024 15:53:25 +0000\nSharon Bewick <sbewick at clemson.edu> пишет:\n\n> I have a dependency on phyloseq, which is available through GitHub\n> but not on the CRAN site. I have a similar problem with microViz,\n> however I’ve managed to make it suggested, rather than required.\n> There is no way to get around the phyloseq requirement. How do I fix\n> this problem so that I can upload my package to the CRAN website?\n\nDid a human reviewer tell you to get rid of the dependencies? There is\nat least 444 packages on CRAN with strong dependencies on Bioconductor\npackages, so your phyloseq dependency should work. In fact, 14 of them\ndepend on phyloseq.\n\nWhat you need is an Additional_repositories field in your DESCRIPTION\nspecifying the source package repository where microViz could be\ninstalled from. I think that\n\nAdditional_repositories: https://david-barnett.r-universe.dev\n\n...should work.\n\nBesides that, you'll need to increment the version and list the *.Rproj\nfile in .Rbuildignore:\nhttps://win-builder.r-project.org/incoming_pretest/HybridMicrobiomes_0.1.1_20240504_173331/Debian/00check.log\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Sat, 4 May 2024 15:53:25 +0000\nSharon Bewick <sbewick at clemson.edu> пишет:\n\n> I have a dependency on phyloseq, which is available through GitHub\n> but not on the CRAN site. I have a similar proble",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010705.html"
     },
     {
       "id": "msg-f568b37b4a38",
@@ -451,7 +474,8 @@
       "body_snippet": "On Sat, 4 May 2024, Maciej Nasinski wrote:\n\n> Thank you all for the discussion.Then, we should promote \"code awareness\" and count on the CRAN Team to continue their great work:)\n> \n> What do you think",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010706.html"
     },
     {
       "id": "msg-085526f0e514",
@@ -473,7 +497,8 @@
       "body_snippet": "Hey Vladimir,\n\nThank you for your answer.\nGitHub codespaces are \"a separate computer\" and are free for students and\nthe educational sector.\nThe GitHub codespaces are a cloud service that can be create",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010707.html"
     },
     {
       "id": "msg-f0c0ed3d35d1",
@@ -496,7 +521,8 @@
       "body_snippet": "This is true, and useful.\n\n   Many old-school R users are nervous about coming to rely on tools \nthat are controlled by a company that may rescind that availability in \nthe future, or may possibly use",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 6,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010708.html"
     },
     {
       "id": "msg-f69bc8127f93",
@@ -515,11 +541,12 @@
         "<alpine.DEB.2.22.394.2405041238460.3559@iridium>",
         "<CA+h+x0Zo3cPd_NoTDa2Kuy+9HHWWt9NOCQteG+Yv7gyoqzZcOA@mail.gmail.com>"
       ],
-      "body_plain": "On Sat, 4 May 2024, Maciej Nasinski wrote:\n\n> Hey Vladimir,\n> Thank you for your answer.\n> GitHub codespaces are \"a separate computer\" and are free for students and the educational sector.\n\nHi Maciej,\n\n    What I was suggesting is that instead of encapsulating the application \nin a container that runs on the same physical hardware as other \ncontainers, you would be more secure to use a dedicated computer for the \napplication.\n\n    best\n\nVladimir Dergachev\n\n\n> The GitHub codespaces are a cloud service that can be created anytime, with a specific setup behind it (Dockerfile, settings.json, renv.lock,? ...).\n> The machines GitHub codespaces offer are quite decent (4core 16GB RAM?32GB Memory).?\n> You can destroy and recreate it anytime you want to.\n> You run GitHub codespaces from a web browser, but as Ivan stated, you may need a decent computer to handle them, even if all calculations are done on the cloud.\n> I use GitHub codespaces for all my University projects with my friends.? It is great that I do not have to explain?many things nowadays to older stuff as many things are automatic on GitHub\n> codespaces.\n> \n> KR\n> Maciej Nasinski\n> University of Warsaw\n> \n> On Sat, 4 May 2024 at 18:53, Vladimir Dergachev <volodya at mindspring.com> wrote:\n> \n>\n>       On Sat, 4 May 2024, Maciej Nasinski wrote:\n>\n>       > Thank you all for the discussion.Then, we should promote \"code awareness\" and count on the CRAN Team to continue their great work:)\n>       >\n>       > What do you think about promoting containers?\n>       > Nowadays, containers are more accessible, with GitHub codespaces being more affordable (mostly free for students and the educational sector).\n>       > I feel containers can help a little bit in making the R work more secure,?but once more when used properly.\n>\n>       I think it is not a good idea to focus on one use case. Some people will\n>       find containers more convenient some don't.\n>\n>       If you want security, I am sure containers are not the right approach -\n>       get a separate physical computer instead.\n>\n>       >From a convenience point of view containers are only ok as long as you\n>       don't need to interface with outside software, then it gets tricky as the\n>       security keeping things containerized starts interfering with getting work\n>       done. (Prime example: firefox snap on ubuntu)\n>\n>       One situation where containers can be helpful is distribution of\n>       commercial applications. Containers allow you to freeze library versions,\n>       so your app can still run with old C library or a specific version of\n>       Python. You can then _hope_ that containers will have fewer compatibility\n>       issues, or at least you can sell containers to your management on this\n>       idea.\n>\n>       But this is not really a good thing for an open source project like R.\n>\n>       best\n>\n>       Vladimir Dergachev\n>\n>       >\n>       > KR\n>       > Maciej Nasinski\n>       > University of Warsaw\n>       >\n>       > On Sat, 4 May 2024 at 07:17, Vladimir Dergachev <volodya at mindspring.com> wrote:\n>       >\n>       >\n>       >? ? ? ?On Fri, 3 May 2024, Ivan Krylov via R-package-devel wrote:\n>       >\n>       >? ? ? ?> Dear Maciej Nasinski,\n>       >? ? ? ?>\n>       >? ? ? ?> On Fri, 3 May 2024 11:37:57 +0200\n>       >? ? ? ?> Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n>       >? ? ? ?>\n>       >? ? ? ?>> I believe we must conduct a comprehensive review of all existing CRAN\n>       >? ? ? ?>> packages.\n>       >? ? ? ?>\n>       >? ? ? ?> Why now? R packages are already code. You don't need poisoned RDS files\n>       >? ? ? ?> to wreak havoc using an R package.\n>       >? ? ? ?>\n>       >? ? ? ?> On the other hand, R data files contain R objects, which contain code.\n>       >? ? ? ?> You don't need exploits to smuggle code inside an R object.\n>       >? ? ? ?>\n>       >\n>       >? ? ? ?I think the confusion arises because users expect \"R data files\" to only\n>       >? ? ? ?contain data, i.e. numbers, but they can contain any R object, including\n>       >? ? ? ?functions.\n>       >\n>       >? ? ? ?I, personally, never use them out of concern that accidentally saved\n>       >? ? ? ?function can override some functionality and be difficult to debug. And,\n>       >? ? ? ?of course, I never save R sessions.\n>       >\n>       >? ? ? ?If you need to pass data it is a good idea to use some common format like\n>       >? ? ? ?tab-separated CSV files with column names. One can also use MVL files\n>       >? ? ? ?(RMVL package).\n>       >\n>       >? ? ? ?best\n>       >\n>       >? ? ? ?Vladimir Dergachev\n>       >\n>       >\n>       >\n> \n> \n>",
+      "body_plain": "On Sat, 4 May 2024, Maciej Nasinski wrote:\n\n> Hey Vladimir,\n> Thank you for your answer.\n> GitHub codespaces are \"a separate computer\" and are free for students and the educational sector.\n\nHi Maciej,\n\n    What I was suggesting is that instead of encapsulating the application \nin a container that runs on the same physical hardware as other \ncontainers, you would be more secure to use a dedicated computer for the \napplication.\n\n    best\n\nVladimir Dergachev\n\n\n> The GitHub codespaces are a cloud service that can be created anytime, with a specific setup behind it (Dockerfile, settings.json, renv.lock,  ...).\n> The machines GitHub codespaces offer are quite decent (4core 16GB RAM 32GB Memory). \n> You can destroy and recreate it anytime you want to.\n> You run GitHub codespaces from a web browser, but as Ivan stated, you may need a decent computer to handle them, even if all calculations are done on the cloud.\n> I use GitHub codespaces for all my University projects with my friends.  It is great that I do not have to explain many things nowadays to older stuff as many things are automatic on GitHub\n> codespaces.\n> \n> KR\n> Maciej Nasinski\n> University of Warsaw\n> \n> On Sat, 4 May 2024 at 18:53, Vladimir Dergachev <volodya at mindspring.com> wrote:\n> \n>\n>       On Sat, 4 May 2024, Maciej Nasinski wrote:\n>\n>       > Thank you all for the discussion.Then, we should promote \"code awareness\" and count on the CRAN Team to continue their great work:)\n>       >\n>       > What do you think about promoting containers?\n>       > Nowadays, containers are more accessible, with GitHub codespaces being more affordable (mostly free for students and the educational sector).\n>       > I feel containers can help a little bit in making the R work more secure, but once more when used properly.\n>\n>       I think it is not a good idea to focus on one use case. Some people will\n>       find containers more convenient some don't.\n>\n>       If you want security, I am sure containers are not the right approach -\n>       get a separate physical computer instead.\n>\n>       >From a convenience point of view containers are only ok as long as you\n>       don't need to interface with outside software, then it gets tricky as the\n>       security keeping things containerized starts interfering with getting work\n>       done. (Prime example: firefox snap on ubuntu)\n>\n>       One situation where containers can be helpful is distribution of\n>       commercial applications. Containers allow you to freeze library versions,\n>       so your app can still run with old C library or a specific version of\n>       Python. You can then _hope_ that containers will have fewer compatibility\n>       issues, or at least you can sell containers to your management on this\n>       idea.\n>\n>       But this is not really a good thing for an open source project like R.\n>\n>       best\n>\n>       Vladimir Dergachev\n>\n>       >\n>       > KR\n>       > Maciej Nasinski\n>       > University of Warsaw\n>       >\n>       > On Sat, 4 May 2024 at 07:17, Vladimir Dergachev <volodya at mindspring.com> wrote:\n>       >\n>       >\n>       >? ?    On Fri, 3 May 2024, Ivan Krylov via R-package-devel wrote:\n>       >\n>       >? ?    > Dear Maciej Nasinski,\n>       >? ? ? ?>\n>       >? ?    > On Fri, 3 May 2024 11:37:57 +0200\n>       >? ?    > Maciej Nasinski <nasinski.maciej at gmail.com> wrote:\n>       >? ? ? ?>\n>       >? ?    >> I believe we must conduct a comprehensive review of all existing CRAN\n>       >? ?    >> packages.\n>       >? ? ? ?>\n>       >? ?    > Why now? R packages are already code. You don't need poisoned RDS files\n>       >? ?    > to wreak havoc using an R package.\n>       >? ? ? ?>\n>       >? ?    > On the other hand, R data files contain R objects, which contain code.\n>       >? ?    > You don't need exploits to smuggle code inside an R object.\n>       >? ? ? ?>\n>       >\n>       >? ?    I think the confusion arises because users expect \"R data files\" to only\n>       >? ?    contain data, i.e. numbers, but they can contain any R object, including\n>       >? ?    functions.\n>       >\n>       >? ?    I, personally, never use them out of concern that accidentally saved\n>       >? ?    function can override some functionality and be difficult to debug. And,\n>       >? ?    of course, I never save R sessions.\n>       >\n>       >? ?    If you need to pass data it is a good idea to use some common format like\n>       >? ?    tab-separated CSV files with column names. One can also use MVL files\n>       >? ?    (RMVL package).\n>       >\n>       >? ?    best\n>       >\n>       >? ?    Vladimir Dergachev\n>       >\n>       >\n>       >\n> \n> \n>",
       "body_snippet": "On Sat, 4 May 2024, Maciej Nasinski wrote:\n\n> Hey Vladimir,\n> Thank you for your answer.\n> GitHub codespaces are \"a separate computer\" and are free for students and the educational sector.\n\nHi Maciej,",
       "thread_id": "thread-c8be07dfb6d8",
       "thread_depth": 6,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010709.html"
     },
     {
       "id": "msg-46640d34fe38",
@@ -535,7 +562,8 @@
       "body_snippet": "I noticed a note on RMVL package check page for development version of R:\n\nFound non-API call to R: ?SETLENGTH?\n\nIs this something that is work-in-progress for the development version, or \nhas SETLENG",
       "thread_id": "thread-46640d34fe38",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010710.html"
     },
     {
       "id": "msg-9671d71160a1",
@@ -553,7 +581,8 @@
       "body_snippet": "On Sat, 4 May 2024, Vladimir Dergachev wrote:\n\n> [Some people who received this message don't often get email from \n> volodya at mindspring.com. Learn why this is important at \n> https://aka.ms/LearnA",
       "thread_id": "thread-46640d34fe38",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010711.html"
     },
     {
       "id": "msg-acd5652be76e",
@@ -572,7 +601,8 @@
       "body_snippet": "On Sat, 4 May 2024, luke-tierney at uiowa.edu wrote:\n\n> On Sat, 4 May 2024, Vladimir Dergachev wrote:\n>\n>> [Some people who received this message don't often get email from \n>> volodya at mindspring.c",
       "thread_id": "thread-46640d34fe38",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010712.html"
     },
     {
       "id": "msg-a7d8126ad64d",
@@ -590,7 +620,8 @@
       "body_snippet": "Jarrod,\n\ncould you point us to the code? There is not much to go by based on your email. One thing just in general: it's always safer to not re-map function names, especially since \"error\" can be defi",
       "thread_id": "thread-75189c7237b4",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010713.html"
     },
     {
       "id": "msg-e705a6b90927",
@@ -609,7 +640,8 @@
       "body_snippet": "Hi,\n\nUsing Rf_error() rather than error() fixed the problem. Not sure why the problem was only flagged on Debian, but it seems to have been triggered by R_NO_REMAP being defined (which will be default",
       "thread_id": "thread-75189c7237b4",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010714.html"
     },
     {
       "id": "msg-e562dc5e338f",
@@ -624,11 +656,12 @@
         "<1FB885FF-2DA6-4CB6-A987-38858C3AF7FA@clemson.edu>",
         "<20240504193210.0332d714@Tarkus>"
       ],
-      "body_plain": "> On 5/05/2024, at 4:32 AM, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> ? Sat, 4 May 2024 15:53:25 +0000\n> Sharon Bewick <sbewick at clemson.edu> ?????:\n> \n>> I have a dependency on phyloseq, which is available through GitHub\n>> but not on the CRAN site. I have a similar problem with microViz,\n>> however I?ve managed to make it suggested, rather than required.\n>> There is no way to get around the phyloseq requirement. How do I fix\n>> this problem so that I can upload my package to the CRAN website?\n> \n> Did a human reviewer tell you to get rid of the dependencies? There is\n> at least 444 packages on CRAN with strong dependencies on Bioconductor\n> packages, so your phyloseq dependency should work. In fact, 14 of them\n> depend on phyloseq.\n> \n> What you need is an Additional_repositories field in your DESCRIPTION\n> specifying the source package repository where microViz could be\n> installed from. I think that\n> \n> Additional_repositories: https://david-barnett.r-universe.dev\n> \n> ...should work.\n> \n\nThat doesn't work - additional repositories are not allowed on CRAN other than in very exceptional cases, because it means the package cannot be installed by users making it somewhat pointless. Bioconductor doesn't need to be flagged in Additional_repositories, but not all packages are available - only those that do no depend on the data repository.\n\nAs for the OP, can you post the name of the package and/or the link to the errors so I can have a look?\n\nCheers,\nSimon\n\n\n\n> Besides that, you'll need to increment the version and list the *.Rproj\n> file in .Rbuildignore:\n> https://win-builder.r-project.org/incoming_pretest/HybridMicrobiomes_0.1.1_20240504_173331/Debian/00check.log\n> \n> -- \n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "> On 5/05/2024, at 4:32 AM, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> ? Sat, 4 May 2024 15:53:25 +0000\n> Sharon Bewick <sbewick at clemson.edu> ?????:\n> \n>> I have",
+      "body_plain": "> On 5/05/2024, at 4:32 AM, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> В Sat, 4 May 2024 15:53:25 +0000\n> Sharon Bewick <sbewick at clemson.edu> пишет:\n> \n>> I have a dependency on phyloseq, which is available through GitHub\n>> but not on the CRAN site. I have a similar problem with microViz,\n>> however I’ve managed to make it suggested, rather than required.\n>> There is no way to get around the phyloseq requirement. How do I fix\n>> this problem so that I can upload my package to the CRAN website?\n> \n> Did a human reviewer tell you to get rid of the dependencies? There is\n> at least 444 packages on CRAN with strong dependencies on Bioconductor\n> packages, so your phyloseq dependency should work. In fact, 14 of them\n> depend on phyloseq.\n> \n> What you need is an Additional_repositories field in your DESCRIPTION\n> specifying the source package repository where microViz could be\n> installed from. I think that\n> \n> Additional_repositories: https://david-barnett.r-universe.dev\n> \n> ...should work.\n> \n\nThat doesn't work - additional repositories are not allowed on CRAN other than in very exceptional cases, because it means the package cannot be installed by users making it somewhat pointless. Bioconductor doesn't need to be flagged in Additional_repositories, but not all packages are available - only those that do no depend on the data repository.\n\nAs for the OP, can you post the name of the package and/or the link to the errors so I can have a look?\n\nCheers,\nSimon\n\n\n\n> Besides that, you'll need to increment the version and list the *.Rproj\n> file in .Rbuildignore:\n> https://win-builder.r-project.org/incoming_pretest/HybridMicrobiomes_0.1.1_20240504_173331/Debian/00check.log\n> \n> -- \n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "> On 5/05/2024, at 4:32 AM, Ivan Krylov via R-package-devel <r-package-devel at r-project.org> wrote:\n> \n> В Sat, 4 May 2024 15:53:25 +0000\n> Sharon Bewick <sbewick at clemson.edu> пишет:\n> \n>> I have",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010715.html"
     },
     {
       "id": "msg-50746a46fe69",
@@ -648,7 +681,8 @@
       "body_snippet": "On Tue, 7 May 2024 10:07:59 +1200\nSimon Urbanek <simon.urbanek at R-project.org> wrote:\n\n> That doesn't work - additional repositories are not allowed on CRAN\n> other than in very exceptional cases, b",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010716.html"
     },
     {
       "id": "msg-35970d97bb45",
@@ -669,7 +703,8 @@
       "body_snippet": "Ivan,\n\nsorry if it wasn't clear, but this thread was about strong dependencies -- Sharon noted that phyloseq must remain strong dependency and asked how to deal with that (see all the parts you cut fr",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010717.html"
     },
     {
       "id": "msg-c1301907afe3",
@@ -685,7 +720,8 @@
       "body_snippet": "In my Makevars file (linked below) I link to ssl by adding `-lssl` to\n`PKG_LIBS`. Since I do this, does libssl need to be added to the System\nRequirements field?\n\nMakevars:\nhttps://github.com/R-ArcGIS",
       "thread_id": "thread-c1301907afe3",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010718.html"
     },
     {
       "id": "msg-5c70bbe03c82",
@@ -701,7 +737,8 @@
       "body_snippet": "I've submitted an R package to CRAN and am failing checks *only on Debian*\n\nhttps://win-builder.r-project.org/incoming_pretest/arcgisutils_0.3.0_20240507_194020/Debian/00check.log\n\n\nThis NOTE does not",
       "thread_id": "thread-5c70bbe03c82",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010719.html"
     },
     {
       "id": "msg-105b093b3803",
@@ -719,7 +756,8 @@
       "body_snippet": "Hi Josiah,\n\nIndeed, the right thing to do is to declare the library in the\nSystemRequirements file. However, other than some specific documented\nusages which affect how R builds the package (e.g. C++ ",
       "thread_id": "thread-c1301907afe3",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010720.html"
     },
     {
       "id": "msg-11ca50e9c835",
@@ -737,7 +775,8 @@
       "body_snippet": "? Tue, 7 May 2024 14:03:42 -0400\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> This NOTE does not appear in Ubuntu, Mac, or Windows checks\n> https://github.com/R-ArcGIS/arcgisutils/actions/runs/8",
       "thread_id": "thread-5c70bbe03c82",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010721.html"
     },
     {
       "id": "msg-18b3ef9d53de",
@@ -756,7 +795,8 @@
       "body_snippet": "? Tue, 7 May 2024 21:40:31 +0300\nIvan Krylov via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> It's too late for Makevars to exclude files from the source package\n> tarball. Use .Rbuild",
       "thread_id": "thread-5c70bbe03c82",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010722.html"
     },
     {
       "id": "msg-6b47f62d639e",
@@ -771,11 +811,12 @@
         "<CAL3ufU+Y8qxMOz9WJhuBkmcTWweXKFBRv8E52rNSgLKYsTjWYg@mail.gmail.com>",
         "<20240507214031.0df7e144@Tarkus>"
       ],
-      "body_plain": "Thanks, Ivan!\n\nAs you can see, the directory is ignored already\nhttps://github.com/R-ArcGIS/arcgisutils/blob/ff8a0a1b936e27be16ac866aa16605b973d435c7/.Rbuildignore#L14\n\nThe directory is created in the Makevars after the zip is untarred:\n\nhttps://github.com/R-ArcGIS/arcgisutils/blob/ff8a0a1b936e27be16ac866aa16605b973d435c7/src/Makevars#L17\n\nThen the directory is removed during the clean phase I believe as well.\n\nI have other packages that use a similar makevars that are in CRAN.\n\nSince I can?t repro it I?m not sure how to debug it without submitting to\nCRAN again.\n\n\n\nOn Tue, May 7, 2024 at 14:40 Ivan Krylov <ikrylov at disroot.org> wrote:\n\n> ? Tue, 7 May 2024 14:03:42 -0400\n> Josiah Parry <josiah.parry at gmail.com> ?????:\n>\n> > This NOTE does not appear in Ubuntu, Mac, or Windows checks\n> >\n> https://github.com/R-ArcGIS/arcgisutils\n> /actions/runs/8989812276/job/24693685840\n> <https://github.com/R-ArcGIS/arcgisutils/actions/runs/8989812276/job/24693685840>\n>\n> That's a bit strange. It fires for me in a local R CMD check for a test\n> package even without --as-cran. The code performing the check has been\n> in R since ~2010.\n>\n> > I've made an edit to the Makevars to specifically remove this\n> > directory, but it seems to continue to persist.\n>\n> It's too late for Makevars to exclude files from the source package\n> tarball. Use .Rbuildignore instead:\n> https://cran.r-project.org/doc/manuals/R-exts.html#Building-binary-packages\n>\n> I think that the line src/vendor/chrono/CITATION\\\\.cff will prevent the\n> file from appearing in the package tarball.\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks, Ivan!\n\nAs you can see, the directory is ignored already\nhttps://github.com/R-ArcGIS/arcgisutils/blob/ff8a0a1b936e27be16ac866aa16605b973d435c7/.Rbuildignore#L14\n\nThe directory is created in the Makevars after the zip is untarred:\n\nhttps://github.com/R-ArcGIS/arcgisutils/blob/ff8a0a1b936e27be16ac866aa16605b973d435c7/src/Makevars#L17\n\nThen the directory is removed during the clean phase I believe as well.\n\nI have other packages that use a similar makevars that are in CRAN.\n\nSince I can’t repro it I’m not sure how to debug it without submitting to\nCRAN again.\n\n\n\nOn Tue, May 7, 2024 at 14:40 Ivan Krylov <ikrylov at disroot.org> wrote:\n\n> В Tue, 7 May 2024 14:03:42 -0400\n> Josiah Parry <josiah.parry at gmail.com> пишет:\n>\n> > This NOTE does not appear in Ubuntu, Mac, or Windows checks\n> >\n> https://github.com/R-ArcGIS/arcgisutils\n> /actions/runs/8989812276/job/24693685840\n> <https://github.com/R-ArcGIS/arcgisutils/actions/runs/8989812276/job/24693685840>\n>\n> That's a bit strange. It fires for me in a local R CMD check for a test\n> package even without --as-cran. The code performing the check has been\n> in R since ~2010.\n>\n> > I've made an edit to the Makevars to specifically remove this\n> > directory, but it seems to continue to persist.\n>\n> It's too late for Makevars to exclude files from the source package\n> tarball. Use .Rbuildignore instead:\n> https://cran.r-project.org/doc/manuals/R-exts.html#Building-binary-packages\n>\n> I think that the line src/vendor/chrono/CITATION\\\\.cff will prevent the\n> file from appearing in the package tarball.\n>\n> --\n> Best regards,\n> Ivan\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks, Ivan!\n\nAs you can see, the directory is ignored already\nhttps://github.com/R-ArcGIS/arcgisutils/blob/ff8a0a1b936e27be16ac866aa16605b973d435c7/.Rbuildignore#L14\n\nThe directory is created in the",
       "thread_id": "thread-5c70bbe03c82",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010723.html"
     },
     {
       "id": "msg-e118d33e0ef5",
@@ -791,7 +832,8 @@
       "body_snippet": "Hello,\n\nI like to use write() in Fortran code to combine text with some integers \n& doubles, to pass runtime information to R in a way that is prettier \nand more legible than with intpr() & dblepr(). ",
       "thread_id": "thread-e118d33e0ef5",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010739.html"
     },
     {
       "id": "msg-fbf590a4fca9",
@@ -811,7 +853,8 @@
       "body_snippet": "Thanks to @yutannihilation for pointing out that the issue repros on\nr-universe\nhttps://github.com/r-universe/r-arcgis/actions/runs/8990426306/job/24695887245\n.\n\nDo folks know if there are any templat",
       "thread_id": "thread-5c70bbe03c82",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010724.html"
     },
     {
       "id": "msg-479033207e51",
@@ -827,7 +870,8 @@
       "body_snippet": "I am sorry for blowing up this thread lately.\n\nI've submitted a package to CRAN that uses Rust which thus requires\ndependencies to be vendored. https://github.com/R-ArcGIS/arcgisutils/\n\nThe vendored d",
       "thread_id": "thread-479033207e51",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010725.html"
     },
     {
       "id": "msg-b611092db6b1",
@@ -845,7 +889,8 @@
       "body_snippet": "CRAN policy [1] says: \"If the sources are too large, it is acceptable\nto download them as part of installation, but do ensure that the\ndownload is of a fixed version rather than the latest.\" So you co",
       "thread_id": "thread-479033207e51",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010726.html"
     },
     {
       "id": "msg-a1bf50f600be",
@@ -861,7 +906,8 @@
       "body_snippet": "Hello, \n\nI just discovered that my package 'refseqR' was removed from the CRAN repository on April 30th. \nhttps://cran.r-project.org/web/packages/refseqR/index.html?\n\nThis news is extremely upsetting,",
       "thread_id": "thread-a1bf50f600be",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010727.html"
     },
     {
       "id": "msg-d737f26cedcc",
@@ -879,7 +925,8 @@
       "body_snippet": "According to the CRAN links\n<https://cran-archive.r-project.org/web/checks/2024/2024-04-30_check_results_refseqR.html>,\nyour package had an error on r-devel-windows-x86_64 and\nr-patched-linux-x86_64 w",
       "thread_id": "thread-a1bf50f600be",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010728.html"
     },
     {
       "id": "msg-4bcea22e2169",
@@ -897,7 +944,8 @@
       "body_snippet": "? Wed, 8 May 2024 17:30:46 +0200\n\"Jose V. Die Ramon\" <z42diraj at uco.es> ?????:\n\n> Could anyone please help me understand the reasons behind this, or\n> suggest any steps I should take to resolve it?\n",
       "thread_id": "thread-a1bf50f600be",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010729.html"
     },
     {
       "id": "msg-66ddc579d08e",
@@ -915,7 +963,8 @@
       "body_snippet": "On 8 May 2024 at 11:02, Josiah Parry wrote:\n| CRAN has rejected this package with:\n| \n| *   Size of tarball: 18099770 bytes*\n| \n| *Please reudce to less than 5 MB for a CRAN package.*\n\nAre you by chan",
       "thread_id": "thread-479033207e51",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010730.html"
     },
     {
       "id": "msg-0037ed2b4834",
@@ -934,7 +983,8 @@
       "body_snippet": "Thank you, Dirk. This was a direct email from a CRAN member and not part of\nthe automatic checks. The whole email is below. I think the intent of the\nmessage is \"please resubmit.\"\n\nThanks, we see:\n\n\n>",
       "thread_id": "thread-479033207e51",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010731.html"
     },
     {
       "id": "msg-41d1f4b30f4f",
@@ -950,7 +1000,8 @@
       "body_snippet": "Hello everyone, this is my first post on the mailing list (as well as the first package I'm attempting to publish), so please forgive any obvious errors.\n\nI'm using a lot of Fortran code which relies ",
       "thread_id": "thread-41d1f4b30f4f",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010740.html"
     },
     {
       "id": "msg-3fc0fadb53f8",
@@ -969,7 +1020,8 @@
       "body_snippet": "Thank you, Neal!\n\nI took some inspiration from the arrow-r github repo and ch 1.2 of the\nmanual\n\n*If your configure script needs auxiliary files, it is recommended that you\n> ship them in a tools dire",
       "thread_id": "thread-479033207e51",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010732.html"
     },
     {
       "id": "msg-f22888b5407c",
@@ -989,7 +1041,8 @@
       "body_snippet": "? Wed, 8 May 2024 14:08:36 -0400\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> With ChatGPT's ability to write autoconf, I *think *I have something\n> that can work.\n\nYou don't have to write autoc",
       "thread_id": "thread-479033207e51",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010733.html"
     },
     {
       "id": "msg-0e1ddd3d9c9d",
@@ -1010,7 +1063,8 @@
       "body_snippet": "Thank you, Ivan, for your really thoughtful feedback! I really appreciate\nit!\n\n   - I'll see if there are any base R packages that support SHA-2 or SHA-3.\n   - I'll see if I can get the configure.ac t",
       "thread_id": "thread-479033207e51",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010734.html"
     },
     {
       "id": "msg-894959d8f949",
@@ -1030,7 +1084,8 @@
       "body_snippet": "On 08.05.2024 17:56, Josiah Parry wrote:\n> Thank you, Dirk. This was a direct email from a CRAN member and not part of\n> the automatic checks. The whole email is below. I think the intent of the\n> mes",
       "thread_id": "thread-479033207e51",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010735.html"
     },
     {
       "id": "msg-76c7e4ca845b",
@@ -1051,7 +1106,8 @@
       "body_snippet": "That's a good point! My apologies for not making that abundantly clear.\n\nRegardless, I think it is a fair ask to not submit massive tarballs of\ndependencies.\nClarifying how we might be able to store t",
       "thread_id": "thread-479033207e51",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010736.html"
     },
     {
       "id": "msg-537d5d08f533",
@@ -1073,7 +1129,8 @@
       "body_snippet": "Zenodo and OSF (see e.g. \n<https://fairsharing.org/FAIRsharing.g4z879>) are both non-profit \norganizations that support archiving -- that is, they both make stronger \nguarantees of permanent availabil",
       "thread_id": "thread-479033207e51",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010737.html"
     },
     {
       "id": "msg-2398c96ed3e5",
@@ -1093,7 +1150,8 @@
       "body_snippet": "On Wed, 8 May 2024, Josiah Parry wrote:\n\n>\n>\n> Yes, prqlr is a great Rust-based package! My other Rust based packages that\n> are on CRAN are based, in part on prqlr.\n>\n>\n\nIf there are many packages ba",
       "thread_id": "thread-479033207e51",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010738.html"
     },
     {
       "id": "msg-92693c53ea51",
@@ -1107,11 +1165,12 @@
       "references": [
         "<95b62a98-7920-4a36-8339-fce63a89e3e5@gmail.com>"
       ],
-      "body_plain": "Hi Jisca:\n\nI have used the write successfully.  I?m not sure if this matters or not,\nbut I am using WSL 2 with Ubuntu 22.04 installed.  It works fine with R =>\n4.0.\n\nHope this helps.\n\nSincerely,\nErin\n\nErin Hodgess, PhD\nmailto: erinm.hodgess at gmail.com\n\n\nOn Wed, May 8, 2024 at 6:49?PM Jisca Huisman <jisca.huisman at gmail.com>\nwrote:\n\n> Hello,\n>\n> I like to use write() in Fortran code to combine text with some integers\n> & doubles, to pass runtime information to R in a way that is prettier\n> and more legible than with intpr() & dblepr(). In the past any calls to\n> write() were strictly forbidden in Fortran code, as apparently it messed\n> something up internally (I cannot recall the details). But from 'writing\n> R extensions' it seems that there have been quite a few changes with\n> respect to support for Fortran code, and it currently reads:\n>\n>\n> 6.5.1 Printing from Fortran\n>\n> On many systems Fortran|write|and|print|statements can be used, but the\n> output may not interleave well with that of C, and may be invisible\n> onGUIinterfaces. They are not portable and best avoided.\n>\n>\n> To be more specific, would the subroutine below be allowed? Is it needed\n> to declare R >= 4.0 (?) in the package DESCRIPTION (& then use labelpr()\n> instead of intpr() ?) Is there an alternative without write() to get the\n> same result?\n>\n>\n> subroutine Rprint_pretty(iter, x)\n>      integer, intent(IN) :: iter\n>      double precision, intent(IN) :: x\n>      integer :: date_time_values(8), nchar, IntDummy(0)\n>      character(len=8) :: time_now\n>      character(len=200) :: msg_to_R\n>\n>      call date_and_time(VALUES=date_time_values)\n>      write(time_now, '(i2.2,\":\",i2.2,\":\",i2.2)') date_time_values(5:7)\n>      write(msg_to_R, '(a8, \" i: \", i5, \"  value: \", f8.2)') time_now,\n> iter, x\n>\n>      nchar = len(trim(msg_to_R))\n>     call intpr(trim(msg_to_R), nchar, IntDummy, 0)\n>\n>    end subroutine Rprint_pretty\n>\n>\n> Thanks!\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi Jisca:\n\nI have used the write successfully.  I?m not sure if this matters or not,\nbut I am using WSL 2 with Ubuntu 22.04 installed.  It works fine with R =>\n4.0.\n\nHope this helps.\n\nSincerely,\nErin\n",
+      "body_plain": "Hi Jisca:\n\nI have used the write successfully.  I’m not sure if this matters or not,\nbut I am using WSL 2 with Ubuntu 22.04 installed.  It works fine with R =>\n4.0.\n\nHope this helps.\n\nSincerely,\nErin\n\nErin Hodgess, PhD\nmailto: erinm.hodgess at gmail.com\n\n\nOn Wed, May 8, 2024 at 6:49 PM Jisca Huisman <jisca.huisman at gmail.com>\nwrote:\n\n> Hello,\n>\n> I like to use write() in Fortran code to combine text with some integers\n> & doubles, to pass runtime information to R in a way that is prettier\n> and more legible than with intpr() & dblepr(). In the past any calls to\n> write() were strictly forbidden in Fortran code, as apparently it messed\n> something up internally (I cannot recall the details). But from 'writing\n> R extensions' it seems that there have been quite a few changes with\n> respect to support for Fortran code, and it currently reads:\n>\n>\n> 6.5.1 Printing from Fortran\n>\n> On many systems Fortran|write|and|print|statements can be used, but the\n> output may not interleave well with that of C, and may be invisible\n> onGUIinterfaces. They are not portable and best avoided.\n>\n>\n> To be more specific, would the subroutine below be allowed? Is it needed\n> to declare R >= 4.0 (?) in the package DESCRIPTION (& then use labelpr()\n> instead of intpr() ?) Is there an alternative without write() to get the\n> same result?\n>\n>\n> subroutine Rprint_pretty(iter, x)\n>      integer, intent(IN) :: iter\n>      double precision, intent(IN) :: x\n>      integer :: date_time_values(8), nchar, IntDummy(0)\n>      character(len=8) :: time_now\n>      character(len=200) :: msg_to_R\n>\n>      call date_and_time(VALUES=date_time_values)\n>      write(time_now, '(i2.2,\":\",i2.2,\":\",i2.2)') date_time_values(5:7)\n>      write(msg_to_R, '(a8, \" i: \", i5, \"  value: \", f8.2)') time_now,\n> iter, x\n>\n>      nchar = len(trim(msg_to_R))\n>     call intpr(trim(msg_to_R), nchar, IntDummy, 0)\n>\n>    end subroutine Rprint_pretty\n>\n>\n> Thanks!\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi Jisca:\n\nI have used the write successfully.  I’m not sure if this matters or not,\nbut I am using WSL 2 with Ubuntu 22.04 installed.  It works fine with R =>\n4.0.\n\nHope this helps.\n\nSincerely,\nErin\n",
       "thread_id": "thread-e118d33e0ef5",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010741.html"
     },
     {
       "id": "msg-fcf1a4d2d1a8",
@@ -1127,7 +1186,8 @@
       "body_snippet": "Hi,\n\nI need to serialize and save a 20K x 20K matrix as a binary file. This process is significantly slower in R compared to Python (4X slower).\n\nI'm not sure about the best approach to optimize the b",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010742.html"
     },
     {
       "id": "msg-b6ca8994722a",
@@ -1145,7 +1205,8 @@
       "body_snippet": "On 9 May 2024 at 03:20, Sameh Abdulah wrote:\n| I need to serialize and save a 20K x 20K matrix as a binary file.\n\nHm that is an incomplete specification: _what_ do you want to do with it?\nRead it back",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010743.html"
     },
     {
       "id": "msg-e578fd37fd29",
@@ -1164,7 +1225,8 @@
       "body_snippet": "Thanks!\n\n\nI want to save data from a matrix to a file and then retrieve it later while running R code, all within R.\n\nAs long as the compression doesn't result in data loss, it should be suitable for ",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010744.html"
     },
     {
       "id": "msg-d5e8e12a13f2",
@@ -1182,7 +1244,8 @@
       "body_snippet": "Hi Jisca,\n\nOn Wed, 8 May 2024 10:37:28 +0200\nJisca Huisman <jisca.huisman at gmail.com> wrote:\n\n> I like to use write() in Fortran code [...] But from 'writing R\n> extensions' it seems that there have",
       "thread_id": "thread-e118d33e0ef5",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010745.html"
     },
     {
       "id": "msg-a431c961b4aa",
@@ -1200,7 +1263,8 @@
       "body_snippet": "Sameh,\n\nif it's a matrix, that's easy as you can write it directly which is the fastest possible way without compression - e.g. quick proof of concept:\n\nn <- 20000^2\nA <- matrix(runif(n), ncol = sqrt(",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010746.html"
     },
     {
       "id": "msg-d61cadef4dee",
@@ -1219,7 +1283,8 @@
       "body_snippet": "Dear Berwin & Erin,\n\nThanks for your replies. I should perhaps have clarified - this is for a \npackage on CRAN.\n\nIn my experience anything with Fortran write will get a NOTE from CRAN's \nauto-check:\n\n",
       "thread_id": "thread-e118d33e0ef5",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010747.html"
     },
     {
       "id": "msg-5b3c447ece84",
@@ -1237,7 +1302,8 @@
       "body_snippet": "Hi,\n\nHave a look at package nleqslv to see how you can avoid Fortran write completely.\nLook at the file src/nwout.c and the calls of various functions therein in the other fortran files.\n\nregards,\n\nBe",
       "thread_id": "thread-e118d33e0ef5",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010748.html"
     },
     {
       "id": "msg-86172b22c63a",
@@ -1256,7 +1322,8 @@
       "body_snippet": "Hello Berend,\n\nFantastic, thank you! I'm fairly sure I'll be able to figure something \nout with your code as a guide.\n\nbest,\n\nJisca\n\n\nOn Thu, 09/05/2024 13:08, Berend Hasselman wrote:\n> Hi,\n>\n> Have a",
       "thread_id": "thread-e118d33e0ef5",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010749.html"
     },
     {
       "id": "msg-1400f1962d79",
@@ -1274,7 +1341,8 @@
       "body_snippet": "On Thu, 9 May 2024, Sameh Abdulah wrote:\n\n> Hi,\n>\n> I need to serialize and save a 20K x 20K matrix as a binary file. This process is significantly slower in R compared to Python (4X slower).\n>\n> I'm ",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010750.html"
     },
     {
       "id": "msg-351bc3cafab4",
@@ -1292,7 +1360,8 @@
       "body_snippet": "On 08.05.2024 17:30, Jose V. Die Ramon wrote:\n> Hello,\n> \n> I just discovered that my package 'refseqR' was removed from the CRAN repository on April 30th.\n> https://cran.r-project.org/web/packages/re",
       "thread_id": "thread-a1bf50f600be",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010751.html"
     },
     {
       "id": "msg-65ff8d4953d4",
@@ -1310,7 +1379,8 @@
       "body_snippet": "Dear Othman El Hammouchi,\n\nWelcome to R-package-devel!\n\n? Wed, 08 May 2024 16:52:51 +0000\nOthman El Hammouchi <othman.el.hammouchi at protonmail.com> ?????:\n\n> However, upon submission I received an a",
       "thread_id": "thread-41d1f4b30f4f",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010752.html"
     },
     {
       "id": "msg-136b9c9bd9e9",
@@ -1329,7 +1399,8 @@
       "body_snippet": "Dear Ivan,\n\nThank you so much for taking the time. I'd already figured out my misunderstanding on polymorphism in the mean time. The flang limitations are quite unfortunate, especially since there's n",
       "thread_id": "thread-41d1f4b30f4f",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010753.html"
     },
     {
       "id": "msg-24a360b840e3",
@@ -1349,7 +1420,8 @@
       "body_snippet": "? Thu, 09 May 2024 15:31:25 +0000\nOthman El Hammouchi <othman.el.hammouchi at protonmail.com> ?????:\n\n> Do I understand it correctly that there is no way to specify a\n> Fortran standard in the SystemR",
       "thread_id": "thread-41d1f4b30f4f",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010754.html"
     },
     {
       "id": "msg-734b51ef22a2",
@@ -1371,7 +1443,8 @@
       "body_snippet": "? Wed, 8 May 2024 16:01:23 -0400\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n>    - I'll see if I can get the configure.ac to make the appropriate\n> Rscript call for configure.win.\n>       - I th",
       "thread_id": "thread-479033207e51",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010755.html"
     },
     {
       "id": "msg-322e950b0e3e",
@@ -1394,7 +1467,8 @@
       "body_snippet": "Software Heritage (see [1] for their website and [2] for a brief intro I gave\nat useR! 2019 in Toulouse) covers GitHub and CRAN [3]. It is by now 'in\ncollaboration with UNESCO', supported by a long an",
       "thread_id": "thread-479033207e51",
       "thread_depth": 6,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010756.html"
     },
     {
       "id": "msg-783e882d0818",
@@ -1418,7 +1492,8 @@
       "body_snippet": ">\n> ...but that's a luxury someone would have to pay for.\n>\n\nI'd happily give up my Netflix subscription for this. I suspect the\nR-foundation/consortium could assist as well?\n\nReferring to the \"Using ",
       "thread_id": "thread-479033207e51",
       "thread_depth": 7,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010757.html"
     },
     {
       "id": "msg-949cdc02c133",
@@ -1437,7 +1512,8 @@
       "body_snippet": "> On 9/05/2024, at 11:58 PM, Vladimir Dergachev <volodya at mindspring.com> wrote:\n> \n> \n> \n> On Thu, 9 May 2024, Sameh Abdulah wrote:\n> \n>> Hi,\n>> \n>> I need to serialize and save a 20K x 20K matrix ",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010758.html"
     },
     {
       "id": "msg-95142be16731",
@@ -1457,7 +1533,8 @@
       "body_snippet": "On Thu, May 9, 2024 at 3:46?PM Simon Urbanek\n<simon.urbanek at r-project.org> wrote:\n>\n>\n>\n> > On 9/05/2024, at 11:58 PM, Vladimir Dergachev <volodya at mindspring.com> wrote:\n> >\n> >\n> >\n> > On Thu, ",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010759.html"
     },
     {
       "id": "msg-22aca37326a1",
@@ -1478,7 +1555,8 @@
       "body_snippet": "> On 10/05/2024, at 12:31 PM, Henrik Bengtsson <henrik.bengtsson at gmail.com> wrote:\n> \n> On Thu, May 9, 2024 at 3:46?PM Simon Urbanek\n> <simon.urbanek at r-project.org> wrote:\n>> \n>> FWIW serialize(",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010760.html"
     },
     {
       "id": "msg-89e2688250be",
@@ -1499,7 +1577,8 @@
       "body_snippet": "Dear Ivan,\n\n\nThanks again for the help, you've given me some great pointers to \npursue. I will keep you posted on what CRAN responds and whether I find \na workaround.\n\n > I do wish that flang-new woul",
       "thread_id": "thread-41d1f4b30f4f",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010761.html"
     },
     {
       "id": "msg-8a4398942ea3",
@@ -1521,7 +1600,8 @@
       "body_snippet": "On Fri, 10 May 2024 15:12:17 +1200\nSimon Urbanek <simon.urbanek at R-project.org> wrote:\n\n> I wonder if it may be worth doing something a bit smarter and tag\n> officially a \"reverse XDR\" format instea",
       "thread_id": "thread-fcf1a4d2d1a8",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010762.html"
     },
     {
       "id": "msg-b3e17fe1a88f",
@@ -1537,7 +1617,8 @@
       "body_snippet": "Dear friends,\n\nI am developing an R package built with Rcpp. The package passed the test\nwith devtools::check() before submission to CRAN, but failed with the\nfollowing clang-UBSAN issue after submiss",
       "thread_id": "thread-b3e17fe1a88f",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010763.html"
     },
     {
       "id": "msg-4be84e4e58ec",
@@ -1559,7 +1640,8 @@
       "body_snippet": "Sharon,\n\nI have upgraded Bioc on the R-oldrel build machines and that seems to have taken care of the problem as far as I can tell:\nhttps://cran.r-project.org/web/checks/check_results_HybridMicrobiome",
       "thread_id": "thread-9bbdc886f4d8",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010764.html"
     },
     {
       "id": "msg-a6c380d8106a",
@@ -1577,7 +1659,8 @@
       "body_snippet": "? Sun, 12 May 2024 14:43:18 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n> /data/gannet/ripley/R/test-clang/Rcpp/include/Rcpp/internal/caster.h:30:25:\n> runtime error: nan is outside the range of",
       "thread_id": "thread-b3e17fe1a88f",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010765.html"
     },
     {
       "id": "msg-ac0b4ad41452",
@@ -1595,7 +1678,8 @@
       "body_snippet": "The rhub package should be able to reproduce that, see\nhttps://github.com/r-hub/rhub#readme\n\nOr you can use the clang-asan container directly:\nhttps://r-hub.github.io/containers/\n\nGabor\n\nOn Mon, May 1",
       "thread_id": "thread-b3e17fe1a88f",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010766.html"
     },
     {
       "id": "msg-c3f605216285",
@@ -1611,7 +1695,8 @@
       "body_snippet": "Hi,\nI have submitted an R package and I got the following notes from the CRAN\ntest. I couldn't find what should be the change I have to do to correct\nthis issue. Please check this and guide me to solv",
       "thread_id": "thread-c3f605216285",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010767.html"
     },
     {
       "id": "msg-05692c291626",
@@ -1629,7 +1714,8 @@
       "body_snippet": "? Mon, 13 May 2024 08:33:04 -0500\nRuwani Herath <ruwanirasanjalih at gmail.com> ?????:\n\n> This is what I entered in DESCRIPTION field.\n> \n> Authors at R: c(person(given = \"Ruwani\", family = \"Herath\", ",
       "thread_id": "thread-c3f605216285",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010768.html"
     },
     {
       "id": "msg-d0d63e2969c4",
@@ -1645,7 +1731,8 @@
       "body_snippet": "Hi everyone,\n\nI recently developed an R package called 'StepReg' and used the Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n\noutput:\n  BiocStyle::html_document:\n    toc_float: tr",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010769.html"
     },
     {
       "id": "msg-6f6df9c9182c",
@@ -1659,11 +1746,12 @@
       "references": [
         "<PH0PR10MB5612E8CF3DAE5ADB26034B799BE32@PH0PR10MB5612.namprd10.prod.outlook.com>"
       ],
-      "body_plain": "Hi Junhui,\n\nThere is a separate log for checking if your package works without\nsuggested packages: in the StepReg results\nThe noSuggests title leads to:\nhttps://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\nWhere you can see that it fails if a user don't have BiocStyle installed.\nI don't know if it is possible to use a vignette output conditionally with\nknitr: In any case it seems that it would be a requirement (Imports, or\nDepends).\n\nHowever, it is best to not use the Bioconductor style for a package in\nCRAN.\nYou could use the *_vignette or *_document format directly (from rmarkdown\nif I recall correctly).\nYou will remove a dependency and avoid this problem entirely.\n\nBest,\n\nLlu?s\n\n\nOn Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> wrote:\n\n> Hi everyone,\n>\n> I recently developed an R package called 'StepReg' and used the\n> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>\n> output:\n>   BiocStyle::html_document:\n>     toc_float: true\n>   BiocStyle::pdf_document: default\n>\n> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n> included a new line 'biocViews:', as follows:\n>\n> VignetteBuilder: knitr\n> biocViews:\n> Suggests:\n>     knitr,\n>     testthat,\n>     BiocStyle,\n>     kableExtra\n>\n> You may find all those information here:\n> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>\n> There were no error messages when checking with 'R CMD check' and on\n> https://win-builder.r-project.org/upload.aspx. However, an error message\n> occurred when I attempted to upload it to CRAN:\n>\n> * checking re-building of vignette outputs ... ERROR\n> Error(s) in re-building vignettes:\n> --- re-building 'StepReg.Rmd' using rmarkdown\n> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n> there is no package called 'BiocStyle'\n> --- failed re-building 'StepReg.Rmd'\n>\n> SUMMARY: processing the following file failed:\n>    'StepReg.Rmd'\n>\n> Error: Vignette re-building failed.\n> Execution halted\n>\n> For version 1.5.0 (\n> https://cran.r-project.org/web/packages/StepReg/index.html), I\n> successfully uploaded it to CRAN without including 'biocViews:' in the\n> DESCRIPTION file two months ago. However, I'm encountering difficulties\n> this time. Any insights or suggestions on resolving this issue would be\n> greatly appreciated.\n>\n> Thanks,\n> Junhui\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi Junhui,\n\nThere is a separate log for checking if your package works without\nsuggested packages: in the StepReg results\nThe noSuggests title leads to:\nhttps://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\nWhere you can see that it fails if a user don't have BiocStyle installed.\nI don't know if it is possible to use a vignette output conditionally with\nknitr: In any case it seems that it would be a requirement (Imports, or\nDepends).\n\nHowever, it is best to not use the Bioconductor style for a package in\nCRAN.\nYou could use the *_vignette or *_document format directly (from rmarkdown\nif I recall correctly).\nYou will remove a dependency and avoid this problem entirely.\n\nBest,\n\nLluís\n\n\nOn Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> wrote:\n\n> Hi everyone,\n>\n> I recently developed an R package called 'StepReg' and used the\n> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>\n> output:\n>   BiocStyle::html_document:\n>     toc_float: true\n>   BiocStyle::pdf_document: default\n>\n> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n> included a new line 'biocViews:', as follows:\n>\n> VignetteBuilder: knitr\n> biocViews:\n> Suggests:\n>     knitr,\n>     testthat,\n>     BiocStyle,\n>     kableExtra\n>\n> You may find all those information here:\n> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>\n> There were no error messages when checking with 'R CMD check' and on\n> https://win-builder.r-project.org/upload.aspx. However, an error message\n> occurred when I attempted to upload it to CRAN:\n>\n> * checking re-building of vignette outputs ... ERROR\n> Error(s) in re-building vignettes:\n> --- re-building 'StepReg.Rmd' using rmarkdown\n> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n> there is no package called 'BiocStyle'\n> --- failed re-building 'StepReg.Rmd'\n>\n> SUMMARY: processing the following file failed:\n>    'StepReg.Rmd'\n>\n> Error: Vignette re-building failed.\n> Execution halted\n>\n> For version 1.5.0 (\n> https://cran.r-project.org/web/packages/StepReg/index.html), I\n> successfully uploaded it to CRAN without including 'biocViews:' in the\n> DESCRIPTION file two months ago. However, I'm encountering difficulties\n> this time. Any insights or suggestions on resolving this issue would be\n> greatly appreciated.\n>\n> Thanks,\n> Junhui\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi Junhui,\n\nThere is a separate log for checking if your package works without\nsuggested packages: in the StepReg results\nThe noSuggests title leads to:\nhttps://www.stats.ox.ac.uk/pub/bdr/noSuggests/S",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010770.html"
     },
     {
       "id": "msg-5068ca372509",
@@ -1679,7 +1767,8 @@
       "body_snippet": "I'm seeing some issues using R Altrep classes when compiling a package\nwith the MSVC compiler on windows.\n\nWhile CRAN doesn't build windows binaries with this compiler, some\npackages such as Arrow and",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010771.html"
     },
     {
       "id": "msg-27511e5af176",
@@ -1695,7 +1784,8 @@
       "body_snippet": "Dear all,\n\nI should submit a new version of the package SchoolDataIT \n<https://cran.r-project.org/web/packages/SchoolDataIT/index.html> and \nbefore doing so I need to check it on multiple flavors.\n\nSo",
       "thread_id": "thread-27511e5af176",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010772.html"
     },
     {
       "id": "msg-749847e99d45",
@@ -1713,7 +1803,8 @@
       "body_snippet": "Hi Junhui,\n\nThere are about 25 packages in CRAN that use BiocStyle, including yours.\nIt seems that MetaIntegrator is also facing the same error. I have not\nlooked too deeply into the issue but it seem",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010773.html"
     },
     {
       "id": "msg-5c4fed03a76f",
@@ -1731,7 +1822,8 @@
       "body_snippet": "Are R ALTREP objects memory mapped\n\n\nGet Outlook for iOS<https://aka.ms/o0ukef>\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of David Cor",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010774.html"
     },
     {
       "id": "msg-51dfa85ddd7e",
@@ -1750,7 +1842,8 @@
       "body_snippet": "Sent as mistake - my apologies!\n\nGet Outlook for iOS<https://aka.ms/o0ukef>\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Merlise Clyde",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010775.html"
     },
     {
       "id": "msg-0bd3d12bf493",
@@ -1766,7 +1859,8 @@
       "body_snippet": "Hi,\n\nI hope this message finds you well.\n\nI recently submitted my R package to CRAN, and I received this note from the CRAN teams: \"checking CRAN incoming feasibility ... NOTE.\"\n\nWhen I run R CMD chec",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010780.html"
     },
     {
       "id": "msg-d36f396d94d9",
@@ -1785,7 +1879,8 @@
       "body_snippet": "Hi Llu?s,\n\nThanks for your input. I believe it is ok to use a vignette output conditionally with knitr. However,  what confuses me is that I was able to successfully upload StepReg version 1.5.0 to CR",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010776.html"
     },
     {
       "id": "msg-ce6c7544991e",
@@ -1803,7 +1898,8 @@
       "body_snippet": "On Wed, 15 May 2024, David Cortes wrote:\n\n> I'm seeing some issues using R Altrep classes when compiling a package\n> with the MSVC compiler on windows.\n>\n> While CRAN doesn't build windows binaries wi",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010777.html"
     },
     {
       "id": "msg-c4678495e836",
@@ -1822,7 +1918,8 @@
       "body_snippet": "Hi Marcel,\n\nI appreciate your suggestion and clarification. It is worth mentioning that ?rmarkdown? is included in the Import filed, and I apologize for not stating it here. Interestingly,  I was able",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010778.html"
     },
     {
       "id": "msg-1092b0a35736",
@@ -1840,7 +1937,8 @@
       "body_snippet": "The lines\n```\n* checking examples with --run-donttest ...\nError: The operation was canceled.\n```\nand the 6 hours running time means that your build gets stuck while\nrunning the examples, and then canc",
       "thread_id": "thread-27511e5af176",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010779.html"
     },
     {
       "id": "msg-bb8419285c00",
@@ -1855,11 +1953,12 @@
         "<PH0PR10MB5612E8CF3DAE5ADB26034B799BE32@PH0PR10MB5612.namprd10.prod.outlook.com>",
         "<CAN+W6_unUqSKnyLbGjznx0MCJy52rjjBJEdj8ubDDeN7TRwkdw@mail.gmail.com>"
       ],
-      "body_plain": "Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n> Hi Junhui,\n> \n> There is a separate log for checking if your package works without\n> suggested packages: in the StepReg results\n> The noSuggests title leads to:\n> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n> Where you can see that it fails if a user don't have BiocStyle installed.\n> I don't know if it is possible to use a vignette output conditionally with\n> knitr: In any case it seems that it would be a requirement (Imports, or\n> Depends).\n\nYes, I'd consider the package providing the vignette output format for \nthe rmarkdown engine, here BiocStyle, as a strong dependency of that \nvignette. The error from the additional \"noSuggests\" check \n(<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it \ncannot be rebuild if BiocStyle is unavailable.\n\nThe 'StepReg' vignette could use a metadata line to declare strong \nvignette dependencies, for example:\n\n     %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n\n(I haven't checked if this list is complete.)\n\nThis avoids spurious check errors in incomplete setups, such as when \nmass-checking packages (e.g., reverse dependencies) without some of the \nsuggested packages being installed.\n\nBest,\n\n\tSebastian Meyer\n\n> \n> However, it is best to not use the Bioconductor style for a package in\n> CRAN.\n> You could use the *_vignette or *_document format directly (from rmarkdown\n> if I recall correctly).\n> You will remove a dependency and avoid this problem entirely.\n> \n> Best,\n> \n> Llu?s\n> \n> \n> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> wrote:\n> \n>> Hi everyone,\n>>\n>> I recently developed an R package called 'StepReg' and used the\n>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>\n>> output:\n>>    BiocStyle::html_document:\n>>      toc_float: true\n>>    BiocStyle::pdf_document: default\n>>\n>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>> included a new line 'biocViews:', as follows:\n>>\n>> VignetteBuilder: knitr\n>> biocViews:\n>> Suggests:\n>>      knitr,\n>>      testthat,\n>>      BiocStyle,\n>>      kableExtra\n>>\n>> You may find all those information here:\n>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>\n>> There were no error messages when checking with 'R CMD check' and on\n>> https://win-builder.r-project.org/upload.aspx. However, an error message\n>> occurred when I attempted to upload it to CRAN:\n>>\n>> * checking re-building of vignette outputs ... ERROR\n>> Error(s) in re-building vignettes:\n>> --- re-building 'StepReg.Rmd' using rmarkdown\n>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>> there is no package called 'BiocStyle'\n>> --- failed re-building 'StepReg.Rmd'\n>>\n>> SUMMARY: processing the following file failed:\n>>     'StepReg.Rmd'\n>>\n>> Error: Vignette re-building failed.\n>> Execution halted\n>>\n>> For version 1.5.0 (\n>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>> this time. Any insights or suggestions on resolving this issue would be\n>> greatly appreciated.\n>>\n>> Thanks,\n>> Junhui\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n> Hi Junhui,\n> \n> There is a separate log for checking if your package works without\n> suggested packages: in the StepReg results\n> The noSuggests title lea",
+      "body_plain": "Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n> Hi Junhui,\n> \n> There is a separate log for checking if your package works without\n> suggested packages: in the StepReg results\n> The noSuggests title leads to:\n> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n> Where you can see that it fails if a user don't have BiocStyle installed.\n> I don't know if it is possible to use a vignette output conditionally with\n> knitr: In any case it seems that it would be a requirement (Imports, or\n> Depends).\n\nYes, I'd consider the package providing the vignette output format for \nthe rmarkdown engine, here BiocStyle, as a strong dependency of that \nvignette. The error from the additional \"noSuggests\" check \n(<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it \ncannot be rebuild if BiocStyle is unavailable.\n\nThe 'StepReg' vignette could use a metadata line to declare strong \nvignette dependencies, for example:\n\n     %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n\n(I haven't checked if this list is complete.)\n\nThis avoids spurious check errors in incomplete setups, such as when \nmass-checking packages (e.g., reverse dependencies) without some of the \nsuggested packages being installed.\n\nBest,\n\n\tSebastian Meyer\n\n> \n> However, it is best to not use the Bioconductor style for a package in\n> CRAN.\n> You could use the *_vignette or *_document format directly (from rmarkdown\n> if I recall correctly).\n> You will remove a dependency and avoid this problem entirely.\n> \n> Best,\n> \n> Lluís\n> \n> \n> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> wrote:\n> \n>> Hi everyone,\n>>\n>> I recently developed an R package called 'StepReg' and used the\n>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>\n>> output:\n>>    BiocStyle::html_document:\n>>      toc_float: true\n>>    BiocStyle::pdf_document: default\n>>\n>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>> included a new line 'biocViews:', as follows:\n>>\n>> VignetteBuilder: knitr\n>> biocViews:\n>> Suggests:\n>>      knitr,\n>>      testthat,\n>>      BiocStyle,\n>>      kableExtra\n>>\n>> You may find all those information here:\n>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>\n>> There were no error messages when checking with 'R CMD check' and on\n>> https://win-builder.r-project.org/upload.aspx. However, an error message\n>> occurred when I attempted to upload it to CRAN:\n>>\n>> * checking re-building of vignette outputs ... ERROR\n>> Error(s) in re-building vignettes:\n>> --- re-building 'StepReg.Rmd' using rmarkdown\n>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>> there is no package called 'BiocStyle'\n>> --- failed re-building 'StepReg.Rmd'\n>>\n>> SUMMARY: processing the following file failed:\n>>     'StepReg.Rmd'\n>>\n>> Error: Vignette re-building failed.\n>> Execution halted\n>>\n>> For version 1.5.0 (\n>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>> this time. Any insights or suggestions on resolving this issue would be\n>> greatly appreciated.\n>>\n>> Thanks,\n>> Junhui\n>>\n>>          [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n> Hi Junhui,\n> \n> There is a separate log for checking if your package works without\n> suggested packages: in the StepReg results\n> The noSuggests title lea",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010781.html"
     },
     {
       "id": "msg-aba6b23e3ec1",
@@ -1877,7 +1976,8 @@
       "body_snippet": "Dear Zeinab\n\nIt would help if you gave us more information. What exactly was the NOTE \nwhich it gave you?\n\nMichael\n\nOn 16/05/2024 04:22, Zeinab Mashreghi wrote:\n> Hi,\n> \n> I hope this message finds yo",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010782.html"
     },
     {
       "id": "msg-0045237c99da",
@@ -1895,7 +1995,8 @@
       "body_snippet": "Dear Zeinab,\n\nWelcome to R-package-devel!\n\n? Thu, 16 May 2024 03:22:56 +0000\nZeinab Mashreghi <z.mashreghi at uwinnipeg.ca> ?????:\n\n> I recently submitted my R package to CRAN, and I received this not",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010783.html"
     },
     {
       "id": "msg-c044684d4bd0",
@@ -1911,11 +2012,12 @@
         "<CAN+W6_unUqSKnyLbGjznx0MCJy52rjjBJEdj8ubDDeN7TRwkdw@mail.gmail.com>",
         "<902fbe80-0144-48f9-a195-f59ee81b50ce@fau.de>"
       ],
-      "body_plain": "On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packages: in the StepReg results\n>> The noSuggests title leads to:\n>> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n>> Where you can see that it fails if a user don't have BiocStyle installed.\n>> I don't know if it is possible to use a vignette output conditionally with\n>> knitr: In any case it seems that it would be a requirement (Imports, or\n>> Depends).\n> \n> Yes, I'd consider the package providing the vignette output format for\n> the rmarkdown engine, here BiocStyle, as a strong dependency of that\n> vignette.\n\nIt is documented in WRE as a soft dependency of the package: \"As Sweave \nis the only engine supplied with the R distribution, the package \nproviding any other engine must be specified in the ?VignetteBuilder? \nfield of the package DESCRIPTION file, and also specified in the \n?Suggests?, ?Imports? or ?Depends? field (since its namespace must be \navailable to build or check your package).\"\n\nI forget now, but presumably the thinking at the time was that Suggested \npackages would always be available for building and checking vignettes.\n\nWith most soft dependencies, it's up to the package writer to handle the \npossibility that it is missing, but here, I think it has to be the check \ncode that does it, skipping the vignette test if the builder is missing.\n\nAlternatively, it could be required to be a hard dependency, but that \nseems too strong:  most package users don't need to rebuild vignettes.\n\nDuncan Murdoch\n\n\n  The error from the additional \"noSuggests\" check\n> (<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it\n> cannot be rebuild if BiocStyle is unavailable.\n> \n> The 'StepReg' vignette could use a metadata line to declare strong\n> vignette dependencies, for example:\n> \n>       %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n> \n> (I haven't checked if this list is complete.)\n> \n> This avoids spurious check errors in incomplete setups, such as when\n> mass-checking packages (e.g., reverse dependencies) without some of the\n> suggested packages being installed.\n> \n> Best,\n> \n> \tSebastian Meyer\n> \n>>\n>> However, it is best to not use the Bioconductor style for a package in\n>> CRAN.\n>> You could use the *_vignette or *_document format directly (from rmarkdown\n>> if I recall correctly).\n>> You will remove a dependency and avoid this problem entirely.\n>>\n>> Best,\n>>\n>> Llu?s\n>>\n>>\n>> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> wrote:\n>>\n>>> Hi everyone,\n>>>\n>>> I recently developed an R package called 'StepReg' and used the\n>>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>>\n>>> output:\n>>>     BiocStyle::html_document:\n>>>       toc_float: true\n>>>     BiocStyle::pdf_document: default\n>>>\n>>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>>> included a new line 'biocViews:', as follows:\n>>>\n>>> VignetteBuilder: knitr\n>>> biocViews:\n>>> Suggests:\n>>>       knitr,\n>>>       testthat,\n>>>       BiocStyle,\n>>>       kableExtra\n>>>\n>>> You may find all those information here:\n>>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>>\n>>> There were no error messages when checking with 'R CMD check' and on\n>>> https://win-builder.r-project.org/upload.aspx. However, an error message\n>>> occurred when I attempted to upload it to CRAN:\n>>>\n>>> * checking re-building of vignette outputs ... ERROR\n>>> Error(s) in re-building vignettes:\n>>> --- re-building 'StepReg.Rmd' using rmarkdown\n>>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>>> there is no package called 'BiocStyle'\n>>> --- failed re-building 'StepReg.Rmd'\n>>>\n>>> SUMMARY: processing the following file failed:\n>>>      'StepReg.Rmd'\n>>>\n>>> Error: Vignette re-building failed.\n>>> Execution halted\n>>>\n>>> For version 1.5.0 (\n>>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>>> this time. Any insights or suggestions on resolving this issue would be\n>>> greatly appreciated.\n>>>\n>>> Thanks,\n>>> Junhui\n>>>\n>>>           [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packag",
+      "body_plain": "On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packages: in the StepReg results\n>> The noSuggests title leads to:\n>> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n>> Where you can see that it fails if a user don't have BiocStyle installed.\n>> I don't know if it is possible to use a vignette output conditionally with\n>> knitr: In any case it seems that it would be a requirement (Imports, or\n>> Depends).\n> \n> Yes, I'd consider the package providing the vignette output format for\n> the rmarkdown engine, here BiocStyle, as a strong dependency of that\n> vignette.\n\nIt is documented in WRE as a soft dependency of the package: \"As Sweave \nis the only engine supplied with the R distribution, the package \nproviding any other engine must be specified in the ‘VignetteBuilder’ \nfield of the package DESCRIPTION file, and also specified in the \n‘Suggests’, ‘Imports’ or ‘Depends’ field (since its namespace must be \navailable to build or check your package).\"\n\nI forget now, but presumably the thinking at the time was that Suggested \npackages would always be available for building and checking vignettes.\n\nWith most soft dependencies, it's up to the package writer to handle the \npossibility that it is missing, but here, I think it has to be the check \ncode that does it, skipping the vignette test if the builder is missing.\n\nAlternatively, it could be required to be a hard dependency, but that \nseems too strong:  most package users don't need to rebuild vignettes.\n\nDuncan Murdoch\n\n\n  The error from the additional \"noSuggests\" check\n> (<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it\n> cannot be rebuild if BiocStyle is unavailable.\n> \n> The 'StepReg' vignette could use a metadata line to declare strong\n> vignette dependencies, for example:\n> \n>       %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n> \n> (I haven't checked if this list is complete.)\n> \n> This avoids spurious check errors in incomplete setups, such as when\n> mass-checking packages (e.g., reverse dependencies) without some of the\n> suggested packages being installed.\n> \n> Best,\n> \n> \tSebastian Meyer\n> \n>>\n>> However, it is best to not use the Bioconductor style for a package in\n>> CRAN.\n>> You could use the *_vignette or *_document format directly (from rmarkdown\n>> if I recall correctly).\n>> You will remove a dependency and avoid this problem entirely.\n>>\n>> Best,\n>>\n>> Lluís\n>>\n>>\n>> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> wrote:\n>>\n>>> Hi everyone,\n>>>\n>>> I recently developed an R package called 'StepReg' and used the\n>>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>>\n>>> output:\n>>>     BiocStyle::html_document:\n>>>       toc_float: true\n>>>     BiocStyle::pdf_document: default\n>>>\n>>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>>> included a new line 'biocViews:', as follows:\n>>>\n>>> VignetteBuilder: knitr\n>>> biocViews:\n>>> Suggests:\n>>>       knitr,\n>>>       testthat,\n>>>       BiocStyle,\n>>>       kableExtra\n>>>\n>>> You may find all those information here:\n>>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>>\n>>> There were no error messages when checking with 'R CMD check' and on\n>>> https://win-builder.r-project.org/upload.aspx. However, an error message\n>>> occurred when I attempted to upload it to CRAN:\n>>>\n>>> * checking re-building of vignette outputs ... ERROR\n>>> Error(s) in re-building vignettes:\n>>> --- re-building 'StepReg.Rmd' using rmarkdown\n>>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>>> there is no package called 'BiocStyle'\n>>> --- failed re-building 'StepReg.Rmd'\n>>>\n>>> SUMMARY: processing the following file failed:\n>>>      'StepReg.Rmd'\n>>>\n>>> Error: Vignette re-building failed.\n>>> Execution halted\n>>>\n>>> For version 1.5.0 (\n>>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>>> this time. Any insights or suggestions on resolving this issue would be\n>>> greatly appreciated.\n>>>\n>>> Thanks,\n>>> Junhui\n>>>\n>>>           [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>> \t[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packag",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010784.html"
     },
     {
       "id": "msg-e48be6b79b65",
@@ -1931,11 +2033,12 @@
         "<CAN+W6_unUqSKnyLbGjznx0MCJy52rjjBJEdj8ubDDeN7TRwkdw@mail.gmail.com>",
         "<902fbe80-0144-48f9-a195-f59ee81b50ce@fau.de>"
       ],
-      "body_plain": "On 16.05.2024 10:15, Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packages: in the StepReg results\n>> The noSuggests title leads to:\n>> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n>> Where you can see that it fails if a user don't have BiocStyle installed.\n>> I don't know if it is possible to use a vignette output conditionally \n>> with\n>> knitr: In any case it seems that it would be a requirement (Imports, or\n>> Depends).\n> \n> Yes, I'd consider the package providing the vignette output format for \n> the rmarkdown engine, here BiocStyle, as a strong dependency of that \n> vignette. The error from the additional \"noSuggests\" check \n> (<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it \n> cannot be rebuild if BiocStyle is unavailable.\n> \n> The 'StepReg' vignette could use a metadata line to declare strong \n> vignette dependencies, for example:\n> \n>  ??? %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n\nIndeed, having it listed in Suggests plus the \\VignetteDepends \ndeclaration should suffice.\n\nBest,\nUwe Ligges\n\n\n\n> \n> (I haven't checked if this list is complete.)\n> \n> This avoids spurious check errors in incomplete setups, such as when \n> mass-checking packages (e.g., reverse dependencies) without some of the \n> suggested packages being installed.\n> \n> Best,\n> \n>  ????Sebastian Meyer\n> \n>>\n>> However, it is best to not use the Bioconductor style for a package in\n>> CRAN.\n>> You could use the *_vignette or *_document format directly (from \n>> rmarkdown\n>> if I recall correctly).\n>> You will remove a dependency and avoid this problem entirely.\n>>\n>> Best,\n>>\n>> Llu?s\n>>\n>>\n>> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> \n>> wrote:\n>>\n>>> Hi everyone,\n>>>\n>>> I recently developed an R package called 'StepReg' and used the\n>>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>>\n>>> output:\n>>> ?? BiocStyle::html_document:\n>>> ???? toc_float: true\n>>> ?? BiocStyle::pdf_document: default\n>>>\n>>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>>> included a new line 'biocViews:', as follows:\n>>>\n>>> VignetteBuilder: knitr\n>>> biocViews:\n>>> Suggests:\n>>> ???? knitr,\n>>> ???? testthat,\n>>> ???? BiocStyle,\n>>> ???? kableExtra\n>>>\n>>> You may find all those information here:\n>>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>>\n>>> There were no error messages when checking with 'R CMD check' and on\n>>> https://win-builder.r-project.org/upload.aspx. However, an error message\n>>> occurred when I attempted to upload it to CRAN:\n>>>\n>>> * checking re-building of vignette outputs ... ERROR\n>>> Error(s) in re-building vignettes:\n>>> --- re-building 'StepReg.Rmd' using rmarkdown\n>>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>>> there is no package called 'BiocStyle'\n>>> --- failed re-building 'StepReg.Rmd'\n>>>\n>>> SUMMARY: processing the following file failed:\n>>> ??? 'StepReg.Rmd'\n>>>\n>>> Error: Vignette re-building failed.\n>>> Execution halted\n>>>\n>>> For version 1.5.0 (\n>>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>>> this time. Any insights or suggestions on resolving this issue would be\n>>> greatly appreciated.\n>>>\n>>> Thanks,\n>>> Junhui\n>>>\n>>> ???????? [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>> ????[[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "On 16.05.2024 10:15, Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packages: ",
+      "body_plain": "On 16.05.2024 10:15, Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packages: in the StepReg results\n>> The noSuggests title leads to:\n>> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n>> Where you can see that it fails if a user don't have BiocStyle installed.\n>> I don't know if it is possible to use a vignette output conditionally \n>> with\n>> knitr: In any case it seems that it would be a requirement (Imports, or\n>> Depends).\n> \n> Yes, I'd consider the package providing the vignette output format for \n> the rmarkdown engine, here BiocStyle, as a strong dependency of that \n> vignette. The error from the additional \"noSuggests\" check \n> (<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it \n> cannot be rebuild if BiocStyle is unavailable.\n> \n> The 'StepReg' vignette could use a metadata line to declare strong \n> vignette dependencies, for example:\n> \n>      %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n\nIndeed, having it listed in Suggests plus the \\VignetteDepends \ndeclaration should suffice.\n\nBest,\nUwe Ligges\n\n\n\n> \n> (I haven't checked if this list is complete.)\n> \n> This avoids spurious check errors in incomplete setups, such as when \n> mass-checking packages (e.g., reverse dependencies) without some of the \n> suggested packages being installed.\n> \n> Best,\n> \n>      Sebastian Meyer\n> \n>>\n>> However, it is best to not use the Bioconductor style for a package in\n>> CRAN.\n>> You could use the *_vignette or *_document format directly (from \n>> rmarkdown\n>> if I recall correctly).\n>> You will remove a dependency and avoid this problem entirely.\n>>\n>> Best,\n>>\n>> Lluís\n>>\n>>\n>> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> \n>> wrote:\n>>\n>>> Hi everyone,\n>>>\n>>> I recently developed an R package called 'StepReg' and used the\n>>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>>\n>>> output:\n>>>    BiocStyle::html_document:\n>>>      toc_float: true\n>>>    BiocStyle::pdf_document: default\n>>>\n>>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>>> included a new line 'biocViews:', as follows:\n>>>\n>>> VignetteBuilder: knitr\n>>> biocViews:\n>>> Suggests:\n>>>      knitr,\n>>>      testthat,\n>>>      BiocStyle,\n>>>      kableExtra\n>>>\n>>> You may find all those information here:\n>>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>>\n>>> There were no error messages when checking with 'R CMD check' and on\n>>> https://win-builder.r-project.org/upload.aspx. However, an error message\n>>> occurred when I attempted to upload it to CRAN:\n>>>\n>>> * checking re-building of vignette outputs ... ERROR\n>>> Error(s) in re-building vignettes:\n>>> --- re-building 'StepReg.Rmd' using rmarkdown\n>>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>>> there is no package called 'BiocStyle'\n>>> --- failed re-building 'StepReg.Rmd'\n>>>\n>>> SUMMARY: processing the following file failed:\n>>>     'StepReg.Rmd'\n>>>\n>>> Error: Vignette re-building failed.\n>>> Execution halted\n>>>\n>>> For version 1.5.0 (\n>>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>>> this time. Any insights or suggestions on resolving this issue would be\n>>> greatly appreciated.\n>>>\n>>> Thanks,\n>>> Junhui\n>>>\n>>> ??????   [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>\n>>\n>>     [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "On 16.05.2024 10:15, Sebastian Meyer wrote:\n> Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n>> Hi Junhui,\n>>\n>> There is a separate log for checking if your package works without\n>> suggested packages: ",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010785.html"
     },
     {
       "id": "msg-337ee97a3f69",
@@ -1952,11 +2055,12 @@
         "<902fbe80-0144-48f9-a195-f59ee81b50ce@fau.de>",
         "<6a121782-56f2-4213-a815-d56d32624541@gmail.com>"
       ],
-      "body_plain": "Am 16.05.24 um 11:34 schrieb Duncan Murdoch:\n> On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n>> Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n>>> Hi Junhui,\n>>>\n>>> There is a separate log for checking if your package works without\n>>> suggested packages: in the StepReg results\n>>> The noSuggests title leads to:\n>>> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n>>> Where you can see that it fails if a user don't have BiocStyle \n>>> installed.\n>>> I don't know if it is possible to use a vignette output conditionally \n>>> with\n>>> knitr: In any case it seems that it would be a requirement (Imports, or\n>>> Depends).\n>>\n>> Yes, I'd consider the package providing the vignette output format for\n>> the rmarkdown engine, here BiocStyle, as a strong dependency of that\n>> vignette.\n> \n> It is documented in WRE as a soft dependency of the package: \"As Sweave \n> is the only engine supplied with the R distribution, the package \n> providing any other engine must be specified in the ?VignetteBuilder? \n> field of the package DESCRIPTION file, and also specified in the \n> ?Suggests?, ?Imports? or ?Depends? field (since its namespace must be \n> available to build or check your package).\"\n> \n> I forget now, but presumably the thinking at the time was that Suggested \n> packages would always be available for building and checking vignettes.\n> \n> With most soft dependencies, it's up to the package writer to handle the \n> possibility that it is missing, but here, I think it has to be the check \n> code that does it, skipping the vignette test if the builder is missing.\n\nYes, re-building vignettes is skipped when a VignetteBuilder package is \nunavailable.\n\nIn the present case, the VignetteBuilder package that provides the \nengine is knitr and BiocStyle is used for an alternative rmarkdown \noutput format. Not sure if the latter should be declared as an \nadditional VignetteBuilder even if it does not provide the vignette \nengine, but you are right that it comes very close.\n\n> \n> Alternatively, it could be required to be a hard dependency, but that \n> seems too strong:? most package users don't need to rebuild vignettes.\n\nAgreed. Declaring it as part of the vignette's \\VignetteDepends is what \nI'd do to solve the check issue.\n\n\tSebastian Meyer\n\n> \n> Duncan Murdoch\n> \n> \n>  ?The error from the additional \"noSuggests\" check\n>> (<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it\n>> cannot be rebuild if BiocStyle is unavailable.\n>>\n>> The 'StepReg' vignette could use a metadata line to declare strong\n>> vignette dependencies, for example:\n>>\n>> ????? %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n>>\n>> (I haven't checked if this list is complete.)\n>>\n>> This avoids spurious check errors in incomplete setups, such as when\n>> mass-checking packages (e.g., reverse dependencies) without some of the\n>> suggested packages being installed.\n>>\n>> Best,\n>>\n>> ????Sebastian Meyer\n>>\n>>>\n>>> However, it is best to not use the Bioconductor style for a package in\n>>> CRAN.\n>>> You could use the *_vignette or *_document format directly (from \n>>> rmarkdown\n>>> if I recall correctly).\n>>> You will remove a dependency and avoid this problem entirely.\n>>>\n>>> Best,\n>>>\n>>> Llu?s\n>>>\n>>>\n>>> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> \n>>> wrote:\n>>>\n>>>> Hi everyone,\n>>>>\n>>>> I recently developed an R package called 'StepReg' and used the\n>>>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>>>\n>>>> output:\n>>>> ??? BiocStyle::html_document:\n>>>> ????? toc_float: true\n>>>> ??? BiocStyle::pdf_document: default\n>>>>\n>>>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>>>> included a new line 'biocViews:', as follows:\n>>>>\n>>>> VignetteBuilder: knitr\n>>>> biocViews:\n>>>> Suggests:\n>>>> ????? knitr,\n>>>> ????? testthat,\n>>>> ????? BiocStyle,\n>>>> ????? kableExtra\n>>>>\n>>>> You may find all those information here:\n>>>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>>>\n>>>> There were no error messages when checking with 'R CMD check' and on\n>>>> https://win-builder.r-project.org/upload.aspx. However, an error \n>>>> message\n>>>> occurred when I attempted to upload it to CRAN:\n>>>>\n>>>> * checking re-building of vignette outputs ... ERROR\n>>>> Error(s) in re-building vignettes:\n>>>> --- re-building 'StepReg.Rmd' using rmarkdown\n>>>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>>>> there is no package called 'BiocStyle'\n>>>> --- failed re-building 'StepReg.Rmd'\n>>>>\n>>>> SUMMARY: processing the following file failed:\n>>>> ???? 'StepReg.Rmd'\n>>>>\n>>>> Error: Vignette re-building failed.\n>>>> Execution halted\n>>>>\n>>>> For version 1.5.0 (\n>>>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>>>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>>>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>>>> this time. Any insights or suggestions on resolving this issue would be\n>>>> greatly appreciated.\n>>>>\n>>>> Thanks,\n>>>> Junhui\n>>>>\n>>>> ????????? [[alternative HTML version deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>> ????[[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "Am 16.05.24 um 11:34 schrieb Duncan Murdoch:\n> On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n>> Am 15.05.24 um 00:09 schrieb Llu?s Revilla:\n>>> Hi Junhui,\n>>>\n>>> There is a separate log for checkin",
+      "body_plain": "Am 16.05.24 um 11:34 schrieb Duncan Murdoch:\n> On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n>> Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n>>> Hi Junhui,\n>>>\n>>> There is a separate log for checking if your package works without\n>>> suggested packages: in the StepReg results\n>>> The noSuggests title leads to:\n>>> https://www.stats.ox.ac.uk/pub/bdr/noSuggests/StepReg.out\n>>> Where you can see that it fails if a user don't have BiocStyle \n>>> installed.\n>>> I don't know if it is possible to use a vignette output conditionally \n>>> with\n>>> knitr: In any case it seems that it would be a requirement (Imports, or\n>>> Depends).\n>>\n>> Yes, I'd consider the package providing the vignette output format for\n>> the rmarkdown engine, here BiocStyle, as a strong dependency of that\n>> vignette.\n> \n> It is documented in WRE as a soft dependency of the package: \"As Sweave \n> is the only engine supplied with the R distribution, the package \n> providing any other engine must be specified in the ‘VignetteBuilder’ \n> field of the package DESCRIPTION file, and also specified in the \n> ‘Suggests’, ‘Imports’ or ‘Depends’ field (since its namespace must be \n> available to build or check your package).\"\n> \n> I forget now, but presumably the thinking at the time was that Suggested \n> packages would always be available for building and checking vignettes.\n> \n> With most soft dependencies, it's up to the package writer to handle the \n> possibility that it is missing, but here, I think it has to be the check \n> code that does it, skipping the vignette test if the builder is missing.\n\nYes, re-building vignettes is skipped when a VignetteBuilder package is \nunavailable.\n\nIn the present case, the VignetteBuilder package that provides the \nengine is knitr and BiocStyle is used for an alternative rmarkdown \noutput format. Not sure if the latter should be declared as an \nadditional VignetteBuilder even if it does not provide the vignette \nengine, but you are right that it comes very close.\n\n> \n> Alternatively, it could be required to be a hard dependency, but that \n> seems too strong:  most package users don't need to rebuild vignettes.\n\nAgreed. Declaring it as part of the vignette's \\VignetteDepends is what \nI'd do to solve the check issue.\n\n\tSebastian Meyer\n\n> \n> Duncan Murdoch\n> \n> \n>   The error from the additional \"noSuggests\" check\n>> (<https://www.stats.ox.ac.uk/pub/bdr/noSuggests/README.txt>) shows it\n>> cannot be rebuild if BiocStyle is unavailable.\n>>\n>> The 'StepReg' vignette could use a metadata line to declare strong\n>> vignette dependencies, for example:\n>>\n>>       %\\VignetteDepends{StepReg, BiocStyle, kableExtra}\n>>\n>> (I haven't checked if this list is complete.)\n>>\n>> This avoids spurious check errors in incomplete setups, such as when\n>> mass-checking packages (e.g., reverse dependencies) without some of the\n>> suggested packages being installed.\n>>\n>> Best,\n>>\n>>     Sebastian Meyer\n>>\n>>>\n>>> However, it is best to not use the Bioconductor style for a package in\n>>> CRAN.\n>>> You could use the *_vignette or *_document format directly (from \n>>> rmarkdown\n>>> if I recall correctly).\n>>> You will remove a dependency and avoid this problem entirely.\n>>>\n>>> Best,\n>>>\n>>> Lluís\n>>>\n>>>\n>>> On Tue, 14 May 2024 at 22:48, Li, Junhui <Junhui.Li11 at umassmed.edu> \n>>> wrote:\n>>>\n>>>> Hi everyone,\n>>>>\n>>>> I recently developed an R package called 'StepReg' and used the\n>>>> Bioconductor R package 'BiocStyle' in my vignettes, as shown below:\n>>>>\n>>>> output:\n>>>>     BiocStyle::html_document:\n>>>>       toc_float: true\n>>>>     BiocStyle::pdf_document: default\n>>>>\n>>>> In my DESCRIPTION file, I added 'BiocStyle' to the Suggests field and\n>>>> included a new line 'biocViews:', as follows:\n>>>>\n>>>> VignetteBuilder: knitr\n>>>> biocViews:\n>>>> Suggests:\n>>>>       knitr,\n>>>>       testthat,\n>>>>       BiocStyle,\n>>>>       kableExtra\n>>>>\n>>>> You may find all those information here:\n>>>> https://github.com/JunhuiLi1017/StepReg/tree/dev\n>>>>\n>>>> There were no error messages when checking with 'R CMD check' and on\n>>>> https://win-builder.r-project.org/upload.aspx. However, an error \n>>>> message\n>>>> occurred when I attempted to upload it to CRAN:\n>>>>\n>>>> * checking re-building of vignette outputs ... ERROR\n>>>> Error(s) in re-building vignettes:\n>>>> --- re-building 'StepReg.Rmd' using rmarkdown\n>>>> Error: processing vignette 'StepReg.Rmd' failed with diagnostics:\n>>>> there is no package called 'BiocStyle'\n>>>> --- failed re-building 'StepReg.Rmd'\n>>>>\n>>>> SUMMARY: processing the following file failed:\n>>>>      'StepReg.Rmd'\n>>>>\n>>>> Error: Vignette re-building failed.\n>>>> Execution halted\n>>>>\n>>>> For version 1.5.0 (\n>>>> https://cran.r-project.org/web/packages/StepReg/index.html), I\n>>>> successfully uploaded it to CRAN without including 'biocViews:' in the\n>>>> DESCRIPTION file two months ago. However, I'm encountering difficulties\n>>>> this time. Any insights or suggestions on resolving this issue would be\n>>>> greatly appreciated.\n>>>>\n>>>> Thanks,\n>>>> Junhui\n>>>>\n>>>> ???????   [[alternative HTML version deleted]]\n>>>>\n>>>> ______________________________________________\n>>>> R-package-devel at r-project.org mailing list\n>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>>     [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "Am 16.05.24 um 11:34 schrieb Duncan Murdoch:\n> On 2024-05-16 4:15 a.m., Sebastian Meyer wrote:\n>> Am 15.05.24 um 00:09 schrieb Lluís Revilla:\n>>> Hi Junhui,\n>>>\n>>> There is a separate log for checkin",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010786.html"
     },
     {
       "id": "msg-0abf8d4e8b5b",
@@ -1977,7 +2081,8 @@
       "body_snippet": "On 16 May 2024 at 05:34, Duncan Murdoch wrote:\n| I forget now, but presumably the thinking at the time was that Suggested \n| packages would always be available for building and checking vignettes.\n\nYe",
       "thread_id": "thread-d0d63e2969c4",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010787.html"
     },
     {
       "id": "msg-102e32d2f61b",
@@ -1995,7 +2100,8 @@
       "body_snippet": "? Wed, 15 May 2024 18:54:37 +0200\nDavid Cortes <david.cortes.rivera at gmail.com> ?????:\n\n> The code compiles without errors under MSVC, but executing code that\n> involves returning Altrep objects lea",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010788.html"
     },
     {
       "id": "msg-e7b9433b0b9a",
@@ -2014,7 +2120,8 @@
       "body_snippet": "Hi,\n\nThank you very much for your helpful suggestion! Following your advice, I revisited the package and made necessary adjustments to the description file. However, it appears that there are now some",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010789.html"
     },
     {
       "id": "msg-712f7fcfebc7",
@@ -2034,7 +2141,8 @@
       "body_snippet": "Zeinab\n\nI have found that setting this system value to FALSE eliminates the issue:\n\nSys.setenv(\"_R_CHECK_RD_VALIDATE_RD2HTML_\" = FALSE)\n\n- Keith\n\n?On 5/16/24, 12:02 PM, \"R-package-devel on behalf of Z",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010790.html"
     },
     {
       "id": "msg-812ea125e1d9",
@@ -2054,7 +2162,8 @@
       "body_snippet": "Dear Zeinab\n\nPerhaps the insights in https://github.com/tidymodels/infer/issues/455 \nwill help you especially if you are using roxygen2\n\nMichael\n\nOn 16/05/2024 17:01, Zeinab Mashreghi wrote:\n> Hi,\n> \n",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010791.html"
     },
     {
       "id": "msg-ba9b173ab65b",
@@ -2074,7 +2183,8 @@
       "body_snippet": "? Thu, 16 May 2024 16:01:45 +0000\nZeinab Mashreghi <z.mashreghi at uwinnipeg.ca> ?????:\n\n> checking HTML version of manual ... NOTE\n> Found the following HTML validation problems:\n> All.data.html:4:1 ",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010792.html"
     },
     {
       "id": "msg-614b028e70ae",
@@ -2093,7 +2203,8 @@
       "body_snippet": "Thanks for the hints.\n\nUnfortunately, after some further testing, it seems this was just a\nmatter of getting lucky - using the alternative non-STRUCT_SUBTYPES \ndef. of Altrep still leads to memory cor",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010793.html"
     },
     {
       "id": "msg-6613a5b00ec7",
@@ -2109,7 +2220,8 @@
       "body_snippet": "Dear all,\n\nI have been asked to fix a UBSAN error in my dqrng package. The error\nitself and the necessary fix are quite straight forward. However, I\nwant to make 100% sure that I am really fixing the ",
       "thread_id": "thread-6613a5b00ec7",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010794.html"
     },
     {
       "id": "msg-9a5428d1bd6c",
@@ -2127,7 +2239,8 @@
       "body_snippet": "R-hub v2 has UBSAN testing, the clang-asan image also has UBSAN. [1]\n\nWith the glitch that UBSAN errors do not fail the build because of a bug [2],\nso you'll need to look at the results even if the bu",
       "thread_id": "thread-6613a5b00ec7",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010795.html"
     },
     {
       "id": "msg-788132dc9f30",
@@ -2142,11 +2255,12 @@
         "<CAFQwRQz83jZN=yUZRm1WYMTtt4DAgjsmOgKKHnh6gO5XkmukKQ@mail.gmail.com>",
         "<CABtg=KmrjvuTO5swF4t8VTEygdmCa2HDjpdPPPe2VEMYcbBDNQ@mail.gmail.com>"
       ],
-      "body_plain": "Thanks G?bor! If one checks the output, one can indeed find the UBSAN\nerror. Problem solved!\n\nRalf\n\nOn Thu, May 16, 2024 at 8:40?PM G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>\n> R-hub v2 has UBSAN testing, the clang-asan image also has UBSAN. [1]\n>\n> With the glitch that UBSAN errors do not fail the build because of a bug [2],\n> so you'll need to look at the results even if the build has passed.\n>\n> Gabor\n>\n> [1] https://r-hub.github.io/containers/\n> [2] https://github.com/r-hub/actions/issues/16\n>\n> On Thu, May 16, 2024 at 10:27?PM Ralf Stubner <ralf.stubner at gmail.com> wrote:\n> >\n> > Dear all,\n> >\n> > I have been asked to fix a UBSAN error in my dqrng package. The error\n> > itself and the necessary fix are quite straight forward. However, I\n> > want to make 100% sure that I am really fixing the error. In the past\n> > I had used rhub for tasks like that. But it seems like the new rhub v2\n> > offers only ASAN testing. I have also tried various docker images\n> > (wch1/r-debug, old rhub images, rocker), but with none of them I was\n> > able to reproduce the error seen on CRAN. What would you consider as\n> > \"state of the art\" for reproducing UBSAN errors?\n> >\n> > Thanks\n> > Ralf\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Thanks G?bor! If one checks the output, one can indeed find the UBSAN\nerror. Problem solved!\n\nRalf\n\nOn Thu, May 16, 2024 at 8:40?PM G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>\n> R-hub v2 has UBS",
+      "body_plain": "Thanks Gábor! If one checks the output, one can indeed find the UBSAN\nerror. Problem solved!\n\nRalf\n\nOn Thu, May 16, 2024 at 8:40 PM Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n>\n> R-hub v2 has UBSAN testing, the clang-asan image also has UBSAN. [1]\n>\n> With the glitch that UBSAN errors do not fail the build because of a bug [2],\n> so you'll need to look at the results even if the build has passed.\n>\n> Gabor\n>\n> [1] https://r-hub.github.io/containers/\n> [2] https://github.com/r-hub/actions/issues/16\n>\n> On Thu, May 16, 2024 at 10:27 PM Ralf Stubner <ralf.stubner at gmail.com> wrote:\n> >\n> > Dear all,\n> >\n> > I have been asked to fix a UBSAN error in my dqrng package. The error\n> > itself and the necessary fix are quite straight forward. However, I\n> > want to make 100% sure that I am really fixing the error. In the past\n> > I had used rhub for tasks like that. But it seems like the new rhub v2\n> > offers only ASAN testing. I have also tried various docker images\n> > (wch1/r-debug, old rhub images, rocker), but with none of them I was\n> > able to reproduce the error seen on CRAN. What would you consider as\n> > \"state of the art\" for reproducing UBSAN errors?\n> >\n> > Thanks\n> > Ralf\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Thanks Gábor! If one checks the output, one can indeed find the UBSAN\nerror. Problem solved!\n\nRalf\n\nOn Thu, May 16, 2024 at 8:40 PM Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n>\n> R-hub v2 has UBS",
       "thread_id": "thread-6613a5b00ec7",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010796.html"
     },
     {
       "id": "msg-a220d9f713cd",
@@ -2166,7 +2280,8 @@
       "body_snippet": "? Thu, 16 May 2024 21:32:24 +0200\nDavid Cortes <david.cortes.rivera at gmail.com> ?????:\n\n> Unfortunately, after some further testing, it seems this was just a\n> matter of getting lucky - using the al",
       "thread_id": "thread-5068ca372509",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010797.html"
     },
     {
       "id": "msg-d392c56e085d",
@@ -2187,7 +2302,8 @@
       "body_snippet": "Hi,\n\nThanks for all the suggestions and help.\n\nYes, I'm using an Apple computer. The tidy version was from 2006. I submitted the package without any issues.\n\nThanks again!\n\nZeinab\n\nFrom: Ivan Krylov <",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010798.html"
     },
     {
       "id": "msg-8407b7108907",
@@ -2209,7 +2325,8 @@
       "body_snippet": "Here is the solution to update tidy to a recent version:\nhttps://www.html-tidy.org\n\nMarc\nLe 17/05/2024 ? 17:59, Zeinab Mashreghi a ?crit?:\n> Hi,\n>\n> Thanks for all the suggestions and help.\n>\n> Yes, I",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010799.html"
     },
     {
       "id": "msg-a51cf8faa13c",
@@ -2232,7 +2349,8 @@
       "body_snippet": "this is a suggestion to CRAN.\nwhen checking a package and discovering these messages about html5, can you generate an informational message about tidy with a link to updating tidy?\n\nthank you\nRich\n\nSe",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 6,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010800.html"
     },
     {
       "id": "msg-f2a6d97ab3cb",
@@ -2256,7 +2374,8 @@
       "body_snippet": "I don't think that will ever happen.  It only happens when a user tries \nan \"--as-cran\" check, but doesn't have a current version of tidy \ninstalled.  CRAN does have the up-to-date versions installed,",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 7,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010801.html"
     },
     {
       "id": "msg-22c4009d7191",
@@ -2281,7 +2400,8 @@
       "body_snippet": "exactly. when the --as-cran detects the need for that NOTE, it could prefix the initial instance of that NOTE with information about\nupdating the tidy installation on the package writer'smachine.\n\nSen",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 8,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010802.html"
     },
     {
       "id": "msg-a67b54430d40",
@@ -2307,7 +2427,8 @@
       "body_snippet": "so... your suggestion is not for CRAN, but for R-Core, who makes changes to R....\n\nOn May 18, 2024 6:03:55 PM PDT, \"Richard M. Heiberger\" <rmh at temple.edu> wrote:\n>exactly. when the --as-cran detect",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 9,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010803.html"
     },
     {
       "id": "msg-3125e68841c6",
@@ -2331,7 +2452,8 @@
       "body_snippet": "On Sat, 18 May 2024 21:10:18 +0000\n\"Richard M. Heiberger\" <rmh at temple.edu> wrote:\n\n> when checking a package and discovering these messages about html5,\n> can you generate an informational message ",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 7,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010804.html"
     },
     {
       "id": "msg-bc387f25812c",
@@ -2356,7 +2478,8 @@
       "body_snippet": "In answer to the question about tidy version on macOS, I have the latest version of that OS (Sonoma 14.5 release 23F79 -- a beta release, unless the official has caught up in recent days) and I get as",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 8,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010805.html"
     },
     {
       "id": "msg-6fc006c747e2",
@@ -2382,7 +2505,8 @@
       "body_snippet": "On Sun, 19 May 2024 09:52:08 +0000\nDaniel Kelley <kelley at dal.ca> wrote:\n\n> In answer to the question about tidy version on macOS, I have the\n> latest version of that OS (Sonoma 14.5 release 23F79 -",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 9,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010806.html"
     },
     {
       "id": "msg-5c78fa9ac015",
@@ -2407,7 +2531,8 @@
       "body_snippet": "I seem to be later than some other respondents.  But for closure:\n\n\nThe patch you sent produces a msg <- \": 'tidy' is not HTML Tidy\"\nI would like to have the note tell the user how to update tidy, by ",
       "thread_id": "thread-0bd3d12bf493",
       "thread_depth": 8,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010807.html"
     },
     {
       "id": "msg-50ad34755930",
@@ -2423,7 +2548,8 @@
       "body_snippet": "Hi all,\n\nI'm running into build issues for my package (fido: https://github.com/jsilve24/fido) on the r-devel-linux-x86_64-debian-clang system on CRAN (full check log here: https://win-builder.r-proje",
       "thread_id": "thread-50ad34755930",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010808.html"
     },
     {
       "id": "msg-5ce120d73d64",
@@ -2439,7 +2565,8 @@
       "body_snippet": "I have some documentation that requires external tools to build.  I would like to build the automatically, with requiring either users or repositories to have the tools.  What's the best way to accomp",
       "thread_id": "thread-5ce120d73d64",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010809.html"
     },
     {
       "id": "msg-9c554e3e7811",
@@ -2457,7 +2584,8 @@
       "body_snippet": "Hi Michelle,\n\nOn 21 May 2024 at 13:46, Nixon, Michelle Pistner wrote:\n| Hi all,\n| \n| I'm running into build issues for my package (fido: https://github.com/jsilve24/fido) on the r-devel-linux-x86_64-d",
       "thread_id": "thread-50ad34755930",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010810.html"
     },
     {
       "id": "msg-b2a62745d663",
@@ -2475,7 +2603,8 @@
       "body_snippet": "As lyx is not listed in 'Writing R Extensions', the one (authorative) manual\ndescribing how to build packages for R, I would not assume it to be present\non every CRAN machine building packages. Also n",
       "thread_id": "thread-5ce120d73d64",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010811.html"
     },
     {
       "id": "msg-12330c1bf9b8",
@@ -2494,7 +2623,8 @@
       "body_snippet": "Thanks for the pointer.  You may have been thrown off by some goofs I made in the intro, which said\n> I would like to build the automatically, with requiring either users or repositories to have the t",
       "thread_id": "thread-5ce120d73d64",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010812.html"
     },
     {
       "id": "msg-ee5beea62566",
@@ -2512,7 +2642,8 @@
       "body_snippet": "Ross,\n\nIt's entirely up to you how you do this -- what you describe is something that has to happen before your run R CMD build, so it's not reflected in your package that you submit (and this has not",
       "thread_id": "thread-5ce120d73d64",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010813.html"
     },
     {
       "id": "msg-e9d82e49bdad",
@@ -2532,7 +2663,8 @@
       "body_snippet": "On Tue, 21 May 2024, Boylan, Ross via R-package-devel wrote:\n\n> Thanks for the pointer.  You may have been thrown off by some goofs I made in the intro, which said\n>> I would like to build the automat",
       "thread_id": "thread-5ce120d73d64",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010814.html"
     },
     {
       "id": "msg-c294ad1ad91f",
@@ -2552,7 +2684,8 @@
       "body_snippet": "Thank you both for your responses and help! Kurt-- your message makes a lot of sense. I'll try to debug soon and will reach out if I have more questions.\n\nThanks,\nMichelle\n____________________________",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010815.html"
     },
     {
       "id": "msg-3d3fc698caa1",
@@ -2573,7 +2706,8 @@
       "body_snippet": "On 22 May 2024 at 13:54, Nixon, Michelle Pistner wrote:\n| Thank you both for your responses and help! Kurt-- your message makes a lot of\n| sense. I'll try to debug soon and will reach out if I have mo",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010816.html"
     },
     {
       "id": "msg-3c2651b129dd",
@@ -2595,7 +2729,8 @@
       "body_snippet": "On 2024-05-22 10:18 a.m., Dirk Eddelbuettel wrote:\n> \n> On 22 May 2024 at 13:54, Nixon, Michelle Pistner wrote:\n> | Thank you both for your responses and help! Kurt-- your message makes a lot of\n> | s",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010817.html"
     },
     {
       "id": "msg-9cb954178ac0",
@@ -2611,7 +2746,8 @@
       "body_snippet": "Hil,\n\nI am exploring the use of callr in a package. I know that for packages\nthat do parallel computing, we should not use more than two cores in\nexamples, tests, etc. when being checked on CRAN.\n\nI b",
       "thread_id": "thread-9cb954178ac0",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010818.html"
     },
     {
       "id": "msg-067c5dc0c6f1",
@@ -2629,7 +2765,8 @@
       "body_snippet": "Two parallel processes are okay, so you can use two callr background\nprocesses (\"children\"), as long as you don't do heavy computations on\nthe main R process (\"parent\"). This is commonly done in many ",
       "thread_id": "thread-9cb954178ac0",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010819.html"
     },
     {
       "id": "msg-1dd1ceedc340",
@@ -2652,7 +2789,8 @@
       "body_snippet": "On 22 May 2024 at 14:03, Duncan Murdoch wrote:\n| On 2024-05-22 10:18 a.m., Dirk Eddelbuettel wrote:\n| > \n| > On 22 May 2024 at 13:54, Nixon, Michelle Pistner wrote:\n| > | Thank you both for your respo",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010820.html"
     },
     {
       "id": "msg-0800291176b7",
@@ -2676,7 +2814,8 @@
       "body_snippet": "On 2024-05-23 11:49 a.m., Dirk Eddelbuettel wrote:\n> \n> On 22 May 2024 at 14:03, Duncan Murdoch wrote:\n> | On 2024-05-22 10:18 a.m., Dirk Eddelbuettel wrote:\n> | >\n> | > On 22 May 2024 at 13:54, Nixon",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010821.html"
     },
     {
       "id": "msg-d9bb8be50a49",
@@ -2698,7 +2837,8 @@
       "body_snippet": "On Wed, 22 May 2024 09:18:13 -0500\nDirk Eddelbuettel <edd at debian.org> wrote:\n\n> Testing via 'nm' as you show is possible but not exactly 'portable'.\n> So any suggestions as to what to condition on ",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010822.html"
     },
     {
       "id": "msg-d186105a0213",
@@ -2721,7 +2861,8 @@
       "body_snippet": "On 23 May 2024 at 20:02, Ivan Krylov wrote:\n| On Wed, 22 May 2024 09:18:13 -0500\n| Dirk Eddelbuettel <edd at debian.org> wrote:\n| \n| > Testing via 'nm' as you show is possible but not exactly 'portabl",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010823.html"
     },
     {
       "id": "msg-19b2b1fdeeb6",
@@ -2745,7 +2886,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel writes:\n\n> On 23 May 2024 at 20:02, Ivan Krylov wrote:\n> | On Wed, 22 May 2024 09:18:13 -0500\n> | Dirk Eddelbuettel <edd at debian.org> wrote:\n> | \n> | > Testing via 'nm' as yo",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 4,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010825.html"
     },
     {
       "id": "msg-b11834ae0ec7",
@@ -2770,7 +2912,8 @@
       "body_snippet": "Kurt,\n\nCould you do me a favour and run on that clang18-using machine in question\nthe following one-liner (provided your session has access to a .libPaths()\nincluding Rcpp) and, in the case of success",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010824.html"
     },
     {
       "id": "msg-c5dbf253653e",
@@ -2786,7 +2929,8 @@
       "body_snippet": "Dear List -\n\nI received a note that my package -- epanet2toolkit -- was showing a\nwarning in the fedora-gcc results on CRAN.\nhttps://www.stats.ox.ac.uk/pub/bdr/gcc12/epanet2toolkit.out\n\nI'd like to re",
       "thread_id": "thread-c5dbf253653e",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010826.html"
     },
     {
       "id": "msg-a38b23b48d5f",
@@ -2804,7 +2948,8 @@
       "body_snippet": "Fedora 40 comes with gcc 14.1.x. But I would first try to use the\n`-Wformat-truncation=` flag with the compiler you have, it is possible\nthat you don't need gcc 14.1. If you do, then the `fedora:40`\nc",
       "thread_id": "thread-c5dbf253653e",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010827.html"
     },
     {
       "id": "msg-d13236fbbc17",
@@ -2822,7 +2967,8 @@
       "body_snippet": "On 24 May 2024 at 20:01, Brad Eck wrote:\n| I received a note that my package -- epanet2toolkit -- was showing a\n| warning in the fedora-gcc results on CRAN.\n| https://www.stats.ox.ac.uk/pub/bdr/gcc12/",
       "thread_id": "thread-c5dbf253653e",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010828.html"
     },
     {
       "id": "msg-65fbbfafd223",
@@ -2848,7 +2994,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel writes:\n\n> Kurt,\n\n> Could you do me a favour and run on that clang18-using machine in question\n> the following one-liner (provided your session has access to a .libPaths()\n> in",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 6,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010829.html"
     },
     {
       "id": "msg-c9f70dd9866d",
@@ -2875,7 +3022,8 @@
       "body_snippet": "On 26 May 2024 at 13:31, Kurt Hornik wrote:\n| >>>>> Dirk Eddelbuettel writes:\n| \n| > Kurt,\n| \n| > Could you do me a favour and run on that clang18-using machine in question\n| > the following one-liner",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 7,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010830.html"
     },
     {
       "id": "msg-b4f16a1dccc4",
@@ -2903,7 +3051,8 @@
       "body_snippet": "On Sun, 26 May 2024 17:57:17 -0500\nDirk Eddelbuettel <edd at debian.org> wrote:\n\n> and we'd need something like this (untested)\n> \n>    .plugins[[\"openmp\"]] <- function() {\n>        list(env =\n> list(",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 8,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010832.html"
     },
     {
       "id": "msg-32c8642fcb43",
@@ -2918,11 +3067,12 @@
         "<CALECgParnvn232ruRzc72H5d7F_xymBn5=6TaPA8Q+aufs2qkQ@mail.gmail.com>",
         "<CABtg=Kn1aH4990ZwNOFM5ONSdQju+f=UHO2WPrA4zf3sfnUvFQ@mail.gmail.com>"
       ],
-      "body_plain": "Thanks G?bor and Dirk for the suggestions. This one seemed to need fedora\nto replicate the issue.  Docker did make it easy:\n\nFROM fedora:40\nUSER root\nRUN dnf -y install R\n\n\nBrad\n\n\nOn Fri 24 May 2024 at 20:28, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> Fedora 40 comes with gcc 14.1.x. But I would first try to use the\n> `-Wformat-truncation=` flag with the compiler you have, it is possible\n> that you don't need gcc 14.1. If you do, then the `fedora:40`\n> container should be good.\n>\n> Gabor\n>\n> On Fri, May 24, 2024 at 9:02?PM Brad Eck <bradleyjeck at gmail.com> wrote:\n> >\n> > Dear List -\n> >\n> > I received a note that my package -- epanet2toolkit -- was showing a\n> > warning in the fedora-gcc results on CRAN.\n> > https://www.stats.ox.ac.uk/pub/bdr/gcc12/epanet2toolkit.out\n> >\n> > I'd like to reproduce the warning and fix it.  Usually I'd do that with\n> > Docker.  Is anyone aware of a docker image or dockerfile with this setup?\n> >\n> > Thanks,\n> >\n> > Brad\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks G?bor and Dirk for the suggestions. This one seemed to need fedora\nto replicate the issue.  Docker did make it easy:\n\nFROM fedora:40\nUSER root\nRUN dnf -y install R\n\n\nBrad\n\n\nOn Fri 24 May 2024 a",
+      "body_plain": "Thanks Gábor and Dirk for the suggestions. This one seemed to need fedora\nto replicate the issue.  Docker did make it easy:\n\nFROM fedora:40\nUSER root\nRUN dnf -y install R\n\n\nBrad\n\n\nOn Fri 24 May 2024 at 20:28, Gábor Csárdi <csardi.gabor at gmail.com> wrote:\n\n> Fedora 40 comes with gcc 14.1.x. But I would first try to use the\n> `-Wformat-truncation=` flag with the compiler you have, it is possible\n> that you don't need gcc 14.1. If you do, then the `fedora:40`\n> container should be good.\n>\n> Gabor\n>\n> On Fri, May 24, 2024 at 9:02 PM Brad Eck <bradleyjeck at gmail.com> wrote:\n> >\n> > Dear List -\n> >\n> > I received a note that my package -- epanet2toolkit -- was showing a\n> > warning in the fedora-gcc results on CRAN.\n> > https://www.stats.ox.ac.uk/pub/bdr/gcc12/epanet2toolkit.out\n> >\n> > I'd like to reproduce the warning and fix it.  Usually I'd do that with\n> > Docker.  Is anyone aware of a docker image or dockerfile with this setup?\n> >\n> > Thanks,\n> >\n> > Brad\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks Gábor and Dirk for the suggestions. This one seemed to need fedora\nto replicate the issue.  Docker did make it easy:\n\nFROM fedora:40\nUSER root\nRUN dnf -y install R\n\n\nBrad\n\n\nOn Fri 24 May 2024 a",
       "thread_id": "thread-c5dbf253653e",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010831.html"
     },
     {
       "id": "msg-b41794572e52",
@@ -2938,7 +3088,8 @@
       "body_snippet": "Hello everyone,\n\nI'm updating the 'astrochron' R package, and I'm trying to resolve a new segmentation fault that arises only with the Debian and Fedora clang compilers. An example is the function 'as",
       "thread_id": "thread-b41794572e52",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010833.html"
     },
     {
       "id": "msg-e5839aab6683",
@@ -2956,7 +3107,8 @@
       "body_snippet": "? Mon, 27 May 2024 13:29:56 -0500\nStephen Meyers <srmeyers2 at wisc.edu> ?????:\n\n> I'm updating the 'astrochron' R package, and I'm trying to resolve a\n> new segmentation fault that arises only with t",
       "thread_id": "thread-b41794572e52",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010834.html"
     },
     {
       "id": "msg-dea1aa96f5e2",
@@ -2972,7 +3124,8 @@
       "body_snippet": "Is it possible to get flex in the win-builder windows environment? It's present in the debian environment. My package depends on cmake, bison, and flex. Each of these are listed in the `SystemRequirme",
       "thread_id": "thread-dea1aa96f5e2",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010835.html"
     },
     {
       "id": "msg-ce9e9b5ce835",
@@ -2990,7 +3143,8 @@
       "body_snippet": "On 5/28/24 06:18, drc via R-package-devel wrote:\n> Is it possible to get flex in the win-builder windows environment? It's present in the debian environment. My package depends on cmake, bison, and fl",
       "thread_id": "thread-dea1aa96f5e2",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010836.html"
     },
     {
       "id": "msg-4935b013dee7",
@@ -3006,7 +3160,8 @@
       "body_snippet": "There are at  least 4 ways to build a package:\n\n  1.  R CMD build\n  2.  pkgbuild::build(), which I  believe calls 1.\n  3.  devtools::build(), which calls 2.\n  4.  RStudio GUI, which calls 3.\n\nI recent",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010837.html"
     },
     {
       "id": "msg-cf3ff188136c",
@@ -3024,7 +3179,8 @@
       "body_snippet": "On 2024-05-28 6:20 p.m., Boylan, Ross via R-package-devel wrote:\n> There are at  least 4 ways to build a package:\n> \n>    1.  R CMD build\n>    2.  pkgbuild::build(), which I  believe calls 1.\n>    3. ",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010838.html"
     },
     {
       "id": "msg-24b7468508b4",
@@ -3042,7 +3198,8 @@
       "body_snippet": "Ross,\n\nR CMD build is the only offical way to build a (source) package in R.\n\nAll other \"tools\" are just convenience wrappers by 3rd parties that call R CMD build eventually. There is no reason to ass",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010839.html"
     },
     {
       "id": "msg-b24be359340d",
@@ -3061,7 +3218,8 @@
       "body_snippet": "-----Original Message-----\nFrom: Duncan Murdoch <murdoch.duncan at gmail.com> \nSent: Tuesday, May 28, 2024 3:30 PM\nTo: Boylan, Ross <Ross.Boylan at ucsf.edu>; r-package-devel at r-project.org\nSubject:",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010840.html"
     },
     {
       "id": "msg-724570960271",
@@ -3080,7 +3238,8 @@
       "body_snippet": "Duncan's point about options is key... the build options set by default in devtools etc are generally configured to minimize the time required to identify the next big issue to address. Options approp",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010841.html"
     },
     {
       "id": "msg-f4d33e89e526",
@@ -3099,7 +3258,8 @@
       "body_snippet": "[Sorry: Outlook doesn't quote messages the \"normal\" way]\n\n-----Original Message-----\nFrom: Simon Urbanek <simon.urbanek at R-project.org> \nSent: Tuesday, May 28, 2024 4:10 PM\n\nRoss,\n\nR CMD build is th",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010842.html"
     },
     {
       "id": "msg-1977ee8b194d",
@@ -3119,7 +3279,8 @@
       "body_snippet": "> On 29/05/2024, at 11:21 AM, Boylan, Ross <Ross.Boylan at ucsf.edu> wrote:\n> \n> Is it required that the package submitted to CRAN have been built with R CMD build rather than some other tool?  When y",
       "thread_id": "thread-4935b013dee7",
       "thread_depth": 3,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010843.html"
     },
     {
       "id": "msg-d342b497cd78",
@@ -3135,7 +3296,8 @@
       "body_snippet": "Hello everybody. I'm having a problem submitting a package to CRAN. It\ninvolves a NOTE about  detritus files on the temporary directory.\n\nThe thing is my package basically downloads a zip file to the ",
       "thread_id": "thread-d342b497cd78",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010844.html"
     },
     {
       "id": "msg-a484f093fadc",
@@ -3149,11 +3311,12 @@
       "references": [
         "<CA+T1pOdtf803JVgHCvqLVTa4mXbeS+gcWRhDoz4b8vHYGnaagw@mail.gmail.com>"
       ],
-      "body_plain": "Dear Hector,\n\nThe tmp dir depends on the R session. Use tools::R_user_dir(\"your_package\",\nwhich = \"cache\") if you want a permanent cache of the files.\n\nBest regards,\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse Overheid / Government of Flanders\nINSTITUUT VOOR NATUUR- EN BOSONDERZOEK / RESEARCH INSTITUTE FOR NATURE AND\nFOREST\nTeam Biometrie & Kwaliteitszorg / Team Biometrics & Quality Assurance\nthierry.onkelinx at inbo.be\nHavenlaan 88 bus 73, 1000 Brussel\n*Postadres:* Koning Albert II-laan 15 bus 186, 1210 Brussel\n*Poststukken die naar dit adres worden gestuurd, worden ingescand en\ndigitaal aan de geadresseerde bezorgd. Zo kan de Vlaamse overheid haar\ndossiers volledig digitaal behandelen. Poststukken met de vermelding\n?vertrouwelijk? worden niet ingescand, maar ongeopend aan de geadresseerde\nbezorgd.*\nwww.inbo.be\n\n///////////////////////////////////////////////////////////////////////////////////////////\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n///////////////////////////////////////////////////////////////////////////////////////////\n\n<https://www.inbo.be>\n\n\nOp do 30 mei 2024 om 12:26 schreef H?ctor Meleiro Su?rez <\nhmeleiros at gmail.com>:\n\n> Hello everybody. I'm having a problem submitting a package to CRAN. It\n> involves a NOTE about  detritus files on the temporary directory.\n>\n> The thing is my package basically downloads a zip file to the temporary\n> directory, unzips, reads and processes some of the extracted files and\n> imports the data to the R environment. So after the examples and tests are\n> run the temporary directory is full of those files. So I implemented an\n> internal cleanup function that removes the download zip file and the\n> directory to which the files are extracted and, of course, the NOTE\n> disappears. But I really don't like this approach because I want the\n> function to keep the files in the temporary directory so that if a file has\n> been already downloaded it would not download the file again and just read\n> the data.\n>\n> I thought that R cleaned up the temporary directory when the session ended.\n> So why is this a problem? Is it that there are too many files aftes\n> examples and tests are run? or would this NOTE be an issue to CRAN even if\n> only one file was detected at the end?\n>\n> Thanks in advance.\n>\n> This is the NOTE on the logs:\n>\n> * checking for detritus in the temp directory ... NOTE\n> Found the following files/directories:\n>   ?RtmpRfd2nv\\02202307_MESA? ?RtmpRfd2nv\\02202307_MESA.zip?\n>   ?RtmpRfd2nv\\02202307_MUNI? ?RtmpRfd2nv\\02202307_MUNI.zip?\n>   ?RtmpRfd2nv\\02202307_TOTA? ?RtmpRfd2nv\\02202307_TOTA.zip?\n>   ?RtmpRfd2nv\\03202307_MUNI? ?RtmpRfd2nv\\03202307_MUNI.zip?\n>   ?RtmpUEZkAQ\\02198210_MUNI? ?RtmpUEZkAQ\\02198210_MUNI.zip?\n>   ?RtmpUEZkAQ\\02201904_MESA? ?RtmpUEZkAQ\\02201904_MESA.zip?\n>   ?RtmpUEZkAQ\\03201911_MUNI? ?RtmpUEZkAQ\\03201911_MUNI.zip?\n>   ?RtmpVtjuwE\\02198210_TOTA? ?RtmpVtjuwE\\02198210_TOTA.zip?\n>   ?RtmpVtjuwE\\02201911_MUNI? ?RtmpVtjuwE\\02201911_MUNI.zip?\n>   ?RtmpVtjuwE\\03200403_MUNI? ?RtmpVtjuwE\\03200403_MUNI.zip?\n>   ?RtmpcFaNBb\\02201512_MUNI? ?RtmpcFaNBb\\02201512_MUNI.zip?\n>   ?Rtmpe86bkd\\02198210_TOTA? ?Rtmpe86bkd\\02198210_TOTA.zip?\n>   ?Rtmpe86bkd\\02201911_MUNI? ?Rtmpe86bkd\\02201911_MUNI.zip?\n>   ?Rtmpe86bkd\\02202307_MESA? ?Rtmpe86bkd\\02202307_MESA.zip?\n>   ?Rtmpe86bkd\\03200403_MUNI? ?Rtmpe86bkd\\03200403_MUNI.zip?\n> * DONE\n> Status: 1 NOTE\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear Hector,\n\nThe tmp dir depends on the R session. Use tools::R_user_dir(\"your_package\",\nwhich = \"cache\") if you want a permanent cache of the files.\n\nBest regards,\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse Overheid / Government of Flanders\nINSTITUUT VOOR NATUUR- EN BOSONDERZOEK / RESEARCH INSTITUTE FOR NATURE AND\nFOREST\nTeam Biometrie & Kwaliteitszorg / Team Biometrics & Quality Assurance\nthierry.onkelinx at inbo.be\nHavenlaan 88 bus 73, 1000 Brussel\n*Postadres:* Koning Albert II-laan 15 bus 186, 1210 Brussel\n*Poststukken die naar dit adres worden gestuurd, worden ingescand en\ndigitaal aan de geadresseerde bezorgd. Zo kan de Vlaamse overheid haar\ndossiers volledig digitaal behandelen. Poststukken met de vermelding\n‘vertrouwelijk’ worden niet ingescand, maar ongeopend aan de geadresseerde\nbezorgd.*\nwww.inbo.be\n\n///////////////////////////////////////////////////////////////////////////////////////////\nTo call in the statistician after the experiment is done may be no more\nthan asking him to perform a post-mortem examination: he may be able to say\nwhat the experiment died of. ~ Sir Ronald Aylmer Fisher\nThe plural of anecdote is not data. ~ Roger Brinner\nThe combination of some data and an aching desire for an answer does not\nensure that a reasonable answer can be extracted from a given body of data.\n~ John Tukey\n///////////////////////////////////////////////////////////////////////////////////////////\n\n<https://www.inbo.be>\n\n\nOp do 30 mei 2024 om 12:26 schreef Héctor Meleiro Suárez <\nhmeleiros at gmail.com>:\n\n> Hello everybody. I'm having a problem submitting a package to CRAN. It\n> involves a NOTE about  detritus files on the temporary directory.\n>\n> The thing is my package basically downloads a zip file to the temporary\n> directory, unzips, reads and processes some of the extracted files and\n> imports the data to the R environment. So after the examples and tests are\n> run the temporary directory is full of those files. So I implemented an\n> internal cleanup function that removes the download zip file and the\n> directory to which the files are extracted and, of course, the NOTE\n> disappears. But I really don't like this approach because I want the\n> function to keep the files in the temporary directory so that if a file has\n> been already downloaded it would not download the file again and just read\n> the data.\n>\n> I thought that R cleaned up the temporary directory when the session ended.\n> So why is this a problem? Is it that there are too many files aftes\n> examples and tests are run? or would this NOTE be an issue to CRAN even if\n> only one file was detected at the end?\n>\n> Thanks in advance.\n>\n> This is the NOTE on the logs:\n>\n> * checking for detritus in the temp directory ... NOTE\n> Found the following files/directories:\n>   ‘RtmpRfd2nv\\02202307_MESA’ ‘RtmpRfd2nv\\02202307_MESA.zip’\n>   ‘RtmpRfd2nv\\02202307_MUNI’ ‘RtmpRfd2nv\\02202307_MUNI.zip’\n>   ‘RtmpRfd2nv\\02202307_TOTA’ ‘RtmpRfd2nv\\02202307_TOTA.zip’\n>   ‘RtmpRfd2nv\\03202307_MUNI’ ‘RtmpRfd2nv\\03202307_MUNI.zip’\n>   ‘RtmpUEZkAQ\\02198210_MUNI’ ‘RtmpUEZkAQ\\02198210_MUNI.zip’\n>   ‘RtmpUEZkAQ\\02201904_MESA’ ‘RtmpUEZkAQ\\02201904_MESA.zip’\n>   ‘RtmpUEZkAQ\\03201911_MUNI’ ‘RtmpUEZkAQ\\03201911_MUNI.zip’\n>   ‘RtmpVtjuwE\\02198210_TOTA’ ‘RtmpVtjuwE\\02198210_TOTA.zip’\n>   ‘RtmpVtjuwE\\02201911_MUNI’ ‘RtmpVtjuwE\\02201911_MUNI.zip’\n>   ‘RtmpVtjuwE\\03200403_MUNI’ ‘RtmpVtjuwE\\03200403_MUNI.zip’\n>   ‘RtmpcFaNBb\\02201512_MUNI’ ‘RtmpcFaNBb\\02201512_MUNI.zip’\n>   ‘Rtmpe86bkd\\02198210_TOTA’ ‘Rtmpe86bkd\\02198210_TOTA.zip’\n>   ‘Rtmpe86bkd\\02201911_MUNI’ ‘Rtmpe86bkd\\02201911_MUNI.zip’\n>   ‘Rtmpe86bkd\\02202307_MESA’ ‘Rtmpe86bkd\\02202307_MESA.zip’\n>   ‘Rtmpe86bkd\\03200403_MUNI’ ‘Rtmpe86bkd\\03200403_MUNI.zip’\n> * DONE\n> Status: 1 NOTE\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear Hector,\n\nThe tmp dir depends on the R session. Use tools::R_user_dir(\"your_package\",\nwhich = \"cache\") if you want a permanent cache of the files.\n\nBest regards,\n\nir. Thierry Onkelinx\nStatisticus ",
       "thread_id": "thread-d342b497cd78",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010845.html"
     },
     {
       "id": "msg-88cdafb4b650",
@@ -3167,11 +3330,12 @@
       "references": [
         "<CA+T1pOdtf803JVgHCvqLVTa4mXbeS+gcWRhDoz4b8vHYGnaagw@mail.gmail.com>"
       ],
-      "body_plain": "? Thu, 30 May 2024 11:12:05 +0200\nH?ctor Meleiro Su?rez <hmeleiros at gmail.com> ?????:\n\n> So why is this a problem? Is it that there are too many files aftes\n> examples and tests are run? or would this NOTE be an issue to CRAN\n> even if only one file was detected at the end?\n\nThis problem has two sides.\n\nThe side that R CMD check is giving you NOTEs about is that _examples\nand tests_ are requried to keep the global state of the system intact.\nThis includes all files on the computer: writing anywhere except the\ntempdir() is prohibited, and even that must be done with care not to\noverwrite anything and cleaned up afterwards.\n\n(See https://cran.r-project.org/web/packages/policies.html and search\nfor \"temporary directory\".)\n\nThe side that's more subjective is that outside tests and examples,\ncode shouldn't be touching the filesystem without the user's\npermission. Many functions (e.g. write.table()) have a legitimate need\nto alter the filesystem. If the user would legitimately benefit from not\nhaving to download the files again (including between R sessions), feel\nfree to follow the advice of Thierry Onkelinx and use\ntools::R_user_dir(...), except in tests and examples.\n\nTesting functions that access external resources over the Internet is\nfraught with additional peril. Your examples and tests must not fail if\na download attempt fails, but your users will probably prefer your\nfunctions to stop() with an exception on download failure. One way to\nsolve this problem is to make sure that the functions that fetch\nanything from the Internet raise errors with a specific class set and\nthen to wrap all examples and tests in tryCatch(...,\nyourpackage_Internet_error = function(e) message('Caught an error while\naccessing an Internet resource: ', conditionMessage(e))). This way any\nother unchecked errors (that your tests attempt to uncover) will still\nsurface.\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Thu, 30 May 2024 11:12:05 +0200\nH?ctor Meleiro Su?rez <hmeleiros at gmail.com> ?????:\n\n> So why is this a problem? Is it that there are too many files aftes\n> examples and tests are run? or would th",
+      "body_plain": "В Thu, 30 May 2024 11:12:05 +0200\nHéctor Meleiro Suárez <hmeleiros at gmail.com> пишет:\n\n> So why is this a problem? Is it that there are too many files aftes\n> examples and tests are run? or would this NOTE be an issue to CRAN\n> even if only one file was detected at the end?\n\nThis problem has two sides.\n\nThe side that R CMD check is giving you NOTEs about is that _examples\nand tests_ are requried to keep the global state of the system intact.\nThis includes all files on the computer: writing anywhere except the\ntempdir() is prohibited, and even that must be done with care not to\noverwrite anything and cleaned up afterwards.\n\n(See https://cran.r-project.org/web/packages/policies.html and search\nfor \"temporary directory\".)\n\nThe side that's more subjective is that outside tests and examples,\ncode shouldn't be touching the filesystem without the user's\npermission. Many functions (e.g. write.table()) have a legitimate need\nto alter the filesystem. If the user would legitimately benefit from not\nhaving to download the files again (including between R sessions), feel\nfree to follow the advice of Thierry Onkelinx and use\ntools::R_user_dir(...), except in tests and examples.\n\nTesting functions that access external resources over the Internet is\nfraught with additional peril. Your examples and tests must not fail if\na download attempt fails, but your users will probably prefer your\nfunctions to stop() with an exception on download failure. One way to\nsolve this problem is to make sure that the functions that fetch\nanything from the Internet raise errors with a specific class set and\nthen to wrap all examples and tests in tryCatch(...,\nyourpackage_Internet_error = function(e) message('Caught an error while\naccessing an Internet resource: ', conditionMessage(e))). This way any\nother unchecked errors (that your tests attempt to uncover) will still\nsurface.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Thu, 30 May 2024 11:12:05 +0200\nHéctor Meleiro Suárez <hmeleiros at gmail.com> пишет:\n\n> So why is this a problem? Is it that there are too many files aftes\n> examples and tests are run? or would th",
       "thread_id": "thread-d342b497cd78",
       "thread_depth": 1,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010846.html"
     },
     {
       "id": "msg-5c5b35731347",
@@ -3186,11 +3350,12 @@
         "<CA+T1pOdtf803JVgHCvqLVTa4mXbeS+gcWRhDoz4b8vHYGnaagw@mail.gmail.com>",
         "<20240530144356.5c9ba8e1@arachnoid>"
       ],
-      "body_plain": "On 2024-05-30 7:43 a.m., Ivan Krylov via R-package-devel wrote:\n> ? Thu, 30 May 2024 11:12:05 +0200\n> H?ctor Meleiro Su?rez <hmeleiros at gmail.com> ?????:\n> \n>> So why is this a problem? Is it that there are too many files aftes\n>> examples and tests are run? or would this NOTE be an issue to CRAN\n>> even if only one file was detected at the end?\n> \n> This problem has two sides.\n> \n> The side that R CMD check is giving you NOTEs about is that _examples\n> and tests_ are requried to keep the global state of the system intact.\n\nOnly some parts of the global state:  examples can create variables in \nglobalenv().\n\nDuncan Murdoch\n\n> This includes all files on the computer: writing anywhere except the\n> tempdir() is prohibited, and even that must be done with care not to\n> overwrite anything and cleaned up afterwards.\n> \n> (See https://cran.r-project.org/web/packages/policies.html and search\n> for \"temporary directory\".)\n> \n> The side that's more subjective is that outside tests and examples,\n> code shouldn't be touching the filesystem without the user's\n> permission. Many functions (e.g. write.table()) have a legitimate need\n> to alter the filesystem. If the user would legitimately benefit from not\n> having to download the files again (including between R sessions), feel\n> free to follow the advice of Thierry Onkelinx and use\n> tools::R_user_dir(...), except in tests and examples.\n> \n> Testing functions that access external resources over the Internet is\n> fraught with additional peril. Your examples and tests must not fail if\n> a download attempt fails, but your users will probably prefer your\n> functions to stop() with an exception on download failure. One way to\n> solve this problem is to make sure that the functions that fetch\n> anything from the Internet raise errors with a specific class set and\n> then to wrap all examples and tests in tryCatch(...,\n> yourpackage_Internet_error = function(e) message('Caught an error while\n> accessing an Internet resource: ', conditionMessage(e))). This way any\n> other unchecked errors (that your tests attempt to uncover) will still\n> surface.\n>",
-      "body_snippet": "On 2024-05-30 7:43 a.m., Ivan Krylov via R-package-devel wrote:\n> ? Thu, 30 May 2024 11:12:05 +0200\n> H?ctor Meleiro Su?rez <hmeleiros at gmail.com> ?????:\n> \n>> So why is this a problem? Is it that t",
+      "body_plain": "On 2024-05-30 7:43 a.m., Ivan Krylov via R-package-devel wrote:\n> В Thu, 30 May 2024 11:12:05 +0200\n> Héctor Meleiro Suárez <hmeleiros at gmail.com> пишет:\n> \n>> So why is this a problem? Is it that there are too many files aftes\n>> examples and tests are run? or would this NOTE be an issue to CRAN\n>> even if only one file was detected at the end?\n> \n> This problem has two sides.\n> \n> The side that R CMD check is giving you NOTEs about is that _examples\n> and tests_ are requried to keep the global state of the system intact.\n\nOnly some parts of the global state:  examples can create variables in \nglobalenv().\n\nDuncan Murdoch\n\n> This includes all files on the computer: writing anywhere except the\n> tempdir() is prohibited, and even that must be done with care not to\n> overwrite anything and cleaned up afterwards.\n> \n> (See https://cran.r-project.org/web/packages/policies.html and search\n> for \"temporary directory\".)\n> \n> The side that's more subjective is that outside tests and examples,\n> code shouldn't be touching the filesystem without the user's\n> permission. Many functions (e.g. write.table()) have a legitimate need\n> to alter the filesystem. If the user would legitimately benefit from not\n> having to download the files again (including between R sessions), feel\n> free to follow the advice of Thierry Onkelinx and use\n> tools::R_user_dir(...), except in tests and examples.\n> \n> Testing functions that access external resources over the Internet is\n> fraught with additional peril. Your examples and tests must not fail if\n> a download attempt fails, but your users will probably prefer your\n> functions to stop() with an exception on download failure. One way to\n> solve this problem is to make sure that the functions that fetch\n> anything from the Internet raise errors with a specific class set and\n> then to wrap all examples and tests in tryCatch(...,\n> yourpackage_Internet_error = function(e) message('Caught an error while\n> accessing an Internet resource: ', conditionMessage(e))). This way any\n> other unchecked errors (that your tests attempt to uncover) will still\n> surface.\n>",
+      "body_snippet": "On 2024-05-30 7:43 a.m., Ivan Krylov via R-package-devel wrote:\n> В Thu, 30 May 2024 11:12:05 +0200\n> Héctor Meleiro Suárez <hmeleiros at gmail.com> пишет:\n> \n>> So why is this a problem? Is it that t",
       "thread_id": "thread-d342b497cd78",
       "thread_depth": 2,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010847.html"
     },
     {
       "id": "msg-1d0f08a1b445",
@@ -3215,7 +3380,8 @@
       "body_snippet": "Hi all,\n\nFirst off, I want to thank you all for your help! In case it's useful, I was able to solve my issue by using Ivan's suggestion from May 23rd.\n\nBest,\nMichelle\n________________________________\n",
       "thread_id": "thread-c294ad1ad91f",
       "thread_depth": 5,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010848.html"
     },
     {
       "id": "msg-08f3a47cba95",
@@ -3231,7 +3397,8 @@
       "body_snippet": "Hi,\n\nI'm extending an R package that uses the R C API directly. I'd like to use\nsome distribution functions, so I included the \"Rmath.h\" header. The issue\nis that this introduces macros that have unin",
       "thread_id": "thread-08f3a47cba95",
       "thread_depth": 0,
-      "month": "2024-05"
+      "month": "2024-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q2/010849.html"
     }
   ],
   "threads": [

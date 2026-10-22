@@ -17,7 +17,8 @@
       "body_snippet": "I noticed recently that check --as-cran was hanging and then emitting a\nmessage about not being able to verify the current time.  It seems that the\nCRAN check code is using some website to get the cur",
       "thread_id": "thread-5639778950af",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011859.html"
     },
     {
       "id": "msg-9b393d243dd4",
@@ -31,11 +32,12 @@
       "references": [
         "<CAAS8PA+294Z=EONG0U7K0h7o_tPq5483tLJ6mH6GnOvY-JpjKg@mail.gmail.com>"
       ],
-      "body_plain": "1) R has no native NTP client\n2) outside NTP access is very often blocked on local networks (and local NTP relay requires configuration for which there is no standard)\n3) it is overkill as we don?t need microsecond accuracy so a single HTTP(s) request is much easier\n\n\n> On 1/08/2025, at 10:17, Greg Hunt <greg at firmansyah.com> wrote:\n> \n> I noticed recently that check --as-cran was hanging and then emitting a message about not being able to verify the current time.  It seems that the CRAN check code is using some website to get the current clock time and that that site is currently down.  This strikes me as an odd approach to getting the current time.  Why was that approach taken when NTP is available on all mainstream OSs?   Is there something unusual about the CRAN environment?\n> \n> Greg\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
-      "body_snippet": "1) R has no native NTP client\n2) outside NTP access is very often blocked on local networks (and local NTP relay requires configuration for which there is no standard)\n3) it is overkill as we don?t ne",
+      "body_plain": "1) R has no native NTP client\n2) outside NTP access is very often blocked on local networks (and local NTP relay requires configuration for which there is no standard)\n3) it is overkill as we don’t need microsecond accuracy so a single HTTP(s) request is much easier\n\n\n> On 1/08/2025, at 10:17, Greg Hunt <greg at firmansyah.com> wrote:\n> \n> I noticed recently that check --as-cran was hanging and then emitting a message about not being able to verify the current time.  It seems that the CRAN check code is using some website to get the current clock time and that that site is currently down.  This strikes me as an odd approach to getting the current time.  Why was that approach taken when NTP is available on all mainstream OSs?   Is there something unusual about the CRAN environment?\n> \n> Greg\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_snippet": "1) R has no native NTP client\n2) outside NTP access is very often blocked on local networks (and local NTP relay requires configuration for which there is no standard)\n3) it is overkill as we don’t ne",
       "thread_id": "thread-5639778950af",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011860.html"
     },
     {
       "id": "msg-f628dd7ad99d",
@@ -50,11 +52,12 @@
         "<CAAS8PA+294Z=EONG0U7K0h7o_tPq5483tLJ6mH6GnOvY-JpjKg@mail.gmail.com>",
         "<619668DB-D7BC-433D-80AA-B00C4D76B80D@R-project.org>"
       ],
-      "body_plain": "Greg,\n\nIf the problem is in your local checks you can\nadd _R_CHECK_SYSTEM_CLOCK_=FALSE to your .Renviron to omit that check.\nSee R internals (which documents CRAN's default too) [1].\n\nBest,\n\nLlu?s\n\n\n[1]:\nhttps://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fSYSTEM_005fCLOCK_005f\n\nOn Fri, 1 Aug 2025 at 00:41, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> 1) R has no native NTP client\n> 2) outside NTP access is very often blocked on local networks (and local\n> NTP relay requires configuration for which there is no standard)\n> 3) it is overkill as we don?t need microsecond accuracy so a single\n> HTTP(s) request is much easier\n>\n>\n> > On 1/08/2025, at 10:17, Greg Hunt <greg at firmansyah.com> wrote:\n> >\n> > I noticed recently that check --as-cran was hanging and then emitting a\n> message about not being able to verify the current time.  It seems that the\n> CRAN check code is using some website to get the current clock time and\n> that that site is currently down.  This strikes me as an odd approach to\n> getting the current time.  Why was that approach taken when NTP is\n> available on all mainstream OSs?   Is there something unusual about the\n> CRAN environment?\n> >\n> > Greg\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Greg,\n\nIf the problem is in your local checks you can\nadd _R_CHECK_SYSTEM_CLOCK_=FALSE to your .Renviron to omit that check.\nSee R internals (which documents CRAN's default too) [1].\n\nBest,\n\nLlu?s\n\n\n[",
+      "body_plain": "Greg,\n\nIf the problem is in your local checks you can\nadd _R_CHECK_SYSTEM_CLOCK_=FALSE to your .Renviron to omit that check.\nSee R internals (which documents CRAN's default too) [1].\n\nBest,\n\nLluís\n\n\n[1]:\nhttps://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fSYSTEM_005fCLOCK_005f\n\nOn Fri, 1 Aug 2025 at 00:41, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> 1) R has no native NTP client\n> 2) outside NTP access is very often blocked on local networks (and local\n> NTP relay requires configuration for which there is no standard)\n> 3) it is overkill as we don’t need microsecond accuracy so a single\n> HTTP(s) request is much easier\n>\n>\n> > On 1/08/2025, at 10:17, Greg Hunt <greg at firmansyah.com> wrote:\n> >\n> > I noticed recently that check --as-cran was hanging and then emitting a\n> message about not being able to verify the current time.  It seems that the\n> CRAN check code is using some website to get the current clock time and\n> that that site is currently down.  This strikes me as an odd approach to\n> getting the current time.  Why was that approach taken when NTP is\n> available on all mainstream OSs?   Is there something unusual about the\n> CRAN environment?\n> >\n> > Greg\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Greg,\n\nIf the problem is in your local checks you can\nadd _R_CHECK_SYSTEM_CLOCK_=FALSE to your .Renviron to omit that check.\nSee R internals (which documents CRAN's default too) [1].\n\nBest,\n\nLluís\n\n\n[",
       "thread_id": "thread-5639778950af",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011862.html"
     },
     {
       "id": "msg-364ce4beb928",
@@ -72,7 +75,8 @@
       "body_snippet": "? Thu, 31 Jul 2025 11:09:39 +0200\nJon Olav Skoien <jon.skoien at gmail.com> ?????:\n\n> From what I understood, a solution is to wrap this part of the code\n> inside if (require(\"suggestedPackage\")) {use",
       "thread_id": "thread-364ce4beb928",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011863.html"
     },
     {
       "id": "msg-396857edb967",
@@ -86,11 +90,12 @@
       "references": [
         "<CAOh2hrH+mFWwjWWaMzjCkobfUFpLHhm0Lb4RNEJcBto=08WLjA@mail.gmail.com>"
       ],
-      "body_plain": "To check the existence of a suggested package it is recommended to use\nrequireNamespace(\"suggested\", quiet = TRUE). See the solution for\nexamples on the CRAN cookbook [1].\n\nOn tests, it depends on the approach you use.\nIt seems that you don't use any testing package for it (tinytest,\ntestthat, ...).\nI think you could rely on the actual objects and not compare with a\nsaved output of tests.\nInstead of:\n\n> obj\n[1] \"test1\"\n\nUse something like in a plain R file:\nstopifnot(identical(obj, \"test1\"))\n\nThis is how it is done on base R itself that checks if MASS is\ninstalled and performs some checks conditionally.\nSee example on a mirror: [2].\nHope this helps,\n\nLlu?s\n\n[1]: https://contributor.r-project.org/cran-cookbook/general_issues.html\n[2]: https://github.com/r-devel/r-svn/blob/fb206acc9f17c30d91c528efca9a368c69d5015b/src/library/stats/tests/ig_glm.R\n\n\nOn Fri, 1 Aug 2025 at 15:23, Jon Olav Skoien <jon.skoien at gmail.com> wrote:\n>\n> One of my packages failed the noSuggests test, and needs to be\n> updated. Fair enough, a suggested package was used unconditionally\n> both in an example and in a test. From what I understood, a solution\n> is to wrap this part of the code inside\n> if (require(\"suggestedPackage\")) {useSuggestedPackage}\n> However, it still fails the noSuggests test, this time because the\n> output does not match the test.Rout.save-file. This is also clear, as\n> some of the code is not executed, and some output is missing.\n>\n> How do I get around this?\n> I could use ## IGNORE_RDIFF_BEGIN and ## IGNORE_RDIFF_END before and\n> after the if (require())  clause, but then this part would not be\n> tested when the suggested package is available either. I don't like\n> this solution, as it means the interaction between the two packages\n> will not be checked.\n>\n> Am I missing something? Is there a different way of conditionally\n> using the suggested package? Or do I have to use the IGNORE_RDIFF\n> method?\n>\n> Thanks,\n> Jon\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "To check the existence of a suggested package it is recommended to use\nrequireNamespace(\"suggested\", quiet = TRUE). See the solution for\nexamples on the CRAN cookbook [1].\n\nOn tests, it depends on the approach you use.\nIt seems that you don't use any testing package for it (tinytest,\ntestthat, ...).\nI think you could rely on the actual objects and not compare with a\nsaved output of tests.\nInstead of:\n\n> obj\n[1] \"test1\"\n\nUse something like in a plain R file:\nstopifnot(identical(obj, \"test1\"))\n\nThis is how it is done on base R itself that checks if MASS is\ninstalled and performs some checks conditionally.\nSee example on a mirror: [2].\nHope this helps,\n\nLluís\n\n[1]: https://contributor.r-project.org/cran-cookbook/general_issues.html\n[2]: https://github.com/r-devel/r-svn/blob/fb206acc9f17c30d91c528efca9a368c69d5015b/src/library/stats/tests/ig_glm.R\n\n\nOn Fri, 1 Aug 2025 at 15:23, Jon Olav Skoien <jon.skoien at gmail.com> wrote:\n>\n> One of my packages failed the noSuggests test, and needs to be\n> updated. Fair enough, a suggested package was used unconditionally\n> both in an example and in a test. From what I understood, a solution\n> is to wrap this part of the code inside\n> if (require(\"suggestedPackage\")) {useSuggestedPackage}\n> However, it still fails the noSuggests test, this time because the\n> output does not match the test.Rout.save-file. This is also clear, as\n> some of the code is not executed, and some output is missing.\n>\n> How do I get around this?\n> I could use ## IGNORE_RDIFF_BEGIN and ## IGNORE_RDIFF_END before and\n> after the if (require())  clause, but then this part would not be\n> tested when the suggested package is available either. I don't like\n> this solution, as it means the interaction between the two packages\n> will not be checked.\n>\n> Am I missing something? Is there a different way of conditionally\n> using the suggested package? Or do I have to use the IGNORE_RDIFF\n> method?\n>\n> Thanks,\n> Jon\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "To check the existence of a suggested package it is recommended to use\nrequireNamespace(\"suggested\", quiet = TRUE). See the solution for\nexamples on the CRAN cookbook [1].\n\nOn tests, it depends on the",
       "thread_id": "thread-396857edb967",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011864.html"
     },
     {
       "id": "msg-65a9a8b2963a",
@@ -108,7 +113,8 @@
       "body_snippet": "Am 31.07.25 um 11:09 schrieb Jon Olav Skoien:\n> Is there a different way of conditionally\n> using the suggested package? Or do I have to use the IGNORE_RDIFF\n> method?\n\nTo use *reference output* for o",
       "thread_id": "thread-65a9a8b2963a",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011865.html"
     },
     {
       "id": "msg-6e7826471e8a",
@@ -127,7 +133,8 @@
       "body_snippet": "I would emphasize/paraphrase Ivan's point -- using goldens (.Rout.save) for\nsuch tests is quite a headache. We do so for a very limited number of tests\nin {data.table} (something like 10 tests of over",
       "thread_id": "thread-65a9a8b2963a",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011866.html"
     },
     {
       "id": "msg-850030fb8097",
@@ -147,7 +154,8 @@
       "body_snippet": "Thank you for all answers!\nI agree that adopting a testing framework would be a better approach\nfor future packages. However, as this particular package is not under\nactive development, I was particul",
       "thread_id": "thread-65a9a8b2963a",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011867.html"
     },
     {
       "id": "msg-bf4ce8f01852",
@@ -163,7 +171,8 @@
       "body_snippet": "Sorry for a very trivial issue at one edge of R package management: use \nof github.\n\nMy package (https://github.com/cpsyctc/CECPfuns) is mostly very simple \nas I am entirely self-taught as a statistic",
       "thread_id": "thread-bf4ce8f01852",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011868.html"
     },
     {
       "id": "msg-f77d60f803cb",
@@ -181,7 +190,8 @@
       "body_snippet": "Hey Chris,\n\nHave a look at the actual list of commits in your gh-pages vs. main\nbranches, I suspect you'll spot what's going on pretty quickly :)\n\nhttps://github.com/cpsyctc/CECPfuns/commits/gh-pages/",
       "thread_id": "thread-bf4ce8f01852",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011869.html"
     },
     {
       "id": "msg-da7f0a4ccd52",
@@ -200,7 +210,8 @@
       "body_snippet": "Thanks very much.\n\nOuch, well clearly it would have been a help had I known to do that.? \nGot it and you are correct: whipping long quiescent neurons into action \nfinally sorted this out.? It's edge o",
       "thread_id": "thread-bf4ce8f01852",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011870.html"
     },
     {
       "id": "msg-746d87e825c3",
@@ -220,7 +231,8 @@
       "body_snippet": "On 6 August 2025 at 21:13, Chris Evans wrote:\n| see, the ahead:behind count for the gh-pages branch in github is pretty \n| meaningless here.? Someone please correct me if I am wrong about that.\n\nCorre",
       "thread_id": "thread-bf4ce8f01852",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011871.html"
     },
     {
       "id": "msg-f4b871944071",
@@ -235,11 +247,12 @@
         "<CAAS8PA+294Z=EONG0U7K0h7o_tPq5483tLJ6mH6GnOvY-JpjKg@mail.gmail.com>",
         "<619668DB-D7BC-433D-80AA-B00C4D76B80D@R-project.org>"
       ],
-      "body_plain": "Simon,\nI have been down a bit of a rabbit hole with this.  There is an interesting\nAPNIC blog entry related to this that tries to quantify the distribution of\nclock skews.\n\n1. I have a very simple R NTP client.  It does not implement the server\nclock time adjustment process bits of the protocol, but at a point in time\nits able to detect and discard unsynchronised servers and outlier\nresponses. You can have it if you want, but I think its the answer to the\nwrong question.\n\n3. The webservers that the check code references go down periodically, one\nis unresponsive from here this afternoon.  I agree you don't need\nmicroseconds or even tens of milliseconds, the check code allows for five\nminutes of drift which is consistent with Kerberos tolerance of time\nmismatches, but you do need \"up\" and \"up\" is not reliably there.  The www.\nor cran.r-project.org servers respond to a GET with a standard HTTP Date\nheader that contains that server's current idea of what the time is (you\ncan see it using curlGetHeaders(\"http://cran.r-project.org\"), the timezone\nis required by the HTTP standard to always be GMT/UTC) and I assume the\ncore team have some level of control over those servers' configurations and\nshould be easily able to ensure time synchronisation with some sufficiently\nreliable time source if that time sync is not already in place.  I suspect\nthat cran.r-project.org  is more reliable than the websites you are using\nas time sources.\n\nWouldn't it be possible to use an r-project server, as described above, as\na time source?\n\n\nGreg\n\nOn Fri, 1 Aug 2025 at 08:41, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> 1) R has no native NTP client\n> 2) outside NTP access is very often blocked on local networks (and local\n> NTP relay requires configuration for which there is no standard)\n> 3) it is overkill as we don?t need microsecond accuracy so a single\n> HTTP(s) request is much easier\n>\n>\n> > On 1/08/2025, at 10:17, Greg Hunt <greg at firmansyah.com> wrote:\n> >\n> > I noticed recently that check --as-cran was hanging and then emitting a\n> message about not being able to verify the current time.  It seems that the\n> CRAN check code is using some website to get the current clock time and\n> that that site is currently down.  This strikes me as an odd approach to\n> getting the current time.  Why was that approach taken when NTP is\n> available on all mainstream OSs?   Is there something unusual about the\n> CRAN environment?\n> >\n> > Greg\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Simon,\nI have been down a bit of a rabbit hole with this.  There is an interesting\nAPNIC blog entry related to this that tries to quantify the distribution of\nclock skews.\n\n1. I have a very simple R NTP client.  It does not implement the server\nclock time adjustment process bits of the protocol, but at a point in time\nits able to detect and discard unsynchronised servers and outlier\nresponses. You can have it if you want, but I think its the answer to the\nwrong question.\n\n3. The webservers that the check code references go down periodically, one\nis unresponsive from here this afternoon.  I agree you don't need\nmicroseconds or even tens of milliseconds, the check code allows for five\nminutes of drift which is consistent with Kerberos tolerance of time\nmismatches, but you do need \"up\" and \"up\" is not reliably there.  The www.\nor cran.r-project.org servers respond to a GET with a standard HTTP Date\nheader that contains that server's current idea of what the time is (you\ncan see it using curlGetHeaders(\"http://cran.r-project.org\"), the timezone\nis required by the HTTP standard to always be GMT/UTC) and I assume the\ncore team have some level of control over those servers' configurations and\nshould be easily able to ensure time synchronisation with some sufficiently\nreliable time source if that time sync is not already in place.  I suspect\nthat cran.r-project.org  is more reliable than the websites you are using\nas time sources.\n\nWouldn't it be possible to use an r-project server, as described above, as\na time source?\n\n\nGreg\n\nOn Fri, 1 Aug 2025 at 08:41, Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> 1) R has no native NTP client\n> 2) outside NTP access is very often blocked on local networks (and local\n> NTP relay requires configuration for which there is no standard)\n> 3) it is overkill as we don’t need microsecond accuracy so a single\n> HTTP(s) request is much easier\n>\n>\n> > On 1/08/2025, at 10:17, Greg Hunt <greg at firmansyah.com> wrote:\n> >\n> > I noticed recently that check --as-cran was hanging and then emitting a\n> message about not being able to verify the current time.  It seems that the\n> CRAN check code is using some website to get the current clock time and\n> that that site is currently down.  This strikes me as an odd approach to\n> getting the current time.  Why was that approach taken when NTP is\n> available on all mainstream OSs?   Is there something unusual about the\n> CRAN environment?\n> >\n> > Greg\n> >\n> > [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Simon,\nI have been down a bit of a rabbit hole with this.  There is an interesting\nAPNIC blog entry related to this that tries to quantify the distribution of\nclock skews.\n\n1. I have a very simple R N",
       "thread_id": "thread-5639778950af",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011872.html"
     },
     {
       "id": "msg-865830746c38",
@@ -255,7 +268,8 @@
       "body_snippet": "Hey everyone who is more familiar with R-devel and docker.\n\nI am trying to test the new version of my package (maxLik) on R-devel,\nusing the docker container.  I am using rocker/r-devel as the base.  ",
       "thread_id": "thread-865830746c38",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011873.html"
     },
     {
       "id": "msg-733f1195da0d",
@@ -274,7 +288,8 @@
       "body_snippet": "Thanks.\n\nI thought this was the issue, and even manually deleted /usr/bin/R and\n/usr/bin/Rscript, but the problem persisted.  But now I am thinking that\n/usr/bin/R may not be the relevant executables,",
       "thread_id": "thread-733f1195da0d",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011874.html"
     },
     {
       "id": "msg-c4dad65f4be0",
@@ -294,7 +309,8 @@
       "body_snippet": "Out of curiosity, why do they install two instances of R in a Docker\ncontainer?  On a traditional physical tin server, sure, you can't avoid\nthat sort of thing, but why in Docker?  I didn't see a rati",
       "thread_id": "thread-733f1195da0d",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011875.html"
     },
     {
       "id": "msg-e664d397d724",
@@ -312,7 +328,8 @@
       "body_snippet": "On 10 August 2025 at 21:38, Ott Toomet wrote:\n| root at f4024e015396:/# cat maxLik.Rcheck/00install.out\n| * installing *source* package ?maxLik? ...\n| ** this is package ?maxLik? version ?1.6-3?\n| ** ",
       "thread_id": "thread-865830746c38",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011876.html"
     },
     {
       "id": "msg-5f661d5dd156",
@@ -333,7 +350,8 @@
       "body_snippet": "On 11 August 2025 at 18:03, Greg Hunt wrote:\n| Out of curiosity, why do they install two instances of R in a Docker\n| container?  On a traditional physical tin server, sure, you can't avoid\n| that sor",
       "thread_id": "thread-733f1195da0d",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011877.html"
     },
     {
       "id": "msg-992b2f187600",
@@ -352,7 +370,8 @@
       "body_snippet": "Hmm...\n\nI am a little bit confused.\n\n* Is this \"narrower\" library path for CMD check explained somewhere?\n* Isn't lattice one of the default packages (graphics depends on it iirc),\nso it should be ins",
       "thread_id": "thread-865830746c38",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011878.html"
     },
     {
       "id": "msg-364a92c9b9a4",
@@ -372,7 +391,8 @@
       "body_snippet": "lattice is a \"recommended\" package.  Those are contributed packages, not \nbase packages, so they are optional, but most distributions of R include \nthem.\n\nRegarding Dirk's \"narrower\" comment:  I think",
       "thread_id": "thread-865830746c38",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011879.html"
     },
     {
       "id": "msg-eb9989f0dcbe",
@@ -392,7 +412,8 @@
       "body_snippet": "On 11 August 2025 at 05:26, Ott Toomet wrote:\n| * Is this \"narrower\" library path for CMD check explained somewhere?\n\nMake your package (in a test, maybe even just tests/hello.R) do\n`print(.libPaths()",
       "thread_id": "thread-865830746c38",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011880.html"
     },
     {
       "id": "msg-5be138edcc6d",
@@ -409,11 +430,12 @@
         "<CAMMJQ0axSzM3g2XGfbE9PsHzdMZU94zudLmMNavvVv6LchLrgA@mail.gmail.com>",
         "<f4058abd-b6e0-4a41-813a-9f21f030f462@gmail.com>"
       ],
-      "body_plain": "On Mon, 11 Aug 2025 08:47:45 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> Regarding Dirk's \"narrower\" comment:  I think that is really his\n> decision about the docker container, not a property of R CMD check.\n> R CMD check needs to be able to succeed if the only packages\n> installed are the hard dependencies (Depends, Imports, plus base\n> packages), but it doesn't actually install anything.  That's up to\n> you before running it.\n\nObviously I cannot speak for Dirk and where his comment comes from :),\nbut WRE has since ages the following note:\n\n\tNote: R CMD check and R CMD build run R processes with\n\t--vanilla in which none of the user?s startup files are read.\n\tIf you need R_LIBS set (to find packages in a non-standard\n\tlibrary) you can set it in the environment: also you can use\n\tthe check and build environment files (as specified by the\n\tenvironment variables R_CHECK_ENVIRON and R_BUILD_ENVIRON; if\n\tunset, files55 ~/.R/check.Renviron and ~/.R/build.Renviron are\n\tused) to set environment variables when using these utilities.\n\nOn my linux box I update and compile R patched and R devel regularly,\nand at some point I got tired of also installing a lot of packages\n(that I need for checking) each time.  So I moved all of these\nadditional packages to another library (where they are updated on an\nas needed basis via update.packages(ask=FALSE, CheckBuilt=TRUE)). After\nthis restructure R patched and R devel could promptly not find those\npackages anymore (until I changed my scripts to create appropriate\nsymbolic links, I did not want to go down the path of setting\nenvironment variables).\n\nCheers,\n\n\tBerwin",
+      "body_plain": "On Mon, 11 Aug 2025 08:47:45 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> Regarding Dirk's \"narrower\" comment:  I think that is really his\n> decision about the docker container, not a property of R CMD check.\n> R CMD check needs to be able to succeed if the only packages\n> installed are the hard dependencies (Depends, Imports, plus base\n> packages), but it doesn't actually install anything.  That's up to\n> you before running it.\n\nObviously I cannot speak for Dirk and where his comment comes from :),\nbut WRE has since ages the following note:\n\n\tNote: R CMD check and R CMD build run R processes with\n\t--vanilla in which none of the user’s startup files are read.\n\tIf you need R_LIBS set (to find packages in a non-standard\n\tlibrary) you can set it in the environment: also you can use\n\tthe check and build environment files (as specified by the\n\tenvironment variables R_CHECK_ENVIRON and R_BUILD_ENVIRON; if\n\tunset, files55 ~/.R/check.Renviron and ~/.R/build.Renviron are\n\tused) to set environment variables when using these utilities.\n\nOn my linux box I update and compile R patched and R devel regularly,\nand at some point I got tired of also installing a lot of packages\n(that I need for checking) each time.  So I moved all of these\nadditional packages to another library (where they are updated on an\nas needed basis via update.packages(ask=FALSE, CheckBuilt=TRUE)). After\nthis restructure R patched and R devel could promptly not find those\npackages anymore (until I changed my scripts to create appropriate\nsymbolic links, I did not want to go down the path of setting\nenvironment variables).\n\nCheers,\n\n\tBerwin",
       "body_snippet": "On Mon, 11 Aug 2025 08:47:45 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> Regarding Dirk's \"narrower\" comment:  I think that is really his\n> decision about the docker container, not a ",
       "thread_id": "thread-865830746c38",
       "thread_depth": 4,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011881.html"
     },
     {
       "id": "msg-c1e53727d8c5",
@@ -431,11 +453,12 @@
         "<f4058abd-b6e0-4a41-813a-9f21f030f462@gmail.com>",
         "<20250812161654.59baf69e@dep59159.uniwa.uwa.edu.au>"
       ],
-      "body_plain": "Thanks, everyone, for responding.  Here a summary of my research so\nfar--I do not quite understand what I am doing, but I spotted\na number of different issues, and I got the checks to work.\n\n* I was not aware of the distinction between default and recommended\n  packages, and the fact that the latter is not installed by default\n  (although usually they are on production systems).\n* in the rocker/r-devel container, R and R-devel use (partly)\n  overlapping lib paths: `/usr/local/lib/R/site-library` and\n  `/usr/lib/R/library`.\n\n* R and R-devel have different packages installed by default, but\n  because both access `/usr/lib/R/library`, both seem to have access\n  to both default and recommended packages.\n* `RD CMD check` uses a different lib path, containing\n  `/usr/local/lib/R/library` and a temporary folder.  The latter will\n  contain the needed packages given they are installed in a certain\n  location (I still do not understand how they get there, and from\n  where).\n* The message I got -- package _lattice_ not available -- was due to\n  two reasons: a) it is a recommended, not a default package; and b)\n  it is installed in `/usr/lib/R/library` where it is normally\n  accessible for both R and R-devel, and hence was not installed\n  again.  However, from there it is not copied to the temporary folder that\n  R CMD check uses.\n* Finally, by setting `ENV R_LIBS=/usr/local/lib/R/site-library/` in\n  the Dockerfile, the checks work.  But I am not sure why.\n\nIt would be great to isolate R and R-devel better in the docker\nimage.  Not sure whether it is easy to do...\n\nCheers,\nOtt\n\nOn Tue, Aug 12, 2025 at 1:17?AM Berwin A Turlach <berwin.turlach at gmail.com>\nwrote:\n\n> On Mon, 11 Aug 2025 08:47:45 -0400\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> > Regarding Dirk's \"narrower\" comment:  I think that is really his\n> > decision about the docker container, not a property of R CMD check.\n> > R CMD check needs to be able to succeed if the only packages\n> > installed are the hard dependencies (Depends, Imports, plus base\n> > packages), but it doesn't actually install anything.  That's up to\n> > you before running it.\n>\n> Obviously I cannot speak for Dirk and where his comment comes from :),\n> but WRE has since ages the following note:\n>\n>         Note: R CMD check and R CMD build run R processes with\n>         --vanilla in which none of the user?s startup files are read.\n>         If you need R_LIBS set (to find packages in a non-standard\n>         library) you can set it in the environment: also you can use\n>         the check and build environment files (as specified by the\n>         environment variables R_CHECK_ENVIRON and R_BUILD_ENVIRON; if\n>         unset, files55 ~/.R/check.Renviron and ~/.R/build.Renviron are\n>         used) to set environment variables when using these utilities.\n>\n> On my linux box I update and compile R patched and R devel regularly,\n> and at some point I got tired of also installing a lot of packages\n> (that I need for checking) each time.  So I moved all of these\n> additional packages to another library (where they are updated on an\n> as needed basis via update.packages(ask=FALSE, CheckBuilt=TRUE)). After\n> this restructure R patched and R devel could promptly not find those\n> packages anymore (until I changed my scripts to create appropriate\n> symbolic links, I did not want to go down the path of setting\n> environment variables).\n>\n> Cheers,\n>\n>         Berwin\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks, everyone, for responding.  Here a summary of my research so\nfar--I do not quite understand what I am doing, but I spotted\na number of different issues, and I got the checks to work.\n\n* I was not aware of the distinction between default and recommended\n  packages, and the fact that the latter is not installed by default\n  (although usually they are on production systems).\n* in the rocker/r-devel container, R and R-devel use (partly)\n  overlapping lib paths: `/usr/local/lib/R/site-library` and\n  `/usr/lib/R/library`.\n\n* R and R-devel have different packages installed by default, but\n  because both access `/usr/lib/R/library`, both seem to have access\n  to both default and recommended packages.\n* `RD CMD check` uses a different lib path, containing\n  `/usr/local/lib/R/library` and a temporary folder.  The latter will\n  contain the needed packages given they are installed in a certain\n  location (I still do not understand how they get there, and from\n  where).\n* The message I got -- package _lattice_ not available -- was due to\n  two reasons: a) it is a recommended, not a default package; and b)\n  it is installed in `/usr/lib/R/library` where it is normally\n  accessible for both R and R-devel, and hence was not installed\n  again.  However, from there it is not copied to the temporary folder that\n  R CMD check uses.\n* Finally, by setting `ENV R_LIBS=/usr/local/lib/R/site-library/` in\n  the Dockerfile, the checks work.  But I am not sure why.\n\nIt would be great to isolate R and R-devel better in the docker\nimage.  Not sure whether it is easy to do...\n\nCheers,\nOtt\n\nOn Tue, Aug 12, 2025 at 1:17 AM Berwin A Turlach <berwin.turlach at gmail.com>\nwrote:\n\n> On Mon, 11 Aug 2025 08:47:45 -0400\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n> > Regarding Dirk's \"narrower\" comment:  I think that is really his\n> > decision about the docker container, not a property of R CMD check.\n> > R CMD check needs to be able to succeed if the only packages\n> > installed are the hard dependencies (Depends, Imports, plus base\n> > packages), but it doesn't actually install anything.  That's up to\n> > you before running it.\n>\n> Obviously I cannot speak for Dirk and where his comment comes from :),\n> but WRE has since ages the following note:\n>\n>         Note: R CMD check and R CMD build run R processes with\n>         --vanilla in which none of the user’s startup files are read.\n>         If you need R_LIBS set (to find packages in a non-standard\n>         library) you can set it in the environment: also you can use\n>         the check and build environment files (as specified by the\n>         environment variables R_CHECK_ENVIRON and R_BUILD_ENVIRON; if\n>         unset, files55 ~/.R/check.Renviron and ~/.R/build.Renviron are\n>         used) to set environment variables when using these utilities.\n>\n> On my linux box I update and compile R patched and R devel regularly,\n> and at some point I got tired of also installing a lot of packages\n> (that I need for checking) each time.  So I moved all of these\n> additional packages to another library (where they are updated on an\n> as needed basis via update.packages(ask=FALSE, CheckBuilt=TRUE)). After\n> this restructure R patched and R devel could promptly not find those\n> packages anymore (until I changed my scripts to create appropriate\n> symbolic links, I did not want to go down the path of setting\n> environment variables).\n>\n> Cheers,\n>\n>         Berwin\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks, everyone, for responding.  Here a summary of my research so\nfar--I do not quite understand what I am doing, but I spotted\na number of different issues, and I got the checks to work.\n\n* I was n",
       "thread_id": "thread-865830746c38",
       "thread_depth": 5,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011882.html"
     },
     {
       "id": "msg-b9d0c4551483",
@@ -458,7 +481,8 @@
       "body_snippet": "With all due respect, that summary was more misleading than helpful.  This is\nalso the wrong list to discuss the matter as a few Debian packaging specific\naspects appear to be falsely seen as general ",
       "thread_id": "thread-865830746c38",
       "thread_depth": 6,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011883.html"
     },
     {
       "id": "msg-2a0a6cf86721",
@@ -477,11 +501,12 @@
         "<20250812161654.59baf69e@dep59159.uniwa.uwa.edu.au>",
         "<CAMMJQ0ZRQjPdguB1LDr-CevGgw-bknJvchQfcaU8KS4iHyGVaQ@mail.gmail.com>"
       ],
-      "body_plain": "Dear Ott\n\nPerhaps a dumb question but does your package DESCRIPTION include a \ndependency on lattice (or i,port or suggest)?\n\nMichael\n\nOn 12/08/2025 14:58, Ott Toomet wrote:\n> Thanks, everyone, for responding.  Here a summary of my research so\n> far--I do not quite understand what I am doing, but I spotted\n> a number of different issues, and I got the checks to work.\n> \n> * I was not aware of the distinction between default and recommended\n>    packages, and the fact that the latter is not installed by default\n>    (although usually they are on production systems).\n> * in the rocker/r-devel container, R and R-devel use (partly)\n>    overlapping lib paths: `/usr/local/lib/R/site-library` and\n>    `/usr/lib/R/library`.\n> \n> * R and R-devel have different packages installed by default, but\n>    because both access `/usr/lib/R/library`, both seem to have access\n>    to both default and recommended packages.\n> * `RD CMD check` uses a different lib path, containing\n>    `/usr/local/lib/R/library` and a temporary folder.  The latter will\n>    contain the needed packages given they are installed in a certain\n>    location (I still do not understand how they get there, and from\n>    where).\n> * The message I got -- package _lattice_ not available -- was due to\n>    two reasons: a) it is a recommended, not a default package; and b)\n>    it is installed in `/usr/lib/R/library` where it is normally\n>    accessible for both R and R-devel, and hence was not installed\n>    again.  However, from there it is not copied to the temporary folder that\n>    R CMD check uses.\n> * Finally, by setting `ENV R_LIBS=/usr/local/lib/R/site-library/` in\n>    the Dockerfile, the checks work.  But I am not sure why.\n> \n> It would be great to isolate R and R-devel better in the docker\n> image.  Not sure whether it is easy to do...\n> \n> Cheers,\n> Ott\n> \n> On Tue, Aug 12, 2025 at 1:17?AM Berwin A Turlach <berwin.turlach at gmail.com>\n> wrote:\n> \n>> On Mon, 11 Aug 2025 08:47:45 -0400\n>> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>>> Regarding Dirk's \"narrower\" comment:  I think that is really his\n>>> decision about the docker container, not a property of R CMD check.\n>>> R CMD check needs to be able to succeed if the only packages\n>>> installed are the hard dependencies (Depends, Imports, plus base\n>>> packages), but it doesn't actually install anything.  That's up to\n>>> you before running it.\n>>\n>> Obviously I cannot speak for Dirk and where his comment comes from :),\n>> but WRE has since ages the following note:\n>>\n>>          Note: R CMD check and R CMD build run R processes with\n>>          --vanilla in which none of the user?s startup files are read.\n>>          If you need R_LIBS set (to find packages in a non-standard\n>>          library) you can set it in the environment: also you can use\n>>          the check and build environment files (as specified by the\n>>          environment variables R_CHECK_ENVIRON and R_BUILD_ENVIRON; if\n>>          unset, files55 ~/.R/check.Renviron and ~/.R/build.Renviron are\n>>          used) to set environment variables when using these utilities.\n>>\n>> On my linux box I update and compile R patched and R devel regularly,\n>> and at some point I got tired of also installing a lot of packages\n>> (that I need for checking) each time.  So I moved all of these\n>> additional packages to another library (where they are updated on an\n>> as needed basis via update.packages(ask=FALSE, CheckBuilt=TRUE)). After\n>> this restructure R patched and R devel could promptly not find those\n>> packages anymore (until I changed my scripts to create appropriate\n>> symbolic links, I did not want to go down the path of setting\n>> environment variables).\n>>\n>> Cheers,\n>>\n>>          Berwin\n>>\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nMichael Dewey",
+      "body_plain": "Dear Ott\n\nPerhaps a dumb question but does your package DESCRIPTION include a \ndependency on lattice (or i,port or suggest)?\n\nMichael\n\nOn 12/08/2025 14:58, Ott Toomet wrote:\n> Thanks, everyone, for responding.  Here a summary of my research so\n> far--I do not quite understand what I am doing, but I spotted\n> a number of different issues, and I got the checks to work.\n> \n> * I was not aware of the distinction between default and recommended\n>    packages, and the fact that the latter is not installed by default\n>    (although usually they are on production systems).\n> * in the rocker/r-devel container, R and R-devel use (partly)\n>    overlapping lib paths: `/usr/local/lib/R/site-library` and\n>    `/usr/lib/R/library`.\n> \n> * R and R-devel have different packages installed by default, but\n>    because both access `/usr/lib/R/library`, both seem to have access\n>    to both default and recommended packages.\n> * `RD CMD check` uses a different lib path, containing\n>    `/usr/local/lib/R/library` and a temporary folder.  The latter will\n>    contain the needed packages given they are installed in a certain\n>    location (I still do not understand how they get there, and from\n>    where).\n> * The message I got -- package _lattice_ not available -- was due to\n>    two reasons: a) it is a recommended, not a default package; and b)\n>    it is installed in `/usr/lib/R/library` where it is normally\n>    accessible for both R and R-devel, and hence was not installed\n>    again.  However, from there it is not copied to the temporary folder that\n>    R CMD check uses.\n> * Finally, by setting `ENV R_LIBS=/usr/local/lib/R/site-library/` in\n>    the Dockerfile, the checks work.  But I am not sure why.\n> \n> It would be great to isolate R and R-devel better in the docker\n> image.  Not sure whether it is easy to do...\n> \n> Cheers,\n> Ott\n> \n> On Tue, Aug 12, 2025 at 1:17 AM Berwin A Turlach <berwin.turlach at gmail.com>\n> wrote:\n> \n>> On Mon, 11 Aug 2025 08:47:45 -0400\n>> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>>> Regarding Dirk's \"narrower\" comment:  I think that is really his\n>>> decision about the docker container, not a property of R CMD check.\n>>> R CMD check needs to be able to succeed if the only packages\n>>> installed are the hard dependencies (Depends, Imports, plus base\n>>> packages), but it doesn't actually install anything.  That's up to\n>>> you before running it.\n>>\n>> Obviously I cannot speak for Dirk and where his comment comes from :),\n>> but WRE has since ages the following note:\n>>\n>>          Note: R CMD check and R CMD build run R processes with\n>>          --vanilla in which none of the user’s startup files are read.\n>>          If you need R_LIBS set (to find packages in a non-standard\n>>          library) you can set it in the environment: also you can use\n>>          the check and build environment files (as specified by the\n>>          environment variables R_CHECK_ENVIRON and R_BUILD_ENVIRON; if\n>>          unset, files55 ~/.R/check.Renviron and ~/.R/build.Renviron are\n>>          used) to set environment variables when using these utilities.\n>>\n>> On my linux box I update and compile R patched and R devel regularly,\n>> and at some point I got tired of also installing a lot of packages\n>> (that I need for checking) each time.  So I moved all of these\n>> additional packages to another library (where they are updated on an\n>> as needed basis via update.packages(ask=FALSE, CheckBuilt=TRUE)). After\n>> this restructure R patched and R devel could promptly not find those\n>> packages anymore (until I changed my scripts to create appropriate\n>> symbolic links, I did not want to go down the path of setting\n>> environment variables).\n>>\n>> Cheers,\n>>\n>>          Berwin\n>>\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nMichael Dewey",
       "body_snippet": "Dear Ott\n\nPerhaps a dumb question but does your package DESCRIPTION include a \ndependency on lattice (or i,port or suggest)?\n\nMichael\n\nOn 12/08/2025 14:58, Ott Toomet wrote:\n> Thanks, everyone, for re",
       "thread_id": "thread-865830746c38",
       "thread_depth": 6,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011884.html"
     },
     {
       "id": "msg-5d11c0d28630",
@@ -497,7 +522,8 @@
       "body_snippet": "Dear package developers:\n\nI have run into a dilemma...\n\nI received a message that my package has errors on the development version of R; and that I must fix the error by August 26. Since I will be tra",
       "thread_id": "thread-5d11c0d28630",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011885.html"
     },
     {
       "id": "msg-7ad30026d317",
@@ -515,7 +541,8 @@
       "body_snippet": "Just tell the CRAN guys your situation and ask for an extension.\n\nOn Tue, Aug 12, 2025 at 6:43?PM Lenth, Russell V via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> Dear package develo",
       "thread_id": "thread-5d11c0d28630",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011886.html"
     },
     {
       "id": "msg-1b305986c268",
@@ -531,7 +558,8 @@
       "body_snippet": "Hi everyone,\n\nwhich approach should I try to use for official CRAN submissions of R \npackages using OpenCL and GPUs, if none of the available solutions would \npass the CRAN checks.\n\nCurrently I see tw",
       "thread_id": "thread-1b305986c268",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011887.html"
     },
     {
       "id": "msg-3eefbc1f12fe",
@@ -547,7 +575,8 @@
       "body_snippet": "Hello,\n\nI've been trying to address this note (now failing CRAN submission) from\nbuilding the HTML version of the manual.\n\nCheck: HTML version of manual, Result: NOTE\n  Found the following HTML valida",
       "thread_id": "thread-3eefbc1f12fe",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011888.html"
     },
     {
       "id": "msg-86ee53a3e1ce",
@@ -563,7 +592,8 @@
       "body_snippet": "Disclaimer: I am building a package for local usage (for now), which will probably be not submitted to CRAN. If you view this posting as off topic, please say so or ignore.\n\nIn a vignette like this on",
       "thread_id": "thread-86ee53a3e1ce",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011889.html"
     },
     {
       "id": "msg-1041d33ffa6b",
@@ -577,11 +607,12 @@
       "references": [
         "<c9377d13d97047fd904b1699fcdf75a1@krebsregister.nrw.de>"
       ],
-      "body_plain": "Presumably when your code tries to open the database, it will fail with \nan error.  What you should do is catch that error so the vignette \ndoesn't fail, and print a message to the user explaining why things \ndidn't work.\n\nIf you are using knitr, you can call `knitr::knit_exit()`\nand it will quit at that point without appearing to fail.\n\nDuncan Murdoch\n\nOn 2025-08-18 9:06 a.m., H?sing, Johannes via R-package-devel wrote:\n> Disclaimer: I am building a package for local usage (for now), which will probably be not submitted to CRAN. If you view this posting as off topic, please say so or ignore.\n> \n> In a vignette like this one https://rdrr.io/cran/DBI/f/vignettes/DBI-advanced.Rmd, code is introduced that, on invocation, would try to establish a DB connection which probably would not exist on someone else's than the maintainer's configuration. Would the maintainer expect the user of the package to tweak her local configuration, or rather vignette script, to make the code run? The R packages book reads:\n> \n> Note that since you build vignettes locally, CRAN only receives the html/pdf and the source code. However, CRAN does not re-build the vignette. It only checks that the code is runnable (by running it).\n> \n> What happens when running the script on the user's configuration if the DB handle does not exist? Or indeed, when CRAN runs the code and no DB is built by running the code?\n> \n> This posting https://forum.posit.co/t/vignettes-that-require-locally-stored-data/2392 seems to come close to my question.\n> \n> Best\n> \n> Johannes\n> \n> Dr. Johannes H?sing\n> Epidemiologie\n> \n> Landeskrebsregister NRW gGmbH\n> Gesundheitscampus 10\n> 44801 Bochum\n> \n> \n> \n> T 0234 54509-216\n> F 0234 54509-499\n> Johannes.Huesing at krebsregister.nrw.de<mailto:Johannes.Huesing at krebsregister.nrw.de>\n> www.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>\n> \n> Das Landeskrebsregister NRW online\n> FACEBOOK: https://www.facebook.com/LKRNordrheinWestfalen/\n> INSTAGRAM: https://www.instagram.com/landeskrebsregister_nrw\n> LINKEDIN: https://www.linkedin.com/company/87452209/admin/feed/posts/\n> \n> Newsletter LKR NRW - jetzt anmelden unter\n>   https://www.landeskrebsregister.nrw/aktuelles/newsletter\n> \n> 5. Landesqualit?tskonferenz\n> Mittwoch 08. Oktober 2025 in M?nster\n> 20 Jahre Krebsregistrierung f?r Nordrhein-Westfalen\n> Eine Erfolgsgeschichte f?r die onkologische Forschung und Versorgung\n> Anmeldung: https://www.landeskrebsregister.nrw/5-landesqualitaetskonferenz-nrw/\n> \n> Gesch?ftsf?hrer\n> Dr. Andres Sch?tzend?bel\n> Vorsitzender der Gesellschafterversammlung\n> Staatssekret?r Matthias Heidmeier\n> Sitz der Gesellschaft\n> Bochum\n> Registergericht\n> Amtsgericht Bochum\n> HRB 17715\n> \n> HINWEIS: Diese Nachricht ist nur f?r den Adressaten bestimmt. Es ist nicht erlaubt, diese Nachricht zu kopieren oder Dritten zug?nglich zu machen. Sollten Sie irrt?mlich diese Nachricht erhalten haben, bitte ich um Ihre Mitteilung per E-Mail oder unter der oben angegebenen Telefonnummer.\n> \n> \t[[alternative HTML version deleted]]\n> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Presumably when your code tries to open the database, it will fail with \nan error.  What you should do is catch that error so the vignette \ndoesn't fail, and print a message to the user explaining why things \ndidn't work.\n\nIf you are using knitr, you can call `knitr::knit_exit()`\nand it will quit at that point without appearing to fail.\n\nDuncan Murdoch\n\nOn 2025-08-18 9:06 a.m., Hüsing, Johannes via R-package-devel wrote:\n> Disclaimer: I am building a package for local usage (for now), which will probably be not submitted to CRAN. If you view this posting as off topic, please say so or ignore.\n> \n> In a vignette like this one https://rdrr.io/cran/DBI/f/vignettes/DBI-advanced.Rmd, code is introduced that, on invocation, would try to establish a DB connection which probably would not exist on someone else's than the maintainer's configuration. Would the maintainer expect the user of the package to tweak her local configuration, or rather vignette script, to make the code run? The R packages book reads:\n> \n> Note that since you build vignettes locally, CRAN only receives the html/pdf and the source code. However, CRAN does not re-build the vignette. It only checks that the code is runnable (by running it).\n> \n> What happens when running the script on the user's configuration if the DB handle does not exist? Or indeed, when CRAN runs the code and no DB is built by running the code?\n> \n> This posting https://forum.posit.co/t/vignettes-that-require-locally-stored-data/2392 seems to come close to my question.\n> \n> Best\n> \n> Johannes\n> \n> Dr. Johannes H?sing\n> Epidemiologie\n> \n> Landeskrebsregister NRW gGmbH\n> Gesundheitscampus 10\n> 44801 Bochum\n> \n> \n> \n> T 0234 54509-216\n> F 0234 54509-499\n> Johannes.Huesing at krebsregister.nrw.de<mailto:Johannes.Huesing at krebsregister.nrw.de>\n> www.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>\n> \n> Das Landeskrebsregister NRW online\n> FACEBOOK: https://www.facebook.com/LKRNordrheinWestfalen/\n> INSTAGRAM: https://www.instagram.com/landeskrebsregister_nrw\n> LINKEDIN: https://www.linkedin.com/company/87452209/admin/feed/posts/\n> \n> Newsletter LKR NRW - jetzt anmelden unter\n>   https://www.landeskrebsregister.nrw/aktuelles/newsletter\n> \n> 5. Landesqualit?tskonferenz\n> Mittwoch 08. Oktober 2025 in M?nster\n> 20 Jahre Krebsregistrierung f?r Nordrhein-Westfalen\n> Eine Erfolgsgeschichte f?r die onkologische Forschung und Versorgung\n> Anmeldung: https://www.landeskrebsregister.nrw/5-landesqualitaetskonferenz-nrw/\n> \n> Gesch?ftsf?hrer\n> Dr. Andres Sch?tzend?bel\n> Vorsitzender der Gesellschafterversammlung\n> Staatssekret?r Matthias Heidmeier\n> Sitz der Gesellschaft\n> Bochum\n> Registergericht\n> Amtsgericht Bochum\n> HRB 17715\n> \n> HINWEIS: Diese Nachricht ist nur f?r den Adressaten bestimmt. Es ist nicht erlaubt, diese Nachricht zu kopieren oder Dritten zug?nglich zu machen. Sollten Sie irrt?mlich diese Nachricht erhalten haben, bitte ich um Ihre Mitteilung per E-Mail oder unter der oben angegebenen Telefonnummer.\n> \n> \t[[alternative HTML version deleted]]\n> \n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Presumably when your code tries to open the database, it will fail with \nan error.  What you should do is catch that error so the vignette \ndoesn't fail, and print a message to the user explaining why",
       "thread_id": "thread-86ee53a3e1ce",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011890.html"
     },
     {
       "id": "msg-e3788435c707",
@@ -596,11 +627,12 @@
         "<c9377d13d97047fd904b1699fcdf75a1@krebsregister.nrw.de>",
         "<906ddef4-6d05-4a89-86a0-0ee6280daeaf@gmail.com>"
       ],
-      "body_plain": "You can also pre-render your vignette on your local machine, where you have access to the database. Downside is that you cannot automate this, so you will have to render again when you update your package. See: https://ropensci.org/blog/2019/12/08/precompute-vignettes/#the-solution-locally-knitting-rmarkdown\n\nPepijn\n\n________________________________________\nVan:?R-package-devel <r-package-devel-bounces at r-project.org> namens Duncan Murdoch <murdoch.duncan at gmail.com>\nVerzonden:?maandag 18 augustus 2025 16:55\nAan:?H?sing, Johannes <Johannes.Huesing at krebsregister.nrw.de>; r-package-devel at r-project.org <r-package-devel at r-project.org>\nOnderwerp:?Re: [R-pkg-devel] Drafting vignettes that require DB connection\n?\nPresumably when your code tries to open the database, it will fail with\nan error.? What you should do is catch that error so the vignette\ndoesn't fail, and print a message to the user explaining why things\ndidn't work.\n\nIf you are using knitr, you can call `knitr::knit_exit()`\nand it will quit at that point without appearing to fail.\n\nDuncan Murdoch\n\nOn 2025-08-18 9:06 a.m., H?sing, Johannes via R-package-devel wrote:\n> Disclaimer: I am building a package for local usage (for now), which will probably be not submitted to CRAN. If you view this posting as off topic, please say so or ignore.\n>\n> In a vignette like this one https://rdrr.io/cran/DBI/f/vignettes/DBI-advanced.Rmd, code is introduced that, on invocation, would try to establish a DB connection which probably would not exist on someone else's than the maintainer's configuration. Would the maintainer expect the user of the package to tweak her local configuration, or rather vignette script, to make the code run? The R packages book reads:\n>\n> Note that since you build vignettes locally, CRAN only receives the html/pdf and the source code. However, CRAN does not re-build the vignette. It only checks that the code is runnable (by running it).\n>\n> What happens when running the script on the user's configuration if the DB handle does not exist? Or indeed, when CRAN runs the code and no DB is built by running the code?\n>\n> This posting https://forum.posit.co/t/vignettes-that-require-locally-stored-data/2392?seems to come close to my question.\n>\n> Best\n>\n> Johannes\n>\n> Dr. Johannes H?sing\n> Epidemiologie\n>\n> Landeskrebsregister NRW gGmbH\n> Gesundheitscampus 10\n> 44801 Bochum\n>\n>\n>\n> T 0234 54509-216\n> F 0234 54509-499\n> Johannes.Huesing at krebsregister.nrw.de<mailto:Johannes.Huesing at krebsregister.nrw.de>\n> [http://www.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>]www.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>\n>\n> Das Landeskrebsregister NRW online\n> FACEBOOK: https://www.facebook.com/LKRNordrheinWestfalen/\n> INSTAGRAM: https://www.instagram.com/landeskrebsregister_nrw\n> LINKEDIN: https://www.linkedin.com/company/87452209/admin/feed/posts/\n>\n> Newsletter LKR NRW - jetzt anmelden unter\n>?? https://www.landeskrebsregister.nrw/aktuelles/newsletter\n>\n> 5. Landesqualit?tskonferenz\n> Mittwoch 08. Oktober 2025 in M?nster\n> 20 Jahre Krebsregistrierung f?r Nordrhein-Westfalen\n> Eine Erfolgsgeschichte f?r die onkologische Forschung und Versorgung\n> Anmeldung: https://www.landeskrebsregister.nrw/5-landesqualitaetskonferenz-nrw/\n>\n> Gesch?ftsf?hrer\n> Dr. Andres Sch?tzend?bel\n> Vorsitzender der Gesellschafterversammlung\n> Staatssekret?r Matthias Heidmeier\n> Sitz der Gesellschaft\n> Bochum\n> Registergericht\n> Amtsgericht Bochum\n> HRB 17715\n>\n> HINWEIS: Diese Nachricht ist nur f?r den Adressaten bestimmt. Es ist nicht erlaubt, diese Nachricht zu kopieren oder Dritten zug?nglich zu machen. Sollten Sie irrt?mlich diese Nachricht erhalten haben, bitte ich um Ihre Mitteilung per E-Mail oder unter der oben angegebenen Telefonnummer.\n>\n>??????? [[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "You can also pre-render your vignette on your local machine, where you have access to the database. Downside is that you cannot automate this, so you will have to render again when you update your package. See: https://ropensci.org/blog/2019/12/08/precompute-vignettes/#the-solution-locally-knitting-rmarkdown\n\nPepijn\n\n________________________________________\nVan: R-package-devel <r-package-devel-bounces at r-project.org> namens Duncan Murdoch <murdoch.duncan at gmail.com>\nVerzonden: maandag 18 augustus 2025 16:55\nAan: Hüsing, Johannes <Johannes.Huesing at krebsregister.nrw.de>; r-package-devel at r-project.org <r-package-devel at r-project.org>\nOnderwerp: Re: [R-pkg-devel] Drafting vignettes that require DB connection\n \nPresumably when your code tries to open the database, it will fail with\nan error.  What you should do is catch that error so the vignette\ndoesn't fail, and print a message to the user explaining why things\ndidn't work.\n\nIf you are using knitr, you can call `knitr::knit_exit()`\nand it will quit at that point without appearing to fail.\n\nDuncan Murdoch\n\nOn 2025-08-18 9:06 a.m., Hüsing, Johannes via R-package-devel wrote:\n> Disclaimer: I am building a package for local usage (for now), which will probably be not submitted to CRAN. If you view this posting as off topic, please say so or ignore.\n>\n> In a vignette like this one https://rdrr.io/cran/DBI/f/vignettes/DBI-advanced.Rmd, code is introduced that, on invocation, would try to establish a DB connection which probably would not exist on someone else's than the maintainer's configuration. Would the maintainer expect the user of the package to tweak her local configuration, or rather vignette script, to make the code run? The R packages book reads:\n>\n> Note that since you build vignettes locally, CRAN only receives the html/pdf and the source code. However, CRAN does not re-build the vignette. It only checks that the code is runnable (by running it).\n>\n> What happens when running the script on the user's configuration if the DB handle does not exist? Or indeed, when CRAN runs the code and no DB is built by running the code?\n>\n> This posting https://forum.posit.co/t/vignettes-that-require-locally-stored-data/2392 seems to come close to my question.\n>\n> Best\n>\n> Johannes\n>\n> Dr. Johannes H?sing\n> Epidemiologie\n>\n> Landeskrebsregister NRW gGmbH\n> Gesundheitscampus 10\n> 44801 Bochum\n>\n>\n>\n> T 0234 54509-216\n> F 0234 54509-499\n> Johannes.Huesing at krebsregister.nrw.de<mailto:Johannes.Huesing at krebsregister.nrw.de>\n> [http://www.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>]www.landeskrebsregister.nrw<http://www.landeskrebsregister.nrw>\n>\n> Das Landeskrebsregister NRW online\n> FACEBOOK: https://www.facebook.com/LKRNordrheinWestfalen/\n> INSTAGRAM: https://www.instagram.com/landeskrebsregister_nrw\n> LINKEDIN: https://www.linkedin.com/company/87452209/admin/feed/posts/\n>\n> Newsletter LKR NRW - jetzt anmelden unter\n>   https://www.landeskrebsregister.nrw/aktuelles/newsletter\n>\n> 5. Landesqualit?tskonferenz\n> Mittwoch 08. Oktober 2025 in M?nster\n> 20 Jahre Krebsregistrierung f?r Nordrhein-Westfalen\n> Eine Erfolgsgeschichte f?r die onkologische Forschung und Versorgung\n> Anmeldung: https://www.landeskrebsregister.nrw/5-landesqualitaetskonferenz-nrw/\n>\n> Gesch?ftsf?hrer\n> Dr. Andres Sch?tzend?bel\n> Vorsitzender der Gesellschafterversammlung\n> Staatssekret?r Matthias Heidmeier\n> Sitz der Gesellschaft\n> Bochum\n> Registergericht\n> Amtsgericht Bochum\n> HRB 17715\n>\n> HINWEIS: Diese Nachricht ist nur f?r den Adressaten bestimmt. Es ist nicht erlaubt, diese Nachricht zu kopieren oder Dritten zug?nglich zu machen. Sollten Sie irrt?mlich diese Nachricht erhalten haben, bitte ich um Ihre Mitteilung per E-Mail oder unter der oben angegebenen Telefonnummer.\n>\n> ??     [[alternative HTML version deleted]]\n>\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "You can also pre-render your vignette on your local machine, where you have access to the database. Downside is that you cannot automate this, so you will have to render again when you update your pac",
       "thread_id": "thread-86ee53a3e1ce",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011891.html"
     },
     {
       "id": "msg-2e61029a1795",
@@ -612,11 +644,12 @@
       "subject_clean": "[R-pkg-devel] Using DOTS from C API",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "*Question:* what is the best way to access a DOTSXP from R's C API in a\nfunction call.\n\nOver at extendr (1) we'd like to be able to utilize `...` from the body of\na Rust function?with initial motivation being to support S3 generics like\nprint(x, ...).\n\nI don't see any recommendations / or mention of accessing DOTSXP in WRE.\nThe closest I can find is from R internals (2) repo which says\n\n\"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"",
-      "body_snippet": "*Question:* what is the best way to access a DOTSXP from R's C API in a\nfunction call.\n\nOver at extendr (1) we'd like to be able to utilize `...` from the body of\na Rust function?with initial motivati",
+      "body_plain": "*Question:* what is the best way to access a DOTSXP from R's C API in a\nfunction call.\n\nOver at extendr (1) we'd like to be able to utilize `...` from the body of\na Rust function—with initial motivation being to support S3 generics like\nprint(x, ...).\n\nI don't see any recommendations / or mention of accessing DOTSXP in WRE.\nThe closest I can find is from R internals (2) repo which says\n\n\"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"",
+      "body_snippet": "*Question:* what is the best way to access a DOTSXP from R's C API in a\nfunction call.\n\nOver at extendr (1) we'd like to be able to utilize `...` from the body of\na Rust function—with initial motivati",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011892.html"
     },
     {
       "id": "msg-a9727988dcdf",
@@ -630,11 +663,12 @@
       "references": [
         "<CAL3ufUJ9uk8VZsUyUvhrjR5_H2AvheGN6Qk8YKDYW1rr+ViJgQ@mail.gmail.com>"
       ],
-      "body_plain": "On 2025-08-18 2:25 p.m., Josiah Parry wrote:\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n> \n> Over at extendr (1) we'd like to be able to utilize `...` from the body of\n> a Rust function?with initial motivation being to support S3 generics like\n> print(x, ...).\n> \n> I don't see any recommendations / or mention of accessing DOTSXP in WRE.\n> The closest I can find is from R internals (2) repo which says\n> \n> \"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"\n> \n> \n>  From R's C API would this mean we would want to use something like:\n> \n> findVar(R_DotsSymbol, R_GetCurrentEnv()) to get the dots pairlist from the\n> function's environment?\n> \n\nIt's almost certainly easier to pass something like list(...) to your \nexternal function.  That will evaluate each of the arguments in the \nappropriate environments and put them in a list.\n\nIf you want to receive the promises without them being evaluated, I \ndon't know if there's a documented way to do it in the C API.  You could \nalways use the tidyverse approach and ask your users to pass formulas \ninstead of expressions.\n\nDuncan Murdoch",
+      "body_plain": "On 2025-08-18 2:25 p.m., Josiah Parry wrote:\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n> \n> Over at extendr (1) we'd like to be able to utilize `...` from the body of\n> a Rust function—with initial motivation being to support S3 generics like\n> print(x, ...).\n> \n> I don't see any recommendations / or mention of accessing DOTSXP in WRE.\n> The closest I can find is from R internals (2) repo which says\n> \n> \"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"\n> \n> \n>  From R's C API would this mean we would want to use something like:\n> \n> findVar(R_DotsSymbol, R_GetCurrentEnv()) to get the dots pairlist from the\n> function's environment?\n> \n\nIt's almost certainly easier to pass something like list(...) to your \nexternal function.  That will evaluate each of the arguments in the \nappropriate environments and put them in a list.\n\nIf you want to receive the promises without them being evaluated, I \ndon't know if there's a documented way to do it in the C API.  You could \nalways use the tidyverse approach and ask your users to pass formulas \ninstead of expressions.\n\nDuncan Murdoch",
       "body_snippet": "On 2025-08-18 2:25 p.m., Josiah Parry wrote:\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n> \n> Over at extendr (1) we'd like to be able to utilize `...` f",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011893.html"
     },
     {
       "id": "msg-4f12a01e5fac",
@@ -653,7 +687,8 @@
       "body_snippet": "It is sometimes helpful to see what other packages do / have done. Here we\nget 46 hits in CRAN packages mirrored at GitHub [1], see\n  https://github.com/search?q=org%3Acran%20R_DotsSymbol&type=code\n\nD",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011894.html"
     },
     {
       "id": "msg-ffead9a060e9",
@@ -671,7 +706,8 @@
       "body_snippet": "? Mon, 18 Aug 2025 11:25:57 -0700\nJosiah Parry <josiah.parry at gmail.com> ?????:\n\n> *Question:* what is the best way to access a DOTSXP from R's C API in\n> a function call.\n\nIn the future, there may ",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011895.html"
     },
     {
       "id": "msg-54a15c7436cb",
@@ -685,11 +721,12 @@
       "references": [
         "<CAL3ufUJ9uk8VZsUyUvhrjR5_H2AvheGN6Qk8YKDYW1rr+ViJgQ@mail.gmail.com>"
       ],
-      "body_plain": "Generally, the best way to get access to the current environment is passing\nenvironment() as an argument to your C function. I know that people will\ntell you to use R_GetCurrentEnv() in C, but that does not work when the C\ncall is an argument to another function. For example:\n\ntryCatch({\n   .External(.C_<funname>, <other args>)\n})\n\nIf you tried to call R_GetCurrentEnv() inside your C function, it would\nreturn the environment of doTryCatch, and that's not what you. Better\ninstead to just do this:\n\ntryCatch({\n   .External(.C_<funname>, environment(), <other args>)\n})\n\n\nNext, once you're in C, and you have the environment, presumably using\nsomething like\n\nSEXP rho = CAR(args); args = CDR(args);\n\nyou would find it in the environment:\n\nSEXP dots = Rf_findVarInFrame(rho, R_DotsSymbol);\n\nor\n\nSEXP dots = Rf_findVar(R_DotsSymbol, rho);\n\nThe best way to determine the length of the object is this:\n\nR_xlen_t n = (TYPEOF(dots) == DOTSXP) ? Rf_length(dots) : 0;\n\nThe reason you should switch on TYPEOF is in case ... contains zero\narguments, in which case it is R_MissingArg.\n\n>From there, it is just a pair list. You can select specific elements like\nthis:\n\nCAR(Rf_nthcdr(dots, <index>))\n\nor you can loop over them like this:\n\nSEXP d = dots;\nfor (R_xlen_t i = 0; i < n; i++, d = CDR(d)) {\n    di = CAR(d);\n}\n\nHowever, the values of di are R_MissingArg if that element is empty or a\npromise. And while you cannot access the components of a promise, you are\nallowed to evaluate it.\n\nSEXP d = dots;\nfor (R_xlen_t i = 0; i < n; i++, d = CDR(d)) {\n    di = CAR(d);\n    if (di == R_MissingArg) {\n        <do something if missing>\n    }\n    else {\n        di = Rf_eval(di, R_EmptyEnv);\n        <do something with promise value>\n    }\n}\n\nThe environment used in Rf_eval does not matter, when evaluating a promise,\nthe promise environment is always used.\n\n\nThat being said, Rchk may complain of some objects not being protected. To\nmake it happen, you should protect dots right after you use\nRf_findVarInFrame, as well as protect di right after you use Rf_eval (don't\nforget to unprotect di at the end of each loop).\n\nRegards,\n    Iris\n\n\n\nOn Mon, Aug 18, 2025, 14:26 Josiah Parry <josiah.parry at gmail.com> wrote:\n\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n>\n> Over at extendr (1) we'd like to be able to utilize `...` from the body of\n> a Rust function?with initial motivation being to support S3 generics like\n> print(x, ...).\n>\n> I don't see any recommendations / or mention of accessing DOTSXP in WRE.\n> The closest I can find is from R internals (2) repo which says\n>\n> \"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"\n>\n>\n> From R's C API would this mean we would want to use something like:\n>\n> findVar(R_DotsSymbol, R_GetCurrentEnv()) to get the dots pairlist from the\n> function's environment?\n>\n>\n> 1) https://extendr.rs\n> 2)\n>\n> https://github.com/hadley/r-internals/blob/16c1d73b635ccecec8b1f396a8935a8dd96126e4/pairlists.md\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Generally, the best way to get access to the current environment is passing\nenvironment() as an argument to your C function. I know that people will\ntell you to use R_GetCurrentEnv() in C, but that does not work when the C\ncall is an argument to another function. For example:\n\ntryCatch({\n   .External(.C_<funname>, <other args>)\n})\n\nIf you tried to call R_GetCurrentEnv() inside your C function, it would\nreturn the environment of doTryCatch, and that's not what you. Better\ninstead to just do this:\n\ntryCatch({\n   .External(.C_<funname>, environment(), <other args>)\n})\n\n\nNext, once you're in C, and you have the environment, presumably using\nsomething like\n\nSEXP rho = CAR(args); args = CDR(args);\n\nyou would find it in the environment:\n\nSEXP dots = Rf_findVarInFrame(rho, R_DotsSymbol);\n\nor\n\nSEXP dots = Rf_findVar(R_DotsSymbol, rho);\n\nThe best way to determine the length of the object is this:\n\nR_xlen_t n = (TYPEOF(dots) == DOTSXP) ? Rf_length(dots) : 0;\n\nThe reason you should switch on TYPEOF is in case ... contains zero\narguments, in which case it is R_MissingArg.\n\n>From there, it is just a pair list. You can select specific elements like\nthis:\n\nCAR(Rf_nthcdr(dots, <index>))\n\nor you can loop over them like this:\n\nSEXP d = dots;\nfor (R_xlen_t i = 0; i < n; i++, d = CDR(d)) {\n    di = CAR(d);\n}\n\nHowever, the values of di are R_MissingArg if that element is empty or a\npromise. And while you cannot access the components of a promise, you are\nallowed to evaluate it.\n\nSEXP d = dots;\nfor (R_xlen_t i = 0; i < n; i++, d = CDR(d)) {\n    di = CAR(d);\n    if (di == R_MissingArg) {\n        <do something if missing>\n    }\n    else {\n        di = Rf_eval(di, R_EmptyEnv);\n        <do something with promise value>\n    }\n}\n\nThe environment used in Rf_eval does not matter, when evaluating a promise,\nthe promise environment is always used.\n\n\nThat being said, Rchk may complain of some objects not being protected. To\nmake it happen, you should protect dots right after you use\nRf_findVarInFrame, as well as protect di right after you use Rf_eval (don't\nforget to unprotect di at the end of each loop).\n\nRegards,\n    Iris\n\n\n\nOn Mon, Aug 18, 2025, 14:26 Josiah Parry <josiah.parry at gmail.com> wrote:\n\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n>\n> Over at extendr (1) we'd like to be able to utilize `...` from the body of\n> a Rust function—with initial motivation being to support S3 generics like\n> print(x, ...).\n>\n> I don't see any recommendations / or mention of accessing DOTSXP in WRE.\n> The closest I can find is from R internals (2) repo which says\n>\n> \"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"\n>\n>\n> From R's C API would this mean we would want to use something like:\n>\n> findVar(R_DotsSymbol, R_GetCurrentEnv()) to get the dots pairlist from the\n> function's environment?\n>\n>\n> 1) https://extendr.rs\n> 2)\n>\n> https://github.com/hadley/r-internals/blob/16c1d73b635ccecec8b1f396a8935a8dd96126e4/pairlists.md\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Generally, the best way to get access to the current environment is passing\nenvironment() as an argument to your C function. I know that people will\ntell you to use R_GetCurrentEnv() in C, but that do",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011896.html"
     },
     {
       "id": "msg-929443a744bf",
@@ -703,11 +740,12 @@
       "references": [
         "<CAL3ufUJ9uk8VZsUyUvhrjR5_H2AvheGN6Qk8YKDYW1rr+ViJgQ@mail.gmail.com>"
       ],
-      "body_plain": "Oh, forgot to mention. Using Rf_eval on a promise a second time does not\nre-evaluate the promise. It simply returns the already calculated promise\nvalue. So if that comes up, no need to worry about it.\n\nOn Mon, Aug 18, 2025, 14:26 Josiah Parry <josiah.parry at gmail.com> wrote:\n\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n>\n> Over at extendr (1) we'd like to be able to utilize `...` from the body of\n> a Rust function?with initial motivation being to support S3 generics like\n> print(x, ...).\n>\n> I don't see any recommendations / or mention of accessing DOTSXP in WRE.\n> The closest I can find is from R internals (2) repo which says\n>\n> \"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"\n>\n>\n> From R's C API would this mean we would want to use something like:\n>\n> findVar(R_DotsSymbol, R_GetCurrentEnv()) to get the dots pairlist from the\n> function's environment?\n>\n>\n> 1) https://extendr.rs\n> 2)\n>\n> https://github.com/hadley/r-internals/blob/16c1d73b635ccecec8b1f396a8935a8dd96126e4/pairlists.md\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Oh, forgot to mention. Using Rf_eval on a promise a second time does not\nre-evaluate the promise. It simply returns the already calculated promise\nvalue. So if that comes up, no need to worry about it.\n\nOn Mon, Aug 18, 2025, 14:26 Josiah Parry <josiah.parry at gmail.com> wrote:\n\n> *Question:* what is the best way to access a DOTSXP from R's C API in a\n> function call.\n>\n> Over at extendr (1) we'd like to be able to utilize `...` from the body of\n> a Rust function—with initial motivation being to support S3 generics like\n> print(x, ...).\n>\n> I don't see any recommendations / or mention of accessing DOTSXP in WRE.\n> The closest I can find is from R internals (2) repo which says\n>\n> \"Easiest to get to with findVar(R_DotsSymbol, env) or similar.\"\n>\n>\n> From R's C API would this mean we would want to use something like:\n>\n> findVar(R_DotsSymbol, R_GetCurrentEnv()) to get the dots pairlist from the\n> function's environment?\n>\n>\n> 1) https://extendr.rs\n> 2)\n>\n> https://github.com/hadley/r-internals/blob/16c1d73b635ccecec8b1f396a8935a8dd96126e4/pairlists.md\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Oh, forgot to mention. Using Rf_eval on a promise a second time does not\nre-evaluate the promise. It simply returns the already calculated promise\nvalue. So if that comes up, no need to worry about it",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011897.html"
     },
     {
       "id": "msg-fc672bd8a8a3",
@@ -726,7 +764,8 @@
       "body_snippet": "On Tue, 19 Aug 2025, Ivan Krylov via R-package-devel wrote:\n\n> ? Mon, 18 Aug 2025 11:25:57 -0700\n> Josiah Parry <josiah.parry at gmail.com> ?????:\n>\n>> *Question:* what is the best way to access a DOT",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011898.html"
     },
     {
       "id": "msg-9ad14cab7487",
@@ -746,7 +785,8 @@
       "body_snippet": "Thank you all for such a wonderful discussion thread!\n\nI think we can hold off on an implementation until there is a formal C API\nfor doing so.\n\nOn Tue, Aug 19, 2025 at 4:12?PM <luke-tierney at uiowa.",
       "thread_id": "thread-2e61029a1795",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011899.html"
     },
     {
       "id": "msg-7a07ed90901b",
@@ -762,7 +802,8 @@
       "body_snippet": "I recently submitted a package to CRAN that creates a device that \noutputs into the terminal (for terminals that support the Terminal \nGraphics Protocol (and hopefully in the future also terminals tha",
       "thread_id": "thread-7a07ed90901b",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011900.html"
     },
     {
       "id": "msg-65aa1b2176d7",
@@ -780,7 +821,8 @@
       "body_snippet": "Someone asked for the response I got from CRAN. I included it below:\n\n---\n[... another issue where I forgot a \\value{} in the documentation of one \nof the functions]\n\nPlease make sure that you do not ",
       "thread_id": "thread-7a07ed90901b",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011901.html"
     },
     {
       "id": "msg-c83efd7376af",
@@ -795,11 +837,12 @@
         "<87dbbfc8-48be-4e5a-b188-988656d36572@eoos.dds.nl>",
         "<SV0P279MB0577C9530FEBC0805CFF9025FC32A@SV0P279MB0577.NORP279.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "Hi Kristian,\n\nAlso replying to the list.\n\nThanks for the suggestion. Personally I have something like the \nfollowing in my ~/.Rprofile\n\nif (interactive() && terminalgraphics::has_tgp_support()) {\n   options(device = terminalgraphics::tgp)\n}\n\nSo that doesn't work well with your suggestion, but creating a (have to \nthink of a better name) `get_par` function, might at least make it \neasier for the user to set the colors when it turns out to be impossible \nto set these from tgp():\n\ntgp()\nopar <- par(terminalgraphics::get_par())\nplot(...)\npar(opar)\n\n`get_par` would then be similar to what you suggest. The disadvantage is \nthat this code is only relevant when `tgp` is the active device, so \nusers would need to either write device specific code or wrap this in \nif-statements. Perhaps a better solution would be to allow for a user \ndefined callback to `tgp` that is called after the device is created. A \nuser might then be able to do something like:\n\nif (interactive() && terminalgraphics::has_tgp_support()) {\n   set_par <- function() par(terminalgraphics::get_par())\n   options(device = terminalgraphics::tgp, tgp_callback = set_par)\n}\n\nThis is still extra work for the user, but avoids device specific code \nin the user scripts.\n\nThanks again.\n\nJan\n\n\n\n\n\n\n\nOn 8/21/25 08:35, Kristian Hovde Liland wrote:\n> Hi Jan,\n> \n> I?m not sure how this plays with your point 3, if the intention is \n> subsequent automatic updates, but for setting the colours once, you \n> could let the user perform the par() part, for instance:\n> tgp <- function(...){\n>  ? # All the nice things that are needed.\n>  ? # <- here\n>  ? # Output in the form of a vector to be passed to par, e.g.,\n>  ? vec <- c(bg = \"black\",\n>  ? ? ? ? ? ?fg = \"white\",\n>  ? ? ? ? ? ?col.axis = \"white\",\n>  ? ? ? ? ? ?col.lab = \"white\",\n>  ? ? ? ? ? ?col.main = \"white\",\n>  ? ? ? ? ? ?col.sub = \"white\")\n>  ? return(vec)\n> }\n> # Example\n> old.par <- par(tgp()) # <- User involvement\n> plot(1:3, type=\"l\")\n> par(old.par)\n> \n> Regards,\n> Kristian\n> \n> *Fra: *R-package-devel <r-package-devel-bounces at r-project.org> p? vegne \n> av Jan van der Laan <rhelp at eoos.dds.nl>\n> *Dato: *onsdag, 20. august 2025 kl. 21:32\n> *Til: *r-package-devel at r-project.org <r-package-devel at r-project.org>\n> *Emne: *[R-pkg-devel] Issue with use of par() in package\n> \n> \n> I recently submitted a package to CRAN that creates a device that\n> outputs into the terminal (for terminals that support the Terminal\n> Graphics Protocol (and hopefully in the future also terminals that\n> support sixel)) [1].\n> \n> It introduces a 'tgp' function that does the following:\n> \n> 1. It opens a ragg::agg_capture device.\n> \n> 2. When term_col = TRUE: sets the background and foreground colors of\n> the device to those of the terminal (when these can be detected).\n> \n> 3. Every time the ragg:agg_capture device is updated: updates the plot\n> in the terminal.\n> \n> Point 2 raises an issue from CRAN as par() changes some properties and\n> these are not set back at the and of the function call. This is\n> intentional, as otherwise setting them would be useless; it is the\n> intention that the colors of subsequent plot calls are changed.? I am\n> not sure how I can set the colors of the device to those in the terminal\n> (as requested by the user) without violating this rule.\n> \n> Are there alternative ways of helping the user to set the colors of the\n> device without violating this issue?\n> \n> Could this be an exception to the rule as the argument intentionally\n> changes par()? This could be made more explicit by changing the default\n> value to FALSE. I guess this question is better asked at the CRAN\n> maintainers, but perhaps there are other package that do something\n> similar that I might look at.\n> \n> Instead of having this functionality in the tgp() function, I could\n> create a 'set_figure_colours_to_terminal()` function (perhaps with a\n> corresponding reset function). However, this function would run into the\n> same issue.\n> \n> I appreciate any suggestions/help that yoy could give.\n> \n> Best,\n> Jan\n> \n> \n> \n> \n> [1] The current version of the code can be found here:\n> https://codeberg.org/djvanderlaan/terminalgraphics/src/branch/dev \n> <https://codeberg.org/djvanderlaan/terminalgraphics/src/branch/dev>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel <https:// \n> stat.ethz.ch/mailman/listinfo/r-package-devel>",
+      "body_plain": "Hi Kristian,\n\nAlso replying to the list.\n\nThanks for the suggestion. Personally I have something like the \nfollowing in my ~/.Rprofile\n\nif (interactive() && terminalgraphics::has_tgp_support()) {\n   options(device = terminalgraphics::tgp)\n}\n\nSo that doesn't work well with your suggestion, but creating a (have to \nthink of a better name) `get_par` function, might at least make it \neasier for the user to set the colors when it turns out to be impossible \nto set these from tgp():\n\ntgp()\nopar <- par(terminalgraphics::get_par())\nplot(...)\npar(opar)\n\n`get_par` would then be similar to what you suggest. The disadvantage is \nthat this code is only relevant when `tgp` is the active device, so \nusers would need to either write device specific code or wrap this in \nif-statements. Perhaps a better solution would be to allow for a user \ndefined callback to `tgp` that is called after the device is created. A \nuser might then be able to do something like:\n\nif (interactive() && terminalgraphics::has_tgp_support()) {\n   set_par <- function() par(terminalgraphics::get_par())\n   options(device = terminalgraphics::tgp, tgp_callback = set_par)\n}\n\nThis is still extra work for the user, but avoids device specific code \nin the user scripts.\n\nThanks again.\n\nJan\n\n\n\n\n\n\n\nOn 8/21/25 08:35, Kristian Hovde Liland wrote:\n> Hi Jan,\n> \n> I’m not sure how this plays with your point 3, if the intention is \n> subsequent automatic updates, but for setting the colours once, you \n> could let the user perform the par() part, for instance:\n> tgp <- function(...){\n>    # All the nice things that are needed.\n>    # <- here\n>    # Output in the form of a vector to be passed to par, e.g.,\n>    vec <- c(bg = \"black\",\n>  ? ? ? ? ?  fg = \"white\",\n>  ? ? ? ?    col.axis = \"white\",\n>  ? ? ? ?    col.lab = \"white\",\n>  ? ? ? ?    col.main = \"white\",\n>  ? ? ? ?    col.sub = \"white\")\n>    return(vec)\n> }\n> # Example\n> old.par <- par(tgp()) # <- User involvement\n> plot(1:3, type=\"l\")\n> par(old.par)\n> \n> Regards,\n> Kristian\n> \n> *Fra: *R-package-devel <r-package-devel-bounces at r-project.org> på vegne \n> av Jan van der Laan <rhelp at eoos.dds.nl>\n> *Dato: *onsdag, 20. august 2025 kl. 21:32\n> *Til: *r-package-devel at r-project.org <r-package-devel at r-project.org>\n> *Emne: *[R-pkg-devel] Issue with use of par() in package\n> \n> \n> I recently submitted a package to CRAN that creates a device that\n> outputs into the terminal (for terminals that support the Terminal\n> Graphics Protocol (and hopefully in the future also terminals that\n> support sixel)) [1].\n> \n> It introduces a 'tgp' function that does the following:\n> \n> 1. It opens a ragg::agg_capture device.\n> \n> 2. When term_col = TRUE: sets the background and foreground colors of\n> the device to those of the terminal (when these can be detected).\n> \n> 3. Every time the ragg:agg_capture device is updated: updates the plot\n> in the terminal.\n> \n> Point 2 raises an issue from CRAN as par() changes some properties and\n> these are not set back at the and of the function call. This is\n> intentional, as otherwise setting them would be useless; it is the\n> intention that the colors of subsequent plot calls are changed.  I am\n> not sure how I can set the colors of the device to those in the terminal\n> (as requested by the user) without violating this rule.\n> \n> Are there alternative ways of helping the user to set the colors of the\n> device without violating this issue?\n> \n> Could this be an exception to the rule as the argument intentionally\n> changes par()? This could be made more explicit by changing the default\n> value to FALSE. I guess this question is better asked at the CRAN\n> maintainers, but perhaps there are other package that do something\n> similar that I might look at.\n> \n> Instead of having this functionality in the tgp() function, I could\n> create a 'set_figure_colours_to_terminal()` function (perhaps with a\n> corresponding reset function). However, this function would run into the\n> same issue.\n> \n> I appreciate any suggestions/help that yoy could give.\n> \n> Best,\n> Jan\n> \n> \n> \n> \n> [1] The current version of the code can be found here:\n> https://codeberg.org/djvanderlaan/terminalgraphics/src/branch/dev \n> <https://codeberg.org/djvanderlaan/terminalgraphics/src/branch/dev>\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel <https:// \n> stat.ethz.ch/mailman/listinfo/r-package-devel>",
       "body_snippet": "Hi Kristian,\n\nAlso replying to the list.\n\nThanks for the suggestion. Personally I have something like the \nfollowing in my ~/.Rprofile\n\nif (interactive() && terminalgraphics::has_tgp_support()) {\n   o",
       "thread_id": "thread-c83efd7376af",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011902.html"
     },
     {
       "id": "msg-d1071a3701ed",
@@ -817,7 +860,8 @@
       "body_snippet": "? Mon, 18 Aug 2025 12:19:40 +0100\nRasha Shraim via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> \\if{html}{\\out{<p>World region coverage:</p>}\\out{<div\n> style=\"text-align:\n> left\">}\\fi",
       "thread_id": "thread-3eefbc1f12fe",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011903.html"
     },
     {
       "id": "msg-09ab54b61b4e",
@@ -836,7 +880,8 @@
       "body_snippet": "I can understand caution about functions with side effects, but rejecting a\npackage on those grounds alone seems strange to me.\n\nI can easily find thousands of calls to par() on CRAN without any\nassoc",
       "thread_id": "thread-7a07ed90901b",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011904.html"
     },
     {
       "id": "msg-e52abb7d2999",
@@ -856,7 +901,8 @@
       "body_snippet": ">>>>> Michael Chirico \n>>>>>     on Thu, 21 Aug 2025 12:56:41 -0700 writes:\n\n    > I can understand caution about functions with side effects, but rejecting a\n    > package on those grounds alone seem",
       "thread_id": "thread-7a07ed90901b",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011905.html"
     },
     {
       "id": "msg-0a778a8c9d6c",
@@ -872,7 +918,8 @@
       "body_snippet": "Hi everyone,\n\nbuilding an R package following the work of Simon Urbanek \n(https://github.com/s-u/OpenCL and \nhttps://cran.r-project.org/web/packages/OpenCL/index.html) still yields \nthe error from CRA",
       "thread_id": "thread-0a778a8c9d6c",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011906.html"
     },
     {
       "id": "msg-90e5367bf99b",
@@ -893,7 +940,8 @@
       "body_snippet": "Thanks Micheal and Martin,\n\nI have contacted the people from CRAN, and they have let me know that in \nthis case it is indeed reasonable to set par and not set it back.\n\nI will also think about Martins",
       "thread_id": "thread-7a07ed90901b",
       "thread_depth": 4,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011907.html"
     },
     {
       "id": "msg-d9f91022bfeb",
@@ -911,7 +959,8 @@
       "body_snippet": "? Fri, 22 Aug 2025 16:05:31 +0200\nquirin stier <Quirin_Stier at gmx.de> ?????:\n\n> Hi everyone,\n> \n> building an R package following the work of Simon Urbanek \n> (https://github.com/s-u/OpenCL and \n> h",
       "thread_id": "thread-0a778a8c9d6c",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011908.html"
     },
     {
       "id": "msg-128ad130a7bb",
@@ -927,7 +976,8 @@
       "body_snippet": "Hi,\n\nAfter submitting a newbie package to CRAN, I received a notification after the automatic checks that it was pending a manual check.\nHowever, I haven't heard back from CRAN since. Also, it is nowh",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011909.html"
     },
     {
       "id": "msg-255f74a36e93",
@@ -945,7 +995,8 @@
       "body_snippet": "Hi Pepijn,\n\nYou can see your package at https://cran.r-project.org/incoming/newbies/. Note that sorting is a bit special with capital first letters first, then packages with small first letters. It ha",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011910.html"
     },
     {
       "id": "msg-e45de8b7303b",
@@ -964,7 +1015,8 @@
       "body_snippet": "Indeed, as the auto notification says \"A CRAN team member will typically \nrespond to you within the next 10 working days.\" Only two passed so far. \nCRAN received > 100 newbie submissions within three ",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011911.html"
     },
     {
       "id": "msg-eba89a47c18a",
@@ -984,7 +1036,8 @@
       "body_snippet": "Hi Both,\n\nThanks for the quick response. Indeed, it was my bad. I overlooked the listing at CRAN incoming due to the sorting. I will patiently await the report of the manual inspection.\n\nPepijn\n\n\n____",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011912.html"
     },
     {
       "id": "msg-dc6d01431d91",
@@ -1005,7 +1058,8 @@
       "body_snippet": "Pepijn, I bookmarked this shiny app a while ago:\nhttps://r-hub.github.io/cransays/articles/dashboard.html\n\nsuper helpful for the \"is it just me? Did i miss something?\" view. It lets\nyou see if other p",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 4,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011913.html"
     },
     {
       "id": "msg-c483c6c05084",
@@ -1027,7 +1081,8 @@
       "body_snippet": "There is also the CRAN package foghorn with, amongst others, the handy \ncran_incoming function.\n\nMichael\n\nOn 26/08/2025 20:02, Josiah Parry wrote:\n> Pepijn, I bookmarked this shiny app a while ago:\n> ",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 5,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011914.html"
     },
     {
       "id": "msg-f16fee7fc472",
@@ -1050,7 +1105,8 @@
       "body_snippet": "On 27 August 2025 at 10:54, Michael Dewey wrote:\n| There is also the CRAN package foghorn with, amongst others, the handy \n| cran_incoming function.\n\nThere is also the 'ciw' package with its 'ciw()' (",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 6,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011915.html"
     },
     {
       "id": "msg-63e4920f158a",
@@ -1066,7 +1122,8 @@
       "body_snippet": "Hello, All:\n\n\nThe R parser in GitHub action seems to be getting corrupted in \nprocessing \"sbgraves237/Ecdat\".[1] For one, I'm getting:\n\n\n358:22: unexpected symbol\n357: ##\n358: plotUSGPDpresidents('fed",
       "thread_id": "thread-63e4920f158a",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011916.html"
     },
     {
       "id": "msg-7385afd40d5e",
@@ -1084,7 +1141,8 @@
       "body_snippet": "This has nothing to do with any GitHub Action. Your example is\ncorrupt, you need to escape `%` characters in .Rd files.\n\nGabor\n\nOn Wed, Aug 27, 2025 at 4:33?PM Spencer Graves\n<spencer.graves at effect",
       "thread_id": "thread-63e4920f158a",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011917.html"
     },
     {
       "id": "msg-8a5137e4aace",
@@ -1100,7 +1158,8 @@
       "body_snippet": "Hello, All:\n\n\n\"CRAN Package Check Results for Package Ecdat\"[1] flags a \"NOTE\" on all \nplatforms. I don't understand any of them.\n\n\nFor example, the check results from some but not all platforms inclu",
       "thread_id": "thread-8a5137e4aace",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011918.html"
     },
     {
       "id": "msg-c4c6ad4230cf",
@@ -1118,7 +1177,8 @@
       "body_snippet": "On 2025-08-27 2:22 p.m., Spencer Graves wrote:\n> Hello, All:\n> \n> \n> \"CRAN Package Check Results for Package Ecdat\"[1] flags a \"NOTE\" on all\n> platforms. I don't understand any of them.\n> \n> \n> For ex",
       "thread_id": "thread-8a5137e4aace",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011919.html"
     },
     {
       "id": "msg-1c7bf2e89351",
@@ -1137,7 +1197,8 @@
       "body_snippet": "Hi, Duncan:\n\n\nThanks for the reply.\n\n\nPlease excuse: I should have checked that but didn't think to do so.\n\n\nThanks again, Spencer Graves\n\n\nOn 8/27/25 14:13, Duncan Murdoch wrote:\n> On 2025-08-27 2:22",
       "thread_id": "thread-8a5137e4aace",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011920.html"
     },
     {
       "id": "msg-6ead5caf6eda",
@@ -1161,7 +1222,8 @@
       "body_snippet": "Thanks for all the tips.\n\n@josiah I'm aware of cransays (It's not a shiny app by the way, it uses pkgdown in combination with GH pages). When I checked it, I missed the paginating button at the bottom",
       "thread_id": "thread-128ad130a7bb",
       "thread_depth": 7,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011921.html"
     },
     {
       "id": "msg-2b39db2937bf",
@@ -1177,7 +1239,8 @@
       "body_snippet": "Hi everyone,\n\nCRAN Submission of package \n(https://github.com/Quirinms/GeneralizedUmatrixGPU/tree/main)?leads to \nan error.\n\n\n* installing *source* package 'GeneralizedUmatrixGPU' ...\n** this is packa",
       "thread_id": "thread-2b39db2937bf",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011922.html"
     },
     {
       "id": "msg-aefc0500258d",
@@ -1193,7 +1256,8 @@
       "body_snippet": "Hi everyone,\n\nsry for the double mail - I included the old error output from a \nprevious version, only the location of the?#include \"CL/cl.hpp\"? changed \nto ocl.h in /src.\n\nCRAN Submission of package ",
       "thread_id": "thread-aefc0500258d",
       "thread_depth": 0,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011923.html"
     },
     {
       "id": "msg-e51f9b6056e1",
@@ -1211,7 +1275,8 @@
       "body_snippet": "On 28 August 2025 at 13:25, quirin stier wrote:\n| D:/RCompile/CRANincoming/R-devel/lib/RcppArmadillo/include/current/armadillo_bits/config.hpp:373:72: note: '#pragma message: NOTE: option ARMA_CRIPPLE",
       "thread_id": "thread-aefc0500258d",
       "thread_depth": 1,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011924.html"
     },
     {
       "id": "msg-35a504f9b591",
@@ -1226,11 +1291,12 @@
         "<a2f70101-989f-47e0-9bb0-b75bca5b10d2@gmx.de>",
         "<26800.23084.380298.314975@paul.eddelbuettel.com>"
       ],
-      "body_plain": "Thanks! It seems that the headers can be easily shipped without much \neffort inside the inst/include/CL/, working at least for both Debian and \nWindows for now. (Updates available on \nhttps://github.com/Quirinms/GeneralizedUmatrixGPU/tree/main)\n\nHowever, there comes another problem afterwards with a dynamic \nlibrary/shared object (Win/Debian).\n\nAfter finding the headers, following message appeared:\n\nD:\\rtools45\\x86_64-w64-mingw32.static.posix\\bin/ld.exe: cannot find -lOpenCL: No such file or directory\n\nsimilar in Debian:\n\nError: package or namespace load failed for ?GeneralizedUmatrixGPU? in library.dynam(lib, package, package.lib):\n  shared object ?GeneralizedUmatrixGPU.so? not found\n\n\nFor?Windows there is more output using -lOpenCL --verbose:\n\ng++ -std=gnu++17 -shared -s -static-libgcc -o GeneralizedUmatrixGPU.dll tmp.def RcppExports.o trainSESOM.o -Ld:/RCompile/CRANpkg/extralibs/OpenCL/lib/x64/ -lOpenCL --verbose -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib/x64 -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib -LD:/RCompile/recent/R/bin/x64 -lR\nUsing built-in specs.\nCOLLECT_GCC=D:\\rtools45\\x86_64-w64-mingw32.static.posix\\bin\\g++.exe\nCOLLECT_LTO_WRAPPER=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/lto-wrapper.exe\nTarget: x86_64-w64-mingw32.static.posix\nConfigured with: /root/mxe/tmp-gcc-host-x86_64-w64-mingw32.static.posix/gcc-14.2.0/configure --host=x86_64-w64-mingw32.static.posix --target=x86_64-w64-mingw32.static.posix --build=x86_64-pc-linux-gnu --prefix=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-native-system-header-dir=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix/include --enable-languages=c,c++,objc,fortran --enable-version-specific-runtime-libs --with-gcc --with-gnu-ld --with-gnu-as --disable-nls --without-libiconv-prefix --disable-shared --disable-multilib --without-x --disable-win32-registry --enable-threads=posix --enable-libgomp --with-gmp=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-isl=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-mpc=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-mpfr=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --enable-libstdcxx-time target_configargs=XCFLAGS=-Wno-format ac_cv_header_sys_mman_h=no\nThread model: posix\nSupported LTO compression algorithms: zlib zstd\ngcc version 14.2.0 (GCC)\nCOMPILER_PATH=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/\nLIBRARY_PATH=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../../lib/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../\nCOLLECT_GCC_OPTIONS='-std=gnu++17' '-shared' '-s' '-static-libgcc' '-o' 'GeneralizedUmatrixGPU.dll' '-Ld:/RCompile/CRANpkg/extralibs/OpenCL/lib/x64/' '-v' '-Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib/x64' '-Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib' '-LD:/RCompile/recent/R/bin/x64' '-mtune=generic' '-march=x86-64' '-dumpdir' 'GeneralizedUmatrixGPU.dll.'\n  D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/collect2.exe -plugin D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/liblto_plugin.dll -plugin-opt=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=D:\\temp\\2025_08_29_11_20_18_14976\\cc2Dbamn.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --shared -Bdynamic -e DllMainCRTStartup --enable-auto-image-base -o GeneralizedUmatrixGPU.dll -s D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../../lib/dllcrt2.o D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/crtbegin.o -Ld:/RCompile/CRANpkg/extralibs/OpenCL/lib/x64/ -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib/x64 -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib -LD:/RCompile/recent/R/bin/x64 -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0 -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../../lib -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../.. tmp.def RcppExports.o trainSESOM.o -lOpenCL -lR -lstdc++ -lmingw32 -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lmingwex -lmsvcrt -lkernel32 D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/crtend.o\nD:\\rtools45\\x86_64-w64-mingw32.static.posix\\bin/ld.exe: cannot find -lOpenCL: No such file or directory\ncollect2.exe: error: ld returned 1 exit status\nno DLL was created\nERROR: compilation failed for package 'GeneralizedUmatrixGPU'\n\n\n\nAm 28.08.2025 um 15:31 schrieb Dirk Eddelbuettel:\n> On 28 August 2025 at 13:25, quirin stier wrote:\n> | D:/RCompile/CRANincoming/R-devel/lib/RcppArmadillo/include/current/armadillo_bits/config.hpp:373:72: note: '#pragma message: NOTE: option ARMA_CRIPPLED_LAPACK is not supported'\n>\n> That is a side effect from CRAN and me trying to figure out how to accomodate\n> breaking changes in the new Armadillo upstream. Ignore this for now, this is\n> a likely side-effect of a tested version being on the CRAN machine when this\n> ran. The released RcppArmadillo will not trigger ut,\n>\n>\n>\n> | * installing *source* package ?GeneralizedUmatrixGPU? ...\n> | ** this is package ?GeneralizedUmatrixGPU? version ?0.0.1?\n> | ** using staged installation\n> | ** libs\n> | using C++ compiler: ?Debian clang version 19.1.7 (3+b2)?\n> | clang++-19 -std=gnu++17 -I\"/home/hornik/tmp/R/include\" -DNDEBUG  -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/Rcpp/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppArmadillo/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppParallel/include' -I/usr/local/include -DUSE_TYPE_CHECKING_STRICT -D_FORTIFY_SOURCE=3   -fpic  -g -O3 -Wall -pedantic -Wno-missing-template-arg-list-after-template-kw -Wdeprecated-literal-operator  -c RcppExports.cpp -o RcppExports.o\n> | clang++-19 -std=gnu++17 -I\"/home/hornik/tmp/R/include\" -DNDEBUG  -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/Rcpp/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppArmadillo/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppParallel/include' -I/usr/local/include -DUSE_TYPE_CHECKING_STRICT -D_FORTIFY_SOURCE=3   -fpic  -g -O3 -Wall -pedantic -Wno-missing-template-arg-list-after-template-kw -Wdeprecated-literal-operator  -c trainSESOM.cpp -o trainSESOM.o\n> | In file included from trainSESOM.cpp:2:\n> | ./ocl.h:9:10: fatal error: 'CL/cl.hpp' file not found\n> |      9 | #include <CL/cl.hpp>\n> |        |          ^~~~~~~~~~~\n> | 1 error generated.\n> | make: *** [/home/hornik/tmp/R/etc/Makeconf:209: trainSESOM.o] Error 1\n> | ERROR: compilation failed for package ?GeneralizedUmatrixGPU?\n> | * removing *?/srv/hornik/tmp/CRAN_pretest/GeneralizedUmatrixGPU.Rcheck/GeneralizedUmatrixGPU?\n>\n> Do you ensure the CL headers are installed?  On Debian these come for example\n> from package opencl-clhpp-headers [1] (but you have no general control over what\n> is installed).  At least package gpuR ships it for R, and you check how few\n> other packages test for this via a search at github.org/cran (a mirror) [2].\n>\n> It looks to me like you need to take better care of the 'configure does not\n> find cl.hpp' case (and you need to add logic to your package to have that test).\n>\n> Dirk\n>\n> [1]https://packages.debian.org/search?searchon=contents&keywords=CL%2Fcl.hpp&mode=path&suite=unstable&arch=any\n> [2]https://github.com/search?q=org%3Acran%20CL%2Fcl.hpp&type=code\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks! It seems that the headers can be easily shipped without much \neffort inside the inst/include/CL/, working at least for both Debian and \nWindows for now. (Updates available on \nhttps://github.com/Quirinms/GeneralizedUmatrixGPU/tree/main)\n\nHowever, there comes another problem afterwards with a dynamic \nlibrary/shared object (Win/Debian).\n\nAfter finding the headers, following message appeared:\n\nD:\\rtools45\\x86_64-w64-mingw32.static.posix\\bin/ld.exe: cannot find -lOpenCL: No such file or directory\n\nsimilar in Debian:\n\nError: package or namespace load failed for ‘GeneralizedUmatrixGPU’ in library.dynam(lib, package, package.lib):\n  shared object ‘GeneralizedUmatrixGPU.so’ not found\n\n\nFor Windows there is more output using -lOpenCL --verbose:\n\ng++ -std=gnu++17 -shared -s -static-libgcc -o GeneralizedUmatrixGPU.dll tmp.def RcppExports.o trainSESOM.o -Ld:/RCompile/CRANpkg/extralibs/OpenCL/lib/x64/ -lOpenCL --verbose -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib/x64 -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib -LD:/RCompile/recent/R/bin/x64 -lR\nUsing built-in specs.\nCOLLECT_GCC=D:\\rtools45\\x86_64-w64-mingw32.static.posix\\bin\\g++.exe\nCOLLECT_LTO_WRAPPER=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/lto-wrapper.exe\nTarget: x86_64-w64-mingw32.static.posix\nConfigured with: /root/mxe/tmp-gcc-host-x86_64-w64-mingw32.static.posix/gcc-14.2.0/configure --host=x86_64-w64-mingw32.static.posix --target=x86_64-w64-mingw32.static.posix --build=x86_64-pc-linux-gnu --prefix=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-native-system-header-dir=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix/include --enable-languages=c,c++,objc,fortran --enable-version-specific-runtime-libs --with-gcc --with-gnu-ld --with-gnu-as --disable-nls --without-libiconv-prefix --disable-shared --disable-multilib --without-x --disable-win32-registry --enable-threads=posix --enable-libgomp --with-gmp=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-isl=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-mpc=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --with-mpfr=/usr/lib/mxe/usr/x86_64-w64-mingw32.static.posix --enable-libstdcxx-time target_configargs=XCFLAGS=-Wno-format ac_cv_header_sys_mman_h=no\nThread model: posix\nSupported LTO compression algorithms: zlib zstd\ngcc version 14.2.0 (GCC)\nCOMPILER_PATH=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/\nLIBRARY_PATH=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../../lib/;D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../\nCOLLECT_GCC_OPTIONS='-std=gnu++17' '-shared' '-s' '-static-libgcc' '-o' 'GeneralizedUmatrixGPU.dll' '-Ld:/RCompile/CRANpkg/extralibs/OpenCL/lib/x64/' '-v' '-Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib/x64' '-Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib' '-LD:/RCompile/recent/R/bin/x64' '-mtune=generic' '-march=x86-64' '-dumpdir' 'GeneralizedUmatrixGPU.dll.'\n  D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/collect2.exe -plugin D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/liblto_plugin.dll -plugin-opt=D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../libexec/gcc/x86_64-w64-mingw32.static.posix/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=D:\\temp\\2025_08_29_11_20_18_14976\\cc2Dbamn.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep --shared -Bdynamic -e DllMainCRTStartup --enable-auto-image-base -o GeneralizedUmatrixGPU.dll -s D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../../lib/dllcrt2.o D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/crtbegin.o -Ld:/RCompile/CRANpkg/extralibs/OpenCL/lib/x64/ -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib/x64 -Ld:/rtools45/x86_64-w64-mingw32.static.posix/lib -LD:/RCompile/recent/R/bin/x64 -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0 -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../../../lib -LD:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/../../.. tmp.def RcppExports.o trainSESOM.o -lOpenCL -lR -lstdc++ -lmingw32 -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lmingwex -lmsvcrt -lkernel32 D:/rtools45/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/14.2.0/crtend.o\nD:\\rtools45\\x86_64-w64-mingw32.static.posix\\bin/ld.exe: cannot find -lOpenCL: No such file or directory\ncollect2.exe: error: ld returned 1 exit status\nno DLL was created\nERROR: compilation failed for package 'GeneralizedUmatrixGPU'\n\n\n\nAm 28.08.2025 um 15:31 schrieb Dirk Eddelbuettel:\n> On 28 August 2025 at 13:25, quirin stier wrote:\n> | D:/RCompile/CRANincoming/R-devel/lib/RcppArmadillo/include/current/armadillo_bits/config.hpp:373:72: note: '#pragma message: NOTE: option ARMA_CRIPPLED_LAPACK is not supported'\n>\n> That is a side effect from CRAN and me trying to figure out how to accomodate\n> breaking changes in the new Armadillo upstream. Ignore this for now, this is\n> a likely side-effect of a tested version being on the CRAN machine when this\n> ran. The released RcppArmadillo will not trigger ut,\n>\n>\n>\n> | * installing *source* package ?GeneralizedUmatrixGPU’ ...\n> | ** this is package ‘GeneralizedUmatrixGPU’ version ‘0.0.1’\n> | ** using staged installation\n> | ** libs\n> | using C++ compiler: ‘Debian clang version 19.1.7 (3+b2)’\n> | clang++-19 -std=gnu++17 -I\"/home/hornik/tmp/R/include\" -DNDEBUG  -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/Rcpp/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppArmadillo/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppParallel/include' -I/usr/local/include -DUSE_TYPE_CHECKING_STRICT -D_FORTIFY_SOURCE=3   -fpic  -g -O3 -Wall -pedantic -Wno-missing-template-arg-list-after-template-kw -Wdeprecated-literal-operator  -c RcppExports.cpp -o RcppExports.o\n> | clang++-19 -std=gnu++17 -I\"/home/hornik/tmp/R/include\" -DNDEBUG  -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/Rcpp/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppArmadillo/include' -I'/home/hornik/lib/R/Library/4.6/x86_64-linux-gnu/RcppParallel/include' -I/usr/local/include -DUSE_TYPE_CHECKING_STRICT -D_FORTIFY_SOURCE=3   -fpic  -g -O3 -Wall -pedantic -Wno-missing-template-arg-list-after-template-kw -Wdeprecated-literal-operator  -c trainSESOM.cpp -o trainSESOM.o\n> | In file included from trainSESOM.cpp:2:\n> | ./ocl.h:9:10: fatal error: 'CL/cl.hpp' file not found\n> |      9 | #include <CL/cl.hpp>\n> |        |          ^~~~~~~~~~~\n> | 1 error generated.\n> | make: *** [/home/hornik/tmp/R/etc/Makeconf:209: trainSESOM.o] Error 1\n> | ERROR: compilation failed for package ‘GeneralizedUmatrixGPU’\n> | * removing *‘/srv/hornik/tmp/CRAN_pretest/GeneralizedUmatrixGPU.Rcheck/GeneralizedUmatrixGPU’\n>\n> Do you ensure the CL headers are installed?  On Debian these come for example\n> from package opencl-clhpp-headers [1] (but you have no general control over what\n> is installed).  At least package gpuR ships it for R, and you check how few\n> other packages test for this via a search at github.org/cran (a mirror) [2].\n>\n> It looks to me like you need to take better care of the 'configure does not\n> find cl.hpp' case (and you need to add logic to your package to have that test).\n>\n> Dirk\n>\n> [1]https://packages.debian.org/search?searchon=contents&keywords=CL%2Fcl.hpp&mode=path&suite=unstable&arch=any\n> [2]https://github.com/search?q=org%3Acran%20CL%2Fcl.hpp&type=code\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks! It seems that the headers can be easily shipped without much \neffort inside the inst/include/CL/, working at least for both Debian and \nWindows for now. (Updates available on \nhttps://github.c",
       "thread_id": "thread-aefc0500258d",
       "thread_depth": 2,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011925.html"
     },
     {
       "id": "msg-483332d59225",
@@ -1250,7 +1316,8 @@
       "body_snippet": "On Fri, 29 Aug 2025 14:11:18 +0200\nquirin stier <Quirin_Stier at gmx.de> wrote:\n\n> Error: package or namespace load failed for ?GeneralizedUmatrixGPU?\n> in library.dynam(lib, package, package.lib): sh",
       "thread_id": "thread-aefc0500258d",
       "thread_depth": 3,
-      "month": "2025-08"
+      "month": "2025-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q3/011926.html"
     }
   ],
   "threads": [

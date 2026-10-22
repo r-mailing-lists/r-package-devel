@@ -17,7 +17,8 @@
       "body_snippet": "Hi,\n\nI wanted to submit a package to CRAN. When I ran R CMD check --as-cran I \nsaw that the package name is used by another package. After renaming my \npackage I googled the new name and it turned out",
       "thread_id": "thread-48f191903d8e",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007499.html"
     },
     {
       "id": "msg-72ac21098a1a",
@@ -35,7 +36,8 @@
       "body_snippet": "Hi Sigbert,\n\nthe CRAN Repository Policy available at\n\nhttps://cran.r-project.org/web/packages/policies.html\n\ncontains\n\nPackages should be named in a way that does not conflict (irrespective of \ncase) ",
       "thread_id": "thread-48f191903d8e",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007500.html"
     },
     {
       "id": "msg-fb5e103e12d0",
@@ -51,7 +53,8 @@
       "body_snippet": "Good day,\n\nHow can a parameter take a default value from a vector of permitted ones, if it is missing?\n\nsetClassUnion(\"characterOrMissing\", c(\"character\", \"missing\"))\nsetClassUnion(\"integerOrMissing\",",
       "thread_id": "thread-fb5e103e12d0",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007501.html"
     },
     {
       "id": "msg-9d90581a8f07",
@@ -69,7 +72,8 @@
       "body_snippet": ">From the line `function(A, B) standardGeneric(\"SetOfParams\")`, A and B will\nalways have default values of R_MissingArg\nProviding default values within the methods does nothing since A and B have\nalre",
       "thread_id": "thread-fb5e103e12d0",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007502.html"
     },
     {
       "id": "msg-d511724a9b88",
@@ -88,7 +92,8 @@
       "body_snippet": "You need to define  the generic with a default value for this parameter. Methods can then have a different default value for it. I remember reading this in S4's documentation but don't remember where.",
       "thread_id": "thread-fb5e103e12d0",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007503.html"
     },
     {
       "id": "msg-3ee34e466188",
@@ -104,7 +109,8 @@
       "body_snippet": "Not sure if this is the best place to post this message, as it is more of a\nsuggestion than a question.\n\nWhen an R function accepts more than a handful of arguments there is the\nrisk that users accide",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007504.html"
     },
     {
       "id": "msg-73eb77d2cfe7",
@@ -124,7 +130,8 @@
       "body_snippet": ">>>>> Georgi Boshnakov \n>>>>>     on Mon, 8 Nov 2021 09:46:00 +0000 writes:\n\n    > You need to define the generic with a default value for\n    > this parameter. Methods can then have a different defau",
       "thread_id": "thread-fb5e103e12d0",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007505.html"
     },
     {
       "id": "msg-2af119857117",
@@ -142,7 +149,8 @@
       "body_snippet": "On 08/11/2021 10:29 a.m., Vincent van Hees wrote:\n> Not sure if this is the best place to post this message, as it is more of a\n> suggestion than a question.\n> \n> When an R function accepts more than ",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007506.html"
     },
     {
       "id": "msg-821d6725e8e9",
@@ -163,7 +171,8 @@
       "body_snippet": "It turns out that it is not difficult to find, the excerpt below is from help(setMethod). Maybe  mentioning this in help(setGeneric) would be helpful, as well.\n\nGeorgi Boshnakov\n\n\n=======\nMethod defin",
       "thread_id": "thread-fb5e103e12d0",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007507.html"
     },
     {
       "id": "msg-0734376bf734",
@@ -182,7 +191,8 @@
       "body_snippet": "Duncan,\n\nThis may not be the place to discuss this so I will be brief.\n\nThe question is whether it should be some kind of error to call a function\nwith two named arguments that are the same.\n\nI can th",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007508.html"
     },
     {
       "id": "msg-93e32c76eb2b",
@@ -201,7 +211,8 @@
       "body_snippet": "Thanks Duncan, I have tried to make a minimalistic example:\n\nmyfun = function(...) {\n  input = list(...)\n  mysum = function(A = c(), B= c()) {\n    return(A+B)\n  }\n  if (\"A\" %in% names(input) & \"B\" %in",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007509.html"
     },
     {
       "id": "msg-5252529698d8",
@@ -221,7 +232,8 @@
       "body_snippet": "Vincent,\n\nBut is the second being ignored the right result?\n\nIn many programming situations, subsequent assignments replace earlier ones.\nAnd consider the way R allows something like this:\n\nfunc(a=2, ",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007510.html"
     },
     {
       "id": "msg-64d865da3dd3",
@@ -242,7 +254,8 @@
       "body_snippet": "On 08/11/2021 11:48 a.m., Avi Gross via R-package-devel wrote:\n> Vincent,\n> \n> But is the second being ignored the right result?\n> \n> In many programming situations, subsequent assignments replace ear",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007511.html"
     },
     {
       "id": "msg-dc986b695e9d",
@@ -264,7 +277,8 @@
       "body_snippet": "I think this is similar in nature (though not detail) to an issue raised\non StackOverflow where the OP used \"x\" in dot args and it clashed with the\n\"x\" in a numDeriv call in my optimx package. I've go",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 5,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007512.html"
     },
     {
       "id": "msg-31021e26d8f0",
@@ -280,7 +294,8 @@
       "body_snippet": "Is there any way at all to update the email address of the maintainer of \na package? (The address of the maintainer of CVXR which is in need of an \nupdate for the new SCS solver has changed from? @sta",
       "thread_id": "thread-31021e26d8f0",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007513.html"
     },
     {
       "id": "msg-aefedcd8679f",
@@ -298,7 +313,8 @@
       "body_snippet": "",
       "thread_id": "thread-31021e26d8f0",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007514.html"
     },
     {
       "id": "msg-0f54d8bb7965",
@@ -313,11 +329,12 @@
         "<35287e15-7347-ed92-5233-c2300a9ca1ac@stanford.edu>",
         "<E605BC26-5267-492F-905A-9E79927CE1B3@R-project.org>"
       ],
-      "body_plain": "Thank you, Simon!\n\nOn 11/8/21 5:57 PM, Simon Urbanek wrote:\n>  From CRAN Policy:\n>\n>\n>> Explain any change in the maintainer?s email address and if possible send confirmation from the previous address (by a separate email to CRAN-submissions at R-project.org) or explain why it is not possible\n>>\n>\n> Cheers,\n> Simon\n>",
-      "body_snippet": "Thank you, Simon!\n\nOn 11/8/21 5:57 PM, Simon Urbanek wrote:\n>  From CRAN Policy:\n>\n>\n>> Explain any change in the maintainer?s email address and if possible send confirmation from the previous address",
+      "body_plain": "Thank you, Simon!\n\nOn 11/8/21 5:57 PM, Simon Urbanek wrote:\n>  From CRAN Policy:\n>\n>\n>> Explain any change in the maintainer’s email address and if possible send confirmation from the previous address (by a separate email to CRAN-submissions at R-project.org) or explain why it is not possible\n>>\n>\n> Cheers,\n> Simon\n>",
+      "body_snippet": "Thank you, Simon!\n\nOn 11/8/21 5:57 PM, Simon Urbanek wrote:\n>  From CRAN Policy:\n>\n>\n>> Explain any change in the maintainer’s email address and if possible send confirmation from the previous address",
       "thread_id": "thread-31021e26d8f0",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007515.html"
     },
     {
       "id": "msg-624a0f7531a3",
@@ -333,7 +350,8 @@
       "body_snippet": "Hello,\n\nI am trying to submit a new package to CRAN. I have fixed all warnings\nand errors, and have 1 Note remaining, which I can't get rid off.\nHere is the result:\n\"\n?New submission\n? \n? License comp",
       "thread_id": "thread-624a0f7531a3",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007516.html"
     },
     {
       "id": "msg-117c5a56835d",
@@ -353,7 +371,8 @@
       "body_snippet": "Thanks for your replies, I only just noticed them as I had daily-digest =\ntrue and someone seems to have removed my e-mail address when replying to\nthe list. Never mind, I have now switched my daily-d",
       "thread_id": "thread-3ee34e466188",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007517.html"
     },
     {
       "id": "msg-f72374d29829",
@@ -369,7 +388,8 @@
       "body_snippet": "Hi,\n\nI have written a function which\n- checks if the input is a raw-vector\n- if the input is a file-descriptor, it converts the file-content to a \nraw-vector\n- if the input is a URL, it converts the c",
       "thread_id": "thread-f72374d29829",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007520.html"
     },
     {
       "id": "msg-f0b049a99a8a",
@@ -385,7 +405,8 @@
       "body_snippet": "Hello,\n\nI am a package maintainer for the package \"fabisearch\" which is now\narchived on CRAN. The package includes many examples which take a long time\nto run. In past versions of R, I used to simply ",
       "thread_id": "thread-f0b049a99a8a",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007521.html"
     },
     {
       "id": "msg-bc89e4a4dca5",
@@ -401,7 +422,8 @@
       "body_snippet": "Hi all,\n\nI maintain a package (netgsa) that has been on CRAN since september 2021\nand recently got an email about CRAN check failures. There are 2 errors and\n1 warning. The failures are listed here:\nh",
       "thread_id": "thread-bc89e4a4dca5",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007518.html"
     },
     {
       "id": "msg-b4d1387c1d62",
@@ -419,7 +441,8 @@
       "body_snippet": "You should ALWAYS build with the latest stable AND the latest development versions of R before submitting.\n\nOn November 15, 2021 6:33:12 PM PST, Michael Hellstern <mikeh1 at uw.edu> wrote:\n>Hi all,\n>\n",
       "thread_id": "thread-bc89e4a4dca5",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007519.html"
     },
     {
       "id": "msg-bb86f8254d0b",
@@ -437,7 +460,8 @@
       "body_snippet": "On 15/11/2021 2:30 p.m., Martin Ondrus wrote:\n> Hello,\n> \n> I am a package maintainer for the package \"fabisearch\" which is now\n> archived on CRAN. The package includes many examples which take a long",
       "thread_id": "thread-f0b049a99a8a",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007522.html"
     },
     {
       "id": "msg-60a75efff7cf",
@@ -456,7 +480,8 @@
       "body_snippet": "Hi Duncan,\n\nThat's a fair point, and I think making the examples run quicker probably\nmakes the most sense. I have bad experiences with using dontrun - my\npackage always gets flagged. Although not ide",
       "thread_id": "thread-f0b049a99a8a",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007523.html"
     },
     {
       "id": "msg-a5771aaa7957",
@@ -476,7 +501,8 @@
       "body_snippet": "Am 16.11.21 um 20:16 schrieb Martin Ondrus:\n\n> Hi Duncan,\n>\n> That's a fair point, and I think making the examples run quicker probably\n> makes the most sense. I have bad experiences with using dontru",
       "thread_id": "thread-f0b049a99a8a",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007524.html"
     },
     {
       "id": "msg-56f2a107bb8e",
@@ -497,7 +523,8 @@
       "body_snippet": "Hi Guido,\n\nYes \\dontrun works fine for me as well when I'm running the package check\non my own, as well as the win-builder link you've sent. The problem I\nalways run into is that when it first gets in",
       "thread_id": "thread-f0b049a99a8a",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007525.html"
     },
     {
       "id": "msg-0598693038b2",
@@ -518,7 +545,8 @@
       "body_snippet": "(This crossed with Martin Ondrus's reply).\n\n   In the past few years CRAN screeners have gotten more strict about \n\\dontrun{}; a first-round screening often comes back requesting that \n\\dontrun{}, and",
       "thread_id": "thread-f0b049a99a8a",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007526.html"
     },
     {
       "id": "msg-83a568b00a40",
@@ -536,7 +564,8 @@
       "body_snippet": "On Mon, 15 Nov 2021 17:15:14 +0100\nBen Engbers <Ben.Engbers at Be-Logical.nl> wrote:\n\n> I don't know why I have to explicitly include 'library(\"rex\")' in\n> the code since I have added rex to the Impor",
       "thread_id": "thread-f72374d29829",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007527.html"
     },
     {
       "id": "msg-a511fedc480b",
@@ -555,7 +584,8 @@
       "body_snippet": "Thanks for your reply.\n\nI have moved new/edited 'input_to_raw' code and the validation code to \nanother file with all kind of utility-functions and that seems to have \nsolved that problem. (But I don'",
       "thread_id": "thread-f72374d29829",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007528.html"
     },
     {
       "id": "msg-270c41482e3c",
@@ -575,7 +605,8 @@
       "body_snippet": "On Wed, 17 Nov 2021 00:20:44 +0100\nBen Engbers <Ben.Engbers at Be-Logical.nl> wrote:\n\n> I don't edit the NAMESPACE file by hand. It is created by roxygen2.\n\nRight. In that case, use an @importFrom tag",
       "thread_id": "thread-f72374d29829",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007529.html"
     },
     {
       "id": "msg-824c3e7e154d",
@@ -591,7 +622,8 @@
       "body_snippet": "Good day,\n\nI read in the documentation of SetMethod that \"Roughly, if the generic has ... as one of its arguments, then the method may have extra formal arguments, which will be matched from the argum",
       "thread_id": "thread-824c3e7e154d",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007530.html"
     },
     {
       "id": "msg-0ad05f17cf05",
@@ -609,7 +641,8 @@
       "body_snippet": "Michael,\n\nthis is really a CRAN question rather than a package question so you may have more luck asking CRAN, but generally it is not a a good idea to have strong dependencies (Depends/Imports) on Bi",
       "thread_id": "thread-bc89e4a4dca5",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007531.html"
     },
     {
       "id": "msg-c7c882068304",
@@ -627,7 +660,8 @@
       "body_snippet": "Hi,\nI've getting an ERROR when submitting a new release of our package BCEA to CRAN which I'm having problems understanding and reproducing. Its passing CHECK locally and GitHub Actions standard check",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007532.html"
     },
     {
       "id": "msg-3d14e1710f53",
@@ -646,7 +680,8 @@
       "body_snippet": "On Wed, 24 Nov 2021 16:37:44 +0000 (UTC)\nNathan Green via R-package-devel <r-package-devel at r-project.org> wrote:\n\n> An irrecoverable exception occurred. R is aborting now ...\n\nIt seems that some of",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007533.html"
     },
     {
       "id": "msg-bc8a72174de6",
@@ -666,7 +701,8 @@
       "body_snippet": "On Thu, Nov 25, 2021 at 11:49 AM Ivan Krylov <krylov.r00t at gmail.com> wrote:\n>\n> On Wed, 24 Nov 2021 16:37:44 +0000 (UTC)\n> Nathan Green via R-package-devel <r-package-devel at r-project.org> wrote:",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007534.html"
     },
     {
       "id": "msg-20662acea934",
@@ -683,11 +719,12 @@
         "<20211125134908.2e74c9ae@arachnoid>",
         "<CABtg=Km+KQLw88zP0-yNHeXqU4CxCg7JkSMjxSy0M_Lp0g_pCA@mail.gmail.com>"
       ],
-      "body_plain": "On Thu, 25 Nov 2021 12:33:01 +0100\nG?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> Are you sure about this? I don't think testthat hides any output. R\n> CMD check on the other hand AFAICT only shows the last 13 lines by\n> default. See the _R_CHECK_TESTS_NLINES_ environment variable in\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html\n\nIndeed you're right, R CMD check truncating the output is the main\nproblem here. With a full traceback, it would at least be possible to\nsee which dependency crashes R on CRAN Macs. I should have been more\nclear in my e-mail.\n\nBy \"testthat hiding output\" I mean that there's no *.Rout[.fail] files\nfor every file in tests/testthat/*.R with line-by-line output of the\ntest code. In cases when R itself crashes in the middle of the test run,\nthese *.Rout.fail files could be useful to find out which line caused\nthe crash. With testthat, crashing the R process during tests results\nin a single testthat.Rout.fail:\n\n> > library(testthat)\n> > library(package_name)\n...\n> > test_check(\"package_name\")\n> \n>  *** caught segfault ***\n> address (nil), cause 'memory not mapped'\n> \n> Traceback:\n>  1: .C(\"foo\")\n>  2: eval(code, test_env)\n...\n> 23: test_dir(\"testthat\", package = package, reporter = reporter,     ..., load_package = \"installed\")\n> 24: test_check(\"package_name\")\n> An irrecoverable exception occurred. R is aborting now ...\n\nHere, the traceback makes the answer obvious, but it's not always so.\nWith serious heap corruption, it's possible to get just:\n\n> > test_check(\"package_name\")\n> free(): invalid pointer\n> Aborted\n\nWith no indication of the call or the file causing the crash.\n\nYou are right that this is not the main problem here: if the test\noutput wasn't truncated by R CMD check, we would know the origin of the\ncrash, even without testthat.\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "On Thu, 25 Nov 2021 12:33:01 +0100\nG?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> Are you sure about this? I don't think testthat hides any output. R\n> CMD check on the other hand AFAICT only show",
+      "body_plain": "On Thu, 25 Nov 2021 12:33:01 +0100\nGábor Csárdi <csardi.gabor at gmail.com> wrote:\n\n> Are you sure about this? I don't think testthat hides any output. R\n> CMD check on the other hand AFAICT only shows the last 13 lines by\n> default. See the _R_CHECK_TESTS_NLINES_ environment variable in\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html\n\nIndeed you're right, R CMD check truncating the output is the main\nproblem here. With a full traceback, it would at least be possible to\nsee which dependency crashes R on CRAN Macs. I should have been more\nclear in my e-mail.\n\nBy \"testthat hiding output\" I mean that there's no *.Rout[.fail] files\nfor every file in tests/testthat/*.R with line-by-line output of the\ntest code. In cases when R itself crashes in the middle of the test run,\nthese *.Rout.fail files could be useful to find out which line caused\nthe crash. With testthat, crashing the R process during tests results\nin a single testthat.Rout.fail:\n\n> > library(testthat)\n> > library(package_name)\n...\n> > test_check(\"package_name\")\n> \n>  *** caught segfault ***\n> address (nil), cause 'memory not mapped'\n> \n> Traceback:\n>  1: .C(\"foo\")\n>  2: eval(code, test_env)\n...\n> 23: test_dir(\"testthat\", package = package, reporter = reporter,     ..., load_package = \"installed\")\n> 24: test_check(\"package_name\")\n> An irrecoverable exception occurred. R is aborting now ...\n\nHere, the traceback makes the answer obvious, but it's not always so.\nWith serious heap corruption, it's possible to get just:\n\n> > test_check(\"package_name\")\n> free(): invalid pointer\n> Aborted\n\nWith no indication of the call or the file causing the crash.\n\nYou are right that this is not the main problem here: if the test\noutput wasn't truncated by R CMD check, we would know the origin of the\ncrash, even without testthat.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "On Thu, 25 Nov 2021 12:33:01 +0100\nGábor Csárdi <csardi.gabor at gmail.com> wrote:\n\n> Are you sure about this? I don't think testthat hides any output. R\n> CMD check on the other hand AFAICT only show",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007535.html"
     },
     {
       "id": "msg-f5f30faac341",
@@ -706,7 +743,8 @@
       "body_snippet": "Nathan,\n\ntestthat is notorious for obfuscation and unhelpful output as can be clearly seen in the head of testthat.Rout.fail:\n\n> library(testthat)\n> library(BCEA)\n\nAttaching package: 'BCEA'\n\nThe follo",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007536.html"
     },
     {
       "id": "msg-f290e118010e",
@@ -726,7 +764,8 @@
       "body_snippet": "That shouldn't be happening, at least not by default. However, RcppParallel\ndoes ship with tbbmalloc_proxy, which is a library that, when loaded, will\noverload the default allocators to use TBB's allo",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007537.html"
     },
     {
       "id": "msg-812cbb7c6461",
@@ -747,7 +786,8 @@
       "body_snippet": "Kevin,\n\nthanks, that's very helpful! So this is a serious bug in rstan - apparently they only do that on macOS which explains why other platforms don't see it:\n\n.onLoad <- function(libname, pkgname) {",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007538.html"
     },
     {
       "id": "msg-1ab014a2b79d",
@@ -765,11 +805,12 @@
         "<CAJXgQP2oDh=FHkch3dyUv9Fbp8ny-cg05fwjuTgQT_AYPphSXQ@mail.gmail.com>",
         "<9D114DE7-583C-45E5-B45E-513950DE54D0@R-project.org>"
       ],
-      "body_plain": "Thanks everyone for your help with this.TBH the technical nature is more than a little above my head.What are you advising as the current solution to enable me to resubmit the package to CRAN?BCEA doesn't have a strong dependency on rstan so I could remove it as a simple solution?Thanks again for all the help!\nNathan\n\n\n? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ??Dr Nathan Green\n@: n8thangreen at yahoo.co.ukTel: 07821 318353\n \n\n    On Thursday, 25 November 2021, 22:56:45 GMT, Simon Urbanek <simon.urbanek at r-project.org> wrote:  \n \n Kevin,\n\nthanks, that's very helpful! So this is a serious bug in rstan - apparently they only do that on macOS which explains why other platforms don't see it:\n\n.onLoad <- function(libname, pkgname) {\n[...]\n? ## the tbbmalloc_proxy is not loaded by RcppParallel which is linked\n? ## in by default on macOS; unloading only works under R >= 4.0 so that\n? ## this is only done for R >= 4.0\n? if(R.version$major >= 4 && Sys.info()[\"sysname\"] == \"Darwin\") {\n? ? ? tbbmalloc_proxy? <- system.file(\"lib/libtbbmalloc_proxy.dylib\", package=\"RcppParallel\", mustWork=FALSE)\n? ? ? tbbmalloc_proxyDllInfo <<- dyn.load(tbbmalloc_proxy, local = FALSE, now = TRUE)\n? }\n\nI can confirm that commenting out that part solves the segfault and BCEA passes the tests.\n\n@Ben, please fix and submit a new version of rstan (see discussion below).\n\nThanks,\nSimon\n\n\n\n> On Nov 26, 2021, at 11:19 AM, Kevin Ushey <kevinushey at gmail.com> wrote:\n> \n> That shouldn't be happening, at least not by default. However, RcppParallel does ship with tbbmalloc_proxy, which is a library that, when loaded, will overload the default allocators to use TBB's allocators instead. The intention is normally that these libraries would be loaded via e.g. LD_PRELOAD or something similar, since changing the allocator at runtime would cause these sorts of issues.\n> \n> If I test with the following:\n> \n> trace(dyn.load, quote({\n>? if (grepl(\"tbbmalloc_proxy\", x))\n>? ? print(rlang::trace_back())\n> }), print = FALSE)\n> \n> devtools::test()\n> \n> then I see:\n> \n>? 1. ??base::load(test_path(\"data\", \"stanfit.RData\")) at test-bcea.R:179:2\n>? 2. ??base::..getNamespace(`<chr>`, \"stanfit\")\n>? 3.? ??base::tryCatch(...)\n>? 4.? ? ??base tryCatchList(expr, classes, parentenv, handlers)\n>? 5.? ?? ??base tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>? 6.? ?? ? ??base doTryCatch(return(expr), name, parentenv, handler)\n>? 7.? ??base::loadNamespace(name)\n>? 8.? ? ??base runHook(\".onLoad\", env, package.lib, package)\n>? 9.? ? ? ??base::tryCatch(fun(libname, pkgname), error = identity)\n>? 10.? ? ? ? ??base tryCatchList(expr, classes, parentenv, handlers)\n>? 11.? ? ? ?? ??base tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>? 12.? ? ? ?? ? ??base doTryCatch(return(expr), name, parentenv, handler)\n>? 13.? ? ? ??rstan fun(libname, pkgname)\n>? 14.? ? ? ? ??base::dyn.load(tbbmalloc_proxy, local = FALSE, now = TRUE)\n> \n> My guess is that the 'rstan' package is trying to forcefully load libtbbmalloc_proxy.dylib at runtime, and that's causing the issue. IMHO 'rstan' shouldn't be doing that, at least definitely not by default.\n> \n> Best,\n> Kevin\n> \n> On Thu, Nov 25, 2021 at 12:54 PM Simon Urbanek <simon.urbanek at r-project.org> wrote:\n> Nathan,\n> \n> testthat is notorious for obfuscation and unhelpful output as can be clearly seen in the head of testthat.Rout.fail:\n> \n> > library(testthat)\n> > library(BCEA)\n> \n> Attaching package: 'BCEA'\n> \n> The following object is masked from 'package:graphics':\n> \n>? ? contour\n> \n> > \n> > test_check(\"BCEA\")\n> \n>? *** caught segfault ***\n> address 0x10d492ffc, cause 'memory not mapped'\n> \n> However this appears to be hard to debug, because it is a fall out from some memory corruption and/or allocator mistmatch: the crash happens in free() while doing GC (see below). Since it happens in the GC, many bad things happen afterwards.\n> With some lldb magic I could trace that the crash happens during\n>? ..getNamespace(c(\"Matrix\", \"1.3-3\"), \"stanfit\")\n>? load(test_path(\"data\", \"stanfit.RData\"))\n> but as I said that's likely too late - the memory corruption/issue likely happened before. Since BCEA itself doesn't have native code, this is likely a bug in some of the packages it depends on, but quite a serious one since it affects subsequent code in R.\n> \n> The list of packages loaded at the time of the crash - so one of them is the culprit:\n> \n>? [1] \"rstan\"? ? ? ? ? \"tidyselect\"? ? \"purrr\"? ? ? ? ? \"reshape2\"? ? ? \n>? [5] \"lattice\"? ? ? ? \"V8\"? ? ? ? ? ? \"colorspace\"? ? \"vctrs\"? ? ? ? \n>? [9] \"generics\"? ? ? \"testthat\"? ? ? \"stats4\"? ? ? ? \"BCEA\"? ? ? ? ? \n> [13] \"loo\"? ? ? ? ? ? \"grDevices\"? ? ? \"R2jags\"? ? ? ? \"utf8\"? ? ? ? ? \n> [17] \"rlang\"? ? ? ? ? \"pkgbuild\"? ? ? \"pillar\"? ? ? ? \"glue\"? ? ? ? ? \n> [21] \"withr\"? ? ? ? ? \"DBI\"? ? ? ? ? ? \"matrixStats\"? ? \"lifecycle\"? ? \n> [25] \"plyr\"? ? ? ? ? \"stringr\"? ? ? ? \"munsell\"? ? ? ? \"gtable\"? ? ? ? \n> [29] \"coda\"? ? ? ? ? \"codetools\"? ? ? \"inline\"? ? ? ? \"callr\"? ? ? ? \n> [33] \"ps\"? ? ? ? ? ? \"parallel\"? ? ? \"curl\"? ? ? ? ? \"fansi\"? ? ? ? \n> [37] \"methods\"? ? ? ? \"Rcpp\"? ? ? ? ? \"scales\"? ? ? ? \"desc\"? ? ? ? ? \n> [41] \"RcppParallel\"? \"StanHeaders\"? ? \"GrassmannOptim\" \"jsonlite\"? ? ? \n> [45] \"abind\"? ? ? ? ? \"gridExtra\"? ? ? \"winch\"? ? ? ? ? \"rjags\"? ? ? ? \n> [49] \"ggplot2\"? ? ? ? \"stats\"? ? ? ? ? \"datasets\"? ? ? \"graphics\"? ? ? \n> [53] \"stringi\"? ? ? ? \"processx\"? ? ? \"dplyr\"? ? ? ? ? \"grid\"? ? ? ? ? \n> [57] \"rprojroot\"? ? ? \"cli\"? ? ? ? ? ? \"tools\"? ? ? ? ? \"magrittr\"? ? ? \n> [61] \"tibble\"? ? ? ? \"crayon\"? ? ? ? \"pkgconfig\"? ? ? \"Matrix\"? ? ? ? \n> [65] \"MASS\"? ? ? ? ? \"ellipsis\"? ? ? \"utils\"? ? ? ? ? \"prettyunits\"? \n> [69] \"assertthat\"? ? \"base\"? ? ? ? ? \"boot\"? ? ? ? ? \"R6\"? ? ? ? ? ? \n> [73] \"R2WinBUGS\"? ? ? \"compiler\"? ? ? \n> \n> My guess would be that the issue could be in RcppParallel which overrides the memory allocator:\n> \n> * thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x11649fffc)\n>? * frame #0: 0x00000001097c517f libtbbmalloc.dylib`__TBB_malloc_safer_msize + 63\n>? ? frame #1: 0x00007fff76f746fd libsystem_malloc.dylib`free + 96\n>? ? frame #2: 0x00000001001c9227 libR.dylib`RunGenCollect at memory.c:1114 [opt]\n>? ? frame #3: 0x00000001001c9038 libR.dylib`RunGenCollect(size_needed=0) at memory.c:1896 [opt]\n>? ? frame #4: 0x00000001001bf769 libR.dylib`R_gc_internal(size_needed=0) at memory.c:3129 [opt]\n> \n> (lldb) image lookup -va 0x00000001097c517f\n>? ? ? Address: libtbbmalloc.dylib[0x000000000001117f] (libtbbmalloc.dylib.__TEXT.__text + 65375)\n>? ? ? Summary: libtbbmalloc.dylib`__TBB_malloc_safer_msize + 63\n>? ? ? ? Module: file = \"/Volumes/Builds/packages/high-sierra-x86_64/Rlib/4.1/RcppParallel/lib/libtbbmalloc.dylib\", arch = \"x86_64\"\n>? ? ? ? Symbol: id = {0x0000060c}, range = [0x00000001097c5140-0x00000001097c5290), mangled=\"__TBB_malloc_safer_msize\"\n> \n> but that's just a wild guess... (CCing Kevin just in case he can shed a light on whether TBB allocator should be involved in regular R garbage collection).\n> \n> Cheers,\n> Simon\n> \n> \n> \n> > On Nov 25, 2021, at 5:37 AM, Nathan Green via R-package-devel <r-package-devel at r-project.org> wrote:\n> > \n> > Hi,\n> > I've getting an ERROR when submitting a new release of our package BCEA to CRAN which I'm having problems understanding and reproducing. Its passing CHECK locally and GitHub Actions standard check (https://github.com/n8thangreen/BCEA/actions/runs/1494595896).\n> > The message is something to do with testthat. Any help would be gratefully received.\n> > Thanks!\n> > Nathan\n> > \n> > From https://cran.r-project.org/web/checks/check_results_BCEA.html\n> > Here's the error message:\n> > Check: tests, Result: ERROR\n> >? ? Running ???testthat.R??? [5s/5s]\n> >? Running the tests in ???tests/testthat.R??? failed.\n> >? Last 13 lines of output:\n> >? ? 33: tryCatch(withCallingHandlers({? ? eval(code, test_env)? ? if (!handled && !is.null(test)) {? ? ? ? skip_empty()? ? }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,? ? message = handle_message, error = handle_error), error = handle_fatal,? ? skip = function(e) {? ? })\n> >? ? 34: test_code(NULL, exprs, env)\n> >? ? 35: source_file(path, child_env(env), wrap = wrap)\n> >? ? 36: FUN(X[[i]], ...)\n> >? ? 37: lapply(test_paths, test_one_file, env = env, wrap = wrap)\n> >? ? 38: doTryCatch(return(expr), name, parentenv, handler)\n> >? ? 39: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n> >? ? 40: tryCatchList(expr, classes, parentenv, handlers)\n> >? ? 41: tryCatch(code, testthat_abort_reporter = function(cnd) {? ? cat(conditionMessage(cnd), \"\\n\")? ? NULL})\n> >? ? 42: with_reporter(reporters$multi, lapply(test_paths, test_one_file,? ? env = env, wrap = wrap))\n> >? ? 43: test_files(test_dir = test_dir, test_package = test_package,? ? test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,? ? env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,? ? wrap = wrap, load_package = load_package)\n> >? ? 44: test_files(test_dir = path, test_paths = test_paths, test_package = package,? ? reporter = reporter, load_helpers = load_helpers, env = env,? ? stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,? ? wrap = wrap, load_package = load_package, parallel = parallel)\n> >? ? 45: test_dir(\"testthat\", package = package, reporter = reporter,? ? ..., load_package = \"installed\")\n> >? ? 46: test_check(\"BCEA\")\n> >? ? An irrecoverable exception occurred. R is aborting now ...\n> > See: <https://www.r-project.org/nosvn/R.check/r-release-macos-x86_64/BCEA-00check.html>,\n> >? ? <https://www.r-project.org/nosvn/R.check/r-oldrel-macos-x86_64/BCEA-00check.html>\n> > \n> >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? Dr Nathan Green\n> > @: n8thangreen at yahoo.co.ukTel: 07821 318353\n> > \n> > \n> >? ? ? [[alternative HTML version deleted]]\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > \n> \n\n  \n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks everyone for your help with this.TBH the technical nature is more than a little above my head.What are you advising as the current solution to enable me to resubmit the package to CRAN?BCEA doesn't have a strong dependency on rstan so I could remove it as a simple solution?Thanks again for all the help!\nNathan\n\n\n? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?   Dr Nathan Green\n@: n8thangreen at yahoo.co.ukTel: 07821 318353\n \n\n    On Thursday, 25 November 2021, 22:56:45 GMT, Simon Urbanek <simon.urbanek at r-project.org> wrote:  \n \n Kevin,\n\nthanks, that's very helpful! So this is a serious bug in rstan - apparently they only do that on macOS which explains why other platforms don't see it:\n\n.onLoad <- function(libname, pkgname) {\n[...]\n  ## the tbbmalloc_proxy is not loaded by RcppParallel which is linked\n  ## in by default on macOS; unloading only works under R >= 4.0 so that\n  ## this is only done for R >= 4.0\n  if(R.version$major >= 4 && Sys.info()[\"sysname\"] == \"Darwin\") {\n      tbbmalloc_proxy  <- system.file(\"lib/libtbbmalloc_proxy.dylib\", package=\"RcppParallel\", mustWork=FALSE)\n      tbbmalloc_proxyDllInfo <<- dyn.load(tbbmalloc_proxy, local = FALSE, now = TRUE)\n  }\n\nI can confirm that commenting out that part solves the segfault and BCEA passes the tests.\n\n@Ben, please fix and submit a new version of rstan (see discussion below).\n\nThanks,\nSimon\n\n\n\n> On Nov 26, 2021, at 11:19 AM, Kevin Ushey <kevinushey at gmail.com> wrote:\n> \n> That shouldn't be happening, at least not by default. However, RcppParallel does ship with tbbmalloc_proxy, which is a library that, when loaded, will overload the default allocators to use TBB's allocators instead. The intention is normally that these libraries would be loaded via e.g. LD_PRELOAD or something similar, since changing the allocator at runtime would cause these sorts of issues.\n> \n> If I test with the following:\n> \n> trace(dyn.load, quote({\n>  if (grepl(\"tbbmalloc_proxy\", x))\n>    print(rlang::trace_back())\n> }), print = FALSE)\n> \n> devtools::test()\n> \n> then I see:\n> \n>  1. ├─base::load(test_path(\"data\", \"stanfit.RData\")) at test-bcea.R:179:2\n>  2. └─base::..getNamespace(`<chr>`, \"stanfit\")\n>  3.  ├─base::tryCatch(...)\n>  4.  │ └─base tryCatchList(expr, classes, parentenv, handlers)\n>  5.? │  └─base tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>  6.? ??   └─base doTryCatch(return(expr), name, parentenv, handler)\n>  7.  └─base::loadNamespace(name)\n>  8.    └─base runHook(\".onLoad\", env, package.lib, package)\n>  9.? ?   ├─base::tryCatch(fun(libname, pkgname), error = identity)\n>  10.  ? ? ? └─base tryCatchList(expr, classes, parentenv, handlers)\n>  11.  ? ? ?? └─base tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>  12.  ? ? ?? ? └─base doTryCatch(return(expr), name, parentenv, handler)\n>  13.      └─rstan fun(libname, pkgname)\n>  14.  ? ? ? └─base::dyn.load(tbbmalloc_proxy, local = FALSE, now = TRUE)\n> \n> My guess is that the 'rstan' package is trying to forcefully load libtbbmalloc_proxy.dylib at runtime, and that's causing the issue. IMHO 'rstan' shouldn't be doing that, at least definitely not by default.\n> \n> Best,\n> Kevin\n> \n> On Thu, Nov 25, 2021 at 12:54 PM Simon Urbanek <simon.urbanek at r-project.org> wrote:\n> Nathan,\n> \n> testthat is notorious for obfuscation and unhelpful output as can be clearly seen in the head of testthat.Rout.fail:\n> \n> > library(testthat)\n> > library(BCEA)\n> \n> Attaching package: 'BCEA'\n> \n> The following object is masked from 'package:graphics':\n> \n>    contour\n> \n> > \n> > test_check(\"BCEA\")\n> \n>  *** caught segfault ***\n> address 0x10d492ffc, cause 'memory not mapped'\n> \n> However this appears to be hard to debug, because it is a fall out from some memory corruption and/or allocator mistmatch: the crash happens in free() while doing GC (see below). Since it happens in the GC, many bad things happen afterwards.\n> With some lldb magic I could trace that the crash happens during\n>  ..getNamespace(c(\"Matrix\", \"1.3-3\"), \"stanfit\")\n>  load(test_path(\"data\", \"stanfit.RData\"))\n> but as I said that's likely too late - the memory corruption/issue likely happened before. Since BCEA itself doesn't have native code, this is likely a bug in some of the packages it depends on, but quite a serious one since it affects subsequent code in R.\n> \n> The list of packages loaded at the time of the crash - so one of them is the culprit:\n> \n>  [1] \"rstan\"    ? ?   \"tidyselect\"    \"purrr\"    ? ?   \"reshape2\"      \n>  [5] \"lattice\"        \"V8\"    ? ? ?   \"colorspace\"    \"vctrs\"    ? ? \n>  [9] \"generics\"      \"testthat\"      \"stats4\"        \"BCEA\"    ? ? ? \n> [13] \"loo\"    ? ? ?   \"grDevices\"      \"R2jags\"        \"utf8\"    ? ? ? \n> [17] \"rlang\"    ? ?   \"pkgbuild\"      \"pillar\"        \"glue\"    ? ? ? \n> [21] \"withr\"    ? ?   \"DBI\"    ? ? ?   \"matrixStats\"    \"lifecycle\"    \n> [25] \"plyr\"    ? ?   \"stringr\"        \"munsell\"        \"gtable\"    ? ? \n> [29] \"coda\"    ? ?   \"codetools\"      \"inline\"        \"callr\"    ? ? \n> [33] \"ps\"    ? ? ?   \"parallel\"      \"curl\"    ? ?   \"fansi\"    ? ? \n> [37] \"methods\"        \"Rcpp\"    ? ?   \"scales\"        \"desc\"    ? ? ? \n> [41] \"RcppParallel\"  \"StanHeaders\"    \"GrassmannOptim\" \"jsonlite\"      \n> [45] \"abind\"    ? ?   \"gridExtra\"      \"winch\"    ? ?   \"rjags\"    ? ? \n> [49] \"ggplot2\"        \"stats\"    ? ?   \"datasets\"      \"graphics\"      \n> [53] \"stringi\"        \"processx\"      \"dplyr\"    ? ?   \"grid\"    ? ? ? \n> [57] \"rprojroot\"      \"cli\"    ? ? ?   \"tools\"    ? ?   \"magrittr\"      \n> [61] \"tibble\"        \"crayon\"        \"pkgconfig\"      \"Matrix\"    ? ? \n> [65] \"MASS\"    ? ?   \"ellipsis\"      \"utils\"    ? ?   \"prettyunits\"  \n> [69] \"assertthat\"    \"base\"    ? ?   \"boot\"    ? ?   \"R6\"    ? ? ? ? \n> [73] \"R2WinBUGS\"      \"compiler\"      \n> \n> My guess would be that the issue could be in RcppParallel which overrides the memory allocator:\n> \n> * thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x11649fffc)\n>  * frame #0: 0x00000001097c517f libtbbmalloc.dylib`__TBB_malloc_safer_msize + 63\n>    frame #1: 0x00007fff76f746fd libsystem_malloc.dylib`free + 96\n>    frame #2: 0x00000001001c9227 libR.dylib`RunGenCollect at memory.c:1114 [opt]\n>    frame #3: 0x00000001001c9038 libR.dylib`RunGenCollect(size_needed=0) at memory.c:1896 [opt]\n>    frame #4: 0x00000001001bf769 libR.dylib`R_gc_internal(size_needed=0) at memory.c:3129 [opt]\n> \n> (lldb) image lookup -va 0x00000001097c517f\n>      Address: libtbbmalloc.dylib[0x000000000001117f] (libtbbmalloc.dylib.__TEXT.__text + 65375)\n>      Summary: libtbbmalloc.dylib`__TBB_malloc_safer_msize + 63\n>        Module: file = \"/Volumes/Builds/packages/high-sierra-x86_64/Rlib/4.1/RcppParallel/lib/libtbbmalloc.dylib\", arch = \"x86_64\"\n>        Symbol: id = {0x0000060c}, range = [0x00000001097c5140-0x00000001097c5290), mangled=\"__TBB_malloc_safer_msize\"\n> \n> but that's just a wild guess... (CCing Kevin just in case he can shed a light on whether TBB allocator should be involved in regular R garbage collection).\n> \n> Cheers,\n> Simon\n> \n> \n> \n> > On Nov 25, 2021, at 5:37 AM, Nathan Green via R-package-devel <r-package-devel at r-project.org> wrote:\n> > \n> > Hi,\n> > I've getting an ERROR when submitting a new release of our package BCEA to CRAN which I'm having problems understanding and reproducing. Its passing CHECK locally and GitHub Actions standard check (https://github.com/n8thangreen/BCEA/actions/runs/1494595896).\n> > The message is something to do with testthat. Any help would be gratefully received.\n> > Thanks!\n> > Nathan\n> > \n> > From https://cran.r-project.org/web/checks/check_results_BCEA.html\n> > Here's the error message:\n> > Check: tests, Result: ERROR\n> >    Running â€˜testthat.Râ€™ [5s/5s]\n> >  Running the tests in â€˜tests/testthat.Râ€™ failed.\n> >  Last 13 lines of output:\n> >    33: tryCatch(withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,    message = handle_message, error = handle_error), error = handle_fatal,    skip = function(e) {    })\n> >    34: test_code(NULL, exprs, env)\n> >    35: source_file(path, child_env(env), wrap = wrap)\n> >    36: FUN(X[[i]], ...)\n> >    37: lapply(test_paths, test_one_file, env = env, wrap = wrap)\n> >    38: doTryCatch(return(expr), name, parentenv, handler)\n> >    39: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n> >    40: tryCatchList(expr, classes, parentenv, handlers)\n> >    41: tryCatch(code, testthat_abort_reporter = function(cnd) {    cat(conditionMessage(cnd), \"\\n\")    NULL})\n> >    42: with_reporter(reporters$multi, lapply(test_paths, test_one_file,    env = env, wrap = wrap))\n> >    43: test_files(test_dir = test_dir, test_package = test_package,    test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,    env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,    wrap = wrap, load_package = load_package)\n> >    44: test_files(test_dir = path, test_paths = test_paths, test_package = package,    reporter = reporter, load_helpers = load_helpers, env = env,    stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,    wrap = wrap, load_package = load_package, parallel = parallel)\n> >    45: test_dir(\"testthat\", package = package, reporter = reporter,    ..., load_package = \"installed\")\n> >    46: test_check(\"BCEA\")\n> >    An irrecoverable exception occurred. R is aborting now ...\n> > See: <https://www.r-project.org/nosvn/R.check/r-release-macos-x86_64/BCEA-00check.html>,\n> >    <https://www.r-project.org/nosvn/R.check/r-oldrel-macos-x86_64/BCEA-00check.html>\n> > \n> >? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?   Dr Nathan Green\n> > @: n8thangreen at yahoo.co.ukTel: 07821 318353\n> > \n> > \n> >      [[alternative HTML version deleted]]\n> > \n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> > \n> \n\n  \n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks everyone for your help with this.TBH the technical nature is more than a little above my head.What are you advising as the current solution to enable me to resubmit the package to CRAN?BCEA doe",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007539.html"
     },
     {
       "id": "msg-41dd2a46a2c2",
@@ -785,7 +826,8 @@
       "body_snippet": "Dear all,\n\nI am writing a package that needs to load some data from a URL and have\nsuch data (meta data) available when using other functions in the package,\nand I would like some advice on how to pro",
       "thread_id": "thread-41dd2a46a2c2",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007540.html"
     },
     {
       "id": "msg-05fd0b58a73a",
@@ -803,7 +845,8 @@
       "body_snippet": "Hello,\n\nThe trick is to store cached objects in an environment. In our team\nsome of us have started calling this environment \"the\" to reflect that\nthe elements in that environment are global singleton",
       "thread_id": "thread-41dd2a46a2c2",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007541.html"
     },
     {
       "id": "msg-9811a6896ff9",
@@ -822,7 +865,8 @@
       "body_snippet": "Agreed. One can also initialise such an environment as a package option in\n.onLoad which may be better or worse depending in part on how much\nrestriction you want to place on the environment\n\nOn Sat, ",
       "thread_id": "thread-41dd2a46a2c2",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007542.html"
     },
     {
       "id": "msg-6b07dd802999",
@@ -842,7 +886,8 @@
       "body_snippet": "Agreed. I have used `.pkgenv` in a few packages (digest, rpushbullet, ...),\nand usually added a comment that it is package-global.\n\nAnd so have a few others:\n\n https://github.com/search?l=R&q=org%3Acr",
       "thread_id": "thread-41dd2a46a2c2",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007543.html"
     },
     {
       "id": "msg-5a8561901f4a",
@@ -865,7 +910,8 @@
       "body_snippet": "Nathan,\n\nno action is needed on your end since it's not your fault. It was good of you to have the test there because it unearthed the issue. I have re-run the test with hot-fixed rstan and it passes ",
       "thread_id": "thread-c7c882068304",
       "thread_depth": 5,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007544.html"
     },
     {
       "id": "msg-c91a3afafe97",
@@ -886,7 +932,8 @@
       "body_snippet": "Dear Lionel, Hugh and Dirk,\n\nMany, many thanks for your input. I will definitively study the different\nproposals and will check on the different implementations and ideas to\nevaluate what is the most ",
       "thread_id": "thread-41dd2a46a2c2",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007545.html"
     },
     {
       "id": "msg-471d1a8014f4",
@@ -902,7 +949,8 @@
       "body_snippet": "Hi,\n\nI have been working on a R-client for the BaseX XML-database and version \n0.9.2 is nearly finished (submitting version 0.9.0 was rejected by CRAN).\nVersion 0.3 of RBaseX can be found here \n(https",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007546.html"
     },
     {
       "id": "msg-2786d4557ddd",
@@ -920,7 +968,8 @@
       "body_snippet": "On 27/11/2021 4:09 a.m., Ben Engbers wrote:\n> \n> Hi,\n> \n> I have been working on a R-client for the BaseX XML-database and version\n> 0.9.2 is nearly finished (submitting version 0.9.0 was rejected by ",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007547.html"
     },
     {
       "id": "msg-882d44351d8e",
@@ -932,11 +981,12 @@
       "subject_clean": "[R-pkg-devel] socketConnection, delay when reading from",
       "in_reply_to": "<31570aba-b651-2db0-c302-5be1ff833169@gmail.com>",
       "references": [],
-      "body_plain": "That's what I figured out also?. The problem is that even when I reduce the size to 2 bytes and there is only 1byte available in the socket, the code will wait for 1 second which is the minimum time-out?.BenVerzonden vanaf mijn Galaxy\n-------- Oorspronkelijk bericht --------Van: Duncan Murdoch <murdoch.duncan at gmail.com> Datum: 27-11-2021  12:02  (GMT+01:00) Aan: Ben.Engbers at Be-Logical.nl, r-package-devel at r-project.org Onderwerp: Re: [R-pkg-devel] socketConnection, delay when reading from On 27/11/2021 4:09 a.m., Ben Engbers wrote:> > Hi,> > I have been working on a R-client for the BaseX XML-database and version> 0.9.2 is nearly finished (submitting version 0.9.0 was rejected by CRAN).> Version 0.3 of RBaseX can be found here> (https://cran.microsoft.com/web/packages/RBaseX/index.html).> > The client-server protocol specifies that the communication between the> client and the database is based on a socket. The code (below) shows how> I create that socket.> > Writing to the socket works perfect. Reading from the sockets (see> second codeblock) also produces correct results. The problem however is> that the timeout, as specified when initializing the socket, causes a 1> second delay for every read-operation.> I have experimented a lot with different settings and have been> searching a lot on internet, but I can't find any method to get rid of> that delay. (In C or C++ that should be easier but I have never before> had any need to use those languages).> The very first version of my client used a block-size of 1 when reading.> That gave acceptable response times for small query-results but reading> large responses from the database took very long time.> > Do you have any suggestions on how to cope with this problem?You are attempting to read 1024 bytes.? If the socket returns fewer, the code presumably assumes it should wait for more.? You should specify the number to read to be no larger than you'll receive.? That's why reading a byte at a time works well for small reads.To handle larger ones, you need to know what size blocks you are going to receive with each read.? If that varies unpredictably, I doubt if there's much you can do other than reducing the timeout.Duncan Murdoch> > Ben Engbers> > ----------------------------->?????? CreateSocket = function(host, port = 1984L, username, password) {>???????? tryCatch(>?????????? {conn <- private$conn <- socketConnection(>???????????? host = \"localhost\", port,>???????????? open = \"w+b\", server = FALSE, blocking = TRUE, encoding => \"UTF-8\", timeout = 1)>?????????? }, error = function(e) {>???????????? stop(\"Cannot open the connection\")>?????????? }>???????? )> > -----------------------------> > readBin_ <- function(conn) {>???? chars_read <- raw(0)>???? rd <- readBin(conn, what = \"raw\", 1024)>???? while(length(rd) == 1024) {>?????? chars_read <- c(chars_read, rd)>?????? rd <- readBin(conn, \"raw\", 1024)>?????? }>???? if (length(rd) > 0) chars_read <- c(chars_read, rd)>???? return(chars_read)> }> > ______________________________________________> R-package-devel at r-project.org mailing list> https://stat.ethz.ch/mailman/listinfo/r-package-devel> \n\t[[alternative HTML version deleted]]",
-      "body_snippet": "That's what I figured out also?. The problem is that even when I reduce the size to 2 bytes and there is only 1byte available in the socket, the code will wait for 1 second which is the minimum time-o",
+      "body_plain": "That's what I figured out also😉. The problem is that even when I reduce the size to 2 bytes and there is only 1byte available in the socket, the code will wait for 1 second which is the minimum time-out😔.BenVerzonden vanaf mijn Galaxy\n-------- Oorspronkelijk bericht --------Van: Duncan Murdoch <murdoch.duncan at gmail.com> Datum: 27-11-2021  12:02  (GMT+01:00) Aan: Ben.Engbers at Be-Logical.nl, r-package-devel at r-project.org Onderwerp: Re: [R-pkg-devel] socketConnection, delay when reading from On 27/11/2021 4:09 a.m., Ben Engbers wrote:> > Hi,> > I have been working on a R-client for the BaseX XML-database and version> 0.9.2 is nearly finished (submitting version 0.9.0 was rejected by CRAN).> Version 0.3 of RBaseX can be found here> (https://cran.microsoft.com/web/packages/RBaseX/index.html).> > The client-server protocol specifies that the communication between the> client and the database is based on a socket. The code (below) shows how> I create that socket.> > Writing to the socket works perfect. Reading from the sockets (see> second codeblock) also produces correct results. The problem however is> that the timeout, as specified when initializing the socket, causes a 1> second delay for every read-operation.> I have experimented a lot with different settings and have been> searching a lot on internet, but I can't find any method to get rid of> that delay. (In C or C++ that should be easier but I have never before> had any need to use those languages).> The very first version of my client used a block-size of 1 when reading.> That gave acceptable response times for small query-results but reading> large responses from the database took very long time.> > Do you have any suggestions on how to cope with this problem?You are attempting to read 1024 bytes.  If the socket returns fewer, the code presumably assumes it should wait for more.  You should specify the number to read to be no larger than you'll receive.  That's why reading a byte at a time works well for small reads.To handle larger ones, you need to know what size blocks you are going to receive with each read.  If that varies unpredictably, I doubt if there's much you can do other than reducing the timeout.Duncan Murdoch> > Ben Engbers> > ----------------------------->       CreateSocket = function(host, port = 1984L, username, password) {>  ??     tryCatch(>   ?????   {conn <- private$conn <- socketConnection(>   ???????   host = \"localhost\", port,>   ???????   open = \"w+b\", server = FALSE, blocking = TRUE, encoding => \"UTF-8\", timeout = 1)>  ???????  }, error = function(e) {>  ????????   stop(\"Cannot open the connection\")>   ??????? }>???? ??? )> > -----------------------------> > readBin_ <- function(conn) {>     chars_read <- raw(0)>     rd <- readBin(conn, what = \"raw\", 1024)>     while(length(rd) == 1024) {>       chars_read <- c(chars_read, rd)>       rd <- readBin(conn, \"raw\", 1024)>     ? }>     if (length(rd) > 0) chars_read <- c(chars_read, rd)>     return(chars_read)> }> > ______________________________________________> R-package-devel at r-project.org mailing list> https://stat.ethz.ch/mailman/listinfo/r-package-devel> \n\t[[alternative HTML version deleted]]",
+      "body_snippet": "That's what I figured out also😉. The problem is that even when I reduce the size to 2 bytes and there is only 1byte available in the socket, the code will wait for 1 second which is the minimum time-o",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007548.html"
     },
     {
       "id": "msg-3891915ea226",
@@ -954,7 +1004,8 @@
       "body_snippet": "Does the message start with a length or a command whose argument length is known\ndepending on the particular command?\nIf so first read the length or command and from that the length of the\nremainder o",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 1,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007549.html"
     },
     {
       "id": "msg-dee0fd4113ae",
@@ -973,7 +1024,8 @@
       "body_snippet": "No, according to the specification the minimal number of bytes that is \nreturned is 2. There is no maximum. (When querying a database you never \nknow on forehand how many records match the query so by",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 2,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007550.html"
     },
     {
       "id": "msg-8536fa2af4be",
@@ -993,7 +1045,8 @@
       "body_snippet": "Whether the length is variable or not isn't relevant. The point is\nwhether the message is prefaced by a length or command from which the\nlength can be derived.  Maybe it is not and you will have to re",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 3,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007551.html"
     },
     {
       "id": "msg-2a0fd6bab989",
@@ -1014,7 +1067,8 @@
       "body_snippet": "This is a null-terminated message protocol [1]. It has to be processed one byte at a time.\n\n[1] https://docs.basex.org/wiki/Server_Protocol\n\nOn November 27, 2021 7:45:31 AM PST, Gabor Grothendieck <gg",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 4,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007552.html"
     },
     {
       "id": "msg-be64b26343ad",
@@ -1036,7 +1090,8 @@
       "body_snippet": "Op 27-11-2021 om 17:03 schreef Jeff Newmiller:\n> This is a null-terminated message protocol [1]. It has to be processed one byte at a time.\n> \n> [1] https://docs.basex.org/wiki/Server_Protocol\n> \nThe ",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 5,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007553.html"
     },
     {
       "id": "msg-a8fd5d66d6ea",
@@ -1059,7 +1114,8 @@
       "body_snippet": "Maybe time to learn it. At least to assemble complete messages.\n\nThat said, the design of this protocol is intrinsically inefficient. Maybe they will upgrade if the software gets popular.\n\nOn November",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 6,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007554.html"
     },
     {
       "id": "msg-5295bdb53a8e",
@@ -1082,7 +1138,8 @@
       "body_snippet": "On 11/27/21 5:24 PM, Ben Engbers wrote:\n> Op 27-11-2021 om 17:03 schreef Jeff Newmiller:\n>> This is a null-terminated message protocol [1]. It has to be \n>> processed one byte at a time.\n>>\n>> [1] htt",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 6,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007555.html"
     },
     {
       "id": "msg-6b9ce9e1db60",
@@ -1106,7 +1163,8 @@
       "body_snippet": "On 11/27/21 8:05 PM, Tomas Kalibera wrote:\n>\n> On 11/27/21 5:24 PM, Ben Engbers wrote:\n>> Op 27-11-2021 om 17:03 schreef Jeff Newmiller:\n>>> This is a null-terminated message protocol [1]. It has to b",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 7,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007556.html"
     },
     {
       "id": "msg-e7ab7990337d",
@@ -1131,7 +1189,8 @@
       "body_snippet": "I'll first finish the current development but then I will see if your \nsuggestion is usefull.\n\nBen\n\nOp 27-11-2021 om 20:19 schreef Tomas Kalibera:\n> On 11/27/21 8:05 PM, Tomas Kalibera wrote:\n>>\n>> On",
       "thread_id": "thread-471d1a8014f4",
       "thread_depth": 8,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007557.html"
     },
     {
       "id": "msg-3f8a92ff2cfb",
@@ -1157,7 +1216,8 @@
       "body_snippet": "Google?\n\nhttps://developer.r-project.org/Blog/public/2020/03/17/socket-connections-update/\n\nhttps://www.digitalocean.com/community/tutorials/understanding-sockets\n\nhttps://developer.ibm.com/tutorials/",
       "thread_id": "thread-3f8a92ff2cfb",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007558.html"
     },
     {
       "id": "msg-e970fa069f77",
@@ -1185,7 +1245,8 @@
       "body_snippet": "On 11/28/21 5:10 PM, Ben Engbers wrote:\n> Searching Google seems easy. But finding reaully usefull information \n> is often very difficult.\n> I alreay found hint #1. Thankfs for #2 and #3\n\nPerhaps peop",
       "thread_id": "thread-e970fa069f77",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007559.html"
     },
     {
       "id": "msg-db5cbfda19eb",
@@ -1201,7 +1262,8 @@
       "body_snippet": "Good day,\n\nWhat I am misunderstanding about the inherits = TRUE option of mget? I expect the small example to work.\n\nf <- function(x, .iteration = i) g() \ng <- function() mget(\".iteration\", inherits =",
       "thread_id": "thread-db5cbfda19eb",
       "thread_depth": 0,
-      "month": "2021-11"
+      "month": "2021-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2021q4/007560.html"
     }
   ],
   "threads": [

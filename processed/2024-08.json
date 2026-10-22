@@ -17,7 +17,8 @@
       "body_snippet": "I note that on r-release-macos-x86_64, glmmTMB is getting warnings \nlike this:\n\n  Error: processing vignette 'glmmTMB.Rnw' failed with diagnostics:\n   Running 'texi2dvi' on 'glmmTMB.tex' failed.\n   La",
       "thread_id": "thread-e936de735351",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011016.html"
     },
     {
       "id": "msg-0ce0d352fd4e",
@@ -35,7 +36,8 @@
       "body_snippet": "? Thu, 1 Aug 2024 10:53:56 -0400\nBen Bolker <bbolker at gmail.com> ?????:\n\n>    ! Undefined control sequence.\n>    l.176 \\hlkwd{library}\\hldef\n>                               {(}\\hlsng{\"glmmTMB\"}\\hlde",
       "thread_id": "thread-e936de735351",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011017.html"
     },
     {
       "id": "msg-b209379acc4b",
@@ -54,7 +56,8 @@
       "body_snippet": "A vague recollections tells me this happened when the set of packages \nwas not fully updated.\n\nBest,\nUwe LIgges\n\n\n\n\nOn 02.08.2024 09:39, Ivan Krylov via R-package-devel wrote:\n> ? Thu, 1 Aug 2024 10:5",
       "thread_id": "thread-e936de735351",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011018.html"
     },
     {
       "id": "msg-c466182cc2f7",
@@ -66,11 +69,12 @@
       "subject_clean": "[R-pkg-devel] rhub (version 2) baulking at building a vignette.",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Some time back, in the mists of memory, I got advice (on this list, I'm\npretty sure) about building vignettes.  The advice was to the effect\nthat if the vignette was actually just a *.tex file, one could (after\nputting in some preparatory code, in the form of comments, before the\ndocumentclass command) pre-process the file (with pdflatex)\nand the build would use the *.pdf file that was created, without any\nprocessing being required.\n\nBeing a Bear of Very Little Brain (and understanding almost nothing of\nthe underlying intricacies) I simply followed instructions. It seemed\nto work, I was able to build and install the package containing the\nvignette in question.\n\nNow I want to build a Windoze binary of the package.  Trying to do this\nwith rhub led to a failure.  The build process seemed to ignore the\npre-processed *.pdf file, tried to create it, and complained that\npdflatex was not available.\n\nI raised an \"issue\" about this on rhub:\n\n   https://github.com/r-hub/rhub/issues/629\n\nI got a response from the redoubtable G?bor Cs?rdi saying that\nwhen he tried a local build of my package, the build command threw\neffectively the same error as did rhub.  So there's \"something about my\nsystem\" that is different.  What could it be?\n\nI have attached my session info in a *.txt file, to avoid cluttering the\nemail window too much.\n\nIf anyone should wish to experiment, they can clone the package in\nquestion (I think!) by executing: \n\ngit clone https://github.com/rolfTurner/kanova.git\n\nCan anyone give me some avuncular advice as to how:\n\n(a) to get rhub_check() to use the pre-compiled file testStat.pdf, or\n(b) to make pdflatex available to rhub_check()\n(c) to do something else that will permit me to build a Windoze binary\n     using rhub?\n\nGrateful for any tips.\n\ncheers,\n\nRolf Turner\n\n-- \nHonorary Research Fellow\nDepartment of Statistics\nUniversity of Auckland\nStats. Dep't. (secretaries) phone:\n         +64-9-373-7599 ext. 89622\nHome phone: +64-9-480-4619\n\n-------------- next part --------------\nAn embedded and charset-unspecified text was scrubbed...\nName: sessionInfo.txt\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20240802/3c051ce6/attachment.txt>",
+      "body_plain": "Some time back, in the mists of memory, I got advice (on this list, I'm\npretty sure) about building vignettes.  The advice was to the effect\nthat if the vignette was actually just a *.tex file, one could (after\nputting in some preparatory code, in the form of comments, before the\ndocumentclass command) pre-process the file (with pdflatex)\nand the build would use the *.pdf file that was created, without any\nprocessing being required.\n\nBeing a Bear of Very Little Brain (and understanding almost nothing of\nthe underlying intricacies) I simply followed instructions. It seemed\nto work, I was able to build and install the package containing the\nvignette in question.\n\nNow I want to build a Windoze binary of the package.  Trying to do this\nwith rhub led to a failure.  The build process seemed to ignore the\npre-processed *.pdf file, tried to create it, and complained that\npdflatex was not available.\n\nI raised an \"issue\" about this on rhub:\n\n   https://github.com/r-hub/rhub/issues/629\n\nI got a response from the redoubtable Gábor Csárdi saying that\nwhen he tried a local build of my package, the build command threw\neffectively the same error as did rhub.  So there's \"something about my\nsystem\" that is different.  What could it be?\n\nI have attached my session info in a *.txt file, to avoid cluttering the\nemail window too much.\n\nIf anyone should wish to experiment, they can clone the package in\nquestion (I think!) by executing: \n\ngit clone https://github.com/rolfTurner/kanova.git\n\nCan anyone give me some avuncular advice as to how:\n\n(a) to get rhub_check() to use the pre-compiled file testStat.pdf, or\n(b) to make pdflatex available to rhub_check()\n(c) to do something else that will permit me to build a Windoze binary\n     using rhub?\n\nGrateful for any tips.\n\ncheers,\n\nRolf Turner\n\n-- \nHonorary Research Fellow\nDepartment of Statistics\nUniversity of Auckland\nStats. Dep't. (secretaries) phone:\n         +64-9-373-7599 ext. 89622\nHome phone: +64-9-480-4619\n\n-------------- next part --------------\nAn embedded and charset-unspecified text was scrubbed...\nName: sessionInfo.txt\nURL: <https://stat.ethz.ch/pipermail/r-package-devel/attachments/20240802/3c051ce6/attachment.txt>",
       "body_snippet": "Some time back, in the mists of memory, I got advice (on this list, I'm\npretty sure) about building vignettes.  The advice was to the effect\nthat if the vignette was actually just a *.tex file, one co",
       "thread_id": "thread-c466182cc2f7",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011019.html"
     },
     {
       "id": "msg-48d9ee013e07",
@@ -88,7 +92,8 @@
       "body_snippet": "? Fri,  2 Aug 2024 11:10:59 +0000\nRolf Turner <rolfturner at posteo.net> ?????:\n\n> The advice was to the effect that if the vignette was actually just a\n> *.tex file, one could (after putting in some ",
       "thread_id": "thread-c466182cc2f7",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011020.html"
     },
     {
       "id": "msg-d689a0b9a01d",
@@ -104,7 +109,8 @@
       "body_snippet": "Hi All,\n\nI have a function (not a method), sort_by(), in one of my packages. A\nnew method with the same name was introduced in the recent versions of\nR (4.4.0 or 4.4.1, I forgot which one), resulting ",
       "thread_id": "thread-d689a0b9a01d",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011021.html"
     },
     {
       "id": "msg-22122dfca0f3",
@@ -123,7 +129,8 @@
       "body_snippet": "On 2 August 2024 at 16:12, Ivan Krylov via R-package-devel wrote:\n| ? Fri,  2 Aug 2024 11:10:59 +0000\n| Rolf Turner <rolfturner at posteo.net> ?????:\n| \n| > The advice was to the effect that if the vi",
       "thread_id": "thread-c466182cc2f7",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011022.html"
     },
     {
       "id": "msg-d2554b5d0e12",
@@ -141,7 +148,8 @@
       "body_snippet": "On 2024-08-02 10:35 a.m., Shu Fai Cheung wrote:\n> Hi All,\n> \n> I have a function (not a method), sort_by(), in one of my packages. A\n> new method with the same name was introduced in the recent versio",
       "thread_id": "thread-d689a0b9a01d",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011023.html"
     },
     {
       "id": "msg-5ef76f3a7bcb",
@@ -160,7 +168,8 @@
       "body_snippet": "Thanks to Ivan Krylov and Dirk Eddelbuettel who came to my rescue.\n\nAt first I thought that Dirk's suggestion (\"the zero-dependency\napproach\" due to Mark van der Loo) was exactly what I needed.  But t",
       "thread_id": "thread-c466182cc2f7",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011024.html"
     },
     {
       "id": "msg-d01da0b1ca81",
@@ -179,7 +188,8 @@
       "body_snippet": "I haven't thought about this carefully, but shouldn't this mostly work?\n\n  sort_by.est_table <- function(x, y = c(\"op\", \"lhs\", \"rhs\"),\n    object = x,\n    by = y,\n    op_priority = c(\"=~\", \"~\", \"~~\", ",
       "thread_id": "thread-d689a0b9a01d",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011025.html"
     },
     {
       "id": "msg-1bb3fbb1d508",
@@ -199,7 +209,8 @@
       "body_snippet": "Thanks a lot for both suggestions! I haven't thought about these\napproaches, They may solve my problem without breaking existing code.\nI may just keep the original arguments for backward compatibility",
       "thread_id": "thread-d689a0b9a01d",
       "thread_depth": 3,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011026.html"
     },
     {
       "id": "msg-36a42a8b3bb0",
@@ -215,7 +226,8 @@
       "body_snippet": "I have a package, named 'oce' (developed at www.github.com/dankelley/oce and available through CRAN for over a decade) that uses 'ncdf4' to read some file types.  When I do test builds on the win and ",
       "thread_id": "thread-36a42a8b3bb0",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011027.html"
     },
     {
       "id": "msg-33258da9efc5",
@@ -235,7 +247,8 @@
       "body_snippet": "The problem with that is a call like\n\n   sort_by( object = foo, by = bar )\n\nwouldn't be dispatched to the est_table method when foo is an est_table \nobject, it would give a \"argument 'x' is missing\" k",
       "thread_id": "thread-d689a0b9a01d",
       "thread_depth": 3,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011028.html"
     },
     {
       "id": "msg-fe132f608214",
@@ -254,7 +267,8 @@
       "body_snippet": "Since the main problem is that in base-R's function your 'object' is called  'x',  you could consider issuing an intermediate version of the package, where you strongly advise users not to name the fi",
       "thread_id": "thread-d689a0b9a01d",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011029.html"
     },
     {
       "id": "msg-c9feb36dfd8f",
@@ -272,7 +286,8 @@
       "body_snippet": "Ben,\n\nif I recall there were a couple regressions in knitr that broke things, but since this is only a WARNING it means the check has not been automatically repeated after knitr update (ERRORs are re-",
       "thread_id": "thread-e936de735351",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011030.html"
     },
     {
       "id": "msg-e1f46b399eb6",
@@ -288,7 +303,8 @@
       "body_snippet": "I'm working on a package that uses some fortran copied from elsewhere. It compiles and build fine everywhere but exclusively in the intel environment (provided by rhub), the intel fortran compiler gen",
       "thread_id": "thread-e1f46b399eb6",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011031.html"
     },
     {
       "id": "msg-8dd4ca3e3f94",
@@ -306,7 +322,8 @@
       "body_snippet": "? Mon, 12 Aug 2024 18:24:30 +0000\nDavid via R-package-devel <r-package-devel at r-project.org> ?????:\n\n> in the intel environment (provided by rhub), the intel fortran\n> compiler generates intermediar",
       "thread_id": "thread-e1f46b399eb6",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011032.html"
     },
     {
       "id": "msg-8ad7ca3431b8",
@@ -325,7 +342,8 @@
       "body_snippet": "> I'm not familar with fortran but the warning message is: \"Found the following files with non-portbale usage of KIND:.\" In \"Writing R Extensions/Writing portable packages/Portable Fortran code\" it me",
       "thread_id": "thread-e1f46b399eb6",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011033.html"
     },
     {
       "id": "msg-5753ac30a75d",
@@ -344,7 +362,8 @@
       "body_snippet": "This seems like it should work. Unfortunately my rhub github actions is failing to get past the setup deps step which has been occuring inconsistently in the past but right now it's consistently faili",
       "thread_id": "thread-e1f46b399eb6",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011034.html"
     },
     {
       "id": "msg-56913fb9edd9",
@@ -364,7 +383,8 @@
       "body_snippet": "? Thu, 15 Aug 2024 18:58:41 +0000\nanj5xsj9 at nilly.addy.io ?????:\n\n> This seems like it should work. Unfortunately my rhub github actions\n> is failing to get past the setup deps step which has been o",
       "thread_id": "thread-56913fb9edd9",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011035.html"
     },
     {
       "id": "msg-cf84a171f47d",
@@ -380,7 +400,8 @@
       "body_snippet": "Hi,\n\nI seem to have gotten myself confused about inheritance of S4 classes \nand the dispatch of inherited methods.\n\nThe core situation is that\n\n  * The graphics package already defines the function \"h",
       "thread_id": "thread-cf84a171f47d",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011036.html"
     },
     {
       "id": "msg-87afe38fd673",
@@ -396,7 +417,8 @@
       "body_snippet": "Hi,\n\nI maintain a bunch of packages on CRAN. When updating packages, I often \nfind two sort of NOTES on some of the platforms that CRAN checks that \ndon't show up on my stupid Windows (I know that's r",
       "thread_id": "thread-87afe38fd673",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011037.html"
     },
     {
       "id": "msg-61b9887256a4",
@@ -417,7 +439,8 @@
       "body_snippet": "I locally ran the rhub intel docker and that was much easier to set up. So I can now confirm the change to Makevars does work.\n\n> I experimented with the \"ghcr.io/r-hub/containers/intel:latest\" contai",
       "thread_id": "thread-56913fb9edd9",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011038.html"
     },
     {
       "id": "msg-c1ad03fb32e5",
@@ -435,7 +458,8 @@
       "body_snippet": "In most cases, installing a recent version of R-devel will do (here, the check with it will show the notes about missing package anchors).\n\nGeorgi Boshnakov \n\n________________________________________\n",
       "thread_id": "thread-87afe38fd673",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011039.html"
     },
     {
       "id": "msg-b2ee57a1d693",
@@ -454,7 +478,8 @@
       "body_snippet": "And if all else fails submit to Winbuilder using the R-devel branch.\n\nMichael\n\nOn 17/08/2024 10:05, Georgi Boshnakov wrote:\n> In most cases, installing a recent version of R-devel will do (here, the c",
       "thread_id": "thread-87afe38fd673",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011040.html"
     },
     {
       "id": "msg-4e54ea0c9183",
@@ -474,7 +499,8 @@
       "body_snippet": "Slight thread hijacking: does there exist/has someone compiled a list of\nthe environment variables that determine R CMD check's behaviour?\n\nOn Sat, Aug 17, 2024, 9:03 AM Michael Dewey <lists at dewey.",
       "thread_id": "thread-87afe38fd673",
       "thread_depth": 3,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011041.html"
     },
     {
       "id": "msg-caa0c095b658",
@@ -495,7 +521,8 @@
       "body_snippet": "? Sat, 17 Aug 2024 09:17:40 -0400\nBen Bolker <bbolker at gmail.com> ?????:\n\n> does there exist/has someone compiled a list of\n> the environment variables that determine R CMD check's behaviour?\n\nhttps",
       "thread_id": "thread-87afe38fd673",
       "thread_depth": 4,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011042.html"
     },
     {
       "id": "msg-14388ced367c",
@@ -517,7 +544,8 @@
       "body_snippet": "? Fri, 16 Aug 2024 18:53:55 +0000\nanj5xsj9 at nilly.addy.io ?????:\n\n> In the past other packages have failed to build and not only on the\n> intel container see\n> \"https://github.com/SpeakEasy-2/speake",
       "thread_id": "thread-14388ced367c",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011043.html"
     },
     {
       "id": "msg-83a787ac7f72",
@@ -540,7 +568,8 @@
       "body_snippet": "On 17 August 2024 at 17:22, Ivan Krylov via R-package-devel wrote:\n| ? Fri, 16 Aug 2024 18:53:55 +0000\n| anj5xsj9 at nilly.addy.io ?????:\n| \n| > In the past other packages have failed to build and not",
       "thread_id": "thread-14388ced367c",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011044.html"
     },
     {
       "id": "msg-a0d58be2b443",
@@ -562,7 +591,8 @@
       "body_snippet": "Thank you!\n\nOn 8/17/2024 9:24 AM, Ivan Krylov wrote:\n> ? Sat, 17 Aug 2024 09:17:40 -0400\n> Ben Bolker <bbolker at gmail.com> ?????:\n>\n>> does there exist/has someone compiled a list of\n>> the environm",
       "thread_id": "thread-87afe38fd673",
       "thread_depth": 5,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011045.html"
     },
     {
       "id": "msg-5a575bc564c9",
@@ -578,7 +608,8 @@
       "body_snippet": "Has anybody written a quick helper function that extracts the Authors at R field\nfrom tools::CRAN_package_db() and 'stems' it into 'Name, Firstname, ORCID'\nwhich one could use to look up ORCID IDs at ",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011046.html"
     },
     {
       "id": "msg-a1d741d33672",
@@ -596,7 +627,8 @@
       "body_snippet": "Dear Dirk,\n\nMaybe checklist:::author2df() might be useful. It is an unexported function\nfrom my checklist package. It converts a person() object to a dataframe.\nhttps://github.com/inbo/checklist/blob/",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011047.html"
     },
     {
       "id": "msg-308f3e2ebe8f",
@@ -615,7 +647,8 @@
       "body_snippet": "On 19 August 2024 at 15:15, Thierry Onkelinx wrote:\n| Maybe checklist:::author2df() might be useful. It is an unexported function\n| from my checklist package. It converts a person() object to a datafr",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 2,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011048.html"
     },
     {
       "id": "msg-d2527931b195",
@@ -635,7 +668,8 @@
       "body_snippet": "Hi Dirk,\n\nHappy to help. I'm working on a new version of the checklist package. I\ncould export the function if that makes it easier for you.\n\nBest regards,\n\nThierry\n\nir. Thierry Onkelinx\nStatisticus /",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 3,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011049.html"
     },
     {
       "id": "msg-24409c4b3d01",
@@ -656,7 +690,8 @@
       "body_snippet": "Salut Thierry,\n\nOn 20 August 2024 at 13:43, Thierry Onkelinx wrote:\n| Happy to help. I'm working on a new version of the checklist package. I could\n| export the function if that makes it easier for yo",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 4,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011050.html"
     },
     {
       "id": "msg-8967b50e8542",
@@ -678,7 +713,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel writes:\n\nDirk et al,\n\nSorry for not replying any sooner :-)\n\nI think for now you could use something like what I attach below.\n\nNot ideal: I had not too long ago starting addin",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 5,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011051.html"
     },
     {
       "id": "msg-8ab7380fd2c9",
@@ -701,7 +737,8 @@
       "body_snippet": "Hi Kurt,\n\nOn 20 August 2024 at 14:29, Kurt Hornik wrote:\n| I think for now you could use something like what I attach below.\n| \n| Not ideal: I had not too long ago starting adding orcidtools.R to tool",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 6,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011052.html"
     },
     {
       "id": "msg-44ab5d46b071",
@@ -725,7 +762,8 @@
       "body_snippet": "As I think that should be\n\nfortunes::fortune(\"Dirk can type\")\n\nrather than\n\nfortune::fortunes(\"Dirk can type\")\n\nI think that has become both recursive and demonstrating excellent \ntest-retest stabilit",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 7,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011053.html"
     },
     {
       "id": "msg-17b0cca32ce1",
@@ -750,7 +788,8 @@
       "body_snippet": "On 20 August 2024 at 15:13, Chris Evans wrote:\n| As I think that should be\n| \n| fortunes::fortune(\"Dirk can type\")\n| \n| rather than\n| \n| fortune::fortunes(\"Dirk can type\")\n\nYes, thank you. I also fail",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 8,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011054.html"
     },
     {
       "id": "msg-51e2d3d72cd1",
@@ -774,7 +813,8 @@
       "body_snippet": "On 20 August 2024 at 07:57, Dirk Eddelbuettel wrote:\n| \n| Hi Kurt,\n| \n| On 20 August 2024 at 14:29, Kurt Hornik wrote:\n| | I think for now you could use something like what I attach below.\n| | \n| | No",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 7,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011055.html"
     },
     {
       "id": "msg-1e0f786b1e44",
@@ -799,7 +839,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel writes:\n\n> On 20 August 2024 at 07:57, Dirk Eddelbuettel wrote:\n> | \n> | Hi Kurt,\n> | \n> | On 20 August 2024 at 14:29, Kurt Hornik wrote:\n> | | I think for now you could use so",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 8,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011056.html"
     },
     {
       "id": "msg-47802f258926",
@@ -825,7 +866,8 @@
       "body_snippet": ">>>>> Kurt Hornik writes:\n\nThe variant attaches drops the URL and does unique.\n\nHmm, the ones in\n\n  head(with(a, sort_by(a, ~ family + given)), 100)\n\nwithout a family look suspicious ...\n\nBest\n-k\n\n\n--",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 9,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011057.html"
     },
     {
       "id": "msg-275231bd60aa",
@@ -852,7 +894,8 @@
       "body_snippet": "Looking into one particular example,\n\nhttps://github.com/seabbs/idmodelr/blob/master/DESCRIPTION\n\nthis appears to be the authors' fault:\n\nAuthors at R: c(\n     person(given = \"Sam Abbott\",\n           ",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 10,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011058.html"
     },
     {
       "id": "msg-9264d04f8d43",
@@ -880,7 +923,8 @@
       "body_snippet": "Dear Ben,\n\nThis is as simple as setting mandatory given and family fields.\nchecklist::check_description() ensures that given and family are set unless\nthe role is \"cph\" or \"fnd\". Allowing for organisa",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 11,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011059.html"
     },
     {
       "id": "msg-78e5c7ce5d4e",
@@ -896,7 +940,8 @@
       "body_snippet": "Hi,\n\nThis is a follow-up to an earlier question where I asked about R CMD \ncheck on Windows to be able to check R packages in a manner closer to \nthe checks on CRAN machines before i submit (new or up",
       "thread_id": "thread-78e5c7ce5d4e",
       "thread_depth": 0,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011060.html"
     },
     {
       "id": "msg-91f620d06adf",
@@ -914,7 +959,8 @@
       "body_snippet": "When running R CMD check I think the test is using\n\n  Sys.which(c(\"aspell\", \"hunspell\", \"ispell\"))\n\nto find the spell check program, so the fact that the aspell() command \nworked in R suggests that th",
       "thread_id": "thread-78e5c7ce5d4e",
       "thread_depth": 1,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011061.html"
     },
     {
       "id": "msg-a6f945d34d69",
@@ -941,7 +987,8 @@
       "body_snippet": "On 20 August 2024 at 15:47, Kurt Hornik wrote:\n| >>>>> Kurt Hornik writes:\n| \n| The variant attaches drops the URL and does unique.\n\nNice. Alas, some of us default to r-release as the daily driver and",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 10,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011062.html"
     },
     {
       "id": "msg-9dc74162b5e0",
@@ -969,7 +1016,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel writes:\n\nMeanwhile, I am close to committing a change to R-devel which adds\ntools::CRAN_authors_db() with docs\n\n  \\code{CRAN_authors_db()} returns information on the authors of",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 11,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011063.html"
     },
     {
       "id": "msg-da6bb4f9b59e",
@@ -997,7 +1045,8 @@
       "body_snippet": "On 21 August 2024 at 07:43, Dirk Eddelbuettel wrote:\n| \n| On 20 August 2024 at 15:47, Kurt Hornik wrote:\n| | >>>>> Kurt Hornik writes:\n| | \n| | The variant attaches drops the URL and does unique.\n| \n|",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 11,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011064.html"
     },
     {
       "id": "msg-e3cff64517d2",
@@ -1026,7 +1075,8 @@
       "body_snippet": ">>>>> Kurt Hornik writes:\n\nCommitted now.\n\nBest\n-k\n\n>>>>> Dirk Eddelbuettel writes:\n> Meanwhile, I am close to committing a change to R-devel which adds\n> tools::CRAN_authors_db() with docs\n\n>   \\code",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 12,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011065.html"
     },
     {
       "id": "msg-2b0643e57073",
@@ -1056,7 +1106,8 @@
       "body_snippet": "On 21 August 2024 at 15:47, Kurt Hornik wrote:\n| >>>>> Kurt Hornik writes:\n| \n| Committed now.\n\nThat is just *lovely*:\n\n   > aut <- tools::CRAN_authors_db()\n   > dim(aut)\n   [1] 47433     7\n   > head(",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 13,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011066.html"
     },
     {
       "id": "msg-85dee5aa001e",
@@ -1087,7 +1138,8 @@
       "body_snippet": ">>>>> Dirk Eddelbuettel writes:\n\nPossibly yes, if there is enough \"need\" :-)\n\nBest\n-k\n\n> On 21 August 2024 at 15:47, Kurt Hornik wrote:\n> | >>>>> Kurt Hornik writes:\n> | \n> | Committed now.\n\n> That is",
       "thread_id": "thread-5a575bc564c9",
       "thread_depth": 14,
-      "month": "2024-08"
+      "month": "2024-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q3/011067.html"
     }
   ],
   "threads": [

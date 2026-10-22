@@ -25,7 +25,8 @@
       "body_snippet": "Hello Ivan.\n\nThe Does list.files(pattern = 'utils|Rout\\\\.fail') gave me something like\nan empty string.\n\nSo after getting some in-person help on this issue, the key to resolving\nthis error was explici",
       "thread_id": "thread-9c29f2bc83ee",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008528.html"
     },
     {
       "id": "msg-cb5a08a24df9",
@@ -40,11 +41,12 @@
         "<1624161329.20817062.1664440955959.JavaMail.zimbra@ifsttar.fr>",
         "<CAFDcVCQNaP8=iLPG+Vk4vfEN1Y5zfeabca8Qnov5ZomsGLwsZA@mail.gmail.com>"
       ],
-      "body_plain": "Hi,\n\nThanks a lot Henrik for your detailed response, the problem was the one you suspected a \"plan(mutlisession)\" that was not correctly closed. And following your advice I was able to reproduce it on winbuilder.\n\nSo thanks again for your help!\n\nBest regards, \n\nEtienne\n\n\nEtienne C?me, @comeetie\nCharg? de Recherche\nUniversit? Gustave Eiffel\nGRETTIA/COSYS\nTel : 01 81 66 87 18\nWeb : http://www.comeetie.fr\n\n----- Mail original -----\nDe: \"Henrik Bengtsson\" <henrik.bengtsson at gmail.com>\n?: \"etienne come\" <etienne.come at univ-eiffel.fr>\nCc: \"r-package-devel\" <r-package-devel at r-project.org>\nEnvoy?: Vendredi 30 Septembre 2022 17:19:03\nObjet: Re: [R-pkg-devel] NOTE checking for detritus in the temp directory on windows\n\nHi.\n\n> * checking for detritus in the temp directory ... NOTE\n> Found the following files/directories:\n> 'Rscript306c1f1adf1' 'Rscript3fb41f1adf1'\n\nWhenever seeing detritus files with name Rscript<hexcode> like these,\nit's a strong suggestion that parallel workers on MS Windows are\ninvolved.  More precisely, each of them is from a separate PSOCK\ncluster node worker typically launched by parallel::makeCluster().\nWhen such workers are launched in example code, unit tests, or\nvignettes those files are created by R itself when running on MS\nWindows.  If the workers are not properly shutdown (e.g. forgetting to\ncall parallel::stopCluster()), those files are left behind, and 'R CMD\ncheck' will detect them.\n\nNow, from experience, but neither fully investigated not understood\nyet, it *might* be that even if one calls parallel::stopCluster() at\nthe end of examples, unit tests, or vignettes, it might be that there\nis still a race condition where the parallel workers are still in the\nprocess of shutting down when 'R CMD check' is checking for detritus\nfiles.  If that is the case, then it might be sporadic and tricky to\nreproduce this problem.  This has happened to me exactly once. I'm\nsaying this, only in case you're struggle to reproduce it, but my\nguess is that this is *not* the case here. Please see below for\noptions how to reproduce.\n\nNow, I see you're using 'future' for parallelization.  Because of\nthis, I suspect you use plan(multisession), which launches parallel\nPSOCK workers like parallel::makeCluster().  To shut down those\nworkers at the end, call plan(sequential).  My guess is that this is\nyour problem.  Before you do that, I would make sure you can reproduce\nthe problem first - see below.\n\n> I did not manage to reproduce it with Rhub and github action.\n\n1. Looking at your\nhttps://github.com/comeetie/greed/blob/master/.github/workflows/R-CMD-check.yaml,\nI see you're not checking with **R-devel** on MS Windows. I suggest\nyou add that and too see if you can reproduce it there.  You could\nalso add an explicit `env: _R_CHECK_THINGS_IN_TEMP_DIR_: true` just in\ncase (but I'd guess --as-cran does this).\n\n2. Similarly, did you make sure to test with R-devel on MS Windows on R-hub?\n\n3. Did you try with R-devel on the win-builder service?\n\nFor your future needs (pun not intended), I would make sure you can\nreproduce the problem before trying to fix it.\n\nHope this helps,\n\nHenrik\n\nOn Fri, Sep 30, 2022 at 12:14 AM <etienne.come at univ-eiffel.fr> wrote:\n>\n> Dear all,\n>\n> I'm getting the following Note for CRAN pre-tests (for package greed https://github.com/comeetie/greed) :\n>\n> * checking for detritus in the temp directory ... NOTE\n> Found the following files/directories:\n> 'Rscript306c1f1adf1' 'Rscript3fb41f1adf1'\n>\n> this note only appears on windows :\n>\n> * using R Under development (unstable) (2022-09-26 r82921 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n>\n> The full pretest logs are located at https://win-builder.r-project.org/incoming_pretest/greed_0.6.1_20220927_163632/Windows/00check.log\n>\n> I did not manage to reproduce it with Rhub and github action.\n>\n> I've seen other questions on the mailing list about \"detritus\" but the root causes seems to be different in my case since i did not open a navigator and i did not create\n> files or folders in my tests or vignettes. Any hint on how to solve this note will be welcome.\n>\n> Thanks a lot\n>\n> Etienne\n>\n>\n> Etienne C?me, @comeetie\n> Charg? de Recherche\n> Universit? Gustave Eiffel\n> GRETTIA/COSYS\n> Tel : 01 81 66 87 18\n> Web : http://www.comeetie.fr\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Hi,\n\nThanks a lot Henrik for your detailed response, the problem was the one you suspected a \"plan(mutlisession)\" that was not correctly closed. And following your advice I was able to reproduce it on winbuilder.\n\nSo thanks again for your help!\n\nBest regards, \n\nEtienne\n\n\nEtienne Côme, @comeetie\nChargé de Recherche\nUniversité Gustave Eiffel\nGRETTIA/COSYS\nTel : 01 81 66 87 18\nWeb : http://www.comeetie.fr\n\n----- Mail original -----\nDe: \"Henrik Bengtsson\" <henrik.bengtsson at gmail.com>\nÀ: \"etienne come\" <etienne.come at univ-eiffel.fr>\nCc: \"r-package-devel\" <r-package-devel at r-project.org>\nEnvoyé: Vendredi 30 Septembre 2022 17:19:03\nObjet: Re: [R-pkg-devel] NOTE checking for detritus in the temp directory on windows\n\nHi.\n\n> * checking for detritus in the temp directory ... NOTE\n> Found the following files/directories:\n> 'Rscript306c1f1adf1' 'Rscript3fb41f1adf1'\n\nWhenever seeing detritus files with name Rscript<hexcode> like these,\nit's a strong suggestion that parallel workers on MS Windows are\ninvolved.  More precisely, each of them is from a separate PSOCK\ncluster node worker typically launched by parallel::makeCluster().\nWhen such workers are launched in example code, unit tests, or\nvignettes those files are created by R itself when running on MS\nWindows.  If the workers are not properly shutdown (e.g. forgetting to\ncall parallel::stopCluster()), those files are left behind, and 'R CMD\ncheck' will detect them.\n\nNow, from experience, but neither fully investigated not understood\nyet, it *might* be that even if one calls parallel::stopCluster() at\nthe end of examples, unit tests, or vignettes, it might be that there\nis still a race condition where the parallel workers are still in the\nprocess of shutting down when 'R CMD check' is checking for detritus\nfiles.  If that is the case, then it might be sporadic and tricky to\nreproduce this problem.  This has happened to me exactly once. I'm\nsaying this, only in case you're struggle to reproduce it, but my\nguess is that this is *not* the case here. Please see below for\noptions how to reproduce.\n\nNow, I see you're using 'future' for parallelization.  Because of\nthis, I suspect you use plan(multisession), which launches parallel\nPSOCK workers like parallel::makeCluster().  To shut down those\nworkers at the end, call plan(sequential).  My guess is that this is\nyour problem.  Before you do that, I would make sure you can reproduce\nthe problem first - see below.\n\n> I did not manage to reproduce it with Rhub and github action.\n\n1. Looking at your\nhttps://github.com/comeetie/greed/blob/master/.github/workflows/R-CMD-check.yaml,\nI see you're not checking with **R-devel** on MS Windows. I suggest\nyou add that and too see if you can reproduce it there.  You could\nalso add an explicit `env: _R_CHECK_THINGS_IN_TEMP_DIR_: true` just in\ncase (but I'd guess --as-cran does this).\n\n2. Similarly, did you make sure to test with R-devel on MS Windows on R-hub?\n\n3. Did you try with R-devel on the win-builder service?\n\nFor your future needs (pun not intended), I would make sure you can\nreproduce the problem before trying to fix it.\n\nHope this helps,\n\nHenrik\n\nOn Fri, Sep 30, 2022 at 12:14 AM <etienne.come at univ-eiffel.fr> wrote:\n>\n> Dear all,\n>\n> I'm getting the following Note for CRAN pre-tests (for package greed https://github.com/comeetie/greed) :\n>\n> * checking for detritus in the temp directory ... NOTE\n> Found the following files/directories:\n> 'Rscript306c1f1adf1' 'Rscript3fb41f1adf1'\n>\n> this note only appears on windows :\n>\n> * using R Under development (unstable) (2022-09-26 r82921 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n>\n> The full pretest logs are located at https://win-builder.r-project.org/incoming_pretest/greed_0.6.1_20220927_163632/Windows/00check.log\n>\n> I did not manage to reproduce it with Rhub and github action.\n>\n> I've seen other questions on the mailing list about \"detritus\" but the root causes seems to be different in my case since i did not open a navigator and i did not create\n> files or folders in my tests or vignettes. Any hint on how to solve this note will be welcome.\n>\n> Thanks a lot\n>\n> Etienne\n>\n>\n> Etienne Côme, @comeetie\n> Chargé de Recherche\n> Université Gustave Eiffel\n> GRETTIA/COSYS\n> Tel : 01 81 66 87 18\n> Web : http://www.comeetie.fr\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Hi,\n\nThanks a lot Henrik for your detailed response, the problem was the one you suspected a \"plan(mutlisession)\" that was not correctly closed. And following your advice I was able to reproduce it on",
       "thread_id": "thread-cb5a08a24df9",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008529.html"
     },
     {
       "id": "msg-9c5654a7227d",
@@ -60,7 +62,8 @@
       "body_snippet": "Dear all,\n\nI am looking for guidance (blog posts / books / people with expertise) on\nhow to split up an R package that has grown a lot in complexity and size.\nTo make it worthwhile, the split needs to",
       "thread_id": "thread-9c5654a7227d",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008530.html"
     },
     {
       "id": "msg-a8d51183b268",
@@ -78,7 +81,8 @@
       "body_snippet": "Dear Vincent,\n\nHave a look at the spatstat package which was split into several smaller\npackages (https://github.com/spatstat/spatstat). Maybe the maintainers of\nthat package can share some insights.\n",
       "thread_id": "thread-9c5654a7227d",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008531.html"
     },
     {
       "id": "msg-24b54a891a25",
@@ -94,7 +98,8 @@
       "body_snippet": "Hello all,\n\nI'm developing an R package that basically downloads, imports, cleans and\nmerges nine files in xlsx format updated monthly from a public institution.\n\nThe problem is that importing files i",
       "thread_id": "thread-24b54a891a25",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008532.html"
     },
     {
       "id": "msg-1da4fa893c2f",
@@ -112,7 +117,8 @@
       "body_snippet": "On Tue, 4 Oct 2022 15:29:54 -0300\nIgor L <igorlaltuf at gmail.com> wrote:\n\n> The problem is that importing files in xlsx format is time consuming.\n\nDo the openxlsx or XLConnect packages fare any bette",
       "thread_id": "thread-24b54a891a25",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008533.html"
     },
     {
       "id": "msg-09593ae64ba5",
@@ -130,7 +136,8 @@
       "body_snippet": "In 2019, I split psych into psych and psychTools to meet the 5MB space restriction.  I moved several of vignettes, data sets, and a few helper functions over to psychTools. This mainly allowed for mor",
       "thread_id": "thread-9c5654a7227d",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008534.html"
     },
     {
       "id": "msg-365ddff7037e",
@@ -148,7 +155,8 @@
       "body_snippet": "It looks like you are reading directly from URLs? How do you know the delay is not network I/O delay?\n\nParallel computation is not a panacea. It allows tasks _that are CPU-bound_ to get through the CP",
       "thread_id": "thread-24b54a891a25",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008535.html"
     },
     {
       "id": "msg-82828574a3d6",
@@ -164,7 +172,8 @@
       "body_snippet": "Howdy Folks,\n\nI got a message from CRAN today telling me that I have a strong reverse\ndependency on the isoband package. But I'm not alone! It look like more\nthan 4700 other packages also have a stron",
       "thread_id": "thread-82828574a3d6",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008536.html"
     },
     {
       "id": "msg-ccb9a8fcbd1b",
@@ -182,7 +191,8 @@
       "body_snippet": "Hi John,\n\nI think the short answer is yes, see the discussion on their GitHub:\nhttps://github.com/wilkelab/isoband/issues/31\nSee also: https://github.com/tidyverse/ggplot2/issues/5006\n\nBest,\nHenrik\n\nA",
       "thread_id": "thread-82828574a3d6",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008537.html"
     },
     {
       "id": "msg-e6a23f71a56a",
@@ -200,7 +210,8 @@
       "body_snippet": "Am 05.10.22 um 14:32 schrieb John Harrold:\n\n> Howdy Folks,\n>\n> I got a message from CRAN today telling me that I have a strong reverse\n> dependency on the isoband package. But I'm not alone! It look l",
       "thread_id": "thread-82828574a3d6",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008538.html"
     },
     {
       "id": "msg-2f5bfd30b463",
@@ -219,7 +230,8 @@
       "body_snippet": "According to my internet research, it looks like readxl is the fastest\npackage.\n\nThe profvis package indicated that the bottleneck is indeed in importing\nthe files.\n\nMy processor has six cores, but wh",
       "thread_id": "thread-24b54a891a25",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008539.html"
     },
     {
       "id": "msg-c8a206ef3f4b",
@@ -237,7 +249,8 @@
       "body_snippet": "Yes, we will make sure that this is fixed ASAP. There is no need to worry.\n\nHadley\n\nOn Wed, Oct 5, 2022 at 7:32 AM John Harrold <john.m.harrold at gmail.com> wrote:\n>\n> Howdy Folks,\n>\n> I got a messag",
       "thread_id": "thread-82828574a3d6",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008540.html"
     },
     {
       "id": "msg-bbda53762377",
@@ -257,7 +270,8 @@
       "body_snippet": "Hey Igor,\n\nI have been dealing with *CSV*/*XLSX* files from time to time and depending\non the size of those files you are mentioning, 180 seconds isn't really\nthat much.",
       "thread_id": "thread-24b54a891a25",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008541.html"
     },
     {
       "id": "msg-d1bec7016047",
@@ -273,7 +287,8 @@
       "body_snippet": "Hi R pkg developers,\n\nWe are facing a datetime handling issue which manifests itself in a\npackage we are working on.\n\nIn context, we noticed that reading datetime info from an excel file\nresulted in d",
       "thread_id": "thread-d1bec7016047",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008542.html"
     },
     {
       "id": "msg-a280098cdf0c",
@@ -291,7 +306,8 @@
       "body_snippet": "Alexandre,\n\nit's better to parse the timestamp in correct timezone:\n\n> foo = as.POSIXlt(\"2021-10-01\", \"UTC\")\n> as.POSIXct(as.character(foo), \"Europe/Berlin\")\n[1] \"2021-10-01 CEST\"\n\nThe issue stems fro",
       "thread_id": "thread-d1bec7016047",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008543.html"
     },
     {
       "id": "msg-3957a062bd97",
@@ -310,7 +326,8 @@
       "body_snippet": "... which is why tidyverse functions and Python datetime handling irk me so much.\n\nIs tidyverse time handling intrinsically broken? They have a standard practice of reading time as UTC and then using ",
       "thread_id": "thread-d1bec7016047",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008544.html"
     },
     {
       "id": "msg-95364acf4d56",
@@ -326,7 +343,8 @@
       "body_snippet": "Good day,\n\nI am developing a wrapper around xgboost which does not (yet - I see that it is on the developer's version 2.0 task list) support factor variable type. It requires input data to be in one-h",
       "thread_id": "thread-95364acf4d56",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008545.html"
     },
     {
       "id": "msg-7084c2012c5c",
@@ -338,11 +356,12 @@
       "subject_clean": "[R-pkg-devel] Best way forward on a CRAN archived package",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi:\n\nI have some doubts on how to proceed in this case. I am the developer of\ntidyterra, and I received an email from CRAN on 23Sep2022 about an issue on\nthe package, setting a deadline on 07Oct2022 to correct it.\n\nI sent a patch that was accepted on CRAN on 29Sep2022, that fixed the issue\n(or at least I am pretty sure I solved it). I received no further feedback\nby CRAN, so I assumed the package was safe. However it was finally archived\non 07Oct2022.\n\nI have already sent an email to CRAN in order to check if they think the\nissues still persist (or maybe they missed the patch submission?), but I am\nin a rush since there are other packages that depend on tidyterra and they\nmay be in risk of being archived on CRAN as well.\n\nSo my question is: What is the best way forward at this point? Should I\nwait to get some feedback from CRAN or is it best to resubmit the package\n(I already have a new patch prepared)? I acknowledge that  \"The time of the\nvolunteers is CRAN?s most precious resource\" so my goal is to reduce their\nburden as much as possible.\n\nKind regards\n\n-- \n\n\n\nHave a nice day!\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi:\n\nI have some doubts on how to proceed in this case. I am the developer of\ntidyterra, and I received an email from CRAN on 23Sep2022 about an issue on\nthe package, setting a deadline on 07Oct2022 to correct it.\n\nI sent a patch that was accepted on CRAN on 29Sep2022, that fixed the issue\n(or at least I am pretty sure I solved it). I received no further feedback\nby CRAN, so I assumed the package was safe. However it was finally archived\non 07Oct2022.\n\nI have already sent an email to CRAN in order to check if they think the\nissues still persist (or maybe they missed the patch submission?), but I am\nin a rush since there are other packages that depend on tidyterra and they\nmay be in risk of being archived on CRAN as well.\n\nSo my question is: What is the best way forward at this point? Should I\nwait to get some feedback from CRAN or is it best to resubmit the package\n(I already have a new patch prepared)? I acknowledge that  \"The time of the\nvolunteers is CRAN’s most precious resource\" so my goal is to reduce their\nburden as much as possible.\n\nKind regards\n\n-- \n\n\n\nHave a nice day!\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi:\n\nI have some doubts on how to proceed in this case. I am the developer of\ntidyterra, and I received an email from CRAN on 23Sep2022 about an issue on\nthe package, setting a deadline on 07Oct2022 t",
       "thread_id": "thread-7084c2012c5c",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008550.html"
     },
     {
       "id": "msg-52ca8a462dc6",
@@ -362,7 +381,8 @@
       "body_snippet": "On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us> wrote:\n>\n> ... which is why tidyverse functions and Python datetime handling irk me so much.\n>\n> Is tidyverse time handling ",
       "thread_id": "thread-d1bec7016047",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008546.html"
     },
     {
       "id": "msg-653986016fad",
@@ -378,7 +398,8 @@
       "body_snippet": "Hi all,\n\nI'd like to link to a help page of a package in my package's Suggests.\nWRE, section 2.5 says,\n\n\"Historically (before R version 4.1.0), links of the form\n\\link[pkg]{foo} and \\link[pkg:bar]{foo",
       "thread_id": "thread-653986016fad",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008547.html"
     },
     {
       "id": "msg-bd0546efef5e",
@@ -396,11 +417,12 @@
         "<CABdHhvFv32jRvm9WHX4dckOjWs1LK=tV=134K-0cOAgzvvDi=A@mail.gmail.com>",
         "<C86BDDF6-44EE-4B9B-9515-F19F954B5337@liamdbailey.com>"
       ],
-      "body_plain": "Liam,\n\nI think I have failed to convey my main point in the last e-mail - which was that you want to parse the date/time in the timezone that you care about so in your example that would be\n\n> foo <- as.Date(33874, origin = \"1899-12-30\")\n> foo\n[1] \"1992-09-27\"\n> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n[1] \"1992-09-27 CEST\"\n\nI was explicitly saying that you do NOT want to simply change the time zone on POSIXlt objects as that won't work for reasons I explained - see my last e-mail.\n\nCheers,\nSimon\n\n\n> On 11/10/2022, at 6:31 AM, Liam Bailey <liam.bailey at liamdbailey.com> wrote:\n> \n> Hi all,\n> \n> Thanks Simon for the detailed response, that helps us understand a lot better what?s going on! However, with your response in mind, we still encounter some behaviour that we did not expect.\n> \n> I?ve included another minimum reproducible example below to expand on the situation. In this example, `foo` is a Date object that we generate from a numeric input. Following your advice, `bar` is then a POSIXlt object where we now explicitly define timezone using argument tz. However, even though we are explicit about the timezone the POSIXlt that is generated is always in UTC. This then leads to the issues outlined by Alexandre above, which we now understand are caused by DST.\n> \n> ``` r\n> #Generate date from numeric\n>     #Not possible to specify tz at this point\n>     foo <- as.Date(33874, origin = \"1899-12-30\")\n>     dput(foo)\n> #> structure(8305, class = \"Date\")\n>     \n>     #Convert to POSIXlt specifying UTC timezone\n>     bar <- as.POSIXlt(foo, tz = \"UTC\")\n>     dput(bar)\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class = c(\"POSIXlt\", \n> #> \"POSIXt\"), tzone = \"UTC\")\n>     \n>     #Convert to POSIXlt specifying Europe/Berlin.\n>     #Time zone is still UTC\n>     bar <- as.POSIXlt(foo, tz = \"Europe/Berlin\")\n>     dput(bar)\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class = c(\"POSIXlt\", \n> #> \"POSIXt\"), tzone = \"UTC\")\n> ```\n> \n> \n> We noticed that this occurs because the tz argument is not passed to `.Internal(Date2POSIXlt())` inside `as.POSIXlt.Date()`.\n> \n> Reading through the documentation for `as.POSIX*` we can see that this behaviour is described:\n> \n> \t> ?Dates without times are treated as being at midnight UTC.?\n> \n> In this case, if we want to convert a Date object to POSIX* and specify a (non-UTC) timezone would the best strategy be to first coerce our Date object to character? Alternatively, `lubridate::as_datetime()` does seem to recognise the tz argument and convert a Date object to POSIX* with non-UTC time zone (see second example below). But it would be nice to know if there are subtle differences between these two approaches that we should be aware of.\n> \n> ``` r\n> foo <- as.Date(33874, origin = \"1899-12-30\")\n> dput(foo)\n> #> structure(8305, class = \"Date\")\n> \n> #Convert to POSIXct specifying UTC timezone\n> bar <- lubridate::as_datetime(foo, tz = \"UTC\")\n> dput(as.POSIXlt(bar))\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class = c(\"POSIXlt\", \n> #> \"POSIXt\"), tzone = \"UTC\")\n> \n> #Convert to POSIXct specifying Europe/Berlin\n> bar <- lubridate::as_datetime(foo, tz = \"Europe/Berlin\")\n> dput(as.POSIXlt(bar))\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 1L, zone = \"CEST\", \n> #>     gmtoff = 7200L), class = c(\"POSIXlt\", \"POSIXt\"), tzone = c(\"Europe/Berlin\", \n> #> \"CET\", \"CEST\"))\n> ```\n> \n> Thanks again for all your help.\n> Alex & Liam\n> \n>> On 10 Oct 2022, at 6:40 pm, Hadley Wickham <h.wickham at gmail.com> wrote:\n>> \n>> On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us> wrote:\n>>> \n>>> ... which is why tidyverse functions and Python datetime handling irk me so much.\n>>> \n>>> Is tidyverse time handling intrinsically broken? They have a standard practice of reading time as UTC and then using force_tz to fix the \"mistake\". Same as Python.\n>> \n>> Can you point to any docs that lead you to this conclusion so we can\n>> get them fixed? I strongly encourage people to parse date-times in the\n>> correct time zone; this is why lubridate::ymd_hms() and friends have a\n>> tz argument.\n>> \n>> Hadley\n>> \n>> -- \n>> http://hadley.nz\n>",
+      "body_plain": "Liam,\n\nI think I have failed to convey my main point in the last e-mail - which was that you want to parse the date/time in the timezone that you care about so in your example that would be\n\n> foo <- as.Date(33874, origin = \"1899-12-30\")\n> foo\n[1] \"1992-09-27\"\n> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n[1] \"1992-09-27 CEST\"\n\nI was explicitly saying that you do NOT want to simply change the time zone on POSIXlt objects as that won't work for reasons I explained - see my last e-mail.\n\nCheers,\nSimon\n\n\n> On 11/10/2022, at 6:31 AM, Liam Bailey <liam.bailey at liamdbailey.com> wrote:\n> \n> Hi all,\n> \n> Thanks Simon for the detailed response, that helps us understand a lot better what’s going on! However, with your response in mind, we still encounter some behaviour that we did not expect.\n> \n> I’ve included another minimum reproducible example below to expand on the situation. In this example, `foo` is a Date object that we generate from a numeric input. Following your advice, `bar` is then a POSIXlt object where we now explicitly define timezone using argument tz. However, even though we are explicit about the timezone the POSIXlt that is generated is always in UTC. This then leads to the issues outlined by Alexandre above, which we now understand are caused by DST.\n> \n> ``` r\n> #Generate date from numeric\n>     #Not possible to specify tz at this point\n>     foo <- as.Date(33874, origin = \"1899-12-30\")\n>     dput(foo)\n> #> structure(8305, class = \"Date\")\n>     \n>     #Convert to POSIXlt specifying UTC timezone\n>     bar <- as.POSIXlt(foo, tz = \"UTC\")\n>     dput(bar)\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class = c(\"POSIXlt\", \n> #> \"POSIXt\"), tzone = \"UTC\")\n>     \n>     #Convert to POSIXlt specifying Europe/Berlin.\n>     #Time zone is still UTC\n>     bar <- as.POSIXlt(foo, tz = \"Europe/Berlin\")\n>     dput(bar)\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class = c(\"POSIXlt\", \n> #> \"POSIXt\"), tzone = \"UTC\")\n> ```\n> \n> \n> We noticed that this occurs because the tz argument is not passed to `.Internal(Date2POSIXlt())` inside `as.POSIXlt.Date()`.\n> \n> Reading through the documentation for `as.POSIX*` we can see that this behaviour is described:\n> \n> \t> “Dates without times are treated as being at midnight UTC.”\n> \n> In this case, if we want to convert a Date object to POSIX* and specify a (non-UTC) timezone would the best strategy be to first coerce our Date object to character? Alternatively, `lubridate::as_datetime()` does seem to recognise the tz argument and convert a Date object to POSIX* with non-UTC time zone (see second example below). But it would be nice to know if there are subtle differences between these two approaches that we should be aware of.\n> \n> ``` r\n> foo <- as.Date(33874, origin = \"1899-12-30\")\n> dput(foo)\n> #> structure(8305, class = \"Date\")\n> \n> #Convert to POSIXct specifying UTC timezone\n> bar <- lubridate::as_datetime(foo, tz = \"UTC\")\n> dput(as.POSIXlt(bar))\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class = c(\"POSIXlt\", \n> #> \"POSIXt\"), tzone = \"UTC\")\n> \n> #Convert to POSIXct specifying Europe/Berlin\n> bar <- lubridate::as_datetime(foo, tz = \"Europe/Berlin\")\n> dput(as.POSIXlt(bar))\n> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L, \n> #>     year = 92L, wday = 0L, yday = 270L, isdst = 1L, zone = \"CEST\", \n> #>     gmtoff = 7200L), class = c(\"POSIXlt\", \"POSIXt\"), tzone = c(\"Europe/Berlin\", \n> #> \"CET\", \"CEST\"))\n> ```\n> \n> Thanks again for all your help.\n> Alex & Liam\n> \n>> On 10 Oct 2022, at 6:40 pm, Hadley Wickham <h.wickham at gmail.com> wrote:\n>> \n>> On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us> wrote:\n>>> \n>>> ... which is why tidyverse functions and Python datetime handling irk me so much.\n>>> \n>>> Is tidyverse time handling intrinsically broken? They have a standard practice of reading time as UTC and then using force_tz to fix the \"mistake\". Same as Python.\n>> \n>> Can you point to any docs that lead you to this conclusion so we can\n>> get them fixed? I strongly encourage people to parse date-times in the\n>> correct time zone; this is why lubridate::ymd_hms() and friends have a\n>> tz argument.\n>> \n>> Hadley\n>> \n>> -- \n>> http://hadley.nz\n>",
       "body_snippet": "Liam,\n\nI think I have failed to convey my main point in the last e-mail - which was that you want to parse the date/time in the timezone that you care about so in your example that would be\n\n> foo <- ",
       "thread_id": "thread-bd0546efef5e",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008548.html"
     },
     {
       "id": "msg-9105d8edd8ad",
@@ -423,7 +445,8 @@
       "body_snippet": "Hi Simon,\n\nThanks for the clarification.",
       "thread_id": "thread-bd0546efef5e",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008549.html"
     },
     {
       "id": "msg-7053187b14c7",
@@ -443,11 +466,12 @@
         "<03EBA665-067E-45F4-A97B-4E94E98D65A8@R-project.org>",
         "<CAERMt4doKk0OFujPOzi7vNz6NrzHV8c56=5=CKMhfWBtyFbY3Q@mail.gmail.com>"
       ],
-      "body_plain": "Right now as.POSIXlt.Date() is just\n\nfunction (x, ...)\n.Internal(Date2POSIXlt(x))\n\nHow expensive would it be to throw a warning when '...' is provided by \nthe user/discarded ??\n\nAlternately, perhaps the documentation could be amended, although I'm \nnot quite sure what to suggest. (The sentence Liam refers to, \"Dates \nwithout times are treated as being at midnight UTC.\" is correct but \nterse ...)\n\n\nOn 2022-10-10 4:50 p.m., Alexandre Courtiol wrote:\n> Hi Simon,\n> \n> Thanks for the clarification.\n> \n>  From a naive developer point of view, we were initially baffled that the\n> generic as.POSIXlt() does very different things on a character and on a\n> Date input:\n> \n> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n> [1] \"1992-09-27 CEST\"\n> \n> as.POSIXlt(foo, \"Europe/Berlin\")\n> [1] \"1992-09-27 UTC\"\n> \n> Based on what you said, it does make sense: it is only when creating the\n> date/time that we want to include the time zone and that only happens when\n> we don't already work on a previously created date.\n> That is your subtle but spot-on distinction between \"parsing\" and\n> \"changing\" the time zone.\n> \n> Yet, we do find it dangerous that as.POSIXlt.Date() accepts a time zone but\n> does nothing of it, especially when the help file starts with:\n> \n> Usage\n> as.POSIXlt(x, tz = \"\", ...)\n> \n> The behaviour is documented, as Liam reported it, but still, we will almost\n> certainly not be the last one tripping on this (without even adding the\n> additional issue of as.POSIXct() behaving differently across OS).\n> \n> Thanks again,\n> \n> Alex & Liam\n> \n> \n> \n> \n> On Mon, 10 Oct 2022 at 22:13, Simon Urbanek <simon.urbanek at r-project.org>\n> wrote:\n> \n>> Liam,\n>>\n>> I think I have failed to convey my main point in the last e-mail - which\n>> was that you want to parse the date/time in the timezone that you care\n>> about so in your example that would be\n>>\n>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n>>> foo\n>> [1] \"1992-09-27\"\n>>> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n>> [1] \"1992-09-27 CEST\"\n>>\n>> I was explicitly saying that you do NOT want to simply change the time\n>> zone on POSIXlt objects as that won't work for reasons I explained - see my\n>> last e-mail.\n>>\n>> Cheers,\n>> Simon\n>>\n>>\n>>> On 11/10/2022, at 6:31 AM, Liam Bailey <liam.bailey at liamdbailey.com>\n>> wrote:\n>>>\n>>> Hi all,\n>>>\n>>> Thanks Simon for the detailed response, that helps us understand a lot\n>> better what?s going on! However, with your response in mind, we still\n>> encounter some behaviour that we did not expect.\n>>>\n>>> I?ve included another minimum reproducible example below to expand on\n>> the situation. In this example, `foo` is a Date object that we generate\n>> from a numeric input. Following your advice, `bar` is then a POSIXlt object\n>> where we now explicitly define timezone using argument tz. However, even\n>> though we are explicit about the timezone the POSIXlt that is generated is\n>> always in UTC. This then leads to the issues outlined by Alexandre above,\n>> which we now understand are caused by DST.\n>>>\n>>> ``` r\n>>> #Generate date from numeric\n>>>      #Not possible to specify tz at this point\n>>>      foo <- as.Date(33874, origin = \"1899-12-30\")\n>>>      dput(foo)\n>>> #> structure(8305, class = \"Date\")\n>>>\n>>>      #Convert to POSIXlt specifying UTC timezone\n>>>      bar <- as.POSIXlt(foo, tz = \"UTC\")\n>>>      dput(bar)\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n>> c(\"POSIXlt\",\n>>> #> \"POSIXt\"), tzone = \"UTC\")\n>>>\n>>>      #Convert to POSIXlt specifying Europe/Berlin.\n>>>      #Time zone is still UTC\n>>>      bar <- as.POSIXlt(foo, tz = \"Europe/Berlin\")\n>>>      dput(bar)\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n>> c(\"POSIXlt\",\n>>> #> \"POSIXt\"), tzone = \"UTC\")\n>>> ```\n>>>\n>>>\n>>> We noticed that this occurs because the tz argument is not passed to\n>> `.Internal(Date2POSIXlt())` inside `as.POSIXlt.Date()`.\n>>>\n>>> Reading through the documentation for `as.POSIX*` we can see that this\n>> behaviour is described:\n>>>\n>>>        > ?Dates without times are treated as being at midnight UTC.?\n>>>\n>>> In this case, if we want to convert a Date object to POSIX* and specify\n>> a (non-UTC) timezone would the best strategy be to first coerce our Date\n>> object to character? Alternatively, `lubridate::as_datetime()` does seem to\n>> recognise the tz argument and convert a Date object to POSIX* with non-UTC\n>> time zone (see second example below). But it would be nice to know if there\n>> are subtle differences between these two approaches that we should be aware\n>> of.\n>>>\n>>> ``` r\n>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n>>> dput(foo)\n>>> #> structure(8305, class = \"Date\")\n>>>\n>>> #Convert to POSIXct specifying UTC timezone\n>>> bar <- lubridate::as_datetime(foo, tz = \"UTC\")\n>>> dput(as.POSIXlt(bar))\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n>> c(\"POSIXlt\",\n>>> #> \"POSIXt\"), tzone = \"UTC\")\n>>>\n>>> #Convert to POSIXct specifying Europe/Berlin\n>>> bar <- lubridate::as_datetime(foo, tz = \"Europe/Berlin\")\n>>> dput(as.POSIXlt(bar))\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 1L, zone = \"CEST\",\n>>> #>     gmtoff = 7200L), class = c(\"POSIXlt\", \"POSIXt\"), tzone =\n>> c(\"Europe/Berlin\",\n>>> #> \"CET\", \"CEST\"))\n>>> ```\n>>>\n>>> Thanks again for all your help.\n>>> Alex & Liam\n>>>\n>>>> On 10 Oct 2022, at 6:40 pm, Hadley Wickham <h.wickham at gmail.com> wrote:\n>>>>\n>>>> On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\n>> wrote:\n>>>>>\n>>>>> ... which is why tidyverse functions and Python datetime handling irk\n>> me so much.\n>>>>>\n>>>>> Is tidyverse time handling intrinsically broken? They have a standard\n>> practice of reading time as UTC and then using force_tz to fix the\n>> \"mistake\". Same as Python.\n>>>>\n>>>> Can you point to any docs that lead you to this conclusion so we can\n>>>> get them fixed? I strongly encourage people to parse date-times in the\n>>>> correct time zone; this is why lubridate::ymd_hms() and friends have a\n>>>> tz argument.\n>>>>\n>>>> Hadley\n>>>>\n>>>> --\n>>>> http://hadley.nz\n>>>\n>>\n>>\n> \n\n-- \nDr. Benjamin Bolker\nProfessor, Mathematics & Statistics and Biology, McMaster University\nDirector, School of Computational Science and Engineering\n(Acting) Graduate chair, Mathematics & Statistics\n > E-mail is sent at my convenience; I don't expect replies outside of \nworking hours.",
+      "body_plain": "Right now as.POSIXlt.Date() is just\n\nfunction (x, ...)\n.Internal(Date2POSIXlt(x))\n\nHow expensive would it be to throw a warning when '...' is provided by \nthe user/discarded ??\n\nAlternately, perhaps the documentation could be amended, although I'm \nnot quite sure what to suggest. (The sentence Liam refers to, \"Dates \nwithout times are treated as being at midnight UTC.\" is correct but \nterse ...)\n\n\nOn 2022-10-10 4:50 p.m., Alexandre Courtiol wrote:\n> Hi Simon,\n> \n> Thanks for the clarification.\n> \n>  From a naive developer point of view, we were initially baffled that the\n> generic as.POSIXlt() does very different things on a character and on a\n> Date input:\n> \n> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n> [1] \"1992-09-27 CEST\"\n> \n> as.POSIXlt(foo, \"Europe/Berlin\")\n> [1] \"1992-09-27 UTC\"\n> \n> Based on what you said, it does make sense: it is only when creating the\n> date/time that we want to include the time zone and that only happens when\n> we don't already work on a previously created date.\n> That is your subtle but spot-on distinction between \"parsing\" and\n> \"changing\" the time zone.\n> \n> Yet, we do find it dangerous that as.POSIXlt.Date() accepts a time zone but\n> does nothing of it, especially when the help file starts with:\n> \n> Usage\n> as.POSIXlt(x, tz = \"\", ...)\n> \n> The behaviour is documented, as Liam reported it, but still, we will almost\n> certainly not be the last one tripping on this (without even adding the\n> additional issue of as.POSIXct() behaving differently across OS).\n> \n> Thanks again,\n> \n> Alex & Liam\n> \n> \n> \n> \n> On Mon, 10 Oct 2022 at 22:13, Simon Urbanek <simon.urbanek at r-project.org>\n> wrote:\n> \n>> Liam,\n>>\n>> I think I have failed to convey my main point in the last e-mail - which\n>> was that you want to parse the date/time in the timezone that you care\n>> about so in your example that would be\n>>\n>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n>>> foo\n>> [1] \"1992-09-27\"\n>>> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n>> [1] \"1992-09-27 CEST\"\n>>\n>> I was explicitly saying that you do NOT want to simply change the time\n>> zone on POSIXlt objects as that won't work for reasons I explained - see my\n>> last e-mail.\n>>\n>> Cheers,\n>> Simon\n>>\n>>\n>>> On 11/10/2022, at 6:31 AM, Liam Bailey <liam.bailey at liamdbailey.com>\n>> wrote:\n>>>\n>>> Hi all,\n>>>\n>>> Thanks Simon for the detailed response, that helps us understand a lot\n>> better what’s going on! However, with your response in mind, we still\n>> encounter some behaviour that we did not expect.\n>>>\n>>> I’ve included another minimum reproducible example below to expand on\n>> the situation. In this example, `foo` is a Date object that we generate\n>> from a numeric input. Following your advice, `bar` is then a POSIXlt object\n>> where we now explicitly define timezone using argument tz. However, even\n>> though we are explicit about the timezone the POSIXlt that is generated is\n>> always in UTC. This then leads to the issues outlined by Alexandre above,\n>> which we now understand are caused by DST.\n>>>\n>>> ``` r\n>>> #Generate date from numeric\n>>>      #Not possible to specify tz at this point\n>>>      foo <- as.Date(33874, origin = \"1899-12-30\")\n>>>      dput(foo)\n>>> #> structure(8305, class = \"Date\")\n>>>\n>>>      #Convert to POSIXlt specifying UTC timezone\n>>>      bar <- as.POSIXlt(foo, tz = \"UTC\")\n>>>      dput(bar)\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n>> c(\"POSIXlt\",\n>>> #> \"POSIXt\"), tzone = \"UTC\")\n>>>\n>>>      #Convert to POSIXlt specifying Europe/Berlin.\n>>>      #Time zone is still UTC\n>>>      bar <- as.POSIXlt(foo, tz = \"Europe/Berlin\")\n>>>      dput(bar)\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n>> c(\"POSIXlt\",\n>>> #> \"POSIXt\"), tzone = \"UTC\")\n>>> ```\n>>>\n>>>\n>>> We noticed that this occurs because the tz argument is not passed to\n>> `.Internal(Date2POSIXlt())` inside `as.POSIXlt.Date()`.\n>>>\n>>> Reading through the documentation for `as.POSIX*` we can see that this\n>> behaviour is described:\n>>>\n>>>        > “Dates without times are treated as being at midnight UTC.”\n>>>\n>>> In this case, if we want to convert a Date object to POSIX* and specify\n>> a (non-UTC) timezone would the best strategy be to first coerce our Date\n>> object to character? Alternatively, `lubridate::as_datetime()` does seem to\n>> recognise the tz argument and convert a Date object to POSIX* with non-UTC\n>> time zone (see second example below). But it would be nice to know if there\n>> are subtle differences between these two approaches that we should be aware\n>> of.\n>>>\n>>> ``` r\n>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n>>> dput(foo)\n>>> #> structure(8305, class = \"Date\")\n>>>\n>>> #Convert to POSIXct specifying UTC timezone\n>>> bar <- lubridate::as_datetime(foo, tz = \"UTC\")\n>>> dput(as.POSIXlt(bar))\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n>> c(\"POSIXlt\",\n>>> #> \"POSIXt\"), tzone = \"UTC\")\n>>>\n>>> #Convert to POSIXct specifying Europe/Berlin\n>>> bar <- lubridate::as_datetime(foo, tz = \"Europe/Berlin\")\n>>> dput(as.POSIXlt(bar))\n>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 1L, zone = \"CEST\",\n>>> #>     gmtoff = 7200L), class = c(\"POSIXlt\", \"POSIXt\"), tzone =\n>> c(\"Europe/Berlin\",\n>>> #> \"CET\", \"CEST\"))\n>>> ```\n>>>\n>>> Thanks again for all your help.\n>>> Alex & Liam\n>>>\n>>>> On 10 Oct 2022, at 6:40 pm, Hadley Wickham <h.wickham at gmail.com> wrote:\n>>>>\n>>>> On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\n>> wrote:\n>>>>>\n>>>>> ... which is why tidyverse functions and Python datetime handling irk\n>> me so much.\n>>>>>\n>>>>> Is tidyverse time handling intrinsically broken? They have a standard\n>> practice of reading time as UTC and then using force_tz to fix the\n>> \"mistake\". Same as Python.\n>>>>\n>>>> Can you point to any docs that lead you to this conclusion so we can\n>>>> get them fixed? I strongly encourage people to parse date-times in the\n>>>> correct time zone; this is why lubridate::ymd_hms() and friends have a\n>>>> tz argument.\n>>>>\n>>>> Hadley\n>>>>\n>>>> --\n>>>> http://hadley.nz\n>>>\n>>\n>>\n> \n\n-- \nDr. Benjamin Bolker\nProfessor, Mathematics & Statistics and Biology, McMaster University\nDirector, School of Computational Science and Engineering\n(Acting) Graduate chair, Mathematics & Statistics\n > E-mail is sent at my convenience; I don't expect replies outside of \nworking hours.",
       "body_snippet": "Right now as.POSIXlt.Date() is just\n\nfunction (x, ...)\n.Internal(Date2POSIXlt(x))\n\nHow expensive would it be to throw a warning when '...' is provided by \nthe user/discarded ??\n\nAlternately, perhaps t",
       "thread_id": "thread-bd0546efef5e",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008551.html"
     },
     {
       "id": "msg-8ba28874ec3c",
@@ -468,7 +492,8 @@
       "body_snippet": "I have no idea how to get readxl::read_excel to import a timestamp column in a timezone. It is true that Excel has no concept of timezones, but the data one finds there usually came from a text file a",
       "thread_id": "thread-d1bec7016047",
       "thread_depth": 4,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008552.html"
     },
     {
       "id": "msg-1560f88e902c",
@@ -489,11 +514,12 @@
         "<CAERMt4doKk0OFujPOzi7vNz6NrzHV8c56=5=CKMhfWBtyFbY3Q@mail.gmail.com>",
         "<2e92f0f1-ddfd-1c74-4805-ac65821ccd81@gmail.com>"
       ],
-      "body_plain": ">>>>> Ben Bolker \n>>>>>     on Mon, 10 Oct 2022 16:59:35 -0400 writes:\n\n    > Right now as.POSIXlt.Date() is just\n    > function (x, ...)\n    > .Internal(Date2POSIXlt(x))\n\nIt has been quite a bit different in R-devel  for a little\nwhile.  NEWS entries  (there are more already, and more coming\non the wide topic)\n\n    * The as.POSIXlt(<POSIXlt>) and as.POSIXct(<POSIXct>) default\n      methods now do obey their tz argument, also in this case.\n\n    * as.POSIXlt(<Date>) now does apply a tz (timezone) argument, as\n      does as.POSIXct(); partly suggested by Roland Fuss on the R-devel\n      mailing list.\n\nand indeed it would have been good had you used (and read) the\nR-devel mailing list  which is much more appropriate on the\ntopic of *changing* base R behavior.\n\n\n\n\n    > How expensive would it be to throw a warning when '...' is provided by \n    > the user/discarded ??\n\n    > Alternately, perhaps the documentation could be amended, although I'm \n    > not quite sure what to suggest. (The sentence Liam refers to, \"Dates \n    > without times are treated as being at midnight UTC.\" is correct but \n    > terse ...)\n\n\n    > On 2022-10-10 4:50 p.m., Alexandre Courtiol wrote:\n    >> Hi Simon,\n    >> \n    >> Thanks for the clarification.\n    >> \n    >> From a naive developer point of view, we were initially baffled that the\n    >> generic as.POSIXlt() does very different things on a character and on a\n    >> Date input:\n    >> \n    >> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n    >> [1] \"1992-09-27 CEST\"\n    >> \n    >> as.POSIXlt(foo, \"Europe/Berlin\")\n    >> [1] \"1992-09-27 UTC\"\n    >> \n    >> Based on what you said, it does make sense: it is only when creating the\n    >> date/time that we want to include the time zone and that only happens when\n    >> we don't already work on a previously created date.\n    >> That is your subtle but spot-on distinction between \"parsing\" and\n    >> \"changing\" the time zone.\n    >> \n    >> Yet, we do find it dangerous that as.POSIXlt.Date() accepts a time zone but\n    >> does nothing of it, especially when the help file starts with:\n    >> \n    >> Usage\n    >> as.POSIXlt(x, tz = \"\", ...)\n    >> \n    >> The behaviour is documented, as Liam reported it, but still, we will almost\n    >> certainly not be the last one tripping on this (without even adding the\n    >> additional issue of as.POSIXct() behaving differently across OS).\n    >> \n    >> Thanks again,\n    >> \n    >> Alex & Liam\n    >> \n    >> \n    >> \n    >> \n    >> On Mon, 10 Oct 2022 at 22:13, Simon Urbanek <simon.urbanek at r-project.org>\n    >> wrote:\n    >> \n    >>> Liam,\n    >>> \n    >>> I think I have failed to convey my main point in the last e-mail - which\n    >>> was that you want to parse the date/time in the timezone that you care\n    >>> about so in your example that would be\n    >>> \n    >>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n    >>>> foo\n    >>> [1] \"1992-09-27\"\n    >>>> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n    >>> [1] \"1992-09-27 CEST\"\n    >>> \n    >>> I was explicitly saying that you do NOT want to simply change the time\n    >>> zone on POSIXlt objects as that won't work for reasons I explained - see my\n    >>> last e-mail.\n    >>> \n    >>> Cheers,\n    >>> Simon\n    >>> \n    >>> \n    >>>> On 11/10/2022, at 6:31 AM, Liam Bailey <liam.bailey at liamdbailey.com>\n    >>> wrote:\n    >>>> \n    >>>> Hi all,\n    >>>> \n    >>>> Thanks Simon for the detailed response, that helps us understand a lot\n    >>> better what?s going on! However, with your response in mind, we still\n    >>> encounter some behaviour that we did not expect.\n    >>>> \n    >>>> I?ve included another minimum reproducible example below to expand on\n    >>> the situation. In this example, `foo` is a Date object that we generate\n    >>> from a numeric input. Following your advice, `bar` is then a POSIXlt object\n    >>> where we now explicitly define timezone using argument tz. However, even\n    >>> though we are explicit about the timezone the POSIXlt that is generated is\n    >>> always in UTC. This then leads to the issues outlined by Alexandre above,\n    >>> which we now understand are caused by DST.\n    >>>> \n    >>>> ``` r\n    >>>> #Generate date from numeric\n    >>>> #Not possible to specify tz at this point\n    >>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n    >>>> dput(foo)\n    >>>> #> structure(8305, class = \"Date\")\n    >>>> \n    >>>> #Convert to POSIXlt specifying UTC timezone\n    >>>> bar <- as.POSIXlt(foo, tz = \"UTC\")\n    >>>> dput(bar)\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n    >>> c(\"POSIXlt\",\n    >>>> #> \"POSIXt\"), tzone = \"UTC\")\n    >>>> \n    >>>> #Convert to POSIXlt specifying Europe/Berlin.\n    >>>> #Time zone is still UTC\n    >>>> bar <- as.POSIXlt(foo, tz = \"Europe/Berlin\")\n    >>>> dput(bar)\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n    >>> c(\"POSIXlt\",\n    >>>> #> \"POSIXt\"), tzone = \"UTC\")\n    >>>> ```\n    >>>> \n    >>>> \n    >>>> We noticed that this occurs because the tz argument is not passed to\n    >>> `.Internal(Date2POSIXlt())` inside `as.POSIXlt.Date()`.\n    >>>> \n    >>>> Reading through the documentation for `as.POSIX*` we can see that this\n    >>> behaviour is described:\n    >>>> \n    >>>> > ?Dates without times are treated as being at midnight UTC.?\n    >>>> \n    >>>> In this case, if we want to convert a Date object to POSIX* and specify\n    >>> a (non-UTC) timezone would the best strategy be to first coerce our Date\n    >>> object to character? Alternatively, `lubridate::as_datetime()` does seem to\n    >>> recognise the tz argument and convert a Date object to POSIX* with non-UTC\n    >>> time zone (see second example below). But it would be nice to know if there\n    >>> are subtle differences between these two approaches that we should be aware\n    >>> of.\n    >>>> \n    >>>> ``` r\n    >>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n    >>>> dput(foo)\n    >>>> #> structure(8305, class = \"Date\")\n    >>>> \n    >>>> #Convert to POSIXct specifying UTC timezone\n    >>>> bar <- lubridate::as_datetime(foo, tz = \"UTC\")\n    >>>> dput(as.POSIXlt(bar))\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n    >>> c(\"POSIXlt\",\n    >>>> #> \"POSIXt\"), tzone = \"UTC\")\n    >>>> \n    >>>> #Convert to POSIXct specifying Europe/Berlin\n    >>>> bar <- lubridate::as_datetime(foo, tz = \"Europe/Berlin\")\n    >>>> dput(as.POSIXlt(bar))\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 1L, zone = \"CEST\",\n    >>>> #>     gmtoff = 7200L), class = c(\"POSIXlt\", \"POSIXt\"), tzone =\n    >>> c(\"Europe/Berlin\",\n    >>>> #> \"CET\", \"CEST\"))\n    >>>> ```\n    >>>> \n    >>>> Thanks again for all your help.\n    >>>> Alex & Liam\n    >>>> \n    >>>>> On 10 Oct 2022, at 6:40 pm, Hadley Wickham <h.wickham at gmail.com> wrote:\n    >>>>> \n    >>>>> On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\n    >>> wrote:\n    >>>>>> \n>>>>> ... which is why tidyverse functions and Python datetime handling irk\n    >>> me so much.\n    >>>>>> \n>>>>> Is tidyverse time handling intrinsically broken? They have a standard\n    >>> practice of reading time as UTC and then using force_tz to fix the\n    >>> \"mistake\". Same as Python.\n    >>>>> \n    >>>>> Can you point to any docs that lead you to this conclusion so we can\n    >>>>> get them fixed? I strongly encourage people to parse date-times in the\n    >>>>> correct time zone; this is why lubridate::ymd_hms() and friends have a\n    >>>>> tz argument.\n    >>>>> \n    >>>>> Hadley\n    >>>>> \n    >>>>> --\n    >>>>> http://hadley.nz\n    >>>> \n    >>> \n    >>> \n    >> \n\n    > -- \n    > Dr. Benjamin Bolker\n    > Professor, Mathematics & Statistics and Biology, McMaster University\n    > Director, School of Computational Science and Engineering\n    > (Acting) Graduate chair, Mathematics & Statistics\n    >> E-mail is sent at my convenience; I don't expect replies outside of \n    > working hours.\n\n    > ______________________________________________\n    > R-package-devel at r-project.org mailing list\n    > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": ">>>>> Ben Bolker \n>>>>>     on Mon, 10 Oct 2022 16:59:35 -0400 writes:\n\n    > Right now as.POSIXlt.Date() is just\n    > function (x, ...)\n    > .Internal(Date2POSIXlt(x))\n\nIt has been quite a bit different in R-devel  for a little\nwhile.  NEWS entries  (there are more already, and more coming\non the wide topic)\n\n    * The as.POSIXlt(<POSIXlt>) and as.POSIXct(<POSIXct>) default\n      methods now do obey their tz argument, also in this case.\n\n    * as.POSIXlt(<Date>) now does apply a tz (timezone) argument, as\n      does as.POSIXct(); partly suggested by Roland Fuss on the R-devel\n      mailing list.\n\nand indeed it would have been good had you used (and read) the\nR-devel mailing list  which is much more appropriate on the\ntopic of *changing* base R behavior.\n\n\n\n\n    > How expensive would it be to throw a warning when '...' is provided by \n    > the user/discarded ??\n\n    > Alternately, perhaps the documentation could be amended, although I'm \n    > not quite sure what to suggest. (The sentence Liam refers to, \"Dates \n    > without times are treated as being at midnight UTC.\" is correct but \n    > terse ...)\n\n\n    > On 2022-10-10 4:50 p.m., Alexandre Courtiol wrote:\n    >> Hi Simon,\n    >> \n    >> Thanks for the clarification.\n    >> \n    >> From a naive developer point of view, we were initially baffled that the\n    >> generic as.POSIXlt() does very different things on a character and on a\n    >> Date input:\n    >> \n    >> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n    >> [1] \"1992-09-27 CEST\"\n    >> \n    >> as.POSIXlt(foo, \"Europe/Berlin\")\n    >> [1] \"1992-09-27 UTC\"\n    >> \n    >> Based on what you said, it does make sense: it is only when creating the\n    >> date/time that we want to include the time zone and that only happens when\n    >> we don't already work on a previously created date.\n    >> That is your subtle but spot-on distinction between \"parsing\" and\n    >> \"changing\" the time zone.\n    >> \n    >> Yet, we do find it dangerous that as.POSIXlt.Date() accepts a time zone but\n    >> does nothing of it, especially when the help file starts with:\n    >> \n    >> Usage\n    >> as.POSIXlt(x, tz = \"\", ...)\n    >> \n    >> The behaviour is documented, as Liam reported it, but still, we will almost\n    >> certainly not be the last one tripping on this (without even adding the\n    >> additional issue of as.POSIXct() behaving differently across OS).\n    >> \n    >> Thanks again,\n    >> \n    >> Alex & Liam\n    >> \n    >> \n    >> \n    >> \n    >> On Mon, 10 Oct 2022 at 22:13, Simon Urbanek <simon.urbanek at r-project.org>\n    >> wrote:\n    >> \n    >>> Liam,\n    >>> \n    >>> I think I have failed to convey my main point in the last e-mail - which\n    >>> was that you want to parse the date/time in the timezone that you care\n    >>> about so in your example that would be\n    >>> \n    >>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n    >>>> foo\n    >>> [1] \"1992-09-27\"\n    >>>> as.POSIXlt(as.character(foo), \"Europe/Berlin\")\n    >>> [1] \"1992-09-27 CEST\"\n    >>> \n    >>> I was explicitly saying that you do NOT want to simply change the time\n    >>> zone on POSIXlt objects as that won't work for reasons I explained - see my\n    >>> last e-mail.\n    >>> \n    >>> Cheers,\n    >>> Simon\n    >>> \n    >>> \n    >>>> On 11/10/2022, at 6:31 AM, Liam Bailey <liam.bailey at liamdbailey.com>\n    >>> wrote:\n    >>>> \n    >>>> Hi all,\n    >>>> \n    >>>> Thanks Simon for the detailed response, that helps us understand a lot\n    >>> better what’s going on! However, with your response in mind, we still\n    >>> encounter some behaviour that we did not expect.\n    >>>> \n    >>>> I’ve included another minimum reproducible example below to expand on\n    >>> the situation. In this example, `foo` is a Date object that we generate\n    >>> from a numeric input. Following your advice, `bar` is then a POSIXlt object\n    >>> where we now explicitly define timezone using argument tz. However, even\n    >>> though we are explicit about the timezone the POSIXlt that is generated is\n    >>> always in UTC. This then leads to the issues outlined by Alexandre above,\n    >>> which we now understand are caused by DST.\n    >>>> \n    >>>> ``` r\n    >>>> #Generate date from numeric\n    >>>> #Not possible to specify tz at this point\n    >>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n    >>>> dput(foo)\n    >>>> #> structure(8305, class = \"Date\")\n    >>>> \n    >>>> #Convert to POSIXlt specifying UTC timezone\n    >>>> bar <- as.POSIXlt(foo, tz = \"UTC\")\n    >>>> dput(bar)\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n    >>> c(\"POSIXlt\",\n    >>>> #> \"POSIXt\"), tzone = \"UTC\")\n    >>>> \n    >>>> #Convert to POSIXlt specifying Europe/Berlin.\n    >>>> #Time zone is still UTC\n    >>>> bar <- as.POSIXlt(foo, tz = \"Europe/Berlin\")\n    >>>> dput(bar)\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n    >>> c(\"POSIXlt\",\n    >>>> #> \"POSIXt\"), tzone = \"UTC\")\n    >>>> ```\n    >>>> \n    >>>> \n    >>>> We noticed that this occurs because the tz argument is not passed to\n    >>> `.Internal(Date2POSIXlt())` inside `as.POSIXlt.Date()`.\n    >>>> \n    >>>> Reading through the documentation for `as.POSIX*` we can see that this\n    >>> behaviour is described:\n    >>>> \n    >>>> > “Dates without times are treated as being at midnight UTC.”\n    >>>> \n    >>>> In this case, if we want to convert a Date object to POSIX* and specify\n    >>> a (non-UTC) timezone would the best strategy be to first coerce our Date\n    >>> object to character? Alternatively, `lubridate::as_datetime()` does seem to\n    >>> recognise the tz argument and convert a Date object to POSIX* with non-UTC\n    >>> time zone (see second example below). But it would be nice to know if there\n    >>> are subtle differences between these two approaches that we should be aware\n    >>> of.\n    >>>> \n    >>>> ``` r\n    >>>> foo <- as.Date(33874, origin = \"1899-12-30\")\n    >>>> dput(foo)\n    >>>> #> structure(8305, class = \"Date\")\n    >>>> \n    >>>> #Convert to POSIXct specifying UTC timezone\n    >>>> bar <- lubridate::as_datetime(foo, tz = \"UTC\")\n    >>>> dput(as.POSIXlt(bar))\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 0L), class =\n    >>> c(\"POSIXlt\",\n    >>>> #> \"POSIXt\"), tzone = \"UTC\")\n    >>>> \n    >>>> #Convert to POSIXct specifying Europe/Berlin\n    >>>> bar <- lubridate::as_datetime(foo, tz = \"Europe/Berlin\")\n    >>>> dput(as.POSIXlt(bar))\n    >>>> #> structure(list(sec = 0, min = 0L, hour = 0L, mday = 27L, mon = 8L,\n    >>>> #>     year = 92L, wday = 0L, yday = 270L, isdst = 1L, zone = \"CEST\",\n    >>>> #>     gmtoff = 7200L), class = c(\"POSIXlt\", \"POSIXt\"), tzone =\n    >>> c(\"Europe/Berlin\",\n    >>>> #> \"CET\", \"CEST\"))\n    >>>> ```\n    >>>> \n    >>>> Thanks again for all your help.\n    >>>> Alex & Liam\n    >>>> \n    >>>>> On 10 Oct 2022, at 6:40 pm, Hadley Wickham <h.wickham at gmail.com> wrote:\n    >>>>> \n    >>>>> On Sun, Oct 9, 2022 at 9:31 PM Jeff Newmiller <jdnewmil at dcn.davis.ca.us>\n    >>> wrote:\n    >>>>>> \n>>>>> ... which is why tidyverse functions and Python datetime handling irk\n    >>> me so much.\n    >>>>>> \n>>>>> Is tidyverse time handling intrinsically broken? They have a standard\n    >>> practice of reading time as UTC and then using force_tz to fix the\n    >>> \"mistake\". Same as Python.\n    >>>>> \n    >>>>> Can you point to any docs that lead you to this conclusion so we can\n    >>>>> get them fixed? I strongly encourage people to parse date-times in the\n    >>>>> correct time zone; this is why lubridate::ymd_hms() and friends have a\n    >>>>> tz argument.\n    >>>>> \n    >>>>> Hadley\n    >>>>> \n    >>>>> --\n    >>>>> http://hadley.nz\n    >>>> \n    >>> \n    >>> \n    >> \n\n    > -- \n    > Dr. Benjamin Bolker\n    > Professor, Mathematics & Statistics and Biology, McMaster University\n    > Director, School of Computational Science and Engineering\n    > (Acting) Graduate chair, Mathematics & Statistics\n    >> E-mail is sent at my convenience; I don't expect replies outside of \n    > working hours.\n\n    > ______________________________________________\n    > R-package-devel at r-project.org mailing list\n    > https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": ">>>>> Ben Bolker \n>>>>>     on Mon, 10 Oct 2022 16:59:35 -0400 writes:\n\n    > Right now as.POSIXlt.Date() is just\n    > function (x, ...)\n    > .Internal(Date2POSIXlt(x))\n\nIt has been quite a bit diff",
       "thread_id": "thread-bd0546efef5e",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008553.html"
     },
     {
       "id": "msg-ee902f3c5f2a",
@@ -509,7 +535,8 @@
       "body_snippet": "Dear members,\n\nI have difficulties packing my OpenCL functions together as a complete R\npackage. I did not find any exemplary R package building upon the R\nOpenCL Package. Currently I can only run the",
       "thread_id": "thread-ee902f3c5f2a",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008555.html"
     },
     {
       "id": "msg-ad2b5010c696",
@@ -527,7 +554,8 @@
       "body_snippet": "On Mon, 10 Oct 2022 08:00:04 +0000\nDario Strbenac <dstr7320 at uni.sydney.edu.au> wrote:\n\n> It requires input data to be in one-hot encoding, which is created by\n> Matrix::sparse.model.matrix. For fur",
       "thread_id": "thread-95364acf4d56",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008554.html"
     },
     {
       "id": "msg-342b2b53957a",
@@ -545,7 +573,8 @@
       "body_snippet": "I?m not particularly experienced with this but wrote a ?proof-of-concept? skeleton of a package at https://github.com/mtmorgan/ocl . The basics are\n\n\n  *   Import OpenCL in the DESCRIPTION file\n  *   ",
       "thread_id": "thread-ee902f3c5f2a",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008556.html"
     },
     {
       "id": "msg-a04380c5a905",
@@ -563,7 +592,8 @@
       "body_snippet": "On Tue, 4 Oct 2022 16:46:03 +0200\nVincent van Hees <vincentvanhees at gmail.com> wrote:\n\n> Dear all,\n> \n> I am looking for guidance (blog posts / books / people with\n> expertise) on how to split up an",
       "thread_id": "thread-9c5654a7227d",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008557.html"
     },
     {
       "id": "msg-05c8bc070fb0",
@@ -581,7 +611,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  devtools::check_rhub(\"Ecdat\") complained:\n\n\nProblems with news in ?NEWS?:\n    Cannot process chunk/lines:\n      2022-10-12:\n    Cannot process chunk/lines:\n      Ecdat 0.4-2 updated \"",
       "thread_id": "thread-05c8bc070fb0",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008558.html"
     },
     {
       "id": "msg-4b78da0c7fe5",
@@ -600,7 +631,8 @@
       "body_snippet": "? Wed, 12 Oct 2022 20:16:20 -0500\nSpencer Graves <spencer.graves at effectivedefense.org> ?????:\n\n> I copied NEWS to NEWS.md and tried to format it as described in:\n> \n> \n> https://r-pkgs.org/other-ma",
       "thread_id": "thread-05c8bc070fb0",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008559.html"
     },
     {
       "id": "msg-472922806091",
@@ -620,7 +652,8 @@
       "body_snippet": "On 10/13/22 4:34 AM, Ivan Krylov wrote:\n> ? Wed, 12 Oct 2022 20:16:20 -0500\n> Spencer Graves <spencer.graves at effectivedefense.org> ?????:\n> \n>> I copied NEWS to NEWS.md and tried to format it as de",
       "thread_id": "thread-05c8bc070fb0",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008560.html"
     },
     {
       "id": "msg-4505906a672f",
@@ -636,7 +669,8 @@
       "body_snippet": "Hi All:\n\nAbout a week ago I received a notice that my package 'rerddapXtracto' was failing nightly builds and i needed to fix it or face being archived.  Fair enough.  The next day I submitted a fix. ",
       "thread_id": "thread-4505906a672f",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008561.html"
     },
     {
       "id": "msg-7e26230d6776",
@@ -650,11 +684,12 @@
       "references": [
         "<CAA-ibaxp8a5uttw3hci2ZUXit-CjJZf4uaYaqR4zRuD--tAMrw@mail.gmail.com>"
       ],
-      "body_plain": "I?d suggest resubmitting, after ensuring that R CMD  check runs without any\nnotes, warnings, or errors.\n\nHadley\n\nOn Monday, October 10, 2022, Diego Hernang?mez Herrero <\ndiego.hernangomezherrero at gmail.com> wrote:\n\n> Hi:\n>\n> I have some doubts on how to proceed in this case. I am the developer of\n> tidyterra, and I received an email from CRAN on 23Sep2022 about an issue on\n> the package, setting a deadline on 07Oct2022 to correct it.\n>\n> I sent a patch that was accepted on CRAN on 29Sep2022, that fixed the issue\n> (or at least I am pretty sure I solved it). I received no further feedback\n> by CRAN, so I assumed the package was safe. However it was finally archived\n> on 07Oct2022.\n>\n> I have already sent an email to CRAN in order to check if they think the\n> issues still persist (or maybe they missed the patch submission?), but I am\n> in a rush since there are other packages that depend on tidyterra and they\n> may be in risk of being archived on CRAN as well.\n>\n> So my question is: What is the best way forward at this point? Should I\n> wait to get some feedback from CRAN or is it best to resubmit the package\n> (I already have a new patch prepared)? I acknowledge that  \"The time of the\n> volunteers is CRAN?s most precious resource\" so my goal is to reduce their\n> burden as much as possible.\n>\n> Kind regards\n>\n> --\n>\n>\n>\n> Have a nice day!\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nhttp://hadley.nz\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "I?d suggest resubmitting, after ensuring that R CMD  check runs without any\nnotes, warnings, or errors.\n\nHadley\n\nOn Monday, October 10, 2022, Diego Hernang?mez Herrero <\ndiego.hernangomezherrero at gm",
+      "body_plain": "I’d suggest resubmitting, after ensuring that R CMD  check runs without any\nnotes, warnings, or errors.\n\nHadley\n\nOn Monday, October 10, 2022, Diego Hernangómez Herrero <\ndiego.hernangomezherrero at gmail.com> wrote:\n\n> Hi:\n>\n> I have some doubts on how to proceed in this case. I am the developer of\n> tidyterra, and I received an email from CRAN on 23Sep2022 about an issue on\n> the package, setting a deadline on 07Oct2022 to correct it.\n>\n> I sent a patch that was accepted on CRAN on 29Sep2022, that fixed the issue\n> (or at least I am pretty sure I solved it). I received no further feedback\n> by CRAN, so I assumed the package was safe. However it was finally archived\n> on 07Oct2022.\n>\n> I have already sent an email to CRAN in order to check if they think the\n> issues still persist (or maybe they missed the patch submission?), but I am\n> in a rush since there are other packages that depend on tidyterra and they\n> may be in risk of being archived on CRAN as well.\n>\n> So my question is: What is the best way forward at this point? Should I\n> wait to get some feedback from CRAN or is it best to resubmit the package\n> (I already have a new patch prepared)? I acknowledge that  \"The time of the\n> volunteers is CRAN’s most precious resource\" so my goal is to reduce their\n> burden as much as possible.\n>\n> Kind regards\n>\n> --\n>\n>\n>\n> Have a nice day!\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nhttp://hadley.nz\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I’d suggest resubmitting, after ensuring that R CMD  check runs without any\nnotes, warnings, or errors.\n\nHadley\n\nOn Monday, October 10, 2022, Diego Hernangómez Herrero <\ndiego.hernangomezherrero at gm",
       "thread_id": "thread-7084c2012c5c",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008562.html"
     },
     {
       "id": "msg-b2bd2e3d5e86",
@@ -669,11 +704,12 @@
         "<CAA-ibaxp8a5uttw3hci2ZUXit-CjJZf4uaYaqR4zRuD--tAMrw@mail.gmail.com>",
         "<CABdHhvGBK_R3C-Qdc8fU34dm2LhyD3sLKTp2qzKZPSdH-JJsaA@mail.gmail.com>"
       ],
-      "body_plain": "Thanks all for your answers. I resubmitted last week and the package is\nback on CRAN :)\n\nEl El dom, 16 oct 2022 a las 18:34, Hadley Wickham <h.wickham at gmail.com>\nescribi?:\n\n> I?d suggest resubmitting, after ensuring that R CMD  check runs without\n> any notes, warnings, or errors.\n>\n> Hadley\n>\n>\n> On Monday, October 10, 2022, Diego Hernang?mez Herrero <\n> diego.hernangomezherrero at gmail.com> wrote:\n>\n>> Hi:\n>>\n>> I have some doubts on how to proceed in this case. I am the developer of\n>> tidyterra, and I received an email from CRAN on 23Sep2022 about an issue\n>> on\n>> the package, setting a deadline on 07Oct2022 to correct it.\n>>\n>> I sent a patch that was accepted on CRAN on 29Sep2022, that fixed the\n>> issue\n>> (or at least I am pretty sure I solved it). I received no further feedback\n>> by CRAN, so I assumed the package was safe. However it was finally\n>> archived\n>> on 07Oct2022.\n>>\n>> I have already sent an email to CRAN in order to check if they think the\n>> issues still persist (or maybe they missed the patch submission?), but I\n>> am\n>> in a rush since there are other packages that depend on tidyterra and they\n>> may be in risk of being archived on CRAN as well.\n>>\n>> So my question is: What is the best way forward at this point? Should I\n>> wait to get some feedback from CRAN or is it best to resubmit the package\n>> (I already have a new patch prepared)? I acknowledge that  \"The time of\n>> the\n>> volunteers is CRAN?s most precious resource\" so my goal is to reduce their\n>> burden as much as possible.\n>>\n>> Kind regards\n>>\n>> --\n>>\n>>\n>>\n>> Have a nice day!\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>\n> --\n> http://hadley.nz\n>\n-- \n\n\n\nHave a nice day!\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks all for your answers. I resubmitted last week and the package is\nback on CRAN :)\n\nEl El dom, 16 oct 2022 a las 18:34, Hadley Wickham <h.wickham at gmail.com>\nescribi?:\n\n> I?d suggest resubmitti",
+      "body_plain": "Thanks all for your answers. I resubmitted last week and the package is\nback on CRAN :)\n\nEl El dom, 16 oct 2022 a las 18:34, Hadley Wickham <h.wickham at gmail.com>\nescribió:\n\n> I’d suggest resubmitting, after ensuring that R CMD  check runs without\n> any notes, warnings, or errors.\n>\n> Hadley\n>\n>\n> On Monday, October 10, 2022, Diego Hernangómez Herrero <\n> diego.hernangomezherrero at gmail.com> wrote:\n>\n>> Hi:\n>>\n>> I have some doubts on how to proceed in this case. I am the developer of\n>> tidyterra, and I received an email from CRAN on 23Sep2022 about an issue\n>> on\n>> the package, setting a deadline on 07Oct2022 to correct it.\n>>\n>> I sent a patch that was accepted on CRAN on 29Sep2022, that fixed the\n>> issue\n>> (or at least I am pretty sure I solved it). I received no further feedback\n>> by CRAN, so I assumed the package was safe. However it was finally\n>> archived\n>> on 07Oct2022.\n>>\n>> I have already sent an email to CRAN in order to check if they think the\n>> issues still persist (or maybe they missed the patch submission?), but I\n>> am\n>> in a rush since there are other packages that depend on tidyterra and they\n>> may be in risk of being archived on CRAN as well.\n>>\n>> So my question is: What is the best way forward at this point? Should I\n>> wait to get some feedback from CRAN or is it best to resubmit the package\n>> (I already have a new patch prepared)? I acknowledge that  \"The time of\n>> the\n>> volunteers is CRAN’s most precious resource\" so my goal is to reduce their\n>> burden as much as possible.\n>>\n>> Kind regards\n>>\n>> --\n>>\n>>\n>>\n>> Have a nice day!\n>>\n>>         [[alternative HTML version deleted]]\n>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>\n>\n> --\n> http://hadley.nz\n>\n-- \n\n\n\nHave a nice day!\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks all for your answers. I resubmitted last week and the package is\nback on CRAN :)\n\nEl El dom, 16 oct 2022 a las 18:34, Hadley Wickham <h.wickham at gmail.com>\nescribió:\n\n> I’d suggest resubmitti",
       "thread_id": "thread-7084c2012c5c",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008563.html"
     },
     {
       "id": "msg-fd5159b9f964",
@@ -685,11 +721,12 @@
       "subject_clean": "[R-pkg-devel] Invalid UTF-8",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nI suddenly get Warnings from  CRAN (clang):\n\nwarning: invalid UTF-8 in comment [-Winvalid-utf8]\n(It's my name)\n\nSo I wonder: How do I make valid UTF-8 in comment?\n(I already have \"Encoding: UTF-8\" in the DESCRIPTION file)\n\nThanks, G?ran",
+      "body_plain": "Hello,\n\nI suddenly get Warnings from  CRAN (clang):\n\nwarning: invalid UTF-8 in comment [-Winvalid-utf8]\n(It's my name)\n\nSo I wonder: How do I make valid UTF-8 in comment?\n(I already have \"Encoding: UTF-8\" in the DESCRIPTION file)\n\nThanks, Göran",
       "body_snippet": "Hello,\n\nI suddenly get Warnings from  CRAN (clang):\n\nwarning: invalid UTF-8 in comment [-Winvalid-utf8]\n(It's my name)\n\nSo I wonder: How do I make valid UTF-8 in comment?\n(I already have \"Encoding: UT",
       "thread_id": "thread-fd5159b9f964",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008564.html"
     },
     {
       "id": "msg-7be713732726",
@@ -703,11 +740,12 @@
       "references": [
         "<5096fab3-e7db-ad84-eb1a-37db270944ce@umu.se>"
       ],
-      "body_plain": "? Mon, 17 Oct 2022 11:07:25 +0200\nG?ran Brostr?m <goran.brostrom at umu.se> ?????:\n\n> warning: invalid UTF-8 in comment [-Winvalid-utf8]\n> (It's my name)\n> \n> So I wonder: How do I make valid UTF-8 in comment?\n\nThe file GB_zeroin.c is saved in Latin-1 encoding. The warning should\ngo away once you convert it to UTF-8.\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Mon, 17 Oct 2022 11:07:25 +0200\nG?ran Brostr?m <goran.brostrom at umu.se> ?????:\n\n> warning: invalid UTF-8 in comment [-Winvalid-utf8]\n> (It's my name)\n> \n> So I wonder: How do I make valid UTF-8 in",
+      "body_plain": "В Mon, 17 Oct 2022 11:07:25 +0200\nGöran Broström <goran.brostrom at umu.se> пишет:\n\n> warning: invalid UTF-8 in comment [-Winvalid-utf8]\n> (It's my name)\n> \n> So I wonder: How do I make valid UTF-8 in comment?\n\nThe file GB_zeroin.c is saved in Latin-1 encoding. The warning should\ngo away once you convert it to UTF-8.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Mon, 17 Oct 2022 11:07:25 +0200\nGöran Broström <goran.brostrom at umu.se> пишет:\n\n> warning: invalid UTF-8 in comment [-Winvalid-utf8]\n> (It's my name)\n> \n> So I wonder: How do I make valid UTF-8 in",
       "thread_id": "thread-fd5159b9f964",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008565.html"
     },
     {
       "id": "msg-f526dddded3d",
@@ -722,11 +760,12 @@
         "<5096fab3-e7db-ad84-eb1a-37db270944ce@umu.se>",
         "<20221017121825.16af0ff3@arachnoid>"
       ],
-      "body_plain": "Thanks Ivan,\n\nI found two simple ways to convert this old file to UTF-8:\n\n(i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\n(ii) In RStudio, set Tools-Global Options-Code-Saving-\nDefault text encoding  to UTF-8\n\nNo problem with new files.\n\nG;ran (US keyboard)\n\nDen 2022-10-17 kl. 11:18, skrev Ivan Krylov:\n> ? Mon, 17 Oct 2022 11:07:25 +0200\n> G?ran Brostr?m <goran.brostrom at umu.se> ?????:\n> \n>> warning: invalid UTF-8 in comment [-Winvalid-utf8]\n>> (It's my name)\n>>\n>> So I wonder: How do I make valid UTF-8 in comment?\n> \n> The file GB_zeroin.c is saved in Latin-1 encoding. The warning should\n> go away once you convert it to UTF-8.\n>",
+      "body_plain": "Thanks Ivan,\n\nI found two simple ways to convert this old file to UTF-8:\n\n(i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\n(ii) In RStudio, set Tools-Global Options-Code-Saving-\nDefault text encoding  to UTF-8\n\nNo problem with new files.\n\nG;ran (US keyboard)\n\nDen 2022-10-17 kl. 11:18, skrev Ivan Krylov:\n> В Mon, 17 Oct 2022 11:07:25 +0200\n> Göran Broström <goran.brostrom at umu.se> пишет:\n> \n>> warning: invalid UTF-8 in comment [-Winvalid-utf8]\n>> (It's my name)\n>>\n>> So I wonder: How do I make valid UTF-8 in comment?\n> \n> The file GB_zeroin.c is saved in Latin-1 encoding. The warning should\n> go away once you convert it to UTF-8.\n>",
       "body_snippet": "Thanks Ivan,\n\nI found two simple ways to convert this old file to UTF-8:\n\n(i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\n(ii) In RStudio, set Tools-Global Options-Code-Saving-\nDefault text encodi",
       "thread_id": "thread-fd5159b9f964",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008566.html"
     },
     {
       "id": "msg-767531cee278",
@@ -744,7 +783,8 @@
       "body_snippet": "Hello,\n\nGrateful if you could please help with the following comments:\n\nPlease add small executable examples in your Rd-files to illustrate the\nuse of the exported function but also enable automatic t",
       "thread_id": "thread-767531cee278",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008567.html"
     },
     {
       "id": "msg-49100cdc4987",
@@ -763,7 +803,8 @@
       "body_snippet": "See my response to the list.\n\nBest,\nUwe Ligges\n\n\nOn 18.10.2022 14:11, Jahajeeah, Havisha wrote:\n> Hello,\n> \n> Grateful if you could please help with the following comments:\n> \n> Please add small execu",
       "thread_id": "thread-767531cee278",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008568.html"
     },
     {
       "id": "msg-a04a2ced5622",
@@ -779,11 +820,12 @@
         "<20221017121825.16af0ff3@arachnoid>",
         "<0a0d81f0-43e3-240a-5be6-7fd661895346@umu.se>"
       ],
-      "body_plain": "On 17 October 2022 at 13:20, G?ran Brostr?m wrote:\n| Thanks Ivan,\n| \n| I found two simple ways to convert this old file to UTF-8:\n| \n| (i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\nThat's a good ti[. I had actually hand-edited two lines down to 'seven bits'\ninstead of this.  Umlaute, accents and special characters for the win! Thanks\nIvan and G?ran.\n\nAlso, reproducing this warning required both clang(++)-15 and an explicit\nsetting of -Winvalid-utf8.\n\n| (ii) In RStudio, set Tools-Global Options-Code-Saving-\n| Default text encoding  to UTF-8\n| \n| No problem with new files.\n| \n| G;ran (US keyboard)\n\n:)\n\nA fortunes candidate?\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 17 October 2022 at 13:20, G?ran Brostr?m wrote:\n| Thanks Ivan,\n| \n| I found two simple ways to convert this old file to UTF-8:\n| \n| (i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\nThat's a good",
+      "body_plain": "On 17 October 2022 at 13:20, Göran Broström wrote:\n| Thanks Ivan,\n| \n| I found two simple ways to convert this old file to UTF-8:\n| \n| (i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\nThat's a good ti[. I had actually hand-edited two lines down to 'seven bits'\ninstead of this.  Umlaute, accents and special characters for the win! Thanks\nIvan and Göran.\n\nAlso, reproducing this warning required both clang(++)-15 and an explicit\nsetting of -Winvalid-utf8.\n\n| (ii) In RStudio, set Tools-Global Options-Code-Saving-\n| Default text encoding  to UTF-8\n| \n| No problem with new files.\n| \n| G;ran (US keyboard)\n\n:)\n\nA fortunes candidate?\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 17 October 2022 at 13:20, Göran Broström wrote:\n| Thanks Ivan,\n| \n| I found two simple ways to convert this old file to UTF-8:\n| \n| (i) In emacs, C-x <RET> f <RET> (default is utf-8)\n\nThat's a good",
       "thread_id": "thread-fd5159b9f964",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008569.html"
     },
     {
       "id": "msg-0ee73566d277",
@@ -799,7 +841,8 @@
       "body_snippet": "I've run into a problem where if you install the lme4, Matrix, and buildmer\npackages using the binaries from CRAN on a Mac, I get an error message\nabout a missing method, but if I install the same pac",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008570.html"
     },
     {
       "id": "msg-4404494bc5d3",
@@ -819,7 +862,8 @@
       "body_snippet": "Thank you.\n\nOn Tue, Oct 18, 2022 at 4:28 PM Uwe Ligges <ligges at statistik.tu-dortmund.de>\nwrote:\n\n> See my response to the list.\n>\n> Best,\n> Uwe Ligges\n>\n>\n> On 18.10.2022 14:11, Jahajeeah, Havisha ",
       "thread_id": "thread-767531cee278",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008571.html"
     },
     {
       "id": "msg-726f1ef1d46a",
@@ -837,7 +881,8 @@
       "body_snippet": "I see the same thing.  This sounds like a problem in the handling of \nmethods that has been discussed somewhat recently:\n\n   https://stat.ethz.ch/pipermail/r-devel/2022-September/081971.html\n\nThe prob",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008572.html"
     },
     {
       "id": "msg-c66dd475dd01",
@@ -854,11 +899,12 @@
         "<0a0d81f0-43e3-240a-5be6-7fd661895346@umu.se>",
         "<25422.47669.756325.967808@rob.eddelbuettel.com>"
       ],
-      "body_plain": "> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 17 October 2022 at 13:20, G?ran Brostr?m wrote:\n> \n> | G;ran (US keyboard)\n> \n> :)\n> \n> A fortunes candidate?\n> \n\nIncidentally, he's G?ran on a DK keyboard but G?ran on an NO one. The three Scandinavian languages have the same three extra letters (???), but Swedish writes the former two with diaeresis (like German), reverses their order in the alphabet (???), and switches ? and ? on the keyboard (compared to Danish, that is). Norwegian writes and sorts like Danish, but has the same key reversion as Swedish. \"Brotherly love\"...\n\n-pd\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
-      "body_snippet": "> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 17 October 2022 at 13:20, G?ran Brostr?m wrote:\n> \n> | G;ran (US keyboard)\n> \n> :)\n> \n> A fortunes candidate?\n> \n\nI",
+      "body_plain": "> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 17 October 2022 at 13:20, Göran Broström wrote:\n> \n> | G;ran (US keyboard)\n> \n> :)\n> \n> A fortunes candidate?\n> \n\nIncidentally, he's Gæran on a DK keyboard but Gøran on an NO one. The three Scandinavian languages have the same three extra letters (æøå), but Swedish writes the former two with diaeresis (like German), reverses their order in the alphabet (åöä), and switches ö and ä on the keyboard (compared to Danish, that is). Norwegian writes and sorts like Danish, but has the same key reversion as Swedish. \"Brotherly love\"...\n\n-pd\n\n-- \nPeter Dalgaard, Professor,\nCenter for Statistics, Copenhagen Business School\nSolbjerg Plads 3, 2000 Frederiksberg, Denmark\nPhone: (+45)38153501\nOffice: A 4.23\nEmail: pd.mes at cbs.dk  Priv: PDalgd at gmail.com",
+      "body_snippet": "> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 17 October 2022 at 13:20, Göran Broström wrote:\n> \n> | G;ran (US keyboard)\n> \n> :)\n> \n> A fortunes candidate?\n> \n\nI",
       "thread_id": "thread-fd5159b9f964",
       "thread_depth": 4,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008573.html"
     },
     {
       "id": "msg-1c01f610ab0c",
@@ -876,11 +922,12 @@
         "<25422.47669.756325.967808@rob.eddelbuettel.com>",
         "<D9CE8114-B2A9-43C4-A8D0-E1175CE8B33A@gmail.com>"
       ],
-      "body_plain": "On 2022-10-18 21:53, peter dalgaard wrote:\n> \n> \n>> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org>\n>> wrote:\n>> \n>> \n>> On 17 October 2022 at 13:20, G?ran Brostr?m wrote:\n>> \n>> | G;ran (US keyboard)\n>> \n>> :)\n>> \n>> A fortunes candidate?\n>> \n> \n> Incidentally, he's G?ran on a DK keyboard but G?ran on an NO one. The\n> three Scandinavian languages have the same three extra letters (???),\n> but Swedish writes the former two with diaeresis (like German),\n> reverses their order in the alphabet (???), \n\nActually, the order is ??? (Swedish). Didn't know about the different\nScandinavian alphabetical orderings, thanks for the info!\n\ng,\n\n> and switches ? and ? on\n> the keyboard (compared to Danish, that is). Norwegian writes and\n> sorts like Danish, but has the same key reversion as Swedish.\n> \"Brotherly love\"...\n> \n> -pd\n>",
-      "body_snippet": "On 2022-10-18 21:53, peter dalgaard wrote:\n> \n> \n>> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org>\n>> wrote:\n>> \n>> \n>> On 17 October 2022 at 13:20, G?ran Brostr?m wrote:\n>> \n>> | G;",
+      "body_plain": "On 2022-10-18 21:53, peter dalgaard wrote:\n> \n> \n>> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org>\n>> wrote:\n>> \n>> \n>> On 17 October 2022 at 13:20, Göran Broström wrote:\n>> \n>> | G;ran (US keyboard)\n>> \n>> :)\n>> \n>> A fortunes candidate?\n>> \n> \n> Incidentally, he's Gæran on a DK keyboard but Gøran on an NO one. The\n> three Scandinavian languages have the same three extra letters (æøå),\n> but Swedish writes the former two with diaeresis (like German),\n> reverses their order in the alphabet (åöä), \n\nActually, the order is åäö (Swedish). Didn't know about the different\nScandinavian alphabetical orderings, thanks for the info!\n\ng,\n\n> and switches ö and ä on\n> the keyboard (compared to Danish, that is). Norwegian writes and\n> sorts like Danish, but has the same key reversion as Swedish.\n> \"Brotherly love\"...\n> \n> -pd\n>",
+      "body_snippet": "On 2022-10-18 21:53, peter dalgaard wrote:\n> \n> \n>> On 18 Oct 2022, at 16:37 , Dirk Eddelbuettel <edd at debian.org>\n>> wrote:\n>> \n>> \n>> On 17 October 2022 at 13:20, Göran Broström wrote:\n>> \n>> | G;",
       "thread_id": "thread-fd5159b9f964",
       "thread_depth": 5,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008574.html"
     },
     {
       "id": "msg-d8b21065058a",
@@ -899,7 +946,8 @@
       "body_snippet": ">>>>> Duncan Murdoch \n>>>>>     on Tue, 18 Oct 2022 15:17:33 -0400 writes:\n\n    > I see the same thing.  This sounds like a problem in the handling of \n    > methods that has been discussed somewhat r",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008575.html"
     },
     {
       "id": "msg-8f063c59932a",
@@ -919,7 +967,8 @@
       "body_snippet": "Please let the Simon (Mac maintainer for CRAN) know.\nFor Windows, the revdeps get rebuild automatically.\n\nBest,\nUwe Ligges\n\n\nOn 19.10.2022 09:39, Martin Maechler wrote:\n>>>>>> Duncan Murdoch\n>>>>>>   ",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008576.html"
     },
     {
       "id": "msg-828f4d576fe4",
@@ -939,7 +988,8 @@
       "body_snippet": "It seems that this could be mostly avoided if instead of caching copies \nof Matrix methods when buildmer was installed, R would cache promises to \nget those methods.  Then if the method for some parti",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008577.html"
     },
     {
       "id": "msg-e634e5dec8d6",
@@ -955,7 +1005,8 @@
       "body_snippet": "Dear all at R-package-devel,\n\nI am struggling with a R package build.\nIt builds fine on my mac, which is my usual work environment. But when I\nsubmit to CRAN, while the windows version is fine, the de",
       "thread_id": "thread-e634e5dec8d6",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008578.html"
     },
     {
       "id": "msg-08388b4b79a2",
@@ -973,7 +1024,8 @@
       "body_snippet": "You could install VirtualBox if you wanted to test it yourself, or if you\nhave the tarball available online somewhere, I can try building it.\n\nOn Wed., Oct. 19, 2022, 19:57 Vincent Plagnol, <vincent.p",
       "thread_id": "thread-e634e5dec8d6",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008579.html"
     },
     {
       "id": "msg-1be893259f52",
@@ -991,7 +1043,8 @@
       "body_snippet": "On Wed, 19 Oct 2022 23:39:57 +0100\nVincent Plagnol <vincent.plagnol at gmail.com> wrote:\n\n> gcc-12 -I\"/home/hornik/tmp/R/include\" -DNDEBUG   -I/usr/local/include\n> -DUSE_TYPE_CHECKING_STRICT -D_FORTIF",
       "thread_id": "thread-e634e5dec8d6",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008580.html"
     },
     {
       "id": "msg-c55892165533",
@@ -1012,7 +1065,8 @@
       "body_snippet": ">>>>> Duncan Murdoch \n>>>>>     on Wed, 19 Oct 2022 14:55:24 -0400 writes:\n\n    > It seems that this could be mostly avoided if instead of caching copies \n    > of Matrix methods when buildmer was ins",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 4,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008581.html"
     },
     {
       "id": "msg-5efef09f1cce",
@@ -1024,11 +1078,12 @@
       "subject_clean": "[R-pkg-devel] How ton print in the console from Rcpp",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Greetings,\n\nIn my CDatanet package, I want to print texts and values during a numerical\noptimization process. I saw in many posts that CRAN is not happy with\nsd::cout and sd::endl. What I understood is that it is better to use Rcpp\nfunctions. So I used:\n\nRcpp::Rcout << \"beta: \\n\";\nRcpp::print(betacpp);\nRcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n\nEverything is fine with the check --as-cran with Linux and Windows.\nHowever, there is a warning with Mac (\nhttps://www.r-project.org/nosvn/R.check/r-release-macos-arm64/CDatanet-00check.html\n)\nchecking compiled code ... WARNING\nFile ?CDatanet/libs/CDatanet.so?:\n  Found ?___assert_rtn?, possibly from ?assert? (C)\n    Objects: ?CDincomInfo.o?, ?CDincomInfo.rho.o?, ?Homophily.o?,\n      ?RcppExports.o?, ?SARTIncomplet.o?\n\nCompiled code should not call entry points which might terminate R nor\nwrite to stdout/stderr instead of to the console, nor use Fortran I/O\nnor system RNGs.\n\nI think this is because I am printing from C++ functions. Am I wrong? If\nnot, what is the best way to print in the console from C++ functions?\n\nBest regards,\n\nAristide Elys?e HOUNDETOUNGAN\n*Assistant Professor of Economics*\n*Website : *www.ahoundetoungan.com\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Greetings,\n\nIn my CDatanet package, I want to print texts and values during a numerical\noptimization process. I saw in many posts that CRAN is not happy with\nsd::cout and sd::endl. What I understood is that it is better to use Rcpp\nfunctions. So I used:\n\nRcpp::Rcout << \"beta: \\n\";\nRcpp::print(betacpp);\nRcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n\nEverything is fine with the check --as-cran with Linux and Windows.\nHowever, there is a warning with Mac (\nhttps://www.r-project.org/nosvn/R.check/r-release-macos-arm64/CDatanet-00check.html\n)\nchecking compiled code ... WARNING\nFile ‘CDatanet/libs/CDatanet.so’:\n  Found ‘___assert_rtn’, possibly from ‘assert’ (C)\n    Objects: ‘CDincomInfo.o’, ‘CDincomInfo.rho.o’, ‘Homophily.o’,\n      ‘RcppExports.o’, ‘SARTIncomplet.o’\n\nCompiled code should not call entry points which might terminate R nor\nwrite to stdout/stderr instead of to the console, nor use Fortran I/O\nnor system RNGs.\n\nI think this is because I am printing from C++ functions. Am I wrong? If\nnot, what is the best way to print in the console from C++ functions?\n\nBest regards,\n\nAristide Elysée HOUNDETOUNGAN\n*Assistant Professor of Economics*\n*Website : *www.ahoundetoungan.com\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Greetings,\n\nIn my CDatanet package, I want to print texts and values during a numerical\noptimization process. I saw in many posts that CRAN is not happy with\nsd::cout and sd::endl. What I understood i",
       "thread_id": "thread-5efef09f1cce",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008582.html"
     },
     {
       "id": "msg-8dbf0b9d817f",
@@ -1042,11 +1097,12 @@
       "references": [
         "<CALcKxsq1EYdsSh3i2MPLop8fxngVpAKfY8ZqMCmbG+k280VJoA@mail.gmail.com>"
       ],
-      "body_plain": "Hi,\n\nOn Thu, 20 Oct 2022 at 12:42, Elys?e Aristide <ariel92and at gmail.com> wrote:\n>\n> Greetings,\n>\n> In my CDatanet package, I want to print texts and values during a numerical\n> optimization process. I saw in many posts that CRAN is not happy with\n> sd::cout and sd::endl. What I understood is that it is better to use Rcpp\n> functions. So I used:\n>\n> Rcpp::Rcout << \"beta: \\n\";\n> Rcpp::print(betacpp);\n> Rcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n>\n> Everything is fine with the check --as-cran with Linux and Windows.\n> However, there is a warning with Mac (\n> https://www.r-project.org/nosvn/R.check/r-release-macos-arm64/CDatanet-00check.html\n> )\n> checking compiled code ... WARNING\n> File ?CDatanet/libs/CDatanet.so?:\n>   Found ?___assert_rtn?, possibly from ?assert? (C)\n>     Objects: ?CDincomInfo.o?, ?CDincomInfo.rho.o?, ?Homophily.o?,\n>       ?RcppExports.o?, ?SARTIncomplet.o?\n>\n> Compiled code should not call entry points which might terminate R nor\n> write to stdout/stderr instead of to the console, nor use Fortran I/O\n> nor system RNGs.\n>\n> I think this is because I am printing from C++ functions. Am I wrong? If\n> not, what is the best way to print in the console from C++ functions?\n\nNo, this is not related to the use of printing functions. It seems to\nbe related to RcppEigen according to this:\nhttps://stackoverflow.com/questions/70415854/helps-on-the-package-development\n\nOn Linux, I don't see ___assert_rtn being included in the final shared\nlibrary (this seems to happen only for macOS for some reason). What I\ndid find in the shared library is this:\n\n(internal::UIntPtr(eigen_unaligned_array_assert_workaround_gcc47(array))\n& (15)) == 0 && \"this assertion is explained here: \"\n\"http://eigen.tuxfamily.org/dox-devel/group__TopicUnalignedArrayAssert.html\"\n\" **** READ THIS WEB PAGE !!! ****\"\n\nNot sure if this is related to the issue you see, but it seems likely.\n\n-- \nI?aki ?car",
-      "body_snippet": "Hi,\n\nOn Thu, 20 Oct 2022 at 12:42, Elys?e Aristide <ariel92and at gmail.com> wrote:\n>\n> Greetings,\n>\n> In my CDatanet package, I want to print texts and values during a numerical\n> optimization proces",
+      "body_plain": "Hi,\n\nOn Thu, 20 Oct 2022 at 12:42, Elysée Aristide <ariel92and at gmail.com> wrote:\n>\n> Greetings,\n>\n> In my CDatanet package, I want to print texts and values during a numerical\n> optimization process. I saw in many posts that CRAN is not happy with\n> sd::cout and sd::endl. What I understood is that it is better to use Rcpp\n> functions. So I used:\n>\n> Rcpp::Rcout << \"beta: \\n\";\n> Rcpp::print(betacpp);\n> Rcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n>\n> Everything is fine with the check --as-cran with Linux and Windows.\n> However, there is a warning with Mac (\n> https://www.r-project.org/nosvn/R.check/r-release-macos-arm64/CDatanet-00check.html\n> )\n> checking compiled code ... WARNING\n> File ‘CDatanet/libs/CDatanet.so’:\n>   Found ‘___assert_rtn’, possibly from ‘assert’ (C)\n>     Objects: ‘CDincomInfo.o’, ‘CDincomInfo.rho.o’, ‘Homophily.o’,\n>       ‘RcppExports.o’, ‘SARTIncomplet.o’\n>\n> Compiled code should not call entry points which might terminate R nor\n> write to stdout/stderr instead of to the console, nor use Fortran I/O\n> nor system RNGs.\n>\n> I think this is because I am printing from C++ functions. Am I wrong? If\n> not, what is the best way to print in the console from C++ functions?\n\nNo, this is not related to the use of printing functions. It seems to\nbe related to RcppEigen according to this:\nhttps://stackoverflow.com/questions/70415854/helps-on-the-package-development\n\nOn Linux, I don't see ___assert_rtn being included in the final shared\nlibrary (this seems to happen only for macOS for some reason). What I\ndid find in the shared library is this:\n\n(internal::UIntPtr(eigen_unaligned_array_assert_workaround_gcc47(array))\n& (15)) == 0 && \"this assertion is explained here: \"\n\"http://eigen.tuxfamily.org/dox-devel/group__TopicUnalignedArrayAssert.html\"\n\" **** READ THIS WEB PAGE !!! ****\"\n\nNot sure if this is related to the issue you see, but it seems likely.\n\n-- \nIñaki Úcar",
+      "body_snippet": "Hi,\n\nOn Thu, 20 Oct 2022 at 12:42, Elysée Aristide <ariel92and at gmail.com> wrote:\n>\n> Greetings,\n>\n> In my CDatanet package, I want to print texts and values during a numerical\n> optimization proces",
       "thread_id": "thread-5efef09f1cce",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008583.html"
     },
     {
       "id": "msg-3bdc6f480c62",
@@ -1060,11 +1116,12 @@
       "references": [
         "<CALcKxsq1EYdsSh3i2MPLop8fxngVpAKfY8ZqMCmbG+k280VJoA@mail.gmail.com>"
       ],
-      "body_plain": "? Thu, 20 Oct 2022 12:43:30 +0200\nElys?e Aristide <ariel92and at gmail.com> ?????:\n\n> What I understood is that it is better to use Rcpp functions. So I\n> used:\n> \n> Rcpp::Rcout << \"beta: \\n\";\n> Rcpp::print(betacpp);\n> Rcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n\nThis seems to be a right way of printing from Rcpp code.\n\n> checking compiled code ... WARNING\n> File ?CDatanet/libs/CDatanet.so?:\n>   Found ?___assert_rtn?, possibly from ?assert? (C)\n>     Objects: ?CDincomInfo.o?, ?CDincomInfo.rho.o?, ?Homophily.o?,\n>       ?RcppExports.o?, ?SARTIncomplet.o?\n\nSince you don't call assert() yourself (which, in theory, shouldn't\nmatter as R packages are compiled with #define NDEBUG), it must be one\nof the C++ template classes you're using. They may contain calls to\nassert() or an equivalent, which get inlined inside your binary during\ncompilation. It might be even inside the implementation of the C++\nstandard library, which would be completely outside your control.\n\nI'm not sure, but it could be possible to explain this situation to\nCRAN as a false-positive. In order to find out further, you'll need\nsomeone with a macOS computer or experience in cross-platform\ndevelopment to either disassemble the existing binary or take the\ncompilation pipeline apart in order to find out where the calls to\n___assert_rtn originate.\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Thu, 20 Oct 2022 12:43:30 +0200\nElys?e Aristide <ariel92and at gmail.com> ?????:\n\n> What I understood is that it is better to use Rcpp functions. So I\n> used:\n> \n> Rcpp::Rcout << \"beta: \\n\";\n> Rcpp:",
+      "body_plain": "В Thu, 20 Oct 2022 12:43:30 +0200\nElysée Aristide <ariel92and at gmail.com> пишет:\n\n> What I understood is that it is better to use Rcpp functions. So I\n> used:\n> \n> Rcpp::Rcout << \"beta: \\n\";\n> Rcpp::print(betacpp);\n> Rcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n\nThis seems to be a right way of printing from Rcpp code.\n\n> checking compiled code ... WARNING\n> File ‘CDatanet/libs/CDatanet.so’:\n>   Found ‘___assert_rtn’, possibly from ‘assert’ (C)\n>     Objects: ‘CDincomInfo.o’, ‘CDincomInfo.rho.o’, ‘Homophily.o’,\n>       ‘RcppExports.o’, ‘SARTIncomplet.o’\n\nSince you don't call assert() yourself (which, in theory, shouldn't\nmatter as R packages are compiled with #define NDEBUG), it must be one\nof the C++ template classes you're using. They may contain calls to\nassert() or an equivalent, which get inlined inside your binary during\ncompilation. It might be even inside the implementation of the C++\nstandard library, which would be completely outside your control.\n\nI'm not sure, but it could be possible to explain this situation to\nCRAN as a false-positive. In order to find out further, you'll need\nsomeone with a macOS computer or experience in cross-platform\ndevelopment to either disassemble the existing binary or take the\ncompilation pipeline apart in order to find out where the calls to\n___assert_rtn originate.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Thu, 20 Oct 2022 12:43:30 +0200\nElysée Aristide <ariel92and at gmail.com> пишет:\n\n> What I understood is that it is better to use Rcpp functions. So I\n> used:\n> \n> Rcpp::Rcout << \"beta: \\n\";\n> Rcpp:",
       "thread_id": "thread-5efef09f1cce",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008584.html"
     },
     {
       "id": "msg-d4c7d9473829",
@@ -1079,11 +1136,12 @@
         "<CALcKxsq1EYdsSh3i2MPLop8fxngVpAKfY8ZqMCmbG+k280VJoA@mail.gmail.com>",
         "<20221020144644.38d04ef0@arachnoid>"
       ],
-      "body_plain": "On 20 October 2022 at 14:46, Ivan Krylov wrote:\n| ? Thu, 20 Oct 2022 12:43:30 +0200\n| Elys?e Aristide <ariel92and at gmail.com> ?????:\n| \n| > What I understood is that it is better to use Rcpp functions. So I\n| > used:\n| > \n| > Rcpp::Rcout << \"beta: \\n\";\n| > Rcpp::print(betacpp);\n| > Rcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n| \n| This seems to be a right way of printing from Rcpp code.\n\nYup!\n\nAnd as stated that alone does not cause `__assert_rtn` or many of the now\nalmost 2600 Rcpp-using packages (that print this way) would have issues.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 20 October 2022 at 14:46, Ivan Krylov wrote:\n| ? Thu, 20 Oct 2022 12:43:30 +0200\n| Elys?e Aristide <ariel92and at gmail.com> ?????:\n| \n| > What I understood is that it is better to use Rcpp functio",
+      "body_plain": "On 20 October 2022 at 14:46, Ivan Krylov wrote:\n| В Thu, 20 Oct 2022 12:43:30 +0200\n| Elysée Aristide <ariel92and at gmail.com> пишет:\n| \n| > What I understood is that it is better to use Rcpp functions. So I\n| > used:\n| > \n| > Rcpp::Rcout << \"beta: \\n\";\n| > Rcpp::print(betacpp);\n| > Rcpp::Rcout << \"log-likelihood: \" << llh << \"\\n\";\n| \n| This seems to be a right way of printing from Rcpp code.\n\nYup!\n\nAnd as stated that alone does not cause `__assert_rtn` or many of the now\nalmost 2600 Rcpp-using packages (that print this way) would have issues.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 20 October 2022 at 14:46, Ivan Krylov wrote:\n| В Thu, 20 Oct 2022 12:43:30 +0200\n| Elysée Aristide <ariel92and at gmail.com> пишет:\n| \n| > What I understood is that it is better to use Rcpp functio",
       "thread_id": "thread-5efef09f1cce",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008585.html"
     },
     {
       "id": "msg-8f4b013f3cc1",
@@ -1103,7 +1161,8 @@
       "body_snippet": "Thank you very much for your answers.\n\nI finally noticed that the issue comes from the numerical optimization, in which I use the class MFuncGrad of the package RcppNumerical. Is there any problem in ",
       "thread_id": "thread-5efef09f1cce",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008586.html"
     },
     {
       "id": "msg-1a5dc56cff1c",
@@ -1122,7 +1181,8 @@
       "body_snippet": "Thank you Andrew for offering to help. The R-hub package sorted me out for\ntesting for various OSs.\n\nAnd Ivan: thank you very much- you were spot on. Swapping the order of\nconfig.h and system headers ",
       "thread_id": "thread-e634e5dec8d6",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008587.html"
     },
     {
       "id": "msg-8c14fce25455",
@@ -1139,11 +1199,12 @@
         "<25425.16943.184057.68532@rob.eddelbuettel.com>",
         "<SJ0PR10MB5719CC02075B1218B23F2A1FFE2A9@SJ0PR10MB5719.namprd10.prod.outlook.com>"
       ],
-      "body_plain": "On 20 October 2022 at 13:16, Elys?e Aristide wrote:\n| Thank you very much for your answers.\n| \n| I finally noticed that the issue comes from the numerical optimization, in which I use the class MFuncGrad of the package RcppNumerical. Is there any problem in using this class? This is the only way I know to compute integrals of perform numerical optimizations in Rcpp. The other way might be: construct the function to be minimized in Rcpp and use the function optim in R. But this is not efficient.\n\nThat package is also used by others [1] and you should maybe study their code\nand setup as it seems unlikely to me that your woes are due to\nRcppNumerical. It likely is a simple inadvertent issue in your package.\n\nDirk\n\n[1] https://cloud.r-project.org/web/packages/RcppNumerical/index.html shows\nReverse imports:\n  BayesPPD, ccdf, glmdisc, MCPModPack, secr, teachingApps\nReverse linking to:\n  apeglm, BayesPPD, BVSNLP, CDatanet, COMIX, fido, gbeta, glmdisc,\n  MCPModPack, OwenQ, secr, teachingApps, vennLasso, ztpln \nwhich should give you plenty of examples.\n\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 20 October 2022 at 13:16, Elys?e Aristide wrote:\n| Thank you very much for your answers.\n| \n| I finally noticed that the issue comes from the numerical optimization, in which I use the class MFuncG",
+      "body_plain": "On 20 October 2022 at 13:16, Elysée Aristide wrote:\n| Thank you very much for your answers.\n| \n| I finally noticed that the issue comes from the numerical optimization, in which I use the class MFuncGrad of the package RcppNumerical. Is there any problem in using this class? This is the only way I know to compute integrals of perform numerical optimizations in Rcpp. The other way might be: construct the function to be minimized in Rcpp and use the function optim in R. But this is not efficient.\n\nThat package is also used by others [1] and you should maybe study their code\nand setup as it seems unlikely to me that your woes are due to\nRcppNumerical. It likely is a simple inadvertent issue in your package.\n\nDirk\n\n[1] https://cloud.r-project.org/web/packages/RcppNumerical/index.html shows\nReverse imports:\n  BayesPPD, ccdf, glmdisc, MCPModPack, secr, teachingApps\nReverse linking to:\n  apeglm, BayesPPD, BVSNLP, CDatanet, COMIX, fido, gbeta, glmdisc,\n  MCPModPack, OwenQ, secr, teachingApps, vennLasso, ztpln \nwhich should give you plenty of examples.\n\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 20 October 2022 at 13:16, Elysée Aristide wrote:\n| Thank you very much for your answers.\n| \n| I finally noticed that the issue comes from the numerical optimization, in which I use the class MFuncG",
       "thread_id": "thread-5efef09f1cce",
       "thread_depth": 4,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008588.html"
     },
     {
       "id": "msg-6e793d7ba248",
@@ -1159,7 +1220,8 @@
       "body_snippet": "Davis Vaughan and I were looking into the `-Wstrict-prototypes`\nwarnings for C code that were recently added to the R-devel checks. We\ndid a little research and found that these warnings are intended ",
       "thread_id": "thread-6e793d7ba248",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008589.html"
     },
     {
       "id": "msg-7d3312917a7e",
@@ -1178,7 +1240,8 @@
       "body_snippet": "Yes, the resubmission and re-building has fixed the problem with buildmer/\nMatrix.\nCarl\n\nOn Tue, Oct 18, 2022 at 12:17 PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> I see the same thing.  ",
       "thread_id": "thread-0ee73566d277",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008590.html"
     },
     {
       "id": "msg-c456137f2523",
@@ -1194,7 +1257,8 @@
       "body_snippet": "I published the R Package AQLSChemes on CRAN in May 2022. The book \"An\nIntroduction to Acceptance Sampling and SPC with R\" was published after\nthat, and included examples of the use of AQLSChemes pack",
       "thread_id": "thread-c456137f2523",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008591.html"
     },
     {
       "id": "msg-6ede882a15cc",
@@ -1212,7 +1276,8 @@
       "body_snippet": "????\n\nhttps://cran.r-project.org/web//packages/AQLSchemes/index.html\n\n-Roy\n\n> On Oct 25, 2022, at 2:01 PM, John Lawson <lawsonjsl7net at gmail.com> wrote:\n> \n> AQLSChemes\n\n**********************\n\"The ",
       "thread_id": "thread-c456137f2523",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008592.html"
     },
     {
       "id": "msg-b51ad94a506a",
@@ -1230,7 +1295,8 @@
       "body_snippet": "On Tue, 25 Oct 2022 15:01:18 -0600\nJohn Lawson <lawsonjsl7net at gmail.com> wrote:\n\n> I published the R Package AQLSChemes on CRAN in May 2022. The book \"An\n> Introduction to Acceptance Sampling and S",
       "thread_id": "thread-c456137f2523",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008593.html"
     },
     {
       "id": "msg-f28d0ee871f3",
@@ -1249,7 +1315,8 @@
       "body_snippet": "On Wed, 26 Oct 2022 10:42:54 +1300\nRolf Turner <r.turner at auckland.ac.nz> wrote:\n\n> On Tue, 25 Oct 2022 15:01:18 -0600\n> John Lawson <lawsonjsl7net at gmail.com> wrote:\n> \n> > I published the R Pack",
       "thread_id": "thread-c456137f2523",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008594.html"
     },
     {
       "id": "msg-8f3ed2ac3de7",
@@ -1269,7 +1336,8 @@
       "body_snippet": "The capital does not matter for CRAN, packages may not be published if an\nexisting package exists by the same name, regardless of case.\n\nPlus, the package at https://CRAN.R-project.org/package=AQLSche",
       "thread_id": "thread-c456137f2523",
       "thread_depth": 3,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008595.html"
     },
     {
       "id": "msg-80dff787f630",
@@ -1285,7 +1353,8 @@
       "body_snippet": "Hello all,\n\nOur package did not pass the automagical checks when submitted to CRAN. We think the rejection is a false positive, so we ?reply-all to that message and explain? as following the official ",
       "thread_id": "thread-80dff787f630",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008596.html"
     },
     {
       "id": "msg-83ff732a85d2",
@@ -1303,7 +1372,8 @@
       "body_snippet": "This is definitely not a false positive. Find a way to not run long calcs during the CRAN build. There is no alternative.\n\nOne way this can be done is by only running your examples when an environment",
       "thread_id": "thread-80dff787f630",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008597.html"
     },
     {
       "id": "msg-51478b0fbb39",
@@ -1322,7 +1392,8 @@
       "body_snippet": "I run into this all the time.  The trick is to find a minimal example that the package will work with that shows how to make a call,  and allows for CRAN, especially on new submissions,  to test to so",
       "thread_id": "thread-80dff787f630",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008598.html"
     },
     {
       "id": "msg-d51c4aa6accf",
@@ -1340,7 +1411,8 @@
       "body_snippet": "On 2022-10-28 20:48, Ying Li via R-package-devel wrote:\n>> Flavor: r-devel-windows-x86_64\n>> Check: examples, Result: NOTE\n>>  Examples with CPU (user + system) or elapsed time > 10s\n>>       user sys",
       "thread_id": "thread-80dff787f630",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008599.html"
     },
     {
       "id": "msg-65244b6eb323",
@@ -1359,7 +1431,8 @@
       "body_snippet": ">>>>> Jamie Lentin \n>>>>>     on Sat, 29 Oct 2022 13:14:20 +0100 writes:\n\n    > On 2022-10-28 20:48, Ying Li via R-package-devel wrote:\n    >>> Flavor: r-devel-windows-x86_64 Check: examples, Result:\n",
       "thread_id": "thread-80dff787f630",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008600.html"
     },
     {
       "id": "msg-cd1ae191ed63",
@@ -1375,7 +1448,8 @@
       "body_snippet": "Hi,\n\nI'm looking for advice on how to resurrect an archived R package.\n\nI have a couple of scripts that rely on the CC0-licensed BIS package (https://cran.r-project.org/package=BIS) which downloads an",
       "thread_id": "thread-cd1ae191ed63",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008603.html"
     },
     {
       "id": "msg-29237760be01",
@@ -1387,11 +1461,12 @@
       "subject_clean": "[R-pkg-devel] Latex issue on CRAN: Package pdftex.def Error",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear list\n\nTrying to push a fix to CRAN, I?m now running into a Latex issue. I can neither relate the issue I?m trying to resolve, nor my fix, to this new problem, so I?m a bit lost (and slightly frustrated).\n\nI cannot reproduce this specific issue anywhere, neither locally (macOS), nor on win devel, r-hub and Github (there are some other issues on Gh and r-hub, but I don?t believe them to be relevant here).\n\nAll I have to go on is:\n\n- A WARNING in ?checking PDF version of manual?: LaTeX errors found: ! Package pdftex.def Error: File `...' not found: using draft setting.\n- An ERROR in ?checking PDF version of manual without index?\n- A NOTE in ?checking for non-standard things in the check directory?: Found the following files/directories: ?...-manual.tex?\n\nIt seems like when building the PDF manual, an image that should be included is not found and then things fall apart, causing both the error and note. For all I know, the image should be there unter `man/figures/`.\n\nThe problem is showing up in the same way for both ?Windows? and ?Debian? (with slightly different notes due to intermediate files not being cleaned up properly).\n\nHave there been and Latex-related changes to CRAN recently? Are others seeing similar problems? Any ideas what could be causing this?\n\nFor completeness: https://win-builder.r-project.org/incoming_pretest/ricu_0.5.4_20221030_131320/\n\nBest,\nNicolas \n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Dear list\n\nTrying to push a fix to CRAN, I?m now running into a Latex issue. I can neither relate the issue I?m trying to resolve, nor my fix, to this new problem, so I?m a bit lost (and slightly frus",
+      "body_plain": "Dear list\n\nTrying to push a fix to CRAN, I’m now running into a Latex issue. I can neither relate the issue I’m trying to resolve, nor my fix, to this new problem, so I’m a bit lost (and slightly frustrated).\n\nI cannot reproduce this specific issue anywhere, neither locally (macOS), nor on win devel, r-hub and Github (there are some other issues on Gh and r-hub, but I don’t believe them to be relevant here).\n\nAll I have to go on is:\n\n- A WARNING in “checking PDF version of manual”: LaTeX errors found: ! Package pdftex.def Error: File `...' not found: using draft setting.\n- An ERROR in “checking PDF version of manual without index”\n- A NOTE in “checking for non-standard things in the check directory”: Found the following files/directories: ‘...-manual.tex’\n\nIt seems like when building the PDF manual, an image that should be included is not found and then things fall apart, causing both the error and note. For all I know, the image should be there unter `man/figures/`.\n\nThe problem is showing up in the same way for both “Windows” and “Debian” (with slightly different notes due to intermediate files not being cleaned up properly).\n\nHave there been and Latex-related changes to CRAN recently? Are others seeing similar problems? Any ideas what could be causing this?\n\nFor completeness: https://win-builder.r-project.org/incoming_pretest/ricu_0.5.4_20221030_131320/\n\nBest,\nNicolas \n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear list\n\nTrying to push a fix to CRAN, I’m now running into a Latex issue. I can neither relate the issue I’m trying to resolve, nor my fix, to this new problem, so I’m a bit lost (and slightly frus",
       "thread_id": "thread-29237760be01",
       "thread_depth": 0,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008601.html"
     },
     {
       "id": "msg-7b745058e242",
@@ -1409,7 +1484,8 @@
       "body_snippet": "? Sun, 30 Oct 2022 14:48:05 +0100\nr at nbenn.ch ?????:\n\n> It seems like when building the PDF manual, an image that should be\n> included is not found and then things fall apart, causing both the\n> err",
       "thread_id": "thread-29237760be01",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008602.html"
     },
     {
       "id": "msg-e580f8da98ce",
@@ -1423,11 +1499,12 @@
       "references": [
         "<d01a36ff-d779-41cc-b3b7-df2414d8cbaf@app.fastmail.com>"
       ],
-      "body_plain": "? Sun, 30 Oct 2022 16:56:03 +0900\n\"Stefan Angrick\" <contact at stefanangrick.net> ?????:\n\n> Writing code to digest the new data format is straightforward, so I'd\n> like to bring the package back. Unfortunately I'm unable to reach the\n> original author, so I'm unsure how to proceed.\n> \n> Does CRAN allow for people other than the original author to bring\n> back a package?\n\nAccording to the CRAN policy [*], it should be possible to submit the\nfixed package under the original name with an explanation that the\nprevious maintainer is unavailable:\n\n>> Explain any change in the maintainer?s email address and if possible\n>> send confirmation from the previous address (by a separate email to\n>> CRAN-submissions at R-project.org) or explain why it is not possible.\n\nDisclaimer: I've never done this myself.\n\nFor the record, the author's GitHub and Twitter accounts are trivial to\nfind; there is a bit of activity in the former (only once in 2022), and\nthe last update in the latter was in 2020.\n\n> In either case, how would the original package author be acknowledged?\n\nMake sure to mention Eric Persson in the Authors: field of the\nDESCRIPTION file as a full author, but not the maintainer.\n\nYou will also need to make sure that the examples never crash, even if\nthere's no connection to the Internet, which may have been part of the\noriginal reason the package had been archived.\n\n-- \nBest regards,\nIvan\n\n[*] https://cran.r-project.org/web/packages/policies.html",
-      "body_snippet": "? Sun, 30 Oct 2022 16:56:03 +0900\n\"Stefan Angrick\" <contact at stefanangrick.net> ?????:\n\n> Writing code to digest the new data format is straightforward, so I'd\n> like to bring the package back. Unfo",
+      "body_plain": "В Sun, 30 Oct 2022 16:56:03 +0900\n\"Stefan Angrick\" <contact at stefanangrick.net> пишет:\n\n> Writing code to digest the new data format is straightforward, so I'd\n> like to bring the package back. Unfortunately I'm unable to reach the\n> original author, so I'm unsure how to proceed.\n> \n> Does CRAN allow for people other than the original author to bring\n> back a package?\n\nAccording to the CRAN policy [*], it should be possible to submit the\nfixed package under the original name with an explanation that the\nprevious maintainer is unavailable:\n\n>> Explain any change in the maintainer’s email address and if possible\n>> send confirmation from the previous address (by a separate email to\n>> CRAN-submissions at R-project.org) or explain why it is not possible.\n\nDisclaimer: I've never done this myself.\n\nFor the record, the author's GitHub and Twitter accounts are trivial to\nfind; there is a bit of activity in the former (only once in 2022), and\nthe last update in the latter was in 2020.\n\n> In either case, how would the original package author be acknowledged?\n\nMake sure to mention Eric Persson in the Authors: field of the\nDESCRIPTION file as a full author, but not the maintainer.\n\nYou will also need to make sure that the examples never crash, even if\nthere's no connection to the Internet, which may have been part of the\noriginal reason the package had been archived.\n\n-- \nBest regards,\nIvan\n\n[*] https://cran.r-project.org/web/packages/policies.html",
+      "body_snippet": "В Sun, 30 Oct 2022 16:56:03 +0900\n\"Stefan Angrick\" <contact at stefanangrick.net> пишет:\n\n> Writing code to digest the new data format is straightforward, so I'd\n> like to bring the package back. Unfo",
       "thread_id": "thread-cd1ae191ed63",
       "thread_depth": 1,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008604.html"
     },
     {
       "id": "msg-5adf0251d1c8",
@@ -1446,7 +1523,8 @@
       "body_snippet": "On 29.10.2022 14:14, Jamie Lentin wrote:\n> On 2022-10-28 20:48, Ying Li via R-package-devel wrote:\n>>> Flavor: r-devel-windows-x86_64\n>>> Check: examples, Result: NOTE\n>>> ?Examples with CPU (user + s",
       "thread_id": "thread-80dff787f630",
       "thread_depth": 2,
-      "month": "2022-10"
+      "month": "2022-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q4/008605.html"
     }
   ],
   "threads": [

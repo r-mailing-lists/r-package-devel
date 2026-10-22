@@ -21,7 +21,8 @@
       "body_snippet": "Tomas,\nDo you have any logging in the build environment that could tell you\nwhether the environment is running into resource constraints?  I can\nimagine IO (disk or network) or CPU contention with tha",
       "thread_id": "thread-a0d0961b2bf4",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008213.html"
     },
     {
       "id": "msg-54e67ef87711",
@@ -41,7 +42,8 @@
       "body_snippet": "On 6/30/22 17:45, Barbara Lerner wrote:\n> Thanks for these suggestions.? I attempted to submit a slightly \n> earlier version of my package a few weeks ago and saw the slowdown on \n> winbuilder then, t",
       "thread_id": "thread-54e67ef87711",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008214.html"
     },
     {
       "id": "msg-bad1ac3d3231",
@@ -62,7 +64,8 @@
       "body_snippet": "And if you told us what the package is you are tasking about or gave us \naccess to the package sources, we could easily check that. Without \nreproducible examples we really cannot help.\n\nBest,\nUwe Lig",
       "thread_id": "thread-54e67ef87711",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008215.html"
     },
     {
       "id": "msg-759f7e3d7575",
@@ -78,7 +81,8 @@
       "body_snippet": "Dear list,\n\nindependent of the thread on this list about slow examples on R 4.2 on windows \nI have discovered over the last few days that some of my benchmarks (look for \nt4 and t9) run by a factor of",
       "thread_id": "thread-759f7e3d7575",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008217.html"
     },
     {
       "id": "msg-3433902d1931",
@@ -90,11 +94,12 @@
       "subject_clean": "[R-pkg-devel] Seeking feedback on a package before submitting to CRAN",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear all,?\n\nI have written a small?lightweight utility package for R developers that implements opinionated assertion checking routines. This is mostly a drop-in replacement for base::stopifnot() but with some additional features that simplify debugging and error location. Before submitting the package on CRAN I was hoping that someone here would be so kind to have a quick look and maybe offer some feedback. The package is called \"precondition\" and can be found on GitHub here:\n\n? https://github.com/tzakharko/precondition?\n\nIf you would like to leave some feedback I have created a GitHub issue just for that:?\n\n  https://github.com/tzakharko/precondition/issues/1\n\nHere is a quick summary as to what this package is about: it implements a thematic collection of assertion routines that check some conditions and report an informative error if the conditions are not TRUE. The routines have been inspired by similar mechanisms in the Swift programming language and discussion on the Swift design mailing lists. There are three assertion routines:\n\n- precondition(x>0) to check inputs/environment before executing some code (to be used to check function arguments, for example)\n\n- postcondition(.value. > 0) to check the function result?\n\n- sanity_check(!is.null(x)) to check internal assumptions/invariants of the algorithm and guard against bugs, will immediately abort the program bypassing error handling when failed. Sanity checks are internal assertions and failing them always mean that there is a critical bug ?in the code which would make any attempt at error recovery futile\n\nParts of the assertion predicate can be \"embraced\", which will print them on assertion failure, making it easier to see what went wrong, e.g.?\n\n? x <- 0\n? precondition({{x}} > 0)\n??# Error:\n? # ! precondition failure\n? # ! `x > 0` is not TRUE\n? # ?\n? # ?`x` = dbl 10\n\nThe package README has some usage examples and background discussion.?\n\nThank you in advance for your help,?\n\nTaras\n\nP.S. To anticipate the mandatory (and justified) question, the reason why I decided to roll my own solution instead of using one of the existing packages (like the popular assertthat) is because I needed something very simple and with low performance overhead to help me debug my code and document program invariants.?",
-      "body_snippet": "Dear all,?\n\nI have written a small?lightweight utility package for R developers that implements opinionated assertion checking routines. This is mostly a drop-in replacement for base::stopifnot() but ",
+      "body_plain": "Dear all, \n\nI have written a small lightweight utility package for R developers that implements opinionated assertion checking routines. This is mostly a drop-in replacement for base::stopifnot() but with some additional features that simplify debugging and error location. Before submitting the package on CRAN I was hoping that someone here would be so kind to have a quick look and maybe offer some feedback. The package is called \"precondition\" and can be found on GitHub here:\n\n  https://github.com/tzakharko/precondition \n\nIf you would like to leave some feedback I have created a GitHub issue just for that: \n\n  https://github.com/tzakharko/precondition/issues/1\n\nHere is a quick summary as to what this package is about: it implements a thematic collection of assertion routines that check some conditions and report an informative error if the conditions are not TRUE. The routines have been inspired by similar mechanisms in the Swift programming language and discussion on the Swift design mailing lists. There are three assertion routines:\n\n- precondition(x>0) to check inputs/environment before executing some code (to be used to check function arguments, for example)\n\n- postcondition(.value. > 0) to check the function result \n\n- sanity_check(!is.null(x)) to check internal assumptions/invariants of the algorithm and guard against bugs, will immediately abort the program bypassing error handling when failed. Sanity checks are internal assertions and failing them always mean that there is a critical bug  in the code which would make any attempt at error recovery futile\n\nParts of the assertion predicate can be \"embraced\", which will print them on assertion failure, making it easier to see what went wrong, e.g. \n\n  x <- 0\n  precondition({{x}} > 0)\n  # Error:\n  # ! precondition failure\n  # ! `x > 0` is not TRUE\n  # ?\n  #  `x` = dbl 10\n\nThe package README has some usage examples and background discussion. \n\nThank you in advance for your help, \n\nTaras\n\nP.S. To anticipate the mandatory (and justified) question, the reason why I decided to roll my own solution instead of using one of the existing packages (like the popular assertthat) is because I needed something very simple and with low performance overhead to help me debug my code and document program invariants.?",
+      "body_snippet": "Dear all, \n\nI have written a small lightweight utility package for R developers that implements opinionated assertion checking routines. This is mostly a drop-in replacement for base::stopifnot() but ",
       "thread_id": "thread-3433902d1931",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008218.html"
     },
     {
       "id": "msg-dd7a3c3ffa66",
@@ -116,7 +121,8 @@
       "body_snippet": "The package can be downloaded from github:\n\nhttps://github.com/End-to-end-provenance/rdtLite\n\nBarbara\n\nUwe Ligges wrote on 7/1/22 3:49 AM:\n> And if you told us what the package is you are tasking abou",
       "thread_id": "thread-54e67ef87711",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008216.html"
     },
     {
       "id": "msg-0402f9778e59",
@@ -132,7 +138,8 @@
       "body_snippet": "Hello, in my package documentation I want to include URLs with query string parameters and anchors, within a table. A minimally reproducible example is this content in file \"man/mre.Rd\":\n\n\\name{mre}\n\\",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008219.html"
     },
     {
       "id": "msg-2a41ed28ce63",
@@ -150,7 +157,8 @@
       "body_snippet": "Am 02.07.22 um 12:01 schrieb Ralf Herold:\n> Hello, in my package documentation I want to include URLs with query string parameters and anchors, within a table. A minimally reproducible example is this",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008220.html"
     },
     {
       "id": "msg-3ab215149c8f",
@@ -169,7 +177,8 @@
       "body_snippet": "Thanks Sebastian, \n\nbut not only hash, also ampersand in \\href in a tabular environment does need to be escaped, otherwise it does not latex (example below). I was not aware it is a known limitation f",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008221.html"
     },
     {
       "id": "msg-7d8d8285a381",
@@ -189,7 +198,8 @@
       "body_snippet": "Am 03.07.22 um 08:27 schrieb Ralf Herold:\n> Thanks Sebastian,\n> \n> but not only hash, also ampersand in \\href in a tabular environment does \n> need to be escaped, otherwise it does not latex (example ",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008222.html"
     },
     {
       "id": "msg-258d4ffe8c24",
@@ -205,7 +215,8 @@
       "body_snippet": "Hi all,\n\nIn order to support my local students and other blind users, I install every version of R and re-build every document used, almost all of which are R markdown documents.\n\nThat means re-instal",
       "thread_id": "thread-258d4ffe8c24",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008223.html"
     },
     {
       "id": "msg-794ec0c4ffbf",
@@ -223,7 +234,8 @@
       "body_snippet": "Hi Jonathan,\n\nSince we don't have a separate \"R on Windows\" or \"R installation\nand administration\" mailing list, I think that this question is a\nbetter fit for R-help, not R-package-devel. Although R-",
       "thread_id": "thread-258d4ffe8c24",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008224.html"
     },
     {
       "id": "msg-8796ac799929",
@@ -239,7 +251,8 @@
       "body_snippet": "I'm trying to track down a segfault in rgl on macOS, so I need to load R \nunder lldb and set breakpoints in the C++ code, examine local variables, \netc.  Reading WRE, I thought setting CXXFLAGS=-O0 in",
       "thread_id": "thread-8796ac799929",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008225.html"
     },
     {
       "id": "msg-8a9586e21bd4",
@@ -257,7 +270,8 @@
       "body_snippet": "Le 05/07/2022 ? 15:35, Duncan Murdoch a ?crit?:\n> I'm trying to track down a segfault in rgl on macOS, so I need to load \n> R under lldb and set breakpoints in the C++ code, examine local \n> variables",
       "thread_id": "thread-8796ac799929",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008226.html"
     },
     {
       "id": "msg-db0d4481298c",
@@ -275,7 +289,8 @@
       "body_snippet": "On Tue, 5 Jul 2022 09:35:05 -0400\nDuncan Murdoch <murdoch.duncan at gmail.com> wrote:\n\n> I see the -O0 option that I added, but afterwards -O2 coming from \n> somewhere in R.\n\nIt seems to come from the",
       "thread_id": "thread-8796ac799929",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008227.html"
     },
     {
       "id": "msg-423d7d4ab6db",
@@ -294,7 +309,8 @@
       "body_snippet": "The installer asks you\n\n\"Save Version in Registry\" with Description \"Save the R version and \ninstall path in the Registry\". If this is checked in the installation \nwizard, it should work, otherwise no",
       "thread_id": "thread-258d4ffe8c24",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008228.html"
     },
     {
       "id": "msg-ecf70c68919a",
@@ -314,7 +330,8 @@
       "body_snippet": "Hi Jonathan,\n\nI'm not certain if this is the issue you're encountering, but I've\nnoticed that different versions of R may write to different locations\nin the registry.\n\nRight now, on my machine, I see",
       "thread_id": "thread-258d4ffe8c24",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008229.html"
     },
     {
       "id": "msg-3fe9b51eda5a",
@@ -335,7 +352,8 @@
       "body_snippet": "Thanks and I would like to define the follow-up actions: \n\n1) change function \"writeURL\" on line 207 to read, for example, url <- fsub(\"([%#&])\", \"\\\\\\\\1\",  url) in https://svn.r-project.org/R/trunk/sr",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 4,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008230.html"
     },
     {
       "id": "msg-dfb8ecbc6bfd",
@@ -353,7 +371,8 @@
       "body_snippet": "Jonathon,\nAre you using a very old version of regdump?  Could it be a 32 bit\nversion?\n\nGreg\n\nOn Tue, 5 Jul 2022 at 12:00, Jonathan Godfrey <A.J.Godfrey at massey.ac.nz>\nwrote:\n\n> Hi all,\n>\n> In order ",
       "thread_id": "thread-258d4ffe8c24",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008231.html"
     },
     {
       "id": "msg-ecff51ddee1a",
@@ -372,7 +391,8 @@
       "body_snippet": "On 7/5/22 16:11, Ivan Krylov wrote:\n> On Tue, 5 Jul 2022 09:35:05 -0400\n> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>\n>> I see the -O0 option that I added, but afterwards -O2 coming from\n>> ",
       "thread_id": "thread-8796ac799929",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008232.html"
     },
     {
       "id": "msg-44de783e7ab1",
@@ -392,7 +412,8 @@
       "body_snippet": "On 07/07/2022 3:41 a.m., Tomas Kalibera wrote:\n> \n> On 7/5/22 16:11, Ivan Krylov wrote:\n>> On Tue, 5 Jul 2022 09:35:05 -0400\n>> Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>>\n>>> I see the -O0",
       "thread_id": "thread-8796ac799929",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008233.html"
     },
     {
       "id": "msg-1dfe7caf8e86",
@@ -413,7 +434,8 @@
       "body_snippet": "On 7/5/22 19:27, Kevin Ushey wrote:\n> Hi Jonathan,\n>\n> I'm not certain if this is the issue you're encountering, but I've\n> noticed that different versions of R may write to different locations\n> in t",
       "thread_id": "thread-258d4ffe8c24",
       "thread_depth": 4,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008234.html"
     },
     {
       "id": "msg-e3e8c203eaf2",
@@ -425,11 +447,12 @@
       "subject_clean": "[R-pkg-devel] No news entries found",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi,\n\nToday I have submitted a new version of the RALSA package. Soon after I \nreceived an automatic email letting me know that the package did not \npass some of the pre-tests:\n\n> package RALSA_1.3.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests:\n> Windows:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log>\n> Status: 2 NOTEs\n> Debian:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log>\n> Status: 1 NOTE\n>   \n> Last released version's CRAN status: OK: 9, NOTE: 4\n> See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html>\n\nTo summarize:\n\n1. Windows checks found possibly invalid DOIs. This is to be ignored, as \nstated here: \nhttps://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n\n2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the following note:\n\nchecking package subdirectories ... NOTE\nProblems with news in 'NEWS.md':\nNo news entries found.\n\nThis is rather strange because I have added one of the largest news \nupdates I ever made for this package in the NEWS.md file with this \nsubmission. Further, this note appears only in these four of the 13 \nplatforms where the package is checked.\n\nApparently, this is beyond my control and I can do nothing to fix it on \nmy end. I have already replied to the email to notify the \nCRAN-submissions at R-project.org this is a false-positive as advised in \nthe email itself, but I thought the mailing list should also be aware of \nthis issue.\n\nBest,\nPlamen\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnolo?ki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail: plamen.mirazchiyski at ineri.org",
+      "body_plain": "Hi,\n\nToday I have submitted a new version of the RALSA package. Soon after I \nreceived an automatic email letting me know that the package did not \npass some of the pre-tests:\n\n> package RALSA_1.3.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests:\n> Windows:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log>\n> Status: 2 NOTEs\n> Debian:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log>\n> Status: 1 NOTE\n>   \n> Last released version's CRAN status: OK: 9, NOTE: 4\n> See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html>\n\nTo summarize:\n\n1. Windows checks found possibly invalid DOIs. This is to be ignored, as \nstated here: \nhttps://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n\n2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the following note:\n\nchecking package subdirectories ... NOTE\nProblems with news in 'NEWS.md':\nNo news entries found.\n\nThis is rather strange because I have added one of the largest news \nupdates I ever made for this package in the NEWS.md file with this \nsubmission. Further, this note appears only in these four of the 13 \nplatforms where the package is checked.\n\nApparently, this is beyond my control and I can do nothing to fix it on \nmy end. I have already replied to the email to notify the \nCRAN-submissions at R-project.org this is a false-positive as advised in \nthe email itself, but I thought the mailing list should also be aware of \nthis issue.\n\nBest,\nPlamen\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnološki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail: plamen.mirazchiyski at ineri.org",
       "body_snippet": "Hi,\n\nToday I have submitted a new version of the RALSA package. Soon after I \nreceived an automatic email letting me know that the package did not \npass some of the pre-tests:\n\n> package RALSA_1.3.0.t",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008235.html"
     },
     {
       "id": "msg-abcb79a5cdb8",
@@ -451,7 +474,8 @@
       "body_snippet": "Am 05.07.22 um 19:56 schrieb Ralf Herold:\n> Thanks and I would like to define the follow-up actions:\n> \n> 1) change function \"writeURL\" on line 207 to read, for example, url <- \n> fsub(\"([%#&])\", \"\\\\\\",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008236.html"
     },
     {
       "id": "msg-b01c5b211493",
@@ -469,7 +493,8 @@
       "body_snippet": "On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n> Hi,\n> \n> Today I have submitted a new version of the RALSA package. Soon after I\n> received an automatic email letting me know that the package di",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008237.html"
     },
     {
       "id": "msg-6b10e46dcced",
@@ -488,7 +513,8 @@
       "body_snippet": ")There's been recent updates in R-devel\n(https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\nthat do more validation of the syntax/format in NEWS and NEWS.md\nfiles. This wa",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008238.html"
     },
     {
       "id": "msg-a95a70122151",
@@ -506,7 +532,8 @@
       "body_snippet": "On Thu, 7 Jul 2022 21:55:06 +0200\nPlamen Mirazchiyski <plamen.mirazchiyski at ineri.org> wrote:\n\n> Problems with news in 'NEWS.md':\n> No news entries found.\n\nThis is a new check in R-devel:\nhttps://gi",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008239.html"
     },
     {
       "id": "msg-ff472d328e4f",
@@ -529,7 +556,8 @@
       "body_snippet": "Great, thanks -- \n\nusing \\out{} to wrap \\href{} in .Rd for latex rendering does circumvent the issue that I reported, which is that .get_urls_from_Rd() is called such that it cannot handle \\ifelse{} e",
       "thread_id": "thread-0402f9778e59",
       "thread_depth": 6,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008240.html"
     },
     {
       "id": "msg-1ad4a658ee41",
@@ -545,11 +573,12 @@
         "<2216f174-35ec-08cf-89da-87f9f4dbaca4@gmail.com>",
         "<CAFDcVCRidRMRdB7_nJprrXYsKZ=Y1ES7YHUmRohm5k-2Lu+u1g@mail.gmail.com>"
       ],
-      "body_plain": "Thank you all for your help.\n\nI have found the problem - I had accented characters in names of people \nI was thanking for discovering bugs. After replacing them with \nnon-accented characters everything went just fine and the package is on \nits way to CRAN.\n\nI do find, though, the message \"No news entries found.\" quite \nmisleading. Yes, there is a problem, but the message is not even close \nto what actual the problem is. Unfortunately, the r-svn repository on \nGitHub does not have the possibility to report this as an issue.\n\nThank you once again.\n\nBest,\nPlamen\n\nOn 7/8/2022 12:21 AM, Henrik Bengtsson wrote:\n> )There's been recent updates in R-devel\n> (https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\n> that do more validation of the syntax/format in NEWS and NEWS.md\n> files. This was done to make sure news() works in more cases (e.g. it\n> may return just NULL if the NEWS.md file is not formatted as the tool\n> expect).  I guess it will also help render NEWS/NEWS.md files on the\n> CRAN package pages.\n>\n> If you run,\n>\n> news(package = \"RALSA\")\n>\n> and see the NEWS entries, then the format should be correct, otherwise\n> not.  You can use:\n>\n> news <- tools:::.build_news_db_from_package_NEWS_md(\"NEWS.md\")\n> if (is.null(news)) stop(\"Syntax error in NEWS.md\")\n>\n> to troubleshoot.  If you get an error, i.e. 'news' is NULL, then you\n> need to fix up your NEWS.md file.  I don't think the format is\n> documented yet, so you might have to do some trial error to figure it\n> out.  Although it's not an official format, if you follow\n> https://pkgdown.r-lib.org/reference/build_news.html, it typically\n> works.  When I did it some weeks ago, I started with a minimal\n> NEWS.md, e.g. the top version, and then I added the other entries back\n> to find which ones were problematic.  See\n> https://raw.githubusercontent.com/HenrikBengtsson/progressr/0.10.1/NEWS.md\n> for an example that works on CRAN\n> (https://cran.r-project.org/web/packages/progressr/news/news.html) and\n> with news(package = \"progressr\").\n>\n> Hope this helps,\n>\n> Henrik\n>\n> On Thu, Jul 7, 2022 at 11:37 PM Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>> On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n>>> Hi,\n>>>\n>>> Today I have submitted a new version of the RALSA package. Soon after I\n>>> received an automatic email letting me know that the package did not\n>>> pass some of the pre-tests:\n>> It would be helpful to let us know where to see the troublesome NEWS.md\n>> file.  Maybe a small change in formatting is causing these false positives.\n>>\n>> Duncan Murdoch\n>>\n>>\n>>>> package RALSA_1.3.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests:\n>>>> Windows:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log>\n>>>> Status: 2 NOTEs\n>>>> Debian:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log>\n>>>> Status: 1 NOTE\n>>>>\n>>>> Last released version's CRAN status: OK: 9, NOTE: 4\n>>>> See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html>\n>>> To summarize:\n>>>\n>>> 1. Windows checks found possibly invalid DOIs. This is to be ignored, as\n>>> stated here:\n>>> https://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n>>>\n>>> 2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the following note:\n>>>\n>>> checking package subdirectories ... NOTE\n>>> Problems with news in 'NEWS.md':\n>>> No news entries found.\n>>>\n>>> This is rather strange because I have added one of the largest news\n>>> updates I ever made for this package in the NEWS.md file with this\n>>> submission. Further, this note appears only in these four of the 13\n>>> platforms where the package is checked.\n>>>\n>>> Apparently, this is beyond my control and I can do nothing to fix it on\n>>> my end. I have already replied to the email to notify the\n>>> CRAN-submissions at R-project.org this is a false-positive as advised in\n>>> the email itself, but I thought the mailing list should also be aware of\n>>> this issue.\n>>>\n>>> Best,\n>>> Plamen\n>>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnolo?ki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail: plamen.mirazchiyski at ineri.org",
+      "body_plain": "Thank you all for your help.\n\nI have found the problem - I had accented characters in names of people \nI was thanking for discovering bugs. After replacing them with \nnon-accented characters everything went just fine and the package is on \nits way to CRAN.\n\nI do find, though, the message \"No news entries found.\" quite \nmisleading. Yes, there is a problem, but the message is not even close \nto what actual the problem is. Unfortunately, the r-svn repository on \nGitHub does not have the possibility to report this as an issue.\n\nThank you once again.\n\nBest,\nPlamen\n\nOn 7/8/2022 12:21 AM, Henrik Bengtsson wrote:\n> )There's been recent updates in R-devel\n> (https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\n> that do more validation of the syntax/format in NEWS and NEWS.md\n> files. This was done to make sure news() works in more cases (e.g. it\n> may return just NULL if the NEWS.md file is not formatted as the tool\n> expect).  I guess it will also help render NEWS/NEWS.md files on the\n> CRAN package pages.\n>\n> If you run,\n>\n> news(package = \"RALSA\")\n>\n> and see the NEWS entries, then the format should be correct, otherwise\n> not.  You can use:\n>\n> news <- tools:::.build_news_db_from_package_NEWS_md(\"NEWS.md\")\n> if (is.null(news)) stop(\"Syntax error in NEWS.md\")\n>\n> to troubleshoot.  If you get an error, i.e. 'news' is NULL, then you\n> need to fix up your NEWS.md file.  I don't think the format is\n> documented yet, so you might have to do some trial error to figure it\n> out.  Although it's not an official format, if you follow\n> https://pkgdown.r-lib.org/reference/build_news.html, it typically\n> works.  When I did it some weeks ago, I started with a minimal\n> NEWS.md, e.g. the top version, and then I added the other entries back\n> to find which ones were problematic.  See\n> https://raw.githubusercontent.com/HenrikBengtsson/progressr/0.10.1/NEWS.md\n> for an example that works on CRAN\n> (https://cran.r-project.org/web/packages/progressr/news/news.html) and\n> with news(package = \"progressr\").\n>\n> Hope this helps,\n>\n> Henrik\n>\n> On Thu, Jul 7, 2022 at 11:37 PM Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>> On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n>>> Hi,\n>>>\n>>> Today I have submitted a new version of the RALSA package. Soon after I\n>>> received an automatic email letting me know that the package did not\n>>> pass some of the pre-tests:\n>> It would be helpful to let us know where to see the troublesome NEWS.md\n>> file.  Maybe a small change in formatting is causing these false positives.\n>>\n>> Duncan Murdoch\n>>\n>>\n>>>> package RALSA_1.3.0.tar.gz does not pass the incoming checks automatically, please see the following pre-tests:\n>>>> Windows:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log>\n>>>> Status: 2 NOTEs\n>>>> Debian:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log>\n>>>> Status: 1 NOTE\n>>>>\n>>>> Last released version's CRAN status: OK: 9, NOTE: 4\n>>>> See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html>\n>>> To summarize:\n>>>\n>>> 1. Windows checks found possibly invalid DOIs. This is to be ignored, as\n>>> stated here:\n>>> https://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n>>>\n>>> 2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the following note:\n>>>\n>>> checking package subdirectories ... NOTE\n>>> Problems with news in 'NEWS.md':\n>>> No news entries found.\n>>>\n>>> This is rather strange because I have added one of the largest news\n>>> updates I ever made for this package in the NEWS.md file with this\n>>> submission. Further, this note appears only in these four of the 13\n>>> platforms where the package is checked.\n>>>\n>>> Apparently, this is beyond my control and I can do nothing to fix it on\n>>> my end. I have already replied to the email to notify the\n>>> CRAN-submissions at R-project.org this is a false-positive as advised in\n>>> the email itself, but I thought the mailing list should also be aware of\n>>> this issue.\n>>>\n>>> Best,\n>>> Plamen\n>>>\n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list\n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnološki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail: plamen.mirazchiyski at ineri.org",
       "body_snippet": "Thank you all for your help.\n\nI have found the problem - I had accented characters in names of people \nI was thanking for discovering bugs. After replacing them with \nnon-accented characters everythin",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008241.html"
     },
     {
       "id": "msg-096110c0e26a",
@@ -566,11 +595,12 @@
         "<CAFDcVCRidRMRdB7_nJprrXYsKZ=Y1ES7YHUmRohm5k-2Lu+u1g@mail.gmail.com>",
         "<00068109-285b-ce42-282a-2632915f7c7e@ineri.org>"
       ],
-      "body_plain": "Good you figured it out. If you can share a minimal NEWS.md illustrating\nthe problem here, it'll probably help lots of others who run into the same\nproblem. It might even be bug that your have discovered, but without\ndetails no one can improve on it.\n\n/Henrik\n\nOn Fri, Jul 8, 2022, 14:23 Plamen Mirazchiyski <\nplamen.mirazchiyski at ineri.org> wrote:\n\n> Thank you all for your help.\n>\n> I have found the problem - I had accented characters in names of people\n> I was thanking for discovering bugs. After replacing them with\n> non-accented characters everything went just fine and the package is on\n> its way to CRAN.\n>\n> I do find, though, the message \"No news entries found.\" quite\n> misleading. Yes, there is a problem, but the message is not even close\n> to what actual the problem is. Unfortunately, the r-svn repository on\n> GitHub does not have the possibility to report this as an issue.\n>\n> Thank you once again.\n>\n> Best,\n> Plamen\n>\n> On 7/8/2022 12:21 AM, Henrik Bengtsson wrote:\n> > )There's been recent updates in R-devel\n> > (\n> https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\n> > that do more validation of the syntax/format in NEWS and NEWS.md\n> > files. This was done to make sure news() works in more cases (e.g. it\n> > may return just NULL if the NEWS.md file is not formatted as the tool\n> > expect).  I guess it will also help render NEWS/NEWS.md files on the\n> > CRAN package pages.\n> >\n> > If you run,\n> >\n> > news(package = \"RALSA\")\n> >\n> > and see the NEWS entries, then the format should be correct, otherwise\n> > not.  You can use:\n> >\n> > news <- tools:::.build_news_db_from_package_NEWS_md(\"NEWS.md\")\n> > if (is.null(news)) stop(\"Syntax error in NEWS.md\")\n> >\n> > to troubleshoot.  If you get an error, i.e. 'news' is NULL, then you\n> > need to fix up your NEWS.md file.  I don't think the format is\n> > documented yet, so you might have to do some trial error to figure it\n> > out.  Although it's not an official format, if you follow\n> > https://pkgdown.r-lib.org/reference/build_news.html, it typically\n> > works.  When I did it some weeks ago, I started with a minimal\n> > NEWS.md, e.g. the top version, and then I added the other entries back\n> > to find which ones were problematic.  See\n> >\n> https://raw.githubusercontent.com/HenrikBengtsson/progressr/0.10.1/NEWS.md\n> > for an example that works on CRAN\n> > (https://cran.r-project.org/web/packages/progressr/news/news.html) and\n> > with news(package = \"progressr\").\n> >\n> > Hope this helps,\n> >\n> > Henrik\n> >\n> > On Thu, Jul 7, 2022 at 11:37 PM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> >> On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n> >>> Hi,\n> >>>\n> >>> Today I have submitted a new version of the RALSA package. Soon after I\n> >>> received an automatic email letting me know that the package did not\n> >>> pass some of the pre-tests:\n> >> It would be helpful to let us know where to see the troublesome NEWS.md\n> >> file.  Maybe a small change in formatting is causing these false\n> positives.\n> >>\n> >> Duncan Murdoch\n> >>\n> >>\n> >>>> package RALSA_1.3.0.tar.gz does not pass the incoming checks\n> automatically, please see the following pre-tests:\n> >>>> Windows:<\n> https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log\n> >\n> >>>> Status: 2 NOTEs\n> >>>> Debian:<\n> https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log\n> >\n> >>>> Status: 1 NOTE\n> >>>>\n> >>>> Last released version's CRAN status: OK: 9, NOTE: 4\n> >>>> See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html>\n> >>> To summarize:\n> >>>\n> >>> 1. Windows checks found possibly invalid DOIs. This is to be ignored,\n> as\n> >>> stated here:\n> >>>\n> https://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n> >>>\n> >>> 2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the following\n> note:\n> >>>\n> >>> checking package subdirectories ... NOTE\n> >>> Problems with news in 'NEWS.md':\n> >>> No news entries found.\n> >>>\n> >>> This is rather strange because I have added one of the largest news\n> >>> updates I ever made for this package in the NEWS.md file with this\n> >>> submission. Further, this note appears only in these four of the 13\n> >>> platforms where the package is checked.\n> >>>\n> >>> Apparently, this is beyond my control and I can do nothing to fix it on\n> >>> my end. I have already replied to the email to notify the\n> >>> CRAN-submissions at R-project.org this is a false-positive as advised in\n> >>> the email itself, but I thought the mailing list should also be aware\n> of\n> >>> this issue.\n> >>>\n> >>> Best,\n> >>> Plamen\n> >>>\n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> ======================\n> Plamen Mirazchiyski, PhD\n> International Educational Research and Evaluation Institute\n> 24 Tehnolo?ki park\n> SI-1000 Ljubljana\n> Slovenia\n> tel.: +386 51 303 817\n> email: plamen.mirazchiyski at ineri.org\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Good you figured it out. If you can share a minimal NEWS.md illustrating\nthe problem here, it'll probably help lots of others who run into the same\nproblem. It might even be bug that your have discovered, but without\ndetails no one can improve on it.\n\n/Henrik\n\nOn Fri, Jul 8, 2022, 14:23 Plamen Mirazchiyski <\nplamen.mirazchiyski at ineri.org> wrote:\n\n> Thank you all for your help.\n>\n> I have found the problem - I had accented characters in names of people\n> I was thanking for discovering bugs. After replacing them with\n> non-accented characters everything went just fine and the package is on\n> its way to CRAN.\n>\n> I do find, though, the message \"No news entries found.\" quite\n> misleading. Yes, there is a problem, but the message is not even close\n> to what actual the problem is. Unfortunately, the r-svn repository on\n> GitHub does not have the possibility to report this as an issue.\n>\n> Thank you once again.\n>\n> Best,\n> Plamen\n>\n> On 7/8/2022 12:21 AM, Henrik Bengtsson wrote:\n> > )There's been recent updates in R-devel\n> > (\n> https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\n> > that do more validation of the syntax/format in NEWS and NEWS.md\n> > files. This was done to make sure news() works in more cases (e.g. it\n> > may return just NULL if the NEWS.md file is not formatted as the tool\n> > expect).  I guess it will also help render NEWS/NEWS.md files on the\n> > CRAN package pages.\n> >\n> > If you run,\n> >\n> > news(package = \"RALSA\")\n> >\n> > and see the NEWS entries, then the format should be correct, otherwise\n> > not.  You can use:\n> >\n> > news <- tools:::.build_news_db_from_package_NEWS_md(\"NEWS.md\")\n> > if (is.null(news)) stop(\"Syntax error in NEWS.md\")\n> >\n> > to troubleshoot.  If you get an error, i.e. 'news' is NULL, then you\n> > need to fix up your NEWS.md file.  I don't think the format is\n> > documented yet, so you might have to do some trial error to figure it\n> > out.  Although it's not an official format, if you follow\n> > https://pkgdown.r-lib.org/reference/build_news.html, it typically\n> > works.  When I did it some weeks ago, I started with a minimal\n> > NEWS.md, e.g. the top version, and then I added the other entries back\n> > to find which ones were problematic.  See\n> >\n> https://raw.githubusercontent.com/HenrikBengtsson/progressr/0.10.1/NEWS.md\n> > for an example that works on CRAN\n> > (https://cran.r-project.org/web/packages/progressr/news/news.html) and\n> > with news(package = \"progressr\").\n> >\n> > Hope this helps,\n> >\n> > Henrik\n> >\n> > On Thu, Jul 7, 2022 at 11:37 PM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> >> On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n> >>> Hi,\n> >>>\n> >>> Today I have submitted a new version of the RALSA package. Soon after I\n> >>> received an automatic email letting me know that the package did not\n> >>> pass some of the pre-tests:\n> >> It would be helpful to let us know where to see the troublesome NEWS.md\n> >> file.  Maybe a small change in formatting is causing these false\n> positives.\n> >>\n> >> Duncan Murdoch\n> >>\n> >>\n> >>>> package RALSA_1.3.0.tar.gz does not pass the incoming checks\n> automatically, please see the following pre-tests:\n> >>>> Windows:<\n> https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log\n> >\n> >>>> Status: 2 NOTEs\n> >>>> Debian:<\n> https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log\n> >\n> >>>> Status: 1 NOTE\n> >>>>\n> >>>> Last released version's CRAN status: OK: 9, NOTE: 4\n> >>>> See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html>\n> >>> To summarize:\n> >>>\n> >>> 1. Windows checks found possibly invalid DOIs. This is to be ignored,\n> as\n> >>> stated here:\n> >>>\n> https://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n> >>>\n> >>> 2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the following\n> note:\n> >>>\n> >>> checking package subdirectories ... NOTE\n> >>> Problems with news in 'NEWS.md':\n> >>> No news entries found.\n> >>>\n> >>> This is rather strange because I have added one of the largest news\n> >>> updates I ever made for this package in the NEWS.md file with this\n> >>> submission. Further, this note appears only in these four of the 13\n> >>> platforms where the package is checked.\n> >>>\n> >>> Apparently, this is beyond my control and I can do nothing to fix it on\n> >>> my end. I have already replied to the email to notify the\n> >>> CRAN-submissions at R-project.org this is a false-positive as advised in\n> >>> the email itself, but I thought the mailing list should also be aware\n> of\n> >>> this issue.\n> >>>\n> >>> Best,\n> >>> Plamen\n> >>>\n> >> ______________________________________________\n> >> R-package-devel at r-project.org mailing list\n> >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> --\n> ======================\n> Plamen Mirazchiyski, PhD\n> International Educational Research and Evaluation Institute\n> 24 Tehnološki park\n> SI-1000 Ljubljana\n> Slovenia\n> tel.: +386 51 303 817\n> email: plamen.mirazchiyski at ineri.org\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Good you figured it out. If you can share a minimal NEWS.md illustrating\nthe problem here, it'll probably help lots of others who run into the same\nproblem. It might even be bug that your have discove",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 4,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008242.html"
     },
     {
       "id": "msg-820a28915091",
@@ -588,7 +618,8 @@
       "body_snippet": "On 7/1/22 11:10, Johannes Ranke wrote:\n> Dear list,\n>\n> independent of the thread on this list about slow examples on R 4.2 on windows\n> I have discovered over the last few days that some of my benchm",
       "thread_id": "thread-759f7e3d7575",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008243.html"
     },
     {
       "id": "msg-85e3dbba6989",
@@ -609,7 +640,8 @@
       "body_snippet": "On 8 July 2022 at 14:23, Plamen Mirazchiyski wrote:\n| to what actual the problem is. Unfortunately, the r-svn repository on \n| GitHub does not have the possibility to report this as an issue.\n\nPlease ",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 4,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008244.html"
     },
     {
       "id": "msg-fbe4b87e8c92",
@@ -627,11 +659,12 @@
         "<00068109-285b-ce42-282a-2632915f7c7e@ineri.org>",
         "<CAFDcVCTJpwoaTbHO5gNkBsS5h2kGndwssumC0DDXjqSdX+D4dQ@mail.gmail.com>"
       ],
-      "body_plain": "Yes, here is an excerpt from the NEWS.md with a problematic case at the end:\n\n#######################################################\n\n# RALSA v1.3.0 (2022-07-08)\n\nThis update focuses mainly on bugfixes and improvements in the GUI and \nits workflow, but also introduces some new features.\n\n## Bug fixes\n* All analysis functions, as well `lsa.data.diag`, `lsa.recode.vars` and \n`lsa.vars.dict` crash with an error message `Error in \nexists(all.vars(match.call())) : first argument has length > 1` when any \nof the arguments specifying analysis variables point to objects which \ncontain character vectors containing them. Thanks to Rodolfo Ilizaliturri.\n\n* `lsa.prctls` - The percentiles on the x-axis are not properly added \nfor every percentile computed. Thanks to Someone ?ome?ne.\n\n#######################################################\n\nIf I remove the accented characters at the very last word, it all works \nfine when the package is submitted at CRAN.\n\nBest,\nPlamen\n\nOn 7/8/2022 2:30 PM, Henrik Bengtsson wrote:\n> Good you figured it out. If you can share a minimal NEWS.md \n> illustrating the problem here, it'll probably help lots of others who \n> run into the same problem. It might even be bug that your have \n> discovered, but without details no one can improve on it.\n>\n> /Henrik\n>\n> On Fri, Jul 8, 2022, 14:23 Plamen Mirazchiyski \n> <plamen.mirazchiyski at ineri.org> wrote:\n>\n>     Thank you all for your help.\n>\n>     I have found the problem - I had accented characters in names of\n>     people\n>     I was thanking for discovering bugs. After replacing them with\n>     non-accented characters everything went just fine and the package\n>     is on\n>     its way to CRAN.\n>\n>     I do find, though, the message \"No news entries found.\" quite\n>     misleading. Yes, there is a problem, but the message is not even\n>     close\n>     to what actual the problem is. Unfortunately, the r-svn repository on\n>     GitHub does not have the possibility to report this as an issue.\n>\n>     Thank you once again.\n>\n>     Best,\n>     Plamen\n>\n>     On 7/8/2022 12:21 AM, Henrik Bengtsson wrote:\n>     > )There's been recent updates in R-devel\n>     >\n>     (https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\n>     > that do more validation of the syntax/format in NEWS and NEWS.md\n>     > files. This was done to make sure news() works in more cases\n>     (e.g. it\n>     > may return just NULL if the NEWS.md file is not formatted as the\n>     tool\n>     > expect).? I guess it will also help render NEWS/NEWS.md files on the\n>     > CRAN package pages.\n>     >\n>     > If you run,\n>     >\n>     > news(package = \"RALSA\")\n>     >\n>     > and see the NEWS entries, then the format should be correct,\n>     otherwise\n>     > not.? You can use:\n>     >\n>     > news <- tools:::.build_news_db_from_package_NEWS_md(\"NEWS.md\")\n>     > if (is.null(news)) stop(\"Syntax error in NEWS.md\")\n>     >\n>     > to troubleshoot.? If you get an error, i.e. 'news' is NULL, then you\n>     > need to fix up your NEWS.md file.? I don't think the format is\n>     > documented yet, so you might have to do some trial error to\n>     figure it\n>     > out.? Although it's not an official format, if you follow\n>     > https://pkgdown.r-lib.org/reference/build_news.html, it typically\n>     > works.? When I did it some weeks ago, I started with a minimal\n>     > NEWS.md, e.g. the top version, and then I added the other\n>     entries back\n>     > to find which ones were problematic.? See\n>     >\n>     https://raw.githubusercontent.com/HenrikBengtsson/progressr/0.10.1/NEWS.md\n>     > for an example that works on CRAN\n>     >\n>     (https://cran.r-project.org/web/packages/progressr/news/news.html) and\n>     > with news(package = \"progressr\").\n>     >\n>     > Hope this helps,\n>     >\n>     > Henrik\n>     >\n>     > On Thu, Jul 7, 2022 at 11:37 PM Duncan Murdoch\n>     <murdoch.duncan at gmail.com> wrote:\n>     >> On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n>     >>> Hi,\n>     >>>\n>     >>> Today I have submitted a new version of the RALSA package.\n>     Soon after I\n>     >>> received an automatic email letting me know that the package\n>     did not\n>     >>> pass some of the pre-tests:\n>     >> It would be helpful to let us know where to see the troublesome\n>     NEWS.md\n>     >> file.? Maybe a small change in formatting is causing these\n>     false positives.\n>     >>\n>     >> Duncan Murdoch\n>     >>\n>     >>\n>     >>>> package RALSA_1.3.0.tar.gz does not pass the incoming checks\n>     automatically, please see the following pre-tests:\n>     >>>>\n>     Windows:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log>\n>     >>>> Status: 2 NOTEs\n>     >>>>\n>     Debian:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log>\n>     >>>> Status: 1 NOTE\n>     >>>>\n>     >>>> Last released version's CRAN status: OK: 9, NOTE: 4\n>     >>>>\n>     See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html\n>     <https://CRAN.R-project.org/web/checks/check_results_RALSA.html>>\n>     >>> To summarize:\n>     >>>\n>     >>> 1. Windows checks found possibly invalid DOIs. This is to be\n>     ignored, as\n>     >>> stated here:\n>     >>>\n>     https://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n>     >>>\n>     >>> 2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the\n>     following note:\n>     >>>\n>     >>> checking package subdirectories ... NOTE\n>     >>> Problems with news in 'NEWS.md':\n>     >>> No news entries found.\n>     >>>\n>     >>> This is rather strange because I have added one of the largest\n>     news\n>     >>> updates I ever made for this package in the NEWS.md file with this\n>     >>> submission. Further, this note appears only in these four of\n>     the 13\n>     >>> platforms where the package is checked.\n>     >>>\n>     >>> Apparently, this is beyond my control and I can do nothing to\n>     fix it on\n>     >>> my end. I have already replied to the email to notify the\n>     >>> CRAN-submissions at R-project.org this is a false-positive as\n>     advised in\n>     >>> the email itself, but I thought the mailing list should also\n>     be aware of\n>     >>> this issue.\n>     >>>\n>     >>> Best,\n>     >>> Plamen\n>     >>>\n>     >> ______________________________________________\n>     >> R-package-devel at r-project.org mailing list\n>     >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>     -- \n>     ======================\n>     Plamen Mirazchiyski, PhD\n>     International Educational Research and Evaluation Institute\n>     24 Tehnolo?ki park\n>     SI-1000 Ljubljana\n>     Slovenia\n>     tel.: +386 51 303 817\n>     email: plamen.mirazchiyski at ineri.org\n>\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnolo?ki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail:plamen.mirazchiyski at ineri.org\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Yes, here is an excerpt from the NEWS.md with a problematic case at the end:\n\n#######################################################\n\n# RALSA v1.3.0 (2022-07-08)\n\nThis update focuses mainly on bugfixes and improvements in the GUI and \nits workflow, but also introduces some new features.\n\n## Bug fixes\n* All analysis functions, as well `lsa.data.diag`, `lsa.recode.vars` and \n`lsa.vars.dict` crash with an error message `Error in \nexists(all.vars(match.call())) : first argument has length > 1` when any \nof the arguments specifying analysis variables point to objects which \ncontain character vectors containing them. Thanks to Rodolfo Ilizaliturri.\n\n* `lsa.prctls` - The percentiles on the x-axis are not properly added \nfor every percentile computed. Thanks to Someone Šomeöne.\n\n#######################################################\n\nIf I remove the accented characters at the very last word, it all works \nfine when the package is submitted at CRAN.\n\nBest,\nPlamen\n\nOn 7/8/2022 2:30 PM, Henrik Bengtsson wrote:\n> Good you figured it out. If you can share a minimal NEWS.md \n> illustrating the problem here, it'll probably help lots of others who \n> run into the same problem. It might even be bug that your have \n> discovered, but without details no one can improve on it.\n>\n> /Henrik\n>\n> On Fri, Jul 8, 2022, 14:23 Plamen Mirazchiyski \n> <plamen.mirazchiyski at ineri.org> wrote:\n>\n>     Thank you all for your help.\n>\n>     I have found the problem - I had accented characters in names of\n>     people\n>     I was thanking for discovering bugs. After replacing them with\n>     non-accented characters everything went just fine and the package\n>     is on\n>     its way to CRAN.\n>\n>     I do find, though, the message \"No news entries found.\" quite\n>     misleading. Yes, there is a problem, but the message is not even\n>     close\n>     to what actual the problem is. Unfortunately, the r-svn repository on\n>     GitHub does not have the possibility to report this as an issue.\n>\n>     Thank you once again.\n>\n>     Best,\n>     Plamen\n>\n>     On 7/8/2022 12:21 AM, Henrik Bengtsson wrote:\n>     > )There's been recent updates in R-devel\n>     >\n>     (https://github.com/wch/r-source/commit/baf375d8b65414daebf85e226a1e5103a93ab138\n>     > that do more validation of the syntax/format in NEWS and NEWS.md\n>     > files. This was done to make sure news() works in more cases\n>     (e.g. it\n>     > may return just NULL if the NEWS.md file is not formatted as the\n>     tool\n>     > expect).  I guess it will also help render NEWS/NEWS.md files on the\n>     > CRAN package pages.\n>     >\n>     > If you run,\n>     >\n>     > news(package = \"RALSA\")\n>     >\n>     > and see the NEWS entries, then the format should be correct,\n>     otherwise\n>     > not.  You can use:\n>     >\n>     > news <- tools:::.build_news_db_from_package_NEWS_md(\"NEWS.md\")\n>     > if (is.null(news)) stop(\"Syntax error in NEWS.md\")\n>     >\n>     > to troubleshoot.  If you get an error, i.e. 'news' is NULL, then you\n>     > need to fix up your NEWS.md file.  I don't think the format is\n>     > documented yet, so you might have to do some trial error to\n>     figure it\n>     > out.  Although it's not an official format, if you follow\n>     > https://pkgdown.r-lib.org/reference/build_news.html, it typically\n>     > works.  When I did it some weeks ago, I started with a minimal\n>     > NEWS.md, e.g. the top version, and then I added the other\n>     entries back\n>     > to find which ones were problematic.  See\n>     >\n>     https://raw.githubusercontent.com/HenrikBengtsson/progressr/0.10.1/NEWS.md\n>     > for an example that works on CRAN\n>     >\n>     (https://cran.r-project.org/web/packages/progressr/news/news.html) and\n>     > with news(package = \"progressr\").\n>     >\n>     > Hope this helps,\n>     >\n>     > Henrik\n>     >\n>     > On Thu, Jul 7, 2022 at 11:37 PM Duncan Murdoch\n>     <murdoch.duncan at gmail.com> wrote:\n>     >> On 07/07/2022 3:55 p.m., Plamen Mirazchiyski wrote:\n>     >>> Hi,\n>     >>>\n>     >>> Today I have submitted a new version of the RALSA package.\n>     Soon after I\n>     >>> received an automatic email letting me know that the package\n>     did not\n>     >>> pass some of the pre-tests:\n>     >> It would be helpful to let us know where to see the troublesome\n>     NEWS.md\n>     >> file.  Maybe a small change in formatting is causing these\n>     false positives.\n>     >>\n>     >> Duncan Murdoch\n>     >>\n>     >>\n>     >>>> package RALSA_1.3.0.tar.gz does not pass the incoming checks\n>     automatically, please see the following pre-tests:\n>     >>>>\n>     Windows:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Windows/00check.log>\n>     >>>> Status: 2 NOTEs\n>     >>>>\n>     Debian:<https://win-builder.r-project.org/incoming_pretest/RALSA_1.3.0_20220707_190307/Debian/00check.log>\n>     >>>> Status: 1 NOTE\n>     >>>>\n>     >>>> Last released version's CRAN status: OK: 9, NOTE: 4\n>     >>>>\n>     See:<https://CRAN.R-project.org/web/checks/check_results_RALSA.html\n>     <https://CRAN.R-project.org/web/checks/check_results_RALSA.html>>\n>     >>> To summarize:\n>     >>>\n>     >>> 1. Windows checks found possibly invalid DOIs. This is to be\n>     ignored, as\n>     >>> stated here:\n>     >>>\n>     https://www.mail-archive.com/r-package-devel at r-project.org/msg07116.html\n>     >>>\n>     >>> 2. Windows, Debian (gcc) and Fedora (clang and gcc) drop the\n>     following note:\n>     >>>\n>     >>> checking package subdirectories ... NOTE\n>     >>> Problems with news in 'NEWS.md':\n>     >>> No news entries found.\n>     >>>\n>     >>> This is rather strange because I have added one of the largest\n>     news\n>     >>> updates I ever made for this package in the NEWS.md file with this\n>     >>> submission. Further, this note appears only in these four of\n>     the 13\n>     >>> platforms where the package is checked.\n>     >>>\n>     >>> Apparently, this is beyond my control and I can do nothing to\n>     fix it on\n>     >>> my end. I have already replied to the email to notify the\n>     >>> CRAN-submissions at R-project.org this is a false-positive as\n>     advised in\n>     >>> the email itself, but I thought the mailing list should also\n>     be aware of\n>     >>> this issue.\n>     >>>\n>     >>> Best,\n>     >>> Plamen\n>     >>>\n>     >> ______________________________________________\n>     >> R-package-devel at r-project.org mailing list\n>     >> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>     -- \n>     ======================\n>     Plamen Mirazchiyski, PhD\n>     International Educational Research and Evaluation Institute\n>     24 Tehnološki park\n>     SI-1000 Ljubljana\n>     Slovenia\n>     tel.: +386 51 303 817\n>     email: plamen.mirazchiyski at ineri.org\n>\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnološki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail:plamen.mirazchiyski at ineri.org\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Yes, here is an excerpt from the NEWS.md with a problematic case at the end:\n\n#######################################################\n\n# RALSA v1.3.0 (2022-07-08)\n\nThis update focuses mainly on bugfix",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008245.html"
     },
     {
       "id": "msg-c9a278b84466",
@@ -653,7 +686,8 @@
       "body_snippet": "On Fri, 8 Jul 2022 07:55:40 -0500\nDirk Eddelbuettel <edd at debian.org> wrote:\n\n> which could arguably do with a paragraph on how to get a bugzilla\n> account ...\n\nPerhaps the FAQ could link to the htt",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008246.html"
     },
     {
       "id": "msg-a14c851fca95",
@@ -676,7 +710,8 @@
       "body_snippet": "On Fri, 8 Jul 2022 14:58:37 +0200\nPlamen Mirazchiyski <plamen.mirazchiyski at ineri.org> wrote:\n\n> Yes, here is an excerpt from the NEWS.md with a problematic case at\n> the end:\n\nInteresting. The \"No ",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 6,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008247.html"
     },
     {
       "id": "msg-c3a855a6ef98",
@@ -692,7 +727,8 @@
       "body_snippet": "Dear all,\n\nI want to compute processing functions to apply to the data.\nI apply the functions to the data in a second step.\nproc_0 increases the memory, proc_1 is safe.\nreprex below.\n\nIf this behavior",
       "thread_id": "thread-c3a855a6ef98",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008248.html"
     },
     {
       "id": "msg-cc1b21a6f6b9",
@@ -710,7 +746,8 @@
       "body_snippet": "I accidentally replied privately to this message.  Here is the reply \nthat I intended to send to the list, along with an addition based on \nSamuel's reply to me.\n\nOn 08/07/2022 9:50 a.m., Samuel Granj",
       "thread_id": "thread-c3a855a6ef98",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008249.html"
     },
     {
       "id": "msg-86a14a022093",
@@ -729,7 +766,8 @@
       "body_snippet": "On 08/07/2022 11:01 a.m., Duncan Murdoch wrote:\n  ... lots deleted\n\n> So you'll end up with this chain of environments:\n> \n>     environment(function(z) z / cofactor) is the evaluation environment\n> o",
       "thread_id": "thread-c3a855a6ef98",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008250.html"
     },
     {
       "id": "msg-a3dadc9ec4ad",
@@ -749,7 +787,8 @@
       "body_snippet": "Great answer. I think I missed the point on the parent environment \nalthough I did my best to care about the environment.\n\nWhat Ducan removed from my reply is the following and I share it with you:\n\n>",
       "thread_id": "thread-c3a855a6ef98",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008251.html"
     },
     {
       "id": "msg-d4b9088b351c",
@@ -768,7 +807,8 @@
       "body_snippet": "Am Freitag, 8. Juli 2022, 14:52:27 CEST schrieb Tomas Kalibera:\n> On 7/1/22 11:10, Johannes Ranke wrote:\n> > Dear list,\n> > \n> > independent of the thread on this list about slow examples on R 4.2 on\n",
       "thread_id": "thread-759f7e3d7575",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008252.html"
     },
     {
       "id": "msg-fa8cc817d365",
@@ -784,7 +824,8 @@
       "body_snippet": "For some stupid reason I agreed to take over maintenance of the \nnow-orphaned `gtools` package (\"how much trouble could that be, after \nall?\"), which has 203 strong reverse dependencies.\n\n   CRAN is r",
       "thread_id": "thread-fa8cc817d365",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008253.html"
     },
     {
       "id": "msg-b84050cc91bd",
@@ -802,11 +843,12 @@
         "<00068109-285b-ce42-282a-2632915f7c7e@ineri.org>",
         "<25288.10572.792507.993341@rob.eddelbuettel.com>"
       ],
-      "body_plain": "Thank you, I contacted R-Bugzilla to create an account for me, \nexplaining the reason. The answer was that this is related with CRAN \nincoming packages' checks which does not mean it is an R bug which is to \nbe reported and that the CRAN checks are performed using R-devel \nversion, not the released, so it is not a bug that shall be reported.\n\nI actually agree with the answer, especially given that the issue I \nencountered was with four out of the 10 platforms where the package was \nchecked and not all, so I don't really think it is an R-bug that should \nbe reported to R-Bugzilla.\n\nPlamen\n\nOn 7/8/2022 2:55 PM, Dirk Eddelbuettel wrote:\n> On 8 July 2022 at 14:23, Plamen Mirazchiyski wrote:\n> | to what actual the problem is. Unfortunately, the r-svn repository on\n> | GitHub does not have the possibility to report this as an issue.\n>\n> Please see  https://bugs.r-project.org/    but also see old mailing list (and\n> elsewhere) posts on how to create a bugzilla account for which you need a human.\n>\n> The R FAQ is also there for you:\n>\n>    9.2 How to report a bug\n>        https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-to-report-a-bug\n>\n> which could arguably do with a paragraph on how to get a bugzilla account ...\n>\n> Dirk\n>\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnolo?ki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail: plamen.mirazchiyski at ineri.org",
+      "body_plain": "Thank you, I contacted R-Bugzilla to create an account for me, \nexplaining the reason. The answer was that this is related with CRAN \nincoming packages' checks which does not mean it is an R bug which is to \nbe reported and that the CRAN checks are performed using R-devel \nversion, not the released, so it is not a bug that shall be reported.\n\nI actually agree with the answer, especially given that the issue I \nencountered was with four out of the 10 platforms where the package was \nchecked and not all, so I don't really think it is an R-bug that should \nbe reported to R-Bugzilla.\n\nPlamen\n\nOn 7/8/2022 2:55 PM, Dirk Eddelbuettel wrote:\n> On 8 July 2022 at 14:23, Plamen Mirazchiyski wrote:\n> | to what actual the problem is. Unfortunately, the r-svn repository on\n> | GitHub does not have the possibility to report this as an issue.\n>\n> Please see  https://bugs.r-project.org/    but also see old mailing list (and\n> elsewhere) posts on how to create a bugzilla account for which you need a human.\n>\n> The R FAQ is also there for you:\n>\n>    9.2 How to report a bug\n>        https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-to-report-a-bug\n>\n> which could arguably do with a paragraph on how to get a bugzilla account ...\n>\n> Dirk\n>\n\n-- \n======================\nPlamen Mirazchiyski, PhD\nInternational Educational Research and Evaluation Institute\n24 Tehnološki park\nSI-1000 Ljubljana\nSlovenia\ntel.: +386 51 303 817\nemail: plamen.mirazchiyski at ineri.org",
       "body_snippet": "Thank you, I contacted R-Bugzilla to create an account for me, \nexplaining the reason. The answer was that this is related with CRAN \nincoming packages' checks which does not mean it is an R bug which",
       "thread_id": "thread-e3e8c203eaf2",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008254.html"
     },
     {
       "id": "msg-f813bcfd041c",
@@ -824,7 +866,8 @@
       "body_snippet": "Comments in-line:\n\n> Date: Sat, 9 Jul 2022 16:29:57 -0400\n> From: Ben Bolker <bbolker at gmail.com>\n> To: R Package Development <r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] help/advice ",
       "thread_id": "thread-f813bcfd041c",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008259.html"
     },
     {
       "id": "msg-0f9e3c496069",
@@ -842,7 +885,8 @@
       "body_snippet": "On Sat, 9 Jul 2022 16:29:57 -0400\nBen Bolker <bbolker at gmail.com> wrote:\n\n>    The problem is in vignette rebuilding, errors of this form in both\n> of the package vignettes:\n> \n>    Can't join on `x",
       "thread_id": "thread-fa8cc817d365",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008255.html"
     },
     {
       "id": "msg-809d862cc530",
@@ -858,7 +902,8 @@
       "body_snippet": "Is the reason my package failed because the functions assign global\nvariables? If this is the case, can I see where it says that functions\nshould not assign global variables?\n\n\n\n* using log directory ",
       "thread_id": "thread-809d862cc530",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008256.html"
     },
     {
       "id": "msg-c5424380dea5",
@@ -876,7 +921,8 @@
       "body_snippet": "https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-namespaces\n\nNamespaces are sealed after loading. Workaround is to create a global variable that is an environment in an `.onLoad` h",
       "thread_id": "thread-809d862cc530",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008257.html"
     },
     {
       "id": "msg-b9bb10feb6aa",
@@ -890,11 +936,12 @@
       "references": [
         "<CAEf_eRBeAnOw3DY-Rt_UmN_tD5XabDUL89ovTm05AMQAoHuqNg@mail.gmail.com>"
       ],
-      "body_plain": "On 10/07/2022 4:41 p.m., Edward Wei wrote:\n> Is the reason my package failed because the functions assign global\n> variables? If this is the case, can I see where it says that functions\n> should not assign global variables?\n\nIt's in the CRAN repository policy:\n\n\"- Packages should not modify the global environment (user?s workspace).\"\n\nDuncan Murdoch\n\n> \n> \n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/avfintools.Rcheck'\n> * using R Under development (unstable) (2022-07-09 r82572 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'avfintools/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'avfintools' version '0.1.0'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'Edward Wei <edwwei2020 at gmail.com>'\n> \n> New submission\n> \n> Possibly misspelled words in DESCRIPTION:\n>    Avfintools (10:18)\n>    CRAN (9:34)\n>    Vantager (3:55, 10:46, 11:56)\n>    alphavantager (8:3, 9:7)\n>    api (7:49)\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking whether package 'avfintools' can be installed ... OK\n> * checking installed package size ... OK\n> * checking package directory ... OK\n> * checking for future file timestamps ... OK\n> * checking DESCRIPTION meta-information ... OK\n> * checking top-level files ... OK\n> * checking for left-over files ... OK\n> * checking index information ... OK\n> * checking package subdirectories ... OK\n> * checking R files for non-ASCII characters ... OK\n> * checking R files for syntax errors ... OK\n> * checking whether the package can be loaded ... OK\n> * checking whether the package can be loaded with stated dependencies ... OK\n> * checking whether the package can be unloaded cleanly ... OK\n> * checking whether the namespace can be loaded with stated dependencies ... OK\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking loading without being on the library search path ... OK\n> * checking use of S3 registration ... OK\n> * checking dependencies in R code ... OK\n> * checking S3 generic/method consistency ... OK\n> * checking replacement functions ... OK\n> * checking foreign function calls ... OK\n> * checking R code for possible problems ... [8s] NOTE\n> Found the following assignments to the global environment:\n> File 'avfintools/R/avfintools.R':\n>    assign(paste0(ticker, \"daily\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"15\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"15\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"wk\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"60\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"60\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"5\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"5\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(coin_name, \"60\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(coin_name, \"daily\"), retdata, envir = .GlobalEnv)\n> * checking Rd files ... [1s] OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... OK\n> * checking Rd \\usage sections ... OK\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking contents of 'data' directory ... OK\n> * checking data for non-ASCII characters ... OK\n> * checking LazyData ... OK\n> * checking data for ASCII and uncompressed saves ... OK\n> * checking examples ... [9s] OK\n> * checking PDF version of manual ... OK\n> * checking for detritus in the temp directory ... OK\n> * DONE\n> Status: 2 NOTEs\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "On 10/07/2022 4:41 p.m., Edward Wei wrote:\n> Is the reason my package failed because the functions assign global\n> variables? If this is the case, can I see where it says that functions\n> should not assign global variables?\n\nIt's in the CRAN repository policy:\n\n\"- Packages should not modify the global environment (user’s workspace).\"\n\nDuncan Murdoch\n\n> \n> \n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/avfintools.Rcheck'\n> * using R Under development (unstable) (2022-07-09 r82572 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'avfintools/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'avfintools' version '0.1.0'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... NOTE\n> Maintainer: 'Edward Wei <edwwei2020 at gmail.com>'\n> \n> New submission\n> \n> Possibly misspelled words in DESCRIPTION:\n>    Avfintools (10:18)\n>    CRAN (9:34)\n>    Vantager (3:55, 10:46, 11:56)\n>    alphavantager (8:3, 9:7)\n>    api (7:49)\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking whether package 'avfintools' can be installed ... OK\n> * checking installed package size ... OK\n> * checking package directory ... OK\n> * checking for future file timestamps ... OK\n> * checking DESCRIPTION meta-information ... OK\n> * checking top-level files ... OK\n> * checking for left-over files ... OK\n> * checking index information ... OK\n> * checking package subdirectories ... OK\n> * checking R files for non-ASCII characters ... OK\n> * checking R files for syntax errors ... OK\n> * checking whether the package can be loaded ... OK\n> * checking whether the package can be loaded with stated dependencies ... OK\n> * checking whether the package can be unloaded cleanly ... OK\n> * checking whether the namespace can be loaded with stated dependencies ... OK\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking loading without being on the library search path ... OK\n> * checking use of S3 registration ... OK\n> * checking dependencies in R code ... OK\n> * checking S3 generic/method consistency ... OK\n> * checking replacement functions ... OK\n> * checking foreign function calls ... OK\n> * checking R code for possible problems ... [8s] NOTE\n> Found the following assignments to the global environment:\n> File 'avfintools/R/avfintools.R':\n>    assign(paste0(ticker, \"daily\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"15\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"15\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"wk\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"60\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"60\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"5\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(ticker, \"5\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(coin_name, \"60\"), addreturns(retdata), envir = .GlobalEnv)\n>    assign(paste0(coin_name, \"daily\"), retdata, envir = .GlobalEnv)\n> * checking Rd files ... [1s] OK\n> * checking Rd metadata ... OK\n> * checking Rd line widths ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... OK\n> * checking Rd \\usage sections ... OK\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking contents of 'data' directory ... OK\n> * checking data for non-ASCII characters ... OK\n> * checking LazyData ... OK\n> * checking data for ASCII and uncompressed saves ... OK\n> * checking examples ... [9s] OK\n> * checking PDF version of manual ... OK\n> * checking for detritus in the temp directory ... OK\n> * DONE\n> Status: 2 NOTEs\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "On 10/07/2022 4:41 p.m., Edward Wei wrote:\n> Is the reason my package failed because the functions assign global\n> variables? If this is the case, can I see where it says that functions\n> should not a",
       "thread_id": "thread-809d862cc530",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008258.html"
     },
     {
       "id": "msg-72ebb0578a7e",
@@ -910,7 +957,8 @@
       "body_snippet": "Submitted package 'fGarch' has been stuck in CRAN 'pretest' for about 24 hours now. The same seems to hold for several other packages. Is this something that can be expected normally?\n\nThe pretest ser",
       "thread_id": "thread-72ebb0578a7e",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008260.html"
     },
     {
       "id": "msg-0f8439048046",
@@ -928,7 +976,8 @@
       "body_snippet": "On 7/15/22 14:50, Georgi Boshnakov wrote:\n> Submitted package 'fGarch' has been stuck in CRAN 'pretest' for about 24 hours now. The same seems to hold for several other packages. Is this something tha",
       "thread_id": "thread-72ebb0578a7e",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008261.html"
     },
     {
       "id": "msg-f0ee9dc81605",
@@ -947,7 +996,8 @@
       "body_snippet": "On 15.07.2022 16:07, Tomas Kalibera wrote:\n> On 7/15/22 14:50, Georgi Boshnakov wrote:\n>> Submitted package 'fGarch' has been stuck in CRAN 'pretest' for about \n>> 24 hours now. The same seems to hold",
       "thread_id": "thread-72ebb0578a7e",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008262.html"
     },
     {
       "id": "msg-2acec8c16bae",
@@ -965,7 +1015,8 @@
       "body_snippet": "Hi everyone\n\nI am trying to compile a package which provides an interface to the Ceres\nsolver <http://ceres-solver.org/> C++ library for large-scale,\nunconstrained optimization. The requirements for c",
       "thread_id": "thread-2acec8c16bae",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008263.html"
     },
     {
       "id": "msg-f3373091bdf8",
@@ -983,7 +1034,8 @@
       "body_snippet": "Hello:\n\n\n\t  What's the recommended fix for \"?Warning in gsub(gsLi$pattern, \ngsLi$replacement, xo) : unable to translate 'Ekstr<f8>m' to a wide \nstring; Error in gsub(gsLi$pattern, gsLi$replacement, xo",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008264.html"
     },
     {
       "id": "msg-52ddb358b6f9",
@@ -1002,7 +1054,8 @@
       "body_snippet": "On 7/19/22 08:37, Spencer Graves wrote:\n> Hello:\n>\n>\n> ????? What's the recommended fix for \"?Warning in gsub(gsLi$pattern, \n> gsLi$replacement, xo) : unable to translate 'Ekstr<f8>m' to a wide \n> str",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008265.html"
     },
     {
       "id": "msg-5e6ccb30a864",
@@ -1022,7 +1075,8 @@
       "body_snippet": "Hi, Tomas:\n\n\nOn 7/19/22 2:20 AM, Tomas Kalibera wrote:\n> \n> On 7/19/22 08:37, Spencer Graves wrote:\n>> Hello:\n>>\n>>\n>> ????? What's the recommended fix for \"?Warning in gsub(gsLi$pattern, \n>> gsLi$rep",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008266.html"
     },
     {
       "id": "msg-1fd5e9f67294",
@@ -1043,7 +1097,8 @@
       "body_snippet": "Have you tried changing the \\x's in that file with \\u's?\n\n> qx <- c(\"\\xf6\", \"\\xf8\", \"\\xdf\", \"\\xfc\")\n> Encoding(qx) <- \"latin1\"\n> qu <- c(\"\\uf6\", \"\\uf8\", \"\\udf\", \"\\ufc\")\n> Encoding(qu)\n[1] \"UTF-8\" \"UTF",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008267.html"
     },
     {
       "id": "msg-bada518e98bb",
@@ -1065,7 +1120,8 @@
       "body_snippet": "Hi, Bill, Tomas, et al.:\n\n\nOn 7/19/22 12:10 PM, Bill Dunlap wrote:\n> Have you tried changing the \\x's in that file with \\u's?\n> \n>  > qx <- c(\"\\xf6\", \"\\xf8\", \"\\xdf\", \"\\xfc\")\n>  > Encoding(qx) <- \"lati",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 4,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008268.html"
     },
     {
       "id": "msg-8662af1c25f2",
@@ -1088,7 +1144,8 @@
       "body_snippet": "Adding the initial zeroes is a bit safer, as would be \\u{df}; either\nprotects against the next character being a hex digit.  There are 6 byte\nutf-8 'characters', but I don't think R's parser accepts m",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008269.html"
     },
     {
       "id": "msg-3f6b14d4bad0",
@@ -1111,7 +1168,8 @@
       "body_snippet": "?The help pages are at\n\nhttps://github.com/wch/r-source/blob/trunk/src/library/base/man/iconv.Rd\n\nor the equivalent at https://github.com/r-devel/r-svn\n\nor https://svn.r-project.org/R/trunk/src/librar",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008270.html"
     },
     {
       "id": "msg-53e1dbc959fb",
@@ -1135,7 +1193,8 @@
       "body_snippet": "On 7/19/22 12:42 PM, Bill Dunlap wrote:\n> Adding the initial zeroes is a bit safer, as would be \\u{df}; either \n> protects against the next character being a hex digit.? There are 6 byte \n> utf-8 'cha",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 6,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008271.html"
     },
     {
       "id": "msg-48e812624cc9",
@@ -1158,7 +1217,8 @@
       "body_snippet": "On Tue, 19 Jul 2022 12:32:20 -0500\nSpencer Graves <spencer.graves at effectivedefense.org> wrote:\n\n> Can someone provide me with a link to the correct development \n> version of help('iconv')?  The cur",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 5,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008272.html"
     },
     {
       "id": "msg-2ce78438f16a",
@@ -1182,7 +1242,8 @@
       "body_snippet": "Hi, Ivan et al.:\n\n\nOn 7/19/22 1:03 PM, Ivan Krylov wrote:\n> On Tue, 19 Jul 2022 12:32:20 -0500\n> Spencer Graves <spencer.graves at effectivedefense.org> wrote:\n> \n>> Can someone provide me with a link",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 6,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008273.html"
     },
     {
       "id": "msg-cf59025a5fe9",
@@ -1207,7 +1268,8 @@
       "body_snippet": "Perhaps look at [1]? iconv is trying to handle conformity with the Unicode standard, so try starting out by assuming it will succeed.\n\nMeanwhile, you should consider using a docker container to test y",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 7,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008274.html"
     },
     {
       "id": "msg-a9df096dbf5a",
@@ -1232,7 +1294,8 @@
       "body_snippet": "On Tue, 19 Jul 2022 13:23:11 -0500\nSpencer Graves <spencer.graves at effectivedefense.org> wrote:\n\n> So what's the recommended fix?\n\nIs subNonStandardCharacters() supposed to work with strings with\nEn",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 7,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008276.html"
     },
     {
       "id": "msg-664f206e8aed",
@@ -1257,7 +1320,8 @@
       "body_snippet": "On 19/07/2022 2:23 p.m., Spencer Graves wrote:\n> Hi, Ivan et al.:\n> \n> \n> On 7/19/22 1:03 PM, Ivan Krylov wrote:\n>> On Tue, 19 Jul 2022 12:32:20 -0500\n>> Spencer Graves <spencer.graves at effectivedef",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 7,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008275.html"
     },
     {
       "id": "msg-118fa9886511",
@@ -1283,7 +1347,8 @@
       "body_snippet": "On 7/19/22 2:12 PM, Duncan Murdoch wrote:\n> On 19/07/2022 2:23 p.m., Spencer Graves wrote:\n>> Hi, Ivan et al.:\n>>\n>>\n>> On 7/19/22 1:03 PM, Ivan Krylov wrote:\n>>> On Tue, 19 Jul 2022 12:32:20 -0500\n>>",
       "thread_id": "thread-f3373091bdf8",
       "thread_depth": 8,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008277.html"
     },
     {
       "id": "msg-4466a6072400",
@@ -1301,7 +1366,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  Winbuilder with R-Devel complains, \" NOTE\nProblems with news in 'NEWS.md': No news entries found.\" See below.\n\n\n\t  What should I do with this?  Document it in \"cran-comments.md\" and \n",
       "thread_id": "thread-4466a6072400",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008278.html"
     },
     {
       "id": "msg-2815a44ba9ec",
@@ -1320,7 +1386,8 @@
       "body_snippet": "Hi Spencer,\n\nThis NOTE was discussed a couple weeks ago on this list, it's (as you may expect) a new check in R-devel. Here's what Ivan had to say: https://stat.ethz.ch/pipermail/r-package-devel/2022q",
       "thread_id": "thread-4466a6072400",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008279.html"
     },
     {
       "id": "msg-275b7275d391",
@@ -1340,7 +1407,8 @@
       "body_snippet": "Or simply read ?news which explains how the three formats (plain text \nNEWS, NEWS.Rd and NEWS.md) should look like.\n\nBest,\nUwe Ligges\n\nOn 20.07.2022 03:27, Max Turgeon wrote:\n> Hi Spencer,\n> \n> This N",
       "thread_id": "thread-4466a6072400",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008280.html"
     },
     {
       "id": "msg-2d16102efe66",
@@ -1356,7 +1424,8 @@
       "body_snippet": "Dear all,\n\nI submitted a new version of my package \"robust2sls\" (released version \non CRAN <https://cran.r-project.org/package=robust2sls>, new submitted \nversion on GitHub <https://github.com/jkurle/",
       "thread_id": "thread-2d16102efe66",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008281.html"
     },
     {
       "id": "msg-6f9ce9c41c22",
@@ -1374,7 +1443,8 @@
       "body_snippet": "On 22 July 2022 at 21:09, Jonas Kurle wrote:\n| The automatic CRAN pre-tests fail and it seems that this is due to \n| runtime timeout (in the tests). For Windows, I get the message \"Check \n| process pr",
       "thread_id": "thread-2d16102efe66",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008282.html"
     },
     {
       "id": "msg-dc1d4e998ce0",
@@ -1392,7 +1462,8 @@
       "body_snippet": "On Fri, 22 Jul 2022 21:09:15 +0100\nJonas Kurle <mail at jonaskurle.com> wrote:\n\n> Can anyone advise me what to do? \n\nI see you're using testthat. Is there a way to make it produce verbose\noutput for e",
       "thread_id": "thread-2d16102efe66",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008283.html"
     },
     {
       "id": "msg-12b9e67df48d",
@@ -1411,7 +1482,8 @@
       "body_snippet": "Dear Ivan and Dirk,\n\nThank you both for your suggestions and your help.\n\nFor now, I will simply skip the automatic unit testing on CRAN. My \nsubmission to winbuilder is now successful for all versions",
       "thread_id": "thread-2d16102efe66",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008284.html"
     },
     {
       "id": "msg-bef947b41f0c",
@@ -1432,7 +1504,8 @@
       "body_snippet": "Hello, All:\n\n\n\t  Thanks to Uwe Ligges, Max Turgeon, Duncan Murdoch, Ivan Krylov, Jeff \nNewmiller, Ben Bolker, Bill Dunlap, and Tomas Kalibera, Ecfun 0.3-0 is \nnow available on CRAN, after three earlie",
       "thread_id": "thread-4466a6072400",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008285.html"
     },
     {
       "id": "msg-34907429ca7a",
@@ -1450,7 +1523,8 @@
       "body_snippet": "Hi,\n\nRecently I got the following email from the CRAN maintainer about my\npackage, string2path[1].\n\nHowever, I do ensure the binary is the pinned version and verify if the\nhash matches with the embedd",
       "thread_id": "thread-34907429ca7a",
       "thread_depth": 0,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008286.html"
     },
     {
       "id": "msg-eef368e5a26e",
@@ -1469,7 +1543,8 @@
       "body_snippet": "On 7/27/22 00:30, Hiroaki Yutani wrote:\n> Hi,\n>\n> Recently I got the following email from the CRAN maintainer about my\n> package, string2path[1].\n>\n> However, I do ensure the binary is the pinned vers",
       "thread_id": "thread-34907429ca7a",
       "thread_depth": 1,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008287.html"
     },
     {
       "id": "msg-05bba7b1e4df",
@@ -1489,7 +1564,8 @@
       "body_snippet": "Thank you. I'll read the policy again more carefully.\n\n> but you are not downloading sources.\n\nThe case is that, I include the Rust source code, but since the CRAN's\nWindows & macOS machines don't hav",
       "thread_id": "thread-34907429ca7a",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008288.html"
     },
     {
       "id": "msg-0ad7bc881f9c",
@@ -1510,7 +1586,8 @@
       "body_snippet": "On 7/27/22 09:03, Hiroaki Yutani wrote:\n> Thank you. I'll read the policy again more carefully.\n>\n> > but you are not downloading sources.\n>\n> The case is that, I include the Rust source code, but sin",
       "thread_id": "thread-34907429ca7a",
       "thread_depth": 3,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008289.html"
     },
     {
       "id": "msg-eaaad90934ed",
@@ -1530,7 +1607,8 @@
       "body_snippet": "On 7/27/22 08:08, Tomas Kalibera wrote:\n>\n> On 7/27/22 00:30, Hiroaki Yutani wrote:\n>> Hi,\n>>\n>> Recently I got the following email from the CRAN maintainer about my\n>> package, string2path[1].\n>>\n>> ",
       "thread_id": "thread-34907429ca7a",
       "thread_depth": 2,
-      "month": "2022-07"
+      "month": "2022-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q3/008290.html"
     }
   ],
   "threads": [

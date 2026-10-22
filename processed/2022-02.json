@@ -13,11 +13,12 @@
       "subject_clean": "[R-pkg-devel] DBI namespace not found on check",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi,\n\nI am preparing a package for submission and having issues with R CMD check, both using the r-lib GitHub actions and r-hub. I keep getting the warning message:\n\n* checking whether package ?toxpiR? can be installed ... WARNING\nFound the following significant warnings:\n  Warning: namespace ?DBI? is not available and has been replaced\nSee ?.../00install.out? for details.\n\nI cannot replicate the warning while checking as-cran on my local machine. Going through the logs it?s clear that DBI is not getting installed, but I also do not know who/what is calling it. I see that knitr lists DBI in imports, so it?s odd to me that it?s not getting installed. I do not directly import or use any DBI functions. The easy solution would be to add DBI to ?Suggests? ? and that feels more like a bandaid than a good solution.\n\nDBI is also being loaded into the Namespace when loading the package. From a clean session:\n\n> library(toxpiR)\n> sessionInfo()\nR version 4.1.2 (2021-11-01)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Monterey 12.1\n\nMatrix products: default\nLAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlapack.dylib\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] toxpiR_0.1.0\n\nloaded via a namespace (and not attached):\n [1] Rcpp_1.0.8          knitr_1.37          magrittr_2.0.2      BiocGenerics_0.40.0 tidyselect_1.1.1    R6_2.5.1            rlang_1.0.0        \n [8] fastmap_1.1.0       fansi_1.0.2         stringr_1.4.0       dplyr_1.0.7         tools_4.1.2         grid_4.1.2          xfun_0.29          \n[15] utf8_1.2.2          DBI_1.1.2           cli_3.1.1           ellipsis_0.3.2      htmltools_0.5.2     assertthat_0.2.1    yaml_2.2.2         \n[22] digest_0.6.29       tibble_3.1.6        lifecycle_1.0.1     crayon_1.4.2        purrr_0.3.4         pryr_0.1.5          tidyr_1.1.4        \n[29] vctrs_0.3.8         S4Vectors_0.32.3    codetools_0.2-18    glue_1.6.1          evaluate_0.14       rmarkdown_2.11      stringi_1.7.6      \n[36] pillar_1.6.5        compiler_4.1.2      generics_0.1.1      stats4_4.1.2        pkgconfig_2.0.3    \n\nAny help is greatly appreciated!! Below I have linked to the  r-hub results and the pasted the Desc/Namespace. \n\nThank you!\n\nDayne Filer, PhD\nUNC School of Medicine\nRenaissance Computing Institute \n\nLinks to the r-hub results:\n\nWindows/dev: https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-36c4ff0f5ae348e7a5b28c15ca9d761d <https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-36c4ff0f5ae348e7a5b28c15ca9d761d>\nLinux/release: https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-f631ce3fc55d44b98bc328f2886caf6c/ <https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-f631ce3fc55d44b98bc328f2886caf6c/>\nLinux/dev: https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-d64875065b744735bd4991da2d2dc185/ <https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-d64875065b744735bd4991da2d2dc185/>\n\nThe package DESCRIPTION:\n\nPackage: toxpiR\nType: Package\nTitle: Create ToxPi Prioritization Models\nVersion: 0.1.0\nAuthors at R: \n    c(person(\"Dayne L\", \"Filer\", \n             role = c(\"aut\"), \n             email = \"dayne.filer at gmail.com\",\n             comment = c(ORCID = \"0000-0002-3443-5315\")),\n      person(\"Dillon T\", \"Lloyd\",\n             role = \"aut\"),\n      person(\"Preethi\", \"Thunga\",\n             role = \"aut\",\n             comment = c(ORCID = \"0000-0001-5447-0129\")),\n      person(\"Skylar W\", \"Marvel\",\n             role = \"aut\"),      \n      person(\"David M\", \"Reif\",\n             role = c(\"aut\", \"cre\"),\n             email = \"reif.david at gmail.com\",\n             comment = c(ORCID = \"0000-0001-7815-6767\")))\nDescription: \n  Enables users to build ToxPi prioritization models and provides \n  functionality within the grid framework for plotting ToxPi graphs.\n  toxpiR allows for more customization than the ToxPi GUI (toxpi.org)\n  and integration into existing workflows for greater ease-of-use, \n  reproducibility, and transparency.\n  toxpiR package behaves nearly identically to the GUI; the package \n  documentation includes notes about all differences.\nImports: \n    grDevices,\n    methods,\n    S4Vectors,\n    grid,\n    rlang,\n    stats,\n    BiocGenerics,\n    pryr,\n    tidyr,\n    utils\nEncoding: UTF-8\nLazyData: true\nRoxygenNote: 7.1.2\nRoxygen: list(markdown = TRUE)\nDepends: \n    R (>= 3.5.0)\nSuggests: \n    rmarkdown,\n    knitr,\n    testthat (>= 3.0.0),\n    covr\nConfig/testthat/edition: 3\nConfig/testthat/parallel: true\nVignetteBuilder: knitr\nLicense: GPL (>= 3)\n\nPackage NAMESPACE:\n\nS3method(editDetails,pieGrob)\nexport(TxpModel)\nexport(TxpModelList)\nexport(TxpResultList)\nexport(TxpSlice)\nexport(TxpSliceList)\nexport(TxpTransFunc)\nexport(TxpTransFuncList)\nexport(as.TxpModelList)\nexport(as.TxpResultList)\nexport(as.TxpSliceList)\nexport(as.TxpTransFuncList)\nexport(grid.pieGridGrob)\nexport(grid.pieGrob)\nexport(pieGridGrob)\nexport(pieGrob)\nexport(txpCalculateScores)\nexport(txpImportGui)\nexportClasses(TxpModel)\nexportClasses(TxpModelList)\nexportClasses(TxpResult)\nexportClasses(TxpResultList)\nexportClasses(TxpSlice)\nexportClasses(TxpSliceList)\nexportClasses(TxpTransFunc)\nexportClasses(TxpTransFuncList)\nexportMethods(\"[\")\nexportMethods(\"names<-\")\nexportMethods(\"txpIDs<-\")\nexportMethods(\"txpSlices<-\")\nexportMethods(\"txpTransFuncs<-\")\nexportMethods(\"txpValueNames<-\")\nexportMethods(\"txpWeights<-\")\nexportMethods(as.data.frame)\nexportMethods(duplicated)\nexportMethods(length)\nexportMethods(merge)\nexportMethods(names)\nexportMethods(plot)\nexportMethods(sort)\nexportMethods(txpCalculateScores)\nexportMethods(txpIDs)\nexportMethods(txpModel)\nexportMethods(txpRanks)\nexportMethods(txpScores)\nexportMethods(txpSliceScores)\nexportMethods(txpSlices)\nexportMethods(txpTransFuncs)\nexportMethods(txpValueNames)\nexportMethods(txpWeights)\nimport(grid)\nimport(methods)\nimportClassesFrom(S4Vectors,List)\nimportClassesFrom(S4Vectors,SimpleList)\nimportClassesFrom(S4Vectors,character_OR_NULL)\nimportFrom(BiocGenerics,as.data.frame)\nimportFrom(BiocGenerics,duplicated)\nimportFrom(BiocGenerics,sort)\nimportFrom(BiocGenerics,updateObject)\nimportFrom(S4Vectors,List)\nimportFrom(S4Vectors,classNameForDisplay)\nimportFrom(S4Vectors,coolcat)\nimportFrom(S4Vectors,new2)\nimportFrom(S4Vectors,setValidity2)\nimportFrom(grDevices,colorRampPalette)\nimportFrom(grDevices,extendrange)\nimportFrom(pryr,make_function)\nimportFrom(pryr,substitute_q)\nimportFrom(rlang,is_integerish)\nimportFrom(rlang,is_named)\nimportFrom(rlang,is_scalar_character)\nimportFrom(rlang,is_scalar_integerish)\nimportFrom(rlang,is_scalar_logical)\nimportFrom(stats,sd)\nimportFrom(tidyr,separate)\nimportFrom(utils,data)\nimportFrom(utils,read.csv)\nimportFrom(utils,type.convert)\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Hi,\n\nI am preparing a package for submission and having issues with R CMD check, both using the r-lib GitHub actions and r-hub. I keep getting the warning message:\n\n* checking whether package ?toxpiR?",
+      "body_plain": "Hi,\n\nI am preparing a package for submission and having issues with R CMD check, both using the r-lib GitHub actions and r-hub. I keep getting the warning message:\n\n* checking whether package ‘toxpiR’ can be installed ... WARNING\nFound the following significant warnings:\n  Warning: namespace ‘DBI’ is not available and has been replaced\nSee ‘.../00install.out’ for details.\n\nI cannot replicate the warning while checking as-cran on my local machine. Going through the logs it’s clear that DBI is not getting installed, but I also do not know who/what is calling it. I see that knitr lists DBI in imports, so it’s odd to me that it’s not getting installed. I do not directly import or use any DBI functions. The easy solution would be to add DBI to ‘Suggests’ — and that feels more like a bandaid than a good solution.\n\nDBI is also being loaded into the Namespace when loading the package. From a clean session:\n\n> library(toxpiR)\n> sessionInfo()\nR version 4.1.2 (2021-11-01)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Monterey 12.1\n\nMatrix products: default\nLAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlapack.dylib\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] toxpiR_0.1.0\n\nloaded via a namespace (and not attached):\n [1] Rcpp_1.0.8          knitr_1.37          magrittr_2.0.2      BiocGenerics_0.40.0 tidyselect_1.1.1    R6_2.5.1            rlang_1.0.0        \n [8] fastmap_1.1.0       fansi_1.0.2         stringr_1.4.0       dplyr_1.0.7         tools_4.1.2         grid_4.1.2          xfun_0.29          \n[15] utf8_1.2.2          DBI_1.1.2           cli_3.1.1           ellipsis_0.3.2      htmltools_0.5.2     assertthat_0.2.1    yaml_2.2.2         \n[22] digest_0.6.29       tibble_3.1.6        lifecycle_1.0.1     crayon_1.4.2        purrr_0.3.4         pryr_0.1.5          tidyr_1.1.4        \n[29] vctrs_0.3.8         S4Vectors_0.32.3    codetools_0.2-18    glue_1.6.1          evaluate_0.14       rmarkdown_2.11      stringi_1.7.6      \n[36] pillar_1.6.5        compiler_4.1.2      generics_0.1.1      stats4_4.1.2        pkgconfig_2.0.3    \n\nAny help is greatly appreciated!! Below I have linked to the  r-hub results and the pasted the Desc/Namespace. \n\nThank you!\n\nDayne Filer, PhD\nUNC School of Medicine\nRenaissance Computing Institute \n\nLinks to the r-hub results:\n\nWindows/dev: https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-36c4ff0f5ae348e7a5b28c15ca9d761d <https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-36c4ff0f5ae348e7a5b28c15ca9d761d>\nLinux/release: https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-f631ce3fc55d44b98bc328f2886caf6c/ <https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-f631ce3fc55d44b98bc328f2886caf6c/>\nLinux/dev: https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-d64875065b744735bd4991da2d2dc185/ <https://artifacts.r-hub.io/toxpiR_0.1.0.tar.gz-d64875065b744735bd4991da2d2dc185/>\n\nThe package DESCRIPTION:\n\nPackage: toxpiR\nType: Package\nTitle: Create ToxPi Prioritization Models\nVersion: 0.1.0\nAuthors at R: \n    c(person(\"Dayne L\", \"Filer\", \n             role = c(\"aut\"), \n             email = \"dayne.filer at gmail.com\",\n             comment = c(ORCID = \"0000-0002-3443-5315\")),\n      person(\"Dillon T\", \"Lloyd\",\n             role = \"aut\"),\n      person(\"Preethi\", \"Thunga\",\n             role = \"aut\",\n             comment = c(ORCID = \"0000-0001-5447-0129\")),\n      person(\"Skylar W\", \"Marvel\",\n             role = \"aut\"),      \n      person(\"David M\", \"Reif\",\n             role = c(\"aut\", \"cre\"),\n             email = \"reif.david at gmail.com\",\n             comment = c(ORCID = \"0000-0001-7815-6767\")))\nDescription: \n  Enables users to build ToxPi prioritization models and provides \n  functionality within the grid framework for plotting ToxPi graphs.\n  toxpiR allows for more customization than the ToxPi GUI (toxpi.org)\n  and integration into existing workflows for greater ease-of-use, \n  reproducibility, and transparency.\n  toxpiR package behaves nearly identically to the GUI; the package \n  documentation includes notes about all differences.\nImports: \n    grDevices,\n    methods,\n    S4Vectors,\n    grid,\n    rlang,\n    stats,\n    BiocGenerics,\n    pryr,\n    tidyr,\n    utils\nEncoding: UTF-8\nLazyData: true\nRoxygenNote: 7.1.2\nRoxygen: list(markdown = TRUE)\nDepends: \n    R (>= 3.5.0)\nSuggests: \n    rmarkdown,\n    knitr,\n    testthat (>= 3.0.0),\n    covr\nConfig/testthat/edition: 3\nConfig/testthat/parallel: true\nVignetteBuilder: knitr\nLicense: GPL (>= 3)\n\nPackage NAMESPACE:\n\nS3method(editDetails,pieGrob)\nexport(TxpModel)\nexport(TxpModelList)\nexport(TxpResultList)\nexport(TxpSlice)\nexport(TxpSliceList)\nexport(TxpTransFunc)\nexport(TxpTransFuncList)\nexport(as.TxpModelList)\nexport(as.TxpResultList)\nexport(as.TxpSliceList)\nexport(as.TxpTransFuncList)\nexport(grid.pieGridGrob)\nexport(grid.pieGrob)\nexport(pieGridGrob)\nexport(pieGrob)\nexport(txpCalculateScores)\nexport(txpImportGui)\nexportClasses(TxpModel)\nexportClasses(TxpModelList)\nexportClasses(TxpResult)\nexportClasses(TxpResultList)\nexportClasses(TxpSlice)\nexportClasses(TxpSliceList)\nexportClasses(TxpTransFunc)\nexportClasses(TxpTransFuncList)\nexportMethods(\"[\")\nexportMethods(\"names<-\")\nexportMethods(\"txpIDs<-\")\nexportMethods(\"txpSlices<-\")\nexportMethods(\"txpTransFuncs<-\")\nexportMethods(\"txpValueNames<-\")\nexportMethods(\"txpWeights<-\")\nexportMethods(as.data.frame)\nexportMethods(duplicated)\nexportMethods(length)\nexportMethods(merge)\nexportMethods(names)\nexportMethods(plot)\nexportMethods(sort)\nexportMethods(txpCalculateScores)\nexportMethods(txpIDs)\nexportMethods(txpModel)\nexportMethods(txpRanks)\nexportMethods(txpScores)\nexportMethods(txpSliceScores)\nexportMethods(txpSlices)\nexportMethods(txpTransFuncs)\nexportMethods(txpValueNames)\nexportMethods(txpWeights)\nimport(grid)\nimport(methods)\nimportClassesFrom(S4Vectors,List)\nimportClassesFrom(S4Vectors,SimpleList)\nimportClassesFrom(S4Vectors,character_OR_NULL)\nimportFrom(BiocGenerics,as.data.frame)\nimportFrom(BiocGenerics,duplicated)\nimportFrom(BiocGenerics,sort)\nimportFrom(BiocGenerics,updateObject)\nimportFrom(S4Vectors,List)\nimportFrom(S4Vectors,classNameForDisplay)\nimportFrom(S4Vectors,coolcat)\nimportFrom(S4Vectors,new2)\nimportFrom(S4Vectors,setValidity2)\nimportFrom(grDevices,colorRampPalette)\nimportFrom(grDevices,extendrange)\nimportFrom(pryr,make_function)\nimportFrom(pryr,substitute_q)\nimportFrom(rlang,is_integerish)\nimportFrom(rlang,is_named)\nimportFrom(rlang,is_scalar_character)\nimportFrom(rlang,is_scalar_integerish)\nimportFrom(rlang,is_scalar_logical)\nimportFrom(stats,sd)\nimportFrom(tidyr,separate)\nimportFrom(utils,data)\nimportFrom(utils,read.csv)\nimportFrom(utils,type.convert)\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI am preparing a package for submission and having issues with R CMD check, both using the r-lib GitHub actions and r-hub. I keep getting the warning message:\n\n* checking whether package ‘toxpiR’",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007692.html"
     },
     {
       "id": "msg-56c6325e5ec7",
@@ -35,7 +36,8 @@
       "body_snippet": "Dayne,\n\nWhen debugging, splitting concerns into separable buckets ofteb helps.\nSubmission to CRAN, contrary what an increasing number of people appear to\nbelieve does _not_ require use of certain pack",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007693.html"
     },
     {
       "id": "msg-1d31b68a96e2",
@@ -53,7 +55,8 @@
       "body_snippet": "On Tue, 1 Feb 2022 08:27:54 -0500\nDayne Filer <dayne.filer at gmail.com> wrote:\n\n> I do not directly import or use any DBI functions.\n\n00install.out says:\n\n>> Warning: namespace ?DBI? is not available",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007694.html"
     },
     {
       "id": "msg-65e5b62f1c5c",
@@ -71,7 +74,8 @@
       "body_snippet": "A Master student of? us has just send us the way he has found to get out \nof the problem met. Here is the translation of his mail:\n\nI have updated R to 4.1.2 using updateR() of the package installr fr",
       "thread_id": "thread-65e5b62f1c5c",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007695.html"
     },
     {
       "id": "msg-64737d6d4742",
@@ -90,7 +94,8 @@
       "body_snippet": "On 1 February 2022 at 18:14, Ivan Krylov wrote:\n| You might have to depend on DBI explicitly\n\nGood point. That same issue hit me with two little test packages I built on\nthe weekend which started with",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007696.html"
     },
     {
       "id": "msg-4b13bb3e5c24",
@@ -109,7 +114,8 @@
       "body_snippet": "Thanks, Ivan! \n\nI completely missed the warning in the install.out file and had no idea where this was coming from. The object has a slot with a class inheriting from the S4Vectors package. Based on t",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007697.html"
     },
     {
       "id": "msg-1c44c8f9adb9",
@@ -125,11 +131,12 @@
         "<20220201181401.0d1510e6@Tarkus>",
         "<25081.21271.277625.67460@rob.eddelbuettel.com>"
       ],
-      "body_plain": "Thanks, Dirk! \n\nI apologize ? your fist message went to my junk folder so I didn?t see until after my first response. I totally understand re: CRAN requirements. I thought maybe the issue was with how the GitHub actions script was setup, hence moving to r-hub. When they both gave the same answer, I then assumed it was real. \n\nI am also leaning towards adding to suggests and seeing if I can pass checks. It doesn?t detract from the package per se, I just find it odd that it doesn?t get installed, when it?s not MY package that requires it. You can go down the requirement trees (I haven?t done this for every package I import/suggest), but at least knitr -> DBI and S4Vectors -> AnnotationDbi -> DBI. How are these packages being installed during the test check without installing DBI?\n\nThanks, again!\n\nDayne\n\n> On Feb 1, 2022, at 10:34 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 1 February 2022 at 18:14, Ivan Krylov wrote:\n> | You might have to depend on DBI explicitly\n> \n> Good point. That same issue hit me with two little test packages I built on\n> the weekend which started with a Imports: RPostgres and Imports: RPostgreSQL\n> (trying to compare something here) and when R / R CMD check whined (on the\n> simple attempt to connect) I shrugged I just added DBI.  Which shouldn't have\n> been necessary as DBI gets imported by either but I was in no mood to fight.\n> \n> Dirk\n> \n> -- \n> https://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "Thanks, Dirk! \n\nI apologize ? your fist message went to my junk folder so I didn?t see until after my first response. I totally understand re: CRAN requirements. I thought maybe the issue was with how",
+      "body_plain": "Thanks, Dirk! \n\nI apologize — your fist message went to my junk folder so I didn’t see until after my first response. I totally understand re: CRAN requirements. I thought maybe the issue was with how the GitHub actions script was setup, hence moving to r-hub. When they both gave the same answer, I then assumed it was real. \n\nI am also leaning towards adding to suggests and seeing if I can pass checks. It doesn’t detract from the package per se, I just find it odd that it doesn’t get installed, when it’s not MY package that requires it. You can go down the requirement trees (I haven’t done this for every package I import/suggest), but at least knitr -> DBI and S4Vectors -> AnnotationDbi -> DBI. How are these packages being installed during the test check without installing DBI?\n\nThanks, again!\n\nDayne\n\n> On Feb 1, 2022, at 10:34 AM, Dirk Eddelbuettel <edd at debian.org> wrote:\n> \n> \n> On 1 February 2022 at 18:14, Ivan Krylov wrote:\n> | You might have to depend on DBI explicitly\n> \n> Good point. That same issue hit me with two little test packages I built on\n> the weekend which started with a Imports: RPostgres and Imports: RPostgreSQL\n> (trying to compare something here) and when R / R CMD check whined (on the\n> simple attempt to connect) I shrugged I just added DBI.  Which shouldn't have\n> been necessary as DBI gets imported by either but I was in no mood to fight.\n> \n> Dirk\n> \n> -- \n> https://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Thanks, Dirk! \n\nI apologize — your fist message went to my junk folder so I didn’t see until after my first response. I totally understand re: CRAN requirements. I thought maybe the issue was with how",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007698.html"
     },
     {
       "id": "msg-eb569b117041",
@@ -149,7 +156,8 @@
       "body_snippet": "On 01/02/2022 12:13 p.m., Dayne Filer wrote:\n> Thanks, Ivan!\n> \n> I completely missed the warning in the install.out file and had no idea where this was coming from. The object has a slot with a class",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007699.html"
     },
     {
       "id": "msg-964eee05680f",
@@ -170,7 +178,8 @@
       "body_snippet": "I see. And yes, I could only track DBI down though suggests from knitr & S4Vectors. The best answer then, it to suggest DBI?\n\nThanks,\n\nDayne\n\n> On Feb 1, 2022, at 12:25 PM, Duncan Murdoch <murdoch.dun",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 4,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007700.html"
     },
     {
       "id": "msg-eb02fe9ce181",
@@ -192,7 +201,8 @@
       "body_snippet": "On 01/02/2022 12:29 p.m., Dayne Filer wrote:\n> I see. And yes, I could only track DBI down though suggests from knitr & \n> S4Vectors. The best answer then, it to suggest DBI?\n\nThat should be sufficien",
       "thread_id": "thread-7d9767a0ad67",
       "thread_depth": 5,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007701.html"
     },
     {
       "id": "msg-64633d21d5a0",
@@ -208,7 +218,8 @@
       "body_snippet": "Hello, I have an 'identical()' method in my library\n\nhttps://github.com/andrew-plowright/TileManager/blob/0f213a6bcce4bc4b6d0f5e6672660409e09c22c5/R/tileScheme-methods.R#L198\n\nI recently started getti",
       "thread_id": "thread-64633d21d5a0",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007702.html"
     },
     {
       "id": "msg-820ec3d9f5f5",
@@ -226,7 +237,8 @@
       "body_snippet": "Andrew,\n\nyou should not re-define identical, it is not a semantic operation and does NOT test equality. Did you mean to write a `==` method instead?\n\nCheers,\nSimon\n\n\n\n> On Feb 2, 2022, at 9:20 AM, And",
       "thread_id": "thread-64633d21d5a0",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007703.html"
     },
     {
       "id": "msg-f8d536fc28c7",
@@ -245,7 +257,8 @@
       "body_snippet": "Hi Simon,\n\nThanks for your reply. I guess I could use == instead. What I want is a\nmethod for checking if two S4 class objects are the same. I thought that ==\nwas strictly meant for atomic and list ty",
       "thread_id": "thread-64633d21d5a0",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007704.html"
     },
     {
       "id": "msg-f786a3c7fea4",
@@ -265,7 +278,8 @@
       "body_snippet": "> On Feb 2, 2022, at 3:01 PM, Andrew Plowright <plowright.andrew at gmail.com> wrote:\n> \n> Hi Simon,\n> \n> Thanks for your reply. I guess I could use == instead. What I want is a method for checking if",
       "thread_id": "thread-64633d21d5a0",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007705.html"
     },
     {
       "id": "msg-7ab57b31597b",
@@ -286,7 +300,8 @@
       "body_snippet": "Great example, that makes perfect sense.\n\nI'll just drop the identical method. Easy fix!\n\nThanks,\nAndrew\n\nOn Tue, Feb 1, 2022 at 6:57 PM Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n>\n>\n> > ",
       "thread_id": "thread-64633d21d5a0",
       "thread_depth": 4,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007706.html"
     },
     {
       "id": "msg-8aa2c0942690",
@@ -302,7 +317,8 @@
       "body_snippet": "Hello,\nI received the following response from CRAN after submitting my package:\n\nThanks, we see:\nFound the following (possibly) invalid file URI:\n  URI: %5B\n    From: inst/doc/GGIR.html\nPlease fix and",
       "thread_id": "thread-8aa2c0942690",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007707.html"
     },
     {
       "id": "msg-b5a3e6f61688",
@@ -320,7 +336,8 @@
       "body_snippet": "On Wed, 02 Feb 2022, Vincent van Hees writes:\n\n> Hello,\n> I received the following response from CRAN after submitting my package:\n>\n> Thanks, we see:\n> Found the following (possibly) invalid file URI",
       "thread_id": "thread-8aa2c0942690",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007708.html"
     },
     {
       "id": "msg-4e6df2888c6d",
@@ -338,7 +355,8 @@
       "body_snippet": "On Wed, 2 Feb 2022 10:46:57 +0100\nVincent van Hees <vincentvanhees at gmail.com> wrote:\n\n> May I assume that this relates to a link inside my package vignette?\n\nThat's true.\n\n> My vignette has many li",
       "thread_id": "thread-8aa2c0942690",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007709.html"
     },
     {
       "id": "msg-a23d61b81cdd",
@@ -357,7 +375,8 @@
       "body_snippet": "That fixed the issue. Thanks a lot Ivan and Enrico!\n\nOn Wed, 2 Feb 2022 at 11:07, Ivan Krylov <krylov.r00t at gmail.com> wrote:\n\n> On Wed, 2 Feb 2022 10:46:57 +0100\n> Vincent van Hees <vincentvanhees ",
       "thread_id": "thread-8aa2c0942690",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007710.html"
     },
     {
       "id": "msg-8b660484669f",
@@ -373,7 +392,8 @@
       "body_snippet": "In the past when I've got the \"stack smashing detected\" error, it turned\nout to be due to that fact that I'd omitted an argument in a call to a\nFortran subroutine, or had in some similar way buggered ",
       "thread_id": "thread-8b660484669f",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007711.html"
     },
     {
       "id": "msg-13ceceae3813",
@@ -391,7 +411,8 @@
       "body_snippet": "On Sun, 6 Feb 2022 16:32:05 +1300\nRolf Turner <r.turner at auckland.ac.nz> wrote:\n\n> The output that I get from valgrind (see the attached file\n> \"smash.txt\") does not enlighten me.\n\nFor whatever reas",
       "thread_id": "thread-8b660484669f",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007712.html"
     },
     {
       "id": "msg-692690cda1d3",
@@ -410,7 +431,8 @@
       "body_snippet": "On Sun, 6 Feb 2022 12:45:15 +0300\nIvan Krylov <krylov.r00t at gmail.com> wrote:\n\n> Unfortunately, demo.so keeps crashing R, seemingly because of memory\n> corruption (e.g. the function name turns out t",
       "thread_id": "thread-8b660484669f",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007713.html"
     },
     {
       "id": "msg-4d868b165748",
@@ -430,7 +452,8 @@
       "body_snippet": "On Sun, 6 Feb 2022 13:25:48 +0300\nIvan Krylov <krylov.r00t at gmail.com> wrote:\n\n<SNIP>\n\n> d2f is declared to have dimensions (kstate,npar,npar) in derivf.f, but\n> is only a real(kind=8) in its caller",
       "thread_id": "thread-8b660484669f",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007714.html"
     },
     {
       "id": "msg-12b4794c6f38",
@@ -446,7 +469,8 @@
       "body_snippet": "Dear all,\n\nMy package A defines an S4 method for the \"inla\" S3 class. The INLA package\ndefines this class. That package has a huge source, making the build fail\non r-universe.dev. The solution is to n",
       "thread_id": "thread-12b4794c6f38",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007715.html"
     },
     {
       "id": "msg-ee47bafc7b4b",
@@ -458,11 +482,12 @@
       "subject_clean": "[R-pkg-devel] Update of CRAN repository at win-builder r-devel?",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "?I am trying to check a package release-candidate on win-builder r-devel. This package imports a recently-released version of another package, {vegawidget}.\nThe check on win-builder (r-devel) fails:\n* checking package dependencies ... ERROR\nPackage required and available but unsuitable version: 'vegawidget'\n{vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently not available to win-builder r-devel.\nFor what it?s worth, the check passes for win-builder r-release and r-oldrel.\nIs this just a matter of me needing to be more patient, or could there be something ?stuck? at win-builder?\nThanks!\n\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "?I am trying to check a package release-candidate on win-builder r-devel. This package imports a recently-released version of another package, {vegawidget}.\nThe check on win-builder (r-devel) fails:\n*",
+      "body_plain": "﻿I am trying to check a package release-candidate on win-builder r-devel. This package imports a recently-released version of another package, {vegawidget}.\nThe check on win-builder (r-devel) fails:\n* checking package dependencies ... ERROR\nPackage required and available but unsuitable version: 'vegawidget'\n{vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently not available to win-builder r-devel.\nFor what it’s worth, the check passes for win-builder r-release and r-oldrel.\nIs this just a matter of me needing to be more patient, or could there be something “stuck” at win-builder?\nThanks!\n\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "﻿I am trying to check a package release-candidate on win-builder r-devel. This package imports a recently-released version of another package, {vegawidget}.\nThe check on win-builder (r-devel) fails:\n*",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007716.html"
     },
     {
       "id": "msg-578a1e68e032",
@@ -476,11 +501,12 @@
       "references": [
         "<0A18B60D-4C2C-4FDE-BE81-6C0A8611D1E6@me.com>"
       ],
-      "body_plain": "For what it's worth, I am seeing a similar issue.\n\nI am trying to make a release that depends on the hardhat package, which\nmade a release on 2022-01-24, and it's still unavailable to check on\nWinDevel. I am also depending on the newest release of gtsummary which was\nmade available on CRAN on 2022-01-29 (after hardhat's release). The\ngtsummary package, however, became available on WinDevel a few days later.\n\nThank you,\nDaniel\n\nOn Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n>\n> I am trying to check a package release-candidate on win-builder r-devel.\nThis package imports a recently-released version of another package,\n{vegawidget}.\n> The check on win-builder (r-devel) fails:\n> * checking package dependencies ... ERROR\n> Package required and available but unsuitable version: 'vegawidget'\n> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently\nnot available to win-builder r-devel.\n> For what it?s worth, the check passes for win-builder r-release and\nr-oldrel.\n> Is this just a matter of me needing to be more patient, or could there be\nsomething ?stuck? at win-builder?\n> Thanks!\n>\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "For what it's worth, I am seeing a similar issue.\n\nI am trying to make a release that depends on the hardhat package, which\nmade a release on 2022-01-24, and it's still unavailable to check on\nWinDevel. I am also depending on the newest release of gtsummary which was\nmade available on CRAN on 2022-01-29 (after hardhat's release). The\ngtsummary package, however, became available on WinDevel a few days later.\n\nThank you,\nDaniel\n\nOn Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n>\n> I am trying to check a package release-candidate on win-builder r-devel.\nThis package imports a recently-released version of another package,\n{vegawidget}.\n> The check on win-builder (r-devel) fails:\n> * checking package dependencies ... ERROR\n> Package required and available but unsuitable version: 'vegawidget'\n> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently\nnot available to win-builder r-devel.\n> For what it?s worth, the check passes for win-builder r-release and\nr-oldrel.\n> Is this just a matter of me needing to be more patient, or could there be\nsomething “stuck” at win-builder?\n> Thanks!\n>\n>\n>\n>         [[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "For what it's worth, I am seeing a similar issue.\n\nI am trying to make a release that depends on the hardhat package, which\nmade a release on 2022-01-24, and it's still unavailable to check on\nWinDeve",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007717.html"
     },
     {
       "id": "msg-33bab564c7a6",
@@ -498,7 +524,8 @@
       "body_snippet": "On Mon, 7 Feb 2022 15:55:18 +0100\nThierry Onkelinx <thierry.onkelinx at inbo.be> wrote:\n\n> My package A defines an S4 method for the \"inla\" S3 class. The INLA\n> package defines this class. That packag",
       "thread_id": "thread-12b4794c6f38",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007718.html"
     },
     {
       "id": "msg-3378db16fdfe",
@@ -517,7 +544,8 @@
       "body_snippet": "Dear Ivan,\n\nThanks for the suggestion. Something strange is happening. When I run\ngetClassDef(\"inla\", package = \"INLA\") is a fresh session I get.\n\nVirtual Class \"inla\" [package \"INLA\"]\n\nSlots:\n\nName: ",
       "thread_id": "thread-12b4794c6f38",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007719.html"
     },
     {
       "id": "msg-2bfe874209c7",
@@ -537,7 +565,8 @@
       "body_snippet": "On Wed, 9 Feb 2022 12:25:14 +0100\nThierry Onkelinx <thierry.onkelinx at inbo.be> wrote:\n\n> However when package A is loaded first, I get\n\n> Virtual Class \"inla\" [package \"A\"]\n\nSince you own both packa",
       "thread_id": "thread-12b4794c6f38",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007720.html"
     },
     {
       "id": "msg-3ad7fe387b9f",
@@ -558,7 +587,8 @@
       "body_snippet": "Dear Ivan,\n\nDefining \"maybeInla\" in package A and importing that in package B solved\nthe problem. Thanks for your assistance.\n\nBest regards,\n\nir. Thierry Onkelinx\nStatisticus / Statistician\n\nVlaamse O",
       "thread_id": "thread-12b4794c6f38",
       "thread_depth": 4,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007721.html"
     },
     {
       "id": "msg-c556ea9074ef",
@@ -574,7 +604,8 @@
       "body_snippet": "I have long distributed a small spatial ESRI shapefile as demonstration data in the extdata directory of 'secr'. It comprises the three files OVforest.shp, OVforest.dbf and OVforest.shx. I wanted to m",
       "thread_id": "thread-c556ea9074ef",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007722.html"
     },
     {
       "id": "msg-acd3ab15d349",
@@ -592,7 +623,8 @@
       "body_snippet": "On 11/02/2022 5:22 p.m., Murray Efford wrote:\n> I have long distributed a small spatial ESRI shapefile as demonstration data in the extdata directory of 'secr'. It comprises the three files OVforest.s",
       "thread_id": "thread-c556ea9074ef",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007723.html"
     },
     {
       "id": "msg-f47506ca55de",
@@ -611,7 +643,8 @@
       "body_snippet": "Many thanks for your guidance. Indeed there is a radical change:\n\n$ file OVforest.dbf\nOVforest.dbf: FoxBase+/dBase III DBF, 3 records * 22, update-date 95-7-26, at offset 97 1st record \"beech        b",
       "thread_id": "thread-c556ea9074ef",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007724.html"
     },
     {
       "id": "msg-0b2536810165",
@@ -631,7 +664,8 @@
       "body_snippet": "FWIW this seems to be a known issue (for some definition of known):\n\nhttps://bugs.astron.com/view.php?id=316\n\nA fix is to set your date when writing the DBF file to year 2021 instead of 2022 (which al",
       "thread_id": "thread-c556ea9074ef",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007725.html"
     },
     {
       "id": "msg-11a5eee71bc3",
@@ -652,7 +686,8 @@
       "body_snippet": "Also if you just want to \"fix\" the file, you can simply change the second byte using R:\n\nfn = \"myfile.dbf\"\nsz = file.info(fn)$size\nr = readBin(fn, raw(), sz)\nr[2] = as.raw(121) ## make it 2021 instead",
       "thread_id": "thread-c556ea9074ef",
       "thread_depth": 4,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007726.html"
     },
     {
       "id": "msg-3c190973fa02",
@@ -673,7 +708,8 @@
       "body_snippet": "Amazing. Who would have thought? This works:\n\nOVforest <- sf::st_read(\"OVforest.shp\")\nsf::st_write(OVforest, \"OVforest3.shp\", layer_options = \"DBF_DATE_LAST_UPDATE=2021-12-31\")\n\n$ file OVforest3.dbf\nO",
       "thread_id": "thread-c556ea9074ef",
       "thread_depth": 4,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007727.html"
     },
     {
       "id": "msg-577fac1204e4",
@@ -688,11 +724,12 @@
         "<0A18B60D-4C2C-4FDE-BE81-6C0A8611D1E6@me.com>",
         "<CAG5xu54s6RhnkfDfVXb8tfPCiYahnW1LJ513jv8vwFM=2yJMxw@mail.gmail.com>"
       ],
-      "body_plain": "Is there something wrong with the Windows Dev machine? It's now been 3\nweeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\nstill not available in the Win Dev check.\n\nI have this in my DESCRIPTION file:\nImports:\n    hardhat (>= 0.2.0)\n\nAnd still getting this note when running devtools::check_win_devel().\n\nPackage required and available but unsuitable version: 'hardhat'\n\nhttps://cran.r-project.org/package=hardhat\n\nDaniel\n\n\nOn Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com>\nwrote:\n\n> For what it's worth, I am seeing a similar issue.\n>\n> I am trying to make a release that depends on the hardhat package, which\n> made a release on 2022-01-24, and it's still unavailable to check on\n> WinDevel. I am also depending on the newest release of gtsummary which was\n> made available on CRAN on 2022-01-29 (after hardhat's release). The\n> gtsummary package, however, became available on WinDevel a few days later.\n>\n> Thank you,\n> Daniel\n>\n> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n> >\n> > I am trying to check a package release-candidate on win-builder r-devel.\n> This package imports a recently-released version of another package,\n> {vegawidget}.\n> > The check on win-builder (r-devel) fails:\n> > * checking package dependencies ... ERROR\n> > Package required and available but unsuitable version: 'vegawidget'\n> > {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently\n> not available to win-builder r-devel.\n> > For what it?s worth, the check passes for win-builder r-release and\n> r-oldrel.\n> > Is this just a matter of me needing to be more patient, or could there\n> be something ?stuck? at win-builder?\n> > Thanks!\n> >\n> >\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Is there something wrong with the Windows Dev machine? It's now been 3\nweeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\nstill not available in the Win Dev check.\n\nI have this in my DESCRIPTION file:\nImports:\n    hardhat (>= 0.2.0)\n\nAnd still getting this note when running devtools::check_win_devel().\n\nPackage required and available but unsuitable version: 'hardhat'\n\nhttps://cran.r-project.org/package=hardhat\n\nDaniel\n\n\nOn Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com>\nwrote:\n\n> For what it's worth, I am seeing a similar issue.\n>\n> I am trying to make a release that depends on the hardhat package, which\n> made a release on 2022-01-24, and it's still unavailable to check on\n> WinDevel. I am also depending on the newest release of gtsummary which was\n> made available on CRAN on 2022-01-29 (after hardhat's release). The\n> gtsummary package, however, became available on WinDevel a few days later.\n>\n> Thank you,\n> Daniel\n>\n> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n> >\n> > I am trying to check a package release-candidate on win-builder r-devel.\n> This package imports a recently-released version of another package,\n> {vegawidget}.\n> > The check on win-builder (r-devel) fails:\n> > * checking package dependencies ... ERROR\n> > Package required and available but unsuitable version: 'vegawidget'\n> > {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently\n> not available to win-builder r-devel.\n> > For what it?s worth, the check passes for win-builder r-release and\n> r-oldrel.\n> > Is this just a matter of me needing to be more patient, or could there\n> be something “stuck” at win-builder?\n> > Thanks!\n> >\n> >\n> >\n> >         [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Is there something wrong with the Windows Dev machine? It's now been 3\nweeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\nstill not available in the Win Dev check.\n\nI have this i",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007728.html"
     },
     {
       "id": "msg-b875c8264544",
@@ -708,11 +745,12 @@
         "<CAG5xu54s6RhnkfDfVXb8tfPCiYahnW1LJ513jv8vwFM=2yJMxw@mail.gmail.com>",
         "<CAG5xu56LjDsbTmTrp7kRM1WvjoT0uuAPfSeHD_bGsRgRy81SQA@mail.gmail.com>"
       ],
-      "body_plain": "I'd suggest writing to CRAN to point out that they may need to take a \nlook, if you haven't already done so.  In the meantime, you can test \nelsewhere (R-hub, Github, your own Windows machine or image, etc.)\n\nDuncan Murdoch\n\nOn 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n> Is there something wrong with the Windows Dev machine? It's now been 3\n> weeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\n> still not available in the Win Dev check.\n> \n> I have this in my DESCRIPTION file:\n> Imports:\n>      hardhat (>= 0.2.0)\n> \n> And still getting this note when running devtools::check_win_devel().\n> \n> Package required and available but unsuitable version: 'hardhat'\n> \n> https://cran.r-project.org/package=hardhat\n> \n> Daniel\n> \n> \n> On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com>\n> wrote:\n> \n>> For what it's worth, I am seeing a similar issue.\n>>\n>> I am trying to make a release that depends on the hardhat package, which\n>> made a release on 2022-01-24, and it's still unavailable to check on\n>> WinDevel. I am also depending on the newest release of gtsummary which was\n>> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>> gtsummary package, however, became available on WinDevel a few days later.\n>>\n>> Thank you,\n>> Daniel\n>>\n>> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n>>>\n>>> I am trying to check a package release-candidate on win-builder r-devel.\n>> This package imports a recently-released version of another package,\n>> {vegawidget}.\n>>> The check on win-builder (r-devel) fails:\n>>> * checking package dependencies ... ERROR\n>>> Package required and available but unsuitable version: 'vegawidget'\n>>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently\n>> not available to win-builder r-devel.\n>>> For what it?s worth, the check passes for win-builder r-release and\n>> r-oldrel.\n>>> Is this just a matter of me needing to be more patient, or could there\n>> be something ?stuck? at win-builder?\n>>> Thanks!\n>>>\n>>>\n>>>\n>>>          [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "I'd suggest writing to CRAN to point out that they may need to take a \nlook, if you haven't already done so.  In the meantime, you can test \nelsewhere (R-hub, Github, your own Windows machine or image, etc.)\n\nDuncan Murdoch\n\nOn 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n> Is there something wrong with the Windows Dev machine? It's now been 3\n> weeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\n> still not available in the Win Dev check.\n> \n> I have this in my DESCRIPTION file:\n> Imports:\n>      hardhat (>= 0.2.0)\n> \n> And still getting this note when running devtools::check_win_devel().\n> \n> Package required and available but unsuitable version: 'hardhat'\n> \n> https://cran.r-project.org/package=hardhat\n> \n> Daniel\n> \n> \n> On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com>\n> wrote:\n> \n>> For what it's worth, I am seeing a similar issue.\n>>\n>> I am trying to make a release that depends on the hardhat package, which\n>> made a release on 2022-01-24, and it's still unavailable to check on\n>> WinDevel. I am also depending on the newest release of gtsummary which was\n>> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>> gtsummary package, however, became available on WinDevel a few days later.\n>>\n>> Thank you,\n>> Daniel\n>>\n>> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n>>>\n>>> I am trying to check a package release-candidate on win-builder r-devel.\n>> This package imports a recently-released version of another package,\n>> {vegawidget}.\n>>> The check on win-builder (r-devel) fails:\n>>> * checking package dependencies ... ERROR\n>>> Package required and available but unsuitable version: 'vegawidget'\n>>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is apparently\n>> not available to win-builder r-devel.\n>>> For what it?s worth, the check passes for win-builder r-release and\n>> r-oldrel.\n>>> Is this just a matter of me needing to be more patient, or could there\n>> be something “stuck” at win-builder?\n>>> Thanks!\n>>>\n>>>\n>>>\n>>>          [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "I'd suggest writing to CRAN to point out that they may need to take a \nlook, if you haven't already done so.  In the meantime, you can test \nelsewhere (R-hub, Github, your own Windows machine or image",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007729.html"
     },
     {
       "id": "msg-cbffefa72d32",
@@ -729,11 +767,12 @@
         "<CAG5xu56LjDsbTmTrp7kRM1WvjoT0uuAPfSeHD_bGsRgRy81SQA@mail.gmail.com>",
         "<5744a3a6-39f9-4a51-def2-f5f3957eafc9@gmail.com>"
       ],
-      "body_plain": "Thank you so much for the response Duncan!\n\nHow does one go about writing to CRAN?\n\nThe package is tested and ready to be shipped to CRAN, but since it's\nfailing on Win Devel, I assumed it would be auto-rejected if I submitted\nfor a CRAN release.\n\nOn Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> I'd suggest writing to CRAN to point out that they may need to take a\n> look, if you haven't already done so.  In the meantime, you can test\n> elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n>\n> Duncan Murdoch\n>\n> On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n> > Is there something wrong with the Windows Dev machine? It's now been 3\n> > weeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\n> > still not available in the Win Dev check.\n> >\n> > I have this in my DESCRIPTION file:\n> > Imports:\n> >      hardhat (>= 0.2.0)\n> >\n> > And still getting this note when running devtools::check_win_devel().\n> >\n> > Package required and available but unsuitable version: 'hardhat'\n> >\n> > https://cran.r-project.org/package=hardhat\n> >\n> > Daniel\n> >\n> >\n> > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com\n> >\n> > wrote:\n> >\n> >> For what it's worth, I am seeing a similar issue.\n> >>\n> >> I am trying to make a release that depends on the hardhat package, which\n> >> made a release on 2022-01-24, and it's still unavailable to check on\n> >> WinDevel. I am also depending on the newest release of gtsummary which\n> was\n> >> made available on CRAN on 2022-01-29 (after hardhat's release). The\n> >> gtsummary package, however, became available on WinDevel a few days\n> later.\n> >>\n> >> Thank you,\n> >> Daniel\n> >>\n> >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n> >>>\n> >>> I am trying to check a package release-candidate on win-builder\n> r-devel.\n> >> This package imports a recently-released version of another package,\n> >> {vegawidget}.\n> >>> The check on win-builder (r-devel) fails:\n> >>> * checking package dependencies ... ERROR\n> >>> Package required and available but unsuitable version: 'vegawidget'\n> >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n> apparently\n> >> not available to win-builder r-devel.\n> >>> For what it?s worth, the check passes for win-builder r-release and\n> >> r-oldrel.\n> >>> Is this just a matter of me needing to be more patient, or could there\n> >> be something ?stuck? at win-builder?\n> >>> Thanks!\n> >>>\n> >>>\n> >>>\n> >>>          [[alternative HTML version deleted]]\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thank you so much for the response Duncan!\n\nHow does one go about writing to CRAN?\n\nThe package is tested and ready to be shipped to CRAN, but since it's\nfailing on Win Devel, I assumed it would be auto-rejected if I submitted\nfor a CRAN release.\n\nOn Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com>\nwrote:\n\n> I'd suggest writing to CRAN to point out that they may need to take a\n> look, if you haven't already done so.  In the meantime, you can test\n> elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n>\n> Duncan Murdoch\n>\n> On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n> > Is there something wrong with the Windows Dev machine? It's now been 3\n> > weeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\n> > still not available in the Win Dev check.\n> >\n> > I have this in my DESCRIPTION file:\n> > Imports:\n> >      hardhat (>= 0.2.0)\n> >\n> > And still getting this note when running devtools::check_win_devel().\n> >\n> > Package required and available but unsuitable version: 'hardhat'\n> >\n> > https://cran.r-project.org/package=hardhat\n> >\n> > Daniel\n> >\n> >\n> > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com\n> >\n> > wrote:\n> >\n> >> For what it's worth, I am seeing a similar issue.\n> >>\n> >> I am trying to make a release that depends on the hardhat package, which\n> >> made a release on 2022-01-24, and it's still unavailable to check on\n> >> WinDevel. I am also depending on the newest release of gtsummary which\n> was\n> >> made available on CRAN on 2022-01-29 (after hardhat's release). The\n> >> gtsummary package, however, became available on WinDevel a few days\n> later.\n> >>\n> >> Thank you,\n> >> Daniel\n> >>\n> >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n> >>>\n> >>> I am trying to check a package release-candidate on win-builder\n> r-devel.\n> >> This package imports a recently-released version of another package,\n> >> {vegawidget}.\n> >>> The check on win-builder (r-devel) fails:\n> >>> * checking package dependencies ... ERROR\n> >>> Package required and available but unsuitable version: 'vegawidget'\n> >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n> apparently\n> >> not available to win-builder r-devel.\n> >>> For what it?s worth, the check passes for win-builder r-release and\n> >> r-oldrel.\n> >>> Is this just a matter of me needing to be more patient, or could there\n> >> be something “stuck” at win-builder?\n> >>> Thanks!\n> >>>\n> >>>\n> >>>\n> >>>          [[alternative HTML version deleted]]\n> >>>\n> >>> ______________________________________________\n> >>> R-package-devel at r-project.org mailing list\n> >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thank you so much for the response Duncan!\n\nHow does one go about writing to CRAN?\n\nThe package is tested and ready to be shipped to CRAN, but since it's\nfailing on Win Devel, I assumed it would be au",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 4,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007730.html"
     },
     {
       "id": "msg-0d0f845e0690",
@@ -751,11 +790,12 @@
         "<5744a3a6-39f9-4a51-def2-f5f3957eafc9@gmail.com>",
         "<CAG5xu55=ZCDAjn0ftX807SWjdeX6L3+53Ui5Ton-64uXs8N_mw@mail.gmail.com>"
       ],
-      "body_plain": "Write to cran at r-project.org , I think ...\n\nOn 2/13/22 2:33 PM, Daniel Sjoberg wrote:\n> Thank you so much for the response Duncan!\n> \n> How does one go about writing to CRAN?\n> \n> The package is tested and ready to be shipped to CRAN, but since it's\n> failing on Win Devel, I assumed it would be auto-rejected if I submitted\n> for a CRAN release.\n> \n> On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> \n>> I'd suggest writing to CRAN to point out that they may need to take a\n>> look, if you haven't already done so.  In the meantime, you can test\n>> elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n>>\n>> Duncan Murdoch\n>>\n>> On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n>>> Is there something wrong with the Windows Dev machine? It's now been 3\n>>> weeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\n>>> still not available in the Win Dev check.\n>>>\n>>> I have this in my DESCRIPTION file:\n>>> Imports:\n>>>       hardhat (>= 0.2.0)\n>>>\n>>> And still getting this note when running devtools::check_win_devel().\n>>>\n>>> Package required and available but unsuitable version: 'hardhat'\n>>>\n>>> https://cran.r-project.org/package=hardhat\n>>>\n>>> Daniel\n>>>\n>>>\n>>> On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com\n>>>\n>>> wrote:\n>>>\n>>>> For what it's worth, I am seeing a similar issue.\n>>>>\n>>>> I am trying to make a release that depends on the hardhat package, which\n>>>> made a release on 2022-01-24, and it's still unavailable to check on\n>>>> WinDevel. I am also depending on the newest release of gtsummary which\n>> was\n>>>> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>>>> gtsummary package, however, became available on WinDevel a few days\n>> later.\n>>>>\n>>>> Thank you,\n>>>> Daniel\n>>>>\n>>>> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n>>>>>\n>>>>> I am trying to check a package release-candidate on win-builder\n>> r-devel.\n>>>> This package imports a recently-released version of another package,\n>>>> {vegawidget}.\n>>>>> The check on win-builder (r-devel) fails:\n>>>>> * checking package dependencies ... ERROR\n>>>>> Package required and available but unsuitable version: 'vegawidget'\n>>>>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n>> apparently\n>>>> not available to win-builder r-devel.\n>>>>> For what it?s worth, the check passes for win-builder r-release and\n>>>> r-oldrel.\n>>>>> Is this just a matter of me needing to be more patient, or could there\n>>>> be something ?stuck? at win-builder?\n>>>>> Thanks!\n>>>>>\n>>>>>\n>>>>>\n>>>>>           [[alternative HTML version deleted]]\n>>>>>\n>>>>> ______________________________________________\n>>>>> R-package-devel at r-project.org mailing list\n>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>>        [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nDr. Benjamin Bolker\nProfessor, Mathematics & Statistics and Biology, McMaster University\nDirector, School of Computational Science and Engineering\n(Acting) Graduate chair, Mathematics & Statistics",
+      "body_plain": "Write to cran at r-project.org , I think ...\n\nOn 2/13/22 2:33 PM, Daniel Sjoberg wrote:\n> Thank you so much for the response Duncan!\n> \n> How does one go about writing to CRAN?\n> \n> The package is tested and ready to be shipped to CRAN, but since it's\n> failing on Win Devel, I assumed it would be auto-rejected if I submitted\n> for a CRAN release.\n> \n> On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> \n>> I'd suggest writing to CRAN to point out that they may need to take a\n>> look, if you haven't already done so.  In the meantime, you can test\n>> elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n>>\n>> Duncan Murdoch\n>>\n>> On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n>>> Is there something wrong with the Windows Dev machine? It's now been 3\n>>> weeks since the release of the hardhat package v 0.2.0 on CRAN, and it's\n>>> still not available in the Win Dev check.\n>>>\n>>> I have this in my DESCRIPTION file:\n>>> Imports:\n>>>       hardhat (>= 0.2.0)\n>>>\n>>> And still getting this note when running devtools::check_win_devel().\n>>>\n>>> Package required and available but unsuitable version: 'hardhat'\n>>>\n>>> https://cran.r-project.org/package=hardhat\n>>>\n>>> Daniel\n>>>\n>>>\n>>> On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg <danield.sjoberg at gmail.com\n>>>\n>>> wrote:\n>>>\n>>>> For what it's worth, I am seeing a similar issue.\n>>>>\n>>>> I am trying to make a release that depends on the hardhat package, which\n>>>> made a release on 2022-01-24, and it's still unavailable to check on\n>>>> WinDevel. I am also depending on the newest release of gtsummary which\n>> was\n>>>> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>>>> gtsummary package, however, became available on WinDevel a few days\n>> later.\n>>>>\n>>>> Thank you,\n>>>> Daniel\n>>>>\n>>>> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com> wrote:\n>>>>>\n>>>>> I am trying to check a package release-candidate on win-builder\n>> r-devel.\n>>>> This package imports a recently-released version of another package,\n>>>> {vegawidget}.\n>>>>> The check on win-builder (r-devel) fails:\n>>>>> * checking package dependencies ... ERROR\n>>>>> Package required and available but unsuitable version: 'vegawidget'\n>>>>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n>> apparently\n>>>> not available to win-builder r-devel.\n>>>>> For what it?s worth, the check passes for win-builder r-release and\n>>>> r-oldrel.\n>>>>> Is this just a matter of me needing to be more patient, or could there\n>>>> be something “stuck” at win-builder?\n>>>>> Thanks!\n>>>>>\n>>>>>\n>>>>>\n>>>>>           [[alternative HTML version deleted]]\n>>>>>\n>>>>> ______________________________________________\n>>>>> R-package-devel at r-project.org mailing list\n>>>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>>>\n>>>\n>>>        [[alternative HTML version deleted]]\n>>>\n>>> ______________________________________________\n>>> R-package-devel at r-project.org mailing list\n>>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>\n>>\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n-- \nDr. Benjamin Bolker\nProfessor, Mathematics & Statistics and Biology, McMaster University\nDirector, School of Computational Science and Engineering\n(Acting) Graduate chair, Mathematics & Statistics",
       "body_snippet": "Write to cran at r-project.org , I think ...\n\nOn 2/13/22 2:33 PM, Daniel Sjoberg wrote:\n> Thank you so much for the response Duncan!\n> \n> How does one go about writing to CRAN?\n> \n> The package is tes",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 5,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007731.html"
     },
     {
       "id": "msg-8f4b19ddbb9a",
@@ -773,11 +813,12 @@
         "<5744a3a6-39f9-4a51-def2-f5f3957eafc9@gmail.com>",
         "<CAG5xu55=ZCDAjn0ftX807SWjdeX6L3+53Ui5Ton-64uXs8N_mw@mail.gmail.com>"
       ],
-      "body_plain": "On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n> Thank you so much for the response Duncan!\n> \n> How does one go about writing to CRAN?\n\nBen gave you the address:  cran at r-project.org.\n> \n> The package is tested and ready to be shipped to CRAN, but since it's \n> failing on Win Devel, I assumed it would be auto-rejected if I submitted \n> for a CRAN release.\n\nI think CRAN and Winbuilder are separate machines. If CRAN isn't showing \nerrors in its tests of the hardhat package then it has probably \nsuccessfully built it and will use it in tests.   Currently it looks fine:\n\n  https://cran.r-project.org/web/checks/check_results_hardhat.html\n\nI do recommend testing on Windows R-devel on one of the other platforms \nI listed before submitting to CRAN.  I don't think auto-rejects waste a \nlot of their time, but it's better to get accepted on the first try.\n\nDuncan Murdoch\n\n\n\n>   \n> On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com \n> <mailto:murdoch.duncan at gmail.com>> wrote:\n> \n>     I'd suggest writing to CRAN to point out that they may need to take a\n>     look, if you haven't already done so.? In the meantime, you can test\n>     elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n> \n>     Duncan Murdoch\n> \n>     On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n>      > Is there something wrong with the Windows Dev machine? It's now\n>     been 3\n>      > weeks since the release of the hardhat package v 0.2.0 on CRAN,\n>     and it's\n>      > still not available in the Win Dev check.\n>      >\n>      > I have this in my DESCRIPTION file:\n>      > Imports:\n>      >? ? ? hardhat (>= 0.2.0)\n>      >\n>      > And still getting this note when running devtools::check_win_devel().\n>      >\n>      > Package required and available but unsuitable version: 'hardhat'\n>      >\n>      > https://cran.r-project.org/package=hardhat\n>     <https://cran.r-project.org/package=hardhat>\n>      >\n>      > Daniel\n>      >\n>      >\n>      > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg\n>     <danield.sjoberg at gmail.com <mailto:danield.sjoberg at gmail.com>>\n>      > wrote:\n>      >\n>      >> For what it's worth, I am seeing a similar issue.\n>      >>\n>      >> I am trying to make a release that depends on the hardhat\n>     package, which\n>      >> made a release on 2022-01-24, and it's still unavailable to check on\n>      >> WinDevel. I am also depending on the newest release of gtsummary\n>     which was\n>      >> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>      >> gtsummary package, however, became available on WinDevel a few\n>     days later.\n>      >>\n>      >> Thank you,\n>      >> Daniel\n>      >>\n>      >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com\n>     <mailto:ijlyttle at me.com>> wrote:\n>      >>>\n>      >>> I am trying to check a package release-candidate on win-builder\n>     r-devel.\n>      >> This package imports a recently-released version of another package,\n>      >> {vegawidget}.\n>      >>> The check on win-builder (r-devel) fails:\n>      >>> * checking package dependencies ... ERROR\n>      >>> Package required and available but unsuitable version: 'vegawidget'\n>      >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n>     apparently\n>      >> not available to win-builder r-devel.\n>      >>> For what it?s worth, the check passes for win-builder r-release and\n>      >> r-oldrel.\n>      >>> Is this just a matter of me needing to be more patient, or\n>     could there\n>      >> be something ?stuck? at win-builder?\n>      >>> Thanks!\n>      >>>\n>      >>>\n>      >>>\n>      >>>? ? ? ? ? [[alternative HTML version deleted]]\n>      >>>\n>      >>> ______________________________________________\n>      >>> R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org> mailing list\n>      >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>     <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>      >>\n>      >\n>      >? ? ? ?[[alternative HTML version deleted]]\n>      >\n>      > ______________________________________________\n>      > R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org> mailing list\n>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>     <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>",
+      "body_plain": "On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n> Thank you so much for the response Duncan!\n> \n> How does one go about writing to CRAN?\n\nBen gave you the address:  cran at r-project.org.\n> \n> The package is tested and ready to be shipped to CRAN, but since it's \n> failing on Win Devel, I assumed it would be auto-rejected if I submitted \n> for a CRAN release.\n\nI think CRAN and Winbuilder are separate machines. If CRAN isn't showing \nerrors in its tests of the hardhat package then it has probably \nsuccessfully built it and will use it in tests.   Currently it looks fine:\n\n  https://cran.r-project.org/web/checks/check_results_hardhat.html\n\nI do recommend testing on Windows R-devel on one of the other platforms \nI listed before submitting to CRAN.  I don't think auto-rejects waste a \nlot of their time, but it's better to get accepted on the first try.\n\nDuncan Murdoch\n\n\n\n>   \n> On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com \n> <mailto:murdoch.duncan at gmail.com>> wrote:\n> \n>     I'd suggest writing to CRAN to point out that they may need to take a\n>     look, if you haven't already done so.  In the meantime, you can test\n>     elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n> \n>     Duncan Murdoch\n> \n>     On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n>      > Is there something wrong with the Windows Dev machine? It's now\n>     been 3\n>      > weeks since the release of the hardhat package v 0.2.0 on CRAN,\n>     and it's\n>      > still not available in the Win Dev check.\n>      >\n>      > I have this in my DESCRIPTION file:\n>      > Imports:\n>      >?     hardhat (>= 0.2.0)\n>      >\n>      > And still getting this note when running devtools::check_win_devel().\n>      >\n>      > Package required and available but unsuitable version: 'hardhat'\n>      >\n>      > https://cran.r-project.org/package=hardhat\n>     <https://cran.r-project.org/package=hardhat>\n>      >\n>      > Daniel\n>      >\n>      >\n>      > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg\n>     <danield.sjoberg at gmail.com <mailto:danield.sjoberg at gmail.com>>\n>      > wrote:\n>      >\n>      >> For what it's worth, I am seeing a similar issue.\n>      >>\n>      >> I am trying to make a release that depends on the hardhat\n>     package, which\n>      >> made a release on 2022-01-24, and it's still unavailable to check on\n>      >> WinDevel. I am also depending on the newest release of gtsummary\n>     which was\n>      >> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>      >> gtsummary package, however, became available on WinDevel a few\n>     days later.\n>      >>\n>      >> Thank you,\n>      >> Daniel\n>      >>\n>      >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com\n>     <mailto:ijlyttle at me.com>> wrote:\n>      >>>\n>      >>> I am trying to check a package release-candidate on win-builder\n>     r-devel.\n>      >> This package imports a recently-released version of another package,\n>      >> {vegawidget}.\n>      >>> The check on win-builder (r-devel) fails:\n>      >>> * checking package dependencies ... ERROR\n>      >>> Package required and available but unsuitable version: 'vegawidget'\n>      >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n>     apparently\n>      >> not available to win-builder r-devel.\n>      >>> For what it?s worth, the check passes for win-builder r-release and\n>      >> r-oldrel.\n>      >>> Is this just a matter of me needing to be more patient, or\n>     could there\n>      >> be something “stuck” at win-builder?\n>      >>> Thanks!\n>      >>>\n>      >>>\n>      >>>\n>      >>>? ? ? ?   [[alternative HTML version deleted]]\n>      >>>\n>      >>> ______________________________________________\n>      >>> R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org> mailing list\n>      >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>     <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>      >>\n>      >\n>      >? ?    [[alternative HTML version deleted]]\n>      >\n>      > ______________________________________________\n>      > R-package-devel at r-project.org\n>     <mailto:R-package-devel at r-project.org> mailing list\n>      > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>     <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>",
       "body_snippet": "On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n> Thank you so much for the response Duncan!\n> \n> How does one go about writing to CRAN?\n\nBen gave you the address:  cran at r-project.org.\n> \n> The pack",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 5,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007732.html"
     },
     {
       "id": "msg-c6525b770fd4",
@@ -791,11 +832,12 @@
       "references": [
         "<ee24c0a5-4194-4354-3ede-3c010699fd5c@gmail.com>"
       ],
-      "body_plain": "I tried win-builder (r-devel) again today, everything works for me. Looking forward to a smooth CRAN submission.\n\nThanks for the support and advice,\n\nIan\n\n\n> On Feb 13, 2022, at 2:39 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n> ?On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n>> Thank you so much for the response Duncan!\n>> How does one go about writing to CRAN?\n> \n> Ben gave you the address:  cran at r-project.org.\n>> The package is tested and ready to be shipped to CRAN, but since it's failing on Win Devel, I assumed it would be auto-rejected if I submitted for a CRAN release.\n> \n> I think CRAN and Winbuilder are separate machines. If CRAN isn't showing errors in its tests of the hardhat package then it has probably successfully built it and will use it in tests.   Currently it looks fine:\n> \n> https://cran.r-project.org/web/checks/check_results_hardhat.html\n> \n> I do recommend testing on Windows R-devel on one of the other platforms I listed before submitting to CRAN.  I don't think auto-rejects waste a lot of their time, but it's better to get accepted on the first try.\n> \n> Duncan Murdoch\n> \n> \n> \n>>  On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n>>    I'd suggest writing to CRAN to point out that they may need to take a\n>>    look, if you haven't already done so.  In the meantime, you can test\n>>    elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n>>    Duncan Murdoch\n>>    On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n>>     > Is there something wrong with the Windows Dev machine? It's now\n>>    been 3\n>>     > weeks since the release of the hardhat package v 0.2.0 on CRAN,\n>>    and it's\n>>     > still not available in the Win Dev check.\n>>     >\n>>     > I have this in my DESCRIPTION file:\n>>     > Imports:\n>>     >      hardhat (>= 0.2.0)\n>>     >\n>>     > And still getting this note when running devtools::check_win_devel().\n>>     >\n>>     > Package required and available but unsuitable version: 'hardhat'\n>>     >\n>>     > https://cran.r-project.org/package=hardhat\n>>    <https://cran.r-project.org/package=hardhat>\n>>     >\n>>     > Daniel\n>>     >\n>>     >\n>>     > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg\n>>    <danield.sjoberg at gmail.com <mailto:danield.sjoberg at gmail.com>>\n>>     > wrote:\n>>     >\n>>     >> For what it's worth, I am seeing a similar issue.\n>>     >>\n>>     >> I am trying to make a release that depends on the hardhat\n>>    package, which\n>>     >> made a release on 2022-01-24, and it's still unavailable to check on\n>>     >> WinDevel. I am also depending on the newest release of gtsummary\n>>    which was\n>>     >> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>>     >> gtsummary package, however, became available on WinDevel a few\n>>    days later.\n>>     >>\n>>     >> Thank you,\n>>     >> Daniel\n>>     >>\n>>     >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com\n>>    <mailto:ijlyttle at me.com>> wrote:\n>>     >>>\n>>     >>> I am trying to check a package release-candidate on win-builder\n>>    r-devel.\n>>     >> This package imports a recently-released version of another package,\n>>     >> {vegawidget}.\n>>     >>> The check on win-builder (r-devel) fails:\n>>     >>> * checking package dependencies ... ERROR\n>>     >>> Package required and available but unsuitable version: 'vegawidget'\n>>     >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n>>    apparently\n>>     >> not available to win-builder r-devel.\n>>     >>> For what it?s worth, the check passes for win-builder r-release and\n>>     >> r-oldrel.\n>>     >>> Is this just a matter of me needing to be more patient, or\n>>    could there\n>>     >> be something ?stuck? at win-builder?\n>>     >>> Thanks!\n>>     >>>\n>>     >>>\n>>     >>>\n>>     >>>          [[alternative HTML version deleted]]\n>>     >>>\n>>     >>> ______________________________________________\n>>     >>> R-package-devel at r-project.org\n>>    <mailto:R-package-devel at r-project.org> mailing list\n>>     >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>>     >>\n>>     >\n>>     >       [[alternative HTML version deleted]]\n>>     >\n>>     > ______________________________________________\n>>     > R-package-devel at r-project.org\n>>    <mailto:R-package-devel at r-project.org> mailing list\n>>     > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>",
+      "body_plain": "I tried win-builder (r-devel) again today, everything works for me. Looking forward to a smooth CRAN submission.\n\nThanks for the support and advice,\n\nIan\n\n\n> On Feb 13, 2022, at 2:39 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> \n> ﻿On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n>> Thank you so much for the response Duncan!\n>> How does one go about writing to CRAN?\n> \n> Ben gave you the address:  cran at r-project.org.\n>> The package is tested and ready to be shipped to CRAN, but since it's failing on Win Devel, I assumed it would be auto-rejected if I submitted for a CRAN release.\n> \n> I think CRAN and Winbuilder are separate machines. If CRAN isn't showing errors in its tests of the hardhat package then it has probably successfully built it and will use it in tests.   Currently it looks fine:\n> \n> https://cran.r-project.org/web/checks/check_results_hardhat.html\n> \n> I do recommend testing on Windows R-devel on one of the other platforms I listed before submitting to CRAN.  I don't think auto-rejects waste a lot of their time, but it's better to get accepted on the first try.\n> \n> Duncan Murdoch\n> \n> \n> \n>>  On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n>>    I'd suggest writing to CRAN to point out that they may need to take a\n>>    look, if you haven't already done so.  In the meantime, you can test\n>>    elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n>>    Duncan Murdoch\n>>    On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n>>     > Is there something wrong with the Windows Dev machine? It's now\n>>    been 3\n>>     > weeks since the release of the hardhat package v 0.2.0 on CRAN,\n>>    and it's\n>>     > still not available in the Win Dev check.\n>>     >\n>>     > I have this in my DESCRIPTION file:\n>>     > Imports:\n>>     >      hardhat (>= 0.2.0)\n>>     >\n>>     > And still getting this note when running devtools::check_win_devel().\n>>     >\n>>     > Package required and available but unsuitable version: 'hardhat'\n>>     >\n>>     > https://cran.r-project.org/package=hardhat\n>>    <https://cran.r-project.org/package=hardhat>\n>>     >\n>>     > Daniel\n>>     >\n>>     >\n>>     > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg\n>>    <danield.sjoberg at gmail.com <mailto:danield.sjoberg at gmail.com>>\n>>     > wrote:\n>>     >\n>>     >> For what it's worth, I am seeing a similar issue.\n>>     >>\n>>     >> I am trying to make a release that depends on the hardhat\n>>    package, which\n>>     >> made a release on 2022-01-24, and it's still unavailable to check on\n>>     >> WinDevel. I am also depending on the newest release of gtsummary\n>>    which was\n>>     >> made available on CRAN on 2022-01-29 (after hardhat's release). The\n>>     >> gtsummary package, however, became available on WinDevel a few\n>>    days later.\n>>     >>\n>>     >> Thank you,\n>>     >> Daniel\n>>     >>\n>>     >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com\n>>    <mailto:ijlyttle at me.com>> wrote:\n>>     >>>\n>>     >>> I am trying to check a package release-candidate on win-builder\n>>    r-devel.\n>>     >> This package imports a recently-released version of another package,\n>>     >> {vegawidget}.\n>>     >>> The check on win-builder (r-devel) fails:\n>>     >>> * checking package dependencies ... ERROR\n>>     >>> Package required and available but unsuitable version: 'vegawidget'\n>>     >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n>>    apparently\n>>     >> not available to win-builder r-devel.\n>>     >>> For what it?s worth, the check passes for win-builder r-release and\n>>     >> r-oldrel.\n>>     >>> Is this just a matter of me needing to be more patient, or\n>>    could there\n>>     >> be something “stuck” at win-builder?\n>>     >>> Thanks!\n>>     >>>\n>>     >>>\n>>     >>>\n>>     >>>          [[alternative HTML version deleted]]\n>>     >>>\n>>     >>> ______________________________________________\n>>     >>> R-package-devel at r-project.org\n>>    <mailto:R-package-devel at r-project.org> mailing list\n>>     >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>>     >>\n>>     >\n>>     >       [[alternative HTML version deleted]]\n>>     >\n>>     > ______________________________________________\n>>     > R-package-devel at r-project.org\n>>    <mailto:R-package-devel at r-project.org> mailing list\n>>     > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n>",
       "body_snippet": "I tried win-builder (r-devel) again today, everything works for me. Looking forward to a smooth CRAN submission.\n\nThanks for the support and advice,\n\nIan\n\n\n> On Feb 13, 2022, at 2:39 PM, Duncan Murdoc",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 6,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007733.html"
     },
     {
       "id": "msg-2ea4a83b7d6e",
@@ -810,11 +852,12 @@
         "<ee24c0a5-4194-4354-3ede-3c010699fd5c@gmail.com>",
         "<11A938E8-1C89-4A32-9075-1B3BEF0B88EC@me.com>"
       ],
-      "body_plain": "Thanks Duncan for the advice about the separate dev and production CRAN\nsystems. While the hardhat pkg was not available on Win Devel, I submitted\nto CRAN last night and it was immediately accepted. Much appreciated!\n\nOn Mon, Feb 14, 2022, 7:19 AM Ian Lyttle <ijlyttle at me.com> wrote:\n\n> I tried win-builder (r-devel) again today, everything works for me.\n> Looking forward to a smooth CRAN submission.\n>\n> Thanks for the support and advice,\n>\n> Ian\n>\n>\n> > On Feb 13, 2022, at 2:39 PM, Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> >\n> > ?On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n> >> Thank you so much for the response Duncan!\n> >> How does one go about writing to CRAN?\n> >\n> > Ben gave you the address:  cran at r-project.org.\n> >> The package is tested and ready to be shipped to CRAN, but since it's\n> failing on Win Devel, I assumed it would be auto-rejected if I submitted\n> for a CRAN release.\n> >\n> > I think CRAN and Winbuilder are separate machines. If CRAN isn't showing\n> errors in its tests of the hardhat package then it has probably\n> successfully built it and will use it in tests.   Currently it looks fine:\n> >\n> > https://cran.r-project.org/web/checks/check_results_hardhat.html\n> >\n> > I do recommend testing on Windows R-devel on one of the other platforms\n> I listed before submitting to CRAN.  I don't think auto-rejects waste a lot\n> of their time, but it's better to get accepted on the first try.\n> >\n> > Duncan Murdoch\n> >\n> >\n> >\n> >>  On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <\n> murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n> >>    I'd suggest writing to CRAN to point out that they may need to take a\n> >>    look, if you haven't already done so.  In the meantime, you can test\n> >>    elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n> >>    Duncan Murdoch\n> >>    On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n> >>     > Is there something wrong with the Windows Dev machine? It's now\n> >>    been 3\n> >>     > weeks since the release of the hardhat package v 0.2.0 on CRAN,\n> >>    and it's\n> >>     > still not available in the Win Dev check.\n> >>     >\n> >>     > I have this in my DESCRIPTION file:\n> >>     > Imports:\n> >>     >      hardhat (>= 0.2.0)\n> >>     >\n> >>     > And still getting this note when running\n> devtools::check_win_devel().\n> >>     >\n> >>     > Package required and available but unsuitable version: 'hardhat'\n> >>     >\n> >>     > https://cran.r-project.org/package=hardhat\n> >>    <https://cran.r-project.org/package=hardhat>\n> >>     >\n> >>     > Daniel\n> >>     >\n> >>     >\n> >>     > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg\n> >>    <danield.sjoberg at gmail.com <mailto:danield.sjoberg at gmail.com>>\n> >>     > wrote:\n> >>     >\n> >>     >> For what it's worth, I am seeing a similar issue.\n> >>     >>\n> >>     >> I am trying to make a release that depends on the hardhat\n> >>    package, which\n> >>     >> made a release on 2022-01-24, and it's still unavailable to\n> check on\n> >>     >> WinDevel. I am also depending on the newest release of gtsummary\n> >>    which was\n> >>     >> made available on CRAN on 2022-01-29 (after hardhat's release).\n> The\n> >>     >> gtsummary package, however, became available on WinDevel a few\n> >>    days later.\n> >>     >>\n> >>     >> Thank you,\n> >>     >> Daniel\n> >>     >>\n> >>     >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com\n> >>    <mailto:ijlyttle at me.com>> wrote:\n> >>     >>>\n> >>     >>> I am trying to check a package release-candidate on win-builder\n> >>    r-devel.\n> >>     >> This package imports a recently-released version of another\n> package,\n> >>     >> {vegawidget}.\n> >>     >>> The check on win-builder (r-devel) fails:\n> >>     >>> * checking package dependencies ... ERROR\n> >>     >>> Package required and available but unsuitable version:\n> 'vegawidget'\n> >>     >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n> >>    apparently\n> >>     >> not available to win-builder r-devel.\n> >>     >>> For what it?s worth, the check passes for win-builder r-release\n> and\n> >>     >> r-oldrel.\n> >>     >>> Is this just a matter of me needing to be more patient, or\n> >>    could there\n> >>     >> be something ?stuck? at win-builder?\n> >>     >>> Thanks!\n> >>     >>>\n> >>     >>>\n> >>     >>>\n> >>     >>>          [[alternative HTML version deleted]]\n> >>     >>>\n> >>     >>> ______________________________________________\n> >>     >>> R-package-devel at r-project.org\n> >>    <mailto:R-package-devel at r-project.org> mailing list\n> >>     >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> >>     >>\n> >>     >\n> >>     >       [[alternative HTML version deleted]]\n> >>     >\n> >>     > ______________________________________________\n> >>     > R-package-devel at r-project.org\n> >>    <mailto:R-package-devel at r-project.org> mailing list\n> >>     > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks Duncan for the advice about the separate dev and production CRAN\nsystems. While the hardhat pkg was not available on Win Devel, I submitted\nto CRAN last night and it was immediately accepted. Much appreciated!\n\nOn Mon, Feb 14, 2022, 7:19 AM Ian Lyttle <ijlyttle at me.com> wrote:\n\n> I tried win-builder (r-devel) again today, everything works for me.\n> Looking forward to a smooth CRAN submission.\n>\n> Thanks for the support and advice,\n>\n> Ian\n>\n>\n> > On Feb 13, 2022, at 2:39 PM, Duncan Murdoch <murdoch.duncan at gmail.com>\n> wrote:\n> >\n> > ﻿On 13/02/2022 2:33 p.m., Daniel Sjoberg wrote:\n> >> Thank you so much for the response Duncan!\n> >> How does one go about writing to CRAN?\n> >\n> > Ben gave you the address:  cran at r-project.org.\n> >> The package is tested and ready to be shipped to CRAN, but since it's\n> failing on Win Devel, I assumed it would be auto-rejected if I submitted\n> for a CRAN release.\n> >\n> > I think CRAN and Winbuilder are separate machines. If CRAN isn't showing\n> errors in its tests of the hardhat package then it has probably\n> successfully built it and will use it in tests.   Currently it looks fine:\n> >\n> > https://cran.r-project.org/web/checks/check_results_hardhat.html\n> >\n> > I do recommend testing on Windows R-devel on one of the other platforms\n> I listed before submitting to CRAN.  I don't think auto-rejects waste a lot\n> of their time, but it's better to get accepted on the first try.\n> >\n> > Duncan Murdoch\n> >\n> >\n> >\n> >>  On Sun, Feb 13, 2022 at 2:29 PM Duncan Murdoch <\n> murdoch.duncan at gmail.com <mailto:murdoch.duncan at gmail.com>> wrote:\n> >>    I'd suggest writing to CRAN to point out that they may need to take a\n> >>    look, if you haven't already done so.  In the meantime, you can test\n> >>    elsewhere (R-hub, Github, your own Windows machine or image, etc.)\n> >>    Duncan Murdoch\n> >>    On 13/02/2022 10:32 a.m., Daniel Sjoberg wrote:\n> >>     > Is there something wrong with the Windows Dev machine? It's now\n> >>    been 3\n> >>     > weeks since the release of the hardhat package v 0.2.0 on CRAN,\n> >>    and it's\n> >>     > still not available in the Win Dev check.\n> >>     >\n> >>     > I have this in my DESCRIPTION file:\n> >>     > Imports:\n> >>     >      hardhat (>= 0.2.0)\n> >>     >\n> >>     > And still getting this note when running\n> devtools::check_win_devel().\n> >>     >\n> >>     > Package required and available but unsuitable version: 'hardhat'\n> >>     >\n> >>     > https://cran.r-project.org/package=hardhat\n> >>    <https://cran.r-project.org/package=hardhat>\n> >>     >\n> >>     > Daniel\n> >>     >\n> >>     >\n> >>     > On Tue, Feb 8, 2022 at 9:55 AM Daniel Sjoberg\n> >>    <danield.sjoberg at gmail.com <mailto:danield.sjoberg at gmail.com>>\n> >>     > wrote:\n> >>     >\n> >>     >> For what it's worth, I am seeing a similar issue.\n> >>     >>\n> >>     >> I am trying to make a release that depends on the hardhat\n> >>    package, which\n> >>     >> made a release on 2022-01-24, and it's still unavailable to\n> check on\n> >>     >> WinDevel. I am also depending on the newest release of gtsummary\n> >>    which was\n> >>     >> made available on CRAN on 2022-01-29 (after hardhat's release).\n> The\n> >>     >> gtsummary package, however, became available on WinDevel a few\n> >>    days later.\n> >>     >>\n> >>     >> Thank you,\n> >>     >> Daniel\n> >>     >>\n> >>     >> On Tue, Feb 8, 2022 at 9:06 AM Ian Lyttle <ijlyttle at me.com\n> >>    <mailto:ijlyttle at me.com>> wrote:\n> >>     >>>\n> >>     >>> I am trying to check a package release-candidate on win-builder\n> >>    r-devel.\n> >>     >> This package imports a recently-released version of another\n> package,\n> >>     >> {vegawidget}.\n> >>     >>> The check on win-builder (r-devel) fails:\n> >>     >>> * checking package dependencies ... ERROR\n> >>     >>> Package required and available but unsuitable version:\n> 'vegawidget'\n> >>     >>> {vegawidget} 0.4.1 was released on CRAN on 2022-01-29, but is\n> >>    apparently\n> >>     >> not available to win-builder r-devel.\n> >>     >>> For what it?s worth, the check passes for win-builder r-release\n> and\n> >>     >> r-oldrel.\n> >>     >>> Is this just a matter of me needing to be more patient, or\n> >>    could there\n> >>     >> be something “stuck” at win-builder?\n> >>     >>> Thanks!\n> >>     >>>\n> >>     >>>\n> >>     >>>\n> >>     >>>          [[alternative HTML version deleted]]\n> >>     >>>\n> >>     >>> ______________________________________________\n> >>     >>> R-package-devel at r-project.org\n> >>    <mailto:R-package-devel at r-project.org> mailing list\n> >>     >>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> >>     >>\n> >>     >\n> >>     >       [[alternative HTML version deleted]]\n> >>     >\n> >>     > ______________________________________________\n> >>     > R-package-devel at r-project.org\n> >>    <mailto:R-package-devel at r-project.org> mailing list\n> >>     > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> >>    <https://stat.ethz.ch/mailman/listinfo/r-package-devel>\n> >\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks Duncan for the advice about the separate dev and production CRAN\nsystems. While the hardhat pkg was not available on Win Devel, I submitted\nto CRAN last night and it was immediately accepted. M",
       "thread_id": "thread-ee47bafc7b4b",
       "thread_depth": 7,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007734.html"
     },
     {
       "id": "msg-36e33c4519bf",
@@ -830,7 +873,8 @@
       "body_snippet": "Dear all,\n\nI am currently trying to think of the best way to distribute large sets of coefficients required by my package asteRisk.\n\nAt the moment, I am using an accessory data package, asteRiskData, ",
       "thread_id": "thread-36e33c4519bf",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007735.html"
     },
     {
       "id": "msg-80c6eba9f49f",
@@ -848,7 +892,8 @@
       "body_snippet": "I host my clients' packages on aws; the cost is minimal, and extremely fast\nfor installing on other systems on amazon. Here's the script I use:\n\nhttps://github.com/njnmco/njnmverse/blob/master/Makefil",
       "thread_id": "thread-36e33c4519bf",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007736.html"
     },
     {
       "id": "msg-3ca322677545",
@@ -864,7 +909,8 @@
       "body_snippet": "Dear Rafa, \n\nAWS is a good option, and we are very satisfied with Zenodo for data that can be made publicly available.\n\nSee the corpus_install() function in the 'cwbtools' package I maintain: https://",
       "thread_id": "thread-3ca322677545",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007737.html"
     },
     {
       "id": "msg-30a9be00a72a",
@@ -882,7 +928,8 @@
       "body_snippet": "Rafael,\n\n> Another option that has been suggested to me is not to use an\n> accessory data package at all, but instead download and parse the\n> required data on demand from the corresponding internet r",
       "thread_id": "thread-36e33c4519bf",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007738.html"
     },
     {
       "id": "msg-7b877235a1c1",
@@ -900,7 +947,8 @@
       "body_snippet": "I am developing a package based around several thousand lines of legacy \nFortran code front-ended with a fairly minimal R function to format \ninput and results. In its basic form it is on CRAN, but no",
       "thread_id": "thread-7b877235a1c1",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007739.html"
     },
     {
       "id": "msg-3fe594f94f1a",
@@ -916,7 +964,8 @@
       "body_snippet": "Hi all,\n\nI am ready to submit the ?footBayes? package for football models fitting.\nHowever, even though my vignette knits correctly on my local machine and my package reports zero errors/warnings,\nI a",
       "thread_id": "thread-3fe594f94f1a",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007740.html"
     },
     {
       "id": "msg-7e900fc1c9db",
@@ -934,7 +983,8 @@
       "body_snippet": "On 16/02/2022 12:08 p.m., EGIDI LEONARDO wrote:\n> Hi all,\n> \n> I am ready to submit the ?footBayes? package for football models fitting.\n> However, even though my vignette knits correctly on my local ",
       "thread_id": "thread-3fe594f94f1a",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007741.html"
     },
     {
       "id": "msg-675c8d0043bb",
@@ -953,7 +1003,8 @@
       "body_snippet": "Le 16/02/2022 ? 16:53, Peter Green a ?crit?:\n> I am developing a package based around several thousand lines of \n> legacy Fortran code front-ended with a fairly minimal R function to \n> format input a",
       "thread_id": "thread-7b877235a1c1",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007742.html"
     },
     {
       "id": "msg-8da21362debd",
@@ -973,7 +1024,8 @@
       "body_snippet": "I have created a fortran interface to a few c functions (fopen, fwrite, fread, fseek) via iso_c_binding that is used in my fortran code. The code can be found here: qgg/bigreml.f90 at master ? psoeren",
       "thread_id": "thread-7b877235a1c1",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007743.html"
     },
     {
       "id": "msg-a537c764f3c8",
@@ -992,7 +1044,8 @@
       "body_snippet": "An example and test package:\n\nhttps://bnaras.github.io/ftest/articles/frcall.html\n\n-Naras\n\nOn 2/16/22 7:53 AM, Peter Green wrote:\n> I am developing a package based around several thousand lines of \n> ",
       "thread_id": "thread-7b877235a1c1",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007744.html"
     },
     {
       "id": "msg-ad280a5fd507",
@@ -1008,7 +1061,8 @@
       "body_snippet": "I tried submitting oce_1.6-0 and it was rejected (owing to a broken link, according to reference 1 below; see reference 2 for the email I got from the CRAN system).  The email suggested I fix the pack",
       "thread_id": "thread-ad280a5fd507",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007745.html"
     },
     {
       "id": "msg-442573247411",
@@ -1026,7 +1080,8 @@
       "body_snippet": "On Thu, 17 Feb 2022 20:53:50 +0000\nDaniel Kelley <Dan.Kelley at Dal.Ca> wrote:\n\n> My question is: should I retain the same version number, or should I\n> bump the number?\n\nCRAN policy currently says:\n\n",
       "thread_id": "thread-ad280a5fd507",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007746.html"
     },
     {
       "id": "msg-b97b1bfb4533",
@@ -1044,7 +1099,8 @@
       "body_snippet": "Daniel,\n\nIvan gave you good pointers from the R perspective.  and, in general\n(i.e., even outside the R context), i would say that a \"version number\"\nof a given package, ideally, should represent a un",
       "thread_id": "thread-ad280a5fd507",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007747.html"
     },
     {
       "id": "msg-63a0eeb26acb",
@@ -1060,7 +1116,8 @@
       "body_snippet": "Dear all,\n\nI encounter a new warning with debian OS (only this one) when submitting a\npackage to CRAN:\n\n* checking Rd files ... [4s/4s] WARNING\nprepare_Rd: rgeos: versions of GEOS runtime 3.10.2-CAPI-",
       "thread_id": "thread-63a0eeb26acb",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007748.html"
     },
     {
       "id": "msg-f672f47600c6",
@@ -1074,11 +1131,12 @@
       "references": [
         "<CACSk529+OvNMKuXP734MWMGEb0JytpBtUd1rAA4yo32d7q40tQ@mail.gmail.com>"
       ],
-      "body_plain": "On Thu, 17 Feb 2022 20:00:40 -0500\nj?r?my Gelb <gelbjeremy22 at gmail.com> wrote:\n\n> prepare_Rd: rgeos: versions of GEOS runtime 3.10.2-CAPI-1.16.0\n> and GEOS at installation 3.10.1-CAPI-1.16.0differ\n\nThis warning is produced by rgeos:::.onLoad [1], because\nrgeos:::version_GEOS returns two different things [2],\n\"3.10.2-CAPI-1.16.0\" coming from the GEOSversion() in the shared\nlibrary and \"3.10.1-CAPI-1.16.0differ\" coming from #define\nGEOS_CAPI_VERSION in the headers.\n\nI think that the incoming pretest machine needs a reinstall of the\nrgeos package, or a reinstall of GEOS itself (so that the headers match\nthe shared object), or maybe both. There's nothing to fix in the\nspNetwork package.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://r-forge.r-project.org/scm/viewvc.php/pkg/R/AAA.R?view=markup&revision=673&root=rgeos\n\n[2]\nhttps://r-forge.r-project.org/scm/viewvc.php/pkg/src/rgeos.c?view=markup&revision=576&root=rgeos",
-      "body_snippet": "On Thu, 17 Feb 2022 20:00:40 -0500\nj?r?my Gelb <gelbjeremy22 at gmail.com> wrote:\n\n> prepare_Rd: rgeos: versions of GEOS runtime 3.10.2-CAPI-1.16.0\n> and GEOS at installation 3.10.1-CAPI-1.16.0differ\n",
+      "body_plain": "On Thu, 17 Feb 2022 20:00:40 -0500\njérémy Gelb <gelbjeremy22 at gmail.com> wrote:\n\n> prepare_Rd: rgeos: versions of GEOS runtime 3.10.2-CAPI-1.16.0\n> and GEOS at installation 3.10.1-CAPI-1.16.0differ\n\nThis warning is produced by rgeos:::.onLoad [1], because\nrgeos:::version_GEOS returns two different things [2],\n\"3.10.2-CAPI-1.16.0\" coming from the GEOSversion() in the shared\nlibrary and \"3.10.1-CAPI-1.16.0differ\" coming from #define\nGEOS_CAPI_VERSION in the headers.\n\nI think that the incoming pretest machine needs a reinstall of the\nrgeos package, or a reinstall of GEOS itself (so that the headers match\nthe shared object), or maybe both. There's nothing to fix in the\nspNetwork package.\n\n-- \nBest regards,\nIvan\n\n[1]\nhttps://r-forge.r-project.org/scm/viewvc.php/pkg/R/AAA.R?view=markup&revision=673&root=rgeos\n\n[2]\nhttps://r-forge.r-project.org/scm/viewvc.php/pkg/src/rgeos.c?view=markup&revision=576&root=rgeos",
+      "body_snippet": "On Thu, 17 Feb 2022 20:00:40 -0500\njérémy Gelb <gelbjeremy22 at gmail.com> wrote:\n\n> prepare_Rd: rgeos: versions of GEOS runtime 3.10.2-CAPI-1.16.0\n> and GEOS at installation 3.10.1-CAPI-1.16.0differ\n",
       "thread_id": "thread-63a0eeb26acb",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007749.html"
     },
     {
       "id": "msg-1f4d73084fa0",
@@ -1096,7 +1154,8 @@
       "body_snippet": "Hello All, \n\nI have corrected some parameters to one of my function in my package CUFF\n(https://github.com/giguerch/CUFF) following a request by Prof Ripley\nrelated to a change in aggregate parameter ",
       "thread_id": "thread-1f4d73084fa0",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007750.html"
     },
     {
       "id": "msg-a162b2222e00",
@@ -1111,11 +1170,12 @@
         "<005001d82754$0bf98e30$23ecaa90$@gmail.com>",
         "<007301d8275e$984f1bc0$c8ed5340$@gmail.com>"
       ],
-      "body_plain": "On Mon, 21 Feb 2022 15:07:03 -0500\nCharles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n\n> When I submit it to CRAN there are some error messages and my\n> submission is denied but I don't know what to change since the only\n> error message is that the package cannot be installed. Can someone\n> give me some tips on how I can figure that out? \n\nIt would be much easier to help if we could see the messages themselves.\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "On Mon, 21 Feb 2022 15:07:03 -0500\nCharles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n\n> When I submit it to CRAN there are some error messages and my\n> submission is denied but I don't know wha",
+      "body_plain": "On Mon, 21 Feb 2022 15:07:03 -0500\nCharles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n\n> When I submit it to CRAN there are some error messages and my\n> submission is denied but I don't know what to change since the only\n> error message is that the package cannot be installed. Can someone\n> give me some tips on how I can figure that out? \n\nIt would be much easier to help if we could see the messages themselves.\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "On Mon, 21 Feb 2022 15:07:03 -0500\nCharles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n\n> When I submit it to CRAN there are some error messages and my\n> submission is denied but I don't know wha",
       "thread_id": "thread-1f4d73084fa0",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007751.html"
     },
     {
       "id": "msg-0ddf795aacb0",
@@ -1132,11 +1192,12 @@
         "<20220222193141.46fa2ef4@arachnoid>",
         "<00b201d8280a$fb62a680$f227f380$@gmail.com>"
       ],
-      "body_plain": "Thank you for your reply,\nIn attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward. \nCharles-?douard\n\n* using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n* using R Under development (unstable) (2022-02-15 r81747 ucrt)\n* using platform: x86_64-w64-mingw32 (64-bit)\n* using session charset: UTF-8\n* checking for file 'CUFF/DESCRIPTION' ... OK\n* checking extension type ... Package\n* this is package 'CUFF' version '1.8'\n* package encoding: UTF-8\n* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\nMaintainer: 'Charles-??douard Gigu??re <ce.giguere at gmail.com>'\n* checking package namespace information ... OK\n* checking package dependencies ... OK\n* checking if this is a source package ... OK\n* checking if there is a namespace ... OK\n* checking for hidden files and directories ... OK\n* checking for portable file names ... OK\n* checking serialization versions ... OK\n* checking whether package 'CUFF' can be installed ... ERROR Installation failed.\nSee 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n* DONE\nStatus: 1 ERROR\n\n\n-----Message d'origine-----\nDe : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n\nOn Mon, 21 Feb 2022 15:07:03 -0500\nCharles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n\n> When I submit it to CRAN there are some error messages and my \n> submission is denied but I don't know what to change since the only \n> error message is that the package cannot be installed. Can someone \n> give me some tips on how I can figure that out?\n\nIt would be much easier to help if we could see the messages themselves.\n\n--\nBest regards,\nIvan",
+      "body_plain": "Thank you for your reply,\nIn attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don’t know how to go forward. \nCharles-Édouard\n\n* using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n* using R Under development (unstable) (2022-02-15 r81747 ucrt)\n* using platform: x86_64-w64-mingw32 (64-bit)\n* using session charset: UTF-8\n* checking for file 'CUFF/DESCRIPTION' ... OK\n* checking extension type ... Package\n* this is package 'CUFF' version '1.8'\n* package encoding: UTF-8\n* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\nMaintainer: 'Charles-Ã‰douard GiguÃ¨re <ce.giguere at gmail.com>'\n* checking package namespace information ... OK\n* checking package dependencies ... OK\n* checking if this is a source package ... OK\n* checking if there is a namespace ... OK\n* checking for hidden files and directories ... OK\n* checking for portable file names ... OK\n* checking serialization versions ... OK\n* checking whether package 'CUFF' can be installed ... ERROR Installation failed.\nSee 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n* DONE\nStatus: 1 ERROR\n\n\n-----Message d'origine-----\nDe : Ivan Krylov <krylov.r00t at gmail.com> Envoyé : 22 février 2022 11:32 À : Charles-Édouard Giguère <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n\nOn Mon, 21 Feb 2022 15:07:03 -0500\nCharles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n\n> When I submit it to CRAN there are some error messages and my \n> submission is denied but I don't know what to change since the only \n> error message is that the package cannot be installed. Can someone \n> give me some tips on how I can figure that out?\n\nIt would be much easier to help if we could see the messages themselves.\n\n--\nBest regards,\nIvan",
       "body_snippet": "Thank you for your reply,\nIn attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN.",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007752.html"
     },
     {
       "id": "msg-2923715e0739",
@@ -1154,11 +1215,12 @@
         "<00b201d8280a$fb62a680$f227f380$@gmail.com>",
         "<00ba01d8280b$51c55db0$f5501910$@gmail.com>"
       ],
-      "body_plain": "Am 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n> Charles-?douard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link \nto the relevant check results. Look for the sentence \"More details are \ngiven in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n\tSebastian Meyer\n\n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-??douard Gigu??re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n> \n> \n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n> \n>> When I submit it to CRAN there are some error messages and my\n>> submission is denied but I don't know what to change since the only\n>> error message is that the package cannot be installed. Can someone\n>> give me some tips on how I can figure that out?\n> \n> It would be much easier to help if we could see the messages themselves.\n> \n> --\n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Am 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The prob",
+      "body_plain": "Am 22.02.22 um 17:43 schrieb Charles-Édouard Giguère:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don’t know how to go forward.\n> Charles-Édouard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link \nto the relevant check results. Look for the sentence \"More details are \ngiven in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n\tSebastian Meyer\n\n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-Ã‰douard GiguÃ¨re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n> \n> \n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoyé : 22 février 2022 11:32 À : Charles-Édouard Giguère <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n> \n>> When I submit it to CRAN there are some error messages and my\n>> submission is denied but I don't know what to change since the only\n>> error message is that the package cannot be installed. Can someone\n>> give me some tips on how I can figure that out?\n> \n> It would be much easier to help if we could see the messages themselves.\n> \n> --\n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Am 22.02.22 um 17:43 schrieb Charles-Édouard Giguère:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The prob",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007753.html"
     },
     {
       "id": "msg-f32f06a77a1c",
@@ -1176,11 +1238,12 @@
         "<00b201d8280a$fb62a680$f227f380$@gmail.com>",
         "<00ba01d8280b$51c55db0$f5501910$@gmail.com>"
       ],
-      "body_plain": "Le 22/02/2022 ? 17:43, Charles-?douard Gigu?re a ?crit?:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n\nNext time it would be preferable to post a link from CRAN message not \njust a copy/paste.\n\nLooking at \nhttps://win-builder.r-project.org/incoming_pretest/CUFF_1.8_20220216_031003/Windows/00install.out \nI see that a file \n'h:/DCRFS/Statisticiens/Banque_Signature/Donnees/QUEST.Rdata' cannot be \nopened.? The fact that french words are used in the path make me think \nthat it must be a hard coded path. Do you recognize it?\n\nSerguei.\n\n\n> Charles-?douard\n>\n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-??douard Gigu??re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n>\n>\n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n>\n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n>\n>> When I submit it to CRAN there are some error messages and my\n>> submission is denied but I don't know what to change since the only\n>> error message is that the package cannot be installed. Can someone\n>> give me some tips on how I can figure that out?\n> It would be much easier to help if we could see the messages themselves.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Le 22/02/2022 ? 17:43, Charles-?douard Gigu?re a ?crit?:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The p",
+      "body_plain": "Le 22/02/2022 à 17:43, Charles-Édouard Giguère a écrit :\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don’t know how to go forward.\n\nNext time it would be preferable to post a link from CRAN message not \njust a copy/paste.\n\nLooking at \nhttps://win-builder.r-project.org/incoming_pretest/CUFF_1.8_20220216_031003/Windows/00install.out \nI see that a file \n'h:/DCRFS/Statisticiens/Banque_Signature/Donnees/QUEST.Rdata' cannot be \nopened.  The fact that french words are used in the path make me think \nthat it must be a hard coded path. Do you recognize it?\n\nSerguei.\n\n\n> Charles-Édouard\n>\n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-Ã‰douard GiguÃ¨re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n>\n>\n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoyé : 22 février 2022 11:32 À : Charles-Édouard Giguère <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n>\n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n>\n>> When I submit it to CRAN there are some error messages and my\n>> submission is denied but I don't know what to change since the only\n>> error message is that the package cannot be installed. Can someone\n>> give me some tips on how I can figure that out?\n> It would be much easier to help if we could see the messages themselves.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Le 22/02/2022 à 17:43, Charles-Édouard Giguère a écrit :\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The p",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007754.html"
     },
     {
       "id": "msg-40d8c4213df3",
@@ -1199,11 +1262,12 @@
         "<00ba01d8280b$51c55db0$f5501910$@gmail.com>",
         "<adb6b4ea-09cb-6dba-6fd0-bfd9bc7affce@fau.de>"
       ],
-      "body_plain": "How can I access that file it is a local path: \n\n'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out'\n\nCharles-?douard\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de> \nEnvoy? : 22 f?vrier 2022 12:09\n? : Charles-?douard Gigu?re <ce.giguere at gmail.com>; r-package-devel at r-project.org\nObjet : Re: [R-pkg-devel] TR: Help with checking package.\n\nAm 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n> Charles-?douard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n\tSebastian Meyer\n\n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-??douard Gigu??re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n> \n> \n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n> \n>> When I submit it to CRAN there are some error messages and my \n>> submission is denied but I don't know what to change since the only \n>> error message is that the package cannot be installed. Can someone \n>> give me some tips on how I can figure that out?\n> \n> It would be much easier to help if we could see the messages themselves.\n> \n> --\n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "How can I access that file it is a local path: \n\n'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out'\n\nCharles-?douard\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de> \nE",
+      "body_plain": "How can I access that file it is a local path: \n\n'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out'\n\nCharles-Édouard\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de> \nEnvoyé : 22 février 2022 12:09\nÀ : Charles-Édouard Giguère <ce.giguere at gmail.com>; r-package-devel at r-project.org\nObjet : Re: [R-pkg-devel] TR: Help with checking package.\n\nAm 22.02.22 um 17:43 schrieb Charles-Édouard Giguère:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don’t know how to go forward.\n> Charles-Édouard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n\tSebastian Meyer\n\n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-Ã‰douard GiguÃ¨re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n> \n> \n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoyé : 22 février 2022 11:32 À : Charles-Édouard Giguère <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n> \n>> When I submit it to CRAN there are some error messages and my \n>> submission is denied but I don't know what to change since the only \n>> error message is that the package cannot be installed. Can someone \n>> give me some tips on how I can figure that out?\n> \n> It would be much easier to help if we could see the messages themselves.\n> \n> --\n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "How can I access that file it is a local path: \n\n'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out'\n\nCharles-Édouard\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de> \nE",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007755.html"
     },
     {
       "id": "msg-4ea1230e91a4",
@@ -1223,11 +1287,12 @@
         "<adb6b4ea-09cb-6dba-6fd0-bfd9bc7affce@fau.de>",
         "<00cb01d82814$ada4df30$08ee9d90$@gmail.com>"
       ],
-      "body_plain": "Hi Charles-?douard,\n\nYou can find the 00install.out file here: https://win-builder.r-project.org/incoming_pretest/CUFF_1.8_20220216_031003/Windows/00install.out\n\nThe issue seems to be with this line in your package: https://github.com/giguerch/CUFF/blob/c27896beda228e7af855b4cbbd86a3ef30f38a01/R/to_csv.r#L34\n\nAs mentioned below, you are loading data from a hard-coded absolute path, which of course won't work on someone else's machine. You need to remove, or change, that line.\n\nBest,\n\n\nMax Turgeon<https://www.name-coach.com/maxime-turgeon>\nAssistant Professor\n\nDepartment of Statistics\nUniversity of Manitoba\n\nmaxturgeon.ca<http://maxturgeon.ca/>\n\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Charles-?douard Gigu?re <ce.giguere at gmail.com>\nSent: Tuesday, February 22, 2022 11:50 AM\nTo: 'Sebastian Meyer' <seb.meyer at fau.de>; r-package-devel at r-project.org <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] TR: Help with checking package.\n\n********************************************************\nCaution: This message was sent from outside the University of Manitoba.\n********************************************************\n\nHow can I access that file it is a local path:\n\n'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out'\n\nCharles-?douard\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de>\nEnvoy? : 22 f?vrier 2022 12:09\n? : Charles-?douard Gigu?re <ce.giguere at gmail.com>; r-package-devel at r-project.org\nObjet : Re: [R-pkg-devel] TR: Help with checking package.\n\nAm 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n> Charles-?douard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n        Sebastian Meyer\n\n>\n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-?douard Gigu?re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n>\n>\n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n>\n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n>\n>> When I submit it to CRAN there are some error messages and my\n>> submission is denied but I don't know what to change since the only\n>> error message is that the package cannot be installed. Can someone\n>> give me some tips on how I can figure that out?\n>\n> It would be much easier to help if we could see the messages themselves.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi Charles-?douard,\n\nYou can find the 00install.out file here: https://win-builder.r-project.org/incoming_pretest/CUFF_1.8_20220216_031003/Windows/00install.out\n\nThe issue seems to be with this line in your package: https://github.com/giguerch/CUFF/blob/c27896beda228e7af855b4cbbd86a3ef30f38a01/R/to_csv.r#L34\n\nAs mentioned below, you are loading data from a hard-coded absolute path, which of course won't work on someone else's machine. You need to remove, or change, that line.\n\nBest,\n\n\nMax Turgeon<https://www.name-coach.com/maxime-turgeon>\nAssistant Professor\n\nDepartment of Statistics\nUniversity of Manitoba\n\nmaxturgeon.ca<http://maxturgeon.ca/>\n\n________________________________\nFrom: R-package-devel <r-package-devel-bounces at r-project.org> on behalf of Charles-?douard Gigu?re <ce.giguere at gmail.com>\nSent: Tuesday, February 22, 2022 11:50 AM\nTo: 'Sebastian Meyer' <seb.meyer at fau.de>; r-package-devel at r-project.org <r-package-devel at r-project.org>\nSubject: Re: [R-pkg-devel] TR: Help with checking package.\n\n********************************************************\nCaution: This message was sent from outside the University of Manitoba.\n********************************************************\n\nHow can I access that file it is a local path:\n\n'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out'\n\nCharles-?douard\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de>\nEnvoy? : 22 f?vrier 2022 12:09\n? : Charles-?douard Gigu?re <ce.giguere at gmail.com>; r-package-devel at r-project.org\nObjet : Re: [R-pkg-devel] TR: Help with checking package.\n\nAm 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n> Charles-?douard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n        Sebastian Meyer\n\n>\n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-Édouard Giguère <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n>\n>\n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n>\n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n>\n>> When I submit it to CRAN there are some error messages and my\n>> submission is denied but I don't know what to change since the only\n>> error message is that the package cannot be installed. Can someone\n>> give me some tips on how I can figure that out?\n>\n> It would be much easier to help if we could see the messages themselves.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n______________________________________________\nR-package-devel at r-project.org mailing list\nhttps://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi Charles-?douard,\n\nYou can find the 00install.out file here: https://win-builder.r-project.org/incoming_pretest/CUFF_1.8_20220216_031003/Windows/00install.out\n\nThe issue seems to be with this line i",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007756.html"
     },
     {
       "id": "msg-3b501f40cf43",
@@ -1246,11 +1311,12 @@
         "<00ba01d8280b$51c55db0$f5501910$@gmail.com>",
         "<adb6b4ea-09cb-6dba-6fd0-bfd9bc7affce@fau.de>"
       ],
-      "body_plain": "Hi Sebastian, \nThank you very much, I found a way to look at the file 00install.out and I understand the problem with the local path now. My question now is : what option should I add to R CMD check so that it catches this error because when I used --as-cran it didn't catch this error. \nThank you,\nCharles-?douard\n\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de> \nEnvoy? : 22 f?vrier 2022 12:09\n? : Charles-?douard Gigu?re <ce.giguere at gmail.com>; r-package-devel at r-project.org\nObjet : Re: [R-pkg-devel] TR: Help with checking package.\n\nAm 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n> Charles-?douard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n\tSebastian Meyer\n\n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-??douard Gigu??re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n> \n> \n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n> \n>> When I submit it to CRAN there are some error messages and my \n>> submission is denied but I don't know what to change since the only \n>> error message is that the package cannot be installed. Can someone \n>> give me some tips on how I can figure that out?\n> \n> It would be much easier to help if we could see the messages themselves.\n> \n> --\n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "Hi Sebastian, \nThank you very much, I found a way to look at the file 00install.out and I understand the problem with the local path now. My question now is : what option should I add to R CMD check so that it catches this error because when I used --as-cran it didn't catch this error. \nThank you,\nCharles-Édouard\n\n-----Message d'origine-----\nDe : Sebastian Meyer <seb.meyer at fau.de> \nEnvoyé : 22 février 2022 12:09\nÀ : Charles-Édouard Giguère <ce.giguere at gmail.com>; r-package-devel at r-project.org\nObjet : Re: [R-pkg-devel] TR: Help with checking package.\n\nAm 22.02.22 um 17:43 schrieb Charles-Édouard Giguère:\n> Thank you for your reply,\n> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don’t know how to go forward.\n> Charles-Édouard\n\nThe e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n\nBest regards,\n\n\tSebastian Meyer\n\n> \n> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n> * using platform: x86_64-w64-mingw32 (64-bit)\n> * using session charset: UTF-8\n> * checking for file 'CUFF/DESCRIPTION' ... OK\n> * checking extension type ... Package\n> * this is package 'CUFF' version '1.8'\n> * package encoding: UTF-8\n> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n> Maintainer: 'Charles-Ã‰douard GiguÃ¨re <ce.giguere at gmail.com>'\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking serialization versions ... OK\n> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n> * DONE\n> Status: 1 ERROR\n> \n> \n> -----Message d'origine-----\n> De : Ivan Krylov <krylov.r00t at gmail.com> Envoyé : 22 février 2022 11:32 À : Charles-Édouard Giguère <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> On Mon, 21 Feb 2022 15:07:03 -0500\n> Charles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n> \n>> When I submit it to CRAN there are some error messages and my \n>> submission is denied but I don't know what to change since the only \n>> error message is that the package cannot be installed. Can someone \n>> give me some tips on how I can figure that out?\n> \n> It would be much easier to help if we could see the messages themselves.\n> \n> --\n> Best regards,\n> Ivan\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list \n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "Hi Sebastian, \nThank you very much, I found a way to look at the file 00install.out and I understand the problem with the local path now. My question now is : what option should I add to R CMD check s",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007757.html"
     },
     {
       "id": "msg-cf3989f5ceec",
@@ -1270,11 +1336,12 @@
         "<adb6b4ea-09cb-6dba-6fd0-bfd9bc7affce@fau.de>",
         "<00da01d82817$2b5d18f0$82174ad0$@gmail.com>"
       ],
-      "body_plain": "I don't know if there is an option to R CMD check tha will catch this, but you should always test your packages on some combination of win builder and RHub.  That would have flagged the error, and gives you the best chance of catching all possible errors across various OSs before you submit to CRAN.\n\nHTH,\n\n-Roy\n\n> On Feb 22, 2022, at 10:08 AM, Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n> \n> Hi Sebastian, \n> Thank you very much, I found a way to look at the file 00install.out and I understand the problem with the local path now. My question now is : what option should I add to R CMD check so that it catches this error because when I used --as-cran it didn't catch this error. \n> Thank you,\n> Charles-?douard\n> \n> -----Message d'origine-----\n> De : Sebastian Meyer <seb.meyer at fau.de> \n> Envoy? : 22 f?vrier 2022 12:09\n> ? : Charles-?douard Gigu?re <ce.giguere at gmail.com>; r-package-devel at r-project.org\n> Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> Am 22.02.22 um 17:43 schrieb Charles-?douard Gigu?re:\n>> Thank you for your reply,\n>> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don?t know how to go forward.\n>> Charles-?douard\n> \n> The e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n> \n> Best regards,\n> \n> \tSebastian Meyer\n> \n>> \n>> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n>> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n>> * using platform: x86_64-w64-mingw32 (64-bit)\n>> * using session charset: UTF-8\n>> * checking for file 'CUFF/DESCRIPTION' ... OK\n>> * checking extension type ... Package\n>> * this is package 'CUFF' version '1.8'\n>> * package encoding: UTF-8\n>> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n>> Maintainer: 'Charles-??douard Gigu??re <ce.giguere at gmail.com>'\n>> * checking package namespace information ... OK\n>> * checking package dependencies ... OK\n>> * checking if this is a source package ... OK\n>> * checking if there is a namespace ... OK\n>> * checking for hidden files and directories ... OK\n>> * checking for portable file names ... OK\n>> * checking serialization versions ... OK\n>> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n>> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n>> * DONE\n>> Status: 1 ERROR\n>> \n>> \n>> -----Message d'origine-----\n>> De : Ivan Krylov <krylov.r00t at gmail.com> Envoy? : 22 f?vrier 2022 11:32 ? : Charles-?douard Gigu?re <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n>> \n>> On Mon, 21 Feb 2022 15:07:03 -0500\n>> Charles-?douard Gigu?re <ce.giguere at gmail.com> wrote:\n>> \n>>> When I submit it to CRAN there are some error messages and my \n>>> submission is denied but I don't know what to change since the only \n>>> error message is that the package cannot be installed. Can someone \n>>> give me some tips on how I can figure that out?\n>> \n>> It would be much easier to help if we could see the messages themselves.\n>> \n>> --\n>> Best regards,\n>> Ivan\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list \n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: https://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\" \n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.",
+      "body_plain": "I don't know if there is an option to R CMD check tha will catch this, but you should always test your packages on some combination of win builder and RHub.  That would have flagged the error, and gives you the best chance of catching all possible errors across various OSs before you submit to CRAN.\n\nHTH,\n\n-Roy\n\n> On Feb 22, 2022, at 10:08 AM, Charles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n> \n> Hi Sebastian, \n> Thank you very much, I found a way to look at the file 00install.out and I understand the problem with the local path now. My question now is : what option should I add to R CMD check so that it catches this error because when I used --as-cran it didn't catch this error. \n> Thank you,\n> Charles-Édouard\n> \n> -----Message d'origine-----\n> De : Sebastian Meyer <seb.meyer at fau.de> \n> Envoyé : 22 février 2022 12:09\n> À : Charles-Édouard Giguère <ce.giguere at gmail.com>; r-package-devel at r-project.org\n> Objet : Re: [R-pkg-devel] TR: Help with checking package.\n> \n> Am 22.02.22 um 17:43 schrieb Charles-Édouard Giguère:\n>> Thank you for your reply,\n>> In attachment, I have put my own log where everything checks out and below is the log I received from CRAN. The problem is that I don't have the 00install.out file from CRAN. I suspect it might have to do with the dependencies not installed on CRAN but the dependencies are declared in my Description file in the import section. I don’t know how to go forward.\n>> Charles-Édouard\n> \n> The e-mail from the CRAN teams' auto-check service should contain a link to the relevant check results. Look for the sentence \"More details are given in the directory:\" at the end of that e-mail.\n> \n> Best regards,\n> \n> \tSebastian Meyer\n> \n>> \n>> * using log directory 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck'\n>> * using R Under development (unstable) (2022-02-15 r81747 ucrt)\n>> * using platform: x86_64-w64-mingw32 (64-bit)\n>> * using session charset: UTF-8\n>> * checking for file 'CUFF/DESCRIPTION' ... OK\n>> * checking extension type ... Package\n>> * this is package 'CUFF' version '1.8'\n>> * package encoding: UTF-8\n>> * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers\n>> Maintainer: 'Charles-Ã‰douard GiguÃ¨re <ce.giguere at gmail.com>'\n>> * checking package namespace information ... OK\n>> * checking package dependencies ... OK\n>> * checking if this is a source package ... OK\n>> * checking if there is a namespace ... OK\n>> * checking for hidden files and directories ... OK\n>> * checking for portable file names ... OK\n>> * checking serialization versions ... OK\n>> * checking whether package 'CUFF' can be installed ... ERROR Installation failed.\n>> See 'd:/RCompile/CRANincoming/R-devel/CUFF.Rcheck/00install.out' for details.\n>> * DONE\n>> Status: 1 ERROR\n>> \n>> \n>> -----Message d'origine-----\n>> De : Ivan Krylov <krylov.r00t at gmail.com> Envoyé : 22 février 2022 11:32 À : Charles-Édouard Giguère <ce.giguere at gmail.com> Cc : r-package-devel at r-project.org Objet : Re: [R-pkg-devel] TR: Help with checking package.\n>> \n>> On Mon, 21 Feb 2022 15:07:03 -0500\n>> Charles-Édouard Giguère <ce.giguere at gmail.com> wrote:\n>> \n>>> When I submit it to CRAN there are some error messages and my \n>>> submission is denied but I don't know what to change since the only \n>>> error message is that the package cannot be installed. Can someone \n>>> give me some tips on how I can figure that out?\n>> \n>> It would be much easier to help if we could see the messages themselves.\n>> \n>> --\n>> Best regards,\n>> Ivan\n>> \n>> ______________________________________________\n>> R-package-devel at r-project.org mailing list \n>> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n**********************\n\"The contents of this message do not reflect any position of the U.S. Government or NOAA.\"\n**********************\nRoy Mendelssohn\nSupervisory Operations Research Analyst\nNOAA/NMFS\nEnvironmental Research Division\nSouthwest Fisheries Science Center\n***Note new street address***\n110 McAllister Way\nSanta Cruz, CA 95060\nPhone: (831)-420-3666\nFax: (831) 420-3980\ne-mail: Roy.Mendelssohn at noaa.gov www: https://www.pfeg.noaa.gov/\n\n\"Old age and treachery will overcome youth and skill.\"\n\"From those who have been given much, much will be expected\" \n\"the arc of the moral universe is long, but it bends toward justice\" -MLK Jr.",
       "body_snippet": "I don't know if there is an option to R CMD check tha will catch this, but you should always test your packages on some combination of win builder and RHub.  That would have flagged the error, and giv",
       "thread_id": "thread-0ddf795aacb0",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007758.html"
     },
     {
       "id": "msg-5780ca1a1f92",
@@ -1293,7 +1360,8 @@
       "body_snippet": "Hi All\n\nI am the maintainer of packages \"chest\" and \"allestimates\". With my employment change, I would like to change my work email to a gmail address.\nAfter reading https://cran.r-project.org/web/pac",
       "thread_id": "thread-1f4d73084fa0",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007759.html"
     },
     {
       "id": "msg-39d19991483c",
@@ -1313,7 +1381,8 @@
       "body_snippet": "On 22/02/2022 8:20 p.m., Zhiqiang Wang wrote:\n> Hi All\n> \n> I am the maintainer of packages \"chest\" and \"allestimates\". With my employment change, I would like to change my work email to a gmail addre",
       "thread_id": "thread-1f4d73084fa0",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007760.html"
     },
     {
       "id": "msg-b84ac1cd6dc4",
@@ -1334,7 +1403,8 @@
       "body_snippet": "Thanks a lot. That's helpful. I will update before my current work email disappears.\n\nZhiqiang\n________________________________\nFrom: Duncan Murdoch <murdoch.duncan at gmail.com>\nSent: Wednesday, 23 F",
       "thread_id": "thread-1f4d73084fa0",
       "thread_depth": 3,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007761.html"
     },
     {
       "id": "msg-3d1a696a75df",
@@ -1350,7 +1420,8 @@
       "body_snippet": "Hello,\n\nI am using \\Sexpr{} macros in my R package with render-time evaluation.\nThis means in my package source that I submit to CRAN, the package manual\nmust be pre-built and included in the tarball.",
       "thread_id": "thread-3d1a696a75df",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007762.html"
     },
     {
       "id": "msg-b569d44cb6b1",
@@ -1368,7 +1439,8 @@
       "body_snippet": "On 25/02/2022 12:49 p.m., Noah Greifer wrote:\n> Hello,\n> \n> I am using \\Sexpr{} macros in my R package with render-time evaluation.\n> This means in my package source that I submit to CRAN, the package",
       "thread_id": "thread-3d1a696a75df",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007763.html"
     },
     {
       "id": "msg-8e96d8fef670",
@@ -1386,7 +1458,8 @@
       "body_snippet": "On Fri, 25 Feb 2022 12:49:49 -0500\nNoah Greifer <noah.greifer at gmail.com> wrote:\n\n\n<SNIP>\n\n> I know very little about Latex (I don't use it for my writing). \n\n<SNIP>\n\nIMHO that is a flaw in your cha",
       "thread_id": "thread-3d1a696a75df",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007764.html"
     },
     {
       "id": "msg-57a12ef0457a",
@@ -1405,7 +1478,8 @@
       "body_snippet": "Thank you for the help! I found \"TinyTeX\" which according to its developer\nis a lightweight version of TeX Live for use by R users. I thought I had\ninstalled it previously, but maybe not. After doing ",
       "thread_id": "thread-3d1a696a75df",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007765.html"
     },
     {
       "id": "msg-bc1932d97acb",
@@ -1417,11 +1491,12 @@
       "subject_clean": "[R-pkg-devel] Submission did not pass incoming checks",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get an error at the following link\n\nhttps://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n\nI?m a little confused.\n\n\nSent from my iPhone\nwww.spsanderson.com\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get an error at the following link\n\nhttps://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n\nI’m a little confused.\n\n\nSent from my iPhone\nwww.spsanderson.com\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get an error at the following link\n\nhttps://win-builder.r-project",
       "thread_id": "thread-bc1932d97acb",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007766.html"
     },
     {
       "id": "msg-5032160f257a",
@@ -1435,11 +1510,12 @@
       "references": [
         "<9EAAD7A4-03A8-4FF4-8EB4-871F535C07C6@gmail.com>"
       ],
-      "body_plain": "Le 27/02/2022 ? 19:15, spsanderson at gmail.com a ?crit?:\n> Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get an error at the following link\n> \n> https://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n> \n> I?m a little confused.\nI don't see any error, only notes and warning.\nFor notes, they are pretty explicit, saying\nFound if() conditions comparing class() to string:\nFile ???healthyR.ai/R/vec-hai-fourier-discrete.R???: if (class(.x) == \n\"Date\") ...\n\nAs class(x) can be a vector of strings, not just a string, it is much \nsafer to use constructs like 'if (inherits(.x, \"Date\")) ...'\n\nAs to the warning, it says that you did not increment the package \nversion which should be done on every new submission.\n\nBest,\nSerguei.\n\n> \n> \n> Sent from my iPhone\n> www.spsanderson.com\n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
-      "body_snippet": "Le 27/02/2022 ? 19:15, spsanderson at gmail.com a ?crit?:\n> Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get a",
+      "body_plain": "Le 27/02/2022 à 19:15, spsanderson at gmail.com a écrit :\n> Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get an error at the following link\n> \n> https://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n> \n> I’m a little confused.\nI don't see any error, only notes and warning.\nFor notes, they are pretty explicit, saying\nFound if() conditions comparing class() to string:\nFile â€˜healthyR.ai/R/vec-hai-fourier-discrete.Râ€™: if (class(.x) == \n\"Date\") ...\n\nAs class(x) can be a vector of strings, not just a string, it is much \nsafer to use constructs like 'if (inherits(.x, \"Date\")) ...'\n\nAs to the warning, it says that you did not increment the package \nversion which should be done on every new submission.\n\nBest,\nSerguei.\n\n> \n> \n> Sent from my iPhone\n> www.spsanderson.com\n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "Le 27/02/2022 à 19:15, spsanderson at gmail.com a écrit :\n> Hi everyone, I have submitted my package healthyR.au to you CRAN it passes all the Arhubb checks properly but when I submit the CRAN I get a",
       "thread_id": "thread-bc1932d97acb",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007767.html"
     },
     {
       "id": "msg-aa46f7b26ef1",
@@ -1457,7 +1533,8 @@
       "body_snippet": "On Sun, 27 Feb 2022 13:15:43 -0500\nspsanderson at gmail.com wrote:\n\n> https://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n\nThe important part is the following NOTE fr",
       "thread_id": "thread-bc1932d97acb",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007768.html"
     },
     {
       "id": "msg-a8325297314b",
@@ -1473,7 +1550,8 @@
       "body_snippet": "Dear All,\n\nI'm new to this list so my apologies if a similar question has been asked recently.\n\nI'm the maintainer of a package released last year (COINr). I am working on some major upgrades to the p",
       "thread_id": "thread-a8325297314b",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007771.html"
     },
     {
       "id": "msg-423dac126c6b",
@@ -1488,11 +1566,12 @@
         "<9EAAD7A4-03A8-4FF4-8EB4-871F535C07C6@gmail.com>",
         "<60b19da0-67fe-0489-8558-9487540f34fb@gmail.com>"
       ],
-      "body_plain": "Thank you all, I did change over to the suggested construct of\nif(inherits(x = .x, \"Date\")) etc. and the package was sent off.\n\nOn Mon, Feb 28, 2022 at 9:23 AM Serguei Sokol <serguei.sokol at gmail.com>\nwrote:\n\n> Le 27/02/2022 ? 19:15, spsanderson at gmail.com a ?crit :\n> > Hi everyone, I have submitted my package healthyR.au to you CRAN it\n> passes all the Arhubb checks properly but when I submit the CRAN I get an\n> error at the following link\n> >\n> >\n> https://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n> >\n> > I?m a little confused.\n> I don't see any error, only notes and warning.\n> For notes, they are pretty explicit, saying\n> Found if() conditions comparing class() to string:\n> File ???healthyR.ai/R/vec-hai-fourier-discrete.R???: if (class(.x) ==\n> \"Date\") ...\n>\n> As class(x) can be a vector of strings, not just a string, it is much\n> safer to use constructs like 'if (inherits(.x, \"Date\")) ...'\n>\n> As to the warning, it says that you did not increment the package\n> version which should be done on every new submission.\n>\n> Best,\n> Serguei.\n>\n> >\n> >\n> > Sent from my iPhone\n> > www.spsanderson.com\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nSteven P Sanderson II, MPH\nBook on Lulu <http://goo.gl/lmrlFI>\nPersonal Site <http://www.spsanderson.com>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thank you all, I did change over to the suggested construct of\nif(inherits(x = .x, \"Date\")) etc. and the package was sent off.\n\nOn Mon, Feb 28, 2022 at 9:23 AM Serguei Sokol <serguei.sokol at gmail.com>\nwrote:\n\n> Le 27/02/2022 à 19:15, spsanderson at gmail.com a écrit :\n> > Hi everyone, I have submitted my package healthyR.au to you CRAN it\n> passes all the Arhubb checks properly but when I submit the CRAN I get an\n> error at the following link\n> >\n> >\n> https://win-builder.r-project.org/incoming_pretest/healthyR.ai_0.0.6_20220227_175008/\n> >\n> > I’m a little confused.\n> I don't see any error, only notes and warning.\n> For notes, they are pretty explicit, saying\n> Found if() conditions comparing class() to string:\n> File â€˜healthyR.ai/R/vec-hai-fourier-discrete.Râ€™: if (class(.x) ==\n> \"Date\") ...\n>\n> As class(x) can be a vector of strings, not just a string, it is much\n> safer to use constructs like 'if (inherits(.x, \"Date\")) ...'\n>\n> As to the warning, it says that you did not increment the package\n> version which should be done on every new submission.\n>\n> Best,\n> Serguei.\n>\n> >\n> >\n> > Sent from my iPhone\n> > www.spsanderson.com\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\n-- \nSteven P Sanderson II, MPH\nBook on Lulu <http://goo.gl/lmrlFI>\nPersonal Site <http://www.spsanderson.com>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thank you all, I did change over to the suggested construct of\nif(inherits(x = .x, \"Date\")) etc. and the package was sent off.\n\nOn Mon, Feb 28, 2022 at 9:23 AM Serguei Sokol <serguei.sokol at gmail.co",
       "thread_id": "thread-bc1932d97acb",
       "thread_depth": 2,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007769.html"
     },
     {
       "id": "msg-3bb47c02f29f",
@@ -1504,11 +1583,12 @@
       "subject_clean": "[R-pkg-devel] Profiling C++ code in R packages on Windows",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear all,\n\nI've been struggling to profile C++ code within an R package I'm writing on\nWindows 10.\n\nAfter finding various excellent online guides, I'm building the package\nwith g++ 8.3.0 using -Og -g -fpic -mstackrealign, and omitting the -s flag\nwhen linking the DLL. AMD ?prof is showing time spent within\n[~]/R/win-library/4.1/00LOCK-MYPACKAGE/00new/MYPACKAGE/libs/x64/MYPACKAGE.dll,\nbut when I double click for a line-by-line profile I see \"Binary file []\nmissing! Unable to show source view...\". I have a similar issue if I try\nusing Very Sleepy instead.\n\nI wonder whether anyone would be able to suggest why my profiler can't\nidentify functions, or find the package source?\n\n\n\nMy ideas so far:\n-- I noticed that the source files constructed when installing the package\nare no longer present: no .o or tmp.def files are evident in my package's\n\"src\" directory. But I can't work out how to make these files persist\nbeyond the compilation process, in a manner that a profiler can locate\nthem. I've tried:\n\n* Installing using devtools::install(keep.source = TRUE)\n* Including the  --with-keep.source option when installing the package via\nR CMD INSTALL (within RStudio)\n\n-- The profiler is identifying the dll in a temporary 00LOCK- folder,\nrather than its final location in win-library/4.1/MYPACAKGE/MYPACKAGE.dll.\nThis 00LOCK folder only exists whilst the package is being installed. Could\nthe DLL contain links to this folder that are not updated when the package\nfiles are moved to their final home?\n\nMany thanks,\n\nMartin Smith\n\n--\n\n*Dr. Martin R. Smith*\nAssociate Professor in Palaeontology\nDurham University\nDepartment of Earth Sciences\nMountjoy Site, South Road, Durham, DH1 3LE United Kingdom\n\n*M*: +44 (0)774 353 7510\n*E*: martin.smith at durham.ac.uk\n*Zoom room*: durhamuniversity.zoom.us/my/smith\n\nsmithlabdurham.github.io\ntwitter.com/PalaeoSmith\n\nMy working days are Monday?Thursday.\n\nThe information in this e-mail and any attachments is co...{{dropped:13}}",
+      "body_plain": "Dear all,\n\nI've been struggling to profile C++ code within an R package I'm writing on\nWindows 10.\n\nAfter finding various excellent online guides, I'm building the package\nwith g++ 8.3.0 using -Og -g -fpic -mstackrealign, and omitting the -s flag\nwhen linking the DLL. AMD µprof is showing time spent within\n[~]/R/win-library/4.1/00LOCK-MYPACKAGE/00new/MYPACKAGE/libs/x64/MYPACKAGE.dll,\nbut when I double click for a line-by-line profile I see \"Binary file []\nmissing! Unable to show source view...\". I have a similar issue if I try\nusing Very Sleepy instead.\n\nI wonder whether anyone would be able to suggest why my profiler can't\nidentify functions, or find the package source?\n\n\n\nMy ideas so far:\n-- I noticed that the source files constructed when installing the package\nare no longer present: no .o or tmp.def files are evident in my package's\n\"src\" directory. But I can't work out how to make these files persist\nbeyond the compilation process, in a manner that a profiler can locate\nthem. I've tried:\n\n* Installing using devtools::install(keep.source = TRUE)\n* Including the  --with-keep.source option when installing the package via\nR CMD INSTALL (within RStudio)\n\n-- The profiler is identifying the dll in a temporary 00LOCK- folder,\nrather than its final location in win-library/4.1/MYPACAKGE/MYPACKAGE.dll.\nThis 00LOCK folder only exists whilst the package is being installed. Could\nthe DLL contain links to this folder that are not updated when the package\nfiles are moved to their final home?\n\nMany thanks,\n\nMartin Smith\n\n--\n\n*Dr. Martin R. Smith*\nAssociate Professor in Palaeontology\nDurham University\nDepartment of Earth Sciences\nMountjoy Site, South Road, Durham, DH1 3LE United Kingdom\n\n*M*: +44 (0)774 353 7510\n*E*: martin.smith at durham.ac.uk\n*Zoom room*: durhamuniversity.zoom.us/my/smith\n\nsmithlabdurham.github.io\ntwitter.com/PalaeoSmith\n\nMy working days are Monday–Thursday.\n\nThe information in this e-mail and any attachments is co...{{dropped:13}}",
       "body_snippet": "Dear all,\n\nI've been struggling to profile C++ code within an R package I'm writing on\nWindows 10.\n\nAfter finding various excellent online guides, I'm building the package\nwith g++ 8.3.0 using -Og -g ",
       "thread_id": "thread-3bb47c02f29f",
       "thread_depth": 0,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007770.html"
     },
     {
       "id": "msg-c9acecbc2eaf",
@@ -1526,7 +1606,8 @@
       "body_snippet": "On 28/02/2022 9:51 a.m., William Becker wrote:\n> Dear All,\n> \n> I'm new to this list so my apologies if a similar question has been asked recently.\n> \n> I'm the maintainer of a package released last y",
       "thread_id": "thread-a8325297314b",
       "thread_depth": 1,
-      "month": "2022-02"
+      "month": "2022-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2022q1/007772.html"
     }
   ],
   "threads": [

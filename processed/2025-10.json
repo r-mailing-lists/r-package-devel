@@ -15,11 +15,12 @@
       "references": [
         "<9301dfd0-1ab1-40a5-89be-265422de25dd@uni-duesseldorf.de>"
       ],
-      "body_plain": "On 28 September 2025 at 11:00, Nils L?schow wrote:\n| when performing \"R CMD check\" on my package that contains the sourcecode \n| of a third party C++ library, I get a warning telling me to avoid the \n| usage of makefile extensions. Before going ahead and trying to temper \n| with the library's build-process, I just wanted to ask how severe of a \n| problem makefile extensions are. Is there a \"gradient\" i.e. makefile \n| extensions can be tolerated to a certain degree and some are worse than \n| others, or are they such a problem with regards to portability that you \n| shouldn't use them at all?\n\nSee Section 1.6 \"Writing Portable Packages\" of _Writing R Extensions_ under\nthe bullet point for `make`:\n\n   ? If your package has a ?Makevars? or ?Makefile? file, make sure that\n     you use only portable make features.  Such files should be\n     LF-terminated(2) (including the final line of the file) and not\n     make use of GNU extensions.  (The POSIX specification is available\n     at\n     <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html>;\n     anything not documented there should be regarded as an extension to\n     be avoided.  Further advice can be found at\n     <https://www.gnu.org/software/autoconf/manual/autoconf.html#Portable-Make>.\n     )  Commonly misused GNU extensions are conditional inclusions\n     (?ifeq? and the like), ?${shell ...}?, ?${wildcard ...}? and\n     similar, and the use of ?+=?(3) and ?:=?.  Also, the use of ?$<?\n     other than in implicit rules is a GNU extension, as is the ?$^?\n     macro.  As is the use of ?.PHONY? (some other makes ignore it).\n     Unfortunately makefiles which use GNU extensions often run on other\n     platforms but do not have the intended results.\n\n     Note that the ?-C? flag for ?make? is not included in the POSIX\n     specification and is not implemented by some of the ?make?s which\n     have been used with R. However, it is more commonly implemented\n     (e.g. by FreeBSD ?make?) than the GNU-specific ?--directory=?.\n\n     You should not rely on built-in/default ?make? rules, even when\n     specified by POSIX, as some ?make?s do not have the POSIX ones and\n     others have altered them.\n\n     The use of ?${shell ...}? can be avoided by using backticks, e.g.\n\n          PKG_CPPFLAGS = `gsl-config --cflags`\n\n     which works in all versions of ?make? known(4) to be used with R.\n\n     If you really must require GNU make, declare it in the\n     ?DESCRIPTION? file by\n\n          SystemRequirements: GNU make\n\n     and ensure that you use the value of environment variable ?MAKE?\n     (and not just ?make?) in your scripts.  (On some platforms GNU make\n     is available under a name such as ?gmake?, and there\n     ?SystemRequirements? is used to set ?MAKE?.)  Your ?configure?\n     script (or similar) does need to check that the executable pointed\n     to by ?MAKE? is indeed GNU make.\n\n     If you only need GNU make for parts of the package which are rarely\n     needed (for example to create bibliography files under\n     ?vignettes?), use a file called ?GNUmakefile? rather than\n     ?Makefile? as GNU make (only) will use the former.\n\n     macOS has used GNU make for many years (it previously used BSD\n     make), but the version has been frozen at 3.81 (from 2006).\n\n     Since the only viable make for Windows is GNU make, it is\n     permissible to use GNU extensions in files ?Makevars.win?,\n     ?Makevars.ucrt?, ?Makefile.win? or ?Makefile.ucrt?.\n\nYou either comply, or you declare 'SystemRequirements: GNU make' as many\npackages do. There is no gradient here.\n\nHope this helps, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
-      "body_snippet": "On 28 September 2025 at 11:00, Nils L?schow wrote:\n| when performing \"R CMD check\" on my package that contains the sourcecode \n| of a third party C++ library, I get a warning telling me to avoid the \n",
+      "body_plain": "On 28 September 2025 at 11:00, Nils Lüschow wrote:\n| when performing \"R CMD check\" on my package that contains the sourcecode \n| of a third party C++ library, I get a warning telling me to avoid the \n| usage of makefile extensions. Before going ahead and trying to temper \n| with the library's build-process, I just wanted to ask how severe of a \n| problem makefile extensions are. Is there a \"gradient\" i.e. makefile \n| extensions can be tolerated to a certain degree and some are worse than \n| others, or are they such a problem with regards to portability that you \n| shouldn't use them at all?\n\nSee Section 1.6 \"Writing Portable Packages\" of _Writing R Extensions_ under\nthe bullet point for `make`:\n\n   • If your package has a ‘Makevars’ or ‘Makefile’ file, make sure that\n     you use only portable make features.  Such files should be\n     LF-terminated(2) (including the final line of the file) and not\n     make use of GNU extensions.  (The POSIX specification is available\n     at\n     <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html>;\n     anything not documented there should be regarded as an extension to\n     be avoided.  Further advice can be found at\n     <https://www.gnu.org/software/autoconf/manual/autoconf.html#Portable-Make>.\n     )  Commonly misused GNU extensions are conditional inclusions\n     (‘ifeq’ and the like), ‘${shell ...}’, ‘${wildcard ...}’ and\n     similar, and the use of ‘+=’(3) and ‘:=’.  Also, the use of ‘$<’\n     other than in implicit rules is a GNU extension, as is the ‘$^’\n     macro.  As is the use of ‘.PHONY’ (some other makes ignore it).\n     Unfortunately makefiles which use GNU extensions often run on other\n     platforms but do not have the intended results.\n\n     Note that the ‘-C’ flag for ‘make’ is not included in the POSIX\n     specification and is not implemented by some of the ‘make’s which\n     have been used with R. However, it is more commonly implemented\n     (e.g. by FreeBSD ‘make’) than the GNU-specific ‘--directory=’.\n\n     You should not rely on built-in/default ‘make’ rules, even when\n     specified by POSIX, as some ‘make’s do not have the POSIX ones and\n     others have altered them.\n\n     The use of ‘${shell ...}’ can be avoided by using backticks, e.g.\n\n          PKG_CPPFLAGS = `gsl-config --cflags`\n\n     which works in all versions of ‘make’ known(4) to be used with R.\n\n     If you really must require GNU make, declare it in the\n     ‘DESCRIPTION’ file by\n\n          SystemRequirements: GNU make\n\n     and ensure that you use the value of environment variable ‘MAKE’\n     (and not just ‘make’) in your scripts.  (On some platforms GNU make\n     is available under a name such as ‘gmake’, and there\n     ‘SystemRequirements’ is used to set ‘MAKE’.)  Your ‘configure’\n     script (or similar) does need to check that the executable pointed\n     to by ‘MAKE’ is indeed GNU make.\n\n     If you only need GNU make for parts of the package which are rarely\n     needed (for example to create bibliography files under\n     ‘vignettes’), use a file called ‘GNUmakefile’ rather than\n     ‘Makefile’ as GNU make (only) will use the former.\n\n     macOS has used GNU make for many years (it previously used BSD\n     make), but the version has been frozen at 3.81 (from 2006).\n\n     Since the only viable make for Windows is GNU make, it is\n     permissible to use GNU extensions in files ‘Makevars.win’,\n     ‘Makevars.ucrt’, ‘Makefile.win’ or ‘Makefile.ucrt’.\n\nYou either comply, or you declare 'SystemRequirements: GNU make' as many\npackages do. There is no gradient here.\n\nHope this helps, Dirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 28 September 2025 at 11:00, Nils Lüschow wrote:\n| when performing \"R CMD check\" on my package that contains the sourcecode \n| of a third party C++ library, I get a warning telling me to avoid the \n",
       "thread_id": "thread-f518110031e4",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012023.html"
     },
     {
       "id": "msg-5949a5bab7d1",
@@ -37,7 +38,8 @@
       "body_snippet": "On 29 September 2025 at 19:14, quirin stier wrote:\n| I submitted a locally functioning package to CRAN (see \n| https://github.com/Quirinms/GeneralizedUmatrixGPU), however in the case \n| of the Linux t",
       "thread_id": "thread-5949a5bab7d1",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012024.html"
     },
     {
       "id": "msg-f92f1b0f40a4",
@@ -51,11 +53,12 @@
       "references": [
         "<fa780c92-0ad3-49c0-9fb1-d9f97e9f77e3@gmx.de>"
       ],
-      "body_plain": "On 9/29/25 19:14, quirin stier wrote:\n> I submitted a locally functioning package to CRAN (see\n> https://github.com/Quirinms/GeneralizedUmatrixGPU), however in the case\n> of the Linux test, I get following error:\n>\n>    *** caught segfault ***\n> address 0x10, cause 'memory not mapped'\n\nJust from these two lines, one can't tell what was the problem. It would \nbe slightly better to see complete outputs of the failed checks, that \ncould give a hint where it failed.\n\nTo provoke the crash on a system where it normally doesn't happen, one \nmight try using gc torture (see ?gctorture). Also one might try running \nwith address sanitizer/valgrind to see if those tools could find a \nmemory error. Possibly one could run only a smaller part of the check, \nbased on the output - e.g. if it crashes while running a specific \nexample, one might try just running that example in isolation (with \ngctorture, valgrind, etc).\n\nCertainly that it crashes on some platforms means there is an error (in \nthe package, or depenendent packages, or possibly used libraries or R).\n\nBest\nTomas\n\n> A web search suggests that the executing machine must have a \"mismatch\n> between currently?installed shared libraries and the libraries that were\n> built to install R or packages\".\n>\n> https://stackoverflow.com/questions/49190251/caught-segfault-memory-not-mapped-error-in-r\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_plain": "On 9/29/25 19:14, quirin stier wrote:\n> I submitted a locally functioning package to CRAN (see\n> https://github.com/Quirinms/GeneralizedUmatrixGPU), however in the case\n> of the Linux test, I get following error:\n>\n>    *** caught segfault ***\n> address 0x10, cause 'memory not mapped'\n\nJust from these two lines, one can't tell what was the problem. It would \nbe slightly better to see complete outputs of the failed checks, that \ncould give a hint where it failed.\n\nTo provoke the crash on a system where it normally doesn't happen, one \nmight try using gc torture (see ?gctorture). Also one might try running \nwith address sanitizer/valgrind to see if those tools could find a \nmemory error. Possibly one could run only a smaller part of the check, \nbased on the output - e.g. if it crashes while running a specific \nexample, one might try just running that example in isolation (with \ngctorture, valgrind, etc).\n\nCertainly that it crashes on some platforms means there is an error (in \nthe package, or depenendent packages, or possibly used libraries or R).\n\nBest\nTomas\n\n> A web search suggests that the executing machine must have a \"mismatch\n> between currently installed shared libraries and the libraries that were\n> built to install R or packages\".\n>\n> https://stackoverflow.com/questions/49190251/caught-segfault-memory-not-mapped-error-in-r\n>\n>\n> \t[[alternative HTML version deleted]]\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
       "body_snippet": "On 9/29/25 19:14, quirin stier wrote:\n> I submitted a locally functioning package to CRAN (see\n> https://github.com/Quirinms/GeneralizedUmatrixGPU), however in the case\n> of the Linux test, I get foll",
       "thread_id": "thread-f92f1b0f40a4",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012025.html"
     },
     {
       "id": "msg-2ce9ca398cb9",
@@ -71,7 +74,8 @@
       "body_snippet": "Dear list members,\n\nWe are trying to get our package rsofun updated on CRAN. The source code is hosted in the master branch at: https://github.com/geco-bern/rsofun\n\nThe CRAN pretest fails on Debian wi",
       "thread_id": "thread-2ce9ca398cb9",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012028.html"
     },
     {
       "id": "msg-7b6d4ef37d8d",
@@ -87,7 +91,8 @@
       "body_snippet": "Hi Everyone,\n\nOne of the functions in my DiNAMIC.Duo package on CRAN uses the biomaRt package to download gene position information from the Ensembl website.  Currently I use one of the Ensembl archiv",
       "thread_id": "thread-7b6d4ef37d8d",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012026.html"
     },
     {
       "id": "msg-240e0806c425",
@@ -103,7 +108,8 @@
       "body_snippet": "Hi everyone,\n\nI submitted an update for my broadcast R-package yesterday on CRAN.\nPrior to submission I checked the package with R CMD check, devtools::check_win_devel(), with devtools::check_mac_rele",
       "thread_id": "thread-240e0806c425",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012027.html"
     },
     {
       "id": "msg-af457da09ece",
@@ -121,7 +127,8 @@
       "body_snippet": "On 1 October 2025 at 16:58, fabian.bernhard at unibe.ch wrote:\n| Dear list members,\n| \n| We are trying to get our package rsofun updated on CRAN. The source code is hosted in the master branch at: htt",
       "thread_id": "thread-2ce9ca398cb9",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012029.html"
     },
     {
       "id": "msg-0ccd68f96cfe",
@@ -139,7 +146,8 @@
       "body_snippet": "On 3 October 2025 at 08:57, Tony Wilkes wrote:\n| Hi everyone,\n| \n| I submitted an update for my broadcast R-package yesterday on CRAN.\n| Prior to submission I checked the package with R CMD check, dev",
       "thread_id": "thread-240e0806c425",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012030.html"
     },
     {
       "id": "msg-cbb9b5bd7d2d",
@@ -157,7 +165,8 @@
       "body_snippet": "? Wed, 1 Oct 2025 16:58:16 +0000\n<fabian.bernhard at unibe.ch> ?????:\n\n> The cookbook\n> (https://contributor.r-project.org/cran-cookbook/code_issues.html)\n> suggests use of the j-flag for compilation ",
       "thread_id": "thread-2ce9ca398cb9",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012031.html"
     },
     {
       "id": "msg-77eeeaca09e5",
@@ -176,7 +185,8 @@
       "body_snippet": "Tony,\n\nThe script below should set you up for clang-22 on the rocker/r-base\ncontainer running Debian testing/unstable, and ensure R uses clang-22.\n\nThe fact that clang-22 passes the build whereas as t",
       "thread_id": "thread-240e0806c425",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012032.html"
     },
     {
       "id": "msg-9820e2fc2478",
@@ -194,7 +204,8 @@
       "body_snippet": "Hi everyone,\n\nSorry, false alarm.\nThere's probably no problem on the side of CRAN.\nThe problem was probably on my side.\n\nMy code is not wrong per-s?, but I created an additional if()else() statement i",
       "thread_id": "thread-240e0806c425",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012033.html"
     },
     {
       "id": "msg-89512e5959a6",
@@ -215,7 +226,8 @@
       "body_snippet": "Dear all\n\nIn recent days, I also experienced that I did not receive an email with a\nlink to the check results from winbuilder after uploading an improved\nversion of my micEcon package. On Friday morni",
       "thread_id": "thread-89512e5959a6",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012034.html"
     },
     {
       "id": "msg-1c07dde173e5",
@@ -233,7 +245,8 @@
       "body_snippet": "Hi Vonn,\n\nYou could wrap the offending example in try et.al. and handle failed situations in a way that gives a warning but not an error.\n\nBest,\nBerry\n\n\n\n-------------------------------------\n\n_______",
       "thread_id": "thread-7b6d4ef37d8d",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012035.html"
     },
     {
       "id": "msg-045dafa7afb4",
@@ -255,7 +268,8 @@
       "body_snippet": "Hello everyone,\n\nI have fixed the 'broadcast' package (updated to version 0.1.5.1), but there is still an installation error on r-devel-linux-x86_64-fedora-clang: https://www.r-project.org/nosvn/R.che",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012036.html"
     },
     {
       "id": "msg-8c35a8a0ef21",
@@ -277,7 +291,8 @@
       "body_snippet": "We had mail server issues from Fri to Sun /toda).\nMails should be delievered again.\n\nBest,\nUwe Ligges\n\n\nOn 05.10.2025 08:31, Arne Henningsen wrote:\n> Dear all\n> \n> In recent days, I also experienced t",
       "thread_id": "thread-89512e5959a6",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012037.html"
     },
     {
       "id": "msg-52ed33ec9bc6",
@@ -300,7 +315,8 @@
       "body_snippet": "Yes, it works again :-) Thanks a lot, Uwe, for fixing this! ...and\nthanks a lot to you and the entire CRAN team for your fantastic work!\n\n/Arne\n\nOn Sun, 5 Oct 2025 at 23:59, Uwe Ligges <ligges at stat",
       "thread_id": "thread-89512e5959a6",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012038.html"
     },
     {
       "id": "msg-0e1496b4c993",
@@ -324,7 +340,8 @@
       "body_snippet": "You are most welcome,\nUwe\n\n\nOn 06.10.2025 09:18, Arne Henningsen wrote:\n> Yes, it works again :-) Thanks a lot, Uwe, for fixing this! ...and\n> thanks a lot to you and the entire CRAN team for your fan",
       "thread_id": "thread-89512e5959a6",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012039.html"
     },
     {
       "id": "msg-2eb2f86cc41c",
@@ -347,7 +364,8 @@
       "body_snippet": "The error log at\nhttps://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/broadcast-00install.html\nmakes it pretty clear that there's a bug in the compiler being used on\nthat CRAN mac",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012040.html"
     },
     {
       "id": "msg-93a63360c90d",
@@ -371,7 +389,8 @@
       "body_snippet": "Hi Kevin, CRAN, and the rest,\n\nThank you for your answer, Kevin, I appreciate it!\n\nIf there is an issue in the compiler CRAN uses, it seems reasonable that CRAN fixes that.\nI also don't know how to wo",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012041.html"
     },
     {
       "id": "msg-f519ee37582b",
@@ -396,7 +415,8 @@
       "body_snippet": "On 7 October 2025 at 06:34, Tony Wilkes wrote:\n| If there is an issue in the compiler CRAN uses, it seems reasonable that CRAN fixes that.\n\nIn an ideal world, sure. But please keep in mind that CRAN's",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012042.html"
     },
     {
       "id": "msg-4cd5f4699858",
@@ -421,7 +441,8 @@
       "body_snippet": "? Tue, 7 Oct 2025 06:34:11 +0000\nTony Wilkes <tony_a_wilkes at outlook.com> ?????:\n\n> I also don't know how to work around a bug in a compiler. How would\n> you even do that?\n\nFor example, the SQLite d",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012043.html"
     },
     {
       "id": "msg-fc4f59cd35b0",
@@ -447,7 +468,8 @@
       "body_snippet": "On 7 October 2025 at 20:07, Ivan Krylov via R-package-devel wrote:\n| Clang is programmed to print a message saying \"PLEASE submit a bug\n| report\" when it receives an unexpected fatal signal. Here, the",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 4,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012044.html"
     },
     {
       "id": "msg-8cb7ec89196d",
@@ -474,7 +496,8 @@
       "body_snippet": "Should we ask the LLVM team if they think it's worth handling the\nSIGXCPU signal in an alternate way? Since the message they're printing\nhere implies it's a bug in the compiler... or at least, they co",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 5,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012045.html"
     },
     {
       "id": "msg-8ab91af3ec55",
@@ -501,7 +524,8 @@
       "body_snippet": "Hi everyone,\n\nI followed the given advise to the best of my abilities: rewritten some c++ scripts to c, split large c++ scripts into smaller pieces, simplified the macros, reduced the install size & t",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 5,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012046.html"
     },
     {
       "id": "msg-0d1d286585fa",
@@ -529,7 +553,8 @@
       "body_snippet": "On 9 October 2025 at 12:05, Tony Wilkes wrote:\n| But when I checked the cran incoming website, i saw it was put under folder \"archive\", which means (I think) rejection. Not even pretest, just straight",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 6,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012047.html"
     },
     {
       "id": "msg-4803f28b3604",
@@ -557,7 +582,8 @@
       "body_snippet": "? Thu, 9 Oct 2025 12:05:57 +0000\nTony Wilkes <tony_a_wilkes at outlook.com> ?????:\n\n> when I checked the cran incoming website, i saw it was put under\n> folder \"archive\", which means (I think) rejecti",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 6,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012048.html"
     },
     {
       "id": "msg-b4cc713e9fa1",
@@ -576,7 +602,8 @@
       "body_snippet": "Thank you for your answers, Dirk and Ivan!\n\nWith your help I managed to reduce the compilation time on CRAN Debian pretest (from [89s/32s] to [48s/20s]) by modifying the Makevars of the rsofun package",
       "thread_id": "thread-2ce9ca398cb9",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012049.html"
     },
     {
       "id": "msg-bc04f1451762",
@@ -605,7 +632,8 @@
       "body_snippet": "Thanks! Yes this is very easy to fix.\n\n________________________________\nVan: Ivan Krylov <ikrylov at disroot.org>\nVerstuurd: donderdag, oktober 9, 2025 2:47:28 p.m.\nAan: Tony Wilkes <tony_a_wilkes at ",
       "thread_id": "thread-045dafa7afb4",
       "thread_depth": 7,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012050.html"
     },
     {
       "id": "msg-63fbc5650687",
@@ -621,7 +649,8 @@
       "body_snippet": "The plotly R package is a tool that makes the Shiny and the\nRMarkdown/Quarto HTML formats truly shine. According to this community\nannouncement, the Plotly organization is preparing to retire R\ndocume",
       "thread_id": "thread-63fbc5650687",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012052.html"
     },
     {
       "id": "msg-f3e062cfa0e4",
@@ -637,7 +666,8 @@
       "body_snippet": "Armadillo 15.0.* brought upstream changes that lead to two CRAN 'Deadlines'.\nA lot of packages have adjusted, some more still seem to need help.\n\nI detailed this, and the nine (!!) issue tickets aroun",
       "thread_id": "thread-f3e062cfa0e4",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012051.html"
     },
     {
       "id": "msg-2afd222d00e1",
@@ -653,7 +683,8 @@
       "body_snippet": "Hello everyone,\nI recently updated the roxygen2 version used in my package (SPIChanges on CRAN<https://cran.r-project.org/web/packages/SPIChanges/index.html>) from v7.3.2 to v7.3.3.\nRunning the follow",
       "thread_id": "thread-2afd222d00e1",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012053.html"
     },
     {
       "id": "msg-7fb2299ea301",
@@ -671,7 +702,8 @@
       "body_snippet": "On 13 October 2025 at 13:39, Gabriel Constantino Blain wrote:\n| Hello everyone,\n| I recently updated the roxygen2 version used in my package (SPIChanges on CRAN<https://cran.r-project.org/web/packages",
       "thread_id": "thread-2afd222d00e1",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012054.html"
     },
     {
       "id": "msg-1e0455ac043e",
@@ -689,7 +721,8 @@
       "body_snippet": "Did you search for a solution? I did... and apparently this feature is not supplied by devtools.\n\nOn October 13, 2025 6:39:07 AM PDT, Gabriel Constantino Blain <gabriel.blain at sp.gov.br> wrote:\n>Hel",
       "thread_id": "thread-2afd222d00e1",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012055.html"
     },
     {
       "id": "msg-010bb2681a1a",
@@ -705,7 +738,8 @@
       "body_snippet": "Hello, All:\n\n\nGitHub actions has seen no problems with:\n\n\nhttps://github.com/sbgraves237/MaddisonData\n\n\nHowever, R CMD check on my local computer cannot find any of the \ndatasets defined in this packa",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012056.html"
     },
     {
       "id": "msg-46d6bb56ed2b",
@@ -723,7 +757,8 @@
       "body_snippet": "Hi:\n\nMaybe remove those rda files from .Rbuildignore (as in a previous question)?\n\n\n\nHave a nice day!\n\n\nEl El mar, 14 oct 2025 a las 1:04, Spencer Graves <\nspencer.graves at effectivedefense.org> escr",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012057.html"
     },
     {
       "id": "msg-694c7fae8f12",
@@ -741,7 +776,8 @@
       "body_snippet": "Datasets are somewhat special, in that they are not in the namespace of the package. So, you can't access them with the '::' operator, you need to use data(). When inside functions, preferably with en",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012058.html"
     },
     {
       "id": "msg-809af98e69b0",
@@ -760,7 +796,8 @@
       "body_snippet": "> On Oct 14, 2025, at 1:38?AM, Georgi Boshnakov <georgi.boshnakov at manchester.ac.uk> wrote:\n> \n> So, you can't access them with the '::' operator, you need to use data().\n\nYou can, though!\n\n```\n% R ",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012059.html"
     },
     {
       "id": "msg-761ca1bd5a72",
@@ -775,11 +812,12 @@
         "<a8a20ef6-fbbd-4059-a5bf-9dea5c090230@effectivedefense.org>",
         "<LO0P265MB63250D278F8B3BE5CAD76834AEEBA@LO0P265MB6325.GBRP265.PROD.OUTLOOK.COM>"
       ],
-      "body_plain": "As Chris Black pointed out, you can use `::`. The help page for `data()` recommends this approach for Spencer?s use case:\n\n\"In the unusual case that a package uses a lazy-loaded dataset as a default argument to a function, that needs to be specified by :: <http://127.0.0.1:16056/help/library/utils/help/%3A%3A>, e.g., survival::survexp.us.\"\n\n\n> On Oct 14, 2025, at 3:38?AM, Georgi Boshnakov <georgi.boshnakov at manchester.ac.uk> wrote:\n> \n> Datasets are somewhat special, in that they are not in the namespace of the package. So, you can't access them with the '::' operator, you need to use data(). When inside functions, preferably with envir = environment() to avoid putting the datasets in the user's workspace, see the help page of data().\n> \n> Georgi Boshnakov\n> \n> ________________________________________\n> From: R-package-devel <r-package-devel-bounces at r-project.org <mailto:r-package-devel-bounces at r-project.org>> on behalf of Spencer Graves <spencer.graves at effectivedefense.org <mailto:spencer.graves at effectivedefense.org>>\n> Sent: 14 October 2025 00:03\n> To: r-package-devel at r-project.org <mailto:r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] \"Undefined global functions or variables\" locally but NOT on GitHub\n> \n> Hello, All:\n> \n> \n> GitHub actions has seen no problems with:\n> \n> \n> https://urldefense.com/v3/__https://github.com/sbgraves237/MaddisonData__;!!PDiH4ENfjr2_Jw!AV0E6CfZS8E1jXuDa5DiIi0ORXQzjlJGiZYd5YBVl6_i05LSgAXspPn4jj-Afy87jGSuyd2V30E2t9n-P_gyU7t7pRJGtHyLWV9CXc2TIzbRfGQ$ [github[.]com]\n> \n> \n> However, R CMD check on my local computer cannot find any of the\n> datasets defined in this package. I think I have the current version of\n> everything including upgrading macOS to 26.0.1, upgrading RStudio and\n> running \"update.packages()\". I've studied Wickham and Bryan, R Packages,\n> without finding how to fix this problem. I've compared the roxygen2 code\n> in this package with data documentation in other tidyverse packages\n> without being able to resolve this issue. Below please find\n> sessionInfo() and 00check.log from \"R CMD check MaddisonData_0.0.1.tar.gz\".\n> \n> \n> Suggestions? Thanks, Spencer Graves\n> \n> \n> p.s. I was having the same problem with\n> \"github.com/sbgraves237/SS4Maddison\", so I created the MaddisonData\n> project from scratch and copied only what I needed from SS4Maddison. The\n> problem followed me.\n> \n> \n>> sessionInfo()\n> R version 4.5.1 (2025-06-13)\n> Platform: aarch64-apple-darwin20\n> Running under: macOS Tahoe 26.0.1\n> \n> Matrix products: default\n> BLAS:\n> /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib\n> \n> LAPACK:\n> /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;\n>  LAPACK version 3.12.1\n> \n> locale:\n> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n> \n> time zone: America/Chicago\n> tzcode source: internal\n> \n> attached base packages:\n> [1] stats     graphics  grDevices utils     datasets\n> [6] methods   base\n> \n> other attached packages:\n> [1] devtools_2.4.6 usethis_3.2.1\n> \n> loaded via a namespace (and not attached):\n>  [1] R6_2.6.1           fastmap_1.2.0\n>  [3] magrittr_2.0.4     cachem_1.1.0\n>  [5] remotes_2.5.0.9000 glue_1.8.0\n>  [7] memoise_2.0.1      lifecycle_1.0.4\n>  [9] cli_3.6.5          sessioninfo_1.2.3\n> [11] vctrs_0.6.5        compiler_4.5.1\n> [13] pkgload_1.4.1      tools_4.5.1\n> [15] purrr_1.1.0        rstudioapi_0.17.1\n> [17] pkgbuild_1.4.8     ellipsis_0.3.2\n> [19] rlang_1.1.6        fs_1.6.6\n> \n> \n> ##################\n> \n> \n> 00check.log\n> \n> \n> * using log directory\n> ?/Users/sg/Documents/current/R/MaddisonData/MaddisonData.Rcheck?\n> * using R version 4.5.1 (2025-06-13)\n> * using platform: aarch64-apple-darwin20\n> * R was compiled by\n>     Apple clang version 16.0.0 (clang-1600.0.26.6)\n>     GNU Fortran (GCC) 14.2.0\n> * running under: macOS Tahoe 26.0.1\n> * using session charset: UTF-8\n> * checking for file ?MaddisonData/DESCRIPTION? ... OK\n> * this is package ?MaddisonData? version ?0.0.1?\n> * package encoding: UTF-8\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for executable files ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking for sufficient/correct file permissions ... OK\n> * checking whether package ?MaddisonData? can be installed ... OK\n> * checking installed package size ... INFO\n>   installed size is  5.1Mb\n>   sub-directories of 1Mb or more:\n>     extdata   4.7Mb\n> * checking package directory ... OK\n> * checking ?build? directory ... OK\n> * checking DESCRIPTION meta-information ... OK\n> * checking top-level files ... OK\n> * checking for left-over files ... OK\n> * checking index information ... OK\n> * checking package subdirectories ... OK\n> * checking code files for non-ASCII characters ... OK\n> * checking R files for syntax errors ... OK\n> * checking whether the package can be loaded ... OK\n> * checking whether the package can be loaded with stated dependencies ... OK\n> * checking whether the package can be unloaded cleanly ... OK\n> * checking whether the namespace can be loaded with stated dependencies\n> ... OK\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking loading without being on the library search path ... OK\n> * checking dependencies in R code ... OK\n> * checking S3 generic/method consistency ... OK\n> * checking replacement functions ... OK\n> * checking foreign function calls ... OK\n> * checking R code for possible problems ... NOTE\n> getMaddisonSources: no visible binding for global variable\n>   ?MaddisonSources?\n> getMaddisonSources: no visible binding for global variable\n>   ?MaddisonYears?\n> logMaddison: no visible binding for global variable ?MaddisonData?\n> logMaddison: no visible binding for global variable ?MaddisonCountries?\n> Undefined global functions or variables:\n>   MaddisonCountries MaddisonData MaddisonSources MaddisonYears\n> * checking Rd files ... OK\n> * checking Rd metadata ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... OK\n> * checking Rd \\usage sections ... OK\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking contents of ?data? directory ... OK\n> * checking data for non-ASCII characters ... OK\n> * checking LazyData ... OK\n> * checking data for ASCII and uncompressed saves ... OK\n> * checking installed files from ?inst/doc? ... OK\n> * checking files in ?vignettes? ... OK\n> * checking examples ... OK\n> * checking for unstated dependencies in vignettes ... OK\n> * checking package vignettes ... OK\n> * checking re-building of vignette outputs ... OK\n> * checking PDF version of manual ... OK\n> * DONE\n> Status: 1 NOTE\n> \n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!AV0E6CfZS8E1jXuDa5DiIi0ORXQzjlJGiZYd5YBVl6_i05LSgAXspPn4jj-Afy87jGSuyd2V30E2t9n-P_gyU7t7pRJGtHyLWV9CXc2TBzk31as$ [stat[.]ethz[.]ch]\n> \n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "As Chris Black pointed out, you can use `::`. The help page for `data()` recommends this approach for Spencer?s use case:\n\n\"In the unusual case that a package uses a lazy-loaded dataset as a default a",
+      "body_plain": "As Chris Black pointed out, you can use `::`. The help page for `data()` recommends this approach for Spencer’s use case:\n\n\"In the unusual case that a package uses a lazy-loaded dataset as a default argument to a function, that needs to be specified by :: <http://127.0.0.1:16056/help/library/utils/help/%3A%3A>, e.g., survival::survexp.us.\"\n\n\n> On Oct 14, 2025, at 3:38 AM, Georgi Boshnakov <georgi.boshnakov at manchester.ac.uk> wrote:\n> \n> Datasets are somewhat special, in that they are not in the namespace of the package. So, you can't access them with the '::' operator, you need to use data(). When inside functions, preferably with envir = environment() to avoid putting the datasets in the user's workspace, see the help page of data().\n> \n> Georgi Boshnakov\n> \n> ________________________________________\n> From: R-package-devel <r-package-devel-bounces at r-project.org <mailto:r-package-devel-bounces at r-project.org>> on behalf of Spencer Graves <spencer.graves at effectivedefense.org <mailto:spencer.graves at effectivedefense.org>>\n> Sent: 14 October 2025 00:03\n> To: r-package-devel at r-project.org <mailto:r-package-devel at r-project.org>\n> Subject: [R-pkg-devel] \"Undefined global functions or variables\" locally but NOT on GitHub\n> \n> Hello, All:\n> \n> \n> GitHub actions has seen no problems with:\n> \n> \n> https://urldefense.com/v3/__https://github.com/sbgraves237/MaddisonData__;!!PDiH4ENfjr2_Jw!AV0E6CfZS8E1jXuDa5DiIi0ORXQzjlJGiZYd5YBVl6_i05LSgAXspPn4jj-Afy87jGSuyd2V30E2t9n-P_gyU7t7pRJGtHyLWV9CXc2TIzbRfGQ$ [github[.]com]\n> \n> \n> However, R CMD check on my local computer cannot find any of the\n> datasets defined in this package. I think I have the current version of\n> everything including upgrading macOS to 26.0.1, upgrading RStudio and\n> running \"update.packages()\". I've studied Wickham and Bryan, R Packages,\n> without finding how to fix this problem. I've compared the roxygen2 code\n> in this package with data documentation in other tidyverse packages\n> without being able to resolve this issue. Below please find\n> sessionInfo() and 00check.log from \"R CMD check MaddisonData_0.0.1.tar.gz\".\n> \n> \n> Suggestions? Thanks, Spencer Graves\n> \n> \n> p.s. I was having the same problem with\n> \"github.com/sbgraves237/SS4Maddison\", so I created the MaddisonData\n> project from scratch and copied only what I needed from SS4Maddison. The\n> problem followed me.\n> \n> \n>> sessionInfo()\n> R version 4.5.1 (2025-06-13)\n> Platform: aarch64-apple-darwin20\n> Running under: macOS Tahoe 26.0.1\n> \n> Matrix products: default\n> BLAS:\n> /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib\n> \n> LAPACK:\n> /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;\n>  LAPACK version 3.12.1\n> \n> locale:\n> [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n> \n> time zone: America/Chicago\n> tzcode source: internal\n> \n> attached base packages:\n> [1] stats     graphics  grDevices utils     datasets\n> [6] methods   base\n> \n> other attached packages:\n> [1] devtools_2.4.6 usethis_3.2.1\n> \n> loaded via a namespace (and not attached):\n>  [1] R6_2.6.1           fastmap_1.2.0\n>  [3] magrittr_2.0.4     cachem_1.1.0\n>  [5] remotes_2.5.0.9000 glue_1.8.0\n>  [7] memoise_2.0.1      lifecycle_1.0.4\n>  [9] cli_3.6.5          sessioninfo_1.2.3\n> [11] vctrs_0.6.5        compiler_4.5.1\n> [13] pkgload_1.4.1      tools_4.5.1\n> [15] purrr_1.1.0        rstudioapi_0.17.1\n> [17] pkgbuild_1.4.8     ellipsis_0.3.2\n> [19] rlang_1.1.6        fs_1.6.6\n> \n> \n> ##################\n> \n> \n> 00check.log\n> \n> \n> * using log directory\n> ‘/Users/sg/Documents/current/R/MaddisonData/MaddisonData.Rcheck’\n> * using R version 4.5.1 (2025-06-13)\n> * using platform: aarch64-apple-darwin20\n> * R was compiled by\n>     Apple clang version 16.0.0 (clang-1600.0.26.6)\n>     GNU Fortran (GCC) 14.2.0\n> * running under: macOS Tahoe 26.0.1\n> * using session charset: UTF-8\n> * checking for file ‘MaddisonData/DESCRIPTION’ ... OK\n> * this is package ‘MaddisonData’ version ‘0.0.1’\n> * package encoding: UTF-8\n> * checking package namespace information ... OK\n> * checking package dependencies ... OK\n> * checking if this is a source package ... OK\n> * checking if there is a namespace ... OK\n> * checking for executable files ... OK\n> * checking for hidden files and directories ... OK\n> * checking for portable file names ... OK\n> * checking for sufficient/correct file permissions ... OK\n> * checking whether package ‘MaddisonData’ can be installed ... OK\n> * checking installed package size ... INFO\n>   installed size is  5.1Mb\n>   sub-directories of 1Mb or more:\n>     extdata   4.7Mb\n> * checking package directory ... OK\n> * checking ‘build’ directory ... OK\n> * checking DESCRIPTION meta-information ... OK\n> * checking top-level files ... OK\n> * checking for left-over files ... OK\n> * checking index information ... OK\n> * checking package subdirectories ... OK\n> * checking code files for non-ASCII characters ... OK\n> * checking R files for syntax errors ... OK\n> * checking whether the package can be loaded ... OK\n> * checking whether the package can be loaded with stated dependencies ... OK\n> * checking whether the package can be unloaded cleanly ... OK\n> * checking whether the namespace can be loaded with stated dependencies\n> ... OK\n> * checking whether the namespace can be unloaded cleanly ... OK\n> * checking loading without being on the library search path ... OK\n> * checking dependencies in R code ... OK\n> * checking S3 generic/method consistency ... OK\n> * checking replacement functions ... OK\n> * checking foreign function calls ... OK\n> * checking R code for possible problems ... NOTE\n> getMaddisonSources: no visible binding for global variable\n>   ‘MaddisonSources’\n> getMaddisonSources: no visible binding for global variable\n>   ‘MaddisonYears’\n> logMaddison: no visible binding for global variable ‘MaddisonData’\n> logMaddison: no visible binding for global variable ‘MaddisonCountries’\n> Undefined global functions or variables:\n>   MaddisonCountries MaddisonData MaddisonSources MaddisonYears\n> * checking Rd files ... OK\n> * checking Rd metadata ... OK\n> * checking Rd cross-references ... OK\n> * checking for missing documentation entries ... OK\n> * checking for code/documentation mismatches ... OK\n> * checking Rd \\usage sections ... OK\n> * checking Rd contents ... OK\n> * checking for unstated dependencies in examples ... OK\n> * checking contents of ‘data’ directory ... OK\n> * checking data for non-ASCII characters ... OK\n> * checking LazyData ... OK\n> * checking data for ASCII and uncompressed saves ... OK\n> * checking installed files from ‘inst/doc’ ... OK\n> * checking files in ‘vignettes’ ... OK\n> * checking examples ... OK\n> * checking for unstated dependencies in vignettes ... OK\n> * checking package vignettes ... OK\n> * checking re-building of vignette outputs ... OK\n> * checking PDF version of manual ... OK\n> * DONE\n> Status: 1 NOTE\n> \n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://urldefense.com/v3/__https://stat.ethz.ch/mailman/listinfo/r-package-devel__;!!PDiH4ENfjr2_Jw!AV0E6CfZS8E1jXuDa5DiIi0ORXQzjlJGiZYd5YBVl6_i05LSgAXspPn4jj-Afy87jGSuyd2V30E2t9n-P_gyU7t7pRJGtHyLWV9CXc2TBzk31as$ [stat[.]ethz[.]ch]\n> \n> ______________________________________________\n> R-package-devel at r-project.org <mailto:R-package-devel at r-project.org> mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "As Chris Black pointed out, you can use `::`. The help page for `data()` recommends this approach for Spencer’s use case:\n\n\"In the unusual case that a package uses a lazy-loaded dataset as a default a",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012060.html"
     },
     {
       "id": "msg-681fc27fd610",
@@ -799,7 +837,8 @@
       "body_snippet": "Thanks to all who replied. John Benninghoff and Georgi Boshnakov \nsuggested I use the \"::\" operator. That fixed that problem.\n\n\nPlease excuse: Since those objects were part of the package under \ndevel",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012061.html"
     },
     {
       "id": "msg-b5bbb201163d",
@@ -820,7 +859,8 @@
       "body_snippet": "Hi Spencer,\n\nI believe the issue is that you have the same VignetteIndexEntry\n\n%\\VignetteIndexEntry{UpdateMaddisonData}\"\n\nin _both_ of those vignettes. So I think you want the other one to be:\n\n%\\Vign",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 4,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012062.html"
     },
     {
       "id": "msg-3d9adb38684d",
@@ -842,7 +882,8 @@
       "body_snippet": "Hi, Nicholas:\n\n\nThanks very much. I see it now and fixed it.\n\n\n(I should have grepped for it in the vignette's folder, but I didn't \nthink to do that before I posted the question.)\n\n\nSpencer Graves\n\n\n",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 5,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012063.html"
     },
     {
       "id": "msg-044352cba5ac",
@@ -862,7 +903,8 @@
       "body_snippet": "On 2025-10-14 5:16 a.m., Chris Black wrote:\n> \n> \n>> On Oct 14, 2025, at 1:38?AM, Georgi Boshnakov <georgi.boshnakov at manchester.ac.uk> wrote:\n>>\n>> So, you can't access them with the '::' operator,",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012064.html"
     },
     {
       "id": "msg-ff081e8d6ba6",
@@ -883,7 +925,8 @@
       "body_snippet": "Thanks, Duncan.\n\n\nThis is the first package I've created trying to follow Wickham and \nBryan, R Packages, including using roxygen2. That DESCRIPTION file \nincludes \"LazyData: true\". I don't remember i",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 4,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012065.html"
     },
     {
       "id": "msg-687d7f078f75",
@@ -905,7 +948,8 @@
       "body_snippet": "Yes, the rules for visibility of objects in the `data` directory are \nsomewhat strange, but they are documented in \"Writing R Extensions\", \nsection 1.1.6.  They're also summarized here: \nhttps://stack",
       "thread_id": "thread-010bb2681a1a",
       "thread_depth": 5,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012066.html"
     },
     {
       "id": "msg-e137ca244deb",
@@ -921,7 +965,8 @@
       "body_snippet": "Dear All,\n\n\nI have recently submitted a Go using Package to CRAN and it was\narchived (i have yet to receive the rejection email).\n\nI have anticipated the warnings (at least on Unix) and made comments\n",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012067.html"
     },
     {
       "id": "msg-abbf88334c21",
@@ -939,7 +984,8 @@
       "body_snippet": "Sounkou,\n\nas usual, you should start with the instructions in \"External Libraries for CRAN packages\"[1] which really boils down to sending an e-mail to CRAN and CCing me and Uwe. That is assuming that",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012068.html"
     },
     {
       "id": "msg-1d356e6de317",
@@ -958,7 +1004,8 @@
       "body_snippet": "Dear Simon,\n\nThank you for this information. I will be reworking my package to use an\nexternal statically linked executable and therefore only require a basic go\ninstallation. I shall send as you said",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012069.html"
     },
     {
       "id": "msg-e1ab72862322",
@@ -978,7 +1025,8 @@
       "body_snippet": "On 10/19/25 15:29, Sounkou Mahamane Toure wrote:\n> Dear Simon,\n>\n> Thank you for this information. I will be reworking my package to use an\n> external statically linked executable and therefore only r",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012070.html"
     },
     {
       "id": "msg-94e0baa070bf",
@@ -996,7 +1044,8 @@
       "body_snippet": "Hi Sounkou,\n\nI will briefly share the journey of adbcsnowfake, which I submitted to \nCRAN at one point. The CRAN team was kind to help me through the \nprocess; however, I was unable to resolve an issu",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012071.html"
     },
     {
       "id": "msg-66b1628bb08a",
@@ -1015,7 +1064,8 @@
       "body_snippet": "> I had to do this to keep the tarball under 5 MB\n\nNot widely advertised, but this limit was recently increased; \"Source\npackage tarballs should if possible not exceed 10MB.\" (\nhttps://cran.r-project.",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 2,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012072.html"
     },
     {
       "id": "msg-329b7a171ad1",
@@ -1035,7 +1085,8 @@
       "body_snippet": "Thanks Simon, Thomas, Dewey and Henrik for the helpful information and\nfeedback !\n\nGiven the restrictions on the go side for the c-shared mode and the fact\nthat the plugin system that would allow load",
       "thread_id": "thread-e137ca244deb",
       "thread_depth": 3,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012073.html"
     },
     {
       "id": "msg-c47d27b179a8",
@@ -1051,7 +1102,8 @@
       "body_snippet": "Dear all,\n\nI wanted to share a tool revdeprun that I built over the weekend. It might be useful if you maintain R packages with many reverse dependencies.\n\nIf you ever needed to run revdepcheck on a d",
       "thread_id": "thread-c47d27b179a8",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012074.html"
     },
     {
       "id": "msg-64c7a5d793ca",
@@ -1069,7 +1121,8 @@
       "body_snippet": ">>>>> Nan Xiao \n>>>>>     on Mon, 27 Oct 2025 23:07:59 -0400 writes:\n\n    > Dear all,\n    > I wanted to share a tool revdeprun that I built over the weekend. It might be useful if you maintain R packa",
       "thread_id": "thread-c47d27b179a8",
       "thread_depth": 1,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2025q4/012075.html"
     }
   ],
   "threads": [

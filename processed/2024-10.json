@@ -21,7 +21,8 @@
       "body_snippet": "On 9/26/24 23:48, Murray Efford via R-package-devel wrote:\n\n> I am tossing up between (i) appealing to CRAN to allow the submission through with NOTEs until it feels safe to remove the functions with ",
       "thread_id": "thread-794deac68953",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011120.html"
     },
     {
       "id": "msg-980e176a5025",
@@ -39,7 +40,8 @@
       "body_snippet": "Hi Yu and welcome to R-package-devel! You're now part of the team as\nwell.\n\n? Mon, 30 Sep 2024 21:30:44 -0400\nYu Yang <yuyang.stat at gmail.com> ?????:\n\n>   I recently updated my package ?glmtlp? to m",
       "thread_id": "thread-980e176a5025",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011122.html"
     },
     {
       "id": "msg-18fe02c0cf9d",
@@ -60,7 +62,8 @@
       "body_snippet": "? Tue, 1 Oct 2024 09:00:24 +0200\nJan van der Laan <eoos at dds.nl> ?????:\n\n> S3method(esa, plot, esaplotmethod)\n> \n> To register `esaplotmethod` as the method that is called when using \n> `esa` with a",
       "thread_id": "thread-18fe02c0cf9d",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011123.html"
     },
     {
       "id": "msg-1bfff183e4be",
@@ -82,7 +85,8 @@
       "body_snippet": "Almost too good to be true: with this in my NAMESPACE\n\nexport (esa.plot)\nS3method(esa,plot)\n\nit seems I can deprecate esa.plot by the usual route (calling .Deprecated and passing call through to the n",
       "thread_id": "thread-18fe02c0cf9d",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011124.html"
     },
     {
       "id": "msg-8fbf6c03bd8b",
@@ -101,7 +105,8 @@
       "body_snippet": "Hi Ivan, \n\n  Thank you so much for your help! I have fixed the issue following your advice!\n\n  May you have a great day!\n\nBest,\nYu\n\n\n> On Oct 1, 2024, at 6:39?AM, Ivan Krylov <ikrylov at disroot.org> ",
       "thread_id": "thread-980e176a5025",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011125.html"
     },
     {
       "id": "msg-9960cf4951ef",
@@ -113,11 +118,12 @@
       "subject_clean": "[R-pkg-devel] Question about examples/tests run-time",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Hello,\n\nI am hoping this is the correct way to pose a question about my submission, which I can?t seem to fix 2 NOTES for.  They are related to run time:\nFlavor: r-devel-windows-x86_64\nCheck: examples, Result: NOTE\nExamples with CPU (user + system) or elapsed time > 10s\n           user system elapsed\ncountTree 17.66   0.13   17.78\nestTree   17.52   0.02   17.54\nwmmTree   15.70   0.02   15.72\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: examples, Result: NOTE\nExamples with CPU (user + system) or elapsed time > 5s\n            user system elapsed\ncountTree 14.218  0.077  14.401\nwmmTree   14.049  0.028  14.086\nestTree   14.046  0.012  14.066\n\nThe package enables easy implementation of a sampling method for population size estimation on a highly correlated tree - since it?s sequentially sampled, it?s expected to run long compared to other functionality, even on smaller examples. \nI have added many layers to try to shorten examples and tests, including ?donttest?, ?dontrun?, ?if (interactive())?, and reducing toy examples to what I believe is the smallest they can be to still demonstrate utility.  I also included the ?skip_on_cran()? function in tests which run longer.\n\nDoes anyone else have any ideas on how I can eliminate these notes?\n\nAny help is very much appreciated!!\nThank you!",
-      "body_snippet": "Hello,\n\nI am hoping this is the correct way to pose a question about my submission, which I can?t seem to fix 2 NOTES for.  They are related to run time:\nFlavor: r-devel-windows-x86_64\nCheck: examples",
+      "body_plain": "Hello,\n\nI am hoping this is the correct way to pose a question about my submission, which I can’t seem to fix 2 NOTES for.  They are related to run time:\nFlavor: r-devel-windows-x86_64\nCheck: examples, Result: NOTE\nExamples with CPU (user + system) or elapsed time > 10s\n           user system elapsed\ncountTree 17.66   0.13   17.78\nestTree   17.52   0.02   17.54\nwmmTree   15.70   0.02   15.72\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: examples, Result: NOTE\nExamples with CPU (user + system) or elapsed time > 5s\n            user system elapsed\ncountTree 14.218  0.077  14.401\nwmmTree   14.049  0.028  14.086\nestTree   14.046  0.012  14.066\n\nThe package enables easy implementation of a sampling method for population size estimation on a highly correlated tree - since it’s sequentially sampled, it’s expected to run long compared to other functionality, even on smaller examples. \nI have added many layers to try to shorten examples and tests, including “donttest”, “dontrun”, “if (interactive())”, and reducing toy examples to what I believe is the smallest they can be to still demonstrate utility.  I also included the “skip_on_cran()” function in tests which run longer.\n\nDoes anyone else have any ideas on how I can eliminate these notes?\n\nAny help is very much appreciated!!\nThank you!",
+      "body_snippet": "Hello,\n\nI am hoping this is the correct way to pose a question about my submission, which I can’t seem to fix 2 NOTES for.  They are related to run time:\nFlavor: r-devel-windows-x86_64\nCheck: examples",
       "thread_id": "thread-9960cf4951ef",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011126.html"
     },
     {
       "id": "msg-c096028b7ada",
@@ -133,7 +139,8 @@
       "body_snippet": "How I can solve this NOTES:\n\n\n* checking CRAN incoming feasibility ... [3s/5s] NOTE\nMaintainer: ?Jaime Salvador <\njaime.salvador at ideasybits.com<mailto:jaime.salvador at ideasybits.com>>?\n\nNew submi",
       "thread_id": "thread-c096028b7ada",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011127.html"
     },
     {
       "id": "msg-53c07211779b",
@@ -147,11 +154,12 @@
       "references": [
         "<78E66F51-2437-43C6-B4CD-C6A43A8984E6@stat.ubc.ca>"
       ],
-      "body_plain": "Dear Mallory,\n\nIt would help a little bit if we know the package and we can check the\nexamples and code.\nPerhaps it can help this little explanation of when to use donttest,\ndontrun and other options:\nhttps://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples\nIf it is still too long I would leave the representative example for a\nvignette or demo (or an article if you use pkgdown) and show how to use the\ndifferent parameters of your functions in the examples.\n\nBest,\n\nOn Wed, 9 Oct 2024 at 23:04, Mallory Flynn <mallory.flynn at stat.ubc.ca>\nwrote:\n\n> Hello,\n>\n> I am hoping this is the correct way to pose a question about my\n> submission, which I can?t seem to fix 2 NOTES for.  They are related to run\n> time:\n> Flavor: r-devel-windows-x86_64\n> Check: examples, Result: NOTE\n> Examples with CPU (user + system) or elapsed time > 10s\n>            user system elapsed\n> countTree 17.66   0.13   17.78\n> estTree   17.52   0.02   17.54\n> wmmTree   15.70   0.02   15.72\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc\n> Check: examples, Result: NOTE\n> Examples with CPU (user + system) or elapsed time > 5s\n>             user system elapsed\n> countTree 14.218  0.077  14.401\n> wmmTree   14.049  0.028  14.086\n> estTree   14.046  0.012  14.066\n>\n> The package enables easy implementation of a sampling method for\n> population size estimation on a highly correlated tree - since it?s\n> sequentially sampled, it?s expected to run long compared to other\n> functionality, even on smaller examples.\n> I have added many layers to try to shorten examples and tests, including\n> ?donttest?, ?dontrun?, ?if (interactive())?, and reducing toy examples to\n> what I believe is the smallest they can be to still demonstrate utility.  I\n> also included the ?skip_on_cran()? function in tests which run longer.\n>\n> Does anyone else have any ideas on how I can eliminate these notes?\n>\n> Any help is very much appreciated!!\n> Thank you!\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear Mallory,\n\nIt would help a little bit if we know the package and we can check the\nexamples and code.\nPerhaps it can help this little explanation of when to use donttest,\ndontrun and other options:\nhttps://contributor.r-project.org/cran-cookbook/general_issues.html#structuring-of-examples\nIf it is still too long I would leave the representative example for a\nvignette or demo (or an article if you use pkgdown) and show how to use the\ndifferent parameters of your functions in the examples.\n\nBest,\n\nOn Wed, 9 Oct 2024 at 23:04, Mallory Flynn <mallory.flynn at stat.ubc.ca>\nwrote:\n\n> Hello,\n>\n> I am hoping this is the correct way to pose a question about my\n> submission, which I can’t seem to fix 2 NOTES for.  They are related to run\n> time:\n> Flavor: r-devel-windows-x86_64\n> Check: examples, Result: NOTE\n> Examples with CPU (user + system) or elapsed time > 10s\n>            user system elapsed\n> countTree 17.66   0.13   17.78\n> estTree   17.52   0.02   17.54\n> wmmTree   15.70   0.02   15.72\n>\n> Flavor: r-devel-linux-x86_64-debian-gcc\n> Check: examples, Result: NOTE\n> Examples with CPU (user + system) or elapsed time > 5s\n>             user system elapsed\n> countTree 14.218  0.077  14.401\n> wmmTree   14.049  0.028  14.086\n> estTree   14.046  0.012  14.066\n>\n> The package enables easy implementation of a sampling method for\n> population size estimation on a highly correlated tree - since it’s\n> sequentially sampled, it’s expected to run long compared to other\n> functionality, even on smaller examples.\n> I have added many layers to try to shorten examples and tests, including\n> “donttest”, “dontrun”, “if (interactive())”, and reducing toy examples to\n> what I believe is the smallest they can be to still demonstrate utility.  I\n> also included the “skip_on_cran()” function in tests which run longer.\n>\n> Does anyone else have any ideas on how I can eliminate these notes?\n>\n> Any help is very much appreciated!!\n> Thank you!\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear Mallory,\n\nIt would help a little bit if we know the package and we can check the\nexamples and code.\nPerhaps it can help this little explanation of when to use donttest,\ndontrun and other options:",
       "thread_id": "thread-9960cf4951ef",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011128.html"
     },
     {
       "id": "msg-ae7a2f491857",
@@ -169,7 +177,8 @@
       "body_snippet": "Dear Jaime Salvador,\n\nWelcome to R-package-devel!\n\n? Wed, 9 Oct 2024 20:42:24 +0000\nJaime Salvador <jaime.salvador at ideasybits.com> ?????:\n\n> New submission\n\nThis one is expected for new packages.\n\n",
       "thread_id": "thread-c096028b7ada",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011129.html"
     },
     {
       "id": "msg-c15094b431d6",
@@ -188,7 +197,8 @@
       "body_snippet": "Hi Ivan,\n\nThanks for you reply, I appreciate your help.\n\nActually, with your help, I fixex the issues :\n\n\n  *   I enclose between single quotes Redata, RXDB and DICX\n  *   I fixed the version of binar",
       "thread_id": "thread-c096028b7ada",
       "thread_depth": 2,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011130.html"
     },
     {
       "id": "msg-0ab20c7dd9a1",
@@ -208,7 +218,8 @@
       "body_snippet": "? Thu, 10 Oct 2024 13:10:39 +0000\nJaime Salvador <jaime.salvador at ideasybits.com> ?????:\n\n>   *   The \\dontrun in examples. To run the examples, we need a\n> database, the package doesn't include a s",
       "thread_id": "thread-c096028b7ada",
       "thread_depth": 3,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011131.html"
     },
     {
       "id": "msg-1cb45de464b1",
@@ -224,7 +235,8 @@
       "body_snippet": "Hi all,\nI have a new package that I submitted to CRAN, that uses rust (for reference, it's called rtiktoken and can be found here: https://github.com/DavZim/rtiktoken).\nThe submission failed as 1-2 NO",
       "thread_id": "thread-1cb45de464b1",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011132.html"
     },
     {
       "id": "msg-cdc720bccfb6",
@@ -242,7 +254,8 @@
       "body_snippet": "? Wed, 16 Oct 2024 17:38:27 +0000\nD Z <david_j_zimmermann at hotmail.com> ?????:\n\n> if [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n> ? export BUILDFLAGS=\"-j 2 --offline\"; \\\n\nThis environment variable is sp",
       "thread_id": "thread-1cb45de464b1",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011133.html"
     },
     {
       "id": "msg-8fa82091b71a",
@@ -257,11 +270,12 @@
         "<PAVPR03MB101039EE8E46028FAFFD96737D3452@PAVPR03MB10103.eurprd03.prod.outlook.com>",
         "<20241016215029.3694e8d0@Tarkus>"
       ],
-      "body_plain": "Thanks, Ivan! Yes, I would use the NOT_CRAN flag. But in the case of that\npackage, the CRAN_FLAGS are not set dynamically.\nIt would be a welcome PR to rextendr if anyone more comfortable with Make\nwould like to. The current\ntemplate Makevars is at\nhttps://github.com/extendr/rextendr/blob/main/inst/templates/cran/Makevars.\n\nDavid, it looks like you went about crafting your CRAN-compliance by\nhand?hats off! If you want to be a little more\nhands off in the future, you can check out the development version of\n{rextendr} https://extendr.github.io/rextendr/dev/reference/cran.html\nwhich provides Makevars and configure scripts that are CRAN compatible.\n\nThe general workflow for a new package would be something like:\n\nusethis::create_package()\nrextendr::use_extendr()\nrextendr::use_cran_defaults()\nrextendr::use_msrv(\"1.69\") # or whatever MSRV you have\nrextendr::vendor_pkgs()\n\nIf you, or anyone else for that matter, have additional questions, I\nrecommend joining the\nextendr discord at https://discord.gg/Mt4Kauus.\n\nFor more \"formal\" questions a GitHub discussion or issue is also welcome\nhttps://github.com/extendr/extendr/discussions\n\n\nOn Wed, Oct 16, 2024 at 11:50?AM Ivan Krylov via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> ? Wed, 16 Oct 2024 17:38:27 +0000\n> D Z <david_j_zimmermann at hotmail.com> ?????:\n>\n> > if [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n> >  export BUILDFLAGS=\"-j 2 --offline\"; \\\n>\n> This environment variable is spelled with an extra underscore:\n>\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fLIMIT_005fCORES_005f\n>\n> At least one of Josiah's packages instead relies on the user setting\n> the NOT_CRAN environment variable:\n>\n> https://github.com/extendr/b64/blob/67ff753f71676870e3b04657909050ae10ec2145/src/Makevars#L10-L28\n>\n> > Now I am wondering if there is anything that I can do about this NOTE\n> > or if I should ignore it.\n> > I did not find any reference to this in the \"Using Rust in CRAN\n> > Packages\"\n>\n> \"Not taking more than two parallel processes or threads during the CRAN\n> check\" is a more general requirement for all packages, regardless of\n> whether they use Rust. A package that uses cmake -GNinja without\n> limiting the number of compiler processes or gives the -j$(nproc)\n> argument to a Make subprocess would have received this NOTE as well.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Thanks, Ivan! Yes, I would use the NOT_CRAN flag. But in the case of that\npackage, the CRAN_FLAGS are not set dynamically.\nIt would be a welcome PR to rextendr if anyone more comfortable with Make\nwould like to. The current\ntemplate Makevars is at\nhttps://github.com/extendr/rextendr/blob/main/inst/templates/cran/Makevars.\n\nDavid, it looks like you went about crafting your CRAN-compliance by\nhand—hats off! If you want to be a little more\nhands off in the future, you can check out the development version of\n{rextendr} https://extendr.github.io/rextendr/dev/reference/cran.html\nwhich provides Makevars and configure scripts that are CRAN compatible.\n\nThe general workflow for a new package would be something like:\n\nusethis::create_package()\nrextendr::use_extendr()\nrextendr::use_cran_defaults()\nrextendr::use_msrv(\"1.69\") # or whatever MSRV you have\nrextendr::vendor_pkgs()\n\nIf you, or anyone else for that matter, have additional questions, I\nrecommend joining the\nextendr discord at https://discord.gg/Mt4Kauus.\n\nFor more \"formal\" questions a GitHub discussion or issue is also welcome\nhttps://github.com/extendr/extendr/discussions\n\n\nOn Wed, Oct 16, 2024 at 11:50 AM Ivan Krylov via R-package-devel <\nr-package-devel at r-project.org> wrote:\n\n> В Wed, 16 Oct 2024 17:38:27 +0000\n> D Z <david_j_zimmermann at hotmail.com> пишет:\n>\n> > if [ -n \"$_R_CHECK_LIMIT_CORES\" ]; then \\\n> >  export BUILDFLAGS=\"-j 2 --offline\"; \\\n>\n> This environment variable is spelled with an extra underscore:\n>\n> https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#index-_005fR_005fCHECK_005fLIMIT_005fCORES_005f\n>\n> At least one of Josiah's packages instead relies on the user setting\n> the NOT_CRAN environment variable:\n>\n> https://github.com/extendr/b64/blob/67ff753f71676870e3b04657909050ae10ec2145/src/Makevars#L10-L28\n>\n> > Now I am wondering if there is anything that I can do about this NOTE\n> > or if I should ignore it.\n> > I did not find any reference to this in the \"Using Rust in CRAN\n> > Packages\"\n>\n> \"Not taking more than two parallel processes or threads during the CRAN\n> check\" is a more general requirement for all packages, regardless of\n> whether they use Rust. A package that uses cmake -GNinja without\n> limiting the number of compiler processes or gives the -j$(nproc)\n> argument to a Make subprocess would have received this NOTE as well.\n>\n> --\n> Best regards,\n> Ivan\n>\n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Thanks, Ivan! Yes, I would use the NOT_CRAN flag. But in the case of that\npackage, the CRAN_FLAGS are not set dynamically.\nIt would be a welcome PR to rextendr if anyone more comfortable with Make\nwou",
       "thread_id": "thread-1cb45de464b1",
       "thread_depth": 2,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011134.html"
     },
     {
       "id": "msg-8cf2da36eb81",
@@ -277,7 +291,8 @@
       "body_snippet": "Apologies in advance for not providing a reproducible example, but I am \nunsure how to reproduce the below error, as it did not occur on my \nmachine.\n\nI recently submitted a package to CRAN, after whi",
       "thread_id": "thread-8cf2da36eb81",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011135.html"
     },
     {
       "id": "msg-60c28971cd03",
@@ -295,7 +310,8 @@
       "body_snippet": "See the error - that looks like a temporary issue. I'd contact CRAN or resubmit.\n\nCheers,\nSimon\n\n\n\n> On Oct 17, 2024, at 09:04, Michael Mahony <michael.mahony at cantab.net> wrote:\n> \n> \n> \n> Apologie",
       "thread_id": "thread-8cf2da36eb81",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011136.html"
     },
     {
       "id": "msg-c508705e0965",
@@ -313,7 +329,8 @@
       "body_snippet": "You should not use \"library(anything)\" in a package. You should rely on the Imports: field in the DESCRIPTION file along with importFrom() in your NAMESPACE file, or the Suggests: field in the DESCRIP",
       "thread_id": "thread-8cf2da36eb81",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011137.html"
     },
     {
       "id": "msg-4e78354846ef",
@@ -332,7 +349,8 @@
       "body_snippet": "1. I looked, and farver is not declared in your DESCRIPTION file as any \ndependency. Is it used by another package you depend on?\n\n\n2. We also see:\n\nFlavor: r-devel-linux-x86_64-debian-gcc\nCheck: DESC",
       "thread_id": "thread-8cf2da36eb81",
       "thread_depth": 2,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011138.html"
     },
     {
       "id": "msg-d4b788212dc6",
@@ -352,7 +370,8 @@
       "body_snippet": "On Thu, 17 Oct 2024 10:33:33 +0200\nUwe Ligges <ligges at statistik.tu-dortmund.de> wrote:\n\n> I looked, and farver is not declared in your DESCRIPTION file as any \n> dependency. Is it used by another p",
       "thread_id": "thread-8cf2da36eb81",
       "thread_depth": 3,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011139.html"
     },
     {
       "id": "msg-cbbcb444da19",
@@ -373,7 +392,8 @@
       "body_snippet": "Indeed, thank you, Ivan.\nThen it was a temporary hicc up on the build server and should work for \nthe resubmission of the fixed package.\n\nBest,\nUwe\n\nOn 17.10.2024 10:52, Ivan Krylov wrote:\n> On Thu, 1",
       "thread_id": "thread-8cf2da36eb81",
       "thread_depth": 4,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011140.html"
     },
     {
       "id": "msg-3b46dc5a5151",
@@ -389,7 +409,8 @@
       "body_snippet": "Hello all,\n\nMy package *WeightIt* is failing\n<https://cran.r-project.org/web/checks/check_results_WeightIt.html> the\nCRAN test on ATLAS. The failure is due\n<https://www.stats.ox.ac.uk/pub/bdr/Rblas/AT",
       "thread_id": "thread-3b46dc5a5151",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011141.html"
     },
     {
       "id": "msg-75e7d1019ec8",
@@ -401,11 +422,12 @@
       "subject_clean": "[R-pkg-devel]  *** caught segfault *** address (nil), cause 'unknown'",
       "in_reply_to": null,
       "references": [],
-      "body_plain": "Dear R packages developers,\n\nI am the maintainer of the package spNetwork. It has been removed from CRAN\nrecently because of an issue with the new compiler clang19. The error came\nfrom one of the dependencies: the package BH giving access to the boost c++\nlibrary (https://github.com/eddelbuettel/bh/issues/101).\n\nThe boost code has been updated since and I had no choice to include it\ndirectly in my own package and remove the dependency to BH because its\nmaintainer does not plan a new release before december 2024.\n\nHowever, there is a new error when I submit the package to CRAN (ubuntu\nwith clang19). The full report is here :\nhttps://win-builder.r-project.org/incoming_pretest/spNetwork_0.4.4.4_20241026_034629/specialChecks/clang19/package/00install.out\n\nThe error occurred during the installation of the package, and the message\nis not very helpful :\n\n *** caught segfault ***\naddress (nil), cause 'unknown'\n\nIt seems that the error is happening when loading a c++ module of my\npackage\n\nTraceback:\n 1: Module(module, mustStart = TRUE, where = env)\n 2: doTryCatch(return(expr), name, parentenv, handler)\n 3: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n 4: tryCatchList(expr, classes, parentenv, handlers)\n 5: tryCatch(Module(module, mustStart = TRUE, where = env), error =\nfunction(e) e)\n 6: loadModule(module = \"spatial_index_cpp\", what = TRUE, env = ns,\n loadNow = TRUE)\n\n\nIt is rather strange because I have not edited this module since the last\nversion and the package is installing correctly on other platforms. I also\ntried to validate it with rhub and it worked well even with ubuntu and\nclang19 :\nhttps://github.com/JeremyGelb/spNetwork/actions/runs/11527593888/job/32093568292\n\nDoes someone have an idea about what could be causing this error during the\ninstallation ? Any help would be highly appreciated.\n\nI have a specific branch in gihtub for this issue :\nhttps://github.com/JeremyGelb/spNetwork/tree/refs/heads/CRAN-v4.\n\nAll the best\n-- \n\n*J?r?my GELB*\nConseiller en gestion et analyse de donn?es ? l'ARTM\nDocteur en ?tudes Urbaines\n\n438 389 6398\ngelbjeremy22 at gmail.com\n\n\t[[alternative HTML version deleted]]",
+      "body_plain": "Dear R packages developers,\n\nI am the maintainer of the package spNetwork. It has been removed from CRAN\nrecently because of an issue with the new compiler clang19. The error came\nfrom one of the dependencies: the package BH giving access to the boost c++\nlibrary (https://github.com/eddelbuettel/bh/issues/101).\n\nThe boost code has been updated since and I had no choice to include it\ndirectly in my own package and remove the dependency to BH because its\nmaintainer does not plan a new release before december 2024.\n\nHowever, there is a new error when I submit the package to CRAN (ubuntu\nwith clang19). The full report is here :\nhttps://win-builder.r-project.org/incoming_pretest/spNetwork_0.4.4.4_20241026_034629/specialChecks/clang19/package/00install.out\n\nThe error occurred during the installation of the package, and the message\nis not very helpful :\n\n *** caught segfault ***\naddress (nil), cause 'unknown'\n\nIt seems that the error is happening when loading a c++ module of my\npackage\n\nTraceback:\n 1: Module(module, mustStart = TRUE, where = env)\n 2: doTryCatch(return(expr), name, parentenv, handler)\n 3: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n 4: tryCatchList(expr, classes, parentenv, handlers)\n 5: tryCatch(Module(module, mustStart = TRUE, where = env), error =\nfunction(e) e)\n 6: loadModule(module = \"spatial_index_cpp\", what = TRUE, env = ns,\n loadNow = TRUE)\n\n\nIt is rather strange because I have not edited this module since the last\nversion and the package is installing correctly on other platforms. I also\ntried to validate it with rhub and it worked well even with ubuntu and\nclang19 :\nhttps://github.com/JeremyGelb/spNetwork/actions/runs/11527593888/job/32093568292\n\nDoes someone have an idea about what could be causing this error during the\ninstallation ? Any help would be highly appreciated.\n\nI have a specific branch in gihtub for this issue :\nhttps://github.com/JeremyGelb/spNetwork/tree/refs/heads/CRAN-v4.\n\nAll the best\n-- \n\n*Jérémy GELB*\nConseiller en gestion et analyse de données à l'ARTM\nDocteur en Études Urbaines\n\n438 389 6398\ngelbjeremy22 at gmail.com\n\n\t[[alternative HTML version deleted]]",
       "body_snippet": "Dear R packages developers,\n\nI am the maintainer of the package spNetwork. It has been removed from CRAN\nrecently because of an issue with the new compiler clang19. The error came\nfrom one of the depe",
       "thread_id": "thread-75e7d1019ec8",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011142.html"
     },
     {
       "id": "msg-4b614ade067e",
@@ -421,7 +443,8 @@
       "body_snippet": "Dear R Package Developers,\nI am seeking guidance regarding a situation with my package 'chisquare'\n(version 1.1) on CRAN.\n\nCurrent situation:\n\n1. The package was submitted and (automatically) accepted",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011143.html"
     },
     {
       "id": "msg-6e55756ea513",
@@ -439,7 +462,8 @@
       "body_snippet": "On 2024-10-27 6:03 a.m., Gianmarco Alberti wrote:\n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (version 1.1) on CRAN.\n> \n> Current situation",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011144.html"
     },
     {
       "id": "msg-5bfad4990b2c",
@@ -458,7 +482,8 @@
       "body_snippet": "Dear Duncan,\n\nThank you for the straightforward guidance.\n\nMy initial query stemmed from a concern about versioning consistency - I\nthought that once using three digits (1.1.1), I would need to mainta",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 2,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011145.html"
     },
     {
       "id": "msg-44789cc07497",
@@ -478,7 +503,8 @@
       "body_snippet": "I don't think R will enforce a 3 part version just because you used it \nonce.  You might have other reasons to try to maintain versioning \nconsistency.\n\nDuncan Murdoch\n\nOn 2024-10-27 7:48 a.m., Gianma",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 3,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011146.html"
     },
     {
       "id": "msg-05262b79e888",
@@ -492,11 +518,12 @@
       "references": [
         "<CACSk52-bmXQzSBXwp+Q2jvK0ucw=_-XAt1iw3HVV=+-9PwGPRQ@mail.gmail.com>"
       ],
-      "body_plain": "? Sat, 26 Oct 2024 12:18:07 -0400\nj?r?my Gelb <gelbjeremy22 at gmail.com> ?????:\n\n>  *** caught segfault ***\n> address (nil), cause 'unknown'\n> \n> It seems that the error is happening when loading a c++ module of my\n> package\n> \n> Traceback:\n>  1: Module(module, mustStart = TRUE, where = env)\n>  2: doTryCatch(return(expr), name, parentenv, handler)\n>  3: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>  4: tryCatchList(expr, classes, parentenv, handlers)\n>  5: tryCatch(Module(module, mustStart = TRUE, where = env), error =\n> function(e) e)\n>  6: loadModule(module = \"spatial_index_cpp\", what = TRUE, env = ns,\n>  loadNow = TRUE)\n> \n> \n> It is rather strange because I have not edited this module since the\n> last version and the package is installing correctly on other\n> platforms\n\nPerplexing. The method that usually works - starting a fresh Debian\ntrixie/sid virtual machine, installing clang-19 and R\nbuild-dependencies, compiling R from source (with OR without\nCXXFLAGS=-stdlib=libc++), installing fresh dependencies from CRAN\nsource packages and running R CMD check --as-cran - did not reproduce\nthe null pointer dereference and the crash.\n\nThe compiler versions did not exactly match (current Debian testing has\nnewer clang-19 than 19.1.0 that had compiled R or 19.1.1 that compiled\nyour package), but that looks very minor.\n\nAlthough there was no crash on Windows, the Windows compilation log is\nfull of warnings about potential null pointer dereference:\n\nhttps://win-builder.r-project.org/incoming_pretest/spNetwork_0.4.4.4_20241026_034629/Windows/00install.out\n\n../inst/i/b/concept/detail/general.hpp:50:47: warning: 'this' pointer is null [-Wnonnull]\n   50 |     static void failed() { ((Model*)0)->~Model(); }\n      |                            ~~~~~~~~~~~~~~~~~~~^~\n../inst/i/b/concept/usage.hpp:20:5: note: in a call to non-static member function 'boost::concepts::usage_requirements<Model>::~usage_requirements() [with Model = boost::geometry::concepts::Box<boost::geometry::model::box<boost::geometry::model::point<double, 2, boost::geometry::cs::cartesian> > >]'\n   20 |     ~usage_requirements() { ((Model*)0)->~Model(); }\n      |     ^\n\nI see that, for example,\nboost::geometry::concepts::Box<boost::geometry::model::box>::dimension_checker::apply()\ncreates a null pointer boost::geometry::model::box * b = 0 and then\ncalls geometry::set<...>(*b, geometry::get<...>(*b)). This _could_ be a\nred herring, but class boost::geometry::model::box has member\nvariables. Could a previous version of the clang-19 compiler have\nfailed to elide member variable access in this call for some reason?\n(According to the standard, having a null `this` pointer is always\nundefined behaviour, so the compiler would not be exactly wrong to make\nthe application crash if this code is ever reached.)\n\n-- \nBest regards,\nIvan",
-      "body_snippet": "? Sat, 26 Oct 2024 12:18:07 -0400\nj?r?my Gelb <gelbjeremy22 at gmail.com> ?????:\n\n>  *** caught segfault ***\n> address (nil), cause 'unknown'\n> \n> It seems that the error is happening when loading a c",
+      "body_plain": "В Sat, 26 Oct 2024 12:18:07 -0400\njérémy Gelb <gelbjeremy22 at gmail.com> пише?:\n\n>  *** caught segfault ***\n> address (nil), cause 'unknown'\n> \n> It seems that the error is happening when loading a c++ module of my\n> package\n> \n> Traceback:\n>  1: Module(module, mustStart = TRUE, where = env)\n>  2: doTryCatch(return(expr), name, parentenv, handler)\n>  3: tryCatchOne(expr, names, parentenv, handlers[[1L]])\n>  4: tryCatchList(expr, classes, parentenv, handlers)\n>  5: tryCatch(Module(module, mustStart = TRUE, where = env), error =\n> function(e) e)\n>  6: loadModule(module = \"spatial_index_cpp\", what = TRUE, env = ns,\n>  loadNow = TRUE)\n> \n> \n> It is rather strange because I have not edited this module since the\n> last version and the package is installing correctly on other\n> platforms\n\nPerplexing. The method that usually works - starting a fresh Debian\ntrixie/sid virtual machine, installing clang-19 and R\nbuild-dependencies, compiling R from source (with OR without\nCXXFLAGS=-stdlib=libc++), installing fresh dependencies from CRAN\nsource packages and running R CMD check --as-cran - did not reproduce\nthe null pointer dereference and the crash.\n\nThe compiler versions did not exactly match (current Debian testing has\nnewer clang-19 than 19.1.0 that had compiled R or 19.1.1 that compiled\nyour package), but that looks very minor.\n\nAlthough there was no crash on Windows, the Windows compilation log is\nfull of warnings about potential null pointer dereference:\n\nhttps://win-builder.r-project.org/incoming_pretest/spNetwork_0.4.4.4_20241026_034629/Windows/00install.out\n\n../inst/i/b/concept/detail/general.hpp:50:47: warning: 'this' pointer is null [-Wnonnull]\n   50 |     static void failed() { ((Model*)0)->~Model(); }\n      |                            ~~~~~~~~~~~~~~~~~~~^~\n../inst/i/b/concept/usage.hpp:20:5: note: in a call to non-static member function 'boost::concepts::usage_requirements<Model>::~usage_requirements() [with Model = boost::geometry::concepts::Box<boost::geometry::model::box<boost::geometry::model::point<double, 2, boost::geometry::cs::cartesian> > >]'\n   20 |     ~usage_requirements() { ((Model*)0)->~Model(); }\n      |     ^\n\nI see that, for example,\nboost::geometry::concepts::Box<boost::geometry::model::box>::dimension_checker::apply()\ncreates a null pointer boost::geometry::model::box * b = 0 and then\ncalls geometry::set<...>(*b, geometry::get<...>(*b)). This _could_ be a\nred herring, but class boost::geometry::model::box has member\nvariables. Could a previous version of the clang-19 compiler have\nfailed to elide member variable access in this call for some reason?\n(According to the standard, having a null `this` pointer is always\nundefined behaviour, so the compiler would not be exactly wrong to make\nthe application crash if this code is ever reached.)\n\n-- \nBest regards,\nIvan",
+      "body_snippet": "В Sat, 26 Oct 2024 12:18:07 -0400\njérémy Gelb <gelbjeremy22 at gmail.com> пише?:\n\n>  *** caught segfault ***\n> address (nil), cause 'unknown'\n> \n> It seems that the error is happening when loading a c",
       "thread_id": "thread-75e7d1019ec8",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011147.html"
     },
     {
       "id": "msg-d3eeb637b193",
@@ -517,7 +544,8 @@
       "body_snippet": "`R CMD check` uses the `package_version()` function to check that the\nsubmitted package version is > the version on CRAN. You can use it to\ncheck Duncan's hypothesis:\n\nR$ # current update with 3-part ",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 4,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011148.html"
     },
     {
       "id": "msg-5a043c48085b",
@@ -539,7 +567,8 @@
       "body_snippet": "Also, v1.1 = v1.1.0:\n\n>  package_version(\"1.1.0\") > package_version(\"1.1\")\n[1] FALSE\n>  package_version(\"1.1.0\") == package_version(\"1.1\")\n[1] TRUE\n\nIf you adopt the 2-digit versions but decide to kee",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 5,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011149.html"
     },
     {
       "id": "msg-21872f15c026",
@@ -562,7 +591,8 @@
       "body_snippet": "On 2024-10-28 12:56 p.m., Georgi Boshnakov wrote:\n> Also, v1.1 = v1.1.0:\n> \n>>   package_version(\"1.1.0\") > package_version(\"1.1\")\n> [1] FALSE\n>>   package_version(\"1.1.0\") == package_version(\"1.1\")\n>",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 6,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011150.html"
     },
     {
       "id": "msg-33dc128d2f28",
@@ -576,11 +606,12 @@
       "references": [
         "<CAMQoV_oo3ry2ZAsLDRMRASM9LE9ciOOy8a9W-Ykj9269gh=Bgg@mail.gmail.com>"
       ],
-      "body_plain": "> On 27 Oct 2024, at 23:03, Gianmarco Alberti <gianmarcoalberti at gmail.com> wrote:\n> \n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (version 1.1) on CRAN.\n> \n> Current situation:\n> \n> 1. The package was submitted and (automatically) accepted to CRAN (version\n> 1.1) after thorough local testing and complete devtools checks\n> (check_win_oldrelease(), check_win_release(), check_win_devel())\n> \n> 2. After acceptance, I received a request to make formatting changes to the\n> DESCRIPTION file by November 2, 2024:\n> -Remove version specifications for graphics and stats in Imports\n> -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> \n> 3. Upon attempting to submit these formatting changes, I received a warning\n> about \"Insufficient package version (submitted: 1.1, existing: 1.1)\". I am\n> well aware that this warning typically indicates the need to increment the\n> version number for new submissions of existing packages, as per CRAN\n> policies.\n> \n> This creates a procedural challenge:\n> -I need to make the requested DESCRIPTION file changes to retain the package\n> -The changes are purely formatting-related, not functional (all checks pass)\n> -I cannot submit without changing the version number\n> -However, incrementing the version number seems disproportionate for\n> formatting changes.\n> \n\n\nBut it is not. ANY change requires a version bump. You cannot have two files with different content yet the same version - the whole point of version is to uniquely identify content. Whether the change is just cosmetic or not is irrelevant (in your case it is actually functional so not even a question). As Rob Gentleman is fond of saying, version numbers are cheap ;). In your case I?d just use 1.1-1 (see semantic versioning which is highly recommended to follow)\n\nCheers,\nSimon\n\n\n\n> I would greatly appreciate guidance on the proper way to handle this\n> situation.\n> What is the recommended approach for submitting DESCRIPTION file formatting\n> corrections for an already-accepted package, given that incrementing the\n> version number might seem a bit disproportionate?\n> \n> Thank you for your time and assistance.\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
+      "body_plain": "> On 27 Oct 2024, at 23:03, Gianmarco Alberti <gianmarcoalberti at gmail.com> wrote:\n> \n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (version 1.1) on CRAN.\n> \n> Current situation:\n> \n> 1. The package was submitted and (automatically) accepted to CRAN (version\n> 1.1) after thorough local testing and complete devtools checks\n> (check_win_oldrelease(), check_win_release(), check_win_devel())\n> \n> 2. After acceptance, I received a request to make formatting changes to the\n> DESCRIPTION file by November 2, 2024:\n> -Remove version specifications for graphics and stats in Imports\n> -Update R version dependency format from R (>= 4.0.0) to R (>= 4.0)\n> \n> 3. Upon attempting to submit these formatting changes, I received a warning\n> about \"Insufficient package version (submitted: 1.1, existing: 1.1)\". I am\n> well aware that this warning typically indicates the need to increment the\n> version number for new submissions of existing packages, as per CRAN\n> policies.\n> \n> This creates a procedural challenge:\n> -I need to make the requested DESCRIPTION file changes to retain the package\n> -The changes are purely formatting-related, not functional (all checks pass)\n> -I cannot submit without changing the version number\n> -However, incrementing the version number seems disproportionate for\n> formatting changes.\n> \n\n\nBut it is not. ANY change requires a version bump. You cannot have two files with different content yet the same version - the whole point of version is to uniquely identify content. Whether the change is just cosmetic or not is irrelevant (in your case it is actually functional so not even a question). As Rob Gentleman is fond of saying, version numbers are cheap ;). In your case I’d just use 1.1-1 (see semantic versioning which is highly recommended to follow)\n\nCheers,\nSimon\n\n\n\n> I would greatly appreciate guidance on the proper way to handle this\n> situation.\n> What is the recommended approach for submitting DESCRIPTION file formatting\n> corrections for an already-accepted package, given that incrementing the\n> version number might seem a bit disproportionate?\n> \n> Thank you for your time and assistance.\n> \n> [[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>",
       "body_snippet": "> On 27 Oct 2024, at 23:03, Gianmarco Alberti <gianmarcoalberti at gmail.com> wrote:\n> \n> Dear R Package Developers,\n> I am seeking guidance regarding a situation with my package 'chisquare'\n> (versio",
       "thread_id": "thread-4b614ade067e",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011151.html"
     },
     {
       "id": "msg-c16b4621f76c",
@@ -596,7 +627,8 @@
       "body_snippet": "Dear friends,\n\nI received clang-san error messages for all vignettes that include ggplot2\nfigures when submitting an R package to CRAN. Please see below for an\nexample.\n\nHow can I resolve this problem",
       "thread_id": "thread-c16b4621f76c",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011152.html"
     },
     {
       "id": "msg-01478773e787",
@@ -614,7 +646,8 @@
       "body_snippet": "Can you tell us more about/point us to the code for the plots that are\ntriggering these errors? (eg, are you using unusual fonts or other\nsettings?)\n\nOn Tue, Oct 29, 2024, 10:22 PM Kaifeng Lu <kaifeng",
       "thread_id": "thread-c16b4621f76c",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011153.html"
     },
     {
       "id": "msg-4e23bc2b0021",
@@ -632,7 +665,8 @@
       "body_snippet": "? Tue, 29 Oct 2024 22:21:16 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n>   ==1429888==ERROR: LeakSanitizer: detected memory leaks\n> \n>   Direct leak of 7680 byte(s) in 12 object(s) allocated fr",
       "thread_id": "thread-c16b4621f76c",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011154.html"
     },
     {
       "id": "msg-9c812ddd198d",
@@ -648,7 +682,8 @@
       "body_snippet": "Dear friends,\n\nI received the following warning messages related to functions from the\nsurvival package. I didn't directly use the functions mentioned below:\ncoxph_wtest, agsurv5, survdiff2, and coxma",
       "thread_id": "thread-9c812ddd198d",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011155.html"
     },
     {
       "id": "msg-a8d6984c572a",
@@ -666,7 +701,8 @@
       "body_snippet": "? Thu, 31 Oct 2024 12:06:25 -0400\nKaifeng Lu <kaifenglu at gmail.com> ?????:\n\n>   /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime error: call to\n> function coxph_wtest through pointer to incorre",
       "thread_id": "thread-9c812ddd198d",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011156.html"
     },
     {
       "id": "msg-00780e87d8e2",
@@ -685,7 +721,8 @@
       "body_snippet": "On 10/31/24 17:39, Ivan Krylov via R-package-devel wrote:\n> ? Thu, 31 Oct 2024 12:06:25 -0400\n> Kaifeng Lu <kaifenglu at gmail.com> ?????:\n>\n>>    /home/hornik/src/R/src/main/dotcode.c:1978:2: runtime",
       "thread_id": "thread-9c812ddd198d",
       "thread_depth": 2,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011157.html"
     },
     {
       "id": "msg-e01e92d301f4",
@@ -701,7 +738,8 @@
       "body_snippet": "Dear list,\n\nI'm trying to submit an updated version of R package scoringutils to CRAN (https://github.com/epiforecasts/scoringutils). I built the package using `R CMD build` with Roxygen2 7.3.2 both o",
       "thread_id": "thread-e01e92d301f4",
       "thread_depth": 0,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011158.html"
     },
     {
       "id": "msg-463a22f483e5",
@@ -719,7 +757,8 @@
       "body_snippet": "? Thu, 31 Oct 2024 18:04:47 +0100\nNikos Bosse <nikosbosse at gmail.com> ?????:\n\n> ?Found the following HTML validation problems:\n> ?ae_median_quantile.html:79:1 (ae_median_quantile.Rd:41): Warning:\n> ",
       "thread_id": "thread-e01e92d301f4",
       "thread_depth": 1,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011159.html"
     },
     {
       "id": "msg-553e5163a354",
@@ -739,7 +778,8 @@
       "body_snippet": "On Thu, 31 Oct 2024 17:59:01 +0100\nTomas Kalibera <tomas.kalibera at gmail.com> wrote:\n\n> for now, if you know an elegant, minimal way how to suppress\n> this, and have the time and energy, a patch wou",
       "thread_id": "thread-9c812ddd198d",
       "thread_depth": 3,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011160.html"
     },
     {
       "id": "msg-ae7555797502",
@@ -758,7 +798,8 @@
       "body_snippet": "Hi Ivan,\n\nThanks SO much for your quick help. Removing the <div> did not work. However, I now did\n\n```\n#' \\if{html}{\n#'? ?\\out{<div style=\"text-align: left\">}\n#'? ?\\figure{metrics-binary-point.png}{op",
       "thread_id": "thread-e01e92d301f4",
       "thread_depth": 2,
-      "month": "2024-10"
+      "month": "2024-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2024q4/011161.html"
     }
   ],
   "threads": [
