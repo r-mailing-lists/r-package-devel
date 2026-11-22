@@ -1913,3 +1913,35 @@ Best regards,
 Tyler Morgan-Wall
 
 
+From jepu@to @end|ng |rom gm@||@com  Sat Nov 21 19:27:48 2026
+From: jepu@to @end|ng |rom gm@||@com (James Pustejovsky)
+Date: Sat, 21 Nov 2026 12:27:48 -0600
+Subject: [R-pkg-devel] MKL build on CRAN
+Message-ID: <CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>
+
+Dear all,
+
+Does anyone have a suggestion for reproducing CRAN's MKL checks?
+
+For package lmeInfo, we have been using rhub to run our test suite on their
+MKL container (https://r-hub.github.io/containers/containers.html#mkl),
+both via the rhub package and as a stand-alone Github Action. Our own tests
+all pass but CRAN's MKL check does not.
+
+CRAN's check result:
+https://www.stats.ox.ac.uk/pub/bdr/Rblas/MKL/lmeInfo.out
+Our Github Action:
+https://github.com/jepusto/lmeInfo/actions/runs/44632278268/job/135941754981
+Our rhub check:
+https://github.com/jepusto/lmeInfo/actions/runs/44327151448/job/134881510957
+
+We know how to fix the unit tests. We're just struggling to figure out how
+to validate that our corrections will pass. Thanks for any suggestions
+offered!
+
+Kind Regards,
+James
+
+	[[alternative HTML version deleted]]
+
+
