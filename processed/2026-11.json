@@ -111,6 +111,42 @@
       "thread_depth": 0,
       "month": "2026-11",
       "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012601.html"
+    },
+    {
+      "id": "msg-ea52d7ed4609",
+      "message_id": "<SY9PR01MB9897E026AB43395910A3FDD5AC432@SY9PR01MB9897.ausprd01.prod.outlook.com>",
+      "from_name": "Murray Efford",
+      "from_email_hash": "82bfe0c72bb61f0f38c9ced4d7d6ebe1e213c779150a721c41da24aa8495d9a0",
+      "date": "2026-11-25T02:09:50Z",
+      "subject": "[R-pkg-devel] Follow-up: Check time > 10min (secr)",
+      "subject_clean": "[R-pkg-devel] Follow-up: Check time > 10min (secr)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Last June I asked here why secr's Windows pre-test overran 10 minutes when the listed steps summed to far less (https://www.mail-archive.com/r-package-devel at r-project.org/msg10774.html). Replies pointed out that Windows does not itemise installation time, which was the missing piece. Thanks to Sebastian Meyer and Joshua Ulrich for that. A report of what fixed it in the end may help others.\nFor secr 5.6.1, winbuilder R-devel gave installation 312 s and check time 905 s (before the changes below). Two changes made the difference.\n1. Combining the C++ files. Each of 21 files took about 3 s to compile regardless of size, because each re-parsed the same headers (Rcpp, RcppParallel, 7 Boost distributions: about 2.6 s of the 3 s). Merging them into one .cpp file cut local install from 107 s to 41 s, and winbuilder installation from 312 s to 84-90 s, check time to 590-649 s. A single file compiled in about 9 s against 65 s for the separate files. I merged into one file rather than a wrapper that #includes the others or a subfolder, because Rcpp::compileAttributes() scans only top-level src/*.cpp and would otherwise lose the exports. -pedantic made no difference to install time.\n2. Not importing terra and raster. Every check step that loads the package pays the load time, and on the Windows pre-test machine each load took about 11 s. Loading secr took 2.9 s locally, of which about 2 s was terra and raster. Moving both to Suggests and registering my S4 methods when they are loaded (via setHook(packageEvent(...)), with the methods stored in a private environment, because the namespace is locked) cut that to 0.9 s. Note that raster imports terra, so one without the other saves nothing. On Winbuilder now: installation 58 s and check time 384 s.\nThe cost is a small API change (users must load raster or terra before calling raster(mask)).\nI did this work with the help of Claude (Anthropic's AI assistant), which carried out the timing measurements and drafted the code changes; I reviewed, tested and take responsibility for the results.\nMurray Efford\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Last June I asked here why secr's Windows pre-test overran 10 minutes when the listed steps summed to far less (https://www.mail-archive.com/r-package-devel at r-project.org/msg10774.html). Replies po",
+      "thread_id": "thread-ea52d7ed4609",
+      "thread_depth": 0,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012602.html"
+    },
+    {
+      "id": "msg-438d58df00e6",
+      "message_id": "<ed385404-0d22-40e6-baf0-c15110d811f2@R-project.org>",
+      "from_name": "Simon Urbanek",
+      "from_email_hash": "0f7a36ede18d495e19236834ee83f5b20722f5d7cec3588576a59851b948b51a",
+      "date": "2026-11-25T04:40:55Z",
+      "subject": "[R-pkg-devel] MKL build on CRAN",
+      "subject_clean": "[R-pkg-devel] MKL build on CRAN",
+      "in_reply_to": "<CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>",
+      "references": [
+        "<CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>"
+      ],
+      "body_plain": "James,\n\nhave a look at\n\nhttps://github.com/coatless/docker-r-check\n\nif that helps - it's a set of containers that replicate Linux CRAN \nchecks as close as possible with Docker (many thanks to JJB!).\n\nCheers,\nSimon\n\n\n\nOn 22 Nov 2026, at 07:27, James Pustejovsky <jepusto at gmail.com> wrote:\n> Dear all,\n> \n> Does anyone have a suggestion for reproducing CRAN's MKL checks?\n> \n> For package lmeInfo, we have been using rhub to run our test suite on \n> their\n> MKL container \n> (https://r-hub.github.io/containers/containers.html#mkl),\n> both via the rhub package and as a stand-alone Github Action. Our own \n> tests\n> all pass but CRAN's MKL check does not.\n> \n> CRAN's check result:\n> https://www.stats.ox.ac.uk/pub/bdr/Rblas/MKL/lmeInfo.out\n> Our Github Action:\n> https://github.com/jepusto/lmeInfo/actions/runs/44632278268/job/135941754981\n> Our rhub check:\n> https://github.com/jepusto/lmeInfo/actions/runs/44327151448/job/134881510957\n> \n> We know how to fix the unit tests. We're just struggling to figure out \n> how\n> to validate that our corrections will pass. Thanks for any suggestions\n> offered!\n> \n> Kind Regards,\n> James\n> \n> \t[[alternative HTML version deleted]]\n> \n> ______________________________________________\n> R-package-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-package-devel",
+      "body_snippet": "James,\n\nhave a look at\n\nhttps://github.com/coatless/docker-r-check\n\nif that helps - it's a set of containers that replicate Linux CRAN \nchecks as close as possible with Docker (many thanks to JJB!).\n\n",
+      "thread_id": "thread-45e79d0e5482",
+      "thread_depth": 1,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012603.html"
     }
   ],
   "threads": [
@@ -141,13 +177,25 @@
     {
       "id": "thread-45e79d0e5482",
       "subject": "[R-pkg-devel] MKL build on CRAN",
-      "message_count": 1,
+      "message_count": 2,
       "participants": [
-        "James Pustejovsky"
+        "James Pustejovsky",
+        "Simon Urbanek"
       ],
       "started": "2026-11-21T18:27:48Z",
-      "last_reply": "2026-11-21T18:27:48Z",
+      "last_reply": "2026-11-25T04:40:55Z",
       "root_message_id": "msg-45e79d0e5482"
+    },
+    {
+      "id": "thread-ea52d7ed4609",
+      "subject": "[R-pkg-devel] Follow-up: Check time > 10min (secr)",
+      "message_count": 1,
+      "participants": [
+        "Murray Efford"
+      ],
+      "started": "2026-11-25T02:09:50Z",
+      "last_reply": "2026-11-25T02:09:50Z",
+      "root_message_id": "msg-ea52d7ed4609"
     }
   ]
 }

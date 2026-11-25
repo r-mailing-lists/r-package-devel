@@ -1945,3 +1945,78 @@ James
 	[[alternative HTML version deleted]]
 
 
+From murr@y@e||ord @end|ng |rom ot@go@@c@nz  Wed Nov 25 03:09:50 2026
+From: murr@y@e||ord @end|ng |rom ot@go@@c@nz (Murray Efford)
+Date: Wed, 25 Nov 2026 02:09:50 +0000
+Subject: [R-pkg-devel] Follow-up: Check time > 10min (secr)
+Message-ID: <SY9PR01MB9897E026AB43395910A3FDD5AC432@SY9PR01MB9897.ausprd01.prod.outlook.com>
+
+Last June I asked here why secr's Windows pre-test overran 10 minutes when the listed steps summed to far less (https://www.mail-archive.com/r-package-devel at r-project.org/msg10774.html). Replies pointed out that Windows does not itemise installation time, which was the missing piece. Thanks to Sebastian Meyer and Joshua Ulrich for that. A report of what fixed it in the end may help others.
+For secr 5.6.1, winbuilder R-devel gave installation 312 s and check time 905 s (before the changes below). Two changes made the difference.
+1. Combining the C++ files. Each of 21 files took about 3 s to compile regardless of size, because each re-parsed the same headers (Rcpp, RcppParallel, 7 Boost distributions: about 2.6 s of the 3 s). Merging them into one .cpp file cut local install from 107 s to 41 s, and winbuilder installation from 312 s to 84-90 s, check time to 590-649 s. A single file compiled in about 9 s against 65 s for the separate files. I merged into one file rather than a wrapper that #includes the others or a subfolder, because Rcpp::compileAttributes() scans only top-level src/*.cpp and would otherwise lose the exports. -pedantic made no difference to install time.
+2. Not importing terra and raster. Every check step that loads the package pays the load time, and on the Windows pre-test machine each load took about 11 s. Loading secr took 2.9 s locally, of which about 2 s was terra and raster. Moving both to Suggests and registering my S4 methods when they are loaded (via setHook(packageEvent(...)), with the methods stored in a private environment, because the namespace is locked) cut that to 0.9 s. Note that raster imports terra, so one without the other saves nothing. On Winbuilder now: installation 58 s and check time 384 s.
+The cost is a small API change (users must load raster or terra before calling raster(mask)).
+I did this work with the help of Claude (Anthropic's AI assistant), which carried out the timing measurements and drafted the code changes; I reviewed, tested and take responsibility for the results.
+Murray Efford
+
+
+	[[alternative HTML version deleted]]
+
+
+From @|mon@urb@nek @end|ng |rom R-project@org  Wed Nov 25 05:40:55 2026
+From: @|mon@urb@nek @end|ng |rom R-project@org (Simon Urbanek)
+Date: Wed, 25 Nov 2026 17:40:55 +1300
+Subject: [R-pkg-devel] MKL build on CRAN
+In-Reply-To: <CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>
+References: <CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>
+Message-ID: <ed385404-0d22-40e6-baf0-c15110d811f2@R-project.org>
+
+James,
+
+have a look at
+
+https://github.com/coatless/docker-r-check
+
+if that helps - it's a set of containers that replicate Linux CRAN 
+checks as close as possible with Docker (many thanks to JJB!).
+
+Cheers,
+Simon
+
+
+
+On 22 Nov 2026, at 07:27, James Pustejovsky <jepusto at gmail.com> wrote:
+> Dear all,
+> 
+> Does anyone have a suggestion for reproducing CRAN's MKL checks?
+> 
+> For package lmeInfo, we have been using rhub to run our test suite on 
+> their
+> MKL container 
+> (https://r-hub.github.io/containers/containers.html#mkl),
+> both via the rhub package and as a stand-alone Github Action. Our own 
+> tests
+> all pass but CRAN's MKL check does not.
+> 
+> CRAN's check result:
+> https://www.stats.ox.ac.uk/pub/bdr/Rblas/MKL/lmeInfo.out
+> Our Github Action:
+> https://github.com/jepusto/lmeInfo/actions/runs/44632278268/job/135941754981
+> Our rhub check:
+> https://github.com/jepusto/lmeInfo/actions/runs/44327151448/job/134881510957
+> 
+> We know how to fix the unit tests. We're just struggling to figure out 
+> how
+> to validate that our corrections will pass. Thanks for any suggestions
+> offered!
+> 
+> Kind Regards,
+> James
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> ______________________________________________
+> R-package-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-package-devel
+
+
