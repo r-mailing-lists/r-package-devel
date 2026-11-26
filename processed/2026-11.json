@@ -147,6 +147,45 @@
       "thread_depth": 1,
       "month": "2026-11",
       "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012603.html"
+    },
+    {
+      "id": "msg-3cddbb49d8d8",
+      "message_id": "<CAFUVuJyupaNPx0_5TkQ3OrtW94LtnZKRwuDwD+-H8k1YOFQXXg@mail.gmail.com>",
+      "from_name": "James Pustejovsky",
+      "from_email_hash": "8e06b2f7b3c4fed4d29177cf04ef673e9a6723b661aa70c4ebd2fa8843e37a8a",
+      "date": "2026-11-25T21:43:41Z",
+      "subject": "[R-pkg-devel] MKL build on CRAN",
+      "subject_clean": "[R-pkg-devel] MKL build on CRAN",
+      "in_reply_to": "<ed385404-0d22-40e6-baf0-c15110d811f2@R-project.org>",
+      "references": [
+        "<CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>",
+        "<ed385404-0d22-40e6-baf0-c15110d811f2@R-project.org>"
+      ],
+      "body_plain": "Simon, thanks for the pointer! I will check it out.\n\nIvan, thank you for pointing out the difference in MKL builds between rhub\nand CRAN.\n\nJames\n\nOn Tue, Nov 24, 2026 at 10:41?PM Simon Urbanek <simon.urbanek at r-project.org>\nwrote:\n\n> James,\n>\n> have a look at\n>\n> https://github.com/coatless/docker-r-check\n>\n> if that helps - it's a set of containers that replicate Linux CRAN\n> checks as close as possible with Docker (many thanks to JJB!).\n>\n> Cheers,\n> Simon\n>\n>\n>\n> On 22 Nov 2026, at 07:27, James Pustejovsky <jepusto at gmail.com> wrote:\n> > Dear all,\n> >\n> > Does anyone have a suggestion for reproducing CRAN's MKL checks?\n> >\n> > For package lmeInfo, we have been using rhub to run our test suite on\n> > their\n> > MKL container\n> > (https://r-hub.github.io/containers/containers.html#mkl),\n> > both via the rhub package and as a stand-alone Github Action. Our own\n> > tests\n> > all pass but CRAN's MKL check does not.\n> >\n> > CRAN's check result:\n> > https://www.stats.ox.ac.uk/pub/bdr/Rblas/MKL/lmeInfo.out\n> > Our Github Action:\n> >\n> https://github.com/jepusto/lmeInfo/actions/runs/44632278268/job/135941754981\n> > Our rhub check:\n> >\n> https://github.com/jepusto/lmeInfo/actions/runs/44327151448/job/134881510957\n> >\n> > We know how to fix the unit tests. We're just struggling to figure out\n> > how\n> > to validate that our corrections will pass. Thanks for any suggestions\n> > offered!\n> >\n> > Kind Regards,\n> > James\n> >\n> >       [[alternative HTML version deleted]]\n> >\n> > ______________________________________________\n> > R-package-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-package-devel\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Simon, thanks for the pointer! I will check it out.\n\nIvan, thank you for pointing out the difference in MKL builds between rhub\nand CRAN.\n\nJames\n\nOn Tue, Nov 24, 2026 at 10:41?PM Simon Urbanek <simon.",
+      "thread_id": "thread-45e79d0e5482",
+      "thread_depth": 2,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012604.html"
+    },
+    {
+      "id": "msg-fe531acc71fc",
+      "message_id": "<27399.23423.695077.50533@paul.eddelbuettel.com>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "26604783910298c073ad132e77cb72b30037ddd7369ecad11e5fe08281600547",
+      "date": "2026-11-25T22:04:47Z",
+      "subject": "[R-pkg-devel] MKL build on CRAN",
+      "subject_clean": "[R-pkg-devel] MKL build on CRAN",
+      "in_reply_to": "<CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>",
+      "references": [
+        "<CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>"
+      ],
+      "body_plain": "On 21 November 2026 at 12:27, James Pustejovsky wrote:\n| We know how to fix the unit tests. We're just struggling to figure out how\n| to validate that our corrections will pass. Thanks for any suggestions\n| offered!\n\nReplication is always the first step. And for that it used to be more\ndifficult to get MKL installed -- so I once set up a GitHub repo with a\nscript at https://github.com/eddelbuettel/mkl4deb to show how to do that\nbased on the 'upstream' Intel repos for Debian / Ubuntu which (at the time)\nwere external to the distros.\n\nThis repo is now outdated. MKL is now more generally available directly for\nUbuntu (version 2020.4.304-4 and 2020.4.304-7 packaged for 24.04 and 26.04)\nand also for Debian (same 2020.4.304-7) thanks to some changes in their\nlicensing. Regardless the repo of mine still gets hits and stars...\n\nIf you prefer a local setup this is another alternative worth exploring.\nNow, as always, a possible 'delta' to the CRAN setup is always a possibly.\nSadly CRAN does not make it as easy as it could be to reproduce failings\noccurring at their end. Maybe one day we all get to collaborate on genuine\nspecs and e.g. Dockerfiles to actually pin this down for good.\n\nDirk\n\n-- \ndirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 21 November 2026 at 12:27, James Pustejovsky wrote:\n| We know how to fix the unit tests. We're just struggling to figure out how\n| to validate that our corrections will pass. Thanks for any suggest",
+      "thread_id": "thread-45e79d0e5482",
+      "thread_depth": 1,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012605.html"
     }
   ],
   "threads": [
@@ -177,13 +216,14 @@
     {
       "id": "thread-45e79d0e5482",
       "subject": "[R-pkg-devel] MKL build on CRAN",
-      "message_count": 2,
+      "message_count": 4,
       "participants": [
+        "Dirk Eddelbuettel",
         "James Pustejovsky",
         "Simon Urbanek"
       ],
       "started": "2026-11-21T18:27:48Z",
-      "last_reply": "2026-11-25T04:40:55Z",
+      "last_reply": "2026-11-25T22:04:47Z",
       "root_message_id": "msg-45e79d0e5482"
     },
     {

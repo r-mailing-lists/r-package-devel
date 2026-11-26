@@ -2020,3 +2020,113 @@ On 22 Nov 2026, at 07:27, James Pustejovsky <jepusto at gmail.com> wrote:
 > https://stat.ethz.ch/mailman/listinfo/r-package-devel
 
 
+From jepu@to @end|ng |rom gm@||@com  Wed Nov 25 22:43:41 2026
+From: jepu@to @end|ng |rom gm@||@com (James Pustejovsky)
+Date: Wed, 25 Nov 2026 15:43:41 -0600
+Subject: [R-pkg-devel] MKL build on CRAN
+In-Reply-To: <ed385404-0d22-40e6-baf0-c15110d811f2@R-project.org>
+References: <CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>
+ <ed385404-0d22-40e6-baf0-c15110d811f2@R-project.org>
+Message-ID: <CAFUVuJyupaNPx0_5TkQ3OrtW94LtnZKRwuDwD+-H8k1YOFQXXg@mail.gmail.com>
+
+Simon, thanks for the pointer! I will check it out.
+
+Ivan, thank you for pointing out the difference in MKL builds between rhub
+and CRAN.
+
+James
+
+On Tue, Nov 24, 2026 at 10:41?PM Simon Urbanek <simon.urbanek at r-project.org>
+wrote:
+
+> James,
+>
+> have a look at
+>
+> https://github.com/coatless/docker-r-check
+>
+> if that helps - it's a set of containers that replicate Linux CRAN
+> checks as close as possible with Docker (many thanks to JJB!).
+>
+> Cheers,
+> Simon
+>
+>
+>
+> On 22 Nov 2026, at 07:27, James Pustejovsky <jepusto at gmail.com> wrote:
+> > Dear all,
+> >
+> > Does anyone have a suggestion for reproducing CRAN's MKL checks?
+> >
+> > For package lmeInfo, we have been using rhub to run our test suite on
+> > their
+> > MKL container
+> > (https://r-hub.github.io/containers/containers.html#mkl),
+> > both via the rhub package and as a stand-alone Github Action. Our own
+> > tests
+> > all pass but CRAN's MKL check does not.
+> >
+> > CRAN's check result:
+> > https://www.stats.ox.ac.uk/pub/bdr/Rblas/MKL/lmeInfo.out
+> > Our Github Action:
+> >
+> https://github.com/jepusto/lmeInfo/actions/runs/44632278268/job/135941754981
+> > Our rhub check:
+> >
+> https://github.com/jepusto/lmeInfo/actions/runs/44327151448/job/134881510957
+> >
+> > We know how to fix the unit tests. We're just struggling to figure out
+> > how
+> > to validate that our corrections will pass. Thanks for any suggestions
+> > offered!
+> >
+> > Kind Regards,
+> > James
+> >
+> >       [[alternative HTML version deleted]]
+> >
+> > ______________________________________________
+> > R-package-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-package-devel
+>
+
+	[[alternative HTML version deleted]]
+
+
+From edd @end|ng |rom deb|@n@org  Wed Nov 25 23:04:47 2026
+From: edd @end|ng |rom deb|@n@org (Dirk Eddelbuettel)
+Date: Wed, 25 Nov 2026 16:04:47 -0600
+Subject: [R-pkg-devel] MKL build on CRAN
+In-Reply-To: <CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>
+References: <CAFUVuJwgx+SFbzKEkh_kmBj9NicV91agTLfc9dRCJw3oL-8nBw@mail.gmail.com>
+Message-ID: <27399.23423.695077.50533@paul.eddelbuettel.com>
+
+
+On 21 November 2026 at 12:27, James Pustejovsky wrote:
+| We know how to fix the unit tests. We're just struggling to figure out how
+| to validate that our corrections will pass. Thanks for any suggestions
+| offered!
+
+Replication is always the first step. And for that it used to be more
+difficult to get MKL installed -- so I once set up a GitHub repo with a
+script at https://github.com/eddelbuettel/mkl4deb to show how to do that
+based on the 'upstream' Intel repos for Debian / Ubuntu which (at the time)
+were external to the distros.
+
+This repo is now outdated. MKL is now more generally available directly for
+Ubuntu (version 2020.4.304-4 and 2020.4.304-7 packaged for 24.04 and 26.04)
+and also for Debian (same 2020.4.304-7) thanks to some changes in their
+licensing. Regardless the repo of mine still gets hits and stars...
+
+If you prefer a local setup this is another alternative worth exploring.
+Now, as always, a possible 'delta' to the CRAN setup is always a possibly.
+Sadly CRAN does not make it as easy as it could be to reproduce failings
+occurring at their end. Maybe one day we all get to collaborate on genuine
+specs and e.g. Dockerfiles to actually pin this down for good.
+
+Dirk
+
+-- 
+dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
