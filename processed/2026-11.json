@@ -186,6 +186,23 @@
       "thread_depth": 1,
       "month": "2026-11",
       "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012605.html"
+    },
+    {
+      "id": "msg-76fde512b8ef",
+      "message_id": "<CADtpigagig8Z0aCk0SGmhHUunEK47++1jEFaxY58j5NeCaivsg@mail.gmail.com>",
+      "from_name": "Carl Schwarz",
+      "from_email_hash": "f40cf2b8fac5269904c84548193d46e32fc1aa31c458349608e8c47156fca065",
+      "date": "2026-11-27T05:32:41Z",
+      "subject": "[R-pkg-devel] Which rhub \"container\" should be used to replicate an error on Debian machine?",
+      "subject_clean": "[R-pkg-devel] Which rhub \"container\" should be used to replicate an error on Debian machine?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I'm trying to unarchive a package. It passes the\nusethis::use_github_action() checks on Window release, mac release,\nand ubuntu.\n\nWhen I submit to CRAN it fails on a Debian machine with message\n Debian: <https://win-builder.r-project.org/incoming_pretest/SPAS_2026.12.2_20261127_035904/Debian/00check.log>\n\nwhich says that\nR was compiled by\n    Debian clang version 23.1.4 (2)\n    Debian flang version 23.1.4 (2)\n\nwith error messages\nError(s) in re-building vignettes:\n  ...\n--- re-building ?AutomaticPooling.Rmd? using rmarkdown\n[WARNING] Deprecated: --mathjax. Use --math-method=mathjax[:URL] instead.\nError parsing YAML metadata at \"AutomaticPooling.knit.md\" (line 1, column 1):\nAutomaticPooling.knit.md:11:5: ']' is indented too little to end the\nflow sequence\n   |\n11 |     ]\n   |     ^\nError: processing vignette 'AutomaticPooling.Rmd' failed with diagnostics:\npandoc document conversion failed with error 64\n\nApparently the new Pandoc is more strict about the yaml structure.\n\nI've fixed this, but for the life of me, I can't figure out which\noption to use in\n   rhub::rhub_check(platforms = xxx)\nto see if if I've truely fixed the problem before resubmitting to CRAN.\n\nFor example, if i use\n    rhub::rhub_check(platforms=\"ubuntu-clang\")\n because it is an [r-devel-linux-x86_64-debian-clang] so appears to be\na debian system,but the output says\n   * R was compiled by\n        gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0\n        GNU Fortran (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nwhich doesn't appear to be debian???\n\nIf I use\n  rhub::rhub_check(platforms = \"clang23\")\nto match the clang 23.1.4 in the CRAN error message, it stops because\nit cant install the mvtnorm package.\n\nIt would be helpful if the CRAN error message somehow identified a\nparticular system that was used when an error occured to make it\neasier to check before resubmission.\n\nThanks\nCarl Schwarz",
+      "body_snippet": "I'm trying to unarchive a package. It passes the\nusethis::use_github_action() checks on Window release, mac release,\nand ubuntu.\n\nWhen I submit to CRAN it fails on a Debian machine with message\n Debia",
+      "thread_id": "thread-76fde512b8ef",
+      "thread_depth": 0,
+      "month": "2026-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-package-devel/2026q4/012606.html"
     }
   ],
   "threads": [
@@ -236,6 +253,17 @@
       "started": "2026-11-25T02:09:50Z",
       "last_reply": "2026-11-25T02:09:50Z",
       "root_message_id": "msg-ea52d7ed4609"
+    },
+    {
+      "id": "thread-76fde512b8ef",
+      "subject": "[R-pkg-devel] Which rhub \"container\" should be used to replicate an error on Debian machine?",
+      "message_count": 1,
+      "participants": [
+        "Carl Schwarz"
+      ],
+      "started": "2026-11-27T05:32:41Z",
+      "last_reply": "2026-11-27T05:32:41Z",
+      "root_message_id": "msg-76fde512b8ef"
     }
   ]
 }

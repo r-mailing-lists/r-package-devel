@@ -2130,3 +2130,65 @@ Dirk
 dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
 
 
+From c@chw@rz@t@t@|uc@ @end|ng |rom gm@||@com  Fri Nov 27 06:32:41 2026
+From: c@chw@rz@t@t@|uc@ @end|ng |rom gm@||@com (Carl Schwarz)
+Date: Thu, 26 Nov 2026 22:32:41 -0700
+Subject: [R-pkg-devel] Which rhub "container" should be used to replicate an
+ error on Debian machine?
+Message-ID: <CADtpigagig8Z0aCk0SGmhHUunEK47++1jEFaxY58j5NeCaivsg@mail.gmail.com>
+
+I'm trying to unarchive a package. It passes the
+usethis::use_github_action() checks on Window release, mac release,
+and ubuntu.
+
+When I submit to CRAN it fails on a Debian machine with message
+ Debian: <https://win-builder.r-project.org/incoming_pretest/SPAS_2026.12.2_20261127_035904/Debian/00check.log>
+
+which says that
+R was compiled by
+    Debian clang version 23.1.4 (2)
+    Debian flang version 23.1.4 (2)
+
+with error messages
+Error(s) in re-building vignettes:
+  ...
+--- re-building ?AutomaticPooling.Rmd? using rmarkdown
+[WARNING] Deprecated: --mathjax. Use --math-method=mathjax[:URL] instead.
+Error parsing YAML metadata at "AutomaticPooling.knit.md" (line 1, column 1):
+AutomaticPooling.knit.md:11:5: ']' is indented too little to end the
+flow sequence
+   |
+11 |     ]
+   |     ^
+Error: processing vignette 'AutomaticPooling.Rmd' failed with diagnostics:
+pandoc document conversion failed with error 64
+
+Apparently the new Pandoc is more strict about the yaml structure.
+
+I've fixed this, but for the life of me, I can't figure out which
+option to use in
+   rhub::rhub_check(platforms = xxx)
+to see if if I've truely fixed the problem before resubmitting to CRAN.
+
+For example, if i use
+    rhub::rhub_check(platforms="ubuntu-clang")
+ because it is an [r-devel-linux-x86_64-debian-clang] so appears to be
+a debian system,but the output says
+   * R was compiled by
+        gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+        GNU Fortran (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+which doesn't appear to be debian???
+
+If I use
+  rhub::rhub_check(platforms = "clang23")
+to match the clang 23.1.4 in the CRAN error message, it stops because
+it cant install the mvtnorm package.
+
+It would be helpful if the CRAN error message somehow identified a
+particular system that was used when an error occured to make it
+easier to check before resubmission.
+
+Thanks
+Carl Schwarz
+
+
