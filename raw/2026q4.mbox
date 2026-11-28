@@ -2192,3 +2192,34 @@ Thanks
 Carl Schwarz
 
 
+From derekog|e51 @end|ng |rom gm@||@com  Thu Nov 26 23:55:38 2026
+From: derekog|e51 @end|ng |rom gm@||@com (Derek Ogle)
+Date: Thu, 26 Nov 2026 16:55:38 -0600
+Subject: [R-pkg-devel] Inconsistent long-running example
+Message-ID: <CAKKtRk__DE=s3ydNwQqLfyNsCRp-Lm6zvdHmDP1Jq_2o-zJL2Q@mail.gmail.com>
+
+I submitted a new version of my FSA package to CRAN earlier today. It was
+rejected on pre-check with examples that exceeded 10s (apparently due to
+examples for one function) on Windows. Earlier in the day I had checked the
+package (prior to submitting to CRAN) on R-Winbuilder a handful of times.
+The same NOTE about examples exceeding 10s appeared only once, but not the
+other times. I have checked the same source tarball sent to CRAN on
+R-Winbuilder since it was rejected by CRAN and the NOTE has not appeared
+again. For what it is worth I have not seen this NOTE on any of my local
+checks or checks with GitHub actions. Also, for what it is worth, the
+apparent offending function has not been modified in this or many previous
+versions of my package.
+
+This feels like a false positive, or that I hit the CRAN windows server at
+a "bad time", but that seems odd as well. Any thoughts on how I should
+proceed, or troubleshoot this? Thanks.
+
+p.s., Here is the CRAN result with the note
+<https://win-builder.r-project.org/incoming_pretest/FSA_0.10.2_20261126_180000/Windows/00check.log>.
+Here is my latest R-WinBuilder result
+<https://win-builder.r-project.org/5Q47Ss0Y1I2P/00check.log> without any
+notes.
+
+	[[alternative HTML version deleted]]
+
+
